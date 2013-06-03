@@ -41,12 +41,6 @@ package Connectors "Declarative and imperative connectors"
 
   connector ChemicalSpecies "Connector for a species of a chemical reaction"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
     // Material exchange
     Q.Potential mu(nominal=U.V) "Chemical potential";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
@@ -58,6 +52,13 @@ package Connectors "Declarative and imperative connectors"
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
       "Specific entropy-temperature product upon outflow";
+
+  protected
+    outer parameter Integer n_trans(final min=0)
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage="This connector should be used within a subregion model.
+");
+
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html>
@@ -96,7 +97,6 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,195,38},
             fillPattern=FillPattern.Solid,
             pattern=LinePattern.None)}));
-
   end ChemicalSpecies;
 
   expandable connector PhysicalBus
@@ -122,15 +122,15 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-120,36},{120,76}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-30,30},{30,-30}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-120,36},{120,76}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end PhysicalBus;
 
@@ -155,24 +155,19 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-120,20},{120,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-120,20},{120,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end PhysicalBusInternal;
 
   connector Physical "Connector for phase change"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
     parameter String formula(start="") "Chemical formula of the species";
     // The start value prevents a warning in Dymola 7.4.
 
@@ -187,6 +182,13 @@ package Connectors "Declarative and imperative connectors"
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
       "Specific entropy-temperature product upon outflow";
+
+  protected
+    outer parameter Integer n_trans(final min=0)
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage="This connector should be used within a subregion model.
+");
+
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html>
@@ -250,7 +252,7 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Force mPhidot[3](each nominal=U.N) "Force";
 
     // Thermal
-    extends FCSys.Connectors.ThermalDiffusion;
+    extends ThermalDiffusion;
     annotation (
       Documentation(info="<html><p>This connector applies to a single species in a single phase.
     For multiple species or phases, use the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
@@ -275,15 +277,8 @@ package Connectors "Declarative and imperative connectors"
   connector Inert
     "Connector to exchange translational momentum and thermal energy by diffusion"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 0
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
-    Translational translational(final n_trans=n_trans)
-      "Subconnector for translational diffusion";
-    Connectors.ThermalDiffusion thermal "Subconnector for thermal diffusion";
+    Translational translational "Subconnector for translational diffusion";
+    ThermalDiffusion thermal "Subconnector for thermal diffusion";
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation in the
@@ -334,11 +329,6 @@ package Connectors "Declarative and imperative connectors"
   connector InertInternal
     "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector with conditional subconnectors</html>"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 0
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
     parameter Boolean inclTranslational=true
       "Include the translational subconnector" annotation (
       HideResult=true,
@@ -350,9 +340,9 @@ package Connectors "Declarative and imperative connectors"
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    Translational translational(final n_trans=n_trans) if inclTranslational
+    Translational translational if inclTranslational
       "Subconnector for translational diffusion";
-    Connectors.ThermalDiffusion thermal if inclThermal
+    ThermalDiffusion thermal if inclThermal
       "Subconnector for thermal diffusion";
     annotation (
       defaultComponentPrefixes="protected",
@@ -373,19 +363,22 @@ package Connectors "Declarative and imperative connectors"
             fillPattern=FillPattern.Solid,
             pattern=LinePattern.None,
             lineColor={0,0,0})}),
-      Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-5,5},{5,-5}},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+      Diagram(graphics={
+          Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-5,5},{5,-5}},
+            fillColor={47,107,251},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end InertInternal;
 
@@ -439,14 +432,15 @@ package Connectors "Declarative and imperative connectors"
   connector Translational
     "Connector for advection or diffusion of translational momentum"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
     Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
+
+  protected
+    outer parameter Integer n_trans(final min=0)
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage="This connector should be used within a subregion model.
+");
+
     annotation (
       Documentation(info="<html><p>Please see the documentation in the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p>
@@ -464,7 +458,6 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,36},{100,76}},
             textString="%name",
             lineColor={0,0,0})}));
-
   end Translational;
 
   connector ThermalDiffusion "Connector for diffusion of thermal energy"

@@ -2643,19 +2643,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = chemical.mPhidot[transAxes[axis]]);
+          final y(final unit="l.m/T2") = chemical.mPhidot[transCart[axis]]);
 
       equation
-        chemical.phi[transAxes[axis]] = u_final;
+        chemical.phi[transCart[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=chemical.mPhidot[transAxes[axis]]);
+            y=chemical.mPhidot[transCart[axis]]);
 
-        Real x=chemical.phi[transAxes[axis]]
+        Real x=chemical.phi[transCart[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -2683,10 +2683,10 @@ model.</p>
           // the results.
 
         protected
-          final parameter Integer cartAxes[n_trans]=index({inclTransX,
+          final parameter Integer cartTrans[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transCart[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
             "Translational-momentum-component indices of the Cartesian axes";
 
@@ -2694,7 +2694,7 @@ model.</p>
           // Zero values of other flows
           chemical.Ndot = 0 "Current";
           for i in 1:n_trans loop
-            if cartAxes[i] <> axis then
+            if cartTrans[i] <> axis then
               chemical.mPhidot[i] = 0 "Force along the other axes";
             end if;
           end for;
@@ -3244,10 +3244,10 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = translational.mPhidot[transAxes[axis]]);
+          final y(final unit="l.m/T2") = translational.mPhidot[transCart[axis]]);
 
       equation
-        translational.phi[transAxes[axis]] = u_final;
+        translational.phi[transCart[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
@@ -3256,19 +3256,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = translational.phi[transAxes[axis]]);
+          final y(final unit="l/T") = translational.phi[transCart[axis]]);
 
       equation
-        translational.mPhidot[transAxes[axis]] = u_final;
+        translational.mPhidot[transCart[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=translational.mPhidot[transAxes[axis]]);
+            y=translational.mPhidot[transCart[axis]]);
 
-        Real x=translational.phi[transAxes[axis]]
+        Real x=translational.phi[transCart[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -3300,17 +3300,17 @@ model.</p>
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         protected
-          final parameter Integer cartAxes[n_trans]=index({inclTransX,
+          final parameter Integer cartTrans[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transCart[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
             "Translational-momentum-component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
           for i in 1:n_trans loop
-            if cartAxes[i] <> axis then
+            if cartTrans[i] <> axis then
               translational.mPhidot[i] = 0 "Force along the other axes";
             end if;
           end for;
@@ -3779,10 +3779,10 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[transAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.mPhidot[transCart[axis]]);
 
       equation
-        inert.phi[transAxes[axis]] = u_final;
+        inert.phi[transCart[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
@@ -3791,19 +3791,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[transAxes[axis]]);
+          final y(final unit="l/T") = inert.phi[transCart[axis]]);
 
       equation
-        inert.mPhidot[transAxes[axis]] = u_final;
+        inert.mPhidot[transCart[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[transAxes[axis]]);
+            y=inert.mPhidot[transCart[axis]]);
 
-        Real x=inert.phi[transAxes[axis]]
+        Real x=inert.phi[transCart[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -3831,10 +3831,10 @@ model.</p>
           // the results.
 
         protected
-          final parameter Integer cartAxes[n_trans]=index({inclTransX,
+          final parameter Integer cartTrans[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transCart[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
             "Translational-momentum-component indices of the Cartesian axes";
 
@@ -3842,7 +3842,7 @@ model.</p>
           // Zero values of other flows
           inert.p = 0 "Pressure";
           for i in 1:n_trans loop
-            if cartAxes[i] <> axis then
+            if cartTrans[i] <> axis then
               inert.mPhidot[i] = 0 "Force along the other axes";
             end if;
           end for;
@@ -6518,25 +6518,21 @@ settings will be used.
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Single;
 
