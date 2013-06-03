@@ -27,7 +27,8 @@ for i in 1:size(species, 1) loop
          "subregion." + species[i] + ".faces[2, 2].T", "subregion." + species[i] + ".faces[3, 1].T",
          "subregion." + species[i] + ".faces[3, 2].T"};
    y5 = {"subregion." + species[i] + ".v"};
-   y6 = {"subregion." + species[i] + ".mu"};
+   y6 = {"subregion." + species[i] + ".h",
+         "subregion." + species[i] + ".chemical.mu"};
 
    // Make plots.
    RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

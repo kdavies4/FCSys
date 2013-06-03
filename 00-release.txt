@@ -9,15 +9,15 @@ Steps to release the FCSys library:
         test/tests.mos scripts.  Address any problems.
 1/29/13 KD
     3.  Update the embedded documentation.
-1/29/13 KD
+6/4/13 KD
     4.  Update and run 00-find-unused.sh to be sure that all quantities and
         references are used in the code.  Remove the unused quantities from
         resources/quantities.xls and update Quantities.mo and
         resources/scripts/units.mos.  Remove the unused references from
         package.mo (FCSys.UsersGuide.References).
-1/29/13 KD
+6/4/13 KD
     5.  Spellcheck the Modelica files using 00-spellcheck.sh.
-1/29/13 KD
+6/4/13 KD
     6.  Run 00-tidy.py to autoformat the Modelica code.
 1/29/13 KD
     7.  Delete the FCSys/help directory and recreate it using Dymola

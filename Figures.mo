@@ -1379,42 +1379,42 @@ package Figures "Graphical layouts for documentation"
 
   model Matrix3D
 
-    Subregions.BaseClasses.PartialSubregion subreg000(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg000(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-    Subregions.BaseClasses.PartialSubregion subreg001(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg001(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
-    Subregions.BaseClasses.PartialSubregion subreg010(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg010(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
-    Subregions.BaseClasses.PartialSubregion subreg011(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg011(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
-    Subregions.BaseClasses.PartialSubregion subreg100(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg100(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-    Subregions.BaseClasses.PartialSubregion subreg101(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg101(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{10,-50},{30,-30}})));
-    Subregions.BaseClasses.PartialSubregion subreg110(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg110(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,20},{50,40}})));
-    Subregions.BaseClasses.PartialSubregion subreg111(
+    FCSys.Subregions.BaseClasses.EmptySubregion subreg111(
       inclX=true,
       inclY=true,
       inclZ=true)
@@ -1486,7 +1486,7 @@ package Figures "Graphical layouts for documentation"
 
   model SubregionIcon
 
-    Subregions.BaseClasses.PartialSubregion Subregion(
+    FCSys.Subregions.BaseClasses.EmptySubregion Subregion(
       inclX=true,
       inclZ=true,
       inclY=true)
@@ -1496,7 +1496,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model PhaseIcon
 
-    Subregions.Phases.BaseClasses.NullPhase Phase
+    FCSys.Subregions.Phases.BaseClasses.EmptyPhase Phase
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
 

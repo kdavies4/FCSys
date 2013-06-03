@@ -81,6 +81,7 @@ package Tests "Models and functions for test and validation"
 
   package Characteristics
     extends Modelica.Icons.Package;
+
     model RunAll
       "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
       extends Modelica.Icons.Example;
@@ -201,6 +202,10 @@ package Tests "Models and functions for test and validation"
           "<html>Test the isobaric specific heat capacity of H<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
           import FCSys.Test.assertValue;
           extends Modelica.Icons.Example;
+
+          // Note:  To work in Dymola 7.4., this and other tests of the
+          // Characteristics package must be models rather than functions.
+
           replaceable package Data = FCSys.Characteristics.H2.Gas (b_v=[1], n_v
                 ={-1,0}) "Ideal gas properties";
           parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
@@ -348,8 +353,8 @@ package Tests "Models and functions for test and validation"
         model RunAll
           "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">H2O.Gas</a> package</html>"
           extends Modelica.Icons.Example;
-          Gas.h testh;
-          Gas.s tests;
+          h testh;
+          s tests;
           F testF;
           R testR;
           annotation (Documentation(info="<html><p>If this model simulates without failure,
@@ -1212,10 +1217,10 @@ package Tests "Models and functions for test and validation"
         (strings[1:6],integers[1:6]) := readSpecies("C19HF37O5S-");
         for i in 1:6 loop
           assert(strings[i] == {"C","H","F","O","S","e-"}[i],
-            "The elements function failed on element name of entry " + String(i)
-             + ".");
+            "The readSpecies function failed on element name of entry " +
+            String(i) + ".");
           assert(integers[i] == {19,1,37,5,1,1}[i],
-            "The elements function failed on element stoichiometric coefficient of entry "
+            "The readSpecies function failed on element stoichiometric coefficient of entry "
              + String(i) + ".");
         end for;
 

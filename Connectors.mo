@@ -41,6 +41,12 @@ package Connectors "Declarative and imperative connectors"
 
   connector ChemicalSpecies "Connector for a species of a chemical reaction"
 
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
     // Material exchange
     Q.Potential mu(nominal=U.V) "Chemical potential";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
@@ -52,13 +58,6 @@ package Connectors "Declarative and imperative connectors"
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
       "Specific entropy-temperature product upon outflow";
-
-  protected
-    outer parameter Integer n_trans(final min=0)
-      "Number of components of translational momentum" annotation (
-        missingInnerMessage="This connector should be used within a subregion model.
-");
-
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html>
@@ -97,11 +96,11 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,195,38},
             fillPattern=FillPattern.Solid,
             pattern=LinePattern.None)}));
+
   end ChemicalSpecies;
 
   expandable connector PhysicalBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
-
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -136,7 +135,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector PhysicalBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="physical",
@@ -170,6 +168,11 @@ package Connectors "Declarative and imperative connectors"
 
     parameter String formula(start="") "Chemical formula of the species";
     // The start value prevents a warning in Dymola 7.4.
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
 
     // Material exchange
     Q.Potential a(nominal=1) "Activity";
@@ -182,13 +185,6 @@ package Connectors "Declarative and imperative connectors"
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
       "Specific entropy-temperature product upon outflow";
-
-  protected
-    outer parameter Integer n_trans(final min=0)
-      "Number of components of translational momentum" annotation (
-        missingInnerMessage="This connector should be used within a subregion model.
-");
-
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html>
@@ -214,7 +210,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple configurations)</html>"
-
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -277,7 +272,14 @@ package Connectors "Declarative and imperative connectors"
   connector Inert
     "Connector to exchange translational momentum and thermal energy by diffusion"
 
-    Translational translational "Subconnector for translational diffusion";
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
+    Translational translational(final n_trans=n_trans)
+      "Subconnector for translational diffusion";
     ThermalDiffusion thermal "Subconnector for thermal diffusion";
     annotation (
       Documentation(info="<html>
@@ -329,6 +331,12 @@ package Connectors "Declarative and imperative connectors"
   connector InertInternal
     "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector with conditional subconnectors</html>"
 
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
     parameter Boolean inclTranslational=true
       "Include the translational subconnector" annotation (
       HideResult=true,
@@ -340,7 +348,7 @@ package Connectors "Declarative and imperative connectors"
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    Translational translational if inclTranslational
+    Translational translational(final n_trans=n_trans) if inclTranslational
       "Subconnector for translational diffusion";
     ThermalDiffusion thermal if inclThermal
       "Subconnector for thermal diffusion";
@@ -432,15 +440,14 @@ package Connectors "Declarative and imperative connectors"
   connector Translational
     "Connector for advection or diffusion of translational momentum"
 
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
     Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
-
-  protected
-    outer parameter Integer n_trans(final min=0)
-      "Number of components of translational momentum" annotation (
-        missingInnerMessage="This connector should be used within a subregion model.
-");
-
     annotation (
       Documentation(info="<html><p>Please see the documentation in the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p>
@@ -458,6 +465,7 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,36},{100,76}},
             textString="%name",
             lineColor={0,0,0})}));
+
   end Translational;
 
   connector ThermalDiffusion "Connector for diffusion of thermal energy"
@@ -545,7 +553,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -580,7 +587,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -668,7 +674,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -701,7 +706,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
@@ -771,19 +775,19 @@ package Connectors "Declarative and imperative connectors"
   conditionally-instantiated subconnectors to directly couple the velocities or temperatures
   of configurations within a subregion.  Each icon on the bottom row represents a single effort/flow
   pair.</p>
-  
+
   <p>In addition to the connectors on the bottom row, the
   <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
   and <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors
   have stream variables to represent the advection of translational momentum and
-  thermal energy.  </p>
+  thermal energy.</p>
 
   <p>The <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
   connector is used for a single species in a reaction.  It expresses the rate of
   consumption or generation of a species at a electrochemical potential.  The
   <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector is
-  used for the chemical reaction as a whole.  It has electrochemical potential as a 
-  flow and current as an effort (opposite designations of the 
+  used for the chemical reaction as a whole.  It has electrochemical potential as a
+  flow and current as an effort (opposite designations of the
   <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
   connector).
   It sums the stoichiometrically-weighted electrochemical potentials of the species
@@ -793,7 +797,7 @@ package Connectors "Declarative and imperative connectors"
   <p>The <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector has one
   more effort/flow pair than the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
-  It applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a> 
+  It applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>
   to mix species within a phase.</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/ConnectorHierarchy.png\">

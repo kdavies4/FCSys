@@ -1985,7 +1985,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Gas "Condition for gas"
 
-      extends BaseClasses.NullPhase;
+      extends BaseClasses.EmptyPhase;
 
       // Conditionally include species.
       parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
@@ -2139,7 +2139,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Graphite "Condition for graphite"
 
-      extends BaseClasses.NullPhase;
+      extends BaseClasses.EmptyPhase;
 
       // Conditionally include species.
       parameter Boolean 'inclC+'=false
@@ -2217,7 +2217,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Ionomer "Condition for ionomer"
 
-      extends BaseClasses.NullPhase;
+      extends BaseClasses.EmptyPhase;
 
       // Conditionally include species.
       parameter Boolean 'inclC19HF37O5S-'=false
@@ -2330,7 +2330,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Liquid "Condition for liquid"
 
-      extends BaseClasses.NullPhase;
+      extends BaseClasses.EmptyPhase;
 
       // Conditionally include species.
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -2374,7 +2374,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
 
-      model NullPhase "Empty condition for a phase (no species)"
+      model EmptyPhase "Empty condition for a phase (no species)"
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclTransX=true "X" annotation (
@@ -2412,7 +2412,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,0})));
         annotation (Diagram(graphics));
 
-      end NullPhase;
+      end EmptyPhase;
 
     end BaseClasses;
     annotation (Documentation(info="<html><p>All of the submodels for the individual species in
@@ -4248,7 +4248,7 @@ model.</p>
 
       model Gas "Condition for gas"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
@@ -4380,7 +4380,7 @@ model.</p>
 
       model Graphite "Condition for graphite"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean 'inclC+'=false
@@ -4450,7 +4450,7 @@ model.</p>
 
       model Ionomer "Condition for ionomer"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean 'inclC19HF37O5S-'=false
@@ -4554,7 +4554,7 @@ model.</p>
 
       model Liquid "Condition for liquid"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -4593,7 +4593,7 @@ model.</p>
 
       package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
-        model NullPhase "Empty condition for a phase (no species)"
+        model EmptyPhase "Empty condition for a phase (no species)"
           extends FCSys.Conditions.BaseClasses.Icons.Single;
 
           Connectors.FaceBus face
@@ -4618,7 +4618,7 @@ model.</p>
                 rotation=0,
                 origin={100,0})));
 
-        end NullPhase;
+        end EmptyPhase;
 
       end BaseClasses;
 
@@ -5328,7 +5328,7 @@ model.</p>
 
       model Gas "Condition for gas"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
@@ -5487,7 +5487,7 @@ model.</p>
 
       model Graphite "Condition for graphite"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean 'inclC+'=false
@@ -5571,7 +5571,7 @@ model.</p>
 
       model Ionomer "Condition for ionomer"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean 'inclC19HF37O5S-'=false
@@ -5695,7 +5695,7 @@ model.</p>
 
       model Liquid "Condition for liquid"
 
-        extends BaseClasses.NullPhase;
+        extends BaseClasses.EmptyPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -5741,7 +5741,7 @@ model.</p>
 
       package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
-        model NullPhase "Empty condition for a phase (no species)"
+        model EmptyPhase "Empty condition for a phase (no species)"
           extends FCSys.Conditions.BaseClasses.Icons.Double;
 
           Connectors.FaceBus negative
@@ -5772,7 +5772,7 @@ model.</p>
                 origin={0,-50})));
           annotation (Icon(graphics));
 
-        end NullPhase;
+        end EmptyPhase;
 
       end BaseClasses;
 
@@ -6361,31 +6361,27 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6427,60 +6423,49 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-120,60},{120,100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-120,60},{120,100}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,170,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-100}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
-          Ellipse(
-            extent={{32,8},{48,-8}},
-            pattern=LinePattern.None,
-            lineColor={255,255,255},
-            fillColor={50,50,50},
-            fillPattern=FillPattern.Sphere),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Dash)}));
+              100}}), graphics={Rectangle(
+              extent={{-120,60},{120,100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-120,60},{120,100}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,170,255}),Rectangle(
+              extent={{-72,-60},{72,-100}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
+              extent={{32,8},{48,-8}},
+              pattern=LinePattern.None,
+              lineColor={255,255,255},
+              fillColor={50,50,50},
+              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
+            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
+            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
+            -2,-60}}, color={0,0,0}),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash)}));
 
   end Environment;
 
@@ -6541,7 +6526,7 @@ settings will be used.
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
-  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, 
+  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>,
   <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or

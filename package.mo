@@ -5,7 +5,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -19,11 +18,9 @@ import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Subregions.BaseClasses.InitElectrical;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -62,7 +59,7 @@ package UsersGuide "User's Guide"
         <li>Read the overview in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</li>
         <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the packages are
         ordered by level of model and physical hierarchy (high-level at the top).
-        <li>Call the <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a> function to
+        <li>Call <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a>() to
         establish the display units.  This is automatic if <a href=\"modelica://FCSys\">FCSys</a>
         is loaded via the \"FCSys/load.mos\" script.
         <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
@@ -79,11 +76,11 @@ package UsersGuide "User's Guide"
             Information about the system of units, which is different
             than <a href=\"modelica://Modelica.SIunits\">Modelica.SIunits</a></li>
             <li><a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a> package:
-            Overview of the connectors and an explanation of the effort and flow variables in terms of thermodynamics</li>
+            Overview of the connectors</li>
             <li><a href=\"modelica://FCSys.Subregions.Volume\">FCSys.Subregions.Volume</a> model:
             Discussion of how species are mixed within phases and how phases are combined within subregions</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
-            Details about the exchange, transport, and storage of material, volume, translational momentum, and
+            Details about the exchange, transport, and storage of material, translational momentum, and
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
@@ -121,7 +118,7 @@ package UsersGuide "User's Guide"
     annotation (
       preferedView="info",
       DocumentationClass=true,
-      Documentation(info="<html><p>The following terms appear in this library with meanings that are new or should be clarified:
+      Documentation(info="<html><p>The following terms appear in this library with new or somewhat unique meanings:
     <ul>
       <li><b>configuration</b>&mdash;a species in a certain phase within a subregion<br>
 
@@ -150,7 +147,7 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>These papers describe work leading to the current <a href=\"modelica://FCSys\">FCSys</a> package:
+    <p>These papers describe work leading to the current <a href=\"modelica://FCSys\">FCSys</a> package (most recent at the top):
     <ol>
     <li>K. L. Davies, \"<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf\">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
@@ -229,10 +226,6 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Hess2008\" class=bookmark>Hess2008</a>]</td>
       <td valign=top class=noBorder>B. Hess, C. Kutzner, D. van der Spoel, and E. Lindahl, \"GROMACS 4: Algorithms for Highly Efficient, Load-Balanced, and Scalable Molecular Simulation,\" <i>J. Chem. Theory Comput.</i>, vol. 4, no. 3, pp. 435&ndash;447, 2008.</td>
-    </tr>
-    <tr>
-      <td valign=top class=noBorder>[<a name=\"Hogan2006\" class=bookmark>Hogan2006</a>]</td>
-      <td valign=top class=noBorder>N. Hogan, \"Heat Transfer and the Second Law,\" <a href=\"http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf\">http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf</a>, Course notes for <i>Modeling and Simulation of Dynamic Systems</i> (2.141), Massachusetts of Technology, Oct. 2006.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Incropera2002\" class=bookmark>Incropera2002</a>]</td>
@@ -374,18 +367,18 @@ package UsersGuide "User's Guide"
 
     <p><b>Author:</b></p>
     <dd>Kevin Davies</dd>
-    <dd>George W. Woodruff School of Mechanical Engineering</dd>
-    <dd>Georgia Institute of Technology</dd>
+    <dd><a href=\"http://www.me.gatech.edu\">George W. Woodruff School of Mechanical Engineering</a></dd>
+    <dd><a href=\"http://www.gatech.edu\">Georgia Institute of Technology</a></dd>
     <dd>813 Ferst Drive</dd>
     <dd>Atlanta, GA 30332-0405</dd>
     <dd>USA</dd>
     <dd><a href=\"mailto:kdavies4@gmail.com\">kdavies4@gmail.com</a></dd>
 
     <p><b>Acknowledgments:</b><ul>
-    <li>Source code contributions and bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
     <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
-    <li>Technical support from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet,
+    <li>Technical discussions and help from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet,
     Chris Ford, George Nelson, Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
+    <li>Source-code contributions and bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href=\"http://www.me.gatech.edu\">George W. Woodruff
@@ -943,8 +936,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1250,4 +1241,5 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
+
 end FCSys;

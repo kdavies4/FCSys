@@ -17,20 +17,21 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-5-17
+      // Generated from FCSys/resources/quantities.xls, 2013-6-4
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
       parameter Q.Angle Angle=1*U.rad "Angle";
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
-      parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.C "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.Current Current=1*U.A "Current";
       parameter Q.CurrentAbsolute CurrentAbsolute=1*U.A "Absolute current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
+      parameter Q.CurrentAreicAbsolute CurrentAreicAbsolute=1*U.A/U.m^2
+        "Absolute areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Density Density=1*U.C/U.m^3 "Density";
       parameter Q.DensityRate DensityRate=1*U.C/(U.m^3*U.s) "DensityRate";
@@ -105,8 +106,7 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-5-17
-
+  // Generated from FCSys/resources/quantities.xls, 2013-6-4
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -114,8 +114,6 @@ package Quantities "Quantities to represent physical properties"
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
-  type AreaSpecific = Modelica.Icons.TypeReal (final unit="l2/N", min=0)
-    "Specific area";
   type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
   type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
           "N2.T/(l2.m)", min=0) "Electrical conductance";
@@ -150,8 +148,6 @@ package Quantities "Quantities to represent physical properties"
   type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
   type MomentumRotational = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
     "Rotational momentum";
-  type MomentumTranslationalSpecific = Modelica.Icons.TypeReal (final unit=
-          "l.m/(N.T)") "Specific translational momentum";
   type Number = Modelica.Icons.TypeReal (final unit="1");
   type NumberAbsolute = Modelica.Icons.TypeReal (final unit="1", min=0)
     "Absolute number";
@@ -203,6 +199,7 @@ package Quantities "Quantities to represent physical properties"
   type VolumeSpecificRate = Modelica.Icons.TypeReal (final unit="l3/(N.T)")
     "Rate of specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
+
   // -------- end from FCSys/resources/quantities.xls
 
   // Aliases that imply special display units

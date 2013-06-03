@@ -116,11 +116,10 @@ package Blocks "Imperative models (inputs and outputs only)"
   For conversions that require just a scaling factor, it is best to use
 the <a href=\"modelica://Modelica.Blocks.Math.Gain\">Modelica.Blocks.Math.Gain</a>
 block with the appropriate factors from <a href=\"modelica://FCSys.Units\">Units</a> package
-(<code>U</code>).  For example, to convert from potential in volts use:
-<br><code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code>
-<br>To convert to current in amperes use:
-<br><code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
-
+(<code>U</code>).  For example, to convert from potential in volts use:<br>
+<code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code><br>
+To convert to current in amperes use:<br>
+<code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
 </html>"));
 
   end UnitConversions;

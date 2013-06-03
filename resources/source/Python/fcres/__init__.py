@@ -42,12 +42,11 @@ from modelicares.helpers import (flatten, figure_w_label, setup_subplots,
 Conditions = namedtuple('Conditions',
     ['cell_temp', 'composition', 'pressure', 'humidity', 'inlet_temp', 'flow'])
 
-# **Update this from quantities.xls:
 # Default units
 # These units are used to display a variable's quantity if its displayUnit
 # attribute is empty ('').  Each key is a dimension string and each entry is a
 # unit string.  Both are formatted in Modelica unit notation.
-# Generated from FCSys/resources/quantities.xls, 2013-1-15
+# Generated from FCSys/resources/quantities.xls, 2013-6-4
 default_units = {
                  '1/N': '1/mol',
                  'A': 'rad',
@@ -60,6 +59,7 @@ default_units = {
                  'l.m/T2': 'N',
                  'l.T/m': '1/(Pa.s)',
                  'l.T/N': 'cm/A',
+                 'l.T2/m': '1/kPa',
                  'l/(T.s)': 'cm/s2',
                  'l/N': 'm/mol',
                  'l/T': 'cm/s',
@@ -69,7 +69,6 @@ default_units = {
                  'l2.m/(A.T)': 'J.s/rad',
                  'l2.m/(A2.T3)': 'cd',
                  'l2.m/(N.T2.s)': 'V/s',
-                 'l2.m/(N.T2)': 'K',
                  'l2.m/(N.T2)': 'V',
                  'l2.m/(N.T3)': 'V/s',
                  'l2.m/(N2.T)': 'ohm',
@@ -80,6 +79,8 @@ default_units = {
                  'l3': 'cc',
                  'l3.m/(A.N.T2)': 'V.m/rad',
                  'l3.m/(N2.T2)': 'm/H',
+                 'l3/(N.s)': 'cc/(C.s)',
+                 'l3/(N.T)': 'cc/(C.s)',
                  'l3/N': 'cc/C',
                  'l3/T': 'L/min',
                  'l4.m/T3': 'W.m2',
@@ -89,10 +90,13 @@ default_units = {
                  'm/(l.T2.s)': 'Pa/s',
                  'm/(l.T2)': 'kPa',
                  'm/(l.T3)': 'Pa/s',
+                 'm/(T2.l.s)': 'Pa/s',
                  'm/N': 'g/mol',
+                 'm/s': 'g/s',
                  'm/T3': 'W/m2',
                  'N': 'C',
-                 'N.T/(l2.m)': 'mol/(J.s)',
+                 'N.T/m': 'cm2/(V.s)',
+                 'N/(l2.T)': 'A/cm2',
                  'N/(l2.T)': 'A/cm2',
                  'N/(l3.T)': 'C/(cc.s)',
                  'N/(T.s)': 'A/s',
@@ -103,7 +107,9 @@ default_units = {
                  'N2.T/(l2.m)': 'S',
                  'N2.T2/(l2.m)': 'uF',
                  'N2.T2/(l3.m)': 'F/m',
-                 'T': 's'}
+                 'T': 's',
+                 'T/l': 's/m',
+                 'T/l2': 's/mm2'}
 
 class SimRes(modelicares.SimRes):
     """Base class for Modelica_-based simulation results and methods to analyze

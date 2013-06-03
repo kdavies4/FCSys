@@ -200,26 +200,26 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-98,40},{98,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-98,40},{98,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-98,40},{98,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-98,40},{98,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-98,20},{98,60}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-98,20},{98,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-98,20},{98,60}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-98,20},{98,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top1;
 
