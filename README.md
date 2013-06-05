@@ -15,7 +15,7 @@ from the documentation layer of the Modelica code (starting at the
 [top level](package.mo)), or from the help folder (starting at
 [FCSys.html](help/FCSys.html)).
 
-### Installation/Getting started
+### Installation
 
 Please see the
 [Getting Started](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted)
@@ -28,9 +28,8 @@ documentation and can be safely removed (but may be helpful for debugging).
 
 ### Credits
 
-Please see the
-[Contact page](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.Contact)
-for a list of acknowledgements.
+Please see the acknowledgements on the
+[Contact page](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.Contact).
 
 ### License terms
 
