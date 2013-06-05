@@ -10,17 +10,27 @@ with "TODO" or "**".  If you have problems besides those noted, please
 
 [FCSys] is a library of proton exchange membrane fuel cell models in
 [Modelica](https://www.modelica.org/).  More information is available in the
-documentation, which can be accessed through documentation layer of the Modelica
-code (starting from [package.mo](package.mo)), the help folder (starting from
-[FCSys.html](help/FCSys.html)), or [online](http://kdavies4.github.com/FCSys).
-In particular, see the
+documentation, which can be accessed [online](http://kdavies4.github.com/FCSys),
+from the documentation layer of the Modelica code (starting at the
+[top level](package.mo)), or from the help folder (starting at
+[FCSys.html](help/FCSys.html)).
+
+### Installation/Getting started
+
+Please see the
 [Getting Started](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted)
 section of the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html).
 
-There are also optional subpackages ([Test](Test.mo) and [Tests](Tests.mo)) to
+There are optional subpackages ([Test](Test.mo) and [Tests](Tests.mo)) to
 perform tests on the rest of the library.  They are not included in the
 documentation and can be safely removed (but may be helpful for debugging).
+
+### Credits
+
+Please see the
+[Contact page](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.Contact)
+for a list of acknowledgements.
 
 ### License terms
 
