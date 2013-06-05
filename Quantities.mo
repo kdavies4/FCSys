@@ -127,7 +127,8 @@ package Quantities "Quantities to represent physical properties"
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
   type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);
-  type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)");
+  type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)")
+    "Rate of density";
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
   type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
@@ -183,7 +184,8 @@ package Quantities "Quantities to represent physical properties"
   type ResistivityMaterial = Modelica.Icons.TypeReal (final unit="T/l2", min=0)
     "Material resistivity";
   type Time = Modelica.Icons.TypeReal (final unit="T");
-  type TimeAbsolute = Modelica.Icons.TypeReal (final unit="T", min=0);
+  type TimeAbsolute = Modelica.Icons.TypeReal (final unit="T", min=0)
+    "Absolute time";
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
   type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
     "Squared velocity";
@@ -208,7 +210,8 @@ package Quantities "Quantities to represent physical properties"
     "Specific thermal capacity";
   type PotentialChemical = Potential (displayUnit="J/mol") "Chemical potential";
   type Temperature = Potential (displayUnit="K");
-  type TemperatureAbsolute = PotentialAbsolute (displayUnit="K");
+  type TemperatureAbsolute = PotentialAbsolute (displayUnit="K")
+    "Absolute temperature";
   type TemperatureRate = PotentialRate (displayUnit="K/s")
     "Rate of temperature";
   type ResistivityThermal = Resistivity (displayUnit="m.K/W")

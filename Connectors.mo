@@ -185,10 +185,10 @@ package Connectors "Declarative and imperative connectors"
             fillPattern=FillPattern.Solid,
             fillColor={38,196,52})}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={2,157,21},
-            fillPattern=FillPattern.Solid,
-            fillColor={38,196,52})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
 
   end Physical;
 
@@ -557,14 +557,14 @@ package Connectors "Declarative and imperative connectors"
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -678,14 +678,14 @@ package Connectors "Declarative and imperative connectors"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{-100,50},{0,0},{-100,-50},{-100,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealOutputBus;
 
@@ -722,7 +722,7 @@ package Connectors "Declarative and imperative connectors"
               lineColor={0,0,0})}));
 
   end RealOutputBusInternal;
-  annotation (Documentation(info="<html>**Update in text and figure: chemical potential, not activity, in physical connector.
+  annotation (Documentation(info="<html>
   <p><a href=\"modelica://FCSys\">FCSys</a> uses four types of declarative connectors.
   The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> and
   <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>)
@@ -760,7 +760,7 @@ package Connectors "Declarative and imperative connectors"
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector has
   conditionally-instantiated subconnectors to directly couple the velocities or temperatures
   of configurations within a subregion.  Each icon on the bottom row represents a single effort/flow
-  pair.</p>
+  pair, which may or may not be implemented as a separate connector.</p>
 
   <p>In addition to the connectors on the bottom row, the
   <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
