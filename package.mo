@@ -5,6 +5,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -21,6 +22,7 @@ import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -54,17 +56,17 @@ package UsersGuide "User's Guide"
       </tr>
     </table>
 
-    <p>In order to begin using <a href=\"modelica://FCSys\">FCSys</a>, one is recommended to follow these steps (roughly in order):
+    <p>These are the suggested steps to begin using <a href=\"modelica://FCSys\">FCSys</a>:
     <ol>
         <li>Read the overview in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</li>
-        <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the packages are
-        ordered by level of model and physical hierarchy (high-level at the top).
+        <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the subpackages are
+        ordered by the level of the model and the physical hierarchy (high-level at the top).
         <li>Call <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a>() to
         establish the display units.  This is automatic if <a href=\"modelica://FCSys\">FCSys</a>
         is loaded via the \"FCSys/load.mos\" script.
         <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
-        There are scripts in \"FCSys/resources/scripts/Dymola/\" to create plots of that model and others.
+        There are scripts in \"FCSys/resources/scripts/Dymola/\" to create useful plots of that model and others.
         The scripts should be accessible from the \"Command\" menu of the Modelica environment.
         For more detailed
         analysis, including spatial property distributions and vector plots,
@@ -96,7 +98,7 @@ package UsersGuide "User's Guide"
         nested models (regions, subregions, species) are replaceable.
         Their parameters are often not propagated to the cell level, but may
         be accessed through the parameter dialog by editing the replaceable model.  Note that
-        many models have auxiliary output variables available for additional analysis and diagnostics.
+        many models have auxiliary output variables for analysis and diagnostics.
         These may be included by setting <code>analysis=true</code> in the outer environment model (instance
         of <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
@@ -359,7 +361,7 @@ package UsersGuide "User's Guide"
       DocumentationClass=true,
       Documentation(info="<html>
     <p>Updates to this package may be available online at the
-    <a href=\"http://kdavies4.github.com/FCSys/\">main project site</a>.
+    <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a>.
     The development page is
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
     Please report any problems using the <a href=\"https://github.com/kdavies4/FCSys/issues\">issues</a>
@@ -936,6 +938,8 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1241,5 +1245,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

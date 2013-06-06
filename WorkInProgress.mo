@@ -7146,7 +7146,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
 
   model ConditionsAdaptersSpeciesFluid
     "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-    extends Conditions.Adapters.Species.FluidNonionic;
+    extends FCSys.Conditions.Adapters.Species.FluidNeutral;
     extends Modelica.Icons.UnderConstruction;
     Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
@@ -7180,8 +7180,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Modelica.Media.IdealGases.SingleGases.H2)
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
     // **Use model for H instead.
-    Conditions.Adapters.Species.FluidNonionic H2O(redeclare package Data =
-          Characteristics.H2O.Ionomer, redeclare package Medium =
+    FCSys.Conditions.Adapters.Species.FluidNeutral H2O(redeclare package Data
+        = Characteristics.H2O.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2O)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     Conditions.Adapters.Junctions.Junction2 junction2
