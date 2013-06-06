@@ -611,7 +611,7 @@ package Figures "Graphical layouts for documentation"
                   {-100,-100},{100,100}}), graphics));
       end ImperativeTF_iv;
 
-      package BaseClasses "Base classes (not generally for direct use)"
+      package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.BasesPackage;
 
         partial model Parameters
@@ -1263,7 +1263,7 @@ package Figures "Graphical layouts for documentation"
                   {-120,-80},{120,80}}), graphics));
       end ImperativeABTF;
 
-      package BaseClasses "Base classes (not generally for direct use)"
+      package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.BasesPackage;
 
         partial model Parameters "Base model with parameters"

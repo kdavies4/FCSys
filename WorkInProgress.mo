@@ -2193,7 +2193,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 
         end PendulumDummy;
 
-        package BaseClasses "Base classes (not generally for direct use)"
+        package BaseClasses "Base classes (generally not for direct use)"
           extends Modelica.Icons.BasesPackage;
           partial block PartialPlant
             extends FCSys.BaseClasses.Icons.Blocks.Continuous;
@@ -2459,7 +2459,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     {100,100}}), graphics));
         end RandomUniform;
 
-        package BaseClasses "Base classes (not generally for direct use)"
+        package BaseClasses "Base classes (generally not for direct use)"
           extends Modelica.Icons.BasesPackage;
           function tableTimeInit
             "Initialize 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)"
@@ -3303,7 +3303,7 @@ This is discussed in the description of package
                 graphics));
         end MPCWRej;
 
-        package BaseClasses "Base classes (not generally for direct use)"
+        package BaseClasses "Base classes (generally not for direct use)"
           extends Modelica.Icons.BasesPackage;
           block QPSolver "Dynamic quadratic programming problem solver"
             extends
@@ -4086,7 +4086,7 @@ results in the following equations:
 
         end Pendulum;
 
-        package BaseClasses "Base classes (not generally for direct use)"
+        package BaseClasses "Base classes (generally not for direct use)"
           extends Modelica.Icons.BasesPackage;
           partial model PartialPlant
             extends
@@ -4682,7 +4682,7 @@ via parameter <b>samplePeriod</b>.</p>
 "));
       end Sampler;
 
-      package BaseClasses "Base classes (not generally for direct use)"
+      package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial block DiscreteBlock "Base class of discrete blocks"
           extends FCSys.BaseClasses.Icons.Blocks.Discrete;
@@ -5324,7 +5324,7 @@ This is discussed in the description of package
 
     end Routing;
 
-    package BaseClasses "Base classes (not generally for direct use)"
+    package BaseClasses "Base classes (generally not for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial block SI "Single Input block"
         Connectors.RealInput u "Connector for Real input signal" annotation (
@@ -6984,7 +6984,7 @@ a simple model of a variable pressure loss is needed.</p>
 
     end FluidHeater;
 
-    package BaseClasses "Base classes (not generally for direct use)"
+    package BaseClasses "Base classes (generally not for direct use)"
       extends Modelica.Icons.BasesPackage;
       type LHSchoice = enumeration(
           Delta_v1 "Voltage across side 1",

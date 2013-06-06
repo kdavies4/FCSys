@@ -70,7 +70,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     </html>"));
     end UnitConversion;
 
-    package BaseClasses "Base classes (not generally for direct use)"
+    package BaseClasses "Base classes (generally not for direct use)"
       extends Modelica.Icons.BasesPackage;
 
       partial block PartialUnitConversion
