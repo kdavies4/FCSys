@@ -3,7 +3,7 @@
 // notation).  The second column contains the stop times of the simulations (as
 // strings).
 list = [//"FCSys.Conditions.Examples.FaceCondition", "1;"
-        //"FCSys.Conditions.Examples.FaceonditionMixtures", "1";
+        //"FCSys.Conditions.Examples.FaceConditionMixtures", "1";
         "FCSys.Conditions.Examples.Router", "1";
         //"FCSys.Conditions.Examples.Adapteminus", "1";
         //"FCSys.Conditions.Examples.AdaptFluid", "1";
@@ -22,22 +22,15 @@ list = [//"FCSys.Conditions.Examples.FaceCondition", "1;"
         "FCSys.Regions.Examples.CaCL", "500";
         "FCSys.Regions.Examples.CaGDL", "10";
         "FCSys.Regions.Examples.CaFP", "10";
-        "FCSys.Subregions.Examples.SubregionH2", "10";
+        "FCSys.Subregions.Examples.Subregion", "10";
         "FCSys.Subregions.Examples.SubregionHOR", "1000";
         "FCSys.Subregions.Examples.SubregionORR", "1000";
-        "FCSys.Subregions.Examples.SubregionsH2", "1";
+        "FCSys.Subregions.Examples.Subregions", "1";
         "FCSys.Subregions.Examples.SubregionsCAndH2", "1";
-        "FCSys.Subregions.Examples.SubregionsCAndH2AndH2O", "6";
-        "FCSys.Subregions.Examples.SubregionsCAndN2", "20";
-        "FCSys.Subregions.Examples.SubregionsCAndO2", "20";
-        "FCSys.Subregions.Examples.SubregionsC19HF37O5SAndH2OAndHplus", "1";
-        "FCSys.Subregions.Examples.SubregionsCAndeminus", "1";
         "FCSys.Subregions.Examples.ThermalConduction", "298.15";
         "FCSys.Subregions.Examples.ThermalConductionConvection", "200";
-        "FCSys.Subregions.Examples.ReactionRamp", "36000";
         "FCSys.Subregions.Examples.Reaction", "100";
         "FCSys.Subregions.Examples.SpeciesH2", "10";
-        "FCSys.Subregions.Examples.Specieseminus", "10";
         "FCSys.Subregions.Examples.SubregionsCell", "4";
         "FCSys.Characteristics.Examples.Correlations", "1";
         "FCSys.Units.Evaluate", "1";

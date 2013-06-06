@@ -178,7 +178,7 @@ package Conditions "Models to specify and measure operating conditions"
   package Adapters
     "<html>Adapters to <a href=\"modelica://Modelica\">Package Modelica</a></html>"
     extends Modelica.Icons.Package;
-
+    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
     model Anode
       "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
       extends FCSys.BaseClasses.Icons.Names.Top4;
@@ -201,7 +201,7 @@ package Conditions "Models to specify and measure operating conditions"
             iconTransformation(extent={{70,50},{90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
-                {70,10},{90,30}}),iconTransformation(extent={{70,10},{90,30}})));
+                {70,10},{90,30}}), iconTransformation(extent={{70,10},{90,30}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
         "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
                 {90,-10}}), iconTransformation(extent={{70,-30},{90,-10}})));
@@ -262,28 +262,34 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -308,7 +314,7 @@ package Conditions "Models to specify and measure operating conditions"
             iconTransformation(extent={{70,50},{90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
-                {70,10},{90,30}}),iconTransformation(extent={{70,10},{90,30}})));
+                {70,10},{90,30}}), iconTransformation(extent={{70,10},{90,30}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
         "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
                 {90,-10}}), iconTransformation(extent={{70,-30},{90,-10}})));
@@ -368,28 +374,34 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -2010,7 +2022,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -2018,7 +2030,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -2523,6 +2535,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermalDiffusion",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.T</code> and/or <code>chemical.Qdot_D</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2636,8 +2649,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         chemical.mu = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="chemical");
+        annotation (defaultComponentPrefixes="replaceable");
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
@@ -2648,8 +2660,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         chemical.Ndot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="chemical");
+        annotation (defaultComponentPrefixes="replaceable");
       end Current;
 
       model Custom "Custom"
@@ -2709,7 +2720,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransY=false "Y" annotation (
+          parameter Boolean inclTransY=true "Y" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -2717,7 +2728,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransZ=false "Z" annotation (
+          parameter Boolean inclTransZ=true "Z" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -2957,14 +2968,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Assumptions",
             group="Axes with translational momentum included",
             compact=true));
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             tab="Assumptions",
             group="Axes with translational momentum included",
             compact=true));
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -3157,8 +3168,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         physical.mu = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="physical");
+        annotation (defaultComponentPrefixes="replaceable");
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
@@ -3169,8 +3179,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         physical.Ndot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="physical");
+        annotation (defaultComponentPrefixes="replaceable");
       end Current;
 
       model Custom "Custom"
@@ -3234,7 +3243,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransY=false "Y" annotation (
+          parameter Boolean inclTransY=true "Y" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -3242,7 +3251,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransZ=false "Z" annotation (
+          parameter Boolean inclTransZ=true "Z" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -4774,7 +4783,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           extends FCSys.BaseClasses.Icons.Conditions.Double;
 
-          replaceable Material.Density material(source(k(start=U.atm)))
+          replaceable Material.Density material(source(k(start=4*U.C/U.cc)))
             constrainedby Material.BaseClasses.PartialCondition "Material"
             annotation (
             __Dymola_choicesFromPackage=true,
@@ -4887,11 +4896,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // 1st transverse
           connect(negative, following.negative) annotation (Line(
-              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-10,
-                  6.10623e-16}},
+              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{
+                  -10,6.10623e-16}},
               color={127,127,127},
               pattern=LinePattern.None,
               smooth=Smooth.None));
+
           connect(following.positive, positive) annotation (Line(
               points={{10,6.10623e-16},{80,6.10623e-16},{80,5.55112e-16},{100,
                   5.55112e-16}},
@@ -4904,6 +4914,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   6.10623e-16,5}},
               color={0,0,127},
               smooth=Smooth.None));
+
           connect(following.y, y.following) annotation (Line(
               points={{6.10623e-16,-5},{6.10623e-16,-30},{5.55112e-16,-30},{
                   5.55112e-16,-50}},
@@ -5306,7 +5317,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           extends FCSys.BaseClasses.Icons.Conditions.Single;
 
-          replaceable Material.Density material(source(k(start=U.atm)))
+          replaceable Material.Density material(source(k(start=4*U.C/U.cc)))
             constrainedby Material.BaseClasses.PartialCondition "Material"
             annotation (
             __Dymola_choicesFromPackage=true,
@@ -5549,8 +5560,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             end PartialCondition;
 
             type ConditionType = enumeration(
-                Density "Specify densiy (measure current)",
-                Current "Specify current (measure densiy)",
+                Density "Specify density (measure current)",
+                Current "Specify current (measure Denis)",
                 Custom "Custom") "Types of conditions";
 
           end BaseClasses;
@@ -5805,7 +5816,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -5813,7 +5824,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6015,7 +6026,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6023,7 +6034,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6478,7 +6489,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6486,7 +6497,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6935,7 +6946,7 @@ model.</p>
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransY=false "Y" annotation (
+          parameter Boolean inclTransY=true "Y" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -6943,7 +6954,7 @@ model.</p>
               group="Axes with translational momentum included",
               compact=true));
 
-          parameter Boolean inclTransZ=false "Z" annotation (
+          parameter Boolean inclTransZ=true "Z" annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
@@ -7036,7 +7047,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransY=false "Y" annotation (
+        parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -7044,7 +7055,7 @@ model.</p>
             group="Axes with translational momentum included",
             compact=true));
 
-        parameter Boolean inclTransZ=false "Z" annotation (
+        parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
