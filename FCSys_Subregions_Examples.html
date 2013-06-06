@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-5">
+<meta name="date" content="2013-6-6">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -88,19 +88,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Test the Species model</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.ThermalConductionS.png" alt="FCSys.Subregions.Examples.TestSpeciesReaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.TestSpeciesReaction">TestSpeciesReaction</a>
 </td><td>Test the Species model</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.NegativeBCS.png" alt="FCSys.Subregions.Examples.NegativeBC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.NegativeBC">NegativeBC</a>
-</td><td>&nbsp;</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.NegativeBCS.png" alt="FCSys.Subregions.Examples.PositiveBC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.PositiveBC">PositiveBC</a>
-</td><td>&nbsp;</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.NegativeBCS.png" alt="FCSys.Subregions.Examples.CurrentBC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.CurrentBC">CurrentBC</a>
-</td><td>&nbsp;</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.CatalystS.png" alt="FCSys.Subregions.Examples.Catalyst" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Catalyst">Catalyst</a>
-</td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.BoundaryS.png" alt="FCSys.Subregions.Examples.Boundary" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Boundary">Boundary</a>
-</td><td>&nbsp;</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.BoundaryS.png" alt="FCSys.Subregions.Examples.Boundary2" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Boundary2">Boundary2</a>
-</td><td>&nbsp;</td></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.BoundaryGasS.png" alt="FCSys.Subregions.Examples.BoundaryGas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.BoundaryGas">BoundaryGas</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.BoundarySubregionS.png" alt="FCSys.Subregions.Examples.BoundarySubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.BoundarySubregion">BoundarySubregion</a>
 </td><td>&nbsp;</td></tr>
@@ -215,16 +203,16 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
       gas(H2O(initMaterial=InitScalar.None)),
       liquid(inclH2O=inclH2O)));
 
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> reactionBC(
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows</a> reactionBC(
     graphite(
       <font color="blue">final </font>&#39;inclC+&#39;='inclC+',
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current">Conditions.Face.Material.Current</a> material(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>Conditions.Face.Material.Current material(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             source(duration=1000, height=0.001*U.A)))),
     ionomer(
       <font color="blue">final </font>&#39;inclC19HF37O5S-&#39;='inclC19HF37O5S-',
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Pressure">Conditions.Face.Material.Pressure</a> material(source(k=U.atm)))),
+      &#39;H+&#39;(<font color="blue">redeclare </font>Conditions.Face.Material.Pressure material(source(k=U.atm)))),
 
     gas(
       <font color="blue">final </font>inclH2=inclH2,
@@ -282,16 +270,16 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     subregion(graphite(&#39;e-&#39;(consTransX=Conservation.IC)), ionomer(&#39;H+&#39;(
             consTransX=Conservation.IC))));
 
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> reactionBC(
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows</a> reactionBC(
     graphite(
       <font color="blue">final </font>&#39;inclC+&#39;='inclC+',
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current">Conditions.Face.Material.Current</a> material(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>Conditions.Face.Material.Current material(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             source(duration=1000, height=0.001*U.A)))),
     ionomer(
       <font color="blue">final </font>&#39;inclC19HF37O5S-&#39;='inclC19HF37O5S-',
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Pressure">Conditions.Face.Material.Pressure</a> material(source(k=U.atm)))),
+      &#39;H+&#39;(<font color="blue">redeclare </font>Conditions.Face.Material.Pressure material(source(k=U.atm)))),
 
     gas(
       <font color="blue">final </font>inclH2=inclH2,
@@ -420,8 +408,9 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <pre>
 <font color="blue">model</font> SubregionH2PipeTest
   <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(subregion(L={100,1,1}*U.mm), condition1(gas(H2(<font color="blue">
-            redeclare </font>FCSys.Conditions.Face.Material.Density normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
-              source(height=U.C/U.cc, offset=298.15*U.K/U.atm))))));
+            redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Density">FCSys.Conditions.ByConnector.Face.Single.Material.Density</a>
+            normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> source(height=U.C/U.cc,
+                offset=298.15*U.K/U.atm))))));
 
 <font color="blue">end </font>SubregionH2PipeTest;
 </pre>
@@ -709,9 +698,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>1</td><td>Number of discrete regions through the PEM along the x axis</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>condition1</td><td>redeclare FCSys.Conditions.F&hellip;</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>condition2</td><td>redeclare FCSys.Conditions.F&hellip;</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>ground</td><td>redeclare FCSys.Conditions.F&hellip;</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a></td><td>condition1</td><td>redeclare FCSys.Conditions.B&hellip;</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a></td><td>condition2</td><td>redeclare FCSys.Conditions.B&hellip;</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a></td><td>ground</td><td>redeclare FCSys.Conditions.B&hellip;</td><td>&nbsp;</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -831,35 +820,38 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     inclFacesZ=false);
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> condition1 <font color="blue">constrainedby </font>
-    FCSys.Conditions.FaceBus.Subregion(gas(
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows</a>
+    condition1 <font color="blue">constrainedby </font>
+    FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus(gas(
       inclH2=true,
       inclH2O=false,
       inclN2=false,
       inclO2=false), graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;C+&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature">FCSys.Conditions.Face.Thermal.Temperature</a> thermal(source(k
+      &#39;C+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Thermal.Temperature thermal(source(k
               =environment.T))),
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current">FCSys.Conditions.Face.Material.Current</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             source(duration=1000, height=-2*U.A)))));
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> condition2 <font color="blue">constrainedby </font>
-    FCSys.Conditions.FaceBus.Subregion(gas(
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows</a>
+    condition2 <font color="blue">constrainedby </font>
+    FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus(gas(
       inclH2=false,
       inclH2O=true,
       inclN2=false,
       inclO2=true), graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;C+&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature">FCSys.Conditions.Face.Thermal.Temperature</a> thermal(source(k
+      &#39;C+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Thermal.Temperature thermal(source(k
               =environment.T))),
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current">FCSys.Conditions.Face.Material.Current</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             source(duration=1000, height=2*U.A)))));
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> ground(graphite(&#39;incle-&#39;=true,
-        &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Pressure">Conditions.Face.Material.Pressure</a> material, materialSpec(
-            k=0)))) <font color="blue">constrainedby </font>Conditions.FaceBus.Subregion;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows</a> ground(
+      graphite(&#39;incle-&#39;=true, &#39;e-&#39;(<font color="blue">redeclare </font>Conditions.Face.Material.Pressure
+          material, materialSpec(k=0)))) <font color="blue">constrainedby </font>
+    FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus;
 
 <font color="blue">equation </font>
   <font color="red">connect</font>(condition1.face, subregion1.xNegative);
@@ -928,8 +920,10 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
           initMaterial=InitScalar.Pressure,
           V_IC=0.99*subregion2.V,
           T(displayUnit=&quot;degC&quot;)))),
-    <font color="blue">redeclare </font>FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
-    <font color="blue">redeclare </font>FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+    <font color="blue">redeclare </font>FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
+      condition1,
+    <font color="blue">redeclare </font>FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
+      condition2);
 
 <font color="blue">end </font>ThermalConduction;
 </pre>
@@ -983,8 +977,10 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
     subregion2(gas(N2(p_IC=environment.p, phi(displayUnit=&quot;mm/s&quot;))), graphite(
           &#39;C+&#39;(V_IC=0.5*subregion2.V, T(displayUnit=&quot;degC&quot;)))),
-    <font color="blue">redeclare </font>FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
-    <font color="blue">redeclare </font>FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+    <font color="blue">redeclare </font>FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
+      condition1,
+    <font color="blue">redeclare </font>FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
+      condition2);
 
 <font color="blue">end </font>ThermalConductionConvection;
 </pre>
@@ -1003,58 +999,51 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>transMomCat</td><td>false</td><td>Pass translational momentum through the catalyst</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
-<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>3</td><td>Number of components of translational momentum</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalSpecies.html#FCSys.Conditions.ByConnector.ChemicalSpecies.Current">Current</a></td><td>current</td><td>redeclare Conditions.ByConne&hellip;</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalSpecies.html#FCSys.Conditions.ByConnector.ChemicalSpecies.Potential">Potential</a></td><td>potential[2]</td><td>redeclare Conditions.ByConne&hellip;</td><td>&nbsp;</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> TestReaction <font color="darkgreen">&quot;Test an electrochemical reaction&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-  <font color="darkgreen">// **Use BCs from Conditions package.</font>
-  <font color="blue">parameter </font>Boolean transMomCat=false <font color="darkgreen">
-    &quot;Pass translational momentum through the catalyst&quot;</font>;
-
-  FCSys.Subregions.Reaction2 reaction(n_spec=3, transMomCat=transMomCat);
-
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.NegativeBC">NegativeBC</a> negBC(m=1*U.g/U.mol);
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.PositiveBC">PositiveBC</a> posBC(m=1*U.g/U.mol);
-
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Catalyst">FCSys.Subregions.Examples.Catalyst</a> catalyst(transMomCat=transMomCat);
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.CurrentBC">CurrentBC</a> currentBC(m=4*U.g/U.mol);
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Boundary">Boundary</a> bC1;
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Boundary">Boundary</a> bC2;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> reaction;
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(analysis=true);
-  <font color="darkgreen">// Included components of translational momentum</font>
-  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransY=true <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
-      inclTransZ} <font color="darkgreen">
-    &quot;true, if each component of translational momentum is included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartTrans[n_trans]=<font color="red">index</font>(inclTrans) <font color="darkgreen">
-    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
+  <font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=3 <font color="darkgreen">
     &quot;Number of components of translational momentum&quot;</font>;
 
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> chemicalExchange[3](n={-2,-2,1}, m={1,1,1}*U.g/U.mol);
+  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">SingleLayer</a> layer1(transSubstrate=true, thermalSubstrate=true);
+  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">SingleLayer</a> layer2;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalSpecies.html#FCSys.Conditions.ByConnector.ChemicalSpecies.Current">Conditions.ByConnector.ChemicalSpecies.Current</a> current(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      source(height=100*U.A, duration=100), sT=3);
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalSpecies.html#FCSys.Conditions.ByConnector.ChemicalSpecies.Potential">Conditions.ByConnector.ChemicalSpecies.Potential</a> potential[2](<font color="blue">
+      each </font>sT=0);
+  <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Conditions.ByConnector.Inert.Inert</a> catalyst(thermal(source(k=360*U.K)));
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Conditions.ByConnector.Face.Single.Face</a> face1(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">FCSys.Conditions.ByConnector.Face.Single.Translational.Force</a>
+      normal);
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Conditions.ByConnector.Face.Single.Face</a> face2(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">FCSys.Conditions.ByConnector.Face.Single.Translational.Force</a>
+      normal);
 <font color="blue">equation </font>
-  <font color="red">connect</font>(negBC.chemical, reaction.chemical[1]);
-  <font color="red">connect</font>(currentBC.chemical, reaction.chemical[2]);
 
-  <font color="red">connect</font>(posBC.chemical, reaction.chemical[3]);
-  <font color="red">connect</font>(bC1.face, reaction.negative);
-  <font color="red">connect</font>(bC2.face, reaction.positive);
+  <font color="red">connect</font>(chemicalExchange[1].reaction, reaction.chemical);
+  <font color="red">connect</font>(chemicalExchange[2].reaction, reaction.chemical);
+  <font color="red">connect</font>(chemicalExchange[3].reaction, reaction.chemical);
+  <font color="red">connect</font>(layer2.chemical, reaction.chemical);
+  <font color="red">connect</font>(layer1.chemical, reaction.chemical);
+  <font color="red">connect</font>(current.chemical, chemicalExchange[3].species);
 
-  <font color="red">connect</font>(catalyst.inert, reaction.catalyst);
+  <font color="red">connect</font>(potential.chemical, chemicalExchange[1:2].species);
+  <font color="red">connect</font>(catalyst.inert, layer1.inert);
+  <font color="red">connect</font>(catalyst.inert, layer2.inert);
+  <font color="red">connect</font>(face1.face, layer1.face);
+  <font color="red">connect</font>(layer2.face, face2.face);
 <font color="blue">end </font>TestReaction;
 </pre>
 <hr>
@@ -1241,168 +1230,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.Examples.NegativeBCI.png" alt="FCSys.Subregions.Examples.NegativeBC" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.NegativeBC"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.NegativeBC</h2>
-<img src="images/FCSys.Subregions.Examples.NegativeBCD.png" alt="FCSys.Subregions.Examples.NegativeBC">
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>String</td><td>formula</td><td>&quot;e-&quot;</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>U.g/U.mol</td><td>[m/N]</td></tr>
-<tr><td>Integer</td><td>n_trans</td><td>3</td><td>Number of components of translational momentum</td></tr>
-</table>
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> NegativeBC
-  <font color="blue">parameter </font>String formula=&quot;e-&quot;;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m=U.g/U.mol;
-  <font color="blue">parameter </font>Integer n_trans=3 <font color="darkgreen">&quot;Number of components of translational momentum&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Connectors.ChemicalSpecies</a> chemical(
-    <font color="blue">final </font>formula=formula,
-    <font color="blue">final </font>m=m,
-    <font color="blue">final </font>n_trans=n_trans);
-
-<font color="blue">equation </font>
-  chemical.mu = 0;
-  chemical.phi = <font color="red">ones</font>(n_trans);
-  chemical.sT = 1;
-<font color="blue">end </font>NegativeBC;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Subregions.Examples.NegativeBCI.png" alt="FCSys.Subregions.Examples.PositiveBC" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.PositiveBC"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.PositiveBC</h2>
-<img src="images/FCSys.Subregions.Examples.NegativeBCD.png" alt="FCSys.Subregions.Examples.PositiveBC">
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>String</td><td>formula</td><td>&quot;H+&quot;</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>U.g/U.mol</td><td>[m/N]</td></tr>
-<tr><td>Integer</td><td>n_trans</td><td>3</td><td>Number of components of translational momentum</td></tr>
-</table>
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> PositiveBC
-  <font color="blue">parameter </font>String formula=&quot;H+&quot;;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m=U.g/U.mol;
-  <font color="blue">parameter </font>Integer n_trans=3 <font color="darkgreen">&quot;Number of components of translational momentum&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Connectors.ChemicalSpecies</a> chemical(
-    <font color="blue">final </font>formula=formula,
-    <font color="blue">final </font>m=m,
-    <font color="blue">final </font>n_trans=n_trans);
-
-<font color="blue">equation </font>
-  chemical.mu = 1.2*U.V;
-  chemical.phi = <font color="red">ones</font>(n_trans);
-  chemical.sT = 1;
-
-<font color="blue">end </font>PositiveBC;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Subregions.Examples.NegativeBCI.png" alt="FCSys.Subregions.Examples.CurrentBC" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.CurrentBC"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.CurrentBC</h2>
-<img src="images/FCSys.Subregions.Examples.CurrentBCD.png" alt="FCSys.Subregions.Examples.CurrentBC">
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>String</td><td>formula</td><td>&quot;H2&quot;</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>U.g/U.mol</td><td>[m/N]</td></tr>
-<tr><td>Integer</td><td>n_trans</td><td>3</td><td>Number of components of translational momentum</td></tr>
-</table>
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> CurrentBC
-  <font color="blue">parameter </font>String formula=&quot;H2&quot;;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m=U.g/U.mol;
-  <font color="blue">parameter </font>Integer n_trans=3 <font color="darkgreen">&quot;Number of components of translational momentum&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Connectors.ChemicalSpecies</a> chemical(
-    <font color="blue">final </font>formula=formula,
-    <font color="blue">final </font>m=m,
-    <font color="blue">final </font>n_trans=n_trans);
-
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> source(height=100*U.A, duration=100);
-
-<font color="blue">equation </font>
-  chemical.Ndot = source.y;
-  chemical.phi = <font color="red">ones</font>(n_trans);
-  chemical.sT = 3;
-<font color="blue">end </font>CurrentBC;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Subregions.Examples.CatalystI.png" alt="FCSys.Subregions.Examples.Catalyst" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.Catalyst"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.Catalyst</h2>
-<img src="images/FCSys.Subregions.Examples.CatalystD.png" alt="FCSys.Subregions.Examples.Catalyst">
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_trans</td><td>3</td><td>Number of components of translational momentum</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>transMomCat</td><td>true</td><td>Pass translational momentum through the catalyst</td></tr>
-</table>
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> Catalyst
-  <font color="blue">parameter </font>Integer n_trans=3 <font color="darkgreen">&quot;Number of components of translational momentum&quot;</font>;
-  <font color="blue">parameter </font>Boolean transMomCat=true <font color="darkgreen">
-    &quot;Pass translational momentum through the catalyst&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(<font color="blue">final </font>n_trans=n_trans, translational(phi=<font color="red">zeros</font>(n_trans)));
-
-<font color="blue">equation </font>
-  inert.thermal.T = 360*U.K;
-<font color="blue">end </font>Catalyst;
-</pre>
-<hr>
-
 <h2><img src="images/FCSys.Subregions.Examples.BoundaryI.png" alt="FCSys.Subregions.Examples.Boundary" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.Boundary"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.Boundary</h2>
 <img src="images/FCSys.Subregions.Examples.BoundaryD.png" alt="FCSys.Subregions.Examples.Boundary">
@@ -1423,59 +1250,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">equation </font>
   face.rho = 4*U.C/U.cc;
-  face.mPhidot = {0,0,0};
+  face.mPhidot[1] = 0;
+  face.phi[2:3] = {0,0};
   face.T = 300*U.K;
 <font color="blue">end </font>Boundary;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Subregions.Examples.BoundaryI.png" alt="FCSys.Subregions.Examples.Boundary2" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.Boundary2"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.Boundary2</h2>
-<img src="images/FCSys.Subregions.Examples.BoundaryD.png" alt="FCSys.Subregions.Examples.Boundary2">
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> Boundary2
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face;
-
-<font color="blue">equation </font>
-  face.Ndot = 0;
-  face.phi = {0,0,0};
-  face.Qdot = 0;
-<font color="blue">end </font>Boundary2;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Subregions.Examples.BoundaryGasI.png" alt="FCSys.Subregions.Examples.BoundaryGas" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.BoundaryGas"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.BoundaryGas</h2>
-<img src="images/FCSys.Subregions.Examples.BoundaryGasD.png" alt="FCSys.Subregions.Examples.BoundaryGas">
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> BoundaryGas
-
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Boundary2">Boundary2</a> boundary2_1;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face;
-<font color="blue">equation </font>
-  <font color="red">connect</font>(boundary2_1.face, face.H2);
-<font color="blue">end </font>BoundaryGas;
 </pre>
 <hr>
 
@@ -1495,7 +1273,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <pre>
 <font color="blue">model</font> BoundarySubregion
 
-  <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.BoundaryGas">BoundaryGas</a> boundaryGas;
+  BoundaryGas boundaryGas;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face;
 <font color="blue">equation </font>
   <font color="red">connect</font>(boundaryGas.face, face.gas);
@@ -1506,7 +1284,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:36 2013.
 </div>
 </body>
 </html>

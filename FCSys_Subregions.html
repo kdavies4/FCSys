@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-5">
+<meta name="date" content="2013-6-6">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -86,7 +86,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Subregions.VolumeS.png" alt="FCSys.Subregions.Volume" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a>
 </td><td>Model to establish a fixed total volume</td></tr>
 <tr><td><img src="images/FCSys.Subregions.BaseClassesS.png" alt="FCSys.Subregions.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not generally for direct use)</td></tr>
+</td><td>Base classes (generally not for direct use)</td></tr>
 </table>
 <hr>
 
@@ -305,7 +305,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.yPositive, yPositive.ionomer);
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);
-
 <font color="blue">end </font>SubregionIonomerOnly;
 </pre>
 <hr>
@@ -405,7 +404,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
   <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
   <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);
-
 <font color="blue">end </font>SubregionNoIonomer;
 </pre>
 <hr>
@@ -763,7 +761,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:09 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:18 2013.
 </div>
 </body>
 </html>

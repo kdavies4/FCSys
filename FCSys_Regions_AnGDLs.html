@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-5">
+<meta name="date" content="2013-6-6">
 <meta name="description" content="Anode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -162,6 +162,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;incle-&#39;=true,
           &#39;C+&#39;(V_IC=V - xV)),
         liquid(inclH2O=true, H2O(V_IC=0))));
+
   <font color="darkgreen">// **Add inclTrans*=false for all axes here and in the other layers except y in the FPs</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.76 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
   <font color="darkgreen">// The default porosity is for Sigracet 24 BC.</font>
@@ -807,7 +808,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:43:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:28:33 2013.
 </div>
 </body>
 </html>

@@ -1,0 +1,143 @@
+<html>
+<head>
+<title>FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-6-6">
+<meta name="description" content="Base classes (generally not for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational">FCSys.Conditions.ByConnector.ChemicalReaction.Translational</a>.BaseClasses</h2>
+
+<b>Base classes (generally not for direct use)</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition">PartialCondition</a>
+</td><td>Partial model for a translational condition</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.ConditionType">ConditionType</a>
+</td><td>Types of conditions</td></tr>
+</table>
+<p>
+<h3>Types and constants</h3>
+
+<a name="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
+    Velocity <font color="darkgreen">&quot;Specify velocity (measure force)&quot;</font>,
+    Custom <font color="darkgreen">&quot;Custom&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses">FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses</a>.PartialCondition</h2>
+<b>Partial model for a translational condition</b><p>
+<img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Material.ReactionRateD.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.BaseClasses.PartialCondition">ByConnector.ChemicalReaction.BaseClasses.PartialCondition</a> (Partial model of a condition).
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for a chemical reaction</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
+  &quot;Partial model for a translational condition&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.BaseClasses.PartialCondition">ByConnector.ChemicalReaction.BaseClasses.PartialCondition</a>;
+
+  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis&quot;</font>;
+
+  <font color="blue">constant </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
+  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with</font>
+  <font color="darkgreen">// the results.</font>
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer transCart[Axis] <font color="darkgreen">
+    &quot;Translational-momentum-component indices of the Cartesian axes&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Zero values of other flows</font>
+  chemical.mu = 0 <font color="darkgreen">&quot;Electrochemical potential&quot;</font>;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans<font color="blue"> loop</font>
+    <font color="blue">if </font>cartTrans[i] &lt;&gt; axis<font color="blue"> then</font>
+      chemical.mPhidot[i] = 0 <font color="darkgreen">&quot;Force along the other axes&quot;</font>;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+  chemical.Qdot_A = 0 <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
+  chemical.Qdot_D = 0 <font color="darkgreen">&quot;Rate of thermal diffusion&quot;</font>;
+<font color="blue">end </font>PartialCondition;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:25:40 2013.
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Quantities</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-5">
+<meta name="date" content="2013-6-6">
 <meta name="description" content="Quantities to represent physical properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -121,7 +121,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Density" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.DensityRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.DensityRate">DensityRate</a>
-</td><td>&nbsp;</td></tr>
+</td><td>Rate of density</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Energy" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Energy</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Fluidity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a>
@@ -195,7 +195,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Time" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Time">Time</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.TimeAbsolute" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a>
-</td><td>&nbsp;</td></tr>
+</td><td>Absolute time</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Velocity2" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Velocity2</a>
@@ -223,7 +223,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.TemperatureAbsolute" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a>
-</td><td>&nbsp;</td></tr>
+</td><td>Absolute temperature</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.TemperatureRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a>
 </td><td>Rate of temperature</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.ResistivityThermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a>
@@ -252,7 +252,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Quantities.CurrentRate"></a><pre><font color="blue">type</font> CurrentRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T2&quot;) <font color="darkgreen">
   &quot;Rate of current&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Density"></a><pre><font color="blue">type</font> Density = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/l3&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.DensityRate"></a><pre><font color="blue">type</font> DensityRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l3.T)&quot;);</pre><p>
+<a name="FCSys.Quantities.DensityRate"></a><pre><font color="blue">type</font> DensityRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l3.T)&quot;) <font color="darkgreen">
+  &quot;Rate of density&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Energy"></a><pre><font color="blue">type</font> Energy = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T2&quot;);</pre><p>
 <a name="FCSys.Quantities.Fluidity"></a><pre><font color="blue">type</font> Fluidity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.T/m&quot;, min=0);</pre><p>
 <a name="FCSys.Quantities.Force"></a><pre><font color="blue">type</font> Force = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/T2&quot;);</pre><p>
@@ -308,7 +309,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Quantities.ResistivityMaterial"></a><pre><font color="blue">type</font> ResistivityMaterial = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T/l2&quot;, min=0) <font color="darkgreen">
   &quot;Material resistivity&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Time"></a><pre><font color="blue">type</font> Time = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T&quot;);</pre><p>
-<a name="FCSys.Quantities.TimeAbsolute"></a><pre><font color="blue">type</font> TimeAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.TimeAbsolute"></a><pre><font color="blue">type</font> TimeAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T&quot;, min=0) <font color="darkgreen">
+  &quot;Absolute time&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Velocity"></a><pre><font color="blue">type</font> Velocity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/T&quot;);</pre><p>
 <a name="FCSys.Quantities.Velocity2"></a><pre><font color="blue">type</font> Velocity2 = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="darkgreen">
   &quot;Squared velocity&quot;</font>;</pre><p>
@@ -328,7 +330,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Specific thermal capacity&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.PotentialChemical"></a><pre><font color="blue">type</font> PotentialChemical = <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a> (displayUnit=&quot;J/mol&quot;) <font color="darkgreen">&quot;Chemical potential&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Temperature"></a><pre><font color="blue">type</font> Temperature = <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a> (displayUnit=&quot;K&quot;);</pre><p>
-<a name="FCSys.Quantities.TemperatureAbsolute"></a><pre><font color="blue">type</font> TemperatureAbsolute = <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a> (displayUnit=&quot;K&quot;);</pre><p>
+<a name="FCSys.Quantities.TemperatureAbsolute"></a><pre><font color="blue">type</font> TemperatureAbsolute = <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a> (displayUnit=&quot;K&quot;) <font color="darkgreen">
+  &quot;Absolute temperature&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.TemperatureRate"></a><pre><font color="blue">type</font> TemperatureRate = <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a> (displayUnit=&quot;K/s&quot;) <font color="darkgreen">&quot;Rate of temperature&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.ResistivityThermal"></a><pre><font color="blue">type</font> ResistivityThermal = <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Resistivity</a> (displayUnit=&quot;m.K/W&quot;) <font color="darkgreen">
   &quot;Thermal resistivity&quot;</font>;</pre><p>
@@ -337,7 +340,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:59 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:30:06 2013.
 </div>
 </body>
 </html>

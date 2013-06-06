@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-5">
+<meta name="date" content="2013-6-6">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -65,7 +65,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Subregions.Phases.LiquidS.png" alt="FCSys.Subregions.Phases.Liquid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a>
 </td><td>Liquid phase</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Phases.BaseClassesS.png" alt="FCSys.Subregions.Phases.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not generally for direct use)</td></tr>
+</td><td>Base classes (generally not for direct use)</td></tr>
 </table>
 <hr>
 
@@ -136,7 +136,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
 
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>
-        ({inclH2,inclH2O,inclN2,inclO2}),reduceVel=true);
+        ({inclH2,inclH2O,inclN2,inclO2}), reduceVel=true);
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
@@ -836,7 +836,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:41 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:47 2013.
 </div>
 </body>
 </html>
