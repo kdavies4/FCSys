@@ -96,7 +96,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector PhysicalBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
-
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -131,7 +130,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector PhysicalBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="physical",
@@ -189,7 +187,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple configurations)</html>"
-
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -533,7 +530,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -568,7 +564,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -656,7 +651,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -689,7 +683,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",

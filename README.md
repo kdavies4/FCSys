@@ -18,8 +18,8 @@ from the documentation layer of the Modelica code (starting at the
 ### Installation
 
 Please see the
-[Getting Started](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted)
-section of the
+[Getting Started section](http://kdavies4.github.io/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted)
+of the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html).
 
 There are optional subpackages ([Test](Test.mo) and [Tests](Tests.mo)) to
@@ -35,8 +35,8 @@ Please see the acknowledgements on the
 
 [FCSys] is published under the Modelica License 2 (see the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2)
-or the [ModelicaLicense2.html](resources/documentation/ModelicaLicense2.html)
-file).
+or the
+[ModelicaLicense2.html file](resources/documentation/ModelicaLicense2.html)).
 Please share any modifications you make (preferably on a Github fork from
 https://github.com/kdavies4/FCSys) so that others may benefit from your work.
 

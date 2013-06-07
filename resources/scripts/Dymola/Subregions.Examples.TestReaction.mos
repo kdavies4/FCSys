@@ -3,7 +3,7 @@ filename = "TestReaction.mat";
 y1 = {"reaction.chemical.mu"};
 y2 = {"reaction.chemical.Ndot"};
 y3 = {"reaction.chemical.T"};
-y4 = {""};
+y4 = {"layer1.inert.thermal.Qdot", "layer2.inert.thermal.Qdot"};
 y5 = {""};
 y6 = {""};
 

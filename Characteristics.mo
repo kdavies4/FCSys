@@ -796,6 +796,7 @@ package Characteristics
       import FCSys.BaseClasses.Utilities.Chemistry.charge;
       import Modelica.Math.BooleanVectors.anyTrue;
       extends Modelica.Icons.MaterialPropertiesPackage;
+
       constant String formula "Chemical formula";
       constant Phase phase "Material phase";
       constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
@@ -1135,8 +1136,8 @@ package Characteristics
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
           1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
-          Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-           then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
+          Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+           then 0 else Deltah0_f) + h_offset + h_resid(T, p) - (if phase <>
           Phase.Gas then h_resid(T, p0) else h_resid(
                 T,
                 p0,

@@ -7180,8 +7180,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Modelica.Media.IdealGases.SingleGases.H2)
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
     // **Use model for H instead.
-    FCSys.Conditions.Adapters.Species.FluidNeutral H2O(redeclare package Data
-        = Characteristics.H2O.Ionomer, redeclare package Medium =
+    Conditions.Adapters.Species.FluidNeutral H2O(redeclare package Data =
+          Characteristics.H2O.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2O)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     Conditions.Adapters.Junctions.Junction2 junction2
