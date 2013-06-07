@@ -321,8 +321,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition1[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition1[
+        n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -331,8 +331,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition2[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition2[
+        n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -587,8 +587,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition1[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition1[
+        n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -597,8 +597,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition2[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition2[
+        n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
@@ -730,8 +730,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition1[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition1[
+        n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -742,8 +742,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-4,-8.88178e-16})));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow condition2[n_y,
-        n_z](
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated condition2[
+        n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -2844,7 +2844,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
     final parameter Q.Length L[Axis]={sum(L_x),sum(L_y),sum(L_z)} if
       hasSubregions "Length";
     final parameter Q.Area A[Axis]={L[cartWrap(ax + 1)]*L[cartWrap(ax + 2)]
-        for ax in 1:3} if hasSubregions "Cross-sectional area";
+        for ax in 1:3} if hasSubregions "Cross-sectional areas";
     final parameter Q.Volume V=product(L) if hasSubregions "Volume";
 
     // Assumptions about included faces
@@ -2994,25 +2994,29 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-100,120},{100,160}},
-              fillColor={255,255,255},
-              visible=inclFacesY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-100,120},{100,160}},
-              textString="%name",
-              visible=inclFacesY,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-100,56},{100,96}},
-              fillColor={255,255,255},
-              visible=not inclFacesY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-100,120},{100,160}},
+            fillColor={255,255,255},
+            visible=inclFacesY,
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-100,120},{100,160}},
+            textString="%name",
+            visible=inclFacesY,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-100,56},{100,96}},
+            fillColor={255,255,255},
+            visible=not inclFacesY,
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            visible=not inclFacesY,
+            lineColor={0,0,0})}));
   end Region;
   annotation (Documentation(info="<html>
 <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

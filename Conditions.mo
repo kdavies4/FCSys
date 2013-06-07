@@ -2138,31 +2138,31 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               rotation=270,
               origin={40,-160})));
 
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow anEndCondition[
-          n_y, n_z](each graphite('inclC+'=true, 'incle-'=true)) annotation (
-            Placement(transformation(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
+          anEndCondition[n_y, n_z](each graphite('inclC+'=true, 'incle-'=true))
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow caEndCondition[
-          n_y, n_z](each graphite('inclC+'=true, 'incle-'=true)) annotation (
-            Placement(transformation(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
+          caEndCondition[n_y, n_z](each graphite('inclC+'=true, 'incle-'=true))
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
           anSourceCondition[n_x_an, n_z](each gas(inclH2=true, inclH2O=true))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-136})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow anSinkCondition[
-          n_x_an, n_z](each gas(inclH2=true, inclH2O=true)) annotation (
-            Placement(transformation(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
+          anSinkCondition[n_x_an, n_z](each gas(inclH2=true, inclH2O=true))
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
           caSourceCondition[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
@@ -2170,8 +2170,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-136})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow caSinkCondition[
-          n_x_ca, n_z](each gas(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
+          caSinkCondition[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2298,8 +2298,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         final parameter Integer n_z=1
           "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
 
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow anEnd[n_y, n_z]
-          (each graphite(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anEnd[n_y,
+          n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
@@ -2308,8 +2308,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow caEnd[n_y, n_z]
-          (each graphite(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caEnd[n_y,
+          n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
@@ -2318,28 +2318,28 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow anSource[n_x_an,
-          n_z](each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSource[
+          n_x_an, n_z](each gas(inclH2=true, inclH2O=true)) annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow anSink[n_x_an,
-          n_z](each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSink[
+          n_x_an, n_z](each gas(inclH2=true, inclH2O=true)) annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow caSource[n_x_ca,
-          n_z](each gas(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSource[
+          n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={20,-30})));
-        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow caSink[n_x_ca,
-          n_z](each gas(
+        FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSink[
+          n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2369,7 +2369,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       extends Modelica.Icons.Package;
 
       model ChemicalReaction
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector</html>"
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector, with efforts by default</html>"
         import FCSys.BaseClasses.Utilities.countTrue;
         import FCSys.BaseClasses.Utilities.enumerate;
         import FCSys.BaseClasses.Utilities.index;
@@ -2604,18 +2604,23 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             index=1,
             extent={{2,3},{2,3}}));
 
-        annotation (
-          defaultComponentName="chemical",
-          Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Chemical.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"),
-          Diagram(graphics));
+        annotation (defaultComponentName="chemical");
       end ChemicalReaction;
+
+      model ChemicalReactionNoFlow
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector, with zero flows by default</html>"
+        extends ChemicalReaction(
+          redeclare replaceable Material.Potential material,
+          redeclare replaceable Translational.Force translationalX(final axis),
+
+          redeclare replaceable Translational.Force translationalY(final axis),
+
+          redeclare replaceable Translational.Force translationalZ(final axis),
+
+          redeclare replaceable ThermalAdvection.HeatRate thermalAdvection,
+          redeclare replaceable ThermalDiffusion.HeatRate thermalDiffusion);
+        annotation (defaultComponentName="chemical");
+      end ChemicalReactionNoFlow;
 
       package Material "Conditions for additivity of volume"
         extends Modelica.Icons.Package;
@@ -3011,7 +3016,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
       equation
         chemical.mu = u_final;
-        annotation (defaultComponentPrefixes="replaceable");
+
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
@@ -3022,7 +3027,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
       equation
         chemical.Ndot = u_final;
-        annotation (defaultComponentPrefixes="replaceable");
+
       end Current;
 
       model Custom "Custom"
@@ -3034,11 +3039,9 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
       equation
         x = u_final;
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="chemical",
-          Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
+        annotation (defaultComponentName="chemical", Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.mu</code> and/or <code>chemical.Ndot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -3173,7 +3176,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       extends Modelica.Icons.Package;
 
       model PhysicalBus
-        "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector</html>"
+        "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with effort by default</html>"
 
         extends FCSys.BaseClasses.Icons.Conditions.Single;
 
@@ -3188,12 +3191,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential 'C+'(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="C+") if 'inclC+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if 'inclC+' constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="C+") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3210,12 +3216,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential 'C19HF37O5S-'(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="inclC19HF37O5S-") if 'inclC19HF37O5S-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if 'inclC19HF37O5S-' constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="inclC19HF37O5S-") "Model" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Species",
@@ -3232,12 +3241,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential 'e-'(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="e-") if 'incle-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if 'incle-' constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="e-") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3252,12 +3264,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential 'H+'(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="H+") if 'inclH+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if 'inclH+' constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="H+") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3272,12 +3287,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential H2(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="H2") if inclH2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if inclH2 constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="H2") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3293,12 +3311,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential H2O(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="H2O") if inclH2O constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if inclH2O constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="H2O") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3314,12 +3335,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential N2(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="N2") if inclN2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if inclN2 constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="N2") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3335,12 +3359,15 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_joinNext=true));
 
         replaceable Physical.Potential O2(
-          final inclTransX=inclTransX,
-          final inclTransY=inclTransY,
-          final inclTransZ=inclTransZ,
-          final formula="O2") if inclO2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition
-          "Model" annotation (Dialog(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ,
+          final formula) if inclO2 constrainedby
+          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ,
+          formula="O2") "Model" annotation (Dialog(
             __Dymola_choicesFromPackage=true,
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3394,7 +3421,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // C+
         connect('C+'.physical, physical.'C+') annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.'C+', 'C+'.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3411,7 +3438,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         connect('C19HF37O5S-'.physical, physical.'C19HF37O5S-') annotation (
             Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3427,7 +3454,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // e-
         connect('e-'.physical, physical.'e-') annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3443,7 +3470,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // H+
         connect('H+'.physical, physical.'H+') annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3459,7 +3486,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // H2
         connect(H2.physical, physical.H2) annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3475,7 +3502,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // H2O
         connect(H2O.physical, physical.H2O) annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3491,7 +3518,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // N2
         connect(N2.physical, physical.N2) annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3507,7 +3534,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // O2
         connect(O2.physical, physical.O2) annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={239,142,1},
+            color={38,196,52},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
@@ -3519,7 +3546,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-        annotation (Diagram(graphics));
+        annotation (defaultComponentName="physical");
       end PhysicalBus;
 
       annotation (Documentation(info="<html><p>All of the submodels for the individual species in
@@ -3540,6 +3567,51 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               fillColor={38,196,52},
               lineThickness=0.5)}));
 
+      model PhysicalBusIsolated
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with zero flows by default</html>"
+        extends PhysicalBus(
+          redeclare replaceable Physical.Current 'C+'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current 'C19HF37O5S-'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current 'e-'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current 'H+'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current H2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current H2O(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current N2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula),
+          redeclare replaceable Physical.Current O2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ,
+            final formula));
+        annotation (defaultComponentName="physical");
+      end PhysicalBusIsolated;
     end PhysicalBus;
 
     package Physical
@@ -3872,76 +3944,86 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           annotation (defaultComponentName="face",Icon(graphics));
         end FaceBus;
 
-        model FaceBusFlow
-          "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors, with flows by default</html>"
+        model FaceBusIsolated
+          "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors, with zero normal velocity and otherwise zero flows by default</html>"
 
           extends FaceBus(
             gas(
               H2(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal),
               H2O(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal),
               N2(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal),
               O2(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal)),
             graphite('C+'(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal), 'e-'
                 (
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal)),
             ionomer(
               'C19HF37O5S-'(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal),
               'H+'(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal),
               H2O(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal)),
             liquid(H2O(
                 redeclare replaceable Face.Pair.Material.Current material,
-                redeclare replaceable Face.Pair.Translational.Force normal,
-                redeclare replaceable Face.Pair.Translational.Force following,
-                redeclare replaceable Face.Pair.Translational.Force preceding,
+                redeclare replaceable Face.Pair.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Pair.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Pair.Thermal.HeatRate thermal)));
 
           annotation (defaultComponentName="face");
 
-        end FaceBusFlow;
+        end FaceBusIsolated;
 
         package Phases
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
@@ -4552,106 +4634,86 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           annotation (defaultComponentName="face",Diagram(graphics));
         end FaceBus;
 
-        model FaceBusFlow
-          "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows by default</html>"
+        model FaceBusIsolated
+          "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with zero normal velocity and otherwise zero flows by default</html>"
 
           extends FaceBus(
             gas(
               H2(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
               H2O(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
               N2(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
               O2(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal)),
             graphite('C+'(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
                 'e-'(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal)),
             ionomer(
               'C19HF37O5S-'(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
               'H+'(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal),
               H2O(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal)),
             liquid(H2O(
                 redeclare replaceable Face.Single.Material.Current material,
-                redeclare replaceable Face.Single.Translational.Force normal,
-                redeclare replaceable Face.Single.Translational.Force following,
-
-                redeclare replaceable Face.Single.Translational.Force preceding,
-
+                redeclare replaceable Face.Single.Translational.Force following(
+                    final orientation),
+                redeclare replaceable Face.Single.Translational.Force preceding(
+                    final orientation),
                 redeclare replaceable Face.Single.Thermal.HeatRate thermal)));
 
-          annotation (
-            defaultComponentName="face",
-            Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>gas(H2O(redeclare Conditions.ByConnector.Face.Single.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)))</code><br>
-  rather than simply:<br>
-  <code>gas(H2O(material(redeclare Modelica.Blocks.Sources.Ramp source)))</code></p>
-  </html>"),
-            defaultComponentName="face");
+          annotation (defaultComponentName="face");
 
-        end FaceBusFlow;
+        end FaceBusIsolated;
 
         package Phases
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
@@ -5091,23 +5153,26 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-50,14},{-30,34}})));
-          replaceable Translational.Velocity normal(final orientation=
-                Orientation.normal) constrainedby
-            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition
-            "Normal translational" annotation (
+          replaceable Translational.Velocity normal(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.normal) "Normal translational"
+            annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-30,2},{-10,22}})));
-          replaceable Translational.Velocity following(final orientation=
-                Orientation.preceding) constrainedby
-            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition
+          replaceable Translational.Velocity following(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.following)
             "<html>1<sup>st</sup> transverse</html>" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-10,-10},{10,10}})));
-          replaceable Translational.Velocity preceding(final orientation=
-                Orientation.following) constrainedby
-            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition
+          replaceable Translational.Velocity preceding(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.following)
             "<html>2<sup>nd</sup> transverse</html>" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
@@ -5198,8 +5263,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           // 1st transverse
           connect(negative, following.negative) annotation (Line(
-              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-10,
-                  6.10623e-16}},
+              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{
+                  -10,6.10623e-16}},
               color={127,127,127},
               pattern=LinePattern.None,
               smooth=Smooth.None));
@@ -5236,10 +5301,12 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               color={127,127,127},
               pattern=LinePattern.None,
               smooth=Smooth.None));
+
           connect(u.preceding, preceding.u) annotation (Line(
               points={{5.55112e-16,50},{5.55112e-16,30},{20,30},{20,-7}},
               color={0,0,127},
               smooth=Smooth.None));
+
           connect(preceding.y, y.preceding) annotation (Line(
               points={{20,-17},{20,-30},{5.55112e-16,-30},{5.55112e-16,-50}},
               color={0,0,127},
@@ -5266,15 +5333,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               points={{40,-29},{40,-30},{5.55112e-16,-30},{5.55112e-16,-50}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Face.Pair.Material.Density material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"), Diagram(graphics));
+
         end Face;
+
+        model FaceIsolated
+          "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector, with zero normal velocity and otherwise zero flows by default</html>"
+
+          extends Face(
+            redeclare replaceable Material.Current material,
+            redeclare replaceable Translational.Force following(final
+                orientation),
+            redeclare replaceable Translational.Force preceding(final
+                orientation),
+            redeclare replaceable Thermal.HeatRate thermal);
+
+          annotation (defaultComponentName="face");
+        end FaceIsolated;
 
         package Material "Material conditions"
           extends Modelica.Icons.Package;
@@ -5626,23 +5700,26 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-66,22},{-46,42}})));
-          replaceable Translational.Velocity normal(final orientation=
-                Orientation.normal) constrainedby
-            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition
-            "Normal translational" annotation (
+          replaceable Translational.Velocity normal(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.normal) "Normal translational"
+            annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-38,10},{-18,30}})));
-          replaceable Translational.Velocity following(final orientation=
-                Orientation.following) constrainedby
-            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition
+          replaceable Translational.Velocity following(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.following)
             "<html>1<sup>st</sup> transverse</html>" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{-10,-2},{10,18}})));
-          replaceable Translational.Velocity preceding(final orientation=
-                Orientation.preceding) constrainedby
-            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition
+          replaceable Translational.Velocity preceding(final orientation)
+            constrainedby
+            FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+              orientation=Orientation.preceding)
             "<html>2<sup>nd</sup> transverse</html>" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
@@ -5792,18 +5869,19 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               string="%second",
               index=1,
               extent={{1,3},{1,3}}));
-          annotation (
-            Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Face.Single.Material.Density material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"),
-            Diagram(graphics),
-            Icon(graphics));
+
         end Face;
+
+        model FaceIsolated
+          extends Face(
+            redeclare replaceable Material.Current material,
+            redeclare replaceable Translational.Force following(final
+                orientation),
+            redeclare replaceable Translational.Force preceding(final
+                orientation),
+            redeclare replaceable Thermal.HeatRate thermal);
+          annotation (defaultComponentName="face");
+        end FaceIsolated;
 
         package Material "Material conditions"
           extends Modelica.Icons.Package;
@@ -6290,34 +6368,27 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             string="%second",
             index=1,
             extent={{2,3},{2,3}}));
-        annotation (
-          Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Inert.Translational.Force translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"),
-          Diagram(graphics),
-          Icon(graphics));
+
       end Inert;
 
-      model InertFlow
-        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector, with efforts by default</html>"
+      model InertIsolated
+        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector, with zero flows by default</html>"
 
         extends Inert(
-          redeclare Inert.Translational.Force translationalX(final axis),
-          redeclare Inert.Translational.Force translationalY(final axis),
-          redeclare Inert.Translational.Force translationalZ(final axis),
-          redeclare Inert.Thermal.HeatRate thermal);
+          redeclare replaceable Translational.Force translationalX(final axis),
+
+          redeclare replaceable Translational.Force translationalY(final axis),
+
+          redeclare replaceable Translational.Force translationalZ(final axis),
+
+          redeclare replaceable Thermal.HeatRate thermal);
 
         annotation (defaultComponentName="inert",Documentation(info="<html>
 <p>See the <a href=\"modelica://FCSys.Conditions.ByConnector.Inert.Inert\">Inert</a>
 model.</p>
 </html>"));
 
-      end InertFlow;
+      end InertIsolated;
 
       model InertInternal
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector, with efforts by default</html>"
@@ -6514,35 +6585,27 @@ model.</p>
             string="%second",
             index=1,
             extent={{2,3},{2,3}}));
-        annotation (
-          defaultComponentName="inert",
-          Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Inert.Translational.Force translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"),
-          Diagram(graphics),
-          Icon(graphics));
+        annotation (defaultComponentName="inert");
       end InertInternal;
 
-      model InertInternalFlow
-        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector, with efforts by default</html>"
+      model InertInternalIsolated
+        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector, with zero flows by default</html>"
 
         extends InertInternal(
-          redeclare Translational.Force translationalX(final axis),
-          redeclare Translational.Force translationalY(final axis),
-          redeclare Translational.Force translationalZ(final axis),
-          redeclare Thermal.HeatRate thermal);
+          redeclare replaceable Translational.Force translationalX(final axis),
+
+          redeclare replaceable Translational.Force translationalY(final axis),
+
+          redeclare replaceable Translational.Force translationalZ(final axis),
+
+          redeclare replaceable Thermal.HeatRate thermal);
 
         annotation (defaultComponentName="inert",Documentation(info="<html>
 <p>See the <a href=\"modelica://FCSys.Conditions.ByConnector.Inert.Inert\">Inert</a>
 model.</p>
 </html>"));
 
-      end InertInternalFlow;
+      end InertInternalIsolated;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
@@ -6987,31 +7050,27 @@ model.</p>
             string="%second",
             index=1,
             extent={{2,3},{2,3}}));
-        annotation (Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.InertDalton.Dalton.Pressure dalton(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>dalton(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"));
+
       end InertDalton;
 
-      model InertDaltonFlow
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, with flows by default</html>"
+      model InertDaltonEmpty
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, with zero flows by default</html>"
 
         extends InertDalton(
-          redeclare Dalton.Pressure dalton(source(y=-U.atm)),
-          redeclare Translational.Force translationalX,
-          redeclare Translational.Force translationalY,
-          redeclare Translational.Force translationalZ,
-          redeclare Thermal.HeatRate thermal);
+          redeclare replaceable Dalton.Pressure dalton,
+          redeclare replaceable Translational.Force translationalX(final axis),
+
+          redeclare replaceable Translational.Force translationalY(final axis),
+
+          redeclare replaceable Translational.Force translationalZ(final axis),
+
+          redeclare replaceable Thermal.HeatRate thermal);
         annotation (defaultComponentName="inertDalton",Documentation(info="<html>
 <p>See the <a href=\"modelica://FCSys.Conditions.ByConnector.InertDalton.InertDalton\">InertDalton</a>
 model.</p>
 </html>"));
 
-      end InertDaltonFlow;
+      end InertDaltonEmpty;
 
       package Dalton "Conditions for additivity of volume"
         extends Modelica.Icons.Package;
@@ -7340,7 +7399,7 @@ model.</p>
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector</html>"
       extends Modelica.Icons.Package;
       model Translational
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector</html>"
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector, with efforts by default</html>"
         import FCSys.BaseClasses.Utilities.countTrue;
         import FCSys.BaseClasses.Utilities.enumerate;
         import FCSys.BaseClasses.Utilities.index;
@@ -7489,15 +7548,18 @@ model.</p>
             index=1,
             extent={{2,3},{2,3}}));
 
-        annotation (Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Translational.Component.Force material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"));
       end Translational;
+
+      model TranslationalIsolated
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector, with zero flows by default</html>"
+
+        extends Translational(
+          redeclare replaceable Component.Force translationalX(final axis),
+          redeclare replaceable Component.Force translationalY(final axis),
+          redeclare replaceable Component.Force translationalZ(final axis));
+
+        annotation (defaultComponentName="translational");
+      end TranslationalIsolated;
 
       package Component "Conditions for a component of translational momentum"
         extends Modelica.Icons.Package;
@@ -7657,8 +7719,7 @@ model.</p>
 
       equation
         thermal.T = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -7671,8 +7732,7 @@ model.</p>
 
       equation
         thermal.Qdot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+
       end HeatRate;
 
       model Custom "Custom"
@@ -7686,10 +7746,7 @@ model.</p>
 
       equation
         x = u_final;
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="thermal",
-          Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
+        annotation (defaultComponentName="thermal", Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>thermal.T</code> and/or <code>thermal.Qdot</code>.</p></html>"));
       end Custom;
 

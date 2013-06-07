@@ -92,11 +92,9 @@ package Subregions
         'inclC19HF37O5S-'=true,
         'incle-'=true,
         'inclH+'=true,
-        inclH2=true,
-        subregion(graphite('e-'(consTransX=Conservation.IC)), ionomer('H+'(
-                consTransX=Conservation.IC))));
+        inclH2=true);
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow reactionBC(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated reactionBC(
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
@@ -104,12 +102,8 @@ package Subregions
               FCSys.Conditions.ByConnector.Face.Single.Material.Current
               material(redeclare Modelica.Blocks.Sources.Ramp source(duration=
                     1000, height=100*U.A)))),
-        ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          final 'inclH+'='inclH+',
-          'H+'(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
-              material(source(k=U.atm)))),
+        ionomer(final 'inclC19HF37O5S-'='inclC19HF37O5S-', final 'inclH+'=
+              'inclH+'),
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -303,7 +297,7 @@ package Subregions
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlow face1(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated face1(
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
@@ -337,7 +331,7 @@ package Subregions
             rotation=90,
             origin={-56,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlow face2(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated face2(
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
@@ -579,7 +573,7 @@ package Subregions
 
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow
+      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
         condition1 constrainedby
         FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus(gas(
           inclH2=true,
@@ -598,7 +592,7 @@ package Subregions
             rotation=90,
             origin={-50,0})));
 
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow
+      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
         condition2 constrainedby
         FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus(gas(
           inclH2=false,
@@ -617,7 +611,7 @@ package Subregions
             rotation=270,
             origin={50,0})));
 
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlow
+      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
         ground(graphite('incle-'=true, 'e-'(redeclare
               Conditions.Face.Material.Pressure material, materialSpec(k=0))))
         constrainedby FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus
@@ -923,6 +917,7 @@ package Subregions
     parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and gas.inclO2
          and gas.inclH2O "Oxygen reduction" annotation (Dialog(group=
             "Included reactions", compact=true), choices(__Dymola_checkBox=true));
+
     Reaction reaction if inclHOR or inclORR "Electrochemical reaction"
       annotation (Placement(transformation(extent={{-23,17},{-3,37}})));
 
@@ -2557,13 +2552,12 @@ package Subregions
           annotation (Dialog(group="Geometry"));
 
         // Assumptions
-        parameter Boolean reduceVel=false if n_spec > 0
-          "Same velocity for all species" annotation (Dialog(tab="Assumptions",
-              enable=n_spec > 1), choices(__Dymola_checkBox=true));
-        parameter Boolean reduceTemp=true if n_spec > 0
-          "Same temperature for all species" annotation (Dialog(tab=
-                "Assumptions", enable=n_spec > 1), choices(__Dymola_checkBox=
-                true));
+        parameter Boolean reduceVel=false "Same velocity for all species"
+          annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+              __Dymola_checkBox=true));
+        parameter Boolean reduceTemp=true "Same temperature for all species"
+          annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+              __Dymola_checkBox=true));
 
         // Initialization
         parameter Boolean initVelX=true if n_spec > 0
@@ -2736,50 +2730,58 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end EmptyPhase;
 
@@ -4207,14 +4209,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         stateSelect=StateSelect.never) "Pressure";
       // StateSelect.never avoids dynamic state selection of this variable and others
       // below in Dymola 7.4.
-      Q.PressureAbsolute p_faces[n_faces, Side](each nominal=U.atm, each start=
-            p_IC) "Thermodynamic pressures at the faces";
-      Q.PotentialAbsolute sT(
-        nominal=3000*U.K,
-        final start=h_IC - g_IC,
-        final fixed=false,
-        stateSelect=StateSelect.never)
-        "Product of specific entropy and temperature";
       Q.Mass M(
         nominal=1e-3*U.g,
         final start=Data.m*N_IC,
@@ -4235,10 +4229,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final fixed=false,
         stateSelect=StateSelect.never) "Specific enthalpy";
       // StateSelect.never avoids dynamic state selection Dymola 7.4.
-      Q.Current I[n_trans](
-        each nominal=U.A,
-        final start=I_IC[cartTrans],
-        each final fixed=false) "Advective current";
 
       // Auxiliary variables (for analysis)
       // ----------------------------------
@@ -4471,6 +4461,19 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           initTransZ} "Initialization methods for translational momentum"
         annotation (HideResult=true);
 
+      // Additional aliases (for common terms)
+      Q.PressureAbsolute p_faces[n_faces, Side](each nominal=U.atm, each start=
+            p_IC) "Thermodynamic pressures at the faces";
+      Q.PotentialAbsolute sT(
+        nominal=3000*U.K,
+        final start=h_IC - g_IC,
+        final fixed=false,
+        stateSelect=StateSelect.never)
+        "Product of specific entropy and temperature";
+      Q.Current I[n_trans](
+        each nominal=U.A,
+        final start=I_IC[cartTrans],
+        each final fixed=false) "Advective current";
       Q.Force faces_mPhidot[n_faces, Side, 2]
         "Directly-calculated shear forces";
 
@@ -5014,11 +5017,11 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1)),
         Icon(graphics={Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid)}));
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid)}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
