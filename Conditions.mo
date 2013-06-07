@@ -2429,14 +2429,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           Dialog(group="Conditions",enable=inclTransZ),
           Placement(transformation(extent={{4,4},{24,24}})));
         replaceable ThermalAdvection.SpecificEntropyTemperature
-          thermalAdvection(source(y(start=3000*U.K))) constrainedby
+          thermalAdvection(source(y=3000*U.K)) constrainedby
           FCSys.Conditions.ByConnector.ChemicalReaction.ThermalAdvection.BaseClasses.PartialCondition
           "Thermal advection" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{32,-10},{52,10}})));
-        replaceable ThermalDiffusion.Temperature thermalDiffusion(source(y(
-                start=298.15*U.K))) constrainedby
+        replaceable ThermalDiffusion.Temperature thermalDiffusion(source(y=
+                298.15*U.K)) constrainedby
           FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition
           "Thermal diffusion" annotation (
           __Dymola_choicesFromPackage=true,
@@ -2862,7 +2862,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         model Temperature "Specify temperature (measure heat flow rate)"
           extends BaseClasses.PartialCondition(
             final conditionType=BaseClasses.ConditionType.Temperature,
-            u(final unit="l2.m/(N.T2)"),
+            u(final unit="l2.m/(N.T2)", displayUnit="K"),
             final y(final unit="l2.m/T3") = chemical.Qdot_D);
 
         equation
@@ -2897,6 +2897,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             defaultComponentName="thermalDiffusion",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.T</code> and/or <code>chemical.Qdot_D</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -5117,10 +5118,10 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{30,-34},{50,-14}})));
-          // Note:  In Dymola 7.4, the value of k must be specified here instead
+          // Note:  In Dymola 7.4, the value of y must be specified here instead
           // of at the lower level (e.g., Thermal.Temperature) so that the source
           // subcomponent can be replaced by blocks that don't contain the
-          // parameter k.
+          // parameter y.
 
           Connectors.Face negative
             "Negative-side single-species connector for material, momentum, and energy"
@@ -5197,8 +5198,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           // 1st transverse
           connect(negative, following.negative) annotation (Line(
-              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{
-                  -10,6.10623e-16}},
+              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-10,
+                  6.10623e-16}},
               color={127,127,127},
               pattern=LinePattern.None,
               smooth=Smooth.None));
@@ -5618,7 +5619,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           extends FCSys.BaseClasses.Icons.Conditions.Single;
 
-          replaceable Material.Density material(source(y(start=4*U.C/U.cc)))
+          replaceable Material.Density material(source(y=4*U.C/U.cc))
             constrainedby
             FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition
             "Material" annotation (
@@ -5646,17 +5647,17 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{18,-18},{38,2}})));
-          replaceable Thermal.Temperature thermal(source(y(start=298.15*U.K)))
+          replaceable Thermal.Temperature thermal(source(y=298.15*U.K))
             constrainedby
             FCSys.Conditions.ByConnector.Face.Single.Thermal.BaseClasses.PartialCondition
             "Thermal" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(group="Conditions"),
             Placement(transformation(extent={{46,-30},{66,-10}})));
-          // Note:  In Dymola 7.4, the value of k must be specified here instead
+          // Note:  In Dymola 7.4, the value of y must be specified here instead
           // of at the lower level (e.g., Thermal.Temperature) so that the source
           // subcomponent can be replaced by blocks that don't contain the
-          // parameter k.
+          // parameter y.
 
           Connectors.Face face
             "Single-species connector for material, momentum, and energy"
@@ -6163,7 +6164,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           Dialog(group="Conditions",enable=inclTransZ),
           Placement(transformation(extent={{6,-16},{26,4}})));
 
-        replaceable Thermal.Temperature thermal(source(y(start=298.15*U.K)))
+        replaceable Thermal.Temperature thermal(source(y=298.15*U.K))
           constrainedby
           FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.PartialCondition
           "Thermal" annotation (
@@ -6385,7 +6386,7 @@ model.</p>
           Dialog(group="Conditions",enable=inclTransZ),
           Placement(transformation(extent={{6,-16},{26,4}})));
 
-        replaceable Thermal.Temperature thermal(source(y(start=298.15*U.K)))
+        replaceable Thermal.Temperature thermal(source(y=298.15*U.K))
           constrainedby
           FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.PartialCondition
           "Thermal" annotation (
@@ -6813,7 +6814,7 @@ model.</p>
             compact=true));
 
         // Conditions
-        replaceable Dalton.Volume dalton(source(y(start=U.cc))) constrainedby
+        replaceable Dalton.Volume dalton(source(y=U.cc)) constrainedby
           FCSys.Conditions.ByConnector.InertDalton.Dalton.BaseClasses.PartialCondition
           "Dalton" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6842,7 +6843,7 @@ model.</p>
           Dialog(group="Conditions",enable=inclTransZ),
           Placement(transformation(extent={{22,-16},{42,4}})));
 
-        replaceable Thermal.Temperature thermal(source(y(start=298.15*U.K)))
+        replaceable Thermal.Temperature thermal(source(y=298.15*U.K))
           constrainedby
           FCSys.Conditions.ByConnector.InertDalton.Thermal.BaseClasses.PartialCondition
           "Thermal" annotation (
@@ -7000,7 +7001,7 @@ model.</p>
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, with flows by default</html>"
 
         extends InertDalton(
-          redeclare Dalton.Pressure dalton(source(y(start=-U.atm))),
+          redeclare Dalton.Pressure dalton(source(y=-U.atm)),
           redeclare Translational.Force translationalX,
           redeclare Translational.Force translationalY,
           redeclare Translational.Force translationalZ,
@@ -7652,7 +7653,7 @@ model.</p>
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           final y(unit="l2.m/T3") = thermal.Qdot,
-          source(y(start=298.15*U.K)));
+          source(y=298.15*U.K));
 
       equation
         thermal.T = u_final;
@@ -7678,7 +7679,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Custom,
           y=thermal.Qdot,
-          source(y(start=298.15*U.K)));
+          source(y=298.15*U.K));
 
         Real x=thermal.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));

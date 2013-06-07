@@ -1,12 +1,29 @@
 // Define signals.
 filename = "TestReaction.mat";
-y1 = {"reaction.chemical[1].mu", "reaction.chemical[2].mu", "reaction.chemical[3].mu"};
-y2 = {"reaction.nu[1]", "reaction.nu[2]", "reaction.nu[3]"};
-y3 = {"reaction.Xidot"};
-y4 = {"reaction.mphi[1]"};
-y5 = {"reaction.Ts"};
+y1 = {"reaction.chemical.mu"};
+y2 = {"reaction.chemical.Ndot"};
+y3 = {"reaction.chemical.T"};
+y4 = {""};
+y5 = {""};
 y6 = {""};
 
 // Make plots.
 removePlots();
 RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+
+createPlot(id = 7,
+ position = {300, 0, 600, 400},
+ x = "reaction.chemical.Ndot",
+ y = {"reaction.chemical.mu"},
+ range = {0, 120.0, 0.8, -0.2},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ online = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitleType = 1,
+ bottomTitleType = 1);

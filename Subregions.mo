@@ -100,14 +100,16 @@ package Subregions
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'e-'(redeclare Conditions.Face.Material.Current material(redeclare
-                Modelica.Blocks.Sources.Ramp source(duration=1000, height=0.001
-                    *U.A)))),
+          'e-'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material(redeclare Modelica.Blocks.Sources.Ramp source(duration=
+                    1000, height=100*U.A)))),
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
-          'H+'(redeclare Conditions.Face.Material.Pressure material(source(k=U.atm)))),
-
+          'H+'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(k=U.atm)))),
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -170,7 +172,7 @@ package Subregions
                 FCSys.Conditions.ByConnector.Face.Single.Material.Density
                 normal(redeclare Modelica.Blocks.Sources.Ramp source(height=U.C
                       /U.cc, offset=298.15*U.K/U.atm))))));
-
+      extends Modelica.Icons.UnderConstruction;
     end SubregionH2PipeTest;
 
     model Subregions
@@ -415,7 +417,6 @@ package Subregions
             "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"),
         experimentSetupOutput,
         Diagram(graphics));
-
     end Subregions;
 
     model SubregionsCandH2
@@ -699,7 +700,7 @@ package Subregions
         redeclare
           FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
           condition2);
-
+      extends Modelica.Icons.UnderConstruction;
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
           experiment(StopTime=298.15, Algorithm="Dassl"));
@@ -732,6 +733,7 @@ package Subregions
           FCSys.Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
           condition2);
 
+      extends Modelica.Icons.UnderConstruction;
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
           experiment(StopTime=200, Algorithm="Dassl"));
