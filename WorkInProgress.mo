@@ -7144,31 +7144,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
 
   end Systems;
 
-  model ConditionsAdaptersSpeciesFluid
-    "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-    extends FCSys.Conditions.Adapters.Species.FluidNeutral;
-    extends Modelica.Icons.UnderConstruction;
-    Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
-      "Modelica electrical pin" annotation (Placement(transformation(extent={{
-              70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
-
-  equation
-    // **Add electrical equations.
-    annotation (Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
-    if the species is ionic.</p>
-
-<p>For additional information, see the
-    <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
-    PartialSpecies</a> model.</p>
-    </html>"), Icon(graphics={Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,60},{0,20}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash)}));
-  end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
@@ -7225,113 +7200,33 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
-public
-  function Characteristics_BaseClasses_Characteristic_kappa_T
-    "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;<sub><i>T</i></sub>)</html>"
-    extends Modelica.Icons.Function;
-    input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-    input Q.PressureAbsolute p=U.atm "Pressure";
-    output Q.PressureReciprocal beta_T "Isothermal compressibility";
 
-  algorithm
-    beta_T := -FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp(
-        T=T,
-        p=p,
-        dT=0,
-        dp=1)/Characteristics.BaseClasses.Characteristic.v_Tp(T, p)
-      annotation (Inline=true);
-    annotation (Documentation(info="<html>
-  <p>Note that the compressibility given by this function is static&mdash;unique
-  from the dynamic compressibility given by
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.Xi\">Xi</a>().</p>
-
-  <p>For an ideal gas, this function is independent of temperature
-  (although temperature remains as a valid input).</p>
-  </html>"));
-  end Characteristics_BaseClasses_Characteristic_kappa_T;
-
-  model ChemicalReaction "Model of a chemical reaction"
-    import FCSys.WorkInProgress.Chemistry.stoich;
-    extends FCSys.BaseClasses.Icons.Names.Top2;
-
-    parameter String formulas[:]={""} "Chemical formulas of the species";
-
-    Q.Current Ndot "Reaction rate";
-    Q.Velocity phi "Conversion velocity";
-    Q.Temperature Ts "Conversion temperature-specific entropy product";
-
-    Connectors.ChemicalSpecies chemical[n_spec] "Connectors to the species"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-  protected
-    final parameter Integer n_spec=size(formulas, 1) "Number of species";
-    final parameter Integer n[n_spec]=stoich(formulas)
-      "Stoichiometric coefficients";
-
-  initial equation
-    for i in 1:n_spec loop
-      assert(formulas[i] == chemical[i].formula, "Species " + String(i) +
-        " is " + formulas[i] + ", but it is connected to " + chemical[i].formula
-         + ".");
-    end for;
-
-  equation
-    // Diffusive equilibrium
-    0 = n*chemical.mu;
-
-    // Advection
-    for i in 1:n_spec loop
-      chemical[i].mPhidot = semiLinear(
-          chemical.Ndot,
-          phi,
-          chemical[i].phi);
-      chemical[i].Qdot = semiLinear(
-          chemical[i].Ndot,
-          Ts,
-          chemical[i].Ts);
-    end for;
-
-    // Conservation (without storage)
-    zeros(n_spec) = chemical.Ndot + n*Ndot "Material";
-    0 = sum(chemical.mPhidot) "Translational momentum";
-    0 = sum(chemical.Qdot) "Energy";
-    annotation (Documentation(info="<html>
-    <p>The stoichiometry is determined automatically from the chemical formulas
-    of the connected species.  No intermediate species are considered.  Each reaction must be
-    completely and uniquely defined by the species entered in the <code>formulas</code> array.
-    Otherwise an error message is given.</p>
-
-    </html>"), Icon(graphics={Ellipse(
-              extent={{-80,40},{80,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash),Text(
-              extent={{-100,-16},{100,-40}},
-              lineColor={127,127,127},
-              textString="%formulas")}));
-  end ChemicalReaction;
   annotation (Commands(file="../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
         file="test/check.mos"

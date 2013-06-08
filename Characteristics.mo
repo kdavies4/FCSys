@@ -1425,6 +1425,31 @@ package Characteristics
   </ol></p>
 </html>"));
       end theta;
+    public
+
+      function kappa
+        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        output Q.PressureReciprocal kappa "Isothermal compressibility";
+
+      algorithm
+        kappa := -dv_Tp(
+                T=T,
+                p=p,
+                dT=0,
+                dp=1)/v_Tp(T, p) annotation (Inline=true);
+        annotation (Documentation(info="<html>
+  <p>Note that the compressibility given by this function is static&mdash;different
+  from the dynamic compressibility given by
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>().</p>
+
+  <p>For an ideal gas, this function is independent of temperature
+  (although temperature remains as a valid input).</p>
+  </html>"));
+      end kappa;
 
       replaceable function mu
         "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"
