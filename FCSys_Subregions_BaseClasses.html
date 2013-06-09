@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -121,6 +121,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = {U.cm,U.cm,
     U.cm} <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
+      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
   <font color="darkgreen">// Assumptions</font>
@@ -144,8 +146,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">protected </font>
   <font color="blue">parameter </font>Boolean hasSpecies <font color="darkgreen">&quot;true, if any species are included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
-      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
       inclTransZ} <font color="darkgreen">
     &quot;true, if each component of translational momentum is included&quot;</font>;
@@ -162,6 +162,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartFaces[n_faces]=<font color="red">index</font>(inclFaces) <font color="darkgreen">
     &quot;Cartesian-axis indices of the pairs of faces&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartRot[:]=<font color="red">index</font>(inclRot) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of rotational momentum&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer transCart[Axis]=<font color="red">enumerate</font>(inclTrans) <font color="darkgreen">
     &quot;Translational-momentum-component indices of the Cartesian axes&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer facesCart[Axis]=<font color="red">enumerate</font>(inclFaces) <font color="darkgreen">
@@ -176,7 +178,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:54 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:50:03 2013.
 </div>
 </body>
 </html>

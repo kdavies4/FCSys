@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Physical.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -88,7 +88,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula of the species</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification of material condition</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Properties upon outflow</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Axis]</td><td>{0,0,0}</td><td>Velocity (<b>&phi;</b>) [l/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>&nbsp;</td><td>Specific entropy-temperature product [l2.m/(N.T2)]</td></tr>
@@ -125,7 +125,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="blue">parameter </font>Boolean internal=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> source <font color="blue">if </font>internal <font color="blue">
+  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> source <font color="blue">if </font>internal <font color="blue">
     constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
 
@@ -166,7 +166,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="red">connect</font>(source.y, u_final);
   <font color="red">connect</font>(u, u_final);
-
 <font color="blue">end </font>PartialCondition;
 </pre>
       </div>
@@ -174,7 +173,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:25:51 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:07 2013.
 </div>
 </body>
 </html>

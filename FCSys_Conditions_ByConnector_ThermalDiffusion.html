@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.ThermalDiffusion</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.ThermalDiffusion\&quot;&gt;ThermalDiffusion&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -83,7 +83,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 <tr><td><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
@@ -100,10 +99,12 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
     <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Temperature,
     u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
-    <font color="blue">final </font>y(unit=&quot;l2.m/T3&quot;) = thermal.Qdot);
+    <font color="blue">final </font>y(unit=&quot;l2.m/T3&quot;) = thermal.Qdot,
+    source(y=298.15*U.K));
 
 <font color="blue">equation </font>
   thermal.T = u_final;
+
 <font color="blue">end </font>Temperature;
 </pre>
 <hr>
@@ -111,7 +112,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 <h2><img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.TemperatureI.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ThermalDiffusion">FCSys.Conditions.ByConnector.ThermalDiffusion</a>.HeatRate</h2>
 <b>Specify heat flow rate (measure temperature)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.TemperatureD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate">
+<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRateD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate">
 
 <h3>Information</h3>
 
@@ -124,7 +125,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 <tr><td><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
@@ -147,6 +148,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 
 <font color="blue">equation </font>
   thermal.Qdot = u_final;
+
 <font color="blue">end </font>HeatRate;
 </pre>
 <hr>
@@ -154,7 +156,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 <h2><img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.TemperatureI.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.Custom" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.ThermalDiffusion.Custom"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ThermalDiffusion">FCSys.Conditions.ByConnector.ThermalDiffusion</a>.Custom</h2>
 <b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.TemperatureD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.Custom">
+<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.CustomD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.Custom">
 
 <h3>Information</h3>
 
@@ -169,7 +171,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 <tr><td><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <tr><td>Real</td><td>x</td><td>thermal.T</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>thermal.Qdot</td><td>Measurement expression</td></tr>
@@ -189,8 +190,10 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
 
 <pre>
 <font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
-      y=thermal.Qdot);
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+    y=thermal.Qdot,
+    source(y=298.15*U.K));
 
   Real x=thermal.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
 
@@ -203,7 +206,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:27:11 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:47:47 2013.
 </div>
 </body>
 </html>

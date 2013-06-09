@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.FaceBus.Pair.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -113,19 +113,19 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> H2 <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> H2 <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2</font>
@@ -203,11 +203,11 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> &#39;C+&#39; <font color="blue">if </font>'inclC+' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> &#39;C+&#39; <font color="blue">if </font>'inclC+' <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// C+</font>
@@ -273,16 +273,15 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
   <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
     &quot;Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> &#39;C19HF37O5S-&#39; <font color="blue">if </font>
-    'inclC19HF37O5S-' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> &#39;C19HF37O5S-&#39; <font color="blue">if </font>'inclC19HF37O5S-' <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// C19HF37O5S-</font>
@@ -351,7 +350,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">FCSys.Conditions.ByConnector.Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face.Pair.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2O</font>
@@ -359,6 +358,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
 
   <font color="red">connect</font>(H2O.positive, positive.H2O);
   <font color="red">connect</font>(u.H2O, H2O.u);
+
   <font color="red">connect</font>(H2O.y, y.H2O);
 
 <font color="blue">end </font>Liquid;
@@ -368,7 +368,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases_BaseClass
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:25:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:14 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -60,10 +60,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Test the conditions for the face of a subregion</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Examples.FaceConditionS.png" alt="FCSys.Conditions.Examples.FaceConditionPhases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.FaceConditionPhases">FaceConditionPhases</a>
 </td><td>Test the conditions for the face of a subregion with phases</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.RouterS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
-</td><td>Test the <code>Router<code> model</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.AnodeAdapterS.png" alt="FCSys.Conditions.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.AnodeAdapter">AnodeAdapter</a>
-</td><td>Test the <code>'Adapte-'</code> model</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Examples.FaceConditionS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
+</td><td>Test the <a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a> model</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Examples.FaceConditionS.png" alt="FCSys.Conditions.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.AnodeAdapter">AnodeAdapter</a>
+</td><td>Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter</td></tr>
 </table>
 <hr>
 
@@ -74,21 +74,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> FaceCondition <font color="darkgreen">
-  &quot;Test the conditions for the face of a subregion&quot;</font>
+<font color="blue">model</font> FaceCondition <font color="darkgreen">&quot;Test the conditions for the face of a subregion&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus</a> face(gas(inclH2O=true,
-        H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">FCSys.Conditions.ByConnector.Face.Single.Material.Current</a>
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">ByConnector.FaceBus.Single.FaceBus</a> face(gas(inclH2O=true, H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">ByConnector.Face.Single.Material.Current</a>
           material)));
   <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
     L={1,1,1}*U.cm,
-    inclReact=false,
     inclFacesX=false,
     inclFacesY=true,
     inclFacesZ=false,
@@ -112,14 +109,23 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>ones(3)*U.cm</td><td>Length (<b>L</b>) [l]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>false</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>false</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -128,37 +134,76 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">model</font> FaceConditionPhases <font color="darkgreen">
   &quot;Test the conditions for the face of a subregion with phases&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
   <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small, start=<font color="red">
-        ones</font>(3)*U.cm) <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
-      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">ones</font>(3)*
+    U.cm <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas</a> phaseFaceCondition(
-      inclH2O=true, H2O(<font color="blue">redeclare </font>Face.Normal.CurrentAreic normal(source(k=0))));
+  <font color="darkgreen">// Included components of translational momentum</font>
+  <font color="blue">parameter </font>Boolean inclTransX=false <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Subregions.Volume</a> volume;
+  <font color="darkgreen">// Included faces</font>
+  <font color="blue">parameter </font>Boolean inclFacesX=false <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">ByConnector.FaceBus.Single.Phases.Gas</a> face(inclH2O=true, H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+        thermal(source(k=0)), <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+        material(source(k=U.A))));
+
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Subregions.Volume</a> volume(n_phases=1);
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Subregions.Phases.Gas</a> gas(
-    inclReact=false,
-    inclTrans={false,true,false},
     inclH2=false,
-    inclH2O=true);
+    inclH2O=true,
+    <font color="blue">final </font>n_faces=n_faces,
+    T_IC=environment.T,
+    reduceTemp=false,
+    H2O(T_IC=300*U.K));
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
 
-<font color="blue">equation </font>
-  <font color="red">connect</font>(gas.yPositive, phaseFaceCondition.face);
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
+      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
+      inclTransZ} <font color="darkgreen">
+    &quot;true, if each component of translational momentum is included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclFaces[Axis]={inclFacesX,inclFacesY,
+      inclFacesZ} <font color="darkgreen">&quot;true, if each pairs of faces is included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclRot[Axis]={inclFacesY<font color="blue"> and </font>inclFacesZ,
+      inclFacesZ<font color="blue"> and </font>inclFacesX,inclFacesX<font color="blue"> and </font>inclFacesY} <font color="darkgreen">
+    &quot;true, if each axis of rotation has all its tangential faces included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_faces=<font color="red">countTrue</font>(inclFaces) <font color="darkgreen">
+    &quot;Number of pairs of faces&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartTrans[n_trans]=<font color="red">index</font>(inclTrans) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartFaces[n_faces]=<font color="red">index</font>(inclFaces) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the pairs of faces&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer transCart[Axis]=<font color="red">enumerate</font>(inclTrans) <font color="darkgreen">
+    &quot;Translational-momentum-component indices of the Cartesian axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer facesCart[Axis]=<font color="red">enumerate</font>(inclFaces) <font color="darkgreen">
+    &quot;Face-pair indices of the Cartesian axes&quot;</font>;
 
-  <font color="red">connect</font>(gas.inert, volume.inert);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(gas.yPositive, face.face);
+
+  <font color="red">connect</font>(volume.inertDalton[1], gas.inertDalton);
 <font color="blue">end </font>FaceConditionPhases;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples.RouterI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples.FaceConditionI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.Router"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.Router</h2>
-<b>Test the <code>Router<code> model</b><p>
+<b>Test the <a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a> model</b><p>
 <img src="images/FCSys.Conditions.Examples.RouterD.png" alt="FCSys.Conditions.Examples.Router">
 
 <h3>Information</h3>
@@ -168,7 +213,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Router <font color="darkgreen">&quot;Test the <code>Router<code> model&quot;</font>
+<font color="blue">model</font> Router <font color="darkgreen">
+  &quot;Test the <a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a> model&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
   <font color="darkgreen">// TODO:  Make this into a meaningful example.</font>
@@ -178,28 +224,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples.AnodeAdapterI.png" alt="FCSys.Conditions.Examples.AnodeAdapter" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples.FaceConditionI.png" alt="FCSys.Conditions.Examples.AnodeAdapter" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.AnodeAdapter"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.AnodeAdapter</h2>
-<b>Test the <code>'Adapte-'</code> model</b><p>
+<b>Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter</b><p>
 <img src="images/FCSys.Conditions.Examples.AnodeAdapterD.png" alt="FCSys.Conditions.Examples.AnodeAdapter">
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> AnodeAdapter <font color="darkgreen">&quot;Test the <code>'Adapte-'</code> model&quot;</font>
-
+<font color="blue">model</font> AnodeAdapter <font color="darkgreen">
+  &quot;Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="darkgreen">// **fails check</font>
+
   <font color="blue">inner </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid.System">Modelica.Fluid.System</a> system(T_ambient=293.15 + 5);
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(T=350*U.K);
   <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> subregion(
     L={1,1,1}*U.cm,
-    inclReact=false,
     inclFacesY=false,
     inclFacesZ=false,
     gas(inclH2=true, inclH2O=true),
@@ -244,7 +288,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:24:42 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:44:33 2013.
 </div>
 </body>
 </html>

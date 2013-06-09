@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'C+'.Graphite</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;C&lt;sup&gt;+&lt;/sup&gt; graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -72,7 +72,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>See the information in the
+<p>Please see the documentation of the
     <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and zero velocity)).
 <p>
@@ -84,10 +84,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>k_nu*Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>k_theta*Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_nu</td><td>1</td><td>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_theta</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
@@ -135,8 +134,11 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <pre>
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a>,
-      theta=k_theta*<font color="red">Data.theta</font>(T, v));
+  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a>,
+    nu=k_nu*<font color="red">Data.nu</font>(T, v),
+    theta=k_theta*<font color="red">Data.theta</font>(T, v));
+
   <font color="darkgreen">// Note:  In Dymola 7.4,</font>
   <font color="darkgreen">// &quot;redeclare replaceable package Data = FCSys.Characteristics.C.Graphite&quot;</font>
   <font color="darkgreen">// must be used instead of</font>
@@ -144,6 +146,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="darkgreen">// order for this model to pass its check.  This applies to the other</font>
   <font color="darkgreen">// species models too.</font>
 
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_nu(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_theta(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)&quot;</font>;
 
@@ -158,7 +162,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <h3>Information</h3>
 
-<p>See the information in the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and zero velocity)).
 <p>
 <h3>Parameters</h3>
@@ -169,9 +173,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
@@ -233,14 +235,19 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <h3>Information</h3>
 
 <p>Assumptions:<ol>
-    <li>Fixed specific heat capacity (independent of temperature)
-    <li>Thermal resistivity &theta; is fixed (e.g., independent of temperature)</li>
+    <li>The specific heat capacity is fixed (independent of temperature).</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
     </ol></p>
 
-    <p>The default isobaric specific heat capacity (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
-   resistivity (<code>theta=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
-   Incropera and DeWitt [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 909].
-   Related data is listed in <a href="#Tab1">Table 1</a>.</p>
+   <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
+   and thermal
+   resistivity (<code>theta = U.m*U.K/(0.87*U.W)</code>) are for graphite fiber epoxy (25% vol)
+   composite (with heat flow perpendicular to the fibers) at 300 K
+   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 909].
+   The integration offset for specific entropy is set such that
+   the specific entropy is 154.663 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 atm).
+   This is the value from Table B in [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>].
+   Additional thermal data is listed in <a href="#Tab1">Table 1</a>.</p>
 
   <table border="1" cellspacing=0 cellpadding=2 style="border-collapse:collapse;">
     <caption align="top" id="Tab1">Table 1: Properties of forms of C [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 909].</caption>
@@ -288,10 +295,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphit&hellip;</td><td>Characteristic data</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
@@ -338,30 +342,22 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <pre>
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
-  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Math.html#Modelica.Math.log">Modelica.Math.log</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>;
 
-  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a>,
-      <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=<font color="red">Data.theta</font>());
-  <font color="darkgreen">/* **
-(
-        Deltah0_f=0,
-        Deltah0=0,
+  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a> (
         n_c=0,
-        T_lim_c={0,Modelica.Constants.inf,Modelica.Constants.inf},
-        b_c=[935*U.J*Data.m/(U.kg*U.K);0],
-        B_c=[0, 0;0,0])
-        B_c=[-298.15*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-            Polynomial.F(
-            298.15*U.K,
-            Characteristics.&#39;C+&#39;.Graphite.b_c[1, :],
-            -3) + FCSys.Characteristics.&#39;C+&#39;.Graphite.B_c[1, 2] - Data.b_c[1, 1]
-            *lnog298.15*U.K)]), redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(5.70
-        *U.W)*/</font>
-  <font color="darkgreen">// See the documentation for a table of values.</font>
-  <font color="darkgreen">// Note:  Parameter expressions (e.g., involving environment.T) are not</font>
-  <font color="darkgreen">// used here since they would render the parameters unadjustable in Dymola</font>
-  <font color="darkgreen">// 7.4.  A similar note applies to the other species.</font>
+        T_lim_c={0,Modelica.Constants.inf},
+        b_c=[935*U.J*Data.m/(U.kg*U.K)],
+        B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(U.mol*
+            U.K) - (935*U.J*Data.m/(U.kg*U.K))*<font color="red">ln</font>(298.15*U.K)]),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.87*U.W));
+
+  <font color="darkgreen">// In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c</font>
+  <font color="darkgreen">// (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).</font>
+
+  <font color="darkgreen">// See the documentation layer for a table of values for the specific heat</font>
+  <font color="darkgreen">// capacity and thermal resistivity.</font>
 
 <font color="blue">end </font>Fixed;
 </pre>
@@ -370,7 +366,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:49 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:57 2013.
 </div>
 </body>
 </html>

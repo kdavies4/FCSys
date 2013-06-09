@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Adapters.Species</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Adapters for single species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -58,12 +58,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.Adapters.Species.'e-'S.png" alt="FCSys.Conditions.Adapters.Species.'e-'" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.'e-'">'e-'</a>
 </td><td>Adapter to connect e<sup>-</sup> between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> (electrical and heat only)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.Species.FluidNonionicS.png" alt="FCSys.Conditions.Adapters.Species.FluidNonionic" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">FluidNonionic</a>
-</td><td>Adapter to connect a single nonionic fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.Species.FluidS.png" alt="FCSys.Conditions.Adapters.Species.Fluid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.Fluid">Fluid</a>
+</td><td>Adapter to connect a single fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.Species.FluidNeutralS.png" alt="FCSys.Conditions.Adapters.Species.FluidNeutral" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNeutral">FluidNeutral</a>
+</td><td>Adapter to connect a single neutral fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></td></tr>
 <tr><td><img src="images/FCSys.Conditions.Adapters.Species.SolidS.png" alt="FCSys.Conditions.Adapters.Species.Solid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.Solid">Solid</a>
 </td><td>Adapter to connect a single solid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> (heat only)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.Species.BaseClassesS.png" alt="FCSys.Conditions.Adapters.Species.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
 </table>
 <hr>
 
@@ -74,27 +74,24 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>For additional information, see the
-    <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">
-    PartialSpecies</a> model.</p>
-    <p>
-Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a> (Partial single-species adapter between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>.
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area of the interface [l2]</td></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a></td><td>side</td><td>Side.n</td><td>Side of the interface w.r.t. this component</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a></td><td>side</td><td>Side.n</td><td>FCSys side of the interface</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for translational momentum and heat of a single species</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for material, momentum, and energy of a single species</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -103,98 +100,205 @@ Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.C
 <font color="blue">model</font> &#39;e-&#39; <font color="darkgreen">
   &quot;Adapter to connect e<sup>-</sup> between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> (electrical and heat only)&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">FCSys.BaseClasses.Utilities.inSign</a>;
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>;
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a>(<font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>
-      Data);
-
+  <font color="darkgreen">// Geometry</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area of the interface&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a> side=Side.n <font color="darkgreen">&quot;Side of the interface w.r.t. this component&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a> side=Side.n <font color="darkgreen">&quot;FCSys side of the interface&quot;</font>;
 
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+    &quot;Characteristic data (for FCSys)&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
     &quot;Modelica electrical pin&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
+    &quot;Modelica heat port&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Efforts</font>
-  <font color="red">Data.g</font>(face.T, <font color="red">inSign</font>(side)*face.mPhidot_0/A) = Data.z*pin.v*U.V <font color="darkgreen">
-    &quot;Electrical potential&quot;</font>;
+  <font color="darkgreen">// Equal properties</font>
+  face.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
 
-  <font color="darkgreen">// Conservation (no storage)</font>
-  0 = A*face.J + pin.i*U.A/Data.z <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = face.Ndot <font color="darkgreen">&quot;Material diffusion&quot;</font>;
+  0 = A*face.rho*face.phi[1] + pin.i*U.A/Data.z <font color="darkgreen">
+    &quot;Material advection (also charge)&quot;</font>;
+  <font color="red">inSign</font>(side)*pin.v*face.rho*A*Data.z*U.V = face.mPhidot[1] <font color="darkgreen">
+    &quot;Normal translational momentum&quot;</font>;
+  {0,0} = face.mPhidot[2:3] <font color="darkgreen">&quot;Transverse translational momentum&quot;</font>;
+  0 = face.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
+  <font color="darkgreen">// cancel across the interface.</font>
 <font color="blue">end </font>&#39;e-&#39;;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Adapters.Species.FluidNonionicI.png" alt="FCSys.Conditions.Adapters.Species.FluidNonionic" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.Adapters.Species.FluidNonionic"></a><a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species">FCSys.Conditions.Adapters.Species</a>.FluidNonionic</h2>
-<b>Adapter to connect a single nonionic fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
-<img src="images/FCSys.Conditions.Adapters.Species.FluidNonionicD.png" alt="FCSys.Conditions.Adapters.Species.FluidNonionic">
+<h2><img src="images/FCSys.Conditions.Adapters.Species.FluidI.png" alt="FCSys.Conditions.Adapters.Species.Fluid" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.Species.Fluid"></a><a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species">FCSys.Conditions.Adapters.Species</a>.Fluid</h2>
+<b>Adapter to connect a single fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
+<img src="images/FCSys.Conditions.Adapters.Species.FluidD.png" alt="FCSys.Conditions.Adapters.Species.Fluid">
 
 <h3>Information</h3>
 
-<p>The electrical connector (<code>pin</code>) is only included
-    if the species is ionic.</p>
-
-<p>For additional information, see the
-    <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">
-    PartialSpecies</a> model.</p>
-    <p>
-Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a> (Partial single-species adapter between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area of the interface [l2]</td></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a></td><td>side</td><td>Side.n</td><td>Side of the interface w.r.t. this component</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data (FCSys)</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a></td><td>side</td><td>Side.n</td><td>FCSys side of the interface</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for translational momentum and heat of a single species</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for material, momentum, and energy of a single species</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> FluidNonionic <font color="darkgreen">
-  &quot;Adapter to connect a single nonionic fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
+<font color="blue">model</font> Fluid <font color="darkgreen">
+  &quot;Adapter to connect a single fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">FCSys.BaseClasses.Utilities.inSign</a>;
-
-  <font color="blue">extends </font><a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a>;
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area of the interface&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a> side=Side.n <font color="darkgreen">&quot;Side of the interface w.r.t. this component&quot;</font>;
-
+  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a> side=Side.n <font color="darkgreen">&quot;FCSys side of the interface&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
+    &quot;Characteristic data (for FCSys)&quot;</font>;
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> <font color="blue">
     constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
-    &quot;Medium model (Modelica)&quot;</font>;
+    &quot;Medium model (for Modelica)&quot;</font>;
 
   <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.Common.SingleGasNasa.html#Modelica.Media.IdealGases.Common.SingleGasNasa.BaseProperties">Medium.BaseProperties</a> medium <font color="darkgreen">&quot;Base properties of the fluid&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I <font color="darkgreen">&quot;Material current&quot;</font>;
 
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+    &quot;Modelica translational flanges&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
+    &quot;Modelica heat port&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
+    &quot;Modelica electrical pin&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Thermodynamic state and properties</font>
+  <font color="darkgreen">// Aliases (for common terms)</font>
+  I = face.Ndot + face.phi[1]*face.rho*A <font color="darkgreen">&quot;Current&quot;</font>;
+
+  <font color="darkgreen">// Base media properties</font>
   medium.p = fluidPort.p;
   medium.T = heatPort.T;
   medium.Xi = <font color="red">ones</font>(Medium.nXi)/Medium.nXi;
 
-  <font color="darkgreen">// Efforts</font>
-  face.mPhidot_0 = <font color="red">inSign</font>(side)*A*fluidPort.p*U.Pa;
+  <font color="darkgreen">// Equal properties</font>
+  medium.MM*face.rho = medium.d*U.mol/U.m^3 <font color="darkgreen">&quot;Density&quot;</font>;
+  face.phi = <font color="red">der</font>(flange.s)*U.m/U.s <font color="darkgreen">&quot;Velocity&quot;</font>;
+  face.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   medium.h = fluidPort.h_outflow;
 
-  <font color="darkgreen">// Conservation (no storage)</font>
-  0 = face.J*A + (fluidPort.m_flow/medium.MM)*U.mol/U.s <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = Data.z*I + pin.i*U.A <font color="darkgreen">&quot;Charge&quot;</font>;
+  0 = I + (fluidPort.m_flow/medium.MM)*U.mol/U.s <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">inSign</font>(side)*pin.v*face.rho*A*Data.z*U.V = face.mPhidot[1] + flange[1].f*U.N <font color="darkgreen">
+    &quot;Normal translational momentum&quot;</font>;
+  {0,0} = face.mPhidot[2:3] + flange[2:3].f*U.N <font color="darkgreen">
+    &quot;Transverse translational momentum&quot;</font>;
+  0 = face.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
+  <font color="darkgreen">// cancel across the interface.</font>
+<font color="blue">end </font>Fluid;
+</pre>
+<hr>
 
-  <font color="darkgreen">// See the partial model for additional equations.</font>
-<font color="blue">end </font>FluidNonionic;
+<h2><img src="images/FCSys.Conditions.Adapters.Species.FluidNeutralI.png" alt="FCSys.Conditions.Adapters.Species.FluidNeutral" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.Species.FluidNeutral"></a><a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species">FCSys.Conditions.Adapters.Species</a>.FluidNeutral</h2>
+<b>Adapter to connect a single neutral fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
+<img src="images/FCSys.Conditions.Adapters.Species.FluidNeutralD.png" alt="FCSys.Conditions.Adapters.Species.FluidNeutral">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area of the interface [l2]</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for material, momentum, and energy of a single species</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> FluidNeutral <font color="darkgreen">
+  &quot;Adapter to connect a single neutral fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area of the interface&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
+    &quot;Characteristic data (for FCSys)&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> <font color="blue">
+    constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
+    &quot;Medium model (for Modelica)&quot;</font>;
+
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.Common.SingleGasNasa.html#Modelica.Media.IdealGases.Common.SingleGasNasa.BaseProperties">Medium.BaseProperties</a> medium <font color="darkgreen">&quot;Base properties of the fluid&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+    &quot;Modelica translational flanges&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
+    &quot;Modelica heat port&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">assert</font>(Data.z == 0, &quot;The species must be neutral, but its chemical formula is &quot;
+     + Data.formula);
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Base media properties</font>
+  medium.p = fluidPort.p;
+  medium.T = heatPort.T;
+  medium.Xi = <font color="red">ones</font>(Medium.nXi)/Medium.nXi;
+
+  <font color="darkgreen">// Equal properties</font>
+  medium.MM*face.rho = medium.d*U.mol/U.m^3 <font color="darkgreen">&quot;Density&quot;</font>;
+  face.phi = <font color="red">der</font>(flange.s)*U.m/U.s <font color="darkgreen">&quot;Velocity&quot;</font>;
+  face.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  medium.h = fluidPort.h_outflow;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = face.Ndot + face.phi[1]*face.rho*A + (fluidPort.m_flow/medium.MM)*U.mol/U.s
+    <font color="darkgreen">&quot;Material&quot;</font>;
+  {0,0,0} = face.mPhidot + flange.f*U.N <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = face.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
+  <font color="darkgreen">// cancel across the interface.</font>
+<font color="blue">end </font>FluidNeutral;
 </pre>
 <hr>
 
@@ -205,25 +309,14 @@ Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.C
 
 <h3>Information</h3>
 
-<p>For additional information, see the
-    <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">
-    PartialSpecies</a> model.</p>
-    <p>
-Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a> (Partial single-species adapter between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data (FCSys)</td></tr>
-</table>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>.
 <p>
 <h3>Connectors</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for translational momentum and heat of a single species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector for material, momentum, and energy of a single species</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 </table>
 <p>
@@ -232,11 +325,31 @@ Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.C
 <pre>
 <font color="blue">model</font> Solid <font color="darkgreen">
   &quot;Adapter to connect a single solid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> (heat only)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>;
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies">BaseClasses.PartialSpecies</a>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
+    &quot;Characteristic data (for FCSys)&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
+
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+    &quot;Modelica translational flanges&quot;</font>;
+
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
+    &quot;Modelica heat port&quot;</font>;
 
 <font color="blue">equation </font>
-  face.J = 0 <font color="darkgreen">&quot;Closed&quot;</font>;
+  <font color="darkgreen">// Equal properties</font>
+  face.phi = <font color="red">der</font>(flange.s)*U.m/U.s <font color="darkgreen">&quot;Velocity&quot;</font>;
+  face.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperatures&quot;</font>;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = face.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  {0,0,0} = face.mPhidot + flange.f*U.N <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = face.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
+  <font color="darkgreen">// cancel across the interface.</font>
 <font color="blue">end </font>Solid;
 </pre>
       </div>
@@ -244,7 +357,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.C
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:24:58 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:44:55 2013.
 </div>
 </body>
 </html>

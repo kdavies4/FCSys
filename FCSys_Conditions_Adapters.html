@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.Adapters</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
-<meta name="description" content="&lt;html&gt;Adapters to &lt;a href=\&quot;modelica://Modelica\&quot;&gt;Package Modelica&lt;/a&gt;&lt;/html&gt;">
+<meta name="date" content="2013-6-9">
+<meta name="description" content="&lt;html&gt;Adapters to the &lt;a href=\&quot;modelica://Modelica\&quot;&gt;Modelica Standard Library&lt;/a&gt;&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -46,11 +46,11 @@
 
 <h2><a name="FCSys.Conditions.Adapters"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Adapters</h2>
 
-<b>Adapters to <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Package Modelica</a></b>
+<b>Adapters to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></b>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons_PackageUnderConstruction.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay to indicate that a package is in development).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 
 <h3>Package Content</h3>
 
@@ -67,7 +67,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.Adapters.PhasesS.png" alt="FCSys.Conditions.Adapters.Junctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions">Junctions</a>
 </td><td><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> junctions between pure substances and their mixtures</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Adapters.MediaS.png" alt="FCSys.Conditions.Adapters.Media" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Media.html#FCSys.Conditions.Adapters.Media">Media</a>
-</td><td><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica.Media">Modelica media</a> models to interface with the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">fuel cell</a></td></tr>
+</td><td><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica.Media">Modelica media</a> models to interface with the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">cell</a></td></tr>
 </table>
 <hr>
 
@@ -89,6 +89,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -121,6 +122,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Anode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">
     &quot;Liquid subadapter&quot;</font>;
 
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+    &quot;Modelica translational flanges&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(gas.face, face.gas);
   <font color="red">connect</font>(gasPort, gas.fluidPort);
@@ -133,6 +137,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="red">connect</font>(liquid.face, face.liquid);
   <font color="red">connect</font>(liquidPort, liquid.fluidPort);
   <font color="red">connect</font>(liquid.heatPort, heatPort);
+  <font color="red">connect</font>(gas.flange, flange);
+  <font color="red">connect</font>(graphite.flange, flange);
+
+  <font color="red">connect</font>(liquid.flange, flange);
 <font color="blue">end </font>Anode;
 </pre>
 <hr>
@@ -155,6 +163,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -187,6 +196,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Cathode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">
     &quot;Liquid subadapter&quot;</font>;
 
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+    &quot;Modelica translational flanges&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(gas.face, face.gas);
   <font color="red">connect</font>(gasPort, gas.fluidPort);
@@ -198,6 +210,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="red">connect</font>(liquid.face, face.liquid);
   <font color="red">connect</font>(liquidPort, liquid.fluidPort);
   <font color="red">connect</font>(liquid.heatPort, heatPort);
+  <font color="red">connect</font>(gas.flange, flange);
+  <font color="red">connect</font>(graphite.flange, flange);
+
+  <font color="red">connect</font>(liquid.flange, flange);
 <font color="blue">end </font>Cathode;
 </pre>
       </div>
@@ -205,7 +221,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:24:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:44:44 2013.
 </div>
 </body>
 </html>

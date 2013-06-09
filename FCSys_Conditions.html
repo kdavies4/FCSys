@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Models to specify and measure operating conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -59,10 +59,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.ExamplesS.png" alt="FCSys.Conditions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">Examples</a>
 </td><td>Examples</td></tr>
 <tr><td><img src="images/FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.Adapters" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">Adapters</a>
-</td><td>Adapters to <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Package Modelica</a></td></tr>
+</td><td>Adapters to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></td></tr>
 <tr><td><img src="images/FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.TestStands" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">TestStands</a>
 </td><td>Test stands</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnectorS.png" alt="FCSys.Conditions.ByConnector" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector.html#FCSys.Conditions.ByConnector">ByConnector</a>
+<tr><td><img src="images/FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.ByConnector" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector.html#FCSys.Conditions.ByConnector">ByConnector</a>
 </td><td>Conditions for each type of connector</td></tr>
 <tr><td><img src="images/FCSys.Conditions.EnvironmentS.png" alt="FCSys.Conditions.Environment" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>
 </td><td>Environmental properties for a model</td></tr>
@@ -82,13 +82,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>analysis</td><td>false</td><td>Include optional variables for analysis</td></tr>
+<tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>1</td><td>Relative humidity [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2_dry</td><td>0.208</td><td>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[Axis]</td><td>{0,Modelica.Constants.g_n*U&hellip;.</td><td>Acceleration due to body forces [l/T2]</td></tr>
-<tr><td>Real</td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">PotentialLineic</a></td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -100,7 +100,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="darkgreen">// Store the values of the base constants and units.</font>
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a> baseUnits=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean analysis=false <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
+  <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) = 298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
@@ -114,8 +114,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Acceleration due to body forces&quot;</font>;
   <font color="darkgreen">// The gravity component is positive because it&#39;s added to the transient</font>
   <font color="darkgreen">// term in the Species model.</font>
-  <font color="blue">parameter </font>Real E[Axis]={0,0,0} <font color="darkgreen">&quot;Electric field&quot;</font>;
-  <font color="darkgreen">// **PotentiaLineic</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">Q.PotentialLineic</a> E[Axis]={0,0,0} <font color="darkgreen">&quot;Electric field&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_H2O(
     <font color="blue">final </font>max=1,
     displayUnit=&quot;%&quot;) = 0.2 <font color="darkgreen">
@@ -209,7 +208,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:24:39 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:44:26 2013.
 </div>
 </body>
 </html>

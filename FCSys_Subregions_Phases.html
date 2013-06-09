@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -50,6 +50,8 @@
 
 <h3>Information</h3>
 
+<p>The graphite, ionomer, and
+liquid phases can only be used with a compressible phase (gas).</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 
 <h3>Package Content</h3>
@@ -76,8 +78,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>For more information, see the
- <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
+<p>Please see the documentation of the <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a> (Model for a phase with no species or reactions).
 <p>
 <h3>Parameters</h3>
@@ -101,8 +102,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Boolean</td><td>inclHOR</td><td>false</td><td>Hydrogen oxidation</td></tr>
 <tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Oxygen reduction</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>false</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>false</td><td>Same temperature for all species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -125,7 +126,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>**</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>Connector for phase change</td></tr>
 </table>
 <p>
@@ -134,9 +135,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <pre>
 <font color="blue">model</font> Gas <font color="darkgreen">&quot;Gas phase&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
-
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>
-        ({inclH2,inclH2O,inclN2,inclO2}), reduceVel=true);
+        ({inclH2,inclH2O,inclN2,inclO2}));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
@@ -208,9 +208,12 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
     <font color="darkgreen">&quot;O<sub>2</sub> model&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=1, <font color="blue">final </font>m=H2.Data.m) <font color="blue">if </font>inclHOR;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR[2](n={-1,2}, <font color="blue">final </font>m={O2.Data.m,H2O.Data.m}) <font color="blue">if </font>inclORR;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">&quot;**&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=1, <font color="blue">final </font>m=H2.Data.m) <font color="blue">if </font>inclHOR <font color="darkgreen">
+    &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR[2](n={-1,2}, <font color="blue">final </font>m={O2.Data.m,H2O.Data.m}) <font color="blue">if </font>inclORR <font color="darkgreen">
+    &quot;Interfaces with the oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+    &quot;Connector for chemical reactions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
@@ -308,17 +311,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <h3>Information</h3>
 
-<p>If C<sup>+</sup> is included (<code>'inclC+'</code>=<code>true</code>),
-    then <code>initTransX</code>, <code>initTransY</code>, and <code>initTransZ</code> are
-    ignored.  Velocity is not initialized because it is set by C<sup>+</sup>. **update this</p>
-
-    <p>Assumptions:
-    <ol>
-    <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup>.</li>
-    <li>All of the C has been ionized to C<sup>+</sup>.</li>
-    </ol></p>
-
-    <p>For more information, see the
+<p>See <a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> for assumptions.
+    For more information, see the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a> (Model for a phase with no species or reactions).
 <p>
@@ -340,7 +334,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Oxygen reduction</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>false</td><td>Same temperature for all species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>not &#39;inclC+&#39;</td><td>Initialize the x component</td></tr>
@@ -363,7 +357,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>**</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -409,19 +403,22 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
     <font color="darkgreen">&quot;'e-' model&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=-2, <font color="blue">final </font>m='e-'.Data.m) <font color="blue">if </font>inclHOR;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='e-'.Data.m) <font color="blue">if </font>inclORR;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">&quot;**&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">FCSys.Subregions.SingleLayer</a> layerHOR(
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=-2, <font color="blue">final </font>m='e-'.Data.m) <font color="blue">if </font>inclHOR <font color="darkgreen">
+    &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='e-'.Data.m) <font color="blue">if </font>inclORR <font color="darkgreen">
+    &quot;Interface with the oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+    &quot;Connector for chemical reactions&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">FCSys.Subregions.Depletion</a> depletionHOR(
     z=-1,
     A=A[Axis.x],
     transSubstrate=true,
-    thermalSubstrate=true) <font color="blue">if </font>inclHOR;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">FCSys.Subregions.SingleLayer</a> layerORR(
+    thermalSubstrate=true) <font color="blue">if </font>inclHOR <font color="darkgreen">&quot;Depletion region for the HOR&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">FCSys.Subregions.Depletion</a> depletionORR(
     z=-1,
     A=A[Axis.x],
     transSubstrate=true,
-    thermalSubstrate=true) <font color="blue">if </font>inclORR;
+    thermalSubstrate=true) <font color="blue">if </font>inclORR <font color="darkgreen">&quot;Depletion region for the ORR&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
   <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
@@ -436,15 +433,15 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// HOR</font>
   <font color="red">connect</font>('e-'.chemical, HOR.species);
   <font color="red">connect</font>(HOR.reaction, chemical);
-  <font color="red">connect</font>(layerHOR.face, 'e-'.faces[1, Side.p]);
-  <font color="red">connect</font>(layerHOR.inert, 'C+'.inert);
+  <font color="red">connect</font>(depletionHOR.face, 'e-'.faces[1, Side.p]);
+  <font color="red">connect</font>(depletionHOR.inert, 'C+'.inert);
   <font color="red">connect</font>(HOR.reaction, chemical);
   <font color="darkgreen">// ORR</font>
   <font color="red">connect</font>('e-'.chemical, ORR.species);
   <font color="red">connect</font>(ORR.reaction, chemical);
-  <font color="red">connect</font>(layerORR.face, 'e-'.faces[1, Side.n]);
+  <font color="red">connect</font>(depletionORR.face, 'e-'.faces[1, Side.n]);
 
-  <font color="red">connect</font>(layerORR.inert, 'C+'.inert);
+  <font color="red">connect</font>(depletionORR.inert, 'C+'.inert);
   <font color="red">connect</font>(ORR.reaction, chemical);
 
   <font color="darkgreen">// C+</font>
@@ -482,9 +479,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.n], zNegative.'e-');
   <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.p], zPositive.'e-');
-  <font color="red">connect</font>(layerORR.chemical, chemical);
+  <font color="red">connect</font>(depletionORR.chemical, chemical);
 
-  <font color="red">connect</font>(layerHOR.chemical, chemical);
+  <font color="red">connect</font>(depletionHOR.chemical, chemical);
 <font color="blue">end </font>Graphite;
 </pre>
 <hr>
@@ -496,20 +493,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <h3>Information</h3>
 
-<p>If C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> is included
-    (<code>'inclC19HF37O5S-'</code>=<code>true</code>),
-    then <code>initTransX</code>, <code>initTransY</code>, and <code>initTransZ</code> are
-    ignored.  Velocity is not initialized because it is set by C19HF37O5S.**update this</p>
-
-    <p>Assumptions:
-    <ol>
-    <li>The density of H<sup>+</sup> is equal to that of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.</li>
-    <li>All of the C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S has been ionized to
-    C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.  Note that this is not true in practice
-    (see <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>).</li>
-    </ol></p>
-
-    <p>For more information, see the
+<p>See <a href="FCSys_Subregions_Species_'H+'_Ionomer.html#FCSys.Subregions.Species.'H+'.Ionomer.Fixed">Species.'H+'.Ionomer.Fixed</a> for assumptions.
+    For more information, see the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a> (Model for a phase with no species or reactions).
 <p>
@@ -533,7 +518,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Oxygen reduction</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>false</td><td>Same temperature for all species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>not &#39;inclC19HF37O5S-&#39;</td><td>Initialize the x component</td></tr>
@@ -557,7 +542,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>Connector for phase change</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>**</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -623,19 +608,22 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=-2, <font color="blue">final </font>m='H+'.Data.m) <font color="blue">if </font>inclHOR;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='H+'.Data.m) <font color="blue">if </font>inclORR;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">&quot;**&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">FCSys.Subregions.SingleLayer</a> layerHOR(
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(n=-2, <font color="blue">final </font>m='H+'.Data.m) <font color="blue">if </font>inclHOR <font color="darkgreen">
+    &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='H+'.Data.m) <font color="blue">if </font>inclORR <font color="darkgreen">
+    &quot;Interface with the oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+    &quot;Connector for chemical reactions&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">FCSys.Subregions.Depletion</a> depletionHOR(
     z=1,
     A=A[Axis.x],
     transSubstrate=false,
-    thermalSubstrate=false) <font color="blue">if </font>inclHOR;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.SingleLayer">FCSys.Subregions.SingleLayer</a> layerORR(
+    thermalSubstrate=false) <font color="blue">if </font>inclHOR <font color="darkgreen">&quot;Depletion region for the HOR&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">FCSys.Subregions.Depletion</a> depletionORR(
     z=1,
     A=A[Axis.x],
     transSubstrate=false,
-    thermalSubstrate=false) <font color="blue">if </font>inclORR;
+    thermalSubstrate=false) <font color="blue">if </font>inclORR <font color="darkgreen">&quot;Depletion region for the ORR&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
   <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
@@ -653,15 +641,15 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// HOR</font>
   <font color="red">connect</font>('H+'.chemical, HOR.species);
   <font color="red">connect</font>(HOR.reaction, chemical);
-  <font color="red">connect</font>(layerHOR.face, 'H+'.faces[1, Side.n]);
+  <font color="red">connect</font>(depletionHOR.face, 'H+'.faces[1, Side.n]);
 
-  <font color="red">connect</font>(layerHOR.inert, 'C19HF37O5S-'.inert);
+  <font color="red">connect</font>(depletionHOR.inert, 'C19HF37O5S-'.inert);
   <font color="red">connect</font>(HOR.reaction, chemical);
   <font color="darkgreen">// ORR</font>
   <font color="red">connect</font>('H+'.chemical, ORR.species);
   <font color="red">connect</font>(ORR.reaction, chemical);
-  <font color="red">connect</font>(layerORR.face, 'H+'.faces[1, Side.p]);
-  <font color="red">connect</font>(layerORR.inert, 'C19HF37O5S-'.inert);
+  <font color="red">connect</font>(depletionORR.face, 'H+'.faces[1, Side.p]);
+  <font color="red">connect</font>(depletionORR.inert, 'C19HF37O5S-'.inert);
   <font color="red">connect</font>(ORR.reaction, chemical);
 
   <font color="darkgreen">// C19HF37O5S-</font>
@@ -723,9 +711,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O);
   <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O);
-  <font color="red">connect</font>(layerORR.chemical, chemical);
+  <font color="red">connect</font>(depletionORR.chemical, chemical);
 
-  <font color="red">connect</font>(layerHOR.chemical, chemical);
+  <font color="red">connect</font>(depletionHOR.chemical, chemical);
 <font color="blue">end </font>Ionomer;
 </pre>
 <hr>
@@ -737,7 +725,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <h3>Information</h3>
 
-<p>See the information in the
+<p>Please see the documentation of the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a> (Model for a phase with no species or reactions).
 <p>
@@ -753,8 +741,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_H2O_Liquid.html#FCSys.Subregions.Species.H2O.Liquid.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Liquid&hellip;</td><td>H<sub>2</sub>O model</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>false</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>false</td><td>Same temperature for all species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -784,9 +772,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">&quot;Liquid phase&quot;</font>
-
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.EmptyPhase">FCSys.Subregions.Phases.BaseClasses.EmptyPhase</a>(<font color="blue">final </font>n_spec=<font color="blue">if </font>
-        inclH2O<font color="blue"> then </font>1<font color="blue"> else </font>0,reduceVel=true);
+        inclH2O<font color="blue"> then </font>1<font color="blue"> else </font>0);
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
@@ -836,7 +823,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:47 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:56 2013.
 </div>
 </body>
 </html>

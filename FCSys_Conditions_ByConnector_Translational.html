@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Translational</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.Translational\&quot;&gt;Translational&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -57,7 +57,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalS.png" alt="FCSys.Conditions.ByConnector.Translational.Translational" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational.Translational">Translational</a>
-</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector</td></tr>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalS.png" alt="FCSys.Conditions.ByConnector.Translational.TranslationalIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational.TranslationalIsolated">TranslationalIsolated</a>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with zero flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Translational.ComponentS.png" alt="FCSys.Conditions.ByConnector.Translational.Component" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component">Component</a>
 </td><td>Conditions for a component of translational momentum</td></tr>
 </table>
@@ -65,18 +67,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalI.png" alt="FCSys.Conditions.ByConnector.Translational.Translational" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Translational.Translational"></a><a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational">FCSys.Conditions.ByConnector.Translational</a>.Translational</h2>
-<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector</b><p>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with efforts by default</b><p>
 <img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalD.png" alt="FCSys.Conditions.ByConnector.Translational.Translational">
 
 <h3>Information</h3>
 
-<p>If the source of an internal specification is redeclared to a block besides
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Translational.Component.Force material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
 <p>
 <h3>Parameters</h3>
@@ -107,7 +102,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
 <pre>
 <font color="blue">model</font> Translational <font color="darkgreen">
-  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector&quot;</font>
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with efforts by default&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
@@ -121,15 +116,18 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalX(source(k(start=0)), <font color="blue">final </font>axis)
-    <font color="blue">if </font>inclTransX <font color="blue">constrainedby </font>Component.BaseClasses.PartialCondition(axis=
-        Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalY(source(k(start=0)), <font color="blue">final </font>axis)
-    <font color="blue">if </font>inclTransY <font color="blue">constrainedby </font>Component.BaseClasses.PartialCondition(axis=
-        Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalZ(source(k(start=0)), <font color="blue">final </font>axis)
-    <font color="blue">if </font>inclTransZ <font color="blue">constrainedby </font>Component.BaseClasses.PartialCondition(axis=
-        Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalX(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransX <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Translational.Component.BaseClasses.PartialCondition(
+      axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalY(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransY <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Translational.Component.BaseClasses.PartialCondition(
+      axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Velocity">Component.Velocity</a> translationalZ(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransZ <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Translational.Component.BaseClasses.PartialCondition(
+      axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Connectors.Translational</a> translational(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Connector for advection or diffusion of translational momentum&quot;</font>;
@@ -167,12 +165,56 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
 <font color="blue">end </font>Translational;
 </pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalI.png" alt="FCSys.Conditions.ByConnector.Translational.TranslationalIsolated" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Translational.TranslationalIsolated"></a><a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational">FCSys.Conditions.ByConnector.Translational</a>.TranslationalIsolated</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with zero flows by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Translational.TranslationalD.png" alt="FCSys.Conditions.ByConnector.Translational.TranslationalIsolated">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational.Translational">Translational</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with efforts by default).
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a></td><td>translational</td><td>Connector for advection or diffusion of translational momentum</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> TranslationalIsolated <font color="darkgreen">
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> connector, with zero flows by default&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Translational.html#FCSys.Conditions.ByConnector.Translational.Translational">Translational</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Force">Component.Force</a> translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Force">Component.Force</a> translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Translational_Component.html#FCSys.Conditions.ByConnector.Translational.Component.Force">Component.Force</a> translationalZ(<font color="blue">final </font>axis));
+
+<font color="blue">end </font>TranslationalIsolated;
+</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:27:06 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:47:44 2013.
 </div>
 </body>
 </html>

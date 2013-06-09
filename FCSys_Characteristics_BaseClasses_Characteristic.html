@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Record for thermodynamic and resistive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -173,6 +173,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Material resistivity (&eta;) as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.theta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.theta">theta</a>
 </td><td>Thermal resistivity (&theta;) as a function of temperature and specific volume</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.kappa" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.kappa">kappa</a>
+</td><td>Isothermal compressibility as a function of temperature and pressure (&kappa;)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.mu">mu</a>
 </td><td>Mobility (&mu;) as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.nu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.nu">nu</a>
@@ -687,8 +689,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   h := <font color="red">smooth</font>(1, <font color="red">sum</font>(<font color="blue">if </font>(T_lim_c[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_c[i + 1]<font color="blue"> or </font>
     i == <font color="red">size</font>(b_c, 1))<font color="blue"> then </font><font color="red">h0_i</font>(T, i)<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_c, 1))) + (<font color="blue">if </font>
     referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K<font color="blue"> then </font>Deltah0<font color="blue"> else </font>0) - (<font color="blue">if </font>
-    referenceEnthalpy &lt;&gt; ReferenceEnthalpy.EnthalpyOfFormationAt25degC<font color="blue"> then </font>
-    Deltah0_f<font color="blue"> else </font>0) + h_offset + <font color="red">h_resid</font>(T, p) - (<font color="blue">if </font>phase &lt;&gt; Phase.Gas<font color="blue"> then </font><font color="red">
+    referenceEnthalpy == ReferenceEnthalpy.EnthalpyOfFormationAt25degC<font color="blue"> then </font>0<font color="blue">
+     else </font>Deltah0_f) + h_offset + <font color="red">h_resid</font>(T, p) - (<font color="blue">if </font>phase &lt;&gt; Phase.Gas<font color="blue"> then </font><font color="red">
     h_resid</font>(T, p0)<font color="blue"> else </font><font color="red">h_resid</font>(
     T,
     p0,
@@ -1149,6 +1151,56 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
+<h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.kappa" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.kappa"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.kappa</h2>
+<b>Isothermal compressibility as a function of temperature and pressure (&kappa;)</b>
+<h3>Information</h3>
+
+<p>Note that the compressibility given by this function is static&mdash;different
+  from the dynamic compressibility given by
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.beta">&beta;</a>().</p>
+
+  <p>For an ideal gas, this function is independent of temperature
+  (although temperature remains as a valid input).</p>
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+<h3>Inputs</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+</table>
+<p>
+<h3>Outputs</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">PressureReciprocal</a></td><td>kappa</td><td>Isothermal compressibility [l.T2/m]</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> kappa <font color="darkgreen">
+  &quot;Isothermal compressibility as a function of temperature and pressure (&kappa;)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> kappa <font color="darkgreen">&quot;Isothermal compressibility&quot;</font>;
+
+<font color="blue">algorithm </font>
+  kappa := -<font color="red">dv_Tp</font>(
+    T=T,
+    p=p,
+    dT=0,
+    dp=1)/<font color="red">v_Tp</font>(T, p);
+<font color="blue">end </font>kappa;
+</pre>
+<hr>
+
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.mu"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.mu</h2>
 <b>Mobility (&mu;) as a function of temperature and specific volume</b>
@@ -1239,7 +1291,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Thermal independence [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Thermal independity [T]</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -1250,7 +1302,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu <font color="darkgreen">&quot;Thermal independence&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu <font color="darkgreen">&quot;Thermal independity&quot;</font>;
 
 <font color="blue">algorithm </font>
   nu := <font color="red">omega</font>(T)*v/(alpha*<font color="red">c_p</font>(T, <font color="red">p_Tv</font>(T, v)));
@@ -1343,7 +1395,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:30:04 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:50:13 2013.
 </div>
 </body>
 </html>

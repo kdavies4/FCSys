@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Single</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -58,6 +58,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.FaceS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Face" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a>
 </td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.FaceS.png" alt="FCSys.Conditions.ByConnector.Face.Single.FaceIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.FaceIsolated">FaceIsolated</a>
+</td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.MaterialS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">Material</a>
 </td><td>Material conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.MaterialS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">Translational</a>
@@ -76,13 +78,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>If the source of an internal specification is redeclared to a block besides
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Face.Single.Material.Density material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
 <p>
 <h3>Parameters</h3>
@@ -114,25 +109,29 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Density">Material.Density</a> material(source(k(start=4*U.C/U.cc))) <font color="blue">
-    constrainedby </font>Material.BaseClasses.PartialCondition <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> normal(<font color="blue">final </font>orientation=Orientation.normal,
-      source(k(start=0))) <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition <font color="darkgreen">&quot;Normal translational&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> following(<font color="blue">final </font>orientation=Orientation.following,
-      source(k(start=0))) <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition <font color="darkgreen">
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Density">Material.Density</a> material(source(y=4*U.C/U.cc)) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition <font color="darkgreen">
+    &quot;Material&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> normal(<font color="blue">final </font>orientation) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+      orientation=Orientation.normal) <font color="darkgreen">&quot;Normal translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> following(<font color="blue">final </font>orientation) <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+      orientation=Orientation.following) <font color="darkgreen">
     &quot;1<sup>st</sup> transverse&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> preceding(<font color="blue">final </font>orientation=Orientation.preceding,
-      source(k(start=0))) <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition <font color="darkgreen">
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Translational.Velocity</a> preceding(<font color="blue">final </font>orientation) <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition(
+      orientation=Orientation.preceding) <font color="darkgreen">
     &quot;2<sup>nd</sup> transverse&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k(start=298.15*U.K))) <font color="blue">
-    constrainedby </font>Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;
-  <font color="darkgreen">// Note:  In Dymola 7.4, the value of k must be specified here instead</font>
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.Temperature">Thermal.Temperature</a> thermal(source(y=298.15*U.K)) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.Face.Single.Thermal.BaseClasses.PartialCondition <font color="darkgreen">
+    &quot;Thermal&quot;</font>;
+  <font color="darkgreen">// Note:  In Dymola 7.4, the value of y must be specified here instead</font>
   <font color="darkgreen">// of at the lower level (e.g., Thermal.Temperature) so that the source</font>
   <font color="darkgreen">// subcomponent can be replaced by blocks that don&#39;t contain the</font>
-  <font color="darkgreen">// parameter k.</font>
+  <font color="darkgreen">// parameter y.</font>
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
     &quot;Single-species connector for material, momentum, and energy&quot;</font>;
@@ -168,14 +167,54 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="red">connect</font>(u.thermal, thermal.u);
 
   <font color="red">connect</font>(thermal.y, y.thermal);
+
 <font color="blue">end </font>Face;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.FaceI.png" alt="FCSys.Conditions.ByConnector.Face.Single.FaceIsolated" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.FaceIsolated"></a><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single">FCSys.Conditions.ByConnector.Face.Single</a>.FaceIsolated</h2>
+<img src="images/FCSys.Conditions.ByConnector.Face.Single.FaceD.png" alt="FCSys.Conditions.ByConnector.Face.Single.FaceIsolated">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a> (Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector).
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Velocity</a></td><td>normal</td><td>redeclare Translational.Velo&hellip;</td><td>Normal translational</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for material, momentum, and energy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> FaceIsolated
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Material.Current</a> material,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Translational.Force</a> following(<font color="blue">final </font>orientation),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Translational.Force</a> preceding(<font color="blue">final </font>orientation),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
+
+<font color="blue">end </font>FaceIsolated;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:26:21 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:58 2013.
 </div>
 </body>
 </html>

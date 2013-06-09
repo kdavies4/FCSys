@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.ChemicalReaction</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalReaction\&quot;&gt;ChemicalReaction&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -57,7 +57,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction">ChemicalReaction</a>
-</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector</td></tr>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow">ChemicalReactionNoFlow</a>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with zero flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.MaterialS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Material" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material">Material</a>
 </td><td>Conditions for additivity of volume</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.MaterialS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Translational" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational">Translational</a>
@@ -73,18 +75,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionI.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction">FCSys.Conditions.ByConnector.ChemicalReaction</a>.ChemicalReaction</h2>
-<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector</b><p>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with efforts by default</b><p>
 <img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionD.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction">
 
 <h3>Information</h3>
 
-<p>If the source of an internal specification is redeclared to a block besides
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Chemical.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
 <p>
 <h3>Parameters</h3>
@@ -118,7 +113,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
 <pre>
 <font color="blue">model</font> ChemicalReaction <font color="darkgreen">
-  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector&quot;</font>
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with efforts by default&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
@@ -132,26 +127,29 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.ReactionRate">Material.ReactionRate</a> material(source(k(start=0))) <font color="blue">constrainedby </font>
-    Material.BaseClasses.PartialCondition <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalX(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransX <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.x) <font color="darkgreen">
-    &quot;X-axis translational&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalY(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransY <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.y) <font color="darkgreen">
-    &quot;Y-axis translational&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalZ(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransZ <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.z) <font color="darkgreen">
-    &quot;Z-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.ReactionRate">Material.ReactionRate</a> material <font color="blue">constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.Material.BaseClasses.PartialCondition
+    <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalX(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransX <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+      axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalY(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransY <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+      axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Velocity">Translational.Velocity</a> translationalZ(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransZ <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+      axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalAdvection.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalAdvection.SpecificEntropyTemperature">ThermalAdvection.SpecificEntropyTemperature</a> thermalAdvection(
-      source(k(start=0))) <font color="blue">constrainedby </font>
-    ThermalAdvection.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal advection&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.Temperature">ThermalDiffusion.Temperature</a> thermalDiffusion(source(k(start=0)))
-    <font color="blue">constrainedby </font>ThermalDiffusion.BaseClasses.PartialCondition <font color="darkgreen">
-    &quot;Thermal diffusion&quot;</font>;
+      source(y=3000*U.K)) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.ThermalAdvection.BaseClasses.PartialCondition
+    <font color="darkgreen">&quot;Thermal advection&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.Temperature">ThermalDiffusion.Temperature</a> thermalDiffusion(source(y=298.15*U.K))
+    <font color="blue">constrainedby </font>
+    Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition
+    <font color="darkgreen">&quot;Thermal diffusion&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Connector for a chemical reaction&quot;</font>;
@@ -205,15 +203,60 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="red">connect</font>(u.thermalDiffusion, thermalDiffusion.u);
   <font color="red">connect</font>(thermalDiffusion.y, y.thermalDiffusion);
-
 <font color="blue">end </font>ChemicalReaction;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionI.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction">FCSys.Conditions.ByConnector.ChemicalReaction</a>.ChemicalReactionNoFlow</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with zero flows by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionD.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction">ChemicalReaction</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with efforts by default).
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for a chemical reaction</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ChemicalReactionNoFlow <font color="darkgreen">
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with zero flows by default&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction">ChemicalReaction</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential">Material.Potential</a> material,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalAdvection.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalAdvection.HeatRate">ThermalAdvection.HeatRate</a> thermalAdvection,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.HeatRate">ThermalDiffusion.HeatRate</a> thermalDiffusion);
+
+<font color="blue">end </font>ChemicalReactionNoFlow;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:25:34 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:45:44 2013.
 </div>
 </body>
 </html>

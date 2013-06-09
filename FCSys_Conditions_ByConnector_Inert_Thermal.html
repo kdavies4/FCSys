@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Inert.Thermal</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Thermal conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -83,6 +83,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.htm
 <tr><td><a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
@@ -99,7 +100,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.htm
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
     <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Temperature,
     u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
-    source(k(start=298.15*U.K)),
     <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;) = thermal.Qdot);
 
 <font color="blue">equation </font>
@@ -124,7 +124,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.htm
 <tr><td><a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
 <h3>Connectors</h3>
@@ -169,7 +169,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.htm
 <tr><td><a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Inert.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <tr><td>Real</td><td>x</td><td>thermal.T</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>thermal.Qdot</td><td>Measurement expression</td></tr>
@@ -203,7 +203,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert_Thermal_BaseClasses.htm
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:26:47 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:47:25 2013.
 </div>
 </body>
 </html>

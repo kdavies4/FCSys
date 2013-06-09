@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Models for single-species storage, transport, and exchange of material, translational momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -113,10 +113,10 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>0</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>0</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>0</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>1</td><td>Fluidity (&zeta;) [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
@@ -176,12 +176,14 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">final </font>phi_IC=<font color="red">zeros</font>(3),
     <font color="blue">final </font>I_IC,
     consMaterial=Conservation.IC,
+    <font color="blue">final </font>tauprime=0,
+    <font color="blue">final </font>mu=0,
     <font color="blue">final </font>beta=0,
     <font color="blue">final </font>zeta=1);
   <font color="darkgreen">//</font>
-  <font color="darkgreen">//consTransX=Conservation.IC,</font>
+  <font color="darkgreen">// consTransX=Conservation.IC,</font>
   <font color="darkgreen">// consTransY=Conservation.IC,</font>
-  <font color="darkgreen">//consTransZ=Conservation.IC);</font>
+  <font color="darkgreen">// consTransZ=Conservation.IC);</font>
   <font color="darkgreen">//</font>
 
 <font color="blue">end </font>SpeciesSolid;
@@ -195,7 +197,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <h3>Information</h3>
 
-<p>Please see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
 <h3>Parameters</h3>
@@ -206,11 +208,11 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>1</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>Data.beta(T, v)</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>Fluidity (&zeta;) [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
@@ -457,11 +459,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Data.eta(T, v)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>Data.beta(T, v)</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>tauprime</td><td>1e-6*U.s</td><td>Effective collision interval (&tau;') [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>Fluidity (&zeta;) [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
@@ -515,7 +517,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <pre>
 <font color="blue">model</font> Species <font color="darkgreen">
   &quot;Model to exchange, transport, and store the material, momentum, and energy of one species&quot;</font>
-  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Math.html#Modelica.Math.log10">Modelica.Math.log10</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">FCSys.BaseClasses.Utilities.inSign</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Delta">FCSys.BaseClasses.Utilities.Delta</a>;
@@ -533,6 +534,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
     constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
     &quot;Characteristic data&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime(nominal=1e-6*U.s) = 1e-52*U.s <font color="darkgreen">
+    &quot;Effective collision interval (&tau;')&quot;</font>;
+  <font color="darkgreen">// **temp tiny value</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu(nominal=0.1*U.C*U.s/U.kg) = <font color="red">Data.mu</font>(T, v) <font color="darkgreen">
     &quot;Mobility (&mu;)&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu(nominal=1e-9*U.s) = <font color="red">Data.nu</font>(T, v) <font color="darkgreen">
@@ -541,8 +545,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Material resistivity (&eta;)&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> beta(nominal=10*U.cm*U.s/U.g) = <font color="red">Data.beta</font>(T, v) <font color="darkgreen">
     &quot;Dynamic compressibility (&beta;)&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">Q.CurrentAbsolute</a> tauprime(nominal=1e-6*U.s) = 1e-6*U.s <font color="darkgreen">
-    &quot;Effective collision interval (&tau;')&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> zeta(nominal=10*U.cm*U.s/U.g) = <font color="red">Data.zeta</font>(T, v) <font color="darkgreen">
     &quot;Fluidity (&zeta;)&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta(nominal=10*U.cm/U.A) = <font color="red">Data.theta</font>(T, v) <font color="darkgreen">
@@ -644,14 +646,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="darkgreen">// StateSelect.never avoids dynamic state selection of this variable and others</font>
   <font color="darkgreen">// below in Dymola 7.4.</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_faces[n_faces, Side](<font color="blue">each </font>nominal=U.atm, <font color="blue">each </font>start=p_IC)
-    <font color="darkgreen">&quot;Thermodynamic pressures at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT(
-    nominal=3000*U.K,
-    <font color="blue">final </font>start=h_IC - g_IC,
-    <font color="blue">final </font>fixed=false,
-    stateSelect=StateSelect.never) <font color="darkgreen">
-    &quot;Product of specific entropy and temperature&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> M(
     nominal=1e-3*U.g,
     <font color="blue">final </font>start=Data.m*N_IC,
@@ -672,10 +666,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     <font color="blue">final </font>fixed=false,
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Specific enthalpy&quot;</font>;
   <font color="darkgreen">// StateSelect.never avoids dynamic state selection Dymola 7.4.</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I[n_trans](
-    <font color="blue">each </font>nominal=U.A,
-    <font color="blue">final </font>start=I_IC[cartTrans],
-    <font color="blue">each </font><font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Advective current&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="darkgreen">// ----------------------------------</font>
@@ -691,115 +681,132 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> q[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) =
     Data.m*phi .* I ./ (2*A[cartTrans]) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Dynamic pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p(stateSelect=StateSelect.never) = <font color="red">
+    Data.c_p</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isobaric specific heat capacity&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v(stateSelect=StateSelect.never) = <font color="red">
     Data.c_v</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isochoric specific heat capacity&quot;</font>;
-  <font color="darkgreen">/* **
-  output Q.PressureReciprocal beta_T(stateSelect=StateSelect.never) =
-    Data.beta_T(T, p) if environment.analysis
-    &quot;Isothermal static compressibility&quot;;
-  //
-  // Time constants
-  output Q.Time tau_exch_translational(stateSelect=StateSelect.never) =
-    halfalpha_zeta if environment.analysis
-    &quot;Time constant for translational exchange&quot;;
-  output Q.Time tau_exch_thermal(stateSelect=StateSelect.never) = halfalpha_theta*N/ if environment.analysis &quot;Time constant for thermal exchange&quot;;
-  output Q.Time tau_trans_material(stateSelect=StateSelect.never) = noEvent(if
-    halfalpha_beta &gt; Modelica.Constants.small then Data.m*beta_T/halfalpha_beta
-     else 0) if environment.analysis &quot;Time constant for material transport&quot;;
-  // **Note that this isn&#39;t dependent on length or area---only intensive
-  // properties.
-  output Q.Time tau_trans_normal[n_trans](each stateSelect=StateSelect.never) =
-    fill(halfalpha_beta*N, n_trans) ./ Lprime[cartTrans] if environment.analysis
-    &quot;Time constants for normal translational transport&quot;;
-  // **Note that only for the axes with translational momentum included; others are
-  // infinite
-  output Q.Time tau_trans_transverse[n_trans](each stateSelect=StateSelect.never)
-     = fill(halfalpha_zeta*N, n_trans) ./ Lprime[cartTrans] if environment.analysis
-    &quot;Time constants for transverse translational transport&quot;;
-  // **Note that only for the axes with translational momentum included; others are
-  // infinite
-  output Q.Time tau_trans_thermal[Axis](each stateSelect=StateSelect.never) =
-    fill(halfalpha_theta*N, 3) ./ Lprime if environment.analysis
-    &quot;Time constants for thermal transport&quot;;
-  output Q.NumberAbsolute eta(stateSelect=StateSelect.never) = log10(max({
-    tau_exch_translational,tau_exch_thermal,max([tau_trans_normal;
-    tau_trans_transverse; tau_trans_thermal])})) - log10(min({
-    tau_exch_translational,tau_exch_thermal,min([tau_trans_normal;
-    tau_trans_transverse; tau_trans_thermal])})) if environment.analysis
-    &quot;Range of time constants in order of magnitude&quot;;
-  //
-  // Peclet numbers (only for the axes with translational momentum included; others
-  // are zero)
-  output Q.Number Pe_0[n_trans](each stateSelect=StateSelect.never) = I*
-    halfalpha_beta ./ Lprime[cartTrans] if environment.analysis
-    &quot;Normal Peclet numbers&quot;;
-  output Q.Number Pe_12[n_trans](each stateSelect=StateSelect.never) = I*
-    halfalpha_zeta ./ Lprime[cartTrans] if environment.analysis
-    &quot;Transverse Peclet numbers&quot;;
-  output Q.Number Pe_therm[n_trans](each stateSelect=StateSelect.never) = I*
-    halfalpha_theta ./ Lprime[cartTrans] if environment.analysis
-    &quot;Thermal Peclet numbers&quot;;
-  //
-  // Bulk flow rates
-  **indexing error
-  output Q.Force mphiI[n_trans, Orientation](each stateSelect=StateSelect.never)
-     = {(if inclTrans[cartWrap(cartTrans[axis] + orientation)] then Data.m*phi[
-    transCart[cartWrap(cartTrans[axis] + orientation)]]*I[axis] else 0) for
-    orientation in Orientation, axis in 1:n_trans} if n_trans &gt; 0 and environment.analysis
-    &quot;Bulk rate of translational advection&quot;;
-  output Q.Power sTI[n_trans](each stateSelect=StateSelect.never) = T*s*I if
-    environment.analysis &quot;Bulk rate of thermal advection&quot;;
-  //
-  // Translational momentum balance
-  output Q.Force Ma[n_trans](each stateSelect=StateSelect.never) = M*(der(phi)/U.s
-     - environment.a[cartTrans]) if environment.analysis
-    &quot;Acceleration force relative to the frame of reference (constant mass)&quot;;
-  output Q.Force f_exch_adv[n_trans](each stateSelect=StateSelect.never) =
-    chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
-    &quot;Acceleration force due to advective exchange&quot;;
-  output Q.Force f_exch_diff[n_trans](each stateSelect=StateSelect.never) =
-    inert.translational.mPhidot + inertDalton.mPhidot if environment.analysis
-    &quot;Friction from other species (diffusive exchange)&quot;;
-  output Q.Force f_trans_adv[n_trans](each stateSelect=StateSelect.never) = Data.m
-    *{faces.phi[1][cartTrans[axis], :]*faces[cartTrans[axis], :].Ndot + sum(faces[
-    cartWrap(cartTrans[axis] - orientation), :].phi[orientation]*faces[cartWrap(
-    cartTrans[axis] - orientation), :].Ndot for orientation in Orientation) for
-    axis in 1:n_trans} if environment.analysis
-    &quot;Acceleration force due to advective transport&quot;;
-  output Q.Force f_trans_diff[n_trans](each stateSelect=StateSelect.never) = {sum
-    (Sigma(faces[cartWrap(cartTrans[axis] - orientation), :].mPhidot[orientation])
-    for orientation in Orientation) - Delta(faces[cartTrans[axis], :].rho)*A[
-    cartTrans[axis]] for axis in 1:n_trans} if environment.analysis
-    &quot;Friction from other subregions (diffusive transport; includes volume viscosity)&quot;;
-  //
-  // Energy balance
-  output Q.Power Ndere(stateSelect=StateSelect.never) = (M*der(phi*phi)/2 + N*
-    der(h) - V*der(p))/U.s if environment.analysis
-    &quot;Rate of energy storage (internal and kinetic) at constant mass&quot;;
-  output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -(chemical.mphi*
-    chemical.mPhidot/(2*Data.m) + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
-    if environment.analysis
-    &quot;Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)&quot;;
-  output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*inert.translational.mPhidot
-     + inertDalton.phi*inertDalton.mPhidot if environment.analysis
-    &quot;Rate of heat generation due to friction with other species&quot;;
-  output Q.Power Qdot_exch(stateSelect=StateSelect.never) = inert.thermal.Qdot +
-    inertDalton.Qdot if environment.analysis
-    &quot;Rate of thermal conduction from other species&quot;;
-  output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((Data.m*(
-    faces.phi[axis, side,0]^2 + faces[axis, side].phi*faces[axis, side].phi)/2 +
-    Data.h(faces[axis, side].T, faces[axis, side].rho) - Data.m*phi*phi/2 - h)*
-    faces[axis, side].Ndot for side in Side) for axis in Axis) if environment.analysis
-    &quot;Relative rate of work (internal, flow, and kinetic) done by advective transport&quot;;
-  output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(faces.phi .*
-    faces.mPhidot) if environment.analysis
-    &quot;Rate of heat generation due to friction with other subregions&quot;;
-  output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(faces.Qdot)
-    if environment.analysis &quot;Rate of thermal conduction from other subregions&quot;;
-  // Note:  These auxiliary variables should not be used as states (hence
-  // StateSelect.never); the structure of the problem should not change if
-  // they are included.
-  */</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> kappa(stateSelect=StateSelect.never) = <font color="red">Data.kappa</font>
+    (T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isothermal compressibility&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Time constants (only for the axes with translational momentum included; others</font>
+  <font color="darkgreen">// are infinite)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_NE(
+    stateSelect=StateSelect.never,
+    start=U.s,
+    min=Modelica.Constants.small) = N*kappa/v <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constant for phase change&quot;</font>;
+  <font color="darkgreen">// **Fix this once the rate of phase change is fixed.</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_PhiE(
+    stateSelect=StateSelect.never,
+    start=U.s,
+    min=Modelica.Constants.small) = Data.m*mu <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constant for translational exchange&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_QE(
+    stateSelect=StateSelect.never,
+    start=U.s,
+    min=Modelica.Constants.small) = c_p*nu <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constant for thermal exchange&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_NT[n_faces](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>start=U.s,
+    <font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">fill</font>(V*eta/2, n_faces) ./ Lprime[
+    cartFaces] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Time constants for material transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_PhiT_perp[n_faces](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>start=U.s,
+    <font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">fill</font>(M*beta/2, n_faces) ./ Lprime[
+    cartFaces] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constants for normal translational transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_PhiT_para[n_faces](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>start=U.s,
+    <font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">fill</font>(M*zeta/2, n_faces) ./ Lprime[
+    cartFaces] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constants for transverse translational transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_QT[n_faces](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>start=U.s,
+    <font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">fill</font>(N*c_v*theta/2, n_faces) ./ Lprime[
+    cartFaces] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Time constants for thermal transport&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Peclet numbers (only for the axes with translational momentum included; others</font>
+  <font color="darkgreen">// are zero)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_N[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = eta*v*I ./
+    Lprime[cartTrans] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Material Peclet numbers&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_Phi_perp[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    beta*Data.m*I ./ Lprime[cartTrans] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Normal translational Peclet numbers&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_Phi_para[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    zeta*Data.m*I ./ Lprime[cartTrans] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Transverse translational Peclet numbers&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_Q[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = theta*<font color="red">
+    Data.c_v</font>(T, p)*I ./ Lprime[cartTrans] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Thermal Peclet numbers&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Bulk flow rates</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mphiI[n_trans, n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    outerProduct</font>(I, Data.m*phi) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Bulk rate of translational advection (1st index: transport axis, 2nd index: translational component)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> hI[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = h*I <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Bulk enthalpy flow rate&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Translational momentum balance</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> Ma[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = M*(<font color="red">der</font>(phi)/
+    U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans] <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">
+    &quot;Acceleration force (including acceleration due to body forces)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_thermo[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = {(<font color="blue">if </font>
+    inclFaces[cartTrans[i]]<font color="blue"> then </font>-<font color="red">Delta</font>(p_faces[facesCart[cartTrans[i]], :])*A[
+    cartTrans[i]]<font color="blue"> else </font>0) <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans} <font color="darkgreen">&quot;Thermodynamic force&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_AE[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = Data.m*((<font color="red">
+    actualStream</font>(chemical.phi) - phi) .* chemical.Ndot + (<font color="red">actualStream</font>(physical.phi)
+     - phi) .* physical.Ndot) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Acceleration force due to advective exchange&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_DE[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = inert.translational.mPhidot
+     + inertDalton.mPhidot <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Friction from other configurations (diffusive exchange)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_AT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = {<font color="red">sum</font>(<font color="blue">if </font>
+    inclFaces[<font color="red">cartWrap</font>(cartTrans[i] - orientation + 1)]<font color="blue"> then </font>Data.m*faces[
+    facesCart[<font color="red">cartWrap</font>(cartTrans[i] - orientation + 1)], :].phi[orientation]*
+    faces[facesCart[<font color="red">cartWrap</font>(cartTrans[i] - orientation + 1)], :].Ndot<font color="blue"> else </font>0 <font color="blue">
+    for </font>orientation<font color="blue"> in </font>Orientation) <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans} <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Acceleration force due to advective transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_DT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = {<font color="red">sum</font>(<font color="blue">if </font>
+    inclFaces[<font color="red">cartWrap</font>(cartTrans[i] - orientation + 1)]<font color="blue"> then </font><font color="red">Sigma</font>(faces[
+    facesCart[<font color="red">cartWrap</font>(cartTrans[i] - orientation + 1)], :].mPhidot[orientation])<font color="blue">
+     else </font>0 <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation) <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans} <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Friction from other subregions (diffusive transport, including bulk viscosity)&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Energy balance</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Ndere(stateSelect=StateSelect.never) = (N*<font color="red">der</font>(h) - V*<font color="red">der</font>(p) +
+    M*<font color="red">der</font>(phi*phi)/2)/U.s <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Rate of energy storage (internal and kinetic) at constant mass&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Edot_AE(stateSelect=StateSelect.never) = -(chemical.mu + <font color="red">
+    actualStream</font>(chemical.phi)*<font color="red">actualStream</font>(chemical.phi)*Data.m/2 + <font color="red">
+    actualStream</font>(chemical.sT) - h - Data.m*phi*phi/2)*chemical.Ndot + (physical.mu
+     + <font color="red">actualStream</font>(physical.phi)*<font color="red">actualStream</font>(physical.phi)*Data.m/2 + <font color="red">
+    actualStream</font>(physical.sT) - h - Data.m*phi*phi/2)*physical.Ndot <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">
+    &quot;Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_GE(stateSelect=StateSelect.never) = inert.translational.phi
+    *inert.translational.mPhidot + inertDalton.phi*inertDalton.mPhidot <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">
+    &quot;Rate of heat generation due to friction with other configurations&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_DE(stateSelect=StateSelect.never) = inert.thermal.Qdot +
+    inertDalton.Qdot <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Rate of thermal conduction from other configurations&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Edot_AT(stateSelect=StateSelect.never) = -<font color="red">sum</font>(<font color="red">sum</font>((<font color="red">Data.h</font>(
+    faces[i, side].T, p_faces[i, side]) - h + (faces[i, side].phi*faces[i, side].phi
+     - phi*phi)*Data.m/2)*faces[i, side].Ndot <font color="blue">for </font>side<font color="blue"> in </font>Side) <font color="blue">for </font>i<font color="blue"> in </font>1:
+    n_faces) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Relative rate of energy (internal, flow, and kinetic) due to advective transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_GT(stateSelect=StateSelect.never) = <font color="red">sum</font>(faces.phi .*
+    faces.mPhidot) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Rate of heat generation due to friction with other subregions&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_DT(stateSelect=StateSelect.never) = <font color="red">sum</font>(faces.Qdot) <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Rate of thermal conduction from other subregions&quot;</font>;
+  <font color="darkgreen">// Note:  The structure of the problem should not change if these</font>
+  <font color="darkgreen">// auxiliary variables are included (hence StateSelect.never).</font>
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Connectors.ChemicalSpecies</a> chemical(
     <font color="blue">final </font>n_trans=n_trans,
@@ -832,15 +839,14 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> faces[n_faces, Side](
     rho(<font color="blue">each </font>start=rho_IC),
     Ndot(start=<font color="red">outerProduct</font>(I_IC[cartFaces], {1,-1})),
-    phi(start={<font color="red">fill</font>({phi_IC[<font color="red">cartWrap</font>(cartFaces[axis] + orientation - 1)] <font color="blue">for </font>
-          orientation<font color="blue"> in </font>Orientation}, 2) <font color="blue">for </font>axis<font color="blue"> in </font>1:n_faces}),
+    phi(start={<font color="red">fill</font>({phi_IC[<font color="red">cartWrap</font>(cartFaces[i] + orientation - 1)] <font color="blue">for </font>
+          orientation<font color="blue"> in </font>Orientation}, 2) <font color="blue">for </font>i<font color="blue"> in </font>1:n_faces}),
     mPhidot(<font color="blue">each </font>start=0),
     T(<font color="blue">each </font>start=T_IC),
     Qdot(<font color="blue">each </font>start=0)) <font color="darkgreen">
     &quot;Connectors to transport material, translational momentum, and thermal energy through the boundaries&quot;</font>;
 
 <font color="darkgreen">// Geometric parameters</font>
-
 <font color="blue">protected </font>
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Length&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
@@ -852,17 +858,21 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;true, if each pair of faces is included&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclRot[Axis] <font color="darkgreen">
     &quot;true, if each axis of rotation has all its tangential faces included&quot;</font>;
+  <font color="darkgreen">// Note:  The size is also Axis, but it can&#39;t be specified here due to</font>
+  <font color="darkgreen">// an error in Dymola 7.4.</font>
   <font color="blue">outer </font><font color="blue">parameter </font>Integer n_trans <font color="darkgreen">
     &quot;Number of components of translational momentum&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
     &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
-  <font color="darkgreen">// Note:  The size is n_trans, but it can&#39;t be specified here due to an error</font>
-  <font color="darkgreen">// in Dymola 7.4.</font>
   <font color="blue">outer </font><font color="blue">parameter </font>Integer cartFaces[:] <font color="darkgreen">
     &quot;Cartesian-axis indices of the pairs of faces&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font>Integer transCart[:] <font color="darkgreen">
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartRot[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of rotational momentum&quot;</font>;
+  <font color="darkgreen">// Note:  The size of cartTrans, cartFaces, and cartRot is n_trans,</font>
+  <font color="darkgreen">// but it can&#39;t be specified here due to an error in Dymola 7.4.</font>
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer transCart[Axis] <font color="darkgreen">
     &quot;Translational-momentum-component indices of the Cartesian axes&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font>Integer facesCart[:] <font color="darkgreen">
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer facesCart[Axis] <font color="darkgreen">
     &quot;Face-pair indices of the Cartesian axes&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ} <font color="darkgreen">
     &quot;true, if each Cartesian axis uses upstream discretization&quot;</font>;
@@ -871,6 +881,19 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a> initTrans[Axis]={initTransX,initTransY,
       initTransZ} <font color="darkgreen">&quot;Initialization methods for translational momentum&quot;</font>;
 
+  <font color="darkgreen">// Additional aliases (for common terms)</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_faces[n_faces, Side](<font color="blue">each </font>nominal=U.atm, <font color="blue">each </font>start=p_IC)
+    <font color="darkgreen">&quot;Thermodynamic pressures at the faces&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT(
+    nominal=3000*U.K,
+    <font color="blue">final </font>start=h_IC - g_IC,
+    <font color="blue">final </font>fixed=false,
+    stateSelect=StateSelect.never) <font color="darkgreen">
+    &quot;Product of specific entropy and temperature&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I[n_trans](
+    <font color="blue">each </font>nominal=U.A,
+    <font color="blue">final </font>start=I_IC[cartTrans],
+    <font color="blue">each </font><font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Advective current&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> faces_mPhidot[n_faces, Side, 2] <font color="darkgreen">&quot;Directly-calculated shear forces&quot;</font>;
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
@@ -1015,8 +1038,8 @@ Choose a condition besides None.&quot;);
   M = Data.m*N;
   phi = inert.translational.phi;
   I .* L[cartTrans] = N*phi;
-  p_faces = {{<font color="red">Data.p_Tv</font>(faces[axis, side].T, 1/faces[axis, side].rho) <font color="blue">for </font>side<font color="blue">
-     in </font>Side} <font color="blue">for </font>axis<font color="blue"> in </font>1:n_faces};
+  p_faces = {{<font color="red">Data.p_Tv</font>(faces[i, side].T, 1/faces[i, side].rho) <font color="blue">for </font>side<font color="blue"> in </font>
+    Side} <font color="blue">for </font>i<font color="blue"> in </font>1:n_faces};
   chemical.mu = h - sT;
 
   <font color="darkgreen">// Thermodynamic correlations</font>
@@ -1089,24 +1112,20 @@ Choose a condition besides None.&quot;);
   <font color="blue">end for</font>;
 
   <font color="darkgreen">// Zero-torque mapping of shear forces</font>
-  <font color="blue">for </font>axis<font color="blue"> in </font>Axis<font color="blue"> loop</font>
-    <font color="blue">if </font>inclRot[axis]<font color="blue"> then</font>
-      4*<font color="red">cat</font>(
-        1,
-        faces[facesCart[<font color="red">cartWrap</font>(axis + 1)], :].mPhidot[Orientation.following],
-        faces[facesCart[<font color="red">cartWrap</font>(axis - 1)], :].mPhidot[Orientation.preceding])
-        = {{3,1,L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)],-L[<font color="red">cartWrap</font>(axis - 1)]
-        /L[<font color="red">cartWrap</font>(axis + 1)]},{1,3,-L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)],
-        L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)]},{L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">
-        cartWrap</font>(axis - 1)],-L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">cartWrap</font>(axis - 1)],3,1},{-
-        L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">cartWrap</font>(axis - 1)],L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">
-        cartWrap</font>(axis - 1)],1,3}}*<font color="red">cat</font>(
-        1,
-        faces_mPhidot[facesCart[<font color="red">cartWrap</font>(axis + 1)], :, Orientation.following -
-          1],
-        faces_mPhidot[facesCart[<font color="red">cartWrap</font>(axis - 1)], :, Orientation.preceding -
-          1]);
-    <font color="blue">end if</font>;
+  <font color="blue">for </font>axis<font color="blue"> in </font>cartRot<font color="blue"> loop</font>
+    4*<font color="red">cat</font>(
+      1,
+      faces[facesCart[<font color="red">cartWrap</font>(axis + 1)], :].mPhidot[Orientation.following],
+      faces[facesCart[<font color="red">cartWrap</font>(axis - 1)], :].mPhidot[Orientation.preceding]) =
+      {{3,1,L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)],-L[<font color="red">cartWrap</font>(axis - 1)]/
+      L[<font color="red">cartWrap</font>(axis + 1)]},{1,3,-L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)],
+      L[<font color="red">cartWrap</font>(axis - 1)]/L[<font color="red">cartWrap</font>(axis + 1)]},{L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">
+      cartWrap</font>(axis - 1)],-L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">cartWrap</font>(axis - 1)],3,1},{-L[<font color="red">
+      cartWrap</font>(axis + 1)]/L[<font color="red">cartWrap</font>(axis - 1)],L[<font color="red">cartWrap</font>(axis + 1)]/L[<font color="red">
+      cartWrap</font>(axis - 1)],1,3}}*<font color="red">cat</font>(
+      1,
+      faces_mPhidot[facesCart[<font color="red">cartWrap</font>(axis + 1)], :, Orientation.following - 1],
+      faces_mPhidot[facesCart[<font color="red">cartWrap</font>(axis - 1)], :, Orientation.preceding - 1]);
   <font color="blue">end for</font>;
 
   <font color="darkgreen">// Material dynamics</font>
@@ -1241,7 +1260,7 @@ Choose a condition besides None.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:48 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:57 2013.
 </div>
 </body>
 </html>

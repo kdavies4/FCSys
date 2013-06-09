@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnFPs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -59,7 +59,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Regions.AnFPs.AnFPS.png" alt="FCSys.Regions.AnFPs.AnFP" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a>
 </td><td>Anode flow plate</td></tr>
 <tr><td><img src="images/FCSys.Regions.AnFPs.AnFPS.png" alt="FCSys.Regions.AnFPs.GM" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.GM">GM</a>
-</td><td>General Motors cathodic test flow plate and current collector</td></tr>
+</td><td>GM anode test flow plate and current collector</td></tr>
 </table>
 <hr>
 
@@ -70,24 +70,42 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>This model describes the storage and transport of chemical/electrochemical
-species in and through the anode flow plate of a PEMFC.
-The x axis is intended to extend from the anode to the cathode.
-and the y axis extends along the length of the channel. The model is
+<p>This model represents the anode flow plate of a PEMFC.
+The x axis extends from the anode to the cathode.
+The y axis extends along the length of the channel. The model is
 bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
-used as the inlet. The z axis extends across the width of the channel.</p><p>
+used as the inlet. The z axis extends across the width of the channel.</p>
+
+<p>By default, the layer cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+
+<p>See <a href="FCSys_Subregions_Species_'C+'_Graphite.html#FCSys.Subregions.Species.'C+'.Graphite.Fixed">Subregions.Species.'C+'.Graphite.Fixed</a>
+regarding the default specific heat capacity.  The default thermal resistivity
+of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].
+  The default electronic mobility (<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is
+  also based on
+  Entegris/Poco Graphite AXF-5Q
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).
+There is additional data in the
+text layer of this model.</p>
+
+<p>For more information, see the
+    <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
+<p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.1</td><td>Volumetric porosity [1]</td></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.SubregionNoIonome&hellip;</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.1</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(8*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{8*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
@@ -112,38 +130,51 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
 <pre>
 <font color="blue">model</font> AnFP <font color="darkgreen">&quot;Anode flow plate&quot;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>;
   <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+  <font color="blue">import </font><a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">FCSys.Characteristics.'C+'.Graphite</a>;
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x=<font color="red">fill</font>(8*U.mm/1, 1),
-    L_y=<font color="red">fill</font>(1*U.m/1, 1),
-    L_z=<font color="red">fill</font>(5*U.mm/1, 1),
+    L_x={8*U.mm},
+    L_y={2*U.m},
+    L_z={5*U.mm},
     <font color="blue">final </font>inclFacesX=true,
     <font color="blue">final </font>inclFacesY=true,
     inclFacesZ=false,
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
-        (
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> (
         inclTransX=false,
         inclTransY=true,
         inclTransZ=false,
         gas(
+          reduceVel=true,
+          reduceTemp=true,
+          k=<font color="red">fill</font>(epsilon^(3/2), 3),
           inclH2=true,
           inclH2O=true,
-          reduceVel=false,
           H2(p_IC=(1 - environment.n_H2O)*environment.p),
-          H2O(p_IC=environment.n_H2O*environment.p)),
+          H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
+
         graphite(
+          reduceTemp=true,
+          k=<font color="red">fill</font>((1 - epsilon)^(3/2), 3),
           &#39;inclC+&#39;=true,
           &#39;incle-&#39;=true,
-          &#39;C+&#39;(V_IC=V - xV)),
-        liquid(inclH2O=true, H2O(V_IC=0))));
+          &#39;C+&#39;(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
+          &#39;e-&#39;(consTransY=Conservation.IC,mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol))),
 
-  <font color="darkgreen">// **for e-: setVelY=true,</font>
-  <font color="darkgreen">// **set phi[x] = 0 for gases if terminal velocity/bulk current is negligible w.r.t.</font>
-  <font color="darkgreen">// diffusion, since momentum time constant is very, very fast (see 2/3/13 p.1</font>
-  <font color="darkgreen">// notes); do the same for all other layers</font>
+        liquid(
+          inclH2O=true,
+          k=<font color="red">fill</font>(epsilon^(3/2), 3),
+          H2O(V_IC=Modelica.Constants.eps))));
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.1 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
+  <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
+  <font color="darkgreen">// regarding the settings of k for each phase.</font>
+
+  <font color="darkgreen">// **Find a better solution for liquid.H2O.V_IC than Modelica.Constants.eps</font>
+  <font color="darkgreen">// and apply it to other layers too.</font>
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.1 <font color="darkgreen">
+    &quot;Volumetric porosity (&epsilon;)&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
@@ -157,34 +188,28 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     &quot;Molar concentration of H2O&quot;</font>;
 
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> epsilonV=epsilon*V <font color="darkgreen">&quot;Fluid volume&quot;</font>;
 
-  <font color="darkgreen">// The isobaric specific heat capacity and thermal</font>
-  <font color="darkgreen">// resistivity is based on data of graphite fiber epoxy (25% vol)</font>
-  <font color="darkgreen">// composite (heat flow parallel to fibers) at 300 K from Incropera and</font>
-  <font color="darkgreen">// DeWitt (2002, p. 909).  See FCSys.Subregions.Species.C.Fixed for more</font>
-  <font color="darkgreen">// data.</font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
-  <font color="darkgreen">// Thermal resistivity of some other flowplate materials from</font>
-  <font color="darkgreen">// [Incropera2002, pp. 905 &amp;amp; 907]:</font>
-  <font color="darkgreen">//                                   Stainless steel</font>
-  <font color="darkgreen">//                                   ------------------------------------------------------------------------------------</font>
-  <font color="darkgreen">//             Aluminium (pure)      AISI 302              AISI 304              AISI 316              AISI 347</font>
-  <font color="darkgreen">//             ------------------    ------------------    ------------------    ------------------    ------------------</font>
-  <font color="darkgreen">//             c_p*U.kg   alpha_Qdot c_p*U.kg   alpha_Qdot c_p*U.kg   alpha_Qdot c_p*U.kg   alpha_Qdot c_p*U.kg   alpha_Qdot</font>
-  <font color="darkgreen">//             *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W</font>
-  <font color="darkgreen">//             /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m</font>
-  <font color="darkgreen">//     T/K     *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)</font>
-  <font color="darkgreen">//     ----    --------   -------    -------    -------    -------    -------    -------    -------    -------    -------</font>
-  <font color="darkgreen">//     100     482        1/302                            272        1/9.2</font>
-  <font color="darkgreen">//     200     798        1/237                            402        1/12.6</font>
-  <font color="darkgreen">//     300     903        1/237      480        1/15.1     477        1/14.9     468        1/13.4     480        1/14.2</font>
-  <font color="darkgreen">//     400     949        1/240      512        1/17.3     515        1/16.6     504        1/15.2     513        1/15.8</font>
-  <font color="darkgreen">//     600     1033       1/231      559        1/20.0     557        1/19.8     550        1/18.3     559        1/18.9</font>
-  <font color="darkgreen">//     800     1146       1/218      585        1/22.8     582        1/22.6     576        1/21.3     585        1/21.9</font>
-  <font color="darkgreen">//     1000                          606        1/25.4     611        1/25.4     602        1/24.2     606        1/24.7</font>
-
-  <font color="darkgreen">// **Update for theta instead of alpha.</font>
+  <font color="darkgreen">// Thermal resistivity of some other flowplate materials [Incropera2002,</font>
+  <font color="darkgreen">// pp. 905 &amp; 907]:</font>
+  <font color="darkgreen">//                                Stainless steel</font>
+  <font color="darkgreen">//                                ---------------------------------------------------------------------------------</font>
+  <font color="darkgreen">//             Aluminium (pure)   AISI 302             AISI 304              AISI 316              AISI 347</font>
+  <font color="darkgreen">//             ----------------   ------------------   ------------------    -----------------    -----------------</font>
+  <font color="darkgreen">//                        theta              theta                theta                 theta                theta</font>
+  <font color="darkgreen">//             c_p*U.kg   *U.W    c_p*U.kg   *U.W      c_p*U.kg   *U.W       c_p*U.kg   *U.W      c_p*U.kg   *U.W</font>
+  <font color="darkgreen">//             *U.K       /(U.m   *U.K       /(U.m     *U.K       /(U.m      *U.K       /(U.m     *U.K       /(U.m</font>
+  <font color="darkgreen">//     T/K     /(U.J*m)   *U.K)   /(U.J*m)   *U.K)     /(U.J*m)   *U.K)      /(U.J*m)   *U.K)     /(U.J*m)   *U.K)</font>
+  <font color="darkgreen">//     ----    --------   -----   --------   ------    --------   -------    --------   ------    --------   ------</font>
+  <font color="darkgreen">//     100     482        1/302                        272        1/9.2</font>
+  <font color="darkgreen">//     200     798        1/237                        402        1/12.6</font>
+  <font color="darkgreen">//     300     903        1/237   480        1/15.1    477        1/14.9     468        1/13.4    480        1/14.2</font>
+  <font color="darkgreen">//     400     949        1/240   512        1/17.3    515        1/16.6     504        1/15.2    513        1/15.8</font>
+  <font color="darkgreen">//     600     1033       1/231   559        1/20.0    557        1/19.8     550        1/18.3    559        1/18.9</font>
+  <font color="darkgreen">//     800     1146       1/218   585        1/22.8    582        1/22.6     576        1/21.3    585        1/21.9</font>
+  <font color="darkgreen">//     1000                       606        1/25.4    611        1/25.4     602        1/24.2    606        1/24.7</font>
 
   <font color="darkgreen">// Electrical resistivities:</font>
   <font color="darkgreen">//     Aluminium (http://en.wikipedia.org/wiki/Electrical_resistivity, 2008):</font>
@@ -195,21 +220,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">//         1.72e-8 ohm.m</font>
   <font color="darkgreen">//     Stainless steel AISI 304 (http://hypertextbook.com/facts/2006/UmranUgur.shtml, 2008):</font>
   <font color="darkgreen">//         6.897e-7 ohm.m</font>
-  <font color="darkgreen">//     Entegris/Poco Graphite AXM-5Q [Entegris2012]:</font>
-  <font color="darkgreen">//         1.470e-5 ohm.m</font>
-
-  <font color="darkgreen">// Dynamic viscosities:</font>
-  <font color="darkgreen">//     Air at 1 atm [Incropera2002, p. 917, Table A.4]:</font>
-  <font color="darkgreen">//         @ 300K:  1.846e-5 Pa.s</font>
-  <font color="darkgreen">//         @ 350K:  2.082e-5 Pa.s</font>
-  <font color="darkgreen">//     Liquid H2O [Incropera2002, p. 924, Table A.6]:</font>
-  <font color="darkgreen">//         @ 300K, 0.03531 bar (saturation pressure): 8.55e-4 Pa.s</font>
-  <font color="darkgreen">//         @ 350K, 0.4163 bar (saturation pressure): 3.65e-4 Pa.s</font>
-  <font color="darkgreen">//     Gas H2O [Incropera2002, p. 924, Table A.6]:</font>
-  <font color="darkgreen">//         @ 300K, 0.03531 bar (saturation pressure): 9.09e-6 Pa.s</font>
-  <font color="darkgreen">//         @ 350K, 0.4163 bar (saturation pressure): 1.109e-5 Pa.s</font>
-
-  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>AnFP;
 </pre>
@@ -217,7 +227,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
 <h2><img src="images/FCSys.Regions.AnFPs.AnFPI.png" alt="FCSys.Regions.AnFPs.GM" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.AnFPs.GM"></a><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs">FCSys.Regions.AnFPs</a>.GM</h2>
-<b>General Motors cathodic test flow plate and current collector</b><p>
+<b>GM anode test flow plate and current collector</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnFPs.GM">
 
 <h3>Information</h3>
@@ -237,24 +247,27 @@ anode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documen
 In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 </ol></p>
 
-<p>Additional notes:
-<ul>
-<li>The default thermal resistivity ((1/95) m K/W) is that of Entegris/Poco Graphite AXM-5Q
-[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].</li>
-</ul></p>
-<p>
+<p>The default thermal resistivity of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].  The default electronic mobility
+(<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
+Entegris/Poco Graphite AXF-5Q as well
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+<p>For more information, see the
+    <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> (Anode flow plate).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.011</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.011</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(35.22*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1.543*U.m, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill((5/1.543)*U.mm, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{35.22*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{1.543*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{(5/1.543)*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
@@ -275,15 +288,14 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> GM <font color="darkgreen">
-  &quot;General Motors cathodic test flow plate and current collector&quot;</font>
+<font color="blue">model</font> GM <font color="darkgreen">&quot;GM anode test flow plate and current collector&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a>(
-    subregions(<font color="blue">each </font>graphite(&#39;C+&#39;(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*U.K
-              /(95*U.W)))),
-    L_x=<font color="red">fill</font>(35.22*U.mm/1, 1),
-    L_y=<font color="red">fill</font>(1.543*U.m, 1),
-    L_z=<font color="red">fill</font>((5/1.543)*U.mm, 1),
-    x=0.011);
+    L_x={35.22*U.mm},
+    L_y={1.543*U.m},
+    L_z={(5/1.543)*U.mm},
+    Subregion(graphite(&#39;C+&#39;(theta=U.m*U.K/(95*U.W)),&#39;e-&#39;(mu=U.S*U.cc/(1.470e-3*
+              U.cm*0.1849*U.mol)))),
+    epsilon=0.011);
 
 <font color="blue">end </font>GM;
 </pre>
@@ -292,7 +304,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:28:11 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:48:30 2013.
 </div>
 </body>
 </html>

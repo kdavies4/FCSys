@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -90,11 +90,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>This model describes the storage and transport of
-chemical/electrochemical species in and through the cathode gas diffusion layer of a PEMFC.
-The x axis is intended to extend from the anode to the cathode.
+<p>This model represents the cathode gas diffusion layer of a PEMFC.
+The x axis extends from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p>
+
+<p>By default, the layer cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+
+<p>The default porosity (<code>epsilon = 0.4</code>) is
+of a compressed GDL according to [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Bernardi1992</a>, p. 2483, Table 3].
+  The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)</code>)
+   represents a compressed SGL Sigracet 10 BA gas diffusion layer
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Nitta2008</a>].  The default
+  electronic mobility
+  is for SGL Carbon Group Sigracet&reg; 10 BA [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].</p>
 
 <p>For more information, see the
     <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
@@ -105,12 +114,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.SubregionNoIonome&hellip;</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.4</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.3*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.3*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
@@ -136,6 +145,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <pre>
 <font color="blue">model</font> CaGDL <font color="darkgreen">&quot;Cathode gas diffusion layer&quot;</font>
   <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+
   <font color="darkgreen">// Note:  Extensions of CaGDL should be placed directly in the CaGDLs</font>
   <font color="darkgreen">// package rather than subpackages (e.g., by manufacturer) so that</font>
   <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the</font>
@@ -143,18 +153,20 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// used.</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x=<font color="red">fill</font>(0.3*U.mm/1, 1),
-    L_y=<font color="red">fill</font>(1*U.m/1, 1),
-    L_z=<font color="red">fill</font>(5*U.mm/1, 1),
+    L_x={0.3*U.mm},
+    L_y={U.m},
+    L_z={5*U.mm},
     <font color="blue">final </font>inclFacesX=true,
     inclFacesY=false,
     inclFacesZ=false,
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
-        (
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> (
         inclTransX=true,
         inclTransY=false,
         inclTransZ=false,
         gas(
+          reduceVel=true,
+          reduceTemp=true,
+          k=<font color="red">fill</font>(epsilon^(3/2), 3),
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -165,13 +177,22 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
 
         graphite(
+          reduceTemp=true,
+          k=<font color="red">fill</font>((1 - epsilon)^(3/2), 3),
           &#39;inclC+&#39;=true,
           &#39;incle-&#39;=true,
-          &#39;C+&#39;(V_IC=V - xV)),
-        liquid(inclH2O=true, H2O(V_IC=0))));
+          &#39;C+&#39;(V_IC=V - epsilonV,theta=U.m*U.K/(1.18*U.W)),
+          &#39;e-&#39;(mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol))),
+        liquid(
+          k=<font color="red">fill</font>(epsilon^(3/2), 3),
+          inclH2O=true,
+          H2O(V_IC=0))));
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.76 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
-  <font color="darkgreen">// The default porosity is for Sigracet 24 BC.</font>
+  <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
+  <font color="darkgreen">// regarding the settings of k for each phase.</font>
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.4 <font color="darkgreen">
+    &quot;Volumetric porosity (&epsilon;)&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
@@ -190,11 +211,8 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     &quot;Molar concentration of O2&quot;</font>;
 
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> epsilonV=epsilon*V <font color="darkgreen">&quot;Fluid volume&quot;</font>;
 
-  <font color="darkgreen">// See AnGDLs.AnGDL for additional notes and data.</font>
-
-<font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>CaGDL;
@@ -208,20 +226,24 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.400*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.400*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -244,11 +266,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet10BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BA&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.400*U.mm/1, 1),x=0.88);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.400 mm, p = 0.85 m/s (for air) =&gt; D = P*L = 340 mm2/s</font>
-  <font color="darkgreen">//     Density: (85 g/m2)/(0.400 mm)/0.88 = 212.5 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.400 mm) = 3 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.400*U.mm},
+    epsilon=0.88,
+    Subregion(graphite(&#39;e-&#39;(mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.400 mm, p = 0.85 m/s (for air) =&gt; D = P*L = 340 mm2/s</font>
+  <font color="darkgreen">//     Density:  (85 g/m2)/(0.400 mm)/0.88 = 212.5 kg/m3</font>
 
 <font color="blue">end </font>Sigracet10BA;
 </pre>
@@ -261,20 +285,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.84</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.420*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.420*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -297,11 +325,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet10BB <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BB&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.420*U.mm/1, 1),x=0.84);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.03 m/s (for air) =&gt; D = P*L = 12.6 mm2/s</font>
-  <font color="darkgreen">//     Density: (125 g/m2)/(0.420 mm) = 297.62 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (15 mohm.cm2)/(0.420 mm) = 3.5714 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.420*U.mm},
+    epsilon=0.84,
+    Subregion(graphite(&#39;e-&#39;(mu=42*U.S*U.cc/(15*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.420 mm, p = 0.03 m/s (for air) =&gt; D = P*L = 12.6 mm2/s</font>
+  <font color="darkgreen">//     Density:  (125 g/m2)/(0.420 mm) = 297.62 kg/m3</font>
 
 <font color="blue">end </font>Sigracet10BB;
 </pre>
@@ -314,20 +344,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.82</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.82</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.420*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.420*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -350,11 +384,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet10BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BC&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.420*U.mm/1, 1),x=0.82);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.0145 m/s (for air) =&gt; D = P*L = 6.09 mm2/s</font>
-  <font color="darkgreen">//     Density: (135 g/m2)/(0.420 mm) = 321.43 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (16 mohm.cm2)/(0.420 mm) = 3.8095 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.420*U.mm},
+    epsilon=0.82,
+    Subregion(graphite(&#39;e-&#39;(mu=42*U.S*U.cc/(16*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.420 mm, p = 0.0145 m/s (for air) =&gt; D = P*L = 6.09 mm2/s</font>
+  <font color="darkgreen">//     Density:  (135 g/m2)/(0.420 mm) = 321.43 kg/m3</font>
 
 <font color="blue">end </font>Sigracet10BC;
 </pre>
@@ -367,20 +403,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.84</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.190*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -403,11 +443,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet24BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 24 BA&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.84);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.30 m/s (for air) =&gt; D = P*L = 57 mm2/s</font>
-  <font color="darkgreen">//     Density: (54 g/m2)/(0.190 mm) = 284.21 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.190*U.mm},
+    epsilon=0.84,
+    Subregion(graphite(&#39;e-&#39;(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.190 mm, p = 0.30 m/s (for air) =&gt; D = P*L = 57 mm2/s</font>
+  <font color="darkgreen">//     Density:  (54 g/m2)/(0.190 mm) = 284.21 kg/m3</font>
 
 <font color="blue">end </font>Sigracet24BA;
 </pre>
@@ -420,20 +462,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.76</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.235*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -456,11 +502,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet24BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 24 BC&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.235*U.mm/1, 1),x=0.76);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.0045 m/s (for air) =&gt; D = P*L = 1.0575 mm2/s</font>
-  <font color="darkgreen">//     Density: (100 g/m2)/(0.235 mm) = 425.53 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (11 mohm.cm2)/(0.235 mm) = 4.6809 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.235*U.mm},
+    epsilon=0.76,
+    Subregion(graphite(&#39;e-&#39;(mu=23.5*U.S*U.cc/(11*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.235 mm, p = 0.0045 m/s (for air) =&gt; D = P*L = 1.0575 mm2/s</font>
+  <font color="darkgreen">//     Density:  (100 g/m2)/(0.235 mm) = 425.53 kg/m3</font>
 
 <font color="blue">end </font>Sigracet24BC;
 </pre>
@@ -473,20 +521,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.190*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -509,11 +561,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet25BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 25 BA&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.88);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.90 m/s (for air) =&gt; D = P*L = 171 mm2/s</font>
-  <font color="darkgreen">//     Density: (40 g/m2)/(0.190 mm) = 210.53 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.190*U.mm},
+    epsilon=0.88,
+    Subregion(graphite(&#39;e-&#39;(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.190 mm, p = 0.90 m/s (for air) =&gt; D = P*L = 171 mm2/s</font>
+  <font color="darkgreen">//     Density:  (40 g/m2)/(0.190 mm) = 210.53 kg/m3</font>
 
 <font color="blue">end </font>Sigracet25BA;
 </pre>
@@ -526,20 +580,24 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.235*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -562,11 +620,13 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> Sigracet25BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 25 BC&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.235*U.mm/1, 1),x=0.80);
-  <font color="darkgreen">// See [SGL2007]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.008 m/s (for air) =&gt; D = P*L = 1.88 mm2/s</font>
-  <font color="darkgreen">//     Density: (86 g/m2)/(0.235 mm) = 365.96 kg/m3</font>
-  <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.235 mm) = 5.1064 mohm.m</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.235*U.mm},
+    epsilon=0.80,
+    Subregion(graphite(&#39;e-&#39;(mu=23.5*U.S*U.cc/(12*U.cm*0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [SGL2007]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.235 mm, p = 0.008 m/s (for air) =&gt; D = P*L = 1.88 mm2/s</font>
+  <font color="darkgreen">//     Density:  (86 g/m2)/(0.235 mm) = 365.96 kg/m3</font>
 
 <font color="blue">end </font>Sigracet25BC;
 </pre>
@@ -579,20 +639,26 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).  The electronic mobility (<code>mu</code>) is based on the
+  through-plane value of resistivity.  The thermal conductivity is not listed but is
+  taken to be the same as for TGP-H-060, TGP-H-090, and TGP-H-120.</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.110*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.11*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -615,16 +681,15 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> TorayTGPH030 <font color="darkgreen">&quot;Toray Industries TGP-H-030&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.110*U.mm/1, 1),x=0.80);
-  <font color="darkgreen">// See [Toray2010]:</font>
-  <font color="darkgreen">//     Diffusivity: L = 0.110 mm, P/p = 2500 ml.mm/(cm2.hr.mmAq) = 0.70814e-3 m/(s.kPa)</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.11*U.mm},
+    epsilon=0.80,
+    Subregion(graphite(&#39;C+&#39;(theta=U.m*U.K/(1.7*U.W)),&#39;e-&#39;(mu=U.S*U.cc/(0.80*U.mm
+              *0.1849*U.mol)))));
+  <font color="darkgreen">// Additional properties not incorporated [Toray2010]:</font>
+  <font color="darkgreen">//     Diffusivity:  L = 0.110 mm, P/p = 2500 ml.mm/(cm2.hr.mmAq) = 0.70814e-3 m/(s.kPa)</font>
   <font color="darkgreen">//         =&gt; D = P*L = 7.89e-6 m2/s, assuming p = 101.325 kPa</font>
-  <font color="darkgreen">//     Electronic resistivity (through plane): 80 mohm.cm</font>
-  <font color="darkgreen">//     Electronic resistivity (in plane): not listed</font>
-  <font color="darkgreen">//     Thermal conductivity (through plane, 20 degC): not listed</font>
-  <font color="darkgreen">//     Thermal conductivity (in plane, 20 degC): not listed</font>
-  <font color="darkgreen">//     Thermal conductivity (in plane, 100 degC): not listed</font>
-  <font color="darkgreen">//     Bulk Density: 0.4 g/cm3</font>
+  <font color="darkgreen">//     Bulk density:  0.44 g/cm3</font>
 
 <font color="blue">end </font>TorayTGPH030;
 </pre>
@@ -637,20 +702,26 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).  The electronic mobility (<code>mu</code>) is based on the
+  through-plane value of resistivity.  The thermal conductivity is through the plane at
+  room temperature.</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.19*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -673,16 +744,16 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> TorayTGPH060 <font color="darkgreen">&quot;Toray Industries TGP-H-060&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.78);
-  <font color="darkgreen">// See [Toray2010]:</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.19*U.mm},
+    epsilon=0.78,
+    Subregion(graphite(&#39;C+&#39;(theta=U.m*U.K/(1.7*U.W)),&#39;e-&#39;(mu=U.S*U.cc/(0.80*U.mm
+              *0.1849*U.mol)))));
+
+  <font color="darkgreen">// Additional properties not incorporated [Toray2010]:</font>
   <font color="darkgreen">//     Diffusivity: L = 0.190 mm, P/p = 1900 ml.mm/(cm2.hr.mmAq) = 0.53818e-3 m/(s.kPa)</font>
   <font color="darkgreen">//         =&gt; D = P*L = 10.36e-6 m2/s, assuming p = 101.325 kPa</font>
-  <font color="darkgreen">//     Electronic resistivity (through plane): 80 mohm.cm</font>
-  <font color="darkgreen">//     Electronic resistivity (in plane): 5.8 mohm.cm</font>
-  <font color="darkgreen">//     Thermal resistivity (through plane, 20 degC): (1/1.7) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
-  <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
+  <font color="darkgreen">//     Bulk density:  0.44 g/cm3</font>
 
 <font color="blue">end </font>TorayTGPH060;
 </pre>
@@ -695,20 +766,26 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).  The electronic mobility (<code>mu</code>) is based on the
+  through-plane value of resistivity.  The thermal conductivity is through the plane at
+  room temperature.</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.280*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.28*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -731,16 +808,16 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> TorayTGPH090 <font color="darkgreen">&quot;Toray Industries TGP-H-090&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.280*U.mm/1, 1),x=0.78);
-  <font color="darkgreen">// See [Toray2010]:</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.28*U.mm},
+    epsilon=0.78,
+    Subregion(graphite(&#39;C+&#39;(theta=U.m*U.K/(1.7*U.W)),&#39;e-&#39;(mu=U.S*U.cc/(0.80*U.mm
+              *0.1849*U.mol)))));
+
+  <font color="darkgreen">// Additional properties not incorporated [Toray2010]:</font>
   <font color="darkgreen">//     Diffusivity: L = 0.280 mm, P/p = 1700 ml.mm/(cm2.hr.mmAq) = 0.48153e-3 m/(s.kPa)</font>
   <font color="darkgreen">//         =&gt; D = P*L = 13.66e-6 m2/s, assuming p = 101.325 kPa</font>
-  <font color="darkgreen">//     Electronic resistivity (through plane): 80 mohm.cm</font>
-  <font color="darkgreen">//     Electronic resistivity (in plane): 5.6 mohm.cm</font>
-  <font color="darkgreen">//     Thermal resistivity (through plane, 20 degC): (1/1.7) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
-  <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
+  <font color="darkgreen">//     Bulk density:  0.44 g/cm3</font>
 
 <font color="blue">end </font>TorayTGPH090;
 </pre>
@@ -753,20 +830,26 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>See the information in the
-                <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>]
+  and the density of electrons from
+  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  (&sim;0.1849 mol/cm<sup>3</sup>).  The electronic mobility (<code>mu</code>) is based on the
+  through-plane value of resistivity.  The thermal conductivity is through the plane at
+  room temperature.</p>
+
+  <p>For more information, see the
+    <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.370*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.37*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
@@ -789,16 +872,16 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <pre>
 <font color="blue">model</font> TorayTGPH120 <font color="darkgreen">&quot;Toray Industries TGP-H-030&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(L_x=<font color="red">fill</font>(0.370*U.mm/1, 1),x=0.78);
-  <font color="darkgreen">// See [Toray2010]:</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>(
+    L_x={0.37*U.mm},
+    epsilon=0.78,
+    Subregion(graphite(&#39;C+&#39;(theta=U.m*U.K/(1.7*U.W)),&#39;e-&#39;(mu=U.S*U.cc/(0.80*U.mm
+              *0.1849*U.mol)))));
+
+  <font color="darkgreen">// Additional properties not incorporated [Toray2010]:</font>
   <font color="darkgreen">//     Diffusivity: L = 0.370 mm, P/p = 1500 ml.mm/(cm2.hr.mmAq) = 0.42488e-3 m/(s.kPa)</font>
-  <font color="darkgreen">//         =&gt; D = P*L = 15.93e-6 m2/s, assuming p = 101.325 kPa&quot;);</font>
-  <font color="darkgreen">//     Electronic resistivity (through plane): 80 mohm.cm</font>
-  <font color="darkgreen">//     Electronic resistivity (in plane): 4.7 mohm.cm</font>
-  <font color="darkgreen">//     Thermal resistivity (through plane, 20 degC): (1/1.7) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
-  <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
-  <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
+  <font color="darkgreen">//         =&gt; D = P*L = 15.93e-6 m2/s, assuming p = 101.325 kPa</font>
+  <font color="darkgreen">//     Bulk density:  0.44 g/cm3</font>
 
 <font color="blue">end </font>TorayTGPH120;
 </pre>
@@ -807,7 +890,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:29:09 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:27 2013.
 </div>
 </body>
 </html>

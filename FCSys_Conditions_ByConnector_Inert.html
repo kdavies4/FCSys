@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Inert</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for an &lt;a href=\&quot;modelica://FCSys.Connectors.Inert\&quot;&gt;Inert&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.InertInternal\&quot;&gt;InertInternal&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -58,12 +58,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.Inert" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a>
 </td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector, with efforts by default</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.InertFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertFlow">InertFlow</a>
-</td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.InertIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertIsolated">InertIsolated</a>
+</td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternal">InertInternal</a>
 </td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternalFlow">InertInternalFlow</a>
-</td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.InertS.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternalIsolated">InertInternalIsolated</a>
+</td><td>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.TranslationalS.png" alt="FCSys.Conditions.ByConnector.Inert.Translational" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational">Translational</a>
 </td><td>Translational conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Inert.TranslationalS.png" alt="FCSys.Conditions.ByConnector.Inert.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal">Thermal</a>
@@ -80,13 +80,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>If the source of an internal specification is redeclared to a block besides
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Inert.Translational.Force translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
 <p>
 <h3>Parameters</h3>
@@ -132,23 +125,23 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalX(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransX <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.x) <font color="darkgreen">
-    &quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalX(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransX <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalY(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransY <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.y) <font color="darkgreen">
-    &quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalY(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransY <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalZ(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransZ <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.z) <font color="darkgreen">
-    &quot;Z-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalZ(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransZ <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k(start=298.15*U.K))) <font color="blue">
-    constrainedby </font>Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.Temperature">Thermal.Temperature</a> thermal(source(y=298.15*U.K)) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.Inert.Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
@@ -188,20 +181,18 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="red">connect</font>(thermal.thermal, inert.thermal);
   <font color="red">connect</font>(u.thermal, thermal.u);
   <font color="red">connect</font>(thermal.y, y.thermal);
+
 <font color="blue">end </font>Inert;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Inert.InertI.png" alt="FCSys.Conditions.ByConnector.Inert.InertFlow" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Inert.InertFlow"></a><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert">FCSys.Conditions.ByConnector.Inert</a>.InertFlow</h2>
-<b>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Inert.InertD.png" alt="FCSys.Conditions.ByConnector.Inert.InertFlow">
+<h2><img src="images/FCSys.Conditions.ByConnector.Inert.InertI.png" alt="FCSys.Conditions.ByConnector.Inert.InertIsolated" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Inert.InertIsolated"></a><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert">FCSys.Conditions.ByConnector.Inert</a>.InertIsolated</h2>
+<b>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Inert.InertD.png" alt="FCSys.Conditions.ByConnector.Inert.InertIsolated">
 
 <h3>Information</h3>
 
-<p>See the <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a>
-model.</p>
-<p>
 Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a> (Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector, with efforts by default).
 <p>
 <h3>Parameters</h3>
@@ -227,19 +218,16 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> InertFlow <font color="darkgreen">
-  &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default&quot;</font>
+<font color="blue">model</font> InertIsolated <font color="darkgreen">
+  &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a>(
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(source(k(start=0)), <font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
 
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(source(k(start=0)), <font color="blue">final </font>axis),
-
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(source(k(start=0)), <font color="blue">final </font>axis),
-
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k(start=0))));
-
-<font color="blue">end </font>InertFlow;
+<font color="blue">end </font>InertIsolated;
 </pre>
 <hr>
 
@@ -250,13 +238,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
 
 <h3>Information</h3>
 
-<p>If the source of an internal specification is redeclared to a block besides
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.ByConnector.Inert.Translational.Force translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>translationalX(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
 <p>
 <h3>Parameters</h3>
@@ -309,23 +290,23 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="blue">parameter </font>Boolean inclThermal=true <font color="darkgreen">&quot;Thermal&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalX(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransX <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.x) <font color="darkgreen">
-    &quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalX(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransX <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalY(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransY <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.y) <font color="darkgreen">
-    &quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalY(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransY <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalZ(source(k(start=0)), <font color="blue">final </font>
-      axis) <font color="blue">if </font>inclTransZ <font color="blue">constrainedby </font>
-    Translational.BaseClasses.PartialCondition(axis=Axis.z) <font color="darkgreen">
-    &quot;Z-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Velocity">Translational.Velocity</a> translationalZ(<font color="blue">final </font>axis) <font color="blue">if </font>inclTransZ <font color="blue">
+    constrainedby </font>
+    Conditions.ByConnector.Inert.Translational.BaseClasses.PartialCondition(
+      axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k(start=298.15*U.K))) <font color="blue">
-    constrainedby </font>Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.Temperature">Thermal.Temperature</a> thermal(source(y=298.15*U.K)) <font color="blue">constrainedby </font>
+    Conditions.ByConnector.Inert.Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
@@ -371,16 +352,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Inert.InertI.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalFlow" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Inert.InertInternalFlow"></a><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert">FCSys.Conditions.ByConnector.Inert</a>.InertInternalFlow</h2>
-<b>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Inert.InertInternalD.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalFlow">
+<h2><img src="images/FCSys.Conditions.ByConnector.Inert.InertI.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalIsolated" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Inert.InertInternalIsolated"></a><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert">FCSys.Conditions.ByConnector.Inert</a>.InertInternalIsolated</h2>
+<b>Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Inert.InertInternalD.png" alt="FCSys.Conditions.ByConnector.Inert.InertInternalIsolated">
 
 <h3>Information</h3>
 
-<p>See the <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a>
-model.</p>
-<p>
 Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternal">InertInternal</a> (Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default).
 <p>
 <h3>Parameters</h3>
@@ -409,26 +387,23 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> InertInternalFlow <font color="darkgreen">
-  &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with efforts by default&quot;</font>
+<font color="blue">model</font> InertInternalIsolated <font color="darkgreen">
+  &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternal">InertInternal</a>(
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(source(k(start=0)), <font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
 
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(source(k(start=0)), <font color="blue">final </font>axis),
-
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(source(k(start=0)), <font color="blue">final </font>axis),
-
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k(start=0))));
-
-<font color="blue">end </font>InertInternalFlow;
+<font color="blue">end </font>InertInternalIsolated;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:26:42 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:47:22 2013.
 </div>
 </body>
 </html>

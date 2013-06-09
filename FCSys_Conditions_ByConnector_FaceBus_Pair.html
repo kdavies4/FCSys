@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.FaceBus.Pair</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-6">
+<meta name="date" content="2013-6-9">
 <meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connectors&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -58,8 +58,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus">FaceBus</a>
 </td><td>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with efforts by default</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusFlow">FaceBusFlow</a>
-</td><td>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with flows by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusIsolated">FaceBusIsolated</a>
+</td><td>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with zero normal velocity and otherwise zero flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.PhasesS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Pair_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Pair.Phases">Phases</a>
 </td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector</td></tr>
 </table>
@@ -147,10 +147,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusFlow" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusFlow"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair">FCSys.Conditions.ByConnector.FaceBus.Pair</a>.FaceBusFlow</h2>
-<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with flows by default</b><p>
-<img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusFlow">
+<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusIsolated" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusIsolated"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair">FCSys.Conditions.ByConnector.FaceBus.Pair</a>.FaceBusIsolated</h2>
+<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with zero normal velocity and otherwise zero flows by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBusIsolated">
 
 <h3>Information</h3>
 
@@ -169,130 +169,90 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Condi
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> FaceBusFlow <font color="darkgreen">
-  &quot;Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with flows by default&quot;</font>
+<font color="blue">model</font> FaceBusIsolated <font color="darkgreen">
+  &quot;Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with zero normal velocity and otherwise zero flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_FaceBus_Pair.html#FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus">FaceBus</a>(
     gas(
       H2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal),
       N2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal),
       O2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0))))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal)),
     graphite(&#39;C+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))), &#39;e-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0))))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal), &#39;e-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal)),
     ionomer(
       &#39;C19HF37O5S-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal),
       &#39;H+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0)))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0))))),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal)),
     liquid(H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> normal(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(source(k(
-                start=0))),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal(source(k(start
-                =0))))));
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Face.Pair.Material.Current</a> material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> following(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Face.Pair.Translational.Force</a> preceding(<font color="blue">final </font>
+            orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">Face.Pair.Thermal.HeatRate</a> thermal)));
 
-<font color="blue">end </font>FaceBusFlow;
+<font color="blue">end </font>FaceBusIsolated;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jun  6 08:25:52 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:10 2013.
 </div>
 </body>
 </html>
