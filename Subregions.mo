@@ -430,245 +430,19 @@ package Subregions
 
     end SubregionsZeroVelocity;
 
-    model SubregionsCell "Test a one-dimensional array of subregions"
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Integer n_x=1
-        "Number of discrete regions through the PEM along the x axis";
-
-      Subregion subregion1(
-        L={1,1,1}*U.cm,
-        gas(
-          inclH2=true,
-          inclH2O=false,
-          inclN2=false,
-          inclO2=false,
-          H2O(
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true)),
-          H2(
-            p_IC=1.05*environment.p,
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(V_IC=subregion1.V/4),
-          'e-'(
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        ionomer(
-          'inclC19HF37O5S-'=true,
-          'inclH+'=true,
-          'C19HF37O5S-'(V_IC=subregion1.V/4),
-          'H+'(
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        inclTransY=false,
-        inclTransZ=false,
-        inclFacesY=false,
-        inclFacesZ=false)
-        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      Subregion subregions[n_x](
-        each L={1,1,1}*U.cm,
-        gas(each inclH2O=false),
-        ionomer(
-          each 'inclC19HF37O5S-'=true,
-          each 'inclH+'=true,
-          'C19HF37O5S-'(each V_IC=subregions[1].V/4),
-          'H+'(
-            each yNegative(inviscidX=true),
-            each yPositive(inviscidX=true),
-            each zNegative(inviscidX=true),
-            each zPositive(inviscidX=true))),
-        each inclTransY=false,
-        each inclTransZ=false,
-        each inclFacesY=false,
-        each inclFacesZ=false) if n_x > 0
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      Subregion subregion2(
-        L={1,1,1}*U.cm,
-        gas(
-          inclH2=false,
-          inclH2O=true,
-          inclN2=false,
-          inclO2=true,
-          H2O(
-            p_IC=0.95*environment.p,
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true)),
-          N2(
-            p_IC=0.95*environment.p,
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true)),
-          O2(
-            p_IC=0.95*environment.p,
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(V_IC=subregion2.V/4),
-          'e-'(
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        ionomer(
-          'inclC19HF37O5S-'=true,
-          'inclH+'=true,
-          'C19HF37O5S-'(V_IC=subregion2.V/4),
-          'H+'(
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))),
-        inclTransY=false,
-        inclTransZ=false,
-        inclFacesY=false,
-        inclFacesZ=false)
-        annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-
-      inner FCSys.Conditions.Environment environment(analysis=true)
-        annotation (Placement(transformation(extent={{60,20},{80,40}})));
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
-        condition1 constrainedby Conditions.ByConnector.FaceBus.Single.FaceBus(
-          gas(
-          inclH2=true,
-          inclH2O=false,
-          inclN2=false,
-          inclO2=false), graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(
-                source(k=environment.T))),
-          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
-                redeclare Modelica.Blocks.Sources.Ramp source(duration=1000,
-                  height=-2*U.A))))) annotation (__Dymola_choicesFromPackage=
-            true, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=90,
-            origin={-50,0})));
-
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
-        condition2 constrainedby Conditions.ByConnector.FaceBus.Single.FaceBus(
-          gas(
-          inclH2=false,
-          inclH2O=true,
-          inclN2=false,
-          inclO2=true), graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(
-                source(k=environment.T))),
-          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
-                redeclare Modelica.Blocks.Sources.Ramp source(duration=1000,
-                  height=2*U.A))))) annotation (__Dymola_choicesFromPackage=
-            true, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={50,0})));
-
-      replaceable FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated
-        ground(graphite('incle-'=true, 'e-'(redeclare
-              Conditions.Face.Material.Pressure material, materialSpec(k=0))))
-        constrainedby FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus
-        annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=90,
-            origin={-50,30})));
-
-    equation
-      connect(condition1.face, subregion1.xNegative) annotation (Line(
-          points={{-46,3.65701e-16},{-40,6.10623e-16}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(subregion1.xPositive, subregions[1].xNegative) annotation (Line(
-          points={{-20,6.10623e-16},{-16,-3.36456e-22},{-16,6.10623e-16},{-10,
-              6.10623e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      for i in 1:n_x - 1 loop
-        connect(subregions[i].xPositive, subregions[i + 1].xNegative)
-          "Not shown on the diagram";
-      end for;
-      if n_x == 0 then
-        connect(subregion1.xPositive, subregion2.xNegative)
-          "Not shown on the diagram";
-      end if;
-      connect(subregions[n_x].xPositive, subregion2.xNegative) annotation (Line(
-          points={{10,6.10623e-16},{20,-3.36456e-22},{20,6.10623e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(condition2.face, subregion2.xPositive) annotation (Line(
-          points={{46,1.23436e-15},{46,6.10623e-16},{40,6.10623e-16}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(ground.face, subregion1.xNegative) annotation (Line(
-          points={{-46,30},{-40,30},{-40,6.10623e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      annotation (
-        Placement(transformation(extent={{70,70},{90,90}})),
-        experiment(
-          StopTime=4,
-          NumberOfIntervals=5000,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
-    end SubregionsCell;
-
     model ThermalConduction "Test thermal conduction (through solid)"
       extends Examples.Subregions(
         n_x=8,
         'inclC+'=true,
         inclH2=false,
         subregion1(graphite('C+'(
-              initMaterial=InitScalar.Pressure,
               V_IC=0.99*subregion1.V,
               T_IC=1.1*environment.T,
               T(displayUnit="degC")))),
-        subregions(graphite('C+'(
-              each initMaterial=InitScalar.Pressure,
-              each V_IC=0.99*subregions[1].V,
-              each T(displayUnit="degC")))),
-        subregion2(graphite('C+'(
-              initMaterial=InitScalar.Pressure,
-              V_IC=0.99*subregion2.V,
-              T(displayUnit="degC")))),
-        redeclare
-          Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
-          condition1,
-        redeclare
-          Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
-          condition2);
+        subregions(graphite('C+'(each V_IC=0.99*subregions[1].V, each T(
+                  displayUnit="degC")))),
+        subregion2(graphite('C+'(V_IC=0.99*subregion2.V, T(displayUnit="degC")))));
+
       extends Modelica.Icons.UnderConstruction;
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
@@ -678,6 +452,7 @@ package Subregions
 
     model ThermalConductionConvection
       "Test combined thermal conduction and convection"
+
       extends Examples.Subregions(
         n_x=8,
         'inclC+'=true,
@@ -694,13 +469,7 @@ package Subregions
             graphite('C+'(each V_IC=0.5*subregions[1].V, each T(displayUnit=
                     "degC")))),
         subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
-            graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))),
-        redeclare
-          Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
-          condition1,
-        redeclare
-          Conditions.ByConnector.FaceBus.Single.SubregionClosedAdiabatic
-          condition2);
+            graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))));
 
       extends Modelica.Icons.UnderConstruction;
       annotation (Commands(file=
@@ -1195,7 +964,7 @@ package Subregions
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
-<p>Please see the documentation fo the 
+<p>Please see the documentation of the 
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
@@ -1367,7 +1136,7 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     annotation (defaultComponentName="subregion", Documentation(info="<html>
-<p>Please see the documentation fo the 
+<p>Please see the documentation for the 
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
   end SubregionNoIonomer;
 
@@ -2801,9 +2570,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
@@ -4400,8 +4169,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Force mphiI[n_trans, n_trans](each stateSelect=StateSelect.never)
          = outerProduct(I, Data.m*phi) if environment.analysis
         "Bulk rate of translational advection (1st index: transport axis, 2nd index: translational component)";
-      output Q.Power sTI[n_trans](each stateSelect=StateSelect.never) = sT*I
-        if environment.analysis "Bulk rate of thermal advection";
+      output Q.Power hI[n_trans](each stateSelect=StateSelect.never) = h*I if
+        environment.analysis "Bulk enthalpy flow rate";
       //
       // Translational momentum balance
       output Q.Force Ma[n_trans](each stateSelect=StateSelect.never) = M*(der(
@@ -5128,11 +4897,11 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1)),
         Icon(graphics={Ellipse(
-              extent={{-80,80},{80,-80}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid)}));
+                  extent={{-80,80},{80,-80}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid)}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -5215,11 +4984,11 @@ Choose a condition besides None.");
     unit of catalyst surface area).</p>
 
     <p></p></html>"), Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}));
+              extent={{-40,40},{40,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash)}));
   end Reaction;
 
   model ChemicalExchange
@@ -5270,12 +5039,12 @@ Choose a condition besides None.");
   <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connectors.
   It should be instantiated once for each species in
   a reaction.</p></html>"), Icon(graphics={Line(
-            points={{-10,0},{10,0}},
-            color={255,195,38},
-            smooth=Smooth.None), Text(
-            extent={{-100,-20},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n")}));
+              points={{-10,0},{10,0}},
+              color={255,195,38},
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n")}));
   end ChemicalExchange;
 
   model Depletion "Electrochemical depletion region"
@@ -5371,25 +5140,21 @@ Choose a condition besides None.");
     substrates will be coupled and this may cause a structural singularity.
     If it is <code>false</code> for both of the depletion regions, then the reaction temperature will be
     undefined.</p>
-    </html>"), Icon(graphics={
-          Line(
-            points={{-90,0},{-20,0}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,30},{-20,-30}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{20,0},{90,0}},
-            color={47,107,251},
-            smooth=Smooth.None),
-          Line(
-            points={{20,30},{20,-30}},
-            color={47,107,251},
-            smooth=Smooth.None,
-            thickness=0.5)}));
+    </html>"), Icon(graphics={Line(
+              points={{-90,0},{-20,0}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-20,30},{-20,-30}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{20,0},{90,0}},
+              color={47,107,251},
+              smooth=Smooth.None),Line(
+              points={{20,30},{20,-30}},
+              color={47,107,251},
+              smooth=Smooth.None,
+              thickness=0.5)}));
   end Depletion;
 
   model Volume "Model to establish a fixed total volume"
@@ -5458,27 +5223,23 @@ Choose a condition besides None.");
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (generally not for direct use)"
@@ -5497,6 +5258,8 @@ Choose a condition besides None.");
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
         U.cm,U.cm} "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
+      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
+          axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Q.Volume V=product(L) "Volume";
 
       // Assumptions
@@ -5568,8 +5331,6 @@ Choose a condition besides None.");
 
     protected
       parameter Boolean hasSpecies "true, if any species are included";
-      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
-          axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
           inclTransZ}
         "true, if each component of translational momentum is included";
@@ -5607,100 +5368,83 @@ Choose a condition besides None.");
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-100,56},{100,96}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}));
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclFacesX,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-100,56},{100,96}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Text(
+                  extent={{-100,56},{100,96}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end EmptySubregion;
 

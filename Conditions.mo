@@ -772,18 +772,21 @@ package Conditions "Models to specify and measure operating conditions"
             points={{80,5.55112e-16},{20,5.55112e-16},{20,-20},{8,-20}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{70,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{70,40}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Graphite;
 
       model Liquid
@@ -862,13 +865,13 @@ package Conditions "Models to specify and measure operating conditions"
                     70,-50},{90,-30}}), iconTransformation(extent={{70,-50},{90,
                     -30}})));
           annotation (Icon(graphics={Line(
-                          points={{0,0},{-70,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None,
-                          thickness=0.5),Line(
-                          points={{0,-40},{70,-40}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,-40},{70,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -1593,10 +1596,11 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
   package TestStands "Test stands"
     extends Modelica.Icons.Package;
-    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
     model TestProfile "Cell test profile"
       extends Modelica.Icons.Example;
       extends BaseClasses.PartialTestStandNoIO;
+      extends Modelica.Icons.UnderConstruction;
+
       annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
               preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
             graphics));
@@ -2135,40 +2139,40 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               rotation=270,
               origin={40,-160})));
 
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anEndCondition[
-          n_y, n_z](each graphite('inclC+'=true, 'incle-'=true)) annotation (
-            Placement(transformation(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anEndBC[n_y, n_z]
+          (each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caEndCondition[
-          n_y, n_z](each graphite('inclC+'=true, 'incle-'=true)) annotation (
-            Placement(transformation(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caEndBC[n_y, n_z]
+          (each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSourceCondition[
-          n_x_an, n_z](each gas(inclH2=true, inclH2O=true)) annotation (
-            Placement(transformation(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSourceBC[n_x_an,
+          n_z](each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-136})));
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSinkCondition[
-          n_x_an, n_z](each gas(inclH2=true, inclH2O=true)) annotation (
-            Placement(transformation(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated anSinkBC[n_x_an,
+          n_z](each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSourceCondition[
-          n_x_ca, n_z](each gas(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSourceBC[n_x_ca,
+          n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-136})));
-        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSinkCondition[
-          n_x_ca, n_z](each gas(
+        Conditions.ByConnector.FaceBus.Single.FaceBusIsolated caSinkBC[n_x_ca,
+          n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2191,38 +2195,38 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={166,-166})));
-        replaceable FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus current[
-          n_y, n_z](graphite('inclC+'=true, 'incle-'=true)) if inclIO
-          constrainedby FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus(
-            graphite('inclC+'=true, 'incle-'=true))
+        replaceable Conditions.ByConnector.FaceBus.Pair.FaceBus current[n_y,
+          n_z](graphite('inclC+'=true, 'incle-'=true)) if inclIO constrainedby
+          FCSys.Conditions.ByConnector.FaceBus.Pair.FaceBus(graphite('inclC+'=
+                true, 'incle-'=true))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
       equation
-        connect(anSourceCondition.face, anSource) annotation (Line(
+        connect(anSourceBC.face, anSource) annotation (Line(
             points={{-40,-140},{-40,-160}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(anSinkCondition.face, anSink) annotation (Line(
+        connect(anSinkBC.face, anSink) annotation (Line(
             points={{-40,140},{-40,160}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(caSourceCondition.face, caSource) annotation (Line(
+        connect(caSourceBC.face, caSource) annotation (Line(
             points={{40,-140},{40,-160}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(caSinkCondition.face, caSink) annotation (Line(
+        connect(caSinkBC.face, caSink) annotation (Line(
             points={{40,140},{40,160}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(caEndCondition.face, caEnd) annotation (Line(
+        connect(caEndBC.face, caEnd) annotation (Line(
             points={{140,3.65701e-16},{140,5.55112e-16},{160,5.55112e-16}},
             color={127,127,127},
             thickness=0.5,
@@ -2245,7 +2249,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(voltage.negative, anEndCondition.face) annotation (Line(
+        connect(voltage.negative, anEndBC.face) annotation (Line(
             points={{120,-30},{-150,-30},{-150,1.23436e-15},{-140,1.23436e-15}},
 
             color={127,127,127},
@@ -2264,7 +2268,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(anEndCondition.face, anEnd) annotation (Line(
+        connect(anEndBC.face, anEnd) annotation (Line(
             points={{-140,1.23436e-15},{-140,5.55112e-16},{-160,5.55112e-16}},
             color={127,127,127},
             thickness=0.5,
@@ -2275,16 +2279,17 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
         "Partial cell test stand without inputs/outputs"
         extends FCSys.BaseClasses.Icons.Names.Top9;
+        extends Modelica.Icons.UnderConstruction;
 
         final parameter Integer n_x_an=1
           "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)</html>";
