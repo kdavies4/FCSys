@@ -500,7 +500,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       <p><b>Examples:</b><br>
     <code>countElements(\"C19HF37O5S-\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
-  <p>See the
+  <p>Please see the
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry.readElement\">readElement</a> function
   for details about the format of the chemical formula.</p></html>"));
 

@@ -226,8 +226,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
     anFP.L_x) + sum(anGDL.L_x) + sum(anCL.L_x) + sum(pEM.L_x) + sum(caCL.L_x) +
     sum(caGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if environment.analysis
     "Total lengths along the x, y, and z axes";
-  final parameter Q.Area A[Axis](each stateSelect=StateSelect.never) = {L[
-    cartWrap(ax + 2)]*L[cartWrap(ax + 2)] for ax in 1:3} if environment.analysis
+  final parameter Q.Area A[Axis](each stateSelect=StateSelect.never) = anFP.A if environment.analysis
     "Cross-sectional areas";
   final parameter Q.Volume V=product(L) if environment.analysis "Volume";
   output Q.Potential Deltav_x_seg[n_y, n_z](each stateSelect=StateSelect.never)
@@ -930,8 +929,8 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       final parameter Q.Length L[Axis]={sum(anFP.L_x) + sum(anCGDL.L_x) + sum(
           pEM.L_x) + sum(caCGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if
         environment.analysis "Total lengths along the x, y, and z axes";
-      final parameter Q.Area A[Axis]={L[cartWrap(ax + 2)]*L[cartWrap(ax + 2)]
-          for ax in 1:3} if environment.analysis "Cross-sectional areas";
+      final parameter Q.Area A[Axis]=anFP.A if environment.analysis
+        "Cross-sectional areas";
       final parameter Q.Volume V=product(L) if environment.analysis "Volume";
       output Q.Potential Deltav_x[n_y, n_z](each stateSelect=StateSelect.never)
          = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
@@ -1117,7 +1116,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         defaultComponentName="cell",
         Documentation(info="
 
-<html><p>See the
+<html><p>Please see the documentation of the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"),
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{

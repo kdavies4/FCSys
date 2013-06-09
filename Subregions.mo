@@ -63,8 +63,6 @@ package Subregions
 
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
-      replaceable Regions.Region region
-        annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -80,9 +78,12 @@ package Subregions
         inclH2O=true,
         inclH2=false,
         subregion(liquid(inclH2O=inclH2O)));
-      annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
-              ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionCondensation.mos"));
+      annotation (
+        experiment(StopTime=10, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "resources/scripts/Dymola/Subregions.Examples.SubregionCondensation.mos"),
+
+        Diagram(graphics));
 
     end SubregionCondensation;
 
@@ -373,8 +374,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, face2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
-              -2.54679e-16}},
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1131,8 +1132,8 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     annotation (Documentation(info="<html>
-<p>Please see the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"));
+<p>Please see the documentation of the
+   <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1194,8 +1195,8 @@ package Subregions
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
-<p>For more information, see the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
+<p>Please see the documentation fo the 
+   <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
   end SubregionIonomerOnly;
@@ -1365,13 +1366,9 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    annotation (
-      defaultComponentName="subregion",
-      Documentation(info="<html>
-<p>For more information, see the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
-
-      Diagram(graphics));
+    annotation (defaultComponentName="subregion", Documentation(info="<html>
+<p>Please see the documentation fo the 
+   <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1770,7 +1767,7 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       annotation (Documentation(info="<html>
-<p>See the information in the <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+<p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2511,7 +2508,7 @@ package Subregions
           points={{6.10623e-16,6.10623e-16},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-      annotation (Documentation(info="<html><p>See the information in the
+      annotation (Documentation(info="<html><p>Please see the documentation of the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
     end Liquid;
 
@@ -2715,58 +2712,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -2783,8 +2772,12 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
       package Graphite "<html>C<sup>+</sup> graphite</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C+'.Graphite, theta=k_theta*Data.theta(T, v));
+          extends SpeciesSolid(
+            redeclare replaceable package Data = Characteristics.'C+'.Graphite,
+
+            nu=k_nu*Data.nu(T, v),
+            theta=k_theta*Data.theta(T, v));
+
           // Note:  In Dymola 7.4,
           // "redeclare replaceable package Data = FCSys.Characteristics.C.Graphite"
           // must be used instead of
@@ -2792,22 +2785,25 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           // order for this model to pass its check.  This applies to the other
           // species models too.
 
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C",
-            Documentation(info="<html><p>See the information in the
+            defaultComponentName="'C+'",
+            Documentation(info="<html><p>Please see the documentation of the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -2816,9 +2812,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                 Characteristics.'C+'.Graphite);
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C",
+            defaultComponentName="'C+'",
             Documentation(info=
-                  "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
 
@@ -2826,15 +2822,18 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
 
         model Fixed "Fixed properties"
 
-          extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C+'.Graphite (
+          extends SpeciesSolid(
+            redeclare replaceable package Data = Characteristics.'C+'.Graphite
+                (
                 n_c=0,
                 T_lim_c={0,Modelica.Constants.inf},
                 b_c=[935*U.J*Data.m/(U.kg*U.K)],
-                B_c=[Data.Deltah0_f - (935*U.J*Data.m/(U.kg*U.K))*298.15*U.K,
-                    154.663*U.J/(U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*ln(
-                    298.15*U.K)]), redeclare parameter Q.ResistivityThermal
-              theta=U.m*U.K/(0.87*U.W));
+                B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J
+                    /(U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
+
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.87*U.W));
+
           // In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c
           // (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).
 
@@ -2842,10 +2841,10 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           // capacity and thermal resistivity.
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C",
+            defaultComponentName="'C+'",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>The specific heat capacity is fixed (independent of temperature).</li>
-    <li>The thermal resistivity is fixed (e.g., independent of temperature).</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
     </ol></p>
 
    <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
@@ -2909,18 +2908,23 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S ionomer</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C19HF37O5S-'.Ionomer, theta=k_theta*Data.theta(
-                T, v));
+          extends SpeciesSolid(
+            redeclare replaceable package Data =
+                Characteristics.'C19HF37O5S-'.Ionomer,
+            nu=k_nu*Data.nu(T, v),
+            theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C19HF37O5S",
+            defaultComponentName="'C19HF37O5S-'",
             Documentation(info=
-                  "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
 
@@ -2931,22 +2935,25 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                 Characteristics.'C19HF37O5S-'.Ionomer);
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C19HF37O5S",
+            defaultComponentName="'C19HF37O5S-'",
             Documentation(info=
-                  "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C19HF37O5S-'.Ionomer, redeclare parameter
-              Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
+          extends SpeciesSolid(
+            redeclare replaceable package Data =
+                Characteristics.'C19HF37O5S-'.Ionomer,
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
+
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="C19HF37O5S",
+            defaultComponentName="'C19HF37O5S-'",
             Documentation(info="<html><p>Assumptions:
     <ol>
-    <li>The thermal resistivity is fixed (e.g., independent of temperature)</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>The default thermal resistivity (<code>theta=U.m*U.K/(0.16*U.W)</code>) is of dry
@@ -2969,10 +2976,23 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           extends SpeciesIsochoric(
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
-            theta=k_theta*Data.theta(T, v));
+            theta=k_theta*Data.theta(T, v),
+            consMaterial=Conservation.IC,
+            initMaterial=InitScalar.Pressure);
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -2986,19 +3006,22 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
-          // **Add parameters k_mu, k_nu, k_eta for this and all calibrated species.
+                  "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesIsochoric(redeclare replaceable package Data =
-                Characteristics.'e-'.Graphite);
+          extends SpeciesIsochoric(
+            redeclare replaceable package Data = Characteristics.'e-'.Graphite,
+
+            consMaterial=Conservation.IC,
+            initMaterial=InitScalar.Pressure);
+
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3006,6 +3029,8 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           extends SpeciesIsochoric(
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
             redeclare parameter Q.ResistivityThermal theta=Data.theta(),
@@ -3020,11 +3045,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html>
-    <p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+    <p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
-
-          // **set theta=0 (final), zeta=0 (final), use small Lprime factor to reduce thermal and translational coupling with solid
 
         end Fixed;
 
@@ -3038,13 +3061,21 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends SpeciesIsochoric(
-            redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
-                  n_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.n_v, b_v=
-                    Characteristics.'C19HF37O5S-'.Ionomer.b_v),
+            redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
+            consMaterial=Conservation.IC,
+            initMaterial=InitScalar.Pressure,
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3072,10 +3103,10 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesIsochoric(redeclare replaceable package Data =
-                Characteristics.'H+'.Ionomer (n_v=FCSys.Characteristics.
-                    'C19HF37O5S-'.Ionomer.n_v, b_v=FCSys.Characteristics.
-                    'C19HF37O5S-'.Ionomer.b_v));
+          extends SpeciesIsochoric(
+            redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
+            consMaterial=Conservation.IC,
+            initMaterial=InitScalar.Pressure);
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
@@ -3096,8 +3127,10 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         model Fixed "Fixed properties"
           extends SpeciesIsochoric(
             redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
-            redeclare parameter Q.Fluidity zeta=Data.zeta(),
+            redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
 
             consMaterial=Conservation.IC,
@@ -3195,11 +3228,22 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1],n_v={-1,0}),
+                  b_v=[1], n_v={-1,0}),
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
+            eta=k_eta*Data.eta(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
-
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3238,9 +3282,12 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1], n_v={-1,0}),
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(8.96e-6*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(183e-3*U.W));
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W));
           // See the documentation for a table of values.
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3315,10 +3362,21 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], n_v={-1,0}),
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
+            eta=k_eta*Data.eta(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
-
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3357,6 +3415,9 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], n_v={-1,0}),
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(9.09e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W));
@@ -3466,8 +3527,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
 <tr><td>750</td><td>2.119e3</td><td>1/260.4e-7</td><td>1/54.9e-3</td></tr>
 <tr><td>800</td><td>2.152e3</td><td>1/278.6e-7</td><td>1/59.2e-3</td></tr>
 <tr><td>850</td><td>2.186e3</td><td>1/296.9e-7</td><td>1/63.7e-3</td></tr>
-  </table></ul>
-<br></p>
+  </table></ul></p>
 
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
@@ -3479,12 +3539,23 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1], n_v={-1,0}),
+            redeclare replaceable package Data = Characteristics.H2O.Ionomer,
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
+            eta=k_eta*Data.eta(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3523,27 +3594,13 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
                   b_v=[1], n_v={-1,0}),
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
             redeclare parameter Q.ResistivityThermal theta=Data.theta());
 
-          // **
-          // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
-          // Nafion EW 1100 series:
-          //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
-          //     => lambda = 3.4855 in equilibrium with 50% RH gas @ 30 degC
-          //     => lambda = 14.003 in equilibrium with 100% RH gas @ 30 degC
-          // The change in thickness and linear expansion of Nafion 1100 EW series are
-          // 14% and 15% (respectively) from 50% RH @ 23 degC to water soaked @ 100
-          // degC [DuPont2004NRE].  This corresponds to a volumic expansion of 51%.
-          // Meanwhile, the water content increased from 5% to 38% on a dry-weight
-          // basis.  Therefore, based on this interval, the Amagat specific volume of
-          // H2O in Nafion is **m3/C.
-
-          // Free proton density from [Spry2009, p. 10214]:
-          //     @ lambda = 12: 0.95 M
-          //     @ lambda = 22: 0.54 M
-          // where lambda is the ratio of water molecules to sulfonic acid units.
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3563,10 +3620,18 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Calibrated "Correlations with adjustment factors"
           extends FCSys.Subregions.Species.SpeciesIsochoric(
             redeclare replaceable package Data = Characteristics.H2O.Liquid,
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3591,16 +3656,18 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html>
-         <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+         <p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
         model Fixed "Fixed properties"
           extends FCSys.Subregions.Species.SpeciesIsochoric(
             redeclare replaceable package Data = Characteristics.H2O.Liquid,
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(855e-6*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(613e-3*U.W));
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.613*U.W));
 
           // See the documentation for tables of values.
           annotation (
@@ -3686,7 +3753,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>635</td><td>16400</td><td>1/64e-6</td><td>1/392e-3</td></tr>
 <tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
   </table>
-<br>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
@@ -3703,11 +3769,23 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1],n_v={-1,0}),
+                  b_v=[1], n_v={-1,0}),
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
+            eta=k_eta*Data.eta(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3744,7 +3822,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
         model Fixed "Fixed properties"
           import FCSys.BaseClasses.Utilities.Polynomial;
-          import Modelica.Math.log;
 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
@@ -3752,18 +3829,19 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
                 n_v={-1,0},
                 n_c=0,
                 T_lim_c={0,Modelica.Constants.inf},
-                b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
-                B_c=[-298.15*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-                    Polynomial.F(
-                            298.15*U.K,
-                            Characteristics.N2.Gas.b_c[1, :],
-                            -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
-                    1, 1]*log(298.15*U.K)]),
+                b_c=[1041*U.J*Data.m/(U.kg*U.K)],
+                B_c=[Data.Deltah0_f - (1041*U.J*Data.m/U.kg)*298.15, 191.610*U.J
+                    /(U.mol*U.K) - (1041*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
+
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(17.82e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W));
-          // **Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.N2.eta).
-          // **Clean up B_c (see C+)
+
+          // TODO: Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.N2.eta).
+
           // See the documentation for a table of values.
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3775,12 +3853,14 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
     </ol></p>
 
-<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities (<code>zeta=1/(178.2e-7*U.Pa*U.s)</code> and <code>theta=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
+<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities 
+(<code>zeta=1/(17.82e-6*U.Pa*U.s)</code> and <code>theta=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
-  <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures. Note that the value for isobaric specific heat capacity at
-  800 K (<code>c_p=1.22e3*U.J*Data.m/(U.kg*U.K)</code>) seems unusual, but it matches the
-  reference.</p>
-
+   The integration offset for specific entropy is set such that
+   the specific entropy is 191.610 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 bar).
+   This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.</p>
+   
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
   <tr>
@@ -3801,7 +3881,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>550</td><td>1.065e3</td><td>1/274.7e-7</td><td>1/41.7e-3</td></tr>
 <tr><td>600</td><td>1.075e3</td><td>1/290.8e-7</td><td>1/44.6e-3</td></tr>
 <tr><td>700</td><td>1.098e3</td><td>1/320.1e-7</td><td>1/49.9e-3</td></tr>
-<tr><td>800</td><td>1.220e3</td><td>1/349.1e-7</td><td>1/54.8e-3</td></tr>
+<tr><td>800</td><td>1.220e3 [sic]</td><td>1/349.1e-7</td><td>1/54.8e-3</td></tr>
 <tr><td>900</td><td>1.146e3</td><td>1/375.3e-7</td><td>1/59.7e-3</td></tr>
 <tr><td>1000</td><td>1.167e3</td><td>1/399.9e-7</td><td>1/64.7e-3</td></tr>
 <tr><td>1100</td><td>1.187e3</td><td>1/423.2e-7</td><td>1/70.0e-3</td></tr>
@@ -3828,11 +3908,23 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1],n_v={-1,0}),
+                  b_v=[1], n_v={-1,0}),
+            mu=k_mu*Data.mu(T, v),
+            nu=k_nu*Data.nu(T, v),
+            eta=k_eta*Data.eta(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
 
+          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
+            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+            "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+            "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3871,10 +3963,13 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1], n_v={-1,0}),
+            redeclare parameter Q.Mobility mu=Data.mu(),
+            redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+            redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(20.72e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W));
-          // **Add table from Present1958 p. 263 to the documentation (see Tests.Characteristics.O2.eta).
+          // TODO: Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.O2.eta).
 
           // See the documentation for a table of values.
           annotation (
@@ -3944,6 +4039,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final phi_IC=zeros(3),
         final I_IC,
         consMaterial=Conservation.IC,
+        final tauprime=0,
+        final mu=0,
         final beta=0,
         final zeta=1);
       //
@@ -3984,13 +4081,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         defaultComponentPrefixes="replaceable",
         defaultComponentName="species",
         Documentation(info="<html>
-  <p>Please see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+  <p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
     end SpeciesIsochoric;
 
     model Species
       "Model to exchange, transport, and store the material, momentum, and energy of one species"
-      import Modelica.Math.log10;
       import FCSys.BaseClasses.Utilities.cartWrap;
       import FCSys.BaseClasses.Utilities.inSign;
       import FCSys.BaseClasses.Utilities.Delta;
@@ -4014,7 +4110,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         __Dymola_choicesFromPackage=true,
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-      Q.CurrentAbsolute tauprime(nominal=1e-6*U.s) = 1e-52*U.s
+      Q.TimeAbsolute tauprime(nominal=1e-6*U.s) = 1e-52*U.s
         "<html>Effective collision interval (&tau;')</html>"
         annotation (Dialog(group="Material properties"));
       // **temp tiny value
@@ -4244,32 +4340,46 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       //
       // Time constants (only for the axes with translational momentum included; others
       // are infinite)
-      output Q.NumberAbsolute tau_NE(stateSelect=StateSelect.never) = N*kappa/v
-        if environment.analysis "Time constant for phase change";
+      output Q.TimeAbsolute tau_NE(
+        stateSelect=StateSelect.never,
+        start=U.s,
+        min=Modelica.Constants.small) = N*kappa/v if environment.analysis
+        "Time constant for phase change";
       // **Fix this once the rate of phase change is fixed.
-      output Q.NumberAbsolute tau_PhiE(stateSelect=StateSelect.never) = Data.m*
-        mu if environment.analysis "Time constant for translational exchange";
-      output Q.NumberAbsolute tau_QE(stateSelect=StateSelect.never) = c_p*nu
-        if environment.analysis "Time constant for thermal exchange";
-      output Q.NumberAbsolute tau_NT[n_faces](each stateSelect=StateSelect.never)
-         = fill(V*eta/2, n_faces) ./ Lprime[cartFaces] if environment.analysis
+      output Q.TimeAbsolute tau_PhiE(
+        stateSelect=StateSelect.never,
+        start=U.s,
+        min=Modelica.Constants.small) = Data.m*mu if environment.analysis
+        "Time constant for translational exchange";
+      output Q.TimeAbsolute tau_QE(
+        stateSelect=StateSelect.never,
+        start=U.s,
+        min=Modelica.Constants.small) = c_p*nu if environment.analysis
+        "Time constant for thermal exchange";
+      output Q.TimeAbsolute tau_NT[n_faces](
+        each stateSelect=StateSelect.never,
+        each start=U.s,
+        each min=Modelica.Constants.small) = fill(V*eta/2, n_faces) ./ Lprime[
+        cartFaces] if environment.analysis
         "Time constants for material transport";
-      output Q.NumberAbsolute tau_PhiT_perp[n_faces](each stateSelect=
-            StateSelect.never) = fill(M*beta/2, n_faces) ./ Lprime[cartFaces]
-        if environment.analysis
+      output Q.TimeAbsolute tau_PhiT_perp[n_faces](
+        each stateSelect=StateSelect.never,
+        each start=U.s,
+        each min=Modelica.Constants.small) = fill(M*beta/2, n_faces) ./ Lprime[
+        cartFaces] if environment.analysis
         "Time constants for normal translational transport";
-      output Q.NumberAbsolute tau_PhiT_para[n_faces](each stateSelect=
-            StateSelect.never) = fill(M*zeta/2, n_faces) ./ Lprime[cartFaces]
-        if environment.analysis
+      output Q.TimeAbsolute tau_PhiT_para[n_faces](
+        each stateSelect=StateSelect.never,
+        each start=U.s,
+        each min=Modelica.Constants.small) = fill(M*zeta/2, n_faces) ./ Lprime[
+        cartFaces] if environment.analysis
         "Time constants for transverse translational transport";
-      output Q.NumberAbsolute tau_QT[n_faces](each stateSelect=StateSelect.never)
-         = fill(N*c_v*theta/2, n_faces) ./ Lprime[cartFaces] if environment.analysis
+      output Q.TimeAbsolute tau_QT[n_faces](
+        each stateSelect=StateSelect.never,
+        each start=U.s,
+        each min=Modelica.Constants.small) = fill(N*c_v*theta/2, n_faces) ./
+        Lprime[cartFaces] if environment.analysis
         "Time constants for thermal transport";
-      output Q.NumberAbsolute timeConstSpan(stateSelect=StateSelect.never) =
-        log10(max({tau_NE,tau_PhiE,tau_QE,max([tau_NT; tau_PhiT_perp;
-        tau_PhiT_para; tau_QT])})) - log10(min({tau_NE,tau_PhiE,tau_QE,min([
-        tau_NT; tau_PhiT_perp; tau_PhiT_para; tau_QT])})) if environment.analysis
-        "Range of time constants in order of magnitude";
       //
       // Peclet numbers (only for the axes with translational momentum included; others
       // are zero)
@@ -4393,8 +4503,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Connectors.Face faces[n_faces, Side](
         rho(each start=rho_IC),
         Ndot(start=outerProduct(I_IC[cartFaces], {1,-1})),
-        phi(start={fill({phi_IC[cartWrap(cartFaces[axis] + orientation - 1)]
-              for orientation in Orientation}, 2) for axis in 1:n_faces}),
+        phi(start={fill({phi_IC[cartWrap(cartFaces[i] + orientation - 1)] for
+              orientation in Orientation}, 2) for i in 1:n_faces}),
         mPhidot(each start=0),
         T(each start=T_IC),
         Qdot(each start=0))
@@ -4403,7 +4513,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             iconTransformation(extent={{-10,-10},{10,10}})));
 
       // Geometric parameters
-
     protected
       outer parameter Q.Length L[Axis] "Length" annotation (missingInnerMessage
           ="This model should be used within a subregion model.
@@ -4423,7 +4532,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "true, if each pair of faces is included" annotation (
           missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Boolean inclRot[3]
+      outer parameter Boolean inclRot[Axis]
         "true, if each axis of rotation has all its tangential faces included"
         annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
@@ -4437,8 +4546,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "Cartesian-axis indices of the components of translational momentum"
         annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-      // Note:  The size is n_trans, but it can't be specified here due to an error
-      // in Dymola 7.4.
       outer parameter Integer cartFaces[:]
         "Cartesian-axis indices of the pairs of faces" annotation (
           missingInnerMessage="This model should be used within a subregion model.
@@ -4447,11 +4554,13 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "Cartesian-axis indices of the components of rotational momentum"
         annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Integer transCart[:]
+      // Note:  The size of cartTrans, cartFaces, and cartRot is n_trans,
+      // but it can't be specified here due to an error in Dymola 7.4.
+      outer parameter Integer transCart[Axis]
         "Translational-momentum-component indices of the Cartesian axes"
         annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Integer facesCart[:]
+      outer parameter Integer facesCart[Axis]
         "Face-pair indices of the Cartesian axes" annotation (
           missingInnerMessage="This model should be used within a subregion model.
 ");
@@ -4624,8 +4733,8 @@ Choose a condition besides None.");
       M = Data.m*N;
       phi = inert.translational.phi;
       I .* L[cartTrans] = N*phi;
-      p_faces = {{Data.p_Tv(faces[axis, side].T, 1/faces[axis, side].rho) for
-        side in Side} for axis in 1:n_faces};
+      p_faces = {{Data.p_Tv(faces[i, side].T, 1/faces[i, side].rho) for side
+         in Side} for i in 1:n_faces};
       chemical.mu = h - sT;
 
       // Thermodynamic correlations
@@ -5230,9 +5339,9 @@ Choose a condition besides None.");
     chemical.Qdot_A = 0 "No thermal energy into the advected stream";
 
     // Conservation (without storage)
-    for axis in 1:n_trans loop
-      0 = chemical.mPhidot[axis] + inert.translational.mPhidot[axis] + (if
-        cartTrans[axis] == 0 then 0 else face.mPhidot[cartTrans[axis]])
+    for i in 1:n_trans loop
+      0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (if cartTrans[
+        i] == 0 then 0 else face.mPhidot[cartTrans[i]])
         "Translational momentum";
       // The conditional expression is necessary to pass the check since
       // cartTrans is empty by default.
@@ -5345,7 +5454,7 @@ Choose a condition besides None.");
     <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector).</p>
 
     <p>Please also see the
-    the documentation in the
+    the documentation for the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
@@ -5369,6 +5478,7 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (generally not for direct use)"

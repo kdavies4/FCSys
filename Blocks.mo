@@ -13,7 +13,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     equation
       y = U.from_degC(u);
       annotation (Documentation(info="<html>
-    <p>See the documentation in the
+    <p>Please see the documentation for the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
     end From_degC;
@@ -26,7 +26,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     equation
       y = U.to_degC(u);
       annotation (Documentation(info="<html>
-    <p>See the documentation in the
+    <p>Please see the documentation for the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
     end To_degC;
@@ -38,7 +38,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     equation
       y = U.from_kPag(u);
       annotation (Documentation(info="<html>
-    <p>See the documentation in the
+    <p>Please see the documentation for the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
     end From_kPag;
@@ -49,7 +49,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     equation
       y = U.to_kPag(u);
       annotation (Documentation(info="<html>
-    <p>See the documentation in the
+    <p>Please see the documentation for the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
     end To_kPag;
@@ -65,7 +65,7 @@ package Blocks "Imperative models (inputs and outputs only)"
     equation
       y = f(u);
       annotation (Documentation(info="<html>
-    <p>See the documentation in the
+    <p>Please see the documentation for the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
     end UnitConversion;
@@ -86,7 +86,7 @@ package Blocks "Imperative models (inputs and outputs only)"
             Placement(transformation(extent={{100,-10},{120,10}}, rotation=0),
               iconTransformation(extent={{100,-10},{120,10}})));
         annotation (Documentation(info="<html>
-<p>See the documentation in the
+<p>Please see the documentation for the
   <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p></html>"),
             Icon(graphics={Rectangle(
                       extent={{-100,40},{100,-40}},

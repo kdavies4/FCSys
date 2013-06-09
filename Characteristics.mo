@@ -226,7 +226,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Graphite;
 
@@ -286,7 +286,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Ionomer;
 
@@ -341,14 +341,14 @@ package Characteristics
 </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
     package Graphite "e- in graphite"
       extends Gas(
         final phase=Phase.Solid,
-        n_v='C+'.Graphite.n_v,
+        n_v={0,0},
         b_v='C+'.Graphite.b_v);
       annotation (Documentation(info="<html>
   <p>Assumptions:<ol>
@@ -357,7 +357,7 @@ package Characteristics
     </ol></p>
 
      <p>For more information, see the
-     <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+     <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Graphite;
 
@@ -408,7 +408,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
@@ -416,7 +416,7 @@ package Characteristics
       extends Gas(
         final phase=Phase.Solid,
         n_v={0,0},
-        b_v=[1/(0.95*U.M)]);
+        b_v='C19HF37O5S-'.Ionomer.b_v);
       annotation (Documentation(info="<html>
   <p>The specific volume of protons corresponds to the concentration measured
   by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
@@ -473,7 +473,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
@@ -522,7 +522,7 @@ package Characteristics
      </ul></p>
 
   <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
@@ -535,7 +535,14 @@ package Characteristics
      </ol></p>
 
   <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
+
+      // **
+      // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
+      // Nafion EW 1100 series:
+      //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
+      //     => lambda = 3.4855 in equilibrium with 50% RH gas @ 30 degC
+      //     => lambda = 14.003 in equilibrium with 100% RH gas @ 30 degC
 
     end Ionomer;
 
@@ -572,7 +579,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Liquid;
 
@@ -622,7 +629,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
@@ -669,7 +676,7 @@ package Characteristics
      </ul></p>
 
 <p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
@@ -788,7 +795,7 @@ package Characteristics
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
   <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]. For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end CharacteristicNASA;
 
@@ -1483,7 +1490,7 @@ package Characteristics
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
-        output Q.TimeAbsolute nu "Thermal independence";
+        output Q.TimeAbsolute nu "Thermal independity";
 
       algorithm
         nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v))) annotation (Inline=true);
