@@ -180,9 +180,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (experiment(StopTime=1000));
       end CellModelica;
 
-      function plot "\"**\""
+      function plot "Create plots using FCRes"
         extends Modelica.Icons.Function;
         extends Modelica.Icons.UnderConstruction;
+
       algorithm
         Modelica.Utilities.System.command("loadres");
 

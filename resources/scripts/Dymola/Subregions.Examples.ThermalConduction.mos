@@ -1,21 +1,24 @@
 // Define signals.
 filename = "ThermalConduction.mat";
 
-y1 = cat(1, 
-         {"subregion1.graphite.C.T"}, 
-         {"subregions["+String(i)+"].graphite.C.T" for i in 1:n_x}, 
-         {"subregion2.graphite.C.T"});
-y2 = cat(1, 
-         {"subregion1.graphite.C.p"}, 
-         {"subregions["+String(i)+"].graphite.C.p" for i in 1:n_x}, 
-         {"subregion2.graphite.C.p"});
-y3 = cat(1, 
-         {"subregion1.graphite.C.M"}, 
-         {"subregions["+String(i)+"].graphite.C.M" for i in 1:n_x}, 
-         {"subregion2.graphite.C.M"});
-y4 = "";
-y5 = "";
-y6 = "";
+y1 = cat(1,
+         {"subregion1.graphite.'C+'.T"},
+         {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
+         {"subregion2.graphite.'C+'.T"});
+y2 = cat(1,
+         {"subregion1.graphite.'C+'.p"},
+         {"subregions[" + String(i) + "].graphite.'C+'.p" for i in 1:n_x},
+         {"subregion2.graphite.'C+'.p"});
+y3 = cat(1,
+         {"subregion1.graphite.'C+'.M"},
+         {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
+         {"subregion2.graphite.'C+'.M"});
+y4 = {""};
+y5 = cat(1,
+         {"subregion1.graphite.'C+'.theta"},
+         {"subregions[" + String(i) + "].graphite.'C+'.theta" for i in 1:n_x},
+         {"subregion2.graphite.'C+'.theta"});
+y6 = {""};
 
 // Make plots.
 removePlots();

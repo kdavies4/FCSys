@@ -4,7 +4,7 @@ package Subregions
   extends Modelica.Icons.Package;
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
-    // **Add a test of phase change.
+
     model Subregion
       "<html>Evaluate a single subregion, with H<sub>2</sub> by default</html>"
 
@@ -86,6 +86,9 @@ package Subregions
         inclH2O=true,
         inclH2=false,
         subregion(liquid(inclH2O=inclH2O)));
+
+      extends Modelica.Icons.UnderConstruction;
+
       annotation (
         experiment(StopTime=2e-07, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
@@ -93,7 +96,6 @@ package Subregions
 
         Diagram(graphics),
         experimentSetupOutput);
-
     end SubregionCondensation;
 
     model SubregionHydration
@@ -104,6 +106,9 @@ package Subregions
         inclH2O=true,
         inclH2=false,
         subregion(ionomer(inclH2O=inclH2O)));
+
+      extends Modelica.Icons.UnderConstruction;
+
       annotation (
         experiment(StopTime=2e-07, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
@@ -111,7 +116,6 @@ package Subregions
 
         Diagram(graphics),
         experimentSetupOutput);
-
     end SubregionHydration;
 
     model SubregionHOR
@@ -185,8 +189,9 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (
-        experiment(StopTime=5e-99, Tolerance=1e-06),
+        experiment(StopTime=10000, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
         experimentSetupOutput);
@@ -219,12 +224,10 @@ package Subregions
       "<html>Test a one-dimensional array of subregions with an initial pressure gradient (H<sub>2</sub> included by default)</html>"
       extends Modelica.Icons.Example;
 
-      // **Update and use BC from Conditions package for this and derived examples.
       parameter Integer n_x=0
         "<html>Number of discrete subregions along the x axis, besides the 2 side subregions (<i>n<i><sub>x</sub>)</html>";
       parameter Q.Pressure Deltap_IC=100*U.Pa
         "<html>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>)</html>";
-      // **temp 0 pressure diff
       parameter Boolean 'inclC+'=false
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
@@ -254,7 +257,7 @@ package Subregions
             __Dymola_descriptionLabel=true));
 
       FCSys.Subregions.Subregion subregion1(
-        L={10,10,10}*U.mm,
+        L={1,1,1}*U.cm,
         liquid(H2O(V_IC=subregion1.V/4)),
         inclFacesY=false,
         inclFacesZ=false,
@@ -292,8 +295,7 @@ package Subregions
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
       FCSys.Subregions.Subregion subregions[n_x](
-        each L={10,10,10}*U.mm,
-        liquid(H2O(V_IC=subregions[1].V/4)),
+        each L={1,1,1}*U.cm,
         each inclTransY=false,
         each inclTransZ=false,
         each inclFacesY=false,
@@ -301,20 +303,20 @@ package Subregions
         graphite(
           each final 'inclC+'='inclC+',
           each final 'incle-'='incle-',
-          each 'C+'(
-            V_IC=subregions[1].V/1000,
-            initTransX=InitTranslational.None,
-            initTransY=InitTranslational.None,
-            initTransZ=InitTranslational.None),
+          'C+'(
+            each V_IC=subregions[1].V/1000,
+            each initTransX=InitTranslational.None,
+            each initTransY=InitTranslational.None,
+            each initTransZ=InitTranslational.None),
           each reduceTemp=true),
         ionomer(
           each final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           each final 'inclH+'='inclH+',
-          each 'C19HF37O5S-'(
-            V_IC=subregions[1].V/1000,
-            initTransX=InitTranslational.None,
-            initTransY=InitTranslational.None,
-            initTransZ=InitTranslational.None),
+          'C19HF37O5S-'(
+            each V_IC=subregions[1].V/1000,
+            each initTransX=InitTranslational.None,
+            each initTransY=InitTranslational.None,
+            each initTransZ=InitTranslational.None),
           each reduceTemp=true),
         gas(
           each final inclH2=inclH2,
@@ -327,11 +329,12 @@ package Subregions
           N2(p_IC=subregions.gas.H2.p_IC),
           O2(p_IC=subregions.gas.H2.p_IC),
           each reduceTemp=true,
-          each reduceVel=true)) if n_x > 0
+          each reduceVel=true),
+        liquid(H2O(each V_IC=subregions[1].V/4))) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Subregions.Subregion subregion2(
-        L={10,10,10}*U.mm,
+        L={1,1,1}*U.cm,
         liquid(H2O(V_IC=subregion2.V/4)),
         inclFacesY=false,
         inclFacesZ=false,
@@ -453,6 +456,25 @@ package Subregions
 
     end SubregionsCandH2;
 
+    model SubregionsCande
+      "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
+      extends Examples.Subregions(
+        'inclC+'=true,
+        'incle-'=true,
+        inclH2=false,
+        subregion1(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Pressure))),
+        subregion2(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Pressure))));
+      annotation (
+        experiment(StopTime=30, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "resources/scripts/Dymola/Subregions.Examples.SubregionsCandH2.mos"),
+
+        experimentSetupOutput);
+
+    end SubregionsCande;
+
     model SubregionsInitialVelocity
       "<html>Test a one-dimensional array of subregions with an initial pressure gradient (H<sub>2</sub> included by default)</html>"
       extends Subregions(Deltap_IC=0,subregion1(gas(phi_IC={1,0,0}*U.cm/U.s)));
@@ -486,18 +508,25 @@ package Subregions
         n_x=8,
         'inclC+'=true,
         inclH2=false,
-        subregion1(graphite('C+'(
-              V_IC=0.99*subregion1.V,
-              T_IC=1.1*environment.T,
+        subregion1(graphite(T_IC=1.1*environment.T,'C+'(
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.Pressure,
               T(displayUnit="degC")))),
-        subregions(graphite('C+'(each V_IC=0.99*subregions[1].V, each T(
-                  displayUnit="degC")))),
-        subregion2(graphite('C+'(V_IC=0.99*subregion2.V, T(displayUnit="degC")))));
+        subregions(graphite('C+'(
+              each consMaterial=Conservation.IC,
+              each initMaterial=InitScalar.Pressure,
+              each T(displayUnit="degC")))),
+        subregion2(graphite('C+'(
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.Pressure,
+              T(displayUnit="degC")))));
 
-      extends Modelica.Icons.UnderConstruction;
-      annotation (Commands(file=
+      annotation (
+        Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
-          experiment(StopTime=298.15, Algorithm="Dassl"));
+
+        experiment(StopTime=200, Algorithm="Dassl"),
+        experimentSetupOutput);
 
     end ThermalConduction;
 
@@ -509,23 +538,28 @@ package Subregions
         'inclC+'=true,
         inclH2=false,
         inclN2=true,
-        subregion1(gas(N2(
-              T_IC=1.1*environment.T,
+        subregion1(gas(T_IC=1.1*environment.T,N2(
               p_IC=environment.p,
-              phi(displayUnit="mm/s"))), graphite('C+'(
-              V_IC=0.5*subregion1.V,
-              T_IC=1.1*environment.T,
-              T(displayUnit="degC")))),
-        subregions(gas(N2(each p_IC=environment.p, phi(each displayUnit="mm/s"))),
-            graphite('C+'(each V_IC=0.5*subregions[1].V, each T(displayUnit=
-                    "degC")))),
-        subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
-            graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))));
+              T(displayUnit="degC"),
+              phi(displayUnit="mm/s"))), graphite(T_IC=1.1*environment.T,'C+'(
+                V_IC=0.5*subregion1.V, T(displayUnit="degC")))),
+        subregions(gas(N2(
+              each p_IC=environment.p,
+              each T(displayUnit="degC"),
+              phi(each displayUnit="mm/s"))), graphite('C+'(each V_IC=0.5*
+                  subregions[1].V, each T(displayUnit="degC")))),
+        subregion2(gas(N2(
+              p_IC=environment.p,
+              T(displayUnit="degC"),
+              phi(displayUnit="mm/s"))), graphite('C+'(V_IC=0.5*subregion2.V, T(
+                  displayUnit="degC")))));
 
-      extends Modelica.Icons.UnderConstruction;
-      annotation (Commands(file=
+      annotation (
+        Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
-          experiment(StopTime=200, Algorithm="Dassl"));
+
+        experiment(StopTime=200, Algorithm="Dassl"),
+        experimentSetupOutput);
 
     end ThermalConductionConvection;
 
@@ -662,25 +696,31 @@ package Subregions
         Diagram(graphics));
     end TestReaction;
 
-    model SubregionsCande
-      "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
+    model ThermalConduction2 "Test thermal conduction (through solid)"
       extends Examples.Subregions(
+        n_x=8,
         'inclC+'=true,
-        'incle-'=true,
         inclH2=false,
-        subregion1(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Pressure))),
-        subregion2(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Pressure))));
-      annotation (
-        experiment(StopTime=30, Tolerance=1e-06),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionsCandH2.mos"),
+        subregion1(graphite('C+'(
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.Pressure,
+              T_IC=1.1*environment.T,
+              T(displayUnit="degC")))),
+        subregions(graphite('C+'(
+              each consMaterial=Conservation.IC,
+              each initMaterial=InitScalar.Pressure,
+              each T(displayUnit="degC")))),
+        subregion2(graphite('C+'(
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.Pressure,
+              T(displayUnit="degC")))));
 
-        experimentSetupOutput);
+      extends Modelica.Icons.UnderConstruction;
+      annotation (Commands(file=
+              "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
+          experiment(StopTime=298.15, Algorithm="Dassl"));
 
-    end SubregionsCande;
-
+    end ThermalConduction2;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -2519,58 +2559,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -2648,7 +2680,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
 
             redeclare parameter Q.Mobility mu=0,
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.87*U.W));
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
 
           // In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c
           // (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).
@@ -2670,8 +2702,8 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
 
    <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
    and thermal
-   resistivity (<code>theta = U.m*U.K/(0.87*U.W)</code>) are for graphite fiber epoxy (25% vol)
-   composite (with heat flow perpendicular to the fibers) at 300 K
+   resistivity (<code>theta = U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
+   composite (with heat flow parallel to the fibers) at 300 K
    [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
    The integration offset for specific entropy is set such that
    the specific entropy is 154.663 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 atm).

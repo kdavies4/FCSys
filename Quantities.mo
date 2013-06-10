@@ -164,7 +164,7 @@ package Quantities "Quantities to represent physical properties"
   type Potential = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)");
   type PotentialAbsolute = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)",
         min=0) "Absolute potential";
-  type PotentialLineic = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)")
+  type PotentialLineic = Modelica.Icons.TypeReal (final unit="l.m/(N.T2)")
     "Lineic potential";
   type PotentialPerWavenumber = Modelica.Icons.TypeReal (final unit=
           "l3.m/(A.N.T2)") "Potential per wavenumber";
