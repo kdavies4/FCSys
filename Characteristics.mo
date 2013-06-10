@@ -858,7 +858,6 @@ package Characteristics
       // can be computed using FCSys/resources/virial-relations.cdf.
       constant Q.AreaSpecific alpha=3*sqrt(U.pi)*d^2*U.q/2
         "Scaled specific intercept area";
-      // **Dimension: Q.AreaSpecific [l2/N]
 
       function omega
         "Rescaled reciprocal of thermal speed (omega = pi*sqrt(m/T)) as a function of temperature"
@@ -1391,6 +1390,9 @@ package Characteristics
       algorithm
         eta := omega(T)*alpha/v annotation (Inline=true);
         annotation (Documentation(info="<html>
+  <p>Material resistivity is the reciprocal of the self-diffusion coefficient 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
+  
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>

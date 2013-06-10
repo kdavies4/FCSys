@@ -45,20 +45,28 @@ package Subregions
           final inclH2O=inclH2O,
           final inclN2=inclN2,
           final inclO2=inclO2),
-        graphite(
-          final 'inclC+'='inclC+',
-          final 'incle-'='incle-',
-          'C+'(V_IC=subregion.V/4)),
-        ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion.V/4)),
         liquid(H2O(V_IC=subregion.V/4)),
         inclTransY=false,
         inclTransZ=false,
         inclFacesY=false,
         inclFacesZ=false,
-        inclFacesX=true)
+        inclFacesX=true,
+        graphite(
+          final 'inclC+'='inclC+',
+          final 'incle-'='incle-',
+          'C+'(
+            V_IC=subregion.V/4,
+            consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+            consTransY=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+            consTransZ=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
+        ionomer(
+          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclH+'='inclH+',
+          'C19HF37O5S-'(
+            V_IC=subregion.V/4,
+            consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+            consTransY=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+            consTransZ=FCSys.Subregions.Species.BaseClasses.Conservation.IC)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner FCSys.Conditions.Environment environment(analysis=true)
@@ -229,18 +237,6 @@ package Subregions
 
       FCSys.Subregions.Subregion subregion1(
         L={10,10,10}*U.mm,
-        graphite(
-          final 'inclC+'='inclC+',
-          final 'incle-'='incle-',
-          'C+'(
-            V_IC=subregion1.V/1000,
-            consTransX=Conservation.IC,
-            consTransY=Conservation.IC,
-            consTransZ=Conservation.IC)),
-        ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion1.V/1000)),
         liquid(H2O(V_IC=subregion1.V/4)),
         inclFacesY=false,
         inclFacesZ=false,
@@ -256,11 +252,52 @@ package Subregions
           O2(p_IC=environment.p + Deltap_IC/2),
           H2(p_IC=environment.p + Deltap_IC/2),
           reduceVel=true,
+          reduceTemp=true),
+        graphite(
+          final 'inclC+'='inclC+',
+          final 'incle-'='incle-',
+          'C+'(
+            V_IC=subregion1.V/1000,
+            consTransX=Conservation.IC,
+            consTransY=Conservation.IC,
+            consTransZ=Conservation.IC),
+          reduceTemp=true),
+        ionomer(
+          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclH+'='inclH+',
+          'C19HF37O5S-'(
+            V_IC=subregion1.V/1000,
+            consTransX=Conservation.IC,
+            consTransY=Conservation.IC,
+            consTransZ=Conservation.IC),
           reduceTemp=true))
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
       FCSys.Subregions.Subregion subregions[n_x](
         each L={10,10,10}*U.mm,
+        liquid(H2O(V_IC=subregions[1].V/4)),
+        each inclTransY=false,
+        each inclTransZ=false,
+        each inclFacesY=false,
+        each inclFacesZ=false,
+        graphite(
+          each final 'inclC+'='inclC+',
+          each final 'incle-'='incle-',
+          each 'C+'(
+            V_IC=subregions[1].V/1000,
+            initTransX=InitTranslational.None,
+            initTransY=InitTranslational.None,
+            initTransZ=InitTranslational.None),
+          each reduceTemp=true),
+        ionomer(
+          each final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          each final 'inclH+'='inclH+',
+          each 'C19HF37O5S-'(
+            V_IC=subregions[1].V/1000,
+            initTransX=InitTranslational.None,
+            initTransY=InitTranslational.None,
+            initTransZ=InitTranslational.None),
+          each reduceTemp=true),
         gas(
           each final inclH2=inclH2,
           each final inclH2O=inclH2O,
@@ -270,36 +307,13 @@ package Subregions
                  in 1:n_x}),
           H2O(p_IC=subregions.gas.H2.p_IC),
           N2(p_IC=subregions.gas.H2.p_IC),
-          O2(p_IC=subregions.gas.H2.p_IC)),
-        graphite(
-          each final 'inclC+'='inclC+',
-          each final 'incle-'='incle-',
-          'C+'(each V_IC=subregions[1].V/1000)),
-        ionomer(
-          each final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          each final 'inclH+'='inclH+',
-          'C19HF37O5S-'(each V_IC=subregions[1].V/1000)),
-        liquid(H2O(V_IC=subregions[1].V/4)),
-        each inclTransY=false,
-        each inclTransZ=false,
-        each inclFacesY=false,
-        each inclFacesZ=false) if n_x > 0
+          O2(p_IC=subregions.gas.H2.p_IC),
+          each reduceTemp=true,
+          each reduceVel=true)) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Subregions.Subregion subregion2(
         L={10,10,10}*U.mm,
-        graphite(
-          final 'inclC+'='inclC+',
-          final 'incle-'='incle-',
-          'C+'(
-            V_IC=subregion2.V/1000,
-            initTransX=InitTranslational.None,
-            initTransY=InitTranslational.None,
-            initTransZ=InitTranslational.None)),
-        ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion2.V/1000)),
         liquid(H2O(V_IC=subregion2.V/4)),
         inclFacesY=false,
         inclFacesZ=false,
@@ -315,13 +329,31 @@ package Subregions
           O2(p_IC=environment.p - Deltap_IC/2),
           H2(p_IC=environment.p - Deltap_IC/2),
           reduceVel=true,
+          reduceTemp=true),
+        graphite(
+          final 'inclC+'='inclC+',
+          final 'incle-'='incle-',
+          'C+'(
+            V_IC=subregion2.V/1000,
+            initTransX=InitTranslational.None,
+            initTransY=InitTranslational.None,
+            initTransZ=InitTranslational.None),
+          reduceTemp=true),
+        ionomer(
+          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclH+'='inclH+',
+          'C19HF37O5S-'(
+            V_IC=subregion2.V/1000,
+            initTransX=InitTranslational.None,
+            initTransY=InitTranslational.None,
+            initTransZ=InitTranslational.None),
           reduceTemp=true))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated face1(
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
         graphite('inclC+'=false, final 'incle-'='incle-'),
         ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
         gas(
@@ -333,7 +365,7 @@ package Subregions
             rotation=90,
             origin={-56,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated face2(
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
         graphite('inclC+'=false, final 'incle-'='incle-'),
         ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
         gas(
@@ -367,16 +399,16 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(face1.face, subregion1.xNegative) annotation (Line(
+      connect(BC1.face, subregion1.xNegative) annotation (Line(
           points={{-52,3.65701e-16},{-46,3.65701e-16},{-46,6.10623e-16},{-40,
               6.10623e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(subregion2.xPositive, face2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
-
+      connect(subregion2.xPositive, BC2.face) annotation (Line(
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -655,20 +687,7 @@ package Subregions
     Phases.Ionomer ionomer(
       final n_faces=n_faces,
       final inclHOR=inclHOR,
-      final inclORR=inclORR,
-      'C19HF37O5S-'(
-        consTransX=if graphite.'inclC+' then Conservation.Dynamic else
-            Conservation.IC,
-        consTransY=if graphite.'inclC+' then Conservation.Dynamic else
-            Conservation.IC,
-        consTransZ=if graphite.'inclC+' then Conservation.Dynamic else
-            Conservation.IC,
-        initTransX=if graphite.'inclC+' then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if graphite.'inclC+' then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if graphite.'inclC+' then InitTranslational.None else
-            InitTranslational.Velocity)) "Ionomer" annotation (Dialog(group=
+      final inclORR=inclORR) "Ionomer" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
 
@@ -2579,9 +2598,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -2609,11 +2628,16 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                 B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J
                     /(U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
 
+            redeclare parameter Q.Mobility mu=0,
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.87*U.W));
 
           // In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c
           // (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).
+
+          // Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not
+          // used here since they would render the parameters unadjustable in Dymola
+          // 7.4.  A similar note applies to the other species.
 
           // See the documentation layer for a table of values for the specific heat
           // capacity and thermal resistivity.
@@ -2623,6 +2647,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             Documentation(info="<html><p>Assumptions:<ol>
     <li>The specific heat capacity is fixed (independent of temperature).</li>
     <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
+    <li>Mobility is zero (by default).</li>
     </ol></p>
 
    <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
@@ -2826,9 +2851,6 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             consMaterial=Conservation.IC,
             initMaterial=InitScalar.Pressure);
 
-          // Note:  Parameter expressions (e.g., involving environment.T) are not
-          // used here since they would render the parameters unadjustable in Dymola
-          // 7.4.  A similar note applies to the other species.
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
@@ -3063,7 +3085,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3077,7 +3099,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3148,7 +3170,7 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
 <tr><td>2000</td><td>18.25e3</td><td>1/318.2e-7</td><td>1/878e-3</td></tr>
     </tr>
   </table>
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
 
@@ -3201,7 +3223,7 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3215,7 +3237,7 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3338,7 +3360,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
 <tr><td>850</td><td>2.186e3</td><td>1/296.9e-7</td><td>1/63.7e-3</td></tr>
   </table></ul></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3384,7 +3406,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         other configurations (e.g., gas).</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3401,7 +3423,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
    other configurations (e.g., gas).</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3427,7 +3449,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         other configurations (e.g., gas).</li>
     </ol></p></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3467,7 +3489,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
         other configurations (e.g., gas).</li>
     </ol></p>
-         <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+         <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3482,7 +3504,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
         other configurations (e.g., gas).</li>
     </ol></p>
-         <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+         <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3582,7 +3604,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
   </table>
 
-  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3634,7 +3656,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3648,7 +3670,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3673,8 +3695,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             redeclare parameter Q.Fluidity zeta=1/(17.82e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W));
 
-          // TODO: Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.N2.eta).
-
           // See the documentation for a table of values.
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3692,8 +3712,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
    The integration offset for specific entropy is set such that
    the specific entropy is 191.610 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 bar).
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.</p>
-   
+   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.  <a href=\"#Tab2\">Table 2</a> lists
+  values of the material resistivity or self diffusion coefficient.</p>
+  
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
   <tr>
@@ -3722,11 +3743,26 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>1300</td><td>1.219e3</td><td>1/466.2e-7</td><td>1/81.0e-3</td></tr>
   </table>
 
+<br>
+
+  <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
+  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of N<sub>2</sub> gas at 1 atm 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
+  <tr>
+      <th valign=\"middle\"><code>T<br>/U.K</code></th>
+      <th width=1><code>eta*U.s<br>/U.cm^2</code></th>
+    </tr>
+<tr><td>77.7</td><td>0.0168</td></tr>
+<tr><td>194.7</td><td>0.104</td></tr>
+<tr><td>273.2</td><td>0.185</td></tr>
+<tr><td>353.2</td><td>0.287</td></tr>
+  </table></p>
+  
   <p>The fluidity of air at 15.0 &deg;C and 1 atm is given by
-       <code>zeta=1/(178e-7*U.Pa*U.s)</code>
+       <code>zeta=1/(17.8e-6*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3778,7 +3814,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3792,7 +3828,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3807,7 +3843,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(20.72e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W));
-          // TODO: Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.O2.eta).
 
           // See the documentation for a table of values.
           annotation (
@@ -3827,11 +3862,13 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   potential.</li></ul></p>
 
   <p>The default resistivities (<code>zeta=1/(207.2e-7*U.Pa*U.s)</code> and <code>theta=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1 atm and
-  300 K from Incropera and DeWitt  [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
-  <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
+  300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
+  <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures. <a href=\"#Tab2\">Table 2</a> lists
+  values of the material resistivity or self diffusion coefficient.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3858,7 +3895,22 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>1300</td><td>1.125e3</td><td>1/588.4e-7</td><td>1/87.1e-3</td></tr>
   </table></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
+<br>
+
+  <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
+  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of O<sub>2</sub> gas at 1 atm 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
+  <tr>
+      <th valign=\"middle\"><code>T<br>/U.K</code></th>
+      <th width=1><code>eta*U.s<br>/U.cm^2</code></th>
+    </tr>
+<tr><td>77.7</td><td>0.0153</td></tr>
+<tr><td>194.7</td><td>0.104</td></tr>
+<tr><td>273.2</td><td>0.187</td></tr>
+<tr><td>353.2</td><td>0.301</td></tr>
+  </table></p>
+  
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
 
@@ -3878,14 +3930,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final I_IC,
         consMaterial=Conservation.IC,
         final tauprime=0,
-        final mu=0,
         final beta=0,
         final zeta=1);
-      //
-      // consTransX=Conservation.IC,
-      // consTransY=Conservation.IC,
-      // consTransZ=Conservation.IC);
-      //
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="species",
@@ -4179,43 +4225,34 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       // are infinite)
       output Q.TimeAbsolute tau_NE(
         stateSelect=StateSelect.never,
-        start=U.s,
-        min=Modelica.Constants.small) = kappa*tauprime*exp((chemical.mu - g0)/T)
-        *T/v if environment.analysis "Time constant for phase change";
+        start=U.s) = kappa*tauprime*exp((chemical.mu - g0)/T)*T/v if
+        environment.analysis "Time constant for phase change";
       output Q.TimeAbsolute tau_PhiE(
         stateSelect=StateSelect.never,
-        start=U.s,
-        min=Modelica.Constants.small) = Data.m*mu if environment.analysis
+        start=U.s) = Data.m*mu if environment.analysis
         "Time constant for translational exchange";
       output Q.TimeAbsolute tau_QE(
         stateSelect=StateSelect.never,
-        start=U.s,
-        min=Modelica.Constants.small) = c_p*nu if environment.analysis
+        start=U.s) = c_p*nu if environment.analysis
         "Time constant for thermal exchange";
       output Q.TimeAbsolute tau_NT[n_faces](
         each stateSelect=StateSelect.never,
-        each start=U.s,
-        each min=Modelica.Constants.small) = fill(V*eta/2, n_faces) ./ Lprime[
-        cartFaces] if environment.analysis
-        "Time constants for material transport";
+        each start=U.s) = fill(V*eta/2, n_faces) ./ Lprime[cartFaces] if
+        environment.analysis "Time constants for material transport";
       output Q.TimeAbsolute tau_PhiT_perp[n_faces](
         each stateSelect=StateSelect.never,
-        each start=U.s,
-        each min=Modelica.Constants.small) = fill(M*beta/2, n_faces) ./ Lprime[
-        cartFaces] if environment.analysis
+        each start=U.s) = fill(M*beta/2, n_faces) ./ Lprime[cartFaces] if
+        environment.analysis
         "Time constants for normal translational transport";
       output Q.TimeAbsolute tau_PhiT_para[n_faces](
         each stateSelect=StateSelect.never,
-        each start=U.s,
-        each min=Modelica.Constants.small) = fill(M*zeta/2, n_faces) ./ Lprime[
-        cartFaces] if environment.analysis
+        each start=U.s) = fill(M*zeta/2, n_faces) ./ Lprime[cartFaces] if
+        environment.analysis
         "Time constants for transverse translational transport";
       output Q.TimeAbsolute tau_QT[n_faces](
         each stateSelect=StateSelect.never,
-        each start=U.s,
-        each min=Modelica.Constants.small) = fill(N*c_v*theta/2, n_faces) ./
-        Lprime[cartFaces] if environment.analysis
-        "Time constants for thermal transport";
+        each start=U.s) = fill(N*c_v*theta/2, n_faces) ./ Lprime[cartFaces] if
+        environment.analysis "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with translational momentum included; others
       // are zero)

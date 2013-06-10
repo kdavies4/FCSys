@@ -1238,7 +1238,7 @@ encompass other systems of units.</p>
   // Base physical constants and units
   // ------------------------------------------------------------------------
 
-  replaceable constant Bases.Hartree base constrainedby Bases.Base
+  replaceable constant Bases.ScaledFC base constrainedby Bases.Base
     "Scalable base constants and units";
   // Note:  The base constants and units may be replaced to suit the scale
   // of the physical system.

@@ -132,6 +132,7 @@ package Quantities "Quantities to represent physical properties"
   type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);
   type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)")
     "Rate of density";
+  type Diffusivity = Modelica.Icons.TypeReal (final unit="l2/T",min=0);
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
   type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
