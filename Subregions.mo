@@ -96,6 +96,24 @@ package Subregions
 
     end SubregionCondensation;
 
+    model SubregionHydration
+      "Test a subregion with absorption/desorption between gas and ionomer"
+
+      extends Examples.Subregion(
+        'inclC19HF37O5S-'=true,
+        inclH2O=true,
+        inclH2=false,
+        subregion(ionomer(inclH2O=inclH2O)));
+      annotation (
+        experiment(StopTime=2e-07, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "resources/scripts/Dymola/Subregions.Examples.SubregionHydration.mos"),
+
+        Diagram(graphics),
+        experimentSetupOutput);
+
+    end SubregionHydration;
+
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and the essential species for it (C+, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</html>"
 

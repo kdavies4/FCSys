@@ -682,7 +682,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={24,0})));
 
-
     equation
       connect(BC1.face, pEM.xNegative) annotation (Line(
           points={{-20,3.65701e-16},{-16,3.65701e-16},{-16,6.10623e-16},{-10,
@@ -1569,75 +1568,89 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
           Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={42.5001,11.0805}),Rectangle(
-                  extent={{-40,40},{0,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={64,64,64}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={42.5001,11.0805}),
+            Rectangle(
+              extent={{-40,40},{0,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={64,64,64}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end AnGDL;
 
@@ -1703,11 +1716,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.190*U.mm},
         epsilon=0.84,
         Subregion(graphite('e-'(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.190 mm, p = 0.30 m/s (for air) => D = P*L = 57 mm2/s
       //     Density:  (54 g/m2)/(0.190 mm) = 284.21 kg/m3
       annotation (defaultComponentName="anGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -1722,11 +1735,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.235*U.mm},
         epsilon=0.76,
         Subregion(graphite('e-'(mu=23.5*U.S*U.cc/(11*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.235 mm, p = 0.0045 m/s (for air) => D = P*L = 1.0575 mm2/s
       //     Density:  (100 g/m2)/(0.235 mm) = 425.53 kg/m3
       annotation (defaultComponentName="anGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -1741,11 +1754,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.190*U.mm},
         epsilon=0.88,
         Subregion(graphite('e-'(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.190 mm, p = 0.90 m/s (for air) => D = P*L = 171 mm2/s
       //     Density:  (40 g/m2)/(0.190 mm) = 210.53 kg/m3
       annotation (defaultComponentName="anGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -1760,11 +1773,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.235*U.mm},
         epsilon=0.80,
         Subregion(graphite('e-'(mu=23.5*U.S*U.cc/(12*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.235 mm, p = 0.008 m/s (for air) => D = P*L = 1.88 mm2/s
       //     Density:  (86 g/m2)/(0.235 mm) = 365.96 kg/m3
       annotation (defaultComponentName="anGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -2683,75 +2696,89 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={52.5001,1.0805}),Rectangle(
-                  extent={{-20,40},{20,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={127,127,127}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={52.5001,1.0805}),
+            Rectangle(
+              extent={{-20,40},{20,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={127,127,127}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end CaGDL;
 
@@ -2817,11 +2844,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.190*U.mm},
         epsilon=0.84,
         Subregion(graphite('e-'(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.190 mm, p = 0.30 m/s (for air) => D = P*L = 57 mm2/s
       //     Density:  (54 g/m2)/(0.190 mm) = 284.21 kg/m3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -2836,11 +2863,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.235*U.mm},
         epsilon=0.76,
         Subregion(graphite('e-'(mu=23.5*U.S*U.cc/(11*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.235 mm, p = 0.0045 m/s (for air) => D = P*L = 1.0575 mm2/s
       //     Density:  (100 g/m2)/(0.235 mm) = 425.53 kg/m3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -2855,11 +2882,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.190*U.mm},
         epsilon=0.88,
         Subregion(graphite('e-'(mu=19*U.S*U.cc/(10*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.190 mm, p = 0.90 m/s (for air) => D = P*L = 171 mm2/s
       //     Density:  (40 g/m2)/(0.190 mm) = 210.53 kg/m3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
@@ -2874,11 +2901,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         L_x={0.235*U.mm},
         epsilon=0.80,
         Subregion(graphite('e-'(mu=23.5*U.S*U.cc/(12*U.cm*0.1849*U.mol)))));
-      // Additional properties not incorporated [SGL2007]:
+      // Additional properties not incorporated [SGL2004]:
       //     Diffusivity:  L = 0.235 mm, p = 0.008 m/s (for air) => D = P*L = 1.88 mm2/s
       //     Density:  (86 g/m2)/(0.235 mm) = 365.96 kg/m3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>]
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2004</a>]
   and the density of electrons from
   <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>

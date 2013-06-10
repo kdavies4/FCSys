@@ -46,7 +46,7 @@ package Tests "Models and functions for test and validation"
         inclN2=true,
         inclO2=true);
       // Note:  H+ is excluded to prevent reactions.
-      // TODO:  Create separate model to test reactions.
+      // TODO:  Create a separate model to test reactions.
       // Currently, there are no assertions.  This model just checks that the
       // simulation runs.
 
