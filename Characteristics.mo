@@ -856,16 +856,16 @@ package Characteristics
           :-1:1} "Coefficients of p as a polynomial in v and T";
       // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
       // can be computed using FCSys/resources/virial-relations.cdf.
-      constant Q.VelocityReciprocal alpha=3*sqrt(U.pi)*d^2*U.q/2
+      constant Q.AreaSpecific alpha=3*sqrt(U.pi)*d^2*U.q/2
         "Scaled specific intercept area";
+      // **Dimension: Q.AreaSpecific [l2/N]
 
       function omega
         "Rescaled reciprocal of thermal speed (omega = pi*sqrt(m/T)) as a function of temperature"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.VelocityReciprocal omega
-          "Rescaled reciprocal of thermal speed";
+        output Q.TimeLineic omega "Rescaled reciprocal of thermal speed";
 
       algorithm
         omega := U.pi*sqrt(m/T) annotation (Inline=true);
@@ -1432,8 +1432,8 @@ package Characteristics
   </ol></p>
 </html>"));
       end theta;
-    public
 
+    public
       function kappa
         "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
         extends Modelica.Icons.Function;
@@ -1457,6 +1457,39 @@ package Characteristics
   (although temperature remains as a valid input).</p>
   </html>"));
       end kappa;
+
+      replaceable function tauprime
+        "<html>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</html>"
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        output Q.TimeAbsolute tauprime "Phase change interval";
+
+      algorithm
+        tauprime := omega(T)*T/(alpha*p0) annotation (Inline=true);
+        annotation (Documentation(info="<html>
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  Also, it is assumed that the Einstein relation applies.</p>
+
+  <p>Please see [<a href=\"modelica://FCSys.UsersGuide.References\">Davies2013</a>, Ch. 3] for a derivation
+  of the rate of phase change from kinetic theory.</p>
+  
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.</p>
+</html>"));
+      end tauprime;
 
       replaceable function mu
         "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"

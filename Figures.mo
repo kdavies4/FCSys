@@ -1312,11 +1312,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.BaseClasses.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1510,12 +1510,12 @@ package Figures "Graphical layouts for documentation"
 
   end SpeciesIcon;
 
-  model SingleLayerIcon
+  model DepletionIcon
 
-    FCSys.Subregions.Depletion SingleLayer
+    FCSys.Subregions.Depletion Depletion
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
-  end SingleLayerIcon;
+  end DepletionIcon;
 
   model VolumeIcon
 

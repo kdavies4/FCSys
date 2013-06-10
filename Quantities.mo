@@ -85,8 +85,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.TimeAbsolute TimeAbsolute=1*U.s "TimeAbsolute";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
-      parameter Q.VelocityReciprocal VelocityReciprocal=1*U.s/U.m
-        "Reciprocal velocity";
+      parameter Q.TimeLineic TimeLineic=1*U.s/U.m "Lineic time";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
@@ -106,6 +105,8 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
+  // **Update everything else from quantities.xls.
+
   // Generated from FCSys/resources/quantities.xls, 2013-6-4
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
@@ -114,6 +115,8 @@ package Quantities "Quantities to represent physical properties"
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
+  type AreaSpecific = Modelica.Icons.TypeReal (final unit="l2/N", min=0)
+    "Specific area";
   type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
   type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
           "N2.T/(l2.m)", min=0) "Electrical conductance";
@@ -191,8 +194,7 @@ package Quantities "Quantities to represent physical properties"
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
   type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
     "Squared velocity";
-  type VelocityReciprocal = Modelica.Icons.TypeReal (final unit="T/l")
-    "Reciprocal velocity";
+  type TimeLineic = Modelica.Icons.TypeReal (final unit="T/l") "Lineic time";
   type Volume = Modelica.Icons.TypeReal (final unit="l3", min=0);
   type VolumeRate = Modelica.Icons.TypeReal (final unit="l3/T")
     "Rate of volume";
