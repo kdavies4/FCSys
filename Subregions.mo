@@ -70,7 +70,7 @@ package Subregions
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner FCSys.Conditions.Environment environment(analysis=true)
-        annotation (Placement(transformation(extent={{30,20},{50,40}})));
+        annotation (Placement(transformation(extent={{40,40},{60,60}})));
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -87,8 +87,6 @@ package Subregions
         inclH2=false,
         subregion(liquid(inclH2O=inclH2O)));
 
-      extends Modelica.Icons.UnderConstruction;
-
       annotation (
         experiment(StopTime=2e-07, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
@@ -96,6 +94,9 @@ package Subregions
 
         Diagram(graphics),
         experimentSetupOutput);
+
+    equation
+
     end SubregionCondensation;
 
     model SubregionHydration
@@ -105,7 +106,7 @@ package Subregions
         'inclC19HF37O5S-'=true,
         inclH2O=true,
         inclH2=false,
-        subregion(ionomer(inclH2O=inclH2O)));
+        subregion(gas(H2O(T_IC=1*environment.T)), ionomer(inclH2O=inclH2O)));
 
       extends Modelica.Icons.UnderConstruction;
 
@@ -116,6 +117,7 @@ package Subregions
 
         Diagram(graphics),
         experimentSetupOutput);
+
     end SubregionHydration;
 
     model SubregionHOR
@@ -211,14 +213,179 @@ package Subregions
 
     end SubregionORR;
 
-    model SubregionH2PipeTest
-      extends Examples.Subregion(subregion(L={100,1,1}*U.mm), condition1(gas(H2
-              (redeclare Conditions.ByConnector.Face.Single.Material.Density
-                normal(redeclare Modelica.Blocks.Sources.Ramp source(height=U.C
-                      /U.cc, offset=298.15*U.K/U.atm))))));
-      extends Modelica.Icons.UnderConstruction;
+    model SubregionPipeTest
+      extends Examples.Subregion(subregion(
+          L={100,1,1}*U.mm,
+          inclFacesY=true,
+          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
 
-    end SubregionH2PipeTest;
+          inclFacesZ=false));
+
+      parameter Q.Pressure Deltap_IG=-U.kPa
+        "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
+
+      output Q.Length D=2*subregion.A[Axis.x]/(subregion.L[Axis.y] + subregion.L[
+          Axis.z]);
+      output Q.Number Re=subregion.gas.H2.phi[Axis.x]*D*subregion.gas.H2.zeta*
+          subregion.gas.H2.Data.m*subregion.gas.H2.rho "Reynolds number";
+      output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.gas.H2.phi[
+          Axis.x]/(D^2*subregion.gas.H2.zeta)
+        "Pressure difference according to Poiseuille's law";
+      output Q.Pressure Deltap=subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
+          1, Side.n] "Actual pressure difference";
+
+      // **Add plots.
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC3(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=0,
+            origin={0,-24})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC4(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={0,24})));
+
+    equation
+      connect(BC1.face, subregion.xNegative) annotation (Line(
+          points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        Diagram(graphics),
+        experiment(StopTime=3e-06, Tolerance=1e-06),
+        experimentSetupOutput);
+      connect(BC2.face, subregion.xPositive) annotation (Line(
+          points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(subregion.yNegative, BC3.face) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-20}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC4.face, subregion.yPositive) annotation (Line(
+          points={{6.10623e-16,20},{-3.36456e-22,16},{6.10623e-16,16},{
+              6.10623e-16,10}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+    end SubregionPipeTest;
 
     model Subregions
       "<html>Test a one-dimensional array of subregions with an initial pressure gradient (H<sub>2</sub> included by default)</html>"
@@ -696,31 +863,517 @@ package Subregions
         Diagram(graphics));
     end TestReaction;
 
-    model ThermalConduction2 "Test thermal conduction (through solid)"
-      extends Examples.Subregions(
-        n_x=8,
-        'inclC+'=true,
-        inclH2=false,
-        subregion1(graphite('C+'(
-              consMaterial=Conservation.IC,
-              initMaterial=InitScalar.Pressure,
-              T_IC=1.1*environment.T,
-              T(displayUnit="degC")))),
-        subregions(graphite('C+'(
-              each consMaterial=Conservation.IC,
-              each initMaterial=InitScalar.Pressure,
-              each T(displayUnit="degC")))),
-        subregion2(graphite('C+'(
-              consMaterial=Conservation.IC,
-              initMaterial=InitScalar.Pressure,
-              T(displayUnit="degC")))));
+    model SubregionPipeTest2
+      extends Examples.Subregion('inclC+'=true,subregion(L={100,1,1}*U.mm));
 
-      extends Modelica.Icons.UnderConstruction;
-      annotation (Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
-          experiment(StopTime=298.15, Algorithm="Dassl"));
+      parameter Q.Pressure Deltap_IG=-U.kPa
+        "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
 
-    end ThermalConduction2;
+      output Q.Length D=2*subregion.A[Axis.x]/(subregion.L[Axis.y] + subregion.L[
+          Axis.z]);
+      output Q.Number Re=subregion.gas.H2.phi[Axis.x]*D*subregion.gas.H2.zeta*
+          subregion.gas.H2.Data.m*subregion.gas.H2.rho "Reynolds number";
+      output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.gas.H2.phi[
+          Axis.x]/(D^2*subregion.gas.H2.zeta)
+        "Pressure difference according to Poiseuille's law";
+      output Q.Pressure Deltap=subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
+          1, Side.n] "Actual pressure difference";
+
+      // **Add plots.
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+
+    equation
+      connect(BC1.face, subregion.xNegative) annotation (Line(
+          points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        Diagram(graphics),
+        experiment(StopTime=10, Tolerance=1e-06),
+        experimentSetupOutput);
+      connect(BC2.face, subregion.xPositive) annotation (Line(
+          points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+    end SubregionPipeTest2;
+
+    model SubregionPipeTest3
+      extends Examples.Subregion(subregion(
+          L={100,1,1}*U.mm,
+          inclFacesY=true,
+          inclFacesZ=true,
+          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC))));
+
+      parameter Q.Pressure Deltap_IG=-U.kPa
+        "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
+
+      output Q.Length D=2*subregion.A[Axis.x]/(subregion.L[Axis.y] + subregion.L[
+          Axis.z]);
+      output Q.Number Re=subregion.gas.H2.phi[Axis.x]*D*subregion.gas.H2.zeta*
+          subregion.gas.H2.Data.m*subregion.gas.H2.rho "Reynolds number";
+      output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.gas.H2.phi[
+          Axis.x]/(D^2*subregion.gas.H2.zeta)
+        "Pressure difference according to Poiseuille's law";
+      output Q.Pressure Deltap=subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
+          1, Side.n] "Actual pressure difference";
+
+      // **Add plots.
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC3(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=0,
+            origin={0,-24})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC4(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={0,24})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC5(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={76,-16})));
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC6(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=0,
+            origin={76,-64})));
+    equation
+      connect(BC1.face, subregion.xNegative) annotation (Line(
+          points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        Diagram(graphics),
+        experiment(StopTime=3e-06, Tolerance=1e-06),
+        experimentSetupOutput);
+      connect(BC2.face, subregion.xPositive) annotation (Line(
+          points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(subregion.yNegative, BC3.face) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-12.5},{6.10623e-16,-12.5},{
+              6.10623e-16,-15},{6.10623e-16,-20},{6.10623e-16,-20}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC4.face, subregion.yPositive) annotation (Line(
+          points={{6.10623e-16,20},{-3.36456e-22,16},{6.10623e-16,16},{
+              6.10623e-16,10}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC5.face, subregion.zPositive) annotation (Line(
+          points={{76,-20},{36,-20},{36,-5},{-5,-5}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC6.face, subregion.zNegative) annotation (Line(
+          points={{76,-60},{42,-60},{42,5},{5,5}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+    end SubregionPipeTest3;
+
+    model SubregionPipeTest4
+      extends Examples.Subregion(subregion(
+          L={100,1,1}*U.mm,
+          inclFacesZ=false,
+          inclFacesY=true,
+          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                beta=Modelica.Constants.inf))));
+
+      parameter Q.Pressure Deltap_IG=-3*U.Pa
+        "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
+
+      output Q.Length D=2*subregion.A[Axis.x]/(subregion.L[Axis.y] + subregion.L[
+          Axis.z]);
+      output Q.Number Re=subregion.gas.H2.phi[Axis.x]*D*subregion.gas.H2.zeta*
+          subregion.gas.H2.Data.m*subregion.gas.H2.rho "Reynolds number";
+      output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.gas.H2.phi[
+          Axis.x]/(D^2*subregion.gas.H2.zeta)
+        "Pressure difference according to Poiseuille's law";
+      output Q.Pressure Deltap=subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
+          1, Side.n] "Actual pressure difference";
+
+      // **Add plots.
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC3(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=0,
+            origin={0,-24})));
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC4(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={10,34})));
+    equation
+      connect(BC1.face, subregion.xNegative) annotation (Line(
+          points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        Diagram(graphics),
+        experiment(StopTime=3e-06, Tolerance=1e-06),
+        experimentSetupOutput);
+      connect(BC2.face, subregion.xPositive) annotation (Line(
+          points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(subregion.yNegative, BC3.face) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-18},{0,-20},{6.10623e-16,-20}},
+
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC4.face, subregion.yPositive) annotation (Line(
+          points={{10,30},{10,26},{10,10},{6.10623e-16,10}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+    end SubregionPipeTest4;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -2559,50 +3212,58 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -4347,6 +5008,14 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         orientation]*faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)],
         :].Ndot else 0 for orientation in Orientation) for i in 1:n_trans} if
         environment.analysis "Acceleration force due to advective transport";
+      output Q.Force f_AT2[n_trans](each stateSelect=StateSelect.never) = {sum(
+        if inclFaces[cartWrap(cartTrans[i] - orientation + 1)] then Data.m*
+        Delta(faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].phi[
+        orientation] .* faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)],
+        :].phi[1] .* faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)],
+        :].rho)*A[cartWrap(cartTrans[i] - orientation + 1)] else 0 for
+        orientation in Orientation) for i in 1:n_trans} if environment.analysis
+        "Acceleration force due to advective transport **temp";
       output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(
         if inclFaces[cartWrap(cartTrans[i] - orientation + 1)] then Sigma(faces[
         facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].mPhidot[
@@ -4733,36 +5402,37 @@ Choose a condition besides None.");
         end for;
 
         // Direct mapping of shear forces
-        if not inclRot[cartWrap(cartFaces[i] - 1)] then
+        if true or not inclRot[cartWrap(cartFaces[i] - 1)] then
           faces[i, :].mPhidot[Orientation.following] = faces_mPhidot[i, :,
             Orientation.following - 1];
           // Else the force must be mapped for zero torque (below).
         end if;
-        if not inclRot[cartWrap(cartFaces[i] + 1)] then
+        if true or not inclRot[cartWrap(cartFaces[i] + 1)] then
           faces[i, :].mPhidot[Orientation.preceding] = faces_mPhidot[i, :,
             Orientation.preceding - 1];
           // Else the force must be mapped for zero torque (below).
         end if;
       end for;
+      // **temp trues.
 
       // Zero-torque mapping of shear forces
-      for axis in cartRot loop
-        4*cat(1,
-              faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
-              faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding])
-          = {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis
-           - 1)]/L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(
-          axis + 1)],L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(
-          axis + 1)]/L[cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(
-          axis - 1)],3,1},{-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[
-          cartWrap(axis + 1)]/L[cartWrap(axis - 1)],1,3}}*cat(
-              1,
-              faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following
-             - 1],
-              faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding
-             - 1]);
-      end for;
-
+      /* **
+  for axis in cartRot loop
+    4*cat(
+      1,
+      faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
+      faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding]) =
+      {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis - 1)]/
+      L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],
+      L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(axis + 1)]/L[
+      cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],3,1},{-L[
+      cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[cartWrap(axis + 1)]/L[
+      cartWrap(axis - 1)],1,3}}*cat(
+      1,
+      faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following - 1],
+      faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding - 1]);
+  end for;
+*/
       // Material dynamics
       if consMaterial == Conservation.IC then
         // Apply the IC forever (material not conserved).
@@ -4800,7 +5470,8 @@ Choose a condition besides None.");
         end if;
       else
         (if consMaterial == Conservation.Dynamic then der(N)/U.s else 0) =
-          chemical.Ndot + physical.Ndot + sum(faces.Ndot)
+          chemical.Ndot + physical.Ndot + sum(faces.Ndot) + sum(Delta(faces[i,
+          :].rho*faces[i, :].phi[1])*A[cartTrans[i]] for i in 1:n_faces)
           "Material conservation";
       end if;
 
@@ -4829,12 +5500,18 @@ Choose a condition besides None.");
             actualStream(chemical.phi) .* chemical.Ndot + actualStream(physical.phi)
              .* physical.Ndot)[i] + inert.translational.mPhidot[i] +
             inertDalton.mPhidot[i] + sum(if inclFaces[cartWrap(cartTrans[i] -
-            orientation + 1)] then faces[facesCart[cartWrap(cartTrans[i] -
+            orientation + 1)] then 0*faces[facesCart[cartWrap(cartTrans[i] -
             orientation + 1)], :].phi[orientation]*faces[facesCart[cartWrap(
-            cartTrans[i] - orientation + 1)], :].Ndot*Data.m + Sigma(faces[
-            facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].mPhidot[
-            orientation]) else 0 for orientation in Orientation)
-            "Conservation of translational momentum";
+            cartTrans[i] - orientation + 1)], :].Ndot*Data.m + 0*Delta(faces[
+            facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].phi[
+            orientation] .* faces[facesCart[cartWrap(cartTrans[i] - orientation
+             + 1)], :].phi[1] .* faces[facesCart[cartWrap(cartTrans[i] -
+            orientation + 1)], :].rho)*A[cartWrap(cartTrans[i] - orientation +
+            1)]*Data.m + Sigma(faces[facesCart[cartWrap(cartTrans[i] -
+            orientation + 1)], :].mPhidot[orientation]) else 0 for orientation
+             in Orientation) "Conservation of translational momentum";
+          // **temp 0
+          // Note in diss:  no advective translational momentum with  material diffusion.
           // In Dymola 7.4 it isn't possible to individually index the components
           // of advective exchange, e.g.,
           // (actualStream(physical.phi) .* physical.Ndot)[i]
