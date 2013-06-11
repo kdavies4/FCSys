@@ -5618,13 +5618,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Force,
               u(final unit="l.m/T2"),
-              final y(final unit="l/T") = negative.phi[orientation] - positive.phi[
+              final y(final unit="l/T") = positive.phi[orientation] - negative.phi[
                 orientation]);
 
           equation
             negative.mPhidot[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Force;
 
           model Custom "Custom"
@@ -5715,7 +5716,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               u(final unit="l2.m/T3"),
               final y(
                 final unit="l2.m/(N.T2)",
-                displayUnit="K") = negative.T - positive.T);
+                displayUnit="K") = positive.T - negative.T);
 
           equation
             negative.Qdot = u_final;
@@ -6088,8 +6089,11 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           equation
             Data.p_Tv(face.T, 1/face.rho) = u_final;
-            annotation (defaultComponentPrefixes="replaceable",
-                defaultComponentName="material");
+            annotation (
+              defaultComponentPrefixes="replaceable",
+              defaultComponentName="material",
+              Documentation(info="<html>
+  <p>The default characteristic data represents an ideal gas.</p></html>"));
           end Pressure;
 
           model Current "Specify current (measure density)"

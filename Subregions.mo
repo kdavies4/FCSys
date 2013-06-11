@@ -219,10 +219,10 @@ package Subregions
           inclFacesY=true,
           gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
 
-          inclFacesZ=false));
+          inclFacesZ=true));
 
-      parameter Q.Pressure Deltap_IG=-U.kPa
-        "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
+      parameter Q.Pressure Deltap=-10*U.Pa
+        "<html>Prescribed gas pressure difference (&Delta;<i>p</i>)</html>";
 
       output Q.Length D=2*subregion.A[Axis.x]/(subregion.L[Axis.y] + subregion.L[
           Axis.z]);
@@ -231,8 +231,6 @@ package Subregions
       output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.gas.H2.phi[
           Axis.x]/(D^2*subregion.gas.H2.zeta)
         "Pressure difference according to Poiseuille's law";
-      output Q.Pressure Deltap=subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
-          1, Side.n] "Actual pressure difference";
 
       // **Add plots.
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
@@ -244,29 +242,26 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p - Deltap/2))),
           H2O(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p - Deltap/2))),
           N2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p - Deltap/2))),
           O2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p - Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal))) annotation (Placement(transformation(
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p - Deltap/2))))) annotation (
+          Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
@@ -280,29 +275,26 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p + Deltap/2))),
           H2O(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p + Deltap/2))),
           N2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p + Deltap/2))),
           O2(redeclare
-              FCSys.Conditions.ByConnector.Face.Single.Material.Density
-              material(source(y=(environment.p + Deltap_IG/2)/environment.T)),
-              redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal))) annotation (Placement(transformation(
+              normal, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p + Deltap/2))))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -355,7 +347,57 @@ package Subregions
             rotation=0,
             origin={0,24})));
 
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC5(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={86,-6})));
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC6(
+        graphite('inclC+'=false, final 'incle-'='incle-'),
+        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          N2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          O2(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=0,
+            origin={86,-54})));
     equation
+      assert(abs(Deltap - (subregion.gas.H2.p_faces[1, Side.p] - subregion.gas.H2.p_faces[
+        1, Side.n])) <= Modelica.Constants.small,
+        "The actual pressure difference and the prescribed pressure difference are not equal.");
+
       connect(BC1.face, subregion.xNegative) annotation (Line(
           points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
               6.10623e-16}},
@@ -365,7 +407,7 @@ package Subregions
 
       annotation (
         Diagram(graphics),
-        experiment(StopTime=3e-06, Tolerance=1e-06),
+        experiment(StopTime=200, Tolerance=1e-06),
         experimentSetupOutput);
       connect(BC2.face, subregion.xPositive) annotation (Line(
           points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
@@ -375,13 +417,25 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.yNegative, BC3.face) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-20}},
+          points={{6.10623e-16,-10},{6.10623e-16,-12.5},{6.10623e-16,-12.5},{
+              6.10623e-16,-15},{6.10623e-16,-20},{6.10623e-16,-20}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(BC4.face, subregion.yPositive) annotation (Line(
           points={{6.10623e-16,20},{-3.36456e-22,16},{6.10623e-16,16},{
               6.10623e-16,10}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(BC5.face, subregion.zPositive) annotation (Line(
+          points={{86,-10},{46,-10},{46,-5},{-5,-5}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(BC6.face, subregion.zNegative) annotation (Line(
+          points={{86,-50},{52,-50},{52,5},{5,5}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
