@@ -5501,10 +5501,32 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               final y(final unit="N/T") = negative.Ndot);
 
           equation
-            negative.rho = u_final;
+            positive.rho - negative.rho = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
           end Density;
+
+          model Pressure "Specify pressure (measure current)"
+            extends Single.Material.BaseClasses.PartialCondition(
+              final conditionType=BaseClasses.ConditionType.Pressure,
+              u(final unit="m/(l.T2)"),
+              final y(final unit="N/T") = face.Ndot);
+
+            replaceable package Data =
+                Characteristics.BaseClasses.Characteristic constrainedby
+              Characteristics.BaseClasses.CharacteristicEOS
+              "Characteristic data" annotation (
+              Dialog(group="Material properties"),
+              choicesAllMatching=true,
+              __Dymola_choicesFromPackage=true,
+              Placement(transformation(extent={{-60,40},{-40,60}}),
+                  iconTransformation(extent={{-10,90},{10,110}})));
+
+          equation
+            Data.p_Tv(face.T, 1/face.rho) = u_final;
+            annotation (defaultComponentPrefixes="replaceable",
+                defaultComponentName="material");
+          end Pressure;
 
           model Current
             "Specify current (measure density), with conservation of material"
@@ -5523,7 +5545,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             extends BaseClasses.PartialCondition(final conditionType=
                   BaseClasses.ConditionType.Custom, y=negative.Ndot);
 
-            Real x=negative.rho "Expression to which the condition is applied"
+            Real x=positive.rho - negative.rho
+              "Expression to which the condition is applied"
               annotation (Dialog(group="Specification"));
 
           equation
@@ -5564,7 +5587,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             end PartialCondition;
 
             type ConditionType = enumeration(
-                Density "Specify density (measure current)",
+                Density "Specify density difference (measure current)",
+                Pressure "Specify presure difference (measure current)",
                 Current "Specify current (measure density difference)",
                 Custom "Custom") "Types of conditions";
 
@@ -5583,9 +5607,10 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               final y(final unit="l.m/T2") = negative.mPhidot[orientation]);
 
           equation
-            negative.phi[orientation] - positive.phi[orientation] = u_final;
+            positive.phi[orientation] - negative.phi[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Velocity;
 
           model Force
@@ -5607,7 +5632,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                   BaseClasses.ConditionType.Custom, y=negative.mPhidot[
                   orientation]);
 
-            Real x=negative.phi[orientation] - positive.phi[orientation]
+            Real x=positive.phi[orientation] - negative.phi[orientation]
               "Expression to which the condition is applied"
               annotation (Dialog(group="Specification"));
 
@@ -5678,7 +5703,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               final y(unit="l2.m/T3") = negative.Qdot);
 
           equation
-            negative.T - positive.T = u_final;
+            positive.T - negative.T = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="thermal");
           end Temperature;
@@ -5703,7 +5728,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             extends BaseClasses.PartialCondition(final conditionType=
                   BaseClasses.ConditionType.Custom, y=negative.Qdot);
 
-            Real x=negative.T - positive.T
+            Real x=positive.T - negative.T
               "Expression to which the condition is applied"
               annotation (Dialog(group="Specification"));
 
@@ -6047,12 +6072,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           model Pressure "Specify pressure (measure current)"
             extends BaseClasses.PartialCondition(
-              final conditionType=BaseClasses.ConditionType.Density,
-              u(final unit="N/l3"),
+              final conditionType=BaseClasses.ConditionType.Pressure,
+              u(final unit="m/(l.T2)"),
               final y(final unit="N/T") = face.Ndot);
 
+            replaceable package Data =
+                Characteristics.BaseClasses.Characteristic constrainedby
+              Characteristics.BaseClasses.Characteristic "Characteristic data"
+              annotation (
+              Dialog(group="Material properties"),
+              choicesAllMatching=true,
+              __Dymola_choicesFromPackage=true,
+              Placement(transformation(extent={{-60,40},{-40,60}}),
+                  iconTransformation(extent={{-10,90},{10,110}})));
+
           equation
-            face.rho = u_final;
+            Data.p_Tv(face.T, 1/face.rho) = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
           end Pressure;
@@ -6105,6 +6140,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
             type ConditionType = enumeration(
                 Density "Specify density (measure current)",
+                Pressure "Specify pressure (measure current)",
                 Current "Specify current (measure Denis)",
                 Custom "Custom") "Types of conditions";
 
