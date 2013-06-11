@@ -1208,8 +1208,10 @@ package Subregions
           L={100,1,1}*U.mm,
           inclFacesZ=false,
           inclFacesY=true,
-          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                beta=Modelica.Constants.inf))));
+          gas(H2(
+              consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+              beta=Modelica.Constants.inf,
+              upstreamX=false))));
 
       parameter Q.Pressure Deltap_IG=-3*U.Pa
         "<html>Ideal gas pressure difference (&Delta;<i>p</i><sub>IG</sub>)</html>";
@@ -5470,8 +5472,8 @@ Choose a condition besides None.");
         end if;
       else
         (if consMaterial == Conservation.Dynamic then der(N)/U.s else 0) =
-          chemical.Ndot + physical.Ndot + sum(faces.Ndot) + sum(Delta(faces[i,
-          :].rho*faces[i, :].phi[1])*A[cartTrans[i]] for i in 1:n_faces)
+          chemical.Ndot + physical.Ndot + sum(faces.Ndot) - sum(Delta(faces[i,
+          :].rho .* faces[i, :].phi[1])*A[cartFaces[i]] for i in 1:n_faces)
           "Material conservation";
       end if;
 

@@ -6045,6 +6045,18 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 defaultComponentName="material");
           end Density;
 
+          model Pressure "Specify pressure (measure current)"
+            extends BaseClasses.PartialCondition(
+              final conditionType=BaseClasses.ConditionType.Density,
+              u(final unit="N/l3"),
+              final y(final unit="N/T") = face.Ndot);
+
+          equation
+            face.rho = u_final;
+            annotation (defaultComponentPrefixes="replaceable",
+                defaultComponentName="material");
+          end Pressure;
+
           model Current "Specify current (measure density)"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Current,

@@ -685,7 +685,7 @@ package Characteristics
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
     package CharacteristicNASA
-      "Thermodynamic record with transport properties based on NASA CEA"
+      "Thermodynamic package with transport properties based on NASA CEA"
       extends Characteristic;
       constant Q.TemperatureAbsolute T_lim_zeta_theta[:]={0,Modelica.Constants.inf}
         "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
@@ -799,10 +799,9 @@ package Characteristics
 
     end CharacteristicNASA;
 
-    package Characteristic "Record for thermodynamic and resistive properties"
+    package Characteristic "Package of thermodynamic and resistive properties"
       import FCSys.BaseClasses.Utilities.Chemistry.charge;
-      import Modelica.Math.BooleanVectors.anyTrue;
-      extends Modelica.Icons.MaterialPropertiesPackage;
+      extends CharacteristicEOS;
 
       constant String formula "Chemical formula";
       constant Phase phase "Material phase";
@@ -812,15 +811,6 @@ package Characteristics
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
-      constant Q.PressureAbsolute p0=U.bar
-        "<html>Reference pressure (<i>p</i><sup>o</sup>)</html>";
-      constant Integer n_v[2]={-1,0}
-        "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub> (<i>n</i><sub><i>v</i></sub>)</html>";
-      constant Real b_v[:, :]=[1]
-        "<html>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
-      // Note:  p/T is the argument instead of p so that b_p will have the
-      // same size as b_v for the typical definitions of the second virial
-      // coefficients in [Dymond2002].
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
@@ -835,27 +825,8 @@ package Characteristics
         "<html>Coefficients of isobaric specific heat capacity at <i>p</i><sup>o</sup> as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</html>";
       constant Real B_c[size(T_lim_c, 1) - 1, 2]
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
-      final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
-          Modelica.Constants.small and n_v[1] + i - 1 <> 0 for i in 1:size(b_v,
-          1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if density depends on pressure</html>";
-      final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
-           > Modelica.Constants.small and n_v[2] + j - n_v[1] - i <> 0 for i
-           in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if density depends on temperature</html>";
 
     protected
-      final constant Integer n_p[2]={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}
-        "Powers of v and T for 1st row and column of b_p";
-      final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
-           then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1
-           or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[
-          1] <= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3
-           and n_v[1] <= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^
-          2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1)
-          :-1:1} "Coefficients of p as a polynomial in v and T";
-      // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
-      // can be computed using FCSys/resources/virial-relations.cdf.
       constant Q.AreaSpecific alpha=3*sqrt(U.pi)*d^2*U.q/2
         "Scaled specific intercept area";
 
@@ -986,61 +957,6 @@ package Characteristics
   </html>"));
       end c_v;
 
-      function dp_Tv
-        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
-        import FCSys.BaseClasses.Utilities.Polynomial;
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
-        input Q.Temperature dT=0 "Derivative of temperature";
-        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
-        output Q.Pressure dp "Derivative of pressure";
-
-      algorithm
-        dp := if isCompressible then Polynomial.f(
-                v,
-                {Polynomial.f(
-                  T,
-                  b_p[i, :] .* {(n_p[1] + i - 1)*T*dv + (n_p[2] + j - 1)*v*dT
-              for j in 1:size(b_p, 2)},
-                  n_p[2] - 1) for i in 1:size(b_p, 1)},
-                n_p[1] - 1) else 0 annotation (
-          Inline=true,
-          inverse(dv=dv_Tp(
-                      T,
-                      p_Tv(T, v),
-                      dT,
-                      dp)),
-          smoothOrder=999);
-
-      end dp_Tv;
-
-      function dv_Tp
-        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
-        import FCSys.BaseClasses.Utilities.Polynomial;
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        input Q.Temperature dT=0 "Derivative of temperature";
-        input Q.Pressure dp=0 "Derivative of pressure";
-        output Q.VolumeSpecific dv "Derivative of specific volume";
-
-      algorithm
-        dv := Polynomial.f(
-                p,
-                {Polynomial.f(
-                  T,
-                  b_v[i, :] .* {(n_v[1] + i - 1)*T*dp + (n_v[2] - n_v[1] + j -
-              i)*p*dT for j in 1:size(b_v, 2)},
-                  n_v[2] - n_v[1] - i) for i in 1:size(b_v, 1)},
-                n_v[1] - 1) annotation (Inline=true, inverse(dp=dp_Tv(
-                      T,
-                      v_Tp(T, p),
-                      dT,
-                      dv)));
-
-      end dv_Tp;
-
       function g "Gibbs potential as a function of temperature and pressure"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1164,36 +1080,6 @@ package Characteristics
     </html>"));
       end h;
 
-      function p_Tv "Pressure as a function of temperature and specific volume"
-        import FCSys.BaseClasses.Utilities.Polynomial;
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
-        output Q.PressureAbsolute p "Pressure";
-
-      algorithm
-        // assert(isCompressible,
-        //  "The pressure is undefined since the material is incompressible.",
-        //  AssertionLevel.warning);
-        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
-        // been defined as an argument to assert() since Modelica 3.0.
-        p := if isCompressible then Polynomial.f(
-                v,
-                {Polynomial.f(
-                  T,
-                  b_p[i, :],
-                  n_p[2]) for i in 1:size(b_p, 1)},
-                n_p[1]) else p0 annotation (
-          Inline=true,
-          inverse(v=v_Tp(T, p)),
-          derivative=dp_Tv,
-          smoothOrder=999);
-        annotation (Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
-  and the function will return a value of zero.</p>
-
-<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
-      end p_Tv;
-
       function s "Specific entropy as a function of temperature and pressure"
         import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
@@ -1296,29 +1182,6 @@ package Characteristics
         // ...).  Otherwise, an indexing error will occur.
 
       end s;
-
-      function v_Tp "Specific volume as a function of temperature and pressure"
-        import FCSys.BaseClasses.Utilities.Polynomial;
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.VolumeSpecificAbsolute v "Specific volume";
-
-      algorithm
-        v := Polynomial.f(
-                p,
-                {Polynomial.f(
-                  T,
-                  b_v[i, :],
-                  n_v[2] - n_v[1] - i + 1) for i in 1:size(b_v, 1)},
-                n_v[1]) annotation (
-          Inline=true,
-          inverse(p=p_Tv(T, v)),
-          derivative=dv_Tp);
-        annotation (Documentation(info="<html>
-  <p>The derivative of this function is
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
-      end v_Tp;
 
       replaceable function beta
         "<html>Dynamic compressibility (&beta;) as a function of temperature</html>"
@@ -1552,12 +1415,7 @@ temperature difference.</p>
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  It may be used with
-    the assumption of ideal gas or of constant specific volume, although it is more general than
-    that.</p>
-
-    <p>Assumptions:
-    <ol><li>Specific mass is constant.</li></ol></p>
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].</p>
 
 <p>Notes regarding the constants:
     <ul>
@@ -1566,21 +1424,6 @@ temperature difference.</p>
     <li><code>d</code> is the Van der Waals diameter or the diameter for the
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
-
-    <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
-    <i>T</i> increase by column.  If <code>n_v[1] == -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
-    <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
-    where
-    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
-    the first, second, third, and fourth coefficients in the volume-explicit
-    virial equation of state
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2].
-    Currently,
-    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
-    If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
-
-    <li>The defaults for <code>b_v</code> and <code>n_v</code> represent ideal gas.</li>
 
     <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
     by the values in <code>T_lim_c</code>.
@@ -1621,6 +1464,176 @@ temperature difference.</p>
     </ul></p></html>"));
 
     end Characteristic;
+
+    package CharacteristicEOS
+      "<html>Base thermodynamic package with only the <i>p</i>-<i>v</i>-<i>T</i> relations</html>"
+      import Modelica.Math.BooleanVectors.anyTrue;
+      extends Modelica.Icons.MaterialPropertiesPackage;
+
+      constant Q.PressureAbsolute p0=U.bar
+        "<html>Reference pressure (<i>p</i><sup>o</sup>)</html>";
+      constant Integer n_v[2]={-1,0}
+        "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub> (<i>n</i><sub><i>v</i></sub>)</html>";
+      constant Real b_v[:, :]=[1]
+        "<html>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
+      // Note:  p/T is the argument instead of p so that b_p will have the
+      // same size as b_v for the typical definitions of the second virial
+      // coefficients in [Dymond2002].
+      final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
+          Modelica.Constants.small and n_v[1] + i - 1 <> 0 for i in 1:size(b_v,
+          1)}) for j in 1:size(b_v, 2)})
+        "<html><code>true</code>, if density depends on pressure</html>";
+      final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
+           > Modelica.Constants.small and n_v[2] + j - n_v[1] - i <> 0 for i
+           in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
+        "<html><code>true</code>, if density depends on temperature</html>";
+
+    protected
+      final constant Integer n_p[2]={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}
+        "Powers of v and T for 1st row and column of b_p";
+      final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
+           then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1
+           or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[
+          1] <= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3
+           and n_v[1] <= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^
+          2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1)
+          :-1:1} "Coefficients of p as a polynomial in v and T";
+      // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
+      // can be computed using FCSys/resources/virial-relations.cdf.
+
+    public
+      function dp_Tv
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
+        import FCSys.BaseClasses.Utilities.Polynomial;
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
+        input Q.Temperature dT=0 "Derivative of temperature";
+        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
+        output Q.Pressure dp "Derivative of pressure";
+
+      algorithm
+        dp := if isCompressible then Polynomial.f(
+                v,
+                {Polynomial.f(
+                  T,
+                  b_p[i, :] .* {(n_p[1] + i - 1)*T*dv + (n_p[2] + j - 1)*v*dT
+              for j in 1:size(b_p, 2)},
+                  n_p[2] - 1) for i in 1:size(b_p, 1)},
+                n_p[1] - 1) else 0 annotation (
+          Inline=true,
+          inverse(dv=dv_Tp(
+                      T,
+                      p_Tv(T, v),
+                      dT,
+                      dp)),
+          smoothOrder=999);
+
+      end dp_Tv;
+
+      function dv_Tp
+        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
+        import FCSys.BaseClasses.Utilities.Polynomial;
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.Temperature dT=0 "Derivative of temperature";
+        input Q.Pressure dp=0 "Derivative of pressure";
+        output Q.VolumeSpecific dv "Derivative of specific volume";
+
+      algorithm
+        dv := Polynomial.f(
+                p,
+                {Polynomial.f(
+                  T,
+                  b_v[i, :] .* {(n_v[1] + i - 1)*T*dp + (n_v[2] - n_v[1] + j -
+              i)*p*dT for j in 1:size(b_v, 2)},
+                  n_v[2] - n_v[1] - i) for i in 1:size(b_v, 1)},
+                n_v[1] - 1) annotation (Inline=true, inverse(dp=dp_Tv(
+                      T,
+                      v_Tp(T, p),
+                      dT,
+                      dv)));
+
+      end dv_Tp;
+
+      function p_Tv "Pressure as a function of temperature and specific volume"
+        import FCSys.BaseClasses.Utilities.Polynomial;
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
+        output Q.PressureAbsolute p "Pressure";
+
+      algorithm
+        // assert(isCompressible,
+        //  "The pressure is undefined since the material is incompressible.",
+        //  AssertionLevel.warning);
+        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
+        // been defined as an argument to assert() since Modelica 3.0.
+        p := if isCompressible then Polynomial.f(
+                v,
+                {Polynomial.f(
+                  T,
+                  b_p[i, :],
+                  n_p[2]) for i in 1:size(b_p, 1)},
+                n_p[1]) else p0 annotation (
+          Inline=true,
+          inverse(v=v_Tp(T, p)),
+          derivative=dp_Tv,
+          smoothOrder=999);
+        annotation (Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
+  and the function will return a value of zero.</p>
+
+<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
+      end p_Tv;
+
+      function v_Tp "Specific volume as a function of temperature and pressure"
+        import FCSys.BaseClasses.Utilities.Polynomial;
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        output Q.VolumeSpecificAbsolute v "Specific volume";
+
+      algorithm
+        v := Polynomial.f(
+                p,
+                {Polynomial.f(
+                  T,
+                  b_v[i, :],
+                  n_v[2] - n_v[1] - i + 1) for i in 1:size(b_v, 1)},
+                n_v[1]) annotation (
+          Inline=true,
+          inverse(p=p_Tv(T, v)),
+          derivative=dv_Tp);
+        annotation (Documentation(info="<html>
+  <p>The derivative of this function is
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
+      end v_Tp;
+
+      annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
+    <p>This package may be used with
+    the assumption of ideal gas or of constant specific volume, although it is more general than
+    that.</p>
+
+<p>Notes regarding the constants:
+    <ul>
+    <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
+    <i>T</i> increase by column.  If <code>n_v[1] == -1</code>, then the rows
+    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
+    <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
+    where
+    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
+    the first, second, third, and fourth coefficients in the volume-explicit
+    virial equation of state
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2].
+    Currently,
+    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
+    If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
+
+    <li>The defaults for <code>b_v</code> and <code>n_v</code> represent ideal gas.</li>
+    </ul></p></html>"));
+
+    end CharacteristicEOS;
 
     type Phase = enumeration(
         Gas "Gas",
