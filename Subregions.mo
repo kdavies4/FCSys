@@ -217,9 +217,8 @@ package Subregions
       extends Examples.Subregion(subregion(
           L={100,1,1}*U.mm,
           inclFacesY=true,
-          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
-
-          inclFacesZ=true));
+          inclFacesZ=true,
+          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC))));
 
       parameter Q.Pressure Deltap=-10*U.Pa
         "<html>Prescribed gas pressure difference (&Delta;<i>p</i>)</html>";
@@ -407,7 +406,7 @@ package Subregions
 
       annotation (
         Diagram(graphics),
-        experiment(StopTime=200, Tolerance=1e-06),
+        experiment(StopTime=0.1, Tolerance=1e-06),
         experimentSetupOutput);
       connect(BC2.face, subregion.xPositive) annotation (Line(
           points={{20,1.23436e-15},{16,1.23436e-15},{16,6.10623e-16},{10,
@@ -5248,7 +5247,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     initial equation
       // Check the initialization methods.
       assert(initMaterial <> initEnergy or initMaterial == InitScalar.None or
-        consMaterial == Conservation.Static or consEnergy == Conservation.Static,
+        consMaterial == Conservation.Steady or consEnergy == Conservation.Steady,
         "The initialization methods for material and energy must be different (unless None).");
       if not Data.isCompressible then
         assert(initMaterial <> InitScalar.Pressure and initMaterial <>
@@ -5305,7 +5304,7 @@ Choose a condition besides None.");
           der(chemical.mu) = 0;
           // Else there's no initial equation since
           // initMaterial == InitScalar.None or
-          // consMaterial == Conservation.Static.
+          // consMaterial == Conservation.Steady.
         end if;
       end if;
 
@@ -5330,7 +5329,7 @@ Choose any condition besides None.");
             der(I[i]) = 0;
             // Else there's no initial equation since
             // initTrans[cartTrans[i]] == InitTranslational.None or
-            // initTrans[cartTrans[i]] == Conservation.Static.
+            // initTrans[cartTrans[i]] == Conservation.Steady.
           end if;
         end if;
       end for;
@@ -5373,7 +5372,7 @@ Choose a condition besides None.");
           der(chemical.mu) = 0;
           // Else there's no initial equation since
           // initEnergy == InitScalar.None or
-          // consEnergy == Conservation.Static.
+          // consEnergy == Conservation.Steady.
         end if;
       end if;
 
@@ -5458,37 +5457,36 @@ Choose a condition besides None.");
         end for;
 
         // Direct mapping of shear forces
-        if true or not inclRot[cartWrap(cartFaces[i] - 1)] then
+        if not inclRot[cartWrap(cartFaces[i] - 1)] then
           faces[i, :].mPhidot[Orientation.following] = faces_mPhidot[i, :,
             Orientation.following - 1];
           // Else the force must be mapped for zero torque (below).
         end if;
-        if true or not inclRot[cartWrap(cartFaces[i] + 1)] then
+        if not inclRot[cartWrap(cartFaces[i] + 1)] then
           faces[i, :].mPhidot[Orientation.preceding] = faces_mPhidot[i, :,
             Orientation.preceding - 1];
           // Else the force must be mapped for zero torque (below).
         end if;
       end for;
-      // **temp trues.
 
       // Zero-torque mapping of shear forces
-      /* **
-  for axis in cartRot loop
-    4*cat(
-      1,
-      faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
-      faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding]) =
-      {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis - 1)]/
-      L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],
-      L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(axis + 1)]/L[
-      cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],3,1},{-L[
-      cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[cartWrap(axis + 1)]/L[
-      cartWrap(axis - 1)],1,3}}*cat(
-      1,
-      faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following - 1],
-      faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding - 1]);
-  end for;
-*/
+      for axis in cartRot loop
+        4*cat(1,
+              faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
+              faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding])
+          = {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis
+           - 1)]/L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(
+          axis + 1)],L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(
+          axis + 1)]/L[cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(
+          axis - 1)],3,1},{-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[
+          cartWrap(axis + 1)]/L[cartWrap(axis - 1)],1,3}}*cat(
+              1,
+              faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following
+             - 1],
+              faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding
+             - 1]);
+      end for;
+
       // Material dynamics
       if consMaterial == Conservation.IC then
         // Apply the IC forever (material not conserved).
@@ -5549,27 +5547,48 @@ Choose a condition besides None.");
             // occur due to an assertion.
           end if;
         else
-          (if consTrans[cartTrans[i]] == Conservation.Dynamic then der(M*phi[i])
+          /*
+              (if consTrans[cartTrans[i]] == Conservation.Dynamic then der(M*phi[i])/U.s
+         else 0) + M*environment.a[cartTrans[i]] + N*Data.z*environment.E[
+        cartTrans[i]] + (if inclFaces[cartTrans[i]] then Delta(p_faces[
+        facesCart[cartTrans[i]], :])*A[cartTrans[i]] else 0) = Data.m*(
+        actualStream(chemical.phi) .* chemical.Ndot + actualStream(physical.phi)
+         .* physical.Ndot)[i] + inert.translational.mPhidot[i] + inertDalton.mPhidot[
+        i] + sum(if inclFaces[cartWrap(cartTrans[i] - orientation + 1)] then 0*
+        faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].phi[
+        orientation]*faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)],
+        :].Ndot*Data.m + 0*Delta(faces[facesCart[cartWrap(cartTrans[i] -
+        orientation + 1)], :].phi[orientation] .* faces[facesCart[cartWrap(
+        cartTrans[i] - orientation + 1)], :].phi[1] .* faces[facesCart[cartWrap
+        (cartTrans[i] - orientation + 1)], :].rho)*A[cartWrap(cartTrans[i] -
+        orientation + 1)]*Data.m + Sigma(faces[facesCart[cartWrap(cartTrans[i] -
+        orientation + 1)], :].mPhidot[orientation]) else 0 for orientation in 
+        Orientation) "Conservation of translational momentum";
+        */
+          (if consTrans[cartTrans[i]] == Conservation.Dynamic then M*der(phi[i])
             /U.s else 0) + M*environment.a[cartTrans[i]] + N*Data.z*environment.E[
             cartTrans[i]] + (if inclFaces[cartTrans[i]] then Delta(p_faces[
-            facesCart[cartTrans[i]], :])*A[cartTrans[i]] else 0) = Data.m*(
-            actualStream(chemical.phi) .* chemical.Ndot + actualStream(physical.phi)
-             .* physical.Ndot)[i] + inert.translational.mPhidot[i] +
-            inertDalton.mPhidot[i] + sum(if inclFaces[cartWrap(cartTrans[i] -
-            orientation + 1)] then 0*faces[facesCart[cartWrap(cartTrans[i] -
-            orientation + 1)], :].phi[orientation]*faces[facesCart[cartWrap(
-            cartTrans[i] - orientation + 1)], :].Ndot*Data.m + 0*Delta(faces[
-            facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].phi[
-            orientation] .* faces[facesCart[cartWrap(cartTrans[i] - orientation
-             + 1)], :].phi[1] .* faces[facesCart[cartWrap(cartTrans[i] -
-            orientation + 1)], :].rho)*A[cartWrap(cartTrans[i] - orientation +
-            1)]*Data.m + Sigma(faces[facesCart[cartWrap(cartTrans[i] -
-            orientation + 1)], :].mPhidot[orientation]) else 0 for orientation
-             in Orientation) "Conservation of translational momentum";
-          // **temp 0
+            facesCart[cartTrans[i]], :])*A[cartTrans[i]] else 0) = Data.m*((
+            actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(
+            physical.phi) - phi) .* physical.Ndot)[i] + inert.translational.mPhidot[
+            i] + inertDalton.mPhidot[i] + sum(if inclFaces[cartWrap(cartTrans[i]
+             - orientation + 1)] then 0*(faces[facesCart[cartWrap(cartTrans[i]
+             - orientation + 1)], :].phi[orientation] - fill(phi[i], 2))*faces[
+            facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].Ndot*Data.m
+             + 0*Delta((faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)],
+            :].phi[orientation] - fill(phi[i], 2)) .* faces[facesCart[cartWrap(
+            cartTrans[i] - orientation + 1)], :].phi[1] .* faces[facesCart[
+            cartWrap(cartTrans[i] - orientation + 1)], :].rho)*A[cartWrap(
+            cartTrans[i] - orientation + 1)]*Data.m + Sigma(faces[facesCart[
+            cartWrap(cartTrans[i] - orientation + 1)], :].mPhidot[orientation])
+             else 0 for orientation in Orientation)
+            "Conservation of translational momentum";
+          // **temp 0s
           // Note in diss:  no advective translational momentum with  material diffusion.
-          // In Dymola 7.4 it isn't possible to individually index the components
-          // of advective exchange, e.g.,
+          // Note:  Dymola 7.4 (Dassl solver) runs better with this intensive form
+          // of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
+          // Note:  In Dymola 7.4 it isn't possible to individually index the
+          // components of advective exchange, e.g.,
           // (actualStream(physical.phi) .* physical.Ndot)[i]
           // must be used instead of
           // actualStream(physical.phi[axis])*physical.Ndot[i].
@@ -5809,7 +5828,7 @@ Choose a condition besides None.");
 
       type Conservation = enumeration(
           IC "Initial condition imposed forever (no conservation)",
-          Static "Static (conservation without storage)",
+          Steady "Steady (conservation with steady state)",
           Dynamic "Dynamic (conservation with storage)")
         "Options for a conservation equation";
       type InitScalar = enumeration(
