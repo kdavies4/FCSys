@@ -5495,7 +5495,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           extends Modelica.Icons.Package;
 
           model Density
-            "Specify density difference (measure current), with conservation of material"
+            "Specify density difference (measure diffusion current), with conservation of material"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Density,
               u(final unit="N/l3"),
@@ -5507,7 +5507,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 defaultComponentName="material");
           end Density;
 
-          model Pressure "Specify pressure (measure current)"
+          model Pressure "Specify pressure (measure diffusion current)"
             extends Single.Material.BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Pressure,
               u(final unit="m/(l.T2)"),
@@ -5530,7 +5530,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           end Pressure;
 
           model Current
-            "Specify current (measure density), with conservation of material"
+            "Specify diffusion current (measure density), with conservation of material"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Current,
               u(final unit="N/T"),
@@ -6070,7 +6070,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 defaultComponentName="material");
           end Density;
 
-          model Pressure "Specify pressure (measure current)"
+          model Pressure "Specify pressure (measure diffusion current)"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Pressure,
               u(final unit="m/(l.T2)"),
@@ -6095,7 +6095,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
   <p>The default characteristic data represents an ideal gas.</p></html>"));
           end Pressure;
 
-          model Current "Specify current (measure density)"
+          model Current "Specify diffusion current (measure density)"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Current,
               u(final unit="N/T"),
@@ -6166,6 +6166,29 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 defaultComponentName="translational");
           end Velocity;
 
+          model Current "Specify advective current (measure force)"
+            extends BaseClasses.PartialCondition(
+              final conditionType=BaseClasses.ConditionType.Current,
+              u(final unit="N/T"),
+              final y(final unit="l.m/T2") = face.mPhidot[orientation]);
+
+            Q.Area A=U.cm^2 "Cross-sectional area";
+
+          initial equation
+            assert(orientation == Orientation.normal,
+              "FCSys.Conditions.ByConnector.Face.Single.Translational.Current is only intended for the normal direction.");
+
+          equation
+            face.phi[orientation]*face.rho*A = u_final;
+
+            annotation (
+              defaultComponentPrefixes="replaceable",
+              defaultComponentName="translational",
+              Documentation(info="<html><p>The advective current is in the globally positive direction (not into the component).
+    This model is meaningful only for the normal direction
+  (<code>orientation = Orientation.normal).</p></html>"));
+          end Current;
+
           model Force "Specify force (measure velocity)"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Force,
@@ -6223,6 +6246,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
             type ConditionType = enumeration(
                 Velocity "Specify velocity (measure force)",
+                Current "Specify current (measure force)",
                 Force "Specify force (measure velocity)",
                 Custom "Custom") "Types of conditions";
 
@@ -8063,7 +8087,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
     parameter Boolean analysis=true "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
-    parameter Q.PressureAbsolute p(nominal=U.atm) = 1*U.atm "Pressure";
+    parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure";
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K
       "Temperature";
     parameter Q.NumberAbsolute RH(displayUnit="%") = 1 "Relative humidity";
@@ -8092,49 +8116,60 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-120,60},{120,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-120,60},{120,100}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{32,8},{48,-8}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={50,50,50},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash)}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-100}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{32,8},{48,-8}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={50,50,50},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash)}));
 
   end Environment;
 

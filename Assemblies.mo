@@ -196,10 +196,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]=fill(1*U.m/1, 1)
+      parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (L<sub>y</sub>)</html>"
         annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]=fill(5*U.mm/1, 1)
+      parameter Q.Length L_z[:]={5*U.mm}
         "<html>Lengths across the channel (L<sub>z</sub>)</html>"
         annotation (Dialog(group="Geometry"));
       final parameter Integer n_y=size(L_y, 1)
@@ -460,10 +460,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]=fill(1*U.m/1, 1)
+      parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (L<sub>y</sub>)</html>"
         annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]=fill(5*U.mm/1, 1)
+      parameter Q.Length L_z[:]={5*U.mm}
         "<html>Lengths across the channel (L<sub>z</sub>)</html>"
         annotation (Dialog(group="Geometry"));
       final parameter Integer n_y=size(L_y, 1)

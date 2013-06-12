@@ -40,12 +40,6 @@ package Subregions
 
       FCSys.Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2),
-        liquid(H2O(V_IC=subregion.V/4)),
         inclTransY=false,
         inclTransZ=false,
         inclFacesY=false,
@@ -56,17 +50,23 @@ package Subregions
           final 'incle-'='incle-',
           'C+'(
             V_IC=subregion.V/4,
-            consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-            consTransY=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-            consTransZ=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
+            consTransX=Conservation.IC,
+            consTransY=Conservation.IC,
+            consTransZ=Conservation.IC)),
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2),
+        liquid(H2O(V_IC=subregion.V/4)),
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
           'C19HF37O5S-'(
             V_IC=subregion.V/4,
-            consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-            consTransY=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-            consTransZ=FCSys.Subregions.Species.BaseClasses.Conservation.IC)))
+            consTransX=Conservation.IC,
+            consTransY=Conservation.IC,
+            consTransZ=Conservation.IC)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner FCSys.Conditions.Environment environment(analysis=true)
@@ -104,8 +104,9 @@ package Subregions
         'inclC19HF37O5S-'=true,
         inclH2O=true,
         inclH2=false,
-        subregion(gas(H2O(T_IC=1*environment.T)), ionomer(inclH2O=inclH2O)));
-
+        subregion(gas(H2O(p_IC=1.001*U.atm)), ionomer(inclH2O=inclH2O)));
+      // In Dymola 7.4, p_IC=1.1*environment.p has no effect on the
+      // initial pressure, but p_IC=1.1*U.atm does.
       extends Modelica.Icons.UnderConstruction;
 
       annotation (
@@ -121,22 +122,24 @@ package Subregions
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and the essential species for it (C+, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</html>"
 
-      // **Fails simulation due to temperature of H+
-
       extends Examples.Subregion(
         'inclC+'=true,
         'inclC19HF37O5S-'=true,
         'incle-'=true,
-        'inclH+'=true,
+        'inclH+'=false,
         inclH2=true,
-        subregion(ionomer(reduceTemp=true), graphite(reduceTemp=true)));
+        subregion(
+          ionomer(reduceTemp=true),
+          graphite(reduceTemp=true),
+          gas(H2(initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+                chemical(Ndot(start=0, fixed=true))))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
         graphite(
           'inclC+'=false,
-          final 'incle-'='incle-',
-          'e-'(normal(redeclare Modelica.Blocks.Sources.Ramp source(duration=
-                    1000, height=0*1*U.cm/U.s)))),
+          final 'incle-'=false,
+          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
+              normal)),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
@@ -151,14 +154,13 @@ package Subregions
             rotation=270,
             origin={-24,0})));
 
-      // **temp 0 factor
-
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
         graphite(
           'inclC+'=false,
           final 'incle-'='incle-',
           'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal(source(y=5.5e7*U.N)))),
+              normal(redeclare Modelica.Blocks.Sources.Ramp source(duration=
+                    1000, height=0*100*U.A)))),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
@@ -196,6 +198,7 @@ package Subregions
               "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
+
     end SubregionHOR;
 
     model SubregionORR
@@ -655,13 +658,12 @@ package Subregions
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
-          StopTime=25,
+          StopTime=2,
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"),
         experimentSetupOutput);
-
     end Subregions;
 
     model ElectricalConduction
@@ -671,10 +673,10 @@ package Subregions
         'inclC+'=true,
         'incle-'=true,
         inclH2=false,
-        subregion1(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Pressure))),
-        subregion2(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Pressure))));
+        subregion1(graphite('e-'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Volume))),
+        subregion2(graphite('e-'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Volume))));
       annotation (
         experiment(StopTime=30, Tolerance=1e-06),
         Commands(file=
@@ -696,7 +698,6 @@ package Subregions
         experimentSetupOutput);
 
     end SubregionsInitialVelocity;
-
 
     model ThermalConduction "Test thermal conduction (through solid)"
       extends Examples.Subregions(
@@ -1215,7 +1216,7 @@ package Subregions
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
-<p>Please see the documentation fo the 
+<p>Please see the documentation fo the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
@@ -1387,7 +1388,7 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     annotation (defaultComponentName="subregion", Documentation(info="<html>
-<p>Please see the documentation fo the 
+<p>Please see the documentation fo the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
   end SubregionNoIonomer;
 
@@ -2732,58 +2733,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -3041,10 +3034,10 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html><p>Assumptions:<ol>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
-    
+
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
@@ -3061,10 +3054,10 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html><p>Assumptions:<ol>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
-    
+
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
@@ -3078,19 +3071,17 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal theta=Data.theta(),
-            consMaterial=Conservation.IC,
-            initMaterial=InitScalar.Pressure);
+            redeclare parameter Q.ResistivityThermal theta=Data.theta());
 
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html><p>Assumptions:<ol>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
-    
+
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
@@ -3142,7 +3133,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
   simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
   (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
 
@@ -3166,7 +3157,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
   simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
   (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
 
@@ -3199,7 +3190,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
   simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
   (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be 
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
 
@@ -3633,7 +3624,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
           </ol></p>
 
@@ -3650,7 +3641,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+    <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
    other configurations (e.g., gas).</li>
           </ol></p>
 
@@ -3676,7 +3667,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
         <li>The generalized resistivities (&beta;, &zeta;, &theta;) are fixed (e.g., independent of temperature).</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
     </ol></p></p>
 
@@ -3717,7 +3708,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
     </ol></p>
          <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
@@ -3732,7 +3723,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
     </ol></p>
          <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
@@ -3755,7 +3746,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
         <li>The generalized resistivities (&beta;, &zeta;, &theta;) are fixed (e.g., independent of temperature).</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the 
+        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
     </ol></p>
 
@@ -3937,7 +3928,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
     </ol></p>
 
-<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities 
+<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
 (<code>zeta=1/(17.82e-6*U.Pa*U.s)</code> and <code>theta=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
    The integration offset for specific entropy is set such that
@@ -3945,7 +3936,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
    Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.  <a href=\"#Tab2\">Table 2</a> lists
   values of the material resistivity or self diffusion coefficient.</p>
-  
+
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
   <tr>
@@ -3977,7 +3968,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <br>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of N<sub>2</sub> gas at 1 atm 
+  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of N<sub>2</sub> gas at 1 atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
@@ -3988,7 +3979,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>273.2</td><td>0.185</td></tr>
 <tr><td>353.2</td><td>0.287</td></tr>
   </table></p>
-  
+
   <p>The fluidity of air at 15.0 &deg;C and 1 atm is given by
        <code>zeta=1/(17.8e-6*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
@@ -4098,7 +4089,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   values of the material resistivity or self diffusion coefficient.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm 
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
@@ -4129,7 +4120,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <br>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of O<sub>2</sub> gas at 1 atm 
+  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of O<sub>2</sub> gas at 1 atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
@@ -4140,7 +4131,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>273.2</td><td>0.187</td></tr>
 <tr><td>353.2</td><td>0.301</td></tr>
   </table></p>
-  
+
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
@@ -4159,9 +4150,11 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final upstreamZ=false,
         final phi_IC=zeros(3),
         final I_IC,
-        consMaterial=Conservation.IC,
+        final consTransX=Conservation.IC,
+        final consTransY=Conservation.IC,
+        final consTransZ=Conservation.IC,
         final tauprime=0,
-        final beta=0,
+        final beta=1,
         final zeta=1);
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -4514,7 +4507,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Power hI[n_trans](each stateSelect=StateSelect.never) = h*I if
         environment.analysis "Bulk enthalpy flow rate";
       //
-      // Translational momentum balance **update
+      // Translational momentum balance
       output Q.Force Ma[n_trans](each stateSelect=StateSelect.never) = M*(der(
         phi)/U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans]
         if environment.analysis
@@ -4529,49 +4522,42 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = inert.translational.mPhidot
          + inertDalton.mPhidot if environment.analysis
         "Friction from other configurations (diffusive exchange)";
-      output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum(
-        if inclFaces[cartWrap(cartTrans[i] - orientation + 1)] then Data.m*(
-        faces[facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].phi[
-        orientation] - fill(phi[i], 2))*Ndot_faces[facesCart[cartWrap(cartTrans[
-        i] - orientation + 1)], :] else 0 for orientation in Orientation) for i
-         in 1:n_trans} if environment.analysis
-        "Acceleration force due to advective transport **update";
+      output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
+        faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],
+        phi[i]})*Ndot_faces[j, :]*Data.m for j in 1:n_faces) for i in 1:n_trans}
+        if environment.analysis "Acceleration force due to advective transport";
       output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(
-        if inclFaces[cartWrap(cartTrans[i] - orientation + 1)] then Sigma(faces[
-        facesCart[cartWrap(cartTrans[i] - orientation + 1)], :].mPhidot[
-        orientation]) else 0 for orientation in Orientation) for i in 1:n_trans}
-        if environment.analysis
+        Sigma(faces[j, :].mPhidot[cartWrap(cartTrans[i] - cartFaces[j] + 1)])
+        for j in 1:n_faces) for i in 1:n_trans} if environment.analysis
         "Friction from other subregions (diffusive transport, including bulk viscosity)";
       //
-      // Energy balance **update
-      output Q.Power Ndere(stateSelect=StateSelect.never) = (N*der(h) - V*der(p)
-         + M*der(phi*phi)/2)/U.s if environment.analysis
-        "Rate of energy storage (internal and kinetic) at constant mass";
-      output Q.Power Edot_AE(stateSelect=StateSelect.never) = -(chemical.mu +
-        actualStream(chemical.phi)*actualStream(chemical.phi)*Data.m/2 +
-        actualStream(chemical.sT) - h - Data.m*phi*phi/2)*chemical.Ndot + (
-        physical.mu + actualStream(physical.phi)*actualStream(physical.phi)*
-        Data.m/2 + actualStream(physical.sT) - h - Data.m*phi*phi/2)*physical.Ndot
-        if environment.analysis
-        "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
-      output Q.Power Qdot_GE(stateSelect=StateSelect.never) = inert.translational.phi
-        *inert.translational.mPhidot + inertDalton.phi*inertDalton.mPhidot if
+      // Energy balance
+      output Q.Power Ndere(stateSelect=StateSelect.never) = (N*T*der(s) + M*phi
+        *der(phi))/U.s if environment.analysis
+        "Rate of energy storage (internal and kinetic) and boundary work at constant mass";
+      // Note that T*der(s) = der(u) + p*der(v).
+      output Q.Power Edot_AE(stateSelect=StateSelect.never) = (chemical.mu +
+        actualStream(chemical.sT) - h + (actualStream(chemical.phi)*
+        actualStream(chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot + (
+        physical.mu + actualStream(physical.sT) - h + (actualStream(physical.phi)
+        *actualStream(physical.phi) - phi*phi)*Data.m/2)*physical.Ndot if
         environment.analysis
-        "Rate of heat generation due to friction with other configurations";
-      output Q.Power Qdot_DE(stateSelect=StateSelect.never) = inert.thermal.Qdot
-         + inertDalton.Qdot if environment.analysis
-        "Rate of thermal conduction from other configurations";
-      output Q.Power Edot_AT(stateSelect=StateSelect.never) = -sum(sum((Data.h(
-        faces[i, side].T, p_faces[i, side]) - h + (faces[i, side].phi*faces[i,
-        side].phi - phi*phi)*Data.m/2)*faces[i, side].Ndot for side in Side)
-        for i in 1:n_faces) if environment.analysis
+        "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
+      output Q.Power Edot_DE(stateSelect=StateSelect.never) = inert.translational.phi
+        *inert.translational.mPhidot + inert.thermal.Qdot + inertDalton.phi*
+        inertDalton.mPhidot + inertDalton.Qdot if environment.analysis
+        "Rate of diffusion of energy from other configurations";
+      output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[
+        j, :].T, p_faces[j, :]) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
+        cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
+        Ndot_faces[j, :]*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if
+        environment.analysis
         "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
-      output Q.Power Qdot_GT(stateSelect=StateSelect.never) = sum(faces.phi .*
-        faces.mPhidot) if environment.analysis
-        "Rate of heat generation due to friction with other subregions";
-      output Q.Power Qdot_DT(stateSelect=StateSelect.never) = sum(faces.Qdot)
-        if environment.analysis
-        "Rate of thermal conduction from other subregions";
+      output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[j,
+        :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)]*faces[j, :].mPhidot[
+        cartWrap(cartTrans[i] - cartFaces[j] + 1)] for i in 1:n_trans) for j
+         in 1:n_faces) + sum(faces.Qdot) if environment.analysis
+        "Rate of diffusion of energy from other subregions";
       // Note:  The structure of the problem should not change if these
       // auxiliary variables are included (hence StateSelect.never).
 
@@ -4708,17 +4694,21 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "The initialization methods for material and energy must be different (unless None).");
       if not Data.isCompressible then
         assert(initMaterial <> InitScalar.Pressure and initMaterial <>
-          InitScalar.PressureSS or consMaterial == Conservation.IC, "The material is incompressible,
+          InitScalar.PressureSS or consMaterial == Conservation.IC or
+          consMaterial == Conservation.Steady, "The material is incompressible,
 yet the initialization method for material involves pressure.");
         assert(initEnergy <> InitScalar.Pressure and initEnergy <> InitScalar.PressureSS
-           or consEnergy == Conservation.IC, "The material is incompressible,
+           or consEnergy == Conservation.IC or consEnergy == Conservation.Steady,
+          "The material is incompressible,
 yet the initialization method for energy involves pressure.");
         if not Data.hasThermalExpansion then
           assert(initMaterial <> InitScalar.Density and initMaterial <>
-            InitScalar.DensitySS or consMaterial == Conservation.IC, "The material is isochoric,
+            InitScalar.DensitySS or consMaterial == Conservation.IC or
+            consMaterial == Conservation.Steady, "The material is isochoric,
 yet the initialization method for material involves density.");
           assert(initEnergy <> InitScalar.Density and initEnergy <> InitScalar.DensitySS
-             or consMaterial == Conservation.IC, "The material is isochoric,
+             or consEnergy == Conservation.IC or consEnergy == Conservation.Steady,
+            "The material is isochoric,
 yet the initialization method for energy involves density.");
         end if;
       end if;
@@ -4881,11 +4871,9 @@ Choose a condition besides None.");
       // Diffusive transport
       for i in 1:n_faces loop
         for side in Side loop
-          // Material
+          // Material (central difference)
           eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho -
             1/v)*2;
-          // **in doc: upstream discretization is only applied to velocity and temperature (not density)
-          // State and justify in dissertation
 
           // Translational momentum
           beta*faces[i, side].mPhidot[Orientation.normal] = Lprime[cartFaces[i]]
@@ -5006,12 +4994,12 @@ Choose a condition besides None.");
             // occur due to an assertion.
           end if;
         else
-          (if consTrans[cartTrans[i]] == Conservation.Dynamic then M*der(phi[i])
-            /U.s else 0) + M*environment.a[cartTrans[i]] + N*Data.z*environment.E[
-            cartTrans[i]] + (if inclFaces[cartTrans[i]] then Delta(p_faces[
-            facesCart[cartTrans[i]], :])*A[cartTrans[i]] else 0) = Data.m*((
-            actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(
-            physical.phi) - phi) .* physical.Ndot)[i] + inert.translational.mPhidot[
+          M*((if consTrans[cartTrans[i]] == Conservation.Dynamic then M*der(phi[
+            i])/U.s else 0) + environment.a[cartTrans[i]]) + N*Data.z*
+            environment.E[cartTrans[i]] + (if inclFaces[cartTrans[i]] then
+            Delta(p_faces[facesCart[cartTrans[i]], :])*A[cartTrans[i]] else 0)
+            = Data.m*((actualStream(chemical.phi) - phi) .* chemical.Ndot + (
+            actualStream(physical.phi) - phi) .* physical.Ndot)[i] + inert.translational.mPhidot[
             i] + inertDalton.mPhidot[i] + sum((faces[j, :].phi[cartWrap(
             cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[i]})*Ndot_faces[j,
             :]*Data.m + Sigma(faces[j, :].mPhidot[cartWrap(cartTrans[i] -
@@ -5063,24 +5051,20 @@ Choose a condition besides None.");
           // assertion.
         end if;
       else
-        (if consEnergy == Conservation.Dynamic then (T*der(s) + M*phi*der(phi))
-          /U.s else 0) = (chemical.mu + actualStream(chemical.phi)*actualStream(
-          chemical.phi)*Data.m/2 + actualStream(chemical.sT) - h)*chemical.Ndot
-           + (physical.mu + actualStream(physical.phi)*actualStream(physical.phi)
-          *Data.m/2 + actualStream(physical.sT) - h)*physical.Ndot + inert.translational.phi
-          *inert.translational.mPhidot + inert.thermal.Qdot + inertDalton.phi*
-          inertDalton.mPhidot + inertDalton.Qdot + sum((Data.h(faces[j, :].T,
-          p_faces[j, :]) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
-          cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
-          Ndot_faces[j, :]*Data.m/2 + faces[j, :].phi[cartWrap(cartTrans[i] -
-          cartFaces[j] + 1)]*faces[j, :].mPhidot[cartWrap(cartTrans[i] -
-          cartFaces[j] + 1)] for i in 1:n_trans) for j in 1:n_faces) + sum(
-          faces.Qdot);
-        // **in doc: If Conservation.Steady, then derivative of velocity is treated as zero and removed from the
-        // momentum balance.  T*der(s) + M*phi*der(phi) is treated as zero and removed from the energy balance.
-        // **in doc: If axis isn't included in momentum balance, then it will still produce
-        // friction (as if stagnant) but won't generate heat and won't contribute to any component
-        // of the momentum balance.
+        (if consEnergy == Conservation.Dynamic then (N*T*der(s) + M*phi*der(phi))
+          /U.s else 0) = (chemical.mu + actualStream(chemical.sT) - h + (
+          actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
+          /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
+          actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*Data.m
+          /2)*physical.Ndot + inert.translational.phi*inert.translational.mPhidot
+           + inert.thermal.Qdot + inertDalton.phi*inertDalton.mPhidot +
+          inertDalton.Qdot + sum((Data.h(faces[j, :].T, p_faces[j, :]) - {h,h})
+          *Ndot_faces[j, :] + sum((faces[j, :].phi[cartWrap(cartTrans[i] -
+          cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*Ndot_faces[j, :]*Data.m/
+          2 + faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)]*faces[
+          j, :].mPhidot[cartWrap(cartTrans[i] - cartFaces[j] + 1)] for i in 1:
+          n_trans) for j in 1:n_faces) + sum(faces.Qdot)
+          "Conservation of energy";
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -5212,6 +5196,19 @@ Choose a condition besides None.");
     and thus temperature.
     In that case, it may help to set <code>consEnergy</code> to <code>Conservation.IC</code> so that
     the energy conservation equation is not imposed.</li>
+    <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
+    <code>Conservation.Steady</code>, then the derivative of the corresponding component of velocity
+    is treated as zero and removed from the translational momentum balance.  If <code>consEnergy</code> is
+    <code>Conservation.Steady</code>, then <code>T*der(s) + M*phi*der(phi)</code> is treated as
+    zero and removed from the energy balance.</li>
+    <li>If a component of velocity is not included (via the outer <code>inclTrans[:]</code> parameter
+    which maps to <code>{inclTransX, inclTransY, inclTransZ}</code> in the
+    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">Subregion</a> model), then it
+    is taken to be zero in each translational transport equation.  However, the corresponding forces
+    in the <code>faces</code> connector array are not included in the momentum or energy balances.
+    If it is necessary to set a component of velocity to zero but still include it in the energy balance, then
+    set the corresponding component of <code>phi_IC</code> to zero and <code>consTransX<code>,
+    <code>consTransY<code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>consMaterial</code> to <code>Conservation.IC</code> and <code>initMaterial</code>
     to <code>InitScalar.Pressure</code> for one of the species.</li>
@@ -5227,11 +5224,14 @@ Choose a condition besides None.");
     is related to it via the material characteristics and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    <li>If upstream discretization is not used (<code>upstreamX=false</code>,
-    etc.), then the central difference scheme is used.
+    <li>Upstream discretization may be applied to translational and thermal transport
+    using (<code>upstreamX=true</code>, etc.).  Otherwise, the central difference
+    scheme is used.  The central difference scheme
+    is always used for material diffusion.</li>
     <li>If <code>invertEOS</code> is <code>true</code>, then the equation of state is implemented with pressure
     as a function of temperature and specific volume.  Otherwise, specific volume is a function of temperature
-    and pressure.</li></p>
+    and pressure.</li>
+    </p>
 
     <p>In evaluating the dynamics of a phase, it is typically assumed that all of the species
     exist at the same velocity and temperature.  The translational and thermal time constants

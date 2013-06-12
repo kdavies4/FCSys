@@ -119,7 +119,7 @@ package Tests "Models and functions for test and validation"
     protected
       replaceable function v_OC "Open-circuit voltage"
         input Q.TemperatureAbsolute T "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.Potential v_OC "Potential";
 
       algorithm
@@ -156,7 +156,7 @@ package Tests "Models and functions for test and validation"
     protected
       redeclare function v_OC "Open-circuit voltage"
         input Q.TemperatureAbsolute T "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.Potential v_OC "Potential";
 
       algorithm
@@ -167,7 +167,7 @@ package Tests "Models and functions for test and validation"
 
       function v_therm "Thermodynamic potential"
         input Q.TemperatureAbsolute T "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.Potential v_therm "Potential";
 
       algorithm
@@ -231,7 +231,6 @@ package Tests "Models and functions for test and validation"
           end for;
 
         end c_p;
-
 
         model c_v
           "<html>Test the isochoric specific heat capacity of H<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
@@ -490,7 +489,6 @@ package Tests "Models and functions for test and validation"
                 *U.K));
 
         end c_v;
-
 
         model h
           "<html>Test the specific enthalpy of N<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
