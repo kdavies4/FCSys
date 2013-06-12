@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.ChemicalReaction</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalReaction\&quot;&gt;ChemicalReaction&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -242,12 +242,29 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.C
 <font color="blue">model</font> ChemicalReactionNoFlow <font color="darkgreen">
   &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector, with zero flows by default&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReaction">ChemicalReaction</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential">Material.Potential</a> material,
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalAdvection.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalAdvection.HeatRate">ThermalAdvection.HeatRate</a> thermalAdvection,
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.HeatRate">ThermalDiffusion.HeatRate</a> thermalDiffusion);
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential">Conditions.ByConnector.ChemicalReaction.Material.Potential</a>
+      material,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Conditions.ByConnector.ChemicalReaction.Translational.Force</a>
+      translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Conditions.ByConnector.ChemicalReaction.Translational.Force</a>
+      translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Translational.html#FCSys.Conditions.ByConnector.ChemicalReaction.Translational.Force">Conditions.ByConnector.ChemicalReaction.Translational.Force</a>
+      translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalAdvection.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalAdvection.HeatRate">Conditions.ByConnector.ChemicalReaction.ThermalAdvection.HeatRate</a>
+      thermalAdvection,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.HeatRate">Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.HeatRate</a>
+      thermalDiffusion);
+
+  <font color="darkgreen">// Note:  Dymola 7.4 requires that the redeclared models are</font>
+  <font color="darkgreen">// resolved to the root of the library, e.g.,</font>
+  <font color="darkgreen">//   &quot;Conditions.ByConnector.ChemicalReaction.Material.Potential&quot;</font>
+  <font color="darkgreen">// instead of</font>
+  <font color="darkgreen">//   &quot;Material.Potential&quot;.</font>
+  <font color="darkgreen">// Otherwise the following error is given:</font>
+  <font color="darkgreen">//   &quot;Cannot show paramter dialog for redeclared class [&hellip;] since:</font>
+  <font color="darkgreen">//   Could not find type of redeclare :[&hellip;] in scope [&hellip;]&quot;</font>
+  <font color="darkgreen">// Similar notes apply to the other top-level extended models in</font>
+  <font color="darkgreen">// FCSys.Conditions.ByConnector.</font>
 
 <font color="blue">end </font>ChemicalReactionNoFlow;
 </pre>
@@ -256,7 +273,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.C
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:45:44 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:10:41 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Single</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -202,10 +202,15 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Condit
 <pre>
 <font color="blue">model</font> FaceIsolated
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Material.Current</a> material,
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Translational.Force</a> following(<font color="blue">final </font>orientation),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Translational.Force</a> preceding(<font color="blue">final </font>orientation),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+      material,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+      following(<font color="blue">final </font>orientation),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+      preceding(<font color="blue">final </font>orientation),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+      thermal);
+  <font color="darkgreen">// See note in ChemicalReactionNoFlow.</font>
 
 <font color="blue">end </font>FaceIsolated;
 </pre>
@@ -214,7 +219,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Condit
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:58 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:29 2013.
 </div>
 </body>
 </html>

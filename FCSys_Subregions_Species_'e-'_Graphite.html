@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'e-'.Graphite</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;e&lt;sup&gt;-&lt;/sup&gt; in graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -72,7 +72,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Assumptions:<ol>
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
+          governed by other configurations.</li>
+    </ol></p>
+
+    <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
 <h3>Parameters</h3>
@@ -83,7 +88,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;e-&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>0</td><td>Phase change interval (&tau;&prime;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>k_mu*Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>k_nu*Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>k_beta*Data.beta(T, v)</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
@@ -149,6 +154,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>,
+    <font color="blue">final </font>tauprime=0,
     mu=k_mu*<font color="red">Data.mu</font>(T, v),
     nu=k_nu*<font color="red">Data.nu</font>(T, v),
     beta=k_beta*<font color="red">Data.beta</font>(T, v),
@@ -181,7 +187,12 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <h3>Information</h3>
 
-<p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Assumptions:<ol>
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
+          governed by other configurations.</li>
+    </ol></p>
+
+    <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
 <h3>Parameters</h3>
@@ -192,7 +203,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;e-&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>0</td><td>Phase change interval (&tau;&prime;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>Data.beta(T, v)</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
@@ -252,6 +263,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>,
+    <font color="blue">final </font>tauprime=0,
     consMaterial=Conservation.IC,
     initMaterial=InitScalar.Pressure);
 
@@ -266,7 +278,12 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <h3>Information</h3>
 
-<p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Assumptions:<ol>
+          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
+          governed by other configurations.</li>
+    </ol></p>
+
+    <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
 <h3>Parameters</h3>
@@ -277,7 +294,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;e-&#39;.Graphite</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>0</td><td>Phase change interval (&tau;&prime;) [T]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
@@ -332,6 +349,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>,
+    <font color="blue">final </font>tauprime=0,
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">Data.mu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> beta=<font color="red">Data.beta</font>(),
@@ -340,10 +358,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     consMaterial=Conservation.IC,
     initMaterial=InitScalar.Pressure);
 
-  <font color="darkgreen">// Note:  Parameter expressions (e.g., involving environment.T) are not</font>
-  <font color="darkgreen">// used here since they would render the parameters unadjustable in Dymola</font>
-  <font color="darkgreen">// 7.4.  A similar note applies to the other species.</font>
-
 <font color="blue">end </font>Fixed;
 </pre>
       </div>
@@ -351,7 +365,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:59 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:20 2013.
 </div>
 </body>
 </html>

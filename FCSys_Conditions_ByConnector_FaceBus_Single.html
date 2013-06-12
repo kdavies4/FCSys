@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.FaceBus.Single</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -169,75 +169,97 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Con
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">FaceBus</a>(
     gas(
       H2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal),
       N2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal),
       O2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal)),
     graphite(&#39;C+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal), &#39;e-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal), &#39;e-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal)),
     ionomer(
       &#39;C19HF37O5S-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal),
       &#39;H+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal)),
     liquid(H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Face.Single.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> following(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Face.Single.Translational.Force</a> preceding(<font color="blue">final </font>
-            orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Face.Single.Thermal.HeatRate</a> thermal)));
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+          material,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          following(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
+          preceding(<font color="blue">final </font>orientation),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
+          thermal)));
+
+  <font color="darkgreen">// See note in ChemicalReactionNoFlow.</font>
 
 <font color="blue">end </font>FaceBusIsolated;
 </pre>
@@ -246,7 +268,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Con
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:16 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:10:59 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'C+'.Graphite</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;C&lt;sup&gt;+&lt;/sup&gt; graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -84,6 +84,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphite</td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>k_nu*Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>k_theta*Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_nu</td><td>1</td><td>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>) [1]</td></tr>
@@ -173,6 +174,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphite</td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
@@ -237,6 +239,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>Assumptions:<ol>
     <li>The specific heat capacity is fixed (independent of temperature).</li>
     <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
+    <li>Mobility is zero (by default).</li>
     </ol></p>
 
    <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
@@ -350,11 +353,16 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
         b_c=[935*U.J*Data.m/(U.kg*U.K)],
         B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(U.mol*
             U.K) - (935*U.J*Data.m/(U.kg*U.K))*<font color="red">ln</font>(298.15*U.K)]),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=0,
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.87*U.W));
 
   <font color="darkgreen">// In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c</font>
   <font color="darkgreen">// (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).</font>
+
+  <font color="darkgreen">// Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not</font>
+  <font color="darkgreen">// used here since they would render the parameters unadjustable in Dymola</font>
+  <font color="darkgreen">// 7.4.  A similar note applies to the other species.</font>
 
   <font color="darkgreen">// See the documentation layer for a table of values for the specific heat</font>
   <font color="darkgreen">// capacity and thermal resistivity.</font>
@@ -366,7 +374,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:57 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:18 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.N2.Gas</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;N&lt;sub&gt;2&lt;/sub&gt; gas&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -76,7 +76,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href="FCSys_Subregions.html#FCSys.Subregions.Specues,Species">Species</a> model.</p><p>
+<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
 <h3>Parameters</h3>
@@ -87,13 +87,14 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>FCSys.Characteristics.N2.Gas&hellip;</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>k_tauprime*Data.tauprime(T, v)</td><td>Phase change interval (&tau;&prime;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>k_mu*Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>k_nu*Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>k_eta*Data.eta(T, v)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>beta</td><td>k_beta*Data.beta(T, v)</td><td>Dynamic compressibility (&beta;) [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>k_zeta*Data.zeta(T, v)</td><td>Fluidity (&zeta;) [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>k_theta*Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_tauprime</td><td>1</td><td>Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_mu</td><td>1</td><td>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_nu</td><td>1</td><td>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_eta</td><td>1</td><td>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>) [1]</td></tr>
@@ -155,6 +156,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a> (b_v=[1],
           n_v={-1,0}),
+    tauprime=k_tauprime*<font color="red">Data.tauprime</font>(T, v),
     mu=k_mu*<font color="red">Data.mu</font>(T, v),
     nu=k_nu*<font color="red">Data.nu</font>(T, v),
     eta=k_eta*<font color="red">Data.eta</font>(T, v),
@@ -162,6 +164,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     zeta=k_zeta*<font color="red">Data.zeta</font>(T, v),
     theta=k_theta*<font color="red">Data.theta</font>(T, v));
 
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_tauprime(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_mu(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_nu(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
@@ -190,7 +194,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href="FCSys_Subregions.html#FCSys.Subregions.Specues,Species">Species</a> model.</p><p>
+<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
 <h3>Parameters</h3>
@@ -201,7 +205,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.N2.Gas (b_v=&hellip;</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>Data.tauprime(T, v)</td><td>Phase change interval (&tau;&prime;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity (&nu;) [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Data.eta(T, v)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
@@ -287,7 +291,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
    The integration offset for specific entropy is set such that
    the specific entropy is 191.610 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 bar).
    This is the value from Table B in [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>].
-   Additional thermal data is listed in <a href="#Tab1">Table 1</a>.</p>
+   Additional thermal data is listed in <a href="#Tab2">Table 2</a> lists
+  values of the material resistivity or self diffusion coefficient.</p>
 
   <table border="1" cellspacing=0 cellpadding=2 style="border-collapse:collapse;">
   <caption align="top" id="Tab1">Table 1: Properties of N<sub>2</sub> gas at 1 atm [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 920]</caption>
@@ -317,11 +322,26 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>1300</td><td>1.219e3</td><td>1/466.2e-7</td><td>1/81.0e-3</td></tr>
   </table>
 
+<br>
+
+  <table border="1" cellspacing=0 cellpadding=2 style="border-collapse:collapse;">
+  <caption align="top" id="Tab2">Table 2: Material resistivity of N<sub>2</sub> gas at 1 atm
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>, p. 263]</caption>
+  <tr>
+      <th valign="middle"><code>T<br>/U.K</code></th>
+      <th width=1><code>eta*U.s<br>/U.cm^2</code></th>
+    </tr>
+<tr><td>77.7</td><td>0.0168</td></tr>
+<tr><td>194.7</td><td>0.104</td></tr>
+<tr><td>273.2</td><td>0.185</td></tr>
+<tr><td>353.2</td><td>0.287</td></tr>
+  </table></p>
+
   <p>The fluidity of air at 15.0 &deg;C and 1 atm is given by
-       <code>zeta=1/(178e-7*U.Pa*U.s)</code>
+       <code>zeta=1/(17.8e-6*U.Pa*U.s)</code>
    (<a href="http://en.wikipedia.org/wiki/Viscosity">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
 
-<p>For more information, see the <a href="FCSys_Subregions.html#FCSys.Subregions.Specues,Species">Species</a> model.</p><p>
+<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
 <h3>Parameters</h3>
@@ -332,7 +352,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Integer</td><td>n_faces</td><td>1</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>FCSys.Characteristics.N2.Gas&hellip;</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>1e-52*U.s</td><td>Effective collision interval (&tau;') [T]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
@@ -396,14 +415,13 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
         b_c=[1041*U.J*Data.m/(U.kg*U.K)],
         B_c=[Data.Deltah0_f - (1041*U.J*Data.m/U.kg)*298.15, 191.610*U.J/(U.mol*
             U.K) - (1041*U.J*Data.m/(U.kg*U.K))*<font color="red">ln</font>(298.15*U.K)]),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime=<font color="red">Data.tauprime</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">Data.mu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">Q.ResistivityMaterial</a> eta=<font color="red">Data.eta</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> beta=<font color="red">Data.beta</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> zeta=1/(17.82e-6*U.Pa*U.s),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(25.9e-3*U.W));
-
-  <font color="darkgreen">// TODO: Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.N2.eta).</font>
 
   <font color="darkgreen">// See the documentation for a table of values.</font>
 
@@ -414,7 +432,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:50:02 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:23 2013.
 </div>
 </body>
 </html>

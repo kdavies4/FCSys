@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Pair.Translational</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="Translational conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -70,7 +70,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Velocity</h2>
 <b>Specify velocity difference (measure force), with conservation of translational momentum</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">
 
 <h3>Information</h3>
 
@@ -106,7 +106,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
     <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;) = negative.mPhidot[orientation]);
 
 <font color="blue">equation </font>
-  negative.phi[orientation] - positive.phi[orientation] = u_final;
+  positive.phi[orientation] - negative.phi[orientation] = u_final;
 <font color="blue">end </font>Velocity;
 </pre>
 <hr>
@@ -114,7 +114,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Force</h2>
 <b>Specify force (measure velocity difference), with conservation of translational momentum</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">
 
 <h3>Information</h3>
 
@@ -147,7 +147,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
     <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Force,
     u(<font color="blue">final </font>unit=&quot;l.m/T2&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l/T&quot;) = negative.phi[orientation] - positive.phi[
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l/T&quot;) = positive.phi[orientation] - negative.phi[
       orientation]);
 
 <font color="blue">equation </font>
@@ -159,7 +159,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Custom</h2>
 <b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom">
 
 <h3>Information</h3>
 
@@ -177,7 +177,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>negative.phi[orientation] - &hellip;</td><td>Expression to which the condition is applied</td></tr>
+<tr><td>Real</td><td>x</td><td>positive.phi[orientation] - &hellip;</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.mPhidot[orientation]</td><td>Measurement expression</td></tr>
 </table>
@@ -200,7 +200,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
       y=negative.mPhidot[orientation]);
 
-  Real x=negative.phi[orientation] - positive.phi[orientation] <font color="darkgreen">
+  Real x=positive.phi[orientation] - negative.phi[orientation] <font color="darkgreen">
     &quot;Expression to which the condition is applied&quot;</font>;
 
 <font color="blue">equation </font>
@@ -212,7 +212,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseC
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:41 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:16 2013.
 </div>
 </body>
 </html>

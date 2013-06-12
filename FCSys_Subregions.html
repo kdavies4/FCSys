@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -159,20 +159,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(
     <font color="blue">final </font>n_faces=n_faces,
     <font color="blue">final </font>inclHOR=inclHOR,
-    <font color="blue">final </font>inclORR=inclORR,
-    &#39;C19HF37O5S-&#39;(
-      consTransX=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>Conservation.Dynamic<font color="blue"> else </font>
-          Conservation.IC,
-      consTransY=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>Conservation.Dynamic<font color="blue"> else </font>
-          Conservation.IC,
-      consTransZ=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>Conservation.Dynamic<font color="blue"> else </font>
-          Conservation.IC,
-      initTransX=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>InitTranslational.None<font color="blue"> else </font>
-          InitTranslational.Velocity,
-      initTransY=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>InitTranslational.None<font color="blue"> else </font>
-          InitTranslational.Velocity,
-      initTransZ=<font color="blue">if </font>graphite.'inclC+'<font color="blue"> then </font>InitTranslational.None<font color="blue"> else </font>
-          InitTranslational.Velocity)) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+    <font color="blue">final </font>inclORR=inclORR) <font color="darkgreen">&quot;Ionomer&quot;</font>;
 
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>n_faces=n_faces) <font color="darkgreen">&quot;Liquid&quot;</font>;
 
@@ -753,7 +740,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:49:37 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:13:58 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Pair.Thermal</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="Thermal conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -70,7 +70,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.Temperature</h2>
 <b>Specify temperature difference (measure heat flow rate), with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature">
 
 <h3>Information</h3>
 
@@ -105,7 +105,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
     <font color="blue">final </font>y(unit=&quot;l2.m/T3&quot;) = negative.Qdot);
 
 <font color="blue">equation </font>
-  negative.T - positive.T = u_final;
+  positive.T - negative.T = u_final;
 <font color="blue">end </font>Temperature;
 </pre>
 <hr>
@@ -113,7 +113,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.HeatRate</h2>
 <b>Specify heat flow rate (measure temperature difference), with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">
 
 <h3>Information</h3>
 
@@ -147,7 +147,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
     u(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;),
     <font color="blue">final </font>y(
       <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-      displayUnit=&quot;K&quot;) = negative.T - positive.T);
+      displayUnit=&quot;K&quot;) = positive.T - negative.T);
 
 <font color="blue">equation </font>
   negative.Qdot = u_final;
@@ -158,7 +158,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.Custom</h2>
 <b>Apply condition to a custom expression, with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom">
 
 <h3>Information</h3>
 
@@ -174,7 +174,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>negative.T - positive.T</td><td>Expression to which the condition is applied</td></tr>
+<tr><td>Real</td><td>x</td><td>positive.T - negative.T</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.Qdot</td><td>Measurement expression</td></tr>
 </table>
@@ -198,7 +198,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
       y=negative.Qdot);
 
-  Real x=negative.T - positive.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+  Real x=positive.T - negative.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
 
 <font color="blue">equation </font>
   x = u_final;
@@ -209,7 +209,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:46:47 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:20 2013.
 </div>
 </body>
 </html>

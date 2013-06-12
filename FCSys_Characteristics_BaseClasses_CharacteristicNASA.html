@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
-<meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
+<meta name="date" content="2013-6-12">
+<meta name="description" content="Thermodynamic package with transport properties based on NASA CEA">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -46,7 +46,7 @@
 
 <h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA"></a><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses">FCSys.Characteristics.BaseClasses</a>.CharacteristicNASA</h2>
 
-<b>Thermodynamic record with transport properties based on NASA CEA</b>
+<b>Thermodynamic package with transport properties based on NASA CEA</b>
 
 <h3>Information</h3>
 
@@ -54,7 +54,7 @@
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>,
   <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>]. For more information, see the
   <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package.</p><p>
-Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> (Record for thermodynamic and resistive properties).
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> (Package of thermodynamic and resistive properties).
 
 <h3>Package Content</h3>
 
@@ -77,9 +77,6 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>m</td><td>Specific mass</td></tr>
 <tr><td>d</td><td>Specific diameter</td></tr>
 <tr><td>z=charge(formula)</td><td>Charge number</td></tr>
-<tr><td>p0=U.bar</td><td>Reference pressure (<i>p</i><sup>o</sup>)</td></tr>
-<tr><td>n_v={-1,0}</td><td>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub> (<i>n</i><sub><i>v</i></sub>)</td></tr>
-<tr><td>b_v=[1]</td><td>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</td></tr>
 <tr><td>Deltah0_f</td><td>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</td></tr>
 <tr><td>Deltah0</td><td><i>h</i><sup>o</sup>(298.15 K) - <i>h</i><sup>o</sup>(0 K) (&Delta;<i>h</i><sup>o</sup>)</td></tr>
 <tr><td>h_offset=0</td><td>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</td></tr>
@@ -87,10 +84,6 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>T_lim_c={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)</td></tr>
 <tr><td>b_c</td><td>Coefficients of isobaric specific heat capacity at <i>p</i><sup>o</sup> as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
-<tr><td>isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on pressure</td></tr>
-<tr><td>hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[2] + j - n_v[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on temperature</td></tr>
-<tr><td>n_p={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p</td></tr>
-<tr><td>b_p=if size(b_v, 1) == 1 then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
 <tr><td>alpha=3*sqrt(U.pi)*d^2*U.q/2</td><td>Scaled specific intercept area</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.omega" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.omega">omega</a>
 </td><td>Rescaled reciprocal of thermal speed (omega = pi*sqrt(m/T)) as a function of temperature</td></tr>
@@ -98,30 +91,39 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 </td><td>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>
 </td><td>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv">dp_Tv</a>
-</td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp">dv_Tp</a>
-</td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>
 </td><td>Specific enthalpy as a function of temperature and pressure</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>
-</td><td>Pressure as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
 </td><td>Specific entropy as a function of temperature and pressure</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>
-</td><td>Specific volume as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.beta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.beta">beta</a>
 </td><td>Dynamic compressibility (&beta;) as a function of temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.eta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.eta">eta</a>
 </td><td>Material resistivity (&eta;) as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.kappa" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.kappa">kappa</a>
 </td><td>Isothermal compressibility as a function of temperature and pressure (&kappa;)</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.tauprime" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.tauprime">tauprime</a>
+</td><td>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.mu">mu</a>
 </td><td>Mobility (&mu;) as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.nu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.nu">nu</a>
 </td><td>Thermal independity (&nu;) as a function of temperature and specific volume</td></tr>
+<tr><td>p0=U.bar</td><td>Reference pressure (<i>p</i><sup>o</sup>)</td></tr>
+<tr><td>n_v={-1,0}</td><td>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub> (<i>n</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>b_v=[1]</td><td>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on pressure</td></tr>
+<tr><td>hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[2] + j - n_v[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on temperature</td></tr>
+<tr><td>n_p={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p</td></tr>
+<tr><td>b_p=if size(b_v, 1) == 1 then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv">dp_Tv</a>
+</td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp">dv_Tp</a>
+</td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv">p_Tv</a>
+</td><td>Pressure as a function of temperature and specific volume</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp">v_Tp</a>
+</td><td>Specific volume as a function of temperature and pressure</td></tr>
 </table>
 <p>
 <h3>Types and constants</h3>
@@ -323,7 +325,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:50:12 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:32 2013.
 </div>
 </body>
 </html>

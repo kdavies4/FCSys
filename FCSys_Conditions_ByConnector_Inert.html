@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Inert</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-9">
+<meta name="date" content="2013-6-12">
 <meta name="description" content="&lt;html&gt;Conditions for an &lt;a href=\&quot;modelica://FCSys.Connectors.Inert\&quot;&gt;Inert&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.InertInternal\&quot;&gt;InertInternal&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -222,10 +222,14 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
   &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.Inert">Inert</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Conditions.ByConnector.Inert.Thermal.HeatRate</a> thermal);
+  <font color="darkgreen">// See note in ChemicalReactionNoFlow.</font>
 
 <font color="blue">end </font>InertIsolated;
 </pre>
@@ -391,10 +395,14 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
   &quot;Condition for an <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector, with zero flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.ByConnector.Inert.InertInternal">InertInternal</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalX(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalY(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Translational.Force</a> translationalZ(<font color="blue">final </font>axis),
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal);
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalX(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalY(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Translational.html#FCSys.Conditions.ByConnector.Inert.Translational.Force">Conditions.ByConnector.Inert.Translational.Force</a>
+      translationalZ(<font color="blue">final </font>axis),
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Inert_Thermal.html#FCSys.Conditions.ByConnector.Inert.Thermal.HeatRate">Conditions.ByConnector.Inert.Thermal.HeatRate</a> thermal);
+  <font color="darkgreen">// See note in ChemicalReactionNoFlow.</font>
 
 <font color="blue">end </font>InertInternalIsolated;
 </pre>
@@ -403,7 +411,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inert.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jun  9 19:47:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:48 2013.
 </div>
 </body>
 </html>
