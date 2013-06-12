@@ -178,7 +178,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (Commands(file(ensureSimulated=true) =
+      annotation (Commands(file =
             "resources/scripts/Dymola/Regions.Examples.FPToFP.mos"), experiment(
           StopTime=20,
           Tolerance=1e-06,
@@ -285,7 +285,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (Commands(file(ensureSimulated=true) =
+      annotation (Commands(file =
             "resources/scripts/Dymola/Regions.Examples.GDLToGDL.mos"),
           experiment(
           StopTime=30,
@@ -380,7 +380,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (Commands(file(ensureSimulated=true) =
+      annotation (Commands(file =
             "resources/scripts/Dymola/Regions.Examples.CLToCL.mos"), experiment(
           StopTime=25,
           Tolerance=1e-06,
@@ -631,7 +631,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=0.7,
           NumberOfIntervals=5000,
           Tolerance=1e-06),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
     end AnCL;
 
@@ -699,7 +699,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         experiment(Tolerance=1e-06, StopTime=10),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.PEM.mos"),
         Diagram(graphics));
     end PEM;
@@ -786,7 +786,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=500,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
     end CaCL;
 
@@ -1082,7 +1082,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=0.7,
           NumberOfIntervals=5000,
           Tolerance=1e-06),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
     end AnCL2;
 
@@ -1110,7 +1110,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         experiment(Tolerance=1e-06, StopTime=10),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.PEM.mos"),
         Diagram(graphics));
 
@@ -1147,7 +1147,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=500,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Commands(file(ensureSimulated=true) =
+        Commands(file =
             "resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
     end CaCL2;
 
