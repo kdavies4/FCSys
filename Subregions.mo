@@ -198,7 +198,6 @@ package Subregions
               "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
-
     end SubregionHOR;
 
     model SubregionORR
@@ -216,6 +215,7 @@ package Subregions
     end SubregionORR;
 
     model SubregionPipeTest
+      import assert = FCSys.BaseClasses.Utilities.assertEval;
       extends Examples.Subregion(subregion(
           L={100,1,1}*U.mm,
           inclFacesY=true,
@@ -498,20 +498,12 @@ package Subregions
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'C+'(
-            V_IC=subregion1.V/1000,
-            consTransX=Conservation.IC,
-            consTransY=Conservation.IC,
-            consTransZ=Conservation.IC),
+          'C+'(V_IC=subregion1.V/1000),
           reduceTemp=true),
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(
-            V_IC=subregion1.V/1000,
-            consTransX=Conservation.IC,
-            consTransY=Conservation.IC,
-            consTransZ=Conservation.IC),
+          'C19HF37O5S-'(V_IC=subregion1.V/1000),
           reduceTemp=true))
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
@@ -649,8 +641,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
-              -2.54679e-16}},
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -673,10 +665,10 @@ package Subregions
         'inclC+'=true,
         'incle-'=true,
         inclH2=false,
-        subregion1(graphite('e-'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Volume))),
-        subregion2(graphite('e-'(consMaterial=Conservation.IC,initMaterial=
-                  InitScalar.Volume))));
+        subregion1(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Pressure))),
+        subregion2(graphite('C+'(consMaterial=Conservation.IC,initMaterial=
+                  InitScalar.Pressure))));
       annotation (
         experiment(StopTime=30, Tolerance=1e-06),
         Commands(file=
@@ -1792,6 +1784,7 @@ package Subregions
     end Gas;
 
     model Graphite "Graphite phase"
+      import assert = FCSys.BaseClasses.Utilities.assertEval;
       import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(
         final n_spec=countTrue({'inclC+','incle-'}),
@@ -2062,6 +2055,7 @@ package Subregions
     end Graphite;
 
     model Ionomer "Ionomer phase"
+      import assert = FCSys.BaseClasses.Utilities.assertEval;
       import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(
         final n_spec=countTrue({'inclC19HF37O5S-','inclH+',inclH2O}),
@@ -2822,9 +2816,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
@@ -3071,7 +3065,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal theta=Data.theta());
+            redeclare parameter Q.ResistivityThermal theta=Data.theta(),
+            initMaterial=InitScalar.Pressure,
+            consMaterial=Conservation.IC);
 
           annotation (
             group="Material properties",
@@ -4199,6 +4195,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       import FCSys.BaseClasses.Utilities.inSign;
       import FCSys.BaseClasses.Utilities.Delta;
       import FCSys.BaseClasses.Utilities.Sigma;
+      import assert = FCSys.BaseClasses.Utilities.assertEval;
       extends FCSys.BaseClasses.Icons.Names.Top4;
 
       // Geometry
@@ -4717,8 +4714,7 @@ yet the initialization method for energy involves density.");
       if consMaterial == Conservation.IC then
         // Ensure that a condition is selected since the state is prescribed.
         assert(initMaterial <> InitScalar.None, "The material state is prescribed,
-yet its condition is not defined.
-Choose a condition besides None.");
+yet its condition is not defined.  Choose any condition besides None.");
       elseif consMaterial == Conservation.Dynamic then
         // Initialize since there's a time-varying state.
         if initMaterial == InitScalar.Amount then
@@ -4762,8 +4758,7 @@ Choose a condition besides None.");
           // prescribed.
           assert(initTrans[cartTrans[i]] <> InitTranslational.None,
             "The state for the " + {"x","y","z"}[cartTrans[i]] + "-axis component of translational momentum is prescribed,
-yet its condition is not defined.
-Choose any condition besides None.");
+syet its condition is not defined.  Choose any condition besides None.");
         elseif consTrans[cartTrans[i]] == Conservation.Dynamic then
           // Initialize since there's a time-varying state.
           if initTrans[cartTrans[i]] == InitTranslational.Velocity then
@@ -4785,8 +4780,7 @@ Choose any condition besides None.");
       if consEnergy == Conservation.IC then
         // Ensure that a condition is selected since the state is prescribed.
         assert(initEnergy <> InitScalar.None, "The energy state is prescribed,
-yet its condition is not defined.
-Choose a condition besides None.");
+yet its condition is not defined.  Choose a condition besides None.");
       elseif consEnergy == Conservation.Dynamic then
         // Initialize since there's a time-varying state.
         if initEnergy == InitScalar.Amount then
@@ -4874,14 +4868,17 @@ Choose a condition besides None.");
           // Material (central difference)
           eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho -
             1/v)*2;
+          // **Try upstream again, update doc.
 
           // Translational momentum
-          beta*faces[i, side].mPhidot[Orientation.normal] = Lprime[cartFaces[i]]
-            *(faces[i, side].phi[Orientation.normal] - (if inclTrans[cartFaces[
-            i]] then phi[transCart[cartFaces[i]]] else 0))*(if inclTrans[
-            cartFaces[i]] and upstream[cartFaces[i]] then 1 + exp(-inSign(side)
-            *I[transCart[cartFaces[i]]]*beta*Data.m/(2*Lprime[cartFaces[i]]))
-             else 2) "Normal";
+          beta*(faces[i, side].mPhidot[Orientation.normal] - 0*inSign(side)*p*A[
+            cartFaces[i]]) = Lprime[cartFaces[i]]*(faces[i, side].phi[
+            Orientation.normal] - (if inclTrans[cartFaces[i]] then phi[
+            transCart[cartFaces[i]]] else 0))*(if inclTrans[cartFaces[i]] and
+            upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
+            cartFaces[i]]]*beta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
+            "Normal";
+          // **Enable thermo pressure, remove from translational momentum balance, remove p_faces.
           zeta*faces_mPhidot[i, side, Orientation.following - 1] = Nu_Phi[
             cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orientation.following]
              - (if inclTrans[cartWrap(cartFaces[i] + 1)] then phi[transCart[
@@ -5254,11 +5251,11 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1)),
         Icon(graphics={Ellipse(
-              extent={{-80,80},{80,-80}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid)}));
+                  extent={{-80,80},{80,-80}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid)}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -5341,11 +5338,11 @@ Choose a condition besides None.");
     unit of catalyst surface area).</p>
 
     <p></p></html>"), Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}));
+              extent={{-40,40},{40,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash)}));
   end Reaction;
 
   model ChemicalExchange
@@ -5396,12 +5393,12 @@ Choose a condition besides None.");
   <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connectors.
   It should be instantiated once for each species in
   a reaction.</p></html>"), Icon(graphics={Line(
-            points={{-10,0},{10,0}},
-            color={255,195,38},
-            smooth=Smooth.None), Text(
-            extent={{-100,-20},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n")}));
+              points={{-10,0},{10,0}},
+              color={255,195,38},
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n")}));
   end ChemicalExchange;
 
   model Depletion "Electrochemical depletion region"
@@ -5497,25 +5494,21 @@ Choose a condition besides None.");
     substrates will be coupled and this may cause a structural singularity.
     If it is <code>false</code> for both of the depletion regions, then the reaction temperature will be
     undefined.</p>
-    </html>"), Icon(graphics={
-          Line(
-            points={{-90,0},{-20,0}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,30},{-20,-30}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{20,0},{90,0}},
-            color={47,107,251},
-            smooth=Smooth.None),
-          Line(
-            points={{20,30},{20,-30}},
-            color={47,107,251},
-            smooth=Smooth.None,
-            thickness=0.5)}));
+    </html>"), Icon(graphics={Line(
+              points={{-90,0},{-20,0}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-20,30},{-20,-30}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{20,0},{90,0}},
+              color={47,107,251},
+              smooth=Smooth.None),Line(
+              points={{20,30},{20,-30}},
+              color={47,107,251},
+              smooth=Smooth.None,
+              thickness=0.5)}));
   end Depletion;
 
   model Volume "Model to establish a fixed total volume"
@@ -5584,24 +5577,21 @@ Choose a condition besides None.");
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
   end Volume;
@@ -5732,100 +5722,83 @@ Choose a condition besides None.");
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-100,56},{100,96}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}));
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclFacesX,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-100,56},{100,96}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Text(
+                  extent={{-100,56},{100,96}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end EmptySubregion;
 

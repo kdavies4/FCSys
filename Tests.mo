@@ -1315,6 +1315,7 @@ package Tests "Models and functions for test and validation"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
           import FCSys.BaseClasses.Utilities.Polynomial.*;
           extends Modelica.Icons.Example;
+
           parameter Integer n=-1 "Power of the first polynomial term";
           Real u1=1 + time
             "Real arguments to function (must have sufficient richness)";

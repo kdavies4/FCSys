@@ -95,21 +95,25 @@ package BaseClasses "Base classes (generally not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
@@ -225,52 +229,52 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-98,80},{98,120}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-98,80},{98,120}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-98,80},{98,120}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-98,80},{98,120}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top4;
 
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-98,60},{98,100}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-98,60},{98,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-98,60},{98,100}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-98,60},{98,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top3;
 
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-98,40},{98,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-98,40},{98,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-98,40},{98,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-98,40},{98,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-98,20},{98,60}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-98,20},{98,60}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-98,20},{98,60}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-98,20},{98,60}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top1;
 
@@ -850,6 +854,24 @@ An unrelated species may be included.");
       end d2f;
 
     end Polynomial;
+
+    function assertEval
+      "Assert function that forces Dymola to parse the message"
+      extends Modelica.Icons.Function;
+
+      input Boolean condition;
+      input String message;
+
+    algorithm
+      assert(condition, "\n" + message + "\n");
+      annotation (Documentation(info="<html><p>When an assert statement is 
+  false in the initial equation section of a model, Dymola 7.4 gives 
+  the following error during translation:
+  <pre>\"Error: The conditions of the following assert statements are always false:\"</pre> 
+  without parsing the message given to the assert function.  This pass-through function causes the 
+  statement to be evaluated during initialization, at
+  which point the message is evaluated.</p></html>"));
+    end assertEval;
 
     function average "Return the arithmetic mean of numbers"
       extends Modelica.Icons.Function;
