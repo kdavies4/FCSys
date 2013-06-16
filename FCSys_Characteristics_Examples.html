@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -84,13 +84,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">model</font> Correlations <font color="darkgreen">
   &quot;Evaluate the material properties over varying temperature and pressure&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
   <font color="darkgreen">// Data</font>
   <font color="blue">import </font>&#39;DataC+&#39; = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">FCSys.Characteristics.'C+'.Graphite</a>;
   <font color="blue">import </font>&#39;DataC19HF37O5S-&#39; = <a href="FCSys_Characteristics_'C19HF37O5S-'_Ionomer.html#FCSys.Characteristics.'C19HF37O5S-'.Ionomer">FCSys.Characteristics.'C19HF37O5S-'.Ionomer</a>;
   <font color="blue">import </font>&#39;Datae-&#39; = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>;
   <font color="blue">import </font>DataH2 = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a>;
-
-<font color="blue">protected </font>
   <font color="blue">package</font> DataH2IG = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> (b_v=[1], n_v={-1,0}) <font color="darkgreen">
     &quot;H2 as ideal gas&quot;</font>;
   <font color="blue">import </font>DataH2O = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a>;
@@ -98,12 +97,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">import </font>&#39;DataH+&#39; = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>;
   <font color="blue">import </font>DataN2 = <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a>;
   <font color="blue">import </font>DataO2 = <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a>;
-  <font color="darkgreen">// Conditions</font>
 
-<font color="blue">public </font>
+  <font color="darkgreen">// Conditions</font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T(unit=&quot;l2.m/(N.T2)&quot;,displayUnit=&quot;K&quot;) <font color="darkgreen">
     &quot;Temperature&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;
+
   <font color="darkgreen">// Results</font>
   <font color="darkgreen">// -------</font>
   <font color="darkgreen">// Isobaric specific heat capacity</font>
@@ -191,8 +190,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_O2=<font color="red">DataO2.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_IG=<font color="red">DataH2IG.v_Tp</font>(T, p) <font color="darkgreen">
     &quot;Specific volume of ideal gas&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Exchange and transport properties for H2O gas</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> beta=<font color="red">DataH2O.beta</font>(T, v_H2O);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> zeta=<font color="red">DataH2O.zeta</font>(T, v_H2O);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=<font color="red">DataH2O.theta</font>(T, v_H2O);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime=<font color="red">DataH2O.tauprime</font>(T, v_H2O);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">DataH2O.nu</font>(T, v_H2O);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">DataH2O.nu</font>(T, v_H2O);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">Q.ResistivityMaterial</a> eta=<font color="red">DataH2O.nu</font>(T, v_H2O);
 
 <font color="blue">protected </font>
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Clock">Modelica.Blocks.Sources.Clock</a> clock;
@@ -219,7 +224,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:53 2013.
 </div>
 </body>
 </html>

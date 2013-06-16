@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -67,9 +67,7 @@
   describe diffusive exchange among configurations within a subregion.
   The face connectors (<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> and
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a>)
-  describe diffusive transport between neighboring regions or subregions. Their
-  variables are sufficient to also
-  resolve the rates of advection.</p>
+  describe transport between neighboring regions or subregions.</p>
 
   <p><a href="#Fig1">Figure 1</a> shows the hierarchy of the declarative connectors.
   The top row contains the bus connectors
@@ -110,7 +108,7 @@
   <p>The <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector has one
   more effort/flow pair than the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> and
   <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connectors.
-  It applies <a href="http://en.wikipedia.org/wiki/Dalton's_law">Dalton's law of partial pressures</a>
+  That pair applies <a href="http://en.wikipedia.org/wiki/Dalton's_law">Dalton's law of partial pressures</a>
   to mix species within a phase.</p>
 
   <p align=center id="Fig1"><img src="images/ConnectorHierarchy.png">
@@ -226,7 +224,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Connectors.FaceBusS.png" alt="FCSys.Connectors.FaceBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a>
 </td><td>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors (for multiple configurations)</td></tr>
 <tr><td><img src="images/FCSys.Connectors.FaceS.png" alt="FCSys.Connectors.Face" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>
-</td><td>Connector to transport material, translational momentum, and thermal energy by diffusion</td></tr>
+</td><td>Connector to transport material, translational momentum, and thermal energy</td></tr>
 <tr><td><img src="images/FCSys.Connectors.InertS.png" alt="FCSys.Connectors.Inert" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>
 </td><td>Connector to exchange translational momentum and thermal energy by diffusion</td></tr>
 <tr><td><img src="images/FCSys.Connectors.InertS.png" alt="FCSys.Connectors.InertInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a>
@@ -284,9 +282,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_trans]</td><td>Velocity [l/T]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_trans]</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Specific entropy-temperature product [l2.m/(N.T2)]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot_A</td><td>Rate of thermal advection [l2.m/T3]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [l2.m/(N.T2)]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot_D</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal advection [l2.m/T3]</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -294,7 +290,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <pre>
 <font color="blue">connector</font> ChemicalReaction <font color="darkgreen">&quot;Connector for a chemical reaction&quot;</font>
 
-  <font color="darkgreen">// Material exchange</font>
+  <font color="darkgreen">// Material diffusion</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Rate of reaction&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> mu(nominal=U.V) <font color="darkgreen">&quot;Electrochemical potential&quot;</font>;
 
@@ -304,11 +300,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
   <font color="darkgreen">// Thermal advection</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT(nominal=3000*U.K) <font color="darkgreen">
     &quot;Specific entropy-temperature product&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_A(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
-
-  <font color="darkgreen">// Thermal diffusion</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_D(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal diffusion&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
 
 <font color="blue">end </font>ChemicalReaction;
 </pre>
@@ -354,7 +346,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
     &quot;Number of components of translational momentum (<i>n</i><sub>trans</sub>)&quot;</font>;
 
-  <font color="darkgreen">// Material exchange</font>
+  <font color="darkgreen">// Material diffusion</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> mu(nominal=U.V) <font color="darkgreen">&quot;Chemical potential&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Current&quot;</font>;
 
@@ -483,7 +475,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
 
 <h2><img src="images/FCSys.Connectors.FaceI.png" alt="FCSys.Connectors.Face" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Face"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Face</h2>
-<b>Connector to transport material, translational momentum, and thermal energy by diffusion</b><p>
+<b>Connector to transport material, translational momentum, and thermal energy</b><p>
 <img src="images/FCSys.Connectors.FaceD.png" alt="FCSys.Connectors.Face">
 
 <h3>Information</h3>
@@ -498,10 +490,10 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho</td><td>Density [N/l3]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Diffusion current [N/T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[3]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[3]</td><td>Force [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Current [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Orientation]</td><td>Velocity [l/T]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orientation]</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [l2.m/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
 </table>
@@ -510,15 +502,15 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 
 <pre>
 <font color="blue">connector</font> Face <font color="darkgreen">
-  &quot;Connector to transport material, translational momentum, and thermal energy by diffusion&quot;</font>
+  &quot;Connector to transport material, translational momentum, and thermal energy&quot;</font>
 
   <font color="darkgreen">// Material</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> rho(nominal=300*U.K/U.atm) <font color="darkgreen">&quot;Density&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Diffusion current&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p(nominal=U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Current&quot;</font>;
 
-  <font color="darkgreen">// Translational</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[3](<font color="blue">each </font>nominal=U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[3](<font color="blue">each </font>nominal=U.N) <font color="darkgreen">&quot;Force&quot;</font>;
+  <font color="darkgreen">// Transverse translational</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[Orientation](<font color="blue">each </font>nominal=U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[Orientation](<font color="blue">each </font>nominal=U.N) <font color="darkgreen">&quot;Force&quot;</font>;
 
   <font color="darkgreen">// Thermal</font>
   <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">ThermalDiffusion</a>;
@@ -941,7 +933,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:27 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:49 2013.
 </div>
 </body>
 </html>

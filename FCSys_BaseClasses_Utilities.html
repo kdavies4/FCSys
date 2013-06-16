@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Utilities</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Functions that implement useful algorithms">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -60,30 +60,70 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Functions to support chemistry</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.ChemistryS.png" alt="FCSys.BaseClasses.Utilities.Polynomial" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">Polynomial</a>
 </td><td>Polynomial functions</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.average" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.average">average</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.assertEval" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.assertEval">assertEval</a>
+</td><td>Assert function that forces Dymola to parse the message</td></tr>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.average" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.average">average</a>
 </td><td>Return the arithmetic mean of numbers</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.cartWrap" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">cartWrap</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.cartWrap" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">cartWrap</a>
 </td><td>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.countTrue" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">countTrue</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.countTrue" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">countTrue</a>
 </td><td>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Delta" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Delta">Delta</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.Delta" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Delta">Delta</a>
 </td><td>Return the second entry of a vector minus the first (&Delta;)</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.enumerate" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">enumerate</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.enumerate" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">enumerate</a>
 </td><td>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.index" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">index</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.index" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">index</a>
 </td><td>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">inSign</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">inSign</a>
 </td><td>Return the mathematical sign for the direction into a side or face</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.mod1" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">mod1</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.mod1" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">mod1</a>
 </td><td>Modulo operator for 1-based indexing (compatible with Modelica)</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.round" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.round">round</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.round" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.round">round</a>
 </td><td>Round a <code>Real</code> variable to the nearest integer</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Sigma" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Sigma">Sigma</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.assertEvalS.png" alt="FCSys.BaseClasses.Utilities.Sigma" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Sigma">Sigma</a>
 </td><td>Return the sum of the first and second entries of a vector (&Sigma;)</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.average" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.assertEval" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BaseClasses.Utilities.assertEval"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.assertEval</h2>
+<b>Assert function that forces Dymola to parse the message</b>
+<h3>Information</h3>
+
+<p>When an assert statement is
+  false in the initial equation section of a model, Dymola 7.4 gives
+  the following error during translation:
+  <pre>"Error: The conditions of the following assert statements are always false:"</pre>
+  without parsing the message given to the assert function.  This pass-through function causes the
+  statement to be evaluated during initialization, at
+  which point the message is evaluated.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+<h3>Inputs</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>condition</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>String</td><td>message</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> assertEval <font color="darkgreen">
+  &quot;Assert function that forces Dymola to parse the message&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font>Boolean condition;
+  <font color="blue">input </font>String message;
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(condition, &quot;\n&quot; + message + &quot;\n&quot;);
+<font color="blue">end </font>assertEval;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.average" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.average"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.average</h2>
 <b>Return the arithmetic mean of numbers</b>
 <h3>Information</h3>
@@ -121,7 +161,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.cartWrap" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.cartWrap" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.cartWrap"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.cartWrap</h2>
 <b>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</b>
 <h3>Information</h3>
@@ -153,7 +193,7 @@ Extends from <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utiliti
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.countTrue" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.countTrue" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.countTrue"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.countTrue</h2>
 <b>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</b>
 <h3>Information</h3>
@@ -192,7 +232,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.Delta" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.Delta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Delta"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Delta</h2>
 <b>Return the second entry of a vector minus the first (&Delta;)</b>
 <h3>Information</h3>
@@ -231,7 +271,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.enumerate" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.enumerate" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.enumerate"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.enumerate</h2>
 <b>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</b>
 <h3>Information</h3>
@@ -282,7 +322,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.index" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.index" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.index"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.index</h2>
 <b>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</b>
 <h3>Information</h3>
@@ -332,7 +372,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.inSign" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.inSign" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.inSign"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.inSign</h2>
 <b>Return the mathematical sign for the direction into a side or face</b>
 <h3>Information</h3>
@@ -373,7 +413,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.mod1"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.mod1</h2>
 <b>Modulo operator for 1-based indexing (compatible with Modelica)</b>
 <h3>Information</h3>
@@ -416,7 +456,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.round" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.round" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.round"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.round</h2>
 <b>Round a <code>Real</code> variable to the nearest integer</b>
 <h3>Information</h3>
@@ -455,7 +495,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Sigma"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Sigma</h2>
 <b>Return the sum of the first and second entries of a vector (&Sigma;)</b>
 <h3>Information</h3>
@@ -498,7 +538,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:59 2013.
 </div>
 </body>
 </html>

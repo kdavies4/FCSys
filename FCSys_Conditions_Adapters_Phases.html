@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Adapters.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Adapters for material phases">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -85,7 +85,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Orientation]</td><td>Modelica translational flanges</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -109,7 +109,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orientation] <font color="darkgreen">
     &quot;Modelica translational flanges&quot;</font>;
 
 <font color="blue">equation </font>
@@ -147,7 +147,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Orientation]</td><td>Modelica translational flanges</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -188,7 +188,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orientation] <font color="darkgreen">
     &quot;Modelica translational flanges&quot;</font>;
 
 <font color="blue">equation </font>
@@ -286,7 +286,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Orientation]</td><td>Modelica translational flanges</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -306,7 +306,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orientation] <font color="darkgreen">
     &quot;Modelica translational flanges&quot;</font>;
 
 <font color="blue">equation </font>
@@ -317,6 +317,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 
   <font color="red">connect</font>(H2O.fluidPort, fluidPort);
   <font color="red">connect</font>(flange, H2O.flange);
+
 <font color="blue">end </font>Liquid;
 </pre>
       </div>
@@ -324,7 +325,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:10:02 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:53:19 2013.
 </div>
 </body>
 </html>

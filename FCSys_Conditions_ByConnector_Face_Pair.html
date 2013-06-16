@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Pair</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connectors&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -85,8 +85,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m&hellip;</td><td>Material</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Velocity</a></td><td>normal</td><td>redeclare Translational.Velo&hellip;</td><td>Normal translational</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure">Pressure</a></td><td>material</td><td>redeclare Material.Pressure &hellip;</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Velocity</a></td><td>following</td><td>redeclare Translational.Velo&hellip;</td><td>1<sup>st</sup> transverse</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Velocity</a></td><td>preceding</td><td>redeclare Translational.Velo&hellip;</td><td>2<sup>nd</sup> transverse</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur&hellip;</td><td>Thermal</td></tr>
@@ -110,12 +109,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Pair">FCSys.BaseClasses.Icons.Conditions.Pair</a>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Density">Material.Density</a> material <font color="blue">constrainedby </font>
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure">Material.Pressure</a> material <font color="blue">constrainedby </font>
     Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition <font color="darkgreen">
     &quot;Material&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Translational.Velocity</a> normal(<font color="blue">final </font>orientation) <font color="blue">constrainedby </font>
-    Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition(
-      orientation=Orientation.normal) <font color="darkgreen">&quot;Normal translational&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Translational.Velocity</a> following(<font color="blue">final </font>orientation) <font color="blue">
     constrainedby </font>
     Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition(
@@ -152,10 +148,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="red">connect</font>(material.y, y.material);
 
   <font color="darkgreen">// Normal</font>
-  <font color="red">connect</font>(negative, normal.negative);
-  <font color="red">connect</font>(normal.positive, positive);
-  <font color="red">connect</font>(u.normal, normal.u);
-  <font color="red">connect</font>(normal.y, y.normal);
 
   <font color="darkgreen">// 1st transverse</font>
   <font color="red">connect</font>(negative, following.negative);
@@ -195,14 +187,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
 Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditions.ByConnector.Face.Pair.Face">Face</a> (Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors).
 <p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Velocity</a></td><td>normal</td><td>redeclare Translational.Velo&hellip;</td><td>Normal translational</td></tr>
-</table>
-<p>
 <h3>Connectors</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -237,7 +221,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair.html#FCSys.Conditio
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:08 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:29 2013.
 </div>
 </body>
 </html>

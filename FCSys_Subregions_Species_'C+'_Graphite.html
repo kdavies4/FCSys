@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'C+'.Graphite</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="&lt;html&gt;C&lt;sup&gt;+&lt;/sup&gt; graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -91,10 +91,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_theta</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
@@ -110,10 +107,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
@@ -179,10 +172,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
@@ -198,10 +188,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
@@ -301,10 +287,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;C+&#39;.Graphit&hellip;</td><td>Characteristic data</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
@@ -320,10 +303,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
@@ -362,7 +341,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
   <font color="darkgreen">// Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not</font>
   <font color="darkgreen">// used here since they would render the parameters unadjustable in Dymola</font>
-  <font color="darkgreen">// 7.4.  A similar note applies to the other species.</font>
+  <font color="darkgreen">// 7.4.  This also applies to the other species.</font>
 
   <font color="darkgreen">// See the documentation layer for a table of values for the specific heat</font>
   <font color="darkgreen">// capacity and thermal resistivity.</font>
@@ -374,7 +353,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:18 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:40 2013.
 </div>
 </body>
 </html>

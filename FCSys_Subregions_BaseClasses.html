@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -74,7 +74,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <p>At least one pair of faces must be included.
   All of the faces are included by default.</p>
 
-  <p>This model should be extended to include the appropriate phases and reactions.</p>
+  <p>A subregion (an instance of a model derived from this one) may be flipped horizontally or
+  vertically in the diagram layer, but the transverse forces will be incorrect if it is rotated.
+  If it is flipped horizontally,
+  then the direction of the x axis is opposite of the global orientation, where left to right
+  is positive x.  If it is flipped vertically, then the
+  direction of the y axis is opposite of the global orientation, where bottom to top is positive y.</p>
+
+  <p>This model should be extended to include the appropriate phases.</p>
   <p>
 
 <p>
@@ -178,7 +185,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:24 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:46 2013.
 </div>
 </body>
 </html>

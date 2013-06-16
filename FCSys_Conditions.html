@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Models to specify and measure operating conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -73,17 +73,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Conditions.EnvironmentI.png" alt="FCSys.Conditions.Environment" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Environment"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Environment</h2>
-<b>Environmental properties for a model</b>
-<h3>Information</h3>
-
-Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
-<p>
+<b>Environmental properties for a model</b><p>
 <h3>Parameters</h3>
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>1</td><td>Relative humidity [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2_dry</td><td>0.208</td><td>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>) [1]</td></tr>
@@ -95,14 +91,14 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 
 <pre>
 <font color="blue">record</font> Environment <font color="darkgreen">&quot;Environmental properties for a model&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top3;</font>
 
   <font color="darkgreen">// Store the values of the base constants and units.</font>
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a> baseUnits=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
 
   <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) = 298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(displayUnit=&quot;%&quot;) = 1 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_O2_dry(
@@ -208,7 +204,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:09:48 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:53:05 2013.
 </div>
 </body>
 </html>

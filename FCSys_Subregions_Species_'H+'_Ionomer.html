@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'H+'.Ionomer</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="&lt;html&gt;H&lt;sup&gt;+&lt;/sup&gt; in ionomer&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -111,7 +111,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
@@ -121,7 +121,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Pressure</td><td>Method of initializing the material balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material balance</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
@@ -159,8 +159,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>,
-    consMaterial=Conservation.IC,
-    initMaterial=InitScalar.Pressure,
     <font color="blue">final </font>tauprime=0,
     mu=k_mu*<font color="red">Data.mu</font>(T, v),
     nu=k_nu*<font color="red">Data.nu</font>(T, v),
@@ -224,7 +222,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
@@ -234,7 +232,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Pressure</td><td>Method of initializing the material balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material balance</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
@@ -270,11 +268,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
 <pre>
 <font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>,
-    <font color="blue">final </font>tauprime=0,
-    consMaterial=Conservation.IC,
-    initMaterial=InitScalar.Pressure);
+  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>,
+      <font color="blue">final </font>tauprime=0);
 
 <font color="blue">end </font>Correlated;
 </pre>
@@ -379,7 +374,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.Dynamic</td><td>X-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.Dynamic</td><td>Y-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.Dynamic</td><td>Z-axis translational momentum</td></tr>
@@ -389,7 +384,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Pressure</td><td>Method of initializing the material balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material balance</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
@@ -432,9 +427,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> beta=<font color="red">Data.beta</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> zeta=1/(5.3e-6*U.Pa*U.s),
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.1661*U.W),
-    consMaterial=Conservation.IC,
-    initMaterial=InitScalar.Pressure);
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.1661*U.W));
 
   <font color="darkgreen">// See the documentation for a table of values.</font>
 
@@ -445,7 +438,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:14:20 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:42 2013.
 </div>
 </body>
 </html>

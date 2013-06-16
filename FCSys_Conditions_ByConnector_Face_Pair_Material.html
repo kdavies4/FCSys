@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Pair.Material</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-12">
+<meta name="date" content="2013-6-15">
 <meta name="description" content="Material conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -56,23 +56,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Density" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Density">Density</a>
-</td><td>Specify density difference (measure current), with conservation of material</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure">Pressure</a>
-</td><td>Specify pressure (measure current)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Current</a>
-</td><td>Specify current (measure density), with conservation of material</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Custom">Custom</a>
+</td><td>Specify pressure difference (measure diffusion current)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Current">Current</a>
+</td><td>Specify current (measure pressure), with conservation of material</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material.Custom">Custom</a>
 </td><td>Custom</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClassesS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses">BaseClasses</a>
 </td><td>Base classes (generally not for direct use)</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Density" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Material.Density"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material">FCSys.Conditions.ByConnector.Face.Pair.Material</a>.Density</h2>
-<b>Specify density difference (measure current), with conservation of material</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Density">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material">FCSys.Conditions.ByConnector.Face.Pair.Material</a>.Pressure</h2>
+<b>Specify pressure difference (measure diffusion current)</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure">
 
 <h3>Information</h3>
 
@@ -82,7 +80,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.De&hellip;</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Pr&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
@@ -99,68 +97,23 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Density <font color="darkgreen">
-  &quot;Specify density difference (measure current), with conservation of material&quot;</font>
+<font color="blue">model</font> Pressure <font color="darkgreen">
+  &quot;Specify pressure difference (measure diffusion current)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Density,
-    u(<font color="blue">final </font>unit=&quot;N/l3&quot;),
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Pressure,
+    u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;),
     <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/T&quot;) = negative.Ndot);
 
 <font color="blue">equation </font>
-  positive.rho - negative.rho = u_final;
-<font color="blue">end </font>Density;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material">FCSys.Conditions.ByConnector.Face.Pair.Material</a>.Pressure</h2>
-<b>Specify pressure (measure current)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Pressure">
-
-<h3>Information</h3>
-
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">Single.Material.BaseClasses.PartialCondition</a> (Partial model for a normal condition).
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Pr&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-</table>
-<p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> Pressure <font color="darkgreen">&quot;Specify pressure (measure current)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">Single.Material.BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Pressure,
-    u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/T&quot;) = face.Ndot);
-
-  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
-    constrainedby </font>Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
-    &quot;Characteristic data&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="red">Data.p_Tv</font>(face.T, 1/face.rho) = u_final;
+  positive.p - negative.p = u_final;
 <font color="blue">end </font>Pressure;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Material.Current"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material">FCSys.Conditions.ByConnector.Face.Pair.Material</a>.Current</h2>
-<b>Specify current (measure density), with conservation of material</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current">
+<b>Specify current (measure pressure), with conservation of material</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Current">
 
 <h3>Information</h3>
 
@@ -188,11 +141,11 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
 
 <pre>
 <font color="blue">model</font> Current <font color="darkgreen">
-  &quot;Specify current (measure density), with conservation of material&quot;</font>
+  &quot;Specify current (measure pressure), with conservation of material&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
     <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Current,
     u(<font color="blue">final </font>unit=&quot;N/T&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/l3&quot;) = negative.rho);
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) = positive.p - negative.p);
 
 <font color="blue">equation </font>
   negative.Ndot = u_final;
@@ -200,10 +153,10 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material.html#FCSys.Conditions.ByConnector.Face.Pair.Material">FCSys.Conditions.ByConnector.Face.Pair.Material</a>.Custom</h2>
 <b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.Custom">
 
 <h3>Information</h3>
 
@@ -220,7 +173,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>positive.rho - negative.rho</td><td>Expression to which the condition is applied</td></tr>
+<tr><td>Real</td><td>x</td><td>positive.p - negative.p</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.Ndot</td><td>Measurement expression</td></tr>
 </table>
@@ -243,8 +196,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
       y=negative.Ndot);
 
-  Real x=positive.rho - negative.rho <font color="darkgreen">
-    &quot;Expression to which the condition is applied&quot;</font>;
+  Real x=positive.p - negative.p <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
 
 <font color="blue">equation </font>
   x = u_final;
@@ -255,7 +207,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasse
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun 12 09:11:12 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:33 2013.
 </div>
 </body>
 </html>
