@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicEOS</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-15">
+<meta name="date" content="2013-6-16">
 <meta name="description" content="&lt;html&gt;Base thermodynamic package with only the &lt;i&gt;p&lt;/i&gt;-&lt;i&gt;v&lt;/i&gt;-&lt;i&gt;T&lt;/i&gt; relations&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -94,6 +94,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Specific volume as a function of temperature and pressure</td></tr>
 </table>
 <p>
+
 <h3>Types and constants</h3>
 
 <pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p0=U.bar <font color="darkgreen">
@@ -124,11 +125,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_TvI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">FCSys.Characteristics.BaseClasses.CharacteristicEOS</a>.dp_Tv</h2>
 <b>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -138,13 +142,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>dv</td><td>0</td><td>Derivative of specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>Derivative of pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -175,11 +182,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_TvI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">FCSys.Characteristics.BaseClasses.CharacteristicEOS</a>.dv_Tp</h2>
 <b>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -189,13 +199,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>0</td><td>Derivative of pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>dv</td><td>Derivative of specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -226,6 +239,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_TvI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">FCSys.Characteristics.BaseClasses.CharacteristicEOS</a>.p_Tv</h2>
 <b>Pressure as a function of temperature and specific volume</b>
+
 <h3>Information</h3>
 
 <p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
@@ -234,7 +248,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>The derivative of this function is <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv">dp_Tv</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -242,13 +258,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -281,13 +300,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_TvI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">FCSys.Characteristics.BaseClasses.CharacteristicEOS</a>.v_Tp</h2>
 <b>Specific volume as a function of temperature and pressure</b>
+
 <h3>Information</h3>
 
 <p>The derivative of this function is
   <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp">dv_Tp</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -295,13 +317,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>

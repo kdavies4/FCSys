@@ -1,19 +1,13 @@
 # Temporary, locked, and synchronization files
 *~
-*.bak-mo
 *.asv
 *.bak
+*.bak-mo
 .~lock*
-*.fuse_hidden*
+.fuse_hidden*
 
-# Modelica files
-*.mo
-
-# Spelling files
-.fcsys.pws
-.modelica.pws
-
-# Simulation files
+# Simulation files (in case they're generated inside the library)
+simulations
 dsin.txt
 dsfinal.txt
 dsu.txt
@@ -22,26 +16,13 @@ dsmodel.c
 dsmodel.mof
 dymosim
 buildlog.txt
-test/LOOCV/Case
 request
 status
-
-# Compiled files
-*.pyc
 *.exe
-
-# Documentation scripts
-*.sh
-*.py
+*.mat
 
 # Internal link to demos
-resources/source/Python/doc/demos
-
-# Mathematica notebooks
-*.nb
-
-# MATLAB data files
-*.mat
+/resources/source/Python/fcres/examples
 
 # Excel spreadsheets
 *.xls
@@ -51,56 +32,33 @@ resources/source/Python/doc/demos
 *.tar.gz
 
 # Selected directories
-old/
-help/
+/old/
+/help/
 build/
 
 # Using .gif version instead
-images/icon.png
+/images/icon.png
 
-# HNEI data
-# (also blocked by other means, but be sure)
-resources/scripts/Dymola/ValidationData.mos
-test/LOOCV
-resources/images/Regions/*.pdf
+# Python-generated and compiled files
+MANIFEST
+*.pyc
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
-test/Morris
+/test/Morris
 
 # Files from the main branch
 *.mo
 *.mos
 package.order
-resources/
-install/
-test/
 *.pws
 .include
 .exclude
-resources/configuration
-resources/documentation
-resources/source
-resources/scripts
-resources/www
+/install
+/test
+/resources
 *.m
 *.sh
 00-process-gh-pages.py
-
-# Unused packages
-images/FCSys.Systems
-images/FCSys.Blocks
-images/FCSys.Figures
-
-
-# Internal links
-resources/source/Python/.modelica.pws
-resources/source/Python/.fcsys.pws
-resources/source/Python/00-spellcheck.sh
-
-# Links to modelicares (which is a git repository itself)
-resources/source/Python/create-matplotlib-icon.py
-resources/source/Python/00-autoformat.sh
-# Eclipse project files
-lib/Python/.project
-lib/Python/.pydevproject
+*.sh
+*.py
