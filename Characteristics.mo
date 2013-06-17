@@ -352,6 +352,7 @@ package Characteristics
     end Gas;
 
     package Graphite "e- in graphite"
+      // **delete this?
       extends Gas(
         final phase=Phase.Solid,
         n_v={0,0},
@@ -419,6 +420,7 @@ package Characteristics
     end Gas;
 
     package Ionomer "H+ in ionomer"
+      // **delete this?
       extends Gas(
         final phase=Phase.Solid,
         n_v={0,0},

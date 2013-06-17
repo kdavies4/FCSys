@@ -132,23 +132,25 @@ package Subregions
             reduceTemp=false,
             'C+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC),
 
-            'e-'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
+            'e-'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None)),
 
           ionomer(
             reduceTemp=false,
             'C19HF37O5S-'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC),
 
-            'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC))));
+            'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
         graphite(
           'inclC+'=false,
           final 'incle-'='incle-',
-          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal(redeclare Modelica.Blocks.Sources.Ramp source(
-                duration=100,
-                height=3*U.N,
-                startTime=10)))),
+          'e-'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material(source(final y=0)), redeclare
+              Conditions.ByConnector.Face.Single.Translational.Current normal(
+                source(y=time*U.A)))),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
@@ -168,21 +170,25 @@ package Subregions
             origin={-24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
-        graphite(
-          'inclC+'=false,
-          final 'incle-'='incle-',
-          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal)),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
-          'H+'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal)),
+          'H+'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Density
+              material(source(final y=17842.7*U.C/U.cc)), redeclare
+              Conditions.ByConnector.Face.Single.Translational.Velocity normal)),
+
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
           final inclN2=inclN2,
-          final inclO2=inclO2)) annotation (Placement(transformation(
+          final inclO2=inclO2),
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -840,10 +846,14 @@ package Subregions
 
       ChemicalExchange chemicalExchange[3](n={-2,-2,1}, m={1,1,1}*U.g/U.mol)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-      FCSys.Subregions.Depletion layer1(transSubstrate=true, thermalSubstrate=
-            true)
+      FCSys.Subregions.Depletion layer1(
+        transSubstrate=true,
+        thermalSubstrate=true,
+        side=FCSys.BaseClasses.Side.n,
+        redeclare package Data = FCSys.Characteristics.'e-'.Gas)
         annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
-      FCSys.Subregions.Depletion layer2
+      FCSys.Subregions.Depletion layer2(side=FCSys.BaseClasses.Side.p,
+          redeclare package Data = FCSys.Characteristics.'H+'.Gas)
         annotation (Placement(transformation(extent={{30,10},{10,30}})));
       replaceable Conditions.ByConnector.ChemicalSpecies.Current current(
         redeclare Modelica.Blocks.Sources.Ramp source(height=100*U.A, duration=
@@ -868,15 +878,13 @@ package Subregions
         final inclTransZ=inclTransZ)
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
-      Conditions.ByConnector.Face.Single.Face face1(redeclare
-          Conditions.ByConnector.Face.Single.Translational.Force normal)
-        annotation (Placement(transformation(
+      Conditions.ByConnector.Face.Single.Face face1 annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-44,20})));
-      Conditions.ByConnector.Face.Single.Face face2(redeclare
-          Conditions.ByConnector.Face.Single.Translational.Force normal)
-        annotation (Placement(transformation(
+      Conditions.ByConnector.Face.Single.Face face2 annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,20})));
@@ -943,6 +951,7 @@ package Subregions
               "resources/scripts/Dymola/Subregions.Examples.TestReaction.mos"),
 
         Diagram(graphics));
+
     end TestReaction;
 
   end Examples;
@@ -1799,7 +1808,7 @@ package Subregions
           color={47,107,251},
           smooth=Smooth.None));
       connect(O2.inertDalton, inertDalton) annotation (Line(
-          points={{3.9,-7},{3.578,-7.155},{3.578,-7.155},{13.33,-26.67}},
+          points={{3.9,-7},{13.33,-26.67}},
           color={11,43,197},
           smooth=Smooth.None));
 
@@ -1917,17 +1926,22 @@ package Subregions
         "Connector for chemical reactions" annotation (Placement(transformation(
               extent={{-50,40},{-30,60}}), iconTransformation(extent={{-48,66},
                 {-28,86}})));
-      FCSys.Subregions.Depletion depletionHOR(
-        z=-1,
+      Depletion depletionHOR(
         A=A[Axis.x],
         transSubstrate=true,
-        thermalSubstrate=true) if inclHOR "Depletion region for the HOR"
+        thermalSubstrate=true,
+        side=FCSys.BaseClasses.Side.p,
+        redeclare package Data = FCSys.Characteristics.'e-'.Gas) if inclHOR
+        "Depletion region for the HOR"
         annotation (Placement(transformation(extent={{38,60},{18,80}})));
-      FCSys.Subregions.Depletion depletionORR(
-        z=-1,
+
+      Depletion depletionORR(
         A=A[Axis.x],
         transSubstrate=true,
-        thermalSubstrate=true) if inclORR "Depletion region for the ORR"
+        thermalSubstrate=true,
+        side=FCSys.BaseClasses.Side.n,
+        redeclare package Data = FCSys.Characteristics.'e-'.Gas) if inclORR
+        "Depletion region for the ORR"
         annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
 
       parameter Boolean inclHOR=false "Hydrogen oxidation" annotation (
@@ -2109,7 +2123,8 @@ package Subregions
       annotation (Documentation(info="<html>
     <p>See <a href=\"modelica://FCSys.Subregions.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, see the
- <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+ <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
+          Diagram(graphics));
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2227,17 +2242,22 @@ package Subregions
         "Connector for chemical reactions" annotation (Placement(transformation(
               extent={{-50,40},{-30,60}}), iconTransformation(extent={{-48,66},
                 {-28,86}})));
-      FCSys.Subregions.Depletion depletionHOR(
-        z=1,
+      Depletion depletionHOR(
         A=A[Axis.x],
         transSubstrate=false,
-        thermalSubstrate=false) if inclHOR "Depletion region for the HOR"
+        thermalSubstrate=false,
+        side=FCSys.BaseClasses.Side.n,
+        redeclare package Data = FCSys.Characteristics.'H+'.Gas) if inclHOR
+        "Depletion region for the HOR"
         annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
-      FCSys.Subregions.Depletion depletionORR(
-        z=1,
+
+      Depletion depletionORR(
         A=A[Axis.x],
         transSubstrate=false,
-        thermalSubstrate=false) if inclORR "Depletion region for the ORR"
+        thermalSubstrate=false,
+        side=FCSys.BaseClasses.Side.p,
+        redeclare package Data = FCSys.Characteristics.'H+'.Gas) if inclORR
+        "Depletion region for the ORR"
         annotation (Placement(transformation(extent={{38,60},{18,80}})));
 
       parameter Boolean inclHOR=false "Hydrogen oxidation" annotation (
@@ -2429,7 +2449,7 @@ package Subregions
           color={47,107,251},
           smooth=Smooth.None));
       connect(H2O.inertDalton, inertDalton) annotation (Line(
-          points={{3.9,-7},{4,-8},{13.33,-26.67}},
+          points={{3.9,-7},{13.33,-26.67}},
           color={11,43,197},
           smooth=Smooth.None));
       // Transport
@@ -3227,12 +3247,13 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesIsochoric(
+          extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Gas,
             final tauprime=0,
             redeclare parameter Q.Mobility mu=Data.mu(),
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare final parameter Q.Mobility eta=0,
+            redeclare final parameter Q.Fluidity beta=0,
             redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
 
@@ -5388,7 +5409,7 @@ yet its condition is not defined.  Choose any condition besides None.");
     extends FCSys.BaseClasses.Icons.Names.Top2;
 
     parameter Q.Area A=100*U.cm^2 "Area";
-    parameter Q.CurrentAreicAbsolute J_0=1e-1*U.A/U.cm^2
+    parameter Q.CurrentAreicAbsolute J_0=1e-3*U.A/U.cm^2
       "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
     parameter Q.NumberAbsolute alpha(max=1) = 0.5
       "<html>Charge transfer coefficient (&alpha;)</html>";
@@ -5491,10 +5512,21 @@ yet its condition is not defined.  Choose any condition besides None.");
   end ChemicalExchange;
 
   model Depletion "Electrochemical depletion region"
-    extends FCSys.BaseClasses.Icons.Names.Top2;
+    import FCSys.BaseClasses.Utilities.inSign;
+    //extends FCSys.BaseClasses.Icons.Names.Top2;
 
-    parameter Integer z=1 "Charge number";
-    parameter Q.Area A=U.cm^2 "Area";
+    parameter Q.Area A=U.cm^2 "Area" annotation (Dialog(group="Geometry"));
+    parameter Side side
+      "Side of the subregion which is depleted of the carrier"
+      annotation (Dialog(group="Geometry"));
+    replaceable package Data = Characteristics.BaseClasses.Characteristic
+      constrainedby Characteristics.BaseClasses.CharacteristicEOS
+      "Characteristic data" annotation (
+      Dialog(group="Material properties"),
+      choicesAllMatching=true,
+      __Dymola_choicesFromPackage=true,
+      Placement(transformation(extent={{-60,40},{-40,60}}), iconTransformation(
+            extent={{-10,90},{10,110}})));
     parameter Boolean transSubstrate=false
       "Pass translational momentum through the substrate" annotation (choices(
           __Dymola_checkBox=true), Dialog(tab="Assumptions", compact=true));
@@ -5524,11 +5556,7 @@ yet its condition is not defined.  Choose any condition besides None.");
 
   equation
     // Electrical potential and electrostatic force
-    z*face.rho*A*chemical.mu = face.mPhidot[1];
-
-    // Material conditions
-    face.Ndot = 0 "No diffusion to or from the depletion region";
-    face.phi[1] = 0 "No advection to or from the depletion region";
+    Data.z*face.rho*A*chemical.mu = face.mPhidot[1];
 
     // Translational conditions
     if transSubstrate then
@@ -5538,7 +5566,6 @@ yet its condition is not defined.  Choose any condition besides None.");
       chemical.mPhidot = zeros(n_trans)
         "Translational momentum passed directly from reactants to products";
     end if;
-    face.mPhidot[2:3] = zeros(2) "No shear force";
 
     // Thermal conditions
     if thermalSubstrate then
@@ -5547,10 +5574,16 @@ yet its condition is not defined.  Choose any condition besides None.");
     else
       chemical.Qdot_D = 0 "Substrate is adiabatic w.r.t. reaction";
     end if;
-    face.Qdot = 0 "Adiabatic at edge of depletion region";
     chemical.Qdot_A = 0 "No thermal energy into the advected stream";
 
-    // Conservation (without storage)
+    // Conservation at the far edge of the depletion region (without storage)
+    0 = face.Ndot - inSign(side)*face.rho*A*face.phi[1] "Material";
+    0 = face.mPhidot[1] - inSign(side)*Data.p_Tv(face.T, 1/face.rho)*A
+      "Normal translational momentum";
+    zeros(2) = face.mPhidot[2:3] "Transverse translational momentum";
+    0 = face.Qdot "Energy";
+
+    // Conservation at the reaction site (without storage)
     for i in 1:n_trans loop
       0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (if cartTrans[
         i] == 0 then 0 else face.mPhidot[cartTrans[i]])
@@ -5601,7 +5634,11 @@ yet its condition is not defined.  Choose any condition besides None.");
             points={{20,30},{20,-30}},
             color={47,107,251},
             smooth=Smooth.None,
-            thickness=0.5)}));
+            thickness=0.5),
+          Text(
+            extent={{-120,40},{120,80}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end Depletion;
 
   model Volume "Model to establish a fixed total volume"
