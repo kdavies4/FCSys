@@ -90,10 +90,9 @@ package Conditions "Models to specify and measure operating conditions"
           compact=true));
 
       ByConnector.FaceBus.Single.Phases.Gas face(inclH2O=true, H2O(redeclare
-            Conditions.ByConnector.Face.Single.Thermal.HeatRate thermal(source(
-                k=0)), redeclare
-            Conditions.ByConnector.Face.Single.Material.Current material(source(
-                k=U.A))))
+            Conditions.ByConnector.Face.Single.Thermal.HeatRate thermal,
+            redeclare Conditions.ByConnector.Face.Single.Material.Current
+            material(source(y=U.A))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 
       Subregions.Volume volume(n_phases=1)
@@ -336,8 +335,8 @@ package Conditions "Models to specify and measure operating conditions"
           color={0,127,0},
           smooth=Smooth.None));
       connect(graphite.flange, flange) annotation (Line(
-          points={{8,6.10623e-16},{24,6.10623e-16},{24,0},{40,0},{40,-80},{80,-80}},
-
+          points={{8,6.10623e-16},{24,6.10623e-16},{24,0},{40,0},{40,-80},{80,
+              -80}},
           color={0,127,0},
           smooth=Smooth.None));
 
@@ -471,8 +470,8 @@ package Conditions "Models to specify and measure operating conditions"
           color={0,127,0},
           smooth=Smooth.None));
       connect(graphite.flange, flange) annotation (Line(
-          points={{8,6.10623e-16},{24,6.10623e-16},{24,0},{40,0},{40,-80},{80,-80}},
-
+          points={{8,6.10623e-16},{24,6.10623e-16},{24,0},{40,0},{40,-80},{80,
+              -80}},
           color={0,127,0},
           smooth=Smooth.None));
 
@@ -592,18 +591,21 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-20},{50,-20},{50,5.55112e-16},{80,5.55112e-16}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,40},{70,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,40},{70,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end AnodeGas;
 
       model CathodeGas
@@ -722,18 +724,21 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-20},{50,-20},{50,5.55112e-16},{80,5.55112e-16}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,40},{70,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,40},{70,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end CathodeGas;
 
       model Graphite
@@ -786,18 +791,21 @@ package Conditions "Models to specify and measure operating conditions"
             points={{80,5.55112e-16},{20,5.55112e-16},{20,-20},{8,-20}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{70,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{70,40}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Graphite;
 
       model Liquid
@@ -847,18 +855,21 @@ package Conditions "Models to specify and measure operating conditions"
                 6.10623e-16}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,40},{70,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,40},{70,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Liquid;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -876,13 +887,13 @@ package Conditions "Models to specify and measure operating conditions"
                     70,-50},{90,-30}}), iconTransformation(extent={{70,-50},{90,
                     -30}})));
           annotation (Icon(graphics={Line(
-                          points={{0,0},{-70,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None,
-                          thickness=0.5),Line(
-                          points={{0,-40},{70,-40}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,-40},{70,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -1482,108 +1493,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialJunction;
 
       end BaseClasses;
-
-      model Junction "Junction between two pure substances and their mixture"
-        import assert = FCSys.BaseClasses.Utilities.assertEval;
-        extends BaseClasses.PartialJunction;
-
-        replaceable package Medium1 = Modelica.Media.IdealGases.SingleGases.H2
-            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-              excludeEnthalpyOfFormation=false) constrainedby
-          Modelica.Media.Interfaces.PartialPureSubstance
-          "<html>Medium model for the 1<sup>st</sup> pure substance</html>"
-          annotation (choicesAllMatching=true, Dialog(group=
-                "Material properties"));
-        replaceable package Medium2 = Modelica.Media.IdealGases.SingleGases.H2O
-            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-              excludeEnthalpyOfFormation=false) constrainedby
-          Modelica.Media.Interfaces.PartialPureSubstance
-          "<html>Medium model for the 2<sup>nd</sup> pure substance</html>"
-          annotation (choicesAllMatching=true, Dialog(group=
-                "Material properties"));
-
-        Modelica.Fluid.Interfaces.FluidPort_b purePort1(redeclare final package
-            Medium = Medium1) "Fluid port for the 1st pure substance"
-          annotation (Placement(transformation(extent={{70,30},{90,50}}),
-              iconTransformation(extent={{70,30},{90,50}})));
-        Modelica.Fluid.Interfaces.FluidPort_b purePort2(redeclare final package
-            Medium = Medium2) "Fluid port for the 2nd pure substance"
-          annotation (Placement(transformation(extent={{70,-50},{90,-30}}),
-              iconTransformation(extent={{70,-50},{90,-30}})));
-
-      initial equation
-        // Check the number and names of substances
-        assert(MixtureMedium.nS == 2,
-          "The mixture medium must have exactly two substances.");
-        assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
-          "The first substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[1] + "\",
-but the first pure substance is \"" + Medium1.substanceNames[1] + "\".");
-        assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
-          "The second substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[2] + "\",
-but the second pure substance is \"" + Medium2.substanceNames[1] + "\".");
-
-        // Check the extra properties.
-        assert(MixtureMedium.nC == Medium1.nC and MixtureMedium.nC == Medium2.nC,
-          "The media must all have the same number of extra properties.");
-        for i in 1:MixtureMedium.nC loop
-          assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
-            i], "Extra property #" + String(i) +
-            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\",
-but that of the first pure substance (Medium1) is \"" + Medium1.extraPropertiesNames[
-            i] + "\".");
-          assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
-            i], "Extra property #" + String(i) +
-            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\",
-but that of the second pure substance (Medium2) is \"" + Medium2.extraPropertiesNames[
-            i] + "\".");
-        end for;
-
-      equation
-        // Dalton's law (additivity of pressure)
-        mixturePort.p = purePort1.p + purePort2.p;
-
-        // Streams
-        // -------
-        // Enthalpy
-        purePort1.h_outflow = inStream(mixturePort.h_outflow);
-        purePort2.h_outflow = inStream(mixturePort.h_outflow);
-        mixturePort.h_outflow = X*{inStream(purePort1.h_outflow),inStream(
-          purePort2.h_outflow)};
-        //
-        // Extra properties
-        purePort1.C_outflow = inStream(mixturePort.C_outflow);
-        purePort2.C_outflow = inStream(mixturePort.C_outflow);
-        mixturePort.C_outflow = X*{inStream(purePort1.C_outflow),inStream(
-          purePort2.C_outflow)};
-
-        // Mass conservation (no storage)
-        0 = X[1]*mixturePort.m_flow + purePort1.m_flow "Substance 1";
-        0 = X[2]*mixturePort.m_flow + purePort2.m_flow "Substance 2";
-        annotation (
-          defaultComponentName="junction",
-          Documentation(info="<html><p>Assumptions:
-  <ol>
-  <li>The mixing is ideal.  If the pure substances are being combined,
-  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
-  If the mixture is being split, then each of the pure substances receives fluid
-  at the same massic enthalpy.
-  </li>
-  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
-  of the pressures of the pure substances.
-  </li>
-  </ol></p></html>"),
-          Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,40},{80,40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
-      end Junction;
 
     end Junctions;
 
@@ -2319,11 +2228,11 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -2676,7 +2585,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         // instead of
         //   "Material.Potential".
         // Otherwise the following error is given:
-        //   "Cannot show paramter dialog for redeclared class [...] since:
+        //   "Cannot show paramter [sic] dialog for redeclared class [...] since:
         //   Could not find type of redeclare :[...] in scope [...]"
         // Similar notes apply to the other top-level extended models in
         // FCSys.Conditions.ByConnector.
@@ -4160,7 +4069,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face H2 if inclH2 "Conditions" annotation (Dialog(
+            Face.Pair.Face H2 if inclH2 "<html>H<sub>2</sub> conditions</html>"
+              annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2), Placement(transformation(extent={{-10,-10},{10,
@@ -4175,7 +4085,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Pair.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -4190,7 +4101,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face N2 if inclN2 "Conditions" annotation (Dialog(
+            Face.Pair.Face N2 if inclN2 "<html>N<sub>2</sub> conditions</html>"
+              annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclN2), Placement(transformation(extent={{-10,-10},{10,
@@ -4205,7 +4117,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face O2 if inclO2 "Conditions" annotation (Dialog(
+            Face.Pair.Face O2 if inclO2 "<html>O<sub>2</sub> conditions</html>"
+              annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclO2), Placement(transformation(extent={{-10,-10},{10,
@@ -4331,7 +4244,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face 'C+' if 'inclC+' "Conditions" annotation (Dialog(
+            Face.Pair.Face 'C+' if 'inclC+'
+              "<html>C<sup>+</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='inclC+'), Placement(transformation(extent={{-10,-10},{
@@ -4346,7 +4260,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face 'e-' if 'incle-' "Conditions" annotation (Dialog(
+            Face.Pair.Face 'e-' if 'incle-'
+              "<html>e<sup>-</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='incle-'), Placement(transformation(extent={{-10,-10},{
@@ -4422,7 +4337,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face 'C19HF37O5S-' if 'inclC19HF37O5S-' "Conditions"
+            Face.Pair.Face 'C19HF37O5S-' if 'inclC19HF37O5S-'
+              "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions</html>"
               annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
@@ -4438,7 +4354,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face 'H+' if 'inclH+' "Conditions" annotation (Dialog(
+            Face.Pair.Face 'H+' if 'inclH+'
+              "<html>H<sup>+</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='inclH+'), Placement(transformation(extent={{-10,-10},{
@@ -4453,7 +4370,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Pair.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -4553,7 +4471,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Pair.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -4910,7 +4829,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face H2 if inclH2 "Conditions" annotation (Dialog(
+            Face.Single.Face H2 if inclH2
+              "<html>H<sub>2</sub> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2), Placement(transformation(extent={{-10,-10},{10,
@@ -4925,7 +4845,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Single.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -4940,7 +4861,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face N2 if inclN2 "Conditions" annotation (Dialog(
+            Face.Single.Face N2 if inclN2
+              "<html>N<sub>2</sub>Conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclN2), Placement(transformation(extent={{-10,-10},{10,
@@ -4955,7 +4877,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face O2 if inclO2 "Conditions" annotation (Dialog(
+            Face.Single.Face O2 if inclO2
+              "<html>O<sub>2</sub> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclO2), Placement(transformation(extent={{-10,-10},{10,
@@ -5054,7 +4977,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face 'C+' if 'inclC+' "Conditions" annotation (Dialog(
+            Face.Single.Face 'C+' if 'inclC+'
+              "<html>C<sup>+</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='inclC+'), Placement(transformation(extent={{-10,-10},{
@@ -5069,7 +4993,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face 'e-' if 'incle-' "Conditions" annotation (Dialog(
+            Face.Single.Face 'e-' if 'incle-'
+              "<html>e<sup>-</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='incle-'), Placement(transformation(extent={{-10,-10},{
@@ -5083,14 +5008,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.'C+', 'C+'.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('C+'.y, y.'C+') annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5102,14 +5027,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.'e-', 'e-'.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('e-'.y, y.'e-') annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5131,7 +5056,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face 'C19HF37O5S-' if 'inclC19HF37O5S-' "Conditions"
+            Face.Single.Face 'C19HF37O5S-' if 'inclC19HF37O5S-'
+              "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions</html>"
               annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
@@ -5147,7 +5073,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face 'H+' if 'inclH+' "Conditions" annotation (Dialog(
+            Face.Single.Face 'H+' if 'inclH+'
+              "<html>H<sup>+</sup> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable='inclH+'), Placement(transformation(extent={{-10,-10},{
@@ -5162,7 +5089,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Single.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -5176,14 +5104,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('C19HF37O5S-'.y, y.'C19HF37O5S-') annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5195,14 +5123,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.'H+', 'H+'.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('H+'.y, y.'H+') annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5214,14 +5142,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.H2O, H2O.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect(H2O.y, y.H2O) annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5242,7 +5170,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.Face H2O if inclH2O "Conditions" annotation (Dialog(
+            Face.Single.Face H2O if inclH2O
+              "<html>H<sub>2</sub>O conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,
@@ -5256,14 +5185,14 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
             connect(u.H2O, H2O.u) annotation (Line(
-                points={{-100,5.55112e-16},{-100,0},{-10,0},{-10,6.10623e-16}},
+                points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect(H2O.y, y.H2O) annotation (Line(
-                points={{10,6.10623e-16},{10,0},{100,0},{100,5.55112e-16}},
+                points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -5441,8 +5370,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           // 1st transverse
           connect(negative, following.negative) annotation (Line(
-              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-10,
-                  6.10623e-16}},
+              points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{
+                  -10,6.10623e-16}},
               color={127,127,127},
               pattern=LinePattern.None,
               smooth=Smooth.None));
@@ -5550,7 +5479,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 defaultComponentName="material");
           end Density;
 
-          model Pressure "Specify pressure (measure diffusion current)"
+          model Pressure
+            "Specify pressure difference (measure diffusion current)"
             extends Single.Material.BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Pressure,
               u(final unit="m/(l.T2)"),
@@ -5567,17 +5497,18 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                   iconTransformation(extent={{-10,90},{10,110}})));
 
           equation
-            Data.p_Tv(face.T, 1/face.rho) = u_final;
+            Data.p_Tv(positive.T, 1/positive.rho) - Data.p_Tv(negative.T, 1/
+              negative.rho) = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
           end Pressure;
 
           model Current
-            "Specify diffusion current (measure density), with conservation of material"
+            "Specify diffusion current (measure density difference), with conservation of material"
             extends BaseClasses.PartialCondition(
               final conditionType=BaseClasses.ConditionType.Current,
               u(final unit="N/T"),
-              final y(final unit="N/l3") = negative.rho);
+              final y(final unit="N/l3") = positive.rho - negative.rho);
 
           equation
             negative.Ndot = u_final;
@@ -8123,7 +8054,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
   end ByConnector;
 
   record Environment "Environmental properties for a model"
-    extends FCSys.BaseClasses.Icons.Names.Top3;
+    //extends FCSys.BaseClasses.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
     final constant U.Bases.Base baseUnits=U.base "Base constants and units";
@@ -8161,11 +8092,6 @@ settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
-          Rectangle(
-            extent={{-120,60},{120,100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
           Text(
             extent={{-120,60},{120,100}},
             textString="%name",

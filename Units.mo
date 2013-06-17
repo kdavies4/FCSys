@@ -14,9 +14,10 @@ package Units "Constants and units of physical measure"
     // them here.  Be sure that the desired unit is included in a
     // defineUnitConversion command below.
     // Generated from FCSys/resources/quantities.xls, 2013-6-10
-    defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal amount";
+    defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal of amount";
     defineDefaultDisplayUnit("A", "rad") "Angle";
-    defineDefaultDisplayUnit("A.N.T/(l2.m)", "1/Wb") "Reciprocal magnetic flux";
+    defineDefaultDisplayUnit("A.N.T/(l2.m)", "1/Wb")
+      "Reciprocal of magnetic flux";
     defineDefaultDisplayUnit("A/l", "rad/m") "Wavenumber";
     defineDefaultDisplayUnit("A/T", "rad/s") "Frequency";
     defineDefaultDisplayUnit("A2", "sr") "Solid angle";
@@ -25,7 +26,7 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l.m/T2", "N") "Force";
     defineDefaultDisplayUnit("l.T/m", "1/(Pa.s)") "Fluidity";
     defineDefaultDisplayUnit("l.T/N", "cm/A") "Resistivity";
-    defineDefaultDisplayUnit("l.T2/m", "1/kPa") "Reciprocal pressure";
+    defineDefaultDisplayUnit("l.T2/m", "1/kPa") "Reciprocal of pressure";
     defineDefaultDisplayUnit("l/(T.s)", "cm/s2")
       "for derivative of velocity in Dymola";
     defineDefaultDisplayUnit("l/N", "m/mol") "Specific length";
@@ -51,7 +52,8 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l3", "cc") "Volume";
     defineDefaultDisplayUnit("l3.m/(A.N.T2)", "V.m/rad")
       "Potential per wavenumber";
-    defineDefaultDisplayUnit("l3.m/(N2.T2)", "m/H") "Reciprocal permittivity";
+    defineDefaultDisplayUnit("l3.m/(N2.T2)", "m/H")
+      "Reciprocal of permittivity";
     defineDefaultDisplayUnit("l3/(N.s)", "cc/(C.s)")
       "for derivative of specific volume in Dymola";
     defineDefaultDisplayUnit("l3/(N.T)", "cc/(C.s)") "Rate of specific volume";
@@ -103,11 +105,11 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "1/N",
         "1/C",
-        C) "Reciprocal amount";
+        C) "Reciprocal of amount";
     defineUnitConversion(
         "1/N",
         "1/mol",
-        mol) "Reciprocal amount";
+        mol) "Reciprocal of amount";
     defineUnitConversion(
         "A",
         "degree",
@@ -119,7 +121,7 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "A.N.T/(l2.m)",
         "1/Wb",
-        Wb) "Reciprocal magnetic flux";
+        Wb) "Reciprocal of magnetic flux";
     defineUnitConversion(
         "A/l",
         "cyc/m",
@@ -179,11 +181,11 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "l.T2/m",
         "1/kPa",
-        kilo*Pa) "Reciprocal pressure";
+        kilo*Pa) "Reciprocal of pressure";
     defineUnitConversion(
         "l.T2/m",
         "1/Pa",
-        Pa) "Reciprocal pressure";
+        Pa) "Reciprocal of pressure";
     defineUnitConversion(
         "l/(T.s)",
         "cm/s2",
@@ -359,7 +361,7 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "l3.m/(N2.T2)",
         "m/H",
-        H/m) "Reciprocal permittivity";
+        H/m) "Reciprocal of permittivity";
     defineUnitConversion(
         "l3/(N.s)",
         "cc/(C.s)",

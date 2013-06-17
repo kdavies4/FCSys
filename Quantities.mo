@@ -20,7 +20,8 @@ package Quantities "Quantities to represent physical properties"
       // Generated from FCSys/resources/quantities.xls, 2013-6-10
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
-      parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
+      parameter Q.AmountReciprocal AmountReciprocal=1/U.C
+        "Reciprocal of amount";
       parameter Q.Angle Angle=1*U.rad "Angle";
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
@@ -47,7 +48,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.MagneticFluxAreic MagneticFluxAreic=1*U.T
         "Areic magnetic flux";
       parameter Q.MagneticFluxReciprocal MagneticFluxReciprocal=1/U.Wb
-        "Reciprocal magnetic flux";
+        "Reciprocal of magnetic flux";
       parameter Q.Mass Mass=1*U.kg "Mass";
       parameter Q.MassSpecific MassSpecific=1*U.micro*U.g/U.C "Specific mass";
       parameter Q.Mobility Mobility=1*U.C*U.s/U.g "Mobility";
@@ -59,7 +60,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Permeability Permeability=1*U.H/U.m "Permeability";
       parameter Q.Permittivity Permittivity=1*U.F/U.m "Permittivity";
       parameter Q.PermittivityReciprocal PermittivityReciprocal=1*U.m/U.H
-        "Reciprocal permittivity";
+        "Reciprocal of permittivity";
       parameter Q.Potential Potential=1*U.V "Potential";
       parameter Q.PotentialAbsolute PotentialAbsolute=1*U.K
         "Absolute potential";
@@ -77,7 +78,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.PressureAbsolute PressureAbsolute=1*U.Pa "Absolute pressure";
       parameter Q.PressureRate PressureRate=1*U.Pa/U.s "Rate of pressure";
       parameter Q.PressureReciprocal PressureReciprocal=1/U.Pa
-        "Reciprocal pressure";
+        "Reciprocal of pressure";
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
@@ -112,7 +113,7 @@ package Quantities "Quantities to represent physical properties"
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
-    "Reciprocal amount";
+    "Reciprocal of amount";
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
@@ -147,7 +148,7 @@ package Quantities "Quantities to represent physical properties"
   type MagneticFluxAreic = Modelica.Icons.TypeReal (final unit="m/(A.N.T)")
     "Areic magnetic flux";
   type MagneticFluxReciprocal = Modelica.Icons.TypeReal (final unit=
-          "A.N.T/(l2.m)") "Reciprocal magnetic flux";
+          "A.N.T/(l2.m)") "Reciprocal of magnetic flux";
   type Mass = Modelica.Icons.TypeReal (final unit="m", min=0);
   type MassSpecific = Modelica.Icons.TypeReal (final unit="m/N", min=0)
     "Specific mass";
@@ -160,7 +161,7 @@ package Quantities "Quantities to represent physical properties"
   type Permeability = Modelica.Icons.TypeReal (final unit="l.m/N2", min=0);
   type Permittivity = Modelica.Icons.TypeReal (final unit="N2.T2/(l3.m)", min=0);
   type PermittivityReciprocal = Modelica.Icons.TypeReal (final unit=
-          "l3.m/(N2.T2)", min=0) "Reciprocal permittivity";
+          "l3.m/(N2.T2)", min=0) "Reciprocal of permittivity";
   type Potential = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)");
   type PotentialAbsolute = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)",
         min=0) "Absolute potential";
@@ -184,7 +185,7 @@ package Quantities "Quantities to represent physical properties"
   type PressureRate = Modelica.Icons.TypeReal (final unit="m/(l.T3)")
     "Rate of pressure";
   type PressureReciprocal = Modelica.Icons.TypeReal (final unit="l.T2/m", min=0)
-    "Reciprocal pressure";
+    "Reciprocal of pressure";
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);

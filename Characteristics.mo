@@ -9,13 +9,12 @@ package Characteristics
     model Correlations
       "Evaluate the material properties over varying temperature and pressure"
       extends Modelica.Icons.Example;
+
       // Data
       import 'DataC+' = FCSys.Characteristics.'C+'.Graphite;
       import 'DataC19HF37O5S-' = FCSys.Characteristics.'C19HF37O5S-'.Ionomer;
       import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
       import DataH2 = FCSys.Characteristics.H2.Gas;
-
-    protected
       package DataH2IG = FCSys.Characteristics.H2.Gas (b_v=[1], n_v={-1,0})
         "H2 as ideal gas";
       import DataH2O = FCSys.Characteristics.H2O.Gas;
@@ -23,15 +22,15 @@ package Characteristics
       import 'DataH+' = FCSys.Characteristics.'H+'.Ionomer;
       import DataN2 = FCSys.Characteristics.N2.Gas;
       import DataO2 = FCSys.Characteristics.O2.Gas;
-      // Conditions
 
-    public
+      // Conditions
       Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
         "Temperature" annotation (Placement(transformation(extent={{50,16},{70,
                 36}}), iconTransformation(extent={{-10,16},{10,36}})));
       Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure" annotation (
           Placement(transformation(extent={{50,-36},{70,-16}}),
             iconTransformation(extent={{-10,-36},{10,-16}})));
+
       // Results
       // -------
       // Isobaric specific heat capacity
@@ -122,8 +121,15 @@ package Characteristics
       output Q.VolumeSpecificAbsolute v_O2=DataO2.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_Tp(T, p)
         "Specific volume of ideal gas";
-      output Q.TimeAbsolute nu=DataH2O.nu(T, v_H2O);
+      //
+      // Exchange and transport properties for H2O gas
       output Q.ResistivityMaterial eta=DataH2O.nu(T, v_H2O);
+      output Q.Fluidity beta=DataH2O.beta(T, v_H2O);
+      output Q.Fluidity zeta=DataH2O.zeta(T, v_H2O);
+      output Q.ResistivityThermal theta=DataH2O.theta(T, v_H2O);
+      output Q.TimeAbsolute tauprime=DataH2O.tauprime(T, v_H2O);
+      output Q.Mobility mu=DataH2O.nu(T, v_H2O);
+      output Q.TimeAbsolute nu=DataH2O.nu(T, v_H2O);
 
     protected
       Modelica.Blocks.Sources.Clock clock
@@ -270,7 +276,7 @@ package Characteristics
    [<a href=\"modelica://FCSys.UsersGuide.References\">Mark1999</a>, p. 234].</li>
      <li>Thermodynamic data for this material is not available from
      [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity
-     (<code>b_c=[4188*U.J*m/(U.kg*U.K)]</code>) based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
+     (<code>b_c=[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
      <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the furthest distance
    between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
    The radius of F is 147 pm (<a href=\"http://en.wikipedia.org/wiki/Fluorine\">http://en.wikipedia.org/wiki/Fluorine</a>).</li>
@@ -1277,7 +1283,7 @@ package Characteristics
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
-        output Q.Resistivity theta "Thermal resistivity";
+        output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
         theta := omega(T)*alpha/c_v(T, p_Tv(T, v)) annotation (Inline=true);

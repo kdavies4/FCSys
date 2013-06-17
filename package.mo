@@ -5,6 +5,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -21,6 +22,7 @@ import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -217,7 +219,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Greiner1995\" class=bookmark>Greiner1995</a>]</td>
-      <td valign=top class=noBorder>W. Greiner, L. Neisem and H. St&ouml;cker, \"<a href=\http://books.google.com/books?id=12DKsFtFTgYC\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
+      <td valign=top class=noBorder>W. Greiner, L. Neisem and H. St&ouml;cker, \"<a href=\"http://books.google.com/books?id=12DKsFtFTgYC\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
@@ -936,6 +938,21 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1059,7 +1076,7 @@ margin-right: auto;\" class=noBorder>
     <ul>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/1/2007:<br>Version 1.0 (as <code>PEMFCSim</code>)</li>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/20/2008:<br>Version 1.1 (to model CO contamination for <a href=\"http://www.hnei.hawaii.edu\">HNEI</a>)</li>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2012:<br>Version 2.0 alpha (released in the public domain)</li>
+    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2013:<br>Version 2.0 beta (released in the public domain)</li>
     </ul>
     </html>"),
   Icon(graphics={
@@ -1241,5 +1258,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

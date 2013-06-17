@@ -4,7 +4,7 @@ package Connectors "Declarative and imperative connectors"
 
   connector ChemicalReaction "Connector for a chemical reaction"
 
-    // Material exchange
+    // Material diffusion
     Q.Current Ndot(nominal=U.A) "Rate of reaction";
     flow Q.Potential mu(nominal=U.V) "Electrochemical potential";
 
@@ -47,7 +47,7 @@ package Connectors "Declarative and imperative connectors"
       "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
       annotation (HideResult=true);
 
-    // Material exchange
+    // Material diffusion
     Q.Potential mu(nominal=U.V) "Chemical potential";
     flow Q.Current Ndot(nominal=U.A) "Current";
 
@@ -214,15 +214,15 @@ package Connectors "Declarative and imperative connectors"
   end FaceBus;
 
   connector Face
-    "Connector to transport material, translational momentum, and thermal energy by diffusion"
+    "Connector to transport material, translational momentum, and thermal energy"
 
     // Material
     Q.Density rho(nominal=300*U.K/U.atm) "Density";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
 
     // Translational
-    Q.Velocity phi[3](each nominal=U.cm/U.s) "Velocity";
-    flow Q.Force mPhidot[3](each nominal=U.N) "Force";
+    Q.Velocity phi[Axis](each nominal=U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[Axis](each nominal=U.N) "Force";
 
     // Thermal
     extends ThermalDiffusion;
@@ -519,13 +519,13 @@ package Connectors "Declarative and imperative connectors"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,20},{40,0},{0,-20},{0,20}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,20},{40,0},{0,-20},{0,20}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -552,14 +552,14 @@ package Connectors "Declarative and imperative connectors"
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -587,14 +587,14 @@ package Connectors "Declarative and imperative connectors"
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Text(
-              extent={{-200,24},{200,64}},
-              textString="%name",
-              lineColor={0,0,0}),Polygon(
-              points={{0,20},{40,0},{0,-20},{0,20}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}));
+            extent={{-200,24},{200,64}},
+            textString="%name",
+            lineColor={0,0,0}), Polygon(
+            points={{0,20},{40,0},{0,-20},{0,20}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}));
 
   end RealInputBusInternal;
 
@@ -640,13 +640,13 @@ package Connectors "Declarative and imperative connectors"
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-40,20},{0,0},{-40,-20},{-40,20}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-40,20},{0,0},{-40,-20},{-40,20}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one output signal of type <code>Real</code>.</p>
 </html>"));
@@ -671,14 +671,14 @@ package Connectors "Declarative and imperative connectors"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealOutputBus;
 
@@ -704,14 +704,14 @@ package Connectors "Declarative and imperative connectors"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-40,20},{0,0},{-40,-20},{-40,20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,24},{200,64}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{-40,20},{0,0},{-40,-20},{-40,20}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,24},{200,64}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealOutputBusInternal;
   annotation (Documentation(info="<html>
@@ -775,7 +775,7 @@ package Connectors "Declarative and imperative connectors"
   <p>The <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector has one
   more effort/flow pair than the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
-  It applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>
+  That pair applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>
   to mix species within a phase.</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/ConnectorHierarchy.png\">
