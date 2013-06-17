@@ -16,9 +16,10 @@ rm -f help/*WorkInProgress*
 
 ## Update the Github web pages.
 branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3` # Original branch
-stash_msg=`git stash save`
+stash_msg=`git stash save "Work in progress before running 00-make-doc.sh"`
 git checkout gh-pages
-git checkout $branch resources/documentation
+git checkout $branch -- resources/documentation # Checkout resources,
+git reset HEAD resources/documentation # but don't track them.
 
 # Update the style sheet.
 cp -f resources/documentation/ModelicaDoc.css stylesheets
@@ -49,7 +50,7 @@ git add *.html
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-updated github pages"
 #git push origin gh-pages
-git checkout $branch
+git checkout -f $branch
 if [ "$stash_msg" != "No local changes to save" ]; then
    git stash pop
 fi

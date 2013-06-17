@@ -11,9 +11,8 @@ with "TODO" or "**".  If you have problems besides those noted, please
 [FCSys] is a library of proton exchange membrane fuel cell models in
 [Modelica](https://www.modelica.org/).  More information is available in the
 documentation, which can be accessed [online](http://kdavies4.github.com/FCSys),
-from the documentation layer of the Modelica code (starting at the
-[top level](package.mo)), or from the help folder (starting at
-[FCSys.html](help/FCSys.html)).
+or from the documentation layer of the Modelica code (starting at the
+[top level](package.mo)).
 
 ### Installation
 
