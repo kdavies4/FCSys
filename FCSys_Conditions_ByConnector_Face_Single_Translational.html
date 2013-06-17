@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Single.Translational</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Translational conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -58,6 +59,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">Velocity</a>
 </td><td>Specify velocity (measure force)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Current" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Current">Current</a>
+</td><td>Specify advective current (measure force)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Force</a>
 </td><td>Specify force (measure velocity)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Custom">Custom</a>
@@ -70,35 +73,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">FCSys.Conditions.ByConnector.Face.Single.Translational</a>.Velocity</h2>
 <b>Specify velocity (measure force)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">
+<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Velocity">
 
 <h3>Information</h3>
 
 Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>&nbsp;</td><td>Orientation of translational momentum</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Ve&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -114,38 +112,85 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Force" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Single.Translational.Force"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">FCSys.Conditions.ByConnector.Face.Single.Translational</a>.Force</h2>
-<b>Specify force (measure velocity)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Force">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Current" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Translational.Current"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">FCSys.Conditions.ByConnector.Face.Single.Translational</a>.Current</h2>
+<b>Specify advective current (measure force)</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Current">
 
 <h3>Information</h3>
 
+<p>The advective current is in the globally positive direction (not into the component).
+    This model is meaningful only for the normal direction
+  (<code>orientation = Orientation.normal).</p><p>
 Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>&nbsp;</td><td>Orientation of translational momentum</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo&hellip;</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
 </table>
 <p>
+<h3>Modelica definition</h3>
 
+<pre>
+<font color="blue">model</font> Current <font color="darkgreen">&quot;Specify advective current (measure force)&quot;</font>
+  <font color="blue">import </font>assert = <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.assertEval">FCSys.BaseClasses.Utilities.assertEval</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Current,
+    u(<font color="blue">final </font>unit=&quot;N/T&quot;),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;) = face.mPhidot[orientation]);
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">assert</font>(orientation == Orientation.normal, &quot;FCSys.Conditions.ByConnector.Face.Single.Translational.Current is only intended for the normal direction.&quot;);
+
+<font color="blue">equation </font>
+  face.phi[orientation]*face.rho*A = u_final;
+
+<font color="blue">end </font>Current;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Force" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Translational.Force"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">FCSys.Conditions.ByConnector.Face.Single.Translational</a>.Force</h2>
+<b>Specify force (measure velocity)</b><p>
+<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Force">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo&hellip;</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
+</table>
+<p>
 <h3>Modelica definition</h3>
 
 <pre>
@@ -164,7 +209,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Custom" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Single.Translational.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational">FCSys.Conditions.ByConnector.Face.Single.Translational</a>.Custom</h2>
 <b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Custom">
+<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Translational.Custom">
 
 <h3>Information</h3>
 
@@ -172,13 +217,11 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p><p>
 Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>&nbsp;</td><td>Orientation of translational momentum</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
@@ -188,9 +231,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>face.mPhidot[orientation]</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -200,7 +241,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -219,7 +259,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:54 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:15:39 2013.
 </div>
 </body>
 </html>

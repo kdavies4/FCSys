@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Regions.AnFPs</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -76,7 +77,7 @@ The y axis extends along the length of the channel. The model is
 bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
 used as the inlet. The z axis extends across the width of the channel.</p>
 
-<p>By default, the layer cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+<p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
 <p>See <a href="FCSys_Subregions_Species_'C+'_Graphite.html#FCSys.Subregions.Species.'C+'.Graphite.Fixed">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
@@ -96,9 +97,7 @@ text layer of this model.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -115,9 +114,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -130,7 +127,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -264,9 +260,7 @@ Entegris/Poco Graphite AXF-5Q as well
     <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> (Anode flow plate).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -280,9 +274,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -294,7 +286,6 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -314,7 +305,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:56:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:17:04 2013.
 </div>
 </body>
 </html>

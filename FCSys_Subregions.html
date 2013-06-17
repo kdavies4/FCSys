@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Subregions</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -81,6 +82,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Electrochemical reaction</td></tr>
 <tr><td><img src="images/FCSys.Subregions.ChemicalExchangeS.png" alt="FCSys.Subregions.ChemicalExchange" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a>
 </td><td>Model to impose stoichiometry and properties on a species in a reaction</td></tr>
+<tr><td><img src="images/FCSys.Subregions.DepletionS.png" alt="FCSys.Subregions.Depletion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">Depletion</a>
+</td><td>Electrochemical depletion region</td></tr>
 <tr><td><img src="images/FCSys.Subregions.VolumeS.png" alt="FCSys.Subregions.Volume" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a>
 </td><td>Model to establish a fixed total volume</td></tr>
 <tr><td><img src="images/FCSys.Subregions.BaseClassesS.png" alt="FCSys.Subregions.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">BaseClasses</a>
@@ -99,9 +102,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
    <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -126,9 +127,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -140,7 +139,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -171,6 +169,8 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="blue">parameter </font>Boolean inclORR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclO2<font color="blue">
        and </font>gas.inclH2O <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
 
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> reaction <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">&quot;Electrochemical reaction&quot;</font>;
+
 <font color="blue">protected </font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBusInternal">Connectors.PhysicalBusInternal</a> physical <font color="blue">if </font>gas.inclH2O<font color="blue"> or </font>ionomer.inclH2O<font color="blue"> or </font>
     liquid.inclH2O <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
@@ -182,8 +182,9 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(liquid.physical, physical);
 
   <font color="darkgreen">// Chemical reactions</font>
-  <font color="red">connect</font>(graphite.chemical, gas.chemical);
-  <font color="red">connect</font>(graphite.chemical, ionomer.chemical);
+  <font color="red">connect</font>(reaction.chemical, gas.chemical);
+  <font color="red">connect</font>(reaction.chemical, graphite.chemical);
+  <font color="red">connect</font>(reaction.chemical, ionomer.chemical);
 
   <font color="darkgreen">// Phases</font>
   <font color="darkgreen">// ------</font>
@@ -240,9 +241,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
    <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -261,9 +260,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -275,7 +272,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -313,9 +309,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
    <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -336,9 +330,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -350,7 +342,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -415,44 +406,31 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 
 <p>This model establishes the rate of an electrochemical reaction
   using the Butler-Volmer equation.  It includes a static energy balance with heat generation.
-  The heat is rejected to <code>inert.thermal.Qdot</code>, independently of the
-  thermal stream from the reactants to the products (<code>chemical.Qdot</code>).</p>
+  The heat is rejected to <code>chemical.Qdot_D</code>, independently of the
+  thermal stream from the reactants to the products (<code>chemical.Qdot_A</code>).</p>
 
     <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
     unit of catalyst surface area).</p>
 
-    <p>If <code>transSubstrate</code> is <code>true</code>, then the translational momentum of the
-    reactants is passed to the substrate through the <code>inert</code>
-    connector and the products are produced at the velocity of the substrate (typically
-    zero).  If it is <code>false</code>, then translational momentum is passed
-    directly from the reactants to the products.</p>
-    <p>
+    <p></p><p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>.
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>100*U.cm^2</td><td>Area [l2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">CurrentAreicAbsolute</a></td><td>J_0</td><td>1e-3*U.A/U.cm^2</td><td>Exchange current density (<i>J</i><sub>0</sub>) [N/(l2.T)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">CurrentAreicAbsolute</a></td><td>J_0</td><td>1e-1*U.A/U.cm^2</td><td>Exchange current density (<i>J</i><sub>0</sub>) [N/(l2.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>alpha</td><td>0.5</td><td>Charge transfer coefficient (&alpha;) [1]</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>transSubstrate</td><td>true</td><td>Pass translational momentum through the substrate</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Common connector for the reaction</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Connector to directly couple velocity or temperature with other species</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -460,46 +438,32 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>;
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=100*U.cm^2 <font color="darkgreen">&quot;Area&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">Q.CurrentAreicAbsolute</a> J_0=1e-3*U.A/U.cm^2 <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">Q.CurrentAreicAbsolute</a> J_0=1e-1*U.A/U.cm^2 <font color="darkgreen">
     &quot;Exchange current density (<i>J</i><sub>0</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> alpha(max=1) = 0.5 <font color="darkgreen">
     &quot;Charge transfer coefficient (&alpha;)&quot;</font>;
-  <font color="blue">parameter </font>Boolean transSubstrate=true <font color="darkgreen">
-    &quot;Pass translational momentum through the substrate&quot;</font>;
 
   <a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe(start=0) <font color="darkgreen">&quot;Peclet number&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Common connector for the reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
-    &quot;Connector to directly couple velocity or temperature with other species&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><font color="blue">parameter </font>Integer n_trans <font color="darkgreen">
     &quot;Number of components of translational momentum&quot;</font>;
 
 <font color="blue">equation </font>
-  Pe*inert.thermal.T = chemical.mu - 31.4725*U.V <font color="darkgreen">&quot;**temp offset&quot;</font>;
+  Pe*chemical.T = chemical.mu - 25.87*U.V;
+  <font color="darkgreen">// **temp offset</font>
   chemical.Ndot = J_0*A*(<font color="red">exp</font>(alpha*Pe) - <font color="red">exp</font>((alpha - 1)*Pe)) <font color="darkgreen">
     &quot;Butler-Volmer equation (reaction rate)&quot;</font>;
 
-  <font color="blue">if </font>transSubstrate<font color="blue"> then</font>
-    chemical.phi = inert.translational.phi <font color="darkgreen">
-      &quot;Products produced at the velocity of the substrate&quot;</font>;
-  <font color="blue">else</font>
-    chemical.mPhidot = <font color="red">zeros</font>(n_trans) <font color="darkgreen">
-      &quot;Translational momentum passed directly from reactants to products&quot;</font>;
-  <font color="blue">end if</font>;
-
   <font color="darkgreen">// Conservation (without storage)</font>
-  <font color="red">zeros</font>(n_trans) = chemical.mPhidot + inert.translational.mPhidot <font color="darkgreen">
-    &quot;Translational momentum&quot;</font>;
-  0 = chemical.Qdot <font color="darkgreen">&quot;Advected thermal energy&quot;</font>;
-  0 = inert.thermal.Qdot + 0*(chemical.mu - 31.4725*U.V)*chemical.Ndot <font color="darkgreen">
+  <font color="red">zeros</font>(n_trans) = chemical.mPhidot <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = chemical.Qdot_A <font color="darkgreen">&quot;Advected thermal energy&quot;</font>;
+  0 = chemical.Qdot_D + 0*(chemical.mu - 25.87*U.V)*chemical.Ndot <font color="darkgreen">
     &quot;Diffused thermal energy (balances heat generation)&quot;</font>;
-  <font color="darkgreen">// **temp offset</font>
-  <font color="darkgreen">// **temp 0</font>
-  <font color="darkgreen">// **include heat gen due to momentum</font>
+  <font color="darkgreen">// **temp offset, zero</font>
 <font color="blue">end </font>Reaction;
 </pre>
 <hr>
@@ -518,9 +482,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   a reaction.</p><p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top1">FCSys.BaseClasses.Icons.Names.Top1</a>.
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -528,9 +490,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>&nbsp;</td><td>Specific mass [m/N]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -538,7 +498,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>species</td><td>Species-side connector</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -577,8 +536,128 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   0 = species.Ndot + n*reaction.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
   <font color="red">zeros</font>(n_trans) = reaction.mPhidot + m*<font color="red">actualStream</font>(species.phi)*species.Ndot <font color="darkgreen">
     &quot;Translational momentum&quot;</font>;
-  0 = reaction.Qdot + <font color="red">actualStream</font>(species.sT)*species.Ndot <font color="darkgreen">&quot;Energy&quot;</font>;
+  0 = reaction.Qdot_A + <font color="red">actualStream</font>(species.sT)*species.Ndot <font color="darkgreen">
+    &quot;Advected thermal energy&quot;</font>;
+  0 = reaction.Qdot_D + (reaction.phi - <font color="red">actualStream</font>(species.phi))*reaction.mPhidot
+    /2 <font color="darkgreen">&quot;Diffused thermal energy (balances heat generation)&quot;</font>;
 <font color="blue">end </font>ChemicalExchange;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.DepletionI.png" alt="FCSys.Subregions.Depletion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Depletion"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Depletion</h2>
+<b>Electrochemical depletion region</b><p>
+<img src="images/FCSys.Subregions.DepletionD.png" alt="FCSys.Subregions.Depletion">
+
+<h3>Information</h3>
+
+<p>This model introduces the electrical potential associated with the force on a minority charge carrier in half
+    of an electrochemical double layer.  It should be instantiated for each of the two minority regions.  The
+    electrical potential is added to the net chemical potential
+    of the reaction, resulting in the electrochemical potential.</p>
+
+    <p>If <code>transSubstrate</code> is <code>true</code>, then the translational momentum of the
+    reactants is passed to the substrate through the <code>inert</code>
+    connector and the products are produced at the velocity of the substrate (typically
+    zero).  If it is <code>false</code>, then translational momentum is passed
+    directly from the reactants to the products.  If <code>transSubstrate</code> is
+    <code>true</code> for both of the depletion regions, then the velocities of the
+    substrates will be coupled and this may cause a structural singularity.</p>
+
+    <p>If <code>thermalSubstrate</code> is <code>true</code>, then the reaction occurs at the temperature
+    of the substrate and the heat generated by the reaction is rejected to the substrate.  If it is
+    <code>false</code>, then the substrate and the reaction are thermally independent.
+    Typically, <code>thermalSubstrate</code> should be <code>true</code> for one but not both of the depletion regions.
+    It it is <code>true</code> for both of the depletion regions, then the temperatures of the
+    substrates will be coupled and this may cause a structural singularity.
+    If it is <code>false</code> for both of the depletion regions, then the reaction temperature will be
+    undefined.</p>
+    <p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>.
+<p>
+<h3>Parameters</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>z</td><td>1</td><td>Charge number</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area [l2]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>transSubstrate</td><td>false</td><td>Pass translational momentum through the substrate</td></tr>
+<tr><td>Boolean</td><td>thermalSubstrate</td><td>false</td><td>Reject heat generated from the reaction into the substrate</td></tr>
+</table>
+<p>
+<h3>Connectors</h3>
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Chemical connector</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Connection to the substrate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Boundary of the minority region</td></tr>
+</table>
+<p>
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Depletion <font color="darkgreen">&quot;Electrochemical depletion region&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>;
+
+  <font color="blue">parameter </font>Integer z=1 <font color="darkgreen">&quot;Charge number&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area&quot;</font>;
+  <font color="blue">parameter </font>Boolean transSubstrate=false <font color="darkgreen">
+    &quot;Pass translational momentum through the substrate&quot;</font>;
+  <font color="blue">parameter </font>Boolean thermalSubstrate=false <font color="darkgreen">
+    &quot;Reject heat generated from the reaction into the substrate&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical connector&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">&quot;Connection to the substrate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">&quot;Boundary of the minority region&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer n_trans <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Electrical potential and electrostatic force</font>
+  z*face.rho*A*chemical.mu = face.mPhidot[1];
+
+  <font color="darkgreen">// Material conditions</font>
+  face.Ndot = 0 <font color="darkgreen">&quot;No diffusion to or from the depletion region&quot;</font>;
+  face.phi[1] = 0 <font color="darkgreen">&quot;No advection to or from the depletion region&quot;</font>;
+
+  <font color="darkgreen">// Translational conditions</font>
+  <font color="blue">if </font>transSubstrate<font color="blue"> then</font>
+    chemical.phi = inert.translational.phi <font color="darkgreen">
+      &quot;Products produced at the velocity of the substrate&quot;</font>;
+  <font color="blue">else</font>
+    chemical.mPhidot = <font color="red">zeros</font>(n_trans) <font color="darkgreen">
+      &quot;Translational momentum passed directly from reactants to products&quot;</font>;
+  <font color="blue">end if</font>;
+  face.mPhidot[2:3] = <font color="red">zeros</font>(2) <font color="darkgreen">&quot;No shear force&quot;</font>;
+
+  <font color="darkgreen">// Thermal conditions</font>
+  <font color="blue">if </font>thermalSubstrate<font color="blue"> then</font>
+    chemical.T = inert.thermal.T <font color="darkgreen">
+      &quot;Substrate sets the temperature of the reaction and receives heat generated by the reaction&quot;</font>;
+  <font color="blue">else</font>
+    chemical.Qdot_D = 0 <font color="darkgreen">&quot;Substrate is adiabatic w.r.t. reaction&quot;</font>;
+  <font color="blue">end if</font>;
+  face.Qdot = 0 <font color="darkgreen">&quot;Adiabatic at edge of depletion region&quot;</font>;
+  chemical.Qdot_A = 0 <font color="darkgreen">&quot;No thermal energy into the advected stream&quot;</font>;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans<font color="blue"> loop</font>
+    0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (<font color="blue">if </font>cartTrans[i] ==
+      0<font color="blue"> then </font>0<font color="blue"> else </font>face.mPhidot[cartTrans[i]]) <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+    <font color="darkgreen">// The conditional expression is necessary to pass the check since</font>
+    <font color="darkgreen">// cartTrans is empty by default.</font>
+  <font color="blue">end for</font>;
+  0 = chemical.mu*chemical.Ndot + chemical.phi*chemical.mPhidot + inert.thermal.Qdot
+     + chemical.Qdot_D + inert.translational.phi*inert.translational.mPhidot <font color="darkgreen">
+    &quot;Energy (excluding terms which are zero above)&quot;</font>;
+<font color="blue">end </font>Depletion;
 </pre>
 <hr>
 
@@ -617,16 +696,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertDalton[n_phases]</td><td>Connector for translational momentum and thermal energy</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -667,7 +743,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:18:08 2013.
 </div>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Subregions.BaseClasses</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -74,20 +75,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <p>At least one pair of faces must be included.
   All of the faces are included by default.</p>
 
-  <p>A subregion (an instance of a model derived from this one) may be flipped horizontally or
-  vertically in the diagram layer, but the transverse forces will be incorrect if it is rotated.
-  If it is flipped horizontally,
-  then the direction of the x axis is opposite of the global orientation, where left to right
-  is positive x.  If it is flipped vertically, then the
-  direction of the y axis is opposite of the global orientation, where bottom to top is positive y.</p>
-
-  <p>This model should be extended to include the appropriate phases.</p>
+  <p>This model should be extended to include the appropriate phases and reactions.</p>
   <p>
 
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -104,9 +96,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -118,7 +108,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -190,7 +179,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:46 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:18:35 2013.
 </div>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Regions.AnCLs</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Anode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -75,7 +76,7 @@ The x axis extends from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p>
 
-<p>By default, the layer cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+<p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
 <p>The default thickness (<code>L_x = {28.7*U.micro*U.m}</code>) is from [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Gurau1998</a>].
 The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)</code>)
@@ -98,9 +99,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -119,9 +118,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -134,7 +131,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -226,9 +222,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> (Anode catalyst layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -246,9 +240,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -260,7 +252,6 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -274,7 +265,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:56:40 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:17:25 2013.
 </div>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Subregions.Species.'C+'.Graphite</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="&lt;html&gt;C&lt;sup&gt;+&lt;/sup&gt; graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -76,9 +77,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and zero velocity)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -109,13 +108,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -128,7 +129,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -164,9 +164,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and zero velocity)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -195,13 +193,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -214,7 +214,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -240,8 +239,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
    <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
    and thermal
-   resistivity (<code>theta = U.m*U.K/(0.87*U.W)</code>) are for graphite fiber epoxy (25% vol)
-   composite (with heat flow perpendicular to the fibers) at 300 K
+   resistivity (<code>theta = U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
+   composite (with heat flow parallel to the fibers) at 300 K
    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 909].
    The integration offset for specific entropy is set such that
    the specific entropy is 154.663 J/(mol&middot;K) at 25 &deg;C and <i>p</i><sup>o</sup> (1 atm).
@@ -287,9 +286,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and zero velocity)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -315,13 +312,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -334,7 +333,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -347,9 +345,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
         b_c=[935*U.J*Data.m/(U.kg*U.K)],
         B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(U.mol*
             U.K) - (935*U.J*Data.m/(U.kg*U.K))*<font color="red">ln</font>(298.15*U.K)]),
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=0,
+    <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=0,
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.87*U.W));
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(11.1*U.W));
 
   <font color="darkgreen">// In Dymola 7.4, the specific heat capacity must be entered explicitly in B_c</font>
   <font color="darkgreen">// (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).</font>
@@ -368,7 +366,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:40 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:18:29 2013.
 </div>
 </body>
 </html>

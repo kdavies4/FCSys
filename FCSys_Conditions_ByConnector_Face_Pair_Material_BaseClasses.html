@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -62,27 +63,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Types of conditions</td></tr>
 </table>
 <p>
-
 <h3>Types and constants</h3>
 
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
-    Pressure <font color="darkgreen">&quot;Specify pressure difference (measure current)&quot;</font>,
-    Current <font color="darkgreen">&quot;Specify current (measure pressure difference)&quot;</font>,
+    Density <font color="darkgreen">&quot;Specify density difference (measure current)&quot;</font>,
+    Pressure <font color="darkgreen">&quot;Specify presure difference (measure current)&quot;</font>,
+    Current <font color="darkgreen">&quot;Specify current (measure density difference)&quot;</font>,
     Custom <font color="darkgreen">&quot;Custom&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses">FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model for a normal condition</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.PressureD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition">
+<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Material.BaseClasses.PartialCondition">
 
 <h3>Information</h3>
 
 Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.BaseClasses.PartialCondition">Pair.BaseClasses.PartialCondition</a> (Partial model to specify and measure conditions on a pair of connectors).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -94,9 +93,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_BaseClasses.html#FC
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -107,7 +104,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_BaseClasses.html#FC
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -126,8 +122,8 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_BaseClasses.html#FC
   <font color="darkgreen">// No flows of other quantities</font>
   <font color="darkgreen">// ----------------------------</font>
   <font color="darkgreen">// Translational momentum</font>
-  negative.mPhidot = {0,0};
-  positive.mPhidot = {0,0};
+  negative.mPhidot = {0,0,0};
+  positive.mPhidot = {0,0,0};
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Thermal energy</font>
   negative.Qdot = 0;
@@ -139,7 +135,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_BaseClasses.html#FC
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:34 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:15:19 2013.
 </div>
 </body>
 </html>

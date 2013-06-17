@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.Conditions.ByConnector.FaceBus.Single.Phases</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -78,26 +79,22 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseClasses.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2</td><td>&nbsp;</td><td>H<sub>2</sub> conditions</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>H<sub>2</sub>O conditions</td></tr>
 <tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>N2</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>N2</td><td>&nbsp;</td><td>N<sub>2</sub>Conditions</td></tr>
 <tr><td>Boolean</td><td>inclO2</td><td>false</td><td>Oxygen (O<sub>2</sub>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>O2</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>O2</td><td>&nbsp;</td><td>O<sub>2</sub> conditions</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -106,7 +103,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -117,19 +113,19 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2 <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2 <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;H<sub>2</sub> conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;H<sub>2</sub>O conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;N<sub>2</sub>Conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;O<sub>2</sub> conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2</font>
@@ -168,22 +164,18 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 
 Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseClasses.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;C+&#39;</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;C+&#39;</td><td>&nbsp;</td><td>C<sup>+</sup> conditions</td></tr>
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;e-&#39;</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;e-&#39;</td><td>&nbsp;</td><td>e<sup>-</sup> conditions</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -192,7 +184,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -203,11 +194,11 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;C+&#39; <font color="blue">if </font>'inclC+' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;C+&#39; <font color="blue">if </font>'inclC+' <font color="darkgreen">&quot;C<sup>+</sup> conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;e<sup>-</sup> conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// C+</font>
@@ -235,24 +226,20 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 
 Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseClasses.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;C19HF37O5S-&#39;</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;C19HF37O5S-&#39;</td><td>&nbsp;</td><td>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;H+&#39;</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>&#39;H+&#39;</td><td>&nbsp;</td><td>H<sup>+</sup> conditions</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>H<sub>2</sub>O conditions</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -261,7 +248,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -273,15 +259,16 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
   <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
     &quot;Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;C19HF37O5S-&#39; <font color="blue">if </font>'inclC19HF37O5S-' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;C19HF37O5S-&#39; <font color="blue">if </font>'inclC19HF37O5S-' <font color="darkgreen">
+    &quot;C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;H<sup>+</sup> conditions&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;H<sub>2</sub>O conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// C19HF37O5S-</font>
@@ -315,20 +302,16 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 
 Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseClasses.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face</a></td><td>H2O</td><td>&nbsp;</td><td>H<sub>2</sub>O conditions</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -337,7 +320,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -348,7 +330,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.Face">Face.Single.Face</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;H<sub>2</sub>O conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2O</font>
@@ -364,7 +346,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases_BaseCla
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:15:07 2013.
 </div>
 </body>
 </html>

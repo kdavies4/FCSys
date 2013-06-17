@@ -1,8 +1,9 @@
 <html>
 <head>
-<title>FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses</title>
+<title>FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,7 +45,7 @@
     <div class="bodywrapper">
       <div class="body">
 
-<h2><a name="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal">FCSys.Conditions.ByConnector.ChemicalReaction.Thermal</a>.BaseClasses</h2>
+<h2><a name="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion">FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion</a>.BaseClasses</h2>
 
 <b>Base classes (generally not for direct use)</b>
 
@@ -56,39 +57,34 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialCondition">PartialCondition</a>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition">PartialCondition</a>
 </td><td>Partial model for a fluid condition</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.ConditionType">ConditionType</a>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a>
 </td><td>Types of conditions</td></tr>
 </table>
 <p>
-
 <h3>Types and constants</h3>
 
-<a name="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
-    SpecificEntropyTemperature <font color="darkgreen">
-      &quot;Specify specific entropy-temperature product (measure heat flow rate)&quot;</font>,
-    HeatRate <font color="darkgreen">
-      &quot;Specify heat flow rate (measure specific entropy-temperature product)&quot;</font>,
+<a name="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
+    Temperature <font color="darkgreen">&quot;Specify temperature (measure heat flow rate)&quot;</font>,
+    HeatRate <font color="darkgreen">&quot;Specify heat flow rate (measure temperature)&quot;</font>,
     Custom <font color="darkgreen">&quot;Custom&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses">FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses</a>.PartialCondition</h2>
+<h2><img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses">FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model for a fluid condition</b><p>
-<img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Material.ReactionRateD.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.PartialCondition">
+<img src="images/FCSys.Conditions.ByConnector.ChemicalReaction.Material.ReactionRateD.png" alt="FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition">
 
 <h3>Information</h3>
 
 Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.BaseClasses.PartialCondition">ByConnector.ChemicalReaction.BaseClasses.PartialCondition</a> (Partial model of a condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
@@ -96,9 +92,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -108,7 +102,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -116,7 +109,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.
 
   <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.BaseClasses.PartialCondition">ByConnector.ChemicalReaction.BaseClasses.PartialCondition</a>;
 
-  <font color="blue">constant </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.Thermal.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
+  <font color="blue">constant </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
   <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with</font>
   <font color="darkgreen">// the results.</font>
 
@@ -124,6 +117,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.
   <font color="darkgreen">// Zero values of other flows</font>
   chemical.mu = 0 <font color="darkgreen">&quot;Electrochemical potential&quot;</font>;
   chemical.mPhidot = <font color="red">zeros</font>(n_trans) <font color="darkgreen">&quot;Force&quot;</font>;
+  chemical.Qdot_A = 0 <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
 <font color="blue">end </font>PartialCondition;
 </pre>
       </div>
@@ -131,7 +125,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_ChemicalReaction_BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:54:08 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:14:53 2013.
 </div>
 </body>
 </html>

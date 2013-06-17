@@ -1,8 +1,9 @@
 <html>
 <head>
 <title>FCSys.BaseClasses.Utilities</title>
+<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-16">
+<meta name="date" content="2013-6-17">
 <meta name="description" content="Functions that implement useful algorithms">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -88,7 +89,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.assertEval" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.assertEval"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.assertEval</h2>
 <b>Assert function that forces Dymola to parse the message</b>
-
 <h3>Information</h3>
 
 <p>When an assert statement is
@@ -100,9 +100,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   which point the message is evaluated.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -110,7 +108,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>String</td><td>message</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -130,32 +127,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.average" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.average"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.average</h2>
 <b>Return the arithmetic mean of numbers</b>
-
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>u[:]</td><td>&nbsp;</td><td>Vector of numbers</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>average</td><td>Arithmetic mean</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -174,16 +165,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.cartWrap" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.cartWrap"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.cartWrap</h2>
 <b>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</b>
-
 <h3>Information</h3>
 
 <p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p><p>
 Extends from <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">mod1</a> (Modulo operator for 1-based indexing (compatible with Modelica)).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -191,16 +179,13 @@ Extends from <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utiliti
 <tr><td>Integer</td><td>den</td><td>Axis.z</td><td>Divisor</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>index</td><td>Remainder with 1-based indexing</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -212,32 +197,26 @@ Extends from <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utiliti
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.countTrue" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.countTrue"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.countTrue</h2>
 <b>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</b>
-
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> vector</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n</td><td>Number of true entries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -257,32 +236,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.Delta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Delta"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Delta</h2>
 <b>Return the second entry of a vector minus the first (&Delta;)</b>
-
 <h3>Information</h3>
 
 <p>The translator should automatically
   vectorize (or "matricize") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>Delta</td><td>Second entry minus the first entry</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -302,32 +275,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.enumerate" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.enumerate"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.enumerate</h2>
 <b>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</b>
-
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
   <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> vector</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>enumerated[size(u, 1)]</td><td>Indices of the true entries (increasing order; 0 for false entries)</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -359,7 +326,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.index" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.index"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.index</h2>
 <b>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</b>
-
 <h3>Information</h3>
 
 <p>The indices are 1-based (Modelica-compatible).</p>
@@ -368,25 +334,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.<p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> array</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>indices[countTrue(u)]</td><td>Indices of the true entries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -415,7 +376,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.inSign" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.inSign"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.inSign</h2>
 <b>Return the mathematical sign for the direction into a side or face</b>
-
 <h3>Information</h3>
 
 <p><b>Examples:</b><br>
@@ -424,25 +384,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a></td><td>side</td><td>&nbsp;</td><td>Side</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>sign</td><td>Sign indicating direction along the axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -462,7 +417,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.mod1"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.mod1</h2>
 <b>Modulo operator for 1-based indexing (compatible with Modelica)</b>
-
 <h3>Information</h3>
 
 <p><b>Examples:</b><br>
@@ -471,9 +425,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>mod</code> is the built-in modulo operator).<p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -481,16 +433,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Integer</td><td>den</td><td>&nbsp;</td><td>Divisor</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>index</td><td>Remainder with 1-based indexing</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -511,32 +460,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.round" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.round"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.round</h2>
 <b>Round a <code>Real</code> variable to the nearest integer</b>
-
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>u</td><td>&nbsp;</td><td><code>Real</code> variable</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>y</td><td>Nearest integer</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -556,7 +499,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Utilities.assertEvalI.png" alt="FCSys.BaseClasses.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Sigma"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Sigma</h2>
 <b>Return the sum of the first and second entries of a vector (&Sigma;)</b>
-
 <h3>Information</h3>
 
 <p>The translator should automatically
@@ -564,25 +506,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>Sigma</td><td>Sum of the first and second entries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -602,7 +539,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jun 15 21:57:59 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:18:50 2013.
 </div>
 </body>
 </html>
