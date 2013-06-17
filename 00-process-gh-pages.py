@@ -24,7 +24,7 @@ rpls = [
     ('<title>FCSys</title>', '<title>FCSys &mdash; Modelica library of fuel cell models</title>'),
     # Add meta title and keywords.
     ('<meta name="HTML-Generator" content="Dymola">', r"""<meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
 <meta name="date" content="%d-%d-%d">""" % (now.year, now.month, now.day)),
     # Change the meta description of the main page.
     ('<meta name="description" content="Modelica library of fuel cell models">', '<meta name="description" content="Open-source library of declarative, dynamic, and flexible models of proton exchange membrane fuel cells in the Modelica language">'),
