@@ -1,6 +1,6 @@
-// Define signals.
-filename = "ThermalConduction.mat";
-
+// Setup
+removePlots();
+createPlot(id = 1, filename = "ThermalConduction.mat");
 y1 = cat(1,
          {"subregion1.graphite.'C+'.T"},
          {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
@@ -13,13 +13,12 @@ y3 = cat(1,
          {"subregion1.graphite.'C+'.M"},
          {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
          {"subregion2.graphite.'C+'.M"});
-y4 = {""};
+y4 = fill("", 0);
 y5 = cat(1,
          {"subregion1.graphite.'C+'.theta"},
          {"subregions[" + String(i) + "].graphite.'C+'.theta" for i in 1:n_x},
          {"subregion2.graphite.'C+'.theta"});
-y6 = {""};
+y6 = fill("", 0);
 
 // Make plots.
-removePlots();
-RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");

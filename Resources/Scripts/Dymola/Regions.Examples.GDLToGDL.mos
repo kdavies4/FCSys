@@ -1,5 +1,6 @@
-// Define signals.
-filename = "GDLToGDL.mat";
+// Setup
+removePlots();
+createPlot(id = 1, filename = "GDLToGDL.mat");
 
 // AnGDL
 y1 = {"anGDL.subregions[1, 1, 1].gas.H2.N", "anGDL.subregions[1, 1, 1].gas.H2O.N", "anGDL.subregions[1, 1, 1].graphite.C.N", "anGDL.subregions[1, 1, 1].graphite.'e-'.N"};
@@ -42,20 +43,19 @@ y5 = cat(1, y5, {"caGDL.subregions[1, 1, 1].gas.H2O.v", "caGDL.subregions[1, 1, 
 y6= cat(1, y6, {"caGDL.subregions[1, 1, 1].gas.H2O.mu", "caGDL.subregions[1, 1, 1].gas.N2.mu", "caGDL.subregions[1, 1, 1].gas.O2.mu", "caGDL.subregions[1, 1, 1].graphite.C.mu", "caGDL.subregions[1, 1, 1].graphite.'e-'.mu"});
 
 // Make plots.
-removePlots();
-RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
 
-createPlot(id = 4, 
- position = {350, 100, 650, 400}, 
- y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "caCL.subregions[1, 1, 1].ORR.Xidot"}, 
- range = {0, 4E-05, 5.0, -50.0}, 
- autoscale = true, 
- autoerase = true, 
- autoreplot = true, 
- description = false, 
- grid = true, 
- color = true, 
- online = false, 
- legendHorizontal = false, 
- leftTitleType = 1, 
+createPlot(id = 4,
+ position = {350, 100, 650, 400},
+ y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "caCL.subregions[1, 1, 1].ORR.Xidot"},
+ range = {0, 4E-05, 5.0, -50.0},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ online = false,
+ legendHorizontal = false,
+ leftTitleType = 1,
  bottomTitleType = 1);

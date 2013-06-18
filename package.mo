@@ -361,7 +361,8 @@ package UsersGuide "User's Guide"
       DocumentationClass=true,
       Documentation(info="<html>
     <p>Updates to this package may be available online at the
-    <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a>.
+    <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a> or the 
+    <a href=\"https://modelica.org/libraries\">Modelica libraries page</a>.
     The development page is
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
     Please report any problems using the <a href=\"https://github.com/kdavies4/FCSys/issues\">issues</a>
@@ -394,7 +395,6 @@ package UsersGuide "User's Guide"
     </ul></p>
 
 </html>"));
-    // TODO:  Create the Modelica page and include it in the first paragraph too.
 
     end Contact;
 
@@ -940,19 +940,6 @@ printing and shipping costs may be recovered.</p>
   end UsersGuide;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1254,7 +1241,7 @@ margin-right: auto;\" class=noBorder>
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
   Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
-  version="2.0 alpha",
+  version="2.0.0-alpha",
   versionBuild=0,
   dateModified="",
   revisionID="");

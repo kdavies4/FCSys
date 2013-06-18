@@ -1,5 +1,6 @@
-// Define signals.
-filename = "AnCL.mat";
+// Setup
+removePlots();
+createPlot(id = 1, filename = "AnCL.mat");
 y1 = {"anCL.subregions[1, 1, 1].gas.H2.N", "anCL.subregions[1, 1, 1].gas.H2O.N", "anCL.subregions[1, 1, 1].graphite.C.N", "anCL.subregions[1, 1, 1].graphite.'e-'.N", "anCL.subregions[1, 1, 1].ionomer.C19HF37O5S.N", "anCL.subregions[1, 1, 1].ionomer.'H+'.N"};
 y2 = {"anCL.subregions[1, 1, 1].gas.H2.phi[1]", "anCL.subregions[1, 1, 1].gas.H2O.phi[1]", "anCL.subregions[1, 1, 1].graphite.C.phi[1]", "anCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "anCL.subregions[1, 1, 1].ionomer.C19HF37O5S.phi[1]", "anCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"};
 y3 = {"anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p", "anCL.subregions[1, 1, 1].graphite.C.p", "anCL.subregions[1, 1, 1].graphite.'e-'.p", "anCL.subregions[1, 1, 1].ionomer.C19HF37O5S.p", "anCL.subregions[1, 1, 1].ionomer.'H+'.p"};
@@ -8,20 +9,19 @@ y5 = {"anCL.subregions[1, 1, 1].gas.H2.v", "anCL.subregions[1, 1, 1].gas.H2O.v",
 y6 = {"anCL.subregions[1, 1, 1].gas.H2.mu", "anCL.subregions[1, 1, 1].gas.H2O.mu", "anCL.subregions[1, 1, 1].graphite.C.mu", "anCL.subregions[1, 1, 1].graphite.'e-'.mu", "anCL.subregions[1, 1, 1].ionomer.C19HF37O5S.mu", "anCL.subregions[1, 1, 1].ionomer.'H+'.mu"};
 
 // Make plots.
-removePlots();
-RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
 
-createPlot(id = 4, 
- position = {350, 100, 650, 400}, 
- y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "anCL.subregions[1, 1, 1].HOR.Ndot_ionic"}, 
- range = {0, 4E-05, 5.0, -50.0}, 
- autoscale = true, 
- autoerase = true, 
- autoreplot = true, 
- description = false, 
- grid = true, 
- color = true, 
- online = false, 
- legendHorizontal = false, 
- leftTitleType = 1, 
+createPlot(id = 4,
+ position = {350, 100, 650, 400},
+ y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "anCL.subregions[1, 1, 1].HOR.Ndot_ionic"},
+ range = {0, 4E-05, 5.0, -50.0},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ online = false,
+ legendHorizontal = false,
+ leftTitleType = 1,
  bottomTitleType = 1);

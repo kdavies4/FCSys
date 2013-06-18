@@ -1,5 +1,6 @@
-// Define signals.
-filename = "FPToFP.mat";
+// Setup
+removePlots();
+createPlot(id = 1, filename = "FPToFP.mat");
 
 // AnFP
 y1 = {"anFP.subregions[1, 1, 1].gas.H2.N", "anFP.subregions[1, 1, 1].gas.H2O.N", "anFP.subregions[1, 1, 1].graphite.C.N", "anFP.subregions[1, 1, 1].graphite.'e-'.N"};
@@ -58,20 +59,19 @@ y5 = cat(1, y5, {"caFP.subregions[1, 1, 1].gas.H2O.v", "caFP.subregions[1, 1, 1]
 y6 = cat(1, y6, {"caFP.subregions[1, 1, 1].gas.H2O.mu", "caFP.subregions[1, 1, 1].gas.N2.mu", "caFP.subregions[1, 1, 1].gas.O2.mu", "caFP.subregions[1, 1, 1].graphite.C.mu", "caFP.subregions[1, 1, 1].graphite.'e-'.mu"});
 
 // Make plots.
-removePlots();
-RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
 
-createPlot(id = 4, 
- position = {350, 100, 650, 400}, 
- y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "caCL.subregions[1, 1, 1].ORR.Xidot"}, 
- range = {0, 4E-05, 5.0, -50.0}, 
- autoscale = true, 
- autoerase = true, 
- autoreplot = true, 
- description = false, 
- grid = true, 
- color = true, 
- online = false, 
- legendHorizontal = false, 
- leftTitleType = 1, 
+createPlot(id = 4,
+ position = {350, 100, 650, 400},
+ y = {"anCL.subregions[1, 1, 1].HOR.Xidot", "caCL.subregions[1, 1, 1].ORR.Xidot"},
+ range = {0, 4E-05, 5.0, -50.0},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ online = false,
+ legendHorizontal = false,
+ leftTitleType = 1,
  bottomTitleType = 1);

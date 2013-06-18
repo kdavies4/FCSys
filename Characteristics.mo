@@ -10,180 +10,231 @@ package Characteristics
       "Evaluate the material properties over varying temperature and pressure"
       extends Modelica.Icons.Example;
 
-      // Data
-      import 'DataC+' = FCSys.Characteristics.'C+'.Graphite;
-      import 'DataC19HF37O5S-' = FCSys.Characteristics.'C19HF37O5S-'.Ionomer;
-      import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
-      import DataH2 = FCSys.Characteristics.H2.Gas;
-      package DataH2IG = FCSys.Characteristics.H2.Gas (b_v=[1], n_v={-1,0})
-        "H2 as ideal gas";
-      import DataH2O = FCSys.Characteristics.H2O.Gas;
-      import DataH2OLiquid = FCSys.Characteristics.H2O.Liquid;
-      import 'DataH+' = FCSys.Characteristics.'H+'.Ionomer;
-      import DataN2 = FCSys.Characteristics.N2.Gas;
-      import DataO2 = FCSys.Characteristics.O2.Gas;
+      parameter Q.TemperatureAbsolute T_start=273.15*U.K
+        "<html>Initial temperature (<i>T</i><sub>start</sub>)</html>";
+      parameter Q.TemperatureAbsolute T_stop=473.15*U.K
+        "<html>Final temperature (<i>T</i><sub>stop</sub>)</html>";
+      parameter Q.PressureAbsolute p_start=U.bar
+        "<html>Initial pressure (<i>p</i><sub>start</sub>)</html>";
+      parameter Q.PressureAbsolute p_stop=U.bar + 0*U.atm
+        "<html>Final pressure (<i>p</i><sub>stop</sub>)</html>";
 
-      // Conditions
-      Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
-        "Temperature" annotation (Placement(transformation(extent={{50,16},{70,
-                36}}), iconTransformation(extent={{-10,16},{10,36}})));
-      Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure" annotation (
-          Placement(transformation(extent={{50,-36},{70,-16}}),
-            iconTransformation(extent={{-10,-36},{10,-16}})));
-
-      // Results
-      // -------
-      // Isobaric specific heat capacity
-      output Q.CapacityThermalSpecific 'c_p_C+'='DataC+'.c_p(T, p);
-      output Q.CapacityThermalSpecific 'c_p_C19HF37O5S-'='DataC19HF37O5S-'.c_p(
-          T, p);
-      output Q.CapacityThermalSpecific 'c_p_e-'='Datae-'.c_p(T, p);
-      output Q.CapacityThermalSpecific 'c_p_H+'='DataH+'.c_p(T, p);
-      output Q.CapacityThermalSpecific c_p_H2=DataH2.c_p(T, p);
-      output Q.CapacityThermalSpecific c_p_H2O=DataH2O.c_p(T, p);
-      output Q.CapacityThermalSpecific c_p_H2O_liquid=DataH2OLiquid.c_p(T, p);
-      output Q.CapacityThermalSpecific c_p_N2=DataN2.c_p(T, p);
-      output Q.CapacityThermalSpecific c_p_O2=DataO2.c_p(T, p);
-      //
-      // Isochoric specific heat capacity
-      output Q.CapacityThermalSpecific 'c_v_C+'='DataC+'.c_v(T, p);
-      output Q.CapacityThermalSpecific 'c_v_C19HF37O5S-'='DataC19HF37O5S-'.c_v(
-          T, p);
-      output Q.CapacityThermalSpecific 'c_v_e-'='Datae-'.c_v(T, p);
-      output Q.CapacityThermalSpecific 'c_v_H+'='DataH+'.c_v(T, p);
-      output Q.CapacityThermalSpecific c_v_H2=DataH2.c_v(T, p);
-      output Q.CapacityThermalSpecific c_v_H2O=DataH2O.c_v(T, p);
-      output Q.CapacityThermalSpecific c_v_H2O_liquid=DataH2OLiquid.c_v(T, p);
-      output Q.CapacityThermalSpecific c_v_N2=DataN2.c_v(T, p);
-      output Q.CapacityThermalSpecific c_v_O2=DataO2.c_v(T, p);
-      //
-      // Gibbs potential
-      output Q.Potential 'g_C+'='DataC+'.g(T, p);
-      output Q.Potential 'g_C19HF37O5S-'='DataC19HF37O5S-'.g(T, p);
-      output Q.Potential 'g_e-'='Datae-'.g(T, p);
-      output Q.Potential 'g_H+'='DataH+'.g(T, p);
-      output Q.Potential g_H2=DataH2.g(T, p);
-      output Q.Potential g_H2O=DataH2O.g(T, p);
-      output Q.Potential g_H2O_liquid=DataH2OLiquid.g(T, p);
-      output Q.Potential g_N2=DataN2.g(T, p);
-      output Q.Potential g_O2=DataO2.g(T, p);
-      //
-      // Specific enthalpy
-      output Q.Potential 'h_C+'='DataC+'.h(T);
-      output Q.Potential 'h_C19HF37O5S-'='DataC19HF37O5S-'.h(T);
-      output Q.Potential 'h_e-'='Datae-'.h(T);
-      output Q.Potential 'h_H+'=FCSys.Characteristics.'H+'.Ionomer.h(T);
-      output Q.Potential h_H2=DataH2.h(T);
-      output Q.Potential h_H2O=DataH2O.h(T);
-      output Q.Potential h_H2O_liquid=DataH2OLiquid.h(T);
-      output Q.Potential h_N2=DataN2.h(T);
-      output Q.Potential h_O2=DataO2.h(T);
-      //
-      // Pressure (indirectly via v_Tp())
-      output Q.PressureAbsolute 'p_C+'='DataC+'.p_Tv(T, v_C) if 'DataC+'.isCompressible;
-      output Q.PressureAbsolute 'p_C19HF37O5S-'='DataC19HF37O5S-'.p_Tv(T,
-          'v_C19HF37O5S-') if 'DataC19HF37O5S-'.isCompressible;
-      output Q.PressureAbsolute 'p_e-'='Datae-'.p_Tv(T, 'v_e-') if 'Datae-'.isCompressible;
-      output Q.PressureAbsolute 'p_H+'='DataH+'.p_Tv(T, 'v_H+') if 'DataH+'.isCompressible;
-      output Q.PressureAbsolute p_H2=DataH2.p_Tv(T, v_H2) if DataH2.isCompressible;
-      output Q.PressureAbsolute p_H2O=DataH2O.p_Tv(T, v_H2O) if DataH2O.isCompressible;
+      // Property models
+      PropertiesRT 'C+'(redeclare package Data =
+            FCSys.Characteristics.'C+'.Graphite)
+        annotation (Placement(transformation(extent={{30,30},{50,50}})));
+      PropertiesRT 'C19HF37O5S-'(redeclare package Data =
+            FCSys.Characteristics.'C19HF37O5S-'.Ionomer)
+        annotation (Placement(transformation(extent={{30,20},{50,40}})));
+      PropertiesRT 'e-'(redeclare package Data = FCSys.Characteristics.'e-'.Gas)
+        annotation (Placement(transformation(extent={{30,10},{50,30}})));
+      PropertiesRT 'H+'(redeclare package Data = FCSys.Characteristics.'H+'.Gas)
+        annotation (Placement(transformation(extent={{30,0},{50,20}})));
+      PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
+        annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+      PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
+              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
+        annotation (Placement(transformation(extent={{30,-20},{50,0}})));
+      PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
+        annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
       // Note that p_H2O diverges from p in Dymola 7.4 due to the large
       // coefficients in the second row of DataH2O.b_v, which cause numerical
       // errors.
-      output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_Tv(T, v_H2O_liquid)
-        if DataH2OLiquid.isCompressible;
-      output Q.PressureAbsolute p_N2=DataN2.p_Tv(T, v_N2) if DataN2.isCompressible;
-      output Q.PressureAbsolute p_O2=DataO2.p_Tv(T, v_O2) if DataO2.isCompressible;
-      output Q.PressureAbsolute p_IG=DataH2IG.p_Tv(T, v_IG) if DataH2IG.isCompressible
-        "Pressure of ideal gas";
-      //
-      // Specific entropy
-      output Q.Number 's_C+'='DataC+'.s(T, p);
-      output Q.Number 's_C19HF37O5S-'='DataC19HF37O5S-'.s(T, p);
-      output Q.Number 's_e-'='Datae-'.s(T, p);
-      output Q.Number 's_H+'=FCSys.Characteristics.'H+'.Ionomer.s(T, p);
-      output Q.Number s_H2=DataH2.s(T, p);
-      output Q.Number s_H2O=DataH2O.s(T, p);
-      output Q.Number s_H2O_liquid=DataH2OLiquid.s(T, p);
-      output Q.Number s_N2=DataN2.s(T, p);
-      output Q.Number s_O2=DataO2.s(T, p);
-      //
-      // Specific volume
-      output Q.VolumeSpecificAbsolute 'v_C+'='DataC+'.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute 'v_C19HF37O5S-'='DataC19HF37O5S-'.v_Tp(T,
-          p);
-      output Q.VolumeSpecificAbsolute 'v_e-'='Datae-'.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute 'v_H+'='DataH+'.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_H2=DataH2.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_H2O=DataH2O.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_H2O_liquid=DataH2OLiquid.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_N2=DataN2.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_O2=DataO2.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_Tp(T, p)
-        "Specific volume of ideal gas";
-      //
-      // Exchange and transport properties for H2O gas
-      output Q.ResistivityMaterial eta=DataH2O.nu(T, v_H2O);
-      output Q.Fluidity beta=DataH2O.beta(T, v_H2O);
-      output Q.Fluidity zeta=DataH2O.zeta(T, v_H2O);
-      output Q.ResistivityThermal theta=DataH2O.theta(T, v_H2O);
-      output Q.TimeAbsolute tauprime=DataH2O.tauprime(T, v_H2O);
-      output Q.Mobility mu=DataH2O.nu(T, v_H2O);
-      output Q.TimeAbsolute nu=DataH2O.nu(T, v_H2O);
+      PropertiesRT H2OLiquid(redeclare package Data =
+            FCSys.Characteristics.H2O.Liquid)
+        annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+      PropertiesRT N2(redeclare package Data = FCSys.Characteristics.N2.Gas)
+        annotation (Placement(transformation(extent={{30,-50},{50,-30}})));
+      PropertiesRT O2(redeclare package Data = FCSys.Characteristics.O2.Gas)
+        annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
+
+      // Conditions
+      Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
+        "Temperature" annotation (Placement(transformation(extent={{-10,10},{10,
+                30}}), iconTransformation(extent={{-10,16},{10,36}})));
+      Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure" annotation (
+          Placement(transformation(extent={{-10,-30},{10,-10}}),
+            iconTransformation(extent={{-10,-36},{10,-16}})));
 
     protected
-      Modelica.Blocks.Sources.Clock clock
-        annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-      Modelica.Blocks.Sources.Constant temperatureOffset(k=273.15*U.K)
-        annotation (Placement(transformation(extent={{-20,40},{0,60}})));
-      Modelica.Blocks.Sources.Constant pressureOffset(k=U.atm)
-        annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
-      Modelica.Blocks.Math.Gain temperatureGain(k=200*U.K)
-        annotation (Placement(transformation(extent={{-20,10},{0,30}})));
-      Modelica.Blocks.Math.Gain pressureGain(k=0*U.bar)
-        annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
-      Modelica.Blocks.Math.Add addTemperature
-        annotation (Placement(transformation(extent={{20,16},{40,36}})));
-      Modelica.Blocks.Math.Add addPressure
-        annotation (Placement(transformation(extent={{20,-36},{40,-16}})));
+      Modelica.Blocks.Sources.Ramp rampTemperature(
+        final height=T_stop - T_start,
+        final offset=T_start,
+        duration=1)
+        annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
+      Modelica.Blocks.Sources.Ramp rampPressure(
+        final height=p_stop - p_start,
+        final offset=p_start,
+        duration=1)
+        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
+
+      model PropertiesRT
+        "FCSys.Characteristics.Examples.Properties, with round-trip pressure calculation"
+        extends FCSys.Characteristics.Examples.Properties;
+
+        Q.Pressure p_RT=Data.p_Tv(T, v) if Data.isCompressible;
+
+      end PropertiesRT;
 
     equation
-      connect(clock.y, temperatureGain.u) annotation (Line(
-          points={{-49,6.10623e-16},{-30,6.10623e-16},{-30,20},{-22,20}},
+      connect(T, 'C+'.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,42}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(clock.y, pressureGain.u) annotation (Line(
-          points={{-49,6.10623e-16},{-30,6.10623e-16},{-30,-20},{-22,-20}},
+
+      connect(p, 'C+'.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,38}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(temperatureOffset.y, addTemperature.u1) annotation (Line(
-          points={{1,50},{10,50},{10,32},{18,32}},
+
+      connect(T, 'C19HF37O5S-'.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,32}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(pressureOffset.y, addPressure.u2) annotation (Line(
-          points={{1,-50},{10,-50},{10,-32},{18,-32}},
+      connect(p, 'C19HF37O5S-'.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,28}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(temperatureGain.y, addTemperature.u2) annotation (Line(
-          points={{1,20},{18,20}},
+
+      connect(T, 'e-'.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,22}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(pressureGain.y, addPressure.u1) annotation (Line(
-          points={{1,-20},{18,-20}},
+      connect(p, 'e-'.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,18}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(addTemperature.y, T) annotation (Line(
-          points={{41,26},{60,26}},
+
+      connect(T, 'H+'.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(addPressure.y, p) annotation (Line(
-          points={{41,-26},{60,-26}},
+      connect(p, 'H+'.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,8}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (experiment, Commands(file=
-              "Resources/Scripts/Dymola/Characteristics.Examples.Correlations.mos"));
+
+      connect(T, H2.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,2},{29,2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,-2},{29,-2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2IG.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,-8}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2IG.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-12}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2O.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,-18}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2O.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2OLiquid.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,-28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2OLiquid.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-32}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, N2.T) annotation (Line(
+          points={{5.55112e-16,20},{10,-40},{10,12},{29,-38}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, N2.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-42}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, O2.T) annotation (Line(
+          points={{5.55112e-16,20},{10,20},{10,12},{29,-48}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, O2.p) annotation (Line(
+          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-52}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(rampTemperature.y, T) annotation (Line(
+          points={{-19,20},{5.55112e-16,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(rampPressure.y, p) annotation (Line(
+          points={{-19,-20},{5.55112e-16,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        experiment,
+        Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.Correlations.mos"),
+
+        Diagram(graphics));
+
     end Correlations;
 
+    model Properties
+      "<html>Model that implements the functions of the <a href=\"modelica://FCSys.UsersGuide.References\">Characteristic</a> package</html>"
+      extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
+
+      replaceable package Data = Characteristics.BaseClasses.Characteristic
+        constrainedby Characteristics.BaseClasses.Characteristic
+        "Characteristic data" annotation (
+        choicesAllMatching=true,
+        __Dymola_choicesFromPackage=true,
+        Placement(transformation(extent={{-60,40},{-40,60}}),
+            iconTransformation(extent={{-10,90},{10,110}})));
+
+      Connectors.RealInput T(unit="l2.m/(N.T2)") "Temperaure"
+        annotation (Placement(transformation(extent={{-120,10},{-100,30}})));
+      Connectors.RealInput p(unit="m/(l.T2)") "Pressure"
+        annotation (Placement(transformation(extent={{-120,-30},{-100,-10}})));
+
+      Q.VolumeSpecific v "Specific volume";
+      Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity";
+      Q.CapacityThermalSpecific c_v "Isobaric specific heat capacity";
+      Q.Potential g "Gibbs potential";
+      Q.Potential h "Specific enthalpy";
+      Q.NumberAbsolute s "Specific entropy";
+      Q.Fluidity beta "Dynamic compressibility";
+      Q.Fluidity zeta "Fluidity";
+      Q.ResistivityMaterial eta "Material resistivity";
+      Q.ResistivityThermal theta "Thermal resistivity";
+      Q.PressureReciprocal kappa "Isothermal compressibility";
+      Q.TimeAbsolute tauprime "Phase change interval";
+      Q.Mobility mu "Mobility";
+      Q.TimeAbsolute nu "Thermal independity";
+
+    equation
+      v = Data.v_Tp(T, p);
+      c_p = Data.c_p(T, p);
+      c_v = Data.c_v(T, p);
+      g = Data.g(T, p);
+      h = Data.h(T, p);
+      s = Data.s(T, p);
+      beta = Data.beta(T, v);
+      zeta = Data.zeta(T, v);
+      eta = Data.eta(T, v);
+      theta = Data.theta(T, v);
+      kappa = Data.kappa(T, p);
+      tauprime = Data.tauprime(T, v);
+      mu = Data.mu(T, v);
+      nu = Data.nu(T, v);
+
+      annotation (Diagram(graphics));
+    end Properties;
   end Examples;
 
   package 'C+' "<html>C<sup>+</sup></html>"
@@ -1261,9 +1312,9 @@ package Characteristics
       algorithm
         eta := omega(T)*alpha/v annotation (Inline=true);
         annotation (Documentation(info="<html>
-  <p>Material resistivity is the reciprocal of the self-diffusion coefficient 
+  <p>Material resistivity is the reciprocal of the self-diffusion coefficient
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
-  
+
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>
@@ -1358,7 +1409,7 @@ package Characteristics
 
   <p>Please see [<a href=\"modelica://FCSys.UsersGuide.References\">Davies2013</a>, Ch. 3] for a derivation
   of the rate of phase change from kinetic theory.</p>
-  
+
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
 </html>"));
@@ -1617,7 +1668,6 @@ temperature difference.</p>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;
-
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package may be used with
     the assumption of ideal gas or of constant specific volume, although it is more general than

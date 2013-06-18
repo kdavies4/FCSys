@@ -1178,8 +1178,8 @@ encompass other systems of units.</p>
       // require that it's one, which means that charge is considered to be
       // an amount of substance.
       final constant Q.Number R=1 "gas constant";
-      // The unit of temperature (kelvin) is inversely proportional to this value.
-      // The gas constant isn't adjustable because the equations of FCSys
+      // The unit of temperature (kelvin) is inversely proportional to this
+      // value.  The gas constant isn't adjustable because the equations of FCSys
       // require that it's one, which means that temperature is considered to
       // be a potential.
       annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation for the

@@ -76,8 +76,7 @@ package Tests "Models and functions for test and validation"
 
     equation
       assert(der(S) >= 0, "Entropy may not decrease.");
-
-      annotation (experiment(StopTime=30), experimentSetupOutput);
+      annotation (experiment(StopTime=30));
     end Test2Subregions;
 
   end Subregions;
@@ -360,7 +359,6 @@ package Tests "Models and functions for test and validation"
           s tests;
           zeta testzeta;
           theta testtheta;
-
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
@@ -462,7 +460,6 @@ package Tests "Models and functions for test and validation"
           eta testeta;
           zeta testzeta;
           theta testtheta;
-
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
