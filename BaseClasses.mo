@@ -459,7 +459,7 @@ package BaseClasses "Base classes (generally not for direct use)"
         output Integer z "Charge number";
 
       external"C";
-        annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
+        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
             Documentation(info="<html><p>This function returns the net
   electrical charge associated with a species represented by a chemical
   formula (<code>formula</code>).  If the charge number is
@@ -481,7 +481,7 @@ package BaseClasses "Base classes (generally not for direct use)"
         output Integer n "Number of elements";
 
       external"C";
-        annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
+        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
             Documentation(info="<html><p>This function returns the number of elements
       in a chemical formula.  Electrons are counted as a present element (or rather particle)
       if the net charge is nonzero.</p>
@@ -511,7 +511,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                 n,
                 z,
                 remainder);
-        annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
+        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
             Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
   stoichiometric coefficient (<code>n</code>), and
   electrical charge (<code>z</code>) associated with an element as it appears in a chemical

@@ -17,7 +17,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         replaceable Cells.Cell cell annotation (__Dymola_choicesFromPackage=
               true, Placement(transformation(extent={{-10,-10},{10,10}})));
         annotation (experiment(StopTime=1e-24, Tolerance=1e-06), Commands(file=
-                "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"));
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"));
 
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
@@ -73,7 +73,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (
           experiment(StopTime=100, Tolerance=1e-06),
           Commands(file=
-                "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
       end CellProfile;
@@ -82,7 +82,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         extends CellProfile;
         extends Modelica.Icons.UnderConstruction;
         annotation (Commands(file=
-                "resources/scripts/Dymola/Assemblies.Cells.Examples.Polarization.mos"));
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.Polarization.mos"));
 
       end Polarization;
 
@@ -121,7 +121,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             thickness=0.5,
             smooth=Smooth.None));
         annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
-                "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
+                "Resources/Scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
       end CellProfileIO;
 
       model CellModelica

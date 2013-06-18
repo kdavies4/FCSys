@@ -24,7 +24,7 @@ rm $dest_dir/$name.zip
 rsync $this_folder -rL --delete --include-from $this_folder/.release-include --exclude-from $this_folder/.release-exclude $dest_dir/
 
 # Copy the static files for the documentation of FCRes.
-cp resources/source/Python/doc/build/html/_static/* $dest_dir/$name/resources/source/Python/doc/_static
+cp Resources/Source/Python/doc/build/html/_static/* $dest_dir/$name/Resources/Source/Python/doc/_static
 
 # Record the date/time and abbreviated SHA of the last git commit.
 # This is recorded in the released version, not in the master copy.
@@ -39,7 +39,7 @@ for f in `find $name -iname "*.bat" -o -iname "*.c" -o -iname "*.css" -o -iname 
     todos "$f"
 done
 todos $name/package.order
-todos $name/resources/source/Python/matplotlibrc
+todos $name/Resources/Source/Python/matplotlibrc
 
 # Make a zipped copy.
 zip -rq $name.zip $name

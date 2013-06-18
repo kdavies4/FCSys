@@ -67,7 +67,7 @@ package Subregions
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.Subregion.mos"));
+              "Resources/Scripts/Dymola/Subregions.Examples.Subregion.mos"));
 
     end Subregion;
 
@@ -82,7 +82,7 @@ package Subregions
       annotation (
         experiment(StopTime=2e-07, Tolerance=1e-06),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.SubregionCondensation.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.SubregionCondensation.mos"),
 
         Diagram(graphics),
         experimentSetupOutput);
@@ -105,7 +105,7 @@ package Subregions
       annotation (
         experiment(StopTime=2e-07, Tolerance=1e-06),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.SubregionHydration.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.SubregionHydration.mos"),
 
         Diagram(graphics),
         experimentSetupOutput);
@@ -213,7 +213,7 @@ package Subregions
       annotation (
         experiment(StopTime=150, Tolerance=1e-08),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
 
@@ -230,7 +230,7 @@ package Subregions
       // **Copy rather than extend.
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
+            "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
 
     end SubregionORR;
 
@@ -459,7 +459,7 @@ package Subregions
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput,
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.SubregionPipeFlow.mos"));
+              "Resources/Scripts/Dymola/Subregions.Examples.SubregionPipeFlow.mos"));
     end SubregionPipeFlow;
 
     model Subregions
@@ -660,7 +660,7 @@ package Subregions
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.Subregions.mos"),
         experimentSetupOutput);
 
     end Subregions;
@@ -726,7 +726,7 @@ package Subregions
       annotation (
         experiment(StopTime=500, Tolerance=1e-06),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"),
 
         experimentSetupOutput,
         Diagram(graphics));
@@ -769,7 +769,7 @@ package Subregions
 
       annotation (
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
 
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput);
@@ -802,7 +802,7 @@ package Subregions
 
       annotation (
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
 
         experiment(
           StopTime=140,
@@ -948,7 +948,7 @@ package Subregions
       annotation (
         experiment(StopTime=120),
         Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.TestReaction.mos"),
+              "Resources/Scripts/Dymola/Subregions.Examples.TestReaction.mos"),
 
         Diagram(graphics));
 
@@ -5212,7 +5212,7 @@ yet its condition is not defined.  Choose any condition besides None.");
   translational momentum is split on a mass basis and the thermal stream is split
   on a particle-number basis.</p>
 
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/Exchange.png\">
+    <p align=center><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Exchange.png\">
 <br>Figure 1:  Exchange of a quantity (translational momentum or thermal energy) among species
     (A, B, and C) within a subregion.</p>
 
@@ -5225,7 +5225,7 @@ yet its condition is not defined.  Choose any condition besides None.");
     etc. parameters.  Similar to exchange, the transport resistances are included inside the
     <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model.</p>
 
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/Transport.png\">
+    <p align=center><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Transport.png\">
 <br>Figure 2:  Transport of a quantity associated with the same species
     between subregions (1 and 2).</p>
 
@@ -5243,11 +5243,11 @@ yet its condition is not defined.  Choose any condition besides None.");
     <table border=0 cellspacing=0 cellpadding=2 align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
       <tr align=center class=noBorder>
         <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
-          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/SharePressure.png\">
+          <img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/SharePressure.png\">
 <br>a:  Pressures of species (A, B, and C) are additive within a phase.
         </td>
         <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
-          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/ShareVolume.png\">
+          <img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/ShareVolume.png\">
 <br>b:  Volumes of phases (I, II, and III) are additive within a subregion.
         </td>
       </tr>

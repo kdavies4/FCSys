@@ -778,7 +778,7 @@ package Connectors "Declarative and imperative connectors"
   That pair applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>
   to mix species within a phase.</p>
 
-  <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/ConnectorHierarchy.png\">
+  <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/Connectors/ConnectorHierarchy.png\">
 <br>Figure 1: Hierarchy of the connectors.</p>
 
   <p>In addition to the declarative connectors, there are connectors with inputs and outputs.

@@ -179,7 +179,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Commands(file=
-              "resources/scripts/Dymola/Regions.Examples.FPToFP.mos"),
+              "Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"),
           experiment(
           StopTime=20,
           Tolerance=1e-06,
@@ -287,7 +287,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Commands(file=
-              "resources/scripts/Dymola/Regions.Examples.GDLToGDL.mos"),
+              "Resources/Scripts/Dymola/Regions.Examples.GDLToGDL.mos"),
           experiment(
           StopTime=30,
           Tolerance=1e-06,
@@ -382,7 +382,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Commands(file=
-              "resources/scripts/Dymola/Regions.Examples.CLToCL.mos"),
+              "Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"),
           experiment(
           StopTime=25,
           Tolerance=1e-06,
@@ -485,7 +485,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.AnFP.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
     end AnFP;
 
     model AnGDL "Test the anode gas diffusion layer"
@@ -554,7 +554,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -633,7 +633,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=0.7,
           NumberOfIntervals=5000,
           Tolerance=1e-06),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"));
     end AnCL;
 
     model PEM "Test the proton exchange membrane"
@@ -700,7 +700,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         experiment(Tolerance=1e-06, StopTime=10),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.PEM.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.PEM.mos"),
         Diagram(graphics));
     end PEM;
 
@@ -786,7 +786,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=500,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CaCL.mos"));
     end CaCL;
 
     model CaGDL "Test the cathode gas diffusion layer"
@@ -859,7 +859,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.CaGDL.mos"));
     end CaGDL;
 
     model CaFP "Test the cathode flow plate"
@@ -964,7 +964,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
     model AnFPAlone "Test the anode flow plate"
@@ -991,7 +991,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.AnFP.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
 
     end AnFPAlone;
 
@@ -1020,7 +1020,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.AnFP.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
     end AnFP2;
 
     model AnGDL2 "Test the anode gas diffusion layer"
@@ -1047,7 +1047,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
 
     end AnGDL2;
 
@@ -1081,7 +1081,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=0.7,
           NumberOfIntervals=5000,
           Tolerance=1e-06),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"));
     end AnCL2;
 
     model PEM2 "Test the proton exchange membrane"
@@ -1108,7 +1108,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         experiment(Tolerance=1e-06, StopTime=10),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.PEM.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.PEM.mos"),
         Diagram(graphics));
 
     end PEM2;
@@ -1144,7 +1144,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=500,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Commands(file="resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CaCL.mos"));
     end CaCL2;
 
     model CaGDL2 "Test the cathode gas diffusion layer"
@@ -1172,7 +1172,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.CaGDL.mos"));
 
     end CaGDL2;
 
@@ -1201,7 +1201,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
-            "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
+            "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP2;
   end Examples;
   extends Modelica.Icons.Package;
@@ -1466,13 +1466,13 @@ text layer of this model.</p>
       annotation (defaultComponentName="anFP", Documentation(info="<html>
   <p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
+of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
+<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
  and end plate combined.  The material properties are those of epoxy-filled
 graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
 <li>The y-axis length of this region is the length of the double-serpentine flow channels of the
 GM-compatible
-anode <a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
+anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
 <li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
 (50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
 <li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
@@ -3281,13 +3281,13 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
       annotation (defaultComponentName="caFP", Documentation(info="<html>
   <p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
+of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
+<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
  and end plate combined.  The material properties are those of epoxy-filled
 graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
 <li>The y-axis length of this region is the length of the triple-serpentine flow channels of the
 GM-compatible
-anode <a href=\"modelica://FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
+anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
 <li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
 (50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
 <li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.

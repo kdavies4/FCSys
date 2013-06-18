@@ -18,22 +18,22 @@ rm -f help/*WorkInProgress*
 branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3` # Original branch
 stash_msg=`git stash save "Work in progress before running 00-make-doc.sh"`
 git checkout gh-pages
-git checkout $branch -- resources/documentation # Checkout resources,
-git reset HEAD resources/documentation # but don't track them.
+git checkout $branch -- Resources/Documentation # Checkout resources,
+git reset HEAD Resources/Documentation # but don't track them.
 
 # Update the style sheet.
-cp -f resources/documentation/ModelicaDoc.css stylesheets
+cp -f Resources/Documentation/ModelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
 IFS=$'\n' # Allow spaces in file names.
-for f in `find ./resources/documentation -iname "*.png" -o -iname "*.svg" -o -iname "*.ico" -o -iname "*.gif" -o -iname "*.pdf"`
+for f in `find ./Resources/Documentation -iname "*.png" -o -iname "*.svg" -o -iname "*.ico" -o -iname "*.gif" -o -iname "*.pdf"`
 do
     cp $f images/
 done
 cp help/*.png images/
 # Note:  This replaces
-# resources/documentation/FCSys.Subassemblies.Cells.CellD.png (copied above),
+# Resources/Documentation/FCSys.Subassemblies.Cells.CellD.png (copied above),
 # which is lower resolution.
 rm images/FCSys.Figures*.png
 

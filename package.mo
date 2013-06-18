@@ -66,12 +66,12 @@ package UsersGuide "User's Guide"
         is loaded via the \"FCSys/load.mos\" script.
         <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
-        There are scripts in \"FCSys/resources/scripts/Dymola/\" to create useful plots of that model and others.
+        There are scripts in \"FCSys/Resources/Scripts/Dymola/\" to create useful plots of that model and others.
         The scripts should be accessible from the \"Command\" menu of the Modelica environment.
         For more detailed
         analysis, including spatial property distributions and vector plots,
         custom <a href=\"http://www.python.org\">Python</a> modules are available in
-        \"FCSys/resources/source/Python/\" with <a href=\"modelica://FCSys/resources/source/Python/help/index.html\">documentation</a>.</li>
+        \"FCSys/Resources/Source/Python/\" with <a href=\"modelica://FCSys/Resources/Source/Python/help/index.html\">documentation</a>.</li>
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href=\"modelica://FCSys.Units\">FCSys.Units</a> package:
@@ -151,9 +151,9 @@ package UsersGuide "User's Guide"
       Documentation(info="<html>
     <p>These papers describe work leading to the current <a href=\"modelica://FCSys\">FCSys</a> package (most recent at the top):
     <ol>
-    <li>K. L. Davies, \"<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf\">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    <li>K. L. Davies, \"<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf\">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
-    <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
+    <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf\">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies, R. M. Moore, and G. Bender, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf\">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies and R. M. Moore, \"<a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
@@ -1030,11 +1030,11 @@ margin-right: auto;\" class=noBorder>
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
 
-    <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/CellFlows.png\">
+    <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/CellFlows.png\">
 <br>Figure 1: Layers and primary flows of a PEMFC.</p>
 
     <!--<p align=center id=\"Fig2\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
-    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
+    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
 <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of

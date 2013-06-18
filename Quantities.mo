@@ -17,7 +17,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-6-10
+      // Generated from FCSys/Resources/quantities.xls, 2013-6-10
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C
@@ -97,7 +97,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificRate VolumeSpecificRate=1*U.m^3/(U.C*U.s)
         "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
-      // -------- end from FCSys/resources/quantities.xls
+      // -------- end from FCSys/Resources/quantities.xls
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}})), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
@@ -109,7 +109,7 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-6-10
+  // Generated from FCSys/Resources/quantities.xls, 2013-6-10
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -209,7 +209,7 @@ package Quantities "Quantities to represent physical properties"
     "Rate of specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
 
-  // -------- end from FCSys/resources/quantities.xls
+  // -------- end from FCSys/Resources/quantities.xls
 
   // Aliases that imply special display units
   type CapacityThermal = Amount (displayUnit="J/K") "Thermal capacity";

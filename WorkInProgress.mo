@@ -3593,7 +3593,7 @@ This is discussed in the description of package
                         y,
                         n_WSR);
             annotation (Include=
-                  "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
+                  "#include \"FCSys/Resources/Source/C/qpOASES_C.h\"", Library=
                   "qpOASES");
             /*
    Note:  As of Dymola 7.4, may need to use this in Windows:
@@ -3635,7 +3635,7 @@ This is discussed in the description of package
                         Gx_min,
                         Gx_max);
             annotation (Include=
-                  "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
+                  "#include \"FCSys/Resources/Source/C/qpOASES_C.h\"", Library=
                   "qpOASES");
             /*
    Note:  As of Dymola 7.4, may need to use this in Windows:
@@ -3686,7 +3686,7 @@ This is discussed in the description of package
                         n_bG,
                         n_WSR_max);
             annotation (Include=
-                  "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
+                  "#include \"FCSys/Resources/Source/C/qpOASES_C.h\"", Library=
                   "qpOASES");
             /*
    Note:  As of Dymola 7.4, may need to use this in Windows:
@@ -3721,7 +3721,7 @@ This is discussed in the description of package
                             n_x,
                             n_bG);
               annotation (Include=
-                    "#include \"FCSys/resources/source/C/qpOASES_C.h\"",
+                    "#include \"FCSys/Resources/Source/C/qpOASES_C.h\"",
                   Library="qpOASES");
               /*
    Note:  As of Dymola 7.4, may need to use this in Windows:
@@ -3739,7 +3739,7 @@ This is discussed in the description of package
                 "Quadratic programming problem memory object";
             external"C" qpoases_free(mem);
               annotation (Include=
-                    "#include \"FCSys/resources/source/C/qpOASES_C.h\"",
+                    "#include \"FCSys/Resources/Source/C/qpOASES_C.h\"",
                   Library="qpOASES");
               /*
    Note:  As of Dymola 7.4, may need to use this in Windows:

@@ -32,7 +32,7 @@ package Conditions "Models to specify and measure operating conditions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
-              "resources/scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
+              "Resources/Scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
     end FaceCondition;
 
     model FaceConditionPhases
@@ -234,7 +234,7 @@ package Conditions "Models to specify and measure operating conditions"
           color={0,127,255},
           smooth=Smooth.None));
       annotation (experiment(StopTime=2e-10), Commands(file=
-              "resources/scripts/Dymola/Conditions.Examples.Adapteminus.mos"));
+              "Resources/Scripts/Dymola/Conditions.Examples.Adapteminus.mos"));
     end AnodeAdapter;
 
   end Examples;
@@ -8202,11 +8202,11 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
         <td align=center width=120>
-          <img src=\"modelica://FCSys/resources/documentation/Conditions/Router/PassThrough.png\">
+          <img src=\"modelica://FCSys/Resources/Documentation/Conditions/Router/PassThrough.png\">
 <br><b>a:</b>  Pass-through
         </td>
         <td align=center>
-          <img src=\"modelica://FCSys/resources/documentation/Conditions/Router/CrossOver.png\">
+          <img src=\"modelica://FCSys/Resources/Documentation/Conditions/Router/CrossOver.png\">
 <br><b>b:</b>  Cross-over
         </td>
       </tr>

@@ -15,25 +15,24 @@
 
 # HNEI data
 # (also blocked by other means, but be sure)
-resources/scripts/Dymola/ValidationData.mos
-resources/documentation/Regions/*.pdf
-test/LOOCV
+Resources/Scripts/Dymola/ValidationData.mos
+Resources/Documentation/Regions/*.pdf
+Test/LOOCV
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
-test/Morris
+Test/Morris
 
 # Built and compiled files
 build
 *.pyc
 
 # Support for MATLAB and model-predictive control (MPC)
-resources/source/MATLAB
-test/MPC
+Resources/Source/MATLAB
+Test/MPC
 *qpOASES*
 
 # Simulation files (in case they're generated inside the library)
-simulations
 dsin.txt
 dsfinal.txt
 dsu.txt
@@ -51,11 +50,11 @@ status
 00-*
 
 # Scripts and other files to create documentation
-resources/source/Python/doc/*.rst
-resources/source/Python/doc/*.py
-resources/source/Python/doc/Makefile
-resources/source/Python/doc/_templates
-resources/source/Python/MANIFEST*
+Resources/Source/Python/doc/*.rst
+Resources/Source/Python/doc/*.py
+Resources/Source/Python/doc/Makefile
+Resources/Source/Python/doc/_templates
+Resources/Source/Python/MANIFEST*
 
 # Temporary, locked, and synchronization files
 .*
@@ -65,31 +64,31 @@ resources/source/Python/MANIFEST*
 *.asv
 .~lock*
 .fuse_hidden*
-resources/source/Python/fcres/temp_plot.pdf
-resources/source/Python/fcres/temp_plot.png
+Resources/Source/Python/fcres/temp_plot.pdf
+Resources/Source/Python/fcres/temp_plot.png
 
 # Web documentation
 images/
 javascripts
 
 # Other
-install
-test
+Install
+Test
 
-# Systems folder (in resources/documentation)
+# Systems folder (in Resources/Documentation)
 Systems
 
 # Duplicate of FCRes examples
-resources/source/Python/fcres/examples
+Resources/Source/Python/fcres/examples
 
 # Work in progress
 WorkInProgress.mo
 help/FCSys_WorkInProgress*.html
 help/FCSys.WorkInProgress*.png
-old
-resources/*.xls
-resources/source/Python/bin/killall-fcsysres.sh
-resources/source/Python/bin/run-exps.py
-resources/source/Python/fcres/EOS-fit.py
-resources/source/Python/fcres/sankey.py
-resources/source/Python/fcres/exp.py
+Old
+Resources/*.xls
+Resources/Source/Python/bin/killall-fcsysres.sh
+Resources/Source/Python/bin/run-exps.py
+Resources/Source/Python/fcres/EOS-fit.py
+Resources/Source/Python/fcres/sankey.py
+Resources/Source/Python/fcres/exp.py

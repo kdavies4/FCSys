@@ -181,7 +181,7 @@ package Characteristics
           color={0,0,127},
           smooth=Smooth.None));
       annotation (experiment, Commands(file=
-              "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"));
+              "Resources/Scripts/Dymola/Characteristics.Examples.Correlations.mos"));
     end Correlations;
 
   end Examples;
@@ -1507,7 +1507,7 @@ temperature difference.</p>
           2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1)
           :-1:1} "Coefficients of p as a polynomial in v and T";
       // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
-      // can be computed using FCSys/resources/virial-relations.cdf.
+      // can be computed using FCSys/Resources/virial-relations.cdf.
 
     public
       function dp_Tv
