@@ -5,7 +5,6 @@ package FCSys "Modelica fuel cell library"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -22,7 +21,6 @@ import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -361,7 +359,7 @@ package UsersGuide "User's Guide"
       DocumentationClass=true,
       Documentation(info="<html>
     <p>Updates to this package may be available online at the
-    <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a> or the 
+    <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a> or the
     <a href=\"https://modelica.org/libraries\">Modelica libraries page</a>.
     The development page is
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
@@ -938,8 +936,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1245,4 +1241,5 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
+
 end FCSys;

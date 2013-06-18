@@ -207,6 +207,7 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
+
     end SubregionHOR;
 
     model SubregionORR
@@ -423,6 +424,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (experiment(StopTime=200, Algorithm="Dassl"), Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionPipeFlow.mos"));
+
     end SubregionPipeFlow;
 
     model Subregions
@@ -615,7 +617,6 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
@@ -624,6 +625,7 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.Subregions.mos"));
+
     end Subregions;
 
     model ElectricalConduction
@@ -698,13 +700,13 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         experiment(StopTime=500, Tolerance=1e-06),
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"),
 
         experimentSetupOutput);
+
     end ElectricalConduction;
 
     model ThermalConduction "Test thermal conduction (through solid)"
@@ -901,6 +903,7 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.TestReaction.mos"),
 
         Diagram(graphics));
+
     end TestReaction;
 
   end Examples;
@@ -1163,6 +1166,7 @@ package Subregions
     annotation (Documentation(info="<html>
 <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1228,6 +1232,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1398,6 +1403,7 @@ package Subregions
     annotation (defaultComponentName="subregion", Documentation(info="<html>
 <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"));
+
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1796,6 +1802,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (Documentation(info="<html>
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2073,6 +2080,7 @@ package Subregions
     <p>See <a href=\"modelica://FCSys.Subregions.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2451,6 +2459,7 @@ package Subregions
     <p>See <a href=\"modelica://FCSys.Subregions.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> for assumptions.
     For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2553,6 +2562,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (Documentation(info="<html><p>Please see the documentation of the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"));
+
     end Liquid;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -2799,6 +2809,7 @@ package Subregions
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end EmptyPhase;
 
     end BaseClasses;
@@ -5301,6 +5312,7 @@ yet its condition is not defined.  Choose any condition besides None.");
                   extent={{-98,80},{98,120}},
                   textString="%name",
                   lineColor={0,0,0})}));
+
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -5390,6 +5402,7 @@ yet its condition is not defined.  Choose any condition besides None.");
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               pattern=LinePattern.Dash)}));
+
   end Reaction;
 
   model ChemicalExchange
@@ -5446,6 +5459,7 @@ yet its condition is not defined.  Choose any condition besides None.");
               extent={{-100,-20},{100,-40}},
               lineColor={127,127,127},
               textString="%n")}));
+
   end ChemicalExchange;
 
   model Depletion "Electrochemical depletion region"
@@ -5571,6 +5585,7 @@ yet its condition is not defined.  Choose any condition besides None.");
               extent={{-120,40},{120,80}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end Depletion;
 
   model Volume "Model to establish a fixed total volume"
@@ -5652,6 +5667,7 @@ yet its condition is not defined.  Choose any condition besides None.");
               lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (generally not for direct use)"

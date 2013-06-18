@@ -76,6 +76,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
+
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -122,6 +123,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
+
       end CellProfileIO;
 
       model CellModelica
@@ -178,6 +180,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         annotation (experiment(StopTime=1000));
+
       end CellModelica;
 
       function plot "Create plots using FCRes"
@@ -454,6 +457,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   visible=inclX,
                   thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
+
     end Cell;
 
     model SimpleCell
@@ -689,6 +693,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   color={127,127,127},
                   visible=inclX,
                   thickness=0.5)}));
+
     end SimpleCell;
 
   end Cells;

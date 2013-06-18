@@ -40,18 +40,18 @@
 ##     June 2009.
 
 # Unzip the archives.
-mkdir -p ../build/
+rm -r ../build
+mkdir -p ../build
 tar -zxvpf $qpOASES.tar.gz --directory ../build/
 unzip -f qpOASES_C.zip -d ../build/
 
 # Copy the Modelica header file into the proper directory
-# (/Resources/Source/C relative to the base directory of the current Modelica package).
-cp ../build/qpOASES_C/qpOASES_C.h ../Resources/Source/C
+cp ../build/qpOASES_C/qpOASES_C.h ../FCSys/Resources/Source/C
 
 # Move the contents of qpOASES_C into the proper folders of the qpOASES package.
-cp -p ../build/qpOASES_C/qpOASES_C.cpp ../build/$qpOASES/src/
-cp -p ../build/qpOASES_C/qpOASES_C.hpp ../build/$qpOASES/include/
-cp ../build/qpOASES_C/qpOASES_C.h ../build/$qpOASES/include/
+cp -p ../build/qpOASES_C/qpOASES_C.cpp ../../build/$qpOASES/src/
+cp -p ../build/qpOASES_C/qpOASES_C.hpp ../../build/$qpOASES/include/
+cp ../build/qpOASES_C/qpOASES_C.h ../../build/$qpOASES/include/
 cp ../build/qpOASES_C/Makefile ../build/$qpOASES/src/ # Replace the existing Makefile.
 
 # Make the qpOASES library including the C interface.

@@ -10,5 +10,5 @@
 # This is used by rsync via 00-release.sh.
 # KLD 5/22/12
 
-Resources/quantities.xls
-Resources/NIST.xls
+FCSys/Resources/quantities.xls
+FCSys/Resources/NIST.xls

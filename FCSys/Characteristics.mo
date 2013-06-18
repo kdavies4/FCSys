@@ -21,10 +21,10 @@ package Characteristics
 
       // Property models
       PropertiesRT 'C+'(redeclare package Data =
-            FCSys.Characteristics.'C+'.Graphite)
+            Characteristics.'C+'.Graphite)
         annotation (Placement(transformation(extent={{30,38},{50,58}})));
       PropertiesRT 'C19HF37O5S-'(redeclare package Data =
-            FCSys.Characteristics.'C19HF37O5S-'.Ionomer)
+            Characteristics.'C19HF37O5S-'.Ionomer)
         annotation (Placement(transformation(extent={{30,26},{50,46}})));
       PropertiesRT 'e-'(redeclare package Data = FCSys.Characteristics.'e-'.Gas)
         annotation (Placement(transformation(extent={{30,14},{50,34}})));
@@ -41,7 +41,7 @@ package Characteristics
       // coefficients in the second row of H2O.Data.b_v, which cause numerical
       // errors.
       PropertiesRT H2OLiquid(redeclare package Data =
-            FCSys.Characteristics.H2O.Liquid)
+            Characteristics.H2O.Liquid)
         annotation (Placement(transformation(extent={{30,-46},{50,-26}})));
       PropertiesRT N2(redeclare package Data = FCSys.Characteristics.N2.Gas)
         annotation (Placement(transformation(extent={{30,-58},{50,-38}})));
@@ -176,7 +176,6 @@ package Characteristics
           points={{5.55112e-16,-20},{10,-20},{10,-62},{29,-62}},
           color={0,0,127},
           smooth=Smooth.None));
-
       annotation (
         experiment,
         Commands(file=
@@ -198,7 +197,7 @@ package Characteristics
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      Connectors.RealInput T(unit="l2.m/(N.T2)") "Temperaure"
+      Connectors.RealInput T(unit="l2.m/(N.T2)") "Temperature"
         annotation (Placement(transformation(extent={{-120,10},{-100,30}})));
       Connectors.RealInput p(unit="m/(l.T2)") "Pressure"
         annotation (Placement(transformation(extent={{-120,-30},{-100,-10}})));
@@ -233,9 +232,10 @@ package Characteristics
       tauprime = Data.tauprime(T, v);
       mu = Data.mu(T, v);
       nu = Data.nu(T, v);
-
       annotation (Diagram(graphics));
+
     end Properties;
+
   end Examples;
 
   package 'C+' "<html>C<sup>+</sup></html>"
@@ -520,7 +520,6 @@ package Characteristics
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
-
       annotation (Documentation(info="<html>
             <p>Notes:
      <ul>
@@ -568,7 +567,6 @@ package Characteristics
             -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
-
       annotation (Documentation(info="<html>
         <p>Notes:
      <ul>
@@ -675,7 +673,6 @@ package Characteristics
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
-
       annotation (Documentation(info="<html>
                   <p>Notes:
      <ul>
@@ -725,7 +722,6 @@ package Characteristics
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
-
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
    bond length of O-O is 128.2 pm.  The radius of O is from
@@ -815,6 +811,7 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
   </html>"));
+
       end zeta;
 
       redeclare function theta
@@ -851,6 +848,7 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
   </html>"));
+
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -911,6 +909,7 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>, and
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));
+
       end omega;
 
     public
@@ -989,6 +988,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
+
       end c_p;
 
       function c_v
@@ -1015,6 +1015,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
+
       end c_v;
 
       function g "Gibbs potential as a function of temperature and pressure"
@@ -1138,6 +1139,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
+
       end h;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1264,6 +1266,7 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">zeta</a>() for the additional
   assumptions used to calculate fluidity.</p>
 </html>"));
+
       end beta;
 
       replaceable function zeta
@@ -1301,6 +1304,7 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
   </html>"));
+
       end zeta;
 
       replaceable function eta
@@ -1330,6 +1334,7 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
 </html>"));
+
       end eta;
 
       replaceable function theta
@@ -1356,6 +1361,7 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
 </html>"));
+
       end theta;
 
     public
@@ -1381,6 +1387,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of temperature
   (although temperature remains as a valid input).</p>
   </html>"));
+
       end kappa;
 
       replaceable function tauprime
@@ -1414,6 +1421,7 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
 </html>"));
+
       end tauprime;
 
       replaceable function mu
@@ -1441,6 +1449,7 @@ package Characteristics
   </ol>
   Also, it is assumed that the Einstein relation applies.</p>
 </html>"));
+
       end mu;
 
       replaceable function nu
@@ -1471,6 +1480,7 @@ temperature difference.</p>
   </ol>
   Also, it is assumed that the Einstein relation applies.</p>
 </html>"));
+
       end nu;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
@@ -1645,6 +1655,7 @@ temperature difference.</p>
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
+
       end p_Tv;
 
       function v_Tp "Specific volume as a function of temperature and pressure"
@@ -1668,6 +1679,7 @@ temperature difference.</p>
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
+
       end v_Tp;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package may be used with

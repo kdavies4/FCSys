@@ -33,6 +33,7 @@ package Conditions "Models to specify and measure operating conditions"
           smooth=Smooth.None));
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
               "Resources/Scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
+
     end FaceCondition;
 
     model FaceConditionPhases
@@ -146,6 +147,7 @@ package Conditions "Models to specify and measure operating conditions"
           color={47,107,251},
           smooth=Smooth.None));
       annotation (experiment);
+
     end FaceConditionPhases;
 
     model Router
@@ -235,6 +237,7 @@ package Conditions "Models to specify and measure operating conditions"
           smooth=Smooth.None));
       annotation (experiment(StopTime=2e-10), Commands(file=
               "Resources/Scripts/Dymola/Conditions.Examples.Adapteminus.mos"));
+
     end AnodeAdapter;
 
   end Examples;
@@ -369,6 +372,7 @@ package Conditions "Models to specify and measure operating conditions"
                   points={{0,-100},{70,-100}},
                   color={0,127,0},
                   smooth=Smooth.None)}));
+
     end Anode;
 
     model Cathode
@@ -497,6 +501,7 @@ package Conditions "Models to specify and measure operating conditions"
                   points={{0,-100},{70,-100}},
                   color={0,127,0},
                   smooth=Smooth.None)}));
+
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -589,6 +594,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,0},{70,0}},
                       color={0,127,0},
                       smooth=Smooth.None)}));
+
       end AnodeGas;
 
       model CathodeGas
@@ -719,6 +725,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,0},{70,0}},
                       color={0,127,0},
                       smooth=Smooth.None)}));
+
       end CathodeGas;
 
       model Graphite
@@ -783,6 +790,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,0},{70,0}},
                       color={0,127,0},
                       smooth=Smooth.None)}));
+
       end Graphite;
 
       model Liquid
@@ -844,6 +852,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,0},{70,0}},
                       color={0,127,0},
                       smooth=Smooth.None)}));
+
       end Liquid;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -937,6 +946,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{-70,0},{0,0}},
                       color={127,127,127},
                       smooth=Smooth.None)}));
+
       end 'e-';
 
       model Fluid
@@ -1027,6 +1037,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{-70,0},{0,0}},
                       color={127,127,127},
                       smooth=Smooth.None)}));
+
       end Fluid;
 
       model FluidNeutral
@@ -1105,6 +1116,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{-70,0},{0,0}},
                       color={127,127,127},
                       smooth=Smooth.None)}));
+
       end FluidNeutral;
 
       model Solid
@@ -1156,6 +1168,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,-40},{70,-40}},
                       color={140,0,0},
                       smooth=Smooth.None)}));
+
       end Solid;
 
     end Species;
@@ -1264,6 +1277,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                       points={{0,40},{80,40}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end Junction2;
 
       model Junction3
@@ -1396,6 +1410,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       points={{6,0},{80,0}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end Junction3;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -1439,6 +1454,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                           lineColor={0,127,255},
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid)}));
+
         end PartialJunction;
 
       end BaseClasses;
@@ -1461,7 +1477,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 
           excludeEnthalpyOfFormation=false);
-
         annotation (Documentation(info="<html>
 
 </html>"));
@@ -1481,7 +1496,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 
           excludeEnthalpyOfFormation=false);
-
         annotation (Documentation(info="<html>
 
 </html>"));
@@ -1968,6 +1982,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,
                 -100},{180,100}}), graphics), experiment(StopTime=15481,
             Algorithm="Euler"));
+
     end Replay;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -2181,6 +2196,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
                 160},{160,-160}}, lineColor={0,0,0})}));
+
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -2503,6 +2519,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             index=1,
             extent={{2,3},{2,3}}));
         annotation (defaultComponentName="chemical");
+
       end ChemicalReaction;
 
       model ChemicalReactionNoFlow
@@ -2555,6 +2572,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.Ndot = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="material");
+
         end ReactionRate;
 
         model Potential "Specify electrochemical potential (measure current)"
@@ -2567,6 +2585,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.mu = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="material");
+
         end Potential;
 
         model Custom "Custom"
@@ -2583,6 +2602,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="material",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.mu</code> and/or <code>chemical.Ndot</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2602,6 +2622,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             chemical.Qdot_A = 0 "Rate of thermal advection";
             chemical.Qdot_D = 0 "Rate of thermal diffusion";
             annotation (defaultComponentName="material");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -2629,6 +2650,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Velocity;
 
         model Force "Specify force (measure velocity)"
@@ -2643,6 +2665,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Force;
 
         model Custom "Custom"
@@ -2662,6 +2685,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="translational",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.phi[transCart[axis]]</code> and/or <code>chemical.mPhidot[transCart[axis]]</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2693,6 +2717,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             chemical.Qdot_A = 0 "Rate of thermal advection";
             chemical.Qdot_D = 0 "Rate of thermal diffusion";
             annotation (defaultComponentName="translational");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -2718,6 +2743,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.sT = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermalAdvection");
+
         end SpecificEntropyTemperature;
 
         model HeatRate
@@ -2731,6 +2757,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.Qdot_A = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermalAdvection");
+
         end HeatRate;
 
         model Custom "Custom"
@@ -2747,6 +2774,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermalAdvection",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.sT</code> and/or <code>chemical.Qdot_A</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2765,6 +2793,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             chemical.mPhidot = zeros(n_trans) "Force";
             chemical.Qdot_D = 0 "Rate of thermal diffusion";
             annotation (defaultComponentName="thermalAdvection");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -2793,6 +2822,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.T = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermalDiffusion");
+
         end Temperature;
 
         model HeatRate "Specify heat flow rate (measure temperature)"
@@ -2805,6 +2835,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           chemical.Qdot_D = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermalDiffusion");
+
         end HeatRate;
 
         model Custom "Custom"
@@ -2821,6 +2852,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermalDiffusion",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.T</code> and/or <code>chemical.Qdot_D</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2839,6 +2871,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             chemical.mPhidot = zeros(n_trans) "Force";
             chemical.Qdot_A = 0 "Rate of thermal advection";
             annotation (defaultComponentName="thermalDiffusion");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -2959,6 +2992,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         x = u_final;
         annotation (defaultComponentName="chemical", Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.mu</code> and/or <code>chemical.Ndot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -3067,6 +3101,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
           annotation (defaultComponentName="chemical");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3479,6 +3514,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             thickness=0.5,
             smooth=Smooth.None));
         annotation (defaultComponentName="physical");
+
       end PhysicalBus;
 
       model PhysicalBusIsolated
@@ -3561,6 +3597,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       equation
         physical.mu = u_final;
         annotation (defaultComponentPrefixes="replaceable");
+
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
@@ -3572,6 +3609,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       equation
         physical.Ndot = u_final;
         annotation (defaultComponentPrefixes="replaceable");
+
       end Current;
 
       model Custom "Custom"
@@ -3588,6 +3626,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           defaultComponentName="physical",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>physical.mu</code> and/or <code>physical.Ndot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -3701,6 +3740,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
           annotation (defaultComponentName="physical");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3876,6 +3916,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face");
+
         end FaceBus;
 
         model FaceBusIsolated
@@ -4176,6 +4217,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 thickness=0.5,
                 smooth=Smooth.None));
             annotation (Diagram(graphics));
+
           end Gas;
 
           model Graphite "Condition for graphite"
@@ -4616,6 +4658,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face");
+
         end FaceBus;
 
         model FaceBusIsolated
@@ -4908,6 +4951,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 thickness=0.5,
                 smooth=Smooth.None));
             annotation (Diagram(graphics));
+
           end Gas;
 
           model Graphite "Condition for graphite"
@@ -5423,6 +5467,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             positive.rho - negative.rho = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
+
           end Density;
 
           model Pressure
@@ -5447,6 +5492,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               negative.rho) = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
+
           end Pressure;
 
           model Current
@@ -5460,6 +5506,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             negative.Ndot = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
+
           end Current;
 
           model Custom "Custom"
@@ -5478,6 +5525,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>negative.rho</code>, <code>positive.rho</code>, <code>negative.Ndot</code>,
     and/or <code>positive.Ndot</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -5505,6 +5553,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               negative.Qdot = 0;
               positive.Qdot = 0;
               annotation (defaultComponentName="material");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -5531,6 +5580,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             positive.phi[orientation] - negative.phi[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Velocity;
 
           model Force
@@ -5545,6 +5595,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             negative.mPhidot[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Force;
 
           model Custom "Custom"
@@ -5564,6 +5615,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>negative.phi[orientation]</code>, <code>positive.phi[orientation]</code>,
     <code>negative.mPhidot[orientation]</code> and/or <code>positive.mPhidot[orientation]</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -5601,6 +5653,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               negative.Qdot = 0;
               positive.Qdot = 0;
               annotation (defaultComponentName="translational");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -5626,6 +5679,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             positive.T - negative.T = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="thermal");
+
           end Temperature;
 
           model HeatRate
@@ -5641,6 +5695,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             negative.Qdot = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="thermal");
+
           end HeatRate;
 
           model Custom
@@ -5659,6 +5714,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               defaultComponentName="thermal",
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>negative.T</code>, <code>positive.T</code>, <code>negative.Qdot</code> and/or <code>positive.Qdot</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -5686,6 +5742,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               negative.mPhidot = {0,0,0};
               positive.mPhidot = {0,0,0};
               annotation (defaultComponentName="thermal");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -5764,6 +5821,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 color={0,0,127},
                 smooth=Smooth.None));
             annotation (Icon(graphics));
+
           end PartialCondition;
 
         end BaseClasses;
@@ -5987,6 +6045,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.rho = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
+
           end Density;
 
           model Pressure "Specify pressure (measure diffusion current)"
@@ -6012,6 +6071,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               defaultComponentName="material",
               Documentation(info="<html>
   <p>The default characteristic data represents an ideal gas.</p></html>"));
+
           end Pressure;
 
           model Current "Specify diffusion current (measure density)"
@@ -6024,6 +6084,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.Ndot = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="material");
+
           end Current;
 
           model Custom "Custom"
@@ -6040,6 +6101,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               defaultComponentName="material",
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.rho</code> and/or <code>face.Ndot</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -6058,6 +6120,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               face.mPhidot = {0,0,0} "Translational momentum";
               face.Qdot = 0 "Heat";
               annotation (defaultComponentName="material");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -6083,6 +6146,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.phi[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Velocity;
 
           model Current "Specify advective current (measure force)"
@@ -6106,6 +6170,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Documentation(info="<html><p>The advective current is in the globally positive direction (not into the component).
     This model is meaningful only for the normal direction
   (<code>orientation = Orientation.normal).</p></html>"));
+
           end Current;
 
           model Force "Specify force (measure velocity)"
@@ -6118,6 +6183,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.mPhidot[orientation] = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="translational");
+
           end Force;
 
           model Custom "Custom"
@@ -6135,6 +6201,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               defaultComponentName="translational",
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -6161,6 +6228,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 "Translational momentum in the preceding direction";
               face.Qdot = 0 "Heat";
               annotation (defaultComponentName="translational");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -6186,6 +6254,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.T = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="thermal");
+
           end Temperature;
 
           model HeatRate "Specify heat flow rate (measure temperature)"
@@ -6200,6 +6269,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             face.Qdot = u_final;
             annotation (defaultComponentPrefixes="replaceable",
                 defaultComponentName="thermal");
+
           end HeatRate;
 
           model Custom "Custom"
@@ -6216,6 +6286,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               defaultComponentName="thermal",
               Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
           end Custom;
 
           package BaseClasses "Base classes (generally not for direct use)"
@@ -6234,6 +6305,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               face.Ndot = 0 "Material";
               face.mPhidot = {0,0,0} "Translational momentum";
               annotation (defaultComponentName="thermal");
+
             end PartialCondition;
 
             type ConditionType = enumeration(
@@ -6308,8 +6380,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
                 color={0,0,127},
                 smooth=Smooth.None));
-
             annotation (Icon(graphics));
+
           end PartialCondition;
 
         end BaseClasses;
@@ -6729,6 +6801,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             index=1,
             extent={{2,3},{2,3}}));
         annotation (defaultComponentName="inert");
+
       end InertInternal;
 
       model InertInternalIsolated
@@ -6765,6 +6838,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Velocity;
 
         model Force "Specify force (measure velocity)"
@@ -6779,6 +6853,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Force;
 
         model Custom "Custom"
@@ -6798,6 +6873,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="translational",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>translational.phi[transCart[axis]]</code> and/or <code>translational.mPhidot[transCart[axis]]</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -6832,6 +6908,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               end if;
             end for;
             annotation (defaultComponentName="translational");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -6856,6 +6933,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thermal.T = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermal");
+
         end Temperature;
 
         model HeatRate "Specify heat flow rate (measure temperature)"
@@ -6870,6 +6948,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thermal.Qdot = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermal");
+
         end HeatRate;
 
         model Custom "Custom"
@@ -6886,6 +6965,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermal",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>thermal.T</code> and/or <code>thermal.Qdot</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -7232,6 +7312,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           inert.V = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="dalton");
+
         end Volume;
 
         model Pressure "Specify pressure (measure volume)"
@@ -7244,6 +7325,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           inert.p = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="dalton");
+
         end Pressure;
 
         model Custom "Custom"
@@ -7260,6 +7342,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="dalton",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>inert.V</code> and/or <code>inert.p</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -7277,6 +7360,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             inert.mPhidot = zeros(n_trans) "Force";
             inert.Qdot = 0 "Heat flow rate";
             annotation (defaultComponentName="dalton");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -7302,6 +7386,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Velocity;
 
         model Force "Specify force (measure velocity)"
@@ -7316,6 +7401,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Force;
 
         model Custom "Custom"
@@ -7335,6 +7421,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="translational",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>inert.phi[transCart[axis]</code> and/or <code>inert.mPhidot[transCart[axis]</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -7365,6 +7452,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             end for;
             inert.Qdot = 0 "Heat flow rate";
             annotation (defaultComponentName="translational");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -7389,6 +7477,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           inert.T = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermal");
+
         end Temperature;
 
         model HeatRate "Specify heat flow rate (measure temperature)"
@@ -7403,6 +7492,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           inert.Qdot = u_final;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="thermal");
+
         end HeatRate;
 
         model Custom "Custom"
@@ -7419,6 +7509,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermal",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>inert.T</code> and/or <code>inert.Qdot</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -7436,6 +7527,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             inert.p = 0 "Pressure";
             inert.mPhidot = zeros(n_trans) "Force";
             annotation (defaultComponentName="thermal");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -7729,6 +7821,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Velocity;
 
         model Force "Specify force (measure velocity)"
@@ -7743,6 +7836,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end if;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="translational");
+
         end Force;
 
         model Custom "Custom"
@@ -7762,6 +7856,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="translational",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>chemical.phi[transCart[axis]]</code> and/or <code>chemical.mPhidot[transCart[axis]]</code>.</p></html>"));
+
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -7844,6 +7939,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 color={0,0,127},
                 smooth=Smooth.None));
             annotation (defaultComponentName="translational");
+
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -7903,6 +7999,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         x = u_final;
         annotation (defaultComponentName="thermal", Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>thermal.T</code> and/or <code>thermal.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -7970,6 +8067,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
           annotation (defaultComponentName="thermal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -8165,6 +8263,7 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
               thickness=0.5,
               visible=crossOver,
               smooth=Smooth.Bezier)}));
+
   end Router;
 
 end Conditions;

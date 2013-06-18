@@ -22,7 +22,7 @@ status
 *.mat
 
 # Internal link to demos
-/Resources/Source/Python/fcres/examples
+/FCSys/Resources/Source/Python/fcres/examples
 
 # Excel spreadsheets
 *.xls
@@ -33,7 +33,7 @@ status
 
 # Selected directories
 /Old/
-/help/
+/FCSys/help/
 build/
 
 # Images
@@ -48,4 +48,4 @@ MANIFEST
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
-/Test/Morris
+/FCSys/Test/Morris

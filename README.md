@@ -12,7 +12,7 @@ with "TODO" or "**".  If you have problems besides those noted, please
 [Modelica](https://www.modelica.org/).  More information is available in the
 documentation, which can be accessed [online](http://kdavies4.github.com/FCSys),
 or from the documentation layer of the Modelica code (starting at the
-[top level](package.mo)).
+[top level](FCSys/package.mo)).
 
 ### Installation
 
@@ -21,7 +21,7 @@ Please see the
 of the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html).
 
-There are optional subpackages ([Test](Test.mo) and [Tests](Tests.mo)) to
+There are optional subpackages ([Test](FCSys/Test.mo) and [Tests](FCSys/Tests.mo)) to
 perform tests on the rest of the library.  They are not included in the
 documentation and can be safely removed (but may be helpful for debugging).
 
@@ -35,7 +35,7 @@ Please see the acknowledgements on the
 [FCSys] is published under the Modelica License 2 (see the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2)
 or the
-[ModelicaLicense2.html file](resources/documentation/ModelicaLicense2.html)).
+[ModelicaLicense2.html file](FCSys/Resources/Documentation/ModelicaLicense2.html)).
 Please share any modifications you make (preferably on a Github fork from
 https://github.com/kdavies4/FCSys) so that others may benefit from your work.
 

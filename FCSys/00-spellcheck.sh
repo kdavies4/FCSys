@@ -5,7 +5,7 @@
 
 # Options
 wordfile=.fcsys.pws # Name of custom word file
-reduce=true # true, if unused words should be removed from the word file (slow)
+reduce=false # true, if unused words should be removed from the word file (slow)
 
 # Remove unused words from the word file.
 if $reduce; then
@@ -23,6 +23,6 @@ fi
 # Check the spelling in all Modelica files.
 for f in *.mo
     do
-        aspell --extra-dicts=./.modelica.pws --personal=./$wordfile -c $f
+        aspell --extra-dicts=./../.modelica.pws --personal=./$wordfile -c $f
     done
 read -p "Done.  Press [Enter] to exit."

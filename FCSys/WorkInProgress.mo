@@ -114,6 +114,7 @@ package WorkInProgress "Incomplete classes under development"
           experiment(StopTime=2),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}})));
+
       end MagneticBall;
 
       model MaciejowskiAircraftMPC
@@ -173,6 +174,7 @@ package WorkInProgress "Incomplete classes under development"
 <br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
  </td></tr></code></table></html>", revisions="<html><ul><li>Jan Gall, 2009/12/7:<br>Initial version</li>
   <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/11:<br>Modified</li></ul></html>"));
+
       end MaciejowskiAircraftMPC;
 
       model RossiterExample2MPC "Example2_mimo.m in Rossiter (2003)"
@@ -1347,6 +1349,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=50));
+
       end RossiterExample2MPC;
 
       model RossiterExample2MPCNoRej "Example2_mimo.m in Rossiter (2003)"
@@ -1429,6 +1432,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=139));
+
       end RossiterExample2MPCNoRej;
 
       model PendulumMPC
@@ -1507,6 +1511,7 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
+
       end PendulumMPC;
 
     end Examples;
@@ -1596,6 +1601,7 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
+
         end Pendulum;
 
       end Examples;
@@ -1689,6 +1695,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Controller;
 
       end Controllers;
@@ -1828,6 +1835,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Observer;
 
       end Observers;
@@ -1935,6 +1943,7 @@ results in the following equations:
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics)));
+
         end StateSpace;
 
         model StateSpaceWNoise
@@ -2041,6 +2050,7 @@ results in the following equations:
                           lineColor={0,0,127},
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid)}));
+
         end StateSpaceWNoise;
 
         model Pendulum "Simple pendulum with one revolute joint and one body"
@@ -2176,6 +2186,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid,
                           lineThickness=0.5)}));
+
         end Pendulum;
 
         model PendulumDummy
@@ -2331,6 +2342,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
+
         end RandomNormal;
 
         model RandomUniform
@@ -2457,6 +2469,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
+
         end RandomUniform;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2569,6 +2582,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics));
+
         end Constant;
 
       end Sources;
@@ -2661,6 +2675,7 @@ Example:
                   color={0,0,0}),Rectangle(extent={{-60,60},{60,-60}},
                   lineColor={0,0,255}),Line(points={{-100,0},{-60,0}}, color={0,
                   0,255}),Line(points={{60,0},{100,0}}, color={0,0,255})})));
+
       end FirstOrder;
 
       block Integrator "Output the integral of the input signal"
@@ -2742,6 +2757,7 @@ This is discussed in the description of package
                         lineColor={0,0,0},
                         textString="s"),Line(points={{-46,0},{46,0}}, color={0,
                   0,0})})));
+
       end Integrator;
 
     end Continuous;
@@ -2825,6 +2841,7 @@ This is discussed in the description of package
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(Algorithm=
                   "Dassl"));
+
         end Sampler;
 
       end Examples;
@@ -2932,6 +2949,7 @@ This is discussed in the description of package
               experiment(StopTime=2),
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics));
+
           end QPSolverFerreauExample;
 
         end Examples;
@@ -3144,6 +3162,7 @@ This is discussed in the description of package
                           textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-140,-100},{140,100}}),
                 graphics));
+
         end MPC;
 
         block MPCWRej "Model predictive controller with disturbance rejection"
@@ -3301,6 +3320,7 @@ This is discussed in the description of package
                           textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-80},{100,80}}),
                 graphics));
+
         end MPCWRej;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -3540,6 +3560,7 @@ This is discussed in the description of package
                                 textString="QP")}),
                 Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                         -100},{100,100}}), graphics)));
+
           end QPSolver;
 
           function GetInfo "<html>Get information about the solution of a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3935,6 +3956,7 @@ This is discussed in the description of package
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Observer;
 
       end Observers;
@@ -4015,6 +4037,7 @@ results in the following equations:
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics)));
+
         end StateSpace;
 
         model StateSpaceWNoise
@@ -4157,6 +4180,7 @@ results in the following equations:
                     extent={{-100,-100},{100,100}}), graphics), Icon(
                   coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                       {100,100}}), graphics));
+
           end PartialPlant;
 
         end BaseClasses;
@@ -4280,6 +4304,7 @@ results in the following equations:
                   lineColor={0,0,127}),Ellipse(extent={{36,78},{44,70}},
                   lineColor={0,0,127}),Ellipse(extent={{56,44},{64,36}},
                   lineColor={0,0,127})}));
+
         end RandomNormal;
 
         model RandomUniform "Generate a sequence of uniform random numbers"
@@ -4400,6 +4425,7 @@ results in the following equations:
                   lineColor={0,0,127}),Ellipse(extent={{36,78},{44,70}},
                   lineColor={0,0,127}),Ellipse(extent={{56,44},{64,36}},
                   lineColor={0,0,127})}));
+
         end RandomUniform;
 
       end Sources;
@@ -4432,6 +4458,7 @@ time instants and holds the output at the value of the last
 sample instant during the sample points.</p>
 </html>
 "));
+
       end ZeroOrderHold;
 
       block FirstOrderHold "First order hold of a sampled-data system"
@@ -4471,6 +4498,7 @@ sample instant during the sample points.</p>
 values of the last two sampled input signals.</p>
 </html>
 "));
+
       end FirstOrderHold;
 
       block TransportFunction "Discrete Transport Function block"
@@ -4577,6 +4605,7 @@ states can be set as start values of <b>x</b>.<p><p>Example:</p>
                       lineColor={0,0,0},
                       textString="a(z)"),Line(points={{-100,0},{-60,0}}, color=
                 {0,0,255}),Line(points={{60,0},{100,0}}, color={0,0,255})}));
+
       end TransportFunction;
 
       block UnitDelay "Unit Delay Block"
@@ -4638,6 +4667,7 @@ the output y is identical to parameter yStart.</p>
                         extent={{-55,-5},{55,-55}},
                         lineColor={0,0,0},
                         textString="z")})));
+
       end UnitDelay;
 
       block Sampler "Ideal sampling of continuous signals"
@@ -4680,6 +4710,7 @@ the output y is identical to parameter yStart.</p>
 via parameter <b>samplePeriod</b>.</p>
 </html>
 "));
+
       end Sampler;
 
       package BaseClasses "Base classes (generally not for direct use)"
@@ -4764,6 +4795,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Add2;
 
       block Add3 "Output the weighted sum of three inputs"
@@ -4827,6 +4859,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:</p>
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Add3;
 
       block AddSkipInclIncl "Add or subtract two inputs"
@@ -4906,6 +4939,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddSkipInclIncl;
 
       block AddInclInclIncl "Add or subtract three inputs"
@@ -5010,6 +5044,7 @@ input <b>u_2</b>:</p>
                       lineColor={0,0,0},
                       textString="-",
                       visible=not isPos3)}));
+
       end AddInclInclIncl;
 
       block AddInclInclSkip "Add or subtract two inputs"
@@ -5091,6 +5126,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddInclInclSkip;
 
       block AddInclSkipIncl "Add or subtract two inputs"
@@ -5175,6 +5211,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddInclSkipIncl;
 
       block Limiter "Limit the range of a signal"
@@ -5241,6 +5278,7 @@ as output.</p>
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Limiter;
 
     end Math;
@@ -5320,6 +5358,7 @@ This is discussed in the description of package
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Duplicate;
 
     end Routing;
@@ -5394,6 +5433,7 @@ The signal sizes of the input and output vector may be different.</p>
         annotation (Documentation(info="<html><p>This function uses <code>internal_twister_uniform()</code>
   to generate uniform random numbers, which in turn uses the Mersenne twister pseudorandom number
   generator and is specific to Dymola (i.e., not general to Modelica).</p></html>"));
+
       end randu;
 
       function randn "Return a vector of normal random numbers"
@@ -5421,6 +5461,7 @@ The signal sizes of the input and output vector may be different.</p>
   It uses <code>internal_twister_uniform()</code> to generate uniform random numbers,
   which in turn uses the Mersenne twister pseudorandom number generator and is
   specific to Dymola (i.e., not general to Modelica).</p></html>"));
+
       end randn;
 
     end BaseClasses;
@@ -5550,6 +5591,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           annotation (Line(points={{-30,10},{0,10}}, color={0,127,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
+
       end FCPlantNoRecirc;
 
     end Examples;
@@ -5803,6 +5845,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
             Algorithm="Dassl"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics));
+
       end FCNoRecirc;
 
       package Interfaces
@@ -5893,6 +5936,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6080,6 +6124,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6278,6 +6323,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics));
+
       end DCDC;
 
       model IdealDCDC
@@ -6443,6 +6489,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics));
+
       end ElecElec;
 
       package Interfaces
@@ -6533,6 +6580,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6685,6 +6733,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
             Diagram(coordinateSystem(preserveAspectRatio=true), graphics),
             Icon(coordinateSystem),
             graphics);
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6872,6 +6921,7 @@ a simple model of a variable pressure loss is needed.</p>
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6980,6 +7030,7 @@ a simple model of a variable pressure loss is needed.</p>
                       smooth=Smooth.None)}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end FluidHeater;
 
     end FluidHeater;
@@ -7218,6 +7269,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               points={{0,-40},{80,-40}},
               color={0,127,255},
               smooth=Smooth.None)}));
+
   end ConditionsAdaptersPhasesIonomer;
   annotation (Commands(file="../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

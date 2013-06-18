@@ -5,15 +5,15 @@ Steps to release the FCSys library:
         Run 00-list-WIP.sh to list the occurrences of those tags.
 1/29/13 KD
     2.  Test FCSys by calling FCSys.Tests.callAll() and simulating
-        FCSys.Tests.RunAll.  Update and run the Test/checks.mos and
-        Test/tests.mos scripts.  Address any problems.
+        FCSys.Tests.RunAll.  Update and run the FCSys/Test/checks.mos and
+        FCSys/Test/tests.mos scripts.  Address any problems.
 1/29/13 KD
     3.  Update the embedded documentation.
 6/10/13 KD
     4.  Update and run 00-find-unused.sh to be sure that all quantities and
         references are used in the code.  Remove the unused quantities from
-        Resources/quantities.xls and update Quantities.mo and
-        Resources/scripts/units.mos.  Remove the unused references from
+        FCSys/Resources/quantities.xls and update Quantities.mo and
+        FCSys/Resources/Scripts/units.mos.  Remove the unused references from
         package.mo (FCSys.UsersGuide.References).
 6/4/13 KD
     5.  Spellcheck the Modelica files using 00-spellcheck.sh.

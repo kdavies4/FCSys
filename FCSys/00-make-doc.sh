@@ -1,6 +1,6 @@
 #!/bin/bash
-# Process the help files and upload a version to github pages
-# (http://kdavies4.github.com/FCSys/).
+# Process the help files and prepare a version for github pages
+# (http://kdavies4.github.io/FCSys/).
 #
 # Kevin Davies, 1/24/2013
 
@@ -22,30 +22,34 @@ git checkout $branch -- Resources/Documentation # Checkout resources,
 git reset HEAD Resources/Documentation # but don't track them.
 
 # Update the style sheet.
-cp -f Resources/Documentation/ModelicaDoc.css stylesheets
+cp -f Resources/Documentation/ModelicaDoc.css ../stylesheets
 
 # Update the images.
-rm images/*
+rm ../images/*
 IFS=$'\n' # Allow spaces in file names.
 for f in `find ./Resources/Documentation -iname "*.png" -o -iname "*.svg" -o -iname "*.ico" -o -iname "*.gif" -o -iname "*.pdf"`
 do
-    cp $f images/
+    cp $f ../images/
 done
-cp help/*.png images/
+cp help/*.png ../images/
 # Note:  This replaces
 # Resources/Documentation/FCSys.Subassemblies.Cells.CellD.png (copied above),
 # which is lower resolution.
-rm images/FCSys.Figures*.png
+rm ../images/FCSys.Figures*.png
 
 # Copy and process the HTML files.
-rm *.html
-cp -f help/*.html ./
-mv -f FCSys.html index.html
+rm ../*.html
+cp -f help/*.html ../
+mv -f ../FCSys.html ../index.html
+script_dir=$PWD
+cd ..
 ./00-process-gh-pages.py
+cd $script_dir
 
 # Be sure that all of the files are added to git.
-git add images
-git add *.html
+rm ../images/icon.png # Using .gif version instead
+git add ../images
+git add ../*.html
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-updated github pages"

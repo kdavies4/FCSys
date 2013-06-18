@@ -55,7 +55,8 @@ Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed wi
 // Startup
 // ------------
 // Load the FCSys package.
-openModel("package.mo");
+openModel("FCSys/package.mo");
+cd("..");
 
 // Set up units.
 FCSys.Units.setup();
