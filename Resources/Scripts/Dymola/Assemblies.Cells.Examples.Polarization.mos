@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "Polarization.mat");
+createPlot(filename = "Polarization.mat");
 y1 = fill("", 0);
 y2 = fill("", 0);
 y3 = fill("", 0);

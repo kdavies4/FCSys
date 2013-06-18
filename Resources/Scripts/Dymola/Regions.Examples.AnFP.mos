@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "AnFP.mat");
+createPlot(filename = "AnFP.mat");
 y1 = {"anFP.subregions[1, 1, 1].gas.H2.N", "anFP.subregions[1, 1, 1].gas.H2O.N", "anFP.subregions[1, 1, 1].graphite.C.N", "anFP.subregions[1, 1, 1].graphite.'e-'.N"};
 y2 = {"anFP.subregions[1, 1, 1].gas.H2.phi[1]", "anFP.subregions[1, 1, 1].gas.H2O.phi[1]", "anFP.subregions[1, 1, 1].graphite.C.phi[1]", "anFP.subregions[1, 1, 1].graphite.'e-'.phi[1]"};
 y3 = {"anFP.subregions[1, 1, 1].gas.H2.p", "anFP.subregions[1, 1, 1].gas.H2O.p", "anFP.subregions[1, 1, 1].graphite.C.p", "anFP.subregions[1, 1, 1].graphite.'e-'.p"};

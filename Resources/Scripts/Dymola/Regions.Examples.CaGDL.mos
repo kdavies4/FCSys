@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "CaGDL.mat");
+createPlot(filename = "CaGDL.mat");
 y1 = {"caGDL.subregions[1, 1, 1].gas.H2O.N", "caGDL.subregions[1, 1, 1].gas.N2.N", "caGDL.subregions[1, 1, 1].gas.O2.N", "caGDL.subregions[1, 1, 1].graphite.C.N", "caGDL.subregions[1, 1, 1].graphite.'e-'.N"};
 y2 = {"caGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "caGDL.subregions[1, 1, 1].gas.N2.phi[1]", "caGDL.subregions[1, 1, 1].gas.O2.phi[1]", "caGDL.subregions[1, 1, 1].graphite.C.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"};
 y3 = {"caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p", "caGDL.subregions[1, 1, 1].graphite.C.p", "caGDL.subregions[1, 1, 1].graphite.'e-'.p"};

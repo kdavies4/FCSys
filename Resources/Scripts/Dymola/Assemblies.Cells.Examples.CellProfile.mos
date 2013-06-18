@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "CellProfile.mat");
+createPlot(filename = "CellProfile.mat");
 y1 = fill("", 0);
 y2 = fill("", 0);
 y3 = fill("", 0);

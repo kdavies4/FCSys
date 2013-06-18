@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "TestReaction.mat");
+createPlot(filename = "TestReaction.mat");
 y1 = {"reaction.chemical.mu"};
 y2 = {"reaction.chemical.Ndot"};
 y3 = {"reaction.chemical.T"};

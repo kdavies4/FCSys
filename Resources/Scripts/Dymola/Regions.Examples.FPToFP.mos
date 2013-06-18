@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "FPToFP.mat");
+createPlot(filename = "FPToFP.mat");
 
 // AnFP
 y1 = {"anFP.subregions[1, 1, 1].gas.H2.N", "anFP.subregions[1, 1, 1].gas.H2O.N", "anFP.subregions[1, 1, 1].graphite.C.N", "anFP.subregions[1, 1, 1].graphite.'e-'.N"};

@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "GDLToGDL.mat");
+createPlot(filename = "GDLToGDL.mat");
 
 // AnGDL
 y1 = {"anGDL.subregions[1, 1, 1].gas.H2.N", "anGDL.subregions[1, 1, 1].gas.H2O.N", "anGDL.subregions[1, 1, 1].graphite.C.N", "anGDL.subregions[1, 1, 1].graphite.'e-'.N"};

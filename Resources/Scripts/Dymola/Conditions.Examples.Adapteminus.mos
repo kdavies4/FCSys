@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "eminusAdapt.mat");
+createPlot(filename = "eminusAdapt.mat");
 y1 = {"fixedTemperature.T", "subregion.graphite.'e-'.T", "eminusAdapt.face.graphite.'e-'.entropy.T"};
 y2 = {"subregion.graphite.'e-'.N"};
 y3 = {"subregion.graphite.'e-'.mu"};

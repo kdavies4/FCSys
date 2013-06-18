@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "FaceBC.mat");
+createPlot(filename = "FaceBC.mat");
 y1 = {"subregion.gas.H2O.T", "subregionFaceBC.gas.H2O.entropyBC.u"};
 y2 = {"subregion.gas.H2O.N"};
 y3 = {"subregion.gas.H2O.phi[1]"};

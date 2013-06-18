@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "CaFP.mat");
+createPlot(filename = "CaFP.mat");
 y1 = {"caFP.subregions[1, 1, 1].gas.H2O.N", "caFP.subregions[1, 1, 1].gas.N2.N", "caFP.subregions[1, 1, 1].gas.O2.N", "caFP.subregions[1, 1, 1].graphite.C.N", "caFP.subregions[1, 1, 1].graphite.'e-'.N"};
 y2 = {"caFP.subregions[1, 1, 1].gas.H2O.phi[1]", "caFP.subregions[1, 1, 1].gas.N2.phi[1]", "caFP.subregions[1, 1, 1].gas.O2.phi[1]", "caFP.subregions[1, 1, 1].graphite.C.phi[1]", "caFP.subregions[1, 1, 1].graphite.'e-'.phi[1]"};
 y3 = {"caFP.subregions[1, 1, 1].gas.H2O.p", "caFP.subregions[1, 1, 1].gas.N2.p", "caFP.subregions[1, 1, 1].gas.O2.p", "caFP.subregions[1, 1, 1].graphite.C.p", "caFP.subregions[1, 1, 1].graphite.'e-'.p"};

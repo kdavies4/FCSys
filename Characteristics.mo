@@ -22,31 +22,31 @@ package Characteristics
       // Property models
       PropertiesRT 'C+'(redeclare package Data =
             FCSys.Characteristics.'C+'.Graphite)
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
+        annotation (Placement(transformation(extent={{30,38},{50,58}})));
       PropertiesRT 'C19HF37O5S-'(redeclare package Data =
             FCSys.Characteristics.'C19HF37O5S-'.Ionomer)
-        annotation (Placement(transformation(extent={{30,20},{50,40}})));
+        annotation (Placement(transformation(extent={{30,26},{50,46}})));
       PropertiesRT 'e-'(redeclare package Data = FCSys.Characteristics.'e-'.Gas)
-        annotation (Placement(transformation(extent={{30,10},{50,30}})));
+        annotation (Placement(transformation(extent={{30,14},{50,34}})));
       PropertiesRT 'H+'(redeclare package Data = FCSys.Characteristics.'H+'.Gas)
-        annotation (Placement(transformation(extent={{30,0},{50,20}})));
+        annotation (Placement(transformation(extent={{30,2},{50,22}})));
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
               b_v=[1], n_v={-1,0})) "H2 as ideal gas"
-        annotation (Placement(transformation(extent={{30,-20},{50,0}})));
+        annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
-        annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-      // Note that p_H2O diverges from p in Dymola 7.4 due to the large
-      // coefficients in the second row of DataH2O.b_v, which cause numerical
+        annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
+      // Note that H2O.p diverges from p in Dymola 7.4 due to the large
+      // coefficients in the second row of H2O.Data.b_v, which cause numerical
       // errors.
       PropertiesRT H2OLiquid(redeclare package Data =
             FCSys.Characteristics.H2O.Liquid)
-        annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+        annotation (Placement(transformation(extent={{30,-46},{50,-26}})));
       PropertiesRT N2(redeclare package Data = FCSys.Characteristics.N2.Gas)
-        annotation (Placement(transformation(extent={{30,-50},{50,-30}})));
+        annotation (Placement(transformation(extent={{30,-58},{50,-38}})));
       PropertiesRT O2(redeclare package Data = FCSys.Characteristics.O2.Gas)
-        annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
+        annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
 
       // Conditions
       Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
@@ -77,97 +77,6 @@ package Characteristics
       end PropertiesRT;
 
     equation
-      connect(T, 'C+'.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,42}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(p, 'C+'.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,38}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, 'C19HF37O5S-'.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,32}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, 'C19HF37O5S-'.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,28}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, 'e-'.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,22}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, 'e-'.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,18}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, 'H+'.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,12}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, 'H+'.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, H2.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,2},{29,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, H2.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,-2},{29,-2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, H2IG.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,-8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, H2IG.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-12}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, H2O.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,-18}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, H2O.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-22}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, H2OLiquid.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,-28}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, H2OLiquid.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-32}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, N2.T) annotation (Line(
-          points={{5.55112e-16,20},{10,-40},{10,12},{29,-38}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, N2.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-42}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(T, O2.T) annotation (Line(
-          points={{5.55112e-16,20},{10,20},{10,12},{29,-48}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(p, O2.p) annotation (Line(
-          points={{5.55112e-16,-20},{20,-80},{20,8},{29,-52}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
       connect(rampTemperature.y, T) annotation (Line(
           points={{-19,20},{5.55112e-16,20}},
           color={0,0,127},
@@ -176,6 +85,98 @@ package Characteristics
           points={{-19,-20},{5.55112e-16,-20}},
           color={0,0,127},
           smooth=Smooth.None));
+
+      connect(T, 'C+'.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,50},{29,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(p, 'C+'.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,46},{29,46}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, 'C19HF37O5S-'.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,38},{29,38}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, 'C19HF37O5S-'.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,34},{29,34}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, 'e-'.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,26},{29,26}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, 'e-'.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,22},{29,22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, 'H+'.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,14},{29,14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, 'H+'.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,10},{29,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,2},{29,2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-2},{29,-2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2IG.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,-10},{29,-10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2IG.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-14},{29,-14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2O.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,-22},{29,-22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2O.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-26},{29,-26}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, H2OLiquid.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,-34},{29,-34}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, H2OLiquid.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-38},{29,-38}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, N2.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,-46},{29,-46}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, N2.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-50},{29,-50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(T, O2.T) annotation (Line(
+          points={{5.55112e-16,20},{20,20},{20,-58},{29,-58}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(p, O2.p) annotation (Line(
+          points={{5.55112e-16,-20},{10,-20},{10,-62},{29,-62}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
       annotation (
         experiment,
         Commands(file=

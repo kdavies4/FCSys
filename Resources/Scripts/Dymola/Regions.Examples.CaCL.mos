@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "CaCL.mat");
+createPlot(filename = "CaCL.mat");
 y1 = {"caCL.subregions[1, 1, 1].gas.H2O.N", "caCL.subregions[1, 1, 1].gas.N2.N", "caCL.subregions[1, 1, 1].gas.O2.N", "caCL.subregions[1, 1, 1].graphite.C.N", "caCL.subregions[1, 1, 1].graphite.'e-'.N", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.N", "caCL.subregions[1, 1, 1].ionomer.'H+'.N"};
 y2 = {"caCL.subregions[1, 1, 1].gas.H2O.phi[1]", "caCL.subregions[1, 1, 1].gas.N2.phi[1]", "caCL.subregions[1, 1, 1].gas.O2.phi[1]", "caCL.subregions[1, 1, 1].graphite.C.phi[1]", "caCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.phi[1]", "caCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"};
 y3 = {"caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p", "caCL.subregions[1, 1, 1].graphite.C.p", "caCL.subregions[1, 1, 1].graphite.'e-'.p", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.p", "caCL.subregions[1, 1, 1].ionomer.'H+'.p"};

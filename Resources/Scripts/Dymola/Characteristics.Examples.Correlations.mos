@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "Correlations.mat");
+createPlot(filename = "Correlations.mat");
 species = {"'C+'", "'C19HF37O5S-'", "'e-'", "'H+'", "H2", "H2IG", "H2O", "H2OLiquid", "N2","O2"};
 
 // Define signals.

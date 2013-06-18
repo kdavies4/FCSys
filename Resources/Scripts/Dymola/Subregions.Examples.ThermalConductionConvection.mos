@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(id = 1, filename = "ThermalConductionConvection.mat");
+createPlot(filename = "ThermalConductionConvection.mat");
 y1 = cat(1,
          {"subregion1.graphite.'C+'.T"},
          {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
