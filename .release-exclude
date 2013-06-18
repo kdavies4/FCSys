@@ -85,7 +85,7 @@ FCSys/Resources/Source/Python/fcres/examples
 WorkInProgress.mo
 FCSys/help/FCSys_WorkInProgress*.html
 FCSys/help/FCSys.WorkInProgress*.png
-Old
+old
 FCSys/Resources/*.xls
 FCSys/Resources/Source/Python/bin/killall-fcsysres.sh
 FCSys/Resources/Source/Python/bin/run-exps.py

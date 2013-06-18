@@ -31,16 +31,18 @@ status
 *.zip
 *.tar.gz
 
-# Selected directories
-/Old/
+# Generated files
 /FCSys/help/
+/FCSys/Resources/Source/Python/doc/fcres.pdf
+/FCSys/Resources/Source/Python/examples/
 build/
+/FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf
 
 # Images
-*.pdf
-*.png
-*.gif
-*.ico
+#*.pdf
+#*.png
+#*.gif
+#*.ico
 
 # Python-generated and compiled files
 MANIFEST
@@ -49,3 +51,7 @@ MANIFEST
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
 /FCSys/Test/Morris
+
+# Work in progress
+FCSys/Resources/Documentation/Systems/
+/old/
