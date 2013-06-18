@@ -2,11 +2,11 @@
 <head>
 <title>FCSys.Subregions.Species</title>
 <meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-17">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-6-18">
 <meta name="description" content="Models for single-species storage, transport, and exchange of material, translational momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -106,7 +106,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -154,7 +156,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -165,6 +169,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -198,7 +203,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -248,7 +255,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -259,6 +268,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -444,8 +454,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     is always used for material diffusion.</li>
     <li>If <code>invertEOS</code> is <code>true</code>, then the equation of state is implemented with pressure
     as a function of temperature and specific volume.  Otherwise, specific volume is a function of temperature
-    and pressure.</li>
-    </p>
+    and pressure.</li></p>
 
     <p>In the <code>faces</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the material current.
@@ -470,7 +479,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -519,7 +530,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td>Boolean</td><td>invertEOS</td><td>true</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -530,6 +543,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -662,8 +676,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     <font color="blue">final </font>start=p_IC,
     <font color="blue">final </font>fixed=false,
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Pressure&quot;</font>;
-  <font color="darkgreen">// StateSelect.never avoids dynamic state selection of this variable and others</font>
-  <font color="darkgreen">// below in Dymola 7.4.</font>
+  <font color="darkgreen">// StateSelect.never avoids dynamic state selection of this variable and</font>
+  <font color="darkgreen">// others below in Dymola 7.4.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> M(
     nominal=1e-3*U.g,
     <font color="blue">final </font>start=Data.m*N_IC,
@@ -717,8 +731,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> kappa(stateSelect=StateSelect.never) = <font color="red">Data.kappa</font>
     (T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isothermal compressibility&quot;</font>;
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Time constants (only for the axes with translational momentum included; others</font>
-  <font color="darkgreen">// are infinite)</font>
+  <font color="darkgreen">// Time constants (only for the axes with translational momentum included;</font>
+  <font color="darkgreen">// others are infinite)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_NE(
     stateSelect=StateSelect.never,
     start=U.s) = kappa*tauprime*<font color="red">exp</font>((chemical.mu - g0)/T)*T/v <font color="blue">if </font>environment.analysis
@@ -749,8 +763,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     <font color="blue">each </font>start=U.s) = <font color="red">fill</font>(N*c_v*theta/2, n_faces) ./ Lprime[cartFaces] <font color="blue">if </font>
     environment.analysis <font color="darkgreen">&quot;Time constants for thermal transport&quot;</font>;
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Peclet numbers (only for the axes with translational momentum included; others</font>
-  <font color="darkgreen">// are zero)</font>
+  <font color="darkgreen">// Peclet numbers (only for the axes with translational momentum included;</font>
+  <font color="darkgreen">// others are zero)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_N[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = eta*v*I ./
     Lprime[cartTrans] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Material Peclet numbers&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_Phi_perp[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) =
@@ -862,6 +876,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Connectors to transport material, translational momentum, and thermal energy through the boundaries&quot;</font>;
 
 <font color="darkgreen">// Geometric parameters</font>
+
 <font color="blue">protected </font>
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Length&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
@@ -1283,7 +1298,7 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:59:18 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:06:15 2013.
 </div>
 </body>
 </html>

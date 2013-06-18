@@ -2,11 +2,11 @@
 <head>
 <title>FCSys.Regions.AnFPs</title>
 <meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-17">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-6-18">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -97,7 +97,9 @@ text layer of this model.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -114,7 +116,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -127,6 +131,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -171,8 +176,8 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
   <font color="darkgreen">// regarding the settings of k for each phase.</font>
 
-  <font color="darkgreen">// TODO:  Find a better solution for liquid.H2O.V_IC than Modelica.Constants.eps</font>
-  <font color="darkgreen">// and apply it to other layers too.</font>
+  <font color="darkgreen">// TODO:  Find a better solution for liquid.H2O.V_IC than</font>
+  <font color="darkgreen">// Modelica.Constants.eps and apply it to other layers too.</font>
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.1 <font color="darkgreen">
     &quot;Volumetric porosity (&epsilon;)&quot;</font>;
@@ -213,13 +218,15 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">//     1000                       606        1/25.4    611        1/25.4     602        1/24.2    606        1/24.7</font>
 
   <font color="darkgreen">// Electrical resistivities:</font>
-  <font color="darkgreen">//     Aluminium (http://en.wikipedia.org/wiki/Electrical_resistivity, 2008):</font>
+  <font color="darkgreen">//     Aluminium</font>
+  <font color="darkgreen">//     (http://en.wikipedia.org/wiki/Electrical_resistivity, 2008):</font>
   <font color="darkgreen">//         2.82e-8 ohm.m</font>
   <font color="darkgreen">//     Graphite (http://hypertextbook.com/facts/2004/AfricaBelgrave.shtml):</font>
   <font color="darkgreen">//         7.837e-6 to 41e-6 ohm.m</font>
   <font color="darkgreen">//     Copper (http://en.wikipedia.org/wiki/Electrical_resistivity, 2008):</font>
   <font color="darkgreen">//         1.72e-8 ohm.m</font>
-  <font color="darkgreen">//     Stainless steel AISI 304 (http://hypertextbook.com/facts/2006/UmranUgur.shtml, 2008):</font>
+  <font color="darkgreen">//     Stainless steel AISI 304</font>
+  <font color="darkgreen">//     (http://hypertextbook.com/facts/2006/UmranUgur.shtml, 2008):</font>
   <font color="darkgreen">//         6.897e-7 ohm.m</font>
 
 <font color="blue">end </font>AnFP;
@@ -235,13 +242,13 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
 <p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
-of the GM-compatible <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a>,
-<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Current collector plate.pdf">current collector plate</a>,
+of the GM-compatible <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a>,
+<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf">current collector plate</a>,
  and end plate combined.  The material properties are those of epoxy-filled
 graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
 <li>The y-axis length of this region is the length of the double-serpentine flow channels of the
 GM-compatible
-anode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
+anode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
 <li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
 (50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
 <li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
@@ -260,7 +267,9 @@ Entegris/Poco Graphite AXF-5Q as well
     <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> (Anode flow plate).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -274,7 +283,9 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -286,6 +297,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -305,7 +317,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:57:54 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:04:52 2013.
 </div>
 </body>
 </html>

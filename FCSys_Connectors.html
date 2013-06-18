@@ -2,11 +2,11 @@
 <head>
 <title>FCSys.Connectors</title>
 <meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-17">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-6-18">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -268,14 +268,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for advection or diffusion of translational momentum).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -290,6 +294,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot_D</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -326,14 +331,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -344,6 +353,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td>stream <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Specific entropy-temperature product upon outflow [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -384,6 +394,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -406,6 +417,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     connector for more information.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -427,7 +439,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a> (Connector for a species of a chemical reaction).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -435,7 +449,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -447,6 +463,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
 <tr><td>stream <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Specific entropy-temperature product upon outflow [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -472,6 +489,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
     of the <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -495,7 +513,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">ThermalDiffusion</a> (Connector for diffusion of thermal energy).
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -507,6 +527,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -539,14 +560,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -555,6 +580,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">ThermalDiffusion</a></td><td>thermal</td><td>Subconnector for thermal diffusion</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -586,7 +612,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
     Please see that connector for more information.</p><p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -595,7 +623,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 <tr><td>Boolean</td><td>inclThermal</td><td>true</td><td>Include the thermal subconnector</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -606,6 +636,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">ThermalDiffusion</a></td><td>thermal</td><td>Subconnector for thermal diffusion</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -651,14 +682,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">T
   <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for advection or diffusion of translational momentum).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -671,6 +706,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -709,14 +745,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
   <p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</td></tr>
 </table>
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -725,6 +765,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_trans]</td><td>Force [l.m/T2]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -754,7 +795,9 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p>
+
 <h3>Contents</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -762,6 +805,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -786,6 +830,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <p>
 Extends from Real.
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -805,6 +850,7 @@ Extends from Real.
 <p>
 Extends from Real.
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -825,6 +871,7 @@ Extends from Real.
    of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.<p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -847,6 +894,7 @@ Extends from Real.
    of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -868,6 +916,7 @@ Extends from Real.
 <p>
 Extends from Real.
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -887,6 +936,7 @@ Extends from Real.
 <p>
 Extends from Real.
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -907,6 +957,7 @@ Extends from Real.
    of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.<p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -929,6 +980,7 @@ Extends from Real.
    of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -942,7 +994,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:59:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:06:23 2013.
 </div>
 </body>
 </html>

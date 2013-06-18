@@ -2,11 +2,11 @@
 <head>
 <title>FCSys.UsersGuide</title>
 <meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-17">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-6-18">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -103,12 +103,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         is loaded via the "FCSys/load.mos" script.
         <li>Simulate the <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
-        There are scripts in "FCSys/resources/scripts/Dymola/" to create useful plots of that model and others.
+        There are scripts in "FCSys/Resources/Scripts/Dymola/" to create useful plots of that model and others.
         The scripts should be accessible from the "Command" menu of the Modelica environment.
         For more detailed
         analysis, including spatial property distributions and vector plots,
         custom <a href="http://www.python.org">Python</a> modules are available in
-        "FCSys/resources/source/Python/" with <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/source/Python/help/index.html">documentation</a>.</li>
+        "FCSys/Resources/Source/Python/" with <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Source/Python/help/index.html">documentation</a>.</li>
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package:
@@ -184,9 +184,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
     <p>These papers describe work leading to the current <a href="index.html#FCSys">FCSys</a> package (most recent at the top):
     <ol>
-    <li>K. L. Davies, "<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>," Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    <li>K. L. Davies, "<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>," Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>," in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
-    <li>K. L. Davies, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082">Natural Unit Representation in Modelica</a>," in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
+    <li>K. L. Davies, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082">Natural Unit Representation in Modelica</a>," in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>," in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies, R. M. Moore, and G. Bender, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>," in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies and R. M. Moore, "<a href="http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1">Object-Oriented Fuel Cell Model Library</a>," <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
@@ -392,7 +392,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
     <p>Updates to this package may be available online at the
-    <a href="http://kdavies4.github.io/FCSys/">main project site</a>.
+    <a href="http://kdavies4.github.io/FCSys/">main project site</a> or the
+    <a href="https://modelica.org/libraries">Modelica libraries page</a>.
     The development page is
     <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.
     Please report any problems using the <a href="https://github.com/kdavies4/FCSys/issues">issues</a>
@@ -967,7 +968,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:54:24 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:01:49 2013.
 </div>
 </body>
 </html>

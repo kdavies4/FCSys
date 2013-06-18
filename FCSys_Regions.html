@@ -2,11 +2,11 @@
 <head>
 <title>FCSys.Regions</title>
 <meta name="title" content="Modelica fuel cell library">
-<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-6-17">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-6-18">
 <meta name="description" content="3D arrays of discrete, interconnected subregions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -101,7 +101,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -116,7 +118,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -128,6 +132,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -224,10 +229,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">if </font>n_z == 0<font color="blue"> then</font>
     <font color="red">connect</font>(zNegative, zPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
   <font color="blue">end if</font>;
-  <font color="darkgreen">// TODO:  Once primitivesVisible is supported by Modelica tools (not supported</font>
-  <font color="darkgreen">// by Dymola 7.4 or 2013 FD01), complete the icon of this model.  Until then,</font>
-  <font color="darkgreen">// the icon should be blank so that the fuel cell layer models can remain as</font>
-  <font color="darkgreen">// they are.</font>
+  <font color="darkgreen">// TODO:  Once primitivesVisible is supported by Modelica tools (not</font>
+  <font color="darkgreen">// supported by Dymola 7.4 or 2013 FD01), complete the icon of this model.</font>
+  <font color="darkgreen">// Until then, the icon should be blank so that the fuel cell layer models</font>
+  <font color="darkgreen">// can remain as they are.</font>
 <font color="blue">end </font>Region;
 </pre>
 <hr>
@@ -237,7 +242,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Base subregion model</b><p>
 <img src="images/FCSys.Regions.Region.SubregionD.png" alt="FCSys.Regions.Region.Subregion">
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -262,7 +269,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -274,6 +283,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -288,7 +298,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jun 17 15:57:39 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:04:39 2013.
 </div>
 </body>
 </html>
