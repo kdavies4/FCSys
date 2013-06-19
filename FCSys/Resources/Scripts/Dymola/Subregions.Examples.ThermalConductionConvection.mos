@@ -1,33 +1,31 @@
 // Setup
 removePlots();
 createPlot(filename = "ThermalConductionConvection.mat");
-y1 = cat(1,
-         {"subregion1.graphite.'C+'.T"},
-         {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
-         {"subregion2.graphite.'C+'.T"});
-y2 = cat(1,
-         {"subregion1.gas.N2.T"},
-         {"subregions[" + String(i) + "].gas.N2.T" for i in 1:n_x},
-         {"subregion2.gas.N2.T"});
-y3 = cat(1,
-         {"subregion1.graphite.'C+'.M"},
-         {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
-         {"subregion2.graphite.'C+'.M"});
-y4 = cat(1,
-         {"subregion1.gas.N2.N"},
-         {"subregions[" + String(i) + "].gas.N2.N" for i in 1:n_x},
-         {"subregion2.gas.N2.N"});
-y5 = cat(1,
-         {"subregion1.gas.N2.p"},
-         {"subregions[" + String(i) + "].gas.N2.p" for i in 1:n_x},
-         {"subregion2.gas.N2.p"});
-y6 = cat(1,
-         {"subregion1.gas.N2.chemical.mu"},
-         {"subregions[" + String(i) + "].gas.N2.chemical.mu" for i in 1:n_x},
-         {"subregion2.gas.N2.chemical.mu"});
-
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1=cat(1,
+             {"subregion1.graphite.'C+'.T"},
+             {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.T"}),
+    y2=cat(1,
+             {"subregion1.gas.N2.T"},
+             {"subregions[" + String(i) + "].gas.N2.T" for i in 1:n_x},
+             {"subregion2.gas.N2.T"}),
+    y3=cat(1,
+             {"subregion1.graphite.'C+'.M"},
+             {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.M"}),
+    y4=cat(1,
+             {"subregion1.gas.N2.N"},
+             {"subregions[" + String(i) + "].gas.N2.N" for i in 1:n_x},
+             {"subregion2.gas.N2.N"}),
+    y5=cat(1,
+             {"subregion1.gas.N2.p"},
+             {"subregions[" + String(i) + "].gas.N2.p" for i in 1:n_x},
+             {"subregion2.gas.N2.p"}),
+    y6=cat(1,
+             {"subregion1.gas.N2.chemical.mu"},
+             {"subregions[" + String(i) + "].gas.N2.chemical.mu" for i in 1:n_x},
+             {"subregion2.gas.N2.chemical.mu"}));
 
 createPlot(id = 4,
  position = {0, 100, 500, 400},

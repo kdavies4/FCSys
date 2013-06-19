@@ -1,16 +1,7 @@
 // Setup
 removePlots();
 createPlot(filename = "Polarization.mat");
-y1 = fill("", 0);
-y2 = fill("", 0);
-y3 = fill("", 0);
-y4 = fill("", 0);
-y5 = fill("", 0);
-y6 = fill("", 0);
-
-// Make plots.
-removePlots();
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6();
 
 createPlot(id = 1,
  position = {0, 0, 440, 650},

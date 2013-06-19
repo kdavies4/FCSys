@@ -1,12 +1,8 @@
 // Setup
 removePlots();
 createPlot(filename = "eminusAdapt.mat");
-y1 = {"fixedTemperature.T", "subregion.graphite.'e-'.T", "eminusAdapt.face.graphite.'e-'.entropy.T"};
-y2 = {"subregion.graphite.'e-'.N"};
-y3 = {"subregion.graphite.'e-'.mu"};
-y4 = {"subregion.graphite.'e-'.phi[1]"};
-y5 = fill("", 0);
-y6 = fill("", 0);
-
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"fixedTemperature.T", "subregion.graphite.'e-'.T", "eminusAdapt.face.graphite.'e-'.entropy.T"},
+    y2={"subregion.graphite.'e-'.N"},
+    y3={"subregion.graphite.'e-'.mu"},
+    y4={"subregion.graphite.'e-'.phi[1]"});

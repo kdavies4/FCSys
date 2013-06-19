@@ -11,7 +11,6 @@ package Tests "Models and functions for test and validation"
     annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
   end callAll;
 
   model RunAll
@@ -78,7 +77,6 @@ package Tests "Models and functions for test and validation"
     equation
       assert(der(S) >= 0, "Entropy may not decrease.");
       annotation (experiment(StopTime=30));
-
     end Test2Subregions;
 
   end Subregions;
@@ -707,7 +705,6 @@ package Tests "Models and functions for test and validation"
             "hasThermalExpansion failed on test 2.");
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"));
-
         end TestProperties;
 
         model c_p
@@ -736,7 +733,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end c_p;
 
         model c_v
@@ -769,7 +765,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end c_v;
 
         model dp
@@ -804,7 +799,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end dp;
 
         model p_Tv
@@ -829,7 +823,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end p_Tv;
 
         model dv
@@ -866,7 +859,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end dv;
 
         model h
@@ -891,7 +883,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end h;
 
         model zeta
@@ -913,7 +904,6 @@ package Tests "Models and functions for test and validation"
           // The fluidity is from [Incropera2002, p. 919].
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end zeta;
 
         model theta
@@ -938,7 +928,6 @@ package Tests "Models and functions for test and validation"
           // The thermal resistivity is from [Incropera2002, p. 919].
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end theta;
 
       end Characteristic;
@@ -959,7 +948,6 @@ package Tests "Models and functions for test and validation"
       annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
     end callAll;
 
     function testValues
@@ -1148,7 +1136,6 @@ package Tests "Models and functions for test and validation"
       annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
     end testValues;
 
     function testConversions
@@ -1182,7 +1169,6 @@ package Tests "Models and functions for test and validation"
       annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
     end testConversions;
 
   end Units;
@@ -1201,7 +1187,6 @@ package Tests "Models and functions for test and validation"
         annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
       end callAll;
 
       function Chemistry
@@ -1276,7 +1261,6 @@ package Tests "Models and functions for test and validation"
         annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
       end Chemistry;
 
       package Polynomial
@@ -1353,7 +1337,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end F;
 
         model dF
@@ -1388,7 +1371,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end dF;
 
         function f
@@ -1415,7 +1397,6 @@ package Tests "Models and functions for test and validation"
           annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
         end f;
 
         model df
@@ -1450,7 +1431,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end df;
 
         model d2f
@@ -1495,7 +1475,6 @@ package Tests "Models and functions for test and validation"
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-
         end d2f;
 
       end Polynomial;
@@ -1574,7 +1553,6 @@ package Tests "Models and functions for test and validation"
         annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-
       end testFunctions;
 
     end Utilities;

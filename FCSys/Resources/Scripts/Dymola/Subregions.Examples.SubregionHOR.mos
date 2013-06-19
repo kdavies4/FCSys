@@ -1,15 +1,12 @@
 // Setup
 removePlots();
 createPlot(filename = "SubregionHOR.mat");
-y1 = {"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"};
-y2 = {"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"};
-y3 = {"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"};
-y4 = {"subregion.graphite.C.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"};
-y5 = {"subregion.graphite.'e-'.mu", "subregion.ionomer.'H+'.mu", "subregion.gas.H2.mu", "subregion.reaction.chemical.mu"};
-y6 = fill("", 0);
-
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"},
+    y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},
+    y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"},
+    y4={"subregion.graphite.C.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"},
+    y5={"subregion.graphite.'e-'.mu", "subregion.ionomer.'H+'.mu", "subregion.gas.H2.mu", "subregion.reaction.chemical.mu"});
 
 createPlot(id = 4,
  position = {400, 100, 500, 400},

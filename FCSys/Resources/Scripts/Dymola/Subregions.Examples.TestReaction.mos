@@ -1,15 +1,11 @@
 // Setup
 removePlots();
 createPlot(filename = "TestReaction.mat");
-y1 = {"reaction.chemical.mu"};
-y2 = {"reaction.chemical.Ndot"};
-y3 = {"reaction.chemical.T"};
-y4 = {"layer1.inert.thermal.Qdot", "layer2.inert.thermal.Qdot"};
-y5 = fill("", 0);
-y6 = fill("", 0);
-
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"reaction.chemical.mu"},
+    y2={"reaction.chemical.Ndot"},
+    y3={"reaction.chemical.T"},
+    y4={"layer1.inert.thermal.Qdot", "layer2.inert.thermal.Qdot"})
 
 createPlot(id = 7,
  position = {300, 0, 600, 400},

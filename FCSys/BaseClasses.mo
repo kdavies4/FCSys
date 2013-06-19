@@ -95,21 +95,25 @@ package BaseClasses "Base classes (generally not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
@@ -202,27 +206,27 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,60},{100,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,60},{100,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top3;
 
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,20},{100,60}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,20},{100,60}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top1;
 
@@ -540,7 +544,6 @@ package BaseClasses "Base classes (generally not for direct use)"
   <p><b>Example:</b><br>
   <code>(symbols, coeffs) = readSpecies(\"C19HF37O5S-\")</code> returns
   <code>symbols={\"C\", \"H\", \"F\", \"O\", \"S\", \"e-\"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p></html>"));
-
       end readSpecies;
 
       function stoich
@@ -636,7 +639,6 @@ An unrelated species may be included.");
   <code>stoich({\"e-\",\"H+\",\"O2\",\"H2O\"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
-
       end stoich;
 
     end Chemistry;
@@ -666,7 +668,6 @@ An unrelated species may be included.");
   (with <code>a</code> constant)
   is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
   however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
-
       end F;
 
       function dF
@@ -749,7 +750,6 @@ An unrelated species may be included.");
 
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>().</p></html>"));
-
       end f;
 
       function df
@@ -775,7 +775,6 @@ An unrelated species may be included.");
         annotation (Documentation(info="<html>
 <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
-
       end df;
 
       function d2f
@@ -820,7 +819,6 @@ An unrelated species may be included.");
   without parsing the message given to the assert function.  This pass-through function causes the
   statement to be evaluated during initialization, at
   which point the message is evaluated.</p></html>"));
-
     end assertEval;
 
     function average "Return the arithmetic mean of numbers"
@@ -833,7 +831,6 @@ An unrelated species may be included.");
       average := sum(u)/size(u, 1) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p></html>"));
-
     end average;
 
     function cartWrap = mod1 (final den=Axis.z)
@@ -853,7 +850,6 @@ An unrelated species may be included.");
         annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
-
     end countTrue;
 
     function Delta
@@ -867,7 +863,6 @@ An unrelated species may be included.");
       Delta := u[2] - u[1] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p></html>"));
-
     end Delta;
 
     function enumerate
@@ -893,7 +888,6 @@ An unrelated species may be included.");
       end for;
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
   <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p></html>"));
-
     end enumerate;
 
     function index
@@ -919,7 +913,6 @@ An unrelated species may be included.");
 
 <p><b>Example:</b><br>
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
-
     end index;
 
     function inSign
@@ -935,7 +928,6 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
-
     end inSign;
 
     function mod1
@@ -952,8 +944,125 @@ An unrelated species may be included.");
   <code>mod1(4,3)</code> returns
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
   <code>mod</code> is the built-in modulo operator).</html>"));
-
     end mod1;
+
+    function plot6 "Create six plots"
+      input String y1[:]=fill("", 0)
+        "<html>Names of the signals for the 1<sup>st</sup> plot</html>";
+      input String y2[:]=fill("", 0)
+        "<html>Names of the signals for the 2<sup>nd</sup> plot</html>";
+      input String y3[:]=fill("", 0)
+        "<html>Names of the signals for the 3<sup>rd</sup> plot</html>";
+      input String y4[:]=fill("", 0)
+        "<html>Names of the signals for the 4<sup>th</sup> plot</html>";
+      input String y5[:]=fill("", 0)
+        "<html>Names of the signals for the 5<sup>th</sup> plot</html>";
+      input String y6[:]=fill("", 0)
+        "<html>Names of the signals for the 6<sup>th</sup> plot</html>";
+
+    algorithm
+      createPlot(
+            id=1,
+            position={0,0,440,650},
+            y=y1,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            online=false,
+            legendLocation=5,
+            legendHorizontal=false,
+            leftTitleType=1,
+            bottomTitleType=1);
+      createPlot(
+            id=1,
+            position={0,0,440,325},
+            y=y2,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            online=false,
+            legendLocation=5,
+            legendHorizontal=false,
+            subPlot=2,
+            leftTitleType=1,
+            bottomTitleType=1);
+      createPlot(
+            id=2,
+            position={450,0,440,650},
+            y=y3,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            legendLocation=5,
+            legendHorizontal=false,
+            online=false,
+            leftTitleType=1,
+            bottomTitleType=1);
+      createPlot(
+            id=2,
+            position={450,0,440,325},
+            y=y4,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            legendLocation=5,
+            legendHorizontal=false,
+            online=false,
+            subPlot=2,
+            leftTitleType=1,
+            bottomTitleType=1);
+      createPlot(
+            id=3,
+            position={900,0,440,650},
+            y=y5,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            legendLocation=5,
+            legendHorizontal=false,
+            online=false,
+            leftTitleType=1,
+            bottomTitleType=1);
+      createPlot(
+            id=3,
+            position={900,0,440,325},
+            y=y6,
+            erase=false,
+            autoscale=true,
+            autoerase=true,
+            autoreplot=true,
+            description=false,
+            grid=true,
+            color=true,
+            legendLocation=5,
+            legendHorizontal=false,
+            online=false,
+            subPlot=2,
+            leftTitleType=1,
+            bottomTitleType=1);
+      annotation (Documentation(info="<html><p>This function calls the <code>createPlot()</code> function in 
+    Dymola to create six plots.  It may not work with other tools.</p></html>"));
+    end plot6;
 
     function round
       "<html>Round a <code>Real</code> variable to the nearest integer</html>"
@@ -966,7 +1075,6 @@ An unrelated species may be included.");
       y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
-
     end round;
 
     function Sigma
@@ -981,7 +1089,6 @@ An unrelated species may be included.");
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
-
     end Sigma;
 
   end Utilities;

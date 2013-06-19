@@ -1,15 +1,13 @@
 // Setup
 removePlots();
 createPlot(filename = "CaCL.mat");
-y1 = {"caCL.subregions[1, 1, 1].gas.H2O.N", "caCL.subregions[1, 1, 1].gas.N2.N", "caCL.subregions[1, 1, 1].gas.O2.N", "caCL.subregions[1, 1, 1].graphite.C.N", "caCL.subregions[1, 1, 1].graphite.'e-'.N", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.N", "caCL.subregions[1, 1, 1].ionomer.'H+'.N"};
-y2 = {"caCL.subregions[1, 1, 1].gas.H2O.phi[1]", "caCL.subregions[1, 1, 1].gas.N2.phi[1]", "caCL.subregions[1, 1, 1].gas.O2.phi[1]", "caCL.subregions[1, 1, 1].graphite.C.phi[1]", "caCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.phi[1]", "caCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"};
-y3 = {"caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p", "caCL.subregions[1, 1, 1].graphite.C.p", "caCL.subregions[1, 1, 1].graphite.'e-'.p", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.p", "caCL.subregions[1, 1, 1].ionomer.'H+'.p"};
-y4 = {"caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T", "caCL.subregions[1, 1, 1].graphite.C.T", "caCL.subregions[1, 1, 1].graphite.'e-'.T", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.T", "caCL.subregions[1, 1, 1].ionomer.'H+'.T"};
-y5 = {"caCL.subregions[1, 1, 1].gas.H2O.v", "caCL.subregions[1, 1, 1].gas.N2.v", "caCL.subregions[1, 1, 1].gas.O2.v", "caCL.subregions[1, 1, 1].graphite.C.v", "caCL.subregions[1, 1, 1].graphite.'e-'.v", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.v", "caCL.subregions[1, 1, 1].ionomer.'H+'.v"};
-y6 = {"caCL.subregions[1, 1, 1].gas.H2O.mu", "caCL.subregions[1, 1, 1].gas.N2.mu", "caCL.subregions[1, 1, 1].gas.O2.mu", "caCL.subregions[1, 1, 1].graphite.C.mu", "caCL.subregions[1, 1, 1].graphite.'e-'.mu", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.mu", "caCL.subregions[1, 1, 1].ionomer.'H+'.mu"};
-
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"caCL.subregions[1, 1, 1].gas.H2O.N", "caCL.subregions[1, 1, 1].gas.N2.N", "caCL.subregions[1, 1, 1].gas.O2.N", "caCL.subregions[1, 1, 1].graphite.C.N", "caCL.subregions[1, 1, 1].graphite.'e-'.N", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.N", "caCL.subregions[1, 1, 1].ionomer.'H+'.N"},
+    y2={"caCL.subregions[1, 1, 1].gas.H2O.phi[1]", "caCL.subregions[1, 1, 1].gas.N2.phi[1]", "caCL.subregions[1, 1, 1].gas.O2.phi[1]", "caCL.subregions[1, 1, 1].graphite.C.phi[1]", "caCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.phi[1]", "caCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"},
+    y3={"caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p", "caCL.subregions[1, 1, 1].graphite.C.p", "caCL.subregions[1, 1, 1].graphite.'e-'.p", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.p", "caCL.subregions[1, 1, 1].ionomer.'H+'.p"},
+    y4={"caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T", "caCL.subregions[1, 1, 1].graphite.C.T", "caCL.subregions[1, 1, 1].graphite.'e-'.T", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.T", "caCL.subregions[1, 1, 1].ionomer.'H+'.T"},
+    y5={"caCL.subregions[1, 1, 1].gas.H2O.v", "caCL.subregions[1, 1, 1].gas.N2.v", "caCL.subregions[1, 1, 1].gas.O2.v", "caCL.subregions[1, 1, 1].graphite.C.v", "caCL.subregions[1, 1, 1].graphite.'e-'.v", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.v", "caCL.subregions[1, 1, 1].ionomer.'H+'.v"},
+    y6={"caCL.subregions[1, 1, 1].gas.H2O.mu", "caCL.subregions[1, 1, 1].gas.N2.mu", "caCL.subregions[1, 1, 1].gas.O2.mu", "caCL.subregions[1, 1, 1].graphite.C.mu", "caCL.subregions[1, 1, 1].graphite.'e-'.mu", "caCL.subregions[1, 1, 1].ionomer.C19HF37O5S.mu", "caCL.subregions[1, 1, 1].ionomer.'H+'.mu"});
 
 createPlot(id = 4,
  position = {350, 100, 650, 400},

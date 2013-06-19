@@ -4,24 +4,13 @@ createPlot(filename = "Correlations.mat");
 species = {"'C+'", "'C19HF37O5S-'", "'e-'", "'H+'", "H2", "H2IG", "H2O", "H2OLiquid", "N2","O2"};
 
 // Define signals.
-y1 = {"T"};
-y2 = {"p"};
-y3 = fill("", 0);
-y4 = fill("", 0);
-y5 = fill("", 0);
-y6 = fill("", 0);
-// Make plots.
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6({"T"}, {"p"});
 
 for i in 1:size(species, 1) loop
-   // Define signals.
-   y1 = fill("", 0);
-   y2 = {species[i] + ".p_RT"};
-   y3 = {species[i] + ".v"};
-   y4 = {species[i] + ".c_v"};
-   y5 = {species[i] + ".h"};
-   y6 = {species[i] + ".s"};
-
-   // Make plots.
-   RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+   FCSys.BaseClasses.Utilities.plot6(
+       y2={species[i] + ".p_RT"},
+       y3={species[i] + ".v"},
+       y4={species[i] + ".c_v"},
+       y5={species[i] + ".h"},
+       y6={species[i] + ".s"});
 end for;

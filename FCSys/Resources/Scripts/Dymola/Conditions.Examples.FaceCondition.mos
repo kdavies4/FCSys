@@ -1,13 +1,9 @@
 // Setup
 removePlots();
 createPlot(filename = "FaceBC.mat");
-y1 = {"subregion.gas.H2O.T", "subregionFaceBC.gas.H2O.entropyBC.u"};
-y2 = {"subregion.gas.H2O.N"};
-y3 = {"subregion.gas.H2O.phi[1]"};
-y4 = fill("", 0);
-y5 = {"subregion.gas.H2O.h"};
-y6 = {"subregion.gas.H2O.mu", "subregionFaceBC.gas.H2O.materialBC.u"};
-
-// Make plots.
-removePlots();
-RunScript("FCSys/Resources/Scripts/Dymola/plot6.mos");
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"subregion.gas.H2O.T", "subregionFaceBC.gas.H2O.entropyBC.u"},
+    y2={"subregion.gas.H2O.N"},
+    y3={"subregion.gas.H2O.phi[1]"},
+    y5={"subregion.gas.H2O.h"},
+    y6={"subregion.gas.H2O.mu", "subregionFaceBC.gas.H2O.materialBC.u"});
