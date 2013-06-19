@@ -401,7 +401,6 @@ package Characteristics
 
     end Gas;
 
-
   end 'e-';
 
   package 'H+' "<html>H<sup>+</sup></html>"
@@ -454,7 +453,6 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
-
 
   end 'H+';
 

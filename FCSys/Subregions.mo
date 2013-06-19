@@ -211,7 +211,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
-
     end SubregionHOR;
 
     model SubregionORR
@@ -302,11 +301,6 @@ package Subregions
             origin={-24,0})));
 
       // **set density properly
-      annotation (
-        experiment(StopTime=1000, Tolerance=1e-06),
-        Commands(file(ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
-        Diagram(graphics));
 
     equation
       connect(negativeBC.face, subregion.xNegative) annotation (Line(
@@ -317,12 +311,17 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, positiveBC.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-1.34539e-15},{-20,
-              -1.34539e-15}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-1.34539e-15},{-20,-1.34539e-15}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (
+        experiment(StopTime=1000, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
+        Diagram(graphics));
     end SubregionORR;
 
     model SubregionPipeFlow
@@ -803,8 +802,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1106,7 +1105,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
         experimentSetupOutput);
-
     end SubregionHORReverse;
   end Examples;
 
@@ -2921,7 +2919,8 @@ package Subregions
           translational(phi(
               each stateSelect=StateSelect.prefer,
               final start=phi_IC[cartTrans],
-              final fixed={initVelX,initVelY,initVelZ}[index(inclTrans)])),
+              final fixed={if axis == Axis.x then initVelX else if axis == Axis.y
+                   then initVelY else initVelZ for axis in index(inclTrans)})),
 
           thermal(T(
               stateSelect=StateSelect.prefer,
@@ -2932,9 +2931,10 @@ package Subregions
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 origin={26.67,-13.33}), iconTransformation(extent={{-10,-10},{
                   10,10}}, origin={26,-14})));
+
         // Note:  It would be simpler to use
         // {initVelX, initVelY, initVelZ}[cartTrans] for the fixed attribute of
-        // inert.translational, but Dymola 7.4 refuses to accept it.
+        // inert.translational, but Dymola 7.4 doesn't accept it.
 
       equation
         if n_spec == 0 then
@@ -3070,9 +3070,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
@@ -3326,7 +3326,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html><p>The initial density is equal to that of C<sup>+</sup> as graphite.**implement this, copy to Correlated and Calibrated.</p>
-    
+
     <p>Assumptions:<ol>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
@@ -5026,10 +5026,22 @@ yet its condition is not defined.  Choose any condition besides None.");
         if consTrans[cartTrans[i]] == Conservation.IC then
           // Ensure that a condition is selected since the state is
           // prescribed.
-          assert(initTrans[cartTrans[i]] <> InitTranslational.None,
-            "The state for the " + {"x","y","z"}[cartTrans[i]] +
-            "-axis component of translational momentum of " + Data.formula + " is prescribed,
+          if cartTrans[i] == Axis.x then
+            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
+              "The state for the x-axis component of translational momentum of "
+               + Data.formula + " is prescribed,
 yet its condition is not defined.  Choose any condition besides None.");
+          elseif cartTrans[i] == Axis.y then
+            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
+              "The state for the y-axis component of translational momentum of "
+               + Data.formula + " is prescribed,
+yet its condition is not defined.  Choose any condition besides None.");
+          else
+            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
+              "The state for the z-axis component of translational momentum of "
+               + Data.formula + " is prescribed,
+yet its condition is not defined.  Choose any condition besides None.");
+          end if;
         elseif consTrans[cartTrans[i]] == Conservation.Dynamic then
           // Initialize since there's a time-varying state.
           if initTrans[cartTrans[i]] == InitTranslational.Velocity then
