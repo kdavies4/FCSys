@@ -12,7 +12,7 @@ top of [reST].  This directory contains:
  - [_templates](_templates) - Used by the [Sphinx] build system
 
 To build the HTML documentation, install [Sphinx] (1.0 or greater required),
-run the following command in this directory.
+run the following command in this directory:
 
     python make.py html
 
