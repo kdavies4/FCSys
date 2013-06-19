@@ -14,12 +14,11 @@ Kevin Bandy helped to develop this package.
 
 ## Installation
 
-First, download and set up [ModelicaRes].  It is hosted in the Python Package
-Index (PyPI) at http://pypi.python.org/pypi/ModelicaRes.  Follow the
-installation instructions there.
-
-Next, install FCRes by running the set up script ([setup.py](setup.py)) from the
-base folder.  On Windows, use the following command:
+First, download and set up [ModelicaRes].  It is hosted in the
+[Python Package Index (PyPI)](http://pypi.python.org/pypi/ModelicaRes).  Follow
+the installation instructions there. Next, install FCRes by running the set up
+script ([setup.py](setup.py)) from the base folder.  On Windows, use the
+following command:
 
     python setup.py install
 
@@ -37,8 +36,3 @@ http://matplotlib.org/users/customizing.html for details.
 [Modelica]: http://www.modelica.org
 [ModelicaRes]: http://kdavies4.github.io/ModelicaRes/
 [matplotlib]: http://www.matplotlib.org
-
-.. _FCSys: http://kdavies4.github.com/FCSys
-.. _Modelica: http://www.modelica.org
-.. _ModelicaRes: http://kdavies4.github.com/ModelicaRes
-.. _matplotlib: http://www.matplotlib.org
