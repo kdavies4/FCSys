@@ -10,7 +10,8 @@ FCSys.BaseClasses.Utilities.plot6(
 
 createPlot(id = 4,
  position = {400, 100, 500, 400},
- y = {"subregion.reaction.Ndot"},
+ x = {"subregion.reaction.chemical.Ndot"},
+ y = {"subregion.reaction.chemical.mu"},
  autoscale = true,
  autoerase = true,
  autoreplot = true,

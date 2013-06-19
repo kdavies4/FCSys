@@ -6,11 +6,13 @@ FCSys.BaseClasses.Utilities.plot6(
     y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},
     y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"},
     y4={"subregion.graphite.C.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"},
-    y5={"subregion.graphite.'e-'.mu", "subregion.ionomer.'H+'.mu", "subregion.gas.H2.mu", "subregion.reaction.chemical.mu"});
+    y5={"subregion.graphite.'e-'.mu", "subregion.ionomer.'H+'.mu", "subregion.gas.H2.mu", "subregion.reaction.chemical.mu"},
+    y6 = {"subregion.reaction.chemical.Ndot"});
 
 createPlot(id = 4,
  position = {400, 100, 500, 400},
- y = {"subregion.reaction.Ndot"},
+ x = {"subregion.reaction.chemical.Ndot"},
+ y = {"subregion.reaction.chemical.mu"},
  autoscale = true,
  autoerase = true,
  autoreplot = true,
