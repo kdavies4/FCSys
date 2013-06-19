@@ -5,10 +5,10 @@ FCSys.BaseClasses.Utilities.plot6(
     y1={"reaction.chemical.mu"},
     y2={"reaction.chemical.Ndot"},
     y3={"reaction.chemical.T"},
-    y4={"layer1.inert.thermal.Qdot", "layer2.inert.thermal.Qdot"})
+    y4={"depletion1.inert.thermal.Qdot", "depletion2.inert.thermal.Qdot"})
 
 createPlot(id = 7,
- position = {300, 0, 600, 400},
+ position = {900, 0, 600, 400},
  x = "reaction.chemical.Ndot",
  y = {"reaction.chemical.mu"},
  range = {0, 120.0, 0.8, -0.2},

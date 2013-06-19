@@ -23,3 +23,5 @@ for i in 1:size(species, 1) loop
        y5={"subregion." + species[i] + ".h",
              "subregion." + species[i] + ".chemical.mu"});
 end for;
+
+FCSys.BaseClasses.Utilities.plot6(y6={"R", "R_Ohm"});

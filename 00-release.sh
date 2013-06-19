@@ -1,7 +1,8 @@
 #!/bin/bash
 # Release the current state of FCSys.
 #
-# First, see 00-release.txt and run 00-make-doc.sh.  This script requires rsync.
+# First, see 00-release.txt and run FCSys/00-make-doc.sh.  This script requires
+# rsync.
 #
 # Kevin Davies, 6/18/2013
 # See:

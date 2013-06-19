@@ -11,8 +11,8 @@ top of [reST].  This directory contains:
  - [_static](_static) - Used by the [Sphinx] build system
  - [_templates](_templates) - Used by the [Sphinx] build system
 
-To build the HTML documentation, install [Sphinx] (1.0 or greater required),
-run the following command in this directory:
+To build the HTML documentation, install [Sphinx] and run the following command
+in this directory:
 
     python make.py html
 

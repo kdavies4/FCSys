@@ -2,7 +2,7 @@
 # for distribution
 #
 # This is the order of precedence for determining if a file or folder will be
-# included (top priority first):
+# included (highest priority first):
 #   1. The files and folders in .release-include are included.
 #   2. The files and folders in .release-exclude (this file) are excluded.
 #   3. By default, all files and folders are included.
@@ -13,24 +13,9 @@
 # Figures (for documentation only)
 *Figures*
 
-# HNEI data
-# (also blocked by other means, but be sure)
-FCSys/Resources/Scripts/Dymola/ValidationData.mos
-FCSys/Resources/Documentation/Regions/*.pdf
-FCSys/Test/LOOCV
-
-# Georgia Tech files
-# TODO:  Ask Chris Paredis if they can be shared, and include them.
-FCSys/Test/Morris
-
 # Built and compiled files
 build
 *.pyc
-
-# Support for MATLAB and model-predictive control (MPC)
-Resources/Source/MATLAB
-Test/MPC
-*qpOASES*
 
 # Simulation files (in case they're generated inside the library)
 dsin.txt
@@ -71,21 +56,34 @@ FCSys/Resources/Source/Python/fcres/temp_plot.png
 images/
 javascripts
 
+# Duplicate of FCRes examples
+FCSys/Resources/Source/Python/fcres/examples
+
+# HNEI data
+# (also blocked by other means, but be sure)
+FCSys/Resources/Scripts/Dymola/ValidationData.mos
+FCSys/Resources/Documentation/Regions/*.pdf
+FCSys/Test/LOOCV
+
+# Georgia Tech files
+# TODO:  Ask Chris Paredis if they can be shared, and include them.
+FCSys/Test/Morris
+
+# Support for MATLAB and model-predictive control (MPC)
+Resources/Source/MATLAB
+Test/MPC
+*qpOASES*
+
 # Other
 Install
 FCSys/Test
-
-# Systems folder (in Resources/Documentation)
-FCSys/Resources/Documentation/Systems
-
-# Duplicate of FCRes examples
-FCSys/Resources/Source/Python/fcres/examples
 
 # Work in progress
 WorkInProgress.mo
 FCSys/help/FCSys_WorkInProgress*.html
 FCSys/help/FCSys.WorkInProgress*.png
 old
+FCSys/Resources/Documentation/Systems
 FCSys/Resources/*.xls
 FCSys/Resources/Source/Python/bin/killall-fcsysres.sh
 FCSys/Resources/Source/Python/bin/run-exps.py

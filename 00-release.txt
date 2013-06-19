@@ -2,7 +2,7 @@ Steps to release the FCSys library:
 
     1.  Address the starred (**), to do (TODO), and under construction
         (UnderConstruction) items in the code (or as many as possible).
-        Run 00-list-WIP.sh to list the occurrences of those tags.
+        Run FCSys/00-list-WIP.sh to list the occurrences of those tags.
 1/29/13 KD
     2.  Test FCSys by calling FCSys.Tests.callAll() and simulating
         FCSys.Tests.RunAll.  Update and run the FCSys/Test/checks.mos and
@@ -10,28 +10,30 @@ Steps to release the FCSys library:
 1/29/13 KD
     3.  Update the embedded documentation.
 6/10/13 KD
-    4.  Update and run 00-find-unused.sh to be sure that all quantities and
+    4.  Update and run FCSys/00-find-unused.sh to be sure that all quantities
+        and
         references are used in the code.  Remove the unused quantities from
         FCSys/Resources/quantities.xls and update Quantities.mo and
         FCSys/Resources/Scripts/units.mos.  Remove the unused references from
         package.mo (FCSys.UsersGuide.References).
 6/4/13 KD
-    5.  Spellcheck the Modelica files using 00-spellcheck.sh.
+    5.  Spellcheck the Modelica files using FCSys/00-spellcheck.sh.
 6/4/13 KD
-    6.  Run 00-tidy.py to autoformat the Modelica code.
+    6.  Run FCSys/00-tidy.py to autoformat the Modelica code.
 6/5/13 KD
     7.  Delete the FCSys/help directory and recreate it using Dymola
-        (File->Export->HTML; check "Large image").  Then run the 00-make-doc.sh
-        script to apply the stylesheet, make special replacements, and update
-        the documentation for the website on the gh-pages branch.  Push the
-        gh-pages branch to origin (git push origin gh-pages).
+        (File->Export->HTML; check "Large image").  Then run the
+        FCSys/00-make-doc.sh script to apply the stylesheet, make special
+        replacements, and update the documentation for the website on the
+        gh-pages branch.  Push the gh-pages branch to origin (git push origin
+        gh-pages).
 1/29/13 KD
     8.  Use http://www.xml-sitemaps.com/ to update the sitemap.  Put it in base
         folder of the the gh-pages branch and push to origin again (git push
         origin gh-pages).  Resubmit it in Google Webmaster tools
         (https://www.google.com/webmasters/tools/sitemap-list?hl=en&siteUrl=http%3A%2F%2Fkdavies4.github.com%2FFCSys%2F#MAIN_TAB=1&CARD_TAB=-1).
 1/3/13 KD
-    9.  Add an entry to the list of revisions in package.mo.  Create and
+    9.  Add an entry to the list of revisions in FCSys/package.mo.  Create and
         include a conversion script if necessary.
     10. Commit the revisions to git.
     11. Create a git tag for the release.
