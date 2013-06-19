@@ -371,7 +371,7 @@ package Tests "Models and functions for test and validation"
           replaceable package Data = FCSys.Characteristics.H2O.Gas (
               b_v=[1],
               n_v={-1,0},
-              h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K))
+              referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)
             "Ideal gas properties w/ 0K enthalpy reference";
           parameter Q.NumberAbsolute eps=0.02 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
@@ -493,7 +493,7 @@ package Tests "Models and functions for test and validation"
             redeclare package Data = FCSys.Characteristics.N2.Gas (
                 b_v=[1],
                 n_v={-1,0},
-                h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
+                referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K),
             eps=1e-3,
             h_table={6391,8723,11640,17563,23714,30129,64810,110690}*U.J/U.mol);
 
@@ -616,7 +616,7 @@ package Tests "Models and functions for test and validation"
             redeclare package Data = FCSys.Characteristics.O2.Gas (
                 b_v=[1],
                 n_v={-1,0},
-                h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
+                referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K),
             eps=0.01,
             h_table={6404,8736,11711,17929,24523,31389,67881,116827}*U.J/U.mol);
 

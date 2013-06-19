@@ -113,9 +113,10 @@ package Subregions
 
       output Q.Potential w=subregion.reaction.chemical.mu
         "Electrochemical overpotential";
-      output Q.Current zI=-subregion.graphite.'e-'.chemical.Ndot
+      output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
-      output Q.Number zI_A=zI/U.A "Electrical current due to reaction, in A";
+      output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+        "Electrical current density, in A/cm2";
 
       extends Examples.Subregion(
         'inclC+'=true,
@@ -123,19 +124,25 @@ package Subregions
         'incle-'=true,
         'inclH+'=true,
         inclH2=true,
-        subregion(graphite('e-'(
+        subregion(
+          L={0.287*U.mm,10*U.cm,10*U.cm},
+          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
+
+          graphite(reduceTemp=false,'e-'(
               initMaterial=InitScalar.Amount,
+              consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
               initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
 
-              phi(each stateSelect=StateSelect.always))), ionomer(
-            reduceTemp=false,
-            'C19HF37O5S-'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC),
+              phi(each stateSelect=StateSelect.always))),
+          ionomer(reduceTemp=false, 'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None)),
 
-            'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None))));
+          reaction(J_0=0.5*U.A/U.cm^2)));
 
-      // **       initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
-      //        chemical(Ndot(start=0, fixed=true)),
+      //initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+      //chemical(Ndot(start=0, fixed=true))
+
       // **relax isothermal ionomer.
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
@@ -150,9 +157,9 @@ package Subregions
           'inclC+'=false,
           final 'incle-'='incle-',
           'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Current normal(
-                redeclare Modelica.Blocks.Sources.Ramp source(height=100*U.A,
-                  duration=100)))),
+              Conditions.ByConnector.Face.Single.Translational.Current normal(A
+                =subregion.A[Axis.x], redeclare Modelica.Blocks.Sources.Ramp
+                source(height=-150*U.A, duration=100)))),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
@@ -199,7 +206,7 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=200, Tolerance=1e-06),
+        experiment(StopTime=150, Tolerance=1e-06),
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
 
@@ -214,16 +221,107 @@ package Subregions
         "Electrochemical overpotential";
       output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
-      output Q.Number zI_A=zI/U.A "Electrical current due to reaction, in A";
+      output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+        "Electrical current density, in A/cm2";
 
-      extends Examples.SubregionHOR(
+      extends Examples.Subregion(
+        'inclC+'=true,
+        'inclC19HF37O5S-'=true,
+        'incle-'=true,
+        'inclH+'=true,
         inclH2=false,
         inclH2O=true,
-        inclO2=true);
-      // **Copy rather than extend.
-      annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
-              ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
+        inclO2=true,
+        subregion(
+          L={0.287*U.mm,10*U.cm,10*U.cm},
+          gas(H2O(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC),
+              O2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
+
+          graphite(reduceTemp=false,'e-'(
+              initMaterial=InitScalar.Amount,
+              consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+              initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
+
+              phi(each stateSelect=StateSelect.always))),
+          ionomer(reduceTemp=false, 'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None)),
+
+          reaction(J_0=0.5*U.A/U.cm^2)));
+
+      //initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+      //chemical(Ndot(start=0, fixed=true))
+
+      // **relax isothermal ionomer.
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2),
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
+              normal)),
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare Conditions.ByConnector.Face.Single.Material.Density
+              material(source(final y=17842.7*U.C/U.cc))))) annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2O(redeclare Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=0.1*environment.p))),
+          O2(redeclare Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=0.21*environment.p)))),
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare
+              Conditions.ByConnector.Face.Single.Translational.Current normal(A
+                =subregion.A[Axis.x], redeclare Modelica.Blocks.Sources.Ramp
+                source(height=-150*U.A, duration=100)))),
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      // **set density properly
+      annotation (
+        experiment(StopTime=1000, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
+        Diagram(graphics));
+
+    equation
+      connect(negativeBC.face, subregion.xNegative) annotation (Line(
+          points={{20,1.23436e-15},{-16,1.23436e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(subregion.xPositive, positiveBC.face) annotation (Line(
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-1.34539e-15},{-20,
+              -1.34539e-15}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
 
     end SubregionORR;
 
@@ -650,6 +748,7 @@ package Subregions
 
               rho_IC=17842.7*U.C/U.cc,
               N(stateSelect=StateSelect.always)))));
+
       // **Integrate these parameters into the model.
 
       output Q.Potential w=(subregion.graphite.'e-'.faces[1, Side.p].mPhidot[
@@ -716,7 +815,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"),
 
         experimentSetupOutput);
-
     end ElectricalConduction;
 
     model ThermalConduction "Test thermal conduction (through solid)"
@@ -914,6 +1012,102 @@ package Subregions
         Diagram(graphics));
     end TestReaction;
 
+    model SubregionHORReverse
+      "<html>Test a subregion with the hydrogen oxidation reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, and H<sub>2</sub>)</html>"
+
+      output Q.Potential w=subregion.reaction.chemical.mu
+        "Electrochemical overpotential";
+      output Q.Current zI=-subregion.graphite.'e-'.chemical.Ndot
+        "Electrical current due to reaction";
+      output Q.Number zI_A=zI/U.A "Electrical current due to reaction, in A";
+
+      extends Examples.Subregion(
+        'inclC+'=true,
+        'inclC19HF37O5S-'=true,
+        'incle-'=true,
+        'inclH+'=true,
+        inclH2=true,
+        subregion(
+          gas(H2(initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+                chemical(Ndot(start=0, fixed=true)))),
+          graphite(reduceTemp=true,'e-'(
+              initMaterial=InitScalar.Amount,
+              initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
+
+              phi(each stateSelect=StateSelect.always))),
+          ionomer(reduceTemp=false, 'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
+                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None))));
+
+      // **relax isothermal ionomer.
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(redeclare Conditions.ByConnector.Face.Single.Material.Pressure
+              material(source(y=environment.p)))),
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare
+              Conditions.ByConnector.Face.Single.Translational.Current normal(
+                redeclare Modelica.Blocks.Sources.Ramp source(height=100*U.A,
+                  duration=100)))),
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-24,0})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2),
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
+              normal)),
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare Conditions.ByConnector.Face.Single.Material.Density
+              material(source(final y=17842.7*U.C/U.cc))))) annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+      // **set density properly
+    equation
+      connect(negativeBC.face, subregion.xNegative) annotation (Line(
+          points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(subregion.xPositive, positiveBC.face) annotation (Line(
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,1.23436e-15},{20,
+              1.23436e-15}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        experiment(StopTime=200, Tolerance=1e-06),
+        Commands(file=
+              "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"),
+
+        experimentSetupOutput);
+
+    end SubregionHORReverse;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1919,8 +2113,7 @@ package Subregions
         inclTransZ=false,
         redeclare
           FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
-          material(source(y=(28.6587 + 3.239468 + 1.02532e-5)*U.V))) if inclHOR
-        "**temp"
+          material(source(y=0.0540456*U.V))) if inclHOR "**temp"
         annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
     initial equation
       assert(not (inclHOR and inclORR),
@@ -2729,6 +2922,7 @@ package Subregions
               each stateSelect=StateSelect.prefer,
               final start=phi_IC[cartTrans],
               final fixed={initVelX,initVelY,initVelZ}[index(inclTrans)])),
+
           thermal(T(
               stateSelect=StateSelect.prefer,
               final start=T_IC,
@@ -2876,9 +3070,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -3131,7 +3325,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             group="Material properties",
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
-            Documentation(info="<html><p>Assumptions:<ol>
+            Documentation(info="<html><p>The initial density is equal to that of C<sup>+</sup> as graphite.**implement this, copy to Correlated and Calibrated.</p>
+    
+    <p>Assumptions:<ol>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change would be
           governed by other configurations.</li>
     </ol></p>
@@ -3236,7 +3432,14 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
-            Documentation(info="<html><p>Assumptions:<ol>
+            Documentation(info="<html><p>The initial density corresponds to the measurement
+  by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
+  &lambda; = 12, where &lambda; is the number of
+  H<sub>2</sub>O molecules to SO<sub>3</sub>H
+  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>]. **Implement this, copy to Correlated and Calibrated</p>
+
+<p>Assumptions:<ol>
     <li>The generalized resistivities (&beta;, &zeta;, &theta;) are fixed (e.g., independent of temperature).</li>
     <li>The density of H<sup>+</sup> is equal to that of
   C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
@@ -5381,7 +5584,7 @@ yet its condition is not defined.  Choose any condition besides None.");
     extends FCSys.BaseClasses.Icons.Names.Top2;
 
     parameter Q.Area A=100*U.cm^2 "Area";
-    parameter Q.CurrentAreicAbsolute J_0=1e-2*U.A/U.cm^2
+    parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
       "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
     parameter Q.NumberAbsolute alpha(max=1) = 0.5
       "<html>Charge transfer coefficient (&alpha;)</html>";
@@ -5409,7 +5612,8 @@ yet its condition is not defined.  Choose any condition besides None.");
     0 = chemical.Qdot_A "Advected thermal energy";
     0 = chemical.Qdot_D + chemical.mu*chemical.Ndot
       "Diffused thermal energy (balances heat generation)";
-    annotation (Documentation(info="<html><p>This model establishes the rate of an electrochemical reaction
+    annotation (
+      Documentation(info="<html><p>This model establishes the rate of an electrochemical reaction
   using the Butler-Volmer equation.  It includes a static energy balance with heat generation.
   The heat is rejected to <code>chemical.Qdot_D</code>, independently of the
   thermal stream from the reactants to the products (<code>chemical.Qdot_A</code>).</p>
@@ -5417,12 +5621,14 @@ yet its condition is not defined.  Choose any condition besides None.");
     <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
     unit of catalyst surface area).</p>
 
-    <p></p></html>"), Icon(graphics={Ellipse(
+    <p></p></html>"),
+      Icon(graphics={Ellipse(
             extent={{-40,40},{40,-40}},
             lineColor={127,127,127},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}));
+            pattern=LinePattern.Dash)}),
+      Diagram(graphics));
   end Reaction;
 
   model ChemicalExchange

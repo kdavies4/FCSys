@@ -245,7 +245,7 @@ package Characteristics
         p0=U.atm,
         n_v={0,0},
         b_v=[U.cc*m/(2.2210*U.g)],
-        m=12.0107000*U.g/U.mol - 'e-'.Graphite.m,
+        m=12.0107000*U.g/U.mol - 'e-'.Gas.m,
         Deltah0_f=0*U.J/U.mol,
         Deltah0=1053.500*U.J/U.mol,
         T_lim_c={200.000,600.000,2000.000,6000.000}*U.K,
@@ -298,7 +298,7 @@ package Characteristics
         final formula="C9HF17O5S-",
         final phase=Phase.Solid,
         p0=U.atm,
-        m=1044.214*U.g/U.mol - 'H+'.Ionomer.m,
+        m=1044.214*U.g/U.mol - 'H+'.Gas.m,
         n_v={0,0},
         b_v=[U.cc*m/(2.00*U.g)],
         Deltah0_f=0,
@@ -306,8 +306,9 @@ package Characteristics
         n_c=0,
         T_lim_c={0,Modelica.Constants.inf},
         b_c=[4188*U.J*m/(U.kg*U.K)],
-        B_c=[-298.15*U.K*b_c[1, 1] + Deltah0_f, 0],
+        B_c=[Deltah0_f - 298.15*U.K*b_c[1, 1], 0],
         d=(294 + 2259.8)*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
        <p>Assumptions:
      <ol>
@@ -400,22 +401,6 @@ package Characteristics
 
     end Gas;
 
-    package Graphite "e- in graphite"
-      // **delete this?
-      extends Gas(
-        final phase=Phase.Solid,
-        n_v={0,0},
-        b_v='C+'.Graphite.b_v);
-      annotation (Documentation(info="<html>
-  <p>Assumptions:<ol>
-    <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup> as graphite.
-    </li>
-    </ol></p>
-
-     <p>For more information, see the
-     <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
-
-    end Graphite;
 
   end 'e-';
 
@@ -430,6 +415,7 @@ package Characteristics
         final m=Data.MM*U.kg/U.mol,
         b_v=[1],
         n_v={-1,0},
+        referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         n_c=-2,
@@ -439,6 +425,7 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         d=240*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -468,22 +455,6 @@ package Characteristics
 
     end Gas;
 
-    package Ionomer "H+ in ionomer"
-      // **delete this?
-      extends Gas(
-        final phase=Phase.Solid,
-        n_v={0,0},
-        b_v='C19HF37O5S-'.Ionomer.b_v);
-      annotation (Documentation(info="<html>
-  <p>The specific volume of protons corresponds to the concentration measured
-  by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
-  &lambda; = 12, where &lambda; is the number of
-  H<sub>2</sub>O molecules to SO<sub>3</sub>H
-  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>].</p>
-</html>"));
-
-    end Ionomer;
 
   end 'H+';
 
@@ -868,6 +839,8 @@ package Characteristics
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
+      constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+        "Choice of enthalpy reference";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
@@ -1018,14 +991,10 @@ package Characteristics
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-          "Choice of enthalpy reference";
         output Q.Potential g "Gibbs potential";
 
       algorithm
-        g := h( T,
-                p,
-                referenceEnthalpy) - T*s(T, p) annotation (Inline=true);
+        g := h(T, p) - T*s(T, p) annotation (Inline=true);
 
       end g;
 
@@ -1034,8 +1003,6 @@ package Characteristics
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-          "Choice of enthalpy reference";
         output Q.Potential h "Specific enthalpy";
 
       protected
