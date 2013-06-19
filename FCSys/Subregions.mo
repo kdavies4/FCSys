@@ -126,18 +126,14 @@ package Subregions
         inclH2=true,
         subregion(
           L={0.287*U.mm,10*U.cm,10*U.cm},
-          gas(H2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
-
+          gas(H2(consEnergy=Conservation.IC, consTransX=Conservation.IC)),
           graphite(reduceTemp=false,'e-'(
               initMaterial=InitScalar.Amount,
-              consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-              initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
-
+              consEnergy=Conservation.IC,
+              initTransX=InitTranslational.None,
               phi(each stateSelect=StateSelect.always))),
-          ionomer(reduceTemp=false, 'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None)),
-
+          ionomer(reduceTemp=false, 'H+'(consEnergy=Conservation.IC, initTransX
+                =InitTranslational.None)),
           reaction(J_0=0.5*U.A/U.cm^2)));
 
       //initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
@@ -216,9 +212,9 @@ package Subregions
     model SubregionORR
       "<html>Test a subregion with the oxygen reduction reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, O<sub>2</sub>, and H<sub>2</sub>O)</html>"
 
-      output Q.Potential w=subregion.reaction.chemical.mu
-        "Electrochemical overpotential";
-      output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot
+      output Q.Potential w=-subregion.reaction.chemical.mu
+        "Electrochemical potential";
+      output Q.Current zI=-subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
       output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
@@ -233,23 +229,23 @@ package Subregions
         inclO2=true,
         subregion(
           L={0.287*U.mm,10*U.cm,10*U.cm},
-          gas(H2O(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC),
-              O2(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                consTransX=FCSys.Subregions.Species.BaseClasses.Conservation.IC)),
-
+          gas(H2O(
+              consMaterial=Conservation.IC,
+              consEnergy=Conservation.IC,
+              consTransX=Conservation.IC), O2(
+              consMaterial=Conservation.IC,
+              consEnergy=Conservation.IC,
+              consTransX=Conservation.IC)),
           graphite(reduceTemp=false,'e-'(
               initMaterial=InitScalar.Amount,
-              consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-              initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
-
+              consEnergy=Conservation.IC,
+              initTransX=InitTranslational.None,
               phi(each stateSelect=StateSelect.always))),
-          ionomer(reduceTemp=false, 'H+'(consEnergy=FCSys.Subregions.Species.BaseClasses.Conservation.IC,
-                initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None)),
+          ionomer(reduceTemp=false, 'H+'(consEnergy=Conservation.IC, initTransX
+                =InitTranslational.None)),
+          reaction(J_0=1e-3*U.A/U.cm^2)));
 
-          reaction(J_0=0.5*U.A/U.cm^2)));
-
-      //initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+      //initMaterial=InitScalar.None,
       //chemical(Ndot(start=0, fixed=true))
 
       // **relax isothermal ionomer.
@@ -271,9 +267,9 @@ package Subregions
           'H+'(redeclare Conditions.ByConnector.Face.Single.Material.Density
               material(source(final y=17842.7*U.C/U.cc))))) annotation (
           Placement(transformation(
-            extent={{-10,-10},{10,10}},
+            extent={{-10,10},{10,-10}},
             rotation=270,
-            origin={24,0})));
+            origin={-24,0})));
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
         gas(
           final inclH2=inclH2,
@@ -296,32 +292,33 @@ package Subregions
           final 'inclH+'='inclH+',
           'H+'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
               normal))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
+            extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={-24,0})));
+            origin={24,0})));
 
       // **set density properly
 
     equation
       connect(negativeBC.face, subregion.xNegative) annotation (Line(
-          points={{20,1.23436e-15},{-16,1.23436e-15},{-16,6.10623e-16},{-10,
+          points={{-20,-1.34539e-15},{-18,-1.34539e-15},{-16,6.10623e-16},{-10,
               6.10623e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       connect(subregion.xPositive, positiveBC.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-1.34539e-15},{-20,-1.34539e-15}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,1.23436e-15},{20,
+              1.23436e-15}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=1000, Tolerance=1e-06),
+        experiment(StopTime=150, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
-        Diagram(graphics));
+        Diagram(graphics),
+        experimentSetupOutput);
     end SubregionORR;
 
     model SubregionPipeFlow
@@ -2113,6 +2110,13 @@ package Subregions
           FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
           material(source(y=0.0540456*U.V))) if inclHOR "**temp"
         annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+      Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow chemical2(
+        inclTransY=false,
+        inclTransZ=false,
+        redeclare
+          FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
+          material(source(y=(5.00069)*U.V))) if inclORR "**temp"
+        annotation (Placement(transformation(extent={{-90,-16},{-70,4}})));
     initial equation
       assert(not (inclHOR and inclORR),
         "The HOR and ORR cannot be included simultaneously.");
@@ -2281,6 +2285,10 @@ package Subregions
           smooth=Smooth.None));
       connect(chemical1.chemical, chemical) annotation (Line(
           points={{-82,26},{-60,26},{-60,50},{-40,50}},
+          color={255,195,38},
+          smooth=Smooth.None));
+      connect(chemical2.chemical, chemical) annotation (Line(
+          points={{-80,-10},{-60,-10},{-60,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
       annotation (Documentation(info="<html>
@@ -2973,58 +2981,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -5026,22 +5026,10 @@ yet its condition is not defined.  Choose any condition besides None.");
         if consTrans[cartTrans[i]] == Conservation.IC then
           // Ensure that a condition is selected since the state is
           // prescribed.
-          if cartTrans[i] == Axis.x then
-            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
-              "The state for the x-axis component of translational momentum of "
-               + Data.formula + " is prescribed,
+          assert(initTrans[cartTrans[i]] <> InitTranslational.None,
+            "The state for the " + {"x","y","z"}[cartTrans[i]] +
+            "-axis component of translational momentum of " + Data.formula + " is prescribed,
 yet its condition is not defined.  Choose any condition besides None.");
-          elseif cartTrans[i] == Axis.y then
-            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
-              "The state for the y-axis component of translational momentum of "
-               + Data.formula + " is prescribed,
-yet its condition is not defined.  Choose any condition besides None.");
-          else
-            assert(initTrans[cartTrans[i]] <> InitTranslational.None,
-              "The state for the z-axis component of translational momentum of "
-               + Data.formula + " is prescribed,
-yet its condition is not defined.  Choose any condition besides None.");
-          end if;
         elseif consTrans[cartTrans[i]] == Conservation.Dynamic then
           // Initialize since there's a time-varying state.
           if initTrans[cartTrans[i]] == InitTranslational.Velocity then
@@ -5101,7 +5089,14 @@ yet its condition is not defined.  Choose any condition besides None.");
         end if;
       end if;
 
+    public
+      Q.Velocity phi_actual_chemical[n_trans];
+      Q.Velocity phi_actual_physical[n_trans];
+
     equation
+      phi_actual_chemical = actualStream(chemical.phi);
+      phi_actual_physical = actualStream(physical.phi);
+
       // Aliases (only to clarify and simplify other equations)
       T = inert.thermal.T;
       p = inertDalton.p;

@@ -7,7 +7,6 @@ package BaseClasses "Base classes (generally not for direct use)"
       extends Modelica.Icons.Package;
       partial class Continuous "Icon for a continuous-time block"
         // extends Names.Middle;
-
         // This has been modified from Modelica.Blocks.Interfaces.BlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
@@ -18,7 +17,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Continuous;
 
       partial class ContinuousShort "Short icon for a continuous block"
@@ -31,7 +29,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end ContinuousShort;
 
       partial class ContinuousShortWide
@@ -45,23 +42,19 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-120,-20},{120,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end ContinuousShortWide;
 
       partial class Discrete "Icon for a discrete-time block"
         extends Names.Top5;
-
         // This has been modified from
         // Modelica.Blocks.Interfaces.DiscreteBlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,-100},{100,100}},
-                      lineColor={0,0,127},
-                      fillColor={223,223,159},
-                      fillPattern=FillPattern.Solid)}));
-
+                extent={{-100,-100},{100,100}},
+                lineColor={0,0,127},
+                fillColor={223,223,159},
+                fillPattern=FillPattern.Solid)}));
       end Discrete;
-
     end Blocks;
 
     package Conditions "Icons for conditions"
@@ -90,33 +83,26 @@ package BaseClasses "Base classes (generally not for direct use)"
                       color={0,0,0},
                       smooth=Smooth.None,
                       pattern=LinePattern.Dash)}));
-
       end Pair;
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
-
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Single;
-
     end Conditions;
 
     package Names
@@ -128,7 +114,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,240},{100,280}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top12;
 
       partial class Top11
@@ -137,7 +122,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,220},{100,260}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top11;
 
       partial class Top10
@@ -146,7 +130,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,200},{100,240}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top10;
 
       partial class Top9
@@ -155,7 +138,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,180},{100,220}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top9;
 
       partial class Top8
@@ -164,7 +146,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,160},{100,200}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top8;
 
       partial class Top7
@@ -173,7 +154,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,140},{100,180}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top7;
 
       partial class Top6
@@ -182,16 +162,14 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,120},{100,160}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top6;
 
       partial class Top5
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,100},{100,140}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
-
+                extent={{-100,100},{100,140}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top5;
 
       partial class Top4
@@ -200,7 +178,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,80},{100,120}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Top4;
 
       partial class Top3
@@ -209,25 +186,22 @@ package BaseClasses "Base classes (generally not for direct use)"
                 extent={{-100,60},{100,100}},
                 textString="%name",
                 lineColor={0,0,0})}));
-
       end Top3;
 
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
-
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,20},{100,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
-
+                      extent={{-100,20},{100,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top1;
 
       partial class Middle
@@ -236,9 +210,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
-
       end Middle;
-
     end Names;
 
     partial class Cell "Icon for a cell"
@@ -388,7 +360,6 @@ package BaseClasses "Base classes (generally not for direct use)"
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)));
-
     end Cell;
 
     partial package PackageUnderConstruction
@@ -404,26 +375,23 @@ package BaseClasses "Base classes (generally not for direct use)"
 
 <p>See also <a href=\"modelica://Modelica.Icons.UnderConstruction\">Modelica.Icons.UnderConstruction</a>.</p>
 </html>"));
-
     end PackageUnderConstruction;
-
   end Icons;
 
   package Utilities "Functions that implement useful algorithms"
     extends Modelica.Icons.Package;
-
     package Chemistry "Functions to support chemistry"
       extends Modelica.Icons.Package;
       function charge
         "Return the charge of a species given its chemical formula"
         extends Modelica.Icons.Function;
-
         input String formula "Chemical formula";
         output Integer z "Charge number";
-
       external"C";
-        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
-            Documentation(info="<html><p>This function returns the net
+        annotation (
+          IncludeDirectory="modelica://FCSys/Resources/Source/C",
+          Include="#include \"Chemistry.c\"",
+          Documentation(info="<html><p>This function returns the net
   electrical charge associated with a species represented by a chemical
   formula (<code>formula</code>).  If the charge number is
   not given explicitly in the formula, then it is assumed to be zero.  A \"+\" or \"-\" without any immediately following digits is interpreted as
@@ -433,49 +401,56 @@ package BaseClasses "Base classes (generally not for direct use)"
   <p><b>Example:</b><br>
   <code>charge(\"Hg2+2\")</code> returns 2.</p>
   </html>"));
+        // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
+        // it will be necessary to use the full
+        // path in the Include annotation, e.g.
+        //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
       end charge;
 
       function countElements
         "Return the number of elements in a chemical formula"
         extends Modelica.Icons.Function;
-
         input String formula "Chemical formula";
         output Integer n "Number of elements";
-
       external"C";
-        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
-            Documentation(info="<html><p>This function returns the number of elements
+        annotation (
+          IncludeDirectory="modelica://FCSys/Resources/Source/C",
+          Include="#include \"Chemistry.c\"",
+          Documentation(info="<html><p>This function returns the number of elements
       in a chemical formula.  Electrons are counted as a present element (or rather particle)
       if the net charge is nonzero.</p>
-
       <p><b>Examples:</b><br>
     <code>countElements(\"C19HF37O5S-\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
   <p>Please see the
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry.readElement\">readElement</a> function
   for details about the format of the chemical formula.</p></html>"));
+        // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
+        // it will be necessary to use the full
+        // path in the Include annotation, e.g.
+        //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
       end countElements;
 
       function readElement
         "Return the symbol, coefficient, and charge of an element in a chemical formula"
         extends Modelica.Icons.Function;
-
         input String formula "Chemical formula";
         output String symbol "Name of element (empty if error)";
         output Integer n "Stoichiometric coefficient";
         output Integer z "Charge number";
         output String remainder "Remainder of the chemical formula";
-
       external"C" readElement(
                 formula,
                 symbol,
                 n,
                 z,
                 remainder);
-        annotation (Include="#include <FCSys/Resources/Source/C/Chemistry.c>",
-            Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
+        annotation (
+          IncludeDirectory="modelica://FCSys/Resources/Source/C",
+          Include="#include <FCSys/FCSys/Resources/Source/C/Chemistry.c>",
+          Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
   stoichiometric coefficient (<code>n</code>), and
   electrical charge (<code>z</code>) associated with an element as it appears in a chemical
   formula (<code>formula</code>).  After any initial whitespace in the <code>formula</code> string,
@@ -495,25 +470,26 @@ package BaseClasses "Base classes (generally not for direct use)"
   <code>(symbol, n, z, remainder) = readElement(\"Hg2+2\")</code> returns
   <code>symbol=\"Hg\"</code>, <code>n=2</code>, <code>z=2</code>, and <code>remainder=\"\"</code>.</p>
   </html>"));
+        // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
+        // it will be necessary to use the full
+        // path in the Include annotation, e.g.
+        //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
       end readElement;
 
       function readSpecies
         "Return the symbols and coefficients of the elements in a chemical formula"
         extends Modelica.Icons.Function;
-
         input String formula "Chemical formula";
         output String symbols[countElements(formula)] "Symbols of the elements";
         output Integer coeffs[size(symbols, 1)] "Coefficients of the elements";
         // Note:  coeffs[countElements(formula)] would require redundant
         // computation.
-
       protected
         Integer z "Charge number";
         Integer z_net=0 "Net charge";
         Integer i=1 "Index of element";
         String f=formula "Working copy of formula";
-
       algorithm
         // Read the elements.
         while f <> "" loop
@@ -525,7 +501,6 @@ package BaseClasses "Base classes (generally not for direct use)"
             // Electrons are counted below.
           end if;
         end while;
-
         // Add electrons according to the charge.
         if z_net <> 0 then
           symbols[i] := "e-";
@@ -550,10 +525,8 @@ package BaseClasses "Base classes (generally not for direct use)"
         "Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species"
         import Modelica.Math.Matrices.singularValues;
         extends Modelica.Icons.Function;
-
         input String formulas[:] "Chemical formulas of the species";
         output Integer n[size(formulas, 1)] "Stoichiometric coefficients";
-
       protected
         Integer n_species=size(formulas, 1) "Number of species";
         Integer n_elements[n_species]=countElements(formulas)
@@ -572,7 +545,6 @@ package BaseClasses "Base classes (generally not for direct use)"
         Real minabs
           "Minimum magnitude of the unnormalized stoichiometric coefficients";
         Real elementCoeffs[n_species, n_tot] "Elementary coefficients";
-
       algorithm
         // Generate a list of all the symbols.
         for i in 1:n_species loop
@@ -581,7 +553,6 @@ package BaseClasses "Base classes (generally not for direct use)"
           allSymbols[j:j + n_elements[i] - 1] := symbols[i, 1:n_elements[i]];
           j := j + n_elements[i];
         end for;
-
         // Reduce the list to a (unique) set.
         i := 1;
         while i < n_tot loop
@@ -597,7 +568,6 @@ package BaseClasses "Base classes (generally not for direct use)"
           i := i + 1;
         end while;
         // Note:  While loops are used since the upper bound changes.
-
         // Find the elementary coefficients for each species in terms of the
         // unique list of symbols.
         elementCoeffs[:, 1:n_tot] := zeros(n_species, n_tot);
@@ -611,7 +581,6 @@ package BaseClasses "Base classes (generally not for direct use)"
             end for;
           end for;
         end for;
-
         // Perform singular value decomposition (SVD).
         assert(n_species == n_tot + 1, "The reaction is ill-posed.
 " + (if n_species > n_tot + 1 then "A species may be included more than once."
@@ -621,7 +590,6 @@ package BaseClasses "Base classes (generally not for direct use)"
                 elementCoeffs[:, 1:n_tot],
                 zeros(n_species, 1)));
         // This approach is based on [Reichert2010].
-
         // Extract the stoichiometric coefficients and normalize them.
         minabs := min(abs(u[:, end]));
         assert(minabs > 0, "The reaction is ill-posed.
@@ -640,24 +608,19 @@ An unrelated species may be included.");
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
       end stoich;
-
     end Chemistry;
 
     package Polynomial "Polynomial functions"
       extends Modelica.Icons.Package;
-
       function F
         "<html>&int;<a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
         import Modelica.Math.log;
         extends Modelica.Icons.Function;
-
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0
           "Power associated with the first term (before integral)";
-
         output Real F "Integral";
-
       algorithm
         F := f( x,
                 a .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
@@ -674,16 +637,13 @@ An unrelated species may be included.");
         "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
         import Modelica.Math.log;
         extends Modelica.Icons.Function;
-
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0
           "Power associated with the first term (before integral)";
         input Real dx "Derivative of argument";
         input Real da[size(a, 1)] "Derivatives of coefficients";
-
         output Real dF "Derivative";
-
       algorithm
         dF := f(x,
                 a,
@@ -692,27 +652,21 @@ An unrelated species may be included.");
                 da .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
             a, 1)},
                 n + 1) annotation (Inline=true);
-
       end dF;
 
       function f
         "<html>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</html>"
         extends Modelica.Icons.Function;
-
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0 "Power of the first term";
-
         output Real f "Result";
-
       protected
         function positivePoly
           "<html>Polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))</html>"
-
           input Real x "Argument";
           input Real a[:] "Coefficients";
           output Real y "Result";
-
         algorithm
           y := if size(a, 1) > 0 then x*(a[1] + (if size(a, 1) > 1 then x*(a[2]
              + (if size(a, 1) > 2 then x*(a[3] + (if size(a, 1) > 3 then x*(a[4]
@@ -729,9 +683,7 @@ An unrelated species may be included.");
           // parentheses.  The implementation here ("unrolled" only up to the 10th
           // order) allows poly() to be called from within one other function within
           // a model.
-
         end positivePoly;
-
       algorithm
         f := (if n < 0 then (if n + size(a, 1) < 0 then x^(n + size(a, 1))
            else 1)*positivePoly(1/x, a[min(size(a, 1), -n):-1:1]) else 0) + (
@@ -755,16 +707,13 @@ An unrelated species may be included.");
       function df
         "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
         extends Modelica.Icons.Function;
-
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0
           "Power associated with the first term (before derivative)";
         input Real dx "Derivative of argument";
         input Real da[size(a, 1)] "Derivatives of coefficients";
-
         output Real df "Derivative";
-
       algorithm
         df := f(x,
                 a={(n + i - 1)*a[i] for i in 1:size(a, 1)},
@@ -780,7 +729,6 @@ An unrelated species may be included.");
       function d2f
         "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>()</html>"
         extends Modelica.Icons.Function;
-
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0
@@ -789,27 +737,21 @@ An unrelated species may be included.");
         input Real da[size(a, 1)] "Derivatives of coefficients";
         input Real d2x "Second derivative of argument";
         input Real d2a[size(a, 1)] "Second derivatives of coefficients";
-
         output Real d2f "Second derivative";
-
       algorithm
         d2f := sum(f(
                 x,
                 {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[
             i]*d2x),d2a[i]},
                 n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
-
       end d2f;
-
     end Polynomial;
 
     function assertEval
       "Assert function that forces Dymola to parse the message"
       extends Modelica.Icons.Function;
-
       input Boolean condition;
       input String message;
-
     algorithm
       assert(condition, "\n" + message + "\n");
       annotation (Documentation(info="<html><p>When an assert statement is
@@ -823,10 +765,8 @@ An unrelated species may be included.");
 
     function average "Return the arithmetic mean of numbers"
       extends Modelica.Icons.Function;
-
       input Real u[:] "Vector of numbers";
       output Real average "Arithmetic mean";
-
     algorithm
       average := sum(u)/size(u, 1) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
@@ -837,14 +777,11 @@ An unrelated species may be included.");
       "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
       annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
-
     function countTrue
       "<html>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</html>"
       extends Modelica.Icons.Function;
-
       input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer n "Number of true entries";
-
     algorithm
       n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1))
         annotation (Inline=true);
@@ -855,10 +792,8 @@ An unrelated species may be included.");
     function Delta
       "<html>Return the second entry of a vector minus the first (&Delta;)</html>"
       extends Modelica.Icons.Function;
-
       input Real u[2] "Vector of size two";
       output Real Delta "Second entry minus the first entry";
-
     algorithm
       Delta := u[2] - u[1] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
@@ -868,14 +803,11 @@ An unrelated species may be included.");
     function enumerate
       "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
-
       input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer enumerated[size(u, 1)]
         "Indices of the true entries (increasing order; 0 for false entries)";
-
     protected
       Integer count "Counter variable";
-
     algorithm
       count := 1;
       for i in 1:size(u, 1) loop
@@ -893,13 +825,10 @@ An unrelated species may be included.");
     function index
       "<html>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</html>"
       extends Modelica.Icons.Function;
-
       input Boolean u[:] "<html><code>Boolean</code> array</html>";
       output Integer indices[countTrue(u)] "Indices of the true entries";
-
     protected
       Integer count "Counter variable";
-
     algorithm
       count := 1;
       for i in 1:size(u, 1) loop
@@ -918,10 +847,8 @@ An unrelated species may be included.");
     function inSign
       "Return the mathematical sign for the direction into a side or face"
       extends Modelica.Icons.Function;
-
       input Side side "Side";
       output Integer sign "Sign indicating direction along the axis";
-
     algorithm
       sign := 3 - 2*side annotation (Inline=true);
       annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
@@ -933,11 +860,9 @@ An unrelated species may be included.");
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"
       extends Modelica.Icons.Function;
-
       input Integer num "Dividend";
       input Integer den "Divisor";
       output Integer index "Remainder with 1-based indexing";
-
     algorithm
       index := mod(num - 1, den) + 1 annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Examples:</b><br>
@@ -959,7 +884,6 @@ An unrelated species may be included.");
         "<html>Names of the signals for the 5<sup>th</sup> plot</html>";
       input String y6[:]=fill("", 0)
         "<html>Names of the signals for the 6<sup>th</sup> plot</html>";
-
     algorithm
       createPlot(
             id=1,
@@ -1067,10 +991,8 @@ An unrelated species may be included.");
     function round
       "<html>Round a <code>Real</code> variable to the nearest integer</html>"
       extends Modelica.Icons.Function;
-
       input Real u "<html><code>Real</code> variable</html>";
       output Integer y "Nearest integer";
-
     algorithm
       y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
@@ -1080,17 +1002,14 @@ An unrelated species may be included.");
     function Sigma
       "<html>Return the sum of the first and second entries of a vector (&Sigma;)</html>"
       extends Modelica.Icons.Function;
-
       input Real u[2] "Vector of size two";
       output Real Sigma "Sum of the first and second entries";
-
     algorithm
       Sigma := u[1] + u[2] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
     end Sigma;
-
   end Utilities;
 
   type Axis = enumeration(
@@ -1120,5 +1039,4 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
-
 end BaseClasses;

@@ -5,6 +5,7 @@ package FCSys "Modelica fuel cell library"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -21,6 +22,7 @@ import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -377,9 +379,10 @@ package UsersGuide "User's Guide"
 
     <p><b>Acknowledgments:</b><ul>
     <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
-    <li>Technical discussions and help from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet,
-    Chris Ford, George Nelson, Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
-    <li>Source-code contributions and bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
+    <li>Technical discussions and insight from Mike Angelo, Guido Bender, Severine Busquet,
+    Chris Ford, Sebastian Herzig, Ben Lee, George Nelson, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
+    <li>Source-code contributions and bug fixes from Mohammad Ali, Kevin Bandy, Martin Sj&ouml;lund, Francois Steinmetz, and Joerg Weiss-Ungeth&uuml;m</li>
+    
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href=\"http://www.me.gatech.edu\">George W. Woodruff
@@ -936,9 +939,29 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
-  uses(Modelica(version="3.2")),
   preferedView="info",
+  version="2.0.0-alpha",
+  versionBuild=0,
+  dateModified="",
+  revisionID="",
+  uses(Modelica(version="3.2")),
+  Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
   Documentation(info="<html>
     <p><a href=\"modelica://FCSys\">FCSys</a> is an open-source library of
     declarative, dynamic, and flexible models of proton exchange membrane
@@ -1235,11 +1258,5 @@ margin-right: auto;\" class=noBorder>
         extent={{-30,32},{-24,-62}},
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
-        pattern=LinePattern.None)}),
-  Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
-  version="2.0.0-alpha",
-  versionBuild=0,
-  dateModified="",
-  revisionID="");
-
+        pattern=LinePattern.None)}));
 end FCSys;
