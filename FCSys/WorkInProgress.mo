@@ -1539,7 +1539,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <br>title({'Distribution of Random Numbers',[num2str(n),' samples']})
 <br>xlabel('Value')
 <br>ylabel('Normalized number of occurrences')
-<br>legend(['Uniform over [',num2str(x_min),', ',num2str(x_max),')'], ['Normal with \mu = ',num2str(mu),', \sigma = ',num2str(sigma)], 'Location', 'NorthEast')
+<br>legend(['Uniform over [',num2str(x_min),', ',num2str(x_max),')'], ['Normal with \\mu = ',num2str(mu),', \\sigma = ',num2str(sigma)], 'Location', 'NorthEast')
 <br>
 <br>%% Analyze results
 <br>display('Uniform Random Numbers----------')
@@ -2772,7 +2772,7 @@ This is discussed in the description of package
 <br>title({'Distribution of Random Numbers',[num2str(n),' samples']})
 <br>xlabel('Value')
 <br>ylabel('Normalized number of occurrences')
-<br>legend(['Uniform over [',num2str(x_min),', ',num2str(x_max),')'], ['Normal with \mu = ',num2str(mu),', \sigma = ',num2str(sigma)], 'Location', 'NorthEast')
+<br>legend(['Uniform over [',num2str(x_min),', ',num2str(x_max),')'], ['Normal with \\mu = ',num2str(mu),', \\sigma = ',num2str(sigma)], 'Location', 'NorthEast')
 <br>
 <br>%% Analyze results
 <br>display('Uniform Random Numbers----------')
