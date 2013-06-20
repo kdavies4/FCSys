@@ -191,17 +191,17 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,20},{100,60}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,20},{100,60}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top1;
 
       partial class Middle
@@ -772,7 +772,6 @@ An unrelated species may be included.");
   <code>arrayIntegerEqual({1,2}, {1,2})</code> returns <code>true</code>, but
   <code>arrayIntegerEqual({1,2}, {1,3})</code> and <code>arrayIntegerEqual({1,2}, {1,2,3})</code> each return false.
   </html>"));
-
     end arrayIntegerEqual;
 
     function arrayRealEqual
@@ -802,7 +801,6 @@ An unrelated species may be included.");
   <code>arrayRealEqual({1,2}, {1,2})</code> returns <code>true</code>, but
   <code>arrayRealEqual({1,2}, {1,2.001})</code> and <code>arrayRealEqual({1,2}, {1,2,3})</code> each return false.
   </html>"));
-
     end arrayRealEqual;
 
     function arrayStringEqual "Check if two string arrays are equal"
@@ -941,9 +939,6 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
     end inSign;
-
-
-
 
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"
