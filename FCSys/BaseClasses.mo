@@ -50,10 +50,10 @@ package BaseClasses "Base classes (generally not for direct use)"
         // Modelica.Blocks.Interfaces.DiscreteBlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={223,223,159},
-                fillPattern=FillPattern.Solid)}));
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={223,223,159},
+                      fillPattern=FillPattern.Solid)}));
       end Discrete;
     end Blocks;
 
@@ -167,9 +167,9 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top5
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,100},{100,140}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,100},{100,140}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top5;
 
       partial class Top4
@@ -183,9 +183,9 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,60},{100,100}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,60},{100,100}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top3;
 
       partial class Top2
@@ -747,6 +747,91 @@ An unrelated species may be included.");
       end d2f;
     end Polynomial;
 
+    function arrayIntegerEqual "Check if two arrays of integers are equal"
+      extends Modelica.Icons.Function;
+
+      input Integer u1[:] "First integer vector";
+      input Integer u2[:] "Second integer vector";
+      output Boolean equal
+        "<html><code>true</code>, if all of the entries are equal</html>";
+
+    algorithm
+      if size(u1, 1) <> size(u2, 1) then
+        equal := false;
+        return;
+      end if;
+      for i in 1:size(u1, 1) loop
+        if u1[i] <> u2[i] then
+          equal := false;
+          return;
+        end if;
+      end for;
+      equal := true;
+      return;
+      annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+  <code>arrayIntegerEqual({1,2}, {1,2})</code> returns <code>true</code>, but
+  <code>arrayIntegerEqual({1,2}, {1,3})</code> and <code>arrayIntegerEqual({1,2}, {1,2,3})</code> each return false.
+  </html>"));
+
+    end arrayIntegerEqual;
+
+    function arrayRealEqual
+      "<html>Check if two arrays of <code>Real</code> variables are essentially equal</html>"
+      extends Modelica.Icons.Function;
+
+      input Real u1[:] "First real vector";
+      input Real u2[:] "Second real vector";
+      input Real eps=1e-7 "Error tolerance";
+      output Boolean equal
+        "<html><code>true</code>, if all of the entries are equal</html>";
+
+    algorithm
+      if size(u1, 1) <> size(u2, 1) then
+        equal := false;
+        return;
+      end if;
+      for i in 1:size(u1, 1) loop
+        if abs(u1[i] - u2[i]) > eps then
+          equal := false;
+          return;
+        end if;
+      end for;
+      equal := true;
+      return;
+      annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+  <code>arrayRealEqual({1,2}, {1,2})</code> returns <code>true</code>, but
+  <code>arrayRealEqual({1,2}, {1,2.001})</code> and <code>arrayRealEqual({1,2}, {1,2,3})</code> each return false.
+  </html>"));
+
+    end arrayRealEqual;
+
+    function arrayStringEqual "Check if two string arrays are equal"
+      extends Modelica.Icons.Function;
+
+      input String u1[:] "First string vector";
+      input String u2[:] "Second string vector";
+      output Boolean equal
+        "<html><code>true</code>, if all of the entries are equal</html>";
+
+    algorithm
+      if size(u1, 1) <> size(u2, 1) then
+        equal := false;
+        return;
+      end if;
+      for i in 1:size(u1, 1) loop
+        if u1[i] <> u2[i] then
+          equal := false;
+          return;
+        end if;
+      end for;
+      equal := true;
+      return;
+      annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+  <code>arrayStringEqual({\"a\",\"bc\"}, {\"a\",\"bc\"})</code> returns <code>true</code>, but
+  <code>arrayStringEqual({\"a\",\"bc\"}, {\"a\",\"b\"})</code> and <code>arrayStringEqual({\"a\",\"b\"}, {\"a\",\"b\",\"c\"})</code> each return false.
+  </html>"));
+    end arrayStringEqual;
+
     function assertEval
       "Assert function that forces Dymola to parse the message"
       extends Modelica.Icons.Function;
@@ -856,6 +941,9 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
     end inSign;
+
+
+
 
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"
@@ -1002,6 +1090,7 @@ An unrelated species may be included.");
     function Sigma
       "<html>Return the sum of the first and second entries of a vector (&Sigma;)</html>"
       extends Modelica.Icons.Function;
+
       input Real u[2] "Vector of size two";
       output Real Sigma "Sum of the first and second entries";
     algorithm

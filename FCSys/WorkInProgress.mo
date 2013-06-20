@@ -3139,9 +3139,9 @@ This is discussed in the description of package
               thickness=0.5));
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics={Text(
-                  extent={{-100,40},{100,-40}},
-                  lineColor={0,0,255},
-                  textString="MPC")}), Diagram(coordinateSystem(
+                          extent={{-100,40},{100,-40}},
+                          lineColor={0,0,255},
+                          textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-140,-100},{140,100}}),
                 graphics));
         end MPC;
@@ -3296,9 +3296,9 @@ This is discussed in the description of package
               smooth=Smooth.None));
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics={Text(
-                  extent={{-100,40},{100,-40}},
-                  lineColor={0,0,255},
-                  textString="MPC")}), Diagram(coordinateSystem(
+                          extent={{-100,40},{100,-40}},
+                          lineColor={0,0,255},
+                          textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-80},{100,80}}),
                 graphics));
         end MPCWRej;
@@ -4445,9 +4445,8 @@ results in the following equations:
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Line(points={{-78,-42},{-52,-42},{-52,0},{
-                    -26,0},{-26,24},{-6,24},{-6,64},{18,64},{18,20},{38,20},{38,
-                    0},{44,0},{44,0},{62,0}}, color={0,0,127})}), Documentation(
-              info="<html>
+                -26,0},{-26,24},{-6,24},{-6,64},{18,64},{18,20},{38,20},{38,0},
+                {44,0},{44,0},{62,0}}, color={0,0,127})}), Documentation(info="<html>
 <p>The output is identical to the sampled input signal at sample
 time instants and holds the output at the value of the last
 sample instant during the sample points.</p>
@@ -4485,9 +4484,9 @@ sample instant during the sample points.</p>
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Line(points={{-79,-41},{-59,-33},{-40,1},{
-                    -20,9},{0,63},{21,20},{41,10},{60,20}}, color={0,0,127}),
-                Line(points={{60,19},{81,10}}, color={0,0,255})}),
-            Documentation(info="<html>
+                -20,9},{0,63},{21,20},{41,10},{60,20}}, color={0,0,127}),Line(
+                points={{60,19},{81,10}}, color={0,0,255})}), Documentation(
+              info="<html>
 <p>The output signal is the extrapolation through the
 values of the last two sampled input signals.</p>
 </html>
@@ -4575,16 +4574,14 @@ states can be set as start values of <b>x</b>.<p><p>Example:</p>
           Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={2,2}), graphics={
-              Line(points={{82,0},{-84,0}}, color={0,0,127}),
-              Text(
-                extent={{-92,92},{86,12}},
-                lineColor={0,0,127},
-                textString="b(z)"),
-              Text(
-                extent={{-90,-12},{90,-90}},
-                lineColor={0,0,127},
-                textString="a(z)")}),
+              grid={2,2}), graphics={Line(points={{82,0},{-84,0}}, color={0,0,
+                127}),Text(
+                      extent={{-92,92},{86,12}},
+                      lineColor={0,0,127},
+                      textString="b(z)"),Text(
+                      extent={{-90,-12},{90,-90}},
+                      lineColor={0,0,127},
+                      textString="a(z)")}),
           Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -4675,20 +4672,17 @@ the output y is identical to parameter yStart.</p>
         end when;
         annotation (
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}}), graphics={
-              Ellipse(
-                extent={{-25,-10},{-45,10}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{45,-10},{25,10}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-100,0},{-45,0}}, color={0,0,127}),
-              Line(points={{45,0},{100,0}}, color={0,0,127}),
-              Line(points={{-35,0},{30,35}}, color={0,0,127})}),
+                  100,100}}), graphics={Ellipse(
+                      extent={{-25,-10},{-45,10}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{45,-10},{25,10}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Line(points={{-100,0},{-45,
+                0}}, color={0,0,127}),Line(points={{45,0},{100,0}}, color={0,0,
+                127}),Line(points={{-35,0},{30,35}}, color={0,0,127})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics={Ellipse(
                       extent={{-25,-10},{-45,10}},
@@ -7225,30 +7219,25 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
   annotation (Commands(file="../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

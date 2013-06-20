@@ -1192,6 +1192,9 @@ package Tests "Models and functions for test and validation"
       function Chemistry
         "<html>Test the <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry\">Chemistry</a> package</html>"
         import FCSys.BaseClasses.Utilities.Chemistry.*;
+        import FCSys.BaseClasses.Utilities.arrayIntegerEqual;
+        import FCSys.BaseClasses.Utilities.arrayStringEqual;
+
         extends Modelica.Icons.Function;
         output Boolean ok "true, if all tests passed";
 
@@ -1203,30 +1206,19 @@ package Tests "Models and functions for test and validation"
         ok := false;
 
         // charge()
-        for i in 1:4 loop
-          assert((charge({"H2O","e-","Hg2+2",""}))[i] == {0,-1,2,0}[i],
-            "The charge function failed on entry " + String(i) + ".");
-        end for;
-        // Note:  As of Modelica 3.2 and Dymola 7.4, assert() doesn't accept
-        // vectorized equations.
+        assert(arrayIntegerEqual(charge({"H2O","e-","Hg2+2",""}), {0,-1,2,0}),
+          "The charge function failed.");
 
         // countElements()
-        for i in 1:4 loop
-          assert((countElements({"H2O","H+","C19HF37O5S-",""}))[i] == {2,2,6,0}
-            [i], "The countElements function failed on entry " + String(i) +
-            ".");
-        end for;
+        assert(arrayIntegerEqual(countElements({"H2O","H+","C19HF37O5S-",""}),
+          {2,2,6,0}), "The countElements function failed on entry.");
 
         // readSpecies()
         (strings[1:6],integers[1:6]) := readSpecies("C19HF37O5S-");
-        for i in 1:6 loop
-          assert(strings[i] == {"C","H","F","O","S","e-"}[i],
-            "The readSpecies function failed on element name of entry " +
-            String(i) + ".");
-          assert(integers[i] == {19,1,37,5,1,1}[i],
-            "The readSpecies function failed on element stoichiometric coefficient of entry "
-             + String(i) + ".");
-        end for;
+        assert(arrayStringEqual(strings[1:6], {"C","H","F","O","S","e-"}),
+          "The readSpecies function failed on the element names.");
+        assert(arrayIntegerEqual(integers[1:6], {19,1,37,5,1,1}),
+          "The readSpecies function failed on the element stoichiometric coefficients.");
 
         // readElement()
         (strings[1],integers[1],integers[2],strings[2]) := readElement("H2");
@@ -1249,14 +1241,11 @@ package Tests "Models and functions for test and validation"
           "The readElement function failed on the remainder output.");
 
         // stoich()
-        for i in 1:3 loop
-          assert((stoich({"e-","H+","H2"}))[i] == {-2,-2,1}[i],
-            "The stoich function failed on entry " + String(i) + ".");
-        end for;
-        for i in 1:4 loop
-          assert((stoich({"e-","H+","O2","H2O"}))[i] == {-4,-4,-1,2}[i],
-            "The stoich function failed on entry " + String(i) + ".");
-        end for;
+        assert(arrayIntegerEqual(stoich({"e-","H+","H2"}), {-2,-2,1}),
+          "The stoich function failed on test 1.");
+        assert(arrayIntegerEqual(stoich({"e-","H+","O2","H2O"}), {-4,-4,-1,2}),
+          "The stoich function failed on test 2.");
+
         ok := true;
         annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
@@ -1492,63 +1481,77 @@ package Tests "Models and functions for test and validation"
       algorithm
         ok := false;
 
+        // arrayIntegerEqual()
+        assert(arrayIntegerEqual({1,2}, {1,2}),
+          "The arrayIntegerEqual function failed on test 1.");
+        assert(not arrayIntegerEqual({1,2}, {1,3}),
+          "The arrayIntegerEqual function failed on test 2.");
+        assert(not arrayIntegerEqual({1,2}, {1,2,3}),
+          "The arrayIntegerEqual function failed on test 3.");
+
+        // arrayRealEqual()
+        assert(arrayRealEqual({1,2}, {1,2}),
+          "The arrayRealEqual function failed on test 1.");
+        assert(not arrayRealEqual({1,2}, {1,2.001}),
+          "The arrayRealEqual function failed on test 2.");
+        assert(not arrayRealEqual({1,2}, {1,2,3}),
+          "The arrayRealEqual function failed on test 3.");
+
+        // arrayStringEqual()
+        assert(arrayStringEqual({"a","bc"}, {"a","bc"}),
+          "The arrayStringEqual function failed on test 1.");
+        assert(not arrayStringEqual({"a","bc"}, {"a","b"}),
+          "The arrayStringEqual function failed on test 2.");
+        assert(not arrayStringEqual({"a","b"}, {"a","b","c"}),
+          "The arrayStringEqual function failed on test 3.");
+
         // average()
         assert(average({1,2,3}) == 2, "The average function failed.");
 
         // cartWrap()
-        assert(cartWrap(0) == 3, "The cartWrap function failed.");
-        assert(cartWrap(4) == 1, "The cartWrap function failed.");
+        assert(cartWrap(0) == 3, "The cartWrap function failed on test 1.");
+        assert(cartWrap(4) == 1, "The cartWrap function failed on test 2.");
 
         // countTrue()
         assert(countTrue({true,false,true}) == 2,
           "The countTrue function failed.");
 
         // Delta()
-        assert(Delta({1,2}) == 1, "The Delta function failed.");
-        for i in 1:2 loop
-          assert((Delta([1, 2; 3, 4]))[i] == 1,
-            "The Delta function failed on entry " + String(i) + ".");
-        end for;
+        assert(Delta({1,2}) == 1, "The Delta function failed on test 1.");
+        assert(arrayRealEqual(Delta([1, 2; 3, 4]), {1,1}),
+          "The Delta function failed on test 2.");
 
         // enumerate()
-        for i in 1:3 loop
-          assert((enumerate({true,false,true}))[i] == {1,0,2}[i],
-            "The enumerate function failed on entry " + String(i) + ".");
-        end for;
+        assert(arrayIntegerEqual(enumerate({true,false,true}), {1,0,2}),
+          "The enumerate function failed.");
 
         // index()
-        for i in 1:2 loop
-          assert((index({true,false,true}))[i] == {1,3}[i],
-            "The index function failed on entry " + String(i) + ".");
-        end for;
+        assert(arrayIntegerEqual(index({true,false,true}), {1,3}),
+          "The index function failed.");
 
         // inSign()
         assert(inSign(FCSys.BaseClasses.Side.n) == 1,
-          "The inSign function failed.");
+          "The inSign function failed on test 1.");
         assert(inSign(FCSys.BaseClasses.Side.p) == -1,
-          "The inSign function failed.");
+          "The inSign function failed on test 2.");
 
         // mod1()
-        assert(mod1(4, 3) == 1, "The mod1 function failed.");
-        assert(mod1(3, 3) == 3, "The mod1 function failed.");
+        assert(mod1(4, 3) == 1, "The mod1 function failed on test 1.");
+        assert(mod1(3, 3) == 3, "The mod1 function failed on test 2.");
         // Compare mod1() to mod():
         assert(mod(3, 3) == 0, "The mod function failed.");
 
         // round()
-        for i in 1:5 loop
-          assert((round({-1.6,-0.4,1.4,1.6,5}))[i] == {-2,0,1,2,5}[i],
-            "The round function failed on entry " + String(i) + ".");
-        end for;
+        assert(arrayRealEqual(round({-1.6,-0.4,1.4,1.6,5}), {-2,0,1,2,5}),
+          "The round function failed on entry.");
 
         // Sigma()
-        assert(Sigma({1,2}) == 3, "The Sigma function failed.");
-        for i in 1:2 loop
-          assert((Sigma([1, 2; 3, 4]))[i] == {3,7}[i],
-            "The Sigma function failed on entry " + String(i) + ".");
-        end for;
-
+        assert(Sigma({1,2}) == 3, "The Sigma function failed on test 1.");
+        assert(arrayRealEqual(Sigma([1, 2; 3, 4]), {3,7}),
+          "The Sigma function failed on test 2.");
         // Compare Sigma() to sum():
         assert(sum([1, 2; 3, 4]) == 10, "The sum function failed.");
+
         ok := true;
         annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
