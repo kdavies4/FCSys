@@ -111,14 +111,16 @@ package Subregions
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, and H<sub>2</sub>)</html>"
 
-      output Q.Potential w=subregion.reaction.chemical.mu
-        "Electrochemical overpotential";
+      output Q.Potential w=-subregion.reaction.chemical.mu "Reaction potential";
       output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
       output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
-      output Q.Power Edot_AE2=subregion.gas.H2.Edot_AE2 + subregion.graphite.
-          'e-'.Edot_AE2 + subregion.ionomer.'H+'.Edot_AE2 "**temp";
+      output Q.Power Qdot=subregion.graphite.'C+'.Edot_DE
+        "Rate of heat generation";
+      output Q.Power P=w*zI "Electrical power";
+      output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
+      // **Fix Qdot, P, eta
 
       extends Examples.Subregion(
         'inclC+'=true,
@@ -128,16 +130,17 @@ package Subregions
         inclH2=true,
         subregion(
           L={0.287*U.mm,10*U.cm,10*U.cm},
-          gas(H2(consTransX=Conservation.IC)),
+          gas(H2(
+              consTransX=Conservation.IC,
+              initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
+
+              chemical(Ndot(start=0, fixed=true)))),
           graphite(reduceTemp=true,'e-'(
               initMaterial=InitScalar.Amount,
               initTransX=InitTranslational.None,
               phi(each stateSelect=StateSelect.always))),
           ionomer(reduceTemp=true, 'H+'(initTransX=InitTranslational.None)),
           reaction(J_0=0.5*U.A/U.cm^2)));
-      // **relax isothermal
-      //initMaterial=FCSys.Subregions.Species.BaseClasses.InitScalar.None,
-      //chemical(Ndot(start=0, fixed=true))
 
       // **relax isothermal
 
@@ -208,6 +211,7 @@ package Subregions
 
         experimentSetupOutput,
         Diagram(graphics));
+
     end SubregionHOR;
 
     model SubregionORR
@@ -219,6 +223,11 @@ package Subregions
         "Electrical current due to reaction";
       output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
+      output Q.Power Qdot=subregion.graphite.'C+'.Edot_DE
+        "Rate of heat generation";
+      output Q.Power P=w*zI "Electrical power";
+      output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
+      // **Fix Qdot, P, eta
 
       extends Examples.Subregion(
         'inclC+'=true,
@@ -239,7 +248,8 @@ package Subregions
               initTransX=InitTranslational.None,
               phi(each stateSelect=StateSelect.always))),
           ionomer(reduceTemp=true, 'H+'(initTransX=InitTranslational.None)),
-          reaction(J_0=1e-2*U.A/U.cm^2)));
+          reaction(J_0=1e-2*U.A/U.cm^2)),
+        environment(T=350*U.K));
 
       // **initMaterial=InitScalar.None,
       //chemical(Ndot(start=0, fixed=true))
@@ -274,18 +284,22 @@ package Subregions
               material(source(y=0.1*environment.p))),
           O2(redeclare Conditions.ByConnector.Face.Single.Material.Pressure
               material(source(y=0.21*environment.p)))),
-        graphite(
-          'inclC+'=false,
-          final 'incle-'='incle-',
-          'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Current normal(A
-                =subregion.A[Axis.x], redeclare Modelica.Blocks.Sources.Ramp
-                source(height=-150*U.A, duration=100)))),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
           'H+'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal))) annotation (Placement(transformation(
+              normal)),
+        graphite(
+          final 'incle-'='incle-',
+          'e-'(redeclare
+              Conditions.ByConnector.Face.Single.Translational.Current normal(A
+                =subregion.A[Axis.x], redeclare Modelica.Blocks.Sources.Ramp
+                source(height=-150*U.A, duration=100))),
+          'inclC+'=true,
+          'C+'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Thermal.Temperature
+              thermal(source(y=environment.T))))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -313,6 +327,7 @@ package Subregions
             "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
         Diagram(graphics),
         experimentSetupOutput);
+
     end SubregionORR;
 
     model SubregionPipeFlow
@@ -705,8 +720,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
-
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -728,18 +743,17 @@ package Subregions
         'inclC+'=true,
         'incle-'=true,
         inclH2=false,
-        subregion(graphite(
+        subregion(L={U.cm,U.mm,U.mm},graphite(
             reduceTemp=true,
             'C+'(consMaterial=Conservation.IC, initMaterial=InitScalar.Pressure),
 
             'e-'(
-              initMaterial=InitScalar.Amount,
+              mu=0.1*U.mm^2/(U.V*U.s),
               initTransX=FCSys.Subregions.Species.BaseClasses.InitTranslational.None,
 
-              rho_IC=17842.7*U.C/U.cc,
-              N(stateSelect=StateSelect.always)))));
+              rho_IC=17842.7*U.C/U.cc))));
 
-      // **Integrate these parameters into the model.
+      // **Integrate the density into the model.
 
       output Q.Potential w=(subregion.graphite.'e-'.faces[1, Side.p].mPhidot[
           Orientation.normal]/subregion.graphite.'e-'.faces[1, Side.p].rho -
@@ -750,7 +764,8 @@ package Subregions
         "Electrical current";
       output Q.ResistanceElectrical R=w/zI "Electrical resistance as measured";
       output Q.ResistanceElectrical R_Ohm=subregion.graphite.'e-'.v/subregion.graphite.
-          'e-'.mu/subregion.L[Axis.x] "Electrical resistance from Ohm's law";
+          'e-'.mu*subregion.L[Axis.x]/subregion.A[Axis.x]
+        "Electrical resistance from Ohm's law";
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
         gas(
@@ -793,8 +808,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2018,7 +2033,7 @@ package Subregions
         inclTransZ=false,
         redeclare
           FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
-          material(source(y=(-0.10227 - 0.0540456)*U.V))) if inclHOR "**temp"
+          material(source(y=0*(-0.10227 - 0.0540456)*U.V))) if inclHOR "**temp"
         annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
       Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow chemical2(
         inclTransY=false,
@@ -3232,12 +3247,13 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare final parameter Q.Fluidity beta=0,
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
             redeclare parameter Q.ResistivityThermal theta=Data.theta(),
-            initMaterial=InitScalar.Density);
+            initMaterial=InitScalar.Density,
+            N(stateSelect=StateSelect.always));
 
           //    redeclare parameter Q.Mobility eta=Data.eta(),
           //    redeclare parameter Q.Fluidity beta=1e-5*Data.beta(),
           // **set rho_IC, do the same for Correlated and Calibrated.
-          // **temp factor on beta
+          // **temp factor on mu
           // add eta to other e- and H+ models.
           annotation (
             group="Material properties",
@@ -4724,10 +4740,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         *actualStream(physical.phi) - phi*phi)*Data.m/2)*physical.Ndot if
         environment.analysis
         "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
-      output Q.Power Edot_AE2(stateSelect=StateSelect.never) = (chemical.mu +
-        actualStream(chemical.sT) + (actualStream(chemical.phi)*actualStream(
-        chemical.phi))*Data.m/2)*chemical.Ndot if environment.analysis
-        "**temp Rate of energy (internal, flow, and kinetic) due to phase change and reaction";
       output Q.Power Edot_DE(stateSelect=StateSelect.never) = inert.translational.phi
         *inert.translational.mPhidot + inert.thermal.Qdot + inertDalton.phi*
         inertDalton.mPhidot + inertDalton.Qdot if environment.analysis
@@ -4741,7 +4753,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[j,
         :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)]*faces[j, :].mPhidot[
         cartWrap(cartTrans[i] - cartFaces[j] + 1)] for i in 1:n_trans) for j
-         in 1:n_faces) + 0*sum(faces.Qdot) if environment.analysis
+         in 1:n_faces) + sum(faces.Qdot) if environment.analysis
         "Rate of diffusion of energy from other subregions";
       // Note:  The structure of the problem should not change if these
       // auxiliary variables are included (hence StateSelect.never).
@@ -4872,7 +4884,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
       // Note:  Dymola 7.4 can't individually index the components of a
       // stream variable (e.g., actualStream(chemical.phi[i])), so these
-      // variables are neccessary.
+      // variables are necessary.
 
       outer Conditions.Environment environment "Environmental conditions";
 
@@ -4948,7 +4960,7 @@ yet its condition is not defined.  Choose any condition besides None.");
         end if;
       end if;
 
-      // Velocity
+      // Translational momentum
       for i in 1:n_trans loop
         if consTrans[cartTrans[i]] == Conservation.IC then
           // Ensure that a condition is selected since the state is
@@ -5243,11 +5255,11 @@ yet its condition is not defined.  Choose any condition besides None.");
         end if;
       else
         (if consEnergy == Conservation.Dynamic then (N*T*der(s) + M*phi*der(phi))
-          /U.s else 0) = (0*chemical.mu + 0*actualStream(chemical.sT) - 0*h + (
+          /U.s else 0) = (chemical.mu + actualStream(chemical.sT) - h + (
           actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
-          /2)*chemical.Ndot + (physical.mu + 0*actualStream(physical.sT) - h +
-          (actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*
-          Data.m/2)*physical.Ndot + inert.translational.phi*inert.translational.mPhidot
+          /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
+          actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*Data.m
+          /2)*physical.Ndot + inert.translational.phi*inert.translational.mPhidot
            + inert.thermal.Qdot + inertDalton.phi*inertDalton.mPhidot +
           inertDalton.Qdot + sum((Data.h(faces[i, :].T, p_faces[i, :]) - {h,h})
           *Ndot_faces[i, :] + sum((faces[i, :].phi[cartWrap(cartTrans[j] -
@@ -5256,8 +5268,6 @@ yet its condition is not defined.  Choose any condition besides None.");
           i, :].mPhidot[cartWrap(cartTrans[j] - cartFaces[i] + 1)] for j in 1:
           n_trans) for i in 1:n_faces) + sum(faces.Qdot)
           "Conservation of energy";
-        // **simplify m factor in advective exchange
-        // **temp 0s on adv exch
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",

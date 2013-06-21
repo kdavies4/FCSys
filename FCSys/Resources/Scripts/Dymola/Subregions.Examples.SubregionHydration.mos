@@ -3,12 +3,12 @@ removePlots();
 createPlot(filename = "SubregionHydration.mat");
 species = cat(1,
               if 'inclC+' then {"graphite.'C+'"} else fill("",0),
-              //if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
+              if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
               if 'incle-' then {"graphite.'e-'"} else fill("",0),
               if 'inclH+' then {"ionomer.'H+'"} else fill("",0),
               if inclH2 then {"gas.H2"} else fill("",0),
               if inclH2O then {"gas.H2O"} else fill("",0),
-              if inclH2O then {"ionomer.H2O"} else fill("",0),
+              if inclH2O then {"liquid.H2O"} else fill("",0),
               if inclN2 then {"gas.N2"} else fill("",0),
               if inclO2 then {"gas.O2"} else fill("",0));
 

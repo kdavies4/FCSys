@@ -87,21 +87,25 @@ package BaseClasses "Base classes (generally not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Single;
     end Conditions;
 
@@ -175,17 +179,17 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,80},{100,120}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,80},{100,120}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top4;
 
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,60},{100,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,60},{100,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top3;
 
       partial class Top2
@@ -973,13 +977,8 @@ An unrelated species may be included.");
             position={0,0,440,650},
             y=y1,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
-            online=false,
+            online=true,
             legendLocation=5,
             legendHorizontal=false,
             leftTitleType=1,
@@ -989,13 +988,8 @@ An unrelated species may be included.");
             position={0,0,440,325},
             y=y2,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
-            online=false,
+            online=true,
             legendLocation=5,
             legendHorizontal=false,
             subPlot=2,
@@ -1006,15 +1000,10 @@ An unrelated species may be included.");
             position={450,0,440,650},
             y=y3,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
             legendLocation=5,
             legendHorizontal=false,
-            online=false,
+            online=true,
             leftTitleType=1,
             bottomTitleType=1);
       createPlot(
@@ -1022,15 +1011,10 @@ An unrelated species may be included.");
             position={450,0,440,325},
             y=y4,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
             legendLocation=5,
             legendHorizontal=false,
-            online=false,
+            online=true,
             subPlot=2,
             leftTitleType=1,
             bottomTitleType=1);
@@ -1039,15 +1023,10 @@ An unrelated species may be included.");
             position={900,0,440,650},
             y=y5,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
             legendLocation=5,
             legendHorizontal=false,
-            online=false,
+            online=true,
             leftTitleType=1,
             bottomTitleType=1);
       createPlot(
@@ -1055,15 +1034,10 @@ An unrelated species may be included.");
             position={900,0,440,325},
             y=y6,
             erase=false,
-            autoscale=true,
-            autoerase=true,
-            autoreplot=true,
-            description=false,
             grid=true,
-            color=true,
             legendLocation=5,
             legendHorizontal=false,
-            online=false,
+            online=true,
             subPlot=2,
             leftTitleType=1,
             bottomTitleType=1);
