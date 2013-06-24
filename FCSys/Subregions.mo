@@ -111,7 +111,8 @@ package Subregions
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, and H<sub>2</sub>)</html>"
 
-      output Q.Potential w=-subregion.reaction.chemical.mu "Reaction potential";
+      output Q.Potential w=-subregion.reaction.chemical.mu/2
+        "Reaction potential";
       output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
       output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
@@ -217,7 +218,7 @@ package Subregions
     model SubregionORR
       "<html>Test a subregion with the oxygen reduction reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, O<sub>2</sub>, and H<sub>2</sub>O)</html>"
 
-      output Q.Potential w=-subregion.reaction.chemical.mu
+      output Q.Potential w=-subregion.reaction.chemical.mu/4
         "Electrochemical potential";
       output Q.Current zI=-subregion.graphite.'e-'.chemical.Ndot
         "Electrical current due to reaction";
@@ -264,7 +265,7 @@ package Subregions
           'inclC+'=false,
           final 'incle-'='incle-',
           'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal)),
+              normal(source(y=0*1e5*U.N)))),
         ionomer(
           'inclC19HF37O5S-'=false,
           final 'inclH+'='inclH+',
@@ -720,8 +721,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
-              -2.54679e-16}},
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -777,9 +778,7 @@ package Subregions
         graphite(
           'inclC+'=false,
           final 'incle-'='incle-',
-          'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Current normal(
-                source(y=U.A))))) annotation (Placement(transformation(
+          'e-'(normal(source(y=U.A))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
@@ -1546,14 +1545,6 @@ package Subregions
       replaceable Species.H2.Gas.Fixed H2(final n_faces) if inclH2
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1576,14 +1567,6 @@ package Subregions
       replaceable Species.H2O.Gas.Fixed H2O(final n_faces) if inclH2O
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1606,14 +1589,6 @@ package Subregions
       replaceable Species.N2.Gas.Fixed N2(final n_faces) if inclN2
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1636,14 +1611,6 @@ package Subregions
       replaceable Species.O2.Gas.Fixed O2(final n_faces) if inclO2
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1926,11 +1893,8 @@ package Subregions
     model Graphite "Graphite phase"
       import assert = FCSys.BaseClasses.Utilities.assertEval;
       import FCSys.BaseClasses.Utilities.countTrue;
-      extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(
-        final n_spec=countTrue({'inclC+','incle-'}),
-        initVelX=not 'inclC+',
-        initVelY=not 'inclC+',
-        initVelZ=not 'inclC+');
+      extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(final n_spec=
+            countTrue({'inclC+','incle-'}));
 
       // Conditionally include species.
       parameter Boolean 'inclC+'='incle-'
@@ -1945,8 +1909,6 @@ package Subregions
       replaceable Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if 'inclC+'
         constrainedby Species.Species(
         n_faces=n_faces,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1971,14 +1933,6 @@ package Subregions
         constrainedby Species.Species(
         n_faces=n_faces,
         initMaterial=if 'inclC+' then InitScalar.None else InitScalar.Volume,
-        initTransX=if (initVelX or 'inclC+') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initTransY=if (initVelY or 'inclC+') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initTransZ=if (initVelZ or 'inclC+') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -2028,19 +1982,12 @@ package Subregions
         choices(__Dymola_checkBox=true));
       // These can't be outer parameters in Dymola 7.4.
 
-      Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow chemical1(
-        inclTransY=false,
-        inclTransZ=false,
-        redeclare
-          FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
-          material(source(y=0*(-0.10227 - 0.0540456)*U.V))) if inclHOR "**temp"
-        annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
       Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow chemical2(
         inclTransY=false,
         inclTransZ=false,
         redeclare
           FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential
-          material(source(y=(5.00069)*U.V))) if inclORR "**temp"
+          material(source(y=0.9*(5.00069)*U.V))) if inclORR "**temp"
         annotation (Placement(transformation(extent={{-90,-16},{-70,4}})));
     initial equation
       assert(not (inclHOR and inclORR),
@@ -2208,10 +2155,6 @@ package Subregions
           points={{28,70},{28,60},{-30,60},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(chemical1.chemical, chemical) annotation (Line(
-          points={{-82,26},{-60,26},{-60,50},{-40,50}},
-          color={255,195,38},
-          smooth=Smooth.None));
       connect(chemical2.chemical, chemical) annotation (Line(
           points={{-80,-10},{-60,-10},{-60,50},{-40,50}},
           color={255,195,38},
@@ -2226,11 +2169,8 @@ package Subregions
     model Ionomer "Ionomer phase"
       import assert = FCSys.BaseClasses.Utilities.assertEval;
       import FCSys.BaseClasses.Utilities.countTrue;
-      extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(
-        final n_spec=countTrue({'inclC19HF37O5S-','inclH+',inclH2O}),
-        initVelX=not 'inclC19HF37O5S-',
-        initVelY=not 'inclC19HF37O5S-',
-        initVelZ=not 'inclC19HF37O5S-');
+      extends FCSys.Subregions.Phases.BaseClasses.EmptyPhase(final n_spec=
+            countTrue({'inclC19HF37O5S-','inclH+',inclH2O}));
 
       // Conditionally include species.
       parameter Boolean 'inclC19HF37O5S-'='inclH+'
@@ -2246,8 +2186,6 @@ package Subregions
       replaceable Species.'C19HF37O5S-'.Ionomer.Fixed 'C19HF37O5S-'(final
           n_faces) if 'inclC19HF37O5S-' constrainedby Species.Species(
         n_faces=n_faces,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -2274,14 +2212,6 @@ package Subregions
         n_faces=n_faces,
         initMaterial=if 'inclC19HF37O5S-' then InitScalar.None else InitScalar.Volume,
 
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -2305,14 +2235,6 @@ package Subregions
       replaceable Species.H2O.Ionomer.Fixed H2O(final n_faces) if inclH2O
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if (initVelX or 'inclC19HF37O5S-') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initTransY=if (initVelY or 'inclC19HF37O5S-') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initTransZ=if (initVelZ or 'inclC19HF37O5S-') and reduceVel then
-            InitTranslational.None else InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -2617,14 +2539,6 @@ package Subregions
       replaceable Species.H2O.Liquid.Fixed H2O(final n_faces) if inclH2O
         constrainedby Species.Species(
         n_faces=n_faces,
-        initTransX=if initVelX and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransY=if initVelY and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
-            InitTranslational.Velocity,
-        initEnergy=if initTemp and reduceTemp then InitScalar.None else
-            InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
         T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -2731,55 +2645,6 @@ package Subregions
           annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
               __Dymola_checkBox=true));
 
-        // Initialization
-        parameter Boolean initVelX=true if n_spec > 0
-          "Initialize the x component" annotation (
-          compact=true,
-          Dialog(
-            tab="Initialization",
-            group="Velocity",
-            enable=reduceVel),
-          __Dymola_joinNext=true,
-          choices(__Dymola_checkBox=true));
-        parameter Boolean initVelY=true if n_spec > 0
-          "Initialize the y component" annotation (
-          compact=true,
-          Dialog(
-            tab="Initialization",
-            group="Velocity",
-            enable=reduceVel),
-          __Dymola_joinNext=true,
-          choices(__Dymola_checkBox=true));
-        parameter Boolean initVelZ=true if n_spec > 0
-          "Initialize the z component" annotation (
-          compact=true,
-          Dialog(
-            tab="Initialization",
-            group="Velocity",
-            enable=reduceVel),
-          __Dymola_joinNext=true,
-          choices(__Dymola_checkBox=true));
-        parameter Q.Velocity phi_IC[Axis]={0,0,0} if n_spec > 0
-          "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
-          annotation (Dialog(
-            tab="Initialization",
-            group="Velocity",
-            enable=reduceVel));
-        parameter Boolean initTemp=true if n_spec > 0 "Initialize" annotation (
-          compact=true,
-          Dialog(
-            tab="Initialization",
-            group="Temperature",
-            enable=reduceTemp),
-          choices(__Dymola_checkBox=true));
-        parameter Q.TemperatureAbsolute T_IC(nominal=300*U.K, start=environment.T)
-          if n_spec > 0
-          "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
-          annotation (Dialog(
-            tab="Initialization",
-            group="Temperature",
-            enable=reduceTemp));
-
         Connectors.InertDalton inertDalton(final n_trans=n_trans) annotation (
             Placement(transformation(extent={{3.33,-36.67},{23.33,-16.67}}),
               iconTransformation(extent={{70,-90},{90,-70}})));
@@ -2849,25 +2714,13 @@ package Subregions
           final n_trans=n_trans,
           final inclTranslational=reduceVel,
           final inclThermal=reduceTemp,
-          translational(phi(
-              each stateSelect=StateSelect.prefer,
-              final start=phi_IC[cartTrans],
-              final fixed={if axis == Axis.x then initVelX else if axis == Axis.y
-                   then initVelY else initVelZ for axis in index(inclTrans)})),
-
-          thermal(T(
-              stateSelect=StateSelect.prefer,
-              final start=T_IC,
-              final fixed=initTemp))) if n_spec > 0 and (reduceVel or
-          reduceTemp)
+          translational(phi(each stateSelect=StateSelect.prefer)),
+          thermal(T(stateSelect=StateSelect.prefer))) if n_spec > 0 and (
+          reduceVel or reduceTemp)
           "Internal connector to directly couple velocities and/or temperatures"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 origin={26.67,-13.33}), iconTransformation(extent={{-10,-10},{
                   10,10}}, origin={26,-14})));
-
-        // Note:  It would be simpler to use
-        // {initVelX, initVelY, initVelZ}[cartTrans] for the fixed attribute of
-        // inert.translational, but Dymola 7.4 doesn't accept it.
 
       equation
         if n_spec == 0 then
@@ -2878,15 +2731,7 @@ package Subregions
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="phase",
-          Documentation(info="<html><p>If one of the species has <code>consEnergy = Conservation.IC</code> and
-    <code>reduceTemp</code> is <code>true</code>, then
-    <code>initTemp</code> should be set to <code>false</code>.
-    Likewise, if one of the species has <code>consTransX = Conservation.IC</code>,
-    <code>consTransY = Conservation.IC</code>, or <code>consTransZ = Conservation.IC</code>, then
-    <code>initVelX</code> and <code>reduceVel</code> is <code>true</code>, <code>initVelY</code>, or <code>initVelZ</code> should
-    be set to <code>false</code> (respectively).</p>
-
-    <p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
+          Documentation(info="<html><p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
     the transport coefficients (&beta;, &zeta;, &eta;, and &theta;) of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.</p>
