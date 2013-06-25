@@ -394,8 +394,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model AnFP "Test the anode flow plate"
       import FCSys.Subregions.Phases;
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
         annotation (Dialog(group="Geometry"));
@@ -414,41 +412,51 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(thermal(source(y=environment.T)))))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC1[n_y, n_z](each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          'C+'(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          'e-'(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-84,0})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2[n_y, n_z](each
-          gas(
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC2[n_y, n_z](
+        each gas(
           inclH2=true,
           inclH2O=true,
-          H2(thermal(source(y=environment.T))),
-          H2O(thermal(source(y=environment.T)))), each graphite('incle-'=true,
-            'e-'(thermal(source(y=environment.T)), redeclare
+          H2(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material)),
+        each graphite('incle-'=true, 'e-'(
+            thermal(source(y=environment.T)),
+            redeclare FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material,
+            redeclare
               FCSys.Conditions.ByConnector.Face.Single.Translational.Force
-              normal))) annotation (Placement(transformation(
+              normal)),
+        each liquid(inclH2O=true,H2O(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material, thermal(source(y=environment.T))))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC3[anFP.n_x, n_z](
-          each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(thermal(source(y=environment.T))),
-          H2O(thermal(source(y=environment.T))))) annotation (Placement(
+          each gas(inclH2=true, inclH2O=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-60,-24})));
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC4[anFP.n_x, n_z](
-          each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(thermal(source(y=environment.T))),
-          H2O(thermal(source(y=environment.T))))) annotation (Placement(
+          each gas(inclH2=true, inclH2O=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -478,15 +486,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={253,52,56},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
-              ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
+      annotation (
+        experiment(Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"),
+        experimentSetupOutput,
+        Diagram(graphics));
     end AnFP;
 
     model AnGDL "Test the anode gas diffusion layer"
       import FCSys.Subregions.Phases;
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
 
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
@@ -506,50 +516,60 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1[n_y, n_z](each
-          gas(
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC1[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
-          H2(thermal(source(k=environment.T))),
-          H2O(thermal(source(k=environment.T)))), each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(thermal(source(k=environment.T))),
-          'e-'(thermal(source(k=environment.T))))) annotation (Placement(
-            transformation(
+          H2(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material)), each graphite('incle-'=true, 'e-'(thermal(source(y=
+                    environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-64,0})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2[n_y, n_z](each
-          gas(
+      Conditions.ByConnector.FaceBus.Single.FaceBus BC2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
-          H2(thermal(source(k=environment.T))),
-          H2O(thermal(source(k=environment.T)))), each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(thermal(source(k=environment.T))),
-          'e-'(thermal(source(k=environment.T))))) annotation (Placement(
-            transformation(
+          H2(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material),
+          H2O(thermal(source(y=environment.T)), redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material)), each graphite('incle-'=true, 'e-'(
+            thermal(source(y=environment.T)),
+            redeclare FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material,
+            redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-16,0})));
-
     equation
+
       connect(BC1.face, anGDL.xNegative) annotation (Line(
-          points={{-60,3.65701e-16},{-60,6.10623e-16},{-50,6.10623e-16}},
-          color={253,52,56},
+          points={{-60,3.65701e-16},{-56,3.65701e-16},{-56,6.10623e-16},{-50,
+              6.10623e-16}},
+          color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       connect(anGDL.xPositive, BC2.face) annotation (Line(
-          points={{-30,6.10623e-16},{-20,6.10623e-16},{-20,1.23436e-15}},
-          color={253,52,56},
+          points={{-30,6.10623e-16},{-26,6.10623e-16},{-26,1.23436e-15},{-20,
+              1.23436e-15}},
+          color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
-              ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
+
+      annotation (
+        experiment(Tolerance=1e-06, StopTime=10),
+        Commands(file(ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"),
+        Diagram(graphics));
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -623,7 +643,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=0.7,
           NumberOfIntervals=5000,
@@ -774,7 +794,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=500,
           Tolerance=1e-06,
@@ -960,62 +980,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
-    model AnFPAlone "Test the anode flow plate"
-      import FCSys.Subregions.Phases;
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.Conditions.Environment environment(
-        p=149.6*U.kPa,
-        T=333.15*U.K,
-        analysis=true)
-        annotation (Placement(transformation(extent={{70,70},{90,90}})));
-      AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
-        annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
-              ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
-
-    end AnFPAlone;
-
-    model AnFP2 "Test the anode flow plate"
-      import FCSys.Subregions.Phases;
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.Conditions.Environment environment(
-        p=149.6*U.kPa,
-        T=333.15*U.K,
-        analysis=true)
-        annotation (Placement(transformation(extent={{70,70},{90,90}})));
-      AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
-        annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
-              ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"));
-
-    end AnFP2;
-
     model AnGDL2 "Test the anode gas diffusion layer"
       import FCSys.Subregions.Phases;
       extends Modelica.Icons.Example;
@@ -1068,7 +1032,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=0.7,
           NumberOfIntervals=5000,
@@ -1128,7 +1092,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=500,
           Tolerance=1e-06,
@@ -1223,12 +1187,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
               inclH2=true,
               inclH2O=true,
               H2(
-                p_IC=(1 - environment.n_H2O)*environment.p,
+                p_IC=environment.p - environment.p_H2Og,
                 initTransX=InitTranslational.None,
                 initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None),
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
-
+                initTransZ=InitTranslational.None,
+                initEnergy=InitScalar.None),
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
             graphite(
               reduceTemp=true,
               k=fill((1 - epsilon)^(3/2), 3),
@@ -1236,9 +1200,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'incle-'=true,
               'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
               'e-'(
+                rho_IC=17842.7*U.C/U.cc,
                 consTransY=Conservation.IC,
                 mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol),
-                initTransX=InitTranslational.None)),
+                initTransX=InitTranslational.None,
+                initEnergy=InitScalar.None)),
             liquid(
               inclH2O=true,
               k=fill(epsilon^(3/2), 3),
@@ -1256,15 +1222,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (group="Geometry");
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
-        if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2 if environment.analysis and hasSubregions
-        "Molar concentration of H2O";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -1328,127 +1291,108 @@ text layer of this model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-100,60},{100,100}},
-              fillColor={255,255,255},
-              visible=not inclFacesY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-76.648,66.211},{-119.073,52.0689}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={135,135,135},
-              origin={111.017,77.3801},
-              pattern=LinePattern.None,
-              lineColor={95,95,95}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={135,135,135}),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Polygon(
-              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-              lineColor={0,0,0},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{16,
-                  24},{16,28},{6,18},{6,24},{16,34},{16,48}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{16,4},
-                  {16,8},{6,-2},{6,4},{16,14},{16,28}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{16,-16},
-                  {16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,-48},
-                  {16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Line(
-              points={{10,0},{100,0}},
-              color={240,0,0},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={127,127,127},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={240,0,0},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={253,52,56},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={253,52,56},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Ellipse(
-              extent={{-4,52},{4,48}},
-              lineColor={135,135,135},
-              fillColor={240,0,0},
-              visible=inclFacesY,
-              fillPattern=FillPattern.Sphere),
-            Line(
-              points={{0,100},{0,50}},
-              color={240,0,0},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-100,60},{100,100}},
+                  fillColor={255,255,255},
+                  visible=not inclFacesY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-76.648,66.211},{-119.073,52.0689}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={135,135,135},
+                  origin={111.017,77.3801},
+                  pattern=LinePattern.None,
+                  lineColor={95,95,95}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={135,135,135}),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Polygon(
+                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),Polygon(
+                  points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{
+                16,24},{16,28},{6,18},{6,24},{16,34},{16,48}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{
+                16,4},{16,8},{6,-2},{6,4},{16,14},{16,28}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{
+                16,-16},{16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,
+                -48},{16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Line(
+                  points={{10,0},{100,0}},
+                  color={240,0,0},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{-20,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={240,0,0},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={253,52,56},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={253,52,56},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Ellipse(
+                  extent={{-4,52},{4,48}},
+                  lineColor={135,135,135},
+                  fillColor={240,0,0},
+                  visible=inclFacesY,
+                  fillPattern=FillPattern.Sphere),Line(
+                  points={{0,100},{0,50}},
+                  color={240,0,0},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclFacesY,
+                  lineColor={0,0,0})}));
 
     end AnFP;
 
@@ -1520,20 +1464,26 @@ Entegris/Poco Graphite AXF-5Q as well
               k=fill(epsilon^(3/2), 3),
               inclH2=true,
               inclH2O=true,
-              H2(p_IC=(1 - environment.n_H2O)*environment.p,consTransX=
-                    Conservation.IC),
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
-
+              H2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                initEnergy=InitScalar.None,
+                p_IC=environment.p - environment.p_H2Og),
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
             graphite(
               reduceTemp=true,
               k=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(1.18*U.W)),
-              'e-'(mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol))),
+              'e-'(
+                mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol),
+                initTransX=InitTranslational.None,
+                initEnergy=InitScalar.None)),
             liquid(
-              k=fill(epsilon^(3/2), 3),
               inclH2O=true,
+              k=fill(epsilon^(3/2), 3),
               H2O(V_IC=0,consTransX=Conservation.IC)))) annotation (IconMap(
             primitivesVisible=false));
 
@@ -1545,15 +1495,12 @@ Entegris/Poco Graphite AXF-5Q as well
         annotation (group="Geometry");
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
-        if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2 if environment.analysis and hasSubregions
-        "Molar concentration of H2O";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -1580,89 +1527,75 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
           Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-100,60},{100,100}},
-              fillColor={255,255,255},
-              visible=not inclFacesY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              rotation=-45,
-              fillPattern=FillPattern.VerticalCylinder,
-              origin={42.5001,11.0805}),
-            Rectangle(
-              extent={{-40,40},{0,-60}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              fillPattern=FillPattern.VerticalCylinder),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={64,64,64}),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={240,0,0},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={240,0,0},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={253,52,56},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={253,52,56},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={253,52,56},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={253,52,56},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-100,60},{100,100}},
+                  fillColor={255,255,255},
+                  visible=not inclFacesY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  rotation=-45,
+                  fillPattern=FillPattern.VerticalCylinder,
+                  origin={42.5001,11.0805}),Rectangle(
+                  extent={{-40,40},{0,-60}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.VerticalCylinder),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={64,64,64}),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-20,0},{-100,0}},
+                  color={240,0,0},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={240,0,0},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={253,52,56},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={253,52,56},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={253,52,56},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={253,52,56},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclFacesY,
+                  lineColor={0,0,0})}));
 
     end AnGDL;
 
@@ -1919,10 +1852,9 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               reduceVel=true,
               reduceTemp=true,
               k=fill(epsilon^(3/2), 3),
-              H2(p_IC=(1 - environment.n_H2O)*environment.p,consTransX=
-                    Conservation.IC),
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
+              H2(consTransX=Conservation.IC, p_IC=environment.p - environment.p_H2Og),
 
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
             graphite(
               reduceTemp=true,
               k=fill((0.5*(1 - epsilon))^(3/2), 3),
@@ -1956,15 +1888,12 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         annotation (Dialog(tab="Initialization"));
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
-        if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2 if environment.analysis and hasSubregions
-        "Molar concentration of H2O";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -2111,7 +2040,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2200,89 +2128,75 @@ the z axis extends across the width of the channel.</p>
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-100,60},{100,100}},
-              fillColor={255,255,255},
-              visible=not inclFacesY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
-              lineColor={200,200,200},
-              fillColor={255,255,255},
-              rotation=-45,
-              fillPattern=FillPattern.VerticalCylinder,
-              origin={95.001,14.864}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              lineColor={200,200,200},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.VerticalCylinder),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={200,200,200}),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={240,0,0},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={0,0,240},
-              visible=inclFacesX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={127,127,127},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={127,127,127},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={127,127,127},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={127,127,127},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-100,60},{100,100}},
+                  fillColor={255,255,255},
+                  visible=not inclFacesY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
+                  lineColor={200,200,200},
+                  fillColor={255,255,255},
+                  rotation=-45,
+                  fillPattern=FillPattern.VerticalCylinder,
+                  origin={95.001,14.864}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  lineColor={200,200,200},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.VerticalCylinder),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={200,200,200}),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-20,0},{-100,0}},
+                  color={240,0,0},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={0,0,240},
+                  visible=inclFacesX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={127,127,127},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={127,127,127},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={127,127,127},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={127,127,127},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclFacesY,
+                  lineColor={0,0,0})}));
     end PEM;
 
     model DuPontN112 "<html>DuPont<sup>TM</sup> Nafion&reg; N-112</html>"
@@ -2446,12 +2360,10 @@ the z axis extends across the width of the channel.</p>
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2Og, consTransX=Conservation.IC),
+              N2(p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
 
-              N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
-                    environment.p),
-              O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
-
+              O2(p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
               k=fill((0.5*(1 - epsilon))^(3/2), 3),
@@ -2482,20 +2394,15 @@ the z axis extends across the width of the channel.</p>
         annotation (Dialog(tab="Initialization"));
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of N2";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
-        "Molar concentration of O2";
+         = subregions.gas.O2.N/(subregions.gas.N2.N + subregions.gas.O2.N) if
+        environment.analysis and hasSubregions "Dry-gas concentration of O2";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -2639,6 +2546,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2690,12 +2598,10 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2Og, consTransX=Conservation.IC),
+              N2(p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
 
-              N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
-                    environment.p),
-              O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
-
+              O2(p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
               k=fill((1 - epsilon)^(3/2), 3),
@@ -2716,20 +2622,15 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
         annotation (group="Geometry");
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of N2";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
-        "Molar concentration of O2";
+         = subregions.gas.O2.N/(subregions.gas.N2.N + subregions.gas.O2.N) if
+        environment.analysis and hasSubregions "Dry-gas concentration of O2";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -3102,12 +3003,10 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2Og, consTransX=Conservation.IC),
+              N2(p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
 
-              N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
-                    environment.p),
-              O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
-
+              O2(p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
               k=fill((1 - epsilon)^(3/2), 3),
@@ -3129,20 +3028,15 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         annotation (group="Geometry");
 
       // Auxiliary variables (for analysis)
-      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
-         + subregions.gas.O2.N) if environment.analysis and hasSubregions
-        "Molar concentration of N2";
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
-         = ones(
-            n_x,
-            n_y,
-            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
-        "Molar concentration of O2";
+         = subregions.gas.O2.N/(subregions.gas.N2.N + subregions.gas.O2.N) if
+        environment.analysis and hasSubregions "Dry-gas concentration of O2";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";

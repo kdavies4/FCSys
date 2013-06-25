@@ -2915,10 +2915,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,195,38})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,195,38})}));
 
     end ChemicalReaction;
 
@@ -3080,14 +3080,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}), Ellipse(
-              extent={{-40,20},{20,-40}},
-              fillColor={255,195,38},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-40,20},{20,-40}},
+                  fillColor={255,195,38},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None)}));
 
     end ChemicalSpecies;
 
@@ -3544,11 +3544,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52},
+                  lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3714,10 +3714,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5186,11 +5186,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191},
+                  lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -6321,10 +6321,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191})}));
 
     end Face;
 
@@ -6977,15 +6977,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}), Ellipse(
-              extent={{-40,20},{20,-40}},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-40,20},{20,-40}},
+                  fillColor={47,107,251},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0})}));
 
     end Inert;
 
@@ -7540,10 +7540,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251})}));
 
     end InertDalton;
 
@@ -7859,10 +7859,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Component;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255})}));
 
     end Translational;
 
@@ -7984,10 +7984,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={221,23,47})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={221,23,47})}));
 
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
@@ -7999,7 +7999,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end ByConnector;
 
   record Environment "Environmental properties for a model"
-    // extends FCSys.BaseClasses.Icons.Names.Top3;
+    extends FCSys.BaseClasses.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
     final constant U.Bases.Base baseUnits=U.base "Base constants and units";
@@ -8010,24 +8010,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure";
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K
       "Temperature";
-    parameter Q.NumberAbsolute RH(displayUnit="%") = 1 "Relative humidity";
-    parameter Q.NumberAbsolute n_O2_dry(
+    parameter Q.NumberAbsolute RH(
+      displayUnit="%",
+      max=1) = 0.8 "Relative humidity";
+    final parameter Q.PressureAbsolute p_H2Og=RH*
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa
+      "Pressure of H2O vapor";
+    parameter Q.NumberAbsolute n_O2(
       final max=1,
       displayUnit="%") = 0.208
-      "<html>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>)</html>";
+      "<html>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces";
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
     parameter Q.PotentialLineic E[Axis]={0,0,0} "Electric field";
-    final parameter Q.NumberAbsolute n_H2O(
-      final max=1,
-      displayUnit="%") = 0.2
-      "<html>Gas H<sub>2</sub>O fraction (<i>n</i><sub>H2O</sub>)</html>";
-    // TODO:  Cast this in terms of relative humidity.
+
     annotation (
-      defaultComponentName="environment",
       defaultComponentPrefixes="inner",
       missingInnerMessage="
 Your model is using an outer \"environment\" record, but an inner \"environment\"
@@ -8037,10 +8037,6 @@ settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
-          Text(
-            extent={{-120,60},{120,100}},
-            textString="%name",
-            lineColor={0,0,0}),
           Rectangle(
             extent={{-80,60},{80,-100}},
             fillColor={255,255,255},
