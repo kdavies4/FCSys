@@ -8019,7 +8019,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     parameter Q.NumberAbsolute n_O2(
       final max=1,
       displayUnit="%") = 0.208
-      "<html>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2</sub>)</html>";
+      "<html>Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces";
