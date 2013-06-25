@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "SubregionCondensation.mat");
+createPlot(filename = "SubregionEvaporation.mat");
 species = cat(1,
               if 'inclC+' then {"graphite.'C+'"} else fill("",0),
               if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
@@ -14,13 +14,15 @@ species = cat(1,
 
 for i in 1:size(species, 1) loop
    FCSys.BaseClasses.Utilities.plot6(
-       y1={"subregion." + species[i] + ".rho"},
+       y1={"subregion." + species[i] + ".N"},
        y2={"subregion." + species[i] + ".tau_NE"},
        y3={"subregion." + species[i] + ".p_faces[1, 1]", "subregion." + species[i] + ".p",
              "subregion." + species[i] + ".p_faces[1, 2]"},
        y4={"subregion." + species[i] + ".faces[1, 1].T", "subregion." + species[i] + ".T",
              "subregion." + species[i] + ".faces[1, 2].T"},
-       y5={"subregion." + species[i] + ".h",
+       y5={"subregion." + species[i] + ".physical.mu",
              "subregion." + species[i] + ".chemical.mu"},
        y6={"subregion." + species[i] + ".physical.Ndot"});
 end for;
+
+FCSys.BaseClasses.Utilities.plot6(y3={"p_sat"});

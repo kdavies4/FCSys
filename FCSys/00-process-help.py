@@ -91,7 +91,7 @@ rpls = [
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated %s.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated %s.
 </div>
 """ % r'\1'),
     # Remove Dymola's tags for the Microsoft Office template.

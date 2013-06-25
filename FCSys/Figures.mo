@@ -1504,7 +1504,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    Subregions.Species.Species Species
+    FCSys.Subregions.Species.Species Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
 
@@ -1718,17 +1718,14 @@ package Figures "Graphical layouts for documentation"
               fillColor={38,196,52},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5),Ellipse(
-              extent={{57,-3},{63,-9}},
+              extent={{33,-3},{39,-9}},
               lineColor={239,142,1},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{58.5,-4.5},{61.5,-7.5}},
+              extent={{34.5,-4.5},{37.5,-7.5}},
               fillColor={255,195,38},
               fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{48,2},{72,-2.2}},
-              lineColor={0,0,0},
-              textString="Species"),Ellipse(
+              pattern=LinePattern.None),Ellipse(
               extent={{81,-3},{87,-9}},
               lineColor={2,157,21},
               fillColor={38,196,52},
@@ -1763,7 +1760,7 @@ package Figures "Graphical layouts for documentation"
               extent={{24,-18},{48,-22}},
               lineColor={0,0,0},
               textString="Thermal"),Text(
-              extent={{48,6},{72,2}},
+              extent={{48,2},{72,-2}},
               lineColor={0,0,0},
               textString="Chemical"),Ellipse(
               extent={{-15,-3},{-9,-9}},
@@ -1780,13 +1777,13 @@ package Figures "Graphical layouts for documentation"
               extent={{-20,2},{-4,-2}},
               lineColor={0,0,0},
               textString="Face"),Ellipse(
-              extent={{33,-3},{39,-9}},
+              extent={{57,-3},{63,-9}},
               lineColor={239,142,1},
               fillColor={255,195,38},
               fillPattern=FillPattern.Solid),Text(
               extent={{28,2},{44,-2}},
               lineColor={0,0,0},
-              textString="Reaction")}));
+              textString="Net")}));
 
   end ConnectorHierarchy;
 

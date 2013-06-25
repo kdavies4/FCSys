@@ -23,11 +23,15 @@ name=$(basename $this_folder)
 rm -r $dest_dir/$name
 rm $dest_dir/$name.zip
 
-# Read the version of the package.
-# Major and minor
-versiona=`sed -n 's/ *version="\([0-9]*\.[0-9]*\)[.0-9A-Za-z-]*",/\1/p' $this_folder/$name/package.mo`
-# Patch and suffix
-versionb=`sed -n 's/ *version="[0-9]*\.[0-9]*\.\([.0-9A-Za-z-]*\)",/\1/p' $this_folder/$name/package.mo`
+# Get the version.
+tag=`git describe --tags release`
+versiona=${tag%-*}
+versiona=${versiona%.*}
+versiona=${versiona#v*}
+versionb=${tag#v*.*.}
+read -p "Enter the major and minor version (last was $versiona): " versiona
+read -p "Enter the patch and optional pre-release string (last was $versionb): " versionb
+#echo v$versiona.$versionb
 
 # Increment the version build number in the master copy.
 #awk '/versionBuild=[0-9]+/ { printf "versionBuild=%d\n", $2+1 }' package.mo
@@ -35,23 +39,27 @@ versionb=`sed -n 's/ *version="[0-9]*\.[0-9]*\.\([.0-9A-Za-z-]*\)",/\1/p' $this_
 # Copy this folder with the relevant files.
 rsync $this_folder -rL --delete --include-from $this_folder/.release-include --exclude-from $this_folder/.release-exclude $dest_dir/
 
-# Record the date/time and abbreviated SHA of the last git commit.
-# This is recorded in the released version, not in the master copy.
-timestamp=`date -u -d @$(find ./ -type f -printf '%A@\t%p\n' | sort -r -k1 | head -n1 | cut -f1) +'%Y-%m-%d %H:%M:%S'`Z
+# Record the release information (in the released copy, not in the master).
+timestamp=`date -u +"%Y-%m-%d %H:%M:%SZ"`
 hash=`git log --pretty=format:'%h' -n 1`
 cd $dest_dir
+# Version
+rpl 'version=""' version='"'$versiona.$versionb'"' $name/$name/package.mo
+# Date modified
 rpl 'dateModified=""' dateModified='"'"$timestamp"'"' $name/$name/package.mo
+# Abbreviated SHA of the last git commit
 rpl 'revisionID=""' revisionID='"SHA: '$hash'"' $name/$name/package.mo
 
 # Use Windows line endings for the text files (except *.mo).
 for f in `find $name -iname "*.bat" -o -iname "*.c" -o -iname "*.css" -o -iname "*.html" -o -iname "*.m" -o -iname "*.mos" -o -iname "*.py" -o -iname "*.txt"`; do
     todos "$f"
 done
-todos $name/$name/package.order
+#todos $name/$name/package.order
 todos $name/$name/Resources/Source/Python/matplotlibrc
 
 # Append the library name with the major and minor version.
 mv $dest_dir/$name/$name "$dest_dir/$name/$name $versiona"
+rpl "FCSys/package.mo" "FCSys $versiona/package.mo" $dest_dir/$name/load.mos
 
 # Make a zipped copy.
 zip -rq $name.zip $name
@@ -82,7 +90,7 @@ for f in `find -type f -name \*`
 done
 cd $this_folder
 git commit -am "Auto-commit for version $versiona.$versionb"
-git tag -a "v$versiona.$versionb"
+git tag "v$versiona.$versionb"
 #git push --tags origin release
 
 # Return to the original work.
@@ -91,5 +99,4 @@ if [ "$stash_msg" != "No local changes to save" ]; then
    git stash pop
 fi
 
-echo "Created release version $versiona.$versionb."
-read -p "Press [Enter] to exit."
+echo "Created release version $versiona.$versionb.  Check it, rebase if necessary, and do 'git push --tags origin release'."

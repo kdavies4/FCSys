@@ -271,7 +271,7 @@ package Units "Constants and units of physical measure"
         "V",
         1/V) "Potential";
     defineUnitConversion(
-        "l2.m/(N.T2)",
+        "l.m/(N.T2)",
         "V/m",
         m/V) "Lineic potential";
     defineUnitConversion(

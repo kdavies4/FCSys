@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """Set up the FCRes module.
 
-See README.txt for instructions.
+See README.md for instructions.
 """
 from distutils.core import setup
 from glob import glob
@@ -18,7 +18,8 @@ setup(name='FCRes',
       url='http://kdavies4.github.com/FCSys/',
       license = "Modelica License Version 2",
       description='Python utilities for the FCSys package',
-      long_description=open('README.txt').read(),
+      long_description=open('README.md').read(),
+      package_data={'fcres': ['fcres.ini']},
       provides=['fcres'],
       requires=['modelicares  (>=0.4)'],
       keywords=['Modelica', 'Dymola', 'matplotlib', 'proton exchange membrane',

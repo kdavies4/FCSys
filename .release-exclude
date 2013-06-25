@@ -87,6 +87,5 @@ FCSys/Resources/Documentation/Systems
 FCSys/Resources/*.xls
 FCSys/Resources/Source/Python/bin/killall-fcsysres.sh
 FCSys/Resources/Source/Python/bin/run-exps.py
-FCSys/Resources/Source/Python/fcres/EOS-fit.py
 FCSys/Resources/Source/Python/fcres/sankey.py
-FCSys/Resources/Source/Python/fcres/exp.py
+FCSys/Resources/Source/Python/fcres/exp.py_broken

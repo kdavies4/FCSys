@@ -32,7 +32,8 @@ package Conditions "Models to specify and measure operating conditions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
-              "Resources/Scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
+              "Resources/Scripts/Dymola/Conditions.Examples.FaceCondition.mos"
+            "Conditions.Examples.FaceCondition.mos"));
     end FaceCondition;
 
     model FaceConditionPhases
@@ -234,7 +235,8 @@ package Conditions "Models to specify and measure operating conditions"
           color={0,127,255},
           smooth=Smooth.None));
       annotation (experiment(StopTime=2e-10), Commands(file=
-              "Resources/Scripts/Dymola/Conditions.Examples.Adapteminus.mos"));
+              "Resources/Scripts/Dymola/Conditions.Examples.Adapteminus.mos"
+            "Conditions.Examples.Adapteminus.mos"));
     end AnodeAdapter;
 
   end Examples;
@@ -2263,12 +2265,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
   package ByConnector "Conditions for each type of connector"
     extends Modelica.Icons.Package;
-    package ChemicalReaction
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector</html>"
+
+    package ChemicalNet
+      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ChemicalNet\">ChemicalNet</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model ChemicalReaction
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector, with efforts by default</html>"
+      model ChemicalNet
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalNet\">ChemicalNet</a> connector, with efforts by default</html>"
         import FCSys.BaseClasses.Utilities.countTrue;
         import FCSys.BaseClasses.Utilities.enumerate;
         import FCSys.BaseClasses.Utilities.index;
@@ -2301,48 +2304,48 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         // Conditions
         replaceable Material.ReactionRate material constrainedby
-          Conditions.ByConnector.ChemicalReaction.Material.BaseClasses.PartialCondition
+          Conditions.ByConnector.ChemicalNet.Material.BaseClasses.PartialCondition
           "Material" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{-80,46},{-60,66}})));
         replaceable Translational.Velocity translationalX(final axis) if
           inclTransX constrainedby
-          Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+          Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.x) "X-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransX),
           Placement(transformation(extent={{-52,32},{-32,52}})));
         replaceable Translational.Velocity translationalY(final axis) if
           inclTransY constrainedby
-          Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+          Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.y) "Y-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransY),
           Placement(transformation(extent={{-24,18},{-4,38}})));
         replaceable Translational.Velocity translationalZ(final axis) if
           inclTransZ constrainedby
-          Conditions.ByConnector.ChemicalReaction.Translational.BaseClasses.PartialCondition(
+          Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.z) "Z-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransZ),
           Placement(transformation(extent={{4,4},{24,24}})));
         replaceable ThermalAdvection.SpecificEntropyTemperature
           thermalAdvection(source(y=3000*U.K)) constrainedby
-          Conditions.ByConnector.ChemicalReaction.ThermalAdvection.BaseClasses.PartialCondition
+          Conditions.ByConnector.ChemicalNet.ThermalAdvection.BaseClasses.PartialCondition
           "Thermal advection" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{32,-10},{52,10}})));
         replaceable ThermalDiffusion.Temperature thermalDiffusion(source(y=
                 298.15*U.K)) constrainedby
-          Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.BaseClasses.PartialCondition
+          Conditions.ByConnector.ChemicalNet.ThermalDiffusion.BaseClasses.PartialCondition
           "Thermal diffusion" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{60,-24},{80,-4}})));
 
-        Connectors.ChemicalReaction chemical(final n_trans=n_trans)
+        Connectors.ChemicalNet chemical(final n_trans=n_trans)
           "Connector for a chemical reaction"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
         Connectors.RealInputBus u
@@ -2503,33 +2506,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             index=1,
             extent={{2,3},{2,3}}));
         annotation (defaultComponentName="chemical");
-      end ChemicalReaction;
+      end ChemicalNet;
 
-      model ChemicalReactionNoFlow
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector, with zero flows by default</html>"
-        extends ChemicalReaction(
+      model ChemicalNetNoFlow
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalNet\">ChemicalNet</a> connector, with zero flows by default</html>"
+        extends ChemicalNet(
           redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.Material.Potential material,
+            Conditions.ByConnector.ChemicalNet.Material.Potential material,
+          redeclare replaceable Translational.Force translationalX(final axis),
 
           redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.Translational.Force
-            translationalX(final axis),
-          redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.Translational.Force
+            Conditions.ByConnector.ChemicalNet.Translational.Force
             translationalY(final axis),
           redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.Translational.Force
+            Conditions.ByConnector.ChemicalNet.Translational.Force
             translationalZ(final axis),
           redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.ThermalAdvection.HeatRate
+            Conditions.ByConnector.ChemicalNet.ThermalAdvection.HeatRate
             thermalAdvection,
           redeclare replaceable
-            Conditions.ByConnector.ChemicalReaction.ThermalDiffusion.HeatRate
+            Conditions.ByConnector.ChemicalNet.ThermalDiffusion.HeatRate
             thermalDiffusion);
 
         // Note:  Dymola 7.4 requires that the redeclared models are
         // resolved to the root of the library, e.g.,
-        //   "Conditions.ByConnector.ChemicalReaction.Material.Potential"
+        //   "Conditions.ByConnector.ChemicalNet.Material.Potential"
         // instead of
         //   "Material.Potential".
         // Otherwise the following error is given:
@@ -2539,7 +2540,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // FCSys.Conditions.ByConnector.
         annotation (defaultComponentName="chemical");
 
-      end ChemicalReactionNoFlow;
+      end ChemicalNetNoFlow;
 
       package Material "Conditions for additivity of volume"
         extends Modelica.Icons.Package;
@@ -2590,7 +2591,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           partial model PartialCondition
             "Partial model of a material condition"
 
-            extends ByConnector.ChemicalReaction.BaseClasses.PartialCondition;
+            extends ByConnector.ChemicalNet.BaseClasses.PartialCondition;
 
             constant ConditionType conditionType "Type of condition";
             // Note:  This is included so that the type of condition is recorded with
@@ -2668,7 +2669,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.BasesPackage;
           partial model PartialCondition
             "Partial model for a translational condition"
-            extends ByConnector.ChemicalReaction.BaseClasses.PartialCondition;
+            extends ByConnector.ChemicalNet.BaseClasses.PartialCondition;
 
             parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
@@ -2753,7 +2754,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.BasesPackage;
           partial model PartialCondition "Partial model for a fluid condition"
 
-            extends ByConnector.ChemicalReaction.BaseClasses.PartialCondition;
+            extends ByConnector.ChemicalNet.BaseClasses.PartialCondition;
 
             constant ConditionType conditionType "Type of condition";
             // Note:  This is included so that the type of condition is recorded with
@@ -2827,7 +2828,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.BasesPackage;
           partial model PartialCondition "Partial model for a fluid condition"
 
-            extends ByConnector.ChemicalReaction.BaseClasses.PartialCondition;
+            extends ByConnector.ChemicalNet.BaseClasses.PartialCondition;
 
             constant ConditionType conditionType "Type of condition";
             // Note:  This is included so that the type of condition is recorded with
@@ -2885,7 +2886,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={110,0})));
-          Connectors.ChemicalReaction chemical(final n_trans=n_trans)
+          Connectors.ChemicalNet chemical(final n_trans=n_trans)
             "Connector for a chemical reaction"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2918,12 +2919,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   extent={{-70,50},{50,-70}},
                   lineColor={239,142,1},
                   fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-40,20},{20,-40}},
+                  fillColor={255,195,38},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None)}));
 
-    end ChemicalReaction;
+    end ChemicalNet;
 
-    package ChemicalSpecies
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a> connector</html>"
+    package Chemical
+      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector</html>"
       extends Modelica.Icons.Package;
 
       model Potential "Specify chemical potential (measure current)"
@@ -3040,7 +3045,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Velocity of the actual stream";
           output Q.Potential sT_actual=actualStream(chemical.sT)
             "Specific entropy-temperature product of the actual stream";
-          Connectors.ChemicalSpecies chemical(final n_trans=n_trans)
+          Connectors.Chemical chemical(final n_trans=n_trans)
             "Connector for a species of a chemical reaction"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -3083,13 +3088,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   extent={{-70,50},{50,-70}},
                   lineColor={239,142,1},
                   fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-40,20},{20,-40}},
-                  fillColor={255,195,38},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None)}));
+                  fillColor={255,195,38})}));
 
-    end ChemicalSpecies;
+    end Chemical;
 
     package PhysicalBus
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> or <a href=\"modelica://FCSys.Connectors.PhysicalBusInternal\">PhysicalBusInternal</a> connector</html>"
@@ -3998,7 +3999,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   preceding(final orientation),
                 redeclare replaceable
                   Conditions.ByConnector.Face.Pair.Thermal.HeatRate thermal)));
-          // See note in ChemicalReactionNoFlow.
+          // See note in ChemicalNetNoFlow.
           annotation (defaultComponentName="face");
 
         end FaceBusIsolated;
@@ -4757,7 +4758,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable
                   Conditions.ByConnector.Face.Single.Thermal.HeatRate thermal)));
 
-          // See note in ChemicalReactionNoFlow.
+          // See note in ChemicalNetNoFlow.
           annotation (defaultComponentName="face");
 
         end FaceBusIsolated;
@@ -5408,7 +5409,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 final orientation),
             redeclare replaceable
               Conditions.ByConnector.Face.Pair.Thermal.HeatRate thermal);
-          // See note in ChemicalReactionNoFlow.
+          // See note in ChemicalNetNoFlow.
           annotation (defaultComponentName="face");
 
         end FaceIsolated;
@@ -5523,7 +5524,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         package Translational "Translational conditions"
           extends Modelica.Icons.Package;
-
+          // **Add current
           model Velocity
             "Specify velocity difference (measure force), with conservation of translational momentum"
             extends BaseClasses.PartialCondition(
@@ -5973,7 +5974,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 final orientation),
             redeclare replaceable
               Conditions.ByConnector.Face.Single.Thermal.HeatRate thermal);
-          // See note in ChemicalReactionNoFlow.
+          // See note in ChemicalNetNoFlow.
           annotation (defaultComponentName="face");
 
         end FaceIsolated;
@@ -6096,7 +6097,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               u(final unit="N/T"),
               final y(final unit="l.m/T2") = face.mPhidot[orientation]);
 
-            Q.Area A=U.cm^2 "Cross-sectional area";
+            parameter Q.Area A=U.cm^2 "Cross-sectional area";
 
           initial equation
             assert(orientation == Orientation.normal,
@@ -6107,7 +6108,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (
               defaultComponentPrefixes="replaceable",
               defaultComponentName="translational",
-              Documentation(info="<html><p>The advective current is in the globally 
+              Documentation(info="<html><p>The advective current is in the globally
     positive direction (not into the component).
     This model is meaningful only for the normal direction
   (<code>orientation = Orientation.normal).</p></html>"));
@@ -6533,7 +6534,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               final axis),
           redeclare replaceable Conditions.ByConnector.Inert.Thermal.HeatRate
             thermal);
-        // See note in ChemicalReactionNoFlow.
+        // See note in ChemicalNetNoFlow.
         annotation (defaultComponentName="inert");
 
       end InertIsolated;
@@ -6751,7 +6752,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               final axis),
           redeclare replaceable Conditions.ByConnector.Inert.Thermal.HeatRate
             thermal);
-        // See note in ChemicalReactionNoFlow.
+        // See note in ChemicalNetNoFlow.
         annotation (defaultComponentName="inert");
 
       end InertInternalIsolated;
@@ -7219,7 +7220,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             translationalZ(final axis),
           redeclare replaceable
             Conditions.ByConnector.InertDalton.Thermal.HeatRate thermal);
-        // See note in ChemicalReactionNoFlow.
+        // See note in ChemicalNetNoFlow.
         annotation (defaultComponentName="inertDalton");
 
       end InertDaltonEmpty;
@@ -7715,7 +7716,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable
             Conditions.ByConnector.Translational.Component.Force translationalZ(
               final axis));
-        // See note in ChemicalReactionNoFlow.
+        // See note in ChemicalNetNoFlow.
         annotation (defaultComponentName="translational");
 
       end TranslationalIsolated;
@@ -8026,7 +8027,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
     parameter Q.PotentialLineic E[Axis]={0,0,0} "Electric field";
-
     annotation (
       defaultComponentPrefixes="inner",
       missingInnerMessage="
@@ -8134,21 +8134,21 @@ It has a single parameter, <code>crossOver</code>.</p>
 set to <code>false</code>, then
 the router will be in the pass-through mode.  In that case,
 <code>negative1</code> is connected to <code>positive1</code> and <code>negative2</code>
-is connected to <code>positive2</code>, as shown by Figure 1a.</p>
+is connected to <code>positive2</code>, as shown by <a href=\"#Fig1a\">Figure 1a</a>.</p>
 
 <p>If <code>crossOver</code> is set to <code>true</code>, then the router will be in cross-over mode.  In that case, <code>negative1</code> is connected to <code>positive2</code>
 and <code>negative2</code> is
-connected to <code>positive1</code>, as shown by Figure 1b.</p>
+connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a>.</p>
 
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
-        <td align=center width=120>
+        <td id=\"Fig1a\" align=center width=120>
           <img src=\"modelica://FCSys/Resources/Documentation/Conditions/Router/PassThrough.png\">
-<br><b>a:</b>  Pass-through
+<br><b>a:</b> Pass-through
         </td>
-        <td align=center>
+        <td id=\"Fig1b\" align=center>
           <img src=\"modelica://FCSys/Resources/Documentation/Conditions/Router/CrossOver.png\">
-<br><b>b:</b>  Cross-over
+<br><b>b:</b> Cross-over
         </td>
       </tr>
       <tr align=center>

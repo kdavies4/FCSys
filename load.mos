@@ -23,7 +23,6 @@ Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once
 //Advanced.GenerateAnalyticJacobian = true "Generate analytic Jacobian for the ODE problem";
 //Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";
 //Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
-//Advanced.Define.AimForHighAccuracy = false "Aim for high accuracy in non-linear solver";
 
 // Debugging and develpment options
 Advanced.CheckUnits = false "Check unit consistency of equations";
@@ -37,7 +36,6 @@ Advanced.Legend.Horizontal = false "Horizontal layout of plot legend by default"
 Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
 Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
 Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
-//OutputFlatModelica = true "Generate listing of flat Modelica code in .mof file";
 //Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
 //Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
 //Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";
@@ -68,6 +66,6 @@ cd("..")
 // The constants and units will be available in the workspace, but only until
 // the next model is simulated.  To load the and retain the variables until
 // Dymola is closed, translate a model besides Units.Evaluate and then run
-// "units-values.mos" as a script.
+// "units.mos" as a script.
 translateModel("FCSys.Units.Examples.Evaluate");
 Modelica.Utilities.Files.copy("dsmodel.mof", "units.mos", true);

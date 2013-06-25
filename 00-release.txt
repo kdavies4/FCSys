@@ -16,11 +16,11 @@ Steps to release the FCSys library:
         FCSys/Resources/quantities.xls and update Quantities.mo and
         FCSys/Resources/Scripts/units.mos.  Remove the unused references from
         package.mo (FCSys.UsersGuide.References).
-6/4/13 KD
+6/30/13 KD
     5.  Spellcheck the Modelica files using FCSys/00-spellcheck.sh.
 6/4/13 KD
     6.  Run FCSys/00-tidy.py to autoformat the Modelica code.
-6/5/13 KD
+6/28/13 KD
     7.  Delete the FCSys/help directory and recreate it using Dymola
         (File->Export->HTML; check "Large image").  Then run the
         FCSys/00-make-doc.sh script to apply the stylesheet, make special

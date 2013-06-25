@@ -17,6 +17,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Continuous;
 
       partial class ContinuousShort "Short icon for a continuous block"
@@ -29,6 +30,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end ContinuousShort;
 
       partial class ContinuousShortWide
@@ -42,6 +44,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-120,-20},{120,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end ContinuousShortWide;
 
       partial class Discrete "Icon for a discrete-time block"
@@ -54,7 +57,9 @@ package BaseClasses "Base classes (generally not for direct use)"
                       lineColor={0,0,127},
                       fillColor={223,223,159},
                       fillPattern=FillPattern.Solid)}));
+
       end Discrete;
+
     end Blocks;
 
     package Conditions "Icons for conditions"
@@ -83,30 +88,29 @@ package BaseClasses "Base classes (generally not for direct use)"
                       color={0,0,0},
                       smooth=Smooth.None,
                       pattern=LinePattern.Dash)}));
+
       end Pair;
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Single;
+
     end Conditions;
 
     package Names
@@ -118,6 +122,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,240},{100,280}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top12;
 
       partial class Top11
@@ -126,6 +131,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,220},{100,260}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top11;
 
       partial class Top10
@@ -134,6 +140,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,200},{100,240}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top10;
 
       partial class Top9
@@ -142,6 +149,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,180},{100,220}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top9;
 
       partial class Top8
@@ -150,6 +158,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,160},{100,200}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top8;
 
       partial class Top7
@@ -158,6 +167,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,140},{100,180}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top7;
 
       partial class Top6
@@ -166,6 +176,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,120},{100,160}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top6;
 
       partial class Top5
@@ -174,22 +185,25 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,100},{100,140}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top5;
 
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Top4;
 
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,60},{100,100}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,60},{100,100}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Top3;
 
       partial class Top2
@@ -198,6 +212,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                 extent={{-100,40},{100,80}},
                 textString="%name",
                 lineColor={0,0,0})}));
+
       end Top2;
 
       partial class Top1
@@ -206,6 +221,7 @@ package BaseClasses "Base classes (generally not for direct use)"
                 extent={{-100,20},{100,60}},
                 textString="%name",
                 lineColor={0,0,0})}));
+
       end Top1;
 
       partial class Middle
@@ -214,7 +230,9 @@ package BaseClasses "Base classes (generally not for direct use)"
                       extent={{-100,-20},{100,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Middle;
+
     end Names;
 
     partial class Cell "Icon for a cell"
@@ -364,6 +382,7 @@ package BaseClasses "Base classes (generally not for direct use)"
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)));
+
     end Cell;
 
     partial package PackageUnderConstruction
@@ -379,7 +398,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
 <p>See also <a href=\"modelica://Modelica.Icons.UnderConstruction\">Modelica.Icons.UnderConstruction</a>.</p>
 </html>"));
+
     end PackageUnderConstruction;
+
   end Icons;
 
   package Utilities "Functions that implement useful algorithms"
@@ -424,7 +445,8 @@ package BaseClasses "Base classes (generally not for direct use)"
           Documentation(info="<html><p>This function returns the number of elements
       in a chemical formula.  Electrons are counted as a present element (or rather particle)
       if the net charge is nonzero.</p>
-      <p><b>Examples:</b><br>
+
+<p><b>Examples:</b><br>
     <code>countElements(\"C19HF37O5S-\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
   <p>Please see the
@@ -489,11 +511,13 @@ package BaseClasses "Base classes (generally not for direct use)"
         output Integer coeffs[size(symbols, 1)] "Coefficients of the elements";
         // Note:  coeffs[countElements(formula)] would require redundant
         // computation.
+
       protected
         Integer z "Charge number";
         Integer z_net=0 "Net charge";
         Integer i=1 "Index of element";
         String f=formula "Working copy of formula";
+
       algorithm
         // Read the elements.
         while f <> "" loop
@@ -531,6 +555,7 @@ package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.Function;
         input String formulas[:] "Chemical formulas of the species";
         output Integer n[size(formulas, 1)] "Stoichiometric coefficients";
+
       protected
         Integer n_species=size(formulas, 1) "Number of species";
         Integer n_elements[n_species]=countElements(formulas)
@@ -549,6 +574,7 @@ package BaseClasses "Base classes (generally not for direct use)"
         Real minabs
           "Minimum magnitude of the unnormalized stoichiometric coefficients";
         Real elementCoeffs[n_species, n_tot] "Elementary coefficients";
+
       algorithm
         // Generate a list of all the symbols.
         for i in 1:n_species loop
@@ -612,6 +638,7 @@ An unrelated species may be included.");
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
       end stoich;
+
     end Chemistry;
 
     package Polynomial "Polynomial functions"
@@ -625,6 +652,7 @@ An unrelated species may be included.");
         input Integer n=0
           "Power associated with the first term (before integral)";
         output Real F "Integral";
+
       algorithm
         F := f( x,
                 a .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
@@ -648,6 +676,7 @@ An unrelated species may be included.");
         input Real dx "Derivative of argument";
         input Real da[size(a, 1)] "Derivatives of coefficients";
         output Real dF "Derivative";
+
       algorithm
         dF := f(x,
                 a,
@@ -656,6 +685,7 @@ An unrelated species may be included.");
                 da .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
             a, 1)},
                 n + 1) annotation (Inline=true);
+
       end dF;
 
       function f
@@ -665,12 +695,14 @@ An unrelated species may be included.");
         input Real a[:] "Coefficients";
         input Integer n=0 "Power of the first term";
         output Real f "Result";
+
       protected
         function positivePoly
           "<html>Polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))</html>"
           input Real x "Argument";
           input Real a[:] "Coefficients";
           output Real y "Result";
+
         algorithm
           y := if size(a, 1) > 0 then x*(a[1] + (if size(a, 1) > 1 then x*(a[2]
              + (if size(a, 1) > 2 then x*(a[3] + (if size(a, 1) > 3 then x*(a[4]
@@ -687,7 +719,9 @@ An unrelated species may be included.");
           // parentheses.  The implementation here ("unrolled" only up to the 10th
           // order) allows poly() to be called from within one other function within
           // a model.
+
         end positivePoly;
+
       algorithm
         f := (if n < 0 then (if n + size(a, 1) < 0 then x^(n + size(a, 1))
            else 1)*positivePoly(1/x, a[min(size(a, 1), -n):-1:1]) else 0) + (
@@ -718,6 +752,7 @@ An unrelated species may be included.");
         input Real dx "Derivative of argument";
         input Real da[size(a, 1)] "Derivatives of coefficients";
         output Real df "Derivative";
+
       algorithm
         df := f(x,
                 a={(n + i - 1)*a[i] for i in 1:size(a, 1)},
@@ -742,13 +777,16 @@ An unrelated species may be included.");
         input Real d2x "Second derivative of argument";
         input Real d2a[size(a, 1)] "Second derivatives of coefficients";
         output Real d2f "Second derivative";
+
       algorithm
         d2f := sum(f(
                 x,
                 {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[
             i]*d2x),d2a[i]},
                 n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
+
       end d2f;
+
     end Polynomial;
 
     function arrayIntegerEqual "Check if two arrays of integers are equal"
@@ -839,6 +877,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Boolean condition;
       input String message;
+
     algorithm
       assert(condition, "\n" + message + "\n");
       annotation (Documentation(info="<html><p>When an assert statement is
@@ -854,6 +893,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Real u[:] "Vector of numbers";
       output Real average "Arithmetic mean";
+
     algorithm
       average := sum(u)/size(u, 1) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
@@ -869,6 +909,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer n "Number of true entries";
+
     algorithm
       n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1))
         annotation (Inline=true);
@@ -881,6 +922,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Real u[2] "Vector of size two";
       output Real Delta "Second entry minus the first entry";
+
     algorithm
       Delta := u[2] - u[1] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
@@ -893,8 +935,10 @@ An unrelated species may be included.");
       input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer enumerated[size(u, 1)]
         "Indices of the true entries (increasing order; 0 for false entries)";
+
     protected
       Integer count "Counter variable";
+
     algorithm
       count := 1;
       for i in 1:size(u, 1) loop
@@ -914,8 +958,10 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Boolean u[:] "<html><code>Boolean</code> array</html>";
       output Integer indices[countTrue(u)] "Indices of the true entries";
+
     protected
       Integer count "Counter variable";
+
     algorithm
       count := 1;
       for i in 1:size(u, 1) loop
@@ -936,6 +982,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Side side "Side";
       output Integer sign "Sign indicating direction along the axis";
+
     algorithm
       sign := 3 - 2*side annotation (Inline=true);
       annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
@@ -950,6 +997,7 @@ An unrelated species may be included.");
       input Integer num "Dividend";
       input Integer den "Divisor";
       output Integer index "Remainder with 1-based indexing";
+
     algorithm
       index := mod(num - 1, den) + 1 annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Examples:</b><br>
@@ -971,6 +1019,7 @@ An unrelated species may be included.");
         "<html>Names of the signals for the 5<sup>th</sup> plot</html>";
       input String y6[:]=fill("", 0)
         "<html>Names of the signals for the 6<sup>th</sup> plot</html>";
+
     algorithm
       createPlot(
             id=1,
@@ -1041,7 +1090,7 @@ An unrelated species may be included.");
             subPlot=2,
             leftTitleType=1,
             bottomTitleType=1);
-      annotation (Documentation(info="<html><p>This function calls the <code>createPlot()</code> function in 
+      annotation (Documentation(info="<html><p>This function calls the <code>createPlot()</code> function in
     Dymola to create six plots.  It may not work with other tools.</p></html>"));
     end plot6;
 
@@ -1050,6 +1099,7 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
       input Real u "<html><code>Real</code> variable</html>";
       output Integer y "Nearest integer";
+
     algorithm
       y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
@@ -1062,12 +1112,14 @@ An unrelated species may be included.");
 
       input Real u[2] "Vector of size two";
       output Real Sigma "Sum of the first and second entries";
+
     algorithm
       Sigma := u[1] + u[2] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
     end Sigma;
+
   end Utilities;
 
   type Axis = enumeration(
@@ -1097,4 +1149,5 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
+
 end BaseClasses;

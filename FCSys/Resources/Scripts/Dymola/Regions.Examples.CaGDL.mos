@@ -2,9 +2,9 @@
 removePlots();
 createPlot(filename = "CaGDL.mat");
 FCSys.BaseClasses.Utilities.plot6(
-    y1={"caGDL.subregions[1, 1, 1].gas.H2O.N", "caGDL.subregions[1, 1, 1].gas.N2.N", "caGDL.subregions[1, 1, 1].gas.O2.N", "caGDL.subregions[1, 1, 1].graphite.C.N", "caGDL.subregions[1, 1, 1].graphite.'e-'.N"},
-    y2={"caGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "caGDL.subregions[1, 1, 1].gas.N2.phi[1]", "caGDL.subregions[1, 1, 1].gas.O2.phi[1]", "caGDL.subregions[1, 1, 1].graphite.C.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"},
-    y3={"caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p", "caGDL.subregions[1, 1, 1].graphite.C.p", "caGDL.subregions[1, 1, 1].graphite.'e-'.p"},
-    y4={"caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T", "caGDL.subregions[1, 1, 1].graphite.C.T", "caGDL.subregions[1, 1, 1].graphite.'e-'.T"},
-    y5={"caGDL.subregions[1, 1, 1].gas.H2O.v", "caGDL.subregions[1, 1, 1].gas.N2.v", "caGDL.subregions[1, 1, 1].gas.O2.v", "caGDL.subregions[1, 1, 1].graphite.C.v", "caGDL.subregions[1, 1, 1].graphite.'e-'.v"},
-    y6={"caGDL.subregions[1, 1, 1].gas.H2O.mu", "caGDL.subregions[1, 1, 1].gas.N2.mu", "caGDL.subregions[1, 1, 1].gas.O2.mu", "caGDL.subregions[1, 1, 1].graphite.C.mu", "caGDL.subregions[1, 1, 1].graphite.'e-'.mu"});
+    y1={"caGDL.subregions[1, 1, 1].gas.H2O.N", "caGDL.subregions[1, 1, 1].gas.N2.N", "caGDL.subregions[1, 1, 1].gas.O2.N", "caGDL.subregions[1, 1, 1].graphite.'C+'.N", "caGDL.subregions[1, 1, 1].graphite.'e-'.N"},
+    y2={"caGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "caGDL.subregions[1, 1, 1].gas.N2.phi[1]", "caGDL.subregions[1, 1, 1].gas.O2.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"},
+    y3={"caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p", "caGDL.subregions[1, 1, 1].graphite.'C+'.p", "caGDL.subregions[1, 1, 1].graphite.'e-'.p"},
+    y4={"caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T", "caGDL.subregions[1, 1, 1].graphite.'C+'.T", "caGDL.subregions[1, 1, 1].graphite.'e-'.T"},
+    y5={"caGDL.subregions[1, 1, 1].gas.H2O.v", "caGDL.subregions[1, 1, 1].gas.N2.v", "caGDL.subregions[1, 1, 1].gas.O2.v", "caGDL.subregions[1, 1, 1].graphite.'C+'.v", "caGDL.subregions[1, 1, 1].graphite.'e-'.v"},
+    y6={"caGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.chemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.chemical.mu", "caGDL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "caGDL.subregions[1, 1, 1].graphite.'e-'.chemical.mu"});

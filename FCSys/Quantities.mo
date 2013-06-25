@@ -217,7 +217,7 @@ package Quantities "Quantities to represent physical properties"
     "Specific thermal capacity";
   type PotentialChemical = Potential (displayUnit="J/mol") "Chemical potential";
   type Temperature = Potential (displayUnit="K");
-  type TemperatureAbsolute = PotentialAbsolute (displayUnit="K")
+  type TemperatureAbsolute = PotentialAbsolute (displayUnit="degC")
     "Absolute temperature";
   type TemperatureRate = PotentialRate (displayUnit="K/s")
     "Rate of temperature";

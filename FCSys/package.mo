@@ -115,6 +115,38 @@ package UsersGuide "User's Guide"
 
     end GettingStarted;
 
+  model SampleResults "Sample results"
+    extends Modelica.Icons.Information;
+    annotation (
+      preferedView="info",
+      DocumentationClass=true,
+      Documentation(info="<html><p>The figures below show results from some of the examples in
+    <a href=\"modelica://FCSys\">FCSys</a>.  The figures are ordered from low-level tests to evaluations
+    of the complete cell.  For more information about any of the results, please
+    follow the links to the associated models.  The models have been simulated using Dymola 7.4 and the plots have been
+    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a>.</p>
+
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionsSound.png\"></a>
+    <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  The nonlinearity is due to upstream discretization (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.SubregionsSound</a>).</p>
+
+    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/ThermalConduction.png\"></a>
+    <br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
+
+    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/ThermalConductionConvection.png\"></a>
+    <br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
+
+    <p align=center id=\"Fig4\"><a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SaturationPressure.png\"></a>
+    <br>Figure 4: H<sub>2</sub>O saturation pressure as a function of temperature (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
+    
+    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionEvaporation.png\"></a>
+    <br>Figure 5: H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\">FCSys.Subregions.Examples.SubregionEvaporation</a>).</p>
+
+    <p>**Add various polarization curves.</p>
+
+    </html>"));
+
+    end SampleResults;
+
   model Glossary "Glossary"
     extends Modelica.Icons.Information;
     annotation (
@@ -382,7 +414,7 @@ package UsersGuide "User's Guide"
     <li>Technical discussions and insight from Mike Angelo, Guido Bender, Severine Busquet,
     Chris Ford, Sebastian Herzig, Ben Lee, George Nelson, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
     <li>Source-code contributions and bug fixes from Mohammad Ali, Kevin Bandy, Martin Sj&ouml;lund, Francois Steinmetz, and Joerg Weiss-Ungeth&uuml;m</li>
-    
+
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href=\"http://www.me.gatech.edu\">George W. Woodruff
@@ -941,38 +973,22 @@ printing and shipping costs may be recovered.</p>
   end UsersGuide;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   preferedView="info",
-  version="2.0.0-alpha",
-  versionBuild=0,
-  dateModified="",
-  revisionID="",
   uses(Modelica(version="3.2")),
   Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
   Documentation(info="<html>
-    <p><a href=\"modelica://FCSys\">FCSys</a> is an open-source library of
+    <p><a href=\"modelica://FCSys\">FCSys</a> is an free, open-source library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = \"http://www.modelica.org/\">Modelica</a>
-    language.  The dynamics include chemical, fluid, thermal, and electrical
-    effects.  There are options to adjust the assumptions, spatial discretization
+    language.  Chemical, electrical, fluid, and thermal
+    phenomena are included.
+    There are options to adjust the assumptions, spatial discretization
     and dimensionality (1D, 2D, or 3D), and the present chemical species and material
-    phases. In fact, the framework could be easily extended to model other electrochemical
+    phases.  The framework is generic and could be extended to other electrochemical
     devices like batteries.</p>
 
-    <p>A fuel cell is similar to a battery except that the reactants (fuel and oxidant)
+    <p>A fuel cell is similar to a battery except that the reactants
     are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
     <table border=0 cellspacing=0 cellpadding=2 align=center style=\"margin-left: auto;
@@ -1031,7 +1047,7 @@ margin-right: auto;\" class=noBorder>
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
     pass through an external load to sustain the net reaction.  As
-    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed from models
+    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model can be constructed from models
     of the same layers in <a href=\"modelica://FCSys\">FCSys</a>.
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
@@ -1041,31 +1057,33 @@ margin-right: auto;\" class=noBorder>
 
     <!--<p align=center id=\"Fig2\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
     <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
-<br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
+<br>Figure 2: Diagram of the <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">PEMFC model</a>.</p>
 
-    <p>The models describe the advection, diffusion, and storage of
+    <p>The models are primarily based on first principles&mdash;the advection, diffusion, and storage of
     material, momentum, and energy.  Upstream
     discretization is applied in a manner that reduces to pure
-    diffusion (i.e., Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
+    diffusion (e.g., Fick's law, Newton's law of viscosity, or Fourier's law) when the bulk velocity is zero.
     The transport equations do
     not use the <a href = \"http://www.modelica.org/\">Modelica</a>
-    <code>stream</code> operator since both diffusion and advection are
+    <code>stream</code> operator since both advection and diffusion are
     important in fuel cells.</p>
 
-    <p>Each layer may be divided into a number of rectilinear regions.  Storage and
-    transport phenomena are co-located (e.g., no distinction between a vessel and a
-    pipe).  Regions may be directly connected without producing nonlinear systems of
+    <p>Each layer may be subdivided in any direction for increased fidelity.  Regions may
+    be directly connected without producing nonlinear systems of
     equations, and species may be independently included in each region.  This is
     different than
     <a href=\"modelica://Modelica.Media\">Modelica.Media</a>,
     where each media model contains a predefined set of species.</p>
 
-    <p>A cell may simulated under specified boundary conditions, as shown in
-    <a href=\"#Fig3\">Figure 3</a>.  Adapters are available to interface with
-    <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a>.</p>
+    <p>A cell may be simulated under specified boundary conditions or connected to
+    <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a> components using
+    <a href=\"modelica://FCSys.Conditions.Adapters\">adapters</a> that are included.
+    <a href=\"#Fig3\">Figure 3</a> shows a series of polarization curves generated
+    from the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">CellProfile</a> model.
+    Please see the <a href=\"modelica://FCSys.UsersGuide.SampleResults\">sample results</a> for more plots.</p>
 
-    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
-<br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
+    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/Resources/Documentation/Polarization.png\"></a>
+<br>Figure 3: Polarization curves under various conditions.</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
 <br>Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
@@ -1082,7 +1100,7 @@ margin-right: auto;\" class=noBorder>
     <ul>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/1/2007:<br>Version 1.0 (as <code>PEMFCSim</code>)</li>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/20/2008:<br>Version 1.1 (to model CO contamination for <a href=\"http://www.hnei.hawaii.edu\">HNEI</a>)</li>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2013:<br>Version 2.0 beta (released in the public domain)</li>
+    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2013:<br>Version 2.0.0-alpha (released in the public domain)</li>
     </ul>
     </html>"),
   Icon(graphics={
@@ -1258,5 +1276,8 @@ margin-right: auto;\" class=noBorder>
         extent={{-30,32},{-24,-62}},
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
-        pattern=LinePattern.None)}));
+        pattern=LinePattern.None)}),
+  version="",
+  dateModified="",
+  revisionID="");
 end FCSys;

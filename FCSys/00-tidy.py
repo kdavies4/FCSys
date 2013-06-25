@@ -48,6 +48,8 @@ rpls = [# Remove tabs.
         ('<br><br>(<br>)+', '<br><br>'),
         # Remove empty lines above annotations.
         (r'\n+(\n *annotation\()', r'\1'),
+        # Don't show the path in the command menu.
+        (r'(file=[\n ]*"Resources/Scripts/Dymola/)([^"]+\.mos")\)', r'\1\2) "\2'),
         # Use shortcuts for Units and Quantities.
         (r' FCSys\.Quantities\.', ' Q.'), # Leading spaces distinguish these from hyperlinks.
         (r' FCSys\.Units\.([^*])', r' U.\1'),
@@ -60,6 +62,15 @@ rpls = [# Remove tabs.
         #(r'  FCSys.Subregions\.', r'  Subregions.'),
         (r'  FCSys.Connectors\.', r'  Connectors.'),
         (r'  FCSys.Characteristics\.', r'  Characteristics.'),
+        # Use shortcuts to enumerations.
+        ('=FCSys.BaseClasses.Axis', '=Axis'),
+        ('=FCSys.BaseClasses.Orientation', '=Orientation'),
+        ('=FCSys.BaseClasses.Side', '=Side'),
+        ('=FCSys.Characteristics.BaseClasses.Phase', '=Phase'),
+        ('=FCSys.Characteristics.BaseClasses.ReferenceEnthalpy', '=ReferenceEnthalpy'),
+        ('=FCSys.Subregions.Species.BaseClasses.Conservation', '=Conservation'),
+        ('=FCSys.Subregions.Species.BaseClasses.InitScalar', '=InitScalar'),
+        ('=FCSys.Subregions.Species.BaseClasses.InitTranslational', '=InitTranslational'),
         # Remove useless import statements.
         (r'import FCSys;\n', ''),
         # One empty line before "end x;"

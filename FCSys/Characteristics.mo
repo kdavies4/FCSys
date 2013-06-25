@@ -175,12 +175,9 @@ package Characteristics
           points={{5.55112e-16,-20},{10,-20},{10,-62},{29,-62}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (
-        experiment,
-        Commands(file=
-              "Resources/Scripts/Dymola/Characteristics.Examples.Correlations.mos"),
-
-        Diagram(graphics));
+      annotation (experiment, Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.Correlations.mos"
+            "Characteristics.Examples.Correlations.mos"));
     end Correlations;
 
     model Properties
@@ -308,7 +305,6 @@ package Characteristics
         b_c=[4188*U.J*m/(U.kg*U.K)],
         B_c=[Deltah0_f - 298.15*U.K*b_c[1, 1], 0],
         d=(294 + 2259.8)*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
        <p>Assumptions:
      <ol>
@@ -424,7 +420,6 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         d=240*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -711,7 +706,7 @@ package Characteristics
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
     package CharacteristicNASA
-      "Thermodynamic package with transport properties based on NASA CEA"
+      "Thermodynamic package with diffusive properties based on NASA CEA"
       extends Characteristic;
       constant Q.TemperatureAbsolute T_lim_zeta_theta[:]={0,Modelica.Constants.inf}
         "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
@@ -825,7 +820,7 @@ package Characteristics
 
     end CharacteristicNASA;
 
-    package Characteristic "Package of thermodynamic and resistive properties"
+    package Characteristic "Package of thermodynamic and diffusive properties"
       import FCSys.BaseClasses.Utilities.Chemistry.charge;
       extends CharacteristicEOS;
 
