@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Phases.BaseClasses</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -69,15 +69,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-<p>If one of the species has <code>consEnergy = Conservation.IC</code> and
-    <code>reduceTemp</code> is <code>true</code>, then
-    <code>initTemp</code> should be set to <code>false</code>.
-    Likewise, if one of the species has <code>consTransX = Conservation.IC</code>,
-    <code>consTransY = Conservation.IC</code>, or <code>consTransZ = Conservation.IC</code>, then
-    <code>initVelX</code> and <code>reduceVel</code> is <code>true</code>, <code>initVelY</code>, or <code>initVelZ</code> should
-    be set to <code>false</code> (respectively).</p>
-
-    <p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
+<p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
     the transport coefficients (&beta;, &zeta;, &eta;, and &theta;) of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.</p>
@@ -99,9 +91,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -112,20 +102,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>false</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>false</td><td>Same temperature for all species</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
-<tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
-<tr><td>Boolean</td><td>initVelY</td><td>true</td><td>Initialize the y component</td></tr>
-<tr><td>Boolean</td><td>initVelZ</td><td>true</td><td>Initialize the z component</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
-<tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -138,7 +117,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -160,16 +138,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Assumptions</font>
   <font color="blue">parameter </font>Boolean reduceVel=false <font color="darkgreen">&quot;Same velocity for all species&quot;</font>;
   <font color="blue">parameter </font>Boolean reduceTemp=false <font color="darkgreen">&quot;Same temperature for all species&quot;</font>;
-
-  <font color="darkgreen">// Initialization</font>
-  <font color="blue">parameter </font>Boolean initVelX=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the x component&quot;</font>;
-  <font color="blue">parameter </font>Boolean initVelY=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the y component&quot;</font>;
-  <font color="blue">parameter </font>Boolean initVelZ=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the z component&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_IC[Axis]={0,0,0} <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Initial velocity (<b>&phi;</b><sub>IC</sub>)&quot;</font>;
-  <font color="blue">parameter </font>Boolean initTemp=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=300*U.K, start=environment.T) <font color="blue">
-    if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inertDalton(<font color="blue">final </font>n_trans=n_trans);
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFaces[Axis.x]<font color="blue"> and </font>n_spec &gt; 0 <font color="darkgreen">
@@ -212,18 +180,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <font color="blue">final </font>n_trans=n_trans,
     <font color="blue">final </font>inclTranslational=reduceVel,
     <font color="blue">final </font>inclThermal=reduceTemp,
-    translational(phi(
-        <font color="blue">each </font>stateSelect=StateSelect.prefer,
-        <font color="blue">final </font>start=phi_IC[cartTrans],
-        <font color="blue">final </font>fixed={initVelX,initVelY,initVelZ}[<font color="red">index</font>(inclTrans)])),
-    thermal(T(
-        stateSelect=StateSelect.prefer,
-        <font color="blue">final </font>start=T_IC,
-        <font color="blue">final </font>fixed=initTemp))) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceVel<font color="blue"> or </font>reduceTemp) <font color="darkgreen">
+    translational(phi(<font color="blue">each </font>stateSelect=StateSelect.prefer)),
+    thermal(T(stateSelect=StateSelect.prefer))) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceVel<font color="blue">
+     or </font>reduceTemp) <font color="darkgreen">
     &quot;Internal connector to directly couple velocities and/or temperatures&quot;</font>;
-  <font color="darkgreen">// Note:  It would be simpler to use</font>
-  <font color="darkgreen">// {initVelX, initVelY, initVelZ}[cartTrans] for the fixed attribute of</font>
-  <font color="darkgreen">// inert.translational, but Dymola 7.4 refuses to accept it.</font>
 
 <font color="blue">equation </font>
   <font color="blue">if </font>n_spec == 0<font color="blue"> then</font>
@@ -238,7 +198,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:06:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:39 2013.
 </div>
 </body>
 </html>

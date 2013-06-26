@@ -3,7 +3,7 @@
 <title>FCSys.Conditions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Models to specify and measure operating conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -74,28 +74,29 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Conditions.EnvironmentI.png" alt="FCSys.Conditions.Environment" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Environment"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Environment</h2>
-<b>Environmental properties for a model</b><p>
+<b>Environmental properties for a model</b>
+<h3>Information</h3>
 
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p>
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>1</td><td>Relative humidity [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2_dry</td><td>0.208</td><td>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>0.8</td><td>Relative humidity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2</td><td>0.208</td><td>Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[Axis]</td><td>{0,Modelica.Constants.g_n*U&hellip;.</td><td>Acceleration due to body forces [l/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">PotentialLineic</a></td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field [l.m/(N.T2)]</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">record</font> Environment <font color="darkgreen">&quot;Environmental properties for a model&quot;</font>
-  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top3;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
 
   <font color="darkgreen">// Store the values of the base constants and units.</font>
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a> baseUnits=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
@@ -104,22 +105,22 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) = 298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(displayUnit=&quot;%&quot;) = 1 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_O2_dry(
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(
+    displayUnit=&quot;%&quot;,
+    max=1) = 0.8 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2Og=RH*<font color="red">
+      Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(T/U.K)*U.Pa <font color="darkgreen">
+    &quot;Pressure of H2O vapor&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_O2(
     <font color="blue">final </font>max=1,
     displayUnit=&quot;%&quot;) = 0.208 <font color="darkgreen">
-    &quot;Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>)&quot;</font>;
+    &quot;Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>)&quot;</font>;
   <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0} <font color="darkgreen">
     &quot;Acceleration due to body forces&quot;</font>;
   <font color="darkgreen">// The gravity component is positive because it&#39;s added to the transient</font>
   <font color="darkgreen">// term in the Species model.</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">Q.PotentialLineic</a> E[Axis]={0,0,0} <font color="darkgreen">&quot;Electric field&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_H2O(
-    <font color="blue">final </font>max=1,
-    displayUnit=&quot;%&quot;) = 0.2 <font color="darkgreen">
-    &quot;Gas H<sub>2</sub>O fraction (<i>n</i><sub>H2O</sub>)&quot;</font>;
-  <font color="darkgreen">// TODO:  Cast this in terms of relative humidity.</font>
 
 <font color="blue">end </font>Environment;
 </pre>
@@ -163,18 +164,14 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
 <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>crossOver</td><td>false</td><td>Cross over (otherwise, pass through)</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -184,7 +181,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive2</td><td>Positive face 2</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -213,7 +209,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:01:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:51:16 2013.
 </div>
 </body>
 </html>

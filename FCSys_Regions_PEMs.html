@@ -3,7 +3,7 @@
 <title>FCSys.Regions.PEMs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -103,9 +103,7 @@ the z axis extends across the width of the channel.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -123,9 +121,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -138,7 +134,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -169,8 +164,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           inclH2O=true,
           &#39;C19HF37O5S-&#39;(consMaterial=Conservation.IC, initMaterial=InitScalar.Pressure),
 
-          &#39;H+&#39;(mu=0.083*U.S/(0.95*U.M*U.cm)),
-          H2O(initMaterial=InitScalar.None))));
+          &#39;H+&#39;(
+            mu=0.083*U.S/(0.95*U.M*U.cm),
+            initTransX=InitTranslational.None,
+            initEnergy=InitScalar.None),
+          H2O(initMaterial=InitScalar.None, initEnergy=InitScalar.None))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)&quot;</font>;
@@ -200,16 +198,14 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   DuPont<sup>TM</sup> Nafion&reg; N-112 (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
   <p>For more information, see the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -225,9 +221,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -239,7 +233,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -265,16 +258,14 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; N-115 (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
   <p>For more information, see the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -290,9 +281,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -304,7 +293,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -330,16 +318,14 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; N-117 (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
   <p>For more information, see the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -355,9 +341,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -369,7 +353,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -395,16 +378,14 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; NE-1110 (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
   <p>For more information, see the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -420,9 +401,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -434,7 +413,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -461,16 +439,14 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; NE-1135 (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
   <p>For more information, see the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -486,9 +462,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -500,7 +474,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -527,7 +500,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-211
   in [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004NRE</a>].</p>
 
@@ -535,9 +508,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -553,9 +524,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -567,7 +536,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -594,7 +562,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004N</a>]
   and the density of protons set by
-  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
+  <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-212
   in [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">DuPont2004NRE</a>].</p>
 
@@ -602,9 +570,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -620,9 +586,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -634,7 +598,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -652,7 +615,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:05:26 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:54:52 2013.
 </div>
 </body>
 </html>

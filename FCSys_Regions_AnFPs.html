@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -87,7 +87,7 @@ of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco G
   also based on
   Entegris/Poco Graphite AXF-5Q
   and the density of electrons from
-  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  <a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).
 There is additional data in the
 text layer of this model.</p>
@@ -97,9 +97,7 @@ text layer of this model.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -116,9 +114,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -131,7 +127,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -148,7 +143,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <font color="blue">final </font>inclFacesY=true,
     inclFacesZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> (
-        inclTransX=false,
+        inclTransX=true,
         inclTransY=true,
         inclTransZ=false,
         gas(
@@ -157,21 +152,29 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           k=<font color="red">fill</font>(epsilon^(3/2), 3),
           inclH2=true,
           inclH2O=true,
-          H2(p_IC=(1 - environment.n_H2O)*environment.p),
-          H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
-
+          H2(
+            initTransX=InitTranslational.None,
+            initTransY=InitTranslational.None,
+            initTransZ=InitTranslational.None,
+            initEnergy=InitScalar.None,
+            p_IC=environment.p - environment.p_H2Og),
+          H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
         graphite(
           reduceTemp=true,
           k=<font color="red">fill</font>((1 - epsilon)^(3/2), 3),
           &#39;inclC+&#39;=true,
           &#39;incle-&#39;=true,
           &#39;C+&#39;(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
-          &#39;e-&#39;(consTransY=Conservation.IC,mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol))),
-
+          &#39;e-&#39;(
+            consTransY=Conservation.IC,
+            initTransX=InitTranslational.None,
+            initEnergy=InitScalar.None,
+            rho_IC=17842.7*U.C/U.cc,
+            mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol))),
         liquid(
           inclH2O=true,
           k=<font color="red">fill</font>(epsilon^(3/2), 3),
-          H2O(V_IC=Modelica.Constants.eps))));
+          H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))));
 
   <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
   <font color="darkgreen">// regarding the settings of k for each phase.</font>
@@ -183,15 +186,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     &quot;Volumetric porosity (&epsilon;)&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
-    subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N) <font color="blue">if </font>
-    environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">&quot;Molar concentration of H2&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
-    ones</font>(
-    n_x,
-    n_y,
-    n_z) - n_H2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
-    &quot;Molar concentration of H2O&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH[n_x, n_y, n_z](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>displayUnit=&quot;%&quot;) = <font color="red">
+    Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(subregions.gas.H2O.T/U.K)
+     ./ subregions.gas.inertDalton.p <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Relative humidity&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> epsilonV=epsilon*V <font color="darkgreen">&quot;Fluid volume&quot;</font>;
@@ -260,16 +260,14 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 (<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
 Entegris/Poco Graphite AXF-5Q as well
   and the density of electrons from
-  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+  <a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
   (&sim;0.1849 mol/cm<sup>3</sup>).</p>
 
 <p>For more information, see the
     <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> (Anode flow plate).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -283,9 +281,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -297,7 +293,6 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -317,7 +312,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:04:52 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:54:19 2013.
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Models for single-species storage, transport, and exchange of material, translational momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -106,9 +106,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -156,9 +154,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -169,7 +165,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -203,9 +198,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>Please see the documentation of the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -255,9 +248,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -268,7 +259,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -400,7 +390,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     If two <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> instances
     are connected through their <code>inertDalton</code> connectors or faces
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Mattsson1993B</a>] is necessary.</li>
+    quantity, then index reduction [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Mattsson1993B</a>] is necessary.</li>
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
     <li>The area fill factor (<b><i>k</i></b>) can be used to account for the effects of porosity and tortousity
@@ -479,9 +469,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -530,9 +518,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td>Boolean</td><td>invertEOS</td><td>true</td><td>Invert the equation of state</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -543,7 +529,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[n_faces, Side]</td><td>Connectors to transport material, translational momentum, and thermal energy through the boundaries</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -920,6 +905,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     <font color="blue">final </font>fixed=false,
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Gibbs potential at reference pressure&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> faces_mPhidot[n_faces, Side, 2] <font color="darkgreen">&quot;Directly calculated shear forces&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_actual_chemical[n_trans] <font color="darkgreen">&quot;Velocity of the chemical stream&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_actual_physical[n_trans] <font color="darkgreen">&quot;Velocity of the physical stream&quot;</font>;
+  <font color="darkgreen">// Note:  Dymola 7.4 can&#39;t individually index the components of a</font>
+  <font color="darkgreen">// stream variable (e.g., actualStream(chemical.phi[i])), so these</font>
+  <font color="darkgreen">// variables are necessary.</font>
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
@@ -989,14 +979,15 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
     <font color="blue">end if</font>;
   <font color="blue">end if</font>;
 
-  <font color="darkgreen">// Velocity</font>
+  <font color="darkgreen">// Translational momentum</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans<font color="blue"> loop</font>
     <font color="blue">if </font>consTrans[cartTrans[i]] == Conservation.IC<font color="blue"> then</font>
       <font color="darkgreen">// Ensure that a condition is selected since the state is</font>
       <font color="darkgreen">// prescribed.</font>
       <font color="red">assert</font>(initTrans[cartTrans[i]] &lt;&gt; InitTranslational.None, &quot;The state for the &quot;
-         + {&quot;x&quot;,&quot;y&quot;,&quot;z&quot;}[cartTrans[i]] + &quot;-axis component of translational momentum of &quot;
-         + Data.formula + &quot; is prescribed,
+         + (<font color="blue">if </font>cartTrans[i] == Axis.x<font color="blue"> then </font>&quot;x&quot;<font color="blue"> else </font><font color="blue">if </font>cartTrans[i] == Axis.y<font color="blue">
+         then </font>&quot;y&quot;<font color="blue"> else </font>&quot;z&quot;) + &quot;-axis component of translational momentum of &quot; +
+        Data.formula + &quot; is prescribed,
 yet its condition is not defined.  Choose any condition besides None.&quot;);
     <font color="blue">elseif </font>consTrans[cartTrans[i]] == Conservation.Dynamic<font color="blue"> then</font>
       <font color="darkgreen">// Initialize since there&#39;s a time-varying state.</font>
@@ -1026,9 +1017,9 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
       N = N_IC;
     <font color="blue">elseif </font>initEnergy == InitScalar.AmountSS<font color="blue"> then</font>
       <font color="red">der</font>(N) = 0;
-    <font color="blue">elseif </font>initMaterial == InitScalar.Density<font color="blue"> then</font>
+    <font color="blue">elseif </font>initEnergy == InitScalar.Density<font color="blue"> then</font>
       1/v = rho_IC;
-    <font color="blue">elseif </font>initMaterial == InitScalar.DensitySS<font color="blue"> then</font>
+    <font color="blue">elseif </font>initEnergy == InitScalar.DensitySS<font color="blue"> then</font>
       <font color="red">der</font>(1/v) = 0;
     <font color="blue">elseif </font>initEnergy == InitScalar.Volume<font color="blue"> then</font>
       V = V_IC;
@@ -1057,6 +1048,7 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   <font color="blue">end if</font>;
 
 <font color="blue">equation </font>
+
   <font color="darkgreen">// Aliases (only to clarify and simplify other equations)</font>
   T = inert.thermal.T;
   p = inertDalton.p;
@@ -1070,6 +1062,8 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   Ndot_faces = faces.Ndot + faces.rho .* {{faces[i, Side.n].phi[Orientation.normal],
     -faces[i, Side.p].phi[Orientation.normal]}*A[cartFaces[i]] <font color="blue">for </font>i<font color="blue"> in </font>1:
     n_faces};
+  phi_actual_chemical = <font color="red">actualStream</font>(chemical.phi);
+  phi_actual_physical = <font color="red">actualStream</font>(physical.phi);
 
   <font color="darkgreen">// Thermodynamic correlations</font>
   <font color="blue">if </font>invertEOS<font color="blue"> then</font>
@@ -1083,13 +1077,14 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
 
   <font color="darkgreen">// Diffusive exchange</font>
   chemical.mu = h - chemical.sT <font color="darkgreen">&quot;Reaction (rate equation elsewhere)&quot;</font>;
-  <font color="blue">if </font>tauprime &gt; Modelica.Constants.small<font color="blue"> then</font>
+  <font color="blue">if </font>tauprime &gt;= Modelica.Constants.small<font color="blue"> then</font>
     tauprime*physical.Ndot = N*(<font color="red">exp</font>((physical.mu - g0)/T) - <font color="red">exp</font>((chemical.mu -
       g0)/T)) <font color="darkgreen">&quot;Phase change&quot;</font>;
   <font color="blue">else</font>
-    physical.mu = chemical.mu;
-    <font color="darkgreen">// This avoids nonlinear equations when tauprime=0.  Dymola 7.4 can&#39;t</font>
-    <font color="darkgreen">// derive it symbolically from the previous equation.</font>
+    0 = <font color="blue">if </font>N &gt; 0<font color="blue"> or </font>physical.mu &gt; chemical.mu<font color="blue"> then </font>physical.mu - chemical.mu<font color="blue">
+       else </font>physical.Ndot;
+    <font color="darkgreen">// The first branch avoids nonlinear equations when tauprime=0.</font>
+    <font color="darkgreen">// Dymola 7.4 can&#39;t derive it symbolically from the previous equation.</font>
   <font color="blue">end if</font>;
   mu*inertDalton.mPhidot = N*(inertDalton.phi - phi) <font color="darkgreen">&quot;Translational momentum&quot;</font>;
   nu*inertDalton.Qdot = N*(inertDalton.T - T) <font color="darkgreen">&quot;Thermal energy&quot;</font>;
@@ -1106,7 +1101,6 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
       <font color="darkgreen">// Material (central difference)</font>
       eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho - 1/v)*
         2;
-      <font color="darkgreen">// **Try upstream again, update doc.</font>
 
       <font color="darkgreen">// Translational momentum</font>
       beta*faces[i, side].mPhidot[Orientation.normal] = Lprime[cartFaces[i]]*(
@@ -1225,20 +1219,15 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
       M*((<font color="blue">if </font>consTrans[cartTrans[j]] == Conservation.Dynamic<font color="blue"> then </font><font color="red">der</font>(phi[j])/U.s<font color="blue">
          else </font>0) + environment.a[cartTrans[j]]) + N*Data.z*environment.E[
         cartTrans[j]] + (<font color="blue">if </font>inclFaces[cartTrans[j]]<font color="blue"> then </font><font color="red">Delta</font>(p_faces[
-        facesCart[cartTrans[j]], :])*A[cartTrans[j]]<font color="blue"> else </font>0) = Data.m*((<font color="red">
-        actualStream</font>(chemical.phi) - phi) .* chemical.Ndot + (<font color="red">actualStream</font>(
-        physical.phi) - phi) .* physical.Ndot)[j] + inert.translational.mPhidot[
-        j] + inertDalton.mPhidot[j] + <font color="red">sum</font>((faces[i, :].phi[<font color="red">cartWrap</font>(cartTrans[j]
-         - cartFaces[i] + 1)] - {phi[j],phi[j]})*Ndot_faces[i, :]*Data.m + <font color="red">
-        Sigma</font>(faces[i, :].mPhidot[<font color="red">cartWrap</font>(cartTrans[j] - cartFaces[i] + 1)]) <font color="blue">
-        for </font>i<font color="blue"> in </font>1:n_faces) <font color="darkgreen">&quot;Conservation of translational momentum&quot;</font>;
+        facesCart[cartTrans[j]], :])*A[cartTrans[j]]<font color="blue"> else </font>0) = Data.m*((
+        phi_actual_chemical[j] - phi[j])*chemical.Ndot + (phi_actual_physical[j]
+         - phi[j])*physical.Ndot) + inert.translational.mPhidot[j] +
+        inertDalton.mPhidot[j] + <font color="red">sum</font>((faces[i, :].phi[<font color="red">cartWrap</font>(cartTrans[j] -
+        cartFaces[i] + 1)] - {phi[j],phi[j]})*Ndot_faces[i, :]*Data.m + <font color="red">Sigma</font>(
+        faces[i, :].mPhidot[<font color="red">cartWrap</font>(cartTrans[j] - cartFaces[i] + 1)]) <font color="blue">for </font>i<font color="blue">
+         in </font>1:n_faces) <font color="darkgreen">&quot;Conservation of translational momentum&quot;</font>;
       <font color="darkgreen">// Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive</font>
       <font color="darkgreen">// form of the balance (M*der(phi) = &hellip; rather than der(M*phi) = &hellip;).</font>
-      <font color="darkgreen">// Note:  In Dymola 7.4 it isn&#39;t possible to individually index the</font>
-      <font color="darkgreen">// components of advective exchange, e.g.,</font>
-      <font color="darkgreen">// (actualStream(chemical.phi) .* chemical.Ndot)[i]</font>
-      <font color="darkgreen">// must be used instead of</font>
-      <font color="darkgreen">// actualStream(chemical.phi[i])*chemical.Ndot[i].</font>
     <font color="blue">end if</font>;
   <font color="blue">end for</font>;
 
@@ -1298,7 +1287,7 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:06:15 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:40 2013.
 </div>
 </body>
 </html>

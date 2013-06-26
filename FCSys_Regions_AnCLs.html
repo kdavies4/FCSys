@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnCLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-18">
+<meta name="date" content="2013-6-25">
 <meta name="description" content="Anode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -19,7 +19,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -99,9 +99,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -120,9 +118,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -135,7 +131,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -159,9 +154,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           reduceVel=true,
           reduceTemp=true,
           k=<font color="red">fill</font>(epsilon^(3/2), 3),
-          H2(p_IC=(1 - environment.n_H2O)*environment.p),
-          H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC)),
+          H2(consTransX=Conservation.IC, p_IC=environment.p - environment.p_H2Og),
 
+          H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
         graphite(
           reduceTemp=true,
           k=<font color="red">fill</font>((0.5*(1 - epsilon))^(3/2), 3),
@@ -180,7 +175,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           H2O(initMaterial=InitScalar.None)),
         liquid(k=<font color="red">fill</font>(epsilon^(3/2), 3))));
 
-  <font color="darkgreen">// Initialize for zero reaction rate</font>
+  <font color="darkgreen">// TODO: Initialize for zero reaction rate</font>
   <font color="darkgreen">// (initMaterial=InitScalar.ReactionRate?) for this and CaCL.</font>
 
   <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
@@ -192,15 +187,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
-    subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N) <font color="blue">if </font>
-    environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">&quot;Molar concentration of H2&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
-    ones</font>(
-    n_x,
-    n_y,
-    n_z) - n_H2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
-    &quot;Molar concentration of H2O&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH[n_x, n_y, n_z](
+    <font color="blue">each </font>stateSelect=StateSelect.never,
+    <font color="blue">each </font>displayUnit=&quot;%&quot;) = <font color="red">
+    Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(subregions.gas.H2O.T/U.K)
+     ./ subregions.gas.inertDalton.p <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Relative humidity&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> epsilonV=epsilon*V <font color="darkgreen">&quot;Fluid volume&quot;</font>;
@@ -228,9 +220,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> (Anode catalyst layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -248,9 +238,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>) [1]</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -262,7 +250,6 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -276,7 +263,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 18 14:05:13 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:54:40 2013.
 </div>
 </body>
 </html>
