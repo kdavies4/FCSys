@@ -3,7 +3,7 @@
 <title>FCSys &mdash; Modelica library of fuel cell models</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Modelica fuel cell library">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -51,16 +51,17 @@
 
 <h3>Information</h3>
 
-<p><a href="index.html#FCSys">FCSys</a> is an open-source library of
+<p><a href="index.html#FCSys">FCSys</a> is an free, open-source library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
-    language.  The dynamics include chemical, fluid, thermal, and electrical
-    effects.  There are options to adjust the assumptions, spatial discretization
+    language.  Chemical, electrical, fluid, and thermal
+    phenomena are included.
+    There are options to adjust the assumptions, spatial discretization
     and dimensionality (1D, 2D, or 3D), and the present chemical species and material
-    phases. In fact, the framework could be easily extended to model other electrochemical
+    phases.  The framework is generic and could be extended to other electrochemical
     devices like batteries.</p>
 
-    <p>A fuel cell is similar to a battery except that the reactants (fuel and oxidant)
+    <p>A fuel cell is similar to a battery except that the reactants
     are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
     <table border=0 cellspacing=0 cellpadding=2 align=center style="margin-left: auto;
@@ -119,7 +120,7 @@ margin-right: auto;" class=noBorder>
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
     pass through an external load to sustain the net reaction.  As
-    shown in <a href="#Fig2">Figure 2</a>, a PEMFC model may be constructed from models
+    shown in <a href="#Fig2">Figure 2</a>, a PEMFC model can be constructed from models
     of the same layers in <a href="index.html#FCSys">FCSys</a>.
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
@@ -129,31 +130,33 @@ margin-right: auto;" class=noBorder>
 
     <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600>-->
     <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600></a>
-<br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
+<br>Figure 2: Diagram of the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">PEMFC model</a>.</p>
 
-    <p>The models describe the advection, diffusion, and storage of
+    <p>The models are primarily based on first principles&mdash;the advection, diffusion, and storage of
     material, momentum, and energy.  Upstream
     discretization is applied in a manner that reduces to pure
-    diffusion (i.e., Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
+    diffusion (e.g., Fick's law, Newton's law of viscosity, or Fourier's law) when the bulk velocity is zero.
     The transport equations do
     not use the <a href = "http://www.modelica.org/">Modelica</a>
-    <code>stream</code> operator since both diffusion and advection are
+    <code>stream</code> operator since both advection and diffusion are
     important in fuel cells.</p>
 
-    <p>Each layer may be divided into a number of rectilinear regions.  Storage and
-    transport phenomena are co-located (e.g., no distinction between a vessel and a
-    pipe).  Regions may be directly connected without producing nonlinear systems of
+    <p>Each layer may be subdivided in any direction for increased fidelity.  Regions may
+    be directly connected without producing nonlinear systems of
     equations, and species may be independently included in each region.  This is
     different than
     <a href="http://build.openmodelica.org/Documentation/Modelica.Media.html#Modelica.Media">Modelica.Media</a>,
     where each media model contains a predefined set of species.</p>
 
-    <p>A cell may simulated under specified boundary conditions, as shown in
-    <a href="#Fig3">Figure 3</a>.  Adapters are available to interface with
-    <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid">Modelica.Fluid</a>.</p>
+    <p>A cell may be simulated under specified boundary conditions or connected to
+    <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid">Modelica.Fluid</a> components using
+    <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">adapters</a> that are included.
+    <a href="#Fig3">Figure 3</a> shows a series of polarization curves generated
+    from the <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a> model **Update with new plot (currently old result).
+    Please see the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.SampleResults">sample results</a> for more plots.</p>
 
-    <p align=center id="Fig3"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png"></a>
-<br>Figure 3: Diagram of a test model (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
+    <p align=center id="Fig3"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/Polarization.png"></a>
+<br>Figure 3: Polarization curves under various conditions.</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
 <br>Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
@@ -200,7 +203,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:51:13 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:42 2013.
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <title>FCSys.Regions.PEMs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -110,7 +110,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.SubregionIonomerO&hellip;</td><td>Base subregion model</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{100*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -148,7 +148,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x={100*U.micro*U.m},
-    L_y={U.m},
+    L_y={2*U.m},
     L_z={5*U.mm},
     <font color="blue">final </font>inclFacesX=true,
     inclFacesY=false,
@@ -168,7 +168,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             mu=0.083*U.S/(0.95*U.M*U.cm),
             initTransX=InitTranslational.None,
             initEnergy=InitScalar.None),
-          H2O(initMaterial=InitScalar.None, initEnergy=InitScalar.None))));
+          H2O(initEnergy=InitScalar.None,initMaterial=InitScalar.None))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)&quot;</font>;
@@ -211,7 +211,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{51*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -271,7 +271,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{127*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -331,7 +331,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{183*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -391,7 +391,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{254*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -452,7 +452,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{89*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -514,7 +514,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{25.4*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -576,7 +576,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{50.8*U.micro*U.m}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -615,7 +615,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:54:52 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:45 2013.
 </div>
 </body>
 </html>

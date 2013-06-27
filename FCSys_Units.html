@@ -3,7 +3,7 @@
 <title>FCSys.Units</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -220,7 +220,7 @@ The function also sets the default display units.  It is automatically called wh
 loaded from the "FCSys/load.mos" script.  It can also be called manually from the
 "Re-initialize the units" command available in Dymola from the
 <a href="FCSys_Units.html#FCSys.Units">Units</a> package or any subpackage.  A spreadsheet
-("FCSys/Resources/quantities.xls") is available to help
+(<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/quantities.xls">Resources/quantities.xls</a>) is available to help
 maintain the quantities, default units, and the setup function.</p>
 
 <p>The values of the units, constants, and prefixes can be evaluated by translating the
@@ -253,7 +253,9 @@ most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
 
   <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
-  <a href="http://www.python.org">Python</a>, C).</p>
+  <a href="http://www.python.org">Python</a>, C).  In fact, this has been implemented in the
+  included <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Source/Python/doc/index.html">FCRes</a> module for
+  plotting and analysis.</p>
 
 <hr>
 
@@ -790,7 +792,7 @@ For more information, see the documentation for the
     &quot;V&quot;,
     1/V) <font color="darkgreen">&quot;Potential&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
+    &quot;l.m/(N.T2)&quot;,
     &quot;V/m&quot;,
     m/V) <font color="darkgreen">&quot;Lineic potential&quot;</font>;
   <font color="red">defineUnitConversion</font>(
@@ -1370,7 +1372,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:54 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:11 2013.
 </div>
 </body>
 </html>

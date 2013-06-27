@@ -3,8 +3,8 @@
 <title>FCSys.Subregions.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
-<meta name="description" content="Models for single-species storage, transport, and exchange of material, translational momentum, and energy">
+<meta name="date" content="2013-7-2">
+<meta name="description" content="Models for single-species, single-phase storage, transport, and exchange of material, translational momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -47,7 +47,7 @@
 
 <h2><a name="FCSys.Subregions.Species"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Species</h2>
 
-<b>Models for single-species storage, transport, and exchange of material, translational momentum, and energy</b>
+<b>Models for single-species, single-phase storage, transport, and exchange of material, translational momentum, and energy</b>
 
 <h3>Information</h3>
 
@@ -95,14 +95,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <li>Zero dynamic compressibility (&rArr; uniform velocity in the axial direction)</li>
   <li>Zero fluidity (&rArr; no shearing)</li></ol></p>
 
-  <p>Usually, conditions should be applied to specify the velocity (typically <b>0</b>).  In a group of connected solid species
-  of a single type (instances of a model derived from this one), there should be exactly one equation to specify the velocity
-  along each Cartesian axis.
-  For example, the x-axis velocity may be given by setting <code>consTransX</code> to <code>Conservation.IC</code> in one of the instances
-  (x-axis velocity will be <code>phi_IC[Axis.x]</code> for all time).  Alternatively, the velocity at one of the faces on the
-  outside of the
-  group could be specified using a boundary condition from the <a href="FCSys_Conditions.html#FCSys.Conditions">Conditions</a> package.</p>
-
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIsochoric">SpeciesIsochoric</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material).
 <p>
@@ -126,18 +118,18 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of conservation equations</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.Dynamic</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consMaterial</td><td>Conservation.IC</td><td>Material</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransX</td><td>Conservation.IC</td><td>X-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransY</td><td>Conservation.IC</td><td>Y-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consTransZ</td><td>Conservation.IC</td><td>Z-axis translational momentum</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the thermal state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_IC</td><td>&nbsp;</td><td>Initial volume (<i>V</i><sub>IC</sub>) [l3]</td></tr>
@@ -146,9 +138,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>zeros(3)</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
 <tr><td>Boolean</td><td>invertEOS</td><td>false</td><td>Invert the equation of state</td></tr>
@@ -158,7 +150,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>Connector for reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Connector for reactions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a></td><td>physical</td><td>Connector for phase change</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Connector to directly couple velocity or temperature with other species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertDalton</td><td>Connector for translational and thermal diffusive exchange, with additivity of pressure</td></tr>
@@ -176,6 +168,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">final </font>upstreamZ=false,
     <font color="blue">final </font>phi_IC=<font color="red">zeros</font>(3),
     <font color="blue">final </font>I_IC,
+    <font color="blue">final </font>consMaterial=Conservation.IC,
     <font color="blue">final </font>consTransX=Conservation.IC,
     <font color="blue">final </font>consTransY=Conservation.IC,
     <font color="blue">final </font>consTransZ=Conservation.IC,
@@ -226,11 +219,11 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Volume</td><td>Method of initializing the material state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the thermal state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_IC</td><td>&nbsp;</td><td>Initial volume (<i>V</i><sub>IC</sub>) [l3]</td></tr>
@@ -239,9 +232,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I_IC[Axis]</td><td>{0,0,0}</td><td>Initial current (<i><b>I</b></i><sub>IC</sub>) [N/T]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
@@ -252,7 +245,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>Connector for reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Connector for reactions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a></td><td>physical</td><td>Connector for phase change</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Connector to directly couple velocity or temperature with other species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertDalton</td><td>Connector for translational and thermal diffusive exchange, with additivity of pressure</td></tr>
@@ -265,8 +258,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> SpeciesIsochoric <font color="darkgreen">
   &quot;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an isochoric material&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
-    initMaterial=InitScalar.Volume,
     invertEOS=false,
+    initMaterial=InitScalar.Volume,
     <font color="blue">final </font>eta=1);
 
   <font color="darkgreen">// Note:  Pressure, which is the default material IC for the base model,</font>
@@ -296,7 +289,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
        grid.</li>
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
           are common to material, translational, and thermal transport.</li>
-       <li>There is no radiative heat transfer.</li>
+       <li>There is no radiative heat transfer (or else it must be linearized).</li>
        <li>Rotational momentum is not exchanged, transported, or stored.</li>
        <li>For the purpose of the material, translational momentum, and energy balances, the
        cross sectional areas of the faces are assumed to be the full cross-sectional
@@ -305,16 +298,17 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     </ol>
     Other assumptions are optional via the parameters.</p>
 
-    <p>Figure 1 shows how instances of
+    <p><a href="#Fig1">Figure 1</a> shows how instances of
     <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models (derived from this
     model) are
-    connected within a <a href="FCSys_Subregions.html#FCSys.Subregions">Subregion</a>.  The
+    connected within a <a href="FCSys_Subregions.html#FCSys.Subregions">Subregion</a>.  A single species in
+    a single phase is called a <i>configuration</i>. The
     generalized resistances (<i>R</i>) affect the phase change rate, forces, and heat flow rates
     associated with differences in activity, velocity, and temperature (respectively) between
-    each species and a common node.  These exchange processes are diffusive.
+    each configuration and a common node.  These exchange processes are diffusive.
 
     <p>In general, the resistances are included within the
-    <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models.  For reactions, however,
+    <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> model.  For reactions, however,
     the rate equation is more complex and is included in the
     <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model.</p>
 
@@ -325,7 +319,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
     <p>The advective exchange is modeled using <code>stream</code> connectors
     (<a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a> and
-    <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>).
+    <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>).
   The rate of advection of translational momentum is the
   product of the velocity of the source (&phi;) and the mass flow rate
   (<i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
@@ -336,24 +330,24 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   translational momentum is split on a mass basis and the thermal stream is split
   on a particle-number basis.</p>
 
-    <p align=center><img src="images/Exchange.png">
-<br>Figure 1:  Exchange of a quantity (translational momentum or thermal energy) among species
+    <p align=center id="Fig1"><img src="images/Exchange.png">
+<br>Figure 1:  Exchange of a quantity (material, translational momentum, or thermal energy) among configurations
     (A, B, and C) within a subregion.</p>
 
-    <p>Figure 2 shows how
-    instances of the same type of <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> model
-    are connected between neighboring instances of a
+    <p><a href="#Fig2">Figure 2</a> shows how
+    a configuration
+    is connected between neighboring instances of a
     <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>.
     Material, translational momentum, and thermal energy are transported by both advection and diffusion.
     Upstream discretization is applied if it is enabled via the <code>upstreamX</code>,
-    etc. parameters.  Similar to exchange, the transport resistances are included inside the
+    etc. parameters.  Like for exchange, the transport resistances are inside the
     <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> model.</p>
 
-    <p align=center><img src="images/Transport.png">
-<br>Figure 2:  Transport of a quantity associated with the same species
+    <p align=center id="Fig2"><img src="images/Transport.png">
+<br>Figure 2:  Transport of a quantity associated with the same configuration
     between subregions (1 and 2).</p>
 
-    <p>The <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> instances
+<p>The <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> instances
     within a <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">Phase</a> are combined by Dalton's law of
     partial pressures (see the
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector), as shown
@@ -387,7 +381,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     (<i>Massic</i> indicates a quantity divided by mass.)</li>
     <li>In general, if material resistivity, dynamic compressibility, fluidity, or thermal resistivity is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
-    If two <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> instances
+    If two configurations
     are connected through their <code>inertDalton</code> connectors or faces
     and both have zero generalized resistivities for a
     quantity, then index reduction [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Mattsson1993B</a>] is necessary.</li>
@@ -421,8 +415,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     is taken to be zero in each translational transport equation.  However, the corresponding forces
     in the <code>faces</code> connector array are not included in the momentum or energy balances.
     If it is necessary to set a component of velocity to zero but still include it in the energy balance, then
-    set the corresponding component of <code>phi_IC</code> to zero and <code>consTransX<code>,
-    <code>consTransY<code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
+    set the corresponding component of <code>phi_IC</code> to zero and <code>consTransX</code>,
+    <code>consTransY</code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>consMaterial</code> to <code>Conservation.IC</code> and <code>initMaterial</code>
     to <code>InitScalar.Pressure</code> for one of the species.</li>
@@ -450,6 +444,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     force due to diffusion.  Translational advection is calculated from the velocity and the material current.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
     thermal energy is determined from the thermodynamic state at the boundary and the material current.</p>
+
+**Discuss thermal Nusselt number.  Default is 1 (conduction); use 3.66 or 4.23 for internal flow if uniform
+temperature or uniform heat flux.
 
     <p>In evaluating the dynamics of a phase, it is typically assumed that all of the species
     exist at the same velocity and temperature.  The translational and thermal time constants
@@ -496,11 +493,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a></td><td>consEnergy</td><td>Conservation.Dynamic</td><td>Energy</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>) [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>3.66</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material and energy</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Pressure</td><td>Method of initializing the material balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the energy balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initMaterial</td><td>InitScalar.Pressure</td><td>Method of initializing the material state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a></td><td>initEnergy</td><td>InitScalar.Temperature</td><td>Method of initializing the thermal state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial density (&rho;<sub>IC</sub>) [N/l3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_IC</td><td>&nbsp;</td><td>Initial volume (<i>V</i><sub>IC</sub>) [l3]</td></tr>
@@ -509,9 +506,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential (<i>g</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Translational momentum</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis balance</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis balance</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransX</td><td>InitTranslational.Velocity</td><td>Method of initializing the x-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransY</td><td>InitTranslational.Velocity</td><td>Method of initializing the y-axis state</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a></td><td>initTransZ</td><td>InitTranslational.Velocity</td><td>Method of initializing the z-axis state</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I_IC[Axis]</td><td>{0,0,0}</td><td>Initial current (<i><b>I</b></i><sub>IC</sub>) [N/T]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
@@ -522,7 +519,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a></td><td>chemical</td><td>Connector for reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Connector for reactions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a></td><td>physical</td><td>Connector for phase change</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Connector to directly couple velocity or temperature with other species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertDalton</td><td>Connector for translational and thermal diffusive exchange, with additivity of pressure</td></tr>
@@ -589,16 +586,16 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="darkgreen">// Flow conditions</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Nu_Phi[Axis]={4,4,4} <font color="darkgreen">
     &quot;Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Nu_Q=3.66 <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Nu_Q=1 <font color="darkgreen">
     &quot;Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>)&quot;</font>;
 
   <font color="darkgreen">// Initialization parameters</font>
   <font color="darkgreen">// -------------------------</font>
   <font color="darkgreen">// Scalar properties</font>
   <font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a> initMaterial=InitScalar.Pressure <font color="darkgreen">
-    &quot;Method of initializing the material balance&quot;</font>;
+    &quot;Method of initializing the material state&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a> initEnergy=InitScalar.Temperature <font color="darkgreen">
-    &quot;Method of initializing the energy balance&quot;</font>;
+    &quot;Method of initializing the thermal state&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N_IC(start=V_IC*rho_IC) <font color="darkgreen">
     &quot;Initial particle number (<i>N</i><sub>IC</sub>)&quot;</font>;
   <font color="darkgreen">// Note:  This parameter is left enabled even it isn&#39;t used to</font>
@@ -612,18 +609,18 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Initial pressure (<i>p</i><sub>IC</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(start=environment.T) <font color="darkgreen">
     &quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_IC(start=<font color="red">Data.h</font>(T_IC, p_IC),displayUnit=&quot;kJ/mol&quot;) <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_IC(start=<font color="red">Data.h</font>(T_IC, p_IC), displayUnit=&quot;kJ/mol&quot;) <font color="darkgreen">
     &quot;Initial specific enthalpy (<i>h</i><sub>IC</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_IC(start=<font color="red">Data.g</font>(T_IC, p_IC),displayUnit=&quot;kJ/mol&quot;) <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_IC(start=<font color="red">Data.g</font>(T_IC, p_IC), displayUnit=&quot;kJ/mol&quot;) <font color="darkgreen">
     &quot;Initial Gibbs potential (<i>g</i><sub>IC</sub>)&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Velocity</font>
   <font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a> initTransX=InitTranslational.Velocity <font color="darkgreen">
-    &quot;Method of initializing the x-axis balance&quot;</font>;
+    &quot;Method of initializing the x-axis state&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a> initTransY=InitTranslational.Velocity <font color="darkgreen">
-    &quot;Method of initializing the y-axis balance&quot;</font>;
+    &quot;Method of initializing the y-axis state&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a> initTransZ=InitTranslational.Velocity <font color="darkgreen">
-    &quot;Method of initializing the z-axis balance&quot;</font>;
+    &quot;Method of initializing the z-axis state&quot;</font>;
   <font color="darkgreen">// Note:  Dymola 7.4 doesn&#39;t provide pull-down lists for arrays of</font>
   <font color="darkgreen">// enumerations; therefore, a parameter is used for each axis.</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_IC[Axis]={0,0,0} <font color="darkgreen">
@@ -635,15 +632,15 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">parameter </font>Boolean invertEOS=true <font color="darkgreen">&quot;Invert the equation of state&quot;</font>;
 
   <font color="darkgreen">// Preferred states</font>
+  <font color="darkgreen">// Note:  The start value for this variable (and others below) isn&#39;t fixed</font>
+  <font color="darkgreen">// because the related initial condition is applied in the initial</font>
+  <font color="darkgreen">// equation section.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N(
     min=Modelica.Constants.small,
     nominal=4*U.C,
     <font color="blue">final </font>start=N_IC,
     <font color="blue">final </font>fixed=false,
     stateSelect=StateSelect.prefer) <font color="darkgreen">&quot;Particle number&quot;</font>;
-  <font color="darkgreen">// Note:  The start value for this variable (and others below) isn&#39;t fixed</font>
-  <font color="darkgreen">// because the related initial condition is applied in the initial</font>
-  <font color="darkgreen">// equation section.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_trans](
     <font color="blue">each </font>nominal=10*U.cm/U.s,
     <font color="blue">final </font>start=phi_IC[cartTrans],
@@ -663,15 +660,15 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="darkgreen">// StateSelect.never avoids dynamic state selection of this variable and</font>
   <font color="darkgreen">// others below in Dymola 7.4.</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> M(
-    nominal=1e-3*U.g,
-    <font color="blue">final </font>start=Data.m*N_IC,
-    stateSelect=StateSelect.never) <font color="darkgreen">&quot;Mass&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(
     nominal=U.cc,
     <font color="blue">final </font>start=V_IC,
     <font color="blue">final </font>fixed=false,
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> M(
+    nominal=1e-3*U.g,
+    <font color="blue">final </font>start=Data.m*N_IC,
+    stateSelect=StateSelect.never) <font color="darkgreen">&quot;Mass&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v(
     nominal=U.cc/(4*U.C),
     <font color="blue">final </font>start=1/rho_IC,
@@ -686,11 +683,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     nominal=10,
     <font color="blue">final </font>start=(h_IC - g_IC)/T_IC,
     stateSelect=StateSelect.never) <font color="darkgreen">&quot;Specific entropy&quot;</font>;
-  <font color="darkgreen">// StateSelect.never avoids dynamic state selection Dymola 7.4.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I[n_trans](
     <font color="blue">each </font>nominal=U.A,
     <font color="blue">final </font>start=I_IC[cartTrans],
-    <font color="blue">each </font><font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Current&quot;</font>;
+    <font color="blue">each </font><font color="blue">final </font>fixed=false,
+    stateSelect=StateSelect.never) <font color="darkgreen">&quot;Current&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_faces[n_faces, Side](nominal=U.A, <font color="blue">final </font>start=<font color="red">outerProduct</font>(
         I_IC[cartFaces], {1,-1})) <font color="darkgreen">
     &quot;Total current into the faces (advection and diffusion)&quot;</font>;
@@ -822,16 +819,16 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="darkgreen">// Note:  The structure of the problem should not change if these</font>
   <font color="darkgreen">// auxiliary variables are included (hence StateSelect.never).</font>
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Connectors.ChemicalSpecies</a> chemical(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemical(
     <font color="blue">final </font>n_trans=n_trans,
     mu(start=g_IC, <font color="blue">final </font>fixed=false),
-    phi(start=phi_IC[cartTrans],<font color="blue">each </font><font color="blue">final </font>fixed=false),
+    phi(start=phi_IC[cartTrans], <font color="blue">each </font><font color="blue">final </font>fixed=false),
     sT(start=h_IC - g_IC, <font color="blue">final </font>fixed=false)) <font color="darkgreen">&quot;Connector for reactions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Connectors.Physical</a> physical(
     <font color="blue">final </font>formula=Data.formula,
     <font color="blue">final </font>n_trans=n_trans,
     mu(start=g_IC, fixed=false),
-    phi(<font color="blue">final </font>start=phi_IC[cartTrans],<font color="blue">each </font><font color="blue">final </font>fixed=false),
+    phi(<font color="blue">final </font>start=phi_IC[cartTrans], <font color="blue">each </font><font color="blue">final </font>fixed=false),
     sT(<font color="blue">final </font>start=h_IC - g_IC, <font color="blue">final </font>fixed=false)) <font color="darkgreen">
     &quot;Connector for phase change&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(
@@ -863,8 +860,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <font color="darkgreen">// Geometric parameters</font>
 
 <font color="blue">protected </font>
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Lengths&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Lprime[Axis] <font color="darkgreen">
     &quot;Effective cross-sectional area per length&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclTrans[Axis] <font color="darkgreen">
@@ -936,6 +933,7 @@ yet the initialization method for material of &quot; + Data.formula + &quot; inv
 yet the initialization method for energy of &quot; + Data.formula + &quot; involves density.&quot;);
     <font color="blue">end if</font>;
   <font color="blue">end if</font>;
+  <font color="darkgreen">// **Move these below.</font>
 
   <font color="darkgreen">// Material</font>
   <font color="blue">if </font>consMaterial == Conservation.IC<font color="blue"> then</font>
@@ -951,8 +949,12 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
       <font color="red">der</font>(N) = 0;
     <font color="blue">elseif </font>initMaterial == InitScalar.Density<font color="blue"> then</font>
       1/v = rho_IC;
+      <font color="red">assert</font>(Data.isCompressible, Data.formula + &quot; is incompressible,
+yet its material initialization involves density.&quot;);
     <font color="blue">elseif </font>initMaterial == InitScalar.DensitySS<font color="blue"> then</font>
       <font color="red">der</font>(1/v) = 0;
+      <font color="red">assert</font>(Data.isCompressible, Data.formula + &quot; is incompressible,
+yet its material initialization involves density.&quot;);
     <font color="blue">elseif </font>initMaterial == InitScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initMaterial == InitScalar.VolumeSS<font color="blue"> then</font>
@@ -1019,8 +1021,12 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
       <font color="red">der</font>(N) = 0;
     <font color="blue">elseif </font>initEnergy == InitScalar.Density<font color="blue"> then</font>
       1/v = rho_IC;
+      <font color="red">assert</font>(Data.hasThermalExpansion, Data.formula + &quot; has no thermal expansion,
+yet its thermal initialization involves density.&quot;);
     <font color="blue">elseif </font>initEnergy == InitScalar.DensitySS<font color="blue"> then</font>
       <font color="red">der</font>(1/v) = 0;
+      <font color="red">assert</font>(Data.hasThermalExpansion, Data.formula + &quot; has no thermal expansion,
+yet its thermal initialization involves density.&quot;);
     <font color="blue">elseif </font>initEnergy == InitScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initEnergy == InitScalar.VolumeSS<font color="blue"> then</font>
@@ -1048,7 +1054,6 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   <font color="blue">end if</font>;
 
 <font color="blue">equation </font>
-
   <font color="darkgreen">// Aliases (only to clarify and simplify other equations)</font>
   T = inert.thermal.T;
   p = inertDalton.p;
@@ -1287,7 +1292,7 @@ yet its condition is not defined.  Choose any condition besides None.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:40 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:59 2013.
 </div>
 </body>
 </html>

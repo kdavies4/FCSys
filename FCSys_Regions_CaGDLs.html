@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -119,7 +119,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.4</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.3*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -155,7 +155,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x={0.3*U.mm},
-    L_y={U.m},
+    L_y={2*U.m},
     L_z={5*U.mm},
     <font color="blue">final </font>inclFacesX=true,
     inclFacesY=false,
@@ -249,7 +249,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.400*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -308,7 +308,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.84</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.420*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -367,7 +367,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.82</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.420*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -426,7 +426,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.84</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.190*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -485,7 +485,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.76</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -544,7 +544,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.190*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -603,7 +603,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -664,7 +664,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.11*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -727,7 +727,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.19*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -791,7 +791,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.28*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -855,7 +855,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.78</td><td>Volumetric porosity (&epsilon;) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.37*U.mm}</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{2*U.m}</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
@@ -897,7 +897,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:13 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:49 2013.
 </div>
 </body>
 </html>

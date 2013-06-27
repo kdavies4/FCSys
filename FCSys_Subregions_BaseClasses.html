@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -59,7 +59,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionS.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a>
 </td><td>Base model for multi-dimensional, multi-species storage, transport, and exchange</td></tr>
+<tr><td><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.InitCapacitor">InitCapacitor</a>
+</td><td>Methods of initializing a capacitor</td></tr>
 </table>
+<p>
+<h3>Types and constants</h3>
+
+<a name="FCSys.Subregions.BaseClasses.InitCapacitor"></a><pre><font color="blue">type</font> InitCapacitor = <font color="blue">enumeration</font>(
+    None <font color="darkgreen">&quot;No initialization&quot;</font>,
+    SS <font color="darkgreen">&quot;Steady state&quot;</font>,
+    Amount <font color="darkgreen">&quot;Amount of material&quot;</font>,
+    Potential <font color="darkgreen">&quot;Potential&quot;</font>) <font color="darkgreen">&quot;Methods of initializing a capacitor&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionI.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" align=RIGHT border=1 width=80  height=80 >
@@ -84,7 +94,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Length (<b>L</b>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths (<b>L</b>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -121,7 +131,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = {U.cm,U.cm,
-    U.cm} <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+    U.cm} <font color="darkgreen">&quot;Lengths (<b>L</b>)&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
       2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
@@ -179,7 +189,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:46 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:04 2013.
 </div>
 </body>
 </html>

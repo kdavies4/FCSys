@@ -3,7 +3,7 @@
 <title>FCSys.BaseClasses.Utilities.Polynomial</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Polynomial functions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -109,6 +109,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Real a[:] <font color="darkgreen">&quot;Coefficients&quot;</font>;
   <font color="blue">input </font>Integer n=0 <font color="darkgreen">&quot;Power associated with the first term (before integral)&quot;</font>;
   <font color="blue">output </font>Real F <font color="darkgreen">&quot;Integral&quot;</font>;
+
 <font color="blue">algorithm </font>
   F := <font color="red">f</font>(
     x,
@@ -156,6 +157,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Real dx <font color="darkgreen">&quot;Derivative of argument&quot;</font>;
   <font color="blue">input </font>Real da[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;Derivatives of coefficients&quot;</font>;
   <font color="blue">output </font>Real dF <font color="darkgreen">&quot;Derivative&quot;</font>;
+
 <font color="blue">algorithm </font>
   dF := <font color="red">f</font>(
     x,
@@ -164,6 +166,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     x,
     da .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">log</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
     n + 1);
+
 <font color="blue">end </font>dF;
 </pre>
 <hr>
@@ -211,12 +214,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Real a[:] <font color="darkgreen">&quot;Coefficients&quot;</font>;
   <font color="blue">input </font>Integer n=0 <font color="darkgreen">&quot;Power of the first term&quot;</font>;
   <font color="blue">output </font>Real f <font color="darkgreen">&quot;Result&quot;</font>;
+
 <font color="blue">protected </font>
   
     &quot;Polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))&quot;</font>
     <font color="blue">input </font>Real x <font color="darkgreen">&quot;Argument&quot;</font>;
     <font color="blue">input </font>Real a[:] <font color="darkgreen">&quot;Coefficients&quot;</font>;
     <font color="blue">output </font>Real y <font color="darkgreen">&quot;Result&quot;</font>;
+
   <font color="blue">algorithm </font>
     y := <font color="blue">if </font><font color="red">size</font>(a, 1) &gt; 0<font color="blue"> then </font>x*(a[1] + (<font color="blue">if </font><font color="red">size</font>(a, 1) &gt; 1<font color="blue"> then </font>x*(a[2] + (<font color="blue">
       if </font><font color="red">size</font>(a, 1) &gt; 2<font color="blue"> then </font>x*(a[3] + (<font color="blue">if </font><font color="red">size</font>(a, 1) &gt; 3<font color="blue"> then </font>x*(a[4] + (<font color="blue">if </font><font color="red">
@@ -232,7 +237,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <font color="darkgreen">// parentheses.  The implementation here (&quot;unrolled&quot; only up to the 10th</font>
     <font color="darkgreen">// order) allows poly() to be called from within one other function within</font>
     <font color="darkgreen">// a model.</font>
+
   <font color="blue">end </font>positivePoly;
+
 <font color="blue">algorithm </font>
   f := (<font color="blue">if </font>n &lt; 0<font color="blue"> then </font>(<font color="blue">if </font>n + <font color="red">size</font>(a, 1) &lt; 0<font color="blue"> then </font>x^(n + <font color="red">size</font>(a, 1))<font color="blue"> else </font>1)*<font color="red">
     positivePoly</font>(1/x, a[<font color="red">min</font>(<font color="red">size</font>(a, 1), -n):-1:1])<font color="blue"> else </font>0) + (<font color="blue">if </font>n &lt;= 0<font color="blue"> and </font>n &gt;
@@ -285,6 +292,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Real dx <font color="darkgreen">&quot;Derivative of argument&quot;</font>;
   <font color="blue">input </font>Real da[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;Derivatives of coefficients&quot;</font>;
   <font color="blue">output </font>Real df <font color="darkgreen">&quot;Derivative&quot;</font>;
+
 <font color="blue">algorithm </font>
   df := <font color="red">f</font>(
     x,
@@ -338,12 +346,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Real d2x <font color="darkgreen">&quot;Second derivative of argument&quot;</font>;
   <font color="blue">input </font>Real d2a[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;Second derivatives of coefficients&quot;</font>;
   <font color="blue">output </font>Real d2f <font color="darkgreen">&quot;Second derivative&quot;</font>;
+
 <font color="blue">algorithm </font>
   d2f := <font color="red">sum</font>(<font color="red">f</font>(
     x,
     {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[i]*d2x),d2a[
       i]},
     n + i - 3) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1));
+
 <font color="blue">end </font>d2f;
 </pre>
       </div>
@@ -351,7 +361,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:58 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:13 2013.
 </div>
 </body>
 </html>

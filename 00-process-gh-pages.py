@@ -32,15 +32,9 @@ rpls = [
     ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
 \2"""),
-#    ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
-#  <h3>Download</h3>
-#    <ul>
-#      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></li>
-#    </ul>
-#\2"""),
     # Move the style sheet.
     ('"\.\./Resources/Documentation/ModelicaDoc\.css"', '"stylesheets/ModelicaDoc.css"'),
     # Add the Google Analytics script.

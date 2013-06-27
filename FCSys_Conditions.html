@@ -3,7 +3,7 @@
 <title>FCSys.Conditions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Models to specify and measure operating conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -140,21 +140,21 @@ It has a single parameter, <code>crossOver</code>.</p>
 set to <code>false</code>, then
 the router will be in the pass-through mode.  In that case,
 <code>negative1</code> is connected to <code>positive1</code> and <code>negative2</code>
-is connected to <code>positive2</code>, as shown by Figure 1a.</p>
+is connected to <code>positive2</code>, as shown by <a href="FCSys_Conditions.html#Fig1a">Figure 1a</a>.</p>
 
 <p>If <code>crossOver</code> is set to <code>true</code>, then the router will be in cross-over mode.  In that case, <code>negative1</code> is connected to <code>positive2</code>
 and <code>negative2</code> is
-connected to <code>positive1</code>, as shown by Figure 1b.</p>
+connected to <code>positive1</code>, as shown by <a href="FCSys_Conditions.html#Fig1b">Figure 1b</a>.</p>
 
     <table border="0" cellspacing="0" cellpadding="2" align=center>
       <tr align=center>
-        <td align=center width=120>
+        <td id="Fig1a" align=center width=120>
           <img src="images/PassThrough.png">
-<br><b>a:</b>  Pass-through
+<br><b>a:</b> Pass-through
         </td>
-        <td align=center>
+        <td id="Fig1b" align=center>
           <img src="images/CrossOver.png">
-<br><b>b:</b>  Cross-over
+<br><b>b:</b> Cross-over
         </td>
       </tr>
       <tr align=center>
@@ -209,7 +209,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:51:16 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:45 2013.
 </div>
 </body>
 </html>

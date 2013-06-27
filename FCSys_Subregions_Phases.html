@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Phases</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -93,7 +93,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Fixed">Fixed</a></td><td>H2</td><td>redeclare Species.H2.Gas.Fix&hellip;</td><td>H<sub>2</sub> model</td></tr>
-<tr><td>Boolean</td><td>inclH2O</td><td>true</td><td>Water (H<sub>2</sub>O)</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Gas.Fi&hellip;</td><td>H<sub>2</sub>O model</td></tr>
 <tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Fixed">Fixed</a></td><td>N2</td><td>redeclare Species.N2.Gas.Fix&hellip;</td><td>N<sub>2</sub> model</td></tr>
@@ -118,7 +118,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>Connector for phase change</td></tr>
 </table>
 <p>
@@ -132,18 +132,17 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
-
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Fixed">Species.H2.Gas.Fixed</a> H2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2 <font color="blue">constrainedby </font>
-    Species.Species(
+    FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
     T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
     <font color="darkgreen">&quot;H<sub>2</sub> model&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclH2O=true <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -152,7 +151,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Fixed">Species.N2.Gas.Fixed</a> N2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclN2 <font color="blue">constrainedby </font>
-    Species.Species(
+    FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -161,7 +160,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Fixed">Species.O2.Gas.Fixed</a> O2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclO2 <font color="blue">constrainedby </font>
-    Species.Species(
+    FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -172,7 +171,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
   <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR[2](n={-1,2}, <font color="blue">final </font>m={O2.Data.m,H2O.Data.m}) <font color="blue">if </font>inclORR <font color="darkgreen">
     &quot;Interfaces with the oxygen reduction reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">Connectors.ChemicalNet</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
     &quot;Connector for chemical reactions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
 
@@ -212,6 +211,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="red">connect</font>(H2.faces[facesCart[Axis.z], Side.n], zNegative.H2);
   <font color="red">connect</font>(H2.faces[facesCart[Axis.z], Side.p], zPositive.H2);
+
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Diffusive exchange</font>
@@ -285,7 +285,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor (<b><i>k</i></b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>&#39;incle-&#39;</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_'C+'_Graphite.html#FCSys.Subregions.Species.'C+'.Graphite.Fixed">Fixed</a></td><td>&#39;C+&#39;</td><td>redeclare Species.&#39;C+&#39;.Graph&hellip;</td><td>C<sup>+</sup> model</td></tr>
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Fixed</a></td><td>&#39;e-&#39;</td><td>redeclare Species.&#39;e-&#39;.Graph&hellip;</td><td>'e-' model</td></tr>
@@ -308,7 +308,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -321,11 +321,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
         ({'inclC+','incle-'}));
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean &#39;inclC+&#39;='incle-' <font color="darkgreen">
-    &quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
-
+  <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'C+'_Graphite.html#FCSys.Subregions.Species.'C+'.Graphite.Fixed">Species.'C+'.Graphite.Fixed</a> &#39;C+&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'inclC+' <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -335,7 +333,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> &#39;e-&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'incle-' <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -343,54 +341,52 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     <font color="darkgreen">&quot;'e-' model&quot;</font>;
 
   <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(<font color="blue">final </font>m='e-'.Data.m, n=2) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
+    &quot;Chemical interface with the hydrogen oxidation reaction&quot;</font>;
   <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='e-'.Data.m) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Interface with the oxygen reduction reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+    &quot;Chemical interface with the oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">Connectors.ChemicalNet</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
     &quot;Connector for chemical reactions&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">Depletion</a> depletionHOR(
-    A=A[Axis.x],
+  <a href="FCSys_Subregions.html#FCSys.Subregions.DoubleLayer">FCSys.Subregions.DoubleLayer</a> HODL(
     transSubstrate=true,
     thermalSubstrate=true,
-    side=FCSys.BaseClasses.Side.p,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.'e-'.Gas">FCSys.Characteristics.'e-'.Gas</a>) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Depletion region for the HOR&quot;</font>;
+    side=Side.p,
+    axis=Axis.x,
+    n=2,
+    minoritySide=Side.p) <font color="blue">if </font>inclHOR <font color="darkgreen">&quot;Double layer for hydrogen oxidation&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">Depletion</a> depletionORR(
-    A=A[Axis.x],
+  <a href="FCSys_Subregions.html#FCSys.Subregions.DoubleLayer">FCSys.Subregions.DoubleLayer</a> ORDL(
     transSubstrate=true,
     thermalSubstrate=true,
-    side=FCSys.BaseClasses.Side.n,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.'e-'.Gas">FCSys.Characteristics.'e-'.Gas</a>) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Depletion region for the ORR&quot;</font>;
+    side=Side.n,
+    axis=Axis.x,
+    n=-4,
+    minoritySide=Side.n) <font color="blue">if </font>inclORR <font color="darkgreen">&quot;Double layer for oxygen reduction&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
   <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
   <font color="darkgreen">// These can&#39;t be outer parameters in Dymola 7.4.</font>
 
-  <a href="FCSys_Conditions_ByConnector_ChemicalReaction.html#FCSys.Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow">Conditions.ByConnector.ChemicalReaction.ChemicalReactionNoFlow</a> chemical2(
-    inclTransY=false,
-    inclTransZ=false,
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ChemicalReaction_Material.html#FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential">FCSys.Conditions.ByConnector.ChemicalReaction.Material.Potential</a>
-      material(source(y=0.9*(5.00069)*U.V))) <font color="blue">if </font>inclORR <font color="darkgreen">&quot;**temp&quot;</font>;
 <font color="blue">initial </font><font color="blue">equation </font>
   <font color="red">assert</font>(<font color="blue">not </font>(inclHOR<font color="blue"> and </font>inclORR), &quot;The HOR and ORR cannot be included simultaneously.&quot;);
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Reactions</font>
   <font color="darkgreen">// ---------</font>
-  <font color="darkgreen">// HOR</font>
+  <font color="darkgreen">// ORR</font>
   <font color="red">connect</font>('e-'.chemical, HOR.species);
   <font color="red">connect</font>(HOR.reaction, chemical);
-  <font color="red">connect</font>(depletionHOR.face, 'e-'.faces[1, Side.p]);
-  <font color="red">connect</font>(depletionHOR.inert, 'C+'.inert);
+  <font color="red">connect</font>(HODL.majority, 'e-'.faces[1, Side.p]);
+
+  <font color="red">connect</font>(HODL.minority, 'e-'.faces[1, Side.n]);
+  <font color="red">connect</font>(HODL.inert, 'C+'.inert);
   <font color="red">connect</font>(HOR.reaction, chemical);
   <font color="darkgreen">// ORR</font>
   <font color="red">connect</font>('e-'.chemical, ORR.species);
   <font color="red">connect</font>(ORR.reaction, chemical);
-  <font color="red">connect</font>(depletionORR.face, 'e-'.faces[1, Side.n]);
+  <font color="red">connect</font>(ORDL.majority, 'e-'.faces[1, Side.n]);
+  <font color="red">connect</font>(ORDL.minority, 'e-'.faces[1, Side.p]);
 
-  <font color="red">connect</font>(depletionORR.inert, 'C+'.inert);
+  <font color="red">connect</font>(ORDL.inert, 'C+'.inert);
   <font color="red">connect</font>(ORR.reaction, chemical);
 
   <font color="darkgreen">// C+</font>
@@ -428,10 +424,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.n], zNegative.'e-');
   <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.p], zPositive.'e-');
-  <font color="red">connect</font>(depletionORR.chemical, chemical);
+  <font color="red">connect</font>(ORDL.chemical, chemical);
 
-  <font color="red">connect</font>(depletionHOR.chemical, chemical);
-  <font color="red">connect</font>(chemical2.chemical, chemical);
+  <font color="red">connect</font>(HODL.chemical, chemical);
 <font color="blue">end </font>Graphite;
 </pre>
 <hr>
@@ -457,7 +452,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces (<i>n</i><sub>faces</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor (<b><i>k</i></b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>&#39;inclH+&#39;</td><td>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_'C19HF37O5S-'_Ionomer.html#FCSys.Subregions.Species.'C19HF37O5S-'.Ionomer.Fixed">Fixed</a></td><td>&#39;C19HF37O5S-&#39;</td><td>redeclare Species.&#39;C19HF37O5&hellip;</td><td>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> model</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_'H+'_Ionomer.html#FCSys.Subregions.Species.'H+'.Ionomer.Fixed">Fixed</a></td><td>&#39;H+&#39;</td><td>redeclare Species.&#39;H+&#39;.Ionom&hellip;</td><td>H<sup>+</sup> model</td></tr>
@@ -483,7 +478,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>Connector for phase change</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a></td><td>chemical</td><td>Connector for chemical reactions</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
@@ -496,11 +491,11 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
         ({'inclC19HF37O5S-','inclH+',inclH2O}));
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;='inclH+' <font color="darkgreen">
+  <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
     &quot;Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'C19HF37O5S-'_Ionomer.html#FCSys.Subregions.Species.'C19HF37O5S-'.Ionomer.Fixed">Species.'C19HF37O5S-'.Ionomer.Fixed</a> &#39;C19HF37O5S-&#39;(<font color="blue">final </font>n_faces) <font color="blue">
-    if </font>'inclC19HF37O5S-' <font color="blue">constrainedby </font>Species.Species(
+    if </font>'inclC19HF37O5S-' <font color="blue">constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -510,7 +505,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'H+'_Ionomer.html#FCSys.Subregions.Species.'H+'.Ionomer.Fixed">Species.'H+'.Ionomer.Fixed</a> &#39;H+&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'inclH+' <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -520,7 +515,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Ionomer.html#FCSys.Subregions.Species.H2O.Ionomer.Fixed">Species.H2O.Ionomer.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -530,26 +525,26 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
 
   <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> HOR(<font color="blue">final </font>m='H+'.Data.m, n=2) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Interface with the hydrogen oxidation reaction&quot;</font>;
+    &quot;Chemical interface with the hydrogen oxidation reaction&quot;</font>;
   <a href="FCSys_Subregions.html#FCSys.Subregions.ChemicalExchange">ChemicalExchange</a> ORR(n=-4, <font color="blue">final </font>m='H+'.Data.m) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Interface with the oxygen reduction reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">Connectors.ChemicalReaction</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
+    &quot;Chemical interface with the oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">Connectors.ChemicalNet</a> chemical <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
     &quot;Connector for chemical reactions&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">Depletion</a> depletionHOR(
-    A=A[Axis.x],
+  <a href="FCSys_Subregions.html#FCSys.Subregions.DoubleLayer">FCSys.Subregions.DoubleLayer</a> HODL(
     transSubstrate=false,
     thermalSubstrate=false,
-    side=FCSys.BaseClasses.Side.n,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Depletion region for the HOR&quot;</font>;
+    side=Side.n,
+    n=2,
+    axis=Axis.x,
+    minoritySide=Side.n) <font color="blue">if </font>inclHOR <font color="darkgreen">&quot;Double layer for hydrogen oxidation&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Depletion">Depletion</a> depletionORR(
-    A=A[Axis.x],
+  <a href="FCSys_Subregions.html#FCSys.Subregions.DoubleLayer">FCSys.Subregions.DoubleLayer</a> ORDL(
     transSubstrate=false,
     thermalSubstrate=false,
-    side=FCSys.BaseClasses.Side.p,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Depletion region for the ORR&quot;</font>;
+    side=Side.p,
+    axis=Axis.x,
+    n=-4,
+    minoritySide=Side.p) <font color="blue">if </font>inclORR <font color="darkgreen">&quot;Double layer for oxygen reduction&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
   <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
@@ -567,15 +562,19 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// HOR</font>
   <font color="red">connect</font>('H+'.chemical, HOR.species);
   <font color="red">connect</font>(HOR.reaction, chemical);
-  <font color="red">connect</font>(depletionHOR.face, 'H+'.faces[1, Side.n]);
+  <font color="red">connect</font>(HODL.majority, 'H+'.faces[1, Side.p]);
 
-  <font color="red">connect</font>(depletionHOR.inert, 'C19HF37O5S-'.inert);
+  <font color="red">connect</font>(HODL.minority, 'H+'.faces[1, Side.n]);
+
+  <font color="red">connect</font>(HODL.inert, 'C19HF37O5S-'.inert);
   <font color="red">connect</font>(HOR.reaction, chemical);
   <font color="darkgreen">// ORR</font>
   <font color="red">connect</font>('H+'.chemical, ORR.species);
   <font color="red">connect</font>(ORR.reaction, chemical);
-  <font color="red">connect</font>(depletionORR.face, 'H+'.faces[1, Side.p]);
-  <font color="red">connect</font>(depletionORR.inert, 'C19HF37O5S-'.inert);
+  <font color="red">connect</font>(ORDL.majority, 'H+'.faces[1, Side.n]);
+
+  <font color="red">connect</font>(ORDL.minority, 'H+'.faces[1, Side.p]);
+  <font color="red">connect</font>(ORDL.inert, 'C19HF37O5S-'.inert);
   <font color="red">connect</font>(ORR.reaction, chemical);
 
   <font color="darkgreen">// C19HF37O5S-</font>
@@ -637,9 +636,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
   <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O);
   <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O);
-  <font color="red">connect</font>(depletionORR.chemical, chemical);
+  <font color="red">connect</font>(ORDL.chemical, chemical);
 
-  <font color="red">connect</font>(depletionHOR.chemical, chemical);
+  <font color="red">connect</font>(HODL.chemical, chemical);
 <font color="blue">end </font>Ionomer;
 </pre>
 <hr>
@@ -695,7 +694,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Liquid.html#FCSys.Subregions.Species.H2O.Liquid.Fixed">Species.H2O.Liquid.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>Species.Species(
+    constrainedby </font>FCSys.Subregions.Species.Species(
     n_faces=n_faces,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
 
@@ -732,7 +731,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:39 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:58 2013.
 </div>
 </body>
 </html>

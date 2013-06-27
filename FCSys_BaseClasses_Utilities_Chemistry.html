@@ -3,7 +3,7 @@
 <title>FCSys.BaseClasses.Utilities.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Functions to support chemistry">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -127,7 +127,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>This function returns the number of elements
       in a chemical formula.  Electrons are counted as a present element (or rather particle)
       if the net charge is nonzero.</p>
-      <p><b>Examples:</b><br>
+
+<p><b>Examples:</b><br>
     <code>countElements("C19HF37O5S-")</code> returns 5 and <code>countElements("H+")</code> returns 2.</p>
 
   <p>Please see the
@@ -283,11 +284,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font>Integer coeffs[<font color="red">size</font>(symbols, 1)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
   <font color="darkgreen">// Note:  coeffs[countElements(formula)] would require redundant</font>
   <font color="darkgreen">// computation.</font>
+
 <font color="blue">protected </font>
   Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
   Integer z_net=0 <font color="darkgreen">&quot;Net charge&quot;</font>;
   Integer i=1 <font color="darkgreen">&quot;Index of element&quot;</font>;
   String f=formula <font color="darkgreen">&quot;Working copy of formula&quot;</font>;
+
 <font color="blue">algorithm </font>
   <font color="darkgreen">// Read the elements.</font>
   <font color="blue">while </font>f &lt;&gt; &quot;&quot;<font color="blue"> loop</font>
@@ -350,6 +353,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formulas[:] <font color="darkgreen">&quot;Chemical formulas of the species&quot;</font>;
   <font color="blue">output </font>Integer n[<font color="red">size</font>(formulas, 1)] <font color="darkgreen">&quot;Stoichiometric coefficients&quot;</font>;
+
 <font color="blue">protected </font>
   Integer n_species=<font color="red">size</font>(formulas, 1) <font color="darkgreen">&quot;Number of species&quot;</font>;
   Integer n_elements[n_species]=<font color="red">countElements</font>(formulas) <font color="darkgreen">
@@ -368,6 +372,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   Real minabs <font color="darkgreen">
     &quot;Minimum magnitude of the unnormalized stoichiometric coefficients&quot;</font>;
   Real elementCoeffs[n_species, n_tot] <font color="darkgreen">&quot;Elementary coefficients&quot;</font>;
+
 <font color="blue">algorithm </font>
   <font color="darkgreen">// Generate a list of all the symbols.</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_species<font color="blue"> loop</font>
@@ -425,7 +430,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:58 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:13 2013.
 </div>
 </body>
 </html>

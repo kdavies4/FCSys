@@ -3,7 +3,7 @@
 <title>FCSys.BaseClasses.Utilities</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Functions that implement useful algorithms">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -290,6 +290,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Boolean condition;
   <font color="blue">input </font>String message;
+
 <font color="blue">algorithm </font>
   <font color="red">assert</font>(condition, &quot;\n&quot; + message + &quot;\n&quot;);
 <font color="blue">end </font>assertEval;
@@ -326,6 +327,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
   <font color="blue">output </font>Real average <font color="darkgreen">&quot;Arithmetic mean&quot;</font>;
+
 <font color="blue">algorithm </font>
   average := <font color="red">sum</font>(u)/<font color="red">size</font>(u, 1);
 <font color="blue">end </font>average;
@@ -395,6 +397,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> vector&quot;</font>;
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of true entries&quot;</font>;
+
 <font color="blue">algorithm </font>
   n := <font color="red">sum</font>(<font color="blue">if </font>u[i]<font color="blue"> then </font>1<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1));
 <font color="blue">end </font>countTrue;
@@ -432,6 +435,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
   <font color="blue">output </font>Real Delta <font color="darkgreen">&quot;Second entry minus the first entry&quot;</font>;
+
 <font color="blue">algorithm </font>
   Delta := u[2] - u[1];
 <font color="blue">end </font>Delta;
@@ -470,8 +474,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> vector&quot;</font>;
   <font color="blue">output </font>Integer enumerated[<font color="red">size</font>(u, 1)] <font color="darkgreen">
     &quot;Indices of the true entries (increasing order; 0 for false entries)&quot;</font>;
+
 <font color="blue">protected </font>
   Integer count <font color="darkgreen">&quot;Counter variable&quot;</font>;
+
 <font color="blue">algorithm </font>
   count := 1;
   <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1)<font color="blue"> loop</font>
@@ -519,8 +525,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> array&quot;</font>;
   <font color="blue">output </font>Integer indices[<font color="red">countTrue</font>(u)] <font color="darkgreen">&quot;Indices of the true entries&quot;</font>;
+
 <font color="blue">protected </font>
   Integer count <font color="darkgreen">&quot;Counter variable&quot;</font>;
+
 <font color="blue">algorithm </font>
   count := 1;
   <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1)<font color="blue"> loop</font>
@@ -566,6 +574,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a> side <font color="darkgreen">&quot;Side&quot;</font>;
   <font color="blue">output </font>Integer sign <font color="darkgreen">&quot;Sign indicating direction along the axis&quot;</font>;
+
 <font color="blue">algorithm </font>
   sign := 3 - 2*side;
 <font color="blue">end </font>inSign;
@@ -607,6 +616,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>Integer num <font color="darkgreen">&quot;Dividend&quot;</font>;
   <font color="blue">input </font>Integer den <font color="darkgreen">&quot;Divisor&quot;</font>;
   <font color="blue">output </font>Integer index <font color="darkgreen">&quot;Remainder with 1-based indexing&quot;</font>;
+
 <font color="blue">algorithm </font>
   index := <font color="red">mod</font>(num - 1, den) + 1;
 <font color="blue">end </font>mod1;
@@ -650,6 +660,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Names of the signals for the 5<sup>th</sup> plot&quot;</font>;
   <font color="blue">input </font>String y6[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
     &quot;Names of the signals for the 6<sup>th</sup> plot&quot;</font>;
+
 <font color="blue">algorithm </font>
   <font color="red">createPlot</font>(
     id=1,
@@ -755,6 +766,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>Real u <font color="darkgreen">&quot;<code>Real</code> variable&quot;</font>;
   <font color="blue">output </font>Integer y <font color="darkgreen">&quot;Nearest integer&quot;</font>;
+
 <font color="blue">algorithm </font>
   y := <font color="red">integer</font>(u + 0.5);
 <font color="blue">end </font>round;
@@ -794,6 +806,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
   <font color="blue">output </font>Real Sigma <font color="darkgreen">&quot;Sum of the first and second entries&quot;</font>;
+
 <font color="blue">algorithm </font>
   Sigma := u[1] + u[2];
 <font color="blue">end </font>Sigma;
@@ -803,7 +816,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:57 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:13 2013.
 </div>
 </body>
 </html>

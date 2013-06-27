@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Face.Single.Translational</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Translational conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -131,6 +131,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Cross-sectional area [l2]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
@@ -153,7 +154,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
     u(<font color="blue">final </font>unit=&quot;N/T&quot;),
     <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;) = face.mPhidot[orientation]);
 
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
 
 <font color="blue">initial </font><font color="blue">equation </font>
   <font color="red">assert</font>(orientation == Orientation.normal, &quot;FCSys.Conditions.ByConnector.Face.Single.Translational.Current is only intended for the normal direction.&quot;);
@@ -259,7 +260,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Translational_Bas
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:53:00 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:17 2013.
 </div>
 </body>
 </html>

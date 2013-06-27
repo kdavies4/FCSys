@@ -3,7 +3,7 @@
 <title>FCSys.Connectors</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-6-25">
+<meta name="date" content="2013-7-2">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
@@ -35,7 +35,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -51,9 +51,10 @@
 
 <h3>Information</h3>
 
-<p><a href="index.html#FCSys">FCSys</a> uses four types of declarative connectors.
-  The chemical connectors (<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> and
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>)
+**Update diagram from Figures package.
+  <p><a href="index.html#FCSys">FCSys</a> uses four types of declarative connectors.
+  The chemical connectors (<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a> and
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>)
   represent the diffusion of material and the advection of other quantities among
   configurations (i.e., species in a particular phase) that
   react chemically within a subregion.
@@ -91,18 +92,18 @@
   pair, which may or may not be implemented as a separate connector.</p>
 
   <p>In addition to the connectors on the bottom row, the
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
   and <a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a> connectors
   have stream variables to represent the advection of translational momentum and
   thermal energy.</p>
 
-  <p>The <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>
+  <p>The <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
   connector is used for a single species in a reaction.  It expresses the rate of
   consumption or generation of a species at a electrochemical potential.  The
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a> connector is
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a> connector is
   used for the chemical reaction as a whole.  It has electrochemical potential as a
   flow and current as an effort (opposite designations of the
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
   connector).
   It sums the stoichiometrically-weighted electrochemical potentials of the species
   participating in a reaction.  Its effort variable is the
@@ -189,7 +190,7 @@
     <p>If the species are mixed, it may be more appropriate to assume that the pressures
     of the components of a mixture sum to the total pressure of the mixture.  This additivity of pressure
     is described by connections of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors.InertDelton">InertDalton</a> connector.</p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector.</p>
 
     <hr>
 
@@ -214,10 +215,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Connectors.ChemicalReactionS.png" alt="FCSys.Connectors.ChemicalReaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalReaction">ChemicalReaction</a>
-</td><td>Connector for a chemical reaction</td></tr>
-<tr><td><img src="images/FCSys.Connectors.ChemicalSpeciesS.png" alt="FCSys.Connectors.ChemicalSpecies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>
-</td><td>Connector for a species of a chemical reaction</td></tr>
+<tr><td><img src="images/FCSys.Connectors.ChemicalNetS.png" alt="FCSys.Connectors.ChemicalNet" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalNet">ChemicalNet</a>
+</td><td>Net connector for a chemical reaction</td></tr>
+<tr><td><img src="images/FCSys.Connectors.ChemicalS.png" alt="FCSys.Connectors.Chemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
+</td><td>Connector for a species in a chemical reaction</td></tr>
 <tr><td><img src="images/FCSys.Connectors.PhysicalBusS.png" alt="FCSys.Connectors.PhysicalBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a>
 </td><td>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Physical">Physical</a> connectors</td></tr>
 <tr><td><img src="images/FCSys.Connectors.PhysicalBusS.png" alt="FCSys.Connectors.PhysicalBusInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBusInternal">PhysicalBusInternal</a>
@@ -257,10 +258,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Connectors.ChemicalReactionI.png" alt="FCSys.Connectors.ChemicalReaction" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.ChemicalReaction"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.ChemicalReaction</h2>
-<b>Connector for a chemical reaction</b><p>
-<img src="images/FCSys.Connectors.ChemicalReactionD.png" alt="FCSys.Connectors.ChemicalReaction">
+<h2><img src="images/FCSys.Connectors.ChemicalNetI.png" alt="FCSys.Connectors.ChemicalNet" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.ChemicalNet"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.ChemicalNet</h2>
+<b>Net connector for a chemical reaction</b><p>
+<img src="images/FCSys.Connectors.ChemicalNetD.png" alt="FCSys.Connectors.ChemicalNet">
 
 <h3>Information</h3>
 
@@ -285,15 +286,13 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_trans]</td><td>Velocity [l/T]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_trans]</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Specific entropy-temperature product [l2.m/(N.T2)]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot_A</td><td>Rate of thermal advection [l2.m/T3]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [l2.m/(N.T2)]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot_D</td><td>Rate of thermal diffusion [l2.m/T3]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal advection [l2.m/T3]</td></tr>
 </table>
 <p>
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">connector</font> ChemicalReaction <font color="darkgreen">&quot;Connector for a chemical reaction&quot;</font>
+<font color="blue">connector</font> ChemicalNet <font color="darkgreen">&quot;Net connector for a chemical reaction&quot;</font>
 
   <font color="darkgreen">// Material diffusion</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Rate of reaction&quot;</font>;
@@ -305,20 +304,16 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
   <font color="darkgreen">// Thermal advection</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT(nominal=3000*U.K) <font color="darkgreen">
     &quot;Specific entropy-temperature product&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_A(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal advection&quot;</font>;
 
-  <font color="darkgreen">// Thermal diffusion</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_D(nominal=U.W) <font color="darkgreen">&quot;Rate of thermal diffusion&quot;</font>;
-
-<font color="blue">end </font>ChemicalReaction;
+<font color="blue">end </font>ChemicalNet;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Connectors.ChemicalSpeciesI.png" alt="FCSys.Connectors.ChemicalSpecies" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.ChemicalSpecies"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.ChemicalSpecies</h2>
-<b>Connector for a species of a chemical reaction</b><p>
-<img src="images/FCSys.Connectors.ChemicalSpeciesD.png" alt="FCSys.Connectors.ChemicalSpecies">
+<h2><img src="images/FCSys.Connectors.ChemicalI.png" alt="FCSys.Connectors.Chemical" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.Chemical"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Chemical</h2>
+<b>Connector for a species in a chemical reaction</b><p>
+<img src="images/FCSys.Connectors.ChemicalD.png" alt="FCSys.Connectors.Chemical">
 
 <h3>Information</h3>
 
@@ -347,8 +342,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">connector</font> ChemicalSpecies <font color="darkgreen">
-  &quot;Connector for a species of a chemical reaction&quot;</font>
+<font color="blue">connector</font> Chemical <font color="darkgreen">&quot;Connector for a species in a chemical reaction&quot;</font>
 
   <font color="blue">parameter </font>Integer n_trans(
     <font color="blue">final </font>min=0,
@@ -366,7 +360,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
   <font color="blue">stream </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT(nominal=U.V) <font color="darkgreen">
     &quot;Specific entropy-temperature product upon outflow&quot;</font>;
 
-<font color="blue">end </font>ChemicalSpecies;
+<font color="blue">end </font>Chemical;
 </pre>
 <hr>
 
@@ -425,7 +419,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <p>Please see the documentation for the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a> (Connector for a species of a chemical reaction).
+Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> (Connector for a species in a chemical reaction).
 <p>
 <h3>Parameters</h3>
 <p>
@@ -455,7 +449,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">Ch
   <font color="blue">parameter </font>String formula(start=&quot;&quot;) <font color="darkgreen">&quot;Chemical formula of the species&quot;</font>;
   <font color="darkgreen">// The start value prevents a warning in Dymola 7.4.</font>
 
-  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalSpecies">ChemicalSpecies</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>;
 
 <font color="blue">end </font>Physical;
 </pre>
@@ -942,7 +936,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jun 25 20:55:49 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:05 2013.
 </div>
 </body>
 </html>
