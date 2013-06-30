@@ -240,18 +240,25 @@ package Subregions
           L={0.287*U.mm,10*U.cm,10*U.cm},
           gas(H2(
               consTransX=Conservation.IC,
+              N(stateSelect=StateSelect.always),
               initMaterial=InitScalar.None,
+              T(stateSelect=StateSelect.always),
               chemical(Ndot(start=0, fixed=true)))),
-          graphite(reduceTemp=true,'e-'(
+          graphite(reduceTemp=true, 'e-'(
+              T(stateSelect=StateSelect.always),
               initMaterial=InitScalar.Amount,
               initTransX=InitTranslational.None,
               initEnergy=InitScalar.None,
-              phi(each stateSelect=StateSelect.always))),
+              phi(each stateSelect=StateSelect.always),
+              consMaterial=Conservation.Steady)),
           ionomer(reduceTemp=true, 'H+'(
+              T(stateSelect=StateSelect.always),
               initMaterial=InitScalar.None,
               initTransX=InitTranslational.None,
+              phi(each stateSelect=StateSelect.always),
               initEnergy=InitScalar.None)),
           reaction(J_0=0.5*U.A/U.cm^2)));
+
       extends Modelica.Icons.UnderConstruction;
 
       Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
@@ -267,8 +274,10 @@ package Subregions
                 =subregion.A[Axis.x], redeclare Modelica.Blocks.Sources.Ramp
                 source(height=-150*U.A, duration=100)))),
         ionomer(final 'inclH+'='inclH+', 'H+'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
-        annotation (Placement(transformation(
+              Conditions.ByConnector.Face.Single.Translational.Force normal,
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
@@ -279,15 +288,20 @@ package Subregions
           final inclH2O=inclH2O,
           final inclN2=inclN2,
           final inclO2=inclO2),
-        graphite(final 'incle-'='incle-', 'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)),
         ionomer(final 'inclH+'='inclH+', 'H+'(redeclare
-              Conditions.ByConnector.Face.Single.Material.Density material(
-                source(final y=17842.7*U.C/U.cc))))) annotation (Placement(
-            transformation(
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material, redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal)),
+        graphite(final 'incle-'='incle-', 'e-'(redeclare
+              Conditions.ByConnector.Face.Single.Translational.Force normal,
+              redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Material.Current
+              material))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
+
       // **set density properly
 
     equation
@@ -304,6 +318,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=150, Tolerance=1e-06), Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.SubregionHOR.mos"
             "Subregions.Examples.SubregionHOR.mos"));
@@ -420,7 +435,6 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
         experimentSetupOutput);
-
     end SubregionORR;
 
     model SubregionPipeFlow
@@ -963,8 +977,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1134,13 +1148,15 @@ package Subregions
         final inclTransZ=inclTransZ)
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
-      Conditions.ByConnector.Face.Single.Face layer1 annotation (Placement(
-            transformation(
+      Conditions.ByConnector.Face.Single.Face layer1(redeclare
+          FCSys.Conditions.ByConnector.Face.Single.Translational.Force normal)
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-44,20})));
-      Conditions.ByConnector.Face.Single.Face layer2 annotation (Placement(
-            transformation(
+      Conditions.ByConnector.Face.Single.Face layer2(redeclare
+          FCSys.Conditions.ByConnector.Face.Single.Translational.Force normal)
+        annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={44,20})));
@@ -5702,22 +5718,19 @@ temperature or uniform heat flux.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)),
-        Icon(graphics={
-            Rectangle(
-              extent={{-98,80},{98,120}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Ellipse(
-              extent={{-80,80},{80,-80}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-98,80},{98,120}},
-              textString="%name",
-              lineColor={0,0,0})}));
+        Icon(graphics={Rectangle(
+                  extent={{-98,80},{98,120}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Ellipse(
+                  extent={{-80,80},{80,-80}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-98,80},{98,120}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -5918,44 +5931,47 @@ temperature or uniform heat flux.
     // **clean up
     // Electrical potential and electrostatic force
     face.rho*A[Axis.x]*chemical.mu = n*inSign(side)*face.mPhidot[1]
-      "**0 Electrochemical potential is due to electrostatic force";
+      "Electrochemical potential is due to electrostatic force";
 
     // Translational conditions
     if transSubstrate then
       chemical.phi = inert.translational.phi
-        "**0 Products produced at the velocity of the substrate";
+        "Products produced at the velocity of the substrate";
     else
       chemical.mPhidot = zeros(n_trans)
-        "**0 Translational momentum passed directly from reactants to products";
+        "Translational momentum passed directly from reactants to products";
     end if;
-    face.mPhidot[2:3] = zeros(2) "**0 No shear force at the far side";
+    face.mPhidot[2:3] = zeros(2) "No shear force at the far side";
 
     // Thermal conditions
     if thermalSubstrate then
       chemical.T = inert.thermal.T
-        "**0 Substrate sets the temperature of the reaction and receives heat generated by the reaction";
+        "Substrate sets the temperature of the reaction and receives heat generated by the reaction";
     else
-      chemical.Qdot_D = 0 "**0 Substrate is adiabatic w.r.t. reaction";
+      chemical.Qdot_D = 0 "Substrate is adiabatic w.r.t. reaction";
     end if;
-    chemical.Qdot_A = 0 "**0 No thermal energy into the advected stream";
-    face.Qdot = 0 "**0 Adiabatic at the far side";
+    chemical.Qdot_A = 0 "No thermal energy into the advected stream";
+    face.Qdot = 0 "Adiabatic at the far side";
 
     // Conservation at the far edge of the depletion region (without storage)
-    0 = face.Ndot - inSign(side)*face.rho*A[Axis.x]*face.phi[1] "**0 Material";
+    0 = face.Ndot - inSign(side)*face.rho*A[Axis.x]*face.phi[1] "Material";
     0 = face.mPhidot[1] - inSign(side)*Data.p_Tv(face.T, 1/face.rho)*A[Axis.x]
       "Normal translational momentum";
+    // **
+    //  face.Ndot = 0;
+    //  face.phi[1] = 0;
 
     // Conservation at the reaction site (without storage)
     for i in 1:n_trans loop
       0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (if cartTrans[
         i] == 0 then 0 else face.mPhidot[cartTrans[i]])
-        "**0 Translational momentum";
+        "Translational momentum";
       // The condition is necessary to pass the check since cartTrans is
       // empty by default.
     end for;
     0 = chemical.mu*chemical.Ndot + chemical.phi*chemical.mPhidot + inert.thermal.Qdot
        + chemical.Qdot_D + inert.translational.phi*inert.translational.mPhidot
-      "**0 Energy (excluding terms which are zero above)";
+      "Energy (excluding terms which are zero above)";
     annotation (Documentation(info="<html>
     <p>This model introduces the electrical potential associated with the force on a minority charge carrier in half
     of an electrochemical double layer.  It should be instantiated for each of the two minority regions.  The

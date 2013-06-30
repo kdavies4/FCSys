@@ -38,7 +38,7 @@ def setup(app):
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
-              #'sphinx.ext.pngmath',
+              'sphinx.ext.pngmath',
               #'mathmpl',
               #'only_directives',
               #'plot_directive',
@@ -91,7 +91,7 @@ exclude_patterns = []
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'fcsys'
+pygments_style = 'sphinx'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -141,8 +141,7 @@ html_last_updated_fmt = '%b %d, %Y'
 html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {'**': ['globaltoc.html', 'searchbox.html']}
-html_sidebars = {'**': ['searchbox.html']}
+html_sidebars = {'**': ['globaltoc.html', 'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -222,6 +221,6 @@ autoclass_content = 'both'
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'fcres', u'FCRes Documentation',
+    ('index', 'FCRes', u'FCRes Documentation',
      [u'Kevin Davies'], 1)
 ]

@@ -41,7 +41,7 @@ package UsersGuide "User's Guide"
       </tr>
       <tr bgcolor=#f7f7f7>
         <td>
-        <a href=\"modelica://FCSys\">FCSys</a> should be compatible with any
+        FCSys should be compatible with any
         modeling environment that supports Modelica 3.1.  The following tools have been tested:
         <ul>
           <li>Dymola: Supported by versions 7.4, 2012 FD01, and 2013 FD01.
@@ -56,22 +56,25 @@ package UsersGuide "User's Guide"
       </tr>
     </table>
 
-    <p>These are the suggested steps to begin using <a href=\"modelica://FCSys\">FCSys</a>:
+    <p>These are the suggested steps to begin using FCSys:
     <ol>
-        <li>Read the overview in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</li>
-        <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the subpackages are
+        <li>Read the overview in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</li>
+        <li>Browse the subpackages of FCSys.  In general, the subpackages are
         ordered by the level of the model and the physical hierarchy (high-level at the top).
         <li>Call <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a>() to
-        establish the display units.  This is automatic if <a href=\"modelica://FCSys\">FCSys</a>
-        is loaded via the \"FCSys/load.mos\" script.
+        establish the display units.  This is automatic if FCSys
+        is loaded via the <a href=\"modelica://FCSys/../load.mos\">load.mos</a> script.
         <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
-        There are scripts in \"FCSys/Resources/Scripts/Dymola/\" to create useful plots of that model and others.
+        There are scripts in <a href=\"modelica://FCSys/Resources/Scripts/Dymola/README.md\">Resources/Scripts/Dymola/</a> to 
+        create useful plots of that model and others.
         The scripts should be accessible from the \"Command\" menu of the Modelica environment.
         For more detailed
         analysis, including spatial property distributions and vector plots,
-        custom <a href=\"http://www.python.org\">Python</a> modules are available in
-        \"FCSys/Resources/Source/Python/\" with <a href=\"modelica://FCSys/Resources/Source/Python/help/index.html\">documentation</a>.</li>
+        a Python module called FCRes is available in
+        <a href=\"modelica://FCSys/Resources/Source/Python/README.md\">Resources/Source/Python/</a> 
+        (HTML and PDF documentation <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">here</a> and 
+        <a href=\"modelica://FCSys/Resources/Source/Python/doc/FCRes.pdf\">here</a>).</li>
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href=\"modelica://FCSys.Units\">FCSys.Units</a> package:
@@ -121,7 +124,7 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html><p>The figures below show results from some of the examples in
-    <a href=\"modelica://FCSys\">FCSys</a>.  The figures are ordered from low-level tests to evaluations
+    FCSys.  The figures are ordered from low-level tests to evaluations
     of the complete cell.  For more information about any of the results, please
     follow the links to the associated models.  The models have been simulated using Dymola 7.4 and the plots have been
     generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a>.</p>
@@ -181,7 +184,7 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>These papers describe work leading to the current <a href=\"modelica://FCSys\">FCSys</a> package (most recent at the top):
+    <p>These papers describe work leading to the current FCSys package (most recent at the top):
     <ol>
     <li>K. L. Davies, \"<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf\">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
