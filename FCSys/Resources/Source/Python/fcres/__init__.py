@@ -1,29 +1,6 @@
 #!/usr/bin/env python
 """Load and analyze results from FCSys_.
 
-**update (moved to other script): The "fcres.py" file can be executed at the command line.  It will accept as an
-argument the name of a results file or a directory with multiple files.  If no
-arguments are provided, then it gives a dialog to choose the file or folder.
-Finally, it provides a working session of `Python <http://www.python.org/>`_
-with those results preloaded.
-
-**Example:**
-
-   .. code-block:: sh
-
-      $ ./fcres.py examples/Polarization.mat
-      Cell simulation results have been loaded from "examples/Polarization.mat".
-      The CellSimRes instance is sim.
-      In [1]:
-
-.. _FCSys: http://kdavies4.github.com/FCSys/
-.. _Modelica: http://www.modelica.org/
-
-**Set up Modelica_ simulations and load, analyze, and plot the results.
-
-
-**Update from modelicares:
-
 This module provides direct access to the most important functions and classes
 from its submodules.  These are:
 
@@ -40,14 +17,16 @@ from its submodules.  These are:
 - To handle multiple files at once: :meth:`multi.multiload`,
   :meth:`multi.multiplot`
 
-- For linearization results: :class:`linres.LinRes`
+- For simulation results: :class:`fcsimres.FCSimRes` and :class:`simres.SimRes`
 
-- For linearization results: :class:`simres.SimRes`
+- For linearization results: :class:`fclinres.FCLinRes` and
+  :class:`linres.LinRes`
 
 - To label numbers and quantities: :meth:`texunit.label_number`,
   :meth:`texunit.label_quantity`, :meth:`texunit.unit2tex`
 
 .. _Modelica: http://www.modelica.org/
+.. _FCSys: http://kdavies4.github.com/FCSys/
 """
 __author__ = "Kevin Davies"
 __email__ = "kdavies4@gmail.com"
@@ -67,21 +46,23 @@ if not (major == 2 and minor1 == 7):
 
 
 # All functions and classes
-#__all__ = ['simres', 'fcsimres', 'fclinres']
+#__all__ = ['simres', 'fcsimres', 'fclinres', 'modelicares']
 
 
 # Essential functions and classes
 #
 # These will be available directly from fcres; others must be loaded from their
 # submodules.
+#
+# Local:
 from simres import SimRes
 from fcsimres import FCSimRes
 from fclinres import FCLinRes
-
+#
 # From modelicares:
-from modelicares.base import (add_arrows, add_hlines, add_vlines, animate, ArrowLine,
-                 closeall, figure, load_csv, saveall, setup_subplots)
-from modelicares.exps import (Experiment, gen_experiments, ParamDict, read_params,
-                  run_models, write_params, write_script)
+from modelicares.base import (add_arrows, add_hlines, add_vlines, animate,
+    ArrowLine, closeall, figure, load_csv, saveall, setup_subplots)
+from modelicares.exps import (Experiment, gen_experiments, ParamDict,
+    read_params, run_models, write_params, write_script)
 from modelicares.multi import multiload, multiplot
 from modelicares.texunit import label_number, label_quantity, unit2tex

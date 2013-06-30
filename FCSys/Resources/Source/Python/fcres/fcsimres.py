@@ -1,23 +1,7 @@
 #!/usr/bin/env python
 """Load and analyze results from FCSys_.
 
-**update (moved to other script): The "fcres.py" file can be executed at the command line.  It will accept as an
-argument the name of a results file or a directory with multiple files.  If no
-arguments are provided, then it gives a dialog to choose the file or folder.
-Finally, it provides a working session of `Python <http://www.python.org/>`_
-with those results preloaded.
-
-**Example:**
-
-   .. code-block:: sh
-
-      $ ./fcres.py examples/Polarization.mat
-      Cell simulation results have been loaded from "examples/Polarization.mat".
-      The FCSimRes instance is sim.
-      In [1]:
-
 .. _FCSys: http://kdavies4.github.com/FCSys/
-.. _Modelica: http://www.modelica.org/
 """
 __author__ = "Kevin Davies"
 __email__ = "kdavies4@gmail.com"
@@ -49,13 +33,13 @@ class FCSimRes(SimRes):
 
     # Global constants
     LAYERS = ['anFP', 'anGDL', 'anCL', 'PEM', 'caCL', 'caGDL', 'caFP']
-    LAYER_INFO = {'anFP':"Anode flow plate",
-                  'anGDL':"Anode GDL",
-                  'anCL':"Anode catalyst layer",
-                  'PEM':"PEM",
-                  'caCL':"Cathode catalyst layer",
-                  'caGDL':"Cathode GDL",
-                  'caFP':"Cathode flow plate"}
+    LAYER_INFO = {'anFP': "Anode flow plate",
+                  'anGDL': "Anode GDL",
+                  'anCL': "Anode catalyst layer",
+                  'PEM': "PEM",
+                  'caCL': "Cathode catalyst layer",
+                  'caGDL': "Cathode GDL",
+                  'caFP': "Cathode flow plate"}
 
     def animate_quiverfig_current(self, times, fname='current_eminus_xy'):
         """Create an animation of the x-direction current in the x-y plane.

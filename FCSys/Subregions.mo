@@ -109,8 +109,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -337,14 +337,19 @@ package Subregions
           gas(
             reduceTemp=true,
             H2O(consTransX=Conservation.IC),
-            O2(consTransX=Conservation.IC)),
+            O2(consTransX=Conservation.IC, initEnergy=InitScalar.None)),
           graphite(reduceTemp=true,'e-'(
               initMaterial=InitScalar.Amount,
+              initEnergy=InitScalar.None,
               initTransX=InitTranslational.None,
               phi(each stateSelect=StateSelect.always))),
-          ionomer(reduceTemp=true, 'H+'(initTransX=InitTranslational.None)),
+          ionomer(reduceTemp=true, 'H+'(
+              initMaterial=InitScalar.None,
+              initTransX=InitTranslational.None,
+              initEnergy=InitScalar.None)),
           reaction(J_0=1e-2*U.A/U.cm^2)),
         environment(T=350*U.K));
+
       extends Modelica.Icons.UnderConstruction;
 
       // **initMaterial=InitScalar.None,
@@ -409,11 +414,13 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (
         experiment(StopTime=150, Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.SubregionORR.mos"),
         experimentSetupOutput);
+
     end SubregionORR;
 
     model SubregionPipeFlow
@@ -956,8 +963,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -983,7 +990,8 @@ package Subregions
     <i>T</i><sub>0</sub> = 25 &deg;C is the boundary temperature and
     &theta; is the thermal resistance.  The factor one fourth
     is due to the boundary conditions; the conduction length is half of the total length
-    and the heat is rejected to both sides.</p>
+    and the heat is rejected to both sides.  There is no thermal convection or radiation&mdash;
+    only conduction to the sides.</p>
 
     **Add variable for expected temperature
 
@@ -1051,7 +1059,10 @@ package Subregions
       import FCSys.BaseClasses.Utilities.countTrue;
       import FCSys.BaseClasses.Utilities.enumerate;
       import FCSys.BaseClasses.Utilities.index;
-      extends Modelica.Icons.UnderConstruction;
+
+      // Geometry
+      inner parameter Q.Area A[Axis]={100,1,1}*U.cm^2
+        "Cross-sectional areas of the region";
 
       // Assumptions
       // -----------
@@ -3570,8 +3581,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Gas (n_v=
-                    {0,0}, b_v=Characteristics.'H+'.'C19HF37O5S-'.Ionomer.b_v),
-
+                    {0,0}, b_v=Characteristics.'C19HF37O5S-'.Ionomer.b_v),
             final tauprime=0,
             redeclare parameter Q.Mobility mu=Data.mu(),
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -5855,7 +5865,7 @@ temperature or uniform heat flux.
             textString="%n")}));
   end ChemicalExchange;
 
-  model Depletion "Electrochemical depletion or region"
+  model Depletion "Electrochemical depletion region"
     import FCSys.BaseClasses.Utilities.cartWrap;
     import FCSys.BaseClasses.Utilities.inSign;
     // extends FCSys.BaseClasses.Icons.Names.Top2;
@@ -5908,46 +5918,44 @@ temperature or uniform heat flux.
     // **clean up
     // Electrical potential and electrostatic force
     face.rho*A[Axis.x]*chemical.mu = n*inSign(side)*face.mPhidot[1]
-      "Electrochemical potential is due to electrostatic force";
+      "**0 Electrochemical potential is due to electrostatic force";
 
     // Translational conditions
     if transSubstrate then
       chemical.phi = inert.translational.phi
-        "Products produced at the velocity of the substrate";
+        "**0 Products produced at the velocity of the substrate";
     else
       chemical.mPhidot = zeros(n_trans)
-        "Translational momentum passed directly from reactants to products";
+        "**0 Translational momentum passed directly from reactants to products";
     end if;
-    face.mPhidot[2:3] = zeros(2) "No shear force at the far side";
+    face.mPhidot[2:3] = zeros(2) "**0 No shear force at the far side";
 
     // Thermal conditions
     if thermalSubstrate then
       chemical.T = inert.thermal.T
-        "Substrate sets the temperature of the reaction and receives heat generated by the reaction";
+        "**0 Substrate sets the temperature of the reaction and receives heat generated by the reaction";
     else
-      chemical.Qdot_D = 0 "Substrate is adiabatic w.r.t. reaction";
+      chemical.Qdot_D = 0 "**0 Substrate is adiabatic w.r.t. reaction";
     end if;
-    chemical.Qdot_A = 0 "No thermal energy into the advected stream";
-    face.Qdot = 0 "Adiabatic at the far side";
+    chemical.Qdot_A = 0 "**0 No thermal energy into the advected stream";
+    face.Qdot = 0 "**0 Adiabatic at the far side";
 
     // Conservation at the far edge of the depletion region (without storage)
-    0 = face.Ndot - inSign(side)*face.rho*A[Axis.x]*face.phi[1] "Material";
+    0 = face.Ndot - inSign(side)*face.rho*A[Axis.x]*face.phi[1] "**0 Material";
     0 = face.mPhidot[1] - inSign(side)*Data.p_Tv(face.T, 1/face.rho)*A[Axis.x]
       "Normal translational momentum";
-    zeros(2) = face.mPhidot[2:3] "Transverse translational momentum";
-    0 = face.Qdot "Energy";
 
     // Conservation at the reaction site (without storage)
     for i in 1:n_trans loop
       0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (if cartTrans[
         i] == 0 then 0 else face.mPhidot[cartTrans[i]])
-        "Translational momentum";
+        "**0 Translational momentum";
       // The condition is necessary to pass the check since cartTrans is
       // empty by default.
     end for;
     0 = chemical.mu*chemical.Ndot + chemical.phi*chemical.mPhidot + inert.thermal.Qdot
        + chemical.Qdot_D + inert.translational.phi*inert.translational.mPhidot
-      "Energy (excluding terms which are zero above)";
+      "**0 Energy (excluding terms which are zero above)";
     annotation (Documentation(info="<html>
     <p>This model introduces the electrical potential associated with the force on a minority charge carrier in half
     of an electrochemical double layer.  It should be instantiated for each of the two minority regions.  The
