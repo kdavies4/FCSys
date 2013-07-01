@@ -109,8 +109,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1111,18 +1111,18 @@ package Subregions
 
       inner Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{50,52},{70,72}})));
-      FCSys.Subregions.Reaction reaction
+      FCSys.Subregions.DoubleLayer reaction
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       ChemicalExchange chemicalExchange[3](n={-2,-2,1}, m={1,1,1}*U.g/U.mol)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-      Depletion depletion1(
+      FCSys.Subregions.DoubleLayer depletion1(
         transSubstrate=true,
         thermalSubstrate=true,
         side=Side.n,
         axis=Axis.x,
         n=-2) annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
-      Depletion depletion2(
+      FCSys.Subregions.DoubleLayer depletion2(
         side=Side.p,
         axis=Axis.x,
         n=-2) annotation (Placement(transformation(extent={{30,10},{10,30}})));
@@ -1472,7 +1472,8 @@ package Subregions
          and gas.inclH2O "Oxygen reduction" annotation (Dialog(group=
             "Included reactions", compact=true), choices(__Dymola_checkBox=true));
 
-    Reaction reaction if inclHOR or inclORR "Electrochemical reaction"
+    FCSys.Subregions.DoubleLayer reaction if inclHOR or inclORR
+      "Electrochemical reaction"
       annotation (Placement(transformation(extent={{-23,17},{-3,37}})));
 
   protected
@@ -2356,30 +2357,30 @@ package Subregions
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
       ChemicalExchange HOR(final m='e-'.Data.m, n=2) if inclHOR
-        "Interface with the hydrogen oxidation reaction"
+        "Chemical interface with the hydrogen oxidation reaction"
         annotation (Placement(transformation(extent={{-10,40},{-30,60}})));
       ChemicalExchange ORR(n=-4, final m='e-'.Data.m) if inclORR
-        "Interface with the oxygen reduction reaction"
+        "Chemical interface with the oxygen reduction reaction"
         annotation (Placement(transformation(extent={{-10,20},{-30,40}})));
       Connectors.ChemicalNet chemical if inclHOR or inclORR
         "Connector for chemical reactions" annotation (Placement(transformation(
               extent={{-50,40},{-30,60}}), iconTransformation(extent={{-48,66},
                 {-28,86}})));
-      Depletion depletionHOR(
+      FCSys.Subregions.DoubleLayer HODL(
         transSubstrate=true,
         thermalSubstrate=true,
         side=Side.p,
         axis=Axis.x,
-        n=2) if inclHOR "Depletion region for the HOR"
-        annotation (Placement(transformation(extent={{38,60},{18,80}})));
+        n=2) if inclHOR "Double layer for hydrogen oxidation"
+        annotation (Placement(transformation(extent={{-10,78},{10,98}})));
 
-      Depletion depletionORR(
+      FCSys.Subregions.DoubleLayer ORDL(
         transSubstrate=true,
         thermalSubstrate=true,
         side=Side.n,
         axis=Axis.x,
-        n=-4) if inclORR "Depletion region for the ORR"
-        annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
+        n=-4) if inclORR "Double layer for oxygen reduction"
+        annotation (Placement(transformation(extent={{10,58},{-10,78}})));
 
       parameter Boolean inclHOR=false "Hydrogen oxidation" annotation (
         HideResult=true,
@@ -2391,13 +2392,6 @@ package Subregions
         choices(__Dymola_checkBox=true));
       // These can't be outer parameters in Dymola 7.4.
 
-      Conditions.ByConnector.ChemicalNet.ChemicalNetNoFlow chemical2(
-        inclTransY=false,
-        inclTransZ=false,
-        redeclare FCSys.Conditions.ByConnector.ChemicalNet.Material.Potential
-          material(source(y=0.9*(5.00069)*U.V))) if inclORR "**temp"
-        annotation (Placement(transformation(extent={{-90,-16},{-70,4}})));
-
     initial equation
       assert(not (inclHOR and inclORR),
         "The HOR and ORR cannot be included simultaneously.");
@@ -2405,21 +2399,26 @@ package Subregions
     equation
       // Reactions
       // ---------
-      // HOR
+      // ORR
       connect('e-'.chemical, HOR.species) annotation (Line(
-          points={{-3.9,7},{-18,50}},
+          points={{-3.9,7},{-10,14},{-10,50},{-18,50}},
           color={255,195,38},
           smooth=Smooth.None));
       connect(HOR.reaction, chemical) annotation (Line(
           points={{-22,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(depletionHOR.face, 'e-'.faces[1, Side.p]) annotation (Line(
-          points={{38,70},{50,70},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+      connect(HODL.majority, 'e-'.faces[1, Side.p]) annotation (Line(
+          points={{-10,88},{-50,88},{-50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+
           color={127,127,127},
           smooth=Smooth.None));
-      connect(depletionHOR.inert, 'C+'.inert) annotation (Line(
-          points={{18,70},{6.9,70},{6.9,-3.8}},
+      connect(HODL.minority, 'e-'.faces[1, Side.n]) annotation (Line(
+          points={{10,88},{50,88},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(HODL.inert, 'C+'.inert) annotation (Line(
+          points={{6.10623e-16,84},{4,80},{30,80},{30,-3.8},{6.9,-3.8}},
           color={47,107,251},
           smooth=Smooth.None));
       connect(HOR.reaction, chemical) annotation (Line(
@@ -2428,21 +2427,24 @@ package Subregions
           smooth=Smooth.None));
       // ORR
       connect('e-'.chemical, ORR.species) annotation (Line(
-          points={{-3.9,7},{-18,30}},
+          points={{-3.9,7},{-10,14},{-10,30},{-18,30}},
           color={255,195,38},
           smooth=Smooth.None));
       connect(ORR.reaction, chemical) annotation (Line(
           points={{-22,30},{-30,30},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(depletionORR.face, 'e-'.faces[1, Side.n]) annotation (Line(
-          points={{-24,70},{-50,70},{-50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+      connect(ORDL.majority, 'e-'.faces[1, Side.n]) annotation (Line(
+          points={{10,68},{50,68},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(ORDL.minority, 'e-'.faces[1, Side.p]) annotation (Line(
+          points={{-10,68},{-50,68},{-50,5.55112e-16},{5.55112e-16,5.55112e-16}},
 
           color={127,127,127},
           smooth=Smooth.None));
-
-      connect(depletionORR.inert, 'C+'.inert) annotation (Line(
-          points={{-4,70},{6.9,70},{6.9,-3.8}},
+      connect(ORDL.inert, 'C+'.inert) annotation (Line(
+          points={{-6.10623e-16,64},{4,60},{30,60},{30,-3.8},{6.9,-3.8}},
           color={47,107,251},
           smooth=Smooth.None));
       connect(ORR.reaction, chemical) annotation (Line(
@@ -2555,17 +2557,13 @@ package Subregions
           points={{6.10623e-16,6.10623e-16},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(depletionORR.chemical, chemical) annotation (Line(
-          points={{-14,70},{-14,60},{-30,60},{-30,50},{-40,50}},
+      connect(ORDL.chemical, chemical) annotation (Line(
+          points={{-6.10623e-16,68},{-8,60},{-30,60},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
 
-      connect(depletionHOR.chemical, chemical) annotation (Line(
-          points={{28,70},{28,60},{-30,60},{-30,50},{-40,50}},
-          color={255,195,38},
-          smooth=Smooth.None));
-      connect(chemical2.chemical, chemical) annotation (Line(
-          points={{-80,-10},{-60,-10},{-60,50},{-40,50}},
+      connect(HODL.chemical, chemical) annotation (Line(
+          points={{6.10623e-16,88},{-8,80},{-30,80},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
       annotation (Documentation(info="<html>
@@ -2658,30 +2656,30 @@ package Subregions
             iconTransformation(extent={{-68,30},{-48,50}})));
 
       ChemicalExchange HOR(final m='H+'.Data.m, n=2) if inclHOR
-        "Interface with the hydrogen oxidation reaction"
+        "Chemical interface with the hydrogen oxidation reaction"
         annotation (Placement(transformation(extent={{-10,40},{-30,60}})));
       ChemicalExchange ORR(n=-4, final m='H+'.Data.m) if inclORR
-        "Interface with the oxygen reduction reaction"
+        "Chemical interface with the oxygen reduction reaction"
         annotation (Placement(transformation(extent={{-10,20},{-30,40}})));
       Connectors.ChemicalNet chemical if inclHOR or inclORR
         "Connector for chemical reactions" annotation (Placement(transformation(
               extent={{-50,40},{-30,60}}), iconTransformation(extent={{-48,66},
                 {-28,86}})));
-      Depletion depletionHOR(
+      FCSys.Subregions.DoubleLayer HODL(
         transSubstrate=false,
         thermalSubstrate=false,
         side=Side.n,
         n=2,
-        axis=Axis.x) if inclHOR "Depletion region for the HOR"
-        annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
+        axis=Axis.x) if inclHOR "Double layer for hydrogen oxidation"
+        annotation (Placement(transformation(extent={{10,78},{-10,98}})));
 
-      Depletion depletionORR(
+      FCSys.Subregions.DoubleLayer ORDL(
         transSubstrate=false,
         thermalSubstrate=false,
         side=Side.p,
         axis=Axis.x,
-        n=-4) if inclORR "Depletion region for the ORR"
-        annotation (Placement(transformation(extent={{38,60},{18,80}})));
+        n=-4) if inclORR "Double layer for oxygen reduction"
+        annotation (Placement(transformation(extent={{-10,58},{10,78}})));
 
       parameter Boolean inclHOR=false "Hydrogen oxidation" annotation (
         HideResult=true,
@@ -2708,21 +2706,26 @@ package Subregions
       // ---------
       // HOR
       connect('H+'.chemical, HOR.species) annotation (Line(
-          points={{-3.9,7},{-18,50}},
+          points={{-3.9,7},{-10,14},{-10,50},{-18,50}},
           color={255,195,38},
           smooth=Smooth.None));
       connect(HOR.reaction, chemical) annotation (Line(
           points={{-22,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(depletionHOR.face, 'H+'.faces[1, Side.n]) annotation (Line(
-          points={{-24,70},{-50,70},{-50,0},{5.55112e-16,0},{5.55112e-16,
-              5.55112e-16}},
+      connect(HODL.majority, 'H+'.faces[1, Side.p]) annotation (Line(
+          points={{10,88},{50,88},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(depletionHOR.inert, 'C19HF37O5S-'.inert) annotation (Line(
-          points={{-4,70},{6.9,70},{6.9,-3.8}},
+      connect(HODL.minority, 'H+'.faces[1, Side.n]) annotation (Line(
+          points={{-10,88},{-50,88},{-50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(HODL.inert, 'C19HF37O5S-'.inert) annotation (Line(
+          points={{-6.10623e-16,84},{4,80},{30,80},{30,-3.8},{6.9,-3.8}},
           color={47,107,251},
           smooth=Smooth.None));
       connect(HOR.reaction, chemical) annotation (Line(
@@ -2731,19 +2734,24 @@ package Subregions
           smooth=Smooth.None));
       // ORR
       connect('H+'.chemical, ORR.species) annotation (Line(
-          points={{-3.9,7},{-18,30}},
+          points={{-3.9,7},{-10,14},{-10,30},{-18,30}},
           color={255,195,38},
           smooth=Smooth.None));
       connect(ORR.reaction, chemical) annotation (Line(
           points={{-22,30},{-30,30},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(depletionORR.face, 'H+'.faces[1, Side.p]) annotation (Line(
-          points={{38,70},{50,70},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+      connect(ORDL.majority, 'H+'.faces[1, Side.n]) annotation (Line(
+          points={{-10,68},{-50,68},{-50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+
           color={127,127,127},
           smooth=Smooth.None));
-      connect(depletionORR.inert, 'C19HF37O5S-'.inert) annotation (Line(
-          points={{18,70},{6.9,70},{6.9,-3.8}},
+      connect(ORDL.minority, 'H+'.faces[1, Side.p]) annotation (Line(
+          points={{10,68},{50,68},{50,5.55112e-16},{5.55112e-16,5.55112e-16}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(ORDL.inert, 'C19HF37O5S-'.inert) annotation (Line(
+          points={{6.10623e-16,64},{4,60},{30,60},{30,-3.8},{6.9,-3.8}},
           color={47,107,251},
           smooth=Smooth.None));
       connect(ORR.reaction, chemical) annotation (Line(
@@ -2913,13 +2921,13 @@ package Subregions
           points={{6.10623e-16,6.10623e-16},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(depletionORR.chemical, chemical) annotation (Line(
-          points={{28,70},{28,60},{-30,60},{-30,50},{-40,50}},
+      connect(ORDL.chemical, chemical) annotation (Line(
+          points={{6.10623e-16,68},{-8,60},{-30,60},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
 
-      connect(depletionHOR.chemical, chemical) annotation (Line(
-          points={{-14,70},{-14,60},{-30,60},{-30,50},{-40,50}},
+      connect(HODL.chemical, chemical) annotation (Line(
+          points={{-6.10623e-16,88},{-8,80},{-30,80},{-30,50},{-40,50}},
           color={255,195,38},
           smooth=Smooth.None));
       annotation (Documentation(info="<html>
@@ -3156,50 +3164,58 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end EmptyPhase;
 
     end BaseClasses;
@@ -5054,10 +5070,10 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       // Geometric parameters
 
     protected
-      outer parameter Q.Length L[Axis] "Length" annotation (missingInnerMessage
-          ="This model should be used within a subregion model.
+      outer parameter Q.Length L[Axis] "Lengths" annotation (
+          missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
+      outer parameter Q.Area A[Axis] "Cross-sectional areas" annotation (
           missingInnerMessage="This model should be used within a subregion model.
 ");
       outer parameter Q.Length Lprime[Axis]
@@ -5718,19 +5734,22 @@ temperature or uniform heat flux.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)),
-        Icon(graphics={Rectangle(
-                  extent={{-98,80},{98,120}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-98,80},{98,120}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+        Icon(graphics={
+            Rectangle(
+              extent={{-98,80},{98,120}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Ellipse(
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-98,80},{98,120}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -5771,56 +5790,6 @@ temperature or uniform heat flux.
 
   end Species;
 
-  model Reaction "Electrochemical reaction"
-    extends FCSys.BaseClasses.Icons.Names.Top2;
-
-    parameter Q.Area A=100*U.cm^2 "Area";
-    parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
-      "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
-    parameter Q.NumberAbsolute alpha(max=1) = 0.5
-      "<html>Charge transfer coefficient (&alpha;)</html>";
-
-    Q.Number Pe(start=0) "Peclet number";
-
-    Connectors.ChemicalNet chemical(final n_trans=n_trans)
-      "Common connector for the reaction" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{
-              10,10}})));
-
-  protected
-    outer parameter Integer n_trans
-      "Number of components of translational momentum" annotation (
-        missingInnerMessage="This model should be used within a subregion model.
-");
-
-  equation
-    // Aliases
-    Pe*chemical.T = chemical.mu;
-
-    // Conditions
-    chemical.Ndot = J_0*A*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
-      "Butler-Volmer equation (reaction rate)";
-    chemical.Qdot_A = 0 "Direct thermal advection (from reactants to products)";
-
-    // Conservation (without storage)
-    zeros(n_trans) = chemical.mPhidot "Translational momentum";
-    0 = chemical.Qdot_D + chemical.mu*chemical.Ndot
-      "Energy (excluding advection which is zero above)";
-    annotation (Documentation(info="<html><p>This model establishes the rate of an electrochemical reaction
-  using the Butler-Volmer equation.  It includes a static energy balance with heat generation.
-  The heat is rejected to <code>chemical.Qdot_D</code>, independently of the
-  thermal stream from the reactants to the products (<code>chemical.Qdot_A</code>).</p>
-
-    <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
-    unit of catalyst surface area).</p>
-
-    <p></p></html>"), Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}));
-  end Reaction;
 
   model ChemicalExchange
     "Model to impose stoichiometry and properties on a species in a reaction"
@@ -5878,44 +5847,69 @@ temperature or uniform heat flux.
             textString="%n")}));
   end ChemicalExchange;
 
-  model Depletion "Electrochemical depletion region"
+  model DoubleLayer "Electrochemical double layer"
     import FCSys.BaseClasses.Utilities.cartWrap;
     import FCSys.BaseClasses.Utilities.inSign;
-    // extends FCSys.BaseClasses.Icons.Names.Top2;
+    extends FCSys.BaseClasses.Icons.Names.Top2;
 
-    parameter Axis axis=Axis.x "Axis of the electric field"
+    // Geometry
+    parameter Axis axis=Axis.x "Majority-minority axis"
       annotation (Dialog(group="Geometry"));
-    parameter Side side
-      "Side of the subregion which is depleted of the carrier"
+    parameter Side minoritySide "Side of the minority region"
       annotation (Dialog(group="Geometry"));
-    parameter Integer n "Stoichiometric coefficient";
-    replaceable package Data = Characteristics.BaseClasses.Characteristic
-      constrainedby Characteristics.BaseClasses.CharacteristicEOS
-      "Characteristic data" annotation (
+
+    // Material characteristics
+    replaceable package Data = Characteristics.IdealGas constrainedby
+      Characteristics.BaseClasses.CharacteristicEOS "Characteristic data"
+      annotation (
       Dialog(group="Material properties"),
       choicesAllMatching=true,
-      __Dymola_choicesFromPackage=true,
       Placement(transformation(extent={{-60,40},{-40,60}}), iconTransformation(
             extent={{-10,90},{10,110}})));
-    parameter Boolean transSubstrate=false
+    parameter Q.Permittivity epsilon=U.epsilon_0 "Permittivity"
+      annotation (Dialog(group="Material properties"));
+    final parameter Q.Capacitance C=epsilon*A[axis]/L[axis] "Capacitance";
+
+    // Assumptions
+    parameter Boolean transSubstrate=true
       "Pass translational momentum through the substrate" annotation (choices(
           __Dymola_checkBox=true), Dialog(tab="Assumptions", compact=true));
-    parameter Boolean thermalSubstrate=false
-      "Reject heat generated from the reaction into the substrate" annotation (
-        choices(__Dymola_checkBox=true), Dialog(tab="Assumptions", compact=true));
 
-    Connectors.ChemicalNet chemical(final n_trans=n_trans) "Chemical connector"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
-          iconTransformation(extent={{-10,-10},{10,10}})));
-    Connectors.Inert inert(final n_trans=n_trans) "Connection to the substrate"
-      annotation (Placement(transformation(extent={{30,-10},{50,10}}),
-          iconTransformation(extent={{90,-10},{110,10}})));
-    Connectors.Face face "Far boundary of the depletion region" annotation (
-        Placement(transformation(extent={{-50,-10},{-30,10}}),
+    // Initialization
+    parameter InitCapacitor initCapacitor=InitCapacitor.SS
+      "Method of initialization" annotation (Dialog(tab="Initialization"));
+    parameter Q.Amount N_IC=0
+      "<html>Initial amount (<i>N</i><sub>IC</sub>)</html>"
+      annotation (Dialog(tab="Initialization"));
+    parameter Q.Potential mu_IC=0
+      "<html>Initial potential (&mu;<sub>IC</sub>)</html>"
+      annotation (Dialog(tab="Initialization"));
+
+    Q.Amount N(
+      final start=N_IC,
+      final fixed=false,
+      stateSelect=StateSelect.prefer)
+      "Amount of material diffused from the majority to the minority side";
+
+    Connectors.ChemicalNet chemical(final n_trans=n_trans,mu(final start=mu_IC,
+          final fixed=false)) "Chemical connector" annotation (Placement(
+          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
+            ={{-10,-10},{10,10}})));
+    Connectors.Inert inert(final n_trans=n_trans)
+      "Interface with the substrate" annotation (Placement(transformation(
+            extent={{-10,-30},{10,-10}}), iconTransformation(extent={{-10,-50},
+              {10,-30}})));
+    Connectors.Face majority "Interface to the majority region" annotation (
+        Placement(transformation(extent={{-30,-10},{-10,10}}),
           iconTransformation(extent={{-110,-10},{-90,10}})));
+    Connectors.Face minority "Far side of the minority region" annotation (
+        Placement(transformation(extent={{10,-10},{30,10}}), iconTransformation(
+            extent={{90,-10},{110,10}})));
 
   protected
-    outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
+    outer parameter Q.Area L[Axis] "Lengths" annotation (missingInnerMessage="This model should be used within a subregion model.
+");
+    outer parameter Q.Area A[Axis] "Cross-sectional areas" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
     outer parameter Integer n_trans
@@ -5927,97 +5921,111 @@ temperature or uniform heat flux.
       annotation (missingInnerMessage="This model should be used within a subregion model.
    ");
 
-  equation
-    // **clean up
-    // Electrical potential and electrostatic force
-    face.rho*A[Axis.x]*chemical.mu = n*inSign(side)*face.mPhidot[1]
-      "Electrochemical potential is due to electrostatic force";
+  initial equation
+    if initCapacitor == InitCapacitor.SS then
+      der(N) = 0;
+    elseif initCapacitor == InitCapacitor.Amount then
+      N = N_IC;
+    elseif initCapacitor == InitCapacitor.Amount then
+      chemical.mu = mu_IC;
+      // Else there's no initial equation since
+      // initCapacitor == InitCapacitor.None.
+    end if;
 
-    // Translational conditions
+  equation
+    // Conditions
+    // ----------
+    // Material
+    minority.rho = majority.rho*exp(chemical.mu/inert.thermal.T)
+      "Integrated result of advection canceling diffusion over the entire double layer";
+    minority.Ndot + inSign(minoritySide)*minority.rho*A[Axis.x]*minority.phi[1]
+      = 0 "Advection cancels diffusion at the far side of the minority region";
+    C*chemical.mu = N "Static potential is applied to the reaction";
+    //
+    // Translational
+    majority.mPhidot[2:3] = zeros(2) "No shear force on the majority side";
+    minority.mPhidot[2:3] = zeros(2) "No shear force on the minority side";
     if transSubstrate then
       chemical.phi = inert.translational.phi
         "Products produced at the velocity of the substrate";
     else
       chemical.mPhidot = zeros(n_trans)
-        "Translational momentum passed directly from reactants to products";
+        "Translational momentum passed directly from the reactants to the products";
     end if;
-    face.mPhidot[2:3] = zeros(2) "No shear force at the far side";
+    //
+    // Thermal
+    majority.Qdot = 0 "No heat transfer from the majority region";
+    minority.Qdot = 0 "No heat transfer from the minority region";
+    chemical.Qdot = 0 "No heat transfer from the reaction stream";
 
-    // Thermal conditions
-    if thermalSubstrate then
-      chemical.T = inert.thermal.T
-        "Substrate sets the temperature of the reaction and receives heat generated by the reaction";
-    else
-      chemical.Qdot_D = 0 "Substrate is adiabatic w.r.t. reaction";
-    end if;
-    chemical.Qdot_A = 0 "No thermal energy into the advected stream";
-    face.Qdot = 0 "Adiabatic at the far side";
+    // Conservation (without storage)
+    der(N)/U.s = majority.Ndot
+      "Material (excluding terms which are zero above)";
+    0 = majority.mPhidot[1] - inSign(minoritySide)*Data.p_Tv(majority.T, 1/
+      majority.rho)*A[Axis.x] "Translational momentum on the majority side";
+    0 = minority.mPhidot[1] - inSign(minoritySide)*Data.p_Tv(minority.T, 1/
+      minority.rho)*A[Axis.x] "Translational momentum on the minority side";
+    0 = chemical.mu*chemical.Ndot + inert.translational.phi*inert.translational.mPhidot
+       + inert.thermal.Qdot "Energy (excluding terms which are zero above)";
+    annotation (
+      Documentation(info="<html>
+    <p>This model introduces the electrostatic potential associated with the diffusion of a charge
+    carrier across the depletion region.  The
+    potential is added to the stoichiometrically-weighted sum of the chemical potentials of the reactants and products, 
+    resulting in the total potential of an electrochemical reaction.  
+    Due to the
+    equations of the charge carrier (an instance of the 
+    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model), the electrostatic
+    potential motivates the charge carrier to or from the reaction.  This has the effect 
+    of the Butler-Volmer equation.</p>
+    
+    <p>The quotient of the amount of material diffused across the junction and the electrostatic potential is the capacitance 
+    (<i>C</i> = <i>N</i>/&mu;).  It is assumed to be equal to the permittivity (&epsilon;, a parameter) times the cross-sectional
+    area divided by the length (<i>C</i> = &epsilon;<i>A</i>/<i>L</i>).</p>
 
-    // Conservation at the far edge of the depletion region (without storage)
-    0 = face.Ndot - inSign(side)*face.rho*A[Axis.x]*face.phi[1] "Material";
-    0 = face.mPhidot[1] - inSign(side)*Data.p_Tv(face.T, 1/face.rho)*A[Axis.x]
-      "Normal translational momentum";
-    // **
-    //  face.Ndot = 0;
-    //  face.phi[1] = 0;
-
-    // Conservation at the reaction site (without storage)
-    for i in 1:n_trans loop
-      0 = chemical.mPhidot[i] + inert.translational.mPhidot[i] + (if cartTrans[
-        i] == 0 then 0 else face.mPhidot[cartTrans[i]])
-        "Translational momentum";
-      // The condition is necessary to pass the check since cartTrans is
-      // empty by default.
-    end for;
-    0 = chemical.mu*chemical.Ndot + chemical.phi*chemical.mPhidot + inert.thermal.Qdot
-       + chemical.Qdot_D + inert.translational.phi*inert.translational.mPhidot
-      "Energy (excluding terms which are zero above)";
-    annotation (Documentation(info="<html>
-    <p>This model introduces the electrical potential associated with the force on a minority charge carrier in half
-    of an electrochemical double layer.  It should be instantiated for each of the two minority regions.  The
-    electrical potential is added to the net chemical potential
-    of the reaction, resulting in the electrochemical potential.</p>
+    <p>This model is typically instantiated for each of the two charge carriers (positive and negative) 
+    in an electrochemical reaction.  The chemical potential is split between the two, which
+    results in a nominal charge transfer coefficient of one half 
+    (depending on mobility and other parameters of the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a>
+    instances for the charge carriers).</p>
 
     <p>If <code>transSubstrate</code> is <code>true</code>, then the translational momentum of the
     reactants is passed to the substrate through the <code>inert</code>
     connector and the products are produced at the velocity of the substrate (typically
     zero).  If it is <code>false</code>, then translational momentum is passed
-    directly from the reactants to the products.  If <code>transSubstrate</code> is
-    <code>true</code> for both of the depletion regions, then the velocities of the
-    substrates will be coupled and this may cause a structural singularity.</p>
-
-    <p>If <code>thermalSubstrate</code> is <code>true</code>, then the reaction occurs at the temperature
-    of the substrate and the heat generated by the reaction is rejected to the substrate.  If it is
-    <code>false</code>, then the substrate and the reaction are thermally independent.
-    Typically, <code>thermalSubstrate</code> should be <code>true</code> for one but not both of the depletion regions.
-    It it is <code>true</code> for both of the depletion regions, then the temperatures of the
-    substrates will be coupled and this may cause a structural singularity.
-    If it is <code>false</code> for both of the depletion regions, then the reaction temperature will be
-    undefined.</p>
-    </html>"), Icon(graphics={
+    directly from the reactants to the products.</p>
+    
+    <p>Even if an initialization parameter (<i>N</i><sub>IC</sub> or &mu;<sub>IC</sub>) is not selected for explicit use,
+    it may be used a guess value.</p>
+    </html>"),
+      Icon(graphics={
+          Rectangle(
+            extent={{-100,40},{100,-40}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
           Line(
-            points={{-90,0},{-20,0}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,30},{-20,-30}},
+            points={{0,40},{0,-40}},
             color={127,127,127},
             smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{20,0},{90,0}},
-            color={47,107,251},
-            smooth=Smooth.None),
-          Line(
-            points={{20,30},{20,-30}},
-            color={47,107,251},
-            smooth=Smooth.None,
-            thickness=0.5),
+            pattern=LinePattern.Dash),
           Text(
-            extent={{-120,40},{120,80}},
-            textString="%name",
-            lineColor={0,0,0})}));
-  end Depletion;
+            extent={{-80,16},{-20,-16}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="M"),
+          Text(
+            extent={{20,16},{80,-16}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="m")}),
+      Diagram(graphics));
+  end DoubleLayer;
 
   model Volume "Model to establish a fixed total volume"
 
@@ -6115,7 +6123,7 @@ temperature or uniform heat flux.
 
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
-        U.cm,U.cm} "<html>Length (<b>L</b>)</html>"
+        U.cm,U.cm} "<html>Lengths (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional areas";
@@ -6319,6 +6327,11 @@ temperature or uniform heat flux.
 
     end EmptySubregion;
 
+    type InitCapacitor = enumeration(
+        None "No initialization",
+        SS "Steady state",
+        Amount "Amount of material",
+        Potential "Potential") "Methods of initializing a capacitor";
   end BaseClasses;
   annotation (Documentation(info="<html>
 <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

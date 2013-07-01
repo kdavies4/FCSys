@@ -232,6 +232,13 @@ package Characteristics
 
   end Examples;
 
+  package IdealGas "Ideal gas"
+    extends BaseClasses.CharacteristicEOS(final n_v={-1,0},final b_v=[1]);
+    annotation (defaultComponentPrefixes="replaceable", Documentation(info="<html>
+    <p>This package contains the pressure-volume-temperature relationship of an ideal gas.  Thermal
+    data (e.g., heat capacity) is not included.</p></html>"));
+  end IdealGas;
+
   package 'C+' "<html>C<sup>+</sup></html>"
     extends Modelica.Icons.Package;
     package Graphite "C+ graphite"

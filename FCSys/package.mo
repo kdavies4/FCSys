@@ -19,6 +19,7 @@ import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
+import FCSys.Subregions.BaseClasses.InitCapacitor;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
@@ -89,6 +90,8 @@ package UsersGuide "User's Guide"
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
+            <li><a href=\"modelica://FCSys.Subregions.DoubleLayer\">FCSys.Subregions.DoubleLayer</a> model:
+            Discussion of the electrochemical reaction</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
         detailed information is given at the appropriate level of inheritance.  If a model does not
@@ -976,6 +979,19 @@ printing and shipping costs may be recovered.</p>
   end UsersGuide;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   preferedView="info",
   uses(Modelica(version="3.2")),
@@ -1082,7 +1098,7 @@ margin-right: auto;\" class=noBorder>
     <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a> components using
     <a href=\"modelica://FCSys.Conditions.Adapters\">adapters</a> that are included.
     <a href=\"#Fig3\">Figure 3</a> shows a series of polarization curves generated
-    from the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">CellProfile</a> model.
+    from the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">CellProfile</a> model **Update with new plot (currently old result).
     Please see the <a href=\"modelica://FCSys.UsersGuide.SampleResults\">sample results</a> for more plots.</p>
 
     <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/Resources/Documentation/Polarization.png\"></a>
