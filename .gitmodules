@@ -1,0 +1,3 @@
+[submodule "FCSys/Resources/FCRes"]
+	path = FCSys/Resources/FCRes
+	url = git://github.com/kdavies4/FCRes.git

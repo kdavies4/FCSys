@@ -30,16 +30,7 @@ status
 # Generated files
 /FCSys/help/
 /FCSys/Resources/Documentation/UsersGuide/References/*(dissertation).pdf
-/FCSys/Resources/Source/Python/doc/fcres.pdf
-/FCSys/Resources/Source/Python/examples/
 build/
-
-# Python-generated and compiled files
-*.pyc
-MANIFEST
-
-# Internal link to demos
-/FCSys/Resources/Source/Python/fcres/examples
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.

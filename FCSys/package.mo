@@ -73,9 +73,9 @@ package UsersGuide "User's Guide"
         For more detailed
         analysis, including spatial property distributions and vector plots,
         a Python module called FCRes is available in
-        <a href=\"modelica://FCSys/Resources/Source/Python/README.md\">Resources/Source/Python/</a> 
-        (HTML and PDF documentation <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">here</a> and 
-        <a href=\"modelica://FCSys/Resources/Source/Python/doc/FCRes.pdf\">here</a>).</li>
+        <a href=\"modelica://FCSys/Resources/FCRes/README.md\">Resources/FCRes/</a> 
+        (HTML and PDF documentation <a href=\"modelica://FCSys/Resources/FCRes/doc/index.html\">here</a> and 
+        <a href=\"modelica://FCSys/Resources/FCRes/doc/FCRes.pdf\">here</a>).</li>
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href=\"modelica://FCSys.Units\">FCSys.Units</a> package:
@@ -130,8 +130,9 @@ package UsersGuide "User's Guide"
     FCSys.  The figures are ordered from low-level tests to evaluations
     of the complete cell.  For more information about any of the results, please
     follow the links to the associated models.  The models have been simulated using Dymola 7.4 and the plots have been
-    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a>.</p>
-
+    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and the commands in the 
+    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/plot-samples.py\">plot-samples.py</a> script.</p>
+    
     <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionsSound.png\"></a>
     <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  The nonlinearity is due to upstream discretization (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.SubregionsSound</a>).</p>
 
@@ -142,10 +143,11 @@ package UsersGuide "User's Guide"
     <br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
 
     <p align=center id=\"Fig4\"><a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SaturationPressure.png\"></a>
-    <br>Figure 4: H<sub>2</sub>O saturation pressure as a function of temperature (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
+    <br>Figure 4: Validation of the H<sub>2</sub>O saturation pressure curve derived from Gibbs equilibrium in <a href=\"modelica://FCSys\">FCSys</a>, as compared to 
+    <a href=\"modelica://Modelica.Media.Air.MoistAir\">Modelica.Media.Air.MoistAir</a> (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
     
     <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionEvaporation.png\"></a>
-    <br>Figure 5: H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\">FCSys.Subregions.Examples.SubregionEvaporation</a>).</p>
+    <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\">FCSys.Subregions.Examples.SubregionEvaporation</a>).</p>
 
     <p>**Add various polarization curves.</p>
 
@@ -977,19 +979,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

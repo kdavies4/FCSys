@@ -2308,38 +2308,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "Material" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
-          Placement(transformation(extent={{-80,46},{-60,66}})));
+          Placement(transformation(extent={{-80,32},{-60,52}})));
         replaceable Translational.Velocity translationalX(final axis) if
           inclTransX constrainedby
           Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.x) "X-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransX),
-          Placement(transformation(extent={{-52,32},{-32,52}})));
+          Placement(transformation(extent={{-52,18},{-32,38}})));
         replaceable Translational.Velocity translationalY(final axis) if
           inclTransY constrainedby
           Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.y) "Y-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransY),
-          Placement(transformation(extent={{-24,18},{-4,38}})));
+          Placement(transformation(extent={{-24,4},{-4,24}})));
         replaceable Translational.Velocity translationalZ(final axis) if
           inclTransZ constrainedby
           Conditions.ByConnector.ChemicalNet.Translational.BaseClasses.PartialCondition(
             axis=Axis.z) "Z-axis translational" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclTransZ),
-          Placement(transformation(extent={{4,4},{24,24}})));
-        replaceable ThermalAdvection.SpecificEntropyTemperature
-          thermalAdvection(source(y=3000*U.K)) constrainedby
-          Conditions.ByConnector.ChemicalNet.ThermalAdvection.BaseClasses.PartialCondition
-          "Thermal advection" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(group="Conditions"),
-          Placement(transformation(extent={{32,-10},{52,10}})));
-        replaceable ThermalDiffusion.Temperature thermalDiffusion(source(y=
-                298.15*U.K)) constrainedby
-          Conditions.ByConnector.ChemicalNet.ThermalDiffusion.BaseClasses.PartialCondition
+          Placement(transformation(extent={{4,-10},{24,10}})));
+        replaceable Thermal.SpecificEntropyTemperature thermal(source(y=298.15*
+                U.K)) constrainedby
+          Conditions.ByConnector.ChemicalNet.Thermal.BaseClasses.PartialCondition
           "Thermal diffusion" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
@@ -2379,19 +2372,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       equation
         // Material
         connect(material.chemical, chemical) annotation (Line(
-            points={{-70,52},{-70,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
+            points={{-70,38},{-70,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
             color={239,142,1},
             smooth=Smooth.None));
 
         connect(u.material, material.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,56},{-81,56}},
+            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,42},{-81,42}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%first",
             index=-1,
             extent={{-2,3},{-2,3}}));
         connect(material.y, y.material) annotation (Line(
-            points={{-59,56},{90,56},{90,5.55112e-16},{110,5.55112e-16}},
+            points={{-59,42},{90,42},{90,5.55112e-16},{110,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -2400,19 +2393,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         // X-axis translational
         connect(translationalX.chemical, chemical) annotation (Line(
-            points={{-42,38},{-42,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
+            points={{-42,24},{-42,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
             color={239,142,1},
             smooth=Smooth.None));
 
         connect(u.translationalX, translationalX.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,42},{-53,42}},
+            points={{-110,5.55112e-16},{-110,-10},{-88,-10},{-88,28},{-53,28}},
+
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%first",
             index=-1,
             extent={{-2,3},{-2,3}}));
         connect(translationalX.y, y.translationalX) annotation (Line(
-            points={{-31,42},{90,42},{90,5.55112e-16},{110,5.55112e-16}},
+            points={{-31,28},{90,28},{90,5.55112e-16},{110,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -2421,19 +2415,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         // Y-axis translational
         connect(translationalY.chemical, chemical) annotation (Line(
-            points={{-14,24},{-14,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
+            points={{-14,10},{-14,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
             color={239,142,1},
             smooth=Smooth.None));
 
         connect(u.translationalY, translationalY.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,28},{-25,28}},
+            points={{-110,5.55112e-16},{-110,-10},{-88,-10},{-88,14},{-25,14}},
+
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%first",
             index=-1,
             extent={{-2,3},{-2,3}}));
         connect(translationalY.y, y.translationalY) annotation (Line(
-            points={{-3,28},{90,28},{90,5.55112e-16},{110,5.55112e-16}},
+            points={{-3,14},{90,14},{90,5.55112e-16},{110,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%second",
@@ -2442,33 +2437,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         // Z-axis translational
         connect(translationalZ.chemical, chemical) annotation (Line(
-            points={{14,10},{14,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
+            points={{14,-4},{14,-28},{5.55112e-16,-28},{5.55112e-16,-40}},
             color={239,142,1},
             smooth=Smooth.None));
 
         connect(u.translationalZ, translationalZ.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,14},{3,14}},
-            color={0,0,127},
-            smooth=Smooth.None), Text(
-            string="%first",
-            index=-1,
-            extent={{-2,3},{-2,3}}));
-        connect(translationalZ.y, y.translationalZ) annotation (Line(
-            points={{25,14},{90,14},{90,5.55112e-16},{110,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None), Text(
-            string="%second",
-            index=1,
-            extent={{2,3},{2,3}}));
-
-        // Thermal advection
-        connect(thermalAdvection.chemical, chemical) annotation (Line(
-            points={{42,-4},{42,-28},{0,-28},{0,-40},{5.55112e-16,-40}},
-            color={239,142,1},
-            smooth=Smooth.None));
-
-        connect(u.thermalAdvection, thermalAdvection.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,6.10623e-16},{31,
+            points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,6.10623e-16},{3,
                 6.10623e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
@@ -2476,8 +2450,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             index=-1,
             extent={{-2,3},{-2,3}}));
 
-        connect(thermalAdvection.y, y.thermalAdvection) annotation (Line(
-            points={{53,6.10623e-16},{90,6.10623e-16},{90,5.55112e-16},{110,
+        connect(translationalZ.y, y.translationalZ) annotation (Line(
+            points={{25,6.10623e-16},{90,6.10623e-16},{90,5.55112e-16},{110,
                 5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
@@ -2485,20 +2459,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             index=1,
             extent={{2,3},{2,3}}));
 
+        // Thermal advection
+
         // Thermal diffusion
-        connect(thermalDiffusion.chemical, chemical) annotation (Line(
+        connect(thermal.chemical, chemical) annotation (Line(
             points={{70,-18},{70,-28},{0,-28},{0,-40},{5.55112e-16,-40}},
             color={239,142,1},
             smooth=Smooth.None));
 
-        connect(u.thermalDiffusion, thermalDiffusion.u) annotation (Line(
+        connect(u.thermal, thermal.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,-14},{59,-14}},
             color={0,0,127},
             smooth=Smooth.None), Text(
             string="%first",
             index=-1,
             extent={{-2,3},{-2,3}}));
-        connect(thermalDiffusion.y, y.thermalDiffusion) annotation (Line(
+        connect(thermal.y, y.thermal) annotation (Line(
             points={{81,-14},{90,-14},{90,5.55112e-16},{110,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None), Text(
@@ -2522,11 +2498,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Conditions.ByConnector.ChemicalNet.Translational.Force
             translationalZ(final axis),
           redeclare replaceable
-            Conditions.ByConnector.ChemicalNet.ThermalAdvection.HeatRate
-            thermalAdvection,
-          redeclare replaceable
-            Conditions.ByConnector.ChemicalNet.ThermalDiffusion.HeatRate
-            thermalDiffusion);
+            Conditions.ByConnector.ChemicalNet.Thermal.HeatRate thermal);
 
         // Note:  Dymola 7.4 requires that the redeclared models are
         // resolved to the root of the library, e.g.,
@@ -2600,8 +2572,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           equation
             // Zero values of other flows
             chemical.mPhidot = zeros(n_trans) "Force";
-            chemical.Qdot_A = 0 "Rate of thermal advection";
-            chemical.Qdot_D = 0 "Rate of thermal diffusion";
+            chemical.Qdot = 0 "Heat flow rate";
             annotation (defaultComponentName="material");
           end PartialCondition;
 
@@ -2691,8 +2662,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 chemical.mPhidot[i] = 0 "Force along the other axes";
               end if;
             end for;
-            chemical.Qdot_A = 0 "Rate of thermal advection";
-            chemical.Qdot_D = 0 "Rate of thermal diffusion";
+            chemical.Qdot = 0 "Heat flow rate";
             annotation (defaultComponentName="translational");
           end PartialCondition;
 
@@ -2704,7 +2674,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Translational;
 
-      package ThermalAdvection "Conditions for thermal advection"
+      package Thermal "Conditions for thermal advection"
         extends Modelica.Icons.Package;
 
         model SpecificEntropyTemperature
@@ -2713,12 +2683,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             final conditionType=BaseClasses.ConditionType.SpecificEntropyTemperature,
 
             u(final unit="l2.m/(N.T2)"),
-            final y(final unit="l2.m/T3") = chemical.Qdot_A);
+            final y(final unit="l2.m/T3") = chemical.Qdot);
 
         equation
           chemical.sT = u_final;
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="thermalAdvection");
+              defaultComponentName="thermal");
         end SpecificEntropyTemperature;
 
         model HeatRate
@@ -2729,14 +2699,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             final y(final unit="l2.m/(N.T2)") = chemical.sT);
 
         equation
-          chemical.Qdot_A = u_final;
+          chemical.Qdot = u_final;
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="thermalAdvection");
+              defaultComponentName="thermal");
         end HeatRate;
 
         model Custom "Custom"
           extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-              y=chemical.Qdot_A);
+              y=chemical.Qdot);
 
           Real x=chemical.sT "Expression to which the condition is applied"
             annotation (Dialog(group="Specification"));
@@ -2745,9 +2715,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           x = u_final;
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermalAdvection",
+            defaultComponentName="thermal",
             Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>chemical.sT</code> and/or <code>chemical.Qdot_A</code>.</p></html>"));
+    must involve <code>chemical.sT</code> and/or <code>chemical.Qdot</code>.</p></html>"));
         end Custom;
 
         package BaseClasses "Base classes (generally not for direct use)"
@@ -2764,8 +2734,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             // Zero values of other flows
             chemical.mu = 0 "Electrochemical potential";
             chemical.mPhidot = zeros(n_trans) "Force";
-            chemical.Qdot_D = 0 "Rate of thermal diffusion";
-            annotation (defaultComponentName="thermalAdvection");
+            annotation (defaultComponentName="thermal");
           end PartialCondition;
 
           type ConditionType = enumeration(
@@ -2779,77 +2748,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         end BaseClasses;
 
-      end ThermalAdvection;
-
-      package ThermalDiffusion "Conditions for thermal diffusion"
-        extends Modelica.Icons.Package;
-
-        model Temperature "Specify temperature (measure heat flow rate)"
-          extends BaseClasses.PartialCondition(
-            final conditionType=BaseClasses.ConditionType.Temperature,
-            u(final unit="l2.m/(N.T2)", displayUnit="K"),
-            final y(final unit="l2.m/T3") = chemical.Qdot_D);
-
-        equation
-          chemical.T = u_final;
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="thermalDiffusion");
-        end Temperature;
-
-        model HeatRate "Specify heat flow rate (measure temperature)"
-          extends BaseClasses.PartialCondition(
-            final conditionType=BaseClasses.ConditionType.HeatRate,
-            u(final unit="l2.m/T3"),
-            final y(final unit="l2.m/(N.T2)") = chemical.T);
-
-        equation
-          chemical.Qdot_D = u_final;
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="thermalDiffusion");
-        end HeatRate;
-
-        model Custom "Custom"
-          extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-              y=chemical.Qdot_D);
-
-          Real x=chemical.T "Expression to which the condition is applied"
-            annotation (Dialog(group="Specification"));
-
-        equation
-          x = u_final;
-          annotation (
-            defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermalDiffusion",
-            Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>chemical.T</code> and/or <code>chemical.Qdot_D</code>.</p></html>"));
-        end Custom;
-
-        package BaseClasses "Base classes (generally not for direct use)"
-          extends Modelica.Icons.BasesPackage;
-          partial model PartialCondition "Partial model for a fluid condition"
-
-            extends ByConnector.ChemicalNet.BaseClasses.PartialCondition;
-
-            constant ConditionType conditionType "Type of condition";
-            // Note:  This is included so that the type of condition is recorded with
-            // the results.
-
-          equation
-            // Zero values of other flows
-            chemical.mu = 0 "Electrochemical potential";
-            chemical.mPhidot = zeros(n_trans) "Force";
-            chemical.Qdot_A = 0 "Rate of thermal advection";
-            annotation (defaultComponentName="thermalDiffusion");
-          end PartialCondition;
-
-          type ConditionType = enumeration(
-              Temperature "Specify temperature (measure heat flow rate)",
-              HeatRate "Specify heat flow rate (measure temperature)",
-              Custom "Custom") "Types of conditions";
-
-        end BaseClasses;
-
-      end ThermalDiffusion;
+      end Thermal;
 
       package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.BasesPackage;
@@ -2916,14 +2815,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-40,20},{20,-40}},
-                  fillColor={255,195,38},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None)}));
+              extent={{-70,50},{50,-70}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-40,20},{20,-40}},
+              fillColor={255,195,38},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None)}));
 
     end ChemicalNet;
 
@@ -3085,10 +2984,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
 
     end Chemical;
 
@@ -3545,11 +3444,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52},
-                  lineThickness=0.5)}));
+              extent={{-70,50},{50,-70}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52},
+              lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3715,10 +3614,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5187,11 +5086,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191},
-                  lineThickness=0.5)}));
+              extent={{-70,50},{50,-70}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191},
+              lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -6322,10 +6221,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191})}));
 
     end Face;
 
@@ -6978,15 +6877,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-40,20},{20,-40}},
-                  fillColor={47,107,251},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-40,20},{20,-40}},
+              fillColor={47,107,251},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
     end Inert;
 
@@ -7541,10 +7440,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
 
     end InertDalton;
 
@@ -7860,10 +7759,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Component;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end Translational;
 
@@ -7985,10 +7884,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-70,50},{50,-70}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
+              extent={{-70,50},{50,-70}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47})}));
 
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
@@ -8155,27 +8054,31 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
 end Conditions;

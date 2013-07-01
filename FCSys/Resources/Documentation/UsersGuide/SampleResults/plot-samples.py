@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Generate plots of FCSys examples (for FCSys.UsersGuide.SampleResults)
+"""Generate plots of FCSys examples (for FCSys.UsersGuide.SampleResults).
 """
 __author__ = "Kevin Davies"
 __version__ = "2013-6-29"
@@ -16,8 +16,8 @@ from fcres import SimRes, saveall
 formats = ['svg', 'png']
 
 # Input and output directories
-in_dir = os.path.normpath('../'*6)
-out_dir = os.path.normpath('.')
+in_dir = '../'*6
+out_dir = '.'
 
 # Plot 1
 name='SubregionsSound'
@@ -52,9 +52,9 @@ sim.plot(title="Gas Velocity Induced by Thermal Conduction\n",
                  ["subregions[%i].gas.N2.phi[1]" % i for i in range(1,9)] +
                  ["subregion2.gas.N2.phi[1]"],
          legends1=['Region %i' % i for i in range(1, 11)],
-         leg1_kwargs=dict(loc='upper right', ncol=2),
+         leg1_kwargs=dict(loc='lower right', ncol=2),
          ylabel1='Velocity')
-plt.xlim(xmax=15)
+plt.xlim(xmax=8)
 
 # Plot 4
 name='SaturationPressure'
@@ -63,7 +63,7 @@ sim.plot(title="Water Saturation Pressure\n",
          label=os.path.join(out_dir, name),
          xname="subregion.gas.H2O.T",
          ynames1=["subregion.gas.H2O.p", "p_sat"],
-         legends1=["FCSys (from Gibbs equilibrium)",
+         legends1=["FCSys (via Gibbs equilibrium)",
                    "Modelica.Media (correlated function)"],
          ylabel1='Saturation pressure')
 
@@ -87,4 +87,4 @@ ax2.set_ylim(ymin=-25*ax1_sat_frac, ymax=25*(1 - ax1_sat_frac))
 
 # Save the plots.
 saveall(formats)
-plt.show()
+#plt.show()

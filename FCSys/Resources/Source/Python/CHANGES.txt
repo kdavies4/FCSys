@@ -1,8 +1,0 @@
-Changelog
-=========
-
-0.1 (2013-1-13) -- Initial release
-
-0.2 (201*-**-**) -- Updates:
-
-   - **.

@@ -238,12 +238,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].phi[1] .* caFP.subregions[
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].mPhidot[1] if
         environment.analysis "Electrical power of the segments (x axis)";
-      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)
-         = -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
+      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)=
+           -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
         anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].rho if
         environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never) =
+      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never)=
         zJ_yz .* anFP.subregions[1, :, :].A[Axis.x] if environment.analysis
         "Electrical current of the segments (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -503,12 +503,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].phi[1] .* caFP.subregions[
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].mPhidot[1] if
         environment.analysis "Electrical power of the segments (x axis)";
-      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)
-         = -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
+      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)=
+           -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
         anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].rho if
         environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never) =
+      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never)=
         zJ_yz .* anFP.subregions[1, :, :].A[Axis.x] if environment.analysis
         "Electrical current of the segments (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -655,7 +655,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
 <html><p>Please see the documentation of the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"),
-
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
                 60,20}}), graphics),
         Icon(coordinateSystem(
