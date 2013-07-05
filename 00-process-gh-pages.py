@@ -40,6 +40,8 @@ rpls = [
     # Add the Google Analytics script.
     ('(<link rel="shortcut icon" href=".*\.ico">\n)(</head>)', r"""\1<script type="text/javascript" src="javascripts/analytics.js"></script>
 \2"""),
+    # Move the icon.
+    ('"\.\./Resources/Documentation/favicon\.ico"', '"images/favicon.ico"'),
     # Remove the self-reference.
     ("""Updates to this package may be available at.*
  *<a href="http://kdavies4\.github\.com/FCSys/">.*
