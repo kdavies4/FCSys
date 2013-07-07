@@ -16,6 +16,8 @@ the Modelica code (starting at the [top level](FCSys/package.mo)).
 
 ![Diagram of the fuel cell model](FCSys/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png)
 
+![Diagram of the fuel cell model](FCSys/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png)
+
 ### Installation
 
 Please see the

@@ -1,5 +1,5 @@
 :mod:`fcres.texunit`
-==========================
+====================
 
 .. automodule:: fcres.texunit
    :members:

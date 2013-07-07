@@ -1,5 +1,5 @@
 :mod:`fcres.simres`
-==========================
+===================
 
 .. automodule:: fcres.simres
    :members:

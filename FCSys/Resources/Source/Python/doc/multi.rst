@@ -1,5 +1,5 @@
 :mod:`fcres.multi`
-========================
+==================
 
 .. automodule:: fcres.multi
    :members:

@@ -192,6 +192,239 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       end plot;
 
+      model PolarizationPlaceholder "**temp"
+        extends Modelica.Icons.Example;
+
+        /*
+                 params=dict(comp=['"O2"'],
+                             anStoich=[1.5, 1.1, 2],
+                             caStoich=[9.5, 7.5, 12.5],
+                             anRH=[0.8, 0.6, 1],
+                             caRH=[0.5, 0.3, 0.7],
+                             T_degC=[60, 40, 80],
+                             p_kPag=[48.3, 0, 202.7]),
+                             */
+      end PolarizationPlaceholder;
+
+      model EISPlaceholder
+        "Placeholder model for electro-impedance spectroscopy"
+        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+
+        parameter Modelica.SIunits.Current zI_large_A=100
+          "Large-signal current in amperes";
+        Modelica.Electrical.Analog.Basic.Resistor resistor2(R=0.1) annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={10,-10})));
+        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-10})));
+        Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-80,-10})));
+        Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
+          annotation (Placement(transformation(
+              extent={{-10,10},{10,-10}},
+              rotation=270,
+              origin={70,-10})));
+        Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=
+              zI_large_A)
+          annotation (Placement(transformation(extent={{-60,20},{-40,0}})));
+        Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+        Connectors.RealInput zI_small_A "Small-signal cell current in amperes"
+          annotation (Placement(transformation(extent={{-110,40},{-90,60}}),
+              iconTransformation(extent={{-120,-10},{-100,10}})));
+        Connectors.RealOutput w_V "Cell potential in volts" annotation (
+            Placement(transformation(extent={{90,-20},{110,0}}),
+              iconTransformation(extent={{100,-10},{120,10}})));
+        Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.1) annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-10,10})));
+        Modelica.Electrical.Analog.Basic.Ground ground
+          annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
+      equation
+        connect(zI_small_A, signalCurrent.i) annotation (Line(
+            points={{-100,50},{-50,50},{-50,37}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(signalCurrent.n, constantCurrent.n) annotation (Line(
+            points={{-40,30},{-30,30},{-30,10},{-40,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(signalCurrent.p, constantCurrent.p) annotation (Line(
+            points={{-60,30},{-70,30},{-70,10},{-60,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.p, constantCurrent.p) annotation (Line(
+            points={{-80,5.55112e-16},{-80,10},{-60,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(voltageSensor.v, w_V) annotation (Line(
+            points={{80,-10},{90,-10},{90,-10},{100,-10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(resistor2.p, capacitor.p) annotation (Line(
+            points={{10,5.55112e-16},{10,10},{40,10},{40,5.55112e-16}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.n, resistor2.n) annotation (Line(
+            points={{-80,-20},{-80,-30},{10,-30},{10,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(capacitor.n, resistor2.n) annotation (Line(
+            points={{40,-20},{40,-30},{10,-30},{10,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(capacitor.n, voltageSensor.n) annotation (Line(
+            points={{40,-20},{40,-30},{70,-30},{70,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(capacitor.p, voltageSensor.p) annotation (Line(
+            points={{40,5.55112e-16},{40,10},{70,10},{70,5.55112e-16}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantCurrent.n, resistor1.p) annotation (Line(
+            points={{-40,10},{-20,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(resistor1.n, resistor2.p) annotation (Line(
+            points={{5.55112e-16,10},{10,10},{10,5.55112e-16}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(ground.p, voltageSensor.n) annotation (Line(
+            points={{70,-40},{70,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(graphics), Icon(graphics));
+      end EISPlaceholder;
+
+      model EISPlaceholder2
+        "Placeholder model for electro-impedance spectroscopy"
+        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+
+        parameter Modelica.SIunits.Current zI_large_A=100
+          "Large-signal current in amperes";
+        parameter Modelica.Electrical.Analog.Basic.Ground ground
+          annotation (Placement(transformation(extent={{50,-60},{70,-40}})));
+        Modelica.Electrical.Analog.Basic.Resistor resistor(R=0.1)
+          annotation (Placement(transformation(extent={{10,0},{30,20}})));
+        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={20,30})));
+        Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-70,-10})));
+        Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
+          annotation (Placement(transformation(
+              extent={{-10,10},{10,-10}},
+              rotation=270,
+              origin={60,-10})));
+        Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=
+              zI_large_A)
+          annotation (Placement(transformation(extent={{-50,20},{-30,0}})));
+        Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent
+          annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
+        Connectors.RealInput zI_small_A "Small-signal cell current in amperes"
+          annotation (Placement(transformation(extent={{-100,40},{-80,60}}),
+              iconTransformation(extent={{-120,-10},{-100,10}})));
+        Connectors.RealOutput w_V "Cell potential in volts" annotation (
+            Placement(transformation(extent={{80,-20},{100,0}}),
+              iconTransformation(extent={{100,-10},{120,10}})));
+      equation
+        connect(zI_small_A, signalCurrent.i) annotation (Line(
+            points={{-90,50},{-40,50},{-40,37}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(signalCurrent.n, constantCurrent.n) annotation (Line(
+            points={{-30,30},{-20,30},{-20,10},{-30,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(signalCurrent.p, constantCurrent.p) annotation (Line(
+            points={{-50,30},{-60,30},{-60,10},{-50,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.p, constantCurrent.p) annotation (Line(
+            points={{-70,5.55112e-16},{-70,10},{-50,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantCurrent.n, resistor.p) annotation (Line(
+            points={{-30,10},{10,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(capacitor.p, resistor.p) annotation (Line(
+            points={{10,30},{0,30},{0,10},{10,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(capacitor.n, resistor.n) annotation (Line(
+            points={{30,30},{40,30},{40,10},{30,10}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(resistor.n, voltageSensor.p) annotation (Line(
+            points={{30,10},{60,10},{60,5.55112e-16}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(voltageSensor.n, ground.p) annotation (Line(
+            points={{60,-20},{60,-40}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.n, voltageSensor.n) annotation (Line(
+            points={{-70,-20},{-70,-30},{60,-30},{60,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(voltageSensor.v, w_V) annotation (Line(
+            points={{70,-10},{80,-10},{80,-10},{90,-10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(graphics), Icon(graphics));
+      end EISPlaceholder2;
+
+      model EISPlaceholder3
+        "Placeholder model for electro-impedance spectroscopy"
+        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+
+        parameter Modelica.SIunits.Current zI_large_A=100
+          "Large-signal current in amperes";
+        Modelica.Electrical.Analog.Basic.Resistor resistor(R=0.1) annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,-10})));
+        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={30,-10})));
+        Modelica.Electrical.Analog.Basic.Ground ground
+          annotation (Placement(transformation(extent={{-2,-60},{18,-40}})));
+      equation
+        connect(resistor.p, capacitor.p) annotation (Line(
+            points={{2.44753e-15,5.55112e-16},{0,10},{30,10},{30,5.55112e-16}},
+
+            color={0,0,255},
+            smooth=Smooth.None));
+
+        connect(capacitor.n, resistor.n) annotation (Line(
+            points={{30,-20},{30,-30},{-1.22629e-15,-30},{-1.22629e-15,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(ground.p, resistor.n) annotation (Line(
+            points={{8,-40},{4,-40},{4,-20},{-1.33227e-15,-20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(graphics), Icon(graphics));
+      end EISPlaceholder3;
     end Examples;
 
     model Cell "Single-cell PEMFC"
@@ -238,12 +471,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].phi[1] .* caFP.subregions[
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].mPhidot[1] if
         environment.analysis "Electrical power of the segments (x axis)";
-      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)=
-           -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
+      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)
+         = -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
         anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].rho if
         environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never)=
+      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never) =
         zJ_yz .* anFP.subregions[1, :, :].A[Axis.x] if environment.analysis
         "Electrical current of the segments (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -503,12 +736,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].phi[1] .* caFP.subregions[
         caFP.n_x, :, :].graphite.'e-'.faces[1, Side.p].mPhidot[1] if
         environment.analysis "Electrical power of the segments (x axis)";
-      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)=
-           -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
+      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)
+         = -anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].phi[1] .*
         anFP.subregions[1, :, :].graphite.'e-'.faces[1, Side.n].rho if
         environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never)=
+      output Q.Current zI_yz[n_y, n_z](each stateSelect=StateSelect.never) =
         zJ_yz .* anFP.subregions[1, :, :].A[Axis.x] if environment.analysis
         "Electrical current of the segments (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -655,6 +888,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
 <html><p>Please see the documentation of the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"),
+
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
                 60,20}}), graphics),
         Icon(coordinateSystem(

@@ -1019,6 +1019,73 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
+    model PEM2 "Test the proton exchange membrane"
+
+      extends Modelica.Icons.Example;
+
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of regions along the channel" annotation (HideResult=true);
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of regions across the channel" annotation (HideResult=true);
+
+      inner FCSys.Conditions.Environment environment(
+        p=149.6*U.kPa,
+        T=333.15*U.K,
+        analysis=true)
+        annotation (Placement(transformation(extent={{70,70},{90,90}})));
+      PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1[n_y, n_z](each
+          ionomer('inclH+'=true, 'H+'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-24,0})));
+    equation
+      connect(BC1.face, PEM.xNegative) annotation (Line(
+          points={{-20,3.65701e-16},{-10,3.65701e-16},{-10,6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file=
+              "Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
+            "Regions.Examples.PEM.mos"));
+    end PEM2;
+
+    model AnGDL2 "Test the anode gas diffusion layer"
+      import FCSys.Subregions.Phases;
+      extends Modelica.Icons.Example;
+
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of regions along the channel" annotation (HideResult=true);
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of regions across the channel" annotation (HideResult=true);
+      inner FCSys.Conditions.Environment environment(
+        p=149.6*U.kPa,
+        T=333.15*U.K,
+        analysis=true)
+        annotation (Placement(transformation(extent={{70,70},{90,90}})));
+      AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
+        annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+
+      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
+              ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
+    end AnGDL2;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -1257,43 +1324,6 @@ text layer of this model.</p>
                   lineColor={0,0,0})}));
 
     end AnFP;
-
-    model GM "GM anode test flow plate and current collector"
-      extends AnFP(
-        L_x={35.22*U.mm},
-        L_y={1.543*U.m},
-        L_z={(5/1.543)*U.mm},
-        Subregion(graphite('C+'(theta=U.m*U.K/(95*U.W)),'e-'(mu=U.S*U.cc/(
-                  1.470e-3*U.cm*0.1849*U.mol)))),
-        epsilon=0.011);
-      annotation (defaultComponentName="anFP", Documentation(info="<html>
-  <p>Assumptions:<ol>
-<li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
- and end plate combined.  The material properties are those of epoxy-filled
-graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
-<li>The y-axis length of this region is the length of the double-serpentine flow channels of the
-GM-compatible
-anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
-<li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
-(50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
-<li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
-In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
-</ol></p>
-
-<p>The default thermal resistivity of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
-[<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].  The default electronic mobility
-(<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
-Entegris/Poco Graphite AXF-5Q as well
-  and the density of electrons from
-  <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
-  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
-
-<p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model.</p></html>"));
-
-    end GM;
 
   end AnFPs;
 
@@ -1952,8 +1982,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               'inclC19HF37O5S-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'C19HF37O5S-'(consMaterial=Conservation.IC, initMaterial=
-                    InitScalar.Pressure),
+              'C19HF37O5S-'(initMaterial=InitScalar.Pressure),
               'H+'(
                 mu=0.083*U.S/(0.95*U.M*U.cm),
                 initTransX=InitTranslational.None,
@@ -1974,7 +2003,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
-      subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
+      //**subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
       annotation (
         defaultComponentName="PEM",
         Documentation(info="<html>
@@ -3014,43 +3043,6 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
                   lineColor={0,0,0})}));
 
     end CaFP;
-
-    model GM "GM cathode test flow plate and current collector"
-      extends CaFP(
-        L_x={35.22*U.mm},
-        L_y={1.028*U.m},
-        L_z={(5/1.028)*U.mm},
-        Subregion(graphite('C+'(theta=U.m*U.K/(95*U.W)),'e-'(mu=U.S*U.cc/(
-                  1.470e-3*U.cm*0.1849*U.mol)))),
-        epsilon=0.011);
-      annotation (defaultComponentName="caFP", Documentation(info="<html>
-  <p>Assumptions:<ol>
-<li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
- and end plate combined.  The material properties are those of epoxy-filled
-graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
-<li>The y-axis length of this region is the length of the triple-serpentine flow channels of the
-GM-compatible
-anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
-<li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
-(50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
-<li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
-In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
-</ol></p>
-
-<p>The default thermal resistivity of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
-[<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].  The default electronic mobility
-(<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
-Entegris/Poco Graphite AXF-5Q as well
-  and the density of electrons from
-  <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
-  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
-
-<p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.CaFPs.CaFP\">CaFP</a> model.</p></html>"));
-
-    end GM;
 
   end CaFPs;
 
