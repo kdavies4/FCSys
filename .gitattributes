@@ -31,5 +31,9 @@ matplotlibrc text
 00-* merge=ours
 .*.pws merge=ours
 WorkInProgress.mo merge=ours
+Figures.mo merge=ours
 package.order merge=ours
 Install merge=ours
+FCSys/Resources/Source/Python/doc/.*.pws merge=ours
+FCSys/Resources/Source/Python/doc/_templates merge=ours
+FCSys/Resources/Source/Python/doc/*.py merge=ours
