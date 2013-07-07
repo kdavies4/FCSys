@@ -30,10 +30,12 @@ matplotlibrc text
 # Keep the development files on the development branch.
 00-* merge=ours
 .*.pws merge=ours
+FCSys/Resources/Source/Python/doc/.*.pws merge=ours
+FCSys/Resources/Source/Python/doc/_templates merge=ours
+FCSys/Resources/Source/Python/doc/*.py merge=ours
 WorkInProgress.mo merge=ours
 Figures.mo merge=ours
 package.order merge=ours
 Install merge=ours
-FCSys/Resources/Source/Python/doc/.*.pws merge=ours
-FCSys/Resources/Source/Python/doc/_templates merge=ours
-FCSys/Resources/Source/Python/doc/*.py merge=ours
+*qpOASES* merge=ours
+MPC merge=ours
