@@ -73,9 +73,9 @@ package UsersGuide "User's Guide"
         For more detailed
         analysis, including spatial property distributions and vector plots,
         a Python module called FCRes is available in
-        <a href=\"modelica://FCSys/Resources/FCRes/README.md\">Resources/FCRes/</a> 
-        (HTML and PDF documentation <a href=\"modelica://FCSys/Resources/FCRes/doc/index.html\">here</a> and 
-        <a href=\"modelica://FCSys/Resources/FCRes/doc/FCRes.pdf\">here</a>).</li>
+        <a href=\"modelica://FCSys/Resources/Source/Python/README.md\">Resources/Source/Python/</a> 
+        (HTML and PDF documentation <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">here</a> and 
+        <a href=\"modelica://FCSys/Resources/Source/Python/doc/FCRes.pdf\">here</a>).</li>
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href=\"modelica://FCSys.Units\">FCSys.Units</a> package:

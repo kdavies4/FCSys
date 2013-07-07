@@ -1258,43 +1258,6 @@ text layer of this model.</p>
 
     end AnFP;
 
-    model GM "GM anode test flow plate and current collector"
-      extends AnFP(
-        L_x={35.22*U.mm},
-        L_y={1.543*U.m},
-        L_z={(5/1.543)*U.mm},
-        Subregion(graphite('C+'(theta=U.m*U.K/(95*U.W)),'e-'(mu=U.S*U.cc/(
-                  1.470e-3*U.cm*0.1849*U.mol)))),
-        epsilon=0.011);
-      annotation (defaultComponentName="anFP", Documentation(info="<html>
-  <p>Assumptions:<ol>
-<li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
- and end plate combined.  The material properties are those of epoxy-filled
-graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
-<li>The y-axis length of this region is the length of the double-serpentine flow channels of the
-GM-compatible
-anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
-<li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
-(50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
-<li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
-In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
-</ol></p>
-
-<p>The default thermal resistivity of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
-[<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].  The default electronic mobility
-(<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
-Entegris/Poco Graphite AXF-5Q as well
-  and the density of electrons from
-  <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
-  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
-
-<p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model.</p></html>"));
-
-    end GM;
-
   end AnFPs;
 
   package AnGDLs "Anode gas diffusion layers"
@@ -3014,43 +2977,6 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
                   lineColor={0,0,0})}));
 
     end CaFP;
-
-    model GM "GM cathode test flow plate and current collector"
-      extends CaFP(
-        L_x={35.22*U.mm},
-        L_y={1.028*U.m},
-        L_z={(5/1.028)*U.mm},
-        Subregion(graphite('C+'(theta=U.m*U.K/(95*U.W)),'e-'(mu=U.S*U.cc/(
-                  1.470e-3*U.cm*0.1849*U.mol)))),
-        epsilon=0.011);
-      annotation (defaultComponentName="caFP", Documentation(info="<html>
-  <p>Assumptions:<ol>
-<li>The x-axis length of this region is the thickness
-of the GM-compatible <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a>,
-<a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Current collector plate.pdf\">current collector plate</a>,
- and end plate combined.  The material properties are those of epoxy-filled
-graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
-<li>The y-axis length of this region is the length of the triple-serpentine flow channels of the
-GM-compatible
-anode <a href=\"modelica://FCSys/Resources/Documentation/Regions/AnFPs/GM/Flow field.pdf\">flow field</a> as if they were straightened.</li>
-<li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
-(50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
-<li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
-In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
-</ol></p>
-
-<p>The default thermal resistivity of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) is that of Entegris/Poco Graphite AXF-5Q
-[<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].  The default electronic mobility
-(<code>mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol)</code>) is based on
-Entegris/Poco Graphite AXF-5Q as well
-  and the density of electrons from
-  <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">FCSys.Characteristics.'e-'.Graphite</a>
-  (&sim;0.1849 mol/cm<sup>3</sup>).</p>
-
-<p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.CaFPs.CaFP\">CaFP</a> model.</p></html>"));
-
-    end GM;
 
   end CaFPs;
 
