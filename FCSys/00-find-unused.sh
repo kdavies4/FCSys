@@ -1,6 +1,10 @@
 #!/bin/bash
 # Check for quantities and references that aren't used in the Modelica code.
 #
+# Manually temove the unused quantities from FCSys/Resources/quantities.xls and
+# update Quantities.mo and FCSys/Resources/Scripts/units.mos.  Remove the unused
+# references from package.mo (FCSys.UsersGuide.References).
+
 # Kevin Davies, 7/18/12
 
 # Quantities

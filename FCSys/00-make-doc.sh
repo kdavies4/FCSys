@@ -1,6 +1,23 @@
 #!/bin/bash
-# Process the help files and prepare a version for github pages
-# (http://kdavies4.github.io/FCSys/).
+# Process the help files and prepare a version for github pages.
+#
+# This script applies the stylesheet, makes special replacements, and updates
+# the documentation for the website on the gh-pages branch (for
+# http://kdavies4.github.io/FCSys/).
+#
+# Before running this script:
+# 1.  Make sure the documentation is up-to-date.  Use 00-find-used.sh,
+#     00-check-linewidth.py, 00-spellcheck.sh, and 00-tidy.sh as needed.
+# 2.  Add an entry to the list of revisions in package.mo.
+# 3.  Delete the help directory and recreate it using Dymola
+#     (File->Export->HTML; check "Large image").
+#
+# After running this script:
+# 1. Push the gh-pages branch to origin (git push origin gh-pages).
+# 2. Optional: Use http://www.xml-sitemaps.com/ to update the sitemap.  Put it
+# in base folder of the the gh-pages branch and push to origin again.  Resubmit
+# it in Google Webmaster tools
+# (https://www.google.com/webmasters/tools/sitemap-list?hl=en&siteUrl=http%3A%2F%2Fkdavies4.github.com%2FFCSys%2F#MAIN_TAB=1&CARD_TAB=-1).
 #
 # Kevin Davies, 1/24/2013
 

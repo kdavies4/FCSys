@@ -28,12 +28,9 @@ matplotlibrc text
 *.xls binary
 
 # Keep the development files and work in progress on the development branch.
-00-* merge=ours
-.*.pws merge=ours
-FCSys/Resources/Source/Python/doc/.*.pws merge=ours
+*00-* merge=ours
+*.pws merge=ours
 FCSys/Resources/Source/Python/doc/_templates merge=ours
-FCSys/Resources/Source/Python/doc/*.py merge=ours
-FCSys/Resources/Source/Python/doc/Makefile merge=ours
 FCSys/Resources/Source/Python/bin/killall-fcsysres.sh merge=ours
 WorkInProgress.mo merge=ours
 Figures.mo merge=ours
