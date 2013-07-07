@@ -30,3 +30,6 @@ matplotlibrc text
 # Keep the development files on the development branch.
 00-* merge=ours
 .*.pws merge=ours
+WorkInProgress.mo merge=ours
+package.order merge=ours
+Install merge=ours

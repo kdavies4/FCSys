@@ -8,11 +8,11 @@ be marked with an "under construction" icon (red triangle) or have notes marked
 with "TODO" or "**".  If you have problems besides those noted, please
 [open an issue](https://github.com/kdavies4/FCSys/issues/new).
 
-[FCSys] is a library of proton exchange membrane fuel cell models in
-[Modelica](https://www.modelica.org/).  More information is available in the
-documentation, which can be accessed [online](http://kdavies4.github.com/FCSys)
-or from the documentation layer of the [Modelica] code (starting at the
-[top level](FCSys/package.mo)).
+[FCSys] is a free, open-source library of proton exchange membrane fuel cell
+models in [Modelica](https://www.modelica.org/).  More information is available
+in the documentation, which can be accessed
+[online](http://kdavies4.github.com/FCSys) or from the documentation layer of
+the Modelica code (starting at the [top level](FCSys/package.mo)).
 
 ![Diagram of the fuel cell model](FCSys/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png)
 
@@ -40,5 +40,6 @@ or
 [ModelicaLicense2.html](FCSys/Resources/Documentation/ModelicaLicense2.html)).
 Please share any modifications you make (preferably on a Github fork from
 https://github.com/kdavies4/FCSys) so that others may benefit from your work.
+
 
 [FCSys]: http://kdavies4.github.io/FCSys/
