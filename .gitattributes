@@ -27,8 +27,22 @@ matplotlibrc text
 *.png binary
 *.xls binary
 
-# Keep the development files on the development branch.
+# Keep the development files and work in progress on the development branch.
 00-* merge=ours
 .*.pws merge=ours
+FCSys/Resources/Source/Python/doc/.*.pws merge=ours
+FCSys/Resources/Source/Python/doc/_templates merge=ours
+FCSys/Resources/Source/Python/doc/*.py merge=ours
+FCSys/Resources/Source/Python/doc/Makefile merge=ours
+FCSys/Resources/Source/Python/bin/killall-fcsysres.sh merge=ours
 WorkInProgress.mo merge=ours
+Figures.mo merge=ours
 package.order merge=ours
+Install merge=ours
+*qpOASES* merge=ours
+MPC merge=ours
+FCSys/Resources/Source/Python/README.rst merge=ours
+
+# Files that are different between master and development:
+FCSys/DOCUMENTATION.html merge=ours
+FCSys/Resources/Source/Python/setup.py merge=ours

@@ -1019,6 +1019,73 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
+    model PEM2 "Test the proton exchange membrane"
+
+      extends Modelica.Icons.Example;
+
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of regions along the channel" annotation (HideResult=true);
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of regions across the channel" annotation (HideResult=true);
+
+      inner FCSys.Conditions.Environment environment(
+        p=149.6*U.kPa,
+        T=333.15*U.K,
+        analysis=true)
+        annotation (Placement(transformation(extent={{70,70},{90,90}})));
+      PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1[n_y, n_z](each
+          ionomer('inclH+'=true, 'H+'(redeclare
+              FCSys.Conditions.ByConnector.Face.Single.Translational.Force
+              normal))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-24,0})));
+    equation
+      connect(BC1.face, PEM.xNegative) annotation (Line(
+          points={{-20,3.65701e-16},{-10,3.65701e-16},{-10,6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file=
+              "Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
+            "Regions.Examples.PEM.mos"));
+    end PEM2;
+
+    model AnGDL2 "Test the anode gas diffusion layer"
+      import FCSys.Subregions.Phases;
+      extends Modelica.Icons.Example;
+
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of regions along the channel" annotation (HideResult=true);
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of regions across the channel" annotation (HideResult=true);
+      inner FCSys.Conditions.Environment environment(
+        p=149.6*U.kPa,
+        T=333.15*U.K,
+        analysis=true)
+        annotation (Placement(transformation(extent={{70,70},{90,90}})));
+      AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
+        annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+
+      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
+              ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
+    end AnGDL2;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -1915,8 +1982,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               'inclC19HF37O5S-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'C19HF37O5S-'(consMaterial=Conservation.IC, initMaterial=
-                    InitScalar.Pressure),
+              'C19HF37O5S-'(initMaterial=InitScalar.Pressure),
               'H+'(
                 mu=0.083*U.S/(0.95*U.M*U.cm),
                 initTransX=InitTranslational.None,
@@ -1937,7 +2003,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
-      subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
+      //**subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
       annotation (
         defaultComponentName="PEM",
         Documentation(info="<html>

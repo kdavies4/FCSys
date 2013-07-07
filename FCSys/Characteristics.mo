@@ -360,8 +360,6 @@ package Characteristics
         final formula="e-",
         phase=Phase.Gas,
         m=Data.MM*U.kg/U.mol,
-        b_v=[1],
-        n_v={-1,0},
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,20000.000}*U.K,
@@ -370,6 +368,7 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         d=2*U.k_A/m);
+
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
@@ -415,8 +414,6 @@ package Characteristics
         final formula="H+",
         phase=Phase.Gas,
         final m=Data.MM*U.kg/U.mol,
-        b_v=[1],
-        n_v={-1,0},
         referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
@@ -427,6 +424,7 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         d=240*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -1535,7 +1533,6 @@ temperature difference.</p>
         input Q.Temperature dT=0 "Derivative of temperature";
         input Q.VolumeSpecific dv=0 "Derivative of specific volume";
         output Q.Pressure dp "Derivative of pressure";
-
       algorithm
         dp := if isCompressible then Polynomial.f(
                 v,
@@ -1544,7 +1541,9 @@ temperature difference.</p>
                   b_p[i, :] .* {(n_p[1] + i - 1)*T*dv + (n_p[2] + j - 1)*v*dT
               for j in 1:size(b_p, 2)},
                   n_p[2] - 1) for i in 1:size(b_p, 1)},
-                n_p[1] - 1) else 0 annotation (
+                n_p[1] - 1) else 0;
+
+        annotation (
           Inline=true,
           inverse(dv=dv_Tp(
                       T,
@@ -1552,7 +1551,6 @@ temperature difference.</p>
                       dT,
                       dp)),
           smoothOrder=999);
-
       end dp_Tv;
 
       function dv_Tp
@@ -1564,7 +1562,6 @@ temperature difference.</p>
         input Q.Temperature dT=0 "Derivative of temperature";
         input Q.Pressure dp=0 "Derivative of pressure";
         output Q.VolumeSpecific dv "Derivative of specific volume";
-
       algorithm
         dv := Polynomial.f(
                 p,
@@ -1573,12 +1570,13 @@ temperature difference.</p>
                   b_v[i, :] .* {(n_v[1] + i - 1)*T*dp + (n_v[2] - n_v[1] + j -
               i)*p*dT for j in 1:size(b_v, 2)},
                   n_v[2] - n_v[1] - i) for i in 1:size(b_v, 1)},
-                n_v[1] - 1) annotation (Inline=true, inverse(dp=dp_Tv(
+                n_v[1] - 1);
+
+        annotation (Inline=true, inverse(dp=dp_Tv(
                       T,
                       v_Tp(T, p),
                       dT,
                       dv)));
-
       end dv_Tp;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
@@ -1587,7 +1585,6 @@ temperature difference.</p>
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         output Q.PressureAbsolute p "Pressure";
-
       algorithm
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
@@ -1600,12 +1597,13 @@ temperature difference.</p>
                   T,
                   b_p[i, :],
                   n_p[2]) for i in 1:size(b_p, 1)},
-                n_p[1]) else p0 annotation (
+                n_p[1]) else p0;
+        annotation (
           Inline=true,
           inverse(v=v_Tp(T, p)),
           derivative=dp_Tv,
-          smoothOrder=999);
-        annotation (Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
+          smoothOrder=999,
+          Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
@@ -1617,7 +1615,6 @@ temperature difference.</p>
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.VolumeSpecificAbsolute v "Specific volume";
-
       algorithm
         v := Polynomial.f(
                 p,
@@ -1625,11 +1622,12 @@ temperature difference.</p>
                   T,
                   b_v[i, :],
                   n_v[2] - n_v[1] - i + 1) for i in 1:size(b_v, 1)},
-                n_v[1]) annotation (
+                n_v[1]);
+        annotation (
           Inline=true,
           inverse(p=p_Tv(T, v)),
-          derivative=dv_Tp);
-        annotation (Documentation(info="<html>
+          derivative=dv_Tp,
+          Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;

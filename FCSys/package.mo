@@ -90,7 +90,7 @@ package UsersGuide "User's Guide"
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
-            <li><a href=\"modelica://FCSys.Subregions.DoubleLayer\">FCSys.Subregions.DoubleLayer</a> model:
+            <li><a href=\"modelica://FCSys.Subregions.DepletionLayer\">FCSys.Subregions.DepletionLayer</a> model:
             Discussion of the electrochemical reaction</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and

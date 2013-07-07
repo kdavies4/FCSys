@@ -99,4 +99,5 @@ if [ "$stash_msg" != "No local changes to save" ]; then
    git stash pop
 fi
 
-echo "Created release version $versiona.$versionb.  Check it, rebase if necessary, and do 'git push --tags origin release'."
+echo "Created release version $versiona.$versionb on the release branch."
+echo "Check it, rebase if necessary, and do 'git push --tags origin release'."

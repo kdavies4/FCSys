@@ -31,7 +31,7 @@ status
 /FCSys/help/
 /FCSys/Resources/Documentation/UsersGuide/References/*(dissertation).pdf
 /FCSys/Resources/Source/Python/doc/fcres.pdf
-/FCSys/Resources/Source/Python/examples/
+/FCSys/Resources/Source/Python/examples/*.mos
 build/
 
 # Python-generated and compiled files
