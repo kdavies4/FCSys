@@ -1781,7 +1781,7 @@ most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
   <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href=\"http://www.python.org\">Python</a>, C).  In fact, this has been implemented in the 
-  included <a href=\"modelica://FCSys/Resources/FCRes/doc/index.html\">FCRes</a> module for
+  included <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">FCRes</a> module for
   plotting and analysis.</p>
 
 <hr>

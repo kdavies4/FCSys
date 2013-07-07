@@ -8,6 +8,7 @@
 *.c text
 *.css text
 *.html text
+*.js text
 *.md text
 *.mo text
 *.mos text
@@ -15,6 +16,7 @@
 *.py text
 *.sh text
 *.txt text
+matplotlibrc text
 
 # Denote all files that are truly binary and should not be modified.
 *.gif binary
@@ -24,3 +26,7 @@
 *.pdf binary
 *.png binary
 *.xls binary
+
+# Keep the development files on the development branch.
+00-* merge=ours
+.*.pws merge=ours
