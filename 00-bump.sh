@@ -7,6 +7,9 @@
 # Assumptions:
 # 1. The repository has the same name as the Modelica package.
 #
+# See http://semver.org/ and
+# http://nvie.com/posts/a-successful-git-branching-model/ .
+#
 # Kevin Davies, 7/7/13
 
 # Get the version.
@@ -37,8 +40,10 @@ sed -i "s/$package[ 0-9.]*\/package.mo/$package $versiona\/package.mo/" load.mos
 # Modelica version string
 cd $package*
 sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ package.mo
+# Python module
+sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ Resources/Source/Python/setup.py
 
 # Commit.
 git commit -am "Bumped to $versiona.$versionb"
 echo "Now on branch v$versiona.$versionb from master."
-echo "Files have been updated and commited."
+echo "The version info has been updated and commited."

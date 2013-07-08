@@ -5,6 +5,9 @@
 # 1. The repository has the same name as the Modelica package.
 # 2. The branch is named with the version number (e.g., v1.0.0).
 #
+# See http://semver.org/ and
+# http://nvie.com/posts/a-successful-git-branching-model/ .
+#
 # Kevin Davies, 7/7/13
 
 # Get the name of the package.

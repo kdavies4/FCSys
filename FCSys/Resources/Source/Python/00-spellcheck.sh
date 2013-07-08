@@ -5,6 +5,6 @@
 
 for f in doc/*.html
     do
-        aspell --personal=./.fcres.pws -c $f
+        aspell --extra-dicts=./.modelica.pws --personal=./.fcres.pws -c $f
     done
 read -p "Done.  Press [Enter] to exit."

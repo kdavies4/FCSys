@@ -207,7 +207,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       end PolarizationPlaceholder;
 
       model EISPlaceholder
-        "Placeholder model for electro-impedance spectroscopy"
+        "Placeholder model for electrochemical-impedance spectroscopy"
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
         parameter Modelica.SIunits.Current zI_large_A=100

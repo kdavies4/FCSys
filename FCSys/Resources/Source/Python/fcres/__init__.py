@@ -31,8 +31,6 @@ from its submodules.  These are:
 __author__ = "Kevin Davies"
 __email__ = "kdavies4@gmail.com"
 __copyright__ = "Copyright 2012-2013, Georgia Tech Research Corporation"
-__license__ = "BSD-compatible (see LICENSE.txt)"
-__version__ = "0.2.1"
 
 
 import sys

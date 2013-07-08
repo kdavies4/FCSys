@@ -23,6 +23,6 @@ fi
 # Check the spelling in all Modelica files.
 for f in *.mo
     do
-        aspell --extra-dicts=./../.modelica.pws --personal=./$wordfile -c $f
+        aspell --extra-dicts=./.modelica.pws --personal=./$wordfile -c $f
     done
 read -p "Done.  Press [Enter] to exit."

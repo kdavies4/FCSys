@@ -189,9 +189,15 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>These papers describe work leading to the current FCSys package (most recent at the top):
+    <p>This library is described in the following dissertation
+    (<a href=\"http://kdavies4.github.io/Dissertation/Davies - Declarative Modeling of PEMFCs for System Design.pdf\">PDF</a> and 
+    <a href=\"https://github.com/kdavies4/Dissertation\">source</a>):
     <ol>
-    <li>K. L. Davies, \"<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf\">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    <li>K. L. Davies, \"Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    </ol></p>
+     
+    <p>These papers describe work leading up to it (most recent at the top):
+    <ol>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
     <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf\">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>

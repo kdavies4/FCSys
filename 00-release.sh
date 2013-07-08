@@ -1,5 +1,5 @@
 #!/bin/bash
-# Publish the current branch as a release version.
+# Release the current branch.
 #
 # This does the following:
 # 1. Merges the branch into master, tags it, and pushes master to origin.
@@ -10,6 +10,9 @@
 # Assumptions:
 # 1. The repository has the same name as the Modelica package.
 # 2. The branch is named with the version number (e.g., v1.0.0).
+#
+# See http://semver.org/ and
+# http://nvie.com/posts/a-successful-git-branching-model/ .
 #
 # Kevin Davies, 7/8/13
 
@@ -25,7 +28,7 @@ version=$branch
 ## Handle the master branch.
 git checkout master
 git merge --no-ff $branch
-git tag $version
+git tag -a $version
 git push --tags origin master
 
 
@@ -55,4 +58,4 @@ git push origin development
 
 ## Finish.
 git push origin gh-pages
-echo "Published release $version."
+echo "Published release $version.  Now on the development branch."
