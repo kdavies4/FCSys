@@ -168,14 +168,14 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end PhysicalBusInternal;
 
@@ -546,6 +546,82 @@ package Connectors "Declarative and imperative connectors"
             textString="D")}));
 
   end InertDalton;
+
+  connector InertDaltonInternal
+    "<html>Internal <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector</html>"
+
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
+    // Additivity of pressure
+    Q.Volume V(nominal=U.cc) "Volume";
+    flow Q.Pressure p(nominal=U.atm) "Pressure";
+
+    // Translational diffusion
+    Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
+
+    // Thermal diffusion
+    // extends ThermalDiffusion;
+    Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
+    flow Q.Power Qdot(nominal=U.W) "Rate of thermal diffusion";
+
+    annotation (
+      defaultComponentPrefixes="protected",
+      defaultComponentName="inertDalton",
+      Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, except that it
+    has a smaller icon and a default <code>protected</code> prefix.
+    Please see that connector for more information.</p></html>"),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={47,107,251}),
+          Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Text(
+            extent={{-8,8},{10,-8}},
+            lineColor={255,255,255},
+            textString="D")}),
+      Icon(graphics={
+          Ellipse(extent={{-76,76},{84,-84}}, lineColor={47,107,251}),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={47,107,251}),
+          Text(
+            extent={{-96,92},{104,-100}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-92,92},{108,-100}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-88,92},{112,-100}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-96,86},{104,-106}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-92,86},{108,-106}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-88,86},{112,-106}},
+            lineColor={255,255,255},
+            textString="D")}));
+
+  end InertDaltonInternal;
 
   connector Translational
     "Connector for advection or diffusion of translational momentum"
