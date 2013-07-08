@@ -1,20 +1,27 @@
 #!/bin/bash
 # Checkout a release branch from master and apply a version number to the
 # Modelica files.
+#
+# The branch is named with the version number.
+#
+# Assumptions:
+# 1. The repository has the same name as the Modelica package.
+#
+# Kevin Davies, 7/7/13
 
 # Get the version.
-tag=`git describe --tags release`
-versiona=${tag%-*}
+# TODO: Split the version number automatically (https://gist.github.com/pete-otaqui/4188238).
+lasttag=`git describe --tags release`
+versiona=${lasttag%-*}
 versiona=${versiona%.*}
 versiona=${versiona#v*}
-versionb=${tag#v*.*.}
+versionb=${lasttag#v*.*.}
 read -p "Enter the major and minor version (last was $versiona): " versiona
 read -p "Enter the patch and optional pre-release string (last was $versionb): " versionb
 #echo v$versiona.$versionb
 
-# Get the name of the repo (assume that the package has the same name as the
-# repo).
-name="$(basename "$( pwd )" )"
+# Get the name of the package (see assumption 1).
+package="$(basename "$( pwd )" )"
 
 # Create the branch.
 git checkout -b "v$versiona.$versionb" master
@@ -23,15 +30,15 @@ git checkout -b "v$versiona.$versionb" master
 cd "$(git rev-parse --show-toplevel)"
 
 # Update the version number in various items.
-# Library folder name
-git mv $name* "$name $versiona"
+# Package folder
+git mv $package* "$package $versiona"
 # Load script
-sed -i "s/$name[ 0-9.]*\/package.mo/$name $versiona\/package.mo/" load.mos
+sed -i "s/$package[ 0-9.]*\/package.mo/$package $versiona\/package.mo/" load.mos
 # Modelica version string
-cd $name*
+cd $package*
 sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ package.mo
 
-# Commit the updates.
-git commit -am "Initial commit for $versiona.$versionb"
-
-echo "Now on branch v$versiona.$versionb from master; files updated and commited."
+# Commit.
+git commit -am "Bumped to $versiona.$versionb"
+echo "Now on branch v$versiona.$versionb from master."
+echo "Files have been updated and commited."
