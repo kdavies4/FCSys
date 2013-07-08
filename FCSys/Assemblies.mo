@@ -306,125 +306,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (Diagram(graphics), Icon(graphics));
       end EISPlaceholder;
 
-      model EISPlaceholder2
-        "Placeholder model for electro-impedance spectroscopy"
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-        parameter Modelica.SIunits.Current zI_large_A=100
-          "Large-signal current in amperes";
-        parameter Modelica.Electrical.Analog.Basic.Ground ground
-          annotation (Placement(transformation(extent={{50,-60},{70,-40}})));
-        Modelica.Electrical.Analog.Basic.Resistor resistor(R=0.1)
-          annotation (Placement(transformation(extent={{10,0},{30,20}})));
-        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={20,30})));
-        Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-70,-10})));
-        Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
-          annotation (Placement(transformation(
-              extent={{-10,10},{10,-10}},
-              rotation=270,
-              origin={60,-10})));
-        Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=
-              zI_large_A)
-          annotation (Placement(transformation(extent={{-50,20},{-30,0}})));
-        Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent
-          annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
-        Connectors.RealInput zI_small_A "Small-signal cell current in amperes"
-          annotation (Placement(transformation(extent={{-100,40},{-80,60}}),
-              iconTransformation(extent={{-120,-10},{-100,10}})));
-        Connectors.RealOutput w_V "Cell potential in volts" annotation (
-            Placement(transformation(extent={{80,-20},{100,0}}),
-              iconTransformation(extent={{100,-10},{120,10}})));
-      equation
-        connect(zI_small_A, signalCurrent.i) annotation (Line(
-            points={{-90,50},{-40,50},{-40,37}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(signalCurrent.n, constantCurrent.n) annotation (Line(
-            points={{-30,30},{-20,30},{-20,10},{-30,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(signalCurrent.p, constantCurrent.p) annotation (Line(
-            points={{-50,30},{-60,30},{-60,10},{-50,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantVoltage.p, constantCurrent.p) annotation (Line(
-            points={{-70,5.55112e-16},{-70,10},{-50,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantCurrent.n, resistor.p) annotation (Line(
-            points={{-30,10},{10,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(capacitor.p, resistor.p) annotation (Line(
-            points={{10,30},{0,30},{0,10},{10,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(capacitor.n, resistor.n) annotation (Line(
-            points={{30,30},{40,30},{40,10},{30,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(resistor.n, voltageSensor.p) annotation (Line(
-            points={{30,10},{60,10},{60,5.55112e-16}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(voltageSensor.n, ground.p) annotation (Line(
-            points={{60,-20},{60,-40}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantVoltage.n, voltageSensor.n) annotation (Line(
-            points={{-70,-20},{-70,-30},{60,-30},{60,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(voltageSensor.v, w_V) annotation (Line(
-            points={{70,-10},{80,-10},{80,-10},{90,-10}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics));
-      end EISPlaceholder2;
-
-      model EISPlaceholder3
-        "Placeholder model for electro-impedance spectroscopy"
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-
-        parameter Modelica.SIunits.Current zI_large_A=100
-          "Large-signal current in amperes";
-        Modelica.Electrical.Analog.Basic.Resistor resistor(R=0.1) annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={0,-10})));
-        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={30,-10})));
-        Modelica.Electrical.Analog.Basic.Ground ground
-          annotation (Placement(transformation(extent={{-2,-60},{18,-40}})));
-      equation
-        connect(resistor.p, capacitor.p) annotation (Line(
-            points={{2.44753e-15,5.55112e-16},{0,10},{30,10},{30,5.55112e-16}},
-
-            color={0,0,255},
-            smooth=Smooth.None));
-
-        connect(capacitor.n, resistor.n) annotation (Line(
-            points={{30,-20},{30,-30},{-1.22629e-15,-30},{-1.22629e-15,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(ground.p, resistor.n) annotation (Line(
-            points={{8,-40},{4,-40},{4,-20},{-1.33227e-15,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics));
-      end EISPlaceholder3;
     end Examples;
 
     model Cell "Single-cell PEMFC"
@@ -658,37 +540,43 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}),
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -894,37 +782,43 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}));
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
     end SimpleCell;
 
   end Cells;

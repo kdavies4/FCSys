@@ -32,6 +32,7 @@ matplotlibrc text
 *.pws merge=ours
 FCSys/Resources/Source/Python/doc/_templates merge=ours
 FCSys/Resources/Source/Python/bin/killall-fcsysres.sh merge=ours
+*_broken
 WorkInProgress.mo merge=ours
 Figures.mo merge=ours
 package.order merge=ours

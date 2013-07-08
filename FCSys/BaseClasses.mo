@@ -209,18 +209,18 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,20},{100,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,20},{100,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top1;
 
