@@ -133,8 +133,14 @@ package UsersGuide "User's Guide"
     generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and the commands in the 
     <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/plot-samples.py\">plot-samples.py</a> script.</p>
     
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionsSound.png\"></a>
-    <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  The nonlinearity is due to upstream discretization (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.SubregionsSound</a>).</p>
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.Echo\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Echo.png\"></a>
+    <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  
+    The nonlinearity is due to upstream discretization and the initial condition 
+    (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.Echo</a>).</p>
+
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/EchoCentral.png\"></a>
+    <br>Figure 2: The conditions are the same as for <a href=\"#Fig1\">Figure 1</a>, but the central difference scheme is used
+    (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.EchoCentral</a>).</p>
 
     <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/ThermalConduction.png\"></a>
     <br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
@@ -146,8 +152,8 @@ package UsersGuide "User's Guide"
     <br>Figure 4: Validation of the H<sub>2</sub>O saturation pressure curve derived from Gibbs equilibrium in <a href=\"modelica://FCSys\">FCSys</a>, as compared to 
     <a href=\"modelica://Modelica.Media.Air.MoistAir\">Modelica.Media.Air.MoistAir</a> (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
     
-    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SubregionEvaporation.png\"></a>
-    <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.SubregionEvaporation\">FCSys.Subregions.Examples.SubregionEvaporation</a>).</p>
+    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.Evaporation\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Evaporation.png\"></a>
+    <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
 
     <p>**Add various polarization curves.</p>
 

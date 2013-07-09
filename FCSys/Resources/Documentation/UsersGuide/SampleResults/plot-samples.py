@@ -20,22 +20,39 @@ in_dir = '../'*6
 out_dir = '.'
 
 # Plot 1
-name='SubregionsSound'
+name='Echo'
 sim = SimRes(os.path.join(in_dir, name))
-sim.plot(title="Gas Velocity in Two Regions with an Initial Pressure Difference\n",
+sim.plot(title="""Gas Velocity in Two Regions with an Initial Pressure Difference
+with Upstream Discretization""",
          label=os.path.join(out_dir, name),
          ynames1=['subregion1.gas.H2.faces[1, 1].phi[1]',
                   'subregion1.gas.H2.phi[1]',
                   'subregion2.gas.H2.faces[1, 1].phi[1]',
                   'subregion2.gas.H2.phi[1]'],
          legends1=['Outside walls', 'Region 1', 'Common boundary', 'Region 2'],
+         leg1_kwargs=dict(loc='lower right'),
+         ylabel1='Velocity', xunit='ms')
+plt.xlim(xmax=0.3)
+
+# Plot 1
+name='EchoCentral'
+sim = SimRes(os.path.join(in_dir, name))
+sim.plot(title="""Gas Velocity in Two Regions with an Initial Pressure Difference
+with Central Difference""",
+         label=os.path.join(out_dir, name),
+         ynames1=['subregion1.gas.H2.faces[1, 1].phi[1]',
+                  'subregion1.gas.H2.phi[1]',
+                  'subregion2.gas.H2.faces[1, 1].phi[1]',
+                  'subregion2.gas.H2.phi[1]'],
+         legends1=['Outside walls', 'Region 1', 'Common boundary', 'Region 2'],
+         leg1_kwargs=dict(loc='lower right'),
          ylabel1='Velocity', xunit='ms')
 plt.xlim(xmax=0.3)
 
 # Plot 2
 name='ThermalConduction'
 sim = SimRes(os.path.join(in_dir, name))
-sim.plot(title="One-Dimensional Thermal Conduction through Graphite\n",
+sim.plot(title="One-Dimensional Thermal Conduction through Graphite",
          label=os.path.join(out_dir, name),
          ynames1=["subregion1.graphite.'C+'.T"] +
                  ["subregions[%i].graphite.'C+'.T" % i for i in range(1,9)] +
@@ -46,7 +63,7 @@ sim.plot(title="One-Dimensional Thermal Conduction through Graphite\n",
 # Plot 3
 name='ThermalConductionConvection'
 sim = SimRes(os.path.join(in_dir, name))
-sim.plot(title="Gas Velocity Induced by Thermal Conduction\n",
+sim.plot(title="Gas Velocity Induced by Thermal Conduction",
          label=os.path.join(out_dir, name),
          ynames1=["subregion1.gas.N2.phi[1]"] +
                  ["subregions[%i].gas.N2.phi[1]" % i for i in range(1,9)] +
@@ -59,7 +76,7 @@ plt.xlim(xmax=8)
 # Plot 4
 name='SaturationPressure'
 sim = SimRes(os.path.join(in_dir, name))
-sim.plot(title="Water Saturation Pressure\n",
+sim.plot(title="Water Saturation Pressure",
          label=os.path.join(out_dir, name),
          xname="subregion.gas.H2O.T",
          ynames1=["subregion.gas.H2O.p", "p_sat"],
@@ -68,9 +85,9 @@ sim.plot(title="Water Saturation Pressure\n",
          ylabel1='Saturation pressure')
 
 # Plot 5
-name='SubregionEvaporation'
+name='Evaporation'
 sim = SimRes(os.path.join(in_dir, name))
-ax1, ax2 = sim.plot(title="Dynamic Evaporation and Condensation of Water at 25$^\circ$C\n",
+ax1, ax2 = sim.plot(title="Dynamic Evaporation and Condensation of Water at 25$^\circ\!$C",
                     label=os.path.join(out_dir, name),
                     ynames1=["subregion.gas.H2O.p", "p_sat"],
                     legends1=["Pressure",

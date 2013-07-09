@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """Load, analyze, and plot results from Modelica_ simulations.
 
 This module supports the approach to physical units and quantities established
@@ -16,7 +17,7 @@ __license__ = "BSD-compatible (see LICENSE.txt)"
 
 import modelicares.base as base
 
-from modelicares import texunit, SimRes
+from modelicares import SimRes, texunit
 
 # Establish the default units.
 import _config
@@ -71,9 +72,9 @@ def label_number(quantity="", unit=None, times='\,', per='\,/\,', roman=False):
     .. _Modelica: http://www.modelica.org/
     """
     if unit in ['degC', 'degF', 'kPag']:
-        per = "$ $in$ $"
-    unit = unit.replace('degC', '^{\\circ}C')
-    unit = unit.replace('degF', '^{\\circ}F')
+        per = "\,$in$\,"
+    unit = unit.replace('degC', '^\circ\!C')
+    unit = unit.replace('degF', '^\circ\!F')
     return texunit.label_number(quantity, unit, times, per, roman)
 
 
@@ -93,19 +94,31 @@ class SimRes(SimRes):
     # TODO: Update sankey() and bar() from modelicares.SimRes.  See sankey.py
     # in this folder.
 
-    def __init__(self, fname="dsres.mat"):
-        """On initialization, load the data Dymola simulation file *fname*
-        (MATLAB format)
+    def __init__(self, fname="dsres.mat", constants_only=False):
+        """On initialization, load Modelica_ simulation results from a
+        MATLAB\ :sup:`®` file in Dymola\ :sup:`®` format.
 
-        *fname* should have an record of base units and constants named
-        *environment.baseUnits*.
+        **Arguments:**
+
+        - *fname*: Name of the file (may include the path)
+
+             The file extension ('.mat') is optional.  *fname* should have an
+             record of base units and constants named *environment.baseUnits*.
+
+        - *constants_only*: *True*, if only the variables from the first data
+          table should be loaded
+
+             The first data table typically contains all of the constants,
+             parameters, and variables that don't vary.  If only that
+             information is needed, it will save some time and memory to set
+             *constants_only* to *True*.
 
         **Example:**
 
-           >>> from fcres import SimRes
+           >>> from modelicares import SimRes
            >>> sim = SimRes('examples/SaturationPressure.mat')
         """
-        super(SimRes, self).__init__(fname)
+        super(SimRes, self).__init__(fname, constants_only)
         self._set_constants('environment.baseUnits')
 
         # Functions for units that involve offsets or more complex mappings
@@ -388,9 +401,9 @@ class SimRes(SimRes):
            ...          legends1=["FCSys (from Gibbs equilibrium)",
            ...                    "Modelica.Media (correlated function)"],
            ...          ylabel1='Saturation pressure',
-           ...          title="Water Saturation Pressure\n",
+           ...          title="Water Saturation Pressure",
            ...          label='examples/SaturationPressure') # doctest: +ELLIPSIS
-           (<matplotlib.axes.AxesSubplot object at 0x...>, None)
+           (<matplotlib.axes._subplots.AxesSubplot object at 0x...>, None)
 
            >>> saveall()
            Saved examples/SaturationPressure.pdf
@@ -398,13 +411,13 @@ class SimRes(SimRes):
 
         .. only:: html
 
-           .. image:: examples/SaturationPressure.png
+           .. image:: ../examples/SaturationPressure.png
               :scale: 70 %
               :alt: plot of water saturation pressure
 
         .. only:: latex
 
-           .. figure:: examples/SaturationPressure.pdf
+           .. figure:: ../examples/SaturationPressure.pdf
               :scale: 70 %
 
               Plot of water saturation pressure
@@ -482,7 +495,7 @@ class SimRes(SimRes):
             if ynames2:
                 # Use solid lines for primary axis and dotted lines for
                 # secondary.
-                kwargs['dashes'] = [(1, 0)]
+                kwargs['dashes'] = [(None, None)]
                 base.plot(y_1, self.get_times(ynames1, f=t_scale) if xname == 'Time'
                           else x, ax1, label=legends1, **kwargs)
                 kwargs['dashes'] = [(3, 3)]
@@ -652,12 +665,12 @@ class SimRes(SimRes):
                       H=H,  T=T, lm=lm, lx=lx, Bq=Bq, Sv=Sv, kat=kat, g=g)
 
         # Non-SI units accepted for use with SI units [BIPM2006, Table 6]
-        min = 60*s
-        hr = 60*min
+        minute = 60*s
+        hr = 60*minute
         day = 24*hr
         degree = 2*pi*rad/360
         L = (deci*m)**3
-        self.U.update(min=min, hr=hr, day=day, degree=degree, L=L)
+        self.U.update(minute=minute, hr=hr, day=day, degree=degree, L=L)
 
         # Derived physical constants
         # Electromagnetism

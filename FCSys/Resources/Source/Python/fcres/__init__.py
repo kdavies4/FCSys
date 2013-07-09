@@ -52,11 +52,6 @@ if not (major == 2 and minor1 == 7):
 # These will be available directly from fcres; others must be loaded from their
 # submodules.
 #
-# Local:
-from simres import SimRes
-from fcsimres import FCSimRes
-from fclinres import FCLinRes
-#
 # From modelicares:
 from modelicares.base import (add_arrows, add_hlines, add_vlines, animate,
     ArrowLine, closeall, figure, load_csv, save, saveall, setup_subplots)
@@ -65,3 +60,8 @@ from modelicares.exps import (Experiment, gen_experiments, ParamDict,
 import modelicares.exps.doe as doe
 from modelicares.multi import multiload, multiplot, multibode, multinyquist
 from modelicares.texunit import label_number, label_quantity, unit2tex
+#
+# Local:
+from simres import SimRes
+from fcsimres import FCSimRes
+from fclinres import FCLinRes

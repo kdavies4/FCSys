@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "SubregionORR.mat");
+createPlot(filename = "ORR.mat");
 FCSys.BaseClasses.Utilities.plot6(
     y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.O2.rho", "subregion.gas.H2O.rho"},
     y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.O2.phi[1]", "subregion.gas.H2O.phi[1]"},

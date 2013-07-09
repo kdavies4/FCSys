@@ -2,21 +2,8 @@
 removePlots();
 createPlot(filename = "Reaction.mat");
 FCSys.BaseClasses.Utilities.plot6(
-    y1={"reaction.chemical.mu"},
-    y2={"reaction.chemical.Ndot"},
-    y3={"reaction.chemical.T"},
-    y4={"depletion1.inert.thermal.Qdot", "depletion2.inert.thermal.Qdot"})
-
-createPlot(id = 7,
- position = {900, 0, 600, 400},
- x = "zJ_Apercm2",
- y = {"w"},
- heading = "Reaction Potential",
- range = {0, 8.0, 0.05, -0.35},
- grid = true,
- online = true,
- legend = false,
- legendLocation = 5,
- legendHorizontal = false,
- leftTitle = "Potential / V",
- bottomTitle = "Current density / (A/cm2)");
+    y1={"depletion.electrical.Ndot", "depletion.majority.Ndot",
+        "depletion.minority.Ndot", "species1.chemical.Ndot",
+        "species2.chemical.Ndot"},
+    y2={"depletion.electrical.mu", "species1.chemical.mu",
+        "species2.chemical.mu"})

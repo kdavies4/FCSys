@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "SubregionsSound.mat");
+createPlot(filename = "Echo.mat");
 species = cat(1,
               if 'inclC+' then {"graphite.'C+'"} else fill("",0),
               if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),

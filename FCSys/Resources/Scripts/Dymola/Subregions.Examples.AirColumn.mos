@@ -1,0 +1,31 @@
+// Setup
+removePlots();
+createPlot(filename = "AirColumn.mat");
+
+FCSys.BaseClasses.Utilities.plot6(
+   y1=cat(1,
+            {"subregion1.gas.N2.faces[1, 1].rho", "subregion1.gas.N2.rho"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.rho" for j in 1:n_y},
+            {"subregion2.gas.N2.faces[1, 1].rho", "subregion2.gas.N2.rho", "subregion2.gas.N2.faces[1, 2].rho"}),
+   y2=cat(1,
+            {"subregion1.gas.N2.faces[1, 1].phi[1]", "subregion1.gas.N2.phi[1]"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.phi[1]" for j in 1:n_y},
+            {"subregion2.gas.N2.faces[1, 1].phi[1]", "subregion2.gas.N2.phi[1]", "subregion2.gas.N2.faces[1, 2].phi[1]"}),
+   y3=cat(1,
+            {"subregion1.gas.N2.p_faces[1, 1]", "subregion1.gas.N2.p"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.p" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.p_faces[1, 1]" for j in 1:n_y},
+            {"subregion2.gas.N2.p_faces[1, 1]", "subregion2.gas.N2.p",
+             "subregion2.gas.N2.p_faces[1, 2]"}),
+   y4=cat(1,
+            {"subregion1.gas.N2.faces[1, 1].T", "subregion1.gas.N2.T"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.T" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.faces[1, 1].T" for j in 1:n_y},
+            {"subregion2.gas.N2.faces[1, 1].T", "subregion2.gas.N2.T",
+             "subregion2.gas.N2.faces[1, 2].T"}),
+   y5=cat(1,
+            {"subregion1.gas.N2.h", "subregion1.gas.N2.chemical.mu"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.mu" for j in 1:n_y},
+            {"subregion2.gas.N2.h", "subregion2.gas.N2.chemical.mu"}));
+
+FCSys.BaseClasses.Utilities.plot6(y6={"Deltap", "Deltap_ex"});
