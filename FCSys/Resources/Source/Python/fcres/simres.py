@@ -433,8 +433,11 @@ class SimRes(SimRes):
                     descriptions = self.get_description(ynames)
                     # If the descriptions are the same, label the y axis with
                     # the 1st one.
-                    if len(set(descriptions)) == 1:
-                        ylabel = descriptions[0]
+                    ylabel = descriptions[0]
+                    if len(set(descriptions)) <> 1:
+                        print("The y-axis variable descriptions are not all "
+                              "the same.  The first has been used.  Please "
+                              "provide the proper name via ylabel1 or ylabel2.")
                 if legends == []:
                     legends = ynames
                 if incl_prefix:

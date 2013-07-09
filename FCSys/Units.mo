@@ -71,6 +71,7 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("m/(T2.l.s)", "Pa/s")
       "for derivative of pressure in Dymola";
     defineDefaultDisplayUnit("m/N", "g/mol") "Specific mass";
+    defineDefaultDisplayUnit("m/l3", "g/cc") "Volumic mass";
     defineDefaultDisplayUnit("m/s", "g/s") "for derivative of mass in Dymola";
     defineDefaultDisplayUnit("m/T3", "W/m2") "Areic power";
     defineDefaultDisplayUnit("N", "C") "Amount";
@@ -471,6 +472,14 @@ package Units "Constants and units of physical measure"
         "m/(T2.l.s)",
         "Pa/s",
         1/Pa) "for derivative of pressure in Dymola";
+    defineUnitConversion(
+        "m/l3",
+        "g/cc",
+        cc/g) "Volumic mass";
+    defineUnitConversion(
+        "m/l3",
+        "kg/m3",
+        m^3/kg) "Volumic mass";
     defineUnitConversion(
         "m/N",
         "g/mol",

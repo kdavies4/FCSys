@@ -152,6 +152,8 @@ package Quantities "Quantities to represent physical properties"
   type Mass = Modelica.Icons.TypeReal (final unit="m", min=0);
   type MassSpecific = Modelica.Icons.TypeReal (final unit="m/N", min=0)
     "Specific mass";
+  type MassVolumic = Modelica.Icons.TypeReal (final unit="m/l3", min=0)
+    "Volumic mass";
   type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
   type MomentumRotational = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
     "Rotational momentum";
