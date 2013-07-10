@@ -24,11 +24,14 @@ import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
 
+// TODO:  Use getInstanceName() to improve assertions and other messages
+// once it is better supported (new in Modelica 3.3).
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
-  model GettingStarted "Getting started"
+  class GettingStarted "Getting started"
     extends Modelica.Icons.Information;
     annotation (
       preferedView="info",
@@ -121,68 +124,180 @@ package UsersGuide "User's Guide"
 
     end GettingStarted;
 
-  model SampleResults "Sample results"
+  package SampleResults "Sample results"
     extends Modelica.Icons.Information;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html><p>The figures below show results from some of the examples in
-    FCSys.  The figures are ordered from low-level tests to evaluations
-    of the complete cell.  For more information about any of the results, please
-    follow the links to the associated models.  The models have been simulated using Dymola 7.4 and the plots have been
-    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and the commands in the 
-    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/plot-samples.py\">plot-samples.py</a> script.</p>
+    // **create index on this page (hyperlinked)
+    // Note: Hash bookmarks don't won't in Dymola 7.4.  They cause the link to fail entirely.
+    class Basic "Basic"
+      extends Modelica.Icons.Information;
+      annotation (
+        preferedView="info",
+        DocumentationClass=true,
+        Documentation(info="<html>    
+    <p>The figures below show the results from some basic, low-level examples of
+    <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
+    follow the links to the associated models.</p> 
+       
+    <p>The models have been simulated using Dymola 7.4.  The plots have been
+    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and
+    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/plot.py\">this Python script</a>.</p>
     
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.Echo\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Echo.png\"></a>
+    ** Reorder, renumber:
+    
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.AirColumn\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn.png\"></a>
+    <br>Figure 1: **
+    (<a href=\"modelica://FCSys.Subregions.Examples.AirColumn\">FCSys.Subregions.Examples.AirColumn</a>).</p>
+    
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.Echo\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Echo.png\"></a>
     <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  
     The nonlinearity is due to upstream discretization and the initial condition 
-    (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.Echo</a>).</p>
+    (<a href=\"modelica://FCSys.Subregions.Examples.Echo\">FCSys.Subregions.Examples.Echo</a>).</p>
 
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/EchoCentral.png\"></a>
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/EchoCentral.png\"></a>
     <br>Figure 2: The conditions are the same as for <a href=\"#Fig1\">Figure 1</a>, but the central difference scheme is used
-    (<a href=\"modelica://FCSys.Subregions.Examples.SubregionsSound\">FCSys.Subregions.Examples.EchoCentral</a>).</p>
-
-    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/ThermalConduction.png\"></a>
-    <br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
-
-    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/ThermalConductionConvection.png\"></a>
-    <br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
-
-    <p align=center id=\"Fig4\"><a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/SaturationPressure.png\"></a>
-    <br>Figure 4: Validation of the H<sub>2</sub>O saturation pressure curve derived from Gibbs equilibrium in <a href=\"modelica://FCSys\">FCSys</a>, as compared to 
-    <a href=\"modelica://Modelica.Media.Air.MoistAir\">Modelica.Media.Air.MoistAir</a> (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
+    (<a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\">FCSys.Subregions.Examples.EchoCentral</a>).</p>
     
-    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.Evaporation\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Evaporation.png\"></a>
-    <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.ElectricalConduction\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ElectricalConduction.png\"></a>
+    <br>Figure 1: **
+    (<a href=\"modelica://FCSys.Subregions.Examples.ElectricalConduction\">FCSys.Subregions.Examples.ElectricalConduction</a>).</p>
+
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.ORR\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ORR.png\"></a>
+    <br>Figure 1: **
+    (<a href=\"modelica://FCSys.Subregions.Examples.ORR\">FCSys.Subregions.Examples.ORR</a>).</p>
+
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.HOR\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/HOR.png\"></a>
+    <br>Figure 1: **
+    (<a href=\"modelica://FCSys.Subregions.Examples.HOR\">FCSys.Subregions.Examples.HOR</a>).</p>
+
+    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConduction.png\"></a>
+    <br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions 
+    (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
+
+    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConductionConvection.png\"></a>
+    <br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction 
+    (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
+
+    <p align=center id=\"Fig4\"><a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/SaturationPressure.png\"></a>
+    <br>Figure 4: Validation of the H<sub>2</sub>O saturation pressure curve derived from Gibbs equilibrium in <a href=\"modelica://FCSys\">FCSys</a>, as compared to 
+    <a href=\"modelica://Modelica.Media.Air.MoistAir\">Modelica.Media.Air.MoistAir</a> 
+    (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
+    
+    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Evaporation.png\"></a>
+    <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected 
+    (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
+    </html>"));
+      end Basic;
+
+    class Cell "Cell-level"
+      extends Modelica.Icons.Information;
+      annotation (
+        preferedView="info",
+        DocumentationClass=true,
+        Documentation(info="<html><p>The figures below show the results from some cell-level examples of
+    <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
+    follow the links to the associated models.</p> 
+       
+    <p>The models have been simulated using Dymola 7.4.  The plots have been
+    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and
+    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/CellLevel/plot.py\">this Python script</a>.</p>
+    
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.Polarization\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/CellLevel/Polarization.png\"></a>
+    <br>Figure 1: ** 
+    (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.Polarization\">FCSys.Assemblies.Cells.Examples.Polarization</a>).</p>
 
     <p>**Add various polarization curves.</p>
 
     </html>"));
+      end Cell;
+    annotation (
+      preferedView="info",
+      DocumentationClass=true,
+      Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>. 
+    Please click on any image to see a larger plot with a link to its example model.</p>  
+      
+      <p><b>Basic:</b><br><br>
+            
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Echo-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/EchoCentral-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ElectricalConduction-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Evaporation-small.png\"></a>      
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/HOR-small.png\"></a>
 
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/InternalFlow-small.png\"></a>
+
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ORR-small.png\"></a>
+
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/SaturationPressure-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConduction-small.png\"></a>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConductionConvection-small.png\"></a>
+      
+      </p>
+
+      <p><b>Cell-level:</b><br><br>
+      
+      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Cell\">
+      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Cell/Polarization-small.png\"></a>
+      
+      </p>
+      
+    </html>"));
     end SampleResults;
 
-  model Glossary "Glossary"
+  class Glossary "Glossary"
     extends Modelica.Icons.Information;
     annotation (
       preferedView="info",
       DocumentationClass=true,
-      Documentation(info="<html><p>The following terms appear in this library with new or somewhat unique meanings:
+      Documentation(info="<html><p>The following terms appear in this library and are uncommon or unique here:
     <ul>
-      <li><b>configuration</b>&mdash;a species in a certain phase within a subregion<br>
+      <li><b>configuration</b> &ndash; a species in a certain phase within a subregion<br>
 
-      <li><b>dynamic compressibility</b>&mdash;reciprocal of volume, second, or bulk viscosity
+      <li><b>dynamic compressibility</b> &ndash; reciprocal of volume, second, or bulk viscosity
       (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())<br>
 
-      <li><b>exchange</b>&mdash;transfer of a conserved quantity among configurations within a region<br>
+      <li><b>equivalent current</b> &ndash; rate of supply of a reactant required to support the given current 
+      assuming the reactant is entirely consumed (complete utilization)<br>
+      
+      <li><b>exchange</b> &ndash; transfer of a conserved quantity among configurations within a region<br>
 
-      <li><b>specific</b>&mdash;adjective that indicates the quotient of the following quantity and its associated particle number<br>
+      <li><b>specific</b> &ndash; adjective that indicates the quotient of the following quantity and its associated particle number<br>
 
-      <li><b>thermal independity</b>&mdash;extent to which an exchange of thermal energy between species causes or requires a temperature difference
+      <li><b>thermal independity</b> &ndash; extent to which an exchange of thermal energy between species causes or requires a temperature difference
       (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())<br>
 
-      <li><b>translational Nusselt number</b>&mdash;correction to Newton's law of viscous shear for the shape of the flow profile<br>
+      <li><b>translational Nusselt number</b> &ndash; correction to Newton's law of viscous shear for the shape of the flow profile<br>
 
-      <li><b>transport</b>&mdash;transfer of a conserved quantity between adjacent subregions
+
+      <li><b>transport</b> &ndash; transfer of a conserved quantity between adjacent subregions
     </ul></p>
     </table>
     </html>"));
@@ -1118,9 +1233,7 @@ margin-right: auto;\" class=noBorder>
     http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>",
       revisions="<html>
     <ul>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/1/2007:<br>Version 1.0 (as <code>PEMFCSim</code>)</li>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/20/2008:<br>Version 1.1 (to model CO contamination for <a href=\"http://www.hnei.hawaii.edu\">HNEI</a>)</li>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2013:<br>Version 2.0.0-alpha (released in the public domain)</li>
+    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, x/x/2013:<br>Version x.x.x (initial release)</li>
     </ul>
     </html>"),
   Icon(graphics={

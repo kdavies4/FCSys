@@ -848,7 +848,7 @@ For more information, see the documentation for the
       // Selected other non-SI units from [BIPM2006, Table 8]
 
       final constant Q.Pressure bar=U.bar "bar";
-      final constant Q.Length Aring=U.Aring "angstrom";
+      final constant Q.Length angstrom=U.angstrom "angstrom";
 
       // ------------------------------------------------------------------------
       // Additional units that are useful for fuel cells
@@ -1571,7 +1571,7 @@ encompass other systems of units.</p>
   // represented in Dymola's unit conversion GUI.
 
   final constant Q.Pressure bar=1e5*Pa "bar";
-  final constant Q.Length Aring=0.1*nano*m "<html>angstrom (&#8491;)</html>";
+  final constant Q.Length angstrom=0.1*nano*m "<html>angstrom (&#8491;)</html>";
 
   // ------------------------------------------------------------------------
   // Additional units that are useful for fuel cells

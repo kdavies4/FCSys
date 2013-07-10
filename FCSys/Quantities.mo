@@ -225,6 +225,7 @@ package Quantities "Quantities to represent physical properties"
     "Rate of temperature";
   type ResistivityThermal = Resistivity (displayUnit="m.K/W")
     "Thermal resistivity";
+  type Conductance = Current (displayUnit="W/K") "Conductance";
   annotation (Documentation(info="<html><p>In this package the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
   dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are
   angle (A), length (l), mass (m), particle number (N), and time (T).<sup><a href=\"#fn2\" id=\"ref1\">2</a></sup>  These

@@ -39,8 +39,8 @@ package.order merge=ours
 Install merge=ours
 *qpOASES* merge=ours
 MPC merge=ours
-FCSys/Resources/Source/Python/README.rst merge=ours
+FCSys*/Resources/Source/Python/README.rst merge=ours
 
 # Files that are different between master and development:
-FCSys/DOCUMENTATION.html merge=ours
-FCSys/Resources/Source/Python/setup.py merge=ours
+FCSys*/DOCUMENTATION.html merge=ours
+FCSys*/Resources/Source/Python/setup.py merge=ours

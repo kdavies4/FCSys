@@ -19,9 +19,7 @@ for i in 1:size(species, 1) loop
        y3={"subregion." + species[i] + ".p_faces[1, 1]", "subregion." + species[i] + ".p",
              "subregion." + species[i] + ".p_faces[1, 2]"},
        y4={"subregion." + species[i] + ".faces[1, 1].T", "subregion." + species[i] + ".T",
-             "subregion." + species[i] + ".faces[1, 2].T"},
-       y5={"subregion." + species[i] + ".h",
-             "subregion." + species[i] + ".chemical.mu"});
+             "subregion." + species[i] + ".faces[1, 2].T"});
 end for;
 
-FCSys.BaseClasses.Utilities.plot6(y6={"R", "R_ex"});
+FCSys.BaseClasses.Utilities.plot6(y4={"T_ex"}, y5={"P", "P_ex"}, y6={"R", "R_ex"});

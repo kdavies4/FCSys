@@ -707,8 +707,8 @@ class SimRes(SimRes):
 
         # Selected other non-SI units from [BIPM2006, Table 8]
         bar = 1e5*Pa
-        Aring = 0.1*nano*m
-        self.U.update(bar=bar, Aring=Aring)
+        angstrom = 0.1*nano*m
+        self.U.update(bar=bar, angstrom=angstrom)
 
         # Additional units that are useful for fuel cells
         atm=101325*Pa

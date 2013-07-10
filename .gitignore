@@ -20,6 +20,12 @@ dymosim
 request
 status
 
+# Sample results User's Guide
+/FCSys*/Resources/Documentation/UsersGuide/SampleResults/Basic/*.png
+/FCSys*/Resources/Documentation/UsersGuide/SampleResults/Basic/*.svg
+/FCSys*/Resources/Documentation/UsersGuide/SampleResults/CellLevel/*.png
+/FCSys*/Resources/Documentation/UsersGuide/SampleResults/CellLevel/*.svg
+
 # Excel spreadsheets
 *.xls
 
@@ -28,10 +34,10 @@ status
 *.zip
 
 # Generated files
-/FCSys/help/
-/FCSys/Resources/Documentation/UsersGuide/References/*(dissertation).pdf
-/FCSys/Resources/Source/Python/doc/fcres.pdf
-/FCSys/Resources/Source/Python/examples/*.mos
+/FCSys*/help/
+/FCSys*/Resources/Documentation/UsersGuide/References/*(dissertation).pdf
+/FCSys*/Resources/Source/Python/doc/fcres.pdf
+/FCSys*/Resources/Source/Python/examples/*.mos
 build/
 
 # Python-generated and compiled files
@@ -39,12 +45,12 @@ build/
 MANIFEST
 
 # Internal link to demos
-/FCSys/Resources/Source/Python/fcres/examples
+/FCSys*/Resources/Source/Python/fcres/examples
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
-/FCSys/Test/Morris
+/FCSys*/Test/Morris
 
 # Work in progress
-/FCSys/Resources/Documentation/Systems/
+/FCSys*/Resources/Documentation/Systems/
 /old/

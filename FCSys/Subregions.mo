@@ -76,14 +76,18 @@ package Subregions
         graphite('inclC+'=true, 'C+'(V_IC=U.mm^3)))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(gas(
-            inclN2=true)) annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(gas(inclN2=true,
+            N2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={0,-56})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(gas(
-            inclN2=true)) annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(gas(inclN2=true,
+            N2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=180,
             origin={0,56})));
@@ -160,7 +164,9 @@ package Subregions
         experimentSetupOutput);
     end AirColumn;
     extends Modelica.Icons.ExamplesPackage;
-    // **hyperlink in doc of each model back to sample results
+    // TODO: In the documentation of each model, insert the sample plots or link
+    // to the sample results of the User's Guide.
+    // TODO: In the documentation of each model, add discussion from the dissertation.
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
       extends Subregions('inclC+'=false);
@@ -240,45 +246,30 @@ package Subregions
       output Q.TemperatureAbsolute T_ex=environment.T + subregion.graphite.'C+'.theta
           *U.cm*P/(4*U.mm^2) "Expected temperature";
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2),
-        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
-        graphite(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(graphite(
           final 'incle-'='incle-',
           'inclC+'=true,
-          'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Current normal(A
-                =U.mm^2, redeclare Modelica.Blocks.Sources.RealExpression
-                source(y=-U.A))),
-          'C+'(redeclare Conditions.ByConnector.Face.Single.Thermal.Temperature
-              thermal(source(y=environment.T))))) annotation (Placement(
+          'e-'(redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
+              normalSource(y=-U.A/U.mm^2)),
+          'C+'(redeclare function thermalSpec =
+                Conditions.ByConnector.Face.Single.Thermal.temperature,
+              thermalSource(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2),
-        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
-        graphite(
+
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(graphite(
           'inclC+'=true,
           final 'incle-'='incle-',
-          'e-'(redeclare Conditions.ByConnector.Face.Single.Translational.Force
-              normal),
-          'C+'(redeclare Conditions.ByConnector.Face.Single.Thermal.Temperature
-              thermal(source(y=environment.T))))) annotation (Placement(
+          'C+'(redeclare function thermalSpec =
+                Conditions.ByConnector.Face.Single.Thermal.temperature,
+              thermalSource(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={24,0})));
-      //     **Update plots to show P
 
     equation
       connect(BC1.face, subregion.xNegative) annotation (Line(
@@ -289,8 +280,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -318,8 +309,6 @@ package Subregions
     is due to the boundary conditions; the conduction length is half of the total length
     and the heat is rejected to both sides.  There is no thermal convection or 
     radiation&mdash;only conduction to the sides.</p>
-
-    **Discuss time constant.
     </html>"));
     end ElectricalConduction;
 
@@ -334,20 +323,26 @@ package Subregions
         inclH2=false,
         subregion(gas(H2O(p_IC=U.kPa, consEnergy=Conservation.IC)), liquid(
               inclH2O=inclH2O, H2O(consEnergy=Conservation.IC))));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(liquid(
-            inclH2O=true), gas(inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Material.Current material(
-                redeclare Modelica.Blocks.Sources.Pulse source(
-                amplitude=-U.A,
-                width=0.01,
-                period=10000,
-                startTime=1))))) annotation (Placement(transformation(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(gas(inclH2O=
+              true, H2O(redeclare Modelica.Blocks.Sources.Pulse materialSource(
+              amplitude=-U.A,
+              width=0.01,
+              period=10000,
+              startTime=1), redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)),
+          liquid(inclH2O=true, H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(gas(
-            inclH2O=true), liquid(inclH2O=true)) annotation (Placement(
-            transformation(
+
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(gas(inclH2O=
+              true, H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)),
+          liquid(inclH2O=true, H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={24,0})));
@@ -375,7 +370,9 @@ package Subregions
         experiment(StopTime=3, Tolerance=1e-06),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Evaporation.mos"
-            "Subregions.Examples.Evaporation.mos"));
+            "Subregions.Examples.Evaporation.mos"),
+        Diagram(graphics));
+
     end Evaporation;
 
     model HOR
@@ -543,63 +540,72 @@ package Subregions
           Axis.x]/(D^2*subregion.liquid.H2O.zeta)
         "Pressure difference according to Poiseuille's law";
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(liquid(
-            inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Velocity normal(
-                redeclare Modelica.Blocks.Sources.Sine source(
-                amplitude=0.05*Vdot/A,
-                offset=Vdot/A,
-                freqHz=0.01))))) annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(inclH2O=
+              true, H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              redeclare Modelica.Blocks.Sources.Sine normalSource(
+              amplitude=0.05*Vdot/A,
+              offset=Vdot/A,
+              freqHz=0.01)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(liquid(
-            inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(liquid(inclH2O=
+              true)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBus BC3(liquid(inclH2O=true,
-            H2O(redeclare Conditions.ByConnector.Face.Single.Material.Current
-              material, redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3(liquid(inclH2O=
+              true, H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=0,
             origin={0,-24})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBus BC4(liquid(inclH2O=true,
-            H2O(redeclare Conditions.ByConnector.Face.Single.Material.Current
-              material, redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC4(liquid(inclH2O=
+              true, H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={0,24})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBus BC5(liquid(inclH2O=true,
-            H2O(redeclare Conditions.ByConnector.Face.Single.Material.Current
-              material, redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5(liquid(inclH2O=
+              true, H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=315,
             origin={24,24})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBus BC6(liquid(inclH2O=true,
-            H2O(redeclare Conditions.ByConnector.Face.Single.Material.Current
-              material, redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC6(liquid(inclH2O=
+              true, H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
+        annotation (Documentation(info="<html><p>Note that the temperature increases due to viscous dissipation.  
+        However, the temperature rise is limited because the walls are held at constant temperature.</p></html>"),
+          Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=315,
             origin={-24,-24})));
-
-      // **Doc: Note that temperature rises but is limited because the walls are
-      // held at constant temperature.
 
     equation
       connect(BC1.face, subregion.xNegative) annotation (Line(
@@ -825,29 +831,30 @@ package Subregions
         "Depletion layer"
         annotation (Placement(transformation(extent={{-10,10},{10,30}})));
 
-      Conditions.ByConnector.Inert.Inert substrate(
+      FCSys.Conditions.ByConnector.Inert.InertEfforts substrate(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
-        thermal(source(y=environment.T)))
+        thermalSource(y=environment.T))
         annotation (Placement(transformation(extent={{-10,6},{10,-14}})));
 
-      Conditions.ByConnector.Face.Single.Face majorityBC(material(source(y=3.5*
-                U.C/U.cc))) annotation (Placement(transformation(
+      Conditions.ByConnector.Face.Single.FaceEfforts majorityBC(materialSource(
+            y=3.5*U.C/U.cc)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-44,20})));
-      Conditions.ByConnector.Face.Single.Face minorityBC(redeclare
-          FCSys.Conditions.ByConnector.Face.Single.Translational.Force normal)
+      Conditions.ByConnector.Face.Single.FaceEfforts minorityBC(redeclare
+          function normalSpec =
+            FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force)
         annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={44,20})));
       replaceable Conditions.ByConnector.Chemical.Potential species1(
-        each final inclTransX=inclTransX,
-        each final inclTransY=inclTransY,
-        each final inclTransZ=inclTransZ,
-        each sT=U.V)
+        final inclTransX=inclTransX,
+        final inclTransY=inclTransY,
+        final inclTransZ=inclTransZ,
+        sT=U.V)
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
       replaceable Conditions.ByConnector.Chemical.Current species2(
         final inclTransX=inclTransX,
@@ -882,7 +889,7 @@ package Subregions
     equation
       connect(depletion.inert, substrate.inert) annotation (Line(
           points={{6.10623e-16,16},{-3.36456e-22,8},{6.10623e-16,8},{
-              6.10623e-16,-6.66134e-16}},
+              6.10623e-16,6}},
           color={47,107,251},
           smooth=Smooth.None));
 
@@ -922,10 +929,11 @@ package Subregions
 
     model SaturationPressure
       "Evaluate the saturation pressure curve by varying temperature"
-      import Modelica.Media.Air.MoistAir.saturationPressureLiquid;
+      import saturationPressureSI =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid;
 
-      output Q.Pressure p_sat=saturationPressureLiquid(subregion.gas.H2O.T/U.K)
-          *U.Pa "Saturation pressure via Modelica.Media";
+      output Q.Pressure p_sat=saturationPressureSI(subregion.gas.H2O.T/U.K)*U.Pa
+        "Saturation pressure via Modelica.Media";
       output Q.Number T_degC=U.to_degC(subregion.gas.H2O.T)
         "Temperature in degree Celcius";
 
@@ -934,39 +942,60 @@ package Subregions
         inclH2=false,
         subregion(liquid(inclH2O=inclH2O, H2O(consTransX=Conservation.IC)), gas(
               H2O(
-              p_IC=saturationPressureLiquid(environment.T/U.K)*U.Pa,
+              p_IC=saturationPressureSI(environment.T/U.K)*U.Pa,
               redeclare package Data = FCSys.Characteristics.H2O.Gas,
               consTransX=Conservation.IC,
               tauprime=1e-4*U.s))),
         environment(T=274.15*U.K));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(liquid(
-            inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Thermal.Temperature thermal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=99*U.K,
-                duration=3600,
-                offset=environment.T)))), gas(inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Thermal.Temperature thermal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=99*U.K,
-                duration=1000,
-                offset=environment.T))))) annotation (Placement(transformation(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(
+            inclH2O=true, H2O(
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+              height=99*U.K,
+              duration=3600,
+              offset=environment.T,
+              y))), gas(inclH2O=true, H2O(
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+              height=99*U.K,
+              duration=1000,
+              offset=environment.T,
+              y)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(gas(
-            inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Thermal.Temperature thermal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=99*U.K,
-                duration=1000,
-                offset=environment.T)))), liquid(inclH2O=true, H2O(redeclare
-              Conditions.ByConnector.Face.Single.Thermal.Temperature thermal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=99*U.K,
-                duration=1000,
-                offset=environment.T))))) annotation (Placement(transformation(
+
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(gas(inclH2O=
+              true, H2O(
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+              height=99*U.K,
+              duration=1000,
+              offset=environment.T,
+              y))), liquid(inclH2O=true, H2O(
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+              height=99*U.K,
+              duration=1000,
+              offset=environment.T,
+              y)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={24,0})));
@@ -1196,28 +1225,70 @@ package Subregions
           'C19HF37O5S-'(V_IC=subregion2.V/1000)))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC1(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
+
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
+
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
           final inclN2=inclN2,
-          final inclO2=inclO2),
-        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+'),
-        graphite('inclC+'=false,final 'incle-'='incle-')) annotation (Placement(
-            transformation(
+          final inclO2=inclO2,
+          H2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          N2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          O2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-56,0})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated BC2(
+      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(
+        ionomer(
+          'inclC19HF37O5S-'=false,
+          final 'inclH+'='inclH+',
+          'H+'(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
+
+        graphite(
+          'inclC+'=false,
+          final 'incle-'='incle-',
+          'e-'(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
+
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
           final inclN2=inclN2,
-          final inclO2=inclO2),
-        graphite('inclC+'=false, final 'incle-'='incle-'),
-        ionomer('inclC19HF37O5S-'=false, final 'inclH+'='inclH+')) annotation (
-          Placement(transformation(
+          final inclO2=inclO2,
+          H2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          H2O(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          N2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity),
+
+          O2(redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)))
+        annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={56,0})));
@@ -1252,8 +1323,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
-              -2.54679e-16}},
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1704,6 +1775,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -2340,6 +2412,7 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2615,6 +2688,7 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2984,6 +3058,7 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -4723,9 +4798,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "Characteristic data" annotation (
         Dialog(group="Material properties"),
         choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true,
-        Placement(transformation(extent={{-60,40},{-40,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+        __Dymola_choicesFromPackage=true);
       Q.TimeAbsolute tauprime(nominal=1e-6*U.s) = Data.tauprime(T, v)
         "<html>Phase change interval (&tau;&prime;)</html>"
         annotation (Dialog(group="Material properties"));
@@ -5372,7 +5445,7 @@ Choose any condition besides None.");
 
       // Diffusive exchange
       chemical.mu = h - chemical.sT "Reaction (rate equation elsewhere)";
-      if tauprime >= Modelica.Constants.small then
+      if tauprime > Modelica.Constants.small then
         tauprime*physical.Ndot = k_E*N*(exp((physical.mu - g0)/T) - exp((
           chemical.mu - g0)/T)) "Phase change";
       else
@@ -5780,19 +5853,22 @@ Choose any condition besides None.");
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
-        Icon(graphics={Rectangle(
-                  extent={{-98,80},{98,120}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-98,80},{98,120}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+        Icon(graphics={
+            Rectangle(
+              extent={{-98,80},{98,120}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Ellipse(
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-98,80},{98,120}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
@@ -6153,6 +6229,7 @@ Choose any condition besides None.");
             color={127,127,127},
             smooth=Smooth.None,
             thickness=0.5)}));
+
   end InertExchange;
 
   model Volume "Model to establish a fixed total volume"
@@ -6211,6 +6288,7 @@ Choose any condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (generally not for direct use)"

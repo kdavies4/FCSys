@@ -1,4 +1,0 @@
-// Setup
-removePlots();
-createPlot(filename = "CellProfile.mat");
-FCSys.BaseClasses.Utilities.plot6();
