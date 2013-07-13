@@ -9,10 +9,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       model Cell "<html>Isolated <code>Cell</code> model</html>"
         extends Modelica.Icons.Example;
 
-        inner FCSys.Conditions.Environment environment(
-          analysis=false,
-          p=149.6*U.kPa,
-          T=333.15*U.K)
+        inner FCSys.Conditions.Environment environment
           annotation (Placement(transformation(extent={{20,20},{40,40}})));
         replaceable Cells.Cell cell "Fuel cell" annotation (
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
@@ -23,80 +20,21 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
-      model CellHNEIProfile
-        "Apply boundary conditions to a cell according to an HNEI test profile"
-        extends Modelica.Icons.Example;
-
-        inner FCSys.Conditions.Environment environment(
-          analysis=false,
-          p=149.6*U.kPa,
-          T=333.15*U.K) "Environmental conditions"
-          annotation (Placement(transformation(extent={{30,32},{50,52}})));
-
-        Conditions.TestStands.TestStand testStand(anEnd(each graphite('incle-'=
-                  true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
-                  materialSpec(height=10000*U.A, duration=500)))), caEnd(each
-              graphite('incle-'=true, 'e-'(redeclare
-                  Modelica.Blocks.Sources.Ramp materialSpec(height=-10000*U.A,
-                    duration=500))))) annotation (__Dymola_choicesFromPackage=
-              true, Placement(transformation(extent={{-16,-16},{16,16}})));
-
-        replaceable Cells.Cell cell "Fuel cell" annotation (
-            __Dymola_choicesFromPackage=true, Placement(transformation(extent={
-                  {-10,-10},{10,10}})));
-      equation
-
-        connect(testStand.an, cell.an) annotation (Line(
-            points={{-16,9.4369e-16},{-14,9.4369e-16},{-14,6.10623e-16},{-10,
-                6.10623e-16}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        connect(cell.ca, testStand.ca) annotation (Line(
-            points={{10,6.10623e-16},{14,6.10623e-16},{14,9.4369e-16},{16.2,
-                9.4369e-16}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        connect(testStand.anPositive, cell.anPositive) annotation (Line(
-            points={{-4,16},{-4,14.5},{-4,14.5},{-4,13},{-4,10},{-4,10}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(testStand.caNegative, cell.caPositive) annotation (Line(
-            points={{4,16},{4,14.5},{4,14.5},{4,13},{4,10},{4,10}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(cell.anNegative, testStand.anNegative) annotation (Line(
-            points={{-4,-10},{-4,-11.5},{-4,-11.5},{-4,-13},{-4,-16},{-4,-16}},
-
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(cell.caNegative, testStand.caPositive) annotation (Line(
-            points={{4,-10},{4,-11.5},{4,-11.5},{4,-13},{4,-16},{4,-16}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        annotation (
-          experiment(StopTime=100, Tolerance=1e-06),
-          Commands(file=
-                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.CellHNEIProfile.mos"
-              "Assemblies.Cells.Examples.CellHNEIProfile.mos"),
-          experiment(StopTime=600, Tolerance=1e-08),
-          Diagram(graphics));
-      end CellHNEIProfile;
 
       model Polarization "Run a cell polarization"
         extends Modelica.Icons.Example;
 
-        inner FCSys.Conditions.Environment environment(
-          analysis=false,
-          p=149.6*U.kPa,
-          T=333.15*U.K) "Environmental conditions"
+        /* **
+                 params=dict(comp=['"O2"'],
+                             anStoich=[1.5, 1.1, 2],
+                             caStoich=[9.5, 7.5, 12.5],
+                             anRH=[0.8, 0.6, 1],
+                             caRH=[0.5, 0.3, 0.7],
+                             T_degC=[60, 40, 80],
+                             p_kPag=[48.3, 0, 202.7]),
+                             */
+        inner FCSys.Conditions.Environment environment
+          "Environmental conditions"
           annotation (Placement(transformation(extent={{30,32},{50,52}})));
 
         Conditions.TestStands.TestStand testStand(anEnd(each graphite('incle-'=
@@ -128,39 +66,36 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         connect(testStand.anPositive, cell.anPositive) annotation (Line(
             points={{-4,16},{-4,14.5},{-4,14.5},{-4,13},{-4,10},{-4,10}},
-            color={127,127,127},
+            color={240,0,0},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(testStand.caNegative, cell.caPositive) annotation (Line(
-            points={{4,16},{4,14.5},{4,14.5},{4,13},{4,10},{4,10}},
-            color={127,127,127},
+        connect(testStand.caNegative, cell.caNegative) annotation (Line(
+            points={{4,-16},{4,-10}},
+            color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
         connect(cell.anNegative, testStand.anNegative) annotation (Line(
             points={{-4,-10},{-4,-11.5},{-4,-11.5},{-4,-13},{-4,-16},{-4,-16}},
 
-            color={127,127,127},
+            color={240,0,0},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(cell.caNegative, testStand.caPositive) annotation (Line(
-            points={{4,-10},{4,-11.5},{4,-11.5},{4,-13},{4,-16},{4,-16}},
-            color={127,127,127},
+
+        connect(cell.caPositive, testStand.caPositive) annotation (Line(
+            points={{4,10},{4,16}},
+            color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
 
         annotation (Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.Polarization.mos"
               "Assemblies.Cells.Examples.Polarization.mos"));
-
       end Polarization;
-
-
-
 
       model PolarizationPlaceholder "**temp"
         extends Modelica.Icons.Example;
 
-        /*
+        /* **
                  params=dict(comp=['"O2"'],
                              anStoich=[1.5, 1.1, 2],
                              caStoich=[9.5, 7.5, 12.5],
@@ -177,9 +112,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         parameter Modelica.SIunits.Current zI_large_A=100
           "Large-signal current in amperes";
-        Connectors.RealInput zI_small_A "Small-signal cell current in amperes"
-          annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
-              iconTransformation(extent={{-120,-10},{-100,10}})));
+        Connectors.RealInput zJ_small_SI
+          "Small-signal current density in SI base units" annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-120,-10},{-100,10}})));
         Connectors.RealOutput w_V "Cell potential in volts" annotation (
             Placement(transformation(extent={{90,-10},{110,10}}),
               iconTransformation(extent={{100,-10},{120,10}})));
@@ -188,8 +124,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
         replaceable FCSys.Assemblies.Cells.Cell cell "Fuel cell model"
           annotation (__Dymola_choicesFromPackage=true, Placement(
               transformation(extent={{-10,-10},{10,10}})));
+        inner FCSys.Conditions.Environment environment(
+          analysis=false,
+          p=149.6*U.kPa,
+          T=333.15*U.K) "Environmental conditions"
+          annotation (Placement(transformation(extent={{30,32},{50,52}})));
       equation
-        connect(zI_small_A, testStandEIS.zI_small_A) annotation (Line(
+        connect(zJ_small_SI, testStandEIS.zJ_small_SI) annotation (Line(
             points={{-100,5.55112e-16},{-40,5.55112e-16},{-40,20},{-20,20},{-16,
                 16.4},{-16.7,16.7}},
             color={0,0,127},
@@ -200,39 +141,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(testStandEIS.an, cell.anX) annotation (Line(
-            points={{-16,9.4369e-16},{-14,9.4369e-16},{-14,6.10623e-16},{-10,
-                6.10623e-16}},
+        annotation (Diagram(graphics), Icon(graphics));
+        connect(testStandEIS.caNegative, cell.caNegative) annotation (Line(
+            points={{4,-16},{4,-10}},
+            color={0,0,240},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(testStandEIS.anPositive, cell.anPositive) annotation (Line(
+            points={{-4,16},{-4,10}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(testStandEIS.an, cell.an) annotation (Line(
+            points={{-16,9.4369e-16},{-10,6.10623e-16}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(cell.caX, testStandEIS.ca) annotation (Line(
-            points={{10,6.10623e-16},{14,6.10623e-16},{14,9.4369e-16},{16.2,
-                9.4369e-16}},
+        connect(cell.anNegative, testStandEIS.anNegative) annotation (Line(
+            points={{-4,-10},{-4,-16}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.caPositive, testStandEIS.caPositive) annotation (Line(
+            points={{4,10},{4,16}},
             color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(testStandEIS.anSupply, cell.anPosY) annotation (Line(
-            points={{-4,16},{-4,14.5},{-4,14.5},{-4,13},{-4,10},{-4,10}},
-            color={221,23,47},
+        connect(cell.ca, testStandEIS.ca) annotation (Line(
+            points={{10,6.10623e-16},{16.2,6.10623e-16},{16.2,9.4369e-16}},
+            color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(testStandEIS.caReturn, cell.caPosY) annotation (Line(
-            points={{4,16},{4,14},{4,14},{4,12},{4,10},{4,10}},
-            color={0,0,240},
-            smooth=Smooth.None,
-            thickness=0.5));
-        connect(cell.anNegY, testStandEIS.anReturn) annotation (Line(
-            points={{-4,-10},{-4,-16},{-4,-16}},
-            color={221,23,47},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(cell.caNegY, testStandEIS.caSupply) annotation (Line(
-            points={{4,-10},{4,-11.5},{4,-11.5},{4,-13},{4,-13},{4,-16}},
-            color={0,0,240},
-            smooth=Smooth.None,
-            thickness=0.5));
-        annotation (Diagram(graphics), Icon(graphics));
       end EIS;
 
       model EISPlaceholder

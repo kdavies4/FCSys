@@ -1592,11 +1592,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model TestStandEIS
       "Test stand to perform electrochemical impedance spectroscopy"
-      extends TestStand(final zI=zI_large + zI_small_SI*U.A);
+      extends TestStand(redeclare Q.Current zI,zJ=zJ_large + zJ_small_SI*U.A/U.m
+            ^2);
 
-      parameter Q.Current zJ_large=U.A "Large-signal current";
-      Connectors.RealInput zI_small_A "Small-signal cell current in amperes"
-        annotation (Placement(transformation(
+      parameter Q.CurrentAreic zJ_large=U.A "Large-signal current density";
+      Connectors.RealInput zJ_small_SI
+        "Small-signal current density in SI base units" annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=-45,
             origin={-107,107}), iconTransformation(
@@ -1613,16 +1615,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             origin={167,-167})));
 
     equation
-      w_V = 1/U.V;
+      w_V = w/U.V;
 
       annotation (
-        Documentation(info="<html><p>Please see the documentation in the
+        Documentation(info="<html><p>This model modulates the electrical current applied to the cell 
+    according to an input.
+    The current density is the sum of a steady-state large-signal current density and a small-signal 
+    current density introduced via the input <code>zJ_small_SI</code>.</p>
+       
+    <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"),
 
         Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics));
+
     end TestStandEIS;
 
     model TestStand "Fuel cell test stand (applies boundary conditions)"
@@ -1721,8 +1729,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.Current I_an "<html>Equivalent current (<i>I</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Anode conditions", group=
               "Inlet flow rate (specify one)"));
-      Q.VolumeRate Vdot_an_in
-        "<html>Volumetric flow rate (<i>V&#775;</i><sub>an in</sub>)</html>"
+      Q.VolumeRate Vdot_g_an_in
+        "<html>Volumetric flow rate of gas (<i>V&#775;</i><sub>g an in</sub>)</html>"
         annotation (Dialog(tab="Anode conditions", group=
               "Inlet flow rate (specify one)"));
       Q.PressureAbsolute p_an_in
@@ -1740,8 +1748,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.Current I_ca "<html>Equivalent current (<i>I</i><sub>ca</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions",group=
               "Inlet flow rate (specify one)"));
-      Q.VolumeRate Vdot_ca_in
-        "<html>Volumetric flow rate (<i>V&#775;</i><sub>ca in</sub>)</html>"
+      Q.VolumeRate Vdot_g_ca_in
+        "<html>Volumetric flow rate of gas (<i>V&#775;</i><sub>g ca in</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions", group=
               "Inlet flow rate (specify one)"));
       Q.PressureAbsolute p_ca_in
@@ -1835,6 +1843,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.CurrentAreic zJ_seg[n_y, n_z] "Current density of the segments";
       Q.PressureAbsolute p_sat_an_in "Saturation pressure at the anode inlet";
       Q.PressureAbsolute p_sat_ca_in "Saturation pressure at the cathode inlet";
+      Q.Current Ndot_H2Ol_an_in "Flow rate of liquid water into anode";
+      Q.Current Ndot_H2Ol_ca_in "Flow rate of liquid water into cathode";
       Q.Pressure p_H2Ol_an_in
         "Non-equilibrium pressure on the H2O liquid at the anode inlet";
       Q.Pressure p_H2Ol_ca_in
@@ -1910,7 +1920,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             origin={40,-100}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={40,160})));
+            origin={40,-160})));
       Connectors.FaceBus caPositive[n_x_ca, n_z]
         "Positive interface to the cathode flow channel" annotation (Placement(
             transformation(
@@ -1919,7 +1929,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             origin={40,100}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={40,-160})));
+            origin={40,160})));
 
     protected
       ByConnector.FaceBus.Single.FaceBusGraphiteOnly anBC[n_y, n_z](graphite(
@@ -1969,7 +1979,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare function precedingSpec = Single.Translational.velocity,
             redeclare function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_an_in))), liquid(each inclH2O=true, H2O(
-            normalSource(y=p_H2Ol_an_in*A_an),
+            normalSource(y=-inSign(caInletSide)*p_H2Ol_an_in*A_an),
             redeclare function followingSpec = Single.Translational.velocity,
             redeclare function precedingSpec = Single.Translational.velocity,
             redeclare function thermalSpec = Single.Thermal.temperature,
@@ -1995,9 +2005,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             normalSource(y=phi_an_out),
             redeclare function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_an_out))), liquid(each inclH2O=true, H2O(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSource(y=phi_an_out),
+            normalSource(y=inSign(anInletSide)*p_an_out*A_an),
             redeclare function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_an_out))))
         "Boundary conditions for the anode outlet" annotation (Placement(
@@ -2044,7 +2052,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 Single.Translational.velocity,
             redeclare each function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_ca_in))), liquid(each inclH2O=true, H2O(
-            normalSource(y=p_H2Ol_an_in*A_an),
+            normalSource(y=-inSign(caInletSide)*p_H2Ol_ca_in*A_ca),
             redeclare each function followingSpec =
                 Single.Translational.velocity,
             redeclare each function precedingSpec =
@@ -2079,9 +2087,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             normalSource(y=phi_ca_out),
             redeclare each function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_ca_out))), liquid(each inclH2O=true, H2O(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSource(y=phi_ca_out),
+            normalSource(y=inSign(caInletSide)*p_ca_out*A_ca),
             redeclare each function thermalSpec = Single.Thermal.temperature,
             each thermalSource(y=T_ca_out))))
         "Boundary conditions for the cathode outlet" annotation (Placement(
@@ -2103,14 +2109,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Anode humidity
       p_sat_an_in = saturationPressureSI(T_an_in/U.K)*U.Pa;
       p_H2O_an_in = saturationPressureSI(T_sat_an_in/U.K)*U.Pa;
-      p_H2O_ca_in = caInletRH*p_sat_ca_in;
-      // ** Flow rate of liquid at inlet sufficient to provide specified humidity if RH > 1
+      p_H2O_an_in = min(anInletRH, 1)*p_sat_an_in;
+      // Liquid makes up the remainder if RH > 100%:
+      Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an)/
+        DataH2O.v_Tp(T_an_in, p_sat_an_in);
+      Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.face.phi[Orientation.normal]
+         .* A_an)/DataH2Ol.v_Tp(T_an_in);
 
       // Cathode humidity
       p_sat_ca_in = saturationPressureSI(T_ca_in/U.K)*U.Pa;
       p_H2O_ca_in = saturationPressureSI(T_sat_ca_in/U.K)*U.Pa;
-      p_H2O_an_in = anInletRH*p_sat_an_in;
-      // ** Flow rate of liquid at inlet sufficient to provide specified humidity if RH > 1
+      p_H2O_ca_in = max(caInletRH, 1)*p_sat_ca_in;
+      // Liquid makes up the remainder if RH > 100%:
+      Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca)/
+        DataH2O.v_Tp(T_ca_in, p_sat_ca_in);
+      Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.face.phi[Orientation.normal]
+         .* A_ca)/DataH2Ol.v_Tp(T_ca_in);
 
       // End plates
       Qdot_an = G_an*(T_an - environment.T) "Anode";
@@ -2121,13 +2135,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Anode flow rate
       anStoich*zI = I_an;
       J_an*A = I_an;
-      Vdot_an_in = sum(outerProduct(L_x_an, L_z) .* phi_an_in) "**Use sign";
+      Vdot_g_an_in = inSign(anInletSide)*sum(outerProduct(L_x_an, L_z) .*
+        phi_an_in);
       I_an = sum(phi_an_in .* anSource.gas.H2.face.rho .* A_an);
 
       // Cathode flow rate
       caStoich*zI = I_ca;
       J_ca*A = I_ca;
-      Vdot_ca_in = sum(outerProduct(L_x_ca, L_z) .* phi_ca_in) "**Use sign";
+      Vdot_g_ca_in = inSign(caInletSide)*sum(outerProduct(L_x_ca, L_z) .*
+        phi_ca_in);
       I_ca = sum(phi_ca_in .* caSource.gas.H2O.face.rho .* A_ca);
 
       // Pressures at the inlets and outlets
@@ -2240,26 +2256,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
-    <p>Assumptions:
-    <ol>
-    <li>The outer x-axis surface of each end plate is each uniform in temperature.</li>
-    <li>No heat is conducted from the rest of the cell hardware.</li>
-    <li>The voltage is uniform across each end flow plate.</li>
-    <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
-    at each inlet boundary).</li>
-    <li>There is no shear force on the fluid at either outlet.</li>
-    <li>The species of each stream have the same velocity at each inlet and outlet.</li>
-    <li>The species of each stream have the same temperature at each inlet and outlet.</li>
-    <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
-    <li>The temperature is uniform over each inlet and outlet.</li>
-    <li>There is no diffusion of the reactants (H<sub>2</sub> and O<sub>2</sub>) or liquid water
-    into the cell (only advection).</li>
-    <li>There is no diffusion of the fluid species 
-    (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, and O<sub>2</sub>) 
-    out of the cell (advection only).</li>
-    <li>There is no net thermal conduction across either outlet.</li>
-    </ol></p>
-
     <p>Any of the settings for the operating conditions can be time-varying expressions.
     In each group,
     specify exactly one variable (otherwise the model will be structurally singular).</p>
@@ -2272,11 +2268,35 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     Therefore liquid water will also be injected if the specified vapor pressure is specified 
     to be above saturation pressure or the specified dew point (<code>T_sat_an_in</code> or 
     <code>T_sat_ca_in</code>) is above the actual temperature.</p>
-        
+    
     <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
     given current
     assuming the reactant is entirely consumed (complete utilization).</p>
 
+    <p>Assumptions:
+    <ol>
+    <li>The outer x-axis surface of each end plate is each uniform in temperature.</li>
+    <li>No heat is conducted from the rest of the cell hardware.</li>
+    <li>The voltage is uniform across each end plate.</li>
+    <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
+    at each inlet boundary).</li>
+    <li>There is no shear force on the fluid at either outlet.</li>
+    <li>The gases of each stream have the same velocity at each inlet and outlet.</li>
+    <li>The species (gases and liquid) of each stream have the same temperature at each inlet and outlet.</li>
+    <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
+    <li>The temperature is uniform over each inlet and outlet.</li>
+    <li>There is no diffusion of the reactants (H<sub>2</sub> and O<sub>2</sub>) or liquid water
+    into the cell (only advection).</li>
+    <li>There is no diffusion of the fluid species 
+    (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, and O<sub>2</sub>) 
+    out of the cell (advection only).</li>
+    <li>The inlet and outlet pressures are applied to the gas mixture by Dalton's law.</li>
+    <li>At the inlet, the liquid has the pressure necessary and sufficient for the prescribed 
+    humidity (zero unless RH > 100%).</li>
+    <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
+    <li>There is no net thermal conduction across either outlet.</li>
+    </ol></p>
+        
     <p>The temperatures of the endplates (<i>T</i><sub>an</sub> and <i>T</i><sub>ca</sub>)
     should not be equal to the temperature of the environment unless <i>G</i><sub>an</sub>
     and <i>G</i><sub>ca</sub> are explicitly set.  Otherwise there will be a mathematical
@@ -6721,8 +6741,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_following, u.following) annotation (Line(
-              points={{-70,5.55112e-16},{-90,5.55112e-16},{-90,5.55112e-16},{
-                  -110,5.55112e-16}},
+              points={{-70,5.55112e-16},{-90,5.55112e-16},{-90,5.55112e-16},{-110,
+                  5.55112e-16}},
               color={0,0,127},
               smooth=Smooth.None));
 
@@ -7992,6 +8012,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=300*
                 U.K));
+
         // The daltonSource and thermalSource blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
@@ -8657,6 +8678,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=300*
                 U.K));
+
         // See note in ElectrochemEfforts.
         // The daltonSource and thermalSource blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
