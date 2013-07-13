@@ -70,7 +70,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             thickness=0.5,
             smooth=Smooth.None));
         connect(testStand.caNegative, cell.caNegative) annotation (Line(
-            points={{4,-16},{4,-10}},
+            points={{4,-16},{4,-14.5},{4,-14.5},{4,-13},{4,-10},{4,-10}},
             color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
@@ -82,14 +82,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
 
         connect(cell.caPositive, testStand.caPositive) annotation (Line(
-            points={{4,10},{4,16}},
+            points={{4,10},{4,11.5},{4,11.5},{4,13},{4,16},{4,16}},
             color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
 
         annotation (Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.Polarization.mos"
-              "Assemblies.Cells.Examples.Polarization.mos"));
+              "Assemblies.Cells.Examples.Polarization.mos"), Diagram(graphics));
       end Polarization;
 
       model PolarizationPlaceholder "**temp"
@@ -141,7 +141,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             smooth=Smooth.None));
 
-        annotation (Diagram(graphics), Icon(graphics));
         connect(testStandEIS.caNegative, cell.caNegative) annotation (Line(
             points={{4,-16},{4,-10}},
             color={0,0,240},
@@ -172,6 +171,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
+        annotation (Diagram(graphics), Icon(graphics));
       end EIS;
 
       model EISPlaceholder
@@ -388,27 +388,29 @@ package Assemblies "Combinations of regions (e.g., cells)"
           smooth=Smooth.None,
           thickness=0.5));
       connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,6.10623e-16},{16,-3.36456e-22},{10,6.10623e-16}},
+          points={{10,6.10623e-16},{10,6.10623e-16},{10,6.10623e-16}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,6.10623e-16},{36,-3.36456e-22},{30,6.10623e-16}},
+          points={{30,6.10623e-16},{30,6.10623e-16}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,6.10623e-16},{56,-3.36456e-22},{50,6.10623e-16}},
+          points={{50,6.10623e-16},{50,6.10623e-16}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
 
       // External connections
       connect(an, anFP.xNegative) annotation (Line(
-          points={{-80,5.55112e-16},{-80,6.10623e-16},{-70,6.10623e-16}},
+          points={{-80,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-70,
+              6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
+
       connect(anFP.yNegative, anNegative) annotation (Line(
           points={{-60,-10},{-60,-20}},
           color={240,0,0},
@@ -437,7 +439,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           smooth=Smooth.None));
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="cell",
         Documentation(info="
     <html><p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
     of a PEMFC is given in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</p>
@@ -547,21 +548,19 @@ package Assemblies "Combinations of regions (e.g., cells)"
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{-50,-10},{-30,10}})));
-      replaceable Regions.AnCLs.AnCGDL anCGDL(final L_y=L_y, final L_z=L_z)
-        "Anode catalyst and gas diffusion layer" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Layers"),
-        Placement(transformation(extent={{-30,-10},{-10,10}})));
+      FCSys.Regions.Integrated.AnCGDL anCGDL(final L_y=L_y, final L_z=L_z)
+        "Anode catalyst and gas diffusion layer" annotation (Dialog(group=
+              "Layers"), Placement(transformation(extent={{-30,-10},{-10,10}})));
+
       replaceable Regions.PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
         "Proton exchange membrane" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{-10,-10},{10,10}})));
-      replaceable Regions.CaCLs.CaCGDL caCGDL(final L_y=L_y, final L_z=L_z)
-        "Cathode catalyst and gas diffusion layer" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Layers"),
-        Placement(transformation(extent={{10,-10},{30,10}})));
+      FCSys.Regions.Integrated.CaCGDL caCGDL(final L_y=L_y, final L_z=L_z)
+        "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
+              "Layers"), Placement(transformation(extent={{10,-10},{30,10}})));
+
       replaceable Regions.CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         "Cathode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
@@ -631,7 +630,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         defaultComponentName="cell",
         Documentation(info="<html>
     <p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  The catalyst layers and gas diffusion
-    layers are integrated on each side to reduce the model complexity.  An overview
+    layers are integrated on each side to reduce the complexity of the model.  An overview
     of a PEMFC is given in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</p>
     </html>"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
@@ -678,6 +677,178 @@ package Assemblies "Combinations of regions (e.g., cells)"
               thickness=0.5)}));
     end SimpleCell;
 
+    model VerySimpleCell
+      "Cell model with one subregion for the GDLs, CLs, and PEM"
+      extends FCSys.BaseClasses.Icons.Cell;
+
+      // Geometric parameters
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (L<sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (L<sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of subregions along the channel";
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of subregions across the channel";
+
+      Connectors.FaceBus an[n_y, n_z] "Interface with the anode end plate"
+        annotation (Placement(transformation(extent={{-50,-10},{-30,10}},
+              rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
+      Connectors.FaceBus ca[n_y, n_z] "Interface with the cathode end plate"
+        annotation (Placement(transformation(extent={{30,-10},{50,10}},
+              rotation=0), iconTransformation(extent={{90,-10},{110,10}})));
+      Connectors.FaceBus anNegative[anFP.n_x, n_z] "Negative anode fluid port"
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={-20,-20}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-40,-100})));
+      Connectors.FaceBus caNegative[caFP.n_x, n_z]
+        "Negative cathode fluid port" annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={20,-20}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={40,-100})));
+      Connectors.FaceBus anPositive[anFP.n_x, n_z] "Positive anode fluid port"
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={-20,20}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-40,100})));
+      Connectors.FaceBus caPositive[caFP.n_x, n_z]
+        "Positive cathode fluid port" annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={20,20}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={40,100})));
+
+      replaceable Regions.AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
+        "Anode flow plate" annotation (
+        __Dymola_choicesFromPackage=true,
+        Dialog(group="Layers"),
+        Placement(transformation(extent={{-30,-10},{-10,10}})));
+      Regions.Integrated.GDLMEA GDLMEA(final L_y=L_y, final L_z=L_z)
+        "Gas diffusion layers and membrane electrolyte assembly" annotation (
+          Dialog(group="Layers"), Placement(transformation(extent={{-10,-10},{
+                10,10}})));
+
+      replaceable Regions.CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
+        "Cathode flow plate" annotation (
+        __Dymola_choicesFromPackage=true,
+        Dialog(group="Layers"),
+        Placement(transformation(extent={{10,-10},{30,10}})));
+
+    protected
+      outer Conditions.Environment environment "Environmental conditions";
+
+    equation
+      // Internal connections (between layers)
+      connect(anFP.xPositive, GDLMEA.xNegative) annotation (Line(
+          points={{-10,6.10623e-16},{-10,6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      // External connections
+      connect(an, anFP.xNegative) annotation (Line(
+          points={{-40,5.55112e-16},{-40,6.10623e-16},{-30,6.10623e-16}},
+          color={127,127,127},
+          smooth=Smooth.None,
+          thickness=0.5));
+      connect(anFP.yNegative, anNegative) annotation (Line(
+          points={{-20,-10},{-20,-20}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anFP.yPositive, anPositive) annotation (Line(
+          points={{-20,10},{-20,20}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(caFP.xPositive, ca) annotation (Line(
+          points={{30,6.10623e-16},{40,5.55112e-16}},
+          color={127,127,127},
+          smooth=Smooth.None,
+          thickness=0.5));
+      connect(caFP.yNegative, caNegative) annotation (Line(
+          points={{20,-10},{20,-20}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caFP.yPositive, caPositive) annotation (Line(
+          points={{20,10},{20,20}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (
+        defaultComponentPrefixes="replaceable",
+        defaultComponentName="cell",
+        Documentation(info="<html>
+    <p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  The gas diffusion
+    layers and membrane electrolyte assembly are integrated to reduce complexity of the model.  An overview
+    of a PEMFC is given in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</p>
+    </html>"),
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-40,-20},{
+                40,20}}), graphics),
+        Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
+      connect(GDLMEA.xPositive, caFP.xNegative) annotation (Line(
+          points={{10,6.10623e-16},{10,6.10623e-16},{10,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+    end VerySimpleCell;
   end Cells;
   annotation (Documentation(info="
 <html>

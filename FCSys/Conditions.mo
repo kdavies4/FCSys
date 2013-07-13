@@ -346,38 +346,31 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{40,-40},{40,-80},{80,-80}},
           color={0,127,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-100}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-100},{70,-100}},
-              color={0,127,0},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-100}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-100},{70,-100}},
+                  color={0,127,0},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -481,38 +474,31 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{40,-40},{40,-80},{80,-80}},
           color={0,127,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-100}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-100},{70,-100}},
-              color={0,127,0},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-100}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-100},{70,-100}},
+                  color={0,127,0},
+                  smooth=Smooth.None)}));
     end Cathode;
 
     model Conductor
@@ -568,30 +554,25 @@ package Conditions "Models to specify and measure operating conditions"
           color={0,127,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{80,-40}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,0},{70,0}},
-              color={0,127,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{80,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{80,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,0},{70,0}},
+                  color={0,127,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end Conductor;
 
     package Phases "Adapters for material phases"
@@ -1630,7 +1611,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics));
-
     end TestStandEIS;
 
     model TestStand "Fuel cell test stand (applies boundary conditions)"
@@ -2249,11 +2229,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
+                  extent={{-160,160},{160,-160}},
+                  lineColor={191,191,191},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+              {160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.
@@ -2953,10 +2933,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,195,38})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,195,38})}));
     end Electrochem;
 
     package Chemical
@@ -3093,14 +3073,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}), Ellipse(
-              extent={{-40,20},{20,-40}},
-              fillColor={255,195,38},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-40,20},{20,-40}},
+                  fillColor={255,195,38},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None)}));
 
     end Chemical;
 
@@ -3557,11 +3537,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52},
+                  lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3701,10 +3681,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5674,11 +5654,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191},
+                  lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -7019,10 +6999,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191})}));
 
     end Face;
 
@@ -7515,10 +7495,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251})}));
     end Inert;
 
     package InertAmagat
@@ -8154,24 +8134,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   to a single value.</p></html>"));
         end PartialCondition;
       end Thermal;
-      annotation (Icon(graphics={
-            Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}),
-            Text(
-              extent={{-66,36},{46,-76}},
-              lineColor={255,255,255},
-              textString="A"),
-            Text(
-              extent={{-64,36},{48,-76}},
-              lineColor={255,255,255},
-              textString="A"),
-            Text(
-              extent={{-62,36},{50,-76}},
-              lineColor={255,255,255},
-              textString="A")}));
+      annotation (Icon(graphics={Ellipse(
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-66,36},{46,-76}},
+                  lineColor={255,255,255},
+                  textString="A"),Text(
+                  extent={{-64,36},{48,-76}},
+                  lineColor={255,255,255},
+                  textString="A"),Text(
+                  extent={{-62,36},{50,-76}},
+                  lineColor={255,255,255},
+                  textString="A")}));
     end InertAmagat;
 
     package InertDalton
@@ -8820,36 +8796,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   to a single value.</p></html>"));
         end PartialCondition;
       end Thermal;
-      annotation (Icon(graphics={
-            Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}),
-            Text(
-              extent={{-66,36},{46,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-64,36},{48,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-62,36},{50,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-62,34},{50,-78}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-64,34},{48,-78}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-66,34},{46,-78}},
-              lineColor={255,255,255},
-              textString="D")}));
+      annotation (Icon(graphics={Ellipse(
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-66,36},{46,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-64,36},{48,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-62,36},{50,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-62,34},{50,-78}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-64,34},{48,-78}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-66,34},{46,-78}},
+                  lineColor={255,255,255},
+                  textString="D")}));
     end InertDalton;
 
     package Translational
@@ -9207,10 +9176,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end Component;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255})}));
 
     end Translational;
 
@@ -9303,10 +9272,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={221,23,47})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={221,23,47})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
@@ -9322,17 +9291,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     // Store the values of the base constants and units.
     final constant U.Bases.Base baseUnits=U.base "Base constants and units";
 
-    parameter Boolean analysis=true "Include optional variables for analysis"
+    parameter Boolean analysis=false "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
-    parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure";
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K
       "Temperature";
+    parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure";
+
+    parameter Q.NumberAbsolute RH(
+      displayUnit="%",
+      max=1) = 0.8 "Relative humidity";
+    final parameter Q.PressureAbsolute p_H2Og=RH*
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa
+      "Pressure of H2O vapor";
+    parameter Q.NumberAbsolute n_O2(
+      final max=1,
+      displayUnit="%") = 0.208
+      "<html>Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>)</html>";
+    // Value from http://en.wikipedia.org/wiki/Oxygen
+
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces";
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
     parameter Q.PotentialLineic E[Axis]={0,0,0} "Electric field";
+
     annotation (
       defaultComponentPrefixes="inner",
       missingInnerMessage="

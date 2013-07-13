@@ -723,8 +723,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       connect(PEM.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{14,6.10623e-16},{14,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1045,12 +1045,31 @@ package Regions "3D arrays of discrete, interconnected subregions"
         T=333.15*U.K,
         analysis=true)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
-      PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file=
-              "Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
-            "Regions.Examples.PEM.mos"));
+      CaCLs.CaCL caCL
+        annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+      PEMs.PEM PEM
+        annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
+      replaceable AnCLs.AnCL anCL
+        annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
+      annotation (
+        experiment(Tolerance=1e-06, StopTime=10),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
+            "Regions.Examples.PEM.mos"),
+        Diagram(graphics));
+    equation
+      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
+          points={{-38,6.10623e-16},{-32,6.10623e-16},{-32,6.10623e-16},{-26,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
+          points={{-6,6.10623e-16},{2,6.10623e-16},{2,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
     end PEM2;
 
     model AnGDL2 "Test the anode gas diffusion layer"
@@ -1072,9 +1091,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         T=333.15*U.K,
         analysis=true)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
-      AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
-        annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
+      replaceable AnCLs.AnCL anCL
+        annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
@@ -1106,7 +1125,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1118,10 +1137,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
             graphite(
               reduceTemp=true,
-              k=fill((1 - epsilon)^(3/2), 3),
+              k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
+              'C+'(V_IC=V - epsilonV, theta=U.m*U.K/(95*U.W)),
               'e-'(
                 consTransY=Conservation.IC,
                 initTransX=InitTranslational.None,
@@ -1130,12 +1149,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol))),
             liquid(
               inclH2O=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       // TODO:  Find a better solution for liquid.H2O.V_IC than
       // Modelica.Constants.eps and apply it to other layers too.
@@ -1367,7 +1386,7 @@ text layer of this model.</p>
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1379,23 +1398,22 @@ text layer of this model.</p>
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2Og)),
             graphite(
               reduceTemp=true,
-              k=fill((1 - epsilon)^(3/2), 3),
+              k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(1.18*U.W)),
+              'C+'(V_IC=V - epsilonV, theta=U.m*U.K/(1.18*U.W)),
               'e-'(
-                rho_IC=17842.7*U.C/U.cc,
                 mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol),
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None)),
             liquid(
               inclH2O=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               H2O(V_IC=Modelica.Constants.eps*U.cc,consTransX=Conservation.IC))))
         annotation (IconMap(primitivesVisible=false));
-
+      // **temp excluded C+
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
         "<html>Volumetric porosity (&epsilon;)</html>"
@@ -1772,7 +1790,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               reduceTemp=true,
               inclH2=true,
               inclH2O=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               H2(
                 initTransX=InitTranslational.None,
                 initTransY=InitTranslational.None,
@@ -1784,11 +1802,11 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               reduceTemp=true,
               'inclC+'=true,
               'incle-'=true,
-              k=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'C+'(V_IC=0.5*(V - epsilonV), theta=U.m*U.K/(1.18*U.W)),
               'e-'(
+                V_IC=0.5*(V - epsilonV),
                 N(stateSelect=StateSelect.prefer),
-                initMaterial=InitScalar.None,
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None,
                 phi(each stateSelect=StateSelect.default))),
@@ -1797,7 +1815,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               'inclC19HF37O5S-'=true,
               'inclH+'=true,
               inclH2O=false,
-              k=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
               'H+'(
                 initMaterial=InitScalar.None,
@@ -1806,7 +1824,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
             liquid(
               inclH2O=false,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               H2O(V_IC=Modelica.Constants.eps*U.cc, consTransX=Conservation.IC)),
 
             reaction(J_0=0.5*U.A/U.cm^2))) annotation (IconMap(
@@ -1823,7 +1841,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
       // (initMaterial=InitScalar.ReactionRate?) for this and CaCL.
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
         "<html>Volumetric porosity (&epsilon;)</html>"
@@ -1985,18 +2003,9 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end AnCL;
 
-    model AnCGDL "Integrated anode catalyst/gas diffusion layer"
-      extends AnCL(L_x={(28.7*U.micro*U.m + 0.3*U.mm)});
-      annotation (Documentation(info="<html><p>The default thickness is the total thickness of
-  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and
-  <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a>.</p>
-
-  <p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> model.</p></html>"));
-
-    end AnCGDL;
 
   end AnCLs;
 
@@ -2317,35 +2326,49 @@ the z axis extends across the width of the channel.</p>
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
               H2O(p_IC=environment.p_H2Og, consTransX=Conservation.IC),
-              N2(p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
+              N2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                initEnergy=InitScalar.None,
+                p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
 
-              O2(p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
+              O2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                initEnergy=InitScalar.None,
+                p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
-              k=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W)),
-              'e-'(mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol))),
+              'e-'(
+                initEnergy=InitScalar.None,
+                V_IC=0.5*(V - epsilonV),
+                initTransX=InitTranslational.None,
+                mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol))),
             ionomer(
               reduceTemp=true,
-              k=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'inclC19HF37O5S-'=true,
               inclH2O=true,
               'inclH+'=true,
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
-              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm)),
-              H2O(initMaterial=InitScalar.None)),
-            liquid(k=fill(epsilon^(3/2), 3)))) annotation (IconMap(
+              'H+'(initEnergy=InitScalar.None, mu=0.083*U.S/(0.95*U.M*U.cm)),
+              H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
+            liquid(k_T=fill(epsilon^(3/2), 3)))) annotation (IconMap(
             primitivesVisible=false));
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
         "<html>Volumetric porosity (&epsilon;)</html>"
@@ -2373,7 +2396,7 @@ the z axis extends across the width of the channel.</p>
     initial equation
       subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
       annotation (Documentation(info="<html>
-<p>This model represents the anode catalyst layer of a PEMFC.
+<p>This model represents the cathode catalyst layer of a PEMFC.
 The x axis extends from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p>
@@ -2507,18 +2530,9 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
-    model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
-      extends CaCL(L_x={(28.7*U.micro*U.m + 0.3*U.mm)});
-      annotation (Documentation(info="<html><p>The default thickness is the total thickness of
-  <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and
-  <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a>.</p>
-
-  <p>For more information, see the
-    <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> model.</p></html>"));
-
-    end CaCGDL;
 
   end CaCLs;
 
@@ -2555,7 +2569,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -2575,7 +2589,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
                 p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
-              k=fill((1 - epsilon)^(3/2), 3),
+              k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(1.18*U.W)),
@@ -2585,13 +2599,13 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None)),
             liquid(
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2O=true,
               H2O(V_IC=Modelica.Constants.eps*U.cc, consTransX=Conservation.IC))))
         annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
         "<html>Volumetric porosity (&epsilon;)</html>"
@@ -2976,7 +2990,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -2996,7 +3010,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
                 p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
             graphite(
               reduceTemp=true,
-              k=fill((1 - epsilon)^(3/2), 3),
+              k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
@@ -3007,13 +3021,13 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
                 rho_IC=17842.7*U.C/U.cc,
                 mu=U.S*U.cc/(1.470e-3*U.cm*0.1849*U.mol))),
             liquid(
-              k=fill(epsilon^(3/2), 3),
+              k_T=fill(epsilon^(3/2), 3),
               inclH2O=true,
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
-      // regarding the settings of k for each phase.
+      // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
         "<html>Volumetric porosity (&epsilon;)</html>"
@@ -3156,6 +3170,241 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
     end CaFP;
 
   end CaFPs;
+
+  package Integrated "Integrated layers"
+    extends Modelica.Icons.Package;
+
+    model AnCGDL "Integrated anode catalyst/gas diffusion layer"
+      extends AnCLs.AnCL(L_x={(28.7*U.micro*U.m + 0.3*U.mm)});
+      annotation (Documentation(info="<html><p>The default thickness is the total thickness of
+  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and
+  <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a>.</p>
+
+  <p>For more information, see the
+    <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> model.</p></html>"));
+
+    end AnCGDL;
+
+    model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
+      extends CaCLs.CaCL(L_x={(28.7*U.micro*U.m + 0.3*U.mm)});
+      annotation (Documentation(info="<html><p>The default thickness is the total thickness of
+  <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and
+  <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a>.</p>
+
+  <p>For more information, see the
+    <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> model.</p></html>"));
+
+    end CaCGDL;
+
+    model GDLMEA
+      "Integrated gas diffusion layers and membrane electrolyte assembly"
+      // extends FCSys.BaseClasses.Icons.Names.Top4;
+
+      extends Region(
+        L_x={0.6*U.mm + (2*28.7 + 100)*U.micro*U.m},
+        L_y={2*U.m},
+        L_z={5*U.mm},
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
+        redeclare replaceable model Subregion = Subregions.Subregion (
+            inclTransX=true,
+            inclTransY=false,
+            inclTransZ=false,
+            final inclNegative=false,
+            gas(
+              reduceVel=true,
+              reduceTemp=true,
+              k_T=fill(epsilon^(3/2), 3),
+              inclH2=true,
+              inclH2O=true,
+              inclN2=true,
+              inclO2=true,
+              H2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                p_IC=environment.p - environment.p_H2Og),
+              H2O(p_IC=environment.p_H2Og, consTransX=Conservation.IC),
+              N2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2Og)),
+
+              O2(
+                initTransX=InitTranslational.None,
+                initTransY=InitTranslational.None,
+                initTransZ=InitTranslational.None,
+                p_IC=environment.n_O2*(environment.p - environment.p_H2Og))),
+            graphite(
+              reduceTemp=true,
+              k_T=fill(((1 - epsilon))^(3/2), 3),
+              'inclC+'=true,
+              'incle-'=true,
+              'C+'(V_IC=0.83*(V - epsilonV),theta=U.m*U.K/(1.18*U.W)),
+              'e-'(mu=40*U.S*U.cc/(12*U.cm*0.1849*U.mol))),
+            ionomer(
+              k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
+              'inclC19HF37O5S-'=true,
+              'inclH+'=true,
+              'C19HF37O5S-'(V_IC=0.17*(V - epsilonV)),
+              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm))),
+            liquid(k_T=fill(epsilon^(3/2), 3)))) annotation (IconMap(
+            primitivesVisible=false));
+
+      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // regarding the settings of k_T for each phase.
+
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
+        "<html>Volumetric porosity (&epsilon;)</html>"
+        annotation (group="Geometry");
+      parameter Q.NumberAbsolute lambda_IC=14
+        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
+        annotation (Dialog(tab="Initialization"));
+
+      // Auxiliary variables (for analysis)
+      output Q.NumberAbsolute RH[n_x, n_y, n_z](
+        each stateSelect=StateSelect.never,
+        each displayUnit="%") =
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
+        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        hasSubregions "Relative humidity";
+      output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
+        if environment.analysis and hasSubregions "Dry-gas concentration of O2";
+
+    protected
+      final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
+
+      outer Conditions.Environment environment "Environmental conditions";
+
+    initial equation
+
+      annotation (Documentation(info="<html>
+<p>This is an integrated model of the gas diffusion layers and membrane electrolyte assembly of a PEMFC.
+The x axis extends from the anode to the cathode.
+The y axis extends along the length of the channel and
+the z axis extends across the width of the channel.</p>
+
+<p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+
+<p>The default thickness is the total thickness of
+  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnGDL</a>, 
+  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a>,
+  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">PEM</a>,
+  <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">CaCL</a>, and
+  <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">CaGDL</a>.</p>
+  
+<p>
+<p>Fixed assumptions:
+<ol>
+<li>There is no transport of protons; all of the electrical resistance must be cast into the electronic resistance.</li>
+<li>The reactions are governed by protons as a charge carrier.  The electronic pathway is disabled.  However, the 
+material resistivity of protons (&eta;) may be reduced to allow the protons to diffuse more readily across the depletion 
+regions on the anode and cathode sides.</li>
+</ol></p>
+
+<p>
+<p>Default assumptions (may be adjusted):
+<ol>
+<li>83% of the solid is graphite and the remainder is ionomer (by volume).  The thickness of the PEM and half of the 
+catalyst layers is 17% of the total thickness of the GDLs, catalyst layers, and PEM.</li>
+<li>All of the solid is graphite (no ionomer).</li>
+<li>There is no liquid water.</li>
+</ol></p>
+
+<p>For more information, see the
+    <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
+</html>"), Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={95.001,14.864}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={200,200,200}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={127,127,127},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={127,127,127},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={127,127,127},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={127,127,127},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
+
+    end GDLMEA;
+  end Integrated;
 
   partial model Region "Base model for a 3D array of subregions"
     import FCSys.BaseClasses.Utilities.cartWrap;
