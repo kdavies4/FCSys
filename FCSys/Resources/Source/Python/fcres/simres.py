@@ -716,14 +716,15 @@ class SimRes(SimRes):
         kJ=kilo*J
         cm = centi*m
         mm = milli*m
+        um = micro*m
         percent = centi
         M=mol/L
         cc=cm**3
         ms=milli*s
         mmol=milli*mol
         umol=micro*mol
-        self.U.update(atm=atm, kPa=kPa, cm=cm, kJ=kJ, mm=mm, M=M, cc=cc, ms=ms,
-                      mmol=mmol, umol=umol)
+        self.U.update(atm=atm, kPa=kPa, cm=cm, kJ=kJ, mm=mm, um=um, M=M, cc=cc,
+                      ms=ms, mmol=mmol, umol=umol)
         self.U.update({'%': percent})
 
 

@@ -10,7 +10,7 @@ package Subregions
 
       output Q.Pressure Deltap=subregion2.gas.N2.p - subregion1.gas.N2.p
         "Measured pressure difference";
-      output Q.Pressure Deltap_ex=-(n_y + 2)*10*U.m*environment.a[Axis.y]*
+      output Q.Pressure Deltap_ex=-(n_y + 1)*10*U.m*environment.a[Axis.y]*
           Characteristics.N2.Gas.m*subregions[round(n_y/2)].gas.N2.rho
         "Expected pressure difference";
 
@@ -34,7 +34,7 @@ package Subregions
           inclN2=true,
           N2(
             p_IC=environment.p - Deltap_IC/2,
-            consEnergy=Conservation.Dynamic,
+            consTransY=Conservation.IC,
             upstreamY=false),
           k_E=1e-8),
         graphite('inclC+'=true, 'C+'(V_IC=U.mm^3)))
@@ -47,11 +47,8 @@ package Subregions
         gas(
           each inclH2O=false,
           each inclN2=true,
-          N2(
-            p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i in
-                1:n_y},
-            each consEnergy=Conservation.Dynamic,
-            each upstreamY=false),
+          N2(p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i
+                 in 1:n_y}, each upstreamY=false),
           each k_E=1e-8),
         graphite(each 'inclC+'=true, each 'C+'(V_IC=U.mm^3)),
         each inclTransX=false,
@@ -71,26 +68,13 @@ package Subregions
         gas(
           inclH2O=false,
           inclN2=true,
-          N2(p_IC=environment.p + Deltap_IC/2, upstreamY=false),
+          N2(
+            p_IC=environment.p + Deltap_IC/2,
+            consTransY=Conservation.IC,
+            upstreamY=false),
           k_E=1e-8),
         graphite('inclC+'=true, 'C+'(V_IC=U.mm^3)))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(gas(inclN2=true,
-            N2(redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={0,-56})));
-
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(gas(inclN2=true,
-            N2(redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=180,
-            origin={0,56})));
 
     equation
       connect(subregion1.yPositive, subregions[1].yNegative) annotation (Line(
@@ -115,20 +99,6 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(BC1.face, subregion1.yNegative) annotation (Line(
-          points={{9.89443e-16,-52},{0,-48},{1.60007e-15,-46},{6.10623e-16,-46},
-              {6.10623e-16,-40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(subregion2.yPositive, BC2.face) annotation (Line(
-          points={{6.10623e-16,40},{0,44},{6.20381e-16,46},{9.75782e-18,46},{
-              9.75782e-18,52}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
@@ -136,17 +106,12 @@ package Subregions
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Documentation(info="<html><p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
-    regions with N<sub>2</sub> gas.  The initial pressure difference is zero, but a pressure difference
-    develops due to gravity.  There are some oscillations due to the pressure/translational dynamics.</p>
-      
-      <p>After about 1.5&nbsp;s, the pressure difference settles to approximately 
+    regions with N<sub>2</sub> gas.  The upper and lower boundary regions are held with zero velocity.  
+    The initial pressure difference is zero, but a pressure difference
+    develops due to gravity.  There are some oscillations due to the pressure/translational dynamics.
+    After about 1.5&nbsp;s, the pressure difference settles to 
       <i>L</i><sub>y</sub> <i>a</i><sub>y</sub> <i>m</i> &rho;
-      as expected.  The pressure gradient is not uniform due to the boundary conditions.  
-      For simplicity, the velocity is assumed to be zero at the upper and lower 
-      boundaries.  In the bulk, however, the velocity is nonzero even at steady state.  
-      At steady
-      state, advection cancels diffusion but neither is zero.
-      </p>
+      as expected.</p>
       
       <p>A temperature gradient is created due to the thermodynamics of the expanding and contracting 
       gases.  It takes much longer (about a day) for the temperatures to equalize since the gas has a
@@ -215,8 +180,8 @@ package Subregions
             reduceTemp=true,
             'C+'(initMaterial=InitScalar.Pressure),
             'e-'(
-              initEnergy=InitScalar.None,
               initTransX=InitTranslational.None,
+              initEnergy=InitScalar.None,
               sigma=1e2*U.S/U.m)),
           void=true));
 
@@ -390,62 +355,68 @@ package Subregions
         'inclH+'=true,
         inclH2=true,
         subregion(
+          inclPositive=false,
           L={0.287*U.mm,10*U.cm,10*U.cm},
-          gas(k_T={10,10,10},H2(
-              consTransX=Conservation.IC,
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always))),
+          gas(H2(consTransX=Conservation.IC, consEnergy=Conservation.IC)),
           graphite(
             reduceTemp=true,
-            'C+'(initEnergy=InitScalar.None),
+            'C+'(initMaterial=InitScalar.Pressure,consEnergy=Conservation.IC),
             'e-'(
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always),
-              initTransX=InitTranslational.None)),
-          ionomer(reduceTemp=true, 'H+'(
-              initMaterial=InitScalar.None,
-              rho_IC=184.978*U.C/U.cc,
-              T(stateSelect=StateSelect.always),
-              initEnergy=InitScalar.None))));
+              V_IC=0.25*subregion.V,
+              initTransX=InitTranslational.None,
+              initEnergy=InitScalar.None)),
+          ionomer(
+            reduceTemp=true,
+            'C19HF37O5S-'(initMaterial=InitScalar.Pressure,consEnergy=
+                  Conservation.IC),
+            'H+'(V_IC=0.25*subregion.V, initEnergy=InitScalar.None))));
 
-      /*
-  subregion.gas.H2.T
-  subregion.graphite.common.thermal.T
-  subregion.ionomer.common.thermal.T
+      //initMaterial=InitScalar.None,
+      //chemical(Ndot(start=0, fixed=true)
 
-  subregion.gas.H2.N
-  subregion.ionomer.HODL.N
-*/
-
-      //          N(stateSelect=StateSelect.always),
-      //**chemical(Ndot(start=0, fixed=true))
+      //**
 
       extends Modelica.Icons.UnderConstruction;
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows negativeBC(gas(inclH2=
-              false, H2(redeclare function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.density,
-              materialSource(y=environment.p/environment.T))), graphite(
-            'incle-'=false, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
-              normalSource(
-              height=-100*U.A,
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts negativeBC(
+        gas(inclH2=true, H2(redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+              materialSource(y=0))),
+        graphite('incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+            redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              height=-U.A/U.cm^2,
               duration=100.1,
-              startTime=0.1)))) annotation (Placement(transformation(
+              startTime=0.1))),
+        ionomer('inclH+'=true, 'H+'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
+        annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
+      //,materialSource(y=environment.p/environment.T)
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows positiveBC(ionomer(
-            'inclH+'=false, 'H+'(redeclare Modelica.Blocks.Sources.Ramp
-              normalSource(
-              height=-100*U.A,
-              duration=100.1,
-              startTime=0.1)))) annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts positiveBC(graphite(
+            'incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)),
+          ionomer('inclH+'=true,'H+'(redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+              materialSource(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
-
-      // **set density properly
 
     equation
       connect(negativeBC.face, subregion.xNegative) annotation (Line(
@@ -463,7 +434,7 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=100, Tolerance=1e-06),
+        experiment(StopTime=1e-10, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Subregions.Examples.HOR.mos"
             "Subregions.Examples.HOR.mos"),
         experimentSetupOutput);
@@ -479,7 +450,7 @@ package Subregions
         subregion(gas(H2O(p_IC=1.001*U.atm)), ionomer(inclH2O=inclH2O)));
       // In Dymola 7.4, p_IC=1.1*environment.p has no effect on the
       // initial pressure, but p_IC=1.1*U.atm does.
-
+      extends Modelica.Icons.UnderConstruction;
       // TODO: Update the EOS for H2O in ionomer and recheck the result.
       annotation (experiment(StopTime=0.003, Tolerance=1e-06), Commands(file(
               ensureTranslated=true) =
@@ -1408,10 +1379,6 @@ package Subregions
           group="Phases (click to edit)"), Placement(transformation(extent={{-10,
               -10},{10,10}})));
 
-    final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
-        gas.inclH2 "Include the hydrogen oxidation reaction";
-    parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and gas.inclO2
-         and gas.inclH2O "Include the oxygen reduction reaction";
     parameter Boolean inclNegative=true "Include the negative reaction pathway"
       annotation (
       HideResult=true,
@@ -1424,6 +1391,11 @@ package Subregions
       choices(__Dymola_checkBox=true));
 
   protected
+    final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
+        gas.inclH2 "Include the hydrogen oxidation reaction";
+    final parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and
+        gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
+
     InertExchange gasDA if gas.n_spec > 0 and not void
       "Inerface between Dalton and Amagat representations of gas"
       annotation (Placement(transformation(extent={{2,-10},{22,-30}})));
@@ -3260,6 +3232,13 @@ package Subregions
 ");
         // Note:  These must be public in Dymola 7.4, so HideResult is used.
 
+        // Aliases
+        Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = common.translational.phi
+          if n_spec > 0 and reduceVel "Velocity";
+        Q.Temperature T(each stateSelect=StateSelect.prefer) = common.thermal.T
+          if n_spec > 0 and reduceTemp "Temperature";
+        // These make the selected states more readable.
+
       protected
         final inner parameter Q.Length Lprime[Axis]=k_T .* A ./ L if n_spec > 0
           "Effective cross-sectional area per length";
@@ -3292,10 +3271,8 @@ package Subregions
         Connectors.InertInternal common(
           final n_trans=n_trans,
           final inclTranslational=reduceVel,
-          final inclThermal=reduceTemp,
-          translational(phi(each stateSelect=StateSelect.prefer)),
-          thermal(T(stateSelect=StateSelect.prefer))) if n_spec > 0 and (
-          reduceVel or reduceTemp)
+          final inclThermal=reduceTemp) if n_spec > 0 and (reduceVel or
+          reduceTemp)
           "Connector to directly couple velocities or temperatures within the phase"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 origin={26,-34}), iconTransformation(extent={{-10,-10},{10,10}},
@@ -3324,50 +3301,58 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end EmptyPhase;
 
@@ -3795,7 +3780,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Gas (n_v=
-                    {0,0},b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
+                    {0,0}, b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
 
             final tauprime=0,
             redeclare parameter Q.Mobility mu=Data.mu(),
@@ -3805,8 +3790,11 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
 
+            consMaterial=Conservation.IC,
             invertEOS=false,
-            initMaterial=InitScalar.None);
+            initMaterial=InitScalar.Volume);
+
+          //        final theta=Modelica.Constants.inf,
 
           // **recreate Ionomer H+ Characteristics model, use it here
 
@@ -5908,19 +5896,22 @@ Choose any condition besides None.");
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
-        Icon(graphics={Rectangle(
-                  extent={{-98,80},{98,120}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-98,80},{98,120}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+        Icon(graphics={
+            Rectangle(
+              extent={{-98,80},{98,120}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Ellipse(
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-98,80},{98,120}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"

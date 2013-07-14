@@ -26,6 +26,5 @@ FCSys.BaseClasses.Utilities.plot6(
    y5=cat(1,
             {"subregion1.gas.N2.h", "subregion1.gas.N2.chemical.mu"},
             if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.mu" for j in 1:n_y},
-            {"subregion2.gas.N2.h", "subregion2.gas.N2.chemical.mu"}));
-
-FCSys.BaseClasses.Utilities.plot6(y6={"Deltap", "Deltap_ex"});
+            {"subregion2.gas.N2.h", "subregion2.gas.N2.chemical.mu"}),
+   y6={"Deltap", "Deltap_ex"});
