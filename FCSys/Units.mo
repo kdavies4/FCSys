@@ -1258,7 +1258,7 @@ encompass other systems of units.</p>
     output Q.PressureAbsolute p "Absolute pressure";
 
   algorithm
-    p := p_kPag*kPa + atm annotation (Inline=true,inverse(p_kPag=to_kPag(p)));
+    p := p_kPag*kPa + atm annotation (Inline=true, inverse(p_kPag=to_kPag(p)));
 
   end from_kPag;
 

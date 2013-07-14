@@ -121,25 +121,21 @@ package BaseClasses "Base classes (generally not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-100},{-100,100},{100,100},{100,-100}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-100},{100,-100}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,100},{100,-100}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-100},{-100,100},{100,100},{100,-100}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-100},{100,-100}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Single;
 
@@ -174,6 +170,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       "Icons labeled with the name of the class at various positions"
       extends Modelica.Icons.Package;
       partial class Top12
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,240},{100,280}},
@@ -183,6 +180,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top12;
 
       partial class Top11
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,220},{100,260}},
@@ -192,6 +190,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top11;
 
       partial class Top10
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,200},{100,240}},
@@ -201,6 +200,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top10;
 
       partial class Top9
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,180},{100,220}},
@@ -210,6 +210,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top9;
 
       partial class Top8
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,160},{100,200}},
@@ -219,6 +220,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top8;
 
       partial class Top7
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,140},{100,180}},
@@ -228,6 +230,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top7;
 
       partial class Top6
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,120},{100,160}},
@@ -237,6 +240,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top6;
 
       partial class Top5
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,100},{100,140}},
@@ -246,6 +250,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top5;
 
       partial class Top4
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                 extent={{-100,80},{100,120}},
@@ -255,6 +260,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top4;
 
       partial class Top3
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                 extent={{-100,60},{100,100}},
@@ -264,6 +270,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top3;
 
       partial class Top2
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                 extent={{-100,40},{100,80}},
@@ -273,6 +280,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top2;
 
       partial class Top1
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                 extent={{-100,20},{100,60}},
@@ -282,6 +290,7 @@ package BaseClasses "Base classes (generally not for direct use)"
       end Top1;
 
       partial class Middle
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-100,-20},{100,20}},

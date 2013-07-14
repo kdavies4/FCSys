@@ -43,7 +43,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               graphite('incle-'=true, 'e-'(redeclare
                   Modelica.Blocks.Sources.Ramp materialSpec(height=-10000*U.A,
                     duration=500))))) annotation (__Dymola_choicesFromPackage=
-              true, Placement(transformation(extent={{-16,-16},{16,16}})));
+              true,Placement(transformation(extent={{-16,-16},{16,16}})));
 
         replaceable Cells.Cell cell "Fuel cell" annotation (
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
@@ -448,43 +448,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}),
+            initialScale=0.1), graphics={Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -638,43 +632,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}));
+            initialScale=0.1), graphics={Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}));
     end SimpleCell;
 
     model VerySimpleCell
@@ -811,43 +799,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}));
+            initialScale=0.1), graphics={Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}));
     end VerySimpleCell;
   end Cells;
   annotation (Documentation(info="

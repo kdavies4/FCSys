@@ -1,13 +1,13 @@
 // Setup
 removePlots();
-createPlot(filename = "SubregionHOR.mat");
+createPlot(filename = "HOR.mat");
 FCSys.BaseClasses.Utilities.plot6(
     y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"},
     y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},
     y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"},
     y4={"subregion.graphite.'C+'.T", "subregion.ionomer.'C19HF37O5S-'.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"},
-    y5={"subregion.graphite.HOR.reaction.mu", "subregion.ionomer.HOR.reaction.mu", "subregion.gas.HOR.reaction.mu", "subregion.graphite.depletionHOR.chemical.mu", "subregion.ionomer.depletionHOR.chemical.mu", "subregion.reaction.chemical.mu"},
-    y6 = {"subregion.reaction.chemical.Ndot"});
+    y5={"subregion.graphite.HOR.electrochem.mu", "subregion.ionomer.HOR.electrochem.mu", "subregion.gas.negHOR.electrochem.mu", "subregion.gas.posHOR.electrochem.mu", "subregion.graphite.HOL.electrical.mu", "subregion.ionomer.HOL.electrical.mu"},
+    y6 = {"subregion.graphite.HOL.electrical.Ndot", "subregion.ionomer.HOL.electrical.Ndot"});
 
 createPlot(id = 4,
  position = {220, 0, 440, 650},

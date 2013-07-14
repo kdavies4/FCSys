@@ -112,6 +112,7 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
+
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_iv;
@@ -665,6 +666,7 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
+
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test;
@@ -1118,6 +1120,7 @@ package Figures "Graphical layouts for documentation"
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
             color={255,195,38},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},

@@ -32,7 +32,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -276,8 +276,8 @@ package Characteristics
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
      <li>The default specific volume (<code>v=U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
-  at 300 K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
-  are (also at 300 K and based on the same reference) are:
+  at 300&nbsp;K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
+  are (also at 300&nbsp;K and based on the same reference) are:
   <ul>
        <li>Amorphous carbon:  <code>v=U.cc*m/(1.950*U.g)</code></li>
        <li>Diamond (type IIa):  <code>v=U.cc*m/(3.500*U.g)</code></li>
@@ -360,8 +360,11 @@ package Characteristics
         final formula="e-",
         phase=Phase.Gas,
         m=Data.MM*U.kg/U.mol,
+        referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
+        h_offset=H2.Gas.Deltah0_f/2 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(
+            298.15*U.K)/2),
         T_lim_c={200.000,20000.000}*U.K,
         b_c={Data.alow} .* fill({U.K^(3 - i) for i in 1:size(Data.alow, 1)},
             size(T_lim_c, 1) - 1),
@@ -372,6 +375,10 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
+     <li>The default reference enthalpy is such that the specific Gibbs energy of e<sup>-</sup> is in equilibrium with 
+     hydrogen gas with zero electrical potential from protons at 25&nbsp;&deg;C and reference pressure (1&nbsp;bar), i.e.,
+     H<sub>2</sub>&nbsp;&#8652;&nbsp;2H<sup>+</sup>&nbsp;+&nbsp;2e<sup>-</sup> is at equilibrium at constant
+     pressure and temperature.</li>
      <li>The specific electron mass (<code>m</code>) is also given by the
      constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
      <code>2*R_inf*h/(q*c*alpha^2)</code>
@@ -381,19 +388,19 @@ package Characteristics
      <code>R_inf*25812.8074434^2/(k_J*c*(pi*1e-7*299792458)^2)</code> in terms of the base constants.</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
-  contain only one temperature range (2000 to 5000 K) which is beyond the expected operating range of the model.</li>
+  contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
   <li>
      <li>The equation for the radius is the classical radius of an electron (see
   <a href=\"http://en.wikipedia.org/wiki/Classical_electron_radius\">http://en.wikipedia.org/wiki/Classical_electron_radius</a>).</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
-  contain only one temperature range (2000 to 5000 K) which is beyond the expected operating range of the model.</li>
+  contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
   <li>
   The thermodynamic data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] splits the correlations into three
   temperature ranges, but the coefficients are the same for each.
    Therefore, the temperature limits are set here such that the entire
    range is handled without switching.  The lower temperature limit
-   in the source data is 298.150 K, but here it is expanded down to 200 K.
+   in the source data is 298.150&nbsp;K, but here it is expanded down to 200&nbsp;K.
    The constants are independent of temperature anyway.
   </li>
 </ul></p>
@@ -415,6 +422,8 @@ package Characteristics
         phase=Phase.Gas,
         final m=Data.MM*U.kg/U.mol,
         referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
+        h_offset=H2.Gas.Deltah0_f/2 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(
+            298.15*U.K)/2),
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         n_c=-2,
@@ -435,18 +444,25 @@ package Characteristics
 
      <p>Additional notes:
      <ul>
-     <li>The source data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] breaks the data into three
+     <li>The default reference enthalpy is such that the specific Gibbs energy of H<sup>+</sup> is in equilibrium with 
+     hydrogen gas with zero electrical potential from electrons at 25&nbsp;&deg;C and reference pressure (1&nbsp;bar), i.e.,
+     H<sub>2</sub>&nbsp;&#8652;&nbsp;2H<sup>+</sup>&nbsp;+&nbsp;2e<sup>-</sup> is at equilibrium at constant
+     pressure and temperature.</li>
+     <li>The source data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] breaks the 
+     data into three
    temperature ranges, but the constants are the same for each.
    Therefore, the temperature limits are set here such that the entire
    range is handled without switching.
    The lower temperature limit in the source data
-   is 298.150 K, but here it is expanded down to 200 K.  The constants are
+   is 298.150&nbsp;K, but here it is expanded down to 200&nbsp;K.  The constants are
    independent of temperature anyway.</li>
-   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O (H<sub>2</sub>O &#8640; OH<sup>-</sup> + H<sup>+</sup>) is
-   -96569.804 J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
-   (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
+   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O 
+   (H<sub>2</sub>O&nbsp;&#8640;&nbsp;OH<sup>-</sup>&nbsp;+&nbsp;H<sup>+</sup>) is
+   -96569.804&nbsp;J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
+   (H<sub>3</sub>O<sup>+</sup>&nbsp;&#8640;&nbsp;H<sub>2</sub>O&nbsp;+&nbsp;H<sup>+</sup>) is 
+   839826.0&nbsp;J/mol.  Based on
    [<a href=\"modelica://FCSys.UsersGuide.References\">Tissandier1998</a>], the
-   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol.</li>
+   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3&nbsp;J/mol.</li>
      </ul></p>
 
 <p>For more information, see the
@@ -601,7 +617,7 @@ package Characteristics
 <p>Additional notes:
      <ul>
      <li>See note in <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
-     <li>The default specific volume (<code>b_v=[U.cc*m/(0.99656*U.g)]</code>) is at 300 K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
+     <li>The default specific volume (<code>b_v=[U.cc*m/(0.99656*U.g)]</code>) is at 300&nbsp;K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
      </ul></p>
 
 <p>For more information, see the
@@ -887,7 +903,7 @@ package Characteristics
         import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity";
 
       protected
@@ -963,7 +979,7 @@ package Characteristics
         "<html>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.CapacityThermalSpecific c_v "Isochoric specific heat capacity";
 
       algorithm
@@ -988,7 +1004,7 @@ package Characteristics
       function g "Gibbs potential as a function of temperature and pressure"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.Potential g "Gibbs potential";
 
       algorithm
@@ -1000,7 +1016,7 @@ package Characteristics
         import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.Potential h "Specific enthalpy";
 
       protected
@@ -1106,7 +1122,7 @@ package Characteristics
         import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.NumberAbsolute s "Specific entropy";
 
       protected
@@ -1209,7 +1225,7 @@ package Characteristics
         "<html>Dynamic compressibility (&beta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
         output Q.Fluidity beta "Dynamic compressibility";
 
@@ -1232,7 +1248,7 @@ package Characteristics
         "<html>Fluidity (&zeta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
         output Q.Fluidity zeta "Fluidity";
 
@@ -1269,7 +1285,7 @@ package Characteristics
         "<html>Material resistivity (&eta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.ResistivityMaterial eta "Material resistivity";
 
       algorithm
@@ -1298,7 +1314,7 @@ package Characteristics
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
@@ -1326,7 +1342,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.PressureAbsolute p=p0 "Pressure";
         output Q.PressureReciprocal kappa "Isothermal compressibility";
 
       algorithm
@@ -1349,7 +1365,7 @@ package Characteristics
         "<html>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.TimeAbsolute tauprime "Phase change interval";
 
       algorithm
@@ -1382,7 +1398,7 @@ package Characteristics
         "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.Mobility mu "Mobility";
 
       algorithm
@@ -1409,7 +1425,7 @@ package Characteristics
         "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.TimeAbsolute nu "Thermal independity";
 
       algorithm
@@ -1462,7 +1478,7 @@ temperature difference.</p>
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
-    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure
+    25&nbsp;&deg;C is the specific enthalpy of formation at that temperature and reference pressure
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
 
@@ -1473,9 +1489,9 @@ temperature difference.</p>
     have <i>n</i> + 1 entries.</li>
 
     <li>The reference pressure is <code>p0</code>.   In the
-    NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1 bar for gases and 1 atm for condensed
+    NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <code>p0</code>.
-    For example, the enthalpy of a non-ideal (real) gas at 25 &deg;C and <code>p0</code> with
+    For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <code>p0</code> with
     <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.</li>
 
     <li>If the material is gaseous (<code>phase == Phase.Gas</code>), then the first virial coefficient

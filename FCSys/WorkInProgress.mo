@@ -58,35 +58,26 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
-  annotation (Commands(file="../../units.mos"
-        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
-        file="test/check.mos"
-        "Check all of FCSys using Dymola's check function."));
 
   model CellModelica
     "<html>Cell interfaced to components from the <a href=\"modelica://Modelica\">Modelica</a> package</html>"
@@ -152,4 +143,8 @@ package WorkInProgress "Incomplete classes under development"
     Modelica.Utilities.System.command("loadres");
 
   end plot;
+  annotation (Commands(file="../../units.mos"
+        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
+        file="test/check.mos"
+        "Check all of FCSys using Dymola's check function."));
 end WorkInProgress;

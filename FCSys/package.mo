@@ -24,6 +24,8 @@ import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
 
+// **Use lowercase for all elements of all enumerations.
+
 // TODO:  Use getInstanceName() to improve assertions and other messages
 // once it is better supported (new in Modelica 3.3).
 
@@ -498,7 +500,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Takenaka1990\" class=bookmark>Takenaka1990</a>]</td>
-      <td valign=top class=noBorder>M. Takenaka and R. Masui, \"<a href=\"http://iopscience.iop.org/0026-1394/27/4/001\">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0 &deg;C&ndash;85&deg;C</a>,\" <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
+      <td valign=top class=noBorder>M. Takenaka and R. Masui, \"<a href=\"http://iopscience.iop.org/0026-1394/27/4/001\">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0&nbsp;&deg;C&ndash;85&deg;C</a>,\" <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Tissandier1998\" class=bookmark>Tissandier1998</a>]</td>
@@ -1106,6 +1108,19 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (
