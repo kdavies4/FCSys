@@ -355,13 +355,13 @@ package Subregions
         'inclH+'=true,
         inclH2=true,
         subregion(
-          inclPositive=false,
           L={0.287*U.mm,10*U.cm,10*U.cm},
           gas(H2(consTransX=Conservation.IC, consEnergy=Conservation.IC)),
           graphite(
             reduceTemp=true,
             'C+'(initMaterial=InitScalar.Pressure,consEnergy=Conservation.IC),
             'e-'(
+              eta=1e10*U.cm^2/(U.V*U.s),
               V_IC=0.25*subregion.V,
               initTransX=InitTranslational.None,
               initEnergy=InitScalar.None)),
@@ -369,7 +369,10 @@ package Subregions
             reduceTemp=true,
             'C19HF37O5S-'(initMaterial=InitScalar.Pressure,consEnergy=
                   Conservation.IC),
-            'H+'(V_IC=0.25*subregion.V, initEnergy=InitScalar.None))));
+            'H+'(
+              eta=1e18*U.cm^2/(U.V*U.s),
+              V_IC=0.25*subregion.V,
+              initEnergy=InitScalar.None))));
 
       //initMaterial=InitScalar.None,
       //chemical(Ndot(start=0, fixed=true)
@@ -379,10 +382,14 @@ package Subregions
       extends Modelica.Icons.UnderConstruction;
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts negativeBC(
-        gas(inclH2=true, H2(redeclare function materialSpec =
+        gas(inclH2=true, H2(materialSource(y=environment.p/environment.T))),
+        graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          'C+'(redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-              materialSource(y=0))),
-        graphite('incle-'=true, 'e-'(
+              materialSource(y=0)),
+          'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -392,7 +399,7 @@ package Subregions
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1))),
-        ionomer('inclH+'=true, 'H+'(
+        ionomer('inclH+'=false, 'H+'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -402,18 +409,22 @@ package Subregions
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
-      //,materialSource(y=environment.p/environment.T)
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts positiveBC(graphite(
-            'incle-'=true, 'e-'(
+            'incle-'=false, 'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)),
-          ionomer('inclH+'=true,'H+'(redeclare function materialSpec =
+          ionomer('inclH+'=true,'H+'(
+            redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-              materialSource(y=0)))) annotation (Placement(transformation(
+            materialSource(y=0),
+            redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              height=-50*U.A,
+              duration=100.1,
+              startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -2532,12 +2543,12 @@ package Subregions
           points={{-3.9,-13},{-10,-6},{-10,30},{-16,30}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(HOL.majority, 'e-'.faces[1, Side.p]) annotation (Line(
+      connect(HOL.majority, 'e-'.faces[1, Side.n]) annotation (Line(
           points={{-10,78},{-50,78},{-50,-20},{5.55112e-16,-20}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(HOL.minority, 'e-'.faces[1, Side.n]) annotation (Line(
+      connect(HOL.minority, 'e-'.faces[1, Side.p]) annotation (Line(
           points={{10,78},{50,78},{50,-20},{5.55112e-16,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2558,11 +2569,11 @@ package Subregions
           points={{-3.9,-13},{-10,-6},{-10,10},{-16,10}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(ORL.majority, 'e-'.faces[1, Side.n]) annotation (Line(
+      connect(ORL.majority, 'e-'.faces[1, Side.p]) annotation (Line(
           points={{10,58},{50,58},{50,-20},{5.55112e-16,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(ORL.minority, 'e-'.faces[1, Side.p]) annotation (Line(
+      connect(ORL.minority, 'e-'.faces[1, Side.n]) annotation (Line(
           points={{-10,58},{-50,58},{-50,-20},{5.55112e-16,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2691,6 +2702,7 @@ package Subregions
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -3662,7 +3674,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             final tauprime=0,
             final mu=sigma*v,
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-            redeclare final parameter Q.Mobility eta=Data.eta(),
+            redeclare parameter Q.Mobility eta=Data.eta(),
             redeclare final parameter Q.Fluidity beta=0,
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
             final theta=Modelica.Constants.inf,
@@ -3785,8 +3797,8 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             final tauprime=0,
             redeclare parameter Q.Mobility mu=Data.mu(),
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-            redeclare final parameter Q.Mobility eta=Data.eta(),
-            redeclare final parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Mobility eta=Data.eta(),
+            redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
 
