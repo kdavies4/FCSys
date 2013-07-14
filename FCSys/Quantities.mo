@@ -109,107 +109,89 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/Resources/quantities.xls, 2013-6-10
-  type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
-  type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
-  type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
+  // Generated from FCSys/Resources/quantities.xls, 2013-7-14
+  type Acceleration = TypeReal (final unit="l/T2");
+  type Amount = TypeReal (final unit="N", min=0);
+  type AmountReciprocal = TypeReal (final unit="1/N", min=0)
     "Reciprocal of amount";
-  type Angle = Modelica.Icons.TypeReal (final unit="A");
-  type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
-  type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
-  type AreaSpecific = Modelica.Icons.TypeReal (final unit="l2/N", min=0)
-    "Specific area";
-  type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
-  type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
-          "N2.T/(l2.m)", min=0) "Electrical conductance";
-  type Current = Modelica.Icons.TypeReal (final unit="N/T");
-  type CurrentAbsolute = Modelica.Icons.TypeReal (final unit="N/T", min=0)
-    "Absolute current";
-  type CurrentAreic = Modelica.Icons.TypeReal (final unit="N/(l2.T)")
-    "Areic current";
-  type CurrentAreicAbsolute = Modelica.Icons.TypeReal (final unit="N/(l2.T)",
-        min=0) "Absolute areic current";
-  type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
-    "Rate of current";
-  type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);
-  type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)")
-    "Rate of density";
-  type Diffusivity = Modelica.Icons.TypeReal (final unit="l2/T", min=0);
-  type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
-  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
-  type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
-  type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
-  type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
-  type Length = Modelica.Icons.TypeReal (final unit="l", min=0);
-  type LengthSpecific = Modelica.Icons.TypeReal (final unit="l/N", min=0)
-    "Specific length";
-  type MagneticFlux = Modelica.Icons.TypeReal (final unit="l2.m/(A.N.T)")
-    "Magnetic flux";
-  type MagneticFluxAreic = Modelica.Icons.TypeReal (final unit="m/(A.N.T)")
+  type Angle = TypeReal (final unit="A");
+  type Angle2 = TypeReal (final unit="A2") "Solid angle";
+  type Area = TypeReal (final unit="l2", min=0);
+  type AreaSpecific = TypeReal (final unit="l2/N", min=0) "Specific area";
+  type Capacitance = TypeReal (final unit="N2.T2/(l2.m)", min=0);
+  type ConductanceElectrical = TypeReal (final unit="N2.T/(l2.m)", min=0)
+    "Electrical conductance";
+  type ConductivityElectrical = TypeReal (final unit="N2.T/(l3.m)", min=0)
+    "Electrical conductivity";
+  type Current = TypeReal (final unit="N/T");
+  type CurrentAreic = TypeReal (final unit="N/(l2.T)") "Areic current";
+  type CurrentAreicAbsolute = TypeReal (final unit="N/(l2.T)", min=0)
+    "Absolute areic current";
+  type CurrentRate = TypeReal (final unit="N/T2") "Rate of current";
+  type Density = TypeReal (final unit="N/l3", min=0);
+  type DensityRate = TypeReal (final unit="N/(l3.T)") "Rate of density";
+  type Diffusivity = TypeReal (final unit="l2/T", min=0);
+  type Energy = TypeReal (final unit="l2.m/T2");
+  type Fluidity = TypeReal (final unit="l.T/m", min=0);
+  type Force = TypeReal (final unit="l.m/T2");
+  type Frequency = TypeReal (final unit="A/T");
+  type Inductance = TypeReal (final unit="l2.m/N2", min=0);
+  type Length = TypeReal (final unit="l", min=0);
+  type LengthSpecific = TypeReal (final unit="l/N", min=0) "Specific length";
+  type MagneticFlux = TypeReal (final unit="l2.m/(A.N.T)") "Magnetic flux";
+  type MagneticFluxAreic = TypeReal (final unit="m/(A.N.T)")
     "Areic magnetic flux";
-  type MagneticFluxReciprocal = Modelica.Icons.TypeReal (final unit=
-          "A.N.T/(l2.m)") "Reciprocal of magnetic flux";
-  type Mass = Modelica.Icons.TypeReal (final unit="m", min=0);
-  type MassSpecific = Modelica.Icons.TypeReal (final unit="m/N", min=0)
-    "Specific mass";
-  type MassVolumic = Modelica.Icons.TypeReal (final unit="m/l3", min=0)
-    "Volumic mass";
-  type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
-  type MomentumRotational = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
+  type MagneticFluxReciprocal = TypeReal (final unit="A.N.T/(l2.m)")
+    "Reciprocal of magnetic flux";
+  type Mass = TypeReal (final unit="m", min=0);
+  type MassSpecific = TypeReal (final unit="m/N", min=0) "Specific mass";
+  type MassVolumic = TypeReal (final unit="m/l3", min=0) "Volumic mass";
+  type Mobility = TypeReal (final unit="N.T/m", min=0);
+  type MomentumRotational = TypeReal (final unit="l2.m/(A.T)")
     "Rotational momentum";
-  type Number = Modelica.Icons.TypeReal (final unit="1");
-  type NumberAbsolute = Modelica.Icons.TypeReal (final unit="1", min=0)
-    "Absolute number";
-  type Permeability = Modelica.Icons.TypeReal (final unit="l.m/N2", min=0);
-  type Permittivity = Modelica.Icons.TypeReal (final unit="N2.T2/(l3.m)", min=0);
-  type PermittivityReciprocal = Modelica.Icons.TypeReal (final unit=
-          "l3.m/(N2.T2)", min=0) "Reciprocal of permittivity";
-  type Potential = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)");
-  type PotentialAbsolute = Modelica.Icons.TypeReal (final unit="l2.m/(N.T2)",
-        min=0) "Absolute potential";
-  type PotentialLineic = Modelica.Icons.TypeReal (final unit="l.m/(N.T2)")
-    "Lineic potential";
-  type PotentialPerWavenumber = Modelica.Icons.TypeReal (final unit=
-          "l3.m/(A.N.T2)") "Potential per wavenumber";
-  type PotentialRate = Modelica.Icons.TypeReal (final unit="l2.m/(N.T3)")
-    "Rate of potential";
-  type Power = Modelica.Icons.TypeReal (final unit="l2.m/T3");
-  type PowerArea = Modelica.Icons.TypeReal (final unit="l4.m/T3")
-    "Power times area";
-  type PowerAreic = Modelica.Icons.TypeReal (final unit="m/T3") "Areic power";
-  type PowerAreicPerPotential4 = Modelica.Icons.TypeReal (final unit="m.T5/l8")
+  type Number = TypeReal (final unit="1");
+  type NumberAbsolute = TypeReal (final unit="1", min=0) "Absolute number";
+  type Permeability = TypeReal (final unit="l.m/N2", min=0);
+  type Permittivity = TypeReal (final unit="N2.T2/(l3.m)", min=0);
+  type PermittivityReciprocal = TypeReal (final unit="l3.m/(N2.T2)", min=0)
+    "Reciprocal of permittivity";
+  type Potential = TypeReal (final unit="l2.m/(N.T2)");
+  type PotentialAbsolute = TypeReal (final unit="l2.m/(N.T2)", min=0)
+    "Absolute potential";
+  type PotentialLineic = TypeReal (final unit="l.m/(N.T2)") "Lineic potential";
+  type PotentialPerWavenumber = TypeReal (final unit="l3.m/(A.N.T2)")
+    "Potential per wavenumber";
+  type PotentialRate = TypeReal (final unit="l2.m/(N.T3)") "Rate of potential";
+  type Power = TypeReal (final unit="l2.m/T3");
+  type PowerArea = TypeReal (final unit="l4.m/T3") "Power times area";
+  type PowerAreic = TypeReal (final unit="m/T3") "Areic power";
+  type PowerAreicPerPotential4 = TypeReal (final unit="m.T5/l8")
     "Areic power per 4th power of potential";
-  type PowerRadiant = Modelica.Icons.TypeReal (final unit="l2.m/(A2.T3)")
-    "Radiant power";
-  type Pressure = Modelica.Icons.TypeReal (final unit="m/(l.T2)");
-  type PressureAbsolute = Modelica.Icons.TypeReal (final unit="m/(l.T2)", min=0)
+  type PowerRadiant = TypeReal (final unit="l2.m/(A2.T3)") "Radiant power";
+  type Pressure = TypeReal (final unit="m/(l.T2)");
+  type PressureAbsolute = TypeReal (final unit="m/(l.T2)", min=0)
     "Absolute pressure";
-  type PressureRate = Modelica.Icons.TypeReal (final unit="m/(l.T3)")
-    "Rate of pressure";
-  type PressureReciprocal = Modelica.Icons.TypeReal (final unit="l.T2/m", min=0)
+  type PressureRate = TypeReal (final unit="m/(l.T3)") "Rate of pressure";
+  type PressureReciprocal = TypeReal (final unit="l.T2/m", min=0)
     "Reciprocal of pressure";
-  type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
-        min=0) "Electrical resistance";
-  type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);
-  type ResistivityMaterial = Modelica.Icons.TypeReal (final unit="T/l2", min=0)
+  type ResistanceElectrical = TypeReal (final unit="l2.m/(N2.T)", min=0)
+    "Electrical resistance";
+  type Resistivity = TypeReal (final unit="l.T/N", min=0);
+  type ResistivityMaterial = TypeReal (final unit="T/l2", min=0)
     "Material resistivity";
-  type Time = Modelica.Icons.TypeReal (final unit="T");
-  type TimeAbsolute = Modelica.Icons.TypeReal (final unit="T", min=0)
-    "Absolute time";
-  type TimeLineic = Modelica.Icons.TypeReal (final unit="T/l") "Lineic time";
-  type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
-  type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
-    "Squared velocity";
-  type Volume = Modelica.Icons.TypeReal (final unit="l3", min=0);
-  type VolumeRate = Modelica.Icons.TypeReal (final unit="l3/T")
-    "Rate of volume";
-  type VolumeSpecific = Modelica.Icons.TypeReal (final unit="l3/N")
-    "Specific volume";
-  type VolumeSpecificAbsolute = Modelica.Icons.TypeReal (final unit="l3/N", min
-        =0) "Absolute specific volume";
-  type VolumeSpecificRate = Modelica.Icons.TypeReal (final unit="l3/(N.T)")
+  type Time = TypeReal (final unit="T");
+  type TimeAbsolute = TypeReal (final unit="T", min=0) "Absolute time";
+  type TimeLineic = TypeReal (final unit="T/l") "Lineic time";
+  type Velocity = TypeReal (final unit="l/T");
+  type Velocity2 = TypeReal (final unit="l2/T2") "Squared velocity";
+  type Volume = TypeReal (final unit="l3", min=0);
+  type VolumeRate = TypeReal (final unit="l3/T") "Rate of volume";
+  type VolumeSpecific = TypeReal (final unit="l3/N") "Specific volume";
+  type VolumeSpecificAbsolute = TypeReal (final unit="l3/N", min=0)
+    "Absolute specific volume";
+  type VolumeSpecificRate = TypeReal (final unit="l3/(N.T)")
     "Rate of specific volume";
-  type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
+  type Wavenumber = TypeReal (final unit="A/l");
 
   // -------- end from FCSys/Resources/quantities.xls
 

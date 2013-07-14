@@ -135,11 +135,11 @@ package Subregions
           StopTime=1.5,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Documentation(info="<html><p>This is a model of a vertical column of 10 &times; 10 &times; 10 m
+        Documentation(info="<html><p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
     regions with N<sub>2</sub> gas.  The initial pressure difference is zero, but a pressure difference
     develops due to gravity.  There are some oscillations due to the pressure/translational dynamics.</p>
       
-      <p>After about 1.5 s, the pressure difference settles to approximately 
+      <p>After about 1.5&nbsp;s, the pressure difference settles to approximately 
       <i>L</i><sub>y</sub> <i>a</i><sub>y</sub> <i>m</i> &rho;
       as expected.  The pressure gradient is not uniform due to the boundary conditions.  
       For simplicity, the velocity is assumed to be zero at the upper and lower 
@@ -217,7 +217,7 @@ package Subregions
             'e-'(
               initEnergy=InitScalar.None,
               initTransX=InitTranslational.None,
-              mu=0.1*U.mm^2/(U.V*U.s))),
+              sigma=1e2*U.S/U.m)),
           void=true));
 
       // **Integrate the value of mu into the e- model... cast in terms of resistivity?
@@ -246,7 +246,7 @@ package Subregions
           'inclC+'=true,
           'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              normalSource(y=-U.A/U.mm^2)),
+              normalSource(y=-5*U.A/U.cm^2)),
           'C+'(redeclare function thermalSpec =
                 Conditions.ByConnector.Face.Single.Thermal.temperature,
               thermalSource(y=environment.T)))) annotation (Placement(
@@ -275,8 +275,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -286,20 +286,20 @@ package Subregions
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"
             "Subregions.Examples.ElectricalConduction.mos"),
-        Documentation(info="<html><p>This is an example of Ohm's law.  The subregion contains
-    carbon (C<sup>+</sup>) and electrons.  An electrical current of 1 A is delivered into
+        Documentation(info="<html><p>This is an example of Ohm's law.  The 1&nbsp;cm &times; 1&nbsp;mm &times; 1&nbsp;mm subregion contains
+    carbon (C<sup>+</sup>) and electrons.  An electrical current of 50&nbsp;mA (5&nbsp;A/cm<sup>2</sup>) is delivered into
     the negative boundary and exits the positive boundary.  Due to the finite mobility of
     the electrons a force is required to support the current; this maps directly to
     electrical potential.  The example shows that the measured resistance is
-    <i>R</i> = <i>L</i>/(<i>A</i> <i>&rho;</i> &mu;) as expected, where &rho; is electronic
+    <i>R</i>&nbsp;=&nbsp;<i>L</i>/(<i>A</i>&nbsp;<i>&rho;</i>&nbsp;&mu;) as expected, where &rho; is electronic
     density and &mu; is electronic mobility.</p>
 
     <p>The measured rate of heat generation (<code>subregion.graphite.'e-'.Edot_DT</code>)
     is equal to <i>P</i> = (<i>zI</i>)<sup>2</sup> <i>R</i> as expected, where
-    <i>zI</i> = 1 A is the electrical current.  This heat is conducted through the carbon
-    to the boundaries, which are held at 25 &deg;C.  The measured steady state temperature
-    is <i>T</i> = <i>T</i><sub>0</sub> + &theta; <i>L</i> <i>P</i>/(4 <i>A</i>) as expected, where
-    <i>T</i><sub>0</sub> = 25 &deg;C is the boundary temperature and
+    <i>zI</i> = 50&nbsp;mA is the electrical current.  This heat is conducted through the carbon
+    to the boundaries, which are held at 25&nbsp;&deg;C.  The measured steady state temperature
+    is <i>T</i>&nbsp;=&nbsp;<i>T</i><sub>0</sub>&nbsp;+&nbsp;&theta;&nbsp;<i>L</i>&nbsp;<i>P</i>/(4&nbsp;<i>A</i>) as expected, where
+    <i>T</i><sub>0</sub>&nbsp;=&nbsp;25&nbsp;&deg;C is the boundary temperature and
     &theta; is the thermal resistance.  The factor of one fourth
     is due to the boundary conditions; the conduction length is half of the total length
     and the heat is rejected to both sides.  There is no thermal convection or 
@@ -359,8 +359,8 @@ package Subregions
 
       annotation (
         Documentation(info="<html><p>Initially, the water vapor is below saturation and liquid water is present.
-  Some of the liquid evaporates until saturation is reached.  Then from 1 to 2 s additional water vapor is injected from the negative boundary
-  and some of it condenses.  All of this occurs at a fixed temperature (25 &deg;C).</p></html>"),
+  Some of the liquid evaporates until saturation is reached.  Then from 1&nbsp;to&nbsp;2&nbsp;s additional water vapor is injected from the negative boundary
+  and some of it condenses.  All of this occurs at a fixed temperature (25&nbsp;&deg;C).</p></html>"),
 
         experiment(StopTime=3, Tolerance=1e-06),
         Commands(file(ensureTranslated=true) =
@@ -423,10 +423,10 @@ package Subregions
       extends Modelica.Icons.UnderConstruction;
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows negativeBC(gas(inclH2=
-              true, H2(redeclare function materialSpec =
+              false, H2(redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.density,
               materialSource(y=environment.p/environment.T))), graphite(
-            'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
+            'incle-'=false, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
               normalSource(
               height=-100*U.A,
               duration=100.1,
@@ -436,7 +436,7 @@ package Subregions
             origin={-24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows positiveBC(ionomer(
-            'inclH+'=true, 'H+'(redeclare Modelica.Blocks.Sources.Ramp
+            'inclH+'=false, 'H+'(redeclare Modelica.Blocks.Sources.Ramp
               normalSource(
               height=-100*U.A,
               duration=100.1,
@@ -839,8 +839,8 @@ package Subregions
         sT=3000*U.K,
         redeclare Modelica.Blocks.Sources.Ramp source(duration=100, height=100*
               U.A)) constrainedby Conditions.ByConnector.Chemical.Current(sT=
-            3000*FCSys.Units.K, redeclare Modelica.Blocks.Sources.Ramp source(
-            duration=100, height=-100*FCSys.Units.A))
+            3000*U.K, redeclare Modelica.Blocks.Sources.Ramp source(duration=
+              100, height=-100*U.A))
         annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
       ChemicalExchange exchange1(
         n=-2,
@@ -985,8 +985,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -3595,16 +3595,17 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
             final tauprime=0,
-            mu=k_mu*Data.mu(T, v),
+            final mu=sigma*Data.v_Tp(T, p),
             nu=k_nu*Data.nu(T, v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=Modelica.Constants.inf,
             initMaterial=InitScalar.Density);
 
-          parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-            "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
+          Q.ConductivityElectrical sigma=k_sigma*Data.mu(T, p)/Data.v_Tp(T, p)
+            "<html>Electrical conductivity (&sigma;)</html>"
             annotation (Dialog(group="Material properties"));
+
           parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
             "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -3617,6 +3618,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_sigma(final nominal=1) = 1
+            "<html>Adjustment factor for electrical conductivity (<i>k</i><sub>&sigma;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
@@ -3626,6 +3630,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           (e.g., <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
           governed by other configurations.</li>
+          <li>The conductivity is mapped to the mobility of the electrons by assuming that
+          the mobility of the substrate (e.g., 
+          <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
 
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
@@ -3637,7 +3644,12 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
             final tauprime=0,
+            final mu=sigma*Data.v_Tp(T, p),
             initMaterial=InitScalar.Density);
+
+          Q.ConductivityElectrical sigma=Data.mu(T, p)/Data.v_Tp(T, p)
+            "<html>Electrical conductivity (&sigma;)</html>"
+            annotation (Dialog(group="Material properties"));
 
           // **Move assumption to Characteristics.'e-'.Graphite, do the same for other e-.
           annotation (
@@ -3649,6 +3661,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           (e.g., <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
           governed by other configurations.</li>
+          <li>The conductivity is mapped to the mobility of the electrons by assuming that
+          the mobility of the substrate (e.g., 
+          <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
 
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
@@ -3660,7 +3675,7 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             redeclare replaceable package Data = Characteristics.'e-'.Gas (n_v=
                     {0,0}, b_v=FCSys.Characteristics.'C+'.Graphite.b_v),
             final tauprime=0,
-            redeclare parameter Q.Mobility mu=Data.mu(),
+            final mu=sigma*v,
             redeclare parameter Q.TimeAbsolute nu=Data.nu(),
             redeclare final parameter Q.Mobility eta=Data.eta(),
             redeclare final parameter Q.Fluidity beta=0,
@@ -3669,6 +3684,11 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
             consMaterial=Conservation.IC,
             invertEOS=false,
             initMaterial=InitScalar.Volume);
+
+          parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
+            "<html>Electrical conductivity (&sigma;)</html>"
+            annotation (Dialog(group="Material properties"));
+
           //    redeclare final parameter Q.Fluidity beta=Data.beta(),
           // **recreate Graphite e- Characteristics model, use it here
           //    redeclare parameter Q.Mobility eta=Data.eta(),
@@ -3687,6 +3707,9 @@ liquid phases can only be used with a compressible phase (gas).</p></html>"));
           (e.g., <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
           governed by other configurations.</li>
+          <li>The conductivity is mapped to the mobility of the electrons by assuming that
+          the mobility of the substrate (e.g., 
+          <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
 
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
@@ -5885,22 +5908,19 @@ Choose any condition besides None.");
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
-        Icon(graphics={
-            Rectangle(
-              extent={{-98,80},{98,120}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Ellipse(
-              extent={{-80,80},{80,-80}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-98,80},{98,120}},
-              textString="%name",
-              lineColor={0,0,0})}));
+        Icon(graphics={Rectangle(
+                  extent={{-98,80},{98,120}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Ellipse(
+                  extent={{-80,80},{80,-80}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-98,80},{98,120}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (generally not for direct use)"
