@@ -1700,8 +1700,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (Dialog(tab="Cathode conditions"));
       //
       // Anode flow rate
-      input Q.NumberAbsolute anStoich "Stoichiometric flow rate" annotation (
-          Dialog(tab="Anode conditions", group="Inlet flow rate (specify one)"));
+      //input
+      Q.NumberAbsolute anStoich "Stoichiometric flow rate" annotation (Dialog(
+            tab="Anode conditions", group="Inlet flow rate (specify one)"));
       Q.CurrentAreic J_an
         "<html>Equivalent current density (<i>J</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Anode conditions", group=
@@ -1718,9 +1719,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Dialog(tab="Anode conditions", group="Inlet flow rate (specify one)"));
       //
       // Cathode flow rate
-      input Q.NumberAbsolute caStoich "Stoichiometric flow rate" annotation (
-          Dialog(tab="Cathode conditions", group=
-              "Inlet flow rate (specify one)"));
+      //input
+      Q.NumberAbsolute caStoich "Stoichiometric flow rate" annotation (Dialog(
+            tab="Cathode conditions", group="Inlet flow rate (specify one)"));
       Q.CurrentAreic J_ca
         "<html>Equivalent current density (<i>J</i><sub>ca</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions", group=
@@ -1738,8 +1739,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "Inlet flow rate (specify one)"));
       //
       // Anode humidity
-      input Q.NumberAbsolute anInletRH(displayUnit="%", max=1)
-        "Relative humidity" annotation (Dialog(tab="Anode conditions", group=
+      //input
+      Q.NumberAbsolute anInletRH(displayUnit="%", max=1) "Relative humidity"
+        annotation (Dialog(tab="Anode conditions", group=
               "Inlet humidity (specify one)"));
       Q.PressureAbsolute p_H2O_an_in
         "<html>H<sub>2</sub>O vapor pressure (<i>p</i><sub>H2O an in</sub>)</html>"
@@ -1750,8 +1752,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Anode conditions", group="Inlet humidity (specify one)"));
       //
       // Cathode humidity
-      input Q.NumberAbsolute caInletRH(displayUnit="%", max=1)
-        "Relative humidity" annotation (Dialog(tab="Cathode conditions", group=
+      //input
+      Q.NumberAbsolute caInletRH(displayUnit="%", max=1) "Relative humidity"
+        annotation (Dialog(tab="Cathode conditions", group=
               "Inlet humidity (specify one)"));
       Q.PressureAbsolute p_H2O_ca_in
         "<html>H<sub>2</sub>O vapor pressure (<i>p</i><sub>H2O ca in</sub>)</html>"
@@ -1762,7 +1765,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Cathode conditions", group="Inlet humidity (specify one)"));
       //
       // Anode end plate
-      input Q.TemperatureAbsolute T_an
+      //input
+      Q.TemperatureAbsolute T_an
         "<html>Temperature (<i>T</i><sub>an</sub>)</html>" annotation (Dialog(
             tab="Anode conditions", group="End plate (specify one)"));
       Q.Conductance G_an
@@ -1775,7 +1779,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "End plate (specify one)"));
       //
       // Cathode end plate
-      input Q.TemperatureAbsolute T_ca
+      //input
+      Q.TemperatureAbsolute T_ca
         "<html>Temperature (<i>T</i><sub>ca</sub>)</html>" annotation (Dialog(
             tab="Cathode conditions", group="End plate (specify one)"));
       Q.Conductance G_ca
@@ -2225,6 +2230,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           smooth=Smooth.None));
 
       annotation (
+        structurallyIncomplete=true,
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
@@ -9444,31 +9450,27 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
 end Conditions;

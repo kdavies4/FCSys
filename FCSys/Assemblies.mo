@@ -791,6 +791,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
+      connect(GDLMEA.xPositive, caFP.xNegative) annotation (Line(
+          points={{10,6.10623e-16},{10,6.10623e-16},{10,6.10623e-16},{10,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="cell",
@@ -841,13 +848,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
               color={127,127,127},
               visible=inclX,
               thickness=0.5)}));
-      connect(GDLMEA.xPositive, caFP.xNegative) annotation (Line(
-          points={{10,6.10623e-16},{10,6.10623e-16},{10,6.10623e-16},{10,
-              6.10623e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
     end VerySimpleCell;
   end Cells;
   annotation (Documentation(info="

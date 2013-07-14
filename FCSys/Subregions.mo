@@ -275,8 +275,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -401,7 +401,6 @@ package Subregions
             'e-'(
               N(stateSelect=StateSelect.always),
               T(stateSelect=StateSelect.always),
-              initMaterial=InitScalar.None,
               initTransX=InitTranslational.None)),
           ionomer(reduceTemp=true, 'H+'(
               initMaterial=InitScalar.None,
@@ -423,42 +422,25 @@ package Subregions
 
       extends Modelica.Icons.UnderConstruction;
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated negativeBC(
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2,
-          H2(redeclare Conditions.ByConnector.Face.Single.Material.Pressure
-              material(source(y=environment.p)))),
-        graphite(final 'incle-'='incle-', 'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=-100*U.A,
-                duration=100.1,
-                startTime=0.1)))),
-        ionomer(final 'inclH+'=false, 'H+'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows negativeBC(gas(inclH2=
+              true, H2(redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.density,
+              materialSource(y=environment.p/environment.T))), graphite(
+            'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
+              normalSource(
+              height=-100*U.A,
+              duration=100.1,
+              startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated positiveBC(
-        gas(
-          inclH2=false,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2),
-        ionomer(final 'inclH+'='inclH+','H+'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal(
-                redeclare Modelica.Blocks.Sources.Ramp source(
-                height=-100*U.A,
-                duration=100.1,
-                startTime=0.1)))),
-        graphite(final 'incle-'=false, 'e-'(redeclare
-              Conditions.ByConnector.Face.Single.Translational.Force normal)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows positiveBC(ionomer(
+            'inclH+'=true, 'H+'(redeclare Modelica.Blocks.Sources.Ramp
+              normalSource(
+              height=-100*U.A,
+              duration=100.1,
+              startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -1003,8 +985,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2447,7 +2429,6 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
-
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2738,7 +2719,6 @@ package Subregions
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -3115,7 +3095,6 @@ package Subregions
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -3345,58 +3324,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}),
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(graphics));
       end EmptyPhase;
 
@@ -6052,48 +6023,17 @@ Choose any condition besides None.");
     parameter Side minoritySide "Side of the minority region"
       annotation (Dialog(group="Geometry"));
 
-    // Material characteristics
-    /*
-  replaceable package Data = Characteristics.IdealGas constrainedby 
-    Characteristics.BaseClasses.CharacteristicEOS "Characteristic data" 
-    annotation (
-    Dialog(group="Material properties"),
-    choicesAllMatching=true,
-    Placement(transformation(extent={{-60,40},{-40,60}}), iconTransformation(
-          extent={{-10,90},{10,110}})));
-  parameter Q.Permittivity epsilon=U.epsilon_0 "Permittivity"
-    annotation (Dialog(group="Material properties"));
-  final parameter Q.Capacitance C=epsilon*A/L "Capacitance";
-*/
-
     // Assumptions
     parameter Boolean transSubstrate=false
       "Pass translational momentum through the substrate" annotation (choices(
           __Dymola_checkBox=true), Dialog(tab="Assumptions", compact=true));
 
-    /*
-  // Initialization
-  parameter InitCapacitor initCapacitor=InitCapacitor.SS 
-    "Method of initialization" annotation (Dialog(tab="Initialization"));
-  parameter Q.Amount N_IC=0 
-    "<html>Initial amount (<i>N</i><sub>IC</sub>)</html>"
-    annotation (Dialog(tab="Initialization"));
-  parameter Q.Potential mu_IC=0 
-    "<html>Initial potential (&mu;<sub>IC</sub>)</html>"
-    annotation (Dialog(tab="Initialization"));
-  Q.Amount N(
-    final start=N_IC,
-    final fixed=false,
-    stateSelect=StateSelect.prefer) 
-    "Amount of material diffused from the majority to the minority side";
-*/
     replaceable Connectors.BaseClasses.Electrochem electrical(final n_trans)
       constrainedby Connectors.BaseClasses.Electrochem(n_trans=n_trans)
       "Electrical connector" annotation (__Dymola_choicesAllMatching=true,
         Placement(transformation(extent={{-10,-10},{10,10}}),
           iconTransformation(extent={{-10,-10},{10,10}})));
 
-    //,mu(final start=mu_IC, final fixed=false)
     Connectors.Inert inert(final n_trans=n_trans)
       "Thermal and translational interface with the substrate" annotation (
         Placement(transformation(extent={{-10,-30},{10,-10}}),
@@ -6111,19 +6051,6 @@ Choose any condition besides None.");
         missingInnerMessage="This model should be used within a subregion model.
    ");
 
-  initial equation
-    /*
-  if initCapacitor == InitCapacitor.SS then
-    der(N) = 0;
-  elseif initCapacitor == InitCapacitor.Amount then
-    N = N_IC;
-  elseif initCapacitor == InitCapacitor.Potential then
-    electrical.mu = mu_IC;
-    // Else there's no initial equation since
-    // initCapacitor == InitCapacitor.None.
-  end if;
-*/
-
   equation
     // Conditions
     // ----------
@@ -6132,7 +6059,6 @@ Choose any condition besides None.");
     //minority.rho = majority.rho*exp(-electrical.mu/inert.thermal.T)
     electrical.mu = -inert.thermal.T*ln(minority.rho/majority.rho)
       "Integrated result of advection canceling diffusion over the entire double layer";
-    //C*electrical.mu = N "Static potential is applied to the reaction";
     //
     // Translational
     majority.mPhidot[1] = 0 "No force on the majority side";
@@ -6154,7 +6080,6 @@ Choose any condition besides None.");
     electrical.Qdot = 0 "No heat transfer from the reaction stream";
 
     // Conservation (without storage; excluding terms which are zero above)
-    //der(N)/U.s = electrical.Ndot + minority.Ndot "Material";
     0 = electrical.Ndot + minority.Ndot "Material";
     zeros(n_trans) = electrical.mPhidot + inert.translational.mPhidot
       "Translational momentum";
