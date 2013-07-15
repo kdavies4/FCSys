@@ -20,9 +20,9 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.BaseClasses.InitCapacitor;
-import FCSys.Subregions.Species.BaseClasses.Conservation;
-import FCSys.Subregions.Species.BaseClasses.InitScalar;
-import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+import FCSys.Species.BaseClasses.Conservation;
+import FCSys.Species.BaseClasses.InitScalar;
+import FCSys.Species.BaseClasses.InitTranslational;
 
 // **Use lowercase for all elements of all enumerations.
 
@@ -90,7 +90,7 @@ package UsersGuide "User's Guide"
             Overview of the connectors</li>
             <li><a href=\"modelica://FCSys.Subregions.Volume\">FCSys.Subregions.Volume</a> model:
             Discussion of how species are mixed within phases and how phases are combined within subregions</li>
-            <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
+            <li><a href=\"modelica://FCSys.Species.Species\">FCSys.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, translational momentum, and
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
@@ -1108,19 +1108,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

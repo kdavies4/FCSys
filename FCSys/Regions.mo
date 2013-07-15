@@ -3,7 +3,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     model FPToFP "Test one flow plate to the other"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
@@ -188,7 +188,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
@@ -297,7 +297,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end GDLToGDL;
 
     model CLToCL "Test one catalyst layer to the other"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
@@ -394,7 +394,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end CLToCL;
 
     model AnFP "Test the anode flow plate"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
 
       parameter Q.Length L_y[:]={U.m}
@@ -490,7 +490,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end AnFP;
 
     model AnGDL "Test the anode gas diffusion layer"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
 
       parameter Q.Length L_y[:]={U.m}
@@ -573,7 +573,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
@@ -736,7 +736,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end PEM;
 
     model CaCL "Test the cathode catalyst layer"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
@@ -837,7 +837,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end CaCL;
 
     model CaGDL "Test the cathode gas diffusion layer"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
 
       parameter Q.Length L_y[:]={U.m}
@@ -922,7 +922,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end CaGDL;
 
     model CaFP "Test the cathode flow plate"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
 
       parameter Q.Length L_y[:]={U.m}
@@ -1076,7 +1076,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end PEM2;
 
     model AnGDL2 "Test the anode gas diffusion layer"
-      import FCSys.Subregions.Phases;
+      import FCSys.Phases;
       extends Modelica.Icons.Example;
 
       parameter Q.Length L_y[:]={U.m}
@@ -1171,7 +1171,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
 
     protected
@@ -1218,7 +1218,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>See <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
+<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (<code>sigma=U.S/(1.470e-3*U.cm)</code>)
@@ -1404,7 +1404,7 @@ text layer of this model.</p>
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
 
     protected
@@ -1784,7 +1784,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
 
     protected
@@ -2279,7 +2279,7 @@ the z axis extends across the width of the channel.</p>
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
@@ -2492,7 +2492,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
@@ -2863,7 +2863,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
@@ -2884,7 +2884,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>See <a href=\"modelica://FCSys.Subregions.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
+<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (<code>theta = U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (<code>sigma=U.S/(1.470e-3*U.cm)</code>)
@@ -3074,7 +3074,7 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
         each stateSelect=StateSelect.never,
         each displayUnit="%") =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.inertDalton.p if environment.analysis and
+        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
         hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)

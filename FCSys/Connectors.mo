@@ -35,7 +35,6 @@ package Connectors "Declarative and imperative connectors"
 
   end Reaction;
 
-
   connector Chemical "Connector for a species in a chemical reaction"
 
     parameter Integer n_trans(
@@ -146,14 +145,14 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end PhysicalBusInternal;
 
@@ -371,14 +370,14 @@ package Connectors "Declarative and imperative connectors"
     for species within a phase.
     For example, if a system contains a solid phase and a gas phase, then it is assumed that the
     partial volumes of the mixtures are additive and the mixtures exist at the same pressure.  Within
-    a phase, the species are mixed according to Dalton's law (see the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector).</p>
+    a phase, the species are mixed according to Dalton's law (see the <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector).</p>
 
     <p>In order to implement Amagat's law, this connector includes volume (not rate of volume) as a flow variable.
     The effort variable is pressure.  This means that the effort and flow variables are conjugates of
     energy (not power).</p>
 
     <p>See also the
-    <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector and
+    <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector and
     the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -452,7 +451,7 @@ package Connectors "Declarative and imperative connectors"
     The effort variable is volume.  This means that the effort and flow variables are conjugates of
     energy (not power).</p>
 
-    <p>For more information, please see     the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>
+    <p>For more information, please see     the <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a>
     connector and the documentation for the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -524,79 +523,6 @@ package Connectors "Declarative and imperative connectors"
             textString="D")}));
 
   end Dalton;
-
-  connector DaltonInternal
-    "<html>Internal <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector</html>"
-
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
-    // Additivity of pressure
-    Q.Volume V(nominal=U.cc) "Volume";
-    flow Q.Pressure p(nominal=U.atm) "Pressure";
-
-    // Translational diffusion
-    Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
-    flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
-
-    // Thermal diffusion
-    // extends ThermalDiffusion;
-    Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
-    flow Q.Power Qdot(nominal=U.W) "Rate of thermal diffusion";
-
-    annotation (
-      defaultComponentPrefixes="protected",
-      defaultComponentName="inertDalton",
-      Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, except that it
-    has a smaller icon and a default <code>protected</code> prefix.
-    Please see that connector for more information.</p></html>"),
-      Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),Text(
-              extent={{-8,8},{10,-8}},
-              lineColor={255,255,255},
-              textString="D")}),
-      Icon(graphics={
-          Ellipse(extent={{-76,76},{84,-84}}, lineColor={47,107,251}),
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={11,43,197},
-            fillPattern=FillPattern.Solid,
-            fillColor={47,107,251}),
-          Text(
-            extent={{-96,92},{104,-100}},
-            lineColor={255,255,255},
-            textString="D"),
-          Text(
-            extent={{-92,92},{108,-100}},
-            lineColor={255,255,255},
-            textString="D"),
-          Text(
-            extent={{-88,92},{112,-100}},
-            lineColor={255,255,255},
-            textString="D"),
-          Text(
-            extent={{-96,86},{104,-106}},
-            lineColor={255,255,255},
-            textString="D"),
-          Text(
-            extent={{-92,86},{108,-106}},
-            lineColor={255,255,255},
-            textString="D"),
-          Text(
-            extent={{-88,86},{112,-106}},
-            lineColor={255,255,255},
-            textString="D")}));
-
-  end DaltonInternal;
 
   connector Translational
     "Connector for advection or diffusion of translational momentum"
@@ -736,14 +662,14 @@ package Connectors "Declarative and imperative connectors"
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -857,14 +783,14 @@ package Connectors "Declarative and imperative connectors"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealOutputBus;
 
@@ -916,8 +842,8 @@ package Connectors "Declarative and imperative connectors"
   The inert connectors
   (<a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>,
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>,
-  <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>, and
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>)
+  <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a>, and
+  <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a>)
   describe diffusive exchange among configurations within a subregion.
   The face connectors (<a href=\"modelica://FCSys.Connectors.Face\">Face</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>)
@@ -961,21 +887,21 @@ package Connectors "Declarative and imperative connectors"
   participating in a reaction.  Its effort variable is the
   stoichiometrically-normalized rate of the reaction.</p>
 
-  <p>The <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector has one
+  <p>The <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector has one
   more effort/flow pair than the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
   That pair applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>
   to mix species within a phase.</p>
 
-  **The <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> and
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connectors have one more effort/flow
+  **The <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> and
+  <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connectors have one more effort/flow
   pair than the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
-  The <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector
+  The <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector
   (with an \"A\" in the icon)
   imposes Amagat's law of partial volumes and is used to combine material phases within a subregion.
   The
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (with a \"D\" in the icon)
+  <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector (with a \"D\" in the icon)
   applies Dalton's law of partial pressures to mix species within a phase (e.g.,
   N<sub>2</sub> and O<sub>2</sub> within a gas).
   The two cannot be directly connected because the effort/flow designations
@@ -1057,7 +983,7 @@ package Connectors "Declarative and imperative connectors"
     <p>If the species are mixed, it may be more appropriate to assume that the pressures
     of the components of a mixture sum to the total pressure of the mixture.  This additivity of pressure
     is described by connections of the
-    <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector.</p>
+    <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector.</p>
 
     <hr>
 

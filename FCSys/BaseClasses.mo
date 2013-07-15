@@ -121,21 +121,25 @@ package BaseClasses "Base classes (generally not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,100},{100,-100}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-100},{-100,100},{100,100},{100,-100}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-100},{100,-100}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,100},{100,-100}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-100},{-100,100},{100,100},{100,-100}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-100},{100,-100}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
@@ -203,9 +207,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,180},{100,220}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,180},{100,220}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top9;
 

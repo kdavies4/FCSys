@@ -849,7 +849,7 @@ package Characteristics
       constant Phase phase "Material phase";
       constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
       // Note:  The positive minimum value prevents a structural singularity
-      // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
+      // when checking FCSys.Species.SpeciesInertStagnant in Dymola
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";

@@ -1725,7 +1725,7 @@ kelvin would be derived from the units kilogram, meter, and second (K
     but SI has seven independent base units (m, kg, s, A, K, mol, and cd).
     In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
-    same base <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
+    same base <a href=\"modelica://FCSys.Species.Species\">Species</a> model.
     First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
     is normalized to one. This implies that the mole (mol) is proportional to the coulomb
     (C or Wb&middot;S), which is considered a number of reference particles given the charge number.
