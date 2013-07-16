@@ -84,14 +84,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*(environment.p - environment.p_H2O)),
+            materialSource(y=1.2*(environment.p - environment.p_H2O)),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
           H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*environment.p_H2O),
+            materialSource(y=1.2*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
         annotation (Placement(transformation(
@@ -131,14 +131,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*environment.p_H2O),
+            materialSource(y=1.8*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
           N2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*(environment.p - environment.p_H2O -
+            materialSource(y=1.8*(environment.p - environment.p_H2O -
                   environment.p_O2)),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
@@ -146,7 +146,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*environment.p_O2),
+            materialSource(y=1.8*environment.p_O2),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
         annotation (Placement(transformation(
