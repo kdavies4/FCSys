@@ -105,16 +105,6 @@ package Phases "Mixtures of species"
       Dialog(group="Included reactions", compact=true),
       choices(__Dymola_checkBox=true));
     // These can't be outer parameters in Dymola 7.4.
-    parameter Boolean inclNegative=true "Include the negative reaction pathway"
-      annotation (
-      HideResult=true,
-      Dialog(group="Assumptions", compact=true),
-      choices(__Dymola_checkBox=true));
-    parameter Boolean inclPositive=true "Include the positive reaction pathway"
-      annotation (
-      HideResult=true,
-      Dialog(tab="Assumptions", compact=true),
-      choices(__Dymola_checkBox=true));
 
     Conditions.Adapters.ChemicalReaction HOR(
       final m=H2.Data.m,
@@ -125,7 +115,7 @@ package Phases "Mixtures of species"
     Conditions.Adapters.ChemicalReaction ORR[2](
       n={-1,2},
       final m={O2.Data.m,H2O.Data.m},
-      final n_trans=n_trans) if inclORR
+      each final n_trans=n_trans) if inclORR
       "Adapter for the chemical contribution of O2 and H2O to the oxygen reduction reaction"
       annotation (Placement(transformation(extent={{-10,20},{-30,40}})));
     Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
@@ -292,6 +282,7 @@ package Phases "Mixtures of species"
             5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
+
     connect(N2.faces[facesCart[Axis.x], Side.p], xPositive.N2) annotation (Line(
         points={{6.10623e-16,6.10623e-16},{40,5.55112e-16}},
         color={127,127,127},
@@ -337,6 +328,7 @@ package Phases "Mixtures of species"
             5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
+
     connect(O2.faces[facesCart[Axis.x], Side.p], xPositive.O2) annotation (Line(
         points={{6.10623e-16,6.10623e-16},{40,5.55112e-16}},
         color={127,127,127},
@@ -365,6 +357,7 @@ package Phases "Mixtures of species"
 
       Diagram(graphics),
       Icon(graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -623,7 +616,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -960,7 +952,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Ionomer;
 
   model Liquid "Liquid phase"

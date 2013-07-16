@@ -8,16 +8,16 @@ package Subregions
       import FCSys.BaseClasses.Utilities.round;
       extends Modelica.Icons.Example;
 
+      parameter Integer n_y=3
+        "<html>Number of discrete subregions along the y axis, besides the 2 boundary subregions (<i>n<i><sub>y</sub>)</html>";
+      parameter Q.Pressure Deltap_IC=0
+        "<html>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>)</html>";
+
       output Q.Pressure Deltap=subregion2.gas.N2.p - subregion1.gas.N2.p
         "Measured pressure difference";
       output Q.Pressure Deltap_ex=-(n_y + 1)*10*U.m*environment.a[Axis.y]*
           Characteristics.N2.Gas.m*subregions[round(n_y/2)].gas.N2.rho
         "Expected pressure difference";
-
-      parameter Integer n_y=3
-        "<html>Number of discrete subregions along the y axis, besides the 2 boundary subregions (<i>n<i><sub>y</sub>)</html>";
-      parameter Q.Pressure Deltap_IC=0
-        "<html>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>)</html>";
 
       inner Conditions.Environment environment(analysis=true, p=U.atm - U.kPa)
         annotation (Placement(transformation(extent={{30,60},{50,80}})));
@@ -170,26 +170,6 @@ package Subregions
     model ElectricalConduction
       "<html>Test a one-dimensional array of subregions with C<sup>+</sup> and e<sup>-</sup></html>"
 
-      extends Examples.Subregion(
-        'inclC+'=true,
-        'incle-'=true,
-        inclH2=false,
-        subregion(
-          L={U.cm,U.mm,U.mm},
-          graphite(
-            reduceTemp=true,
-            'C+'(initMaterial=InitScalar.Pressure),
-            'e-'(
-              initMaterial=InitScalar.Volume,
-              final beta=0,
-              consMaterial=Conservation.IC,
-              initTransX=InitTranslational.None,
-              initEnergy=InitScalar.None,
-              sigma=1e2*U.S/U.m)),
-          void=true));
-
-      // **Integrate the value of mu into the e- model... cast in terms of resistivity?
-
       output Q.Potential w=(subregion.graphite.'e-'.faces[1, Side.p].mPhidot[
           Orientation.normal]/subregion.graphite.'e-'.faces[1, Side.p].rho -
           subregion.graphite.'e-'.faces[1, Side.n].mPhidot[Orientation.normal]/
@@ -208,6 +188,23 @@ package Subregions
         "Measured temperature";
       output Q.TemperatureAbsolute T_ex=environment.T + subregion.graphite.'C+'.theta
           *U.cm*P/(4*U.mm^2) "Expected temperature";
+
+      extends Examples.Subregion(
+        'inclC+'=true,
+        'incle-'=true,
+        inclH2=false,
+        subregion(
+          L={U.cm,U.mm,U.mm},
+          void=true,
+          graphite(
+            reduceTemp=true,
+            'C+'(initMaterial=InitScalar.Pressure),
+            'e-'(
+              initMaterial=InitScalar.Volume,
+              consMaterial=Conservation.IC,
+              initTransX=InitTranslational.None,
+              initEnergy=InitScalar.None,
+              sigma=1e2*U.S/U.m))));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(graphite(
           final 'incle-'='incle-',
@@ -243,8 +240,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -360,12 +357,17 @@ package Subregions
         'incle-'=true,
         'inclH+'=true,
         inclH2=true,
+        inclH2O=true,
         subregion(L={0.287*U.mm,10*U.cm,10*U.cm}, gas(H2(consTransX=
                   Conservation.IC))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts negativeBC(gas(
-            inclH2=true, H2(materialSource(y=environment.p/environment.T))),
-          graphite('incle-'=true, 'e-'(redeclare function normalSpec =
+          inclH2=true,
+          inclH2O=true,
+          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+
+          H2O(materialSource(y=environment.p_H2O/environment.T))), graphite(
+            'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
               redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
@@ -426,15 +428,7 @@ package Subregions
 
     model InternalFlow "Internal, laminar flow of liquid water"
       import FCSys.BaseClasses.Utilities.Delta;
-      extends Examples.Subregion(inclH2=false, subregion(
-          L={U.m,U.cm,U.cm},
-          inclFacesY=true,
-          inclFacesZ=true,
-          liquid(inclH2O=true,H2O(
-              final V_IC=subregion.V,
-              final beta=0,
-              initTransX=InitTranslational.None)),
-          void=true));
+
       final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area";
 
       // Conditions
@@ -451,6 +445,16 @@ package Subregions
       output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.liquid.H2O.phi[
           Axis.x]/(D^2*subregion.liquid.H2O.zeta)
         "Pressure difference according to Poiseuille's law";
+
+      extends Examples.Subregion(inclH2=false, subregion(
+          L={U.m,U.cm,U.cm},
+          void=true,
+          inclFacesY=true,
+          inclFacesZ=true,
+          liquid(inclH2O=true,H2O(
+              final V_IC=subregion.V,
+              final beta=0,
+              initTransX=InitTranslational.None))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(inclH2O=
               true, H2O(redeclare function normalSpec =
@@ -470,7 +474,7 @@ package Subregions
             origin={24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -482,7 +486,7 @@ package Subregions
             origin={0,-24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC4(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -494,7 +498,7 @@ package Subregions
             origin={0,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -506,7 +510,7 @@ package Subregions
             origin={24,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC6(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSource(y=0),
@@ -627,13 +631,6 @@ package Subregions
             rotation=270,
             origin={24,0})));
 
-      annotation (
-        experiment(StopTime=110, Tolerance=1e-06),
-        Commands(file(ensureSimulated=true) =
-            "Resources/Scripts/Dymola/Subregions.Examples.ORR.mos"
-            "Subregions.Examples.ORR.mos"),
-        experimentSetupOutput,
-        Diagram(graphics));
     equation
       connect(negativeBC.face, subregion.xNegative) annotation (Line(
           points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
@@ -649,6 +646,13 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (
+        experiment(StopTime=110, Tolerance=1e-06),
+        Commands(file(ensureSimulated=true) =
+            "Resources/Scripts/Dymola/Subregions.Examples.ORR.mos"
+            "Subregions.Examples.ORR.mos"),
+        experimentSetupOutput,
+        Diagram(graphics));
     end ORR;
 
     model Reaction
@@ -1270,7 +1274,6 @@ package Subregions
 
     end ThermalConductionConvection;
 
-
     model ChargeLayer
       import FCSys.BaseClasses.Utilities.cartWrap;
       import FCSys.BaseClasses.Utilities.countTrue;
@@ -1706,7 +1709,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1735,7 +1737,6 @@ package Subregions
       annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
           iconTransformation(extent={{-76,16},{-56,36}})));
 
-  protected
     FCSys.Conditions.Adapters.AmagatDalton gasDA(final n_trans=n_trans) if gas.n_spec
        > 0 and not void
       "Inerface between Dalton and Amagat representations of gas"
@@ -2068,95 +2069,79 @@ package Subregions
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}));
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclFacesX,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,56},{100,96}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end EmptySubregion;
 
