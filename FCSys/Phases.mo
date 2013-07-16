@@ -366,6 +366,8 @@ package Phases "Mixtures of species"
     extends FCSys.Phases.BaseClasses.EmptyPhase(final n_spec=countTrue({
           'inclC+','incle-'}));
 
+    // **Propagate the reaction parameters.
+
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "<html>Carbon plus (C<sup>+</sup>)</html>"
       annotation (
@@ -424,7 +426,11 @@ package Phases "Mixtures of species"
       choices(__Dymola_checkBox=true));
     // These can't be outer parameters in Dymola 7.4.
 
-    Reaction reaction if inclHOR or inclORR
+    Reaction reaction(
+      final A=A[Axis.x],
+      transSubstrate=true,
+      thermalSubstrate=true,
+      fromCurrent=true) if inclHOR or inclORR
       "Model to determine the electrochemical reaction rate"
       annotation (Placement(transformation(extent={{20,30},{40,50}})));
 
@@ -616,6 +622,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -1052,6 +1059,7 @@ package Phases "Mixtures of species"
   end Liquid;
 
   model Reaction "Electrochemical reaction"
+    import Modelica.Math.asinh;
 
     extends FCSys.BaseClasses.Icons.Names.Top2;
 
@@ -1059,8 +1067,12 @@ package Phases "Mixtures of species"
     parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
       "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
     parameter Q.NumberAbsolute alpha(max=1) = 0.5
-      "<html>Charge transfer coefficient (&alpha;)</html>";
+      "<html>Charge transfer coefficient (&alpha;)</html>"
+      annotation (Dialog(enable=not fromCurrent));
     final parameter Q.Current I_0=J_0*A "Exchange current density";
+    parameter Boolean fromCurrent=false
+      "<html>Calculate potential from reaction rate (requires &alpha;=0.5)</html>"
+      annotation (choices(__Dymola_checkBox=true));
 
     // Assumptions
     parameter Boolean transSubstrate=false
@@ -1081,6 +1093,14 @@ package Phases "Mixtures of species"
         Placement(transformation(extent={{-10,-30},{10,-10}}),
           iconTransformation(extent={{-10,-50},{10,-30}})));
 
+    function sinh2
+      input Real x;
+      output Real y;
+    algorithm
+      y := Modelica.Math.sinh(x)
+        annotation (Inline=true, inverse(x=Modelica.Math.asinh(y)));
+      annotation (Inline=true,inverse(x=Modelica.Math.asinh(y)));
+    end sinh2;
   protected
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
@@ -1092,8 +1112,13 @@ package Phases "Mixtures of species"
     Pe = reaction.mu/inert.thermal.T;
 
     // Reaction rate
-    reaction.Ndot = I_0*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
-      "Butler-Volmer equation";
+    if not fromCurrent then
+      reaction.Ndot = I_0*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
+        "Butler-Volmer equation";
+    else
+      Pe = 2*asinh(reaction.Ndot/(2*I_0))
+        "Inverse form of Butler-Volmer equation, assuming alpha=0.5";
+    end if;
 
     // Assumptions
     if transSubstrate then

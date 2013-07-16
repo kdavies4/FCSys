@@ -41,16 +41,20 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1[n_y, n_z](each
-          graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
-            transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
+          graphite('incle-'=true, 'e-'(redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
+              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              height=-U.A/U.cm^2,
+              duration=100.1,
+              startTime=0.1)))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
             origin={-84,0})));
-
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2[n_y, n_z](each
-          graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
-            transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
+          graphite('incle-'=true, 'e-'(redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
@@ -76,25 +80,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC6[caFP.n_x,
-        n_z](each gas(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC6[caFP.n_x, n_z](
+          each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,24})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,52},{90,72}})));
 
     equation
-      connect(BC1.face, anFP.xNegative) annotation (Line(
-          points={{-80,2.54679e-16},{-80,6.10623e-16},{-70,6.10623e-16}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          thickness=0.5,
-          smooth=Smooth.None));
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
           points={{-50,6.10623e-16},{-50,6.10623e-16}},
           color={240,0,0},
@@ -131,13 +129,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(caFP.xPositive, BC2.face) annotation (Line(
-          points={{70,6.10623e-16},{80,6.10623e-16},{80,1.23436e-15}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          thickness=0.5,
-          smooth=Smooth.None));
-
       connect(BC3.face, anFP.yNegative) annotation (Line(
           points={{-60,-20},{-60,-10}},
           color={240,0,0},
@@ -158,12 +149,28 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (Commands(file=
-              "Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"), experiment(
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
+            "Regions.Examples.FPToFP.mos"),
+        experiment(
           StopTime=20,
           Tolerance=1e-06,
-          Algorithm="Dassl"));
+          Algorithm="Dassl"),
+        Diagram(graphics));
+      connect(BC1.face, anFP.xNegative) annotation (Line(
+          points={{-80,-1.34539e-15},{-76,-1.34539e-15},{-76,6.10623e-16},{-70,
+              6.10623e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      connect(caFP.xPositive, BC2.face) annotation (Line(
+          points={{70,6.10623e-16},{76,6.10623e-16},{76,1.23436e-15},{80,
+              1.23436e-15}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -198,10 +205,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      inner FCSys.Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{70,50},{90,70}})));
-
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
           gas(
           inclH2=true,
@@ -218,6 +221,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-64,0})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
           gas(
           inclH2O=true,
@@ -230,6 +234,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
+
+      inner Conditions.Environment environment(analysis=true)
+        "Environmental conditions"
+        annotation (Placement(transformation(extent={{70,50},{90,70}})));
+
     equation
       connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
           points={{-30,6.10623e-16},{-30,6.10623e-16}},
@@ -269,12 +278,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
+
       connect(caGDL.xPositive, BC2.face) annotation (Line(
           points={{50,6.10623e-16},{56,6.10623e-16},{56,1.23436e-15},{60,
               1.23436e-15}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
+
     end GDLToGDL;
 
     model CLToCL "Test one catalyst layer to the other"
@@ -305,10 +316,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      inner FCSys.Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{70,50},{90,70}})));
-
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
           gas(
           inclH2=true,
@@ -317,19 +324,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
           H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
+                Conditions.ByConnector.Face.Single.TranslationalNormal.force,
               redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
               duration=100.1,
+              offset=-0.001*U.A/U.cm^2,
               startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-44,0})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
           gas(
           inclH2O=true,
+          inclN2=true,
           inclO2=true,
           H2O(materialSource(y=environment.p_H2O/environment.T)),
+          N2(materialSource(y=(environment.p - environment.p_H2O - environment.p_O2)
+                  /environment.T)),
           O2(materialSource(y=environment.p_O2/environment.T))), each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
@@ -337,8 +349,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,0})));
-    equation
+      inner Conditions.Environment environment(analysis=true)
+        "Environmental conditions"
+        annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
+    equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
           points={{-10,6.10623e-16},{-10,6.10623e-16}},
           color={240,0,0},
@@ -413,7 +428,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,24})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -477,7 +492,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-16,0})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -530,7 +545,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
   output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
   */
       // **Fix Qdot, P, eta
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -617,7 +632,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,10},{-10,-10}},
             rotation=90,
             origin={24,0})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -698,7 +713,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={44,0})));
 
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -764,7 +779,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
@@ -837,7 +852,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,24})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
