@@ -5,7 +5,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model FPToFP "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
+      output Q.Potential w[n_y, n_z]=BC2.graphite.'e-'.face.mPhidot[1] ./ (BC2.graphite.
+          'e-'.face.rho*PEM.A[Axis.x]) - BC1.graphite.'e-'.face.mPhidot[1] ./ (
+          BC1.graphite.'e-'.face.rho*PEM.A[Axis.x]) "Electrical potential";
+      output Q.CurrentAreic zJ[n_y, n_z]=-BC1.graphite.'e-'.face.phi[1]*BC1.graphite.
+          'e-'.face.rho "Electrical current density";
+      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
+        "Electrical current density, in A/cm2";
 
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
@@ -42,32 +49,75 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(redeclare function normalSpec =
+          graphite('incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+
+            redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-84,0})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(redeclare function normalSpec =
+          graphite('incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC3[anFP.n_x, n_z](
-          each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-            transformation(
+          each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*(environment.p - environment.p_H2O)),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*environment.p_H2O),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
+        annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,-24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](
-          each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-            transformation(
+          each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=environment.p - environment.p_H2O),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=environment.p_H2O),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,24})));
@@ -76,21 +126,60 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each gas(
           inclH2O=true,
           inclN2=true,
-          inclO2=true)) annotation (Placement(transformation(
+          inclO2=true,
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*environment.p_H2O),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+          N2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*(environment.p - environment.p_H2O -
+                  environment.p_O2)),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+          O2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*environment.p_O2),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
+        annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,-24})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC6[caFP.n_x, n_z](
           each gas(
           inclH2O=true,
           inclN2=true,
-          inclO2=true)) annotation (Placement(transformation(
+          inclO2=true,
+          H2O(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              materialSource(y=environment.p_H2O)),
+          N2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              materialSource(y=environment.p - environment.p_H2O - environment.p_O2)),
+
+          O2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              materialSource(y=environment.p_O2)))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,24})));
+
       inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
-        annotation (Placement(transformation(extent={{70,52},{90,72}})));
+        annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
     equation
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
@@ -153,10 +242,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
             "Regions.Examples.FPToFP.mos"),
         experiment(
-          StopTime=20,
+          StopTime=110,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Diagram(graphics));
+        Diagram(graphics),
+        experimentSetupOutput);
       connect(BC1.face, anFP.xNegative) annotation (Line(
           points={{-80,-1.34539e-15},{-76,-1.34539e-15},{-76,6.10623e-16},{-70,
               6.10623e-16}},
@@ -176,7 +266,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model GDLToGDL "Test one GDL to the other"
 
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
+      output Q.Potential w[n_y, n_z]=BC2.graphite.'e-'.face.mPhidot[1] ./ (BC2.graphite.
+          'e-'.face.rho*PEM.A[Axis.x]) - BC1.graphite.'e-'.face.mPhidot[1] ./ (
+          BC1.graphite.'e-'.face.rho*PEM.A[Axis.x]) "Electrical potential";
+      output Q.CurrentAreic zJ[n_y, n_z]=-BC1.graphite.'e-'.face.phi[1]*BC1.graphite.
+          'e-'.face.rho "Electrical current density";
+      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
+        "Electrical current density, in A/cm2";
 
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
@@ -205,6 +302,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
+      inner Conditions.Environment environment(analysis=true)
+        "Environmental conditions"
+        annotation (Placement(transformation(extent={{70,50},{90,70}})));
+
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
           gas(
           inclH2=true,
@@ -212,9 +313,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
 
           H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
-            'incle-'=true, 'e-'(redeclare function normalSpec =
+            'incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+
+            redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -225,20 +331,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
           gas(
           inclH2O=true,
+          inclN2=true,
           inclO2=true,
           H2O(materialSource(y=environment.p_H2O/environment.T)),
+          N2(materialSource(y=(environment.p - environment.p_H2O - environment.p_O2)
+                  /environment.T)),
           O2(materialSource(y=environment.p_O2/environment.T))), each graphite(
-            'incle-'=true, 'e-'(redeclare function normalSpec =
+            'incle-'=true, 'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current,
+            materialSource(y=0),
+            redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
-
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{70,50},{90,70}})));
-
     equation
       connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
           points={{-30,6.10623e-16},{-30,6.10623e-16}},
@@ -268,19 +376,20 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLToGDL.mos"
             "Regions.Examples.GDLToGDL.mos"),
         experiment(
-          StopTime=30,
+          StopTime=110,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        Diagram(graphics));
+        Diagram(graphics),
+        experimentSetupOutput);
       connect(BC1.face, anGDL.xNegative) annotation (Line(
-          points={{-60,-1.34539e-15},{-56,-1.34539e-15},{-56,6.10623e-16},{-50,
+          points={{-60,-1.34539e-15},{-55,-1.34539e-15},{-55,6.10623e-16},{-50,
               6.10623e-16}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
 
       connect(caGDL.xPositive, BC2.face) annotation (Line(
-          points={{50,6.10623e-16},{56,6.10623e-16},{56,1.23436e-15},{60,
+          points={{50,6.10623e-16},{55,6.10623e-16},{55,1.23436e-15},{60,
               1.23436e-15}},
           color={0,0,240},
           thickness=0.5,
@@ -291,7 +400,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model CLToCL "Test one catalyst layer to the other"
 
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
+      output Q.Potential w[n_y, n_z]=BC2.graphite.'e-'.face.mPhidot[1] ./ (BC2.graphite.
+          'e-'.face.rho*PEM.A[Axis.x]) - BC1.graphite.'e-'.face.mPhidot[1] ./ (
+          BC1.graphite.'e-'.face.rho*PEM.A[Axis.x]) "Electrical potential";
+      output Q.CurrentAreic zJ[n_y, n_z]=-BC1.graphite.'e-'.face.phi[1]*BC1.graphite.
+          'e-'.face.rho "Electrical current density";
+      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
+        "Electrical current density, in A/cm2";
 
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
@@ -304,7 +420,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
 
-      AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
+      AnCLs.AnCL anCL(
+        final L_y=L_y,
+        final L_z=L_z,
+        Subregion(ionomer('H+'(initMaterial=InitScalar.None))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       PEMs.PEM PEM(
@@ -324,11 +443,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
           H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
               redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
               duration=100.1,
-              offset=-0.001*U.A/U.cm^2,
               startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
@@ -366,12 +484,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None,
           thickness=0.5));
 
-      annotation (Commands(file=
-              "Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
-            "Regions.Examples.CLToCL.mos"), experiment(
-          StopTime=25,
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
+            "Regions.Examples.CLToCL.mos"),
+        experiment(
+          StopTime=110,
           Tolerance=1e-06,
-          Algorithm="Dassl"));
+          Algorithm="Dassl"),
+        experimentSetupOutput,
+        Diagram(graphics));
       connect(BC1.face, anCL.xNegative) annotation (Line(
           points={{-40,-1.34539e-15},{-40,0},{-30,0},{-30,6.10623e-16}},
           color={240,0,0},
@@ -596,7 +717,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
@@ -645,8 +766,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       connect(PEM.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,
-              -3.65701e-16}},
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,-3.65701e-16}},
+
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -695,7 +816,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
-            origin={-24,0})));
+            origin={-4,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
           gas(
@@ -719,7 +840,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     equation
       connect(BC1.face, caCL.xNegative) annotation (Line(
-          points={{-20,-1.34539e-15},{10,-1.34539e-15},{10,6.10623e-16}},
+          points={{0,-1.34539e-15},{10,-1.34539e-15},{10,6.10623e-16}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -731,7 +852,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=110,
           Tolerance=1e-06,
@@ -885,6 +1006,98 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
+    model AnCLPEM "Test the anode catalyst layer"
+
+      extends Modelica.Icons.Example;
+
+      parameter Q.Length L_y[:]={U.m}
+        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_z[:]={5*U.mm}
+        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final parameter Integer n_y=size(L_y, 1)
+        "Number of regions along the channel" annotation (HideResult=true);
+      final parameter Integer n_z=size(L_z, 1)
+        "Number of regions across the channel" annotation (HideResult=true);
+
+      /*
+  output Q.Potential w[1, n_y, n_z]=-anCL.subregions.reaction.chemical.mu/2
+    "Reaction potential";
+  output Q.Current zI[1, n_y, n_z]=anCL.subregions.graphite.'e-'.chemical.Ndot
+    "Electrical current due to reaction";
+  output Q.Number zJ_Apercm2[1, n_y, n_z]=(zI*U.cm^2) ./ (anCL.subregions[:, :,
+      :].A[Axis.x]*U.A) "Electrical current density, in A/cm2";
+  output Q.Power Qdot=sum(anCL.subregions.graphite.'C+'.Edot_DE)
+    "Rate of heat generation";
+  output Q.Power P=sum(w .* zI) "Electrical power";
+  output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
+  */
+      // **Fix Qdot, P, eta
+      inner Conditions.Environment environment(analysis=true)
+        "Environmental conditions"
+        annotation (Placement(transformation(extent={{70,50},{90,70}})));
+
+      AnCLs.AnCL anCL(
+        final L_y=L_y,
+        final L_z=L_z,
+        Subregion(ionomer('H+'(initMaterial=InitScalar.None))))
+        annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
+          gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+
+          H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
+            'incle-'=true, 'e-'(redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
+              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              height=-U.A/U.cm^2,
+              duration=100.1,
+              startTime=0.1)))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-44,0})));
+
+      PEMs.PEM PEM(
+        final L_y=L_y,
+        final L_z=L_z,
+        Subregion(ionomer('H+'(initTransX=InitTranslational.None))))
+        annotation (Placement(transformation(extent={{0,0},{20,20}})));
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2[n_y, n_z](each
+          ionomer('inclH+'=true)) annotation (Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={34,10})));
+    equation
+      connect(BC1.face, anCL.xNegative) annotation (Line(
+          points={{-40,-1.34539e-15},{-40,6.10623e-16},{-30,6.10623e-16}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+                {100,100}}),graphics),
+        experiment(StopTime=110, Tolerance=1e-06),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
+            "Regions.Examples.AnCL.mos"),
+        experimentSetupOutput);
+      connect(PEM.xPositive, BC2.face) annotation (Line(
+          points={{20,10},{24,10},{24,10},{30,10}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(PEM.xNegative, anCL.xPositive) annotation (Line(
+          points={{-5.55112e-16,10},{-6,10},{-6,6.10623e-16},{-10,6.10623e-16}},
+
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+    end AnCLPEM;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -912,7 +1125,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k_T=fill(epsilon^(3/2), 3),
+              k_T={5,1,1},
+              k_E=1e-4,
               inclH2=true,
               inclH2O=true,
               H2(
@@ -927,28 +1141,30 @@ package Regions "3D arrays of discrete, interconnected subregions"
               k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV, theta=U.m*U.K/(95*U.W)),
+              'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
+                V_IC=V - epsilonV,
                 consTransY=Conservation.IC,
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=true,
+              inclH2O=false,
               k_T=fill(epsilon^(3/2), 3),
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
-
+      // **temp excluded  H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
+      // **justify k_T={10,1,1}, (adjust 10 based on channel depth)
 
       // TODO:  Find a better solution for liquid.H2O.V_IC than
       // Modelica.Constants.eps and apply it to other layers too.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -1001,6 +1217,32 @@ bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> c
 used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+
+<p>The solid and the fluid phases exist in the same subregions even though a typically flowplate is impermeable 
+to the fluid (except for the channel).  This has some important implications:<ol>
+<li>The fluid species are exposed at the positive x-axis connector (<code>xNegative</code>).  
+They should be left disconnected there.</li>
+<li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid. 
+Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
+and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
+(<i>k</i><sub>T</sub>).</li>
+<li>The area fill factors (<i>k</i><sub>T</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
+generally be greater than one because the fluid is not transported along the entire thickness of the flowplate.
+As an approximation, it should be equal to product of two ratios:<ol>
+<li>the thickness of the flowplate to the depth of the channels, and</li>
+<li>the area of the valleys in the yz plane to the total area of the flowplate in the yz plane (land + valleys).</li>
+</ol>
+The default is 5.
+<li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
+the modeled velocity by a factor of the area of the flowplate in the xz plane divided by the cross-sectional
+area of the channel (also in the xz plane). This should be taken into account when setting 
+<i>k</i><sub>E</sub> to produce the proper pressure drop.</li>
+</ol> 
+In theory it is possible
+to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However
+this would significantly increase the mathematical size of the model.  Currently that detail is best left to 
+computational fluid dynamics.</p>
+</ol></li>
 
 <p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
@@ -1184,23 +1426,24 @@ text layer of this model.</p>
               k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV, theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
               'e-'(
+                V_IC=V - epsilonV,
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None)),
             liquid(
-              inclH2O=true,
+              inclH2O=false,
               k_T=fill(epsilon^(3/2), 3),
               H2O(V_IC=Modelica.Constants.eps*U.cc,consTransX=Conservation.IC))))
         annotation (IconMap(primitivesVisible=false));
-      // **temp excluded C+
+      // **temp excluded  H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -1549,13 +1792,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               'inclC+'=true,
               'incle-'=true,
               k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
-              'C+'(V_IC=0.5*(V - epsilonV), theta=U.m*U.K/(1.18*U.W)),
-              'e-'(
-                V_IC=0.5*(V - epsilonV),
-                N(stateSelect=StateSelect.prefer),
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None,
-                phi(each stateSelect=StateSelect.default))),
+              'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W))),
             ionomer(
               reduceTemp=true,
               'inclC19HF37O5S-'=true,
@@ -1563,10 +1800,6 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclH2O=false,
               k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
-              'H+'(
-                initMaterial=InitScalar.None,
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None),
               H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
             liquid(
               inclH2O=false,
@@ -1576,6 +1809,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
             reaction(J_0=0.5*U.A/U.cm^2))) annotation (IconMap(
             primitivesVisible=false));
 
+      // **temp H2O not in ionomer
       // **temp 0 reaction rate
       // **e-: rho_IC=17842.7*U.C/U.cc,
       // initMaterial=InitScalar.None,
@@ -1591,7 +1825,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization"));
@@ -1749,6 +1983,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2105,30 +2340,26 @@ the z axis extends across the width of the channel.</p>
               k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W)),
-              'e-'(
-                initEnergy=InitScalar.None,
-                V_IC=0.5*(V - epsilonV),
-                initTransX=InitTranslational.None,
-                sigma=U.S/(0.012*U.cm))),
+              'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W))),
             ionomer(
               reduceTemp=true,
               k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'inclC19HF37O5S-'=true,
-              inclH2O=true,
               'inclH+'=true,
+              inclH2O=false,
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
-              'H+'(initEnergy=InitScalar.None, mu=0.083*U.S/(0.95*U.M*U.cm)),
               H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
             liquid(k_T=fill(epsilon^(3/2), 3)))) annotation (IconMap(
             primitivesVisible=false));
+
+      // **temp H2O not in ionomer
 
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization"));
@@ -2150,7 +2381,7 @@ the z axis extends across the width of the channel.</p>
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
-      subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
+      //subregions.ionomer.H2O.N = lambda_IC*subregions.ionomer.'C19HF37O5S-'.N;
       annotation (Documentation(info="<html>
 <p>This model represents the cathode catalyst layer of a PEMFC.
 The x axis extends from the anode to the cathode.
@@ -2286,6 +2517,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2356,24 +2588,26 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
               'e-'(
+                V_IC=V - epsilonV,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None)),
             liquid(
               k_T=fill(epsilon^(3/2), 3),
-              inclH2O=true,
+              inclH2O=false,
               H2O(V_IC=Modelica.Constants.eps*U.cc, consTransX=Conservation.IC))))
         annotation (IconMap(primitivesVisible=false));
 
+      // **temp excl H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -2717,7 +2951,8 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k_T=fill(epsilon^(3/2), 3),
+              k_T={5,1,1},
+              k_E=2e-5,
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -2740,25 +2975,28 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilonV,theta=U.m*U.K/(95*U.W)),
+              'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
+                V_IC=V - epsilonV,
                 consTransY=Conservation.IC,
                 initTransX=InitTranslational.None,
                 initEnergy=InitScalar.None,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
+              inclH2O=false,
               k_T=fill(epsilon^(3/2), 3),
-              inclH2O=true,
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
+      // **temp excluded  H2O liq
+      // **justify k_T={10,1,1}, (adjust 10 based on channel depth)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
         "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (group="Geometry");
+        annotation (Dialog(group="Geometry"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -2785,6 +3023,32 @@ bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> c
 used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+
+<p>The solid and the fluid phases exist in the same subregions even though a typically flowplate is impermeable 
+to the fluid (except for the channel).  This has some important implications:<ol>
+<li>The fluid species are exposed at the positive x-axis connector (<code>xPosititve</code>).  
+They should be left disconnected there.</li>
+<li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid. 
+Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
+and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
+(<i>k</i><sub>T</sub>).</li>
+<li>The area fill factors (<i>k</i><sub>T</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
+generally be greater than one because the fluid is not transported along the entire thickness of the flowplate.
+As an approximation, it should be equal to product of two ratios:<ol>
+<li>the thickness of the flowplate to the depth of the channels, and</li>
+<li>the area of the valleys in the yz plane to the total area of the flowplate in the yz plane (land + valleys).</li>
+The default is 5.
+</ol>
+<li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
+the modeled velocity by a factor of the area of the flowplate in the xz plane divided by the cross-sectional
+area of the channel (also in the xz plane). This should be taken into account when setting 
+<i>k</i><sub>E</sub> to produce the proper pressure drop.</li>
+</ol> 
+In theory it is possible
+to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However
+this would significantly increase the mathematical size of the model.  Currently that detail is best left to 
+computational fluid dynamics.</p>
+</ol></li>
 
 <p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
@@ -2893,7 +3157,6 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
     end CaFP;
 
   end CaFPs;
-
 
   partial model Region "Base model for a 3D array of subregions"
     import FCSys.BaseClasses.Utilities.cartWrap;

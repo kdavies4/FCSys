@@ -1323,7 +1323,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       model Fixed "Fixed properties"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                b_v=[1],n_v={-1,0}),
+                b_v=[1], n_v={-1,0}),
           redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -1331,7 +1331,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(20.72e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W));
-
         // See the documentation for a table of values.
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -1832,7 +1831,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       phi(final start=phi_IC[cartTrans], each final fixed=false),
       sT(final start=h_IC - g_IC, final fixed=false))
       "Connector for phase change" annotation (Placement(transformation(extent=
-              {{-30,-10},{-10,10}}),iconTransformation(extent={{-59,28},{-79,48}})));
+              {{-30,-10},{-10,10}}), iconTransformation(extent={{-59,28},{-79,
+              48}})));
     Connectors.Inert inert(
       final n_trans=n_trans,
       translational(phi(final start=phi_IC[cartTrans], each final fixed=false)),
@@ -1955,6 +1955,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     assert(initMaterial <> initEnergy or initMaterial == InitScalar.None or
       consMaterial == Conservation.Steady or consEnergy == Conservation.Steady,
       "The initialization methods for material and energy must be different (unless None).");
+    assert(V >= 0, "The volume of " + Data.formula + " is negative.
+Check that the volumes of the other phases are set properly.");
 
     // Material
     if consMaterial == Conservation.IC then
@@ -2533,6 +2535,108 @@ Choose any condition besides None.");
             textString="%name",
             lineColor={0,0,0})}));
   end Species;
+
+  model Reaction "Electrochemical reaction"
+    import Modelica.Math.asinh;
+
+    extends FCSys.BaseClasses.Icons.Names.Top2;
+
+    parameter Q.Area A=100*U.cm^2 "Area";
+    parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
+      "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
+    parameter Q.NumberAbsolute alpha(max=1) = 0.5
+      "<html>Charge transfer coefficient (&alpha;)</html>"
+      annotation (Dialog(enable=not fromCurrent));
+    final parameter Q.Current I_0=J_0*A "Exchange current density";
+    parameter Boolean fromCurrent=false
+      "<html>Calculate potential from reaction rate (requires &alpha;=0.5)</html>"
+      annotation (choices(__Dymola_checkBox=true));
+
+    // Assumptions
+    parameter Boolean transSubstrate=false
+      "Pass translational momentum through the substrate" annotation (choices(
+          __Dymola_checkBox=true), Dialog(tab="Assumptions", compact=true));
+    parameter Boolean thermalSubstrate=false "Generate heat into the substrate"
+      annotation (choices(__Dymola_checkBox=true), Dialog(tab="Assumptions",
+          compact=true));
+
+    Q.Number Pe(start=0) "Peclet number";
+
+    Connectors.Reaction reaction(final n_trans=n_trans)
+      "Common connector for the reaction" annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{
+              10,10}})));
+    Connectors.Inert inert(final n_trans=n_trans)
+      "Thermal and translational interface with the substrate" annotation (
+        Placement(transformation(extent={{-10,-30},{10,-10}}),
+          iconTransformation(extent={{-10,-50},{10,-30}})));
+
+  protected
+    outer parameter Integer n_trans
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage="This model should be used within a subregion model.
+");
+
+  equation
+    // Aliases
+    Pe = reaction.mu/inert.thermal.T;
+
+    // Reaction rate
+    if not fromCurrent then
+      reaction.Ndot = I_0*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
+        "Butler-Volmer equation";
+    else
+      Pe = 2*asinh(reaction.Ndot/(2*I_0))
+        "Inverse form of Butler-Volmer equation, assuming alpha=0.5";
+    end if;
+
+    // Assumptions
+    if transSubstrate then
+      reaction.phi = inert.translational.phi
+        "Products produced at the velocity of the substrate";
+    else
+      inert.translational.mPhidot = zeros(n_trans)
+        "Translational momentum passed directly from the reactants to the products";
+    end if;
+    if thermalSubstrate then
+      0 = inert.thermal.Qdot "Heat rejected to the reaction stream";
+    else
+      0 = reaction.Qdot "Heat rejected to the substrate";
+    end if;
+
+    // Conservation (without storage)
+    zeros(n_trans) = inert.translational.mPhidot + reaction.mPhidot
+      "Translational momentum";
+    0 = reaction.mu*reaction.Ndot + inert.translational.mPhidot*(inert.translational.phi
+       - reaction.phi) + inert.thermal.Qdot + reaction.Qdot "Energy";
+
+    annotation (Documentation(info="<html>
+  <p>This model establishes the rate of an electrochemical reaction
+  using the Butler-Volmer equation.  It includes an energy balance with heat generation.
+  The heat is rejected to <code>inert.thermal.Qdot</code>, independently of the
+  thermal stream from the reactants to the products (<code>chemical.Qdot</code>).</p>
+
+    <p>If <code>transSubstrate</code> is <code>true</code>, then the translational momentum of the
+    reactants is passed to the substrate through the <code>inert</code>
+    connector and the products are produced at the velocity of the substrate (typically
+    zero).  If <code>transSubstrate</code> is <code>false</code>, then translational momentum is passed
+    directly from the reactants to the products.</p>
+
+    <p>If <code>thermalSubstrate</code> is <code>true</code>, then the generated heat is rejected to the 
+    substrate through the <code>inert</code>
+    connector.  If <code>thermalSubstrate</code> is <code>false</code>, then the heat is rejected to the 
+    reactino stream.</p>
+
+    <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
+    unit of catalyst surface area).</p>
+
+    <p></p></html>"), Icon(graphics={Ellipse(
+            extent={{-40,40},{40,-40}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash)}));
+  end Reaction;
 
   package BaseClasses "Base classes (generally not for direct use)"
 

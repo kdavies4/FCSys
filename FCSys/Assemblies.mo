@@ -8,15 +8,19 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model Cell "<html>Isolated <code>Cell</code> model</html>"
         extends Modelica.Icons.Example;
+        // **Remove this model once Polarization is running.
 
         inner FCSys.Conditions.Environment environment
           annotation (Placement(transformation(extent={{20,20},{40,40}})));
         replaceable Cells.Cell cell "Fuel cell" annotation (
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
                   {-10,-10},{10,10}})));
-        annotation (experiment(StopTime=1e-24, Tolerance=1e-06), Commands(file=
+        annotation (
+          experiment(StopTime=10, Tolerance=1e-06),
+          Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"
-              "Assemblies.Cells.Examples.Cell.mos"));
+              "Assemblies.Cells.Examples.Cell.mos"),
+          experimentSetupOutput);
 
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
@@ -37,17 +41,24 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "Environmental conditions"
           annotation (Placement(transformation(extent={{30,32},{50,52}})));
 
-        Conditions.TestStands.TestStand testStand(anEnd(each graphite('incle-'=
-                  true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
-                  materialSpec(height=10000*U.A, duration=500)))), caEnd(each
-              graphite('incle-'=true, 'e-'(redeclare
-                  Modelica.Blocks.Sources.Ramp materialSpec(height=-10000*U.A,
-                    duration=500))))) annotation (__Dymola_choicesFromPackage=
-              true,Placement(transformation(extent={{-16,-16},{16,16}})));
+        Conditions.TestStands.TestStand testStand(
+          zJ=currentDensity.y,
+          anInletRH(displayUnit="1") = 0.8,
+          caInletRH(displayUnit="1") = 0.5,
+          T_an=333.15*U.K,
+          T_ca=333.15*U.K,
+          anStoich=1.5,
+          caStoich=2.0) annotation (__Dymola_choicesFromPackage=true, Placement(
+              transformation(extent={{-16,-16},{16,16}})));
 
         replaceable Cells.Cell cell "Fuel cell" annotation (
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
                   {-10,-10},{10,10}})));
+        Modelica.Blocks.Sources.Ramp currentDensity(
+          height=100*U.A/U.cm^2,
+          duration=100,
+          startTime=0.1)
+          annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
       equation
 
         connect(testStand.an, cell.an) annotation (Line(
@@ -65,24 +76,24 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
 
         connect(testStand.anPositive, cell.anPositive) annotation (Line(
-            points={{-4,16},{-4,14.5},{-4,14.5},{-4,13},{-4,10},{-4,10}},
+            points={{-4,16},{-4,14.5},{-4,14.5},{-4,13},{-4,13},{-4,10}},
             color={240,0,0},
             thickness=0.5,
             smooth=Smooth.None));
         connect(testStand.caNegative, cell.caNegative) annotation (Line(
-            points={{4,-16},{4,-14.5},{4,-14.5},{4,-13},{4,-10},{4,-10}},
+            points={{4,-16},{4,-14.5},{4,-14.5},{4,-13},{4,-13},{4,-10}},
             color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
         connect(cell.anNegative, testStand.anNegative) annotation (Line(
-            points={{-4,-10},{-4,-11.5},{-4,-11.5},{-4,-13},{-4,-16},{-4,-16}},
+            points={{-4,-10},{-4,-11.5},{-4,-11.5},{-4,-13},{-4,-13},{-4,-16}},
 
             color={240,0,0},
             thickness=0.5,
             smooth=Smooth.None));
 
         connect(cell.caPositive, testStand.caPositive) annotation (Line(
-            points={{4,10},{4,11.5},{4,11.5},{4,13},{4,16},{4,16}},
+            points={{4,10},{4,11.5},{4,11.5},{4,13},{4,13},{4,16}},
             color={0,0,240},
             thickness=0.5,
             smooth=Smooth.None));
@@ -92,19 +103,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
               "Assemblies.Cells.Examples.Polarization.mos"), Diagram(graphics));
       end Polarization;
 
-      model PolarizationPlaceholder "**temp"
-        extends Modelica.Icons.Example;
-
-        /* **
-                 params=dict(comp=['"O2"'],
-                             anStoich=[1.5, 1.1, 2],
-                             caStoich=[9.5, 7.5, 12.5],
-                             anRH=[0.8, 0.6, 1],
-                             caRH=[0.5, 0.3, 0.7],
-                             T_degC=[60, 40, 80],
-                             p_kPag=[48.3, 0, 202.7]),
-                             */
-      end PolarizationPlaceholder;
 
       model EIS "Model for electrochemical-impedance spectroscopy"
         import FCSys;
@@ -174,106 +172,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (Diagram(graphics), Icon(graphics));
       end EIS;
 
-      model EISPlaceholder
-        "Placeholder model for electrochemical-impedance spectroscopy"
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-
-        parameter Modelica.SIunits.CurrentDensity zJ_large_SI=0.01
-          "Large-signal current density in SI base units";
-        Modelica.Electrical.Analog.Basic.Resistor resistor2(R=0.1) annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={10,-10})));
-        Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-10})));
-        Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-80,-10})));
-        Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
-          annotation (Placement(transformation(
-              extent={{-10,10},{10,-10}},
-              rotation=270,
-              origin={70,-10})));
-        Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=
-              zJ_large_SI)
-          annotation (Placement(transformation(extent={{-60,20},{-40,0}})));
-        Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent
-          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-        Connectors.RealInput zJ_small_SI
-          "Small-signal cell current density in SI base units" annotation (
-            Placement(transformation(extent={{-110,40},{-90,60}}),
-              iconTransformation(extent={{-120,-10},{-100,10}})));
-        Connectors.RealOutput w_V "Cell potential in volts" annotation (
-            Placement(transformation(extent={{90,-20},{110,0}}),
-              iconTransformation(extent={{100,-10},{120,10}})));
-        Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.1) annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-10,10})));
-        Modelica.Electrical.Analog.Basic.Ground ground
-          annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-      equation
-        connect(zJ_small_SI, signalCurrent.i) annotation (Line(
-            points={{-100,50},{-50,50},{-50,37}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(signalCurrent.n, constantCurrent.n) annotation (Line(
-            points={{-40,30},{-30,30},{-30,10},{-40,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(signalCurrent.p, constantCurrent.p) annotation (Line(
-            points={{-60,30},{-70,30},{-70,10},{-60,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantVoltage.p, constantCurrent.p) annotation (Line(
-            points={{-80,5.55112e-16},{-80,10},{-60,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(voltageSensor.v, w_V) annotation (Line(
-            points={{80,-10},{90,-10},{90,-10},{100,-10}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(resistor2.p, capacitor.p) annotation (Line(
-            points={{10,5.55112e-16},{10,10},{40,10},{40,5.55112e-16}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantVoltage.n, resistor2.n) annotation (Line(
-            points={{-80,-20},{-80,-30},{10,-30},{10,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(capacitor.n, resistor2.n) annotation (Line(
-            points={{40,-20},{40,-30},{10,-30},{10,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(capacitor.n, voltageSensor.n) annotation (Line(
-            points={{40,-20},{40,-30},{70,-30},{70,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(capacitor.p, voltageSensor.p) annotation (Line(
-            points={{40,5.55112e-16},{40,10},{70,10},{70,5.55112e-16}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(constantCurrent.n, resistor1.p) annotation (Line(
-            points={{-40,10},{-20,10}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(resistor1.n, resistor2.p) annotation (Line(
-            points={{5.55112e-16,10},{10,10},{10,5.55112e-16}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(ground.p, voltageSensor.n) annotation (Line(
-            points={{70,-40},{70,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics));
-      end EISPlaceholder;
     end Examples;
 
     model Cell "Single-cell PEMFC"

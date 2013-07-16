@@ -283,24 +283,29 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Rectangle(
-                  extent={{-98,20},{98,60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Text(
-                  extent={{-98,20},{98,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+                100,100}}), graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Rectangle(
+              extent={{-98,20},{98,60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Text(
+              extent={{-98,20},{98,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -4778,7 +4783,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows H2 if inclH2
+            Conditions.ByConnector.Face.Single.FaceFlows H2 if inclH2
               "<html>H<sub>2</sub> conditions</html>" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
@@ -7568,21 +7573,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={Rectangle(
-                      extent={{-160,112},{160,152}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Polygon(
-                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
-                  {-160,-160},{-160,60}},
-                      lineColor={127,127,127},
-                      smooth=Smooth.None,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-160,112},{160,152}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+                  160,160}}), graphics={
+              Rectangle(
+                extent={{-160,112},{160,152}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Polygon(
+                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
+                    -160},{-160,60}},
+                lineColor={127,127,127},
+                smooth=Smooth.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-160,112},{160,152}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -8947,16 +8955,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       final parameter Q.Area A_ca[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
         "Areas of the xz segments of the cathode"
         annotation (Dialog(group="Geometry"));
-      parameter Side anInletSide=Side.p
-        "Side of the anode inlet (along the y axis)" annotation (
-        Evaluate=true,
-        Dialog(group="Geometry", compact=true),
-        choices(__Dymola_checkBox=true));
-      parameter Side caInletSide=Side.p
-        "Side of the cathode inlet (along the y axis)" annotation (
-        Evaluate=true,
-        Dialog(group="Geometry", compact=true),
-        choices(__Dymola_checkBox=true));
 
       // Prescribed operating conditions
       // -------------------------------
@@ -8973,6 +8971,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (Dialog(group="Electrical conditions (specify one)"));
       //
       // General anode conditions
+      parameter Side anInletSide=Side.p "Side of the inlet (along the y axis)"
+        annotation (Dialog(tab="Anode conditions"));
       Q.TemperatureAbsolute T_an_in=333.15*U.K
         "<html>Inlet temperature (<i>T</i><sub>an in</sub>)</html>"
         annotation (Dialog(tab="Anode conditions"));
@@ -8981,6 +8981,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (Dialog(tab="Anode conditions"));
       //
       // General cathode conditions
+      parameter Side caInletSide=Side.p "Side of the inlet (along the y axis)"
+        annotation (Dialog(tab="Cathode conditions"));
       Q.TemperatureAbsolute T_ca_in=333.15*U.K
         "<html>Inlet temperature (<i>T</i><sub>ca in</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions"));
@@ -9530,11 +9532,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-                  extent={{-160,160},{160,-160}},
-                  lineColor={191,191,191},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
-              {160,-160}}, lineColor={0,0,0})}),
+              extent={{-160,160},{160,-160}},
+              lineColor={191,191,191},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
+                  160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.
