@@ -34,9 +34,9 @@ package Species "Dynamic models of chemical species"
                   {100,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Text(
-                extent={{-150,90},{-118,52}},
-                lineColor={0,0,255},
-                textString="%t.test")}));
+                      extent={{-150,90},{-118,52}},
+                      lineColor={0,0,255},
+                      textString="%t.test")}));
 
       end Calibrated;
 
@@ -295,12 +295,12 @@ package Species "Dynamic models of chemical species"
           final mu=sigma*v,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Mobility eta=Data.eta(),
-            redeclare final parameter Q.Fluidity beta=0,
+          redeclare final parameter Q.Fluidity beta=0,
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
-            final theta=Modelica.Constants.inf,
-            consMaterial=Conservation.IC,
-            invertEOS=false,
-            initMaterial=InitScalar.Volume);
+          final theta=Modelica.Constants.inf,
+          consMaterial=Conservation.IC,
+          invertEOS=false,
+          initMaterial=InitScalar.Volume);
 
         parameter Q.ConductivityElectrical sigma=1e-10*Data.mu()/Data.v_Tp()
           "<html>Electrical conductivity (&sigma;)</html>"
@@ -412,15 +412,18 @@ package Species "Dynamic models of chemical species"
 
       model Fixed "Fixed properties"
         extends Species(
-            redeclare replaceable package Data = Characteristics.'H+'.Gas (n_v=
-                    {0,0}, b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
+          redeclare replaceable package Data = Characteristics.'H+'.Gas (n_v={0,
+                  0}, b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
           final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Mobility eta=Data.eta(),
-          redeclare parameter Q.Fluidity beta=Data.beta(),
+          redeclare final parameter Q.Fluidity beta=0,
           redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+          consMaterial=Conservation.IC,
+          invertEOS=false,
+          initMaterial=InitScalar.Volume);
         //consMaterial=Conservation.IC,
         //invertEOS=false
         //initMaterial=InitScalar.Volume

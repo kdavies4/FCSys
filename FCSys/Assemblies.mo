@@ -548,7 +548,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{-50,-10},{-30,10}})));
-      FCSys.Regions.Integrated.AnCGDL anCGDL(final L_y=L_y, final L_z=L_z)
+      FCSys.Regions.AnCLs.AnCGDL anCGDL(final L_y=L_y, final L_z=L_z)
         "Anode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{-30,-10},{-10,10}})));
 
@@ -557,7 +557,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{-10,-10},{10,10}})));
-      FCSys.Regions.Integrated.CaCGDL caCGDL(final L_y=L_y, final L_z=L_z)
+      FCSys.Regions.CaCLs.CaCGDL caCGDL(final L_y=L_y, final L_z=L_z)
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{10,-10},{30,10}})));
 
