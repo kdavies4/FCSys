@@ -385,8 +385,8 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
       'inclC+' constrainedby FCSys.Species.Species(
       n_faces=n_faces,
-      initMaterial=if 'incle-' then InitScalar.Pressure else InitScalar.Volume,
-
+      initMaterial=if 'incle-' and not (inclHOR or inclORR) then InitScalar.Pressure
+           else InitScalar.Volume,
       phi(each stateSelect=if reduceVel then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -436,22 +436,32 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{20,30},{40,50}})));
 
     FCSys.Conditions.Adapters.ChemicalFace HOL(
-      n=2,
       final axis=Axis.x,
       final side=Side.n,
       final A=A[Axis.x],
-      final n_trans=n_trans) if inclHOR
+      final cartTrans=cartTrans,
+      redeclare package Data = FCSys.Characteristics.'e-'.Gas) if inclHOR
       "Adapter for the electrical contribution of e- to the hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
 
     FCSys.Conditions.Adapters.ChemicalFace ORL(
-      n=-4,
       final axis=Axis.x,
       final side=Side.p,
       final A=A[Axis.x],
-      final n_trans=n_trans) if inclORR
+      cartTrans=cartTrans,
+      redeclare package Data = FCSys.Characteristics.'e-'.Gas) if inclORR
       "Adapter for the electrical contribution of e- to the oxygen reduction reaction"
       annotation (Placement(transformation(extent={{50,50},{30,70}})));
+    Conditions.Adapters.ChemicalReaction HOR(
+      n=2,
+      final n_trans=n_trans,
+      final m='e-'.Data.m) if inclHOR
+      annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+    Conditions.Adapters.ChemicalReaction ORR(
+      n=-4,
+      final n_trans=n_trans,
+      final m='e-'.Data.m) if inclORR
+      annotation (Placement(transformation(extent={{30,50},{10,70}})));
 
     Connectors.Reaction chemical if inclHOR or inclORR
       "Connector for a chemical reaction" annotation (Placement(transformation(
@@ -462,22 +472,38 @@ package Phases "Mixtures of species"
     // Reactions
     // ---------
     // HOR
-    connect(HOL.reaction, chemical) annotation (Line(
-        points={{-36,60},{0,60},{0,70},{5.55112e-16,70}},
-        color={255,195,38},
-        smooth=Smooth.None));
     connect(HOL.face, xNegative.'e-') annotation (Line(
         points={{-44,60},{-50,60},{-50,5.55112e-16},{-40,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
-    // ORR
-    connect(ORL.reaction, chemical) annotation (Line(
-        points={{36,60},{0,60},{0,70},{5.55112e-16,70}},
+    connect(HOL.chemical, HOR.chemical) annotation (Line(
+        points={{-36,60},{-24,60}},
         color={255,195,38},
         smooth=Smooth.None));
+    connect(HOR.reaction, chemical) annotation (Line(
+        points={{-16,60},{5.55112e-16,60},{5.55112e-16,70}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    // ORR
     connect(ORL.face, xPositive.'e-') annotation (Line(
         points={{44,60},{50,60},{50,5.55112e-16},{40,5.55112e-16}},
         color={127,127,127},
+        smooth=Smooth.None));
+    connect(ORL.chemical, ORR.chemical) annotation (Line(
+        points={{36,60},{24,60}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(ORR.reaction, chemical) annotation (Line(
+        points={{16,60},{5.55112e-16,60},{5.55112e-16,70}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(reaction.reaction, chemical) annotation (Line(
+        points={{30,40},{10,40},{10,60},{5.55112e-16,60},{5.55112e-16,70}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(reaction.inert, 'C+'.inert) annotation (Line(
+        points={{30,36},{30,-3.8},{6.9,-3.8}},
+        color={47,107,251},
         smooth=Smooth.None));
 
     // C+
@@ -597,15 +623,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-    connect(reaction.inert, 'C+'.inert) annotation (Line(
-        points={{30,36},{30,-3.8},{6.9,-3.8}},
-        color={47,107,251},
-        smooth=Smooth.None));
 
-    connect(reaction.reaction, chemical) annotation (Line(
-        points={{30,40},{20,40},{20,60},{5.55112e-16,60},{5.55112e-16,70}},
-        color={255,195,38},
-        smooth=Smooth.None));
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -628,6 +646,8 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'C19HF37O5S-'.Ionomer.Fixed 'C19HF37O5S-'(final
         n_faces) if 'inclC19HF37O5S-' constrainedby FCSys.Species.Species(
       n_faces=n_faces,
+      initMaterial=if 'inclH+' and not (inclHOR or inclORR) then InitScalar.Pressure
+           else InitScalar.Volume,
       phi(each stateSelect=if reduceVel then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -697,21 +717,33 @@ package Phases "Mixtures of species"
     // These can't be outer parameters in Dymola 7.4.
 
     FCSys.Conditions.Adapters.ChemicalFace HOL(
-      n=2,
       final axis=Axis.x,
       final side=Side.p,
       final A=A[Axis.x],
-      final n_trans=n_trans) if inclHOR
+      redeclare package Data = FCSys.Characteristics.'H+'.Gas,
+      cartTrans=cartTrans) if inclHOR
       "Charge layer or adapter for the electrical contribution of H+ to the hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{50,50},{30,70}})));
+
     FCSys.Conditions.Adapters.ChemicalFace ORL(
-      n=-4,
       final axis=Axis.x,
       final side=Side.n,
       final A=A[Axis.x],
-      final n_trans=n_trans) if inclORR
+      redeclare package Data = FCSys.Characteristics.'H+'.Gas,
+      cartTrans=cartTrans) if inclORR
       "Charge layer or adapter for the electrical contribution of H+ to the oxygen reduction reaction"
       annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
+    Conditions.Adapters.ChemicalReaction HOR(
+      n=2,
+      final n_trans=n_trans,
+      final m='H+'.Data.m) if inclHOR
+      annotation (Placement(transformation(extent={{30,50},{10,70}})));
+    Conditions.Adapters.ChemicalReaction ORR(
+      n=-4,
+      final n_trans=n_trans,
+      final m='H+'.Data.m) if inclORR
+      annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+
     Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
       annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
           iconTransformation(extent={{-61,39},{-41,59}})));
@@ -729,22 +761,31 @@ package Phases "Mixtures of species"
     // Reactions
     // ---------
     // HOR
-    connect(HOL.reaction, chemical) annotation (Line(
-        points={{36,60},{0,60},{0,70},{5.55112e-16,70}},
-        color={255,195,38},
-        smooth=Smooth.None));
     connect(HOL.face, xPositive.'H+') annotation (Line(
         points={{44,60},{50,60},{50,5.55112e-16},{40,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
-    // ORR
-    connect(ORL.reaction, chemical) annotation (Line(
-        points={{-36,60},{0,60},{0,70},{5.55112e-16,70}},
+    connect(HOL.chemical, HOR.chemical) annotation (Line(
+        points={{36,60},{24,60}},
         color={255,195,38},
         smooth=Smooth.None));
+    connect(HOR.reaction, chemical) annotation (Line(
+        points={{16,60},{5.55112e-16,60},{5.55112e-16,70}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    // ORR
     connect(ORL.face, xNegative.'H+') annotation (Line(
         points={{-44,60},{-50,60},{-50,5.55112e-16},{-40,5.55112e-16}},
         color={127,127,127},
+        smooth=Smooth.None));
+
+    connect(ORL.chemical, ORR.chemical) annotation (Line(
+        points={{-36,60},{-24,60}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(ORR.reaction, chemical) annotation (Line(
+        points={{-16,60},{5.55112e-16,60},{5.55112e-16,70}},
+        color={255,195,38},
         smooth=Smooth.None));
 
     // C19HF37O5S-

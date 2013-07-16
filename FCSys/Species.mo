@@ -34,9 +34,9 @@ package Species "Dynamic models of chemical species"
                   {100,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Text(
-                      extent={{-150,90},{-118,52}},
-                      lineColor={0,0,255},
-                      textString="%t.test")}));
+                extent={{-150,90},{-118,52}},
+                lineColor={0,0,255},
+                textString="%t.test")}));
 
       end Calibrated;
 
@@ -289,7 +289,8 @@ package Species "Dynamic models of chemical species"
 
       model Fixed "Fixed properties"
         extends Species(
-          redeclare replaceable package Data = Characteristics.'e-'.Gas,
+          redeclare replaceable package Data = Characteristics.'e-'.Gas (n_v={0,
+                  0}, b_v=FCSys.Characteristics.'C+'.Graphite.b_v),
           final tauprime=0,
           final mu=sigma*v,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -299,7 +300,7 @@ package Species "Dynamic models of chemical species"
           final theta=Modelica.Constants.inf);
         //invertEOS=false
         //initMaterial=InitScalar.Volume
-        //(n_v={0,0}, b_v=FCSys.Characteristics.'C+'.Graphite.b_v)
+        //
         //consMaterial=Conservation.IC,
         //            redeclare parameter Q.Fluidity beta=1e-5*Data.beta(),
         //redeclare final parameter Q.Fluidity beta=0,

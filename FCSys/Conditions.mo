@@ -309,6 +309,100 @@ package Conditions "Models to specify and measure operating conditions"
 
     end AmagatDalton;
 
+    model ChemicalFace
+      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
+
+      import FCSys.BaseClasses.Utilities.cartWrap;
+      import FCSys.BaseClasses.Utilities.inSign;
+      extends FCSys.BaseClasses.Icons.Names.Top1;
+
+      // Geometry
+      parameter Q.Area A "Cross-sectional area of the face"
+        annotation (Dialog(group="Geometry"));
+      parameter Axis axis "Axis of the electrochemical reaction"
+        annotation (Dialog(group="Geometry"));
+      parameter Side side "Side of the face w.r.t., the reaction"
+        annotation (Dialog(group="Geometry"));
+      parameter Integer cartTrans[:]
+        "Cartesian-axis indices of the components of translational momentum"
+        annotation (Dialog(group="Geometry"));
+
+      replaceable package Data = Characteristics.BaseClasses.Characteristic
+        constrainedby Characteristics.BaseClasses.Characteristic
+        "Characteristic data" annotation (
+        Dialog(group="Material properties"),
+        choicesAllMatching=true,
+        __Dymola_choicesFromPackage=true);
+
+      // Aliases (for common terms)
+      Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
+
+      Connectors.Face face "Interface to the majority region" annotation (
+          Placement(transformation(extent={{10,-10},{30,10}}),
+            iconTransformation(extent={{-50,-10},{-30,10}})));
+      Connectors.Chemical chemical(final n_trans=n_trans)
+        "Connector for a species in a chemical reaction" annotation (
+          __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
+                -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
+
+    protected
+      final parameter Integer n_trans=size(cartTrans, 1)
+        "Number of components of translational momentum";
+
+    equation
+      // Aliases
+      p = Data.p_Tv(face.T, 1/face.rho);
+
+      // No diffusion across the face
+      face.Ndot = 0 "Material";
+      face.mPhidot[2:3] = {0,0} "Transverse translational momentum";
+      face.Qdot = 0 "Energy";
+
+      // Equal intensive properties
+      chemical.mu = Data.h(face.T, p) - chemical.sT + inSign(side)*face.mPhidot[
+        Orientation.normal]/(face.rho*A) "Electrochemical potential";
+      chemical.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
+        "Velocity";
+      chemical.sT = Data.s(face.T, p)*face.T
+        "Specific entropy-temperature product";
+
+      // Material conservation (without storage)
+      0 = chemical.Ndot + inSign(side)*face.phi[Orientation.normal]*A*face.rho;
+      // The conservation of translational momentum and energy is inherent
+      // in the stream connector.
+
+      annotation (
+        Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
+    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
+    the boundary is due entirely to the electrochemical reaction.</p> 
+    
+    <p>Assumptions:<ol>
+    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
+    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
+    potential.</li> 
+    </ol></p>
+    
+    <p>For more information, please see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+        Diagram(graphics),
+        Icon(graphics={
+            Line(
+              points={{0,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-30,0},{0,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
+
+    end ChemicalFace;
+
     model ChemicalReaction
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
@@ -377,98 +471,6 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(graphics));
 
     end ChemicalReaction;
-
-    model FaceReaction
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
-
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.inSign;
-      extends FCSys.BaseClasses.Icons.Names.Top1;
-
-      parameter Integer n_trans(
-        min=1,
-        max=3) = 1
-        "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>";
-
-      // Geometry
-      parameter Q.Area A "Cross-sectional area of the face"
-        annotation (Dialog(group="Geometry"));
-      parameter Axis axis "Axis of the electrochemical reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Side side "Side of the face w.r.t., the reaction"
-        annotation (Dialog(group="Geometry"));
-
-      replaceable package Data = Characteristics.BaseClasses.Characteristic
-        constrainedby Characteristics.BaseClasses.Characteristic
-        "Characteristic data" annotation (
-        Dialog(group="Material properties"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
-
-      // Aliases (for common terms)
-      Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
-      Q.Current Ndot "Rate of consumption of the species";
-
-      Connectors.Face face "Interface to the majority region" annotation (
-          Placement(transformation(extent={{-30,-10},{-10,10}}),
-            iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
-        "Connector for an electrochemical reaction" annotation (
-          __Dymola_choicesAllMatching=true, Placement(transformation(extent={{
-                10,-10},{30,10}}), iconTransformation(extent={{30,-10},{50,10}})));
-
-    equation
-      // Aliases
-      p = Data.p_Tv(face.T, 1/face.rho);
-      Ndot = inSign(side)*face.phi[Orientation.normal]*A*face.rho;
-
-      // Equal intensive properties
-      reaction.mu = Data.h(face.T, p) - sT + face.mPhidot[Orientation.normal]/(
-        face.rho*A) "Electrochemical potential";
-      reaction.phi = face.phi "Velocity";
-      reaction.sT = Data.s(face.T, p)*face.T
-        "Specific entropy-temperature product";
-
-      // Conservation (without storage)
-      0 = reaction.Ndot + face.Ndot "Material";
-      zeros(n_trans) = reaction.mPhidot + Data.m*face.phi*Ndot
-        "Translational momentum";
-      0 = reaction.Qdot + sT*Ndot "Energy";
-
-      annotation (
-        Documentation(info="<html><p>This model is used to add the electrical potential on a boundary to the
-    electrochemical potential of a reaction.</p> 
-
-    
-    <p>Assumptions:<ol>
-    <li>There is no diffusion across the face.</li>
-    <li>No translational momentum or energy is transferred into the (advective) reaction stream.<li>
-    </ol></p>
-    
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Diagram(graphics),
-        Icon(graphics={
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
-
-    end FaceReaction;
 
 
     package MSL
@@ -578,31 +580,38 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,60},{0,-100}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,20},{80,20}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-20},{80,-20}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{80,60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-60},{80,-60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-100},{70,-100}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,60},{0,-100}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,20},{80,20}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-20},{80,-20}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,60},{80,60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-60},{80,-60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-100},{70,-100}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Anode;
 
       model Cathode
@@ -708,31 +717,38 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,60},{0,-100}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,20},{80,20}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-20},{80,-20}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{80,60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-60},{80,-60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-100},{70,-100}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,60},{0,-100}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,20},{80,20}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-20},{80,-20}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,60},{80,60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-60},{80,-60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-100},{70,-100}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Cathode;
 
       model Conductor
@@ -790,25 +806,30 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,127,0},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,40},{80,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-40},{80,-40}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-40},{80,-40}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}), Diagram(graphics));
       end Conductor;
 
       package Phases "Adapters for material phases"
@@ -1820,104 +1841,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Media;
     end MSL;
-
-    model ChemicalFace
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
-
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.inSign;
-      extends FCSys.BaseClasses.Icons.Names.Top1;
-
-      // Geometry
-      parameter Q.Area A "Cross-sectional area of the face"
-        annotation (Dialog(group="Geometry"));
-      parameter Axis axis "Axis of the electrochemical reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Side side "Side of the face w.r.t., the reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Integer cartTrans[:]
-        "Cartesian-axis indices of the components of translational momentum"
-        annotation (Dialog(group="Geometry"));
-
-      replaceable package Data = Characteristics.BaseClasses.Characteristic
-        constrainedby Characteristics.BaseClasses.Characteristic
-        "Characteristic data" annotation (
-        Dialog(group="Material properties"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
-
-      // Aliases (for common terms)
-      Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
-
-      Connectors.Face face "Interface to the majority region" annotation (
-          Placement(transformation(extent={{10,-10},{30,10}}),
-            iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Chemical chemical(final n_trans=n_trans)
-        "Connector for a species in a chemical reaction" annotation (
-          __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
-                -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
-
-    protected
-      final parameter Integer n_trans=size(cartTrans, 1)
-        "Number of components of translational momentum";
-
-    equation
-      // Aliases
-      p = Data.p_Tv(face.T, 1/face.rho);
-
-      // No diffusion across the face
-      face.Ndot = 0 "Material";
-      face.mPhidot[2:3] = {0,0} "Transverse translational momentum";
-      face.Qdot = 0 "Energy";
-
-      // Equal intensive properties
-      chemical.mu = Data.h(face.T, p) - chemical.sT + inSign(side)*face.mPhidot[
-        Orientation.normal]/(face.rho*A) "Electrochemical potential";
-      chemical.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
-        "Velocity";
-      chemical.sT = Data.s(face.T, p)*face.T
-        "Specific entropy-temperature product";
-
-      // Material conservation (without storage)
-      0 = chemical.Ndot + inSign(side)*face.phi[Orientation.normal]*A*face.rho;
-      // The conservation of translational momentum and energy is inherent
-      // in the stream connector.
-
-      annotation (
-        Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
-    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
-    the boundary is due entirely to the electrochemical reaction.</p> 
-    
-    <p>Assumptions:<ol>
-    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
-    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
-    potential.</li> 
-    </ol></p>
-    
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Diagram(graphics),
-        Icon(graphics={
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
-
-    end ChemicalFace;
   end Adapters;
 
   package ByConnector "Conditions for each type of connector"
@@ -9709,7 +9632,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     parameter Q.NumberAbsolute RH(
       displayUnit="%",
       max=1) = 0.8 "Relative humidity";
-    final parameter Q.PressureAbsolute p_H2Og=RH*
+    final parameter Q.PressureAbsolute p_H2O=RH*
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa
       "Pressure of H2O vapor";
     parameter Q.NumberAbsolute n_O2(
@@ -9717,6 +9640,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       displayUnit="%") = 0.208
       "<html>Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
+    final parameter Q.PressureAbsolute p_O2=n_O2*p "Pressure of O2";
 
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces";

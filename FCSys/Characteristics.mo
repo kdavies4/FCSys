@@ -360,11 +360,8 @@ package Characteristics
         final formula="e-",
         phase=Phase.Gas,
         m=Data.MM*U.kg/U.mol,
-        referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
-        h_offset=H2.Gas.Deltah0_f/2 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(
-            298.15*U.K)/2),
         T_lim_c={200.000,20000.000}*U.K,
         b_c={Data.alow} .* fill({U.K^(3 - i) for i in 1:size(Data.alow, 1)},
             size(T_lim_c, 1) - 1),
@@ -372,13 +369,11 @@ package Characteristics
             log(U.K),
         d=2*U.k_A/m);
 
+      //    h_offset=H2.Gas.Deltah0_f/4 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(298.15*U.K)/4),
+
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
-     <li>The default reference enthalpy is such that the specific Gibbs energy of e<sup>-</sup> is in equilibrium with 
-     hydrogen gas with zero electrical potential from protons at 25&nbsp;&deg;C and reference pressure (1&nbsp;bar), i.e.,
-     H<sub>2</sub>&nbsp;&#8652;&nbsp;2H<sup>+</sup>&nbsp;+&nbsp;2e<sup>-</sup> is at equilibrium at constant
-     pressure and temperature.</li>
      <li>The specific electron mass (<code>m</code>) is also given by the
      constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
      <code>2*R_inf*h/(q*c*alpha^2)</code>
@@ -422,8 +417,6 @@ package Characteristics
         phase=Phase.Gas,
         final m=Data.MM*U.kg/U.mol,
         referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
-        h_offset=H2.Gas.Deltah0_f/2 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(
-            298.15*U.K)/2),
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         n_c=-2,
@@ -444,10 +437,7 @@ package Characteristics
 
      <p>Additional notes:
      <ul>
-     <li>The default reference enthalpy is such that the specific Gibbs energy of H<sup>+</sup> is in equilibrium with 
-     hydrogen gas with zero electrical potential from electrons at 25&nbsp;&deg;C and reference pressure (1&nbsp;bar), i.e.,
-     H<sub>2</sub>&nbsp;&#8652;&nbsp;2H<sup>+</sup>&nbsp;+&nbsp;2e<sup>-</sup> is at equilibrium at constant
-     pressure and temperature.</li>
+     <li>The default reference enthalpy is zero at 25&nbsp;&deg;C.</li>
      <li>The source data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] breaks the 
      data into three
    temperature ranges, but the constants are the same for each.
