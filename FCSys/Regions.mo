@@ -53,85 +53,90 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1[n_y, n_z](each
           graphite('incle-'=true, 'e-'(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
             redeclare Modelica.Blocks.Sources.Ramp normalSource(
               height=-U.A/U.cm^2,
               duration=100.1,
-              startTime=0.1)))) annotation (Placement(transformation(
+              startTime=0.1),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSource(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-84,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC2[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
-            redeclare function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2[n_y, n_z](each
+          graphite('incle-'=true, 'e-'(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+              thermalSource(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC3[anFP.n_x, n_z](gas(
-          each inclH2=true,
-          each inclH2O=true,
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3[anFP.n_x, n_z](
+          each gas(
+          inclH2=true,
+          inclH2O=true,
           H2(
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=anStoich*zI*outerProduct(anFP.L_x, L_z)/(sum(anFP.L_x)
-                  *sum(L_z))),
-            redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas)),
-          H2O(redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=BC3.gas.H2.materialOut.y*environment.p_H2O/(
-                  environment.p - environment.p_H2O))))) annotation (Placement(
+            materialSource(y=1.1*(environment.p - environment.p_H2O)),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            thermalSource(y=environment.T)),
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            materialSource(y=1.1*environment.p_H2O),
+            redeclare function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            thermalSource(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,-24})));
 
-      parameter Real R=U.N*U.s/U.m "Flow restriction **unit";
-      // **Specify temperature here and below (use Efforts)
+      parameter Real R(final min=Modelica.Constants.small) = 40*U.kPa*U.min/(2*
+        U.L) "Hydraulic resistance **unit";
       // Parameter for outerProduct(anFP.L_x, L_z) here and below.
       // Use normalMeas for current density.
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSource(y=(fill(
-                      environment.p,
-                      anFP.n_x,
-                      n_z) - BC4.gas.H2.materialOut.y - BC4.gas.H2O.materialOut.y)
-                   .* outerProduct(anFP.L_x, L_z) - BC4.gas.H2O.face.mPhidot[
-                  Orientation.normal])),
-          H2O(
+          H2(
+            materialSource(final y=0),
             redeclare each function materialMeas =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
 
-            normalSource(y=BC4.gas.H2.face.phi[Orientation.normal]))))
+            normalSource(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
+                  L_z) .* BC4.gas.H2.face.phi[Orientation.normal])),
+          H2O(
+            materialSource(final y=0),
+            redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
+            normalSource(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
+                  L_z) .* BC4.gas.H2O.face.phi[Orientation.normal]))))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,24})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC5[caFP.n_x, n_z](
+      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5[caFP.n_x, n_z](
           each gas(
           inclH2O=true,
           inclN2=true,
@@ -140,25 +145,28 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*environment.p_H2O),
+            materialSource(y=1.4*environment.p_H2O),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            thermalSource(y=environment.T)),
           N2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*(environment.p - environment.p_H2O -
+            materialSource(y=1.4*(environment.p - environment.p_H2O -
                   environment.p_O2)),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            thermalSource(y=environment.T)),
           O2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*environment.p_O2),
+            materialSource(y=1.4*environment.p_O2),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
-        annotation (Placement(transformation(
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            thermalSource(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,-24})));
@@ -272,19 +280,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
-        experiment(
-          StopTime=0.0005,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Diagram(graphics),
-        experimentSetupOutput);
       connect(realExpression.y, PI.u) annotation (Line(
           points={{-2.4,40},{18,40}},
           color={0,0,127},
           smooth=Smooth.None));
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
+            "Regions.Examples.FPToFP.mos"),
+        experiment(
+          StopTime=110,
+          Tolerance=1e-06,
+          Algorithm="Dassl"),
+        Diagram(graphics),
+        experimentSetupOutput);
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -1422,7 +1430,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               reduceVel=true,
               reduceTemp=true,
               k_T={5,1,1},
-              k_E=1e-4,
+              k_E=1e-3,
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1431,7 +1439,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initTransZ=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
+              H2O(
+                consTransX=Conservation.IC,
+                consEnergy=Conservation.IC,
+                p_IC=environment.p_H2O)),
             graphite(
               reduceTemp=true,
               k_T=fill((1 - epsilon)^(3/2), 3),
@@ -1450,6 +1461,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
               k_T=fill(epsilon^(3/2), 3),
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
+      // **temp constant temp gas
+
       // **temp excluded  H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
@@ -3250,11 +3263,14 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               reduceVel=true,
               reduceTemp=true,
               k_T={5,1,1},
-              k_E=2e-5,
+              k_E=3e-4,
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
+              H2O(
+                p_IC=environment.p_H2O,
+                consEnergy=Conservation.IC,
+                consTransX=Conservation.IC),
               N2(
                 initTransX=InitTranslational.none,
                 initTransY=InitTranslational.none,
@@ -3287,6 +3303,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
+      // **temp constant temp gas
       // **temp excluded  H2O liq
       // **justify k_T={10,1,1}, (adjust 10 based on channel depth)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase

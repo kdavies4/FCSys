@@ -1844,6 +1844,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     output Q.Force mphiI[n_trans, n_trans](each stateSelect=StateSelect.never)
        = outerProduct(I, Data.m*phi) if environment.analysis
       "Bulk rate of translational advection (1st index: transport axis, 2nd index: translational component)";
+    output Q.Force Vdot[n_trans](each stateSelect=StateSelect.never) = v*I if
+      environment.analysis "Bulk volumetric flow rate";
     output Q.Power hI[n_trans](each stateSelect=StateSelect.never) = h*I if
       environment.analysis "Bulk enthalpy flow rate";
     //
