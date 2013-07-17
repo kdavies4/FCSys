@@ -213,10 +213,10 @@ package Subregions
           'inclC+'=true,
           'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              normalSource(y=-5*U.A/U.cm^2)),
+              normalSet(y=-5*U.A/U.cm^2)),
           'C+'(redeclare function thermalSpec =
                 Conditions.ByConnector.Face.Single.Thermal.temperature,
-              thermalSource(y=environment.T)))) annotation (Placement(
+              thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -227,7 +227,7 @@ package Subregions
           final 'incle-'='incle-',
           'C+'(redeclare function thermalSpec =
                 Conditions.ByConnector.Face.Single.Thermal.temperature,
-              thermalSource(y=environment.T)))) annotation (Placement(
+              thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
@@ -286,7 +286,7 @@ package Subregions
         subregion(gas(H2O(p_IC=U.kPa, consEnergy=Conservation.IC)), liquid(
               inclH2O=inclH2O, H2O(consEnergy=Conservation.IC))));
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(gas(inclH2O=
-              true, H2O(redeclare Modelica.Blocks.Sources.Pulse materialSource(
+              true, H2O(redeclare Modelica.Blocks.Sources.Pulse materialSet(
               amplitude=-U.A,
               width=0.01,
               period=10000,
@@ -366,12 +366,12 @@ package Subregions
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts negativeBC(gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
 
-          H2O(materialSource(y=environment.p_H2O/environment.T))), graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T))), graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -463,7 +463,7 @@ package Subregions
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(inclH2O=
               true, H2O(redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-              redeclare Modelica.Blocks.Sources.Sine normalSource(
+              redeclare Modelica.Blocks.Sources.Sine normalSet(
               amplitude=0.05*Vdot/A,
               offset=Vdot/A,
               freqHz=0.01)))) annotation (Placement(transformation(
@@ -481,7 +481,7 @@ package Subregions
               true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -493,7 +493,7 @@ package Subregions
               true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -505,7 +505,7 @@ package Subregions
               true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -517,7 +517,7 @@ package Subregions
               true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Documentation(info="<html><p>Note that the temperature increases due to viscous dissipation.  
@@ -627,13 +627,13 @@ package Subregions
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          H2O(materialSource(y=environment.p_H2O/environment.T)),
-          H2(materialSource(y=(environment.p - environment.p_H2O - environment.p_O2)
+          H2O(materialSet(y=environment.p_H2O/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O - environment.p_O2)
                   /environment.T)),
-          O2(materialSource(y=environment.p_O2/environment.T))), graphite(
+          O2(materialSet(y=environment.p_O2/environment.T))), graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -725,10 +725,10 @@ package Subregions
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
-        thermalSource(y=environment.T))
+        thermalSet(y=environment.T))
         annotation (Placement(transformation(extent={{-10,6},{10,-14}})));
 
-      Conditions.ByConnector.Face.Single.FaceEfforts majorityBC(materialSource(
+      Conditions.ByConnector.Face.Single.FaceEfforts majorityBC(materialSet(
             y=3.5*U.C/U.cc)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -846,7 +846,7 @@ package Subregions
 
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=3600,
               offset=environment.T,
@@ -856,7 +856,7 @@ package Subregions
 
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=1000,
               offset=environment.T,
@@ -872,7 +872,7 @@ package Subregions
 
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=1000,
               offset=environment.T,
@@ -882,7 +882,7 @@ package Subregions
 
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSource(
+            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=1000,
               offset=environment.T,

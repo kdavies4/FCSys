@@ -58,13 +58,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            redeclare Modelica.Blocks.Sources.Ramp normalSource(
+            redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            thermalSource(y=environment.T)))) annotation (Placement(
+            thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
@@ -73,7 +73,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2[n_y, n_z](each
           graphite('incle-'=true, 'e-'(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-              thermalSource(y=environment.T)))) annotation (Placement(
+              thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -87,18 +87,18 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*(environment.p - environment.p_H2O)),
+            materialSet(y=1.1*(environment.p - environment.p_H2O)),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSource(y=environment.T)),
+            thermalSet(y=environment.T)),
           H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.1*environment.p_H2O),
+            materialSet(y=1.1*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSource(y=environment.T)))) annotation (Placement(
+            thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
@@ -112,24 +112,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each inclH2=true,
           each inclH2O=true,
           H2(
-            materialSource(final y=0),
+            materialSet(final y=0),
             redeclare each function materialMeas =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             redeclare each function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
 
-            normalSource(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
+            normalSet(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
                   L_z) .* BC4.gas.H2.face.phi[Orientation.normal])),
           H2O(
-            materialSource(final y=0),
+            materialSet(final y=0),
             redeclare each function materialMeas =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             redeclare each function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
 
-            normalSource(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
+            normalSet(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
                   L_z) .* BC4.gas.H2O.face.phi[Orientation.normal]))))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -145,27 +145,27 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.4*environment.p_H2O),
+            materialSet(y=1.4*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSource(y=environment.T)),
+            thermalSet(y=environment.T)),
           N2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.4*(environment.p - environment.p_H2O -
+            materialSet(y=1.4*(environment.p - environment.p_H2O -
                   environment.p_O2)),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSource(y=environment.T)),
+            thermalSet(y=environment.T)),
           O2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.4*environment.p_O2),
+            materialSet(y=1.4*environment.p_O2),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSource(y=environment.T)))) annotation (Placement(
+            thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
@@ -179,16 +179,16 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p_H2O)),
+              materialSet(y=environment.p_H2O)),
           N2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p - environment.p_H2O - environment.p_O2)),
+              materialSet(y=environment.p - environment.p_H2O - environment.p_O2)),
 
           O2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p_O2)))) annotation (Placement(
+              materialSet(y=environment.p_O2)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -342,17 +342,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
 
-          H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            redeclare Modelica.Blocks.Sources.Ramp normalSource(
+            redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -365,14 +365,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          H2O(materialSource(y=environment.p_H2O/environment.T)),
-          N2(materialSource(y=(environment.p - environment.p_H2O - environment.p_O2)
+          H2O(materialSet(y=environment.p_H2O/environment.T)),
+          N2(materialSet(y=(environment.p - environment.p_H2O - environment.p_O2)
                   /environment.T)),
-          O2(materialSource(y=environment.p_O2/environment.T))), each graphite(
+          O2(materialSet(y=environment.p_O2/environment.T))), each graphite(
             'incle-'=true, 'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -471,12 +471,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
 
-          H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -489,10 +489,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          H2O(materialSource(y=environment.p_H2O/environment.T)),
-          N2(materialSource(y=(environment.p - environment.p_H2O - environment.p_O2)
+          H2O(materialSet(y=environment.p_H2O/environment.T)),
+          N2(materialSet(y=(environment.p - environment.p_H2O - environment.p_O2)
                   /environment.T)),
-          O2(materialSource(y=environment.p_O2/environment.T))), each graphite(
+          O2(materialSet(y=environment.p_O2/environment.T))), each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -713,12 +713,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
 
-          H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -855,11 +855,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(
           inclH2O=true,
           inclO2=true,
-          H2O(materialSource(y=environment.p_H2O/environment.T)),
-          O2(materialSource(y=environment.p_O2/environment.T))), each graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T)),
+          O2(materialSet(y=environment.p_O2/environment.T))), each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -1081,12 +1081,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSource(y=(environment.p - environment.p_H2O)/environment.T)),
+          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
 
-          H2O(materialSource(y=environment.p_H2O/environment.T))),each graphite(
+          H2O(materialSet(y=environment.p_H2O/environment.T))),each graphite(
             'incle-'=true, 'e-'(redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSource(
+              redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -1187,11 +1187,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
           graphite('incle-'=true, 'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            redeclare Modelica.Blocks.Sources.Ramp normalSource(
+            redeclare Modelica.Blocks.Sources.Ramp normalSet(
               height=-U.A/U.cm^2,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
@@ -1203,7 +1203,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           graphite('incle-'=true, 'e-'(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
-            materialSource(y=0),
+            materialSet(y=0),
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
         annotation (Placement(transformation(
@@ -1218,8 +1218,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p - environment.p_H2O + PID.y)),
-          H2O(materialSource(y=environment.p_H2O + PID.y*environment.p_H2O/(
+              materialSet(y=environment.p - environment.p_H2O + PID.y)),
+          H2O(materialSet(y=environment.p_H2O + PID.y*environment.p_H2O/(
                   environment.p - environment.p_H2O))))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
@@ -1234,12 +1234,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p - environment.p_H2O)),
+              materialSet(y=environment.p - environment.p_H2O)),
           H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=environment.p_H2O),
+            materialSet(y=environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
         annotation (Placement(transformation(
@@ -1256,14 +1256,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*environment.p_H2O),
+            materialSet(y=1.8*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
           N2(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*(environment.p - environment.p_H2O -
+            materialSet(y=1.8*(environment.p - environment.p_H2O -
                   environment.p_O2)),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
@@ -1271,7 +1271,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.8*environment.p_O2),
+            materialSet(y=1.8*environment.p_O2),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
         annotation (Placement(transformation(
@@ -1287,16 +1287,16 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p_H2O)),
+              materialSet(y=environment.p_H2O)),
           N2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p - environment.p_H2O - environment.p_O2)),
+              materialSet(y=environment.p - environment.p_H2O - environment.p_O2)),
 
           O2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSource(y=environment.p_O2)))) annotation (Placement(
+              materialSet(y=environment.p_O2)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,

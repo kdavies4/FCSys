@@ -1843,7 +1843,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(tab="Specification", group="Material"));
-        replaceable Sources.RealExpression materialSource if internalMaterial
+        replaceable Sources.RealExpression materialSet if internalMaterial
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -1875,7 +1875,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="X-axis translational",
             enable=inclTransX));
-        replaceable Sources.RealExpression transXSource if inclTransX and
+        replaceable Sources.RealExpression transXSet if inclTransX and
           internalTransX constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -1907,7 +1907,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Y-axis translational",
             enable=inclTransY));
-        replaceable Sources.RealExpression transYSource if inclTransY and
+        replaceable Sources.RealExpression transYSet if inclTransY and
           internalTransY constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -1939,7 +1939,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Z-axis translational",
             enable=inclTransZ));
-        replaceable Sources.RealExpression transZSource if inclTransZ and
+        replaceable Sources.RealExpression transZSet if inclTransZ and
           internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -1965,7 +1965,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSource if internalThermal
+        replaceable Sources.RealExpression thermalSet if internalThermal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -2224,7 +2224,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(materialSource.y, _u_material) annotation (Line(
+        connect(materialSet.y, _u_material) annotation (Line(
             points={{-69,90},{-60,90},{-60,80},{-36,80}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2235,7 +2235,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transXSource.y, _u_transX) annotation (Line(
+        connect(transXSet.y, _u_transX) annotation (Line(
             points={{-69,50},{-60,50},{-60,40},{-36,40}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2246,7 +2246,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transYSource.y, _u_transY) annotation (Line(
+        connect(transYSet.y, _u_transY) annotation (Line(
             points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2257,7 +2257,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transZSource.y, _u_transZ) annotation (Line(
+        connect(transZSet.y, _u_transZ) annotation (Line(
             points={{-69,-30},{-60,-30},{-60,-40},{-36,-40}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2268,7 +2268,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(thermalSource.y, _u_thermal) annotation (Line(
+        connect(thermalSet.y, _u_thermal) annotation (Line(
             points={{-69,-70},{-60,-70},{-60,-80},{-36,-80}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -4526,9 +4526,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
@@ -4551,9 +4551,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)),
               N2(
                 redeclare replaceable function materialSpec =
@@ -4576,9 +4576,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)),
               O2(
                 redeclare replaceable function materialSpec =
@@ -4601,9 +4601,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K))),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
@@ -4626,9 +4626,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)), 'e-'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4650,9 +4650,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K))),
             ionomer(
               'C19HF37O5S-'(
@@ -4676,9 +4676,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)),
               'H+'(
                 redeclare replaceable function materialSpec =
@@ -4701,9 +4701,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
@@ -4726,9 +4726,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K))),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
@@ -4751,12 +4751,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSource(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
                     y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSource(
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
                     y=300*U.K))));
 
-          // The daltonSource and thermalSource blocks are redeclared as not replaceable
+          // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
 
           // See note in ElectrochemEfforts.
@@ -5230,7 +5230,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Material"));
-          replaceable Sources.RealExpression materialSource if internalMaterial
+          replaceable Sources.RealExpression materialSet if internalMaterial
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5255,7 +5255,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Normal translational"));
-          replaceable Sources.RealExpression normalSource if internalNormal
+          replaceable Sources.RealExpression normalSet if internalNormal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5281,7 +5281,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSource if
+          replaceable Sources.RealExpression followingSet if
             internalFollowing constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5309,7 +5309,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSource if
+          replaceable Sources.RealExpression precedingSet if
             internalPreceding constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5336,7 +5336,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Thermal"));
-          replaceable Sources.RealExpression thermalSource if internalThermal
+          replaceable Sources.RealExpression thermalSet if internalThermal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5600,7 +5600,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(materialSource.y, _u_material) annotation (Line(
+          connect(materialSet.y, _u_material) annotation (Line(
               points={{-70,29},{-70,20},{-80,20},{-80,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -5611,7 +5611,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(normalSource.y, _u_normal) annotation (Line(
+          connect(normalSet.y, _u_normal) annotation (Line(
               points={{-30,29},{-30,20},{-40,20},{-40,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -5623,7 +5623,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingSource.y, _u_following) annotation (Line(
+          connect(followingSet.y, _u_following) annotation (Line(
               points={{10,29},{10,20},{5.55112e-16,20},{5.55112e-16,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -5634,7 +5634,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingSource.y, _u_preceding) annotation (Line(
+          connect(precedingSet.y, _u_preceding) annotation (Line(
               points={{50,29},{50,20},{40,20},{40,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -5645,7 +5645,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(thermalSource.y, _u_thermal) annotation (Line(
+          connect(thermalSet.y, _u_thermal) annotation (Line(
               points={{90,29},{90,20},{80,20},{80,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -5898,7 +5898,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Material"));
-          replaceable Sources.RealExpression materialSource if internalMaterial
+          replaceable Sources.RealExpression materialSet if internalMaterial
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5925,7 +5925,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Normal translational"));
-          replaceable Sources.RealExpression normalSource if internalNormal
+          replaceable Sources.RealExpression normalSet if internalNormal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5951,7 +5951,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSource if
+          replaceable Sources.RealExpression followingSet if
             internalFollowing constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -5979,7 +5979,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSource if
+          replaceable Sources.RealExpression precedingSet if
             internalPreceding constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -6006,7 +6006,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Thermal"));
-          replaceable Sources.RealExpression thermalSource if internalThermal
+          replaceable Sources.RealExpression thermalSet if internalThermal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -6219,7 +6219,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(materialSource.y, _u_material) annotation (Line(
+          connect(materialSet.y, _u_material) annotation (Line(
               points={{-29,90},{-20,90},{-20,80},{4,80}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6242,7 +6242,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(normalSource.y, _u_normal) annotation (Line(
+          connect(normalSet.y, _u_normal) annotation (Line(
               points={{-29,50},{-20,50},{-20,40},{4,40}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6266,7 +6266,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingSource.y, _u_following) annotation (Line(
+          connect(followingSet.y, _u_following) annotation (Line(
               points={{-29,10},{-20,10},{-20,5.55112e-16},{4,5.55112e-16}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6291,7 +6291,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingSource.y, _u_preceding) annotation (Line(
+          connect(precedingSet.y, _u_preceding) annotation (Line(
               points={{-29,-30},{-20,-30},{-20,-40},{4,-40}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6310,7 +6310,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{6,3},{6,3}}));
 
           // Thermal
-          connect(thermalSource.y, _u_thermal) annotation (Line(
+          connect(thermalSet.y, _u_thermal) annotation (Line(
               points={{-29,-70},{-20,-70},{-20,-80},{4,-80}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6361,12 +6361,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 Conditions.ByConnector.Face.Single.Translational.force,
             redeclare replaceable function thermalMeas =
                 Conditions.ByConnector.Face.Single.Thermal.heatRate,
-            redeclare Modelica.Blocks.Sources.RealExpression materialSource(y=4
+            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=4
                   *U.C/U.cc),
-            redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=
+            redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                   300*U.K));
 
-          // The daltonSource and thermalSource blocks are redeclared as not replaceable
+          // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
 
           // See note in ElectrochemEfforts.
@@ -6588,7 +6588,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="X-axis translational",
             enable=inclTransX));
-        replaceable Sources.RealExpression transXSource if inclTransX and
+        replaceable Sources.RealExpression transXSet if inclTransX and
           internalTransX constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6621,7 +6621,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Y-axis translational",
             enable=inclTransY));
-        replaceable Sources.RealExpression transYSource if inclTransY and
+        replaceable Sources.RealExpression transYSet if inclTransY and
           internalTransY constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6653,7 +6653,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Z-axis translational",
             enable=inclTransZ));
-        replaceable Sources.RealExpression transZSource if inclTransZ and
+        replaceable Sources.RealExpression transZSet if inclTransZ and
           internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6679,7 +6679,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSource if internalThermal
+        replaceable Sources.RealExpression thermalSet if internalThermal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6890,7 +6890,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transXSource.y, _u_transX) annotation (Line(
+        connect(transXSet.y, _u_transX) annotation (Line(
             points={{-69,70},{-60,70},{-60,60},{-36,60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -6901,7 +6901,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transYSource.y, _u_transY) annotation (Line(
+        connect(transYSet.y, _u_transY) annotation (Line(
             points={{-69,30},{-60,30},{-60,20},{-36,20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -6912,7 +6912,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transZSource.y, _u_transZ) annotation (Line(
+        connect(transZSet.y, _u_transZ) annotation (Line(
             points={{-69,-10},{-60,-10},{-60,-20},{-36,-20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -6923,7 +6923,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(thermalSource.y, _u_thermal) annotation (Line(
+        connect(thermalSet.y, _u_thermal) annotation (Line(
             points={{-69,-50},{-60,-50},{-60,-60},{-36,-60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -6953,9 +6953,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Conditions.ByConnector.Inert.Translational.force,
           redeclare replaceable function thermalMeas =
               Conditions.ByConnector.Inert.Thermal.heatRate,
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=300*
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
                 U.K));
-        // The daltonSource and thermalSource blocks are redeclared as not replaceable
+        // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
         // See note in ElectrochemEfforts.
@@ -7104,7 +7104,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="X-axis translational",
             enable=inclTransX));
-        replaceable Sources.RealExpression transXSource if inclTransX and
+        replaceable Sources.RealExpression transXSet if inclTransX and
           internalTransX constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7136,7 +7136,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Y-axis translational",
             enable=inclTransY));
-        replaceable Sources.RealExpression transYSource if inclTransY and
+        replaceable Sources.RealExpression transYSet if inclTransY and
           internalTransY constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7167,7 +7167,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Z-axis translational",
             enable=inclTransZ));
-        replaceable Sources.RealExpression transZSource if inclTransZ and
+        replaceable Sources.RealExpression transZSet if inclTransZ and
           internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7192,7 +7192,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSource if internalThermal
+        replaceable Sources.RealExpression thermalSet if internalThermal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7471,7 +7471,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transXSource.y, _u_transX) annotation (Line(
+        connect(transXSet.y, _u_transX) annotation (Line(
             points={{-69,70},{-60,70},{-60,60},{-36,60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -7482,7 +7482,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transYSource.y, _u_transY) annotation (Line(
+        connect(transYSet.y, _u_transY) annotation (Line(
             points={{-69,30},{-60,30},{-60,20},{-36,20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -7493,7 +7493,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transZSource.y, _u_transZ) annotation (Line(
+        connect(transZSet.y, _u_transZ) annotation (Line(
             points={{-69,-10},{-60,-10},{-60,-20},{-36,-20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -7504,7 +7504,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(thermalSource.y, _u_thermal) annotation (Line(
+        connect(thermalSet.y, _u_thermal) annotation (Line(
             points={{-69,-50},{-60,-50},{-60,-60},{-36,-60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -7530,10 +7530,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function thermalMeas = Thermal.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression amagatSource(y=U.atm),
 
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=300*
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
                 U.K));
 
-        // The daltonSource and thermalSource blocks are redeclared as not replaceable
+        // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
         // See note in ElectrochemEfforts.
@@ -7796,7 +7796,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="X-axis translational",
             enable=inclTransX));
-        replaceable Sources.RealExpression transXSource if inclTransX and
+        replaceable Sources.RealExpression transXSet if inclTransX and
           internalTransX constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7828,7 +7828,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Y-axis translational",
             enable=inclTransY));
-        replaceable Sources.RealExpression transYSource if inclTransY and
+        replaceable Sources.RealExpression transYSet if inclTransY and
           internalTransY constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7859,7 +7859,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Z-axis translational",
             enable=inclTransZ));
-        replaceable Sources.RealExpression transZSource if inclTransZ and
+        replaceable Sources.RealExpression transZSet if inclTransZ and
           internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -7884,7 +7884,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSource if internalThermal
+        replaceable Sources.RealExpression thermalSet if internalThermal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -8163,7 +8163,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transXSource.y, _u_transX) annotation (Line(
+        connect(transXSet.y, _u_transX) annotation (Line(
             points={{-69,70},{-60,70},{-60,60},{-36,60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8174,7 +8174,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transYSource.y, _u_transY) annotation (Line(
+        connect(transYSet.y, _u_transY) annotation (Line(
             points={{-69,30},{-60,30},{-60,20},{-36,20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8185,7 +8185,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transZSource.y, _u_transZ) annotation (Line(
+        connect(transZSet.y, _u_transZ) annotation (Line(
             points={{-69,-10},{-60,-10},{-60,-20},{-36,-20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8196,7 +8196,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(thermalSource.y, _u_thermal) annotation (Line(
+        connect(thermalSet.y, _u_thermal) annotation (Line(
             points={{-69,-50},{-60,-50},{-60,-60},{-36,-60}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8222,11 +8222,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function thermalMeas = Thermal.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression daltonSource(y=U.cc),
 
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSource(y=300*
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
                 U.K));
 
         // See note in ElectrochemEfforts.
-        // The daltonSource and thermalSource blocks are redeclared as not replaceable
+        // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
         annotation (defaultComponentName="dalton");
@@ -8423,7 +8423,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="X-axis translational",
             enable=inclTransX));
-        replaceable Sources.RealExpression transXSource if inclTransX and
+        replaceable Sources.RealExpression transXSet if inclTransX and
           internalTransX constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -8456,7 +8456,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Y-axis translational",
             enable=inclTransY));
-        replaceable Sources.RealExpression transYSource if inclTransY and
+        replaceable Sources.RealExpression transYSet if inclTransY and
           internalTransY constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -8489,7 +8489,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Specification",
             group="Z-axis translational",
             enable=inclTransZ));
-        replaceable Sources.RealExpression transZSource if inclTransZ and
+        replaceable Sources.RealExpression transZSet if inclTransZ and
           internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -8654,7 +8654,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transXSource.y, _u_transX) annotation (Line(
+        connect(transXSet.y, _u_transX) annotation (Line(
             points={{-69,50},{-60,50},{-60,40},{-36,40}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8665,7 +8665,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transYSource.y, _u_transY) annotation (Line(
+        connect(transYSet.y, _u_transY) annotation (Line(
             points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -8676,7 +8676,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(transZSource.y, _u_transZ) annotation (Line(
+        connect(transZSet.y, _u_transZ) annotation (Line(
             points={{-69,-30},{-60,-30},{-60,-40},{-36,-40}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -9241,11 +9241,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           each 'inclC+'=true,
           each 'incle-'=true,
           each 'C+'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSource(y=T_an)),
+              thermalSet(y=T_an)),
           'e-'(
-            normalSource(y=w*anBC.graphite.'e-'.face.rho .* A_seg),
+            normalSet(y=w*anBC.graphite.'e-'.face.rho .* A_seg),
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca))))
+            each thermalSet(y=T_ca))))
         "Boundary conditions for the anode end plate" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -9256,9 +9256,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           each 'inclC+'=true,
           each 'incle-'=true,
           each 'C+'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSource(y=T_ca)),
+              thermalSet(y=T_ca)),
           each 'e-'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSource(y=T_ca))))
+              thermalSet(y=T_ca))))
         "Boundary conditions for the cathode end plate" annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
@@ -9270,26 +9270,26 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_an_in),
+            normalSet(y=phi_an_in),
             redeclare function followingSpec = Single.Translational.velocity,
             redeclare function precedingSpec = Single.Translational.velocity,
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_in)),
+            each thermalSet(y=T_an_in)),
           H2O(
             redeclare each function materialSpec = Single.Material.density,
-            each materialSource(y=1/DataH2O.v_Tp(T_an_in, p_H2O_an_in)),
+            each materialSet(y=1/DataH2O.v_Tp(T_an_in, p_H2O_an_in)),
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_an_in),
+            normalSet(y=phi_an_in),
             redeclare function followingSpec = Single.Translational.velocity,
             redeclare function precedingSpec = Single.Translational.velocity,
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_in))), liquid(each inclH2O=true, H2O(
-            normalSource(y=-inSign(caInletSide)*p_H2Ol_an_in*A_an),
+            each thermalSet(y=T_an_in))), liquid(each inclH2O=true, H2O(
+            normalSet(y=-inSign(caInletSide)*p_H2Ol_an_in*A_an),
             redeclare function followingSpec = Single.Translational.velocity,
             redeclare function precedingSpec = Single.Translational.velocity,
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_in))))
+            each thermalSet(y=T_an_in))))
         "Boundary conditions for the anode inlet" annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
@@ -9302,18 +9302,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_an_out),
+            normalSet(y=phi_an_out),
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_out)),
+            each thermalSet(y=T_an_out)),
           H2O(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_an_out),
+            normalSet(y=phi_an_out),
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_out))), liquid(each inclH2O=true, H2O(
-            normalSource(y=inSign(anInletSide)*p_an_out*A_an),
+            each thermalSet(y=T_an_out))), liquid(each inclH2O=true, H2O(
+            normalSet(y=inSign(anInletSide)*p_an_out*A_an),
             redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_an_out))))
+            each thermalSet(y=T_an_out))))
         "Boundary conditions for the anode outlet" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -9326,45 +9326,45 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           each inclO2=true,
           H2O(
             redeclare each function materialSpec = Single.Material.density,
-            each materialSource(y=1/DataH2O.v_Tp(T_ca_in, p_H2O_ca_in)),
+            each materialSet(y=1/DataH2O.v_Tp(T_ca_in, p_H2O_ca_in)),
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_in),
+            normalSet(y=phi_ca_in),
             redeclare each function followingSpec =
                 Single.Translational.velocity,
             redeclare each function precedingSpec =
                 Single.Translational.velocity,
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_in)),
+            each thermalSet(y=T_ca_in)),
           N2(
             redeclare each function materialSpec = Single.Material.density,
-            materialSource(y=caSource.gas.O2.face.rho*(1/n_O2 - 1)),
+            materialSet(y=caSource.gas.O2.face.rho*(1/n_O2 - 1)),
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_in),
+            normalSet(y=phi_ca_in),
             redeclare each function followingSpec =
                 Single.Translational.velocity,
             redeclare each function precedingSpec =
                 Single.Translational.velocity,
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_in)),
+            each thermalSet(y=T_ca_in)),
           O2(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_in),
+            normalSet(y=phi_ca_in),
             redeclare each function followingSpec =
                 Single.Translational.velocity,
             redeclare each function precedingSpec =
                 Single.Translational.velocity,
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_in))), liquid(each inclH2O=true, H2O(
-            normalSource(y=-inSign(caInletSide)*p_H2Ol_ca_in*A_ca),
+            each thermalSet(y=T_ca_in))), liquid(each inclH2O=true, H2O(
+            normalSet(y=-inSign(caInletSide)*p_H2Ol_ca_in*A_ca),
             redeclare each function followingSpec =
                 Single.Translational.velocity,
             redeclare each function precedingSpec =
                 Single.Translational.velocity,
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_in))))
+            each thermalSet(y=T_ca_in))))
         "Boundary conditions for the cathode inlet" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -9378,24 +9378,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2O(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_out),
+            normalSet(y=phi_ca_out),
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_out)),
+            each thermalSet(y=T_ca_out)),
           N2(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_out),
+            normalSet(y=phi_ca_out),
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_out)),
+            each thermalSet(y=T_ca_out)),
           O2(
             redeclare function normalSpec = Single.TranslationalNormal.velocity,
 
-            normalSource(y=phi_ca_out),
+            normalSet(y=phi_ca_out),
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_out))), liquid(each inclH2O=true, H2O(
-            normalSource(y=inSign(caInletSide)*p_ca_out*A_ca),
+            each thermalSet(y=T_ca_out))), liquid(each inclH2O=true, H2O(
+            normalSet(y=inSign(caInletSide)*p_ca_out*A_ca),
             redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSource(y=T_ca_out))))
+            each thermalSet(y=T_ca_out))))
         "Boundary conditions for the cathode outlet" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
