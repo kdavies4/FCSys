@@ -307,7 +307,6 @@ package Conditions "Models to specify and measure operating conditions"
               color={127,127,127},
               smooth=Smooth.None,
               thickness=0.5)}));
-
     end AmagatDalton;
 
     model ChemicalFace
@@ -401,7 +400,6 @@ package Conditions "Models to specify and measure operating conditions"
               color={127,127,127},
               smooth=Smooth.None,
               thickness=0.5)}));
-
     end ChemicalFace;
 
     model ChemicalReaction
@@ -471,7 +469,6 @@ package Conditions "Models to specify and measure operating conditions"
               smooth=Smooth.None,
               thickness=0.5)}),
         Diagram(graphics));
-
     end ChemicalReaction;
 
     package MSL
@@ -583,38 +580,31 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,60},{0,-100}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,20},{80,20}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-20},{80,-20}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,60},{80,60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-60},{80,-60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-100},{70,-100}},
-                color={0,127,0},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,60},{0,-100}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,20},{80,20}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-20},{80,-20}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{80,60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-60},{80,-60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-100},{70,-100}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}));
       end Anode;
 
       model Cathode
@@ -720,38 +710,31 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,60},{0,-100}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,20},{80,20}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-20},{80,-20}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,60},{80,60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-60},{80,-60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-100},{70,-100}},
-                color={0,127,0},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,60},{0,-100}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,20},{80,20}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-20},{80,-20}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{80,60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-60},{80,-60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-100},{70,-100}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}));
       end Cathode;
 
       model Conductor
@@ -809,30 +792,25 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,127,0},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,0},{70,0}},
-                color={0,127,0},
-                smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,40},{80,40}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{80,-40}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,0},{70,0}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}), Diagram(graphics));
       end Conductor;
 
       package Phases "Adapters for material phases"
@@ -1265,24 +1243,20 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={
-                Line(
-                  points={{0,0},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),
-                Line(
-                  points={{0,0},{70,0}},
-                  color={0,0,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{70,-40}},
-                  color={140,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{-70,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+          annotation (Icon(graphics={Line(
+                          points={{0,0},{0,-40}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          pattern=LinePattern.Dash),Line(
+                          points={{0,0},{70,0}},
+                          color={0,0,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{70,-40}},
+                          color={140,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{-70,0},{0,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end 'e-';
 
         model Fluid
@@ -1355,32 +1329,26 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={
-                Line(
-                  points={{0,40},{70,40}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,40},{0,-80}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),
-                Line(
-                  points={{0,0},{70,0}},
-                  color={0,127,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-80},{70,-80}},
-                  color={0,0,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{70,-40}},
-                  color={140,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{-70,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+          annotation (Icon(graphics={Line(
+                          points={{0,40},{70,40}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,40},{0,-80}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          pattern=LinePattern.Dash),Line(
+                          points={{0,0},{70,0}},
+                          color={0,127,0},
+                          smooth=Smooth.None),Line(
+                          points={{0,-80},{70,-80}},
+                          color={0,0,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{70,-40}},
+                          color={140,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{-70,0},{0,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end Fluid;
 
         model FluidNeutral
@@ -1444,28 +1412,23 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={
-                Line(
-                  points={{0,40},{70,40}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),
-                Line(
-                  points={{0,0},{70,0}},
-                  color={0,127,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{70,-40}},
-                  color={140,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{-70,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+          annotation (Icon(graphics={Line(
+                          points={{0,40},{70,40}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,40},{0,-40}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          pattern=LinePattern.Dash),Line(
+                          points={{0,0},{70,0}},
+                          color={0,127,0},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{70,-40}},
+                          color={140,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{-70,0},{0,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end FluidNeutral;
 
         model Solid
@@ -1504,24 +1467,20 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={
-                Line(
-                  points={{0,0},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),
-                Line(
-                  points={{0,0},{70,0}},
-                  color={0,127,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{-70,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{70,-40}},
-                  color={140,0,0},
-                  smooth=Smooth.None)}));
+          annotation (Icon(graphics={Line(
+                          points={{0,0},{0,-40}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          pattern=LinePattern.Dash),Line(
+                          points={{0,0},{70,0}},
+                          color={0,127,0},
+                          smooth=Smooth.None),Line(
+                          points={{-70,0},{0,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{70,-40}},
+                          color={140,0,0},
+                          smooth=Smooth.None)}));
         end Solid;
 
       end Species;
@@ -6320,8 +6279,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_following, u.following) annotation (Line(
-              points={{-70,5.55112e-16},{-90,5.55112e-16},{-90,5.55112e-16},{
-                  -110,5.55112e-16}},
+              points={{-70,5.55112e-16},{-90,5.55112e-16},{-90,5.55112e-16},{-110,
+                  5.55112e-16}},
               color={0,0,127},
               smooth=Smooth.None));
 
@@ -7642,7 +7601,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
-
       end Volume;
 
       package Amagat "Conditions for additivity of volume"
@@ -8965,7 +8923,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics));
-
     end TestStandEIS;
 
     model TestStand "Fuel cell test stand (applies boundary conditions)"
@@ -9584,11 +9541,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
+                  extent={{-160,160},{160,-160}},
+                  lineColor={191,191,191},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+              {160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.

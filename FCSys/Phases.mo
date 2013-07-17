@@ -121,7 +121,7 @@ package Phases "Mixtures of species"
     Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
       annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
           iconTransformation(extent={{-61,39},{-41,59}})));
-    Connectors.Reaction chemical if inclHOR or inclORR
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for a chemical reaction" annotation (Placement(transformation(
             extent={{-50,40},{-30,60}}), iconTransformation(extent={{-10,-54},{
               10,-34}})));
@@ -461,7 +461,7 @@ package Phases "Mixtures of species"
       final m='e-'.Data.m) if inclORR
       annotation (Placement(transformation(extent={{30,50},{10,70}})));
 
-    Connectors.Reaction chemical if inclHOR or inclORR
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for a chemical reaction" annotation (Placement(transformation(
             extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,-54},{
               10,-34}})));
@@ -744,7 +744,7 @@ package Phases "Mixtures of species"
     Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
       annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
           iconTransformation(extent={{-61,39},{-41,59}})));
-    Connectors.Reaction chemical if inclHOR or inclORR
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for a chemical reaction" annotation (Placement(transformation(
             extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,-54},{
               10,-34}})));
@@ -1047,13 +1047,16 @@ package Phases "Mixtures of species"
         points={{6.10623e-16,6.10623e-16},{-20,-20}},
         color={127,127,127},
         smooth=Smooth.None));
-    annotation (Documentation(info="<html><p>Assumptions:<ol>
+    annotation (
+      Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
     </ol</p>
     
     <p>Please see the documentation of the
  <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
-        Icon(graphics));
+
+      Icon(graphics),
+      Diagram(graphics));
   end Liquid;
 
   package BaseClasses "Base classes (generally not for direct use)"
@@ -1074,7 +1077,7 @@ package Phases "Mixtures of species"
         min=Modelica.Constants.small,
         final nominal=1) = 1 if n_spec > 0 "Coupling factor for exchange"
         annotation (Dialog(group="Geometry",__Dymola_label=
-              "<html><b><i>k</i><sub>E</sub></b></html>"));
+              "<html><i>k</i><sub>E</sub></html>"));
       parameter Q.NumberAbsolute k_T[Axis](
         each min=Modelica.Constants.small,
         each final nominal=1) = {1,1,1} if n_spec > 0

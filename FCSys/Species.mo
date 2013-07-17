@@ -36,9 +36,9 @@ package Species "Dynamic models of chemical species"
                   {100,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Text(
-                extent={{-150,90},{-118,52}},
-                lineColor={0,0,255},
-                textString="%t.test")}));
+                      extent={{-150,90},{-118,52}},
+                      lineColor={0,0,255},
+                      textString="%t.test")}));
 
       end Calibrated;
 
@@ -1134,7 +1134,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 <tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
   </table>
 
-  <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+  <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+
+          Diagram(graphics));
 
       end Fixed;
 
@@ -1481,6 +1483,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       final tauprime=0,
       final beta=1,
       final zeta=1);
+
     // Note:  beta and zeta don't matter as long as they are nonzero.
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -2045,9 +2048,9 @@ Check that the volumes of the other phases are set properly.");
 Choose any condition besides None.");
     elseif consMaterial == Conservation.dynamic then
       // Initialize since there's a time-varying state.
-      if initMaterial == InitScalar.Amount then
+      if initMaterial == InitScalar.amount then
         N = N_IC;
-      elseif initMaterial == InitScalar.AmountSS then
+      elseif initMaterial == InitScalar.amountSS then
         der(N) = 0;
       elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
@@ -2122,9 +2125,9 @@ Choose any condition besides None.");
 Choose any condition besides None.");
     elseif consEnergy == Conservation.dynamic then
       // Initialize since there's a time-varying state.
-      if initEnergy == InitScalar.Amount then
+      if initEnergy == InitScalar.amount then
         N = N_IC;
-      elseif initEnergy == InitScalar.AmountSS then
+      elseif initEnergy == InitScalar.amountSS then
         der(N) = 0;
       elseif initEnergy == InitScalar.density then
         1/v = rho_IC;
@@ -2281,9 +2284,9 @@ Choose any condition besides None.");
     // Material dynamics
     if consMaterial == Conservation.IC then
       // Apply the IC forever (material not conserved).
-      if initMaterial == InitScalar.Amount then
+      if initMaterial == InitScalar.amount then
         N = N_IC;
-      elseif initMaterial == InitScalar.AmountSS then
+      elseif initMaterial == InitScalar.amountSS then
         der(N) = 0;
       elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
@@ -2354,9 +2357,9 @@ Choose any condition besides None.");
     // Thermal dynamics
     if consEnergy == Conservation.IC then
       // Apply the IC forever (energy not conserved).
-      if initEnergy == InitScalar.Amount then
+      if initEnergy == InitScalar.amount then
         N = N_IC;
-      elseif initEnergy == InitScalar.AmountSS then
+      elseif initEnergy == InitScalar.amountSS then
         der(N) = 0;
       elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
@@ -2691,7 +2694,8 @@ Choose any condition besides None.");
     0 = reaction.mu*reaction.Ndot + inert.translational.mPhidot*(inert.translational.phi
        - reaction.phi) + inert.thermal.Qdot + reaction.Qdot "Energy";
 
-    annotation (Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
   <p>This model establishes the rate of an electrochemical reaction
   using the Butler-Volmer equation.  It includes an energy balance with heat generation.
   The heat is rejected to <code>inert.thermal.Qdot</code>, independently of the
@@ -2711,12 +2715,14 @@ Choose any condition besides None.");
     <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
     unit of catalyst surface area).</p>
 
-    <p></p></html>"), Icon(graphics={Ellipse(
+    <p></p></html>"),
+      Icon(graphics={Ellipse(
             extent={{-40,40},{40,-40}},
             lineColor={127,127,127},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}));
+            pattern=LinePattern.Dash)}),
+      Diagram(graphics));
   end Reaction;
 
   package BaseClasses "Base classes (generally not for direct use)"
@@ -2724,33 +2730,33 @@ Choose any condition besides None.");
     extends Modelica.Icons.BasesPackage;
     type Conservation = enumeration(
         IC "Initial condition imposed forever (no conservation)",
-        Steady "Steady (conservation with steady state)",
-        Dynamic "Dynamic (conservation with storage)")
+        steady "Steady (conservation with steady state)",
+        dynamic "Dynamic (conservation with storage)")
       "Options for a conservation equation";
     type InitScalar = enumeration(
-        None "No initialization",
-        Amount "Prescribed amount",
-        AmountSS "Steady-state amount",
-        Density "Prescribed density",
-        DensitySS "Steady-state density",
-        Volume "Prescribed volume",
-        VolumeSS "Steady-state volume",
-        Pressure "Prescribed pressure",
-        PressureSS "Steady-state pressure",
-        Temperature "Prescribed temperature",
-        TemperatureSS "Steady-state temperature",
-        SpecificEnthalpy "Prescribed specific enthalpy",
-        SpecificEnthalpySS "Steady-state specific enthalpy",
-        PotentialGibbs "Prescribed Gibbs potential",
-        PotentialGibbsSS "Steady-state Gibbs potential")
+        none "No initialization",
+        amount "Prescribed amount",
+        amountSS "Steady-state amount",
+        density "Prescribed density",
+        densitySS "Steady-state density",
+        volume "Prescribed volume",
+        volumeSS "Steady-state volume",
+        pressure "Prescribed pressure",
+        pressureSS "Steady-state pressure",
+        temperature "Prescribed temperature",
+        temperatureSS "Steady-state temperature",
+        specificEnthalpy "Prescribed specific enthalpy",
+        specificEnthalpySS "Steady-state specific enthalpy",
+        potentialGibbs "Prescribed Gibbs potential",
+        potentialGibbsSS "Steady-state Gibbs potential")
       "Methods of initializing scalar quantities (material and energy)";
 
     type InitTranslational = enumeration(
-        None "No initialization",
-        Velocity "Prescribed velocity",
-        VelocitySS "Steady-state velocity",
-        Current "Prescribed advective current",
-        CurrentSS "Steady-state advective current")
+        none "No initialization",
+        velocity "Prescribed velocity",
+        velocitySS "Steady-state velocity",
+        current "Prescribed advective current",
+        currentSS "Steady-state advective current")
       "Methods of initializing translational momentum";
 
   end BaseClasses;

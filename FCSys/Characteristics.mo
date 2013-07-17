@@ -419,7 +419,7 @@ package Characteristics
         final formula="H+",
         phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
-        referenceEnthalpy=ReferenceEnthalpy.zeroAt,
+        referenceEnthalpy=ReferenceEnthalpy.zeroAt25degC,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         n_c=-2,
@@ -846,7 +846,7 @@ package Characteristics
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
-      constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt
+      constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC
         "Choice of enthalpy reference";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</html>";
@@ -1088,8 +1088,8 @@ package Characteristics
         //    "Error, not all 'end' could be expanded."
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
-          1))) + (if referenceEnthalpy == ReferenceEnthalpy.zeroAt then
-          Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.enthalpyOfFormationAt
+          1))) + (if referenceEnthalpy == ReferenceEnthalpy.zeroAt0K then
+          Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.enthalpyOfFormationAt25degC
            then 0 else Deltah0_f) + h_offset + h_resid(T, p) - (if phase <>
           Phase.gas then h_resid(T, p0) else h_resid(
                 T,
@@ -1485,7 +1485,7 @@ temperature difference.</p>
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <code>p0</code>.
     For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <code>p0</code> with
-    <code>ReferenceEnthalpy.zeroAt</code> selected is not exactly zero.</li>
+    <code>ReferenceEnthalpy.zeroAt25degC</code> selected is not exactly zero.</li>
 
     <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
@@ -1666,14 +1666,14 @@ temperature difference.</p>
     end CharacteristicEOS;
 
     type Phase = enumeration(
-        Gas "Gas",
-        Solid "Solid",
-        Liquid "Liquid") "Enumeration for material phases";
+        gas "Gas",
+        solid "Solid",
+        liquid "Liquid") "Enumeration for material phases";
     type ReferenceEnthalpy = enumeration(
-        ZeroAt0K "Enthalpy at 0 K and p0 is 0 (if no additional offset)",
-        ZeroAt25degC
+        zeroAt0K "Enthalpy at 0 K and p0 is 0 (if no additional offset)",
+        zeroAt25degC
           "Enthalpy at 25 degC and p0 is 0 (if no additional offset)",
-        EnthalpyOfFormationAt25degC
+        enthalpyOfFormationAt25degC
           "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
 

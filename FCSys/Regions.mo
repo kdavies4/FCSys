@@ -23,7 +23,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry",__Dymola_label=
+        annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
@@ -100,7 +100,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
-          H2(redeclare function materialSpec =
+          each H2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
               materialSource(y=environment.p - environment.p_H2O)),
@@ -175,10 +175,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
-      Modelica.Blocks.Continuous.PI PI
-        annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-      Conditions.TestStands.TestStand testStand
-        annotation (Placement(transformation(extent={{-32,58},{0,90}})));
     equation
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
           points={{-50,6.10623e-16},{-50,6.10623e-16}},
@@ -765,8 +761,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       connect(PEM.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,
-              -3.65701e-16}},
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,-3.65701e-16}},
+
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1098,12 +1094,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         experimentSetupOutput);
     end AnCLPEM;
 
-    model test
-
-      type r = Real;
-      type r2 = input Real;
-
-    end test;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -1991,7 +1981,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2527,7 +2516,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
