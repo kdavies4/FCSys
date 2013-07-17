@@ -4526,10 +4526,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4551,10 +4551,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)),
               N2(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4576,10 +4576,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)),
               O2(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4601,10 +4601,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K))),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K))),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4626,10 +4626,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)), 'e-'(
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)), 'e-'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
                 redeclare replaceable function normalSpec =
@@ -4650,10 +4650,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K))),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K))),
             ionomer(
               'C19HF37O5S-'(
                 redeclare replaceable function materialSpec =
@@ -4676,10 +4676,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)),
               'H+'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4701,10 +4701,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K)),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4726,10 +4726,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K))),
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K))),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
@@ -4751,10 +4751,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(
-                    y=4*U.C/U.cc),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(
-                    y=300*U.K))));
+                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
+                      4*U.C/U.cc),
+                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
+                      300*U.K))));
 
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
@@ -5281,8 +5281,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSet if
-            internalFollowing constrainedby Modelica.Blocks.Interfaces.SO
+          replaceable Sources.RealExpression followingSet if internalFollowing
+            constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
@@ -5309,8 +5309,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSet if
-            internalPreceding constrainedby Modelica.Blocks.Interfaces.SO
+          replaceable Sources.RealExpression precedingSet if internalPreceding
+            constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
@@ -5951,8 +5951,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSet if
-            internalFollowing constrainedby Modelica.Blocks.Interfaces.SO
+          replaceable Sources.RealExpression followingSet if internalFollowing
+            constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
@@ -5979,8 +5979,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSet if
-            internalPreceding constrainedby Modelica.Blocks.Interfaces.SO
+          replaceable Sources.RealExpression precedingSet if internalPreceding
+            constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
@@ -6361,10 +6361,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 Conditions.ByConnector.Face.Single.Translational.force,
             redeclare replaceable function thermalMeas =
                 Conditions.ByConnector.Face.Single.Thermal.heatRate,
-            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=4
-                  *U.C/U.cc),
-            redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                  300*U.K));
+            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=4*U.C
+                  /U.cc),
+            redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*U.K));
 
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
@@ -6953,8 +6952,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Conditions.ByConnector.Inert.Translational.force,
           redeclare replaceable function thermalMeas =
               Conditions.ByConnector.Inert.Thermal.heatRate,
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
-                U.K));
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*U.K));
         // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
@@ -7530,8 +7528,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function thermalMeas = Thermal.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression amagatSource(y=U.atm),
 
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
-                U.K));
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*U.K));
 
         // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
@@ -8222,8 +8219,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function thermalMeas = Thermal.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression daltonSource(y=U.cc),
 
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*
-                U.K));
+          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=300*U.K));
 
         // See note in ElectrochemEfforts.
         // The daltonSource and thermalSet blocks are redeclared as not replaceable

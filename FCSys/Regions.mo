@@ -64,8 +64,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               startTime=0.1),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            thermalSet(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-84,0})));
@@ -98,40 +97,23 @@ package Regions "3D arrays of discrete, interconnected subregions"
             materialSet(y=1.1*environment.p_H2O),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSet(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,-24})));
 
-      parameter Real R(final min=Modelica.Constants.small) = 40*U.kPa*U.min/(2*
-        U.L) "Hydraulic resistance **unit";
       // Parameter for outerProduct(anFP.L_x, L_z) here and below.
       // Use normalMeas for current density.
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
-          H2(
-            materialSet(final y=0),
-            redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
-
-            normalSet(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
-                  L_z) .* BC4.gas.H2.face.phi[Orientation.normal])),
-          H2O(
-            materialSet(final y=0),
-            redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
-
-            normalSet(y=R*outerProduct(anFP.L_x, L_z) .* outerProduct(anFP.L_x,
-                  L_z) .* BC4.gas.H2O.face.phi[Orientation.normal]))))
-        annotation (Placement(transformation(
+          H2(redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              normalSet(y=100*U.cm/U.s)),
+          H2O(redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              each normalSet(y=100*U.cm/U.s)))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,24})));
@@ -153,8 +135,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSet(y=1.4*(environment.p - environment.p_H2O -
-                  environment.p_O2)),
+            materialSet(y=1.4*(environment.p - environment.p_H2O - environment.p_O2)),
+
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
             thermalSet(y=environment.T)),
@@ -165,8 +147,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             materialSet(y=1.4*environment.p_O2),
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force,
-            thermalSet(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,-24})));
@@ -176,19 +157,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          H2O(redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSet(y=environment.p_H2O)),
-          N2(redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSet(y=environment.p - environment.p_H2O - environment.p_O2)),
-
-          O2(redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-              materialSet(y=environment.p_O2)))) annotation (Placement(
+          H2O(redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              each normalSet(y=200*U.cm/U.s)),
+          N2(redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              each normalSet(y=200*U.cm/U.s)),
+          O2(redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
+              each normalSet(y=200*U.cm/U.s)))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -750,7 +727,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
@@ -886,7 +863,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=110,
           Tolerance=1e-06,
@@ -1125,7 +1102,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
@@ -1263,8 +1240,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSet(y=1.8*(environment.p - environment.p_H2O -
-                  environment.p_O2)),
+            materialSet(y=1.8*(environment.p - environment.p_H2O - environment.p_O2)),
+
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.force),
           O2(
@@ -2829,6 +2806,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
