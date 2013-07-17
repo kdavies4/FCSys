@@ -37,11 +37,9 @@ package Connectors "Declarative and imperative connectors"
 
   connector Chemical "Connector for a species in a chemical reaction"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
+    parameter Integer n_trans(min=1,max=3)
+      "Number of components of translational momentum" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     // Material diffusion
     Q.Potential mu(nominal=U.V) "Chemical potential";
@@ -247,11 +245,9 @@ package Connectors "Declarative and imperative connectors"
   connector Inert
     "Connector to exchange translational momentum and thermal energy by diffusion"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
+    parameter Integer n_trans(min=1,max=3)
+      "Number of components of translational momentum" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     Translational translational(final n_trans=n_trans)
       "Subconnector for translational diffusion";
@@ -293,11 +289,9 @@ package Connectors "Declarative and imperative connectors"
   connector InertInternal
     "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector with conditional subconnectors</html>"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
+    parameter Integer n_trans(min=1,max=3)
+      "Number of components of translational momentum" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     parameter Boolean inclTranslational=true
       "Include the translational subconnector" annotation (
@@ -527,11 +521,9 @@ package Connectors "Declarative and imperative connectors"
   connector Translational
     "Connector for advection or diffusion of translational momentum"
 
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
+    parameter Integer n_trans(min=1,max=3)
+      "Number of components of translational momentum" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
@@ -628,13 +620,13 @@ package Connectors "Declarative and imperative connectors"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,20},{40,0},{0,-20},{0,20}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,20},{40,0},{0,-20},{0,20}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -751,13 +743,13 @@ package Connectors "Declarative and imperative connectors"
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-40,20},{0,0},{-40,-20},{-40,20}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-40,20},{0,0},{-40,-20},{-40,20}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one output signal of type <code>Real</code>.</p>
 </html>"));

@@ -103,7 +103,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
               "Assemblies.Cells.Examples.Polarization.mos"), Diagram(graphics));
       end Polarization;
 
-
       model EIS "Model for electrochemical-impedance spectroscopy"
         import FCSys;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
@@ -179,12 +178,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (L<sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (L<sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of subregions along the channel";
       final parameter Integer n_z=size(L_z, 1)
@@ -391,12 +390,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (L<sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (L<sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of subregions along the channel";
       final parameter Integer n_z=size(L_z, 1)

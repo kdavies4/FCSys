@@ -9,9 +9,11 @@ package Subregions
       extends Modelica.Icons.Example;
 
       parameter Integer n_y=3
-        "<html>Number of discrete subregions along the y axis, besides the 2 boundary subregions (<i>n<i><sub>y</sub>)</html>";
-      parameter Q.Pressure Deltap_IC=0
-        "<html>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>)</html>";
+        "Number of discrete subregions along the y axis, besides the 2 boundary subregions"
+        annotation (Dialog(__Dymola_label="<html><i>n<i><sub>y</sub></html>"));
+      parameter Q.Pressure Deltap_IC=0 "Initial pressure difference"
+        annotation (Dialog(__Dymola_label=
+              "<html>&Delta;<i>p</i><sub>IC</sub></html>"));
 
       output Q.Pressure Deltap=subregion2.gas.N2.p - subregion1.gas.N2.p
         "Measured pressure difference";
@@ -198,12 +200,12 @@ package Subregions
           void=true,
           graphite(
             reduceTemp=true,
-            'C+'(initMaterial=InitScalar.Pressure),
+            'C+'(initMaterial=InitScalar.pressure),
             'e-'(
-              initMaterial=InitScalar.Volume,
+              initMaterial=InitScalar.volume,
               consMaterial=Conservation.IC,
-              initTransX=InitTranslational.None,
-              initEnergy=InitScalar.None,
+              initTransX=InitTranslational.none,
+              initEnergy=InitScalar.none,
               sigma=1e2*U.S/U.m))));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(graphite(
@@ -334,7 +336,7 @@ package Subregions
         Diagram(graphics));
     end Evaporation;
 
-    model HOR "Test the oxygen reduction reaction in one subregion"
+    model HOR "Test the hydrogen oxidation reaction in one subregion"
 
       output Q.Potential w=positiveBC.ionomer.'H+'.face.mPhidot[1]/(positiveBC.ionomer.
           'H+'.face.rho*subregion.A[Axis.x]) - negativeBC.graphite.'e-'.face.mPhidot[
@@ -429,10 +431,12 @@ package Subregions
     model InternalFlow "Internal, laminar flow of liquid water"
       import FCSys.BaseClasses.Utilities.Delta;
 
-      final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area";
+      final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area"
+        annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
       // Conditions
-      parameter Q.VolumeRate Vdot=U.L/U.s "Prescribed volume flow rate";
+      parameter Q.VolumeRate Vdot=U.L/U.s "Prescribed volume flow rate"
+        annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
 
       // Measurements
       output Q.Pressure Deltap=Delta(subregion.liquid.H2O.p_faces[1, :]) - sum(
@@ -454,7 +458,7 @@ package Subregions
           liquid(inclH2O=true,H2O(
               final V_IC=subregion.V,
               final beta=0,
-              initTransX=InitTranslational.None))));
+              initTransX=InitTranslational.none))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(inclH2O=
               true, H2O(redeclare function normalSpec =
@@ -573,9 +577,7 @@ package Subregions
         experimentSetupOutput);
     end InternalFlow;
 
-    model ORR
-      "<html>Test a subregion with the oxygen reduction reaction and essential species (C<sup>+</sup>, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, e<sup>-</sup>, H<sup>+</sup>, O<sub>2</sub>, and H<sub>2</sub>O)</html>"
-
+    model ORR "Test the oxygen reduction reaction in one subregion"
       output Q.Potential w=negativeBC.ionomer.'H+'.face.mPhidot[1]/(negativeBC.ionomer.
           'H+'.face.rho*subregion.A[Axis.x]) - positiveBC.graphite.'e-'.face.mPhidot[
           1]/(positiveBC.graphite.'e-'.face.rho*subregion.A[Axis.x])
@@ -607,11 +609,11 @@ package Subregions
             N2(
               consTransX=Conservation.IC,
               p_IC=environment.p - environment.p_H2O - environment.p_O2,
-              initEnergy=InitScalar.None),
+              initEnergy=InitScalar.none),
             O2(
               consTransX=Conservation.IC,
               p_IC=environment.p_O2,
-              initEnergy=InitScalar.None))));
+              initEnergy=InitScalar.none))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts negativeBC(ionomer(
             'inclH+'=true, 'H+'(redeclare function normalSpec =
@@ -988,9 +990,11 @@ package Subregions
       extends Modelica.Icons.Example;
 
       parameter Integer n_x=0
-        "<html>Number of discrete subregions along the x axis, besides the 2 side subregions (<i>n<i><sub>x</sub>)</html>";
-      parameter Q.Pressure Deltap_IC=100*U.Pa
-        "<html>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>)</html>";
+        "Number of discrete subregions along the x axis, besides the 2 side subregions"
+        annotation (Dialog(__Dymola_label="<html><i>n<i><sub>x</sub></html>"));
+      parameter Q.Pressure Deltap_IC=100*U.Pa "Initial pressure difference"
+        annotation (Dialog(__Dymola_label=
+              "<html>&Delta;<i>p</i><sub>IC</sub></html>"));
       parameter Boolean 'inclC+'=true
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
@@ -1212,8 +1216,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
-
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1235,9 +1239,9 @@ package Subregions
         'inclC+'=true,
         inclH2=false,
         subregion1(graphite('C+'(T_IC=environment.T + 30*U.K, initMaterial=
-                  InitScalar.Pressure))),
-        subregions(graphite('C+'(each initMaterial=InitScalar.Pressure))),
-        subregion2(graphite('C+'(initMaterial=InitScalar.Pressure))));
+                  InitScalar.pressure))),
+        subregions(graphite('C+'(each initMaterial=InitScalar.pressure))),
+        subregion2(graphite('C+'(initMaterial=InitScalar.pressure))));
 
       annotation (
         Commands(file=
@@ -1956,8 +1960,8 @@ package Subregions
 
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
-        U.cm,U.cm} "<html>Lengths (<b>L</b>)</html>"
-        annotation (Dialog(group="Geometry"));
+        U.cm,U.cm} "Lengths" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html><b><i>L</i></b></html>"));
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Q.Volume V=product(L) "Volume";
@@ -2078,14 +2082,7 @@ package Subregions
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-        Icon(graphics={Line(subregion.gas.N2.points),Line(subregion.gas.N2.points),
-              Line(subregion.gas.N2.points),Polygon(subregion.gas.N2.points),
-              Line(subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
-              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
-              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
-              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
-              subregion.gas.N2.points),Polygon(subregion.gas.N2.points),Line(
-              subregion.gas.N2.points),Text(subregion.gas.N2.extent)}));
+        Icon(graphics));
 
     end EmptySubregion;
 

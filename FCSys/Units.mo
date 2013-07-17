@@ -1147,6 +1147,7 @@ encompass other systems of units.</p>
     end SImols;
 
     record Base "Base constants and units"
+      extends Modelica.Icons.Record;
 
       final constant Q.Angle rad=1 "radian";
       // SI unit of rotation or planar angle

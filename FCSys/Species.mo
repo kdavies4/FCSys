@@ -8,8 +8,8 @@ package Species "Dynamic models of chemical species"
       model Calibrated "Correlations with adjustment factors"
         extends SpeciesSolid(
           redeclare replaceable package Data = Characteristics.'C+'.Graphite,
-          nu=k_nu*Data.nu(T, v),
-          theta=k_theta*Data.theta(T, v));
+          final nu=k_nu*Data.nu(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         // Note:  In Dymola 7.4,
         // "redeclare replaceable package Data = FCSys.Characteristics.C.Graphite"
@@ -19,11 +19,13 @@ package Species "Dynamic models of chemical species"
         // species models too.
 
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'C+'",
@@ -34,9 +36,9 @@ package Species "Dynamic models of chemical species"
                   {100,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Text(
-                      extent={{-150,90},{-118,52}},
-                      lineColor={0,0,255},
-                      textString="%t.test")}));
+                extent={{-150,90},{-118,52}},
+                lineColor={0,0,255},
+                textString="%t.test")}));
 
       end Calibrated;
 
@@ -148,15 +150,18 @@ package Species "Dynamic models of chemical species"
         extends SpeciesSolid(
           redeclare replaceable package Data =
               Characteristics.'C19HF37O5S-'.Ionomer,
-          nu=k_nu*Data.nu(T, v),
-          theta=k_theta*Data.theta(T, v));
+          final nu=k_nu*Data.nu(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'C19HF37O5S-'",
@@ -214,31 +219,33 @@ package Species "Dynamic models of chemical species"
           redeclare replaceable package Data = Characteristics.'e-'.Graphite,
           final tauprime=0,
           final mu=sigma*Data.v_Tp(T, p),
-          nu=k_nu*Data.nu(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=Modelica.Constants.inf,
-          initMaterial=InitScalar.Density);
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=0,
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=Modelica.Constants.inf,
+          initMaterial=InitScalar.density);
 
         Q.ConductivityElectrical sigma=k_sigma*Data.mu(T, p)/Data.v_Tp(T, p)
-          "<html>Electrical conductivity (&sigma;)</html>"
-          annotation (Dialog(group="Material properties"));
-
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
+          "Electrical conductivity"
           annotation (Dialog(group="Material properties"));
         parameter Q.NumberAbsolute k_sigma(final nominal=1) = 1
-          "<html>Adjustment factor for electrical conductivity (<i>k</i><sub>&sigma;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for electrical conductivity" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&sigma;</sub></html>"));
+        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
+        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
+        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
@@ -262,7 +269,7 @@ package Species "Dynamic models of chemical species"
           redeclare replaceable package Data = Characteristics.'e-'.Graphite,
           final tauprime=0,
           final mu=sigma*Data.v_Tp(T, p),
-          initMaterial=InitScalar.Density);
+          final initMaterial=InitScalar.density);
 
         Q.ConductivityElectrical sigma=Data.mu(T, p)/Data.v_Tp(T, p)
           "<html>Electrical conductivity (&sigma;)</html>"
@@ -300,11 +307,11 @@ package Species "Dynamic models of chemical species"
           final theta=Modelica.Constants.inf,
           consMaterial=Conservation.IC,
           invertEOS=false,
-          initMaterial=InitScalar.Volume);
+          initMaterial=InitScalar.volume);
 
         parameter Q.ConductivityElectrical sigma=1e-10*Data.mu()/Data.v_Tp()
-          "<html>Electrical conductivity (&sigma;)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Electrical conductivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label="<html>&sigma;</html>"));
         // **temp factor on sigma
         //    redeclare final parameter Q.Fluidity beta=Data.beta(),
         // **recreate Graphite e- Characteristics model, use it here
@@ -346,29 +353,36 @@ package Species "Dynamic models of chemical species"
       model Calibrated "Correlations with adjustment factors"
         extends SpeciesIsochoric(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
-          initMaterial=InitScalar.Density,
+          initMaterial=InitScalar.density,
           final tauprime=0,
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=0,
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
+        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</i></sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
@@ -391,7 +405,7 @@ package Species "Dynamic models of chemical species"
         extends SpeciesIsochoric(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final tauprime=0,
-          initMaterial=InitScalar.Density);
+          initMaterial=InitScalar.density);
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -423,10 +437,10 @@ package Species "Dynamic models of chemical species"
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
           consMaterial=Conservation.IC,
           invertEOS=false,
-          initMaterial=InitScalar.Volume);
+          initMaterial=InitScalar.volume);
         //consMaterial=Conservation.IC,
         //invertEOS=false
-        //initMaterial=InitScalar.Volume
+        //initMaterial=InitScalar.volume
         //(n_v={0,0},          b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
 
         //        final theta=Modelica.Constants.inf,
@@ -534,35 +548,42 @@ package Species "Dynamic models of chemical species"
       model Calibrated "Correlations with adjustment factors"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                b_v=[1],n_v={-1,0}),
-          tauprime=k_tauprime*Data.tauprime(T, v),
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          eta=k_eta*Data.eta(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+                b_v=[1], n_v={-1,0}),
+          final tauprime=k_tauprime*Data.tauprime(T, v),
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
         parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "<html>Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for the phase change interval" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2",
@@ -672,35 +693,42 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
       model Calibrated "Correlations with adjustment factors"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1],n_v={-1,0}),
-          tauprime=k_tauprime*Data.tauprime(T, v),
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          eta=k_eta*Data.eta(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+                b_v=[1], n_v={-1,0}),
+          final tauprime=k_tauprime*Data.tauprime(T, v),
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
         parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "<html>Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for the phase change interval" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -857,31 +885,38 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         extends Species(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
           final tauprime=0,
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          eta=k_eta*Data.eta(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -945,27 +980,37 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         extends SpeciesIsochoric(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
           final tauprime=0,
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
+        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -1104,36 +1149,43 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       model Calibrated "Correlations with adjustment factors"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                b_v=[1],n_v={-1,0}),
-          tauprime=k_tauprime*Data.tauprime(T, v),
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          eta=k_eta*Data.eta(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+                b_v=[1], n_v={-1,0}),
+          final tauprime=k_tauprime*Data.tauprime(T, v),
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "<html>Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for the phase change interval" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="N2",
@@ -1265,36 +1317,43 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       model Calibrated "Correlations with adjustment factors"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                b_v=[1],n_v={-1,0}),
-          tauprime=k_tauprime*Data.tauprime(T, v),
-          mu=k_mu*Data.mu(T, v),
-          nu=k_nu*Data.nu(T, v),
-          eta=k_eta*Data.eta(T, v),
-          beta=k_beta*Data.beta(T, v),
-          zeta=k_zeta*Data.zeta(T, v),
-          theta=k_theta*Data.theta(T, v));
+                b_v=[1], n_v={-1,0}),
+          final tauprime=k_tauprime*Data.tauprime(T, v),
+          final mu=k_mu*Data.mu(T, v),
+          final nu=k_nu*Data.nu(T, v),
+          final eta=k_eta*Data.eta(T, v),
+          final beta=k_beta*Data.beta(T, v),
+          final zeta=k_zeta*Data.zeta(T, v),
+          final theta=k_theta*Data.theta(T, v));
 
         parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "<html>Adjustment factor for the phase change interval (<i>k</i><sub>&tau;&prime;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for the phase change interval" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
         parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "<html>Adjustment factor for mobility (<i>k</i><sub>&mu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for mobility" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "<html>Adjustment factor for thermal independity (<i>k</i><sub>&nu;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal independity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&nu;</sub></html>"));
         parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "<html>Adjustment factor for material resistivity (<i>k</i><sub>&eta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for material resistivity" annotation (Dialog(group
+              ="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&eta;</sub></html>"));
         parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for dynamic compressibility" annotation (Dialog(
+              group="Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&beta;</sub></html>"));
         parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for fluidity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&zeta;</sub></html>"));
         parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label=
+                "<html><i>k</i><sub>&theta;</sub></html>"));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="O2",
@@ -1438,7 +1497,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     "<html><a href=\"modelica://FCSys.Species.Species\">Species</a> model for an isochoric material</html>"
     extends Species(
       invertEOS=false,
-      initMaterial=InitScalar.Volume,
+      initMaterial=InitScalar.volume,
       final eta=1);
 
     // Note:  Pressure, which is the default material IC for the base model,
@@ -1463,9 +1522,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     // Geometry
     parameter Integer n_faces(
       min=1,
-      max=3) = 1
-      "<html>Number of pairs of faces (<i>n</i><sub>faces</sub>)</html>"
-      annotation (Dialog(group="Geometry"), HideResult=true);
+      max=3) = 1 "Number of pairs of faces" annotation (Dialog(group="Geometry",
+          __Dymola_label="<html><i>n</i><sub>faces</sub></html>"), HideResult=
+          true);
     // Note:  This can't be an outer parameter in Dymola 7.4.
 
     // Material properties
@@ -1476,26 +1535,26 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       choicesAllMatching=true,
       __Dymola_choicesFromPackage=true);
     Q.TimeAbsolute tauprime(nominal=1e-6*U.s) = Data.tauprime(T, v)
-      "<html>Phase change interval (&tau;&prime;)</html>"
-      annotation (Dialog(group="Material properties"));
-    Q.Mobility mu(nominal=0.1*U.C*U.s/U.kg) = Data.mu(T, v)
-      "<html>Mobility (&mu;)</html>"
-      annotation (Dialog(group="Material properties"));
-    Q.TimeAbsolute nu(nominal=1e-9*U.s) = Data.nu(T, v)
-      "<html>Thermal independity (&nu;)</html>"
-      annotation (Dialog(group="Material properties"));
+      "Phase change interval" annotation (Dialog(group="Material properties",
+          __Dymola_label="<html>&tau;&prime;</html>"));
+    Q.Mobility mu(nominal=0.1*U.C*U.s/U.kg) = Data.mu(T, v) "Mobility"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html>&mu;</html>"));
+    Q.TimeAbsolute nu(nominal=1e-9*U.s) = Data.nu(T, v) "Thermal independity"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html>&nu;</html>"));
     Q.ResistivityMaterial eta(nominal=10e-6*U.s/U.m^2) = Data.eta(T, v)
-      "<html>Material resistivity (&eta;)</html>"
-      annotation (Dialog(group="Material properties"));
+      "Material resistivity" annotation (Dialog(group="Material properties",
+          __Dymola_label="<html>&eta;</html>"));
     Q.Fluidity beta(nominal=10*U.cm*U.s/U.g) = Data.beta(T, v)
-      "<html>Dynamic compressibility (&beta;)</html>"
-      annotation (Dialog(group="Material properties"));
-    Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v)
-      "<html>Fluidity (&zeta;)</html>"
-      annotation (Dialog(group="Material properties"));
+      "Dynamic compressibility" annotation (Dialog(group="Material properties",
+          __Dymola_label="<html>&beta;</html>"));
+    Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v) "Fluidity"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html>&zeta;</html>"));
     Q.ResistivityThermal theta(nominal=10*U.cm/U.A) = Data.theta(T, v)
-      "<html>Thermal resistivity (&theta;)</html>"
-      annotation (Dialog(group="Material properties"));
+      "Thermal resistivity" annotation (Dialog(group="Material properties",
+          __Dymola_label="<html>&theta;</html>"));
 
     // Assumptions
     // -----------
@@ -1526,86 +1585,104 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       choices(__Dymola_checkBox=true));
     //
     // Dynamics
-    parameter BaseClasses.Conservation consMaterial=Conservation.Dynamic
+    parameter BaseClasses.Conservation consMaterial=Conservation.dynamic
       "Material" annotation (Dialog(
         Evaluate=true,
         tab="Assumptions",
         group="Formulation of conservation equations"));
-    parameter BaseClasses.Conservation consTransX=Conservation.Dynamic
+    parameter BaseClasses.Conservation consTransX=Conservation.dynamic
       "X-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[1]));
-    parameter BaseClasses.Conservation consTransY=Conservation.Dynamic
+    parameter BaseClasses.Conservation consTransY=Conservation.dynamic
       "Y-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[2]));
-    parameter BaseClasses.Conservation consTransZ=Conservation.Dynamic
+    parameter BaseClasses.Conservation consTransZ=Conservation.dynamic
       "Z-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[3]));
-    parameter BaseClasses.Conservation consEnergy=Conservation.Dynamic "Energy"
+    parameter BaseClasses.Conservation consEnergy=Conservation.dynamic "Energy"
       annotation (Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of conservation equations"));
     //
     // Flow conditions
     parameter Q.NumberAbsolute Nu_Phi[Axis]={4,4,4}
-      "<html>Translational Nusselt numbers (<b><i>Nu</i><sub>&Phi;</sub></b>)</html>"
-      annotation (Dialog(tab="Assumptions", group="Flow conditions"));
-    parameter Q.NumberAbsolute Nu_Q=1
-      "<html>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>)</html>"
-      annotation (Dialog(tab="Assumptions", group="Flow conditions"));
+      "Translational Nusselt numbers" annotation (Dialog(
+        tab="Assumptions",
+        group="Flow conditions",
+        __Dymola_label="<html><b><i>Nu</i><sub>&Phi;</sub></b></html>"));
+    parameter Q.NumberAbsolute Nu_Q=1 "Thermal Nusselt number" annotation (
+        Dialog(
+        tab="Assumptions",
+        group="Flow conditions",
+        __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
 
     // Initialization parameters
     // -------------------------
     // Scalar properties
-    parameter BaseClasses.InitScalar initMaterial=InitScalar.Pressure
+    parameter BaseClasses.InitScalar initMaterial=InitScalar.pressure
       "Method of initializing the material state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
-    parameter BaseClasses.InitScalar initEnergy=InitScalar.Temperature
+    parameter BaseClasses.InitScalar initEnergy=InitScalar.temperature
       "Method of initializing the thermal state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
-    parameter Q.Amount N_IC(start=V_IC*rho_IC)
-      "<html>Initial particle number (<i>N</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
+    parameter Q.Amount N_IC(start=V_IC*rho_IC) "Initial particle number"
+      annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>N</i><sub>IC</sub></html>"));
     // Note:  This parameter is left enabled even it isn't used to
     // explicitly initialize any states, since it's used as a guess value.
     // Similar notes apply to some other initial conditions below.
-    parameter Q.Density rho_IC(start=1/Data.v_Tp(T_IC, p_IC))
-      "<html>Initial density (&rho;<sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
-    parameter Q.Volume V_IC(start=product(L))
-      "<html>Initial volume (<i>V</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
-    parameter Q.PressureAbsolute p_IC(start=environment.p)
-      "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
+    parameter Q.Density rho_IC(start=1/Data.v_Tp(T_IC, p_IC)) "Initial density"
+      annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html>&rho;<sub>IC</sub></html>"));
+    parameter Q.Volume V_IC(start=product(L)) "Initial volume" annotation (
+        Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>V</i><sub>IC</sub></html>"));
+    parameter Q.PressureAbsolute p_IC(start=environment.p) "Initial pressure"
+      annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>p</i><sub>IC</sub></html>"));
     parameter Q.TemperatureAbsolute T_IC(start=environment.T)
-      "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
+      "Initial temperature" annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>T</i><sub>IC</sub></html>"));
     parameter Q.Potential h_IC(start=Data.h(T_IC, p_IC), displayUnit="kJ/mol")
-      "<html>Initial specific enthalpy (<i>h</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
+      "Initial specific enthalpy" annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>h</i><sub>IC</sub></html>"));
     parameter Q.Potential g_IC(start=Data.g(T_IC, p_IC), displayUnit="kJ/mol")
-      "<html>Initial Gibbs potential (<i>g</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Material and energy"));
+      "Initial Gibbs potential" annotation (Dialog(
+        tab="Initialization",
+        group="Material and energy",
+        __Dymola_label="<html><i>g</i><sub>IC</sub></html>"));
     //
     // Velocity
-    parameter BaseClasses.InitTranslational initTransX=InitTranslational.Velocity
+    parameter BaseClasses.InitTranslational initTransX=InitTranslational.velocity
       "Method of initializing the x-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[1]));
-    parameter BaseClasses.InitTranslational initTransY=InitTranslational.Velocity
+    parameter BaseClasses.InitTranslational initTransY=InitTranslational.velocity
       "Method of initializing the y-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[2]));
-    parameter BaseClasses.InitTranslational initTransZ=InitTranslational.Velocity
+    parameter BaseClasses.InitTranslational initTransZ=InitTranslational.velocity
       "Method of initializing the z-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
@@ -1613,12 +1690,15 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         enable=inclTrans[3]));
     // Note:  Dymola 7.4 doesn't provide pull-down lists for arrays of
     // enumerations; therefore, a parameter is used for each axis.
-    parameter Q.Velocity phi_IC[Axis]={0,0,0}
-      "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Translational momentum"));
-    parameter Q.Current I_IC[Axis]={0,0,0}
-      "<html>Initial current (<i><b>I</b></i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization", group="Translational momentum"));
+    parameter Q.Velocity phi_IC[Axis]={0,0,0} "Initial velocity" annotation (
+        Dialog(
+        tab="Initialization",
+        group="Translational momentum",
+        __Dymola_label="<html><b>&phi;</b><sub>IC</sub></html>"));
+    parameter Q.Current I_IC[Axis]={0,0,0} "Initial current" annotation (Dialog(
+        tab="Initialization",
+        group="Translational momentum",
+        __Dymola_label="<html><i><b>I</b></i><sub>IC</sub></html>"));
 
     // Advanced parameters
     parameter Boolean invertEOS=true "Invert the equation of state" annotation
@@ -1831,8 +1911,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       phi(final start=phi_IC[cartTrans], each final fixed=false),
       sT(final start=h_IC - g_IC, final fixed=false))
       "Connector for phase change" annotation (Placement(transformation(extent=
-              {{-30,-10},{-10,10}}), iconTransformation(extent={{-59,28},{-79,
-              48}})));
+              {{-30,-10},{-10,10}}),iconTransformation(extent={{-59,28},{-79,48}})));
     Connectors.Inert inert(
       final n_trans=n_trans,
       translational(phi(final start=phi_IC[cartTrans], each final fixed=false)),
@@ -1952,8 +2031,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
   initial equation
     // Check the initial conditions.
-    assert(initMaterial <> initEnergy or initMaterial == InitScalar.None or
-      consMaterial == Conservation.Steady or consEnergy == Conservation.Steady,
+    assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
+      consMaterial == Conservation.steady or consEnergy == Conservation.steady,
       "The initialization methods for material and energy must be different (unless None).");
     assert(V >= 0, "The volume of " + Data.formula + " is negative.
 Check that the volumes of the other phases are set properly.");
@@ -1961,50 +2040,50 @@ Check that the volumes of the other phases are set properly.");
     // Material
     if consMaterial == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initMaterial <> InitScalar.None, "The material state of " + Data.formula
+      assert(initMaterial <> InitScalar.none, "The material state of " + Data.formula
          + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
-    elseif consMaterial == Conservation.Dynamic then
+    elseif consMaterial == Conservation.dynamic then
       // Initialize since there's a time-varying state.
       if initMaterial == InitScalar.Amount then
         N = N_IC;
       elseif initMaterial == InitScalar.AmountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.Density then
+      elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
         assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
           " is isochoric, yet its material initial condition is based on density.");
-      elseif initMaterial == InitScalar.DensitySS then
+      elseif initMaterial == InitScalar.densitySS then
         der(1/v) = 0;
         assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
           " is isochoric, yet its material initial condition is based on density.");
-      elseif initMaterial == InitScalar.Volume then
+      elseif initMaterial == InitScalar.volume then
         V = V_IC;
-      elseif initMaterial == InitScalar.VolumeSS then
+      elseif initMaterial == InitScalar.volumeSS then
         der(V) = 0;
-      elseif initMaterial == InitScalar.Pressure then
+      elseif initMaterial == InitScalar.pressure then
         assert(Data.isCompressible, Data.formula +
           " is incompressible, yet its material initial condition is based on pressure.");
         p = p_IC;
         assert(Data.isCompressible, Data.formula +
           " is incompressible, yet its material initial condition is based on pressure.");
-      elseif initMaterial == InitScalar.PressureSS then
+      elseif initMaterial == InitScalar.pressureSS then
         der(p) = 0;
-      elseif initMaterial == InitScalar.Temperature then
+      elseif initMaterial == InitScalar.temperature then
         T = T_IC;
-      elseif initMaterial == InitScalar.TemperatureSS then
+      elseif initMaterial == InitScalar.temperatureSS then
         der(T) = 0;
-      elseif initMaterial == InitScalar.SpecificEnthalpy then
+      elseif initMaterial == InitScalar.specificEnthalpy then
         h = h_IC;
-      elseif initMaterial == InitScalar.SpecificEnthalpySS then
+      elseif initMaterial == InitScalar.specificEnthalpySS then
         der(h) = 0;
-      elseif initMaterial == InitScalar.PotentialGibbs then
+      elseif initMaterial == InitScalar.potentialGibbs then
         chemical.mu = g_IC;
-      elseif initMaterial == InitScalar.PotentialGibbsSS then
+      elseif initMaterial == InitScalar.potentialGibbsSS then
         der(chemical.mu) = 0;
         // Else there's no initial equation since
-        // initMaterial == InitScalar.None or
-        // consMaterial == Conservation.Steady.
+        // initMaterial == InitScalar.none or
+        // consMaterial == Conservation.steady.
       end if;
     end if;
 
@@ -2013,24 +2092,24 @@ Choose any condition besides None.");
       if consTrans[cartTrans[i]] == Conservation.IC then
         // Ensure that a condition is selected since the state is
         // prescribed.
-        assert(initTrans[cartTrans[i]] <> InitTranslational.None,
+        assert(initTrans[cartTrans[i]] <> InitTranslational.none,
           "The state for the " + (if cartTrans[i] == Axis.x then "x" else if
           cartTrans[i] == Axis.y then "y" else "z") +
           "-axis component of translational momentum of " + Data.formula + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
-      elseif consTrans[cartTrans[i]] == Conservation.Dynamic then
+      elseif consTrans[cartTrans[i]] == Conservation.dynamic then
         // Initialize since there's a time-varying state.
-        if initTrans[cartTrans[i]] == InitTranslational.Velocity then
+        if initTrans[cartTrans[i]] == InitTranslational.velocity then
           phi[i] = phi_IC[cartTrans[i]];
-        elseif initTrans[cartTrans[i]] == InitTranslational.VelocitySS then
+        elseif initTrans[cartTrans[i]] == InitTranslational.velocitySS then
           der(phi[i]) = 0;
-        elseif initTrans[cartTrans[i]] == InitTranslational.Current then
+        elseif initTrans[cartTrans[i]] == InitTranslational.current then
           I[i] = I_IC[cartTrans[i]];
-        elseif initTrans[cartTrans[i]] == InitTranslational.CurrentSS then
+        elseif initTrans[cartTrans[i]] == InitTranslational.currentSS then
           der(I[i]) = 0;
           // Else there's no initial equation since
-          // initTrans[cartTrans[i]] == InitTranslational.None or
-          // consTrans[cartTrans[i]] == Conservation.Steady.
+          // initTrans[cartTrans[i]] == InitTranslational.none or
+          // consTrans[cartTrans[i]] == Conservation.steady.
         end if;
       end if;
     end for;
@@ -2038,50 +2117,50 @@ Choose any condition besides None.");
     // Energy
     if consEnergy == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initEnergy <> InitScalar.None, "The energy state of " + Data.formula
+      assert(initEnergy <> InitScalar.none, "The energy state of " + Data.formula
          + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
-    elseif consEnergy == Conservation.Dynamic then
+    elseif consEnergy == Conservation.dynamic then
       // Initialize since there's a time-varying state.
       if initEnergy == InitScalar.Amount then
         N = N_IC;
       elseif initEnergy == InitScalar.AmountSS then
         der(N) = 0;
-      elseif initEnergy == InitScalar.Density then
+      elseif initEnergy == InitScalar.density then
         1/v = rho_IC;
         assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
           " is isochoric, yet its thermal initial condition is based on density.");
-      elseif initEnergy == InitScalar.DensitySS then
+      elseif initEnergy == InitScalar.densitySS then
         der(1/v) = 0;
         assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
           " is isochoric, yet its thermal initial condition is based on density.");
-      elseif initEnergy == InitScalar.Volume then
+      elseif initEnergy == InitScalar.volume then
         V = V_IC;
-      elseif initEnergy == InitScalar.VolumeSS then
+      elseif initEnergy == InitScalar.volumeSS then
         der(V) = 0;
-      elseif initEnergy == InitScalar.Pressure then
+      elseif initEnergy == InitScalar.pressure then
         p = p_IC;
         assert(Data.isCompressible, Data.formula +
           " is incompressible, yet its thermal initial condition is based on pressure.");
-      elseif initEnergy == InitScalar.PressureSS then
+      elseif initEnergy == InitScalar.pressureSS then
         der(p) = 0;
         assert(Data.isCompressible, Data.formula +
           " is incompressible, yet its thermal initial condition is based on pressure.");
-      elseif initEnergy == InitScalar.Temperature then
+      elseif initEnergy == InitScalar.temperature then
         T = T_IC;
-      elseif initEnergy == InitScalar.TemperatureSS then
+      elseif initEnergy == InitScalar.temperatureSS then
         der(T) = 0;
-      elseif initEnergy == InitScalar.SpecificEnthalpy then
+      elseif initEnergy == InitScalar.specificEnthalpy then
         h = h_IC;
-      elseif initEnergy == InitScalar.SpecificEnthalpySS then
+      elseif initEnergy == InitScalar.specificEnthalpySS then
         der(h) = 0;
-      elseif initEnergy == InitScalar.PotentialGibbs then
+      elseif initEnergy == InitScalar.potentialGibbs then
         chemical.mu = g_IC;
-      elseif initEnergy == InitScalar.PotentialGibbsSS then
+      elseif initEnergy == InitScalar.potentialGibbsSS then
         der(chemical.mu) = 0;
         // Else there's no initial equation since
-        // initEnergy == InitScalar.None or
-        // consEnergy == Conservation.Steady.
+        // initEnergy == InitScalar.none or
+        // consEnergy == Conservation.steady.
       end if;
     end if;
 
@@ -2206,36 +2285,36 @@ Choose any condition besides None.");
         N = N_IC;
       elseif initMaterial == InitScalar.AmountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.Density then
+      elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
-      elseif initMaterial == InitScalar.DensitySS then
+      elseif initMaterial == InitScalar.densitySS then
         der(1/v) = 0;
-      elseif initMaterial == InitScalar.Volume then
+      elseif initMaterial == InitScalar.volume then
         V = V_IC;
-      elseif initMaterial == InitScalar.VolumeSS then
+      elseif initMaterial == InitScalar.volumeSS then
         der(V) = 0;
-      elseif initMaterial == InitScalar.Pressure then
+      elseif initMaterial == InitScalar.pressure then
         p = p_IC;
-      elseif initMaterial == InitScalar.PressureSS then
+      elseif initMaterial == InitScalar.pressureSS then
         der(p) = 0;
-      elseif initMaterial == InitScalar.Temperature then
+      elseif initMaterial == InitScalar.temperature then
         T = T_IC;
-      elseif initMaterial == InitScalar.TemperatureSS then
+      elseif initMaterial == InitScalar.temperatureSS then
         der(T) = 0;
-      elseif initMaterial == InitScalar.SpecificEnthalpy then
+      elseif initMaterial == InitScalar.specificEnthalpy then
         h = h_IC;
-      elseif initMaterial == InitScalar.SpecificEnthalpySS then
+      elseif initMaterial == InitScalar.specificEnthalpySS then
         der(h) = 0;
-      elseif initMaterial == InitScalar.PotentialGibbs then
+      elseif initMaterial == InitScalar.potentialGibbs then
         chemical.mu = g_IC;
       else
-        // if initMaterial == InitScalar.PotentialGibbsSS then
+        // if initMaterial == InitScalar.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Note:  initMaterial == InitScalar.None can't occur due to an
+        // Note:  initMaterial == InitScalar.none can't occur due to an
         // assertion.
       end if;
     else
-      (if consMaterial == Conservation.Dynamic then der(N)/U.s else 0) =
+      (if consMaterial == Conservation.dynamic then der(N)/U.s else 0) =
         chemical.Ndot + physical.Ndot + sum(Ndot_faces) "Material conservation";
     end if;
 
@@ -2244,20 +2323,20 @@ Choose any condition besides None.");
       if consTrans[cartTrans[j]] == Conservation.IC then
         // Apply the IC forever (translational momentum isn't conserved along
         // this axis).
-        if initTrans[cartTrans[j]] == InitTranslational.Velocity then
+        if initTrans[cartTrans[j]] == InitTranslational.velocity then
           phi[j] = phi_IC[cartTrans[j]];
-        elseif initTrans[cartTrans[j]] == InitTranslational.VelocitySS then
+        elseif initTrans[cartTrans[j]] == InitTranslational.velocitySS then
           der(phi[j]) = 0;
-        elseif initTransX == InitTranslational.Current then
+        elseif initTransX == InitTranslational.current then
           I[j] = I_IC[cartTrans[j]];
         else
-          // if initTrans[cartTrans[j]] == InitTranslational.CurrentSS then
+          // if initTrans[cartTrans[j]] == InitTranslational.currentSS then
           der(I[j]) = 0;
-          // Note:  initTrans[cartTrans[j]] == InitTranslational.None can't
+          // Note:  initTrans[cartTrans[j]] == InitTranslational.none can't
           // occur due to an assertion.
         end if;
       else
-        M*((if consTrans[cartTrans[j]] == Conservation.Dynamic then der(phi[j])
+        M*((if consTrans[cartTrans[j]] == Conservation.dynamic then der(phi[j])
           /U.s else 0) + environment.a[cartTrans[j]]) + N*Data.z*environment.E[
           cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(p_faces[
           facesCart[cartTrans[j]], :])*A[cartTrans[j]] else 0) = Data.m*((
@@ -2279,36 +2358,36 @@ Choose any condition besides None.");
         N = N_IC;
       elseif initEnergy == InitScalar.AmountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.Density then
+      elseif initMaterial == InitScalar.density then
         1/v = rho_IC;
-      elseif initMaterial == InitScalar.DensitySS then
+      elseif initMaterial == InitScalar.densitySS then
         der(1/v) = 0;
-      elseif initEnergy == InitScalar.Volume then
+      elseif initEnergy == InitScalar.volume then
         V = V_IC;
-      elseif initEnergy == InitScalar.VolumeSS then
+      elseif initEnergy == InitScalar.volumeSS then
         der(V) = 0;
-      elseif initEnergy == InitScalar.Pressure then
+      elseif initEnergy == InitScalar.pressure then
         p = p_IC;
-      elseif initEnergy == InitScalar.PressureSS then
+      elseif initEnergy == InitScalar.pressureSS then
         der(p) = 0;
-      elseif initEnergy == InitScalar.Temperature then
+      elseif initEnergy == InitScalar.temperature then
         T = T_IC;
-      elseif initEnergy == InitScalar.TemperatureSS then
+      elseif initEnergy == InitScalar.temperatureSS then
         der(T) = 0;
-      elseif initEnergy == InitScalar.SpecificEnthalpy then
+      elseif initEnergy == InitScalar.specificEnthalpy then
         h = h_IC;
-      elseif initEnergy == InitScalar.SpecificEnthalpySS then
+      elseif initEnergy == InitScalar.specificEnthalpySS then
         der(h) = 0;
-      elseif initEnergy == InitScalar.PotentialGibbs then
+      elseif initEnergy == InitScalar.potentialGibbs then
         chemical.mu = g_IC;
       else
-        // if initEnergy == InitScalar.PotentialGibbsSS then
+        // if initEnergy == InitScalar.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Note:  initEnergy == InitScalar.None can't occur due to an
+        // Note:  initEnergy == InitScalar.none can't occur due to an
         // assertion.
       end if;
     else
-      (if consEnergy == Conservation.Dynamic then (N*T*der(s) + M*phi*der(phi))
+      (if consEnergy == Conservation.dynamic then (N*T*der(s) + M*phi*der(phi))
         /U.s else 0) = (chemical.mu + actualStream(chemical.sT) - h + (
         actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
         /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
@@ -2454,9 +2533,9 @@ Choose any condition besides None.");
     In that case, it may help to set <code>consEnergy</code> to <code>Conservation.IC</code> so that
     the energy conservation equation is not imposed.</li>
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
-    <code>Conservation.Steady</code>, then the derivative of the corresponding component of velocity
+    <code>Conservation.steady</code>, then the derivative of the corresponding component of velocity
     is treated as zero and removed from the translational momentum balance.  If <code>consEnergy</code> is
-    <code>Conservation.Steady</code>, then <code>T*der(s) + M*phi*der(phi)</code> is treated as
+    <code>Conservation.steady</code>, then <code>T*der(s) + M*phi*der(phi)</code> is treated as
     zero and removed from the energy balance.</li>
     <li>If a component of velocity is not included (via the outer <code>inclTrans[:]</code> parameter
     which maps to <code>{inclTransX, inclTransY, inclTransZ}</code> in the
@@ -2468,7 +2547,7 @@ Choose any condition besides None.");
     <code>consTransY</code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>consMaterial</code> to <code>Conservation.IC</code> and <code>initMaterial</code>
-    to <code>InitScalar.Pressure</code> for one of the species.</li>
+    to <code>InitScalar.pressure</code> for one of the species.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
     temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a> model).
@@ -2541,12 +2620,14 @@ Choose any condition besides None.");
 
     extends FCSys.BaseClasses.Icons.Names.Top2;
 
-    parameter Q.Area A=100*U.cm^2 "Area";
+    parameter Q.Area A=100*U.cm^2 "Area"
+      annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
     parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
-      "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
-    parameter Q.NumberAbsolute alpha(max=1) = 0.5
-      "<html>Charge transfer coefficient (&alpha;)</html>"
-      annotation (Dialog(enable=not fromCurrent));
+      "Exchange current density"
+      annotation (Dialog(__Dymola_label="<html><i>J</i><sub>0</sub></html>"));
+    parameter Q.NumberAbsolute alpha(max=1) = 0.5 "Charge transfer coefficient"
+      annotation (Dialog(enable=not fromCurrent,__Dymola_label=
+            "<html>&alpha;</html>"));
     final parameter Q.Current I_0=J_0*A "Exchange current density";
     parameter Boolean fromCurrent=false
       "<html>Calculate potential from reaction rate (requires &alpha;=0.5)</html>"

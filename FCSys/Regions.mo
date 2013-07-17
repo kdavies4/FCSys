@@ -19,12 +19,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
       parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -41,7 +41,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.None))))
+        Subregion(ionomer('H+'(initTransX=InitTranslational.none))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
@@ -100,14 +100,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
-          H2(redeclare each function materialMeas =
+          H2(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSource(y=(fill(
-                      environment.p - environment.p_H2O,
-                      anFP.n_x,
-                      n_z) - BC4.gas.H2.materialOut.y) .* outerProduct(anFP.L_x,
-                  L_z))),
+              materialSource(y=environment.p - environment.p_H2O)),
           each H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
@@ -179,6 +175,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
+      Modelica.Blocks.Continuous.PI PI
+        annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+      Conditions.TestStands.TestStand testStand
+        annotation (Placement(transformation(extent={{-32,58},{0,90}})));
     equation
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
           points={{-50,6.10623e-16},{-50,6.10623e-16}},
@@ -273,12 +273,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
         "Electrical current density, in A/cm2";
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -291,7 +291,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.None))))
+        Subregion(ionomer('H+'(initTransX=InitTranslational.none))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
@@ -407,12 +407,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
         "Electrical current density, in A/cm2";
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -421,13 +421,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initMaterial=InitScalar.None))))
+        Subregion(ionomer('H+'(initMaterial=InitScalar.none))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.None))))
+        Subregion(ionomer('H+'(initTransX=InitTranslational.none))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
@@ -507,12 +507,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
+
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -583,12 +584,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
+
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -639,12 +641,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -670,7 +672,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initMaterial=InitScalar.None))))
+        Subregion(ionomer('H+'(initMaterial=InitScalar.none))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
@@ -714,7 +716,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
@@ -725,12 +727,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -763,8 +765,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       connect(PEM.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,-3.65701e-16}},
-
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,
+              -3.65701e-16}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -778,12 +780,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -837,7 +839,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     equation
       connect(BC1.face, caCL.xNegative) annotation (Line(
-          points={{0,-1.34539e-15},{10,-1.34539e-15},{10,6.10623e-16}},
+          points={{6.66134e-16,-1.34539e-15},{10,-1.34539e-15},{10,6.10623e-16}},
+
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -849,7 +852,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         experiment(
           StopTime=110,
           Tolerance=1e-06,
@@ -863,12 +866,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -922,12 +925,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+        (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -1006,12 +1009,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths across the channel (<i>L</i><sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
+          Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
@@ -1037,7 +1040,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initMaterial=InitScalar.None))))
+        Subregion(ionomer('H+'(initMaterial=InitScalar.none))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC1[n_y, n_z](each
@@ -1060,7 +1063,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.None))))
+        Subregion(ionomer('H+'(initTransX=InitTranslational.none))))
         annotation (Placement(transformation(extent={{0,0},{20,20}})));
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2[n_y, n_z](each
           ionomer('inclH+'=true)) annotation (Placement(transformation(
@@ -1088,12 +1091,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
         experimentSetupOutput);
     end AnCLPEM;
+
+    model test
+
+      type r = Real;
+      type r2 = input Real;
+
+    end test;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -1126,10 +1136,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
               inclH2=true,
               inclH2O=true,
               H2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -1141,8 +1151,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'e-'(
                 V_IC=V - epsilonV,
                 consTransY=Conservation.IC,
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
@@ -1159,8 +1169,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       // Modelica.Constants.eps and apply it to other layers too.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -1411,10 +1421,10 @@ text layer of this model.</p>
               inclH2=true,
               inclH2O=true,
               H2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -1426,8 +1436,8 @@ text layer of this model.</p>
               'e-'(
                 V_IC=V - epsilonV,
                 sigma=40*U.S/(12*U.cm),
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None)),
+                initTransX=InitTranslational.none,
+                initEnergy=InitScalar.none)),
             liquid(
               inclH2O=false,
               k_T=fill(epsilon^(3/2), 3),
@@ -1437,9 +1447,9 @@ text layer of this model.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -1777,10 +1787,10 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclH2O=true,
               k_T=fill(epsilon^(3/2), 3),
               H2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -1796,7 +1806,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclH2O=false,
               k_T=fill((0.5*(1 - epsilon))^(3/2), 3),
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
-              H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
+              H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(
               inclH2O=false,
               k_T=fill(epsilon^(3/2), 3),
@@ -1808,7 +1818,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
       // **temp H2O not in ionomer
       // **temp 0 reaction rate
       // **e-: rho_IC=17842.7*U.C/U.cc,
-      // initMaterial=InitScalar.None,
+      // initMaterial=InitScalar.none,
       // chemical(Ndot(start=0, fixed=true))
       // **e-: sigma=40*U.S/(12*U.cm),
       // **H+: mu=0.083*U.S/(0.95*U.M*U.cm),
@@ -1820,11 +1830,13 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Volumetric porosity" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
+
       parameter Q.NumberAbsolute lambda_IC=14
-        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization"));
+        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
+        annotation (Dialog(tab="Initialization",__Dymola_label=
+              "<html>&lambda;<sub>IC</sub></html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -1979,6 +1991,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2023,15 +2036,16 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               'inclC19HF37O5S-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'C19HF37O5S-'(initMaterial=InitScalar.Pressure),
-              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitScalar.None),
-              H2O(initEnergy=InitScalar.None)))) annotation (IconMap(
+              'C19HF37O5S-'(initMaterial=InitScalar.pressure),
+              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitScalar.none),
+              H2O(initEnergy=InitScalar.none)))) annotation (IconMap(
             primitivesVisible=false));
-      //initMaterial=InitScalar.None,
+      //initMaterial=InitScalar.none,
 
       parameter Q.NumberAbsolute lambda_IC=14
-        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization"));
+        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
+        annotation (Dialog(tab="Initialization",__Dymola_label=
+              "<html>&lambda;<sub>IC</sub></html>"));
 
       // TODO: Map electrical resistivity and EOD ratio to mobility of ionomer and protons,
       // given the mobility of H2O.
@@ -2318,17 +2332,17 @@ the z axis extends across the width of the channel.</p>
               inclO2=true,
               H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceTemp=true,
@@ -2343,7 +2357,7 @@ the z axis extends across the width of the channel.</p>
               'inclH+'=true,
               inclH2O=false,
               'C19HF37O5S-'(V_IC=0.5*(V - epsilonV)),
-              H2O(initEnergy=InitScalar.None, initMaterial=InitScalar.None)),
+              H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(k_T=fill(epsilon^(3/2), 3)))) annotation (IconMap(
             primitivesVisible=false));
 
@@ -2353,12 +2367,13 @@ the z axis extends across the width of the channel.</p>
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
-      parameter Q.NumberAbsolute lambda_IC=14
-        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup> (&lambda;<sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization"));
+        "Volumetric porosity" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
 
+      parameter Q.NumberAbsolute lambda_IC=14
+        "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
+        annotation (Dialog(tab="Initialization",__Dymola_label=
+              "<html>&lambda;<sub>IC</sub></html>"));
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
         each stateSelect=StateSelect.never,
@@ -2512,6 +2527,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2565,17 +2581,17 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               inclO2=true,
               H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceTemp=true,
@@ -2587,8 +2603,8 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
                 V_IC=V - epsilonV,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=40*U.S/(12*U.cm),
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None)),
+                initTransX=InitTranslational.none,
+                initEnergy=InitScalar.none)),
             liquid(
               k_T=fill(epsilon^(3/2), 3),
               inclH2O=false,
@@ -2599,9 +2615,9 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -2952,17 +2968,17 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclO2=true,
               H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.None,
-                initTransY=InitTranslational.None,
-                initTransZ=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initTransY=InitTranslational.none,
+                initTransZ=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceTemp=true,
@@ -2973,8 +2989,8 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               'e-'(
                 V_IC=V - epsilonV,
                 consTransY=Conservation.IC,
-                initTransX=InitTranslational.None,
-                initEnergy=InitScalar.None,
+                initTransX=InitTranslational.none,
+                initEnergy=InitScalar.none,
                 rho_IC=17842.7*U.C/U.cc,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
@@ -2989,8 +3005,8 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
       // regarding the settings of k_T for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
-        "<html>Volumetric porosity (&epsilon;)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -3158,15 +3174,16 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
     // extends FCSys.BaseClasses.Icons.Names.Top6;
 
     // Geometric parameters
-    parameter Q.Length L_x[:](each final min=Modelica.Constants.small) = {U.cm}
-      "<html>Lengths along the x axis (<i>L</i><sub>x</sub>)</html>"
-      annotation (Dialog(group="Geometry"));
-    parameter Q.Length L_y[:](each final min=Modelica.Constants.small) = {U.cm}
-      "<html>Lengths along the y axis (<i>L</i><sub>y</sub>)</html>"
-      annotation (Dialog(group="Geometry"));
-    parameter Q.Length L_z[:](each final min=Modelica.Constants.small) = {U.cm}
-      "<html>Lengths along the z axis (<i>L</i><sub>z</sub>)</html>"
-      annotation (Dialog(group="Geometry"));
+    parameter Q.Length L_x[:]={U.cm} "Lengths along the x axis" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>L</i><sub>x</sub></html>"));
+    parameter Q.Length L_y[:]={U.cm} "Lengths along the y axis" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>L</i><sub>y</sub></html>"));
+    parameter Q.Length L_z[:]={U.cm} "Lengths across the z axis" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>L</i><sub>z</sub></html>"));
+
     final parameter Integer n_x=size(L_x, 1)
       "Number of sets of subregions along the x axis"
       annotation (HideResult=true);

@@ -45,8 +45,8 @@ package Conditions "Models to specify and measure operating conditions"
 
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) =
-        ones(3)*U.cm "<html>Length (<b>L</b>)</html>"
-        annotation (Dialog(group="Geometry"));
+        ones(3)*U.cm "Length" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html><b><i>L</i></b></html>"));
       final inner parameter Q.Volume V=product(L) "Volume";
 
       // Included components of translational momentum
@@ -250,7 +250,8 @@ package Conditions "Models to specify and measure operating conditions"
       //extends FCSys.BaseClasses.Icons.Names.Top1;
 
       parameter Integer n_trans(min=1,max=3)
-        "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>";
+        "Number of components of translational momentum" annotation (Dialog(
+            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
       FCSys.Connectors.Amagat amagat(final n_trans=n_trans)
         "Connector for translational and thermal diffusion, additivity of volume"
@@ -283,24 +284,30 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Rectangle(
-                  extent={{-98,20},{98,60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Text(
-                  extent={{-98,20},{98,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+                100,100}}), graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Rectangle(
+              extent={{-98,20},{98,60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Text(
+              extent={{-98,20},{98,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
+
     end AmagatDalton;
 
     model ChemicalFace
@@ -311,8 +318,8 @@ package Conditions "Models to specify and measure operating conditions"
       extends FCSys.BaseClasses.Icons.Names.Top1;
 
       // Geometry
-      parameter Q.Area A "Cross-sectional area of the face"
-        annotation (Dialog(group="Geometry"));
+      parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
+            group="Geometry", __Dymola_label="<html><i>A</i></html>"));
       parameter Axis axis "Axis of the electrochemical reaction"
         annotation (Dialog(group="Geometry"));
       parameter Side side "Side of the face w.r.t., the reaction"
@@ -380,17 +387,21 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{0,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-30,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+        Icon(graphics={
+            Line(
+              points={{0,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-30,0},{0,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
+
     end ChemicalFace;
 
     model ChemicalReaction
@@ -399,7 +410,8 @@ package Conditions "Models to specify and measure operating conditions"
       extends FCSys.BaseClasses.Icons.Names.Top1;
 
       parameter Integer n_trans(min=1,max=3)
-        "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>";
+        "Number of components of translational momentum" annotation (Dialog(
+            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
       parameter Integer n "Stoichiometric coefficient";
       parameter Q.MassSpecific m "Specific mass"
@@ -444,23 +456,29 @@ package Conditions "Models to specify and measure operating conditions"
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,-40}},
-                  lineColor={127,127,127},
-                  textString="%n"),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}),
+        Icon(graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,-20},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n"),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}),
         Diagram(graphics));
+
     end ChemicalReaction;
 
     package MSL
       "<html>Adapters to the <a href=\"modelica://Modelica\">Modelica Standard Library</a></html>"
       extends Modelica.Icons.Package;
+
+      // TODO: Create a wrapper for the whole cell.
       model Anode
         "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
         extends FCSys.BaseClasses.Icons.Names.Top4;
@@ -565,31 +583,38 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,60},{0,-100}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,20},{80,20}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-20},{80,-20}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{80,60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-60},{80,-60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-100},{70,-100}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,60},{0,-100}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,20},{80,20}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-20},{80,-20}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,60},{80,60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-60},{80,-60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-100},{70,-100}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Anode;
 
       model Cathode
@@ -695,31 +720,38 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,60},{0,-100}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,20},{80,20}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-20},{80,-20}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{80,60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-60},{80,-60}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-100},{70,-100}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,60},{0,-100}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,20},{80,20}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-20},{80,-20}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,60},{80,60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-60},{80,-60}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-100},{70,-100}},
+                color={0,127,0},
+                smooth=Smooth.None)}));
       end Cathode;
 
       model Conductor
@@ -777,25 +809,30 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,127,0},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,40},{80,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-40},{80,-40}},
-                      color={191,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{70,0}},
-                      color={0,127,0},
-                      smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-40},{80,-40}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{70,0}},
+                color={0,127,0},
+                smooth=Smooth.None)}), Diagram(graphics));
       end Conductor;
 
       package Phases "Adapters for material phases"
@@ -1188,8 +1225,8 @@ package Conditions "Models to specify and measure operating conditions"
           extends FCSys.BaseClasses.Icons.Names.Top2;
 
           // Geometry
-          parameter Q.Area A=U.cm^2 "Area of the interface"
-            annotation (Dialog(group="Geometry"));
+          parameter Q.Area A=U.cm^2 "Area of the interface" annotation (Dialog(
+                group="Geometry", __Dymola_label="<html><i>A</i></html>"));
           parameter Side side=Side.n "FCSys side of the interface"
             annotation (Dialog(group="Geometry"));
 
@@ -1228,20 +1265,24 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={Line(
-                          points={{0,0},{0,-40}},
-                          color={0,0,0},
-                          smooth=Smooth.None,
-                          pattern=LinePattern.Dash),Line(
-                          points={{0,0},{70,0}},
-                          color={0,0,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{70,-40}},
-                          color={140,0,0},
-                          smooth=Smooth.None),Line(
-                          points={{-70,0},{0,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None)}));
+          annotation (Icon(graphics={
+                Line(
+                  points={{0,0},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),
+                Line(
+                  points={{0,0},{70,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{70,-40}},
+                  color={140,0,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{-70,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
         end 'e-';
 
         model Fluid
@@ -1314,26 +1355,32 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={Line(
-                          points={{0,40},{70,40}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,40},{0,-80}},
-                          color={0,0,0},
-                          smooth=Smooth.None,
-                          pattern=LinePattern.Dash),Line(
-                          points={{0,0},{70,0}},
-                          color={0,127,0},
-                          smooth=Smooth.None),Line(
-                          points={{0,-80},{70,-80}},
-                          color={0,0,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{70,-40}},
-                          color={140,0,0},
-                          smooth=Smooth.None),Line(
-                          points={{-70,0},{0,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None)}));
+          annotation (Icon(graphics={
+                Line(
+                  points={{0,40},{70,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,40},{0,-80}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),
+                Line(
+                  points={{0,0},{70,0}},
+                  color={0,127,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-80},{70,-80}},
+                  color={0,0,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{70,-40}},
+                  color={140,0,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{-70,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
         end Fluid;
 
         model FluidNeutral
@@ -1341,8 +1388,8 @@ package Conditions "Models to specify and measure operating conditions"
           import assert = FCSys.BaseClasses.Utilities.assertEval;
           extends FCSys.BaseClasses.Icons.Names.Top3;
 
-          parameter Q.Area A=U.cm^2 "Area of the interface"
-            annotation (Dialog(group="Geometry"));
+          parameter Q.Area A=U.cm^2 "Area of the interface" annotation (Dialog(
+                group="Geometry", __Dymola_label="<html><i>A</i></html>"));
           replaceable package Data = Characteristics.BaseClasses.Characteristic
             "Characteristic data (for FCSys)" annotation (
             Dialog(group="Material properties"),
@@ -1397,23 +1444,28 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={Line(
-                          points={{0,40},{70,40}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,40},{0,-40}},
-                          color={0,0,0},
-                          smooth=Smooth.None,
-                          pattern=LinePattern.Dash),Line(
-                          points={{0,0},{70,0}},
-                          color={0,127,0},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{70,-40}},
-                          color={140,0,0},
-                          smooth=Smooth.None),Line(
-                          points={{-70,0},{0,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None)}));
+          annotation (Icon(graphics={
+                Line(
+                  points={{0,40},{70,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),
+                Line(
+                  points={{0,0},{70,0}},
+                  color={0,127,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{70,-40}},
+                  color={140,0,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{-70,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
         end FluidNeutral;
 
         model Solid
@@ -1452,20 +1504,24 @@ package Conditions "Models to specify and measure operating conditions"
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  All of the advective terms (for all the balance equations)
           // cancel across the interface.
-          annotation (Icon(graphics={Line(
-                          points={{0,0},{0,-40}},
-                          color={0,0,0},
-                          smooth=Smooth.None,
-                          pattern=LinePattern.Dash),Line(
-                          points={{0,0},{70,0}},
-                          color={0,127,0},
-                          smooth=Smooth.None),Line(
-                          points={{-70,0},{0,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{70,-40}},
-                          color={140,0,0},
-                          smooth=Smooth.None)}));
+          annotation (Icon(graphics={
+                Line(
+                  points={{0,0},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),
+                Line(
+                  points={{0,0},{70,0}},
+                  color={0,127,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{-70,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{70,-40}},
+                  color={140,0,0},
+                  smooth=Smooth.None)}));
         end Solid;
 
       end Species;
@@ -2493,12 +2549,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={-80,10})));
 
           // Properties upon outflow
-          parameter Q.Velocity phi[Axis]={0,0,0}
-            "<html>Velocity (<b>&phi;</b>)</html>"
-            annotation (Dialog(group="Properties upon outflow"));
+          parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
+                group="Properties upon outflow", __Dymola_label=
+                  "<html><i><b>&phi;</b></i></html>"));
           parameter Q.PotentialAbsolute sT(start=3000*U.K)
-            "Specific entropy-temperature product"
-            annotation (Dialog(group="Properties upon outflow"));
+            "Specific entropy-temperature product" annotation (Dialog(group=
+                  "Properties upon outflow", __Dymola_label=
+                  "<html><i>sT</i></html>"));
 
           // Included components of translational momentum
           parameter Boolean inclTransX=true "X" annotation (
@@ -3105,12 +3162,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={-80,10})));
 
           // Properties upon outflow
-          parameter Q.Velocity phi[Axis]={0,0,0}
-            "<html>Velocity (<b>&phi;</b>)</html>"
-            annotation (Dialog(group="Properties upon outflow"));
+          parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
+                group="Properties upon outflow", __Dymola_label=
+                  "<html><i><b>&phi;</b></i></html>"));
           parameter Q.PotentialAbsolute sT(start=3000*U.K)
-            "Specific entropy-temperature product"
-            annotation (Dialog(group="Properties upon outflow"));
+            "Specific entropy-temperature product" annotation (Dialog(group=
+                  "Properties upon outflow", __Dymola_label=
+                  "<html><i>sT</i></html>"));
 
           // Included components of translational momentum
           parameter Boolean inclTransX=true "X" annotation (
@@ -7535,11 +7593,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       model Volume "Model to establish a fixed total volume"
         // extends FCSys.BaseClasses.Icons.Names.Top7;
 
-        parameter Q.Volume V "Volume";
+        parameter Q.Volume V "Volume"
+          annotation (Dialog(__Dymola_label="<html><i>V</i></html>"));
         // Note:  These must be public in Dymola 7.4, so HideResult is set true
         // instead.
-        parameter Integer n_trans
-          "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>";
+        parameter Integer n_trans(min=1,max=3)
+          "Number of components of translational momentum" annotation (Dialog(
+              __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
         Connectors.Amagat amagat(final n_trans=n_trans)
           "Connector for translational momentum and thermal energy, with additivity of volume"
@@ -7562,23 +7622,27 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={Rectangle(
-                      extent={{-160,112},{160,152}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Polygon(
-                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
-                  {-160,-160},{-160,60}},
-                      lineColor={127,127,127},
-                      smooth=Smooth.None,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-160,112},{160,152}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+                  160,160}}), graphics={
+              Rectangle(
+                extent={{-160,112},{160,152}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Polygon(
+                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
+                    -160},{-160,60}},
+                lineColor={127,127,127},
+                smooth=Smooth.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-160,112},{160,152}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
+
       end Volume;
 
       package Amagat "Conditions for additivity of volume"
@@ -8864,7 +8928,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends TestStand(redeclare Q.Current zI,zJ=zJ_large + zJ_small_SI*U.A/U.m
             ^2);
 
-      parameter Q.CurrentAreic zJ_large=U.A "Large-signal current density";
+      parameter Q.CurrentAreic zJ_large=U.A "Large-signal current density"
+        annotation (Dialog(__Dymola_label=
+              "<html><i>zJ</i><sub>large</sub></html>"));
       Connectors.RealInput zJ_small_SI
         "Small-signal current density in SI base units" annotation (Placement(
             transformation(
@@ -8899,6 +8965,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics));
+
     end TestStandEIS;
 
     model TestStand "Fuel cell test stand (applies boundary conditions)"
@@ -8911,17 +8978,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       // Geometry
       parameter Q.Length L_x_an[:]={8*U.mm}
-        "<html>Lengths of the segments along the through-cell axis in anode FP (L<sub>x an</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Lengths of the segments through the cell in anode FP" annotation (
+          Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>x an</sub></html>"));
       parameter Q.Length L_x_ca[:]={8*U.mm}
-        "<html>Lengths of the segments along the through-cell axis in anode FP (L<sub>x ca</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Lengths of the segments through the cell in cathode FP" annotation (
+          Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>x ca</sub></html>"));
       parameter Q.Length L_y[:]={U.m}
-        "<html>Lengths of the cell segments along the channel (L<sub>y</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Lengths of the segments along the channel" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm}
-        "<html>Lengths of the cell segments across the channel (L<sub>z</sub>)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Lengths of the segments across the channel" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_x_an=size(L_x_an, 1)
         "Number of subregions along the through-cell axis in anode FP"
         annotation (Dialog(group="Geometry"));
@@ -8945,80 +9014,86 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Prescribed operating conditions
       // -------------------------------
       // Electrical
-      input Q.CurrentAreic zJ "Current density"
-        annotation (Dialog(group="Electrical conditions (specify one)"));
-      Q.Current zI "Current"
-        annotation (Dialog(group="Electrical conditions (specify one)"));
-      Q.Potential w "Voltage"
-        annotation (Dialog(group="Electrical conditions (specify one)"));
-      Q.ResistanceElectrical R "Resistance"
-        annotation (Dialog(group="Electrical conditions (specify one)"));
-      Q.Power P "Power"
-        annotation (Dialog(group="Electrical conditions (specify one)"));
+      parameter ElectricalSpec electricalSpec=ElectricalSpec.currentDensity
+        "Type of electrical specification" annotation (Dialog(
+          group="Electrical condition",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of specification",
+          __Dymola_joinNext=true));
+      Real u_electrical=U.A/U.cm^2 "Value of the electrical specification"
+        annotation (Dialog(
+          group="Electrical condition",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>electrical</sub>)</html>"));
+      Q.CurrentAreic zJ "Current density";
+      Q.Current zI "Current";
+      Q.Potential w "Voltage";
+      Q.ResistanceElectrical R "Resistance";
+      Q.Power P "Power";
+
       //
       // General anode conditions
-      parameter Side anInletSide=Side.p "Side of the inlet (along the y axis)"
-        annotation (Dialog(tab="Anode conditions"));
-      Q.TemperatureAbsolute T_an_in=333.15*U.K
-        "<html>Inlet temperature (<i>T</i><sub>an in</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions"));
-      Q.PressureAbsolute p_an_out=U.from_kPag(48.3)
-        "<html>Outlet pressure (<i>p</i><sub>an out</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions"));
+      parameter Side anInletSide=Side.p "Side of the inlet"
+        annotation (Dialog(group="Anode conditions"));
+      Q.TemperatureAbsolute T_an_in=333.15*U.K "Inlet temperature" annotation (
+          Dialog(group="Anode conditions", __Dymola_label=
+              "<html><i>T</i><sub>an in</sub></html>"));
+
+      Q.PressureAbsolute p_an_out=U.from_kPag(48.3) "Outlet pressure"
+        annotation (Dialog(group="Anode conditions", __Dymola_label=
+              "<html><i>p</i><sub>an out</sub></html>"));
       //
       // General cathode conditions
-      parameter Side caInletSide=Side.p "Side of the inlet (along the y axis)"
-        annotation (Dialog(tab="Cathode conditions"));
-      Q.TemperatureAbsolute T_ca_in=333.15*U.K
-        "<html>Inlet temperature (<i>T</i><sub>ca in</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions"));
-      Q.PressureAbsolute p_ca_out=U.from_kPag(48.3)
-        "<html>Outlet pressure (<i>p</i><sub>ca out</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions"));
+      parameter Side caInletSide=Side.p "Side of the inlet"
+        annotation (Dialog(group="Cathode conditions"));
+      Q.TemperatureAbsolute T_ca_in=333.15*U.K "Inlet temperature" annotation (
+          Dialog(group="Cathode conditions", __Dymola_label=
+              "<html><i>T</i><sub>ca in</sub></html>"));
+      Q.PressureAbsolute p_ca_out=U.from_kPag(48.3) "Outlet pressure"
+        annotation (Dialog(group="Cathode conditions",__Dymola_label=
+              "<html><i>p</i><sub>ca out</sub></html>"));
       Q.NumberAbsolute n_O2(
         final max=1,
         displayUnit="%") = 0.208
-        "<html>Dry-gas concentration of O<sub>2</sub> at inlet (<i>n</i><sub>O2</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions"));
+        "<html>Dry-gas concentration of O<sub>2</sub> at inlet</html>"
+        annotation (Dialog(group="Cathode conditions",__Dymola_label=
+              "<html><i>n</i><sub>O2</sub></html>"));
       //
       // Anode flow rate
-      //input
-      Q.NumberAbsolute anStoich "Stoichiometric flow rate" annotation (Dialog(
-            tab="Anode conditions", group="Inlet flow rate (specify one)"));
-      Q.CurrentAreic J_an
-        "<html>Equivalent current density (<i>J</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.Current I_an "<html>Equivalent current (<i>I</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.VolumeRate Vdot_g_an_in
-        "<html>Volumetric flow rate of gas (<i>V&#775;</i><sub>g an in</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.PressureAbsolute p_an_in
-        "<html>Inlet pressure (<i>p</i><sub>an in</sub>)</html>" annotation (
-          Dialog(tab="Anode conditions", group="Inlet flow rate (specify one)"));
+      parameter FlowSpec anFlowSpec=FlowSpec.stoich
+        "Type of anode flow specification" annotation (Dialog(
+          group="Anode conditions",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of flow specification",
+          __Dymola_joinNext=true));
+      Real u_an_flow=1.5 "Value of the anode flow specification" annotation (
+          Dialog(
+          group="Anode conditions",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>an flow</sub>)</html>"));
+      Q.NumberAbsolute anStoich "Anode stoichiometric flow rate";
+      Q.CurrentAreic J_an "Equivalent current density of anode supply";
+      Q.Current I_an "Equivalent current of anode supply";
+      Q.VolumeRate Vdot_g_an_in "Volumetric flow rate of gas in anode supply";
+      Q.PressureAbsolute p_an_in "Anode inlet pressure";
       //
       // Cathode flow rate
-      //input
-      Q.NumberAbsolute caStoich "Stoichiometric flow rate" annotation (Dialog(
-            tab="Cathode conditions", group="Inlet flow rate (specify one)"));
-      Q.CurrentAreic J_ca
-        "<html>Equivalent current density (<i>J</i><sub>ca</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.Current I_ca "<html>Equivalent current (<i>I</i><sub>ca</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.VolumeRate Vdot_g_ca_in
-        "<html>Volumetric flow rate of gas (<i>V&#775;</i><sub>g ca in</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Inlet flow rate (specify one)"));
-      Q.PressureAbsolute p_ca_in
-        "<html>Inlet pressure (<i>p</i><sub>ca in</sub>)</html>" annotation (
-          Dialog(tab="Cathode conditions", group=
-              "Inlet flow rate (specify one)"));
+      parameter FlowSpec caFlowSpec=FlowSpec.stoich
+        "Type of cathode flow specification" annotation (Dialog(
+          group="Cathode conditions",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of flow specification",
+          __Dymola_joinNext=true));
+      Real u_ca_flow=2.0 "Value of the cathode flow specification" annotation (
+          Dialog(
+          group="Cathode conditions",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>ca flow</sub>)</html>"));
+      Q.NumberAbsolute caStoich "Cathode stoichiometric flow rate";
+      Q.CurrentAreic J_ca "Equivalent current density of cathode supply";
+      Q.Current I_ca "Equivalent current of cathode supply";
+      Q.VolumeRate Vdot_g_ca_in "Volumetric flow rate of gas in cathode supply";
+      Q.PressureAbsolute p_ca_in "Cathode inlet pressure";
       //
       // Anode humidity
       //input
@@ -9050,61 +9125,53 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       //input
       Q.TemperatureAbsolute T_an
         "<html>Temperature (<i>T</i><sub>an</sub>)</html>" annotation (Dialog(
-            tab="Anode conditions", group="End plate (specify one)"));
+            tab="Anode conditions", group=
+              "Temperature of end plate (specify one)"));
       Q.Conductance G_an
         "<html>Thermal conductance with the environment (<i>G</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Anode conditions", group=
-              "End plate (specify one)"));
+              "Temperature of end plate (specify one)"));
       Q.Power Qdot_an
         "<html>Rate of heat rejection (<i>Q&#775;</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Anode conditions", group=
-              "End plate (specify one)"));
+              "Temperature of end plate (specify one)"));
       //
       // Cathode end plate
       //input
       Q.TemperatureAbsolute T_ca
         "<html>Temperature (<i>T</i><sub>ca</sub>)</html>" annotation (Dialog(
-            tab="Cathode conditions", group="End plate (specify one)"));
+            tab="Cathode conditions", group=
+              "Temperature of end plate (specify one)"));
       Q.Conductance G_ca
         "<html>Thermal conductance with the environment (<i>G</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions", group=
-              "End plate (specify one)"));
+              "Temperature of end plate (specify one)"));
       Q.Power Qdot_ca
         "<html>Rate of heat rejection (<i>Q&#775;</i><sub>an</sub>)</html>"
         annotation (Dialog(tab="Cathode conditions", group=
-              "End plate (specify one)"));
+              "Temperature of end plate (specify one)"));
 
       // Material properties
       replaceable package DataH2 = Characteristics.IdealGas constrainedby
         Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub> gas</html>" annotation (
-        Dialog(tab="Advanced",group="Fluid equations of state"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
+        "<html>H<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
+            group="Fluid equations of state"), choicesAllMatching=true);
       replaceable package DataH2O = Characteristics.IdealGas constrainedby
         Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O gas</html>" annotation (
-        Dialog(tab="Advanced",group="Fluid equations of state"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
+        "<html>H<sub>2</sub>O gas</html>" annotation (Dialog(tab="Advanced",
+            group="Fluid equations of state"), choicesAllMatching=true);
       replaceable package DataH2Ol = Characteristics.H2O.Liquid constrainedby
         Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O liquid</html>" annotation (
-        Dialog(tab="Advanced",group="Fluid equations of state"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
+        "<html>H<sub>2</sub>O liquid</html>" annotation (Dialog(tab="Advanced",
+            group="Fluid equations of state"), choicesAllMatching=true);
       replaceable package DataN2 = Characteristics.IdealGas constrainedby
         Characteristics.BaseClasses.CharacteristicEOS
-        "<html>N<sub>2</sub> gas</html>" annotation (
-        Dialog(tab="Advanced",group="Fluid equations of state"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
+        "<html>N<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
+            group="Fluid equations of state"), choicesAllMatching=true);
       replaceable package DataO2 = Characteristics.IdealGas constrainedby
         Characteristics.BaseClasses.CharacteristicEOS
-        "<html>O<sub>2</sub> gas</html>" annotation (
-        Dialog(tab="Advanced",group="Fluid equations of state"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
+        "<html>O<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
+            group="Fluid equations of state"), choicesAllMatching=true);
 
       // Derived and measured conditions
       Q.CurrentAreic zJ_seg[n_y, n_z] "Current density of the segments";
@@ -9197,7 +9264,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={40,160})));
-
     protected
       ByConnector.FaceBus.Single.FaceBusGraphiteOnly anBC[n_y, n_z](graphite(
           each 'inclC+'=true,
@@ -9518,11 +9584,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-                  extent={{-160,160},{160,-160}},
-                  lineColor={191,191,191},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
-              {160,-160}}, lineColor={0,0,0})}),
+              extent={{-160,160},{160,-160}},
+              lineColor={191,191,191},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
+                  160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.
@@ -9573,20 +9639,45 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     which the cell is held.</p>
     </html>"));
     end TestStand;
+
+    type FlowSpec = enumeration(
+        stoich "Stoichiometric rate",
+        currentDensity "Equivalent current density",
+        current "Equivalent current",
+        volumetric "Volumetric rate",
+        pressure "Inlet pressure") "Ways to specify the anode flow rate";
+    type ElectricalSpec = enumeration(
+        currentDensity "Current density",
+        current "Current",
+        voltage "Voltage",
+        resistance "Resistance",
+        power "Power") "Ways to specify the electrical load";
+    type HumditySpec = enumeration(
+        relative "Relative humidity",
+        pressure "Vapor pressure",
+        dewPoint "Dew point") "Ways to specify humidity";
+    type ThermalSpec = enumeration(
+        temperature "Temperature",
+        conductance "Thermal conductance with the environment",
+        rate "Heat flow rate") "Ways to specify a thermal condition";
   end TestStands;
 
   record Environment "Environmental properties for a simulation"
     extends FCSys.BaseClasses.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
-    final constant U.Bases.Base baseUnits=U.base "Base constants and units";
+    final constant U.Bases.Base baseUnits=U.base "Base constants and units"
+      annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
 
     parameter Boolean analysis=false "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K
-      "Temperature";
-    parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure";
+      "Temperature" annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+
+    parameter Q.PressureAbsolute p(nominal=U.atm) = U.atm "Pressure"
+      annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+
     parameter Q.NumberAbsolute RH(
       displayUnit="%",
       max=1) = 0.8 "Relative humidity";
@@ -9596,15 +9687,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     parameter Q.NumberAbsolute n_O2(
       final max=1,
       displayUnit="%") = 0.208
-      "<html>Dry-gas concentration of O<sub>2</sub> (<i>n</i><sub>O2</sub>)</html>";
+      "<html>Dry-gas concentration of O<sub>2</sub></html>"
+      annotation (Dialog(__Dymola_label="<html><i>n</i><sub>O2</sub></html>"));
     // Value from http://en.wikipedia.org/wiki/Oxygen
     final parameter Q.PressureAbsolute p_O2=n_O2*(p - p_H2O) "Pressure of O2";
 
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
-      "Acceleration due to body forces";
+      "Acceleration due to body forces"
+      annotation (Dialog(__Dymola_label="<html><b><i>a</i></b></html>"));
+
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
-    parameter Q.PotentialLineic E[Axis]={0,0,0} "Electric field";
+    parameter Q.PotentialLineic E[Axis]={0,0,0} "Electric field"
+      annotation (Dialog(__Dymola_label="<html><b><i>E</i></b></html>"));
 
     annotation (
       defaultComponentPrefixes="inner",

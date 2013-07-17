@@ -379,8 +379,8 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
       'inclC+' constrainedby FCSys.Species.Species(
       n_faces=n_faces,
-      initMaterial=if 'incle-' and not (inclHOR or inclORR) then InitScalar.Pressure
-           else InitScalar.Volume,
+      initMaterial=if 'incle-' and not (inclHOR or inclORR) then InitScalar.pressure
+           else InitScalar.volume,
       phi(each stateSelect=if reduceVel then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -643,8 +643,8 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'C19HF37O5S-'.Ionomer.Fixed 'C19HF37O5S-'(final
         n_faces) if 'inclC19HF37O5S-' constrainedby FCSys.Species.Species(
       n_faces=n_faces,
-      initMaterial=if 'inclH+' and not (inclHOR or inclORR) then InitScalar.Pressure
-           else InitScalar.Volume,
+      initMaterial=if 'inclH+' and not (inclHOR or inclORR) then InitScalar.pressure
+           else InitScalar.volume,
       phi(each stateSelect=if reduceVel then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceTemp then StateSelect.default else StateSelect.prefer))
@@ -1066,20 +1066,20 @@ package Phases "Mixtures of species"
         annotation (HideResult=true);
 
       // Geometry
-      parameter Integer n_faces(min=1, max=3)
-        "<html>Number of pairs of faces (<i>n</i><sub>faces</sub>)</html>"
-        annotation (Dialog(group="Geometry"),HideResult=true);
+      parameter Integer n_faces(min=1, max=3) "Number of pairs of faces"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><i>n</i><sub>faces</sub></html>"), HideResult=true);
       // This can't be an outer parameter in Dymola 7.4.
       inner parameter Q.NumberAbsolute k_E(
         min=Modelica.Constants.small,
-        final nominal=1) = 1 if n_spec > 0
-        "<html>Coupling factor for exchange (<b><i>k</i><sub>E</sub></b>)</html>"
-        annotation (Dialog(group="Geometry"));
+        final nominal=1) = 1 if n_spec > 0 "Coupling factor for exchange"
+        annotation (Dialog(group="Geometry",__Dymola_label=
+              "<html><b><i>k</i><sub>E</sub></b></html>"));
       parameter Q.NumberAbsolute k_T[Axis](
         each min=Modelica.Constants.small,
         each final nominal=1) = {1,1,1} if n_spec > 0
-        "<html>Area fill factor for transport (<b><i>k</i><sub>T</sub></b>)</html>"
-        annotation (Dialog(group="Geometry"));
+        "Area fill factor for transport" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html><b><i>k</i><sub>T</sub></b></html>"));
 
       // Assumptions
       parameter Boolean reduceVel=false if n_spec > 0
@@ -1195,50 +1195,58 @@ package Phases "Mixtures of species"
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-        Icon(graphics={Ellipse(
-                  extent={{-40,100},{40,20}},
-                  lineColor={127,127,127},
-                  startAngle=30,
-                  endAngle=149,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{20,-4},{100,-84}},
-                  lineColor={127,127,127},
-                  startAngle=270,
-                  endAngle=390,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{-100,-4},{-20,-84}},
-                  lineColor={127,127,127},
-                  startAngle=149,
-                  endAngle=270,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Polygon(
-                  points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                94.5,-24},{60,-84}},
-                  pattern=LinePattern.None,
-                  fillPattern=FillPattern.Sphere,
-                  smooth=Smooth.None,
-                  fillColor={225,225,225},
-                  lineColor={0,0,0}),Line(
-                  points={{-60,-84},{60,-84}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{34.5,80},{94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{-34.5,80},{-94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}),
+        Icon(graphics={
+            Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+                  -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),
+            Line(
+              points={{-60,-84},{60,-84}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
         Diagram(graphics));
     end EmptyPhase;
 

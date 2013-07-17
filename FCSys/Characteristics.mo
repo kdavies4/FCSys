@@ -10,14 +10,17 @@ package Characteristics
       "Evaluate the material properties over varying temperature and pressure"
       extends Modelica.Icons.Example;
 
-      parameter Q.TemperatureAbsolute T_start=273.15*U.K
-        "<html>Initial temperature (<i>T</i><sub>start</sub>)</html>";
-      parameter Q.TemperatureAbsolute T_stop=473.15*U.K
-        "<html>Final temperature (<i>T</i><sub>stop</sub>)</html>";
-      parameter Q.PressureAbsolute p_start=U.bar
-        "<html>Initial pressure (<i>p</i><sub>start</sub>)</html>";
-      parameter Q.PressureAbsolute p_stop=U.bar + 0*U.atm
-        "<html>Final pressure (<i>p</i><sub>stop</sub>)</html>";
+      parameter Q.TemperatureAbsolute T_start=273.15*U.K "Initial temperature"
+        annotation (Dialog(__Dymola_label=
+              "<html><i>T</i><sub>start</sub></html>"));
+      parameter Q.TemperatureAbsolute T_stop=473.15*U.K "Final temperature"
+        annotation (Dialog(__Dymola_label=
+              "<html><i>T</i><sub>stop</sub></html>"));
+      parameter Q.PressureAbsolute p_start=U.bar "Initial pressure" annotation
+        (Dialog(__Dymola_label="<html><i>p</i><sub>start</sub></html>"));
+      parameter Q.PressureAbsolute p_stop=U.bar + 0*U.atm "Final pressure"
+        annotation (Dialog(__Dymola_label=
+              "<html><i>p</i><sub>stop</sub></html>"));
 
       // Property models
       PropertiesRT 'C+'(redeclare package Data = Characteristics.'C+'.Graphite)
@@ -32,7 +35,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -245,7 +248,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.Characteristic(
         final formula="C+",
-        final phase=Phase.Solid,
+        final phase=Phase.solid,
         p0=U.atm,
         n_v={0,0},
         b_v=[U.cc*m/(2.2210*U.g)],
@@ -300,7 +303,7 @@ package Characteristics
       // The same applies to other species.
       extends BaseClasses.Characteristic(
         final formula="C9HF17O5S-",
-        final phase=Phase.Solid,
+        final phase=Phase.solid,
         p0=U.atm,
         m=1044.214*U.g/U.mol - 'H+'.Gas.m,
         n_v={0,0},
@@ -358,7 +361,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.Characteristic(
         final formula="e-",
-        phase=Phase.Gas,
+        phase=Phase.gas,
         m=Data.MM*U.kg/U.mol,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
@@ -414,9 +417,9 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.Characteristic(
         final formula="H+",
-        phase=Phase.Gas,
+        phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
-        referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC,
+        referenceEnthalpy=ReferenceEnthalpy.zeroAt,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         n_c=-2,
@@ -469,7 +472,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase=Phase.Gas,
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         n_v={-1,-3},
         b_v={{0,0,0,1},{8.0282e6*U.K^3,-2.6988e5*U.K^2,-129.26*U.K,17.472}*U.cm
@@ -518,7 +521,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase=Phase.Gas,
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         n_v={-1,-3},
         b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.8189e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
@@ -582,7 +585,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.Characteristic(
         final formula="H2O",
-        final phase=Phase.Liquid,
+        final phase=Phase.liquid,
         final m=0.01801528*U.kg/U.mol,
         p0=U.atm,
         n_v={0,0},
@@ -624,7 +627,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase=Phase.Gas,
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         n_v={-1,-4},
         b_v={{0,0,0,0,1},{-2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9.3378e3
@@ -674,7 +677,7 @@ package Characteristics
       import Modelica.Math.log;
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase=Phase.Gas,
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         n_v={-1,-4},
         b_v={{0,0,0,0,1},{5.0855e9*U.K^4,-1.6393e8*U.K^3,5.2007e5*U.K^2,-1.7696e4
@@ -843,7 +846,7 @@ package Characteristics
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
-      constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+      constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt
         "Choice of enthalpy reference";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</html>";
@@ -952,7 +955,7 @@ package Characteristics
         end c_p_resid;
 
       algorithm
-        c_p := c0_p(T) + c_p_resid(T, p) - (if phase <> Phase.Gas then
+        c_p := c0_p(T) + c_p_resid(T, p) - (if phase <> Phase.gas then
           c_p_resid(T, p0) else c_p_resid(
                 T,
                 p0,
@@ -1085,10 +1088,10 @@ package Characteristics
         //    "Error, not all 'end' could be expanded."
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
-          1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
-          Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+          1))) + (if referenceEnthalpy == ReferenceEnthalpy.zeroAt then
+          Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.enthalpyOfFormationAt
            then 0 else Deltah0_f) + h_offset + h_resid(T, p) - (if phase <>
-          Phase.Gas then h_resid(T, p0) else h_resid(
+          Phase.gas then h_resid(T, p0) else h_resid(
                 T,
                 p0,
                 {1,-n_v[1]}))
@@ -1185,7 +1188,7 @@ package Characteristics
         //    "Error, not all 'end' could be expanded.";
         s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then s0_i(T, i) else 0 for i in 1:size(b_c,
-          1))) + s_resid(T, p) - (if phase <> Phase.Gas then s_resid(T, p0)
+          1))) + s_resid(T, p) - (if phase <> Phase.gas then s_resid(T, p0)
            else s_resid(
                 T,
                 p0,
@@ -1482,9 +1485,9 @@ temperature difference.</p>
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <code>p0</code>.
     For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <code>p0</code> with
-    <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.</li>
+    <code>ReferenceEnthalpy.zeroAt</code> selected is not exactly zero.</li>
 
-    <li>If the material is gaseous (<code>phase == Phase.Gas</code>), then the first virial coefficient
+    <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies

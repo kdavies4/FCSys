@@ -105,35 +105,38 @@ package Tests "Models and functions for test and validation"
       import FCSys.Test.assertValues;
       extends Modelica.Icons.Example;
       parameter Q.TemperatureAbsolute T[:]={298,373.15,473.15,673.15,873.15,
-          1073.15,1273.15}*U.K "Temperatures";
-      final parameter Q.Potential v_OC_model[:]=v_OC(T)
-        "Correlated open circuit potentials";
+          1073.15,1273.15}*U.K "Temperatures"
+        annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+      final parameter Q.Potential w_OC_model[:]=w_OC(T)
+        "Correlated open circuit potentials" annotation (Dialog(__Dymola_label=
+              "<html><i>w</i><sub>OC model</sub></html>"));
       // Note:  The potentials are scaled in terms of electrons.
-      parameter Q.Potential v_OC_table[size(T, 1)]=0.5*{-228590,-225.2e3,-220.4e3,
+      parameter Q.Potential w_OC_table[size(T, 1)]=0.5*{-228590,-225.2e3,-220.4e3,
           -210.3e3,-199.6e3,-188.6e3,-177.4e3}*U.J/U.mol
-        "Tabulated open circuit potentials";
+        "Tabulated open circuit potentials" annotation (Dialog(__Dymola_label=
+              "<html><i>w</i><sub>OC table</sub></html>"));
       // The first entry is based on [Moran2004, p. 803].  The others are
       // from [Larminie2003, p. 28].
 
     protected
-      replaceable function v_OC "Open-circuit voltage"
+      replaceable function w_OC "Open-circuit voltage"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.Potential v_OC "Potential";
+        output Q.Potential w_OC "Potential";
 
       algorithm
-        v_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
+        w_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
           annotation (Inline=true);
 
-      end v_OC;
+      end w_OC;
 
     initial equation
       assertValues(
-            v_OC_model,
-            v_OC_table,
+            w_OC_model,
+            w_OC_table,
             1e-3*U.V,
             name="open circuit potential");
-      // Note:  In Dymola 7.4, the v_OC() function call can't be used
+      // Note:  In Dymola 7.4, the w_OC() function call can't be used
       // directly here.  Instead, intermediate variables must be used.
       // Otherwise, the result is different.
 
@@ -143,42 +146,44 @@ package Tests "Models and functions for test and validation"
       "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(l)</sub></html>"
       import FCSys.Characteristics.*;
       import FCSys.Test.assertValues;
-      extends TestCellPotentialsGas(T={298,298.15,353.15}*U.K, v_OC_table=0.5*{
+      extends TestCellPotentialsGas(T={298,298.15,353.15}*U.K, w_OC_table=0.5*{
             -237180,-237.2e3,-228.2e3}*U.J/U.mol);
-      final parameter Q.Potential v_therm_model[:]=v_therm(T)
+      final parameter Q.Potential w_therm_model[:]=w_therm(T)
         "Correlated thermodynamic potentials";
-      parameter Q.Potential v_therm_table[size(T, 1)]=0.5*{-285830,-237.2e3/
-          0.83,-228.2e3/0.80}*U.J/U.mol "Tabulated thermodynamic potentials";
+      parameter Q.Potential w_therm_table[size(T, 1)]=0.5*{-285830,-237.2e3/
+          0.83,-228.2e3/0.80}*U.J/U.mol "Tabulated thermodynamic potentials"
+        annotation (Dialog(__Dymola_label=
+              "<html><i>w</i><sub>therm table</sub></html>"));
       // The first entry is based on [Moran2004, p. 803].  The others are
       // from [Larminie2003, pp. 28 & 33].
 
     protected
-      redeclare function v_OC "Open-circuit voltage"
+      redeclare function w_OC "Open-circuit voltage"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.Potential v_OC "Potential";
+        output Q.Potential w_OC "Potential";
 
       algorithm
-        v_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
+        w_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
           annotation (Inline=true);
 
-      end v_OC;
+      end w_OC;
 
-      function v_therm "Thermodynamic potential"
+      function w_therm "Thermodynamic potential"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.Potential v_therm "Potential";
+        output Q.Potential w_therm "Potential";
 
       algorithm
-        v_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p))
+        w_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p))
           annotation (Inline=true);
 
-      end v_therm;
+      end w_therm;
 
     initial equation
       assertValues(
-            v_therm_model,
-            v_therm_table,
+            w_therm_model,
+            w_therm_table,
             1e-2*U.V,
             name="thermodynamic potential");
 
@@ -212,12 +217,14 @@ package Tests "Models and functions for test and validation"
                 ={-1,0}) "Ideal gas properties";
           parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
-            "Temperatures";
+            "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           final parameter Q.CapacityThermalSpecific c_p_model[:]=Data.c_p(T)
             "Correlated isobaric specific heat capacity";
           parameter Q.CapacityThermalSpecific c_p_table[size(T, 1)]=Data.m*{
               14.051,14.307,14.427,14.476,14.546,14.695,14.983}*U.J/(U.g*U.K)
-            "Tabulated isobaric specific heat capacity";
+            "Tabulated isobaric specific heat capacity" annotation (Dialog(
+                __Dymola_label="<html><i>c</i><sub><i>p</i> table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -239,12 +246,14 @@ package Tests "Models and functions for test and validation"
                 ={-1,0}) "Ideal gas properties";
           parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
-            "Temperatures";
+            "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           final parameter Q.CapacityThermalSpecific c_v_model[:]=Data.c_v(T)
             "Correlated isochoric specific heat capacity";
           parameter Q.CapacityThermalSpecific c_v_table[size(T, 1)]=Data.m*{
               9.927,10.183,10.302,10.352,10.422,10.570,10.859}*U.J/(U.g*U.K)
-            "Tabulated isochoric specific heat capacity";
+            "Tabulated isochoric specific heat capacity" annotation (Dialog(
+                __Dymola_label="<html><i>c</i><sub><i>v</i> table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -262,14 +271,17 @@ package Tests "Models and functions for test and validation"
           "<html>Test the fluidity of H<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920]</html>"
           import FCSys.Test.assertValue;
           extends Modelica.Icons.Example;
+
           replaceable package Data = FCSys.Characteristics.H2.Gas
             "Material characteristics";
           parameter Q.NumberAbsolute eps=0.1 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={200,250,300,350,400,600,800,
-              1000,2000}*U.K "Temperatures";
+              1000,2000}*U.K "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           parameter Q.Fluidity zeta_table[size(T, 1)]={1/68.1e-7,1/78.9e-7,1/
               89.6e-7,1/98.8e-7,1/108.2e-7,1/142.4e-7,1/172.4e-7,1/201.3e-7,1/
-              318.2e-7}/(U.Pa*U.s) "Tabulated fluidity";
+              318.2e-7}/(U.Pa*U.s) "Tabulated fluidity" annotation (Dialog(
+                __Dymola_label="<html>&zeta;<sub>table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -291,10 +303,12 @@ package Tests "Models and functions for test and validation"
             "Material characteristics";
           parameter Q.NumberAbsolute eps=0.2 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={200,250,300,350,400,600,800,
-              1000,2000}*U.K "Temperatures";
+              1000,2000}*U.K "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           parameter Q.ResistivityThermal theta_table[size(T, 1)]={1/0.131,1/
               0.131,1/0.183,1/0.204,1/0.226,1/0.305,1/0.378,1/0.448,1/0.878}*U.m
-              *U.K/U.W "Tabulated thermal resistivity";
+              *U.K/U.W "Tabulated thermal resistivity" annotation (Dialog(
+                __Dymola_label="<html>&theta;<sub>table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -329,11 +343,14 @@ package Tests "Models and functions for test and validation"
         import FCSys.Test.assertValue;
         import FCSys.Characteristics.H2O;
         extends Modelica.Icons.Example;
+
         parameter Q.TemperatureAbsolute T[:]=U.from_degC({0.01,25,50,80,100,150,
-            200}) "Temperatures";
+            200}) "Temperatures"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
         parameter Q.PressureAbsolute p_sat[size(T, 1)]={0.00611,0.03169,0.1235,
             0.4739,1.014,4.758,15.54}*U.bar "Saturation pressures";
-        Q.PressureAbsolute p[size(T, 1)](each start=U.atm) "Pressures";
+        Q.PressureAbsolute p[size(T, 1)](each start=U.atm) "Pressures"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
 
       initial equation
         for i in 1:size(T, 1) loop
@@ -371,15 +388,18 @@ package Tests "Models and functions for test and validation"
           replaceable package Data = FCSys.Characteristics.H2O.Gas (
               b_v=[1],
               n_v={-1,0},
-              referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)
+              referenceEnthalpy=ReferenceEnthalpy.zeroAt)
             "Ideal gas properties w/ 0K enthalpy reference";
           parameter Q.NumberAbsolute eps=0.02 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
-              3250}*U.K "Temperatures";
+              3250}*U.K "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           final parameter Q.Potential h_model[:]=Data.h(T)
             "Correlated specific enthalpy";
           parameter Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,
-              27896,35882,82593,150272}*U.J/U.mol "Tabulated specific enthalpy";
+              27896,35882,82593,150272}*U.J/U.mol "Tabulated specific enthalpy"
+            annotation (Dialog(__Dymola_label=
+                  "<html><i>h</i><sub>table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -401,12 +421,14 @@ package Tests "Models and functions for test and validation"
                 n_v={-1,0}) "Ideal gas properties w/ 0K enthalpy reference";
           parameter Q.NumberAbsolute eps=3e-3 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
-              3250}*U.K "Temperatures";
+              3250}*U.K "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           final parameter Q.NumberAbsolute s_model[:]=Data.s(T)
             "Correlated specific entropy";
           parameter Q.NumberAbsolute s_table[size(T, 1)]={178.576,188.928,
               198.673,212.920,223.693,232.597,264.571,290.756}*U.J/(U.mol*U.K)
-            "Tabulated specific entropy";
+            "Tabulated specific entropy" annotation (Dialog(__Dymola_label=
+                  "<html><i>s</i><sub>table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -493,7 +515,7 @@ package Tests "Models and functions for test and validation"
             redeclare package Data = FCSys.Characteristics.N2.Gas (
                 b_v=[1],
                 n_v={-1,0},
-                referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K),
+                referenceEnthalpy=ReferenceEnthalpy.zeroAt),
             eps=1e-3,
             h_table={6391,8723,11640,17563,23714,30129,64810,110690}*U.J/U.mol);
 
@@ -518,9 +540,11 @@ package Tests "Models and functions for test and validation"
             "Material characteristics";
           parameter Q.NumberAbsolute eps=3 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={77.7,194.7,273.2,353.2}*U.K
-            "Temperatures";
+            "Temperatures"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
           parameter Q.Diffusivity D_table[size(T, 1)]={0.0168,0.104,0.185,0.287}
-              *U.cm^2/U.s "Tabulated self diffusivity";
+              *U.cm^2/U.s "Tabulated self diffusivity" annotation (Dialog(
+                __Dymola_label="<html><i>D</i><sub>table</sub></html>"));
 
         initial equation
           for i in 1:size(T, 1) loop
@@ -616,7 +640,7 @@ package Tests "Models and functions for test and validation"
             redeclare package Data = FCSys.Characteristics.O2.Gas (
                 b_v=[1],
                 n_v={-1,0},
-                referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K),
+                referenceEnthalpy=ReferenceEnthalpy.zeroAt),
             eps=0.01,
             h_table={6404,8736,11711,17929,24523,31389,67881,116827}*U.J/U.mol);
 
@@ -1302,27 +1326,30 @@ package Tests "Models and functions for test and validation"
           import FCSys.BaseClasses.Utilities.Polynomial.*;
           extends Modelica.Icons.Example;
 
-          parameter Integer n=-1 "Power of the first polynomial term";
-          Real u1=1 + time
+          parameter Integer n=-1 "Power of the first polynomial term"
+            annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+          Real u_1=1 + time
             "Real arguments to function (must have sufficient richness)";
-          parameter Real u2[:]=1:3
-            "Real arguments to function (must have sufficient richness)";
-          // u2 must not be time-varying.  Otherwise, there's no requirement
-          // that y1 == y2.
-          Real y1 "Direct result of function";
-          Real y2 "Integral of derivative of y1";
+          parameter Real u_2[:]=1:3
+            "Real arguments to function (must have sufficient richness)"
+            annotation (Dialog(__Dymola_label=
+                  "<html><i>u</i><sub>2</sub></html>"));
+          // u_2 must not be time-varying.  Otherwise, there's no requirement
+          // that y_1 == y_2.
+          Real y_1 "Direct result of function";
+          Real y_2 "Integral of derivative of y_1";
 
         initial equation
-          y2 = y1;
+          y_2 = y_1;
 
         equation
-          y1 = F(   u1,
-                    u2,
+          y_1 = F(  u_1,
+                    u_2,
                     n);
-          f(        u1,
-                    u2,
-                    n) = der(y2);
-          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          f(        u_1,
+                    u_2,
+                    n) = der(y_2);
+          assert(abs(y_1 - y_2) < 1e-6, "The derivative is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
@@ -1333,30 +1360,31 @@ package Tests "Models and functions for test and validation"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
           import FCSys.BaseClasses.Utilities.Polynomial.*;
           extends Modelica.Icons.Example;
-          parameter Integer n=-1 "Power of the first polynomial term";
-          Real u1=1 + time
+          parameter Integer n=-1 "Power of the first polynomial term"
+            annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+          Real u_1=1 + time
             "Real arguments to function (must have sufficient richness)";
-          Real u2[:]=(1 + time^2)*(1:3)
+          Real u_2[:]=(1 + time^2)*(1:3)
             "Real arguments to function (must have sufficient richness)";
-          Real y1 "Direct result of function";
-          Real y2 "Integral of derivative of y1";
+          Real y_1 "Direct result of function";
+          Real y_2 "Integral of derivative of y_1";
 
         initial equation
-          y2 = y1;
+          y_2 = y_1;
 
         equation
-          y1 = F(   u1,
-                    u2,
+          y_1 = F(  u_1,
+                    u_2,
                     n);
-          dF(       u1,
-                    u2,
+          dF(       u_1,
+                    u_2,
                     n,
-                    der(u1),
-                    der(u2)) = der(y2);
-          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+                    der(u_1),
+                    der(u_2)) = der(y_2);
+          // Note:  This is equivalent to der(y_1) = der(y_2), but it must be
           // explicit to ensure that the translator uses the defined derivative
           // instead of the automatically derived one.
-          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          assert(abs(y_1 - y_2) < 1e-6, "The derivative is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
@@ -1393,30 +1421,31 @@ package Tests "Models and functions for test and validation"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
           import FCSys.BaseClasses.Utilities.Polynomial.*;
           extends Modelica.Icons.Example;
-          parameter Integer n=-1 "Power of the first polynomial term";
-          Real u1=1 + time
+          parameter Integer n=-1 "Power of the first polynomial term"
+            annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+          Real u_1=1 + time
             "Real arguments to function (must have sufficient richness)";
-          Real u2[:]=(1 + time^2)*(1:3)
+          Real u_2[:]=(1 + time^2)*(1:3)
             "Real arguments to function (must have sufficient richness)";
-          Real y1 "Direct result of function";
-          Real y2 "Integral of derivative of y1";
+          Real y_1 "Direct result of function";
+          Real y_2 "Integral of derivative of y_1";
 
         initial equation
-          y2 = y1;
+          y_2 = y_1;
 
         equation
-          y1 = f(   u1,
-                    u2,
+          y_1 = f(  u_1,
+                    u_2,
                     n);
-          df(       u1,
-                    u2,
+          df(       u_1,
+                    u_2,
                     n,
-                    der(u1),
-                    der(u2)) = der(y2);
-          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+                    der(u_1),
+                    der(u_2)) = der(y_2);
+          // Note:  This is equivalent to der(y_1) = der(y_2), but it must be
           // explicit to ensure that the translator uses the defined derivative
           // instead of the automatically derived one.
-          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          assert(abs(y_1 - y_2) < 1e-6, "The derivative is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
@@ -1427,40 +1456,41 @@ package Tests "Models and functions for test and validation"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
           import FCSys.BaseClasses.Utilities.Polynomial.*;
           extends Modelica.Icons.Example;
-          parameter Integer n=-1 "Power of the first polynomial term";
-          Real u1=1 + time
+          parameter Integer n=-1 "Power of the first polynomial term"
+            annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+          Real u_1=1 + time
             "Real arguments to function (must have sufficient richness)";
-          Real u2[:]=(1 + time^2)*(1:3)
+          Real u_2[:]=(1 + time^2)*(1:3)
             "Real arguments to function (must have sufficient richness)";
-          Real y1 "Direct result of function";
-          Real y2 "Integral of derivative of y1";
+          Real y_1 "Direct result of function";
+          Real y_2 "Integral of derivative of y_1";
 
         protected
-          final Real du1=der(u1) "Derivative of u1";
-          final Real du2[:]=der(u2) "Derivative of u2";
+          final Real du_1=der(u_1) "Derivative of u_1";
+          final Real du_2[:]=der(u_2) "Derivative of u_2";
           // In Dymola 7.4, it's necessary to explicitly define these intermediate
           // variables (since there are second-order derivatives).
 
         initial equation
-          y2 = y1;
+          y_2 = y_1;
 
         equation
-          y1 = df(  u1,
-                    u2,
+          y_1 = df( u_1,
+                    u_2,
                     n,
-                    du1,
-                    du2);
-          d2f(      u1,
-                    u2,
+                    du_1,
+                    du_2);
+          d2f(      u_1,
+                    u_2,
                     n,
-                    du1,
-                    du2,
-                    der(du1),
-                    der(du2)) = der(y2);
-          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+                    du_1,
+                    du_2,
+                    der(du_1),
+                    der(du_2)) = der(y_2);
+          // Note:  This is equivalent to der(y_1) = der(y_2), but it must be
           // explicit to ensure that the translator uses the defined derivative
           // instead of the automatically derived one.
-          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          assert(abs(y_1 - y_2) < 1e-6, "The derivative is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
