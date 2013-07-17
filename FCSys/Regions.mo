@@ -13,6 +13,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'e-'.face.rho "Electrical current density";
       output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
         "Electrical current density, in A/cm2";
+      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
+        "Total electrical current";
+
+      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
+      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
 
       parameter Q.Length L_y[:]={U.m}
         "<html>Lengths along the channel (<i>L</i><sub>y</sub>)</html>"
@@ -76,41 +81,34 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC3[anFP.n_x, n_z](
-          each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.2*(environment.p - environment.p_H2O)),
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
-          H2O(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
-                  redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=1.2*environment.p_H2O),
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force)))
-        annotation (Placement(transformation(
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC3[anFP.n_x, n_z](gas(
+          each inclH2=true,
+          each inclH2O=true,
+          H2(materialSource(y=(fill(
+                      anStoich*zI/(sum(anFP.L_x)*sum(L_z)),
+                      anFP.n_x,
+                      n_z) - BC3.gas.H2.face.rho*BC3.gas.H2.face.phi[
+                  Orientation.normal]) .* outerProduct(anFP.L_x, L_z))),
+          H2O(materialSource(y=BC3.gas.H2.materialSource.y*environment.p_H2O/(
+                  environment.p - environment.p_H2O))))) annotation (Placement(
+            transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,-24})));
-
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](
-          each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(
-            redeclare function materialSpec =
+      // Parameter for outerProduct(anFP.L_x, L_z) here and below.
+      // Use normalMeas for current density.
+      Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC4[anFP.n_x, n_z](gas(
+          each inclH2=true,
+          each inclH2O=true,
+          H2(redeclare each function materialMeas =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
-            materialSource(y=environment.p - environment.p_H2O),
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force),
-          H2O(
+              normalSource(y=(fill(
+                      environment.p - environment.p_H2O,
+                      anFP.n_x,
+                      n_z) - BC4.gas.H2.materialOut.y) .* outerProduct(anFP.L_x,
+                  L_z))),
+          each H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
                   redeclare package Data = FCSys.Characteristics.IdealGas),
@@ -238,15 +236,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
-        experiment(
-          StopTime=110,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Diagram(graphics),
-        experimentSetupOutput);
       connect(BC1.face, anFP.xNegative) annotation (Line(
           points={{-80,-1.34539e-15},{-76,-1.34539e-15},{-76,6.10623e-16},{-70,
               6.10623e-16}},
@@ -261,6 +250,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
+            "Regions.Examples.FPToFP.mos"),
+        experiment(
+          StopTime=110,
+          Tolerance=1e-06,
+          Algorithm="Dassl"),
+        Diagram(graphics),
+        experimentSetupOutput);
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -372,15 +370,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None,
           thickness=0.5));
 
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLToGDL.mos"
-            "Regions.Examples.GDLToGDL.mos"),
-        experiment(
-          StopTime=110,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Diagram(graphics),
-        experimentSetupOutput);
       connect(BC1.face, anGDL.xNegative) annotation (Line(
           points={{-60,-1.34539e-15},{-55,-1.34539e-15},{-55,6.10623e-16},{-50,
               6.10623e-16}},
@@ -395,6 +384,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLToGDL.mos"
+            "Regions.Examples.GDLToGDL.mos"),
+        experiment(
+          StopTime=110,
+          Tolerance=1e-06,
+          Algorithm="Dassl"),
+        Diagram(graphics),
+        experimentSetupOutput);
     end GDLToGDL;
 
     model CLToCL "Test one catalyst layer to the other"
@@ -484,15 +482,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None,
           thickness=0.5));
 
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
-            "Regions.Examples.CLToCL.mos"),
-        experiment(
-          StopTime=110,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        experimentSetupOutput,
-        Diagram(graphics));
       connect(BC1.face, anCL.xNegative) annotation (Line(
           points={{-40,-1.34539e-15},{-40,0},{-30,0},{-30,6.10623e-16}},
           color={240,0,0},
@@ -503,6 +492,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
+            "Regions.Examples.CLToCL.mos"),
+        experiment(
+          StopTime=110,
+          Tolerance=1e-06,
+          Algorithm="Dassl"),
+        experimentSetupOutput,
+        Diagram(graphics));
     end CLToCL;
 
     model AnFP "Test the anode flow plate"
@@ -635,7 +633,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"));
-
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -919,7 +916,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "Resources/Scripts/Dymola/Regions.Examples.CaGDL.mos"));
-
     end CaGDL;
 
     model CaFP "Test the cathode flow plate"
@@ -1078,13 +1074,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        experiment(StopTime=110, Tolerance=1e-06),
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
-            "Regions.Examples.AnCL.mos"),
-        experimentSetupOutput);
       connect(PEM.xPositive, BC2.face) annotation (Line(
           points={{20,10},{24,10},{24,10},{30,10}},
           color={0,0,240},
@@ -1097,6 +1086,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+                {100,100}}),graphics),
+        experiment(StopTime=110, Tolerance=1e-06),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
+            "Regions.Examples.AnCL.mos"),
+        experimentSetupOutput);
     end AnCLPEM;
   end Examples;
   extends Modelica.Icons.Package;
@@ -1179,7 +1175,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       outer Conditions.Environment environment "Environmental conditions";
 
-      // Thermal resistivity of some other flowplate materials [Incropera2002,
+      // Thermal resistivity of some other flow plate materials [Incropera2002,
       // pp. 905 & 907]:
       //                                Stainless steel
       //                                ---------------------------------------------------------------------------------
@@ -1218,7 +1214,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The solid and the fluid phases exist in the same subregions even though a typically flowplate is impermeable 
+<p>The solid and the fluid phases exist in the same subregions even though a typically flow plate is impermeable 
 to the fluid (except for the channel).  This has some important implications:<ol>
 <li>The fluid species are exposed at the positive x-axis connector (<code>xNegative</code>).  
 They should be left disconnected there.</li>
@@ -1227,14 +1223,14 @@ Therefore the pressure drop across the channel is governed primarily by the mobi
 and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
 (<i>k</i><sub>T</sub>).</li>
 <li>The area fill factors (<i>k</i><sub>T</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
-generally be greater than one because the fluid is not transported along the entire thickness of the flowplate.
+generally be greater than one because the fluid is not transported along the entire thickness of the flow plate.
 As an approximation, it should be equal to product of two ratios:<ol>
-<li>the thickness of the flowplate to the depth of the channels, and</li>
-<li>the area of the valleys in the yz plane to the total area of the flowplate in the yz plane (land + valleys).</li>
+<li>the thickness of the flow plate to the depth of the channels, and</li>
+<li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
 </ol>
 The default is 5.
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
-the modeled velocity by a factor of the area of the flowplate in the xz plane divided by the cross-sectional
+the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
 area of the channel (also in the xz plane). This should be taken into account when setting 
 <i>k</i><sub>E</sub> to produce the proper pressure drop.</li>
 </ol> 
@@ -1983,7 +1979,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2517,7 +2512,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -3024,7 +3018,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The solid and the fluid phases exist in the same subregions even though a typically flowplate is impermeable 
+<p>The solid and the fluid phases exist in the same subregions even though a typically flow plate is impermeable 
 to the fluid (except for the channel).  This has some important implications:<ol>
 <li>The fluid species are exposed at the positive x-axis connector (<code>xPosititve</code>).  
 They should be left disconnected there.</li>
@@ -3033,14 +3027,14 @@ Therefore the pressure drop across the channel is governed primarily by the mobi
 and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
 (<i>k</i><sub>T</sub>).</li>
 <li>The area fill factors (<i>k</i><sub>T</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
-generally be greater than one because the fluid is not transported along the entire thickness of the flowplate.
+generally be greater than one because the fluid is not transported along the entire thickness of the flow plate.
 As an approximation, it should be equal to product of two ratios:<ol>
-<li>the thickness of the flowplate to the depth of the channels, and</li>
-<li>the area of the valleys in the yz plane to the total area of the flowplate in the yz plane (land + valleys).</li>
+<li>the thickness of the flow plate to the depth of the channels, and</li>
+<li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
 The default is 5.
 </ol>
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
-the modeled velocity by a factor of the area of the flowplate in the xz plane divided by the cross-sectional
+the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
 area of the channel (also in the xz plane). This should be taken into account when setting 
 <i>k</i><sub>E</sub> to produce the proper pressure drop.</li>
 </ol> 

@@ -240,8 +240,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2078,95 +2078,14 @@ package Subregions
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              subregion.gas.N2.points={{-100,0},{-40,0}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesX,
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{0,-40},{0,-100}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesY,
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{40,40},{50,50}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesZ,
-              subregion.gas.N2.smooth=Smooth.None),
-            Polygon(
-              subregion.gas.N2.points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},
-                  {-40,-40},{-40,16}},
-              subregion.gas.N2.lineColor={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.fillColor={255,255,255},
-              subregion.gas.N2.fillPattern=FillPattern.Solid),
-            Line(
-              subregion.gas.N2.points={{-40,-40},{-16,-16}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.pattern=LinePattern.Dash),
-            Line(
-              subregion.gas.N2.points={{-16,40},{-16,-16},{40,-16}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.pattern=LinePattern.Dash),
-            Line(
-              subregion.gas.N2.points={{-40,0},{28,0}},
-              subregion.gas.N2.color={210,210,210},
-              subregion.gas.N2.visible=inclFacesX,
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.thickness=0.5),
-            Line(
-              subregion.gas.N2.points={{0,28},{0,-40}},
-              subregion.gas.N2.color={210,210,210},
-              subregion.gas.N2.visible=inclFacesY,
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.thickness=0.5),
-            Line(
-              subregion.gas.N2.points={{28,0},{100,0}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesX,
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{0,100},{0,28}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesY,
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{-12,-12},{40,40}},
-              subregion.gas.N2.color={210,210,210},
-              subregion.gas.N2.visible=inclFacesZ,
-              subregion.gas.N2.smooth=Smooth.None,
-              subregion.gas.N2.thickness=0.5),
-            Line(
-              subregion.gas.N2.points={{-40,16},{16,16},{16,-40}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{-50,-50},{-12,-12}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.thickness=0.5,
-              subregion.gas.N2.visible=inclFacesZ,
-              subregion.gas.N2.smooth=Smooth.None),
-            Polygon(
-              subregion.gas.N2.points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},
-                  {-40,-40},{-40,16}},
-              subregion.gas.N2.lineColor={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None),
-            Line(
-              subregion.gas.N2.points={{40,40},{16,16}},
-              subregion.gas.N2.color={127,127,127},
-              subregion.gas.N2.smooth=Smooth.None),
-            Text(
-              subregion.gas.N2.extent={{-100,56},{100,96}},
-              subregion.gas.N2.textString="%name",
-              subregion.gas.N2.lineColor={0,0,0})}));
+        Icon(graphics={Line(subregion.gas.N2.points),Line(subregion.gas.N2.points),
+              Line(subregion.gas.N2.points),Polygon(subregion.gas.N2.points),
+              Line(subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
+              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
+              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
+              subregion.gas.N2.points),Line(subregion.gas.N2.points),Line(
+              subregion.gas.N2.points),Polygon(subregion.gas.N2.points),Line(
+              subregion.gas.N2.points),Text(subregion.gas.N2.extent)}));
 
     end EmptySubregion;
 

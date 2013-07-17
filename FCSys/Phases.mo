@@ -357,7 +357,6 @@ package Phases "Mixtures of species"
 
       Diagram(graphics),
       Icon(graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
@@ -622,7 +621,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -1058,7 +1056,6 @@ package Phases "Mixtures of species"
         Icon(graphics));
   end Liquid;
 
-
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
     model EmptyPhase "Model for a phase with no species or reactions"
@@ -1198,58 +1195,50 @@ package Phases "Mixtures of species"
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-        Icon(graphics={
-            Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-                  -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),
-            Line(
-              points={{-60,-84},{60,-84}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+        Icon(graphics={Ellipse(
+                  extent={{-40,100},{40,20}},
+                  lineColor={127,127,127},
+                  startAngle=30,
+                  endAngle=149,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Ellipse(
+                  extent={{20,-4},{100,-84}},
+                  lineColor={127,127,127},
+                  startAngle=270,
+                  endAngle=390,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Ellipse(
+                  extent={{-100,-4},{-20,-84}},
+                  lineColor={127,127,127},
+                  startAngle=149,
+                  endAngle=270,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Polygon(
+                  points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                94.5,-24},{60,-84}},
+                  pattern=LinePattern.None,
+                  fillPattern=FillPattern.Sphere,
+                  smooth=Smooth.None,
+                  fillColor={225,225,225},
+                  lineColor={0,0,0}),Line(
+                  points={{-60,-84},{60,-84}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Line(
+                  points={{34.5,80},{94.5,-24}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Line(
+                  points={{-34.5,80},{-94.5,-24}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0})}),
         Diagram(graphics));
     end EmptyPhase;
 

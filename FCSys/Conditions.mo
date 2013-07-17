@@ -283,29 +283,24 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Rectangle(
-              extent={{-98,20},{98,60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Text(
-              extent={{-98,20},{98,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+                100,100}}), graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Rectangle(
+                  extent={{-98,20},{98,60}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Text(
+                  extent={{-98,20},{98,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -385,20 +380,17 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+        Icon(graphics={Line(
+                  points={{0,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end ChemicalFace;
 
     model ChemicalReaction
@@ -452,20 +444,17 @@ package Conditions "Models to specify and measure operating conditions"
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
+        Icon(graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,-40}},
+                  lineColor={127,127,127},
+                  textString="%n"),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReaction;
 
@@ -6152,7 +6141,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={4,-80})));
-
+        public
           Sources.RealExpression materialOut(y=materialMeas(
                         face.rho,
                         face.Ndot,
@@ -7573,24 +7562,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={
-              Rectangle(
-                extent={{-160,112},{160,152}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
-                    -160},{-160,60}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-160,112},{160,152}},
-                textString="%name",
-                lineColor={0,0,0})}),
+                  160,160}}), graphics={Rectangle(
+                      extent={{-160,112},{160,152}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
+                  {-160,-160},{-160,60}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-160,112},{160,152}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -9532,11 +9518,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
+                  extent={{-160,160},{160,-160}},
+                  lineColor={191,191,191},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+              {160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.
