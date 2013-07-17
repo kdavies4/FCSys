@@ -242,8 +242,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -318,8 +318,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -672,7 +672,7 @@ package Subregions
       import FCSys.BaseClasses.Utilities.countTrue;
       import FCSys.BaseClasses.Utilities.enumerate;
       import FCSys.BaseClasses.Utilities.index;
-
+      extends Modelica.Icons.UnderConstruction;
       // Geometry
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {10
         *U.cm,10*U.cm,0.1*U.mm} "Lengths";
@@ -900,8 +900,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -992,7 +992,7 @@ package Subregions
       parameter Integer n_x=0
         "Number of discrete subregions along the x axis, besides the 2 side subregions"
         annotation (Dialog(__Dymola_label="<html><i>n<i><sub>x</sub></html>"));
-      parameter Q.Pressure Deltap_IC=100*U.Pa "Initial pressure difference"
+      parameter Q.Pressure Deltap_IC=-100*U.Pa "Initial pressure difference"
         annotation (Dialog(__Dymola_label=
               "<html>&Delta;<i>p</i><sub>IC</sub></html>"));
       parameter Boolean 'inclC+'=true
@@ -1216,8 +1216,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
-
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));

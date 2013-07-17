@@ -178,7 +178,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation
         (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
@@ -390,7 +390,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={2*U.m} "Lengths along the channel" annotation
+      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation
         (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"

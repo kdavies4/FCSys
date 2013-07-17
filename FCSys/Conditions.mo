@@ -284,29 +284,24 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Rectangle(
-              extent={{-98,20},{98,60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Text(
-              extent={{-98,20},{98,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+                100,100}}), graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Rectangle(
+                  extent={{-98,20},{98,60}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Text(
+                  extent={{-98,20},{98,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -386,20 +381,17 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+        Icon(graphics={Line(
+                  points={{0,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end ChemicalFace;
 
     model ChemicalReaction
@@ -454,20 +446,17 @@ package Conditions "Models to specify and measure operating conditions"
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
+        Icon(graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,-40}},
+                  lineColor={127,127,127},
+                  textString="%n"),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReaction;
 
@@ -1827,6 +1816,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   package ByConnector "Conditions for each type of connector"
     extends Modelica.Icons.Package;
 
+    // TODO: Move simplified parameter labels to __Dymola_label; give
+    // full description in description string.
+
     package Reaction
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
       extends Modelica.Icons.Package;
@@ -2453,10 +2445,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,195,38})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,195,38})}));
     end Reaction;
 
     package Chemical
@@ -2595,14 +2587,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}), Ellipse(
-              extent={{-40,20},{20,-40}},
-              fillColor={255,195,38},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-40,20},{20,-40}},
+                  fillColor={255,195,38},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None)}));
 
     end Chemical;
 
@@ -3059,11 +3051,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52},
+                  lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3205,10 +3197,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5205,11 +5197,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191},
-              lineThickness=0.5)}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191},
+                  lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -6557,10 +6549,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191})}));
 
     end Face;
 
@@ -7053,10 +7045,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251})}));
     end Inert;
 
     package Amagat
@@ -7581,24 +7573,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={
-              Rectangle(
-                extent={{-160,112},{160,152}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
-                    -160},{-160,60}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-160,112},{160,152}},
-                textString="%name",
-                lineColor={0,0,0})}),
+                  160,160}}), graphics={Rectangle(
+                      extent={{-160,112},{160,152}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
+                  {-160,-160},{-160,60}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-160,112},{160,152}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -7736,24 +7725,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   to a single value.</p></html>"));
         end PartialCondition;
       end Thermal;
-      annotation (Icon(graphics={
-            Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}),
-            Text(
-              extent={{-66,36},{46,-76}},
-              lineColor={255,255,255},
-              textString="A"),
-            Text(
-              extent={{-64,36},{48,-76}},
-              lineColor={255,255,255},
-              textString="A"),
-            Text(
-              extent={{-62,36},{50,-76}},
-              lineColor={255,255,255},
-              textString="A")}));
+      annotation (Icon(graphics={Ellipse(
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-66,36},{46,-76}},
+                  lineColor={255,255,255},
+                  textString="A"),Text(
+                  extent={{-64,36},{48,-76}},
+                  lineColor={255,255,255},
+                  textString="A"),Text(
+                  extent={{-62,36},{50,-76}},
+                  lineColor={255,255,255},
+                  textString="A")}));
     end Amagat;
 
     package Dalton
@@ -8381,36 +8366,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   to a single value.</p></html>"));
         end PartialCondition;
       end Thermal;
-      annotation (Icon(graphics={
-            Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}),
-            Text(
-              extent={{-66,36},{46,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-64,36},{48,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-62,36},{50,-76}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-62,34},{50,-78}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-64,34},{48,-78}},
-              lineColor={255,255,255},
-              textString="D"),
-            Text(
-              extent={{-66,34},{46,-78}},
-              lineColor={255,255,255},
-              textString="D")}));
+      annotation (Icon(graphics={Ellipse(
+                  extent={{-70,50},{50,-70}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-66,36},{46,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-64,36},{48,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-62,36},{50,-76}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-62,34},{50,-78}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-64,34},{48,-78}},
+                  lineColor={255,255,255},
+                  textString="D"),Text(
+                  extent={{-66,34},{46,-78}},
+                  lineColor={255,255,255},
+                  textString="D")}));
     end Dalton;
 
     package Translational
@@ -8768,10 +8746,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end Component;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255})}));
 
     end Translational;
 
@@ -8865,10 +8843,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
       end BaseClasses;
       annotation (Icon(graphics={Ellipse(
-              extent={{-70,50},{50,-70}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={221,23,47})}));
+                  extent={{-70,50},{50,-70}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={221,23,47})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
@@ -8936,24 +8914,26 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Geometry
       parameter Q.Length L_x_an[:]={8*U.mm}
         "Lengths of the segments through the cell in anode FP" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Cell geometry", __Dymola_label=
               "<html><i>L</i><sub>x an</sub></html>"));
       parameter Q.Length L_x_ca[:]={8*U.mm}
         "Lengths of the segments through the cell in cathode FP" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Cell geometry", __Dymola_label=
               "<html><i>L</i><sub>x ca</sub></html>"));
       parameter Q.Length L_y[:]={U.m}
         "Lengths of the segments along the channel" annotation (Dialog(group=
-              "Geometry", __Dymola_label="<html><i>L</i><sub>y</sub></html>"));
+              "Cell geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm}
         "Lengths of the segments across the channel" annotation (Dialog(group=
-              "Geometry", __Dymola_label="<html><i>L</i><sub>z</sub></html>"));
+              "Cell geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_x_an=size(L_x_an, 1)
         "Number of subregions along the through-cell axis in anode FP"
-        annotation (Dialog(group="Geometry"));
+        annotation (Dialog(group="Cell geometry"));
       final parameter Integer n_x_ca=size(L_x_ca, 1)
         "Number of subregions along the through-cell axis in cathode FP"
-        annotation (Dialog(group="Geometry"));
+        annotation (Dialog(group="Cell geometry"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of subregions along the channel";
       final parameter Integer n_z=size(L_z, 1)
@@ -8963,23 +8943,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         "Areas of the yz segments";
       final parameter Q.Area A_an[n_x_an, n_z]=outerProduct(L_x_an, L_z)
         "Areas of the xz segments of the anode"
-        annotation (Dialog(group="Geometry"));
+        annotation (Dialog(group="Cell geometry"));
       final parameter Q.Area A_ca[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
         "Areas of the xz segments of the cathode"
-        annotation (Dialog(group="Geometry"));
+        annotation (Dialog(group="Cell geometry"));
 
-      // Prescribed operating conditions
-      // -------------------------------
+      // Operating conditions
+      // --------------------
       // Electrical
       parameter ElectricalSpec electricalSpec=ElectricalSpec.currentDensity
         "Type of electrical specification" annotation (Dialog(
-          group="Electrical condition",
+          tab="Conditions",
+          group="Electrical",
           __Dymola_descriptionLabel=true,
           __Dymola_label="Type of specification",
           __Dymola_joinNext=true));
       Real u_electrical=U.A/U.cm^2 "Value of the electrical specification"
         annotation (Dialog(
-          group="Electrical condition",
+          tab="Conditions",
+          group="Electrical",
           __Dymola_descriptionLabel=true,
           __Dymola_label="<html>Value (<i>u</i><sub>electrical</sub>)</html>"));
       Q.CurrentAreic zJ "Current density";
@@ -8987,45 +8969,56 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.Potential w "Voltage";
       Q.ResistanceElectrical R "Resistance";
       Q.Power P "Power";
-
       //
       // General anode conditions
       parameter Side anInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(group="Anode conditions"));
+        annotation (Dialog(tab="Conditions",group="Anode"));
       Q.TemperatureAbsolute T_an_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(group="Anode conditions", __Dymola_label=
-              "<html><i>T</i><sub>an in</sub></html>"));
+          Dialog(
+          tab="Conditions",
+          group="Anode",
+          __Dymola_label="<html><i>T</i><sub>an in</sub></html>"));
 
       Q.PressureAbsolute p_an_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(group="Anode conditions", __Dymola_label=
-              "<html><i>p</i><sub>an out</sub></html>"));
+        annotation (Dialog(
+          tab="Conditions",
+          group="Anode",
+          __Dymola_label="<html><i>p</i><sub>an out</sub></html>"));
       //
       // General cathode conditions
       parameter Side caInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(group="Cathode conditions"));
+        annotation (Dialog(tab="Conditions",group="Cathode"));
       Q.TemperatureAbsolute T_ca_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(group="Cathode conditions", __Dymola_label=
-              "<html><i>T</i><sub>ca in</sub></html>"));
+          Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_label="<html><i>T</i><sub>ca in</sub></html>"));
       Q.PressureAbsolute p_ca_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(group="Cathode conditions",__Dymola_label=
-              "<html><i>p</i><sub>ca out</sub></html>"));
-      Q.NumberAbsolute n_O2(
+        annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_label="<html><i>p</i><sub>ca out</sub></html>"));
+      Q.NumberAbsolute n_O2_in(
         final max=1,
         displayUnit="%") = 0.208
-        "<html>Dry-gas concentration of O<sub>2</sub> at inlet</html>"
-        annotation (Dialog(group="Cathode conditions",__Dymola_label=
-              "<html><i>n</i><sub>O2</sub></html>"));
+        "<html>Dry-gas concentration of O<sub>2</sub> at the inlet</html>"
+        annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_label="<html><i>n</i><sub>O2 in</sub></html>"));
       //
       // Anode flow rate
       parameter FlowSpec anFlowSpec=FlowSpec.stoich
         "Type of anode flow specification" annotation (Dialog(
-          group="Anode conditions",
+          tab="Conditions",
+          group="Anode",
           __Dymola_descriptionLabel=true,
           __Dymola_label="Type of flow specification",
           __Dymola_joinNext=true));
       Real u_an_flow=1.5 "Value of the anode flow specification" annotation (
           Dialog(
-          group="Anode conditions",
+          tab="Conditions",
+          group="Anode",
           __Dymola_descriptionLabel=true,
           __Dymola_label="<html>Value (<i>u</i><sub>an flow</sub>)</html>"));
       Q.NumberAbsolute anStoich "Anode stoichiometric flow rate";
@@ -9037,13 +9030,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Cathode flow rate
       parameter FlowSpec caFlowSpec=FlowSpec.stoich
         "Type of cathode flow specification" annotation (Dialog(
-          group="Cathode conditions",
+          tab="Conditions",
+          group="Cathode",
           __Dymola_descriptionLabel=true,
           __Dymola_label="Type of flow specification",
           __Dymola_joinNext=true));
       Real u_ca_flow=2.0 "Value of the cathode flow specification" annotation (
           Dialog(
-          group="Cathode conditions",
+          tab="Conditions",
+          group="Cathode",
           __Dymola_descriptionLabel=true,
           __Dymola_label="<html>Value (<i>u</i><sub>ca flow</sub>)</html>"));
       Q.NumberAbsolute caStoich "Cathode stoichiometric flow rate";
@@ -9053,60 +9048,80 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.PressureAbsolute p_ca_in "Cathode inlet pressure";
       //
       // Anode humidity
-      //input
-      Q.NumberAbsolute anInletRH(displayUnit="%", max=1) "Relative humidity"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Inlet humidity (specify one)"));
-      Q.PressureAbsolute p_H2O_an_in
-        "<html>H<sub>2</sub>O vapor pressure (<i>p</i><sub>H2O an in</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Inlet humidity (specify one)"));
-      Q.TemperatureAbsolute T_sat_an_in
-        "<html>Dew point (<i>T</i><sub>an H2O</sub>)</html>" annotation (Dialog(
-            tab="Anode conditions", group="Inlet humidity (specify one)"));
+      parameter HumiditySpec anHumiditySpec=HumiditySpec.relative
+        "Type of anode humidity specification" annotation (Dialog(
+          tab="Conditions",
+          group="Anode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of humidity specification",
+          __Dymola_joinNext=true));
+      Real u_an_humidity=0.8 "Value of the anode humidity specification"
+        annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>an humidity</sub>)</html>"));
+      Q.NumberAbsolute anInletRH(displayUnit="%")
+        "Relative humidity at anode inlet";
+      Q.PressureAbsolute p_H2O_an_in "H2O vapor pressure at anode inlet";
+      Q.TemperatureAbsolute T_sat_an_in "Dew point at anode inlet";
       //
       // Cathode humidity
-      //input
-      Q.NumberAbsolute caInletRH(displayUnit="%", max=1) "Relative humidity"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Inlet humidity (specify one)"));
-      Q.PressureAbsolute p_H2O_ca_in
-        "<html>H<sub>2</sub>O vapor pressure (<i>p</i><sub>H2O ca in</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Inlet humidity (specify one)"));
-      Q.TemperatureAbsolute T_sat_ca_in
-        "<html>Dew point (<i>T</i><sub>ca H2O</sub>)</html>" annotation (Dialog(
-            tab="Cathode conditions", group="Inlet humidity (specify one)"));
+      parameter HumiditySpec caHumiditySpec=HumiditySpec.relative
+        "Type of anode humidity specification" annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of humidity specification",
+          __Dymola_joinNext=true));
+      Real u_ca_humidity=0.5 "Value of the cathode humidity specification"
+        annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>ca humidity</sub>)</html>"));
+      Q.NumberAbsolute caInletRH(displayUnit="%")
+        "Relative humidity at cathode inlet";
+      Q.PressureAbsolute p_H2O_ca_in "H2O vapor pressure at cathode inlet";
+      Q.TemperatureAbsolute T_sat_ca_in "Dew point at cathode inlet";
       //
       // Anode end plate
-      //input
-      Q.TemperatureAbsolute T_an
-        "<html>Temperature (<i>T</i><sub>an</sub>)</html>" annotation (Dialog(
-            tab="Anode conditions", group=
-              "Temperature of end plate (specify one)"));
+      /*
+  parameter ThermalSpec anEndPlateSpec=ThermalSpec.temperature 
+    "Type of anode end plate specification" annotation (Dialog(
+      tab="Conditions",group="Anode",
+      __Dymola_descriptionLabel=true,
+      __Dymola_label="Type of end plate specification",
+      __Dymola_joinNext=true));
+  Real u_an_end_plate=333.15*U.K "Value of the anode end plate specification" 
+    annotation (Dialog(
+      tab="Conditions",group="Anode",
+      __Dymola_descriptionLabel=true,
+      __Dymola_label="<html>Value (<i>u</i><sub>an end plate</sub>)</html>"));
+  */
+      Q.TemperatureAbsolute T_an "Temperature of anode end plate";
       Q.Conductance G_an
-        "<html>Thermal conductance with the environment (<i>G</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Temperature of end plate (specify one)"));
-      Q.Power Qdot_an
-        "<html>Rate of heat rejection (<i>Q&#775;</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Anode conditions", group=
-              "Temperature of end plate (specify one)"));
+        "Thermal conductance of the anode end plate to the environment";
+      Q.Power Qdot_an "Heat flow rate from the anode end plate";
       //
       // Cathode end plate
-      //input
-      Q.TemperatureAbsolute T_ca
-        "<html>Temperature (<i>T</i><sub>ca</sub>)</html>" annotation (Dialog(
-            tab="Cathode conditions", group=
-              "Temperature of end plate (specify one)"));
+      parameter ThermalSpec caEndPlateSpec=ThermalSpec.temperature
+        "Type of anode end plate specification" annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of end plate specification",
+          __Dymola_joinNext=true));
+      Real u_ca_end_plate=333.15*U.K
+        "Value of the cathode end plate specification" annotation (Dialog(
+          tab="Conditions",
+          group="Cathode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>ca end plate</sub>)</html>"));
+      Q.TemperatureAbsolute T_ca "Temperature of cathode end plate";
       Q.Conductance G_ca
-        "<html>Thermal conductance with the environment (<i>G</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Temperature of end plate (specify one)"));
-      Q.Power Qdot_ca
-        "<html>Rate of heat rejection (<i>Q&#775;</i><sub>an</sub>)</html>"
-        annotation (Dialog(tab="Cathode conditions", group=
-              "Temperature of end plate (specify one)"));
+        "Thermal conductance of the cathode end plate to the environment";
+      Q.Power Qdot_ca "Heat flow rate from the cathode end plate";
 
       // Material properties
       replaceable package DataH2 = Characteristics.IdealGas constrainedby
@@ -9597,6 +9612,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     </html>"));
     end TestStand;
 
+    // **Move to base package:
     type FlowSpec = enumeration(
         stoich "Stoichiometric rate",
         currentDensity "Equivalent current density",
@@ -9609,7 +9625,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         voltage "Voltage",
         resistance "Resistance",
         power "Power") "Ways to specify the electrical load";
-    type HumditySpec = enumeration(
+    type HumiditySpec = enumeration(
         relative "Relative humidity",
         pressure "Vapor pressure",
         dewPoint "Dew point") "Ways to specify humidity";
@@ -9786,31 +9802,27 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
 end Conditions;

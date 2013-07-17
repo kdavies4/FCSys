@@ -1914,7 +1914,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       phi(final start=phi_IC[cartTrans], each final fixed=false),
       sT(final start=h_IC - g_IC, final fixed=false))
       "Connector for phase change" annotation (Placement(transformation(extent=
-              {{-30,-10},{-10,10}}),iconTransformation(extent={{-59,28},{-79,48}})));
+              {{-30,-10},{-10,10}}), iconTransformation(extent={{-59,28},{-79,
+              48}})));
     Connectors.Inert inert(
       final n_trans=n_trans,
       translational(phi(final start=phi_IC[cartTrans], each final fixed=false)),
@@ -2217,16 +2218,17 @@ Choose any condition besides None.");
     // Diffusive transport
     for i in 1:n_faces loop
       for side in Side loop
-        // Material (central difference)
+        // Material
         eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho - 1/
-          v)*2;
+          v)*(if inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1 +
+          exp(-inSign(side)*I[transCart[cartFaces[i]]]*eta/(2*Lprime[cartFaces[
+          i]])) else 2);
 
         // Translational momentum
         beta*faces[i, side].mPhidot[Orientation.normal] = Lprime[cartFaces[i]]*
           (faces[i, side].phi[Orientation.normal] - (if inclTrans[cartFaces[i]]
-           then phi[transCart[cartFaces[i]]] else 0))*(if inclTrans[cartFaces[i]]
-           and upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
-          cartFaces[i]]]*beta*Data.m/(2*Lprime[cartFaces[i]])) else 2) "Normal";
+           then phi[transCart[cartFaces[i]]] else 0))*2
+          "Normal (central difference)";
         zeta*faces_mPhidot[i, side, Orientation.following - 1] = Nu_Phi[
           cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orientation.following]
            - (if inclTrans[cartWrap(cartFaces[i] + 1)] then phi[transCart[
