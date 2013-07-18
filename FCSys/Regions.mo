@@ -6,6 +6,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
+      /*
       output Q.Potential w[n_y, n_z]=BC2.graphite.'e-'.face.mPhidot[1] ./ (BC2.graphite.
           'e-'.face.rho*PEM.A[Axis.x]) - BC1.graphite.'e-'.face.mPhidot[1] ./ (
           BC1.graphite.'e-'.face.rho*PEM.A[Axis.x]) "Electrical potential";
@@ -15,6 +16,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Electrical current density, in A/cm2";
       output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
         "Total electrical current";
+*/
 
       parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
       parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
@@ -96,7 +98,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             materialSet(y=1.1*environment.p_H2O),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
@@ -129,7 +132,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             materialSet(y=1.4*environment.p_H2O),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
             thermalSet(y=environment.T)),
           N2(
             redeclare function materialSpec =
@@ -138,7 +142,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             materialSet(y=1.4*(environment.p - environment.p_H2O - environment.p_O2)),
 
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
             thermalSet(y=environment.T)),
           O2(
             redeclare function materialSpec =
@@ -146,7 +151,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
                   redeclare package Data = FCSys.Characteristics.IdealGas),
             materialSet(y=1.4*environment.p_O2),
             redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
@@ -175,17 +181,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Environmental conditions"
         annotation (Placement(transformation(extent={{70,50},{90,70}})));
 
-      Modelica.Blocks.Continuous.PI PI(
-        T=100,
-        initType=Modelica.Blocks.Types.Init.InitialState,
-        y(unit="m/(l.T2)"),
-        k=400000000,
-        u(unit="N/T"))
-        annotation (Placement(transformation(extent={{20,30},{40,50}})));
-      Modelica.Blocks.Sources.RealExpression realExpression(y=anStoich*zI - sum(
-            BC3.gas.H2.face.Ndot + BC3.gas.H2.face.phi[Orientation.normal] .*
-            BC3.gas.H2.face.rho .* outerProduct(anFP.L_x, L_z)))
-        annotation (Placement(transformation(extent={{-162,30},{-10,50}})));
     equation
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
           points={{-50,6.10623e-16},{-50,6.10623e-16}},
@@ -257,10 +252,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(realExpression.y, PI.u) annotation (Line(
-          points={{-2.4,40},{18,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
       annotation (
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
             "Regions.Examples.FPToFP.mos"),
@@ -2806,7 +2797,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"

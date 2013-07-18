@@ -723,7 +723,6 @@ For more information, see the documentation for the
       // Mathematical constants
 
       final constant Q.Number pi=U.pi "pi";
-      final constant Q.Number e=U.e "Euler number";
 
       // ------------------------------------------------------------------------
       // Base physical constants and units
@@ -855,6 +854,7 @@ For more information, see the documentation for the
 
       final constant Q.Pressure atm=U.atm "atmosphere";
       final constant Q.Pressure kPa=U.kPa "kilopascal";
+      final constant Q.Energy kJ=U.kJ "kilojoule";
       final constant Q.Length cm=U.cm "centimeter";
       final constant Q.Length mm=U.mm "millimeter";
       final constant Q.Number '%'=U.'%' "percent";
@@ -1280,9 +1280,6 @@ encompass other systems of units.</p>
   // ------------------------------------------------------------------------
 
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
-  // Circumference per unit diameter
-  final constant Q.Number e=exp(1) "Euler number";
-  // Natural base
 
   // ------------------------------------------------------------------------
   // Base physical constants and units

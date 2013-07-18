@@ -990,9 +990,6 @@ package Tests "Models and functions for test and validation"
       test(pi/3.14159265358979323846264338327950288419716939937510, name=
         "1 in set 1");
       // Value from http://en.wikipedia.org/wiki/Pi#Approximate_value
-      test(e/2.71828182845904523536028747135266249775724709369995, name=
-        "2 in set 1");
-      // Value from http://en.wikipedia.org/wiki/E_(mathematical_constant)
       test(2*pi*rad/(360*degree), name="3 in set 1");
       test('%'/0.01, name="4 in set 1");
       // ----------------------------------------------------------------------
