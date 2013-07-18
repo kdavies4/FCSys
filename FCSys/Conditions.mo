@@ -284,29 +284,24 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Rectangle(
-              extent={{-98,20},{98,60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Text(
-              extent={{-98,20},{98,60}},
-              textString="%name",
-              lineColor={0,0,0}),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+                100,100}}), graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Rectangle(
+                  extent={{-98,20},{98,60}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Text(
+                  extent={{-98,20},{98,60}},
+                  textString="%name",
+                  lineColor={0,0,0}),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -7575,24 +7570,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={
-              Rectangle(
-                extent={{-160,112},{160,152}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
-                    -160},{-160,60}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-160,112},{160,152}},
-                textString="%name",
-                lineColor={0,0,0})}),
+                  160,160}}), graphics={Rectangle(
+                      extent={{-160,112},{160,152}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
+                  {-160,-160},{-160,60}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-160,112},{160,152}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -9708,42 +9700,51 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-80,60},{80,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{32,8},{48,-8}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={50,50,50},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash)}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-100}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{32,8},{48,-8}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={50,50,50},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash)}));
 
   end Environment;
 

@@ -287,6 +287,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
+      connect(realExpression.y, filt.u) annotation (Line(
+          points={{-77,90},{-62,90}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(realExpression1.y, filtca.u) annotation (Line(
+          points={{-77,-20},{-62,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
       annotation (
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
             "Regions.Examples.FPToFP.mos"),
@@ -297,14 +305,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         experimentSetupOutput);
-      connect(realExpression.y, filt.u) annotation (Line(
-          points={{-77,90},{-62,90}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(realExpression1.y, filtca.u) annotation (Line(
-          points={{-77,-20},{-62,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -1451,16 +1451,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initTransZ=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(
-                consTransX=Conservation.IC,
-                consEnergy=Conservation.IC,
-                p_IC=environment.p_H2O)),
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceTemp=true,
               k_T=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(95*U.W),consEnergy=Conservation.IC),
+              'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
                 V_IC=V - epsilonV,
                 consTransY=Conservation.IC,
@@ -1473,12 +1470,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
               k_T=fill(epsilon^(3/2), 3),
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
-      // **temp constant temp gas and solid
 
       // **temp excluded  H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
-      // **justify k_T={10,1,1}, (adjust 10 based on channel depth)
 
       // TODO:  Find a better solution for liquid.H2O.V_IC than
       // Modelica.Constants.eps and apply it to other layers too.
@@ -2131,10 +2126,6 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
             primitivesVisible=false));
 
       // **temp H2O not in ionomer
-      // **temp 0 reaction rate
-      // **e-: rho_IC=17842.7*U.C/U.cc,
-      // initMaterial=InitScalar.none,
-      // chemical(Ndot(start=0, fixed=true))
       // **e-: sigma=40*U.S/(12*U.cm),
       // **H+: mu=0.083*U.S/(0.95*U.M*U.cm),
 
@@ -2306,6 +2297,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2354,7 +2346,6 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitScalar.none),
               H2O(initEnergy=InitScalar.none)))) annotation (IconMap(
             primitivesVisible=false));
-      //initMaterial=InitScalar.none,
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
@@ -3279,10 +3270,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(
-                p_IC=environment.p_H2O,
-                consEnergy=Conservation.IC,
-                consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
                 initTransX=InitTranslational.none,
                 initTransY=InitTranslational.none,
@@ -3315,9 +3303,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
-      // **temp constant temp gas
       // **temp excluded  H2O liq
-      // **justify k_T={10,1,1}, (adjust 10 based on channel depth)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
