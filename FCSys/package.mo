@@ -568,6 +568,7 @@ package UsersGuide "User's Guide"
     </ul></p>
 
 </html>"));
+    // **Add committee members.
 
     end Contact;
 
@@ -1111,21 +1112,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

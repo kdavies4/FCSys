@@ -1,10 +1,9 @@
 // Setup
 removePlots();
 createPlot(filename = "CaFP.mat");
+
 FCSys.BaseClasses.Utilities.plot6(
-    y1={"caFP.subregions[1, 1, 1].gas.H2O.N", "caFP.subregions[1, 1, 1].gas.N2.N", "caFP.subregions[1, 1, 1].gas.O2.N", "caFP.subregions[1, 1, 1].graphite.'C+'.N", "caFP.subregions[1, 1, 1].graphite.'e-'.N"},
-    y2={"caFP.subregions[1, 1, 1].gas.H2O.phi[1]", "caFP.subregions[1, 1, 1].gas.N2.phi[1]", "caFP.subregions[1, 1, 1].gas.O2.phi[1]", "caFP.subregions[1, 1, 1].graphite.'C+'.phi[1]", "caFP.subregions[1, 1, 1].graphite.'e-'.phi[1]"},
-    y3={"caFP.subregions[1, 1, 1].gas.H2O.p", "caFP.subregions[1, 1, 1].gas.N2.p", "caFP.subregions[1, 1, 1].gas.O2.p", "caFP.subregions[1, 1, 1].graphite.'C+'.p", "caFP.subregions[1, 1, 1].graphite.'e-'.p"},
-    y4={"caFP.subregions[1, 1, 1].gas.H2O.T", "caFP.subregions[1, 1, 1].gas.N2.T", "caFP.subregions[1, 1, 1].gas.O2.T", "caFP.subregions[1, 1, 1].graphite.'C+'.T", "caFP.subregions[1, 1, 1].graphite.'e-'.T"},
-    y5={"caFP.subregions[1, 1, 1].gas.H2O.v", "caFP.subregions[1, 1, 1].gas.N2.v", "caFP.subregions[1, 1, 1].gas.O2.v", "caFP.subregions[1, 1, 1].graphite.'C+'.v", "caFP.subregions[1, 1, 1].graphite.'e-'.v"},
-    y6={"caFP.subregions[1, 1, 1].gas.H2O.chemical.mu", "caFP.subregions[1, 1, 1].gas.N2.chemical.mu", "caFP.subregions[1, 1, 1].gas.O2.chemical.mu", "caFP.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "caFP.subregions[1, 1, 1].graphite.'e-'.chemical.mu"});
+    y1={"caFP.subregions[1, 1, 1].gas.H2O.rho", "caFP.subregions[1, 1, 1].gas.N2.rho", "caFP.subregions[1, 1, 1].gas.O2.rho"},
+    y3={"caFP.subregions[1, 1, 1].gas.H2O.p", "caFP.subregions[1, 1, 1].gas.N2.p", "caFP.subregions[1, 1, 1].gas.O2.p"},
+    y4={"caFP.subregions[1, 1, 1].gas.H2O.T", "caFP.subregions[1, 1, 1].gas.N2.T", "caFP.subregions[1, 1, 1].gas.O2.T"},
+    y5={"caFP.subregions[1, 1, 1].gas.H2O.chemical.mu", "caFP.subregions[1, 1, 1].gas.N2.chemical.mu", "caFP.subregions[1, 1, 1].gas.O2.chemical.mu"})

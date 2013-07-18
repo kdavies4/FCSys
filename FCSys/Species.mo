@@ -5,42 +5,6 @@ package Species "Dynamic models of chemical species"
     extends Modelica.Icons.Package;
     package Graphite "<html>C<sup>+</sup> graphite</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends SpeciesSolid(
-          redeclare replaceable package Data = Characteristics.'C+'.Graphite,
-          final nu=k_nu*Data.nu(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        // Note:  In Dymola 7.4,
-        // "redeclare replaceable package Data = FCSys.Characteristics.C.Graphite"
-        // must be used instead of
-        // "redeclare replaceable FCSys.Characteristics.C.Graphite Data" in
-        // order for this model to pass its check.  This applies to the other
-        // species models too.
-
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'C+'",
-          Documentation(info="<html><p>Please see the documentation of the
-    <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
-
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}}), graphics={Text(
-                      extent={{-150,90},{-118,52}},
-                      lineColor={0,0,255},
-                      textString="%t.test")}));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends SpeciesSolid(redeclare replaceable package Data =
@@ -64,7 +28,7 @@ package Species "Dynamic models of chemical species"
               b_c=[935*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(
                   U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
-          redeclare final parameter Q.Mobility mu=0,
+          final mu=0,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
 
@@ -146,31 +110,6 @@ package Species "Dynamic models of chemical species"
     package Ionomer
       "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S ionomer</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends SpeciesSolid(
-          redeclare replaceable package Data =
-              Characteristics.'C19HF37O5S-'.Ionomer,
-          final nu=k_nu*Data.nu(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'C19HF37O5S-'",
-          Documentation(info=
-                "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
-
-          Diagram(graphics));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends SpeciesSolid(redeclare replaceable package Data =
@@ -214,55 +153,6 @@ package Species "Dynamic models of chemical species"
     extends Modelica.Icons.Package;
     package Graphite "<html>e<sup>-</sup> in graphite</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends SpeciesIsochoric(
-          redeclare replaceable package Data = Characteristics.'e-'.Graphite,
-          final tauprime=0,
-          final mu=sigma*Data.v_Tp(T, p),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=0,
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=Modelica.Constants.inf,
-          initMaterial=InitScalar.density);
-
-        Q.ConductivityElectrical sigma=k_sigma*Data.mu(T, p)/Data.v_Tp(T, p)
-          "Electrical conductivity"
-          annotation (Dialog(group="Material properties"));
-        parameter Q.NumberAbsolute k_sigma(final nominal=1) = 1
-          "Adjustment factor for electrical conductivity" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&sigma;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'e-'",
-          Documentation(info="<html>    <p>Assumptions:<ol>
-    <li>The density is equal to that of C<sup>+</sup> as graphite.</li>
-          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to the substrate
-          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
-          governed by other configurations.</li>
-          <li>The conductivity is mapped to the mobility of the electrons by assuming that
-          the mobility of the substrate (e.g., 
-          <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
-    </ol></p>
-
-    <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends SpeciesIsochoric(
@@ -301,13 +191,16 @@ package Species "Dynamic models of chemical species"
           final tauprime=0,
           final mu=sigma*v,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.Mobility eta=Data.eta(),
+          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           final beta=0,
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
           final theta=Modelica.Constants.inf,
           consMaterial=Conservation.IC,
           invertEOS=false,
-          initMaterial=InitScalar.volume);
+          initMaterial=InitScalar.volume,
+          upstreamX=false,
+          upstreamY=false,
+          upstreamZ=false);
 
         parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
           "Electrical conductivity" annotation (Dialog(group=
@@ -350,56 +243,6 @@ package Species "Dynamic models of chemical species"
     extends Modelica.Icons.Package;
     package Ionomer "<html>H<sup>+</sup> in ionomer</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends SpeciesIsochoric(
-          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
-          initMaterial=InitScalar.density,
-          final tauprime=0,
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=0,
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'H+'",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>The density of H<sup>+</sup> is equal to that of
-  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
-  this is greater than that measured by Spry and Fayer (see
-  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
-  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
-  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
-          governed by other configurations.</li>
-    </ol></p>
-
-  <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends SpeciesIsochoric(
@@ -437,7 +280,10 @@ package Species "Dynamic models of chemical species"
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
           consMaterial=Conservation.IC,
           invertEOS=false,
-          initMaterial=InitScalar.volume);
+          initMaterial=InitScalar.volume,
+          upstreamX=false,
+          upstreamY=false,
+          upstreamZ=false);
         //consMaterial=Conservation.IC,
         //invertEOS=false
         //initMaterial=InitScalar.volume
@@ -545,55 +391,6 @@ package Species "Dynamic models of chemical species"
     extends Modelica.Icons.Package;
     package Gas "<html>H<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends Species(
-          redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                b_v=[1], n_v={-1,0}),
-          final tauprime=k_tauprime*Data.tauprime(T, v),
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-        parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "Adjustment factor for the phase change interval" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
@@ -690,59 +487,15 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
     extends Modelica.Icons.Package;
     package Gas "<html>H<sub>2</sub>O gas</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends Species(
-          redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1], n_v={-1,0}),
-          final tauprime=k_tauprime*Data.tauprime(T, v),
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-        parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "Adjustment factor for the phase change interval" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
               Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
+        output Q.NumberAbsolute RH(
+          stateSelect=StateSelect.never,
+          displayUnit="%") = p/(
+          Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa) if
+          environment.analysis "Relative humidity (approximate)";
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -757,8 +510,8 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
       model Fixed "Fixed properties"
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1],n_v={-1,0}),
-          redeclare parameter Q.TimeAbsolute tauprime=1e6*Data.tauprime(),
+                b_v=[1], n_v={-1,0}),
+          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
@@ -767,6 +520,13 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W));
         // **temp factor on tauprime
         // See the documentation for tables of values.
+
+        output Q.NumberAbsolute RH(
+          stateSelect=StateSelect.never,
+          displayUnit="%") = p/(
+          Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa) if
+          environment.analysis "Relative humidity (approximate)";
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -881,54 +641,6 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
 
     package Ionomer "<html>H<sub>2</sub>O in ionomer</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends Species(
-          redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          final tauprime=0,
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., gas).</li>
-          </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
@@ -976,52 +688,6 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
 
     package Liquid "<html>H<sub>2</sub>O liquid</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends SpeciesIsochoric(
-          redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          final tauprime=0,
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., gas).</li>
-    </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends SpeciesIsochoric(redeclare replaceable package Data =
@@ -1148,56 +814,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     extends Modelica.Icons.Package;
     package Gas "<html>N<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends Species(
-          redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                b_v=[1], n_v={-1,0}),
-          final tauprime=k_tauprime*Data.tauprime(T, v),
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "Adjustment factor for the phase change interval" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="N2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
@@ -1316,56 +932,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     extends Modelica.Icons.Package;
     package Gas "<html>O<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
-      model Calibrated "Correlations with adjustment factors"
-        extends Species(
-          redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                b_v=[1], n_v={-1,0}),
-          final tauprime=k_tauprime*Data.tauprime(T, v),
-          final mu=k_mu*Data.mu(T, v),
-          final nu=k_nu*Data.nu(T, v),
-          final eta=k_eta*Data.eta(T, v),
-          final beta=k_beta*Data.beta(T, v),
-          final zeta=k_zeta*Data.zeta(T, v),
-          final theta=k_theta*Data.theta(T, v));
-
-        parameter Q.NumberAbsolute k_tauprime(final nominal=1) = 1
-          "Adjustment factor for the phase change interval" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&tau;&prime;</sub></html>"));
-        parameter Q.NumberAbsolute k_mu(final nominal=1) = 1
-          "Adjustment factor for mobility" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_nu(final nominal=1) = 1
-          "Adjustment factor for thermal independity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&nu;</sub></html>"));
-        parameter Q.NumberAbsolute k_eta(final nominal=1) = 1
-          "Adjustment factor for material resistivity" annotation (Dialog(group
-              ="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&eta;</sub></html>"));
-        parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
-          "Adjustment factor for dynamic compressibility" annotation (Dialog(
-              group="Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&beta;</sub></html>"));
-        parameter Q.NumberAbsolute k_zeta(final nominal=1) = 1
-          "Adjustment factor for fluidity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&zeta;</sub></html>"));
-        parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-          "Adjustment factor for thermal resistivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label=
-                "<html><i>k</i><sub>&theta;</sub></html>"));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="O2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Calibrated;
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
@@ -1520,7 +1086,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     import FCSys.BaseClasses.Utilities.Delta;
     import FCSys.BaseClasses.Utilities.Sigma;
     import assert = FCSys.BaseClasses.Utilities.assertEval;
-    extends FCSys.BaseClasses.Icons.Names.Top4;
+    //extends FCSys.BaseClasses.Icons.Names.Top5;
 
     // Geometry
     parameter Integer n_faces(
@@ -1559,6 +1125,15 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       "Thermal resistivity" annotation (Dialog(group="Material properties",
           __Dymola_label="<html>&theta;</html>"));
 
+    parameter Integer n_intra=0 "**" annotation (Dialog(connectorSizing=true));
+    parameter Q.NumberAbsolute k_intra[n_intra]=ones(n_intra)
+      "Coupling factors for exchange with other species within the phase"
+      annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html><i><b>k</b></i><sub>E intra</sub></html>"));
+    parameter Q.NumberAbsolute k_N=1 "Coupling factor for phase change"
+      annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html><i><b>k</b></i><sub>E intra</sub></html>"));
+
     // Assumptions
     // -----------
     // Upstream discretization
@@ -1593,6 +1168,13 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         Evaluate=true,
         tab="Assumptions",
         group="Formulation of conservation equations"));
+    parameter Boolean consRot=false "Rotational momentum is conserved"
+      annotation (
+      Evaluate=true,
+      Dialog(tab="Assumptions", group="Formulation of conservation equations"),
+
+      choices(__Dymola_checkBox=true));
+
     parameter Enumerations.Conservation consTransX=Conservation.dynamic
       "X-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
@@ -1608,6 +1190,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[3]));
+
     parameter Enumerations.Conservation consEnergy=Conservation.dynamic
       "Energy" annotation (Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of conservation equations"));
@@ -1793,6 +1376,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Data.c_v(T, p) if environment.analysis "Isochoric specific heat capacity";
     output Q.PressureReciprocal kappa(stateSelect=StateSelect.never) =
       Data.kappa(T, p) if environment.analysis "Isothermal compressibility";
+    output Q.PotentialAbsolute sT_actual_chemical(stateSelect=StateSelect.never)
+       = actualStream(chemical.sT)
+      "Specific entropy-temperature product of the chemical stream";
+    output Q.PotentialAbsolute sT_actual_physical(stateSelect=StateSelect.never)
+       = actualStream(physical.sT)
+      "Specific entropy-temperature product of the physical stream";
     //
     // Time constants (only for the axes with translational momentum included;
     // others are infinite)
@@ -1861,9 +1450,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       (actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(
       physical.phi) - phi) .* physical.Ndot) if environment.analysis
       "Acceleration force due to advective exchange";
-    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = inert.translational.mPhidot
-       + dalton.mPhidot if environment.analysis
+    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) =
+      inertDirect.translational.mPhidot + {sum(inertInter[:].mPhidot[i]) for i
+       in 1:n_trans} + {sum(inertIntra[:].mPhidot[i]) for i in 1:n_trans} if
+      environment.analysis
       "Friction from other configurations (diffusive exchange)";
+    // Note:  The [:] is necessary in Dymola 7.4.
     output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
       faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[
       i]})*Ndot_faces[j, :]*Data.m for j in 1:n_faces) for i in 1:n_trans} if
@@ -1878,15 +1470,18 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       der(phi))/U.s if environment.analysis
       "Rate of energy storage (internal and kinetic) and boundary work at constant mass";
     // Note that T*der(s) = der(u) + p*der(v).
+    output Q.Potential temp=chemical.mu + actualStream(chemical.sT) "**";
     output Q.Power Edot_AE(stateSelect=StateSelect.never) = (chemical.mu +
       actualStream(chemical.sT) - h + (actualStream(chemical.phi)*actualStream(
       chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot + (physical.mu +
       actualStream(physical.sT) - h + (actualStream(physical.phi)*actualStream(
       physical.phi) - phi*phi)*Data.m/2)*physical.Ndot if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
-    output Q.Power Edot_DE(stateSelect=StateSelect.never) = inert.translational.phi
-      *inert.translational.mPhidot + inert.thermal.Qdot + dalton.phi*dalton.mPhidot
-       + dalton.Qdot if environment.analysis
+    output Q.Power Edot_DE(stateSelect=StateSelect.never) = inertDirect.translational.phi
+      *inertDirect.translational.mPhidot + sum(inertInter[i].phi*inertInter[i].mPhidot
+      for i in 1:n_inter) + sum(inertIntra[i].phi*inertIntra[i].mPhidot for i
+       in 1:n_intra) + inertDirect.thermal.Qdot + sum(inertIntra.Qdot) + sum(
+      inertInter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
     output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
       :].T, p_faces[j, :]) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
@@ -1908,7 +1503,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       phi(start=phi_IC[cartTrans], each final fixed=false),
       sT(start=h_IC - g_IC, final fixed=false)) "Connector for reactions"
       annotation (Placement(transformation(extent={{-10,10},{10,30}}),
-          iconTransformation(extent={{-29,60},{-49,80}})));
+          iconTransformation(extent={{-40,78},{-60,98}})));
     Connectors.Physical physical(
       final formula=Data.formula,
       final n_trans=n_trans,
@@ -1916,29 +1511,37 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       phi(final start=phi_IC[cartTrans], each final fixed=false),
       sT(final start=h_IC - g_IC, final fixed=false))
       "Connector for phase change" annotation (Placement(transformation(extent=
-              {{-30,-10},{-10,10}}), iconTransformation(extent={{-59,28},{-79,
-              48}})));
-    Connectors.Inert inert(
+              {{-30,-10},{-10,10}}), iconTransformation(extent={{-76,40},{-96,
+              60}})));
+    FCSys.Connectors.InertDirect inertDirect(
       final n_trans=n_trans,
-      translational(phi(final start=phi_IC[cartTrans], each final fixed=false)),
-
+      translational(phi(final start=phi_IC[cartTrans], final fixed=false)),
       thermal(T(final start=T_IC, final fixed=false)))
-      "Connector to directly couple velocity or temperature with other species"
+      "**Connector to directly couple velocity or temperature with other species within the phase"
+      annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
+          iconTransformation(extent={{49,-70},{69,-90}})));
+    FCSys.Connectors.InertIntra inertIntra[n_intra](
+      each final n_trans=n_trans,
+      each phi(final start=phi_IC[cartTrans], final fixed=false),
+      each T(final start=T_IC, final fixed=false))
+      "**Connector to directly couple velocity or temperature with other phases"
       annotation (Placement(transformation(extent={{10,-10},{30,10}}),
-          iconTransformation(extent={{59,-28},{79,-48}})));
+          iconTransformation(extent={{69,-48},{89,-68}})));
+    Connectors.InertInter inertInter[n_inter](
+      each final n_trans=n_trans,
+      each phi(final start=phi_IC[cartTrans], final fixed=false),
+      each T(final start=T_IC,final fixed=false))
+      "**Connector to directly couple velocity or temperature with other species within the phase"
+      annotation (Placement(transformation(extent={{30,10},{50,30}}),
+          iconTransformation(extent={{85,-20},{105,-40}})));
 
-    FCSys.Connectors.Dalton dalton(
-      final n_trans=n_trans,
-      V(
+    Connectors.Dalton dalton(V(
         min=0,
         final start=V_IC,
-        final fixed=false),
-      p(final start=p_IC, final fixed=false),
-      phi(start=phi_IC[cartTrans]),
-      T(start=T_IC))
+        final fixed=false), p(final start=p_IC, final fixed=false))
       "Connector for translational and thermal diffusive exchange, with additivity of pressure"
-      annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
-          iconTransformation(extent={{28,-59},{48,-79}})));
+      annotation (Placement(transformation(extent={{-30,-50},{-10,-30}}),
+          iconTransformation(extent={{22,-85},{42,-105}})));
     Connectors.Face faces[n_faces, Side](
       rho(each start=rho_IC),
       Ndot(start=outerProduct(I_IC[cartFaces], {1,-1})),
@@ -2005,9 +1608,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       "Face-pair indices of the Cartesian axes" annotation (missingInnerMessage
         ="This model should be used within a subregion model.
 ");
-    outer parameter Q.NumberAbsolute k_E "Coupling factor for exchange"
-      annotation (missingInnerMessage="This model should be used within a phase model.
-      ");
     final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
       "true, if each Cartesian axis uses upstream discretization"
       annotation (HideResult=true);
@@ -2019,6 +1619,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         initTransY,initTransZ}
       "Initialization methods for translational momentum"
       annotation (HideResult=true);
+    outer parameter Integer n_inter "**" annotation (missingInnerMessage="This model should be used within a phase model.
+      ");
+    outer parameter Q.NumberAbsolute k_inter[:]
+      "Coupling factor for exchange with other phases" annotation (
+        missingInnerMessage="This model should be used within a phase model.
+      ");
 
     // Additional aliases (for common terms)
     Q.Potential g0(
@@ -2026,16 +1632,18 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       final start=g_IC,
       final fixed=false,
       stateSelect=StateSelect.never) "Gibbs potential at reference pressure";
-    Q.Force faces_mPhidot[n_faces, Side, 2] "Directly calculated shear forces";
+    Q.Force faces_mPhidot[n_faces, Side, 2] "Directly-calculated shear forces";
     Q.Velocity phi_actual_chemical[n_trans] "Velocity of the chemical stream";
     Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
     // Note:  Dymola 7.4 can't individually index the components of a
     // stream variable (e.g., actualStream(chemical.phi[i])), so these
     // variables are necessary.
 
+  protected
     outer Conditions.Environment environment "Environmental conditions";
 
   initial equation
+
     // Check the initial conditions.
     assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
       consMaterial == Conservation.steady or consEnergy == Conservation.steady,
@@ -2172,12 +1780,12 @@ Choose any condition besides None.");
 
   equation
     // Aliases (only to clarify and simplify other equations)
-    T = inert.thermal.T;
+    T = inertDirect.thermal.T;
     p = dalton.p;
     V = dalton.V;
     v*N = V;
     M = Data.m*N;
-    phi = inert.translational.phi;
+    phi = inertDirect.translational.phi;
     I .* L[cartTrans] = N*phi;
     p_faces = {{Data.p_Tv(faces[i, side].T, 1/faces[i, side].rho) for side in
       Side} for i in 1:n_faces};
@@ -2200,16 +1808,26 @@ Choose any condition besides None.");
     // Diffusive exchange
     chemical.mu = h - chemical.sT "Reaction (rate equation elsewhere)";
     if tauprime > Modelica.Constants.small then
-      tauprime*physical.Ndot = k_E*N*(exp((physical.mu - g0)/T) - exp((chemical.mu
+      tauprime*physical.Ndot = k_N*N*(exp((physical.mu - g0)/T) - exp((chemical.mu
          - g0)/T)) "Phase change";
     else
-      0 = if N > 0 or physical.mu > chemical.mu then physical.mu - chemical.mu
-         else physical.Ndot;
+      0 = if N > Modelica.Constants.small or physical.mu > chemical.mu then
+        physical.mu - chemical.mu else physical.Ndot;
       // The first branch avoids nonlinear equations when tauprime=0.
       // Dymola 7.4 can't derive it symbolically from the previous equation.
     end if;
-    mu*dalton.mPhidot = k_E*N*(dalton.phi - phi) "Translational momentum";
-    nu*dalton.Qdot = k_E*N*(dalton.T - T) "Thermal energy";
+
+    // Translational momentum
+    for i in 1:n_trans loop
+      mu*inertInter.mPhidot[i] = k_inter*N .* (inertInter.phi[i] - fill(phi[i],
+        n_inter));
+      mu*inertIntra.mPhidot[i] = k_intra*N .* (inertIntra.phi[i] - fill(phi[i],
+        n_intra));
+    end for;
+
+    // Thermal energy
+    nu*inertInter.Qdot = k_inter*N .* (inertInter.T - fill(T, n_inter));
+    nu*inertIntra.Qdot = k_intra*N .* (inertIntra.T - fill(T, n_intra));
 
     // Properties upon outflow due to reaction and phase change
     chemical.phi = phi;
@@ -2232,19 +1850,19 @@ Choose any condition besides None.");
            then phi[transCart[cartFaces[i]]] else 0))*2
           "Normal (central difference)";
         zeta*faces_mPhidot[i, side, Orientation.following - 1] = Nu_Phi[
-          cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orientation.following]
-           - (if inclTrans[cartWrap(cartFaces[i] + 1)] then phi[transCart[
-          cartWrap(cartFaces[i] + 1)]] else 0))*(if inclTrans[cartFaces[i]]
-           and upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
-          cartFaces[i]]]*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
-          "1st transverse";
+          cartWrap(cartFaces[i] + 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[
+          Orientation.following] - (if inclTrans[cartWrap(cartFaces[i] + 1)]
+           then phi[transCart[cartWrap(cartFaces[i] + 1)]] else 0))*(if
+          inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1 + exp(-
+          inSign(side)*I[transCart[cartFaces[i]]]*zeta*Data.m/(2*Lprime[
+          cartFaces[i]])) else 2) "1st transverse";
         zeta*faces_mPhidot[i, side, Orientation.preceding - 1] = Nu_Phi[
-          cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orientation.preceding]
-           - (if inclTrans[cartWrap(cartFaces[i] - 1)] then phi[transCart[
-          cartWrap(cartFaces[i] - 1)]] else 0))*(if inclTrans[cartFaces[i]]
-           and upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
-          cartFaces[i]]]*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
-          "2nd transverse";
+          cartWrap(cartFaces[i] - 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[
+          Orientation.preceding] - (if inclTrans[cartWrap(cartFaces[i] - 1)]
+           then phi[transCart[cartWrap(cartFaces[i] - 1)]] else 0))*(if
+          inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1 + exp(-
+          inSign(side)*I[transCart[cartFaces[i]]]*zeta*Data.m/(2*Lprime[
+          cartFaces[i]])) else 2) "2nd transverse";
 
         // Thermal energy
         theta*faces[i, side].Qdot = Nu_Q*Lprime[cartFaces[i]]*(faces[i, side].T
@@ -2254,12 +1872,12 @@ Choose any condition besides None.");
       end for;
 
       // Direct mapping of transverse forces (calculated above)
-      if not inclRot[cartWrap(cartFaces[i] - 1)] then
+      if not (consRot and inclRot[cartWrap(cartFaces[i] - 1)]) then
         faces[i, :].mPhidot[Orientation.following] = faces_mPhidot[i, :,
           Orientation.following - 1];
         // Else the force must be mapped for zero torque (below).
       end if;
-      if not inclRot[cartWrap(cartFaces[i] + 1)] then
+      if not (consRot and inclRot[cartWrap(cartFaces[i] + 1)]) then
         faces[i, :].mPhidot[Orientation.preceding] = faces_mPhidot[i, :,
           Orientation.preceding - 1];
         // Else the force must be mapped for zero torque (below).
@@ -2267,23 +1885,25 @@ Choose any condition besides None.");
     end for;
 
     // Zero-torque mapping of transverse forces
-    for axis in cartRot loop
-      4*cat(
-          1,
-          faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
-          faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding])
-        = {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis -
-        1)]/L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(axis
-         + 1)],L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(axis +
-        1)]/L[cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],
-        3,1},{-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[cartWrap(axis + 1)]
-        /L[cartWrap(axis - 1)],1,3}}*cat(
-          1,
-          faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following
-           - 1],
-          faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding
-           - 1]);
-    end for;
+    if consRot then
+      for axis in cartRot loop
+        4*cat(
+            1,
+            faces[facesCart[cartWrap(axis + 1)], :].mPhidot[Orientation.following],
+            faces[facesCart[cartWrap(axis - 1)], :].mPhidot[Orientation.preceding])
+          = {{3,1,L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)],-L[cartWrap(axis
+           - 1)]/L[cartWrap(axis + 1)]},{1,3,-L[cartWrap(axis - 1)]/L[cartWrap(
+          axis + 1)],L[cartWrap(axis - 1)]/L[cartWrap(axis + 1)]},{L[cartWrap(
+          axis + 1)]/L[cartWrap(axis - 1)],-L[cartWrap(axis + 1)]/L[cartWrap(
+          axis - 1)],3,1},{-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[
+          cartWrap(axis + 1)]/L[cartWrap(axis - 1)],1,3}}*cat(
+            1,
+            faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orientation.following
+             - 1],
+            faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orientation.preceding
+             - 1]);
+      end for;
+    end if;
 
     // Material dynamics
     if consMaterial == Conservation.IC then
@@ -2348,10 +1968,11 @@ Choose any condition besides None.");
           cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(p_faces[
           facesCart[cartTrans[j]], :])*A[cartTrans[j]] else 0) = Data.m*((
           phi_actual_chemical[j] - phi[j])*chemical.Ndot + (phi_actual_physical[
-          j] - phi[j])*physical.Ndot) + inert.translational.mPhidot[j] + dalton.mPhidot[
-          j] + sum((faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)]
-           - {phi[j],phi[j]})*Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[
-          cartWrap(cartTrans[j] - cartFaces[i] + 1)]) for i in 1:n_faces)
+          j] - phi[j])*physical.Ndot) + inertDirect.translational.mPhidot[j] +
+          sum(inertIntra[:].mPhidot[j]) + sum(inertInter[:].mPhidot[j]) + sum((
+          faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)] - {phi[j],
+          phi[j]})*Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[cartWrap(
+          cartTrans[j] - cartFaces[i] + 1)]) for i in 1:n_faces)
           "Conservation of translational momentum";
         // Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive
         // form of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
@@ -2399,14 +2020,20 @@ Choose any condition besides None.");
         actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
         /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
         actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*Data.m
-        /2)*physical.Ndot + inert.translational.phi*inert.translational.mPhidot
-         + inert.thermal.Qdot + dalton.phi*dalton.mPhidot + dalton.Qdot + sum((
-        Data.h(faces[i, :].T, p_faces[i, :]) - {h,h})*Ndot_faces[i, :] + sum((
-        faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)] .^ 2 - fill(
-        phi[j]^2, 2))*Ndot_faces[i, :]*Data.m/2 + faces[i, :].phi[cartWrap(
+        /2)*physical.Ndot + inertDirect.translational.phi*inertDirect.translational.mPhidot
+         + sum(inertInter[i].phi*inertInter[i].mPhidot for i in 1:n_inter) +
+        sum(inertIntra[i].phi*inertIntra[i].mPhidot for i in 1:n_intra) + sum(
+        inertInter.Qdot) + inertDirect.thermal.Qdot + sum(inertIntra.Qdot) +
+        sum((Data.h(faces[i, :].T, p_faces[i, :]) - {h,h})*Ndot_faces[i, :] +
+        sum((faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)] .^ 2 -
+        fill(phi[j]^2, 2))*Ndot_faces[i, :]*Data.m/2 + faces[i, :].phi[cartWrap(
         cartTrans[j] - cartFaces[i] + 1)]*faces[i, :].mPhidot[cartWrap(
         cartTrans[j] - cartFaces[i] + 1)] for j in 1:n_trans) for i in 1:
         n_faces) + sum(faces.Qdot) "Conservation of energy";
+      // Note:  In Dymola 7.4 will crash unless the following summation
+      //   sum(inertIntra.phi .* inertIntra.mPhidot)
+      // is explicitly expanded to
+      //   sum(inertIntra[i].phi*inertIntra[i].mPhidot for i in 1:n_intra)
     end if;
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -2576,7 +2203,14 @@ Choose any condition besides None.");
     and pressure.</li>
     <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use 
     3.66 for internal flow where the boundaries are uniform in temperature or 48/11 or approximately 4.36 
-    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li></p>
+    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li>
+    <li>The indices of <i>Nu</i><sub>&Phi;</sub> correspond to the axes of material advection, not the axes of
+    transport of linear momentum.</li>
+    <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
+    (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
+    rotational axis that has all its faces included (i.e., all the faces around the perimeter).  Rotational 
+    momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li></p>
+**Use formatted variable names (Italic, Greek, subscripts).
 
     <p>In the <code>faces</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the material current.
@@ -2606,18 +2240,18 @@ Choose any condition besides None.");
           initialScale=0.1), graphics),
       Icon(graphics={
           Rectangle(
-            extent={{-98,80},{98,120}},
+            extent={{-98,100},{98,140}},
             fillPattern=FillPattern.Solid,
             fillColor={255,255,255},
             pattern=LinePattern.None),
           Ellipse(
-            extent={{-80,80},{80,-80}},
+            extent={{-100,100},{100,-100}},
             lineColor={127,127,127},
             pattern=LinePattern.Dash,
             fillColor={225,225,225},
             fillPattern=FillPattern.Solid),
           Text(
-            extent={{-98,80},{98,120}},
+            extent={{-98,100},{98,140}},
             textString="%name",
             lineColor={0,0,0})}));
   end Species;
@@ -2654,7 +2288,7 @@ Choose any condition besides None.");
       "Common connector for the reaction" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{
               10,10}})));
-    Connectors.Inert inert(final n_trans=n_trans)
+    Connectors.InertDirect inert(final n_trans=n_trans)
       "Thermal and translational interface with the substrate" annotation (
         Placement(transformation(extent={{-10,-30},{10,-10}}),
           iconTransformation(extent={{-10,-50},{10,-30}})));

@@ -1,10 +1,9 @@
 // Setup
 removePlots();
 createPlot(filename = "AnGDL.mat");
+
 FCSys.BaseClasses.Utilities.plot6(
-    y1={"anGDL.subregions[1, 1, 1].gas.H2.N", "anGDL.subregions[1, 1, 1].gas.H2O.N", "anGDL.subregions[1, 1, 1].graphite.'C+'.N", "anGDL.subregions[1, 1, 1].graphite.'e-'.N"},
-    y2={"anGDL.subregions[1, 1, 1].gas.H2.phi[1]", "anGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "anGDL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "anGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"},
-    y3={"anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p", "anGDL.subregions[1, 1, 1].graphite.'C+'.p", "anGDL.subregions[1, 1, 1].graphite.'e-'.p"},
-    y4={"anGDL.subregions[1, 1, 1].gas.H2.T", "anGDL.subregions[1, 1, 1].gas.H2O.T", "anGDL.subregions[1, 1, 1].graphite.'C+'.T", "anGDL.subregions[1, 1, 1].graphite.'e-'.T"},
-    y5={"anGDL.subregions[1, 1, 1].gas.H2.v", "anGDL.subregions[1, 1, 1].gas.H2O.v", "anGDL.subregions[1, 1, 1].graphite.'C+'.v", "anGDL.subregions[1, 1, 1].graphite.'e-'.v"},
-    y6={"anGDL.subregions[1, 1, 1].gas.H2.chemical.mu", "anGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "anGDL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "anGDL.subregions[1, 1, 1].graphite.'e-'.chemical.mu"});
+    y1={"anGDL.subregions[1, 1, 1].gas.H2.rho", "anGDL.subregions[1, 1, 1].gas.H2O.rho"},
+    y3={"anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p"},
+    y4={"anGDL.subregions[1, 1, 1].gas.H2.T", "anGDL.subregions[1, 1, 1].gas.H2O.T"},
+    y5={"anGDL.subregions[1, 1, 1].gas.H2.chemical.mu", "anGDL.subregions[1, 1, 1].gas.H2O.chemical.mu"})

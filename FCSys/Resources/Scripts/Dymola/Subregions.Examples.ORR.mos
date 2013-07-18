@@ -11,7 +11,7 @@ FCSys.BaseClasses.Utilities.plot6(
 
 createPlot(id = 4,
  position = {220, 0, 440, 650},
- x = {"zJ_Apercm2"},
+ x = "zJ_Apercm2",
  y = {"w"},
  heading = "Reaction Potential",
  range = {0, 8.0, 0.05, -0.35},
@@ -25,7 +25,7 @@ createPlot(id = 4,
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},
- x = {"zJ_Apercm2"},
+ x = "zJ_Apercm2",
  y = {"Qdot",
       "P",
       "eta"},

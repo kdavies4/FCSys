@@ -2,9 +2,31 @@
 removePlots();
 createPlot(filename = "GDLToGDL.mat");
 
+FCSys.BaseClasses.Utilities.plot6(
+    y1={"anGDL.subregions[1, 1, 1].gas.H2.rho", "anGDL.subregions[1, 1, 1].gas.H2O.rho",
+        "anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.rho",
+        "caCL.subregions[1, 1, 1].gas.H2O.rho", "caCL.subregions[1, 1, 1].gas.N2.rho", "caCL.subregions[1, 1, 1].gas.O2.rho",
+        "caGDL.subregions[1, 1, 1].gas.H2O.rho", "caGDL.subregions[1, 1, 1].gas.N2.rho", "caGDL.subregions[1, 1, 1].gas.O2.rho"},
+    y3={"anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p",
+        "anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.p",
+        "caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p",
+        "caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p"},
+    y4={"anGDL.subregions[1, 1, 1].gas.H2.T", "anGDL.subregions[1, 1, 1].gas.H2O.T",
+        "anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.T",
+        "caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T",
+        "caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T"},
+    y5={"anGDL.subregions[1, 1, 1].gas.H2.chemical.mu", "anGDL.subregions[1, 1, 1].gas.H2O.chemical.mu",
+        "anCL.subregions[1, 1, 1].gas.H2.chemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.chemical.mu",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.chemical.mu",
+        "caCL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caCL.subregions[1, 1, 1].gas.N2.chemical.mu", "caCL.subregions[1, 1, 1].gas.O2.chemical.mu",
+        "caGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.chemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.chemical.mu"})
+
 createPlot(id = 4,
  position = {220, 0, 440, 325},
- x = {"zJ_Apercm2[1, 1]"},
+ x = "zJ_Apercm2[1, 1]",
  y = {"w[1, 1]"},
  heading = "Polarization",
  range = {0, 8.0, 0.05, -0.35},
@@ -15,48 +37,3 @@ createPlot(id = 4,
  legendHorizontal = false,
  leftTitle = "Potential / V",
  bottomTitle = "Current density / (A/cm2)");
-
-// AnGDL
-FCSys.BaseClasses.Utilities.plot6(
-    y1=cat(1, y1, {"anGDL.subregions[1, 1, 1].gas.H2.N", "anGDL.subregions[1, 1, 1].gas.H2O.N", "anGDL.subregions[1, 1, 1].graphite.'C+'.N", "anGDL.subregions[1, 1, 1].graphite.'e-'.N"}),
-    y2=cat(1, y2, {"anGDL.subregions[1, 1, 1].gas.H2.phi[1]", "anGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "anGDL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "anGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"}),
-    y3=cat(1, y3, {"anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p", "anGDL.subregions[1, 1, 1].graphite.'C+'.p", "anGDL.subregions[1, 1, 1].graphite.'e-'.p"}),
-    y4=cat(1, y4, {"anGDL.subregions[1, 1, 1].gas.H2.T", "anGDL.subregions[1, 1, 1].gas.H2O.T", "anGDL.subregions[1, 1, 1].graphite.'C+'.T", "anGDL.subregions[1, 1, 1].graphite.'e-'.T"}),
-    y5=cat(1, y5, {"anGDL.subregions[1, 1, 1].gas.H2.v", "anGDL.subregions[1, 1, 1].gas.H2O.v", "anGDL.subregions[1, 1, 1].graphite.'C+'.v", "anGDL.subregions[1, 1, 1].graphite.'e-'.v"}),
-    y6=cat(1, y6, {"anGDL.subregions[1, 1, 1].gas.H2.chemical.mu", "anGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "anGDL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "anGDL.subregions[1, 1, 1].graphite.'e-'.chemical.mu"});
-
-// AnCL
-FCSys.BaseClasses.Utilities.plot6(
-    y1=cat(1, y1, {"anCL.subregions[1, 1, 1].gas.H2.N", "anCL.subregions[1, 1, 1].gas.H2O.N", "anCL.subregions[1, 1, 1].graphite.'C+'.N", "anCL.subregions[1, 1, 1].graphite.'e-'.N", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.N", "anCL.subregions[1, 1, 1].ionomer.'H+'.N"}),
-    y2=cat(1, y2, {"anCL.subregions[1, 1, 1].gas.H2.phi[1]", "anCL.subregions[1, 1, 1].gas.H2O.phi[1]", "anCL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "anCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.phi[1]", "anCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"}),
-    y3=cat(1, y3, {"anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p", "anCL.subregions[1, 1, 1].graphite.'C+'.p", "anCL.subregions[1, 1, 1].graphite.'e-'.p", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.p", "anCL.subregions[1, 1, 1].ionomer.'H+'.p"}),
-    y4=cat(1, y4, {"anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T", "anCL.subregions[1, 1, 1].graphite.'C+'.T", "anCL.subregions[1, 1, 1].graphite.'e-'.T", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.T", "anCL.subregions[1, 1, 1].ionomer.'H+'.T"}),
-    y5=cat(1, y5, {"anCL.subregions[1, 1, 1].gas.H2.v", "anCL.subregions[1, 1, 1].gas.H2O.v", "anCL.subregions[1, 1, 1].graphite.'C+'.v", "anCL.subregions[1, 1, 1].graphite.'e-'.v", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.v", "anCL.subregions[1, 1, 1].ionomer.'H+'.v"}),
-    y6= cat(1, y6, {"anCL.subregions[1, 1, 1].gas.H2.chemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.chemical.mu", "anCL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "anCL.subregions[1, 1, 1].graphite.'e-'.chemical.mu", "anCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.chemical.mu", "anCL.subregions[1, 1, 1].ionomer.'H+'.chemical.mu"});
-
-// PEM
-FCSys.BaseClasses.Utilities.plot6(
-    y1=cat(1, y1, {"PEM.subregions[1, 1, 1].gas.H2O.N", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.N", "PEM.subregions[1, 1, 1].ionomer.'H+'.N"}),
-    y2=cat(1, y2, {"PEM.subregions[1, 1, 1].gas.H2O.phi[1]", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.phi[1]", "PEM.subregions[1, 1, 1].ionomer.'H+'.phi[1]"}),
-    y3=cat(1, y3, {"PEM.subregions[1, 1, 1].gas.H2O.p", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.p", "PEM.subregions[1, 1, 1].ionomer.'H+'.p"}),
-    y4=cat(1, y4, {"PEM.subregions[1, 1, 1].gas.H2O.T", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.T", "PEM.subregions[1, 1, 1].ionomer.'H+'.T"}),
-    y5=cat(1, y5, {"PEM.subregions[1, 1, 1].gas.H2O.v", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.v", "PEM.subregions[1, 1, 1].ionomer.'H+'.v"}),
-    y6=cat(1, y6, {"PEM.subregions[1, 1, 1].gas.H2O.chemical.mu", "PEM.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.chemical.mu", "PEM.subregions[1, 1, 1].ionomer.'H+'.chemical.mu"});
-
-// CaCL
-FCSys.BaseClasses.Utilities.plot6(
-    y1=cat(1, y1, {"caCL.subregions[1, 1, 1].gas.H2O.N", "caCL.subregions[1, 1, 1].gas.N2.N", "caCL.subregions[1, 1, 1].gas.O2.N", "caCL.subregions[1, 1, 1].graphite.'C+'.N", "caCL.subregions[1, 1, 1].graphite.'e-'.N", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.N", "caCL.subregions[1, 1, 1].ionomer.'H+'.N"}),
-    y2=cat(1, y2, {"caCL.subregions[1, 1, 1].gas.H2O.phi[1]", "caCL.subregions[1, 1, 1].gas.N2.phi[1]", "caCL.subregions[1, 1, 1].gas.O2.phi[1]", "caCL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "caCL.subregions[1, 1, 1].graphite.'e-'.phi[1]", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.phi[1]", "caCL.subregions[1, 1, 1].ionomer.'H+'.phi[1]"}),
-    y3=cat(1, y3, {"caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p", "caCL.subregions[1, 1, 1].graphite.'C+'.p", "caCL.subregions[1, 1, 1].graphite.'e-'.p", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.p", "caCL.subregions[1, 1, 1].ionomer.'H+'.p"}),
-    y4=cat(1, y4, {"caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T", "caCL.subregions[1, 1, 1].graphite.'C+'.T", "caCL.subregions[1, 1, 1].graphite.'e-'.T", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.T", "caCL.subregions[1, 1, 1].ionomer.'H+'.T"}),
-    y5=cat(1, y5, {"caCL.subregions[1, 1, 1].gas.H2O.v", "caCL.subregions[1, 1, 1].gas.N2.v", "caCL.subregions[1, 1, 1].gas.O2.v", "caCL.subregions[1, 1, 1].graphite.'C+'.v", "caCL.subregions[1, 1, 1].graphite.'e-'.v", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.v", "caCL.subregions[1, 1, 1].ionomer.'H+'.v"}),
-    y6=cat(1, y6, {"caCL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caCL.subregions[1, 1, 1].gas.N2.chemical.mu", "caCL.subregions[1, 1, 1].gas.O2.chemical.mu", "caCL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "caCL.subregions[1, 1, 1].graphite.'e-'.chemical.mu", "caCL.subregions[1, 1, 1].ionomer.'C19HF37O5S-'.chemical.mu", "caCL.subregions[1, 1, 1].ionomer.'H+'.chemical.mu"});
-
-// CaGDL
-FCSys.BaseClasses.Utilities.plot6(
-    y1=cat(1, y1, {"caGDL.subregions[1, 1, 1].gas.H2O.N", "caGDL.subregions[1, 1, 1].gas.N2.N", "caGDL.subregions[1, 1, 1].gas.O2.N", "caGDL.subregions[1, 1, 1].graphite.'C+'.N", "caGDL.subregions[1, 1, 1].graphite.'e-'.N"}),
-    y2=cat(1, y2, {"caGDL.subregions[1, 1, 1].gas.H2O.phi[1]", "caGDL.subregions[1, 1, 1].gas.N2.phi[1]", "caGDL.subregions[1, 1, 1].gas.O2.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'C+'.phi[1]", "caGDL.subregions[1, 1, 1].graphite.'e-'.phi[1]"}),
-    y3=cat(1, y3, {"caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p", "caGDL.subregions[1, 1, 1].graphite.'C+'.p", "caGDL.subregions[1, 1, 1].graphite.'e-'.p"}),
-    y4=cat(1, y4, {"caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T", "caGDL.subregions[1, 1, 1].graphite.'C+'.T", "caGDL.subregions[1, 1, 1].graphite.'e-'.T"}),
-    y5=cat(1, y5, {"caGDL.subregions[1, 1, 1].gas.H2O.v", "caGDL.subregions[1, 1, 1].gas.N2.v", "caGDL.subregions[1, 1, 1].gas.O2.v", "caGDL.subregions[1, 1, 1].graphite.'C+'.v", "caGDL.subregions[1, 1, 1].graphite.'e-'.v"}),
-    y6= cat(1, y6, {"caGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.chemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.chemical.mu", "caGDL.subregions[1, 1, 1].graphite.'C+'.chemical.mu", "caGDL.subregions[1, 1, 1].graphite.'e-'.chemical.mu"});

@@ -102,7 +102,7 @@ package Conditions "Models to specify and measure operating conditions"
         inclH2O=true,
         final n_faces=n_faces,
         T_IC=environment.T,
-        reduceTemp=false,
+        reduceThermal=false,
         H2O(T_IC=300*U.K))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -249,31 +249,18 @@ package Conditions "Models to specify and measure operating conditions"
 
       //extends FCSys.BaseClasses.Icons.Names.Top1;
 
-      parameter Integer n_trans(min=1,max=3)
-        "Number of components of translational momentum" annotation (Dialog(
-            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-
-      FCSys.Connectors.Amagat amagat(final n_trans=n_trans)
-        "Connector for translational and thermal diffusion, additivity of volume"
+      FCSys.Connectors.Amagat amagat "Connector for additivity of volume"
         annotation (Placement(transformation(extent={{10,-10},{30,10}}),
             iconTransformation(extent={{-50,-10},{-30,10}})));
-      FCSys.Connectors.Dalton dalton(final n_trans=n_trans)
-        "Connector for translational and thermal diffusion, additivity of pressure"
+      FCSys.Connectors.Dalton dalton "Connector for additivity of pressure"
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
             iconTransformation(extent={{30,-10},{50,10}})));
 
     equation
-      // Equal intensive properties
-      amagat.phi = dalton.phi "Velocity";
-      amagat.T = dalton.T "Temperature";
-
       // Static balances
       0 = amagat.p + dalton.p "Pressure";
       0 = amagat.V + dalton.V "Volume";
 
-      // Conservation (without storage)
-      zeros(n_trans) = amagat.mPhidot + dalton.mPhidot "Translational momentum";
-      0 = amagat.Qdot + dalton.Qdot "Energy";
       annotation (
         Documentation(info="<html><p>This model is used to convert between the representation of mixtures 
     with Amagat's law of partial volumes and Dalton's law of partial pressures.</p>
@@ -6740,7 +6727,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        Connectors.Inert inert(final n_trans=n_trans)
+        FCSys.Connectors.Inert inert(final n_trans=n_trans)
           "Connector to exchange translational momentum and thermal energy by diffusion"
           annotation (choicesAllMatching=true, Placement(transformation(extent=
                   {{-10,-110},{10,-90}})));
@@ -7545,22 +7532,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           annotation (Dialog(__Dymola_label="<html><i>V</i></html>"));
         // Note:  These must be public in Dymola 7.4, so HideResult is set true
         // instead.
-        parameter Integer n_trans(min=1,max=3)
-          "Number of components of translational momentum" annotation (Dialog(
-              __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
-        Connectors.Amagat amagat(final n_trans=n_trans)
-          "Connector for translational momentum and thermal energy, with additivity of volume"
+        Connectors.Amagat amagat "Connector for additivity of volume"
           annotation (Placement(transformation(extent={{90,-50},{110,-30}}),
               iconTransformation(extent={{150,-70},{170,-50}})));
 
       equation
-        // Specified volume
         V = amagat.V;
 
-        // Conservation (without storage)
-        zeros(n_trans) = amagat.mPhidot "Translational momentum";
-        0 = amagat.Qdot "Energy";
         annotation (
           Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
     additivity of volume.  In order to use additivity of pressure, use
@@ -7570,21 +7549,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={Rectangle(
-                      extent={{-160,112},{160,152}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Polygon(
-                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
-                  {-160,-160},{-160,60}},
-                      lineColor={127,127,127},
-                      smooth=Smooth.None,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-160,112},{160,152}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+                  160,160}}), graphics={
+              Rectangle(
+                extent={{-160,112},{160,152}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Polygon(
+                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
+                    -160},{-160,60}},
+                lineColor={127,127,127},
+                smooth=Smooth.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-160,112},{160,152}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -8937,12 +8919,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       final parameter Q.Area A=sum(L_y)*sum(L_z) "Cross-sectional area";
       final parameter Q.Area A_seg[n_y, n_z]=outerProduct(L_y, L_z)
         "Areas of the yz segments";
-      final parameter Q.Area A_an[n_x_an, n_z]=outerProduct(L_x_an, L_z)
-        "Areas of the xz segments of the anode"
-        annotation (Dialog(group="Cell geometry"));
-      final parameter Q.Area A_ca[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
-        "Areas of the xz segments of the cathode"
-        annotation (Dialog(group="Cell geometry"));
+      final parameter Q.Area A_an_seg[n_x_an, n_z]=outerProduct(L_x_an, L_z)
+        "Areas of the xz segments of the anode flow plate";
+      final parameter Q.Area A_ca_seg[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
+        "Areas of the xz segments of the cathode flow plate";
+      final parameter Q.Area A_an=sum(L_x_an)*sum(L_z)
+        "Total cross-sectional area of the anode flow plate in the xz plane";
+      final parameter Q.Area A_ca=sum(L_x_ca)*sum(L_z)
+        "Total cross-sectional area of the cathode flow plate in the xz plane";
 
       // Operating conditions
       // --------------------
@@ -9196,12 +9180,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caSink.gas.O2.face.Ndot
          + caSource.gas.O2.face.Ndot) if environment.analysis
         "Net rate of oxygen into the cell";
+      output Q.NumberAbsolute anOutletRH(
+        stateSelect=StateSelect.never,
+        displayUnit="%") = anSink.gas.H2O.materialOut.y/(
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(anSink.gas.H2O.face.T
+        /U.K)*U.Pa) if environment.analysis
+        "Relative humidity at the anode outlet";
+      output Q.NumberAbsolute caOutletRH(
+        stateSelect=StateSelect.never,
+        displayUnit="%") = caSink.gas.H2O.materialOut.y/(
+        Modelica.Media.Air.MoistAir.saturationPressureLiquid(caSink.gas.H2O.face.T
+        /U.K)*U.Pa) if environment.analysis
+        "Relative humidity at the cathode outlet";
 
       Connectors.FaceBus an[n_y, n_z] "Interface to the anode end plate"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-100,0}),iconTransformation(
+            origin={-120,0}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-160,0})));
@@ -9210,7 +9206,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-40,-100}), iconTransformation(
+            origin={-80,-100}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-160})));
@@ -9219,7 +9215,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-40,100}), iconTransformation(
+            origin={-80,100}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,160})));
@@ -9227,7 +9223,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={100,0}), iconTransformation(
+            origin={120,0}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={162,0})));
@@ -9236,7 +9232,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={40,-100}),iconTransformation(
+            origin={80,-100}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={40,-160})));
@@ -9245,176 +9241,204 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={40,100}), iconTransformation(
+            origin={80,100}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={40,160})));
-    protected
-      ByConnector.FaceBus.Single.FaceBusGraphiteOnly anBC[n_y, n_z](graphite(
-          each 'inclC+'=true,
-          each 'incle-'=true,
-          each 'C+'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSet(y=T_an)),
+
+      ByConnector.FaceBus.Single.FaceBusGraphiteOnly anBC[n_y, n_z](each
+          graphite(
+          'incle-'=true,
           'e-'(
-            normalSet(y=w*anBC.graphite.'e-'.face.rho .* A_seg),
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca))))
-        "Boundary conditions for the anode end plate" annotation (Placement(
-            transformation(
+            redeclare function normalSpec =
+                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
+
+            redeclare Modelica.Blocks.Sources.Ramp normalSet(
+              height=-U.A/U.cm^2,
+              duration=100.1,
+              startTime=0.1),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSet(y=environment.T)),
+          'inclC+'=true)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={-84,0})));
+            origin={-104,0})));
 
-      ByConnector.FaceBus.Single.FaceBusGraphiteOnly caBC[n_y, n_z](graphite(
-          each 'inclC+'=true,
-          each 'incle-'=true,
-          each 'C+'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSet(y=T_ca)),
-          each 'e-'(redeclare function thermalSpec = Single.Thermal.temperature,
-              thermalSet(y=T_ca))))
-        "Boundary conditions for the cathode end plate" annotation (Placement(
-            transformation(
+      ByConnector.FaceBus.Single.FaceBusGraphiteOnly caBC[n_y, n_z](each
+          graphite(
+          'incle-'=true,
+          'e-'(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+              thermalSet(y=environment.T)),
+          'inclC+'=true)) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
-            origin={84,0})));
-      ByConnector.FaceBus.Single.FaceBusFluidOnly anSource[n_x_an, n_z](gas(
+            origin={104,0})));
+      ByConnector.FaceBus.Single.FaceBusEfforts anSource[n_x_an, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
+            redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.current,
+            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
+                      zI*anStoich/(2*A_an),
+                      n_x_an,
+                      n_z)) .* A_an_seg),
+            redeclare each function normalMeas =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            normalSet(y=phi_an_in),
-            redeclare function followingSpec = Single.Translational.velocity,
-            redeclare function precedingSpec = Single.Translational.velocity,
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_in)),
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            each thermalSet(y=environment.T)),
           H2O(
-            redeclare each function materialSpec = Single.Material.density,
-            each materialSet(y=1/DataH2O.v_Tp(T_an_in, p_H2O_an_in)),
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
+            redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.current,
+            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
+                      zI*anStoich*environment.p_H2O/(2*(environment.p -
+                    environment.p_H2O)*A_an),
+                      n_x_an,
+                      n_z)) .* A_an_seg),
+            redeclare each function normalMeas =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            normalSet(y=phi_an_in),
-            redeclare function followingSpec = Single.Translational.velocity,
-            redeclare function precedingSpec = Single.Translational.velocity,
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_in))), liquid(each inclH2O=true, H2O(
-            normalSet(y=-inSign(caInletSide)*p_H2Ol_an_in*A_an),
-            redeclare function followingSpec = Single.Translational.velocity,
-            redeclare function precedingSpec = Single.Translational.velocity,
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_in))))
-        "Boundary conditions for the anode inlet" annotation (Placement(
-            transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-64,-40})));
-
-      ByConnector.FaceBus.Single.FaceBusFluidOnly anSink[n_x_an, n_z](gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSet(y=phi_an_out),
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_out)),
-          H2O(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSet(y=phi_an_out),
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_out))), liquid(each inclH2O=true, H2O(
-            normalSet(y=inSign(anInletSide)*p_an_out*A_an),
-            redeclare function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_an_out))))
-        "Boundary conditions for the anode outlet" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-16,40})));
-
-      ByConnector.FaceBus.Single.FaceBusFluidOnly caSource[n_x_ca, n_z](gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec = Single.Material.density,
-            each materialSet(y=1/DataH2O.v_Tp(T_ca_in, p_H2O_ca_in)),
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSet(y=phi_ca_in),
-            redeclare each function followingSpec =
-                Single.Translational.velocity,
-            redeclare each function precedingSpec =
-                Single.Translational.velocity,
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_in)),
-          N2(
-            redeclare each function materialSpec = Single.Material.density,
-            materialSet(y=caSource.gas.O2.face.rho*(1/n_O2 - 1)),
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSet(y=phi_ca_in),
-            redeclare each function followingSpec =
-                Single.Translational.velocity,
-            redeclare each function precedingSpec =
-                Single.Translational.velocity,
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_in)),
-          O2(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
-
-            normalSet(y=phi_ca_in),
-            redeclare each function followingSpec =
-                Single.Translational.velocity,
-            redeclare each function precedingSpec =
-                Single.Translational.velocity,
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_in))), liquid(each inclH2O=true, H2O(
-            normalSet(y=-inSign(caInletSide)*p_H2Ol_ca_in*A_ca),
-            redeclare each function followingSpec =
-                Single.Translational.velocity,
-            redeclare each function precedingSpec =
-                Single.Translational.velocity,
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_in))))
-        "Boundary conditions for the cathode inlet" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            each thermalSet(y=environment.T))),each liquid(inclH2O=true))
+        annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
             rotation=90,
-            origin={16,-40})));
+            origin={-104,-60})));
 
-      ByConnector.FaceBus.Single.FaceBusFluidOnly caSink[n_x_ca, n_z](gas(
+      ByConnector.FaceBus.Single.FaceBusFlows anSink[n_x_an, n_z](gas(
+          each inclH2=true,
+          each inclH2O=true,
+          H2(redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.face.rho ./
+                  (anSink.gas.H2.face.rho + anSink.gas.H2O.face.rho))),
+          H2O(redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.face.rho
+                   ./ (anSink.gas.H2.face.rho + anSink.gas.H2O.face.rho)))),
+          each liquid(inclH2O=true)) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-56,60})));
+      ByConnector.FaceBus.Single.FaceBusEfforts caSource[n_x_ca, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
           H2O(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
+            redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.current,
+            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
+                      zI*caStoich*environment.p_H2O/(4*environment.p_O2*A_ca),
+                      n_x_ca,
+                      n_z)) .* A_ca_seg),
+            redeclare each function normalMeas =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            normalSet(y=phi_ca_out),
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_out)),
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            each thermalSet(y=environment.T)),
           N2(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
+            redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.current,
+            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
+                      zI*caStoich*(environment.p - environment.p_O2 -
+                    environment.p_H2O)/(4*environment.p_O2*A_ca),
+                      n_x_ca,
+                      n_z)) .* A_ca_seg),
+            redeclare each function normalMeas =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            normalSet(y=phi_ca_out),
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_out)),
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.force,
+            each thermalSet(y=environment.T)),
           O2(
-            redeclare function normalSpec = Single.TranslationalNormal.velocity,
+            redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.current,
+            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
+                      zI*caStoich/(4*A_ca),
+                      n_x_ca,
+                      n_z)) .* A_ca_seg),
+            redeclare each function normalMeas =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
-            normalSet(y=phi_ca_out),
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_out))), liquid(each inclH2O=true, H2O(
-            normalSet(y=inSign(caInletSide)*p_ca_out*A_ca),
-            redeclare each function thermalSpec = Single.Thermal.temperature,
-            each thermalSet(y=T_ca_out))))
-        "Boundary conditions for the cathode outlet" annotation (Placement(
-            transformation(
+            redeclare each function normalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force,
+
+            each thermalSet(y=environment.T))),each liquid(inclH2O=true))
+        annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={56,-60})));
+
+      ByConnector.FaceBus.Single.FaceBusFlows caSink[n_x_ca, n_z](gas(
+          each inclH2O=true,
+          each inclN2=true,
+          each inclO2=true,
+          H2O(redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.face.rho
+                   ./ (caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho +
+                  caSink.gas.O2.face.rho))),
+          N2(redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.face.rho ./
+                  (caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho + caSink.gas.O2.face.rho))),
+
+          O2(redeclare each function materialMeas =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure (
+                  redeclare package Data = FCSys.Characteristics.IdealGas),
+              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.face.rho ./
+                  (caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho + caSink.gas.O2.face.rho)))),
+          each liquid(inclH2O=true)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={64,40})));
+            origin={104,60})));
 
+      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
+          environment.p) "Setpoint for the total anode outlet pressure"
+        annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
+          environment.p) "Setpoint for the total cathode outlet pressure"
+        annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
+      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
+           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
+           .* outerProduct(L_x_an, L_z))/A_an)
+        "Thermodynamic pressure at the anode outlet"
+        annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
+           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
+          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
+        "Thermodynamic pressure at the cathode outlet"
+        annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
+      Modelica.Blocks.Math.Feedback anNoneqSet
+        annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
+      Modelica.Blocks.Math.Feedback caNoneqSet
+        annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
+      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
+          T=2) "Dynamics of the anode exit valve"
+        annotation (Placement(transformation(extent={{0,10},{20,30}})));
+      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
+          T=2) "Dynamics of the cathode exit valve"
+        annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
+    protected
+      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
+        "Nonequilibrium pressure at the anode outlet" annotation (Placement(
+            transformation(extent={{34,10},{54,30}}), iconTransformation(extent
+              ={{174,-40},{194,-20}})));
+      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
+        "Nonequilibrium pressure at the cathode outlet" annotation (Placement(
+            transformation(extent={{34,-30},{54,-10}}), iconTransformation(
+              extent={{174,-80},{194,-60}})));
+    protected
       outer Conditions.Environment environment "Environmental conditions";
 
     equation
@@ -9430,20 +9454,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       p_H2O_an_in = saturationPressureSI(T_sat_an_in/U.K)*U.Pa;
       p_H2O_an_in = min(anInletRH, 1)*p_sat_an_in;
       // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an)/
+      Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an_seg)/
         DataH2O.v_Tp(T_an_in, p_sat_an_in);
       Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.face.phi[Orientation.normal]
-         .* A_an)/DataH2Ol.v_Tp(T_an_in);
+         .* A_an_seg)/DataH2Ol.v_Tp(T_an_in);
 
       // Cathode humidity
       p_sat_ca_in = saturationPressureSI(T_ca_in/U.K)*U.Pa;
       p_H2O_ca_in = saturationPressureSI(T_sat_ca_in/U.K)*U.Pa;
       p_H2O_ca_in = max(caInletRH, 1)*p_sat_ca_in;
       // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca)/
+      Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca_seg)/
         DataH2O.v_Tp(T_ca_in, p_sat_ca_in);
       Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.face.phi[Orientation.normal]
-         .* A_ca)/DataH2Ol.v_Tp(T_ca_in);
+         .* A_ca_seg)/DataH2Ol.v_Tp(T_ca_in);
 
       // End plates
       Qdot_an = G_an*(T_an - environment.T) "Anode";
@@ -9456,14 +9480,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       J_an*A = I_an;
       Vdot_g_an_in = inSign(anInletSide)*sum(outerProduct(L_x_an, L_z) .*
         phi_an_in);
-      I_an = sum(phi_an_in .* anSource.gas.H2.face.rho .* A_an);
+      I_an = sum(phi_an_in .* anSource.gas.H2.face.rho .* A_an_seg);
 
       // Cathode flow rate
       caStoich*zI = I_ca;
       J_ca*A = I_ca;
       Vdot_g_ca_in = inSign(caInletSide)*sum(outerProduct(L_x_ca, L_z) .*
         phi_ca_in);
-      I_ca = sum(phi_ca_in .* caSource.gas.H2O.face.rho .* A_ca);
+      I_ca = sum(phi_ca_in .* caSource.gas.H2O.face.rho .* A_ca_seg);
 
       // Pressures at the inlets and outlets
       for j in 1:n_z loop
@@ -9472,12 +9496,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
              + DataH2O.p_Tv(anSource[i, j].gas.H2O.face.T, 1/anSource[i, j].gas.H2O.face.rho)
              - inSign(anInletSide)*(anSource[i, j].gas.H2.face.mPhidot[
             Orientation.normal] + anSource[i, j].gas.H2O.face.mPhidot[
-            Orientation.normal])/A_an[i, j];
+            Orientation.normal])/A_an_seg[i, j];
           p_an_out = DataH2.p_Tv(anSink[i, j].gas.H2.face.T, 1/anSink[i, j].gas.H2.face.rho)
              + DataH2O.p_Tv(anSink[i, j].gas.H2O.face.T, 1/anSink[i, j].gas.H2O.face.rho)
              + inSign(anInletSide)*(anSink[i, j].gas.H2.face.mPhidot[
             Orientation.normal] + anSink[i, j].gas.H2O.face.mPhidot[Orientation.normal])
-            /A_ca[i, j];
+            /A_ca_seg[i, j];
         end for;
         for i in 1:n_x_ca loop
           p_ca_in = DataH2O.p_Tv(caSource[i, j].gas.H2O.face.T, 1/caSource[i, j].gas.H2O.face.rho)
@@ -9486,13 +9510,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
              - inSign(caInletSide)*(caSource[i, j].gas.H2O.face.mPhidot[
             Orientation.normal] + caSource[i, j].gas.N2.face.mPhidot[
             Orientation.normal] + caSource[i, j].gas.O2.face.mPhidot[
-            Orientation.normal])/A_ca[i, j];
+            Orientation.normal])/A_ca_seg[i, j];
           p_ca_out = DataH2O.p_Tv(caSink[i, j].gas.H2O.face.T, 1/caSink[i, j].gas.H2O.face.rho)
              + DataN2.p_Tv(caSink[i, j].gas.N2.face.T, 1/caSink[i, j].gas.N2.face.rho)
              + DataO2.p_Tv(caSink[i, j].gas.O2.face.T, 1/caSink[i, j].gas.O2.face.rho)
              + inSign(caInletSide)*(caSink[i, j].gas.H2O.face.mPhidot[
             Orientation.normal] + caSink[i, j].gas.N2.face.mPhidot[Orientation.normal]
-             + caSink[i, j].gas.O2.face.mPhidot[Orientation.normal])/A_ca[i, j];
+             + caSink[i, j].gas.O2.face.mPhidot[Orientation.normal])/A_ca_seg[i,
+            j];
         end for;
       end for;
 
@@ -9504,24 +9529,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       if anInletSide == Side.n then
         connect(anSource.face, anNegative) annotation (Line(
-            points={{-60,-40},{-50,-40},{-50,-90},{-40,-100}},
+            points={{-100,-60},{-90,-60},{-90,-90},{-80,-100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
         connect(anSink.face, anPositive) annotation (Line(
-            points={{-20,40},{-30,40},{-30,90},{-40,100}},
+            points={{-60,60},{-70,60},{-70,90},{-80,100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
       else
         connect(anSource.face, anPositive) annotation (Line(
-            points={{-60,-40},{-50,-40},{-50,90},{-40,100}},
+            points={{-100,-60},{-90,-60},{-90,90},{-80,100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None,
             pattern=LinePattern.Dash));
         connect(anSink.face, anNegative) annotation (Line(
-            points={{-20,40},{-30,40},{-30,-90},{-40,-100}},
+            points={{-60,60},{-70,60},{-70,-90},{-80,-100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None,
@@ -9529,44 +9554,77 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end if;
       if caInletSide == Side.n then
         connect(caSource.face, caNegative) annotation (Line(
-            points={{20,-40},{30,-40},{30,-90},{40,-100}},
+            points={{60,-60},{70,-60},{70,-90},{80,-100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
         connect(caSink.face, caPositive) annotation (Line(
-            points={{60,40},{50,40},{50,90},{40,100}},
+            points={{100,60},{90,60},{90,90},{80,100}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
       else
         connect(caSource.face, caPositive) annotation (Line(
-            points={{20,-40},{30,-40},{30,90},{40,100}},
+            points={{60,-60},{70,-60},{70,90},{80,100}},
             color={127,127,127},
             pattern=LinePattern.Dash,
             thickness=0.5,
             smooth=Smooth.None));
         connect(caSink.face, caNegative) annotation (Line(
-            points={{60,40},{50,40},{50,-90},{40,-100}},
+            points={{100,60},{90,60},{90,-90},{80,-100}},
             color={127,127,127},
             pattern=LinePattern.Dash,
             thickness=0.5,
             smooth=Smooth.None));
       end if;
       connect(anBC.face, an) annotation (Line(
-          points={{-88,1.23436e-15},{-88,5.55112e-16},{-100,5.55112e-16}},
+          points={{-108,1.23436e-15},{-108,5.55112e-16},{-120,5.55112e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(caBC.face, ca) annotation (Line(
-          points={{88,-1.34539e-15},{88,5.55112e-16},{100,5.55112e-16}},
+          points={{108,-1.34539e-15},{112,0},{114,-7.90278e-16},{114,
+              5.55112e-16},{120,5.55112e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
+      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
+          points={{21,20},{44,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
+          points={{21,-20},{44,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
+          points={{-39,-20},{-28,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
+          points={{-39,-40},{-20,-40},{-20,-28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
+          points={{-11,-20},{-2,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
+          points={{-39,20},{-28,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
+          points={{-20,12},{-20,6.10623e-16},{-39,6.10623e-16}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
+          points={{-11,20},{-2,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
       annotation (
         structurallyIncomplete=true,
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},
+                {120,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
                   extent={{-160,160},{160,-160}},
@@ -9601,7 +9659,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
     at each inlet boundary).</li>
     <li>There is no shear force on the fluid at either outlet.</li>
-    <li>The gases of each stream have the same velocity at each inlet and outlet.</li>
     <li>The species (gases and liquid) of each stream have the same temperature at each inlet and outlet.</li>
     <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
     <li>The temperature is uniform over each inlet and outlet.</li>
@@ -9617,6 +9674,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <li>There is no net thermal conduction across either outlet.</li>
     </ol></p>
         
+    <li>There is no nonequilibrium force on any species at either inlet.  This means that
+    the velocity of the first subregion along the channel will be the same is the velocity
+    at the inlet.</li>
+
     <p>The temperatures of the endplates (<i>T</i><sub>an</sub> and <i>T</i><sub>ca</sub>)
     should not be equal to the temperature of the environment unless <i>G</i><sub>an</sub>
     and <i>G</i><sub>ca</sub> are explicitly set.  Otherwise there will be a mathematical
@@ -9670,7 +9731,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     parameter Q.NumberAbsolute RH(
       displayUnit="%",
-      max=1) = 0.8 "Relative humidity";
+      max=1) = 0.6 "Relative humidity";
     final parameter Q.PressureAbsolute p_H2O=RH*
         Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa
       "Pressure of H2O vapor";
