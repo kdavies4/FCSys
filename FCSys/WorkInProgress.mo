@@ -143,10 +143,7 @@ package WorkInProgress "Incomplete classes under development"
     Modelica.Utilities.System.command("loadres");
 
   end plot;
-  annotation (Commands(file="../../units.mos"
-        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
-        file="test/check.mos"
-        "Check all of FCSys using Dymola's check function."));
+
   model EISPlaceholder
     "Placeholder model for electrochemical-impedance spectroscopy"
     extends FCSys.BaseClasses.Icons.Blocks.Continuous;
@@ -261,4 +258,8 @@ package WorkInProgress "Incomplete classes under development"
                              p_kPag=[48.3, 0, 202.7]),
                              */
   end PolarizationPlaceholder;
+  annotation (Commands(file="../../units.mos"
+        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
+        file="test/check.mos"
+        "Check all of FCSys using Dymola's check function."));
 end WorkInProgress;

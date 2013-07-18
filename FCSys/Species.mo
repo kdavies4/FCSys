@@ -302,22 +302,22 @@ package Species "Dynamic models of chemical species"
           final mu=sigma*v,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Mobility eta=Data.eta(),
-          redeclare final parameter Q.Fluidity beta=0,
+          final beta=0,
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
           final theta=Modelica.Constants.inf,
           consMaterial=Conservation.IC,
           invertEOS=false,
           initMaterial=InitScalar.volume);
 
-        parameter Q.ConductivityElectrical sigma=1e-10*Data.mu()/Data.v_Tp()
+        parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
           "Electrical conductivity" annotation (Dialog(group=
                 "Material properties", __Dymola_label="<html>&sigma;</html>"));
-        // **temp factor on sigma
         //    redeclare final parameter Q.Fluidity beta=Data.beta(),
         // **recreate Graphite e- Characteristics model, use it here
         //    redeclare parameter Q.Mobility eta=Data.eta(),
         //    redeclare parameter Q.Fluidity beta=1e-5*Data.beta(),
         // add eta to other e- and H+ models.
+        // **extend from isochoric.
         annotation (
           group="Material properties",
           defaultComponentPrefixes="replaceable",
@@ -1588,28 +1588,28 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       choices(__Dymola_checkBox=true));
     //
     // Dynamics
-    parameter BaseClasses.Conservation consMaterial=Conservation.dynamic
+    parameter Enumerations.Conservation consMaterial=Conservation.dynamic
       "Material" annotation (Dialog(
         Evaluate=true,
         tab="Assumptions",
         group="Formulation of conservation equations"));
-    parameter BaseClasses.Conservation consTransX=Conservation.dynamic
+    parameter Enumerations.Conservation consTransX=Conservation.dynamic
       "X-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[1]));
-    parameter BaseClasses.Conservation consTransY=Conservation.dynamic
+    parameter Enumerations.Conservation consTransY=Conservation.dynamic
       "Y-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[2]));
-    parameter BaseClasses.Conservation consTransZ=Conservation.dynamic
+    parameter Enumerations.Conservation consTransZ=Conservation.dynamic
       "Z-axis translational momentum" annotation (Evaluate=true, Dialog(
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[3]));
-    parameter BaseClasses.Conservation consEnergy=Conservation.dynamic "Energy"
-      annotation (Evaluate=true, Dialog(tab="Assumptions", group=
+    parameter Enumerations.Conservation consEnergy=Conservation.dynamic
+      "Energy" annotation (Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of conservation equations"));
     //
     // Flow conditions
@@ -1627,10 +1627,10 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     // Initialization parameters
     // -------------------------
     // Scalar properties
-    parameter BaseClasses.InitScalar initMaterial=InitScalar.pressure
+    parameter Enumerations.InitScalar initMaterial=InitScalar.pressure
       "Method of initializing the material state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
-    parameter BaseClasses.InitScalar initEnergy=InitScalar.temperature
+    parameter Enumerations.InitScalar initEnergy=InitScalar.temperature
       "Method of initializing the thermal state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
     parameter Q.Amount N_IC(start=V_IC*rho_IC) "Initial particle number"
@@ -1673,19 +1673,19 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         __Dymola_label="<html><i>g</i><sub>IC</sub></html>"));
     //
     // Velocity
-    parameter BaseClasses.InitTranslational initTransX=InitTranslational.velocity
+    parameter Enumerations.InitTranslational initTransX=InitTranslational.velocity
       "Method of initializing the x-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[1]));
-    parameter BaseClasses.InitTranslational initTransY=InitTranslational.velocity
+    parameter Enumerations.InitTranslational initTransY=InitTranslational.velocity
       "Method of initializing the y-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[2]));
-    parameter BaseClasses.InitTranslational initTransZ=InitTranslational.velocity
+    parameter Enumerations.InitTranslational initTransZ=InitTranslational.velocity
       "Method of initializing the z-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
@@ -2011,11 +2011,11 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
       "true, if each Cartesian axis uses upstream discretization"
       annotation (HideResult=true);
-    final parameter BaseClasses.Conservation consTrans[Axis]={consTransX,
+    final parameter Enumerations.Conservation consTrans[Axis]={consTransX,
         consTransY,consTransZ}
       "Formulation of the translational conservation equations"
       annotation (HideResult=true);
-    final parameter BaseClasses.InitTranslational initTrans[Axis]={initTransX,
+    final parameter Enumerations.InitTranslational initTrans[Axis]={initTransX,
         initTransY,initTransZ}
       "Initialization methods for translational momentum"
       annotation (HideResult=true);
@@ -2729,7 +2729,7 @@ Choose any condition besides None.");
       Diagram(graphics));
   end Reaction;
 
-  package BaseClasses "Base classes (generally not for direct use)"
+  package Enumerations "Choices of options"
 
     extends Modelica.Icons.BasesPackage;
     type Conservation = enumeration(
@@ -2763,6 +2763,6 @@ Choose any condition besides None.");
         currentSS "Steady-state advective current")
       "Methods of initializing translational momentum";
 
-  end BaseClasses;
+  end Enumerations;
 
 end Species;

@@ -19,10 +19,13 @@ import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Subregions.BaseClasses.InitCapacitor;
-import FCSys.Species.BaseClasses.Conservation;
-import FCSys.Species.BaseClasses.InitScalar;
-import FCSys.Species.BaseClasses.InitTranslational;
+import FCSys.Species.Enumerations.Conservation;
+import FCSys.Species.Enumerations.InitScalar;
+import FCSys.Species.Enumerations.InitTranslational;
+import FCSys.Conditions.TestStands.Enumerations.ElectricalSpec;
+import FCSys.Conditions.TestStands.Enumerations.FlowSpec;
+import FCSys.Conditions.TestStands.Enumerations.HumiditySpec;
+import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
 
 // **Use lowercase for all elements of all enumerations.
 
@@ -1108,6 +1111,21 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

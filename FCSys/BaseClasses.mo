@@ -287,9 +287,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,20},{100,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,20},{100,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top1;
 

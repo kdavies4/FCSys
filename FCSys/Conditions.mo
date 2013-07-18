@@ -284,24 +284,29 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Rectangle(
-                  extent={{-98,20},{98,60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Text(
-                  extent={{-98,20},{98,60}},
-                  textString="%name",
-                  lineColor={0,0,0}),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+                100,100}}), graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Rectangle(
+              extent={{-98,20},{98,60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Text(
+              extent={{-98,20},{98,60}},
+              textString="%name",
+              lineColor={0,0,0}),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -7570,21 +7575,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={Rectangle(
-                      extent={{-160,112},{160,152}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Polygon(
-                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
-                  {-160,-160},{-160,60}},
-                      lineColor={127,127,127},
-                      smooth=Smooth.None,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-160,112},{160,152}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+                  160,160}}), graphics={
+              Rectangle(
+                extent={{-160,112},{160,152}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Polygon(
+                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
+                    -160},{-160,60}},
+                lineColor={127,127,127},
+                smooth=Smooth.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-160,112},{160,152}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -8947,7 +8955,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Operating conditions
       // --------------------
       // Electrical
-      parameter ElectricalSpec electricalSpec=ElectricalSpec.currentDensity
+      parameter FCSys.Conditions.TestStands.Enumerations.ElectricalSpec
+        electricalSpec=ElectricalSpec.currentDensity
         "Type of electrical specification" annotation (Dialog(
           tab="Conditions",
           group="Electrical",
@@ -9004,8 +9013,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_label="<html><i>n</i><sub>O2 in</sub></html>"));
       //
       // Anode flow rate
-      parameter FlowSpec anFlowSpec=FlowSpec.stoich
-        "Type of anode flow specification" annotation (Dialog(
+      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec anFlowSpec=
+          FlowSpec.stoich "Type of anode flow specification" annotation (Dialog(
           tab="Conditions",
           group="Anode",
           __Dymola_descriptionLabel=true,
@@ -9024,8 +9033,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.PressureAbsolute p_an_in "Anode inlet pressure";
       //
       // Cathode flow rate
-      parameter FlowSpec caFlowSpec=FlowSpec.stoich
-        "Type of cathode flow specification" annotation (Dialog(
+      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec caFlowSpec=
+          FlowSpec.stoich "Type of cathode flow specification" annotation (
+          Dialog(
           tab="Conditions",
           group="Cathode",
           __Dymola_descriptionLabel=true,
@@ -9044,7 +9054,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.PressureAbsolute p_ca_in "Cathode inlet pressure";
       //
       // Anode humidity
-      parameter HumiditySpec anHumiditySpec=HumiditySpec.relative
+      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
+        anHumiditySpec=HumiditySpec.relative
         "Type of anode humidity specification" annotation (Dialog(
           tab="Conditions",
           group="Anode",
@@ -9054,7 +9065,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Real u_an_humidity=0.8 "Value of the anode humidity specification"
         annotation (Dialog(
           tab="Conditions",
-          group="Cathode",
+          group="Anode",
           __Dymola_descriptionLabel=true,
           __Dymola_label="<html>Value (<i>u</i><sub>an humidity</sub>)</html>"));
       Q.NumberAbsolute anInletRH(displayUnit="%")
@@ -9063,7 +9074,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.TemperatureAbsolute T_sat_an_in "Dew point at anode inlet";
       //
       // Cathode humidity
-      parameter HumiditySpec caHumiditySpec=HumiditySpec.relative
+      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
+        caHumiditySpec=HumiditySpec.relative
         "Type of anode humidity specification" annotation (Dialog(
           tab="Conditions",
           group="Cathode",
@@ -9082,26 +9094,28 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       Q.TemperatureAbsolute T_sat_ca_in "Dew point at cathode inlet";
       //
       // Anode end plate
-      /*
-  parameter ThermalSpec anEndPlateSpec=ThermalSpec.temperature 
-    "Type of anode end plate specification" annotation (Dialog(
-      tab="Conditions",group="Anode",
-      __Dymola_descriptionLabel=true,
-      __Dymola_label="Type of end plate specification",
-      __Dymola_joinNext=true));
-  Real u_an_end_plate=333.15*U.K "Value of the anode end plate specification" 
-    annotation (Dialog(
-      tab="Conditions",group="Anode",
-      __Dymola_descriptionLabel=true,
-      __Dymola_label="<html>Value (<i>u</i><sub>an end plate</sub>)</html>"));
-  */
+      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
+        anEndPlateSpec=ThermalSpec.temperature
+        "Type of anode end plate specification" annotation (Dialog(
+          tab="Conditions",
+          group="Anode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="Type of end plate specification",
+          __Dymola_joinNext=true));
+      Real u_an_end_plate=333.15*U.K
+        "Value of the anode end plate specification" annotation (Dialog(
+          tab="Conditions",
+          group="Anode",
+          __Dymola_descriptionLabel=true,
+          __Dymola_label="<html>Value (<i>u</i><sub>an end plate</sub>)</html>"));
       Q.TemperatureAbsolute T_an "Temperature of anode end plate";
       Q.Conductance G_an
         "Thermal conductance of the anode end plate to the environment";
       Q.Power Qdot_an "Heat flow rate from the anode end plate";
       //
       // Cathode end plate
-      parameter ThermalSpec caEndPlateSpec=ThermalSpec.temperature
+      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
+        caEndPlateSpec=ThermalSpec.temperature
         "Type of anode end plate specification" annotation (Dialog(
           tab="Conditions",
           group="Cathode",
@@ -9140,6 +9154,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Characteristics.BaseClasses.CharacteristicEOS
         "<html>O<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
             group="Fluid equations of state"), choicesAllMatching=true);
+
+      // Standard conditions
+      parameter Q.TemperatureAbsolute T_0=273.15*U.K "Temperature" annotation (
+          Dialog(
+          tab="Advanced",
+          group="Standard conditions (for volumetric flow rate)",
+          __Dymola_label="<html><i>T</i><sub>0</sub>"));
+      parameter Q.PressureAbsolute p_0=U.atm "Pressure" annotation (Dialog(
+          tab="Advanced",
+          group="Standard conditions (for volumetric flow rate)",
+          __Dymola_label="<html><i>p</i><sub>0</sub>"));
 
       // Derived and measured conditions
       Q.CurrentAreic zJ_seg[n_y, n_z] "Current density of the segments";
@@ -9608,27 +9633,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     </html>"));
     end TestStand;
 
-    // **Move to base package:
-    type FlowSpec = enumeration(
-        stoich "Stoichiometric rate",
-        currentDensity "Equivalent current density",
-        current "Equivalent current",
-        volumetric "Volumetric rate",
-        pressure "Inlet pressure") "Ways to specify the anode flow rate";
-    type ElectricalSpec = enumeration(
-        currentDensity "Current density",
-        current "Current",
-        voltage "Voltage",
-        resistance "Resistance",
-        power "Power") "Ways to specify the electrical load";
-    type HumiditySpec = enumeration(
-        relative "Relative humidity",
-        pressure "Vapor pressure",
-        dewPoint "Dew point") "Ways to specify humidity";
-    type ThermalSpec = enumeration(
-        temperature "Temperature",
-        conductance "Thermal conductance with the environment",
-        rate "Heat flow rate") "Ways to specify a thermal condition";
+    package Enumerations "Choices of options"
+
+      extends Modelica.Icons.BasesPackage;
+
+      type ElectricalSpec = enumeration(
+          currentDensity "Current density",
+          current "Current",
+          voltage "Voltage",
+          resistance "Resistance",
+          power "Power") "Ways to specify the electrical load";
+      type FlowSpec = enumeration(
+          stoich "Stoichiometric rate",
+          currentDensity "Equivalent current density",
+          current "Equivalent current",
+          volumetric "Standard volumetric rate (conditions on Advanced tab)",
+          pressure "Inlet pressure") "Ways to specify the anode flow rate";
+      type HumiditySpec = enumeration(
+          relative "Relative humidity",
+          pressure "Vapor pressure",
+          dewPoint "Dew point") "Ways to specify humidity";
+      type ThermalSpec = enumeration(
+          temperature "Temperature",
+          conductance "Thermal conductance with the environment",
+          rate "Heat flow rate") "Ways to specify a thermal condition";
+    end Enumerations;
   end TestStands;
 
   record Environment "Environmental properties for a simulation"
@@ -9679,51 +9708,42 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,170,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-100}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
-          Ellipse(
-            extent={{32,8},{48,-8}},
-            pattern=LinePattern.None,
-            lineColor={255,255,255},
-            fillColor={50,50,50},
-            fillPattern=FillPattern.Sphere),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Dash)}));
+              100}}), graphics={Rectangle(
+              extent={{-80,60},{80,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,170,255}),Rectangle(
+              extent={{-72,-60},{72,-100}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
+              extent={{32,8},{48,-8}},
+              pattern=LinePattern.None,
+              lineColor={255,255,255},
+              fillColor={50,50,50},
+              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
+            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
+            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
+            -2,-60}}, color={0,0,0}),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash)}));
 
   end Environment;
 
