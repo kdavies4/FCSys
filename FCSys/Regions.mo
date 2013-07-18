@@ -86,8 +86,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,40})));
-      // **Use sensors where helpful.
-      // **Use each at highest possible level.
+      // **Fix stoich
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3[anFP.n_x, n_z](
           gas(
           each inclH2=true,
@@ -96,7 +95,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(BC3.gas.H2.normalOut.y - fill(
-                      zI*anStoich/A_an,
+                      zI*anStoich/(2*A_an),
                       anFP.n_x,
                       n_z)) .* A_an_seg),
             redeclare each function normalMeas =
@@ -109,7 +108,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(BC3.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*environment.p_H2O/((environment.p -
+                      zI*anStoich*environment.p_H2O/(2*(environment.p -
                     environment.p_H2O)*A_an),
                       anFP.n_x,
                       n_z)) .* A_an_seg),
@@ -150,8 +149,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
-            materialSet(y=sum(BC5.gas.H2O.normalOut.y .* A_ca_seg) - zI*
-                  caStoich*environment.p_H2O/environment.p_O2),
+            materialSet(y=(BC5.gas.H2O.normalOut.y - fill(
+                      zI*caStoich*environment.p_H2O/(4*environment.p_O2*A_ca),
+                      caFP.n_x,
+                      n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
@@ -161,9 +162,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
           N2(
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
-            materialSet(y=sum(BC5.gas.N2.normalOut.y .* A_ca_seg) - zI*caStoich
-                  *(environment.p - environment.p_O2 - environment.p_H2O)/
-                  environment.p_O2),
+            materialSet(y=(BC5.gas.N2.normalOut.y - fill(
+                      zI*caStoich*(environment.p - environment.p_O2 -
+                    environment.p_H2O)/(4*environment.p_O2*A_ca),
+                      caFP.n_x,
+                      n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
@@ -174,7 +177,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(BC5.gas.O2.normalOut.y - fill(
-                      zI*caStoich/A_ca,
+                      zI*caStoich/(4*A_ca),
                       caFP.n_x,
                       n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
@@ -1140,7 +1143,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k_T={5,1,1},
+              k_T={10,1,1},
               k_E=1e-3,
               inclH2=true,
               inclH2O=true,
@@ -1166,7 +1169,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=false,
-              k_T=fill(epsilon^(3/2), 3),
+              k_T={10,1,1},
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -1247,7 +1250,7 @@ As an approximation, it should be equal to product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels, and</li>
 <li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
 </ol>
-The default is 5.
+The default is 10.
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
 the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
 area of the channel (also in the xz plane). This should be taken into account when setting 
@@ -1456,7 +1459,7 @@ text layer of this model.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Volumetric porosity"
         annotation (Dialog(group="Geometry",__Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -1480,13 +1483,16 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.4</code>) is
-of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483, Table 3].
+<p>The default porosity (<code>epsilon = 0.8</code>) is that of SGL Carbon Group Sigracet&reg; 25 BC GDL.  
+It is lower than the porosity of a Sigracet&reg; 10 BA or 25 BC (0.88).  
+The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
+[<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
+that reference may be outdated.
   The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)</code>)
-   represents a compressed SGL Sigracet 10 BA gas diffusion layer
+   represents a compressed Sigracet&reg; 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
   electrical conductivity
-  is also for SGL Carbon Group Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].</p>
+  is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].</p>
 
 <p>For more information, see the
     <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p></html>"),
@@ -2618,7 +2624,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_T for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Volumetric porosity"
         annotation (Dialog(group="Geometry",__Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -2646,13 +2652,16 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.4</code>) is
-of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483, Table 3].
+<p>The default porosity (<code>epsilon = 0.8</code>) is that of SGL Carbon Group Sigracet&reg; 25 BC GDL.  
+It is lower than the porosity of a Sigracet&reg; 10 BA or 25 BC (0.88).  
+The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
+[<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
+that reference may be outdated.
   The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)</code>)
-   represents a compressed SGL Sigracet 10 BA gas diffusion layer
+   represents a compressed Sigracet&reg; 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
-  electrical conductivity is also
-  for SGL Carbon Group Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].</p>
+  electrical conductivity
+  is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].</p>
 
 <p>For more information, see the
     <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
@@ -2964,7 +2973,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
             gas(
               reduceVel=true,
               reduceTemp=true,
-              k_T={5,1,1},
+              k_T={10,1,1},
               k_E=3e-4,
               inclH2O=true,
               inclN2=true,
@@ -2998,7 +3007,7 @@ of a compressed GDL according to [<a href=\"modelica://FCSys.UsersGuide.Referenc
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=false,
-              k_T=fill(epsilon^(3/2), 3),
+              k_T={10,1,1},
               H2O(consTransX=Conservation.IC,V_IC=Modelica.Constants.eps*U.cc))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -3049,7 +3058,7 @@ generally be greater than one because the fluid is not transported along the ent
 As an approximation, it should be equal to product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels, and</li>
 <li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
-The default is 5.
+The default is 10.
 </ol>
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
 the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
