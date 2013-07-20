@@ -1,5 +1,5 @@
 """
-Configuration utilities.
+Configuration utilities
 """
 import os
 from configobj import ConfigObj
@@ -21,7 +21,8 @@ def iter_paths(config_paths):
 
 
 def read(path):
-    """Return dict-like object of config parameters from file path."""
+    """Return dict-like object of config parameters from file path.
+    """
     return ConfigObj(path)
 
 

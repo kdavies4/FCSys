@@ -319,6 +319,10 @@ package Conditions "Models to specify and measure operating conditions"
       // Aliases (for common terms)
       Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
 
+      // Auxiliary variables (for analysis)
+      output Q.Potential zw(stateSelect=StateSelect.never) = inSign(side)*face.mPhidot[
+        Orient.normal]/(face.rho*A) "Inward nonequilibrium potential";
+
       Connectors.Face face "Interface to the majority region" annotation (
           Placement(transformation(extent={{10,-10},{30,10}}),
             iconTransformation(extent={{-50,-10},{-30,10}})));
@@ -342,14 +346,14 @@ package Conditions "Models to specify and measure operating conditions"
 
       // Equal intensive properties
       chemical.mu = Data.h(face.T, p) - chemical.sT + inSign(side)*face.mPhidot[
-        Orientation.normal]/(face.rho*A) "Electrochemical potential";
+        Orient.normal]/(face.rho*A) "Electrochemical potential";
       chemical.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
         "Velocity";
       chemical.sT = Data.s(face.T, p)*face.T
         "Specific entropy-temperature product";
 
       // Material conservation (without storage)
-      0 = chemical.Ndot + inSign(side)*face.phi[Orientation.normal]*A*face.rho;
+      0 = chemical.Ndot + inSign(side)*face.phi[Orient.normal]*A*face.rho;
       // The conservation of translational momentum and energy is inherent
       // in the stream connector.
 
@@ -2621,8 +2625,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable='inclC+'),
           Placement(transformation(extent={{-10,-10},{10,10}})));
 
-        parameter Boolean 'inclC19HF37O5S-'=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
+        parameter Boolean 'inclSO3-'=false
+          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
           annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -2631,11 +2635,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
-        replaceable Physical.Potential 'C19HF37O5S-'(
+        replaceable Physical.Potential 'SO3-'(
           final inclTransX,
           final inclTransY,
           final inclTransZ,
-          final formula) if 'inclC19HF37O5S-' constrainedby
+          final formula) if 'inclSO3-' constrainedby
           FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
@@ -2645,7 +2649,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable='inclC19HF37O5S-'),
+            enable='inclSO3-'),
           Placement(transformation(extent={{-10,-10},{10,10}})));
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
@@ -2865,17 +2869,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // C19HF37O5S-
-        connect('C19HF37O5S-'.physical, physical.'C19HF37O5S-') annotation (
-            Line(
+        connect('SO3-'.physical, physical.'SO3-') annotation (Line(
             points={{6.10623e-16,-4},{5.55112e-16,-40}},
             color={38,196,52},
             smooth=Smooth.None));
-        connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
+        connect(u.'SO3-', 'SO3-'.u) annotation (Line(
             points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-        connect('C19HF37O5S-'.y, y.'C19HF37O5S-') annotation (Line(
+        connect('SO3-'.y, y.'SO3-') annotation (Line(
             points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
             color={0,0,127},
             thickness=0.5,
@@ -2987,8 +2990,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current
-            'C19HF37O5S-'(
+          redeclare replaceable Conditions.ByConnector.Physical.Current 'SO3-'(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
@@ -3646,7 +3648,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
             ionomer(
-              'C19HF37O5S-'(
+              'SO3-'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Pair.Material.density,
                 redeclare replaceable function normalSpec =
@@ -4016,8 +4018,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends BaseClasses.EmptyPhase;
 
             // Conditionally include species.
-            parameter Boolean 'inclC19HF37O5S-'=false
-              "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
+            parameter Boolean 'inclSO3-'=false
+              "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
               annotation (
               HideResult=true,
               choices(__Dymola_checkBox=true),
@@ -4026,13 +4028,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Pair.FaceFlows 'C19HF37O5S-' if 'inclC19HF37O5S-'
-              "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions</html>"
-              annotation (Dialog(
+            Face.Pair.FaceFlows 'SO3-' if 'inclSO3-'
+              "<html>SO<sub>3</sub><sup>-</sup> conditions</html>" annotation (
+                Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
-                enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,
-                      -10},{10,10}})));
+                enable='inclSO3-'), Placement(transformation(extent={{-10,-10},
+                      {10,10}})));
 
             parameter Boolean 'inclH+'=false
               "<html>Protons (H<sup>+</sup>)</html>" annotation (
@@ -4068,28 +4070,26 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           equation
             // C19HF37O5S-
-            connect('C19HF37O5S-'.negative, negative.'C19HF37O5S-') annotation
-              (Line(
+            connect('SO3-'.negative, negative.'SO3-') annotation (Line(
                 points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
 
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
-            connect('C19HF37O5S-'.positive, positive.'C19HF37O5S-') annotation
-              (Line(
+            connect('SO3-'.positive, positive.'SO3-') annotation (Line(
                 points={{10,6.10623e-16},{10,5.55112e-16},{100,5.55112e-16}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
-            connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
+            connect(u.'SO3-', 'SO3-'.u) annotation (Line(
                 points={{5.55112e-16,50},{6.10623e-16,5}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
-            connect('C19HF37O5S-'.y, y.'C19HF37O5S-') annotation (Line(
+            connect('SO3-'.y, y.'SO3-') annotation (Line(
                 points={{6.10623e-16,-5},{5.55112e-16,-50}},
                 color={0,0,127},
                 thickness=0.5,
@@ -4642,7 +4642,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       300*U.K))),
             ionomer(
-              'C19HF37O5S-'(
+              'SO3-'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
                 redeclare replaceable function normalSpec =
@@ -4991,8 +4991,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends BaseClasses.EmptyPhase;
 
             // Conditionally include species.
-            parameter Boolean 'inclC19HF37O5S-'=false
-              "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
+            parameter Boolean 'inclSO3-'=false
+              "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
               annotation (
               HideResult=true,
               choices(__Dymola_checkBox=true),
@@ -5001,13 +5001,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows 'C19HF37O5S-' if 'inclC19HF37O5S-'
-              "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> conditions</html>"
-              annotation (Dialog(
+            Face.Single.FaceFlows 'SO3-' if 'inclSO3-'
+              "<html>SO<sub>3</sub><sup>-</sup> conditions</html>" annotation (
+                Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
-                enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,
-                      -10},{10,10}})));
+                enable='inclSO3-'), Placement(transformation(extent={{-10,-10},
+                      {10,10}})));
 
             parameter Boolean 'inclH+'=false
               "<html>Protons (H<sup>+</sup>)</html>" annotation (
@@ -5043,20 +5043,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           equation
             // C19HF37O5S-
-            connect('C19HF37O5S-'.face, face.'C19HF37O5S-') annotation (Line(
+            connect('SO3-'.face, face.'SO3-') annotation (Line(
                 points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
-            connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
+            connect(u.'SO3-', 'SO3-'.u) annotation (Line(
                 points={{-100,5.55112e-16},{-100,0},{-11,0},{-11,6.10623e-16}},
 
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
-            connect('C19HF37O5S-'.y, y.'C19HF37O5S-') annotation (Line(
+            connect('SO3-'.y, y.'SO3-') annotation (Line(
                 points={{11,6.10623e-16},{11,0},{100,0},{100,5.55112e-16}},
                 color={0,0,127},
                 thickness=0.5,
@@ -5373,7 +5373,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Aliases
           Q.Density Deltarho "Difference in density";
-          Q.Velocity Deltaphi[Orientation] "Difference in velocity";
+          Q.Velocity Deltaphi[Orient] "Difference in velocity";
           Q.Temperature DeltaT "Difference in temperature";
 
           Connectors.Face negative "Negative face" annotation (Placement(
@@ -5464,7 +5464,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       negative.mPhidot,
                       DeltaT,
                       negative.Qdot,
-                      orientation=Orientation.normal)
+                      orient=Orient.normal)
             "Internal, working value of normal translational specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -5477,7 +5477,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       negative.mPhidot,
                       DeltaT,
                       negative.Qdot,
-                      orientation=Orientation.following)
+                      orient=Orient.after)
             "Internal, working value of first transverse specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -5490,7 +5490,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       negative.mPhidot,
                       DeltaT,
                       negative.Qdot,
-                      orientation=Orientation.preceding)
+                      orient=Orient.before)
             "Internal, working value of second transverse specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -5527,8 +5527,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         negative.mPhidot,
                         DeltaT,
                         negative.Qdot,
-                        orientation=Orientation.normal))
-            "Generate the normal output" annotation (Placement(transformation(
+                        orient=Orient.normal)) "Generate the normal output"
+            annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-40,-70})));
@@ -5539,7 +5539,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         negative.mPhidot,
                         DeltaT,
                         negative.Qdot,
-                        orientation=Orientation.preceding))
+                        orient=Orient.before))
             "Generate the 2nd transverse output" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -5552,7 +5552,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         negative.mPhidot,
                         DeltaT,
                         negative.Qdot,
-                        orientation=Orientation.following))
+                        orient=Orient.after))
             "Generate the 1st transverse output" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -5745,9 +5745,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity Deltaphi[Orientation]
+            input Q.Velocity Deltaphi[Orient]
               "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -5771,14 +5771,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends PartialCondition;
 
           algorithm
-            x := Deltaphi[orientation];
+            x := Deltaphi[orient];
           end velocity;
 
           function force "Non-equilibrium force"
             extends PartialCondition;
 
           algorithm
-            x := mPhidot[orientation];
+            x := mPhidot[orient];
           end force;
 
           partial function PartialCondition
@@ -5792,9 +5792,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity Deltaphi[Orientation]
+            input Q.Velocity Deltaphi[Orient]
               "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -5803,7 +5803,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             input Q.Power Qdot
               "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
 
-            input Orientation orientation
+            input Orient orient
               "Orientation of translational momentum w.r.t. the face";
 
             output Real x "Value of condition";
@@ -5842,9 +5842,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity Deltaphi[Orientation]
+            input Q.Velocity Deltaphi[Orient]
               "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -6098,7 +6098,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       face.mPhidot,
                       face.T,
                       face.Qdot,
-                      orientation=Orientation.normal)
+                      orient=Orient.normal)
             "Internal, working value of normal translational specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -6111,7 +6111,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       face.mPhidot,
                       face.T,
                       face.Qdot,
-                      orientation=Orientation.following)
+                      orient=Orient.after)
             "Internal, working value of first transverse specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -6124,7 +6124,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       face.mPhidot,
                       face.T,
                       face.Qdot,
-                      orientation=Orientation.preceding)
+                      orient=Orient.before)
             "Internal, working value of second transverse specification"
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -6153,8 +6153,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.mPhidot,
                         face.T,
                         face.Qdot,
-                        orientation=Orientation.normal))
-            "Generate the normal output"
+                        orient=Orient.normal)) "Generate the normal output"
             annotation (Placement(transformation(extent={{40,30},{60,50}})));
           Sources.RealExpression precedingOut(y=precedingMeas(
                         face.rho,
@@ -6163,7 +6162,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.mPhidot,
                         face.T,
                         face.Qdot,
-                        orientation=Orientation.preceding))
+                        orient=Orient.before))
             "Generate the 2nd transverse output"
             annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
           Sources.RealExpression followingOut(y=followingMeas(
@@ -6173,7 +6172,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.mPhidot,
                         face.T,
                         face.Qdot,
-                        orientation=Orientation.following))
+                        orient=Orient.after))
             "Generate the 1st transverse output"
             annotation (Placement(transformation(extent={{40,-10},{60,10}})));
           Sources.RealExpression thermalOut(y=thermalMeas(
@@ -6408,8 +6407,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity phi[Orientation] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -6431,7 +6430,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends PartialCondition;
 
           algorithm
-            x := rho*phi[orientation];
+            x := rho*phi[orient];
             annotation (Inline=true);
           end currentDensity;
           extends Translational;
@@ -6445,7 +6444,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends PartialCondition;
 
           algorithm
-            x := phi[orientation];
+            x := phi[orient];
             annotation (Inline=true);
           end velocity;
 
@@ -6453,7 +6452,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends PartialCondition;
 
           algorithm
-            x := mPhidot[orientation];
+            x := mPhidot[orient];
             annotation (Inline=true);
           end force;
 
@@ -6467,8 +6466,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity phi[Orientation] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -6476,7 +6475,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             input Q.Power Qdot
               "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
 
-            input Orientation orientation
+            input Orient orient
               "Orientation of translational momentum w.r.t. the face";
 
             output Real x "Value of condition";
@@ -6516,8 +6515,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
             // Translational
-            input Q.Velocity phi[Orientation] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orientation]
+            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
+            input Q.Force mPhidot[Orient]
               "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
 
             // Thermal
@@ -9439,6 +9438,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       outer Conditions.Environment environment "Environmental conditions";
 
     equation
+      // **remove liq H2O at inlet and outlet (assume no diffusion, adiabatic, no shear force)
+
       // Electrical
       w = R*zI;
       P = w*zI;
@@ -9453,8 +9454,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Liquid makes up the remainder if RH > 100%:
       Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an_seg)/
         DataH2O.v_Tp(T_an_in, p_sat_an_in);
-      Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.face.phi[Orientation.normal]
-         .* A_an_seg)/DataH2Ol.v_Tp(T_an_in);
+      Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.face.phi[Orient.normal] .*
+        A_an_seg)/DataH2Ol.v_Tp(T_an_in);
 
       // Cathode humidity
       p_sat_ca_in = saturationPressureSI(T_ca_in/U.K)*U.Pa;
@@ -9463,8 +9464,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Liquid makes up the remainder if RH > 100%:
       Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca_seg)/
         DataH2O.v_Tp(T_ca_in, p_sat_ca_in);
-      Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.face.phi[Orientation.normal]
-         .* A_ca_seg)/DataH2Ol.v_Tp(T_ca_in);
+      Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.face.phi[Orient.normal] .*
+        A_ca_seg)/DataH2Ol.v_Tp(T_ca_in);
 
       // End plates
       Qdot_an = G_an*(T_an - environment.T) "Anode";
@@ -9491,30 +9492,27 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         for i in 1:n_x_an loop
           p_an_in = DataH2.p_Tv(anSource[i, j].gas.H2.face.T, 1/anSource[i, j].gas.H2.face.rho)
              + DataH2O.p_Tv(anSource[i, j].gas.H2O.face.T, 1/anSource[i, j].gas.H2O.face.rho)
-             - inSign(anInletSide)*(anSource[i, j].gas.H2.face.mPhidot[
-            Orientation.normal] + anSource[i, j].gas.H2O.face.mPhidot[
-            Orientation.normal])/A_an_seg[i, j];
+             - inSign(anInletSide)*(anSource[i, j].gas.H2.face.mPhidot[Orient.normal]
+             + anSource[i, j].gas.H2O.face.mPhidot[Orient.normal])/A_an_seg[i,
+            j];
           p_an_out = DataH2.p_Tv(anSink[i, j].gas.H2.face.T, 1/anSink[i, j].gas.H2.face.rho)
              + DataH2O.p_Tv(anSink[i, j].gas.H2O.face.T, 1/anSink[i, j].gas.H2O.face.rho)
-             + inSign(anInletSide)*(anSink[i, j].gas.H2.face.mPhidot[
-            Orientation.normal] + anSink[i, j].gas.H2O.face.mPhidot[Orientation.normal])
-            /A_ca_seg[i, j];
+             + inSign(anInletSide)*(anSink[i, j].gas.H2.face.mPhidot[Orient.normal]
+             + anSink[i, j].gas.H2O.face.mPhidot[Orient.normal])/A_ca_seg[i, j];
         end for;
         for i in 1:n_x_ca loop
           p_ca_in = DataH2O.p_Tv(caSource[i, j].gas.H2O.face.T, 1/caSource[i, j].gas.H2O.face.rho)
              + DataN2.p_Tv(caSource[i, j].gas.N2.face.T, 1/caSource[i, j].gas.N2.face.rho)
              + DataO2.p_Tv(caSource[i, j].gas.O2.face.T, 1/caSource[i, j].gas.O2.face.rho)
-             - inSign(caInletSide)*(caSource[i, j].gas.H2O.face.mPhidot[
-            Orientation.normal] + caSource[i, j].gas.N2.face.mPhidot[
-            Orientation.normal] + caSource[i, j].gas.O2.face.mPhidot[
-            Orientation.normal])/A_ca_seg[i, j];
+             - inSign(caInletSide)*(caSource[i, j].gas.H2O.face.mPhidot[Orient.normal]
+             + caSource[i, j].gas.N2.face.mPhidot[Orient.normal] + caSource[i,
+            j].gas.O2.face.mPhidot[Orient.normal])/A_ca_seg[i, j];
           p_ca_out = DataH2O.p_Tv(caSink[i, j].gas.H2O.face.T, 1/caSink[i, j].gas.H2O.face.rho)
              + DataN2.p_Tv(caSink[i, j].gas.N2.face.T, 1/caSink[i, j].gas.N2.face.rho)
              + DataO2.p_Tv(caSink[i, j].gas.O2.face.T, 1/caSink[i, j].gas.O2.face.rho)
-             + inSign(caInletSide)*(caSink[i, j].gas.H2O.face.mPhidot[
-            Orientation.normal] + caSink[i, j].gas.N2.face.mPhidot[Orientation.normal]
-             + caSink[i, j].gas.O2.face.mPhidot[Orientation.normal])/A_ca_seg[i,
-            j];
+             + inSign(caInletSide)*(caSink[i, j].gas.H2O.face.mPhidot[Orient.normal]
+             + caSink[i, j].gas.N2.face.mPhidot[Orient.normal] + caSink[i, j].gas.O2.face.mPhidot[
+            Orient.normal])/A_ca_seg[i, j];
         end for;
       end for;
 
@@ -9648,7 +9646,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     given current
     assuming the reactant is entirely consumed (complete utilization).</p>
 
-    <p>Assumptions:
+    <p>Assumptions **review and update:
     <ol>
     <li>The outer x-axis surface of each end plate is each uniform in temperature.</li>
     <li>No heat is conducted from the rest of the cell hardware.</li>
@@ -9717,7 +9715,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     final constant U.Bases.Base baseUnits=U.base "Base constants and units"
       annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
 
-    parameter Boolean analysis=false "Include optional variables for analysis"
+    parameter Boolean analysis=true "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K

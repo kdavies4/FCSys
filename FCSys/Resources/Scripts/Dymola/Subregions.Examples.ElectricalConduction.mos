@@ -3,7 +3,7 @@ removePlots();
 createPlot(filename = "ElectricalConduction.mat");
 species = cat(1,
               if 'inclC+' then {"graphite.'C+'"} else fill("",0),
-              if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
+              if 'inclSO3-' then {"ionomer.'SO3-'"} else fill("",0),
               if 'incle-' then {"graphite.'e-'"} else fill("",0),
               if 'inclH+' then {"ionomer.'H+'"} else fill("",0),
               if inclH2 then {"gas.H2"} else fill("",0),

@@ -136,7 +136,7 @@ package Subregions
     // TODO: In the documentation of each model, add discussion from the dissertation.
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
-      extends Subregions('inclC+'=false);
+      extends Subregions(inclH2=false, 'inclC+'=false);
       annotation (experiment(StopTime=0.0003, Tolerance=1e-06), Commands(file(
               ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Echo.mos"
@@ -173,8 +173,8 @@ package Subregions
       "<html>Test a one-dimensional array of subregions with C<sup>+</sup> and e<sup>-</sup></html>"
 
       output Q.Potential w=(subregion.graphite.'e-'.faces[1, Side.p].mPhidot[
-          Orientation.normal]/subregion.graphite.'e-'.faces[1, Side.p].rho -
-          subregion.graphite.'e-'.faces[1, Side.n].mPhidot[Orientation.normal]/
+          Orient.normal]/subregion.graphite.'e-'.faces[1, Side.p].rho -
+          subregion.graphite.'e-'.faces[1, Side.n].mPhidot[Orient.normal]/
           subregion.graphite.'e-'.faces[1, Side.n].rho)/subregion.A[Axis.x]
         "Potential";
       output Q.Current zI=-subregion.graphite.'e-'.Ndot_faces[1, Side.n]
@@ -354,7 +354,7 @@ package Subregions
   */
       extends Examples.Subregion(
         'inclC+'=true,
-        'inclC19HF37O5S-'=true,
+        'inclSO3-'=true,
         'incle-'=true,
         'inclH+'=true,
         inclH2=true,
@@ -412,7 +412,7 @@ package Subregions
       "<html>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</html>"
 
       extends Examples.Subregion(
-        'inclC19HF37O5S-'=true,
+        'inclSO3-'=true,
         inclH2O=true,
         inclH2=false,
         subregion(gas(H2O(p_IC=1.001*U.atm)), ionomer(inclH2O=inclH2O)));
@@ -434,12 +434,12 @@ package Subregions
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
       // Conditions
-      parameter Q.VolumeRate Vdot=U.L/U.s "Prescribed volume flow rate"
+      parameter Q.VolumeRate Vdot=-U.L/U.s "Prescribed volume flow rate"
         annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
 
       // Measurements
       output Q.Pressure Deltap=Delta(subregion.liquid.H2O.p_faces[1, :]) - sum(
-          subregion.liquid.H2O.faces[1, :].mPhidot[Orientation.normal])/A
+          subregion.liquid.H2O.faces[1, :].mPhidot[Orient.normal])/A
         "Measured pressure difference (thermodynamic + nonequilibrium)";
       output Q.Length D=2*A/(subregion.L[Axis.y] + subregion.L[Axis.z]);
       output Q.Number Re=subregion.liquid.H2O.phi[Axis.x]*D*subregion.liquid.H2O.zeta
@@ -463,7 +463,7 @@ package Subregions
               true, H2O(redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
               redeclare Modelica.Blocks.Sources.Sine normalSet(
-              amplitude=0.05*Vdot/A,
+              amplitude=0.2*Vdot/A,
               offset=Vdot/A,
               freqHz=0.01)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
@@ -595,7 +595,7 @@ package Subregions
 
       extends Examples.Subregion(
         'inclC+'=true,
-        'inclC19HF37O5S-'=true,
+        'inclSO3-'=true,
         'incle-'=true,
         'inclH+'=true,
         inclH2=false,
@@ -666,6 +666,7 @@ package Subregions
 
     model Reaction
       "Test an electrochemical reaction driven by a single charge carrier (positive or negative)"
+      // **Make this into a simple runnable 0D FC.
       extends Modelica.Icons.Example;
       import FCSys.BaseClasses.Utilities.cartWrap;
       import FCSys.BaseClasses.Utilities.countTrue;
@@ -834,9 +835,9 @@ package Subregions
               H2O(
               p_IC=saturationPressureSI(environment.T/U.K)*U.Pa,
               redeclare package Data = FCSys.Characteristics.H2O.Gas,
-              consTransX=Conservation.IC,
-              tauprime=1e-4*U.s))),
+              consTransX=Conservation.IC))),
         environment(T=274.15*U.K));
+      // **Remove tauprime mod
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(
             inclH2O=true, H2O(
@@ -922,8 +923,8 @@ package Subregions
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclC19HF37O5S-'=false
-        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
+      parameter Boolean 'inclSO3-'=false
+        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
       parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
@@ -966,9 +967,9 @@ package Subregions
           final inclO2=inclO2),
         liquid(H2O(V_IC=subregion.V/4)),
         ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclSO3-'='inclSO3-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion.V/4)))
+          'SO3-'(V_IC=subregion.V/4)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       annotation (
         Documentation(info="<html><p>This model is boring.  It just sets up a
@@ -998,7 +999,7 @@ package Subregions
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclC19HF37O5S-'=false
+      parameter Boolean 'inclSO3-'=false
         "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
@@ -1048,9 +1049,9 @@ package Subregions
           'C+'(V_IC=subregion1.V/1000)),
         ionomer(
           reduceThermal=true,
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclSO3-'='inclSO3-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion1.V/1000)),
+          'SO3-'(V_IC=subregion1.V/1000)),
         liquid(H2O(V_IC=subregion1.V/4)))
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
@@ -1067,9 +1068,9 @@ package Subregions
           'C+'(each V_IC=subregions[1].V/1000)),
         ionomer(
           each reduceThermal=true,
-          each final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          each final 'inclSO3-'='inclSO3-',
           each final 'inclH+'='inclH+',
-          'C19HF37O5S-'(each V_IC=subregions[1].V/1000)),
+          'SO3-'(each V_IC=subregions[1].V/1000)),
         gas(
           each reduceThermal=true,
           each reduceTrans=true,
@@ -1112,14 +1113,14 @@ package Subregions
           'C+'(V_IC=subregion2.V/1000)),
         ionomer(
           reduceThermal=true,
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclSO3-'='inclSO3-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion2.V/1000)))
+          'SO3-'(V_IC=subregion2.V/1000)))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(
         ionomer(
-          'inclC19HF37O5S-'=false,
+          'inclSO3-'=false,
           final 'inclH+'='inclH+',
           'H+'(redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
@@ -1153,7 +1154,7 @@ package Subregions
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(
         ionomer(
-          'inclC19HF37O5S-'=false,
+          'inclSO3-'=false,
           final 'inclH+'='inclH+',
           'H+'(redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity)),
@@ -1235,7 +1236,7 @@ package Subregions
 
     model ThermalConduction "Test thermal conduction (through solid)"
       extends Examples.Subregions(
-        n_x=8,
+        n_x=6,
         'inclC+'=true,
         inclH2=false,
         subregion1(graphite('C+'(T_IC=environment.T + 30*U.K, initMaterial=
@@ -1256,31 +1257,38 @@ package Subregions
       "Test combined thermal conduction and convection"
 
       extends Examples.Subregions(
-        n_x=8,
+        n_x=6,
         'inclC+'=true,
         inclH2=false,
         inclN2=true,
-        subregion1(gas(N2(
+        subregion1(gas(k_DT={0.5,1,1}, N2(
               T_IC=environment.T + 30*U.K,
               p_IC=environment.p,
-              T(displayUnit="degC"),
-              phi(displayUnit="mm/s"))), graphite('C+'(T_IC=environment.T + 30*
-                  U.K, V_IC=0.5*subregion1.V))),
-        subregions(gas(N2(
-              each p_IC=environment.p,
-              each T(displayUnit="degC"),
-              phi(each displayUnit="mm/s"))), graphite('C+'(each V_IC=0.5*
-                  subregions[1].V))),
-        subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
-            graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))));
+              T(stateSelect=StateSelect.always),
+              phi(displayUnit="mm/s"))), graphite(k_DT={0.5,1,1}, 'C+'(
+              T_IC=environment.T + 30*U.K,
+              V_IC=0.5*subregion1.V,
+              T(stateSelect=StateSelect.always)))),
+        subregions(each gas(k_DT={0.5,1,1}, N2(
+              p_IC=environment.p,
+              T(stateSelect=StateSelect.always),
+              phi(displayUnit="mm/s"))), each graphite(k_DT={0.5,1,1}, 'C+'(
+                V_IC=0.5*subregions[1].V, T(stateSelect=StateSelect.always)))),
+
+        subregion2(gas(k_DT={0.5,1,1}, N2(
+              p_IC=environment.p,
+              phi(displayUnit="mm/s"),
+              T(stateSelect=StateSelect.always))), graphite(k_DT={0.5,1,1},
+              'C+'(V_IC=0.5*subregion2.V, T(stateSelect=StateSelect.always)))));
 
       annotation (
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"
             "Subregions.Examples.ThermalConductionConvection.mos"),
         experiment(
-          StopTime=140,
-          Tolerance=1e-08,
+          StopTime=400,
+          NumberOfIntervals=5000,
+          Tolerance=1e-06,
           Algorithm="Dassl"),
         experimentSetupOutput);
 
@@ -1457,7 +1465,7 @@ package Subregions
     // Gas-liquid
     if gas.n_spec > 0 and liquid.n_spec > 0 then
       connect(gas.inert[2], liquid.inert[2]) annotation (Line(
-          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.7},{9.8,-4.7}},
+          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.2},{9.8,-4.2}},
           color={0,0,255},
           smooth=Smooth.None));
     end if;
@@ -1533,7 +1541,7 @@ package Subregions
         color={47,107,251},
         smooth=Smooth.None));
     connect(graphite.inert[1], inert) annotation (Line(
-        points={{9.8,-4.2},{19.9,-4.2},{19.9,-18},{30,-18}},
+        points={{9.8,-3.7},{19.9,-3.7},{19.9,-18},{30,-18}},
         color={0,0,255},
         smooth=Smooth.None));
     connect(graphite.xNegative, xNegative.graphite) annotation (Line(
@@ -1638,7 +1646,7 @@ package Subregions
         color={47,107,251},
         smooth=Smooth.None));
     connect(liquid.inert[1], inert) annotation (Line(
-        points={{9.8,-3.7},{19.9,-3.7},{19.9,-18},{30,-18}},
+        points={{9.8,-3.53333},{19.9,-3.53333},{19.9,-18},{30,-18}},
         color={0,0,255},
         smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(

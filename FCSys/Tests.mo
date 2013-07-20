@@ -39,7 +39,7 @@ package Tests "Models and functions for test and validation"
     model Subregion "Test a single subregion"
       extends FCSys.Subregions.Examples.Subregion(
         'inclC+'=true,
-        'inclC19HF37O5S-'=true,
+        'inclSO3-'=true,
         'incle-'=true,
         inclH2=true,
         inclH2O=true,
@@ -58,7 +58,7 @@ package Tests "Models and functions for test and validation"
         n_x=0,
         'inclC+'=true,
         'incle-'=true,
-        'inclC19HF37O5S-'=true,
+        'inclSO3-'=true,
         inclH2=true,
         inclH2O=true,
         inclN2=true,
@@ -67,8 +67,8 @@ package Tests "Models and functions for test and validation"
       // Note:  H+ is excluded to prevent reactions.
 
       output Q.Amount S(stateSelect=StateSelect.never) = subregion1.graphite.
-        'C+'.S + subregion2.graphite.'C+'.S + subregion1.ionomer.'C19HF37O5S-'.S
-         + subregion2.ionomer.'C19HF37O5S-'.S + subregion1.graphite.'e-'.S +
+        'C+'.S + subregion2.graphite.'C+'.S + subregion1.ionomer.'SO3-'.S
+         + subregion2.ionomer.'SO3-'.S + subregion1.graphite.'e-'.S +
         subregion2.graphite.'e-'.S + subregion1.gas.H2.S + subregion2.gas.H2.S
          + subregion1.gas.H2O.S + subregion2.gas.H2O.S + subregion1.gas.N2.S +
         subregion2.gas.N2.S + subregion1.gas.O2.S + subregion2.gas.O2.S
@@ -687,6 +687,9 @@ package Tests "Models and functions for test and validation"
       extends Modelica.Icons.Package;
       package Characteristic
         extends Modelica.Icons.Package;
+
+        // TODO: Add test for s().
+
         model RunAll
           "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package</html>"
           extends Modelica.Icons.Example;
@@ -717,7 +720,7 @@ package Tests "Models and functions for test and validation"
           // z
           assert(H2O.Gas.z == 0, "z failed on test 1.");
           assert('C+'.Graphite.z == 1, "z failed on test 2.");
-          assert('C19HF37O5S-'.Ionomer.z == -1, "z failed on test 3.");
+          assert('SO3-'.Ionomer.z == -1, "z failed on test 3.");
           // isCompressible
           assert(H2O.Gas.isCompressible, "isCompressible failed on test 1.");
           assert(not H2O.Liquid.isCompressible,

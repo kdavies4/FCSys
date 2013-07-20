@@ -216,6 +216,10 @@ package Units "Constants and units of physical measure"
         "mm/s",
         s/mm) "Velocity";
     defineUnitConversion(
+        "l/T",
+        "um/s",
+        s/um) "Velocity";
+    defineUnitConversion(
         "l/T2",
         "cm/s2",
         s^2/cm) "Acceleration";
@@ -1581,6 +1585,8 @@ encompass other systems of units.</p>
   final constant Q.Energy kJ=kilo*J "kilojoule";
   final constant Q.Length cm=centi*m "centimeter";
   final constant Q.Length mm=milli*m "millimeter";
+  final constant Q.Length um=micro*m "micrometer";
+  final constant Q.Time ms=milli*s "millisecond";
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.Density M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";

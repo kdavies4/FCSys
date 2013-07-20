@@ -7,7 +7,7 @@ package WorkInProgress "Incomplete classes under development"
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
     extends Conditions.Adapters.Phases.BaseClasses.PartialPhase;
     extends Modelica.Icons.UnderConstruction;
-    Conditions.Adapters.Species.Solid 'C19HF37O5S-';
+    Conditions.Adapters.Species.Solid 'SO3-';
     FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid 'H+'(redeclare package
         Data = FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2)
@@ -28,8 +28,7 @@ package WorkInProgress "Incomplete classes under development"
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
   equation
-    connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation
-      (Line(
+    connect('SO3-'.face.thermal, face.'SO3-'.thermal) annotation (Line(
         points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -49,7 +48,7 @@ package WorkInProgress "Incomplete classes under development"
         points={{8,-20},{40,-20},{40,5.55112e-16},{80,5.55112e-16}},
         color={191,0,0},
         smooth=Smooth.None));
-    connect('C19HF37O5S-'.heatPort, heatPort) annotation (Line(
+    connect('SO3-'.heatPort, heatPort) annotation (Line(
         points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
         color={191,0,0},
         smooth=Smooth.None));
@@ -58,25 +57,30 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   model CellModelica
@@ -248,18 +252,142 @@ package WorkInProgress "Incomplete classes under development"
   model PolarizationPlaceholder "**temp"
     extends Modelica.Icons.Example;
 
-    /* **
-                 params=dict(comp=['"O2"'],
-                             anStoich=[1.5, 1.1, 2],
-                             caStoich=[9.5, 7.5, 12.5],
-                             anRH=[0.8, 0.6, 1],
-                             caRH=[0.5, 0.3, 0.7],
-                             T_degC=[60, 40, 80],
-                             p_kPag=[48.3, 0, 202.7]),
-                             */
+    parameter Q.NumberAbsolute n_O2=0.21;
+    parameter Q.NumberAbsolute anStoich=1.5;
+    parameter Q.NumberAbsolute caStoich=1;
+    parameter Q.NumberAbsolute anInletRH=0.8;
+    parameter Q.NumberAbsolute caInletRH=0.5;
+    parameter Real T_degC=60;
+    parameter Real p_kPag=48.3;
+
+    Modelica.Electrical.Analog.Basic.Resistor resistor2(R=0.1) annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,0})));
+    Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3) annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={30,0})));
+    Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-100,0})));
+    Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (
+        Placement(transformation(
+          extent={{-10,10},{10,-10}},
+          rotation=270,
+          origin={60,0})));
+    Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.1) annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-20,20})));
+    Modelica.Electrical.Analog.Basic.Ground ground
+      annotation (Placement(transformation(extent={{50,-50},{70,-30}})));
+
+    Connectors.RealOutputInternal w(unit="l2.m/(N.T2)") "Potential"
+      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+
+    Modelica.Electrical.Analog.Sources.RampCurrent rampCurrent(
+      I=200,
+      duration=200,
+      startTime=0.1)
+      annotation (Placement(transformation(extent={{-90,10},{-70,30}})));
+    Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
+      annotation (Placement(transformation(extent={{-60,30},{-40,10}})));
+
+    Connectors.RealOutputInternal zJ(unit="N/(l2.T)") "Current density"
+      annotation (Placement(transformation(extent={{-26,70},{-6,90}})));
+
+    inner Conditions.Environment environment
+      annotation (Placement(transformation(extent={{50,72},{70,92}})));
+    Modelica.Blocks.Math.Gain gain1(k=U.A/(50*U.cm^2)) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={-50,56})));
+    Modelica.Blocks.Math.Gain gain2(k=U.V) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={90,0})));
+  equation
+    connect(resistor2.p, capacitor.p) annotation (Line(
+        points={{2.44753e-15,10},{0,20},{30,20},{30,10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(constantVoltage.n, resistor2.n) annotation (Line(
+        points={{-100,-10},{-100,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(capacitor.n, resistor2.n) annotation (Line(
+        points={{30,-10},{30,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(capacitor.n, voltageSensor.n) annotation (Line(
+        points={{30,-10},{30,-20},{60,-20},{60,-10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(capacitor.p, voltageSensor.p) annotation (Line(
+        points={{30,10},{30,20},{60,20},{60,10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(resistor1.n, resistor2.p) annotation (Line(
+        points={{-10,20},{2.44753e-15,20},{2.44753e-15,10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(constantVoltage.p, rampCurrent.p) annotation (Line(
+        points={{-100,10},{-100,20},{-90,20}},
+        color={0,0,255},
+        smooth=Smooth.None));
+
+    connect(rampCurrent.n, currentSensor.p) annotation (Line(
+        points={{-70,20},{-60,20}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(currentSensor.n, resistor1.p) annotation (Line(
+        points={{-40,20},{-30,20}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(zJ, gain1.y) annotation (Line(
+        points={{-16,80},{-50,80},{-50,67}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(gain1.u, currentSensor.i) annotation (Line(
+        points={{-50,44},{-50,30}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(ground.p, voltageSensor.n) annotation (Line(
+        points={{60,-30},{60,-10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(voltageSensor.v, gain2.u) annotation (Line(
+        points={{70,-2.33651e-15},{74,-2.33651e-15},{74,6.66134e-16},{78,
+            6.66134e-16}},
+        color={0,0,127},
+        smooth=Smooth.None));
+
+    connect(gain2.y, w) annotation (Line(
+        points={{101,6.10623e-16},{108.5,6.10623e-16},{108.5,5.55112e-16},{110,
+            5.55112e-16}},
+        color={0,0,127},
+        smooth=Smooth.None));
+
+    annotation (
+      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
+              100,100}}), graphics),
+      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{100,
+              100}})),
+      experiment(StopTime=210),
+      experimentSetupOutput);
   end PolarizationPlaceholder;
-  annotation (Commands(file="../../units.mos"
+  annotation (Commands(
+      file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
-        file="test/check.mos"
-        "Check all of FCSys using Dymola's check function."));
+
+      file="test/check.mos" "Check all of FCSys using Dymola's check function.",
+
+      file="../../../LaTeX/Dissertation/Results/Cell/Simulation/sim.mos"));
 end WorkInProgress;

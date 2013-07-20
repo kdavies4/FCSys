@@ -17,7 +17,8 @@ from its submodules.  These are:
 - To handle multiple files at once: :meth:`multi.multiload`,
   :meth:`multi.multiplot`
 
-- For simulation results: :class:`fcsimres.FCSimRes` and :class:`simres.SimRes`
+- For simulation results: :class:`fcsimres.FCSimRes`, :class:`simres.SimRes`,
+  :meth:`fcsimres.gen_subtitle_conditions`
 
 - For linearization results: :class:`fclinres.FCLinRes` and
   :class:`linres.LinRes`
@@ -63,5 +64,5 @@ from modelicares.texunit import label_number, label_quantity, unit2tex
 #
 # Local:
 from simres import SimRes
-from fcsimres import FCSimRes
+from fcsimres import FCSimRes, gen_subtitle_conditions
 from fclinres import FCLinRes

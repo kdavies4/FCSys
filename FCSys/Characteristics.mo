@@ -25,8 +25,8 @@ package Characteristics
       // Property models
       PropertiesRT 'C+'(redeclare package Data = Characteristics.'C+'.Graphite)
         annotation (Placement(transformation(extent={{30,38},{50,58}})));
-      PropertiesRT 'C19HF37O5S-'(redeclare package Data =
-            Characteristics.'C19HF37O5S-'.Ionomer)
+      PropertiesRT 'SO3-'(redeclare package Data =
+            Characteristics.'SO3-'.Ionomer)
         annotation (Placement(transformation(extent={{30,26},{50,46}})));
       PropertiesRT 'e-'(redeclare package Data = FCSys.Characteristics.'e-'.Gas)
         annotation (Placement(transformation(extent={{30,14},{50,34}})));
@@ -98,11 +98,11 @@ package Characteristics
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(T, 'C19HF37O5S-'.T) annotation (Line(
+      connect(T, 'SO3-'.T) annotation (Line(
           points={{5.55112e-16,20},{20,20},{20,38},{29,38}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(p, 'C19HF37O5S-'.p) annotation (Line(
+      connect(p, 'SO3-'.p) annotation (Line(
           points={{5.55112e-16,-20},{10,-20},{10,34},{29,34}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -294,8 +294,8 @@ package Characteristics
 
   end 'C+';
 
-  package 'C19HF37O5S-'
-    "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup></html>"
+  package 'SO3-'
+    "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
     extends Modelica.Icons.Package;
     package Ionomer "C9HF17O5S- ionomer"
       // Note:  HTML formatting isn't used in the description because
@@ -352,7 +352,7 @@ package Characteristics
 
     end Ionomer;
 
-  end 'C19HF37O5S-';
+  end 'SO3-';
 
   package 'e-' "<html>e<sup>-</sup></html>"
     extends Modelica.Icons.Package;
@@ -562,7 +562,8 @@ package Characteristics
     end Gas;
 
     package Ionomer "H2O in ionomer"
-      extends Gas;
+      extends Gas(b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,
+            0});
       annotation (Documentation(info="<html>
         <p>Assumptions:
      <ol>
@@ -571,6 +572,8 @@ package Characteristics
 
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
+      // Note:  U.cc*'SO3-'.Ionomer.m/(2.00*U.g) is
+      // 'SO3-'.Ionomer.b_v[1, 1], but it can't be inserted directly.
 
       // **
       // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
@@ -1143,7 +1146,7 @@ package Characteristics
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           input Q.Temperature dT "Derivative of temperature";
-          output Q.NumberAbsolute ds0
+          output Q.Number ds0
             "Derivative of specific entropy at given temperature and reference pressure";
 
         algorithm
@@ -1155,7 +1158,6 @@ package Characteristics
 
         function s_resid
           "Residual specific entropy for pressure adjustment for selected rows of b_v"
-          import FCSys.BaseClasses.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -1170,11 +1172,36 @@ package Characteristics
                       T,
                       b_v[i, :] .* {n_v[1] - n_v[2] + i - j for j in 1:size(b_v,
                 2)},  n_v[2] - n_v[1] - i) for i in rowLimits[1]:rowLimits[2]},
-                    n_v[1] + rowLimits[1] - 1) annotation (Inline=true);
+                    n_v[1] + rowLimits[1] - 1)
+            annotation (Inline=true, derivative=ds_resid);
           // Note:  According to the Maxwell relations,
           // (dels/delp)_T = -(delv/delT)_p.
 
         end s_resid;
+
+        function ds_resid "Derivative of s_resid"
+          // Note:  This function is necessary for Dymola 7.4 to differentiate s().
+          input Q.TemperatureAbsolute T "Temperature";
+          input Q.PressureAbsolute p "Pressure";
+          input Integer rowLimits[2]={1,size(b_v, 1)}
+            "Beginning and ending indices of rows of b_v to be included";
+          input Q.Temperature dT "Derivative of temperature";
+          input Q.Pressure dp "Derivative of pressure";
+          output Q.Number ds_resid
+            "Derivative of integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)";
+
+        algorithm
+          ds_resid := Polynomial.dF(
+                    p,
+                    {Polynomial.df(
+                      T,
+                      b_v[i, :] .* {n_v[1] - n_v[2] + i - j for j in 1:size(b_v,
+                2)},  n_v[2] - n_v[1] - i,
+                      dT) for i in rowLimits[1]:rowLimits[2]},
+                    n_v[1] + rowLimits[1] - 1,
+                    dp) annotation (Inline=true);
+
+        end ds_resid;
 
       algorithm
         /*

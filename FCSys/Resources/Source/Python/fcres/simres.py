@@ -15,67 +15,36 @@ __copyright__ = "Copyright 2012-2013, Georgia Tech Research Corporation"
 __license__ = "BSD-compatible (see LICENSE.txt)"
 
 
+import re
 import modelicares.base as base
 
-from modelicares import SimRes, texunit
+from modelicares import SimRes, label_number
 
 # Establish the default units.
 import _config
 config = _config.config
 default_units = config['Default display units']
 
-def p():
-    import os
-    print os.path.abspath(os.path.dirname(__file__))
-
-def label_number(quantity="", unit=None, times='\,', per='\,/\,', roman=False):
-    r"""Generate text to label a number as a quantity expressed in a unit.
-
-    The unit is formatted with LaTeX_ as needed.
-
-    **Arguments:**
-
-    - *quantity*: String describing the quantity
-
-    - *unit*: String specifying the unit
-
-         This is expressed in extended Modelica_ notation.  See
-         :meth:`unit2tex`.
-
-    - *times*: LaTeX_ math string to indicate multiplication
-
-         *times* is applied between the number and the first unit and between
-         units.  The default is 3/18 quad space.  The multiplication between
-         the significand and the exponent is always indicated by
-         ":math:`\times`".
-
-    - *per*: LaTeX_ math string to indicate division
-
-         It is applied between the quantity and the units.  The default is a
-         3/18 quad space followed by '/; and another 3/18 quad space.  The
-         division associated with the units on the denominator is always
-         indicated by a negative exponential.
-
-    - *roman*: *True*, if the units should be typeset in Roman text (rather
-      than italics)
-
-    **Examples:**
-
-       >>> label_number("Mobility", "m2/(V.s)", roman=True)
-       'Mobility$\\,/\\,\\mathrm{m^{2}\\,V^{-1}\\,s^{-1}}$'
-
-       in LaTeX_: Mobility :math:`\,/\,\mathrm{m^{2}\,V^{-1}\,s^{-1}}`
-
-       >>> label_number("Mole fraction", "1")
-       'Mole fraction'
-
-    .. _Modelica: http://www.modelica.org/
-    """
-    if unit in ['degC', 'degF', 'kPag']:
-        per = "\,$in$\,"
-    unit = unit.replace('degC', '^\circ\!C')
-    unit = unit.replace('degF', '^\circ\!F')
-    return texunit.label_number(quantity, unit, times, per, roman)
+SI_prefixes = dict(Y=1e24, # yotta
+                   Z=1e21, # zetta
+                   E=1e18, # exa
+                   P=1e15, # peta
+                   T=1e12, # tera
+                   G=1e9, # giga
+                   M=1e6, # mega
+                   k=1e3, # kilo
+                   h=100, # hecto
+                   da=10, # deca
+                   d=0.1, # deci
+                   c=0.01, # centi
+                   m=1e-3, # milli
+                   u=1e-6, # micro
+                   n=1e-9, # nano
+                   p=1e-12, # pico
+                   f=1e-15, # femto
+                   a=1e-18, # atto
+                   z=1e-21, # zepto
+                   y=1e-24) # yocto
 
 
 class SimRes(SimRes):
@@ -124,12 +93,10 @@ class SimRes(SimRes):
         # Functions for units that involve offsets or more complex mappings
         # See "Conversions with offsets" in FCSys/Units.mos.
         self._to_unit = {
-            # From thermodynamic temperature to degC
-            'degC': lambda x: x/self._unitval('K') - 273.15,
-            # From thermodynamic temperature to degF
-            'degF': lambda x: (9/5.0)*(x/self._unitval('K') - 273.15) + 32,
-            # From absolute pressure to kPag
-            'kPag': lambda x: x/self._unitval('kPa') - 101.325,
+            'degC': lambda x: x/self._unitvalue('K') - 273.15,
+            'degF': lambda x: (9/5.0)*(x/self._unitvalue('K') - 273.15) + 32,
+            'kPag': lambda x: x/self._unitvalue('kPa') - 101.325,
+            'Pag': lambda x: x/self._unitvalue('Pa') - 101325,
             }
         # TODO: Add special scaling for the der() function
 
@@ -186,9 +153,9 @@ class SimRes(SimRes):
         raise AttributeError("'SimRes' object has no attribute "
                              "'get_displayUnit'.  Use 'get_unit' instead." )
 
-    def _unitval(self, unit):
-        """Convert a Modelica_ unit string to a numeric value using the base
-        constants and units.
+    def _unitvalue(self, unit):
+        """Convert a Modelica_ unit string to a numeric value using the values
+        of base the constants and units.
 
         For example, "m/s2" becomes m/s^2, where m and s are the values of keys
         'm' and 's' in the internal *U* dictionary.
@@ -204,46 +171,49 @@ class SimRes(SimRes):
                 enclosed in parentheses and begins with '/'.  Exponents
                 directly follow the significand (e.g., no carat ('^')).
         """
-        def _simple_unitval(unit):
+        splitter = re.compile('([^0-9+-]*)(.*)')
+
+        def _process_unit(unit):
+            """Convert a simple Modelica_ unit to LaTeX.
+            """
+            if unit.isdigit():
+                return 1
+            base, exponent = splitter.match(unit).groups()
+            try:
+                base = self.U[base]
+            except KeyError:
+                try:
+                    base = SI_prefixes[base[0]]*self.U[base[1:]]
+                except KeyError:
+                    print("The unit group %s is not recognized.  "
+                          "It will be skipped." % unit)
+            return base**int(exponent) if exponent else base
+
+        def _process_group(unit):
             """Convert the numerator or denominator of a unit string to a
             number.
             """
-            import re
+            if unit.startswith('('):
+                assert unit.endswith(')'), ("The unit group %s starts with '(' but "
+                                            "does not end with ')'." % unit)
+                unit = unit[1:-1]
+            val = 1
+            for u in unit.split('.'):
+                val *= _process_unit(u)
+            return val
 
-            if unit == '1':
-                return 1
-
-            # Multiply the parts.
-            unitval = 1
-            r = re.compile("([A-Za-z]+)([+-]?[0-9]*)")
-            for part in unit.split('.'):
+        if unit:
+            # Split the numerator and the denominator.
+            if '/' in unit:
                 try:
-                    base, exponent = r.match(part).groups()
-                    base = self.U[base]
-                    unitval *= base if exponent == '' else base**int(exponent)
-                except (KeyError, AttributeError):
-                    print('Unit substring "%s" is not recognized.  '
-                          'It will be skipped.' % part)
-            return unitval
-
-        # Split the numerator and the denominator (if present).
-        parts = unit.split('/')
-        if len(parts) > 2:
-            print('Unit string "%s" has more than one division sign.' % unit)
-
-        # Remove parentheses.
-        for i in range(len(parts)):
-            while parts[i].startswith('('):
-                if parts[i].endswith(')'):
-                    parts[i] = parts[i][1:-1]
-                else:
-                    print('Group "%s" in unit string "%s" begins with "(" but '
-                          'does not end with ")".' % (parts[i], unit))
-                    parts[i] = parts[i][1::]
-        unitval = _simple_unitval(parts[0])
-        for part in parts[1::]:
-            unitval /= _simple_unitval(part)
-        return unitval
+                    numer, denom = unit.split('/')
+                except ValueError:
+                    print("Check that the unit string %s has at most one "
+                          "division sign." % unit)
+                return _process_group(numer)/_process_group(denom)
+            else:
+                return _process_group(unit)
+        return 1
 
     def to_unit(self, unit):
         """Return a function to display a quantity in a unit.
@@ -290,7 +260,7 @@ class SimRes(SimRes):
             return self._to_unit[unit]
         except KeyError:
             # The unit is just a scaling factor.
-            return lambda x: x/self._unitval(unit)
+            return lambda x: x/self._unitvalue(unit)
 
     def plot(self, ynames1=[], ylabel1=None, yunit1=None, legends1=[],
              leg1_kwargs={'loc': 'best'}, ax1=None,
@@ -451,7 +421,8 @@ class SimRes(SimRes):
                 if yunit is None:
                     # Use the unit of the 1st variable.
                     yunit = self.get_unit(ynames[0])
-                ylabel = label_number(ylabel, yunit)
+                if ylabel <> "":
+                    ylabel = label_number(ylabel, yunit)
 
             return ylabel, yunit, legends
 
@@ -476,7 +447,8 @@ class SimRes(SimRes):
             # "Time in", which isn't good.
         if xunit is None:
             xunit = self.get_unit(xname)
-        xlabel = label_number(xlabel, xunit)
+        if xlabel<> "":
+            xlabel = label_number(xlabel, xunit)
 
         # Generate the y-axis labels and sets of legend entries.
         ylabel1, yunit1, legends1 = _ystrings(ynames1, ylabel1, yunit1, legends1)
@@ -484,7 +456,7 @@ class SimRes(SimRes):
 
         # Read the data.
         if xname == 'Time':
-            t_scale = lambda t: t*self._unitval('s')/self._unitval(xunit)
+            t_scale = lambda t: t*self._unitvalue('s')/self._unitvalue(xunit)
             y_1 = self.get_values(ynames1, f=self.to_unit(yunit1))
             y_2 = self.get_values(ynames2, f=self.to_unit(yunit2))
         else:
@@ -575,8 +547,7 @@ class SimRes(SimRes):
         # Mathematical constants
         from math import acos, exp
         pi = 2*acos(0)
-        e = exp(1)
-        self.U = dict(pi=pi, e=e)
+        self.U = dict(pi=pi)
 
         # Base constants and units
         record += '.'
@@ -620,33 +591,6 @@ class SimRes(SimRes):
         kg = J/Gy
         self.U.update(V=V, A=A, C=C, J=J, Gy=Gy, kg=kg)
 
-        # SI prefixes [BIPM2006, Table 5]
-        yotta = 1e24,
-        zetta = 1e21
-        exa = 1e18
-        peta = 1e15
-        tera = 1e12
-        giga = 1e9
-        mega = 1e6
-        kilo = 1e3
-        hecto = 1e2
-        deca = 1e1
-        deci = 1e-1
-        centi = 1e-2
-        milli = 1e-3
-        micro = 1e-6
-        nano = 1e-9
-        pico = 1e-12
-        femto = 1e-15
-        atto = 1e-18
-        zepto = 1e-21
-        yocto = 1e-24
-        self.U.update(yotta=yotta, zetta=zetta, exa=exa, peta=peta, tera=tera,
-                      giga=giga, mega=mega, kilo=kilo, hecto=hecto ,deca=deca,
-                      deci=deci, centi=centi, milli=milli, micro=micro,
-                      nano=nano, pico=pico, femto=femto, atto=atto,
-                      zepto=zepto, yocto=yocto)
-
         # Coherent derived units in the SI with special names and symbols
         cyc = 2*pi*rad
         Hz = cyc/s
@@ -663,7 +607,7 @@ class SimRes(SimRes):
         Bq = Hz
         Sv = Gy
         kat = mol/s
-        g = kg/kilo
+        g = 0.001*kg
         self.U.update(cyc=cyc, Hz=Hz, sr=sr, N=N, Pa=Pa, W=W, F=F, ohm=ohm,
                       H=H,  T=T, lm=lm, lx=lx, Bq=Bq, Sv=Sv, kat=kat, g=g)
 
@@ -672,7 +616,7 @@ class SimRes(SimRes):
         hr = 60*minute
         day = 24*hr
         degree = 2*pi*rad/360
-        L = (deci*m)**3
+        L = (0.1*m)**3
         self.U.update(minute=minute, hr=hr, day=day, degree=degree, L=L)
 
         # Derived physical constants
@@ -707,25 +651,16 @@ class SimRes(SimRes):
 
         # Selected other non-SI units from [BIPM2006, Table 8]
         bar = 1e5*Pa
-        angstrom = 0.1*nano*m
+        angstrom = 1e-10*m
         self.U.update(bar=bar, angstrom=angstrom)
 
         # Additional units that are useful for fuel cells
-        atm=101325*Pa
-        kPa = kilo*Pa
-        kJ=kilo*J
-        cm = centi*m
-        mm = milli*m
-        um = micro*m
-        percent = centi
-        M=mol/L
-        cc=cm**3
-        ms=milli*s
-        mmol=milli*mol
-        umol=micro*mol
-        self.U.update(atm=atm, kPa=kPa, cm=cm, kJ=kJ, mm=mm, um=um, M=M, cc=cc,
-                      ms=ms, mmol=mmol, umol=umol)
-        self.U.update({'%': percent})
+        atm = 101325*Pa
+        M = mol/L
+        cc = (0.01*m)**3
+        yr = 365.25*day
+        self.U.update(atm=atm, cc=cc, yr=yr)
+        self.U.update({'%': 0.01})
 
 
 class Info:

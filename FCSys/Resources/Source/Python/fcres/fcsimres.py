@@ -21,11 +21,6 @@ from modelicares import (figure, unit2tex, label_number, label_quantity,
 from modelicares.base import flatten_list, get_pow10, convert
 from simres import SimRes
 
-# Create a container class for conditions to display in the subtitles.
-Conditions = namedtuple('Conditions',
-    ['cell_temp', 'composition', 'pressure', 'humidity', 'inlet_temp', 'flow'])
-
-
 class FCSimRes(SimRes):
     """Fuel cell simulation results from FCSys_ and methods to analyze those
     results
@@ -1035,67 +1030,114 @@ class FCSimRes(SimRes):
         self.subregions = presuffix(self.rel_subregions, prefix=cell)
 
 
-def gen_subtitle_conditions(params, details):
-    """Create a description of the operating conditions (to be used as a
+def gen_subtitle_conditions(conditions, temp=True, composition=True,
+                            pressure=True, humidity=True, flow=True):
+    r"""Create a description of the operating conditions (e.g., to be used as a
     subtitle).
 
-    params: TODO
-    details: TODO
+    **Arguments:**
+
+    - *conditions*: Dictionary of operating conditions
+
+         The dictionary may include the keys *T*, *p_an_out*, *p_ca_out*,
+         *n_O2*, *p_an_out*, *p_ca_out*, *T_an_in*, *T_ca_out*, *anInletRH*,
+         *caInletRH*, *anStoich*, and *caStoich*.  Any entry is missing, it will
+         not be exclued.  Each entry is a tuple of (number, unit string) that
+         describes a condition.
+
+    - *temp*: *True*, if temperature should be included in the description
+
+    - *composition*: *True*, if composition should be included in the
+      description
+
+    - *pressure*: *True*, if pressure should be included in the description
+
+    - *humidity*: *True*, if humidity should be included in the description
+
+    - *flow*: *True*, if the flow conditions (stoichiometry) should be included
+      in the description
+
+    **Example:**
+
+       >>> conditions = dict(T = (60, 'degC'),
+       ...                   p_an_out = (150, 'kPa'),
+       ...                   p_ca_out = (150, 'kPa'),
+       ...                   n_O2 = (21, '%'),
+       ...                   anInletRH = (80, '%'),
+       ...                   caInletRH = (50, '%'),
+       ...                   anStoich = (1.5, '1'),
+       ...                   caStoich = (2.0, '1'))
+       >>> gen_subtitle_conditions(conditions)
+       '60$\\,^{\\circ}\\!C$, 150$\\,kPa$; An|Ca: $H_2$|Air, 80|50$\\!$$\\,\\%$$\\,$RH, 1.5|2.0$\\,$stoich'
     """
-    # TODO: Test and get this working.
-    desc = ''
-    needs_sep = False
-    if details.cell_temp:
-        desc += ('Cell: %s' % label_quantity(convert(params['T_cell']),
-                                             params['T_cell'].unit,
-                                             format='%.0f'))
-        needs_sep = True
-    if (details.composition or details.pressure or details.inlet_temp
-        or details.humidity or idetails.humidity):
-        desc += ('; ' if needs_sep else '') + 'An.|Ca.: '
-        needs_sep = False
-    if details.composition:
-        desc += ', ' if needs_sep else ''
-        if (params['anSource.Y_H2Dry'].number == 1.0
-            and (params['caSource.Y_O2Dry'].number == 1.0 or
-                 params['caSource.Y_O2Dry'].number == 0.21)):
-            if params['caSource.Y_O2Dry'].number == 1.0:
-                desc += '$H_2$|$O_2$'
+    # Main description
+    main_desc = []
+    if temp:
+        try:
+            main_desc += [label_quantity(*conditions['T'], format='%.0f')]
+        except KeyError:
+            pass
+    try:
+        if pressure and conditions['p_an_out'] == conditions['p_ca_out']:
+            main_desc += [label_quantity(*conditions['p_an_out'], format='%.0f')]
+            pressure = False
+    except KeyError:
+        pass
+    main_desc = ", ".join(main_desc)
+
+    # Anode/cathode description
+    anca_desc = []
+    if composition:
+        try:
+            if conditions['n_O2'][0] == 1.0:
+                anca_desc += ['$H_2$|$O_2$']
             else:
-                desc += '$H_2$|Air'
-        else:
-            desc += (label_quantity(convert(params['anSource.Y_H2Dry']),
-                     params['anSource.Y_H2Dry'].unit, format='%.0f') +
-                     ' $H_2$|' +
-                     label_quantity(convert(params['caSource.Y_O2Dry']),
-                                    params['caSource.Y_O2Dry'].unit,
-                                    format='%.0f') +
-                     ' $O_2$')
-        needs_sep = True
-    if details.pressure:
-        desc += ((', ' if needs_sep else '') +
-                 label_quantity(convert(params['anSink.P']), format='%.1f') +
-                 '|' + label_quantity(convert(params['caSink.P']),
-                 params['anSink.P'].unit, format='%.1f'))
-        needs_sep = True
-    if details.inlet_temp:
-        desc += ((', ' if needs_sep else '') +
-                 label_quantity(convert(params['anSource.T']), format='%.0f') +
-                 '|' + label_quantity(convert(params['caSource.T']),
-                 params['caSource.T'].unit, format='%.0f'))
-        needs_sep = True
-    if details.humidity:
-        desc += ((', ' if needs_sep else '') +
-                 label_quantity(convert(params['anSource.RH']), format='%.0f')
-                 + '|' + label_quantity(convert(params['caSource.RH']),
-                 params['caSource.RH'].unit, format='%.0f'))
-        needs_sep = True
-    if details.flow:
-        desc += ((', ' if needs_sep else '') +
-                 label_quantity(convert(params['anSource.SR']), format='%.1f')
-                 + '|' + label_quantity(convert(params['caSource.SR']),
-                 params['caSource.SR'].unit, format='%.1f'))
-    return desc
+                anca_desc += ['$H_2$|Air']
+        except KeyError:
+            pass
+    if pressure:
+        try:
+            anca_desc += ['%s|%s' % (label_quantity(conditions['p_an_out'][0],
+                                                    format='%.1f'),
+                                     label_quantity(*conditions['p_ca_out'],
+                                                    format='%.1f'))]
+        except KeyError:
+            pass
+    try:
+        if (temp and (conditions['T'] <> conditions['T_an_in']
+                      or conditions['T'] <> conditions['T_ca_in'])):
+            anca_desc += ['%s|%s' % (label_quantity(conditions['T_an_in'][0],
+                                                    format='%.0f'),
+                                     label_quantity(*conditions['T_ca_in'],
+                                                    format='%.0f'))]
+    except KeyError:
+        pass
+    if humidity:
+        try:
+            anca_desc += ['%s|%s$\,$RH' % (label_quantity(conditions['anInletRH'][0],
+                                                       format='%.0f'),
+                                        label_quantity(*conditions['caInletRH'],
+                                                       format='%.0f$\!$'))]
+        except KeyError:
+            pass
+    if flow:
+        try:
+            anca_desc += ['%s|%sstoich' % (label_quantity(conditions['anStoich'][0],
+                                                          format='%.1f'),
+                                           label_quantity(*conditions['caStoich'],
+                                                          format='%.1f'))]
+        except KeyError:
+            pass
+    anca_desc = ", ".join(anca_desc)
+    if anca_desc:
+        anca_desc = "An|Ca: " + anca_desc
+
+    # Finish.
+    if not anca_desc:
+        return main_desc
+    if not main_desc:
+        return anca_desc
+    return main_desc + "; " + anca_desc
 
 def presuffix(items, prefix='', suffix=''):
     """Add a prefix and/or suffix to every entry in a list.
@@ -1123,74 +1165,6 @@ def presuffix(items, prefix='', suffix=''):
             return [prefix + item + suffix for item in items]
         else:
             return [presuffix(item, prefix, suffix) for item in items]
-
-def multiload(location):
-    """Load multiple FCSys_ cell simulation and/or linearization results.
-
-    **Arguments:**
-
-    - *location*: Input directory, filename, or list of filenames
-
-    **Returns:**
-
-    1. List of cell simulations (:class:`FCSimRes` instances)
-
-    2. List of cell linearizations (:class:`FCSimRes` instances)
-
-    Either list may be empty.
-    """
-    # If updates are made here, consider also making them in modelicares.
-
-    from glob import glob
-
-    # Interpret the arguments.
-    sims = [] # Simulation results
-    lins = [] # Linearization results
-    if type(location) is list:
-        fnames = location
-    else:
-        try: # Assume the location is a directory.
-            # Generate a list of files in the directory.
-            fnames = glob(os.path.join(location, '*.mat'))
-            fnames = [os.path.join(location, fname) for fname in fnames]
-        except:
-            print("Unrecognized location")
-            raise
-
-    # Load the files.
-    for fname in fnames:
-        try:
-            sims.append(FCSimRes(fname))
-            print('Cell simulation results have been loaded from "%s".' %
-                  fname)
-        except:
-            try:
-                lins.append(CellLinRes(fname))
-                print('Linearization results have been loaded from "%s".' %
-                      fname)
-            except:
-                print('Could not load cell simulation or linearization data '
-                      'from "%s".  It will be skipped.' % fname)
-    return sims, lins
-
-def multi_plotfig(sims):
-    """Plot a property across a list of simulations.
-
-    **Arguments:**
-
-    - *sims*: List of simulations
-    """
-    # TODO: Get this working.
-    fig = plt.figure()
-    #plt.setp(fig, 'label', fname)
-    ax = fig.add_subplot(111)
-    for sim in sims:
-        sim.plotfig_subregions(ax=ax, prefix=True)
-        #xy(title=title, fname=fname,
-        #   ynames1=presuffix(self.storage_names,
-        #                      suffix='.H2OCond.H2OlProps.T'),
-        #   ylabel1="Temperature", legends1=self.storage_names, ax="1")
-        #show()
 
 if __name__ == '__main__':
     """Test the contents of this file."""

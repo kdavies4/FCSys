@@ -15,7 +15,7 @@ import Q = FCSys.Quantities;
 
 // Enumerations
 import FCSys.BaseClasses.Axis;
-import FCSys.BaseClasses.Orientation;
+import FCSys.BaseClasses.Orient;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;

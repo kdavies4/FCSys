@@ -269,9 +269,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top2;
 
@@ -731,12 +731,14 @@ An unrelated species may be included.");
         "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
         import Modelica.Math.log;
         extends Modelica.Icons.Function;
+
         input Real x "Argument";
         input Real a[:] "Coefficients";
         input Integer n=0
           "Power associated with the first term (before integral)";
         input Real dx "Derivative of argument";
-        input Real da[size(a, 1)] "Derivatives of coefficients";
+        input Real da[size(a, 1)]=zeros(size(a, 1))
+          "Derivatives of coefficients";
         output Real dF "Derivative";
 
       algorithm
@@ -812,7 +814,8 @@ An unrelated species may be included.");
         input Integer n=0
           "Power associated with the first term (before derivative)";
         input Real dx "Derivative of argument";
-        input Real da[size(a, 1)] "Derivatives of coefficients";
+        input Real da[size(a, 1)]=zeros(size(a, 1))
+          "Derivatives of coefficients";
         output Real df "Derivative";
 
       algorithm
@@ -835,9 +838,11 @@ An unrelated species may be included.");
         input Integer n=0
           "Power associated with the first term (before derivative)";
         input Real dx "Derivative of argument";
-        input Real da[size(a, 1)] "Derivatives of coefficients";
+        input Real da[size(a, 1)]=zeros(size(a, 1))
+          "Derivatives of coefficients";
         input Real d2x "Second derivative of argument";
-        input Real d2a[size(a, 1)] "Second derivatives of coefficients";
+        input Real d2a[size(a, 1)]=zeros(size(a, 1))
+          "Second derivatives of coefficients";
         output Real d2f "Second derivative";
 
       algorithm
@@ -1232,15 +1237,15 @@ An unrelated species may be included.");
       x "X",
       y "Y",
       z "Z") "Enumeration for Cartesian axes";
-  type Orientation = enumeration(
-      normal "Along the normal axis",
-      following "Along axis following normal axis in Cartesian coordinates",
-      preceding "Along axis preceding normal axis in Cartesian coordinates")
+  type Orient = enumeration(
+      normal "Normal axis",
+      after "Axis following the normal axis in Cartesian coordinates",
+      before "Axis preceding the normal axis in Cartesian coordinates")
     "Enumeration for orientations relative to a face" annotation (Documentation(
         info="
-    <html><p><code>Orientation.following</code> indicates the axis following the face-normal axis
+    <html><p><code>Orient.after</code> indicates the axis following the face-normal axis
     in Cartesian coordinates (x, y, z).
-    <code>Orientation.preceding</code> indicates the axis preceding the face-normal axis
+    <code>Orient.before</code> indicates the axis preceding the face-normal axis
     in Cartesian coordinates (or following it twice).</p></html>"));
   type Side = enumeration(
       n "Negative",
