@@ -1350,10 +1350,14 @@ package Subregions
   end Examples;
 
   model Subregion "Subregion with all phases"
+    import Modelica.Constants.eps;
     extends FCSys.Subregions.BaseClasses.EmptySubregion(final hasSpecies=gas.n_spec
            + graphite.n_spec + ionomer.n_spec + liquid.n_spec > 0);
 
-    parameter Q.NumberAbsolute k_gl=5 "Coupling factor between gas and liquid";
+    parameter Q.NumberAbsolute k_gl=eps
+      "Additional coupling factor between gas and liquid";
+    parameter Q.NumberAbsolute k_graphitel=eps
+      "Additional coupling factor between graphite and liquid";
     // **Add Dymola labels and Dialog groups for all k_* parameters here and elsewhere
 
     FCSys.Phases.Gas gas(
@@ -1368,8 +1372,8 @@ package Subregions
 
     FCSys.Phases.Graphite graphite(
       final n_faces=n_faces,
-      n_inter=1,
-      k_inter={k_DE},
+      n_inter=2,
+      k_inter={k_DE,k_graphitel},
       final inclHOR=inclHOR,
       final inclORR=inclORR) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
@@ -1386,8 +1390,8 @@ package Subregions
 
     FCSys.Phases.Liquid liquid(
       final n_faces=n_faces,
-      n_inter=2,
-      k_inter={k_DE,k_gl}) "Liquid" annotation (Dialog(group=
+      n_inter=3,
+      k_inter={k_DE,k_gl,k_graphitel}) "Liquid" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
 
@@ -1454,6 +1458,14 @@ package Subregions
     if gas.n_spec > 0 and liquid.n_spec > 0 then
       connect(gas.inert[2], liquid.inert[2]) annotation (Line(
           points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.7},{9.8,-4.7}},
+          color={0,0,255},
+          smooth=Smooth.None));
+    end if;
+    //
+    // Graphite-liquid
+    if graphite.n_spec > 0 and liquid.n_spec > 0 then
+      connect(graphite.inert[2], liquid.inert[3]) annotation (Line(
+          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.86667},{9.8,-4.86667}},
           color={0,0,255},
           smooth=Smooth.None));
     end if;
@@ -1766,10 +1778,14 @@ package Subregions
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
+    import Modelica.Constants.eps;
     extends FCSys.Subregions.BaseClasses.EmptySubregion(final hasSpecies=gas.n_spec
            + graphite.n_spec + liquid.n_spec > 0);
 
-    parameter Q.NumberAbsolute k_gl=5 "Coupling factor between gas and liquid";
+    parameter Q.NumberAbsolute k_gl=eps
+      "Additional coupling factor between gas and liquid";
+    parameter Q.NumberAbsolute k_graphitel=eps
+      "Additional coupling factor between graphite and liquid";
 
     FCSys.Phases.Gas gas(
       inclH2O=true,
@@ -1782,16 +1798,16 @@ package Subregions
               {10,10}})));
     FCSys.Phases.Graphite graphite(
       final n_faces=n_faces,
-      n_inter=1,
-      k_inter={k_DE},
+      n_inter=2,
+      k_inter={k_DE,k_graphitel},
       final inclHOR=false,
       final inclORR=false) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
     FCSys.Phases.Liquid liquid(
       final n_faces=n_faces,
-      n_inter=2,
-      k_inter={k_DE,k_gl}) "Liquid" annotation (Dialog(group=
+      n_inter=3,
+      k_inter={k_DE,k_gl,k_graphitel}) "Liquid" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
 
@@ -1818,6 +1834,24 @@ package Subregions
         color={38,196,52},
         smooth=Smooth.None,
         thickness=0.5));
+
+    // Additional coupling
+    // -------------------
+    // Gas-liquid
+    if gas.n_spec > 0 and liquid.n_spec > 0 then
+      connect(gas.inert[2], liquid.inert[2]) annotation (Line(
+          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.2},{9.8,-4.2}},
+          color={0,0,255},
+          smooth=Smooth.None));
+    end if;
+    //
+    // Graphite-liquid
+    if graphite.n_spec > 0 and liquid.n_spec > 0 then
+      connect(graphite.inert[2], liquid.inert[3]) annotation (Line(
+          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.86667},{9.8,-4.86667}},
+          color={0,0,255},
+          smooth=Smooth.None));
+    end if;
 
     // Phases
     // ------

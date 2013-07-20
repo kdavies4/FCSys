@@ -126,6 +126,10 @@ package Phases "Mixtures of species"
             extent={{-50,40},{-30,60}}), iconTransformation(extent={{-110,-52},
               {-90,-32}})));
 
+    // Auxiliary variables (for analysis)
+    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = dalton.p
+      "Total thermoynamic pressure";
+
   equation
     // Phase change
     connect(physical.H2O, H2O.physical) annotation (Line(
@@ -379,6 +383,7 @@ package Phases "Mixtures of species"
 
       Diagram(graphics),
       Icon(graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"

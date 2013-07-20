@@ -361,8 +361,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
             "Regions.Examples.FPToFP.mos"),
         experiment(
-          StopTime=110,
-          Tolerance=1e-06,
+          StopTime=210,
+          Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
@@ -871,8 +871,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       connect(PEM.xPositive, caBC.face) annotation (Line(
-          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,
-              -3.65701e-16}},
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,-3.65701e-16},{20,-3.65701e-16}},
+
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1132,10 +1132,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
             inclTransY=true,
             inclTransZ=false,
             k_DE=1e-3,
+            k_gl=5,
+            k_graphitel=5,
             gas(
               reduceTrans=true,
               reduceThermal=true,
-              k_DT={10,1,1},
+              k_DT={30,1,1},
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1158,11 +1160,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT={10,1,1},
               H2O(
-                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/(300*U.K))*
-                    FCSys.Characteristics.H2O.Liquid.tauprime()/1e-5,
+                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/environment.T)*
+                    FCSys.Characteristics.H2O.Liquid.tauprime()/1e-3,
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
                 N_IC=Modelica.Constants.small,
@@ -1182,12 +1184,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
             __Dymola_label="<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
-      output Q.NumberAbsolute RH[n_x, n_y, n_z](
-        each stateSelect=StateSelect.never,
-        each displayUnit="%") =
-        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
-        hasSubregions "Relative humidity";
+      output Q.PressureAbsolute p_ny[n_x, n_z](each stateSelect=StateSelect.never)
+         = subregions[:, 1, :].gas.H2.p_faces[2, Side.n] + subregions[:, 1, :].gas.H2O.p_faces[
+        2, Side.n] "Total thermoynamic pressure at the negative-y boundary";
+      output Q.PressureAbsolute p_py[n_x, n_z](each stateSelect=StateSelect.never)
+         = subregions[:, 1, :].gas.H2.p_faces[2, Side.p] + subregions[:, 1, :].gas.H2O.p_faces[
+        2, Side.p] "Total thermoynamic pressure at the positive-y boundary";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -1247,7 +1249,6 @@ As an approximation, it should be equal to product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels, and</li>
 <li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
 </ol>
-The default is 10.
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
 the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
 area of the channel (also in the xz plane). This should be taken into account when setting 
@@ -1461,17 +1462,9 @@ text layer of this model.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Volumetric porosity"
-        annotation (Dialog(group="Geometry",__Dymola_label=
-              "<html>&epsilon;</html>"));
-
-      // Auxiliary variables (for analysis)
-      output Q.NumberAbsolute RH[n_x, n_y, n_z](
-        each stateSelect=StateSelect.never,
-        each displayUnit="%") =
-        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
-        hasSubregions "Relative humidity";
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
+        "Volumetric porosity" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -1485,8 +1478,7 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.8</code>) is that of SGL Carbon Group Sigracet&reg; 25 BC GDL.  
-It is lower than the porosity of a Sigracet&reg; 10 BA or 25 BC (0.88).  
+<p>The default porosity (<code>epsilon = 0.88</code>) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
 The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
 [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
 that reference may be outdated.
@@ -1845,7 +1837,7 @@ that reference may be outdated.
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.35
         "Volumetric porosity" annotation (Dialog(group="Geometry",
             __Dymola_label="<html>&epsilon;</html>"));
 
@@ -1853,14 +1845,6 @@ that reference may be outdated.
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
         annotation (Dialog(tab="Initialization",__Dymola_label=
               "<html>&lambda;<sub>IC</sub></html>"));
-
-      // Auxiliary variables (for analysis)
-      output Q.NumberAbsolute RH[n_x, n_y, n_z](
-        each stateSelect=StateSelect.never,
-        each displayUnit="%") =
-        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
-        hasSubregions "Relative humidity";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -2388,7 +2372,7 @@ the z axis extends across the width of the channel.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.25
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.35
         "Volumetric porosity" annotation (Dialog(group="Geometry",
             __Dymola_label="<html>&epsilon;</html>"));
 
@@ -2397,12 +2381,6 @@ the z axis extends across the width of the channel.</p>
         annotation (Dialog(tab="Initialization",__Dymola_label=
               "<html>&lambda;<sub>IC</sub></html>"));
       // Auxiliary variables (for analysis)
-      output Q.NumberAbsolute RH[n_x, n_y, n_z](
-        each stateSelect=StateSelect.never,
-        each displayUnit="%") =
-        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
-        hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
         if environment.analysis and hasSubregions "Dry-gas concentration of O2";
@@ -2549,6 +2527,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2641,9 +2620,9 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Volumetric porosity"
-        annotation (Dialog(group="Geometry",__Dymola_label=
-              "<html>&epsilon;</html>"));
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
+        "Volumetric porosity" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
       output Q.NumberAbsolute RH[n_x, n_y, n_z](
@@ -2669,8 +2648,7 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.8</code>) is that of SGL Carbon Group Sigracet&reg; 25 BC GDL.  
-It is lower than the porosity of a Sigracet&reg; 10 BA or 25 BC (0.88).  
+<p>The default porosity (<code>epsilon = 0.88</code>) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
 The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
 [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
 that reference may be outdated.
@@ -2988,10 +2966,12 @@ that reference may be outdated.
             inclTransY=true,
             inclTransZ=false,
             k_DE=3e-4,
+            k_gl=5,
+            k_graphitel=5,
             gas(
               reduceTrans=true,
               reduceThermal=true,
-              k_DT={10,1,1},
+              k_DT={30,1,1},
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -3025,7 +3005,7 @@ that reference may be outdated.
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
-                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/(300*U.K))*
+                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/environment.T)*
                     FCSys.Characteristics.H2O.Liquid.tauprime()/3e-4,
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
@@ -3045,15 +3025,17 @@ that reference may be outdated.
             __Dymola_label="<html>&epsilon;</html>"));
 
       // Auxiliary variables (for analysis)
-      output Q.NumberAbsolute RH[n_x, n_y, n_z](
-        each stateSelect=StateSelect.never,
-        each displayUnit="%") =
-        Modelica.Media.Air.MoistAir.saturationPressureLiquid(subregions.gas.H2O.T
-        /U.K) ./ subregions.gas.dalton.p if environment.analysis and
-        hasSubregions "Relative humidity";
       output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N)
         if environment.analysis and hasSubregions "Dry-gas concentration of O2";
+      output Q.PressureAbsolute p_ny[n_x, n_z](each stateSelect=StateSelect.never)
+         = subregions[:, 1, :].gas.H2O.p_faces[2, Side.n] + subregions[:, 1, :].gas.N2.p_faces[
+        2, Side.n] + subregions[:, 1, :].gas.O2.p_faces[2, Side.n]
+        "Total thermoynamic pressure at the negative-y boundary";
+      output Q.PressureAbsolute p_py[n_x, n_z](each stateSelect=StateSelect.never)
+         = subregions[:, 1, :].gas.H2O.p_faces[2, Side.p] + subregions[:, 1, :].gas.N2.p_faces[
+        2, Side.p] + subregions[:, 1, :].gas.O2.p_faces[2, Side.p]
+        "Total thermoynamic pressure at the positive-y boundary";
 
     protected
       final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
@@ -3083,7 +3065,6 @@ generally be greater than one because the fluid is not transported along the ent
 As an approximation, it should be equal to product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels, and</li>
 <li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
-The default is 10.
 </ol>
 <li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
 the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional

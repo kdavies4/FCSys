@@ -1084,6 +1084,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
   model Species
     "Model to exchange, transport, and store the material, momentum, and energy of one species"
+    //import splice = Modelica.Media.Air.MoistAir.Utilities.spliceFunction;
     import FCSys.BaseClasses.Utilities.cartWrap;
     import FCSys.BaseClasses.Utilities.inSign;
     import FCSys.BaseClasses.Utilities.Delta;
@@ -1390,7 +1391,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     // others are infinite)
     output Q.TimeAbsolute tau_NE(
       stateSelect=StateSelect.never,
-      start=U.s) = kappa*tauprime*exp((chemical.mu - g0)/T)*T/v if environment.analysis
+      start=U.s) = kappa*tauprime*exp(chemical.mu/T)*T/v if environment.analysis
       "Time constant for phase change";
     output Q.TimeAbsolute tau_PhiE(
       stateSelect=StateSelect.never,
@@ -1630,11 +1631,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       ");
 
     // Additional aliases (for common terms)
-    Q.Potential g0(
-      nominal=U.V,
-      final start=g_IC,
-      final fixed=false,
-      stateSelect=StateSelect.never) "Gibbs potential at reference pressure";
     Q.Force faces_mPhidot[n_faces, Side, 2] "Directly-calculated shear forces";
     Q.Velocity phi_actual_chemical[n_trans] "Velocity of the chemical stream";
     Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
@@ -1787,6 +1783,7 @@ Choose any condition besides None.");
     p = dalton.p;
     V = dalton.V;
     v*N = V;
+    h = chemical.mu + chemical.sT;
     M = Data.m*N;
     phi = inertDirect.translational.phi;
     I .* L[cartTrans] = N*phi;
@@ -1806,21 +1803,25 @@ Choose any condition besides None.");
     end if;
     h = Data.h(T, p);
     s = Data.s(T, p);
-    //g0 = Data.g(T, Data.p0);
-    g0 = FCSys.Characteristics.H2O.Gas.g() "**remove";
 
     // Diffusive exchange
-    chemical.mu = h - chemical.sT "Reaction (rate equation elsewhere)";
+    // ------------------
+    // Material via phase change
     if tauprime > 0 then
-      tauprime*physical.Ndot = k_N*N*(exp(physical.mu/T) - exp(chemical.mu/T))
-        "Phase change";
-      // **factor g0 into tauprime.
+      /* tauprime*physical.Ndot = splice(
+      k_N*N*(exp(physical.mu/T) - exp(chemical.mu/T)),
+      V*1e-4*U.C/U.cc,
+      N,
+      V*1e-4*U.C/U.cc)"Spliced to prevent chattering";*/
+      tauprime*physical.Ndot = k_N*N*(exp(physical.mu/T) - exp(chemical.mu/T));
     else
       physical.mu = chemical.mu;
       // This avoids nonlinear equations when tauprime = 0.  Dymola 7.4 can't
       // derive it symbolically from the previous equation.
     end if;
-
+    //
+    // Material via reaction: Determined by the Reaction model.
+    //
     // Translational momentum
     for i in 1:n_trans loop
       mu*inertInter.mPhidot[i] = k_inter*N .* (inertInter.phi[i] - fill(phi[i],
@@ -1828,7 +1829,7 @@ Choose any condition besides None.");
       mu*inertIntra.mPhidot[i] = k_intra*N .* (inertIntra.phi[i] - fill(phi[i],
         n_intra));
     end for;
-
+    //
     // Thermal energy
     nu*inertInter.Qdot = k_inter*N .* (inertInter.T - fill(T, n_inter));
     nu*inertIntra.Qdot = k_intra*N .* (inertIntra.T - fill(T, n_intra));

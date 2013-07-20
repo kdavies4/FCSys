@@ -7549,24 +7549,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics={
-              Rectangle(
-                extent={{-160,112},{160,152}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,
-                    -160},{-160,60}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-160,112},{160,152}},
-                textString="%name",
-                lineColor={0,0,0})}),
+                  160,160}}), graphics={Rectangle(
+                      extent={{-160,112},{160,152}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},
+                  {-160,-160},{-160,60}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-160,112},{160,152}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
