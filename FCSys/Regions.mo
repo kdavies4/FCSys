@@ -69,8 +69,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
             redeclare Modelica.Blocks.Sources.Ramp normalSet(
-              height=-U.A/U.cm^2,
-              duration=100.1,
+              height=-2*U.A/U.cm^2,
+              duration=200.1,
               startTime=0.1),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
@@ -365,7 +365,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         experimentSetupOutput);
     end FPToFP;
 
@@ -1144,10 +1144,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initTransZ=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(
-                consTransX=Conservation.IC,
-                tauprime=FCSys.Characteristics.H2O.Gas.tauprime()/1e-3,
-                p_IC=environment.p_H2O)),
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
               k_DT=fill((1 - epsilon)^(3/2), 3),
@@ -1161,9 +1158,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=true,
+              inclH2O=false,
               k_DT={10,1,1},
               H2O(
+                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/(300*U.K))*
+                    FCSys.Characteristics.H2O.Liquid.tauprime()/1e-5,
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
                 N_IC=Modelica.Constants.small,
@@ -1832,9 +1831,9 @@ that reference may be outdated.
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
                 N_IC=Modelica.Constants.small,
-                consEnergy=Conservation.IC)),
-            reaction(J_0=0.5*U.A/U.cm^2))) annotation (IconMap(
+                consEnergy=Conservation.IC)))) annotation (IconMap(
             primitivesVisible=false));
+      //reaction(J_0=0.5*U.A/U.cm^2)
 
       // **temp H2O not in ionomer
       // **e-: sigma=40*U.S/(12*U.cm),
@@ -2008,6 +2007,7 @@ The default thermal conductivity of the carbon (<code>theta = U.m*U.K/(1.18*U.W)
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2995,10 +2995,7 @@ that reference may be outdated.
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(
-                tauprime=FCSys.Characteristics.H2O.Gas.tauprime()/3e-4,
-                p_IC=environment.p_H2O,
-                consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
                 initTransX=InitTranslational.none,
                 initTransY=InitTranslational.none,
@@ -3028,6 +3025,8 @@ that reference may be outdated.
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
+                tauprime=exp(FCSys.Characteristics.H2O.Gas.g()/(300*U.K))*
+                    FCSys.Characteristics.H2O.Liquid.tauprime()/3e-4,
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
                 N_IC=Modelica.Constants.small,

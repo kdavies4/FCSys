@@ -490,7 +490,10 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
 
       model Correlated "Correlated properties"
         extends Species(redeclare replaceable package Data =
-              Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
+              Characteristics.H2O.Gas (
+              b_v=[1],
+              n_v={-1,0},
+              final tauprime=0));
         output Q.NumberAbsolute RH(
           stateSelect=StateSelect.never,
           displayUnit="%") = p/(
@@ -511,7 +514,7 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
         extends Species(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
                 b_v=[1], n_v={-1,0}),
-          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
+          final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
@@ -691,7 +694,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
 
       model Correlated "Correlated properties"
         extends SpeciesIsochoric(redeclare replaceable package Data =
-              Characteristics.H2O.Liquid, final tauprime=0);
+              Characteristics.H2O.Liquid);
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -707,7 +710,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
       model Fixed "Fixed properties"
         extends SpeciesIsochoric(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          final tauprime=0,
+          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
@@ -1803,18 +1806,19 @@ Choose any condition besides None.");
     end if;
     h = Data.h(T, p);
     s = Data.s(T, p);
-    g0 = Data.g(T, Data.p0);
+    //g0 = Data.g(T, Data.p0);
+    g0 = FCSys.Characteristics.H2O.Gas.g() "**remove";
 
     // Diffusive exchange
     chemical.mu = h - chemical.sT "Reaction (rate equation elsewhere)";
-    if tauprime > Modelica.Constants.small then
-      tauprime*physical.Ndot = k_N*N*(exp((physical.mu - g0)/T) - exp((chemical.mu
-         - g0)/T)) "Phase change";
+    if tauprime > 0 then
+      tauprime*physical.Ndot = k_N*N*(exp(physical.mu/T) - exp(chemical.mu/T))
+        "Phase change";
+      // **factor g0 into tauprime.
     else
-      0 = if N > Modelica.Constants.small or physical.mu > chemical.mu then
-        physical.mu - chemical.mu else physical.Ndot;
-      // The first branch avoids nonlinear equations when tauprime=0.
-      // Dymola 7.4 can't derive it symbolically from the previous equation.
+      physical.mu = chemical.mu;
+      // This avoids nonlinear equations when tauprime = 0.  Dymola 7.4 can't
+      // derive it symbolically from the previous equation.
     end if;
 
     // Translational momentum
@@ -2263,13 +2267,12 @@ Choose any condition besides None.");
 
     parameter Q.Area A=100*U.cm^2 "Area"
       annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
-    parameter Q.CurrentAreicAbsolute J_0=0.01*U.A/U.cm^2
+    parameter Q.CurrentAreicAbsolute J_0=8e-7*U.A/U.cm^2
       "Exchange current density"
       annotation (Dialog(__Dymola_label="<html><i>J</i><sub>0</sub></html>"));
     parameter Q.NumberAbsolute alpha(max=1) = 0.5 "Charge transfer coefficient"
       annotation (Dialog(enable=not fromCurrent,__Dymola_label=
             "<html>&alpha;</html>"));
-    final parameter Q.Current I_0=J_0*A "Exchange current density";
     parameter Boolean fromCurrent=false
       "<html>Calculate potential from reaction rate (requires &alpha;=0.5)</html>"
       annotation (choices(__Dymola_checkBox=true));
@@ -2283,7 +2286,7 @@ Choose any condition besides None.");
           compact=true));
 
     Q.Number Pe(start=0) "Peclet number";
-
+    parameter Q.CurrentAreic J_irrev=3e-4*U.A/U.cm^2 "**";
     Connectors.Reaction reaction(final n_trans=n_trans)
       "Common connector for the reaction" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{
@@ -2305,10 +2308,10 @@ Choose any condition besides None.");
 
     // Reaction rate
     if not fromCurrent then
-      reaction.Ndot = I_0*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
+      reaction.Ndot/A + J_irrev = J_0*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
         "Butler-Volmer equation";
     else
-      Pe = 2*asinh(reaction.Ndot/(2*I_0))
+      Pe = 2*asinh((reaction.Ndot/A + J_irrev)/(2*J_0))
         "Inverse form of Butler-Volmer equation, assuming alpha=0.5";
     end if;
 
