@@ -39,7 +39,7 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l2.m/(N.T2.s)", "V/s")
       "for derivative of potential in Dymola";
     defineDefaultDisplayUnit("l2.m/(N.T2)", "V") "Potential";
-    defineDefaultDisplayUnit("l.m/(N.T2)", "V/m") "Lineic potential";
+    defineDefaultDisplayUnit("l.m/(N.T2)", "V/m") "Specific force";
     defineDefaultDisplayUnit("l2.m/(N.T3)", "V/s") "Rate of potential";
     defineDefaultDisplayUnit("l2.m/(N2.T)", "ohm") "Electrical resistance";
     defineDefaultDisplayUnit("l2.m/N2", "uH") "Inductance";
@@ -278,7 +278,7 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "l.m/(N.T2)",
         "V/m",
-        m/V) "Lineic potential";
+        m/V) "Specific force";
     defineUnitConversion(
         "l2.m/(N.T3)",
         "K/s",

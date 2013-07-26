@@ -1499,7 +1499,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model PhaseIcon
 
-    FCSys.Phases.BaseClasses.EmptyPhase Phase
+    FCSys.Phases.BaseClasses.PartialPhase Phase
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
 
@@ -1507,7 +1507,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    FCSys.Species.Species Species
+    FCSys.Species.CompressibleSpecies Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
 

@@ -562,8 +562,7 @@ package Characteristics
     end Gas;
 
     package Ionomer "H2O in ionomer"
-      extends Gas(b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,
-            0});
+      extends Gas(b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,0});
       annotation (Documentation(info="<html>
         <p>Assumptions:
      <ol>

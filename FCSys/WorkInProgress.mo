@@ -57,30 +57,25 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   model CellModelica
@@ -383,6 +378,125 @@ package WorkInProgress "Incomplete classes under development"
       experiment(StopTime=210),
       experimentSetupOutput);
   end PolarizationPlaceholder;
+
+  model FaceReaction
+    "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
+    extends Modelica.Icons.UnderConstruction;
+    import FCSys.BaseClasses.Utilities.cartWrap;
+    import FCSys.BaseClasses.Utilities.inSign;
+    extends FCSys.BaseClasses.Icons.Names.Top1;
+
+    // Geometry
+    parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
+          group="Geometry", __Dymola_label="<html><i>A</i></html>"));
+    parameter Axis axis "Axis of the electrochemical reaction"
+      annotation (Dialog(group="Geometry"));
+    parameter Side side "Side of the face w.r.t., the reaction"
+      annotation (Dialog(group="Geometry"));
+    parameter Integer cartTrans[:]
+      "Cartesian-axis indices of the components of translational momentum"
+      annotation (Dialog(group="Geometry"));
+    parameter Integer transCart[Axis]
+      "Cartesian-axis indices of the components of translational momentum"
+      annotation (Dialog(group="Geometry"));
+    parameter Integer n "Stoichiometric coefficient";
+    parameter Q.MassSpecific m "Specific mass"
+      annotation (Dialog(group="Material properties"));
+
+    replaceable package Data = Characteristics.BaseClasses.Characteristic
+      constrainedby Characteristics.BaseClasses.Characteristic
+      "Characteristic data" annotation (
+      Dialog(group="Material properties"),
+      choicesAllMatching=true,
+      __Dymola_choicesFromPackage=true);
+
+    // Aliases (for common terms)
+    Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
+
+    // Auxiliary variables (for analysis)
+    output Q.Potential zw(stateSelect=StateSelect.never) = inSign(side)*face.mPhidot[
+      Orient.normal]/(face.rho*A) if environment.analysis
+      "Inward nonequilibrium potential";
+
+    Connectors.Face face "Interface to the majority region" annotation (
+        Placement(transformation(extent={{10,-10},{30,10}}), iconTransformation(
+            extent={{-50,-10},{-30,10}})));
+    Connectors.Reaction reaction(final n_trans=n_trans)
+      "Connector for an electrochemical reaction" annotation (
+        __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
+              -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
+
+  protected
+    final parameter Integer n_trans=size(cartTrans, 1)
+      "Number of components of translational momentum";
+
+    outer Conditions.Environment environment "Environmental conditions";
+
+  equation
+    // Aliases
+    p = Data.p_Tv(face.T, 1/face.rho);
+
+    // No diffusion across the face
+    face.Ndot = 0 "Material";
+    //face.mPhidot[2:3] = {0,0} "Transverse translational momentum";
+
+    // Equal intensive properties
+    reaction.mu = n*(Data.h(face.T, p) - reaction.sT + inSign(side)*face.mPhidot[
+      Orient.normal]/(face.rho*A)) "Electrochemical potential";
+    reaction.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
+      "Velocity";
+    reaction.sT = Data.s(face.T, p)*face.T
+      "Specific entropy-temperature product";
+
+    // Conservation (without storage)
+    0 = inSign(side)*face.phi[Orient.normal]*A*face.rho - n*reaction.Ndot
+      "Material";
+    for i in 2:3 loop
+      0 = reaction.mPhidot[transCart[cartWrap(axis + i - 1)]] + face.mPhidot[i]
+        "Transverse translational momentum";
+    end for;
+    0 = face.Qdot + reaction.Qdot "Energy";
+
+    annotation (
+      Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
+    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
+    the boundary is due entirely to the electrochemical reaction.</p> 
+    
+    <p>Assumptions:<ol>
+    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
+    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
+    potential.</li> 
+    </ol></p>
+    
+    <p>For more information, please see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Diagram(graphics),
+      Icon(graphics={Line(
+              points={{0,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),Line(
+              points={{-30,0},{0,0}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Text(
+              extent={{-100,-20},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n")}));
+  end FaceReaction;
+
+  model Triangle
+    annotation (Diagram(graphics={Polygon(
+              points={{-8,-7},{-4,-7},{4,-7},{8,-7},{10,-3},{7.7725,0.342},{
+              4.683,4.976},{2,9},{-2,9},{-4.5795,5.131},{-7.782,0.327},{-10,-3},
+              {-8,-7}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.Bezier)}));
+  end Triangle;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

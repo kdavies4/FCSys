@@ -31,7 +31,7 @@ package Subregions
         inclTransY=true,
         inclFacesX=false,
         inclFacesY=true,
-        k_DE=1e-8,
+        k_common=1e-8,
         gas(
           inclH2O=false,
           inclN2=true,
@@ -195,10 +195,7 @@ package Subregions
         'inclC+'=true,
         'incle-'=true,
         inclH2=false,
-        subregion(
-          L={U.cm,U.mm,U.mm},
-          void=true,
-          graphite(
+        subregion(L={U.cm,U.mm,U.mm}, graphite(
             reduceThermal=true,
             'C+'(initMaterial=InitScalar.pressure),
             'e-'(
@@ -240,8 +237,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
-
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -457,6 +454,8 @@ package Subregions
           liquid(inclH2O=true,H2O(
               final V_IC=subregion.V,
               final beta=0,
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.pressure,
               initTransX=InitTranslational.none))));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(inclH2O=
@@ -1359,49 +1358,70 @@ package Subregions
 
   model Subregion "Subregion with all phases"
     import Modelica.Constants.eps;
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final hasSpecies=gas.n_spec
-           + graphite.n_spec + ionomer.n_spec + liquid.n_spec > 0);
+    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=gas.n_spec
+           + graphite.n_spec + ionomer.n_spec + liquid.n_spec);
 
-    parameter Q.NumberAbsolute k_gl=eps
-      "Additional coupling factor between gas and liquid";
-    parameter Q.NumberAbsolute k_graphitel=eps
-      "Additional coupling factor between graphite and liquid";
-    // **Add Dymola labels and Dialog groups for all k_* parameters here and elsewhere
+    parameter Q.NumberAbsolute k_gas_liq=eps
+      "Additional coupling factor between gas and liquid" annotation (Dialog(
+          group="Geometry",__Dymola_label=
+            "<html><i>k</i><sub>gas liq</sub></html>"));
+    parameter Q.NumberAbsolute k_graphite_liq=eps
+      "Additional coupling factor between graphite and liquid" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>k</i><sub>graphite liq</sub></html>"));
 
     FCSys.Phases.Gas gas(
-      inclH2O=true,
       n_inter=2,
       final n_faces=n_faces,
       final inclHOR=inclHOR,
       final inclORR=inclORR,
-      k_inter={k_DE,k_gl}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+      k_inter={k_common,k_gas_liq}) "Gas" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-66,-10},
+              {-44,10}})));
 
     FCSys.Phases.Graphite graphite(
       final n_faces=n_faces,
       n_inter=2,
-      k_inter={k_DE,k_graphitel},
+      k_inter={k_common,k_graphite_liq},
       final inclHOR=inclHOR,
       final inclORR=inclORR) "Graphite" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-28,-10},
+              {-8,10}})));
 
     FCSys.Phases.Ionomer ionomer(
       final n_faces=n_faces,
       n_inter=1,
-      k_inter={k_DE},
+      k_inter={k_common},
       final inclHOR=inclHOR,
       final inclORR=inclORR) "Ionomer" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{8,-10},
+              {28,10}})));
 
     FCSys.Phases.Liquid liquid(
       final n_faces=n_faces,
       n_inter=3,
-      k_inter={k_DE,k_gl,k_graphitel}) "Liquid" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
+          group="Phases (click to edit)"), Placement(transformation(extent={{44,
+              -10},{64,10}})));
+
+    Connectors.FaceBus xNegative if inclFacesX "Negative face along the x axis"
+      annotation (Placement(transformation(extent={{-114,-28},{-94,-8}}),
+          iconTransformation(extent={{-110,-10},{-90,10}})));
+    Connectors.FaceBus yNegative if inclFacesY "Negative face along the y axis"
+      annotation (Placement(transformation(extent={{-90,-52},{-70,-32}}),
+          iconTransformation(extent={{-10,-110},{10,-90}})));
+    Connectors.FaceBus zNegative if inclFacesZ "Negative face along the z axis"
+      annotation (Placement(transformation(extent={{82,20},{102,40}}),
+          iconTransformation(extent={{40,40},{60,60}})));
+    Connectors.FaceBus xPositive if inclFacesX "Positive face along the x axis"
+      annotation (Placement(transformation(extent={{94,8},{114,28}}),
+          iconTransformation(extent={{90,-10},{110,10}})));
+    Connectors.FaceBus yPositive if inclFacesY "Positive face along the y axis"
+      annotation (Placement(transformation(extent={{70,32},{90,52}}),
+          iconTransformation(extent={{-10,90},{10,110}})));
+    Connectors.FaceBus zPositive if inclFacesZ "Positive face along the z axis"
+      annotation (Placement(transformation(extent={{-102,-40},{-82,-20}}),
+          iconTransformation(extent={{-60,-60},{-40,-40}})));
 
   protected
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
@@ -1409,635 +1429,620 @@ package Subregions
     final parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and
         gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
 
-    FCSys.Conditions.Adapters.AmagatDalton gasDA if gas.n_spec > 0 and not void
-      "Inerface between Dalton and Amagat representations of gas"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-    FCSys.Conditions.Adapters.AmagatDalton graphiteDA if graphite.n_spec > 0
-       and not void
-      "Inerface between Dalton and Amagat representations of graphite"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-    FCSys.Conditions.Adapters.AmagatDalton ionomerDA if ionomer.n_spec > 0 and
-      not void "Inerface between Dalton and Amagat representations of ionomer"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-    FCSys.Conditions.Adapters.AmagatDalton liquidDA if liquid.n_spec > 0 and
-      not void "Inerface between Dalton and Amagat representations of liquid"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-
-    Connectors.PhysicalBusInternal physical
-      "Internal connector for phase change" annotation (Placement(
-          transformation(extent={{-24,4},{-4,24}}), iconTransformation(extent={
-              {-80,28},{-60,48}})));
+    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+      "Model to establish a fixed total volume"
+      annotation (Placement(transformation(extent={{-100,26},{-80,46}})));
+    Connectors.InertBusInternal common
+      "Connector for translational and thermal exchange among all species"
+      annotation (Placement(transformation(extent={{80,-32},{100,-12}}),
+          iconTransformation(extent={{100,18},{120,38}})));
+    Connectors.InertBusInternal gasLiq
+      "Connector for translational and thermal exchange between gas and liquid"
+      annotation (Placement(transformation(extent={{80,-46},{100,-26}}),
+          iconTransformation(extent={{100,18},{120,38}})));
+    Connectors.InertBusInternal graphiteLiq
+      "Connector for translational and thermal exchange between graphite and liquid"
+      annotation (Placement(transformation(extent={{80,-60},{100,-40}}),
+          iconTransformation(extent={{100,18},{120,38}})));
 
   protected
-    Connectors.InertInternal inert(final n_trans=n_trans)
-      annotation (Placement(transformation(extent={{20,-28},{40,-8}})));
+    Connectors.PhysicalBusInternal phaseCh "Connector for phase change"
+      annotation (Placement(transformation(extent={{80,-72},{100,-52}}),
+          iconTransformation(extent={{64,-42},{84,-22}})));
   equation
-    // Phase change
-    connect(gas.physical, physical) annotation (Line(
-        points={{-5.1,5.1},{-14,14}},
-        color={38,196,52},
-        smooth=Smooth.None,
-        thickness=0.5));
-    connect(ionomer.physical, physical) annotation (Line(
-        points={{-5.1,5.1},{-14,14}},
-        color={38,196,52},
-        smooth=Smooth.None,
-        thickness=0.5));
-    connect(liquid.physical, physical) annotation (Line(
-        points={{-5.1,5.1},{-14,14}},
-        color={38,196,52},
-        smooth=Smooth.None,
-        thickness=0.5));
-
-    // Reactions
-    connect(gas.chemical, graphite.chemical) annotation (Line(
-        points={{-10,-4.2},{-10,-4.2}},
-        color={239,142,1},
-        smooth=Smooth.None));
-
-    connect(graphite.chemical, ionomer.chemical) annotation (Line(
-        points={{-10,-4.2},{-10,-4.2}},
-        color={239,142,1},
-        smooth=Smooth.None));
-
-    // Additional coupling
-    // -------------------
-    // Gas-liquid
-    if gas.n_spec > 0 and liquid.n_spec > 0 then
-      connect(gas.inert[2], liquid.inert[2]) annotation (Line(
-          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.2},{9.8,-4.2}},
-          color={0,0,255},
-          smooth=Smooth.None));
-    end if;
-    //
-    // Graphite-liquid
-    if graphite.n_spec > 0 and liquid.n_spec > 0 then
-      connect(graphite.inert[2], liquid.inert[3]) annotation (Line(
-          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.86667},{9.8,-4.86667}},
-          color={0,0,255},
-          smooth=Smooth.None));
-    end if;
-
-    // Phases
-    // ------
+    // Boundaries and volume-sharing
+    // -----------------------------
     // Gas
-    connect(gas.dalton, gasDA.dalton) annotation (Line(
-        points={{8,-8},{8,-20},{8,-20},{8,-20}},
+    connect(gas.amagat, volume.amagat) annotation (Line(
+        points={{-59,5},{-59,36},{-90,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gasDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(gas.inert[1], inert) annotation (Line(
-        points={{9.8,-3.7},{19.9,-3.7},{19.9,-18},{30,-18}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{8,6.10623e-16},{40,6.10623e-16},{40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
-            5.55112e-16,-40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{6.10623e-16,10},{5.55112e-16,40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+        points={{-54,-8.4},{-54,-42},{-80,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+        points={{-62,-8},{-62,-30},{-92,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    // Graphite
-    connect(graphite.dalton, graphiteDA.dalton) annotation (Line(
-        points={{8,-8},{8,-8},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphiteDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphite.inert[1], inert) annotation (Line(
-        points={{9.8,-3.7},{19.9,-3.7},{19.9,-18},{30,-18}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(graphite.xNegative, xNegative.graphite) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+    connect(gas.xNegative, xNegative.gas) annotation (Line(
+        points={{-62,6.10623e-16},{-70,6.10623e-16},{-70,-18},{-104,-18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    connect(graphite.xPositive, xPositive.graphite) annotation (Line(
-        points={{8,6.10623e-16},{40,6.10623e-16},{40,5.55112e-16}},
+    connect(gas.yPositive, yPositive.gas) annotation (Line(
+        points={{-54,10},{-54,42},{80,42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.zNegative, zNegative.gas) annotation (Line(
+        points={{-49,5},{-46,8},{-46,30},{92,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
+    connect(gas.xPositive, xPositive.gas) annotation (Line(
+        points={{-46,6.10623e-16},{-38,6.10623e-16},{-38,18},{104,18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    // Graphite
+    connect(graphite.amagat, volume.amagat) annotation (Line(
+        points={{-23,5},{-23,36},{-90,36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
     connect(graphite.yNegative, yNegative.graphite) annotation (Line(
-        points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
-            5.55112e-16,-40}},
+        points={{-18,-8.4},{-18,-42},{-80,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.yPositive, yPositive.graphite) annotation (Line(
-        points={{6.10623e-16,10},{5.55112e-16,40}},
+        points={{-18,10},{-18,42},{80,42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zNegative, zNegative.graphite) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+        points={{-13,5},{-10,8},{-10,30},{92,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zPositive, zPositive.graphite) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+        points={{-26,-8},{-26,-30},{-92,-30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.xNegative, xNegative.graphite) annotation (Line(
+        points={{-26,6.10623e-16},{-34,6.10623e-16},{-34,-18},{-104,-18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.xPositive, xPositive.graphite) annotation (Line(
+        points={{-10,6.10623e-16},{-2,6.10623e-16},{-2,18},{104,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     // Ionomer
-    connect(ionomer.dalton, ionomerDA.dalton) annotation (Line(
-        points={{8,-8},{8,-8},{8,-20}},
+    connect(ionomer.amagat, volume.amagat) annotation (Line(
+        points={{13,5},{13,36},{-90,36}},
         color={47,107,251},
-        smooth=Smooth.None));
-    connect(ionomerDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(ionomer.inert[1], inert) annotation (Line(
-        points={{9.8,-4.2},{19.9,-4.2},{19.9,-18},{30,-18}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.xPositive, xPositive.ionomer) annotation (Line(
-        points={{8,6.10623e-16},{40,6.10623e-16},{40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
         smooth=Smooth.None));
 
     connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
-        points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
-            5.55112e-16,-40}},
+        points={{18,-8.4},{18,-42},{-80,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(ionomer.yPositive, yPositive.ionomer) annotation (Line(
-        points={{6.10623e-16,10},{-4.87687e-22,26},{5.55112e-16,26},{
-            5.55112e-16,40}},
+        points={{18,10},{18,42},{80,42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     connect(ionomer.zNegative, zNegative.ionomer) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+        points={{23,5},{26,8},{26,30},{92,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(ionomer.zPositive, zPositive.ionomer) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+        points={{10,-8},{10,-30},{-92,-30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
+        points={{10,6.10623e-16},{2,6.10623e-16},{2,-18},{-104,-18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.xPositive, xPositive.ionomer) annotation (Line(
+        points={{26,6.10623e-16},{34,6.10623e-16},{34,18},{104,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     // Liquid
-    connect(liquid.dalton, liquidDA.dalton) annotation (Line(
-        points={{8,-8},{8,-8},{8,-20}},
+    connect(liquid.amagat, volume.amagat) annotation (Line(
+        points={{49,5},{49,36},{-90,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(liquidDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6}},
-        color={47,107,251},
+
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{54,-8.4},{54,-42},{-80,-42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
         smooth=Smooth.None));
-    connect(liquid.inert[1], inert) annotation (Line(
-        points={{9.8,-3.53333},{19.9,-3.53333},{19.9,-18},{30,-18}},
-        color={0,0,255},
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{54,10},{54,42},{80,42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
         smooth=Smooth.None));
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{59,5},{62,8},{62,30},{92,30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+        points={{46,-8},{46,-30},{-92,-30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+        points={{46,6.10623e-16},{38,6.10623e-16},{38,-18},{-104,-18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-        points={{8,6.10623e-16},{8,5.55112e-16},{40,5.55112e-16}},
+        points={{62,6.10623e-16},{70,6.10623e-16},{70,18},{104,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
-    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
+    // Inert exchange
+    // --------------
+    // Common
+    connect(gas.inter[1], common.exchange) annotation (Line(
+        points={{-45,-6.5},{-45,-22},{90,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(graphite.inter[1], common.exchange) annotation (Line(
+        points={{-9,-6.5},{-9,-22},{90,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(ionomer.inter[1], common.exchange) annotation (Line(
+        points={{27,-7},{27,-22},{90,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[1], common.exchange) annotation (Line(
+        points={{63,-6.33333},{63,-22},{90,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    // Gas-liquid
+    connect(gas.inter[2], gasLiq.exchange) annotation (Line(
+        points={{-45,-7.5},{-45,-36},{90,-36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
+        points={{63,-7},{63,-36},{90,-36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    // Graphite-liquid
+    connect(graphite.inter[2], graphiteLiq.exchange) annotation (Line(
+        points={{-9,-7.5},{-9,-50},{90,-50}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[3], graphiteLiq.exchange) annotation (Line(
+        points={{63,-7.66667},{63,-50},{90,-50}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
+    // Phase change
+    connect(phaseCh, gas.physical) annotation (Line(
+        points={{90,-62},{-51,-62},{-51,-8.4}},
+        color={38,196,52},
         thickness=0.5,
         smooth=Smooth.None));
-    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{6.10623e-16,10},{5.55112e-16,40}},
+    connect(phaseCh, liquid.physical) annotation (Line(
+        points={{90,-62},{57,-62},{57,-8.4}},
+        color={38,196,52},
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.physical, phaseCh) annotation (Line(
+        points={{21,-8.4},{21,-62},{90,-62}},
+        color={38,196,52},
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    // Reactions
+    // ---------
+    connect(gas.chemical, graphite.chemical) annotation (Line(
+        points={{-48,-8.4},{-48,-14},{-12,-14},{-12,-8.4}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(graphite.chemical, ionomer.chemical) annotation (Line(
+        points={{-12,-8.4},{-12,-14},{24,-14},{24,-8.4}},
+        color={255,195,38},
+        smooth=Smooth.None));
+
+    annotation (Documentation(info="<html>
+   <p>Please see the documentation of the
+   <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-80},{
+              120,60}}), graphics));
+  end Subregion;
+
+  model SubregionIonomerOnly "Subregion with only the ionomer phase"
+    import Modelica.Constants.eps;
+    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=ionomer.n_spec);
+
+    FCSys.Phases.Ionomer ionomer(
+      final n_faces=n_faces,
+      final inclHOR=false,
+      final inclORR=false,
+      n_inter=1,
+      k_inter={k_common}) "Ionomer" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,30},
+              {10,50}})));
+
+    Connectors.FaceBus xNegative if inclFacesX "Negative face along the x axis"
+      annotation (Placement(transformation(extent={{-50,30},{-30,50}}),
+          iconTransformation(extent={{-110,-10},{-90,10}})));
+    Connectors.FaceBus yNegative if inclFacesY "Negative face along the y axis"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
+          iconTransformation(extent={{-10,-110},{10,-90}})));
+    Connectors.FaceBus zNegative if inclFacesZ "Negative face along the z axis"
+      annotation (Placement(transformation(extent={{10,50},{30,70}}),
+          iconTransformation(extent={{40,40},{60,60}})));
+    Connectors.FaceBus xPositive if inclFacesX "Positive face along the x axis"
+      annotation (Placement(transformation(extent={{30,30},{50,50}}),
+          iconTransformation(extent={{90,-10},{110,10}})));
+    Connectors.FaceBus yPositive if inclFacesY "Positive face along the y axis"
+      annotation (Placement(transformation(extent={{-10,70},{10,90}}),
+          iconTransformation(extent={{-10,90},{10,110}})));
+    Connectors.FaceBus zPositive if inclFacesZ "Positive face along the z axis"
+      annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
+          iconTransformation(extent={{-60,-60},{-40,-40}})));
+
+  protected
+    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+      "Model to establish a fixed total volume"
+      annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+  equation
+    // Boundaries and volume-sharing
+    // -----------------------------
+    // Ionomer
+    connect(ionomer.amagat, volume.amagat) annotation (Line(
+        points={{-5,45},{-20,60}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
+    connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
+        points={{6.10623e-16,31.6},{6.10623e-16,5.55112e-16},{5.55112e-16,
+            5.55112e-16}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
-    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+    connect(ionomer.yPositive, yPositive.ionomer) annotation (Line(
+        points={{6.10623e-16,50},{6.10623e-16,80},{5.55112e-16,80}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+    connect(ionomer.zNegative, zNegative.ionomer) annotation (Line(
+        points={{5,45},{20,60}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.zPositive, zPositive.ionomer) annotation (Line(
+        points={{-8,32},{-20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
+        points={{-8,40},{-40,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.xPositive, xPositive.ionomer) annotation (Line(
+        points={{8,40},{40,40}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     annotation (Documentation(info="<html>
-  <p>At least one configuration must be included.  H<sub>2</sub>O gas is included by default.</p>
-     
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-        Diagram(graphics));
-  end Subregion;
-
-  model SubregionIonomerOnly "Subregion with only the ionomer phase"
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final hasSpecies=
-          ionomer.n_spec > 0);
-
-    FCSys.Phases.Ionomer ionomer(
-      final n_faces=n_faces,
-      inclH2O=true,
-      n_inter=1,
-      k_inter={k_DE},
-      final inclHOR=false,
-      final inclORR=false) "Ionomer" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
-
-  protected
-    FCSys.Conditions.Adapters.AmagatDalton ionomerDA if ionomer.n_spec > 0 and
-      not void "Inerface between Dalton and Amagat representations of ionomer"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-  equation
-    // Phases
-    // ------
-    // Ionomer
-    connect(ionomer.dalton, ionomerDA.dalton) annotation (Line(
-        points={{8,-8},{8,-14},{8,-14},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(ionomerDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.xPositive, xPositive.ionomer) annotation (Line(
-        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
-            5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-
-    connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
-        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.yPositive, yPositive.ionomer) annotation (Line(
-        points={{6.10623e-16,10},{5.55112e-16,40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.zNegative, zNegative.ionomer) annotation (Line(
-        points={{5.2,5.1},{20,20}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.zPositive, zPositive.ionomer) annotation (Line(
-        points={{-8,-8},{-20,-20}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ionomer.dalton, ionomerDA.dalton) annotation (Line(
-        points={{8,-8},{8,-14},{8,-14},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-
-    connect(ionomerDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-13},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    annotation (
-      defaultComponentName="subregion",
-      Documentation(info="<html>
-  <p>At least one configuration must be included.  H<sub>2</sub>O is included by default.</p>
-
-<p>Please see the documentation of the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-
-      Diagram(graphics));
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
+              60,100}}), graphics));
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
     import Modelica.Constants.eps;
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final hasSpecies=gas.n_spec
-           + graphite.n_spec + liquid.n_spec > 0);
+    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=gas.n_spec
+           + graphite.n_spec + liquid.n_spec);
 
-    parameter Q.NumberAbsolute k_gl=eps
-      "Additional coupling factor between gas and liquid";
-    parameter Q.NumberAbsolute k_graphitel=eps
-      "Additional coupling factor between graphite and liquid";
+    parameter Q.NumberAbsolute k_gas_liq=eps
+      "Additional coupling factor between gas and liquid" annotation (Dialog(
+          group="Geometry",__Dymola_label=
+            "<html><i>k</i><sub>gas liq</sub></html>"));
+    parameter Q.NumberAbsolute k_graphite_liq=eps
+      "Additional coupling factor between graphite and liquid" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>k</i><sub>graphite liq</sub></html>"));
 
     FCSys.Phases.Gas gas(
-      inclH2O=true,
-      final n_faces=n_faces,
       n_inter=2,
-      k_inter={k_DE,k_gl},
       final inclHOR=false,
-      final inclORR=false) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+      final inclORR=false,
+      final n_faces=n_faces,
+      k_inter={k_common,k_gas_liq}) "Gas" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-48,-10},
+              {-26,10}})));
+
     FCSys.Phases.Graphite graphite(
       final n_faces=n_faces,
       n_inter=2,
-      k_inter={k_DE,k_graphitel},
       final inclHOR=false,
-      final inclORR=false) "Graphite" annotation (Dialog(group=
+      final inclORR=false,
+      k_inter={k_common,k_graphite_liq}) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
+
     FCSys.Phases.Liquid liquid(
       final n_faces=n_faces,
       n_inter=3,
-      k_inter={k_DE,k_gl,k_graphitel}) "Liquid" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
-              {10,10}})));
+      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
+          group="Phases (click to edit)"), Placement(transformation(extent={{26,
+              -10},{46,10}})));
+
+    Connectors.FaceBus xNegative if inclFacesX "Negative face along the x axis"
+      annotation (Placement(transformation(extent={{-96,-28},{-76,-8}}),
+          iconTransformation(extent={{-110,-10},{-90,10}})));
+    Connectors.FaceBus yNegative if inclFacesY "Negative face along the y axis"
+      annotation (Placement(transformation(extent={{-72,-52},{-52,-32}}),
+          iconTransformation(extent={{-10,-110},{10,-90}})));
+    Connectors.FaceBus zNegative if inclFacesZ "Negative face along the z axis"
+      annotation (Placement(transformation(extent={{64,20},{84,40}}),
+          iconTransformation(extent={{40,40},{60,60}})));
+    Connectors.FaceBus xPositive if inclFacesX "Positive face along the x axis"
+      annotation (Placement(transformation(extent={{76,8},{96,28}}),
+          iconTransformation(extent={{90,-10},{110,10}})));
+    Connectors.FaceBus yPositive if inclFacesY "Positive face along the y axis"
+      annotation (Placement(transformation(extent={{52,32},{72,52}}),
+          iconTransformation(extent={{-10,90},{10,110}})));
+    Connectors.FaceBus zPositive if inclFacesZ "Positive face along the z axis"
+      annotation (Placement(transformation(extent={{-84,-40},{-64,-20}}),
+          iconTransformation(extent={{-60,-60},{-40,-40}})));
 
   protected
-    Connectors.PhysicalBusInternal physical "Connector for phase change"
-      annotation (Placement(transformation(extent={{-24,4},{-4,24}}),
-          iconTransformation(extent={{-76,16},{-56,36}})));
-
-    FCSys.Conditions.Adapters.AmagatDalton gasDA if gas.n_spec > 0 and not void
-      "Inerface between Dalton and Amagat representations of gas"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-    FCSys.Conditions.Adapters.AmagatDalton graphiteDA if graphite.n_spec > 0
-       and not void
-      "Inerface between Dalton and Amagat representations of graphite"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
-    FCSys.Conditions.Adapters.AmagatDalton liquidDA if liquid.n_spec > 0 and
-      not void "Inerface between Dalton and Amagat representations of liquid"
-      annotation (Placement(transformation(extent={{22,-10},{2,-30}})));
+    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+      "Model to establish a fixed total volume"
+      annotation (Placement(transformation(extent={{-82,26},{-62,46}})));
+    Connectors.InertBusInternal common
+      "Connector for translational and thermal exchange among all species"
+      annotation (Placement(transformation(extent={{62,-32},{82,-12}}),
+          iconTransformation(extent={{100,18},{120,38}})));
+    Connectors.InertBusInternal gasLiq
+      "Connector for translational and thermal exchange between gas and liquid"
+      annotation (Placement(transformation(extent={{62,-46},{82,-26}}),
+          iconTransformation(extent={{100,18},{120,38}})));
+    Connectors.InertBusInternal graphiteLiq
+      "Connector for translational and thermal exchange between graphite and liquid"
+      annotation (Placement(transformation(extent={{62,-60},{82,-40}}),
+          iconTransformation(extent={{100,18},{120,38}})));
   equation
-    // Phase change
-    connect(physical, gas.physical);
-    connect(physical, liquid.physical) annotation (Line(
-        points={{-14,14},{-5.1,5.1}},
-        color={38,196,52},
-        smooth=Smooth.None,
-        thickness=0.5));
-
-    // Additional coupling
-    // -------------------
-    // Gas-liquid
-    if gas.n_spec > 0 and liquid.n_spec > 0 then
-      connect(gas.inert[2], liquid.inert[2]) annotation (Line(
-          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.2},{9.8,-4.2}},
-          color={0,0,255},
-          smooth=Smooth.None));
-    end if;
-    //
-    // Graphite-liquid
-    if graphite.n_spec > 0 and liquid.n_spec > 0 then
-      connect(graphite.inert[2], liquid.inert[3]) annotation (Line(
-          points={{9.8,-4.7},{19.9,-4.7},{19.9,-4.86667},{9.8,-4.86667}},
-          color={0,0,255},
-          smooth=Smooth.None));
-    end if;
-
-    // Phases
-    // ------
+    // Boundaries and volume-sharing
+    // -----------------------------
     // Gas
-    connect(gas.dalton, gasDA.dalton) annotation (Line(
-        points={{8,-8},{8,-20},{8,-20}},
+    connect(gas.amagat, volume.amagat) annotation (Line(
+        points={{-41,5},{-41,36},{-72,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gasDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
-            5.55112e-16}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{6.10623e-16,10},{0,10},{0,10},{-4.87687e-22,40},{-4.87687e-22,
-            40},{5.55112e-16,40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+        points={{-36,-8.4},{-36,-42},{-62,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+        points={{-44,-8},{-44,-30},{-74,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    // Graphite
-    connect(graphite.dalton, graphiteDA.dalton) annotation (Line(
-        points={{8,-8},{8,-20},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphiteDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphite.xNegative, xNegative.graphite) annotation (Line(
-        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+    connect(gas.xNegative, xNegative.gas) annotation (Line(
+        points={{-44,6.10623e-16},{-52,6.10623e-16},{-52,-18},{-86,-18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    connect(graphite.xPositive, xPositive.graphite) annotation (Line(
-        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
-            5.55112e-16}},
+    connect(gas.yPositive, yPositive.gas) annotation (Line(
+        points={{-36,10},{-36,42},{62,42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.zNegative, zNegative.gas) annotation (Line(
+        points={{-31,5},{-28,8},{-28,30},{74,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
+    connect(gas.xPositive, xPositive.gas) annotation (Line(
+        points={{-28,6.10623e-16},{-20,6.10623e-16},{-20,18},{86,18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    // Graphite
+    connect(graphite.amagat, volume.amagat) annotation (Line(
+        points={{-5,5},{-5,36},{-72,36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
     connect(graphite.yNegative, yNegative.graphite) annotation (Line(
-        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        points={{6.10623e-16,-8.4},{6.10623e-16,-42},{-62,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.yPositive, yPositive.graphite) annotation (Line(
-        points={{6.10623e-16,10},{0,10},{0,10},{-4.87687e-22,40},{-4.87687e-22,
-            40},{5.55112e-16,40}},
+        points={{6.10623e-16,10},{6.10623e-16,42},{62,42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zNegative, zNegative.graphite) annotation (Line(
-        points={{5.2,5.1},{20,20}},
+        points={{5,5},{8,8},{8,30},{74,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zPositive, zPositive.graphite) annotation (Line(
-        points={{-8,-8},{-20,-20}},
+        points={{-8,-8},{-8,-30},{-74,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+    connect(graphite.xNegative, xNegative.graphite) annotation (Line(
+        points={{-8,6.10623e-16},{-16,6.10623e-16},{-16,-18},{-86,-18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.xPositive, xPositive.graphite) annotation (Line(
+        points={{8,6.10623e-16},{16,6.10623e-16},{16,18},{86,18}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
     // Liquid
-    connect(liquid.dalton, liquidDA.dalton) annotation (Line(
-        points={{8,-8},{8,-14},{8,-14},{8,-20}},
+    connect(liquid.amagat, volume.amagat) annotation (Line(
+        points={{31,5},{31,36},{-72,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(liquidDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-6},{16,-6}},
-        color={47,107,251},
+
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{36,-8.4},{36,-42},{-62,-42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
         smooth=Smooth.None));
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{36,10},{36,42},{62,42}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{41,5},{44,8},{44,30},{74,30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+        points={{28,-8},{28,-30},{-74,-30}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{-8,6.10623e-16},{-24,0},{-40,5.55112e-16}},
+        points={{28,6.10623e-16},{20,6.10623e-16},{20,-18},{-86,-18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
-            5.55112e-16}},
+        points={{44,6.10623e-16},{52,6.10623e-16},{52,18},{86,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
-    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
-            5.55112e-16,-40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
+    // Inert exchange
+    // --------------
+    // Common
+    connect(gas.inter[1], common.exchange) annotation (Line(
+        points={{-27,-6.5},{-27,-22},{72,-22}},
+        color={47,107,251},
         smooth=Smooth.None));
-    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{6.10623e-16,10},{0,10},{-4.87687e-22,40},{5.55112e-16,40}},
-        color={127,127,127},
-        pattern=LinePattern.None,
+    connect(graphite.inter[1], common.exchange) annotation (Line(
+        points={{9,-6.5},{9,-22},{72,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[1], common.exchange) annotation (Line(
+        points={{45,-6.33333},{45,-22},{72,-22}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    // Gas-liquid
+    connect(gas.inter[2], gasLiq.exchange) annotation (Line(
+        points={{-27,-7.5},{-27,-36},{72,-36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
+        points={{45,-7},{45,-36},{72,-36}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    // Graphite-liquid
+    connect(graphite.inter[2], graphiteLiq.exchange) annotation (Line(
+        points={{9,-7.5},{9,-50},{72,-50}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.inter[3], graphiteLiq.exchange) annotation (Line(
+        points={{45,-7.66667},{45,-50},{72,-50}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
+    // Phase change
+    connect(gas.physical, liquid.physical) annotation (Line(
+        points={{-33,-8.4},{-33,-12},{39,-12},{39,-8.4}},
+        color={38,196,52},
         thickness=0.5,
         smooth=Smooth.None));
 
-    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-        points={{5.2,5.1},{20,20}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{-8,-8},{-20,-20}},
-        color={127,127,127},
-        pattern=LinePattern.None,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(gasDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-13},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphite.dalton, graphiteDA.dalton) annotation (Line(
-        points={{8,-8},{8,-14},{8,-20},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphiteDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-13},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(liquid.dalton, liquidDA.dalton) annotation (Line(
-        points={{8,-8},{8,-14},{8,-14},{8,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(liquidDA.amagat, volume.amagat) annotation (Line(
-        points={{16,-20},{16,-13},{16,-6},{16,-6}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    annotation (
-      defaultComponentName="subregion",
-      Documentation(info="<html>
-  <p>At least one configuration must be included.  H<sub>2</sub>O gas is included by default.</p>
-
-<p>Please see the documentation of the
+    annotation (Documentation(info="<html>
+   <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-
-      Diagram(graphics));
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-80},{
+              100,80}}), graphics));
   end SubregionNoIonomer;
 
   package BaseClasses "Base classes (generally not for direct use)"
@@ -2059,6 +2064,10 @@ package Subregions
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Q.Volume V=product(L) "Volume";
+      parameter Q.NumberAbsolute k_common=1
+        "Coupling factor for exchange among all phases" annotation (Dialog(
+            group="Geometry", __Dymola_label=
+              "<html><i>k</i><sub>common</sub></html>"));
 
       // Assumptions
       // -----------
@@ -2101,41 +2110,10 @@ package Subregions
           tab="Assumptions",
           group="Axes with faces included",
           compact=true));
-      //
-      parameter Boolean void=false "Volume not imposed (zero pressure instead)"
-        annotation (Dialog(tab="Assumptions", compact=true), choices(
-            __Dymola_checkBox=true));
-
-      parameter Q.NumberAbsolute k_DE=1
-        "Base coupling factor for exchange among phases";
-
-      Connectors.FaceBus xNegative if inclFacesX
-        "Negative face along the x axis" annotation (Placement(transformation(
-              extent={{-50,-10},{-30,10}}), iconTransformation(extent={{-110,-10},
-                {-90,10}})));
-      Connectors.FaceBus xPositive if inclFacesX
-        "Positive face along the x axis" annotation (Placement(transformation(
-              extent={{30,-10},{50,10}}), iconTransformation(extent={{90,-10},{
-                110,10}})));
-      Connectors.FaceBus yNegative if inclFacesY
-        "Negative face along the y axis" annotation (Placement(transformation(
-              extent={{-10,-50},{10,-30}}), iconTransformation(extent={{-10,-110},
-                {10,-90}})));
-      Connectors.FaceBus yPositive if inclFacesY
-        "Positive face along the y axis" annotation (Placement(transformation(
-              extent={{-10,30},{10,50}}), iconTransformation(extent={{-10,90},{
-                10,110}})));
-      Connectors.FaceBus zNegative if inclFacesZ
-        "Negative face along the z axis" annotation (Placement(transformation(
-              extent={{10,10},{30,30}}), iconTransformation(extent={{40,40},{60,
-                60}})));
-      Connectors.FaceBus zPositive if inclFacesZ
-        "Positive face along the z axis" annotation (Placement(transformation(
-              extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
-                {-40,-40}})));
 
     protected
-      parameter Boolean hasSpecies "true, if any species are included";
+      parameter Integer n_spec(start=0) "Number of species"
+        annotation (HideResult=true);
       final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
           inclTransZ}
         "true, if each component of translational momentum is included";
@@ -2159,9 +2137,6 @@ package Subregions
       final inner parameter Integer facesCart[Axis]=enumerate(inclFaces)
         "Face-pair indices of the Cartesian axes";
 
-      FCSys.Conditions.ByConnector.Amagat.Volume volume(V=V) if hasSpecies and
-        not void "Model to establish a fixed total volume"
-        annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregion",
@@ -2171,10 +2146,6 @@ package Subregions
 
     <p>At least one pair of faces must be included.
   All of the faces are included by default.</p>
-
-    <p>If <code>void</code> is <code>true</code>, then the total pressure of the species in each
-    phase sums to zero.  The total volume is then typically determined by one of the species in each phase (e.g., the solid).
-    may be at the species level.  This is useful to when all the species are incompressible.</p>
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
@@ -2266,7 +2237,8 @@ package Subregions
             Text(
               extent={{-100,56},{100,96}},
               textString="%name",
-              lineColor={0,0,0})}));
+              lineColor={0,0,0})}),
+        Diagram(graphics));
 
     end EmptySubregion;
 

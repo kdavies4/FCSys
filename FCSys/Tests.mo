@@ -67,12 +67,11 @@ package Tests "Models and functions for test and validation"
       // Note:  H+ is excluded to prevent reactions.
 
       output Q.Amount S(stateSelect=StateSelect.never) = subregion1.graphite.
-        'C+'.S + subregion2.graphite.'C+'.S + subregion1.ionomer.'SO3-'.S
-         + subregion2.ionomer.'SO3-'.S + subregion1.graphite.'e-'.S +
-        subregion2.graphite.'e-'.S + subregion1.gas.H2.S + subregion2.gas.H2.S
-         + subregion1.gas.H2O.S + subregion2.gas.H2O.S + subregion1.gas.N2.S +
-        subregion2.gas.N2.S + subregion1.gas.O2.S + subregion2.gas.O2.S
-        "Total entropy";
+        'C+'.S + subregion2.graphite.'C+'.S + subregion1.ionomer.'SO3-'.S +
+        subregion2.ionomer.'SO3-'.S + subregion1.graphite.'e-'.S + subregion2.graphite.
+        'e-'.S + subregion1.gas.H2.S + subregion2.gas.H2.S + subregion1.gas.H2O.S
+         + subregion2.gas.H2O.S + subregion1.gas.N2.S + subregion2.gas.N2.S +
+        subregion1.gas.O2.S + subregion2.gas.O2.S "Total entropy";
 
     equation
       assert(der(S) >= 0, "Entropy may not decrease.");

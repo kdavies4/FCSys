@@ -64,7 +64,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Potential Potential=1*U.V "Potential";
       parameter Q.PotentialAbsolute PotentialAbsolute=1*U.K
         "Absolute potential";
-      parameter Q.PotentialLineic PotentialLineic=1*U.V/U.m "Lineic potential";
+      parameter Q.ForceSpecific ForceSpecific=1*U.V/U.m "Specific force";
       parameter Q.PotentialPerWavenumber PotentialPerWavenumber=1*U.V*U.m/U.rad
         "Potential per wavenumber";
       parameter Q.PotentialRate PotentialRate=1*U.V/U.s "Rate of potential";
@@ -158,7 +158,7 @@ package Quantities "Quantities to represent physical properties"
   type Potential = TypeReal (final unit="l2.m/(N.T2)");
   type PotentialAbsolute = TypeReal (final unit="l2.m/(N.T2)", min=0)
     "Absolute potential";
-  type PotentialLineic = TypeReal (final unit="l.m/(N.T2)") "Lineic potential";
+  type ForceSpecific = TypeReal (final unit="l.m/(N.T2)") "Specific force";
   type PotentialPerWavenumber = TypeReal (final unit="l3.m/(A.N.T2)")
     "Potential per wavenumber";
   type PotentialRate = TypeReal (final unit="l2.m/(N.T3)") "Rate of potential";
