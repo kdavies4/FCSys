@@ -142,25 +142,21 @@ package BaseClasses "Base classes (generally not for direct use)"
       partial class SingleShort
         "Short icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end SingleShort;
 
@@ -203,9 +199,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                      extent={{-100,180},{100,220}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,180},{100,220}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top9;
 
@@ -273,9 +269,9 @@ package BaseClasses "Base classes (generally not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top2;
 
@@ -543,8 +539,8 @@ package BaseClasses "Base classes (generally not for direct use)"
           IncludeDirectory="modelica://FCSys/Resources/Source/C",
           Include="#include \"Chemistry.c\"",
           Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
-  stoichiometric coefficient (<code>n</code>), and
-  electrical charge (<code>z</code>) associated with an element as it appears in a chemical
+  stoichiometric coefficient (<i>n</i>), and
+  electrical charge (<i>z</i>) associated with an element as it appears in a chemical
   formula (<code>formula</code>).  After any initial whitespace in the <code>formula</code> string,
   which is ignored, the symbol must begin with a letter and may continue with lowercase letters.
   The symbol may be
@@ -692,7 +688,7 @@ package BaseClasses "Base classes (generally not for direct use)"
 An unrelated species may be included.");
         n := round(u[:, end]/minabs);
         annotation (Documentation(info="<html><p>This function returns a vector of
-  stoichiometric coefficients (<code>n</code>) that balance a chemical reaction
+  stoichiometric coefficients (<i>n</i>) that balance a chemical reaction
   among the species given by a vector of chemical formulas (<code>formulas</code>).
   If the reaction is ill-posed or non-unique, then the function will fail with
   a message.  Each formula is interpreted according to the rules in the
@@ -725,8 +721,8 @@ An unrelated species may be included.");
             a, 1)},
                 n + 1) annotation (Inline=true, derivative=dF);
         annotation (Documentation(info="<html>
-  <p>By definition, the partial derivative of this function with respect to <code>x</code>
-  (with <code>a</code> constant)
+  <p>By definition, the partial derivative of this function with respect to <i>x</i>
+  (with <i>a</i> constant)
   is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
   however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
       end F;

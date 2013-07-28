@@ -164,7 +164,7 @@ package Phases "Mixtures of species"
     // These make the selected states more readable.
 
   protected
-    Conditions.Adapters.AmagatDalton DA
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{90,-64},{70,-44}})));
     Conditions.Adapters.ChemicalReaction HOR(
@@ -192,6 +192,10 @@ package Phases "Mixtures of species"
   equation
     // Phase change
     connect(H2O.physical, physical.H2O) annotation (Line(
+        points={{-38.6,5},{-39,5},{-39,60}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(H2O.physical2, physical.H2O2) annotation (Line(
         points={{-38.6,5},{-39,5},{-39,60}},
         color={38,196,52},
         smooth=Smooth.None));
@@ -572,7 +576,7 @@ package Phases "Mixtures of species"
     // These make the selected states more readable.
 
   protected
-    Conditions.Adapters.AmagatDalton DA
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{60,-64},{40,-44}})));
     FCSys.Species.Reaction reaction(
@@ -920,7 +924,7 @@ package Phases "Mixtures of species"
     // These make the selected states more readable.
 
   protected
-    Conditions.Adapters.AmagatDalton DA
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{80,-76},{60,-56}})));
     Connectors.DirectInternal direct(
@@ -966,6 +970,7 @@ package Phases "Mixtures of species"
         points={{-32,-5.9},{-31,-7},{-31,-42},{9,-42},{9,-7},{8,-6},{8,-5.9}},
         color={47,107,251},
         smooth=Smooth.None));
+
     connect('SO3-'.intra[1], H2O.intra[2]) "SO3- and H2O" annotation (Line(
         points={{48,-5.9},{49,-7},{49,-42},{9,-42},{9,-7},{8,-6},{8,-5.9}},
         color={47,107,251},
@@ -1154,7 +1159,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1222,7 +1226,7 @@ package Phases "Mixtures of species"
               {20,-94},{40,-74}})));
 
   protected
-    Conditions.Adapters.AmagatDalton DA
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{30,-38},{10,-18}})));
 
@@ -1239,6 +1243,16 @@ package Phases "Mixtures of species"
     connect(DA.amagat, amagat) annotation (Line(
         points={{24,-28},{40,-28}},
         color={47,107,251},
+        smooth=Smooth.None));
+
+    // Phase change
+    connect(H2O.physical, physical.H2O) annotation (Line(
+        points={{-8.6,5},{-8.6,60.5},{-9,60.5},{-9,60}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(H2O.physical2, physical.H2O2) annotation (Line(
+        points={{-8.6,5},{-8.6,60.5},{-9,60.5},{-9,60}},
+        color={38,196,52},
         smooth=Smooth.None));
 
     // H2O
@@ -1277,11 +1291,6 @@ package Phases "Mixtures of species"
         points={{6.10623e-16,6.10623e-16},{-20,-20}},
         color={127,127,127},
         smooth=Smooth.None));
-    // Phase change
-    connect(H2O.physical, physical.H2O) annotation (Line(
-        points={{-8.6,5},{-8.6,60.5},{-9,60.5},{-9,60}},
-        color={38,196,52},
-        smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation of the
@@ -1314,9 +1323,9 @@ package Phases "Mixtures of species"
         "Scaling factor for diffusive transport" annotation (Dialog(group=
               "Geometry", __Dymola_label=
               "<html><b><i>k</i><sub>DT</sub></b></html>"));
-      inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter)
-        "Coupling factor for exchange with other phases" annotation (HideResult
-          =n_spec == 0, Dialog(group="Geometry", __Dymola_label=
+      inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
+         > 0 "Coupling factor for exchange with other phases" annotation (
+          Dialog(group="Geometry", __Dymola_label=
               "<html><i>k</i><sub>inter</sub></html>"));
 
       // Assumptions
@@ -1387,58 +1396,50 @@ package Phases "Mixtures of species"
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-        Icon(graphics={
-            Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-                  -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),
-            Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+        Icon(graphics={Ellipse(
+                  extent={{-40,100},{40,20}},
+                  lineColor={127,127,127},
+                  startAngle=30,
+                  endAngle=149,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Ellipse(
+                  extent={{20,-4},{100,-84}},
+                  lineColor={127,127,127},
+                  startAngle=270,
+                  endAngle=390,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Ellipse(
+                  extent={{-100,-4},{-20,-84}},
+                  lineColor={127,127,127},
+                  startAngle=149,
+                  endAngle=270,
+                  pattern=LinePattern.Dash,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={225,225,225}),Polygon(
+                  points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                94.5,-24},{60,-84}},
+                  pattern=LinePattern.None,
+                  fillPattern=FillPattern.Sphere,
+                  smooth=Smooth.None,
+                  fillColor={225,225,225},
+                  lineColor={0,0,0}),Line(
+                  points={{-60,-84.1},{60,-84.1}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Line(
+                  points={{34.5,80},{94.5,-24}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Line(
+                  points={{-34.5,80},{-94.5,-24}},
+                  color={127,127,127},
+                  pattern=LinePattern.Dash,
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0})}),
         Diagram(graphics));
     end PartialPhase;
 

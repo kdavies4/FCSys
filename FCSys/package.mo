@@ -27,8 +27,6 @@ import FCSys.Conditions.TestStands.Enumerations.FlowSpec;
 import FCSys.Conditions.TestStands.Enumerations.HumiditySpec;
 import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
 
-// **Use lowercase for all elements of all enumerations.
-
 // TODO:  Use getInstanceName() to improve assertions and other messages
 // once it is better supported (new in Modelica 3.3).
 
@@ -1114,6 +1112,21 @@ printing and shipping costs may be recovered.</p>
   end UsersGuide;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   preferedView="info",
   uses(Modelica(version="3.2")),
@@ -1220,7 +1233,8 @@ margin-right: auto;\" class=noBorder>
     <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a> components using
     <a href=\"modelica://FCSys.Conditions.Adapters\">adapters</a> that are included.
     <a href=\"#Fig3\">Figure 3</a> shows a series of polarization curves generated
-    from the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">CellProfile</a> model **Update with new plot (currently old result).
+    from the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">CellProfile</a> model 
+    TODO: Update with new plot (currently old result).
     Please see the <a href=\"modelica://FCSys.UsersGuide.SampleResults\">sample results</a> for more plots.</p>
 
     <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/Resources/Documentation/Polarization.png\"></a>

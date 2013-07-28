@@ -35,7 +35,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -278,12 +278,12 @@ package Characteristics
      <li>The data for this species is for C rather than C<sup>+</sup> (with the exception of specific mass).</li>
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-     <li>The default specific volume (<code>v=U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
+     <li>The default specific volume (<i>v</i> = <code>U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
   at 300&nbsp;K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
   are (also at 300&nbsp;K and based on the same reference) are:
   <ul>
-       <li>Amorphous carbon:  <code>v=U.cc*m/(1.950*U.g)</code></li>
-       <li>Diamond (type IIa):  <code>v=U.cc*m/(3.500*U.g)</code></li>
+       <li>Amorphous carbon:  <i>v</i> = <code>U.cc*m/(1.950*U.g)</code></li>
+       <li>Diamond (type IIa):  <i>v</i> = <code>U.cc*m/(3.500*U.g)</code></li>
        </li>
      </ul></p>
 
@@ -332,7 +332,7 @@ package Characteristics
    [<a href=\"modelica://FCSys.UsersGuide.References\">Mark1999</a>, p. 234].</li>
      <li>Thermodynamic data for this material is not available from
      [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity
-     (<code>b_c=[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
+     (<i>b<sub>c</sub></i> = <code>[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
      <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the furthest distance
    between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
    The radius of F is 147 pm (<a href=\"http://en.wikipedia.org/wiki/Fluorine\">http://en.wikipedia.org/wiki/Fluorine</a>).</li>
@@ -342,7 +342,7 @@ package Characteristics
    <a href=\"http://en.wikipedia.org/wiki/Nafion\">http://en.wikipedia.org/wiki/Nafion</a>,
        \"the molecular weight of Nafion is uncertain due to differences in
         processing and solution morphology.\"</li>
-     <li>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
+     <li>The specific volume (<i>v</i> = <code>U.cc*m/(2.00*U.g)</code>) is based on
    [<a href=\"modelica://FCSys.UsersGuide.References\">Lin2006</a>, p. A1327].
        </li>
      </ul></p>
@@ -377,13 +377,13 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
-     <li>The specific electron mass (<code>m</code>) is also given by the
+     <li>The specific electron mass (<i>m</i>) is also given by the
      constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
-     <code>2*R_inf*h/(q*c*alpha^2)</code>
+     2 <i>R</i><sub>&infin;</sub>&nbsp;<i>h</i>/(<i>q</i>&nbsp;<i>c</i>&nbsp;&alpha;<sup>2</sup>)
   (from <a href=\"http://en.wikipedia.org/wiki/Electron_rest_mass\">http://en.wikipedia.org/wiki/Electron_rest_mass</a>,
-  with <code>q</code> representing a single particle).  This evaluates to
-     <code>R_inf*(R_K*m*S)^2/(k_J*c^3*(pi*1e-7*s)^2)</code> or
-     <code>R_inf*25812.8074434^2/(k_J*c*(pi*1e-7*299792458)^2)</code> in terms of the base constants.</li>
+  with <i>q</i> representing a single particle).  This evaluates to
+     <i>R</i><sub>&infin;</sub>&nbsp;(<i>R</i><sub>K</sub>&nbsp;m&nbsp;S)<sup>2</sup>/(<i>k</i><sub>J</sub> <i>c</i><sup>3</sup>&nbsp;(&pi;&nbsp;10<sup>-7</sup>&nbsp;s)<sup>2</sup>) or
+     <i>R</i><sub>&infin;</sub>&nbsp;25812.8074434<sup>2</sup>/(<i>k</i><sub>J</sub>&nbsp;<i>c</i>&nbsp;(&pi;&nbsp;10<sup>-7</sup>&nbsp;299792458)<sup>2</sup>) in terms of the base constants.</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
   contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
@@ -612,7 +612,7 @@ package Characteristics
 <p>Additional notes:
      <ul>
      <li>See note in <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
-     <li>The default specific volume (<code>b_v=[U.cc*m/(0.99656*U.g)]</code>) is at 300&nbsp;K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
+     <li>The default specific volume (<i>b<sub>v</sub></i> = <code>[U.cc*m/(0.99656*U.g)]</code>) is at 300&nbsp;K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
      </ul></p>
 
 <p>For more information, see the
@@ -1478,12 +1478,12 @@ temperature difference.</p>
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
 
-    <li><code>d</code> is the Van der Waals diameter or the diameter for the
+    <li><i>d</i> is the Van der Waals diameter or the diameter for the
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
 
     <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
-    by the values in <code>T_lim_c</code>.
+    by the values in <i>T</i><sub>lim <i>c</i></sub>.
     The powers of <i>T</i> increase
     by column.
     By default,
@@ -1493,7 +1493,7 @@ temperature difference.</p>
     temperature is a potential with dimension L2.M/(N.T2); see
     the <a href=\"modelica://FCSys.Units\">Units</a> package.)</li>
 
-    <li><code>B_c</code>: As in <code>b_c</code>, the rows correspond to different
+    <li><i>B<sub>c</sub></i>: As in <i>b<sub>c</sub></i>, the rows correspond to different
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
@@ -1501,16 +1501,16 @@ temperature difference.</p>
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
 
-    <li><code>T_lim_c</code>: The first and last entries are the minimum and
+    <li><i>T</i><sub>lim<i>c</i></sub>: The first and last entries are the minimum and
     maximum valid temperatures.  The intermediate entries are the thresholds
-    between rows of <code>b_c</code> (and <code>B_c</code>).  Therefore, if there are <i>n</i> temperature intervals
-    (and rows in <code>b_c</code> and <code>B_c</code>), then <code>T_lim_c</code> must
+    between rows of <i>b<sub>c</sub></i> (and <i>B<sub>c</sub></i>).  Therefore, if there are <i>n</i> temperature intervals
+    (and rows in <i>b<sub>c</sub></i> and <i>B<sub>c</sub></i>), then <i>T</i><sub>lim<i>c</i></sub> must
     have <i>n</i> + 1 entries.</li>
 
-    <li>The reference pressure is <code>p0</code>.   In the
+    <li>The reference pressure is <i>p</i><sup>o</sup>.   In the
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
-    species.  For gases, the reference state is the ideal gas at <code>p0</code>.
-    For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <code>p0</code> with
+    species.  For gases, the reference state is the ideal gas at <i>p</i><sup>o</sup>.
+    For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> with
     <code>ReferenceEnthalpy.zeroAt25degC</code> selected is not exactly zero.</li>
 
     <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
@@ -1673,9 +1673,9 @@ temperature difference.</p>
 
 <p>Notes regarding the constants:
     <ul>
-    <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
+    <li><i>b<sub>v</sub></i>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>n_v[1] == -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
+    of <i>b<sub>v</sub></i> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
     <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
     where
     1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
@@ -1684,9 +1684,9 @@ temperature difference.</p>
     [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2].
     Currently,
     virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
-    If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
+    If additional terms are required, review and modify the definition of <i>b<sub>p</sub></i>.</li>
 
-    <li>The defaults for <code>b_v</code> and <code>n_v</code> represent ideal gas.</li>
+    <li>The defaults for <i>b<sub>v</sub></i> and <i>n<sub>v</sub></i> represent ideal gas.</li>
     </ul></p></html>"));
 
     end CharacteristicEOS;

@@ -30,9 +30,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Electrical current density, in A/cm2";
       output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
         "Total electrical current";
+      Q.Current I_H2_an_in=zI*anStoich/2;
+      Q.Current I_O2_ca_in=zI*caStoich/4;
 
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+      parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -53,15 +55,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
-            graphite('C+'(T_IC=T))))
+        Subregion(
+          gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
+          liquid(H2O(T_IC=T)),
+          graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
 
       AnGDLs.AnGDL anGDL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
-            graphite('C+'(T_IC=T))))
+        Subregion(
+          gas(H2(p_IC=p - p_H2O_an_in), H2O(
+              T_IC=T,
+              p_IC=p_H2O_an_in,
+              initTransY=InitTranslational.velocitySS)),
+          liquid(H2O(T_IC=T)),
+          graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
       AnCLs.AnCL anCL(
@@ -70,6 +79,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Subregion(
           ionomer('SO3-'(T_IC=T)),
           gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
+          liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
@@ -89,26 +99,35 @@ package Regions "3D arrays of discrete, interconnected subregions"
             H2O(T_IC=T, p_IC=p_H2O_ca_in),
             N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.n_O2)),
             O2(p_IC=(p - p_H2O_ca_in)*environment.n_O2)),
+          liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
 
       CaGDLs.CaGDL caGDL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(gas(
+        Subregion(
+          gas(
             H2O(T_IC=T, p_IC=p_H2O_ca_in),
             N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.n_O2)),
-            O2(p_IC=(p - p_H2O_ca_in)*environment.n_O2)), graphite('C+'(T_IC=T))))
+            O2(p_IC=(p - p_H2O_ca_in)*environment.n_O2)),
+          liquid(H2O(T_IC=T)),
+          graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
 
       CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(gas(
+        Subregion(
+          gas(
             H2O(T_IC=T, p_IC=p_H2O_ca_in),
             N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.n_O2)),
-            O2(p_IC=(p - p_H2O_ca_in)*environment.n_O2)), graphite('C+'(T_IC=T))))
+            O2(p_IC=(p - p_H2O_ca_in)*environment.n_O2)),
+          liquid(H2O(T_IC=T)),
+          graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
+      //initTransY=InitTranslational.velocitySS
+      //,initTransY=InitTranslational.velocitySS
 
       Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
           graphite(
@@ -154,7 +173,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
+                      I_H2_an_in/A_an,
                       anFP.n_x,
                       n_z)) .* A_an_seg),
             redeclare each function normalMeas =
@@ -167,7 +186,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*(p - p_H2O_an_in)*A_an),
+                      I_H2_an_in*p_H2O_an_in/((p - p_H2O_an_in)*A_an),
                       anFP.n_x,
                       n_z)) .* A_an_seg),
             redeclare each function normalMeas =
@@ -208,7 +227,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*(p - p_H2O_ca_in)*n_O2*A_ca),
+                      I_O2_ca_in*p_H2O_ca_in/((p - p_H2O_ca_in)*n_O2*A_ca),
                       caFP.n_x,
                       n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
@@ -221,7 +240,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(1 - n_O2)/(4*n_O2*A_ca),
+                      I_O2_ca_in*(1 - n_O2)/(n_O2*A_ca),
                       caFP.n_x,
                       n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
@@ -234,7 +253,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare each function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
+                      I_O2_ca_in/A_ca,
                       caFP.n_x,
                       n_z)) .* A_ca_seg),
             redeclare each function normalMeas =
@@ -300,11 +319,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Modelica.Blocks.Math.Feedback caNoneqSet
         annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
       Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
+          T=1) "Dynamics of the anode exit valve"
         annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
 
     protected
       Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
@@ -313,6 +329,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
         "Nonequilibrium pressure at the cathode outlet"
         annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
+    public
+      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
+          T=1) "Dynamics of the cathode exit valve"
+        annotation (Placement(transformation(extent={{-8,-80},{12,-60}})));
     equation
 
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
@@ -386,20 +406,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           points={{11,-20},{34,-20}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{11,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
           points={{-49,-70},{-38,-70}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
           points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
@@ -419,11 +431,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Regions.Examples.FPToFP.mos"),
         experiment(
           StopTime=230,
-          Tolerance=1e-06,
+          Tolerance=1e-05,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         experimentSetupOutput);
+      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
+          points={{13,-70},{34,-70}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
+          points={{-21,-70},{-10,-70}},
+          color={0,0,127},
+          smooth=Smooth.None));
     end FPToFP;
 
     model FPToFPCycle "Test one flow plate to the other"
@@ -456,7 +476,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Total electrical current";
 
       parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Geometry",__Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -836,7 +856,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experimentSetupOutput);
     end FPToFPCycle;
 
@@ -987,13 +1007,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           caBC.graphite.'e-'.face.rho*PEM.A[Axis.x]) - anBC.graphite.'e-'.face.mPhidot[
           1] ./ (anBC.graphite.'e-'.face.rho*PEM.A[Axis.x])
         "Electrical potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.face.phi[1]*anBC.graphite.
-          'e-'.face.rho "Electrical current density";
+      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.face.phi[1] .*
+          anBC.graphite.'e-'.face.rho "Electrical current density";
       output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
         "Electrical current density, in A/cm2";
 
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
+      parameter Q.Length L_y[:]=fill(U.m/2, 2) "Lengths along the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -1280,7 +1300,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
@@ -1402,7 +1422,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experiment(
           StopTime=110,
           Tolerance=1e-06,
@@ -1570,7 +1590,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Total electrical current";
 
       parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Geometry",__Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -1915,7 +1935,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experimentSetupOutput);
     end FPToFPO2;
 
@@ -1954,7 +1974,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Q.Current zI=sum(zJ .* outerProduct(L_y, L_z)) "Total electrical current";
 
       parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Geometry",__Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -2333,7 +2353,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experimentSetupOutput);
     end FPToFPLinearize;
 
@@ -2368,7 +2388,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Total electrical current";
 
       parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Geometry",__Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -2758,7 +2778,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experimentSetupOutput);
     end FPToFPSine;
 
@@ -2792,7 +2812,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Total electrical current";
 
       parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry", __Dymola_label=
+          Dialog(group="Geometry",__Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -3181,9 +3201,42 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-06,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         experimentSetupOutput);
     end FPToFPPulse;
+
+    connector Conn
+
+      Real Ndot_exch "Total exchange current";
+      flow Real Ndot "Current into this species";
+
+    end Conn;
+
+    model Mod
+
+      parameter Real Ndot=-1 "Incoming current due to this species";
+      Real Ndot_other "Incoming current due to the other species";
+
+      Conn conn
+        annotation (Placement(transformation(extent={{-58,14},{-38,34}})));
+
+    equation
+      conn.Ndot_exch = Ndot - Ndot_other;
+      conn.Ndot = Ndot + Ndot_other;
+
+    end Mod;
+
+    model TestMod
+
+      Mod mod annotation (Placement(transformation(extent={{-20,-14},{0,6}})));
+      Mod mod1 annotation (Placement(transformation(extent={{32,-8},{52,12}})));
+    equation
+      connect(mod.conn, mod1.conn) annotation (Line(
+          points={{-14.8,-1.6},{11.6,-1.6},{11.6,4.4},{37.2,4.4}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(graphics));
+    end TestMod;
   end Examples;
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
@@ -3194,7 +3247,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model AnFP "Anode flow plate"
       import FCSys.BaseClasses.Utilities.Polynomial;
       // extends FCSys.BaseClasses.Icons.Names.Top4;
-      import FCSys.Characteristics.'C+'.Graphite;
 
       extends Region(
         L_x={8*U.mm},
@@ -3209,8 +3261,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             inclTransY=true,
             inclTransZ=false,
             k_common=1e-4,
-            k_gl=5,
-            k_graphitel=5,
+            k_gas_liq=1e-7,
+            k_graphite_liq=1e-5,
             gas(
               reduceTrans=true,
               reduceThermal=true,
@@ -3223,30 +3275,30 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initTransZ=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(
-                consTransX=Conservation.IC,
-                p_IC=environment.p_H2O,
-                consEnergy=Conservation.IC)),
+              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
               k_DT=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilon*V,theta=U.m*U.K/(95*U.W)),
+              'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
                 consTransY=Conservation.IC,
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=2e-3*U.C,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C,
+                consEnergy=Conservation.dynamic))),
+        subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
+        annotation (IconMap(primitivesVisible=false));
+      //k_gas_liq=1e-7,
+      //k_graphite_liq=1e-5,
 
       //tauprime=1e-6*U.s,
 
@@ -3331,8 +3383,8 @@ computational fluid dynamics.</p>
 
 <p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
-of the carbon (<code>&theta; = U.m*U.K/(95*U.W)</code>) and the
-electrical conductivity (<code>sigma=U.S/(1.470e-3*U.cm)</code>)
+of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
+electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
 are that of Entegris/Poco Graphite AXF-5Q
 [<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].
 There is additional data in the
@@ -3511,20 +3563,22 @@ text layer of this model.</p>
               k_DT=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilon*V,theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none)),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT=fill(epsilon^(3/2), 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=Modelica.Constants.small,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C,
+                consEnergy=Conservation.IC))),
+        subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
+        annotation (IconMap(primitivesVisible=false));
+      //final tauprime=0,
 
       //tauprime=1e-6*U.s,
 
@@ -3532,7 +3586,7 @@ text layer of this model.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.55
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
         "Volumetric porosity" annotation (Dialog(group="Geometry",
             __Dymola_label="<html>&epsilon;</html>"));
 
@@ -3546,11 +3600,11 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.88</code>) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
+<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
 The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
 [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
 that reference may be outdated.
-  The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.W)</code>)
+  The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed Sigracet&reg; 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
   electrical conductivity
@@ -3877,25 +3931,28 @@ that reference may be outdated.
               'inclC+'=true,
               'incle-'=true,
               k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
-              'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W)),
-              J0=1*U.A/U.cm^2),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
+              J0=U.A/U.cm^2),
             ionomer(
               reduceThermal=true,
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
               k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
-              'SO3-'(V_IC=0.5*(V - epsilonV)),
               H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT=fill(epsilon^(3/2), 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=Modelica.Constants.small,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C,
+                consEnergy=Conservation.IC))),
+        subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
+              'SO3-'(V_IC=0.5*subregions.V*(1 - epsilon))))) annotation (
+          IconMap(primitivesVisible=false));
+
+      //final tauprime=0,
       // tauprime=U.s,
 
       // **temp H2O not in ionomer
@@ -3908,7 +3965,7 @@ that reference may be outdated.
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.2 "Volumetric porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -3923,8 +3980,6 @@ that reference may be outdated.
         "Electrical potential differences along the x axis";
 
     protected
-      final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
-
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
@@ -3939,14 +3994,14 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default thickness (<code>L_x = {28.7*U.um}</code>) is from [<a href=\"modelica://FCSys.UsersGuide.References\">Gurau1998</a>].
-The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.W)</code>)
+<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href=\"modelica://FCSys.UsersGuide.References\">Gurau1998</a>].
+The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed SGL Sigracet 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
-  electronical conductivity (<code>sigma=40*U.S/(12*U.cm)</code>)
+  electronical conductivity (&sigma; = <code>40*U.S/(12*U.cm)</code>)
   is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href=\"modelica://FCSys.Regions.AnGDLs.Sigracet10BA\">AnGDLs.Sigracet10BA</a>).
   The default
-  protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 (see <a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">PEMs.DuPontN112</a>).</p>
 
 <p>Default assumptions (may be adjusted):
@@ -4145,7 +4200,7 @@ the z axis extends across the width of the channel.</p>
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
 <p>The default
-  protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 (see <a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>).</p>
 
 <p>Assumptions:<ol>
@@ -4248,7 +4303,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004N]:
       //     Density:  (100 g/m2)/(51 um) = 1.9608 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-112 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4267,7 +4322,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004N] and [DuPont2005]:
       //     Density:  (250 g/m2)/(127 um) = 1.9685 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-115 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4286,7 +4341,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004N] and [DuPont2005]:
       //     Density:  (360 g/m2)/(183 um) = 1.9672 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-117 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4305,7 +4360,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004N] and [DuPont2005]:
       //     Density:  (500 g/m2)/(254 um) = 1.9685 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1110 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4323,7 +4378,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004N] and [DuPont2005]:
       //     Density:  (190 g/m2)/(89 um) = 2.1348 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1135 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4342,7 +4397,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004NRE]:
       //     Density:  (50 g/m2)/(25.4 um) = 1.9685 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4362,7 +4417,7 @@ the z axis extends across the width of the channel.</p>
       // Additional properties not incorporated [DuPont2004NRE]:
       //     Density:  (100 g/m2)/(50.8 um) = 1.9685 g/cm3
       annotation (defaultComponentName="PEM", Documentation(info="<html>
-  <p>The default value of protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  <p>The default value of protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
@@ -4421,7 +4476,7 @@ the z axis extends across the width of the channel.</p>
               k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=0.5*(V - epsilonV),theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
               J0=2e-12*U.A/U.cm^2,
               J_irr=5e-5*U.A/U.cm^2),
             ionomer(
@@ -4430,17 +4485,20 @@ the z axis extends across the width of the channel.</p>
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
-              'SO3-'(V_IC=0.5*(V - epsilonV)),
               H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT=fill(epsilon^(3/2), 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=Modelica.Constants.small,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C,
+                consEnergy=Conservation.IC))),
+        subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
+              'SO3-'(V_IC=0.5*subregions.V*(1 - epsilon))))) annotation (
+          IconMap(primitivesVisible=false));
+
+      //final tauprime=0,
 
       // tauprime=1e-6*U.s,
 
@@ -4449,7 +4507,7 @@ the z axis extends across the width of the channel.</p>
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.2 "Volumetric porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -4469,8 +4527,6 @@ the z axis extends across the width of the channel.</p>
 */
 
     protected
-      final parameter Q.Volume epsilonV=epsilon*V "Fluid volume";
-
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
@@ -4483,14 +4539,14 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default thickness (<code>L_x = {28.7*U.um}</code>) is from [<a href=\"modelica://FCSys.UsersGuide.References\">Gurau1998</a>].
-The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.W)</code>)
+<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href=\"modelica://FCSys.UsersGuide.References\">Gurau1998</a>].
+The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed SGL Sigracet 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
-  electronic mobility (<code>sigma=40*U.S/(12*U.cm)</code>)
+  electronic mobility (&sigma; = <code>40*U.S/(12*U.cm)</code>)
   is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href=\"modelica://FCSys.Regions.CaGDLs.Sigracet10BA\">CAGDLs.Sigracet10BA</a>).
   The default
-  protonic mobility (<code>mu=0.083*U.S/(0.95*U.M*U.cm)</code>)
+  protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 (see <a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">PEMs.DuPontN112</a>).</p>
 
 <p>Default assumptions (may be adjusted):
@@ -4681,20 +4737,23 @@ The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.
               k_DT=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilon*V,theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none)),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT=fill(epsilon^(3/2), 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=Modelica.Constants.small,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C,
+                consEnergy=Conservation.IC))),
+        subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
+        annotation (IconMap(primitivesVisible=false));
+
+      //final tauprime=0,
 
       // tauprime=1e-6*U.s,
 
@@ -4704,7 +4763,7 @@ The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.55
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
         "Volumetric porosity" annotation (Dialog(group="Geometry",
             __Dymola_label="<html>&epsilon;</html>"));
 
@@ -4726,11 +4785,11 @@ the z axis extends across the width of the channel.</p>
 
 <p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
 
-<p>The default porosity (<code>epsilon = 0.88</code>) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
+<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
 The porosity of a GDL may be lower than specified due to compression&mdash;0.4 according to 
 [<a href=\"modelica://FCSys.UsersGuide.References\">Bernardi1992</a>, p. 2483], although
 that reference may be outdated.
-  The default thermal conductivity of the carbon (<code>&theta; = U.m*U.K/(1.18*U.W)</code>)
+  The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed Sigracet&reg; 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
   electrical conductivity
@@ -4954,7 +5013,7 @@ that reference may be outdated.
       //         => D = P*L = 7.89e-6 m2/s, assuming p = 101.325 kPa
       //     Bulk density:  0.44 g/cm3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (<code>mu</code>) is based on the
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is not listed but is
   taken to be the same as for TGP-H-060, TGP-H-090, and TGP-H-120.</p>
 
@@ -4974,7 +5033,7 @@ that reference may be outdated.
       //         => D = P*L = 10.36e-6 m2/s, assuming p = 101.325 kPa
       //     Bulk density:  0.44 g/cm3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (<code>mu</code>) is based on the
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -4994,7 +5053,7 @@ that reference may be outdated.
       //         => D = P*L = 13.66e-6 m2/s, assuming p = 101.325 kPa
       //     Bulk density:  0.44 g/cm3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (<code>mu</code>) is based on the
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -5014,7 +5073,7 @@ that reference may be outdated.
       //         => D = P*L = 15.93e-6 m2/s, assuming p = 101.325 kPa
       //     Bulk density:  0.44 g/cm3
       annotation (defaultComponentName="caGDL", Documentation(info="<html>
-  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (<code>mu</code>) is based on the
+  <p>The default properties are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -5043,9 +5102,9 @@ that reference may be outdated.
             inclTransX=true,
             inclTransY=true,
             inclTransZ=false,
-            k_common=3e-5,
-            k_gl=5,
-            k_graphitel=5,
+            k_common=3e-10,
+            k_gas_liq=1e-7,
+            k_graphite_liq=1e-5,
             gas(
               reduceTrans=true,
               reduceThermal=true,
@@ -5075,23 +5134,33 @@ that reference may be outdated.
               k_DT=fill((1 - epsilon)^(3/2), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(V_IC=V - epsilon*V,theta=U.m*U.K/(95*U.W)),
+              'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
                 consTransY=Conservation.IC,
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
-                N_IC=2e-3*U.C,
-                consEnergy=Conservation.IC)))) annotation (IconMap(
-            primitivesVisible=false));
+                N_IC=2e-6*U.C))),
+        subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
+        annotation (IconMap(primitivesVisible=false));
 
-      //tauprime=1e-6*U.s,
+      //final beta=0,
+      //final beta=0,
+      //final beta=0,
+
+      //initTransX=InitTranslational.none,
+      //initTransX=InitTranslational.none,
+      //
+      //final beta=0,
+      //final beta=0,
+
+      //  **enable thermal dynamics of the gas
 
       //tauprime=FCSys.Characteristics.H2O.Liquid.tauprime()/3e-4,
 
@@ -5161,8 +5230,8 @@ computational fluid dynamics.</p>
 
 <p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
-of the carbon (<code>&theta; = U.m*U.K/(95*U.W)</code>) and the
-electrical conductivity (<code>sigma=U.S/(1.470e-3*U.cm)</code>)
+of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
+electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
 are that of Entegris/Poco Graphite AXF-5Q
 [<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].
   There is additional data in the
@@ -5441,7 +5510,7 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
     // can remain as they are.
     annotation (
       Documentation(info="<html>
-  <p>If <code>L_x</code> is an empty vector (e.g., <code>zeros(0)</code>,
+  <p>If <i>L</i><sub>x</sub> is an empty vector (e.g., <code>zeros(0)</code>,
   <code>ones(0)</code>, or <code>fill(1, 0)</code>), then there are no
   subregions along the x axis and the boundaries along the x axis are
   directly connected.  The same applies to the other axes.</li></p>

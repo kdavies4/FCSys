@@ -940,7 +940,7 @@ encompass other systems of units.</p>
     record Stoney "Base constants and units for Stoney units"
 
       extends Gaussian(final k_J=2e-7*299792458/25812.8074434);
-      annotation (Documentation(info="<html><p>The Rydberg constant (<code>R_inf</code>)
+      annotation (Documentation(info="<html><p>The Rydberg constant (<i>R</i><sub>&infin;</sub>)
   is not final because the <a href=\"modelica://FCSys.Units\">Units</a> package does not
   include the gravitational constant.  The candela (<code>'cd'</code>)
   is not final because luminous intensity is not included in Stoney units.</p>
@@ -1210,7 +1210,7 @@ encompass other systems of units.</p>
   <p>Some natural systems of units
   are not compatible with <a href=\"modelica://FCSys\">FCys</a>.
   Since the Faraday and gas constants
-  are both normalized, it follows that <code>k_B = q</code>.  This is not
+  are both normalized, it follows that <i>k</i><sub>B</sub> = <i>q</i>.  This is not
   the case for the Planck, Rydberg, and Natural systems of units
   [<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>].</p>
 
@@ -1593,7 +1593,7 @@ encompass other systems of units.</p>
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Units\">Units</a> package is abbreviated as <code>U</code> for convenience throughout
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.  For example, an initial pressure might be defined as
-  <code>p_IC = U.atm</code>.</p>
+  <i>p</i><sub>IC</sub> = <code>U.atm</code>.</p>
 
   <p>The information below has been updated from
   [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].  That paper

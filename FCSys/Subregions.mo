@@ -237,8 +237,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion.xPositive, BC2.face) annotation (Line(
-          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,
-              -2.54679e-16}},
+          points={{10,6.10623e-16},{16,6.10623e-16},{16,-2.54679e-16},{20,-2.54679e-16}},
+
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -476,7 +476,7 @@ package Subregions
             origin={24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -488,7 +488,7 @@ package Subregions
             origin={0,-24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC4(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -500,7 +500,7 @@ package Subregions
             origin={0,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -512,7 +512,7 @@ package Subregions
             origin={24,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC6(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),

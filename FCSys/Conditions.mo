@@ -1012,6 +1012,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
               color={127,127,127},
               smooth=Smooth.None));
+
           connect(H2O.heatPort, heatPort) annotation (Line(
               points={{8,-24},{60,-24},{60,-40},{80,-40}},
               color={191,0,0},
@@ -1139,6 +1140,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
               color={127,127,127},
               smooth=Smooth.None));
+
           connect(O2.fluidPort, junction.purePort3) annotation (Line(
               points={{8,-16},{34,-16},{34,36},{42,36}},
               color={0,127,255},
@@ -1208,6 +1210,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
               color={127,127,127},
               smooth=Smooth.None));
+
           connect('C+'.heatPort, heatPort) annotation (Line(
               points={{8,-24},{40,-24},{40,-40},{80,-40}},
               color={191,0,0},
@@ -1972,6 +1975,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     // TODO: Move simplified parameter labels to __Dymola_label; give
     // full description in description string.
+
+    // TODO: Update this package for new connectors.
 
     package Reaction
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
@@ -4779,7 +4784,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      300*U.K)), 'e-'(
+                      300*U.K)),'e-'(
                 redeclare replaceable function materialSpec =
                     Conditions.ByConnector.Face.Single.Material.density,
                 redeclare replaceable function normalSpec =
@@ -9022,7 +9027,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Documentation(info="<html><p>This model modulates the electrical current applied to the cell 
     according to an input.
     The current density is the sum of a steady-state large-signal current density and a small-signal 
-    current density introduced via the input <code>zJ_small_SI</code>.</p>
+    current density introduced via the input <i>zJ</i><sub>small SI</sub>.</p>
        
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"),
@@ -9056,7 +9061,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm}
         "Lengths of the segments across the channel" annotation (Dialog(group=
-              "Cell geometry", __Dymola_label=
+              "Cell geometry",__Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_x_an=size(L_x_an, 1)
         "Number of subregions along the through-cell axis in anode FP"
@@ -9793,10 +9798,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     than 100 %.  In that case, liquid
     water is injected to provide the amount above saturation.  The relative humidity
     is taken to be equal to the quotient of the H<sub>2</sub>O vapor pressure 
-    (<code>p_H2O_an_in</code> or <code>p_H2O_an_in</code>) and the saturation pressure.
+    (<i>p</i><sub>H2O an in</sub> or <i>p</i><sub>H2O ca in</sub>) and the saturation pressure.
     Therefore liquid water will also be injected if the specified vapor pressure is specified 
-    to be above saturation pressure or the specified dew point (<code>T_sat_an_in</code> or 
-    <code>T_sat_ca_in</code>) is above the actual temperature.</p>
+    to be above saturation pressure or the specified dew point (<i>T</i><sub>sat an in</sub> or 
+    <i>T</i><sub>sat ca in</sub>) is above the actual temperature.</p>
     
     <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
     given current
@@ -9853,6 +9858,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           current "Equivalent current",
           volumetric "Standard volumetric rate (conditions on Advanced tab)",
           pressure "Inlet pressure") "Ways to specify the anode flow rate";
+
       type HumiditySpec = enumeration(
           relative "Relative humidity",
           pressure "Vapor pressure",

@@ -317,6 +317,7 @@ package WorkInProgress "Incomplete classes under development"
         points={{-100,-10},{-100,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
         color={0,0,255},
         smooth=Smooth.None));
+
     connect(capacitor.n, resistor2.n) annotation (Line(
         points={{30,-10},{30,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
         color={0,0,255},
@@ -489,6 +490,7 @@ package WorkInProgress "Incomplete classes under development"
   end FaceReaction;
 
   model Triangle
+
     annotation (Diagram(graphics={Polygon(
               points={{-8,-7},{-4,-7},{4,-7},{8,-7},{10,-3},{7.7725,0.342},{
               4.683,4.976},{2,9},{-2,9},{-4.5795,5.131},{-7.782,0.327},{-10,-3},
@@ -504,4 +506,5 @@ package WorkInProgress "Incomplete classes under development"
       file="test/check.mos" "Check all of FCSys using Dymola's check function.",
 
       file="../../../LaTeX/Dissertation/Results/Cell/Simulation/sim.mos"));
+
 end WorkInProgress;

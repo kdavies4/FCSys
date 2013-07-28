@@ -50,9 +50,9 @@ package Species "Dynamic models of chemical species"
     <li>Mobility is zero (by default).</li>
     </ol></p>
 
-   <p>The default isobaric specific heat capacity (<code>b_c = [935*U.J*Data.m/(U.kg*U.K)]</code>)
+   <p>The default isobaric specific heat capacity (<i>b<sub>c</sub></i> = <code>[935*U.J*Data.m/(U.kg*U.K)]</code>)
    and thermal
-   resistivity (<code>&theta; = U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
+   resistivity (&theta; = <code>U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
    composite (with heat flow parallel to the fibers) at 300&nbsp;K
    [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
    The integration offset for specific entropy is set such that
@@ -63,20 +63,20 @@ package Species "Dynamic models of chemical species"
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"top\" id=\"Tab1\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].</caption>
     <tr>
-      <th rowspan=3 valign=\"middle\"><code>T<br>/U.K</code></th>
+      <th rowspan=3 valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th rowspan=1 colspan=2 width=1 valign=\"middle\">Diamond (type IIa)</th>
       <th rowspan=1 colspan=1 width=1 valign=\"middle\">Amorphous<br>carbon</th>
       <th rowspan=1 colspan=3 width=1 valign=\"middle\">Graphite (pyrolytic)</th>
       <th rowspan=1 colspan=3 width=1>Graphite fiber epoxy (25% vol)<br>composite</th>
     </tr>
     <tr>
-      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>&theta;<br>*U.W<br>/(U.m<br>*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>&theta;<br>*U.W<br>/(U.m<br>*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>&theta;*U.W/(U.m*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>&theta;*U.W/(U.m*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><i>c<sub>p</sub></i><code>*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=2 valign=\"middle\">&theta;<code><br>*U.W<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\">&theta;<code><br>*U.W<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><i>c<sub>p</sub></i><code>*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=1 colspan=2>&theta;<code>*U.W/(U.m*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><i>c<sub>p</sub></i><code>*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=1 colspan=2>&theta;<code>*U.W/(U.m*U.K)</code></th>
     </tr>
     <tr>
       <th valign=\"middle\">Parallel<br>to layers</th>
@@ -136,7 +136,7 @@ package Species "Dynamic models of chemical species"
     <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
-    <p>The default thermal resistivity (<code>&theta;=U.m*U.K/(0.16*U.W)</code>) is of dry
+    <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277].</p>
 
 <p>For more information, see the
@@ -284,6 +284,7 @@ package Species "Dynamic models of chemical species"
           upstreamX=false,
           upstreamY=false,
           upstreamZ=false);
+
         //(n_v={0,0},          b_v=FCSys.Characteristics.'SO3-'.Ionomer.b_v),
 
         //        final theta=Modelica.Constants.inf,
@@ -314,16 +315,16 @@ package Species "Dynamic models of chemical species"
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by other configurations.</li>
     </ol></p>
 
-  <p>The default resistivities (<code>&zeta;=1/(5.3e-6*U.Pa*U.s)</code> and <code>&theta;=U.m*U.K/(0.1661*U.W)</code>) are of H gas
+  <p>The default resistivities (&zeta; = <code>1/(5.3e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(0.1661*U.W)</code>) are of H gas
   (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139]</caption>
 <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>200</td><td>1/3.8e-6</td><td>1/0.1197</td></tr>
 <tr><td>300</td><td>1/5.3e-6</td><td>1/0.1661</td></tr>
@@ -407,7 +408,7 @@ package Species "Dynamic models of chemical species"
         extends FCSys.Species.CompressibleSpecies(
           redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                 b_v=[1], n_v={-1,0}),
-          redeclare final parameter Q.TimeAbsolute tauprime=Data.tauprime(),
+          redeclare final parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
@@ -430,18 +431,18 @@ package Species "Dynamic models of chemical species"
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default resistivities (<code>&zeta;=1/(89.6e-7*U.Pa*U.s)</code>
-and <code>&theta;=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1&nbsp;atm and
+<p>The default resistivities (&zeta; = <code>1/(89.6e-7*U.Pa*U.s)</code>
+and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1 ><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1 ><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>11.23e3</td><td>1/42.1e-7</td><td>1/67.0e-3</td></tr>
 <tr><td>150</td><td>12.60e3</td><td>1/56.0e-7</td><td>1/101e-3</td></tr>
@@ -508,15 +509,14 @@ and <code>&theta;=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
       model Fixed "Fixed properties"
         extends FCSys.Species.CompressibleSpecies(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1], n_v={-1,0}),
-          final tauprime=0,
+                b_v=[1],n_v={-1,0}),
+          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(9.09e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W));
-        // **temp factor on tauprime
         // See the documentation for tables of values.
 
         output Q.NumberAbsolute RH(
@@ -538,8 +538,8 @@ and <code>&theta;=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default resistivities (<code>&zeta;=1/(9.09e-6*U.Pa*U.s)</code>
-and <code>&theta;=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
+<p>The default resistivities (&zeta; = <code>1/(9.09e-6*U.Pa*U.s)</code>
+and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.  <a href=\"#Tab2\">Table 2</a> lists the properties of H<sub>2</sub>O gas at 1&nbsp;atm.
   See also
@@ -548,10 +548,10 @@ and <code>&theta;=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>273.15</td><td>1854</td><td>1/8.02e-6</td><td>1/18.2e-3</td></tr>
 <tr><td>275</td><td>1855</td><td>1/8.09e-6</td><td>1/18.3e-3</td></tr>
@@ -613,10 +613,10 @@ and <code>&theta;=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"top\" id=\"Tab2\">Table 2: Properties of H<sub>2</sub>O gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1 ><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1 ><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>380</td><td>2.060e3</td><td>1/127.1e-7</td><td>1/24.6e-3</td></tr>
 <tr><td>400</td><td>2.014e3</td><td>1/134.4e-7</td><td>1/26.1e-3</td></tr>
@@ -740,8 +740,8 @@ and <code>&theta;=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default resistivities (<code>&zeta;=1/(855e-6*U.Pa*U.s)</code>
-and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
+<p>The default resistivities (&zeta; = <code>1/(855e-6*U.Pa*U.s)</code>
+and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.
   See also
@@ -750,10 +750,10 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>273.15</td><td>4217</td><td>1/1750e-6</td><td>1/569e-3</td></tr>
 <tr><td>275</td><td>4211</td><td>1/1652e-6</td><td>1/574e-3</td></tr>
@@ -851,17 +851,13 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
               b_c=[1041*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (1041*U.J*Data.m/U.kg)*298.15, 191.610*U.J/
                   (U.mol*U.K) - (1041*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
-          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity zeta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W));
-
-        // **    redeclare final parameter Q.Fluidity beta=0,
-
-        // **temp factor beta for PipeFlow
 
         // See the documentation for a table of values.
         annotation (
@@ -874,8 +870,8 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
 
     </ol></p>
 
-<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
-(<code>&zeta;=1/(17.82e-6*U.Pa*U.s)</code> and <code>&theta;=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1&nbsp;atm and
+<p>The default specific heat capacity (<i>b<sub>c</sub></i> = <code>[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
+(&zeta; = <code>1/(17.82e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
    The integration offset for specific entropy is set such that
    the specific entropy is 191.610&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;bar).
@@ -886,10 +882,10 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>1.070e3</td><td>1/68.8e-7</td><td>1/9.58e-3</td></tr>
 <tr><td>150</td><td>1.050e3</td><td>1/100.6e-7</td><td>1/13.9e-3</td></tr>
@@ -917,7 +913,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of N<sub>2</sub> gas at 1&nbsp;atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><code>&eta;*U.s<br>/U.cm^2</code></th>
     </tr>
 <tr><td>77.7</td><td>0.0168</td></tr>
@@ -927,7 +923,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   </table></p>
 
   <p>The fluidity of air at 15.0&nbsp;&deg;C and 1&nbsp;atm is given by
-       <code>&zeta;=1/(17.8e-6*U.Pa*U.s)</code>
+       &zeta; = <code>1/(17.8e-6*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
 
 <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
@@ -961,7 +957,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         extends FCSys.Species.CompressibleSpecies(
           redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                 b_v=[1], n_v={-1,0}),
-          redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
@@ -971,9 +967,9 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         // See the documentation for a table of values.
 
         parameter Q.PressureAbsolute p_stop=5*U.Pa
-          "Pressure below which the simulation should terminate"
-          annotation (Dialog(tab="Advanced"));
-        // **dymola label
+          "Pressure below which the simulation should terminate" annotation (
+            Dialog(tab="Advanced", __Dymola_label=
+                "<html><i>p</i><sub>stop</sub></html>"));
 
       equation
         when p < p_stop then
@@ -996,7 +992,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-  <p>The default resistivities (<code>&zeta;=1/(207.2e-7*U.Pa*U.s)</code> and <code>&theta;=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
+  <p>The default resistivities (&zeta; = <code>1/(207.2e-7*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures. <a href=\"#Tab2\">Table 2</a> lists
   values of the material resistivity or self diffusion coefficient.</p>
@@ -1005,10 +1001,10 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1&nbsp;atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
-      <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>&zeta;<br>*U.Pa*U.s</code></th>
-      <th width=1><code>&theta;*U.W<br>/(U.m*U.K)</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&zeta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>0.962e3</td><td>1/76.4e-7</td><td>1/9.25e-3</td></tr>
 <tr><td>150</td><td>0.921e3</td><td>1/114.8e-7</td><td>1/13.8e-3</td></tr>
@@ -1036,7 +1032,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
   <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of O<sub>2</sub> gas at 1&nbsp;atm
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
   <tr>
-      <th valign=\"middle\"><code>T<br>/U.K</code></th>
+      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><code>&eta;*U.s<br>/U.cm^2</code></th>
     </tr>
 <tr><td>77.7</td><td>0.0153</td></tr>
@@ -1136,7 +1132,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
     parameter Q.CurrentAreic J_irr=0 "Irreversible current of side-reactions"
       annotation (Dialog(__Dymola_label="<html><i>J</i><sub>irr</sub></html>"));
     parameter Q.NumberAbsolute alpha(max=1) = 0.5 "Charge transfer coefficient"
-      annotation (Dialog(enable=not fromCurrent,__Dymola_label=
+      annotation (Dialog(enable=not fromCurrent, __Dymola_label=
             "<html>&alpha;</html>"));
     parameter Boolean fromCurrent=false
       "<html>Calculate potential from reaction rate (requires &alpha;=0.5)</html>"
@@ -1222,11 +1218,11 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}),
+              extent={{-40,40},{40,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 
@@ -1315,7 +1311,9 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         "Thermal resistivity" annotation (Dialog(group="Material properties",
             __Dymola_label="<html>&theta;</html>"));
 
-      parameter Integer n_intra=0 "**" annotation (Dialog(connectorSizing=true));
+      parameter Integer n_intra=0
+        "Number of exchange connections within the phase"
+        annotation (Dialog(connectorSizing=true));
       parameter Q.NumberAbsolute k_intra[n_intra]=ones(n_intra)
         "Coupling factors for exchange with other species within the phase"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -1335,7 +1333,7 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
           enable=inclTrans[1],
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean upstreamY=true "Y" annotation (
+      parameter Boolean upstreamY=false "Y **temp false" annotation (
         Evaluate=true,
         Dialog(
           tab="Assumptions",
@@ -1655,10 +1653,12 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
       output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(
         if inclFaces[cartTrans[i]] then -Delta(p_faces[facesCart[cartTrans[i]],
         :])*A[cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
-      output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m
-        *((actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(
-        physical.phi) - phi) .* physical.Ndot) if environment.analysis
-        "Acceleration force due to advective exchange";
+      /*
+  output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*((
+    actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(physical.phi)
+     - phi) .* physical.Ndot) if environment.analysis 
+    "Acceleration force due to advective exchange";
+  */
       output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.translational.mPhidot
          + {sum(inter[:].mPhidot[i]) for i in 1:n_trans} + {sum(intra[:].mPhidot[
         i]) for i in 1:n_trans} if environment.analysis
@@ -1678,13 +1678,14 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         *der(phi))/U.s if environment.analysis
         "Rate of energy storage (internal and kinetic) and boundary work at constant mass";
       // Note that T*der(s) = der(u) + p*der(v).
-      output Q.Power Edot_AE(stateSelect=StateSelect.never) = (chemical.mu +
-        actualStream(chemical.sT) - h + (actualStream(chemical.phi)*
-        actualStream(chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot + (
-        physical.mu + actualStream(physical.sT) - h + (actualStream(physical.phi)
-        *actualStream(physical.phi) - phi*phi)*Data.m/2)*physical.Ndot if
-        environment.analysis
-        "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
+      /*
+  output Q.Power Edot_AE(stateSelect=StateSelect.never) = (chemical.mu + 
+    actualStream(chemical.sT) - h + (actualStream(chemical.phi)*actualStream(
+    chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot + (physical.mu + 
+    actualStream(physical.sT) - h + (actualStream(physical.phi)*actualStream(
+    physical.phi) - phi*phi)*Data.m/2)*physical.Ndot if environment.analysis 
+    "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
+ */
       output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.translational.phi
         *direct.translational.mPhidot + sum(inter[i].phi*inter[i].mPhidot for i
          in 1:n_inter) + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra)
@@ -1721,25 +1722,26 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         "Connector for phase change" annotation (Placement(transformation(
               extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-76,40},
                 {-96,60}})));
-      FCSys.Connectors.Direct direct(
+      Connectors.Direct direct(
         final n_trans=n_trans,
         translational(phi(final start=phi_IC[cartTrans], final fixed=false)),
         thermal(T(final start=T_IC, final fixed=false)))
-        "**Connector to directly couple velocity or temperature with other species within the phase"
+        "Connector to directly couple velocity or temperature with other species"
         annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
             iconTransformation(extent={{50,-70},{70,-90}})));
-      FCSys.Connectors.Intra intra[n_intra](
+
+      Connectors.Intra intra[n_intra](
         each final n_trans=n_trans,
         each phi(final start=phi_IC[cartTrans], final fixed=false),
         each T(final start=T_IC, final fixed=false))
-        "**Connector to directly couple velocity or temperature with other phases"
+        "Connector to exchange translational momentum and energy within the phase"
         annotation (Placement(transformation(extent={{10,-10},{30,10}}),
             iconTransformation(extent={{70,-49},{90,-69}})));
-      FCSys.Connectors.Inter inter[n_inter](
+      Connectors.Inter inter[n_inter](
         each final n_trans=n_trans,
         each phi(final start=phi_IC[cartTrans], final fixed=false),
         each T(final start=T_IC,final fixed=false))
-        "**Connector to directly couple velocity or temperature with other species within the phase"
+        "Connector to exchange translational momentum and energy with all other species"
         annotation (Placement(transformation(extent={{30,10},{50,30}}),
             iconTransformation(extent={{84,-20},{104,-40}})));
 
@@ -1821,7 +1823,8 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         Axis]={initTransX,initTransY,initTransZ}
         "Initialization methods for translational momentum"
         annotation (HideResult=true);
-      outer parameter Integer n_inter "**" annotation (missingInnerMessage="This model should be used within a phase model.
+      outer parameter Integer n_inter "Number of exchange connections"
+        annotation (missingInnerMessage="This model should be used within a phase model.
       ");
       outer parameter Q.NumberAbsolute k_inter[:]
         "Coupling factor for exchange with other phases" annotation (
@@ -1838,6 +1841,8 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
         "Directly-calculated shear forces";
       Q.Velocity phi_actual_chemical[n_trans] "Velocity of the chemical stream";
       Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
+      Q.Velocity phi_actual_physical2[n_trans]
+        "Velocity of the physical stream";
       // Note:  Dymola 7.4 can't individually index the components of a
       // stream variable (e.g., actualStream(chemical.phi[i])), so these
       // variables are necessary.
@@ -1845,6 +1850,16 @@ and <code>&theta;=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at s
     protected
       outer Conditions.Environment environment "Environmental conditions";
 
+    public
+      Connectors.Physical physical2(
+        final formula=Data.formula,
+        final n_trans=n_trans,
+        mu(start=g_IC, fixed=false),
+        phi(final start=phi_IC[cartTrans], each final fixed=false),
+        sT(final start=h_IC - g_IC, final fixed=false))
+        "Connector for phase change" annotation (Placement(transformation(
+              extent={{-56,20},{-36,40}}), iconTransformation(extent={{-76,40},
+                {-96,60}})));
     initial equation
       // Check the initial conditions.
       assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
@@ -1999,6 +2014,7 @@ Choose any condition besides None.");
         n_faces};
       phi_actual_chemical = actualStream(chemical.phi);
       phi_actual_physical = actualStream(physical.phi);
+      phi_actual_physical2 = actualStream(physical2.phi);
 
       // Thermodynamic correlations
       if invertEOS then
@@ -2014,16 +2030,33 @@ Choose any condition besides None.");
       // Diffusive exchange
       // ------------------
       // Material via phase change
-      if tauprime > Modelica.Constants.small then
-        //    1e4*tauprime*physical.Ndot = k_N*(N - Modelica.Constants.eps)*(exp((
-        //      physical.mu - g0)/T) - exp((chemical.mu - g0)/T)) "Phase change";
-        1e4*tauprime*physical.Ndot = k_N*(N - 1e-2*U.C)*(physical.mu - chemical.mu)
-          "Phase change";
-      else
+      if cardinality(physical) == 0 or tauprime <= Modelica.Constants.small
+           then
         physical.mu = chemical.mu;
-        // The first branch avoids nonlinear equations when tauprime=0.
-        // Dymola 7.4 can't derive it symbolically from the previous equation.
+      else
+        if Data.phase == Phase.gas then
+          1e5*tauprime*physical.Ndot = min(k_N*2*(N - 1e-6*U.C)*(exp((physical.mu
+             - chemical.mu)/T) - 1), 0) "Phase change";
+        else
+          physical.mu = chemical.mu;
+          // The first branch avoids nonlinear equations when tauprime=0.
+          // Dymola 7.4 can't derive it symbolically from the previous equation.
+        end if;
       end if;
+      if cardinality(physical2) == 0 or tauprime <= Modelica.Constants.small
+           then
+        physical2.mu = chemical.mu;
+      else
+        if Data.phase == Phase.gas then
+          physical2.mu = chemical.mu;
+        else
+          1e5*tauprime*physical2.Ndot = min(k_N*2*(N - 1e-6*U.C)*(exp((
+            physical2.mu - chemical.mu)/T) - 1), 0) "Phase change";
+          // The first branch avoids nonlinear equations when tauprime=0.
+          // Dymola 7.4 can't derive it symbolically from the previous equation.
+        end if;
+      end if;
+
       //
       // Material via reaction: Determined by the Reaction model.
       //
@@ -2040,8 +2073,10 @@ Choose any condition besides None.");
       // Properties upon outflow due to reaction and phase change
       chemical.phi = phi;
       physical.phi = phi;
+      physical2.phi = phi;
       chemical.sT = s*T;
       physical.sT = chemical.sT;
+      physical2.sT = chemical.sT;
 
       // Diffusive transport
       for i in 1:n_faces loop
@@ -2149,7 +2184,7 @@ Choose any condition besides None.");
         end if;
       else
         (if consMaterial == Conservation.dynamic then der(N)/U.s else 0) =
-          chemical.Ndot + physical.Ndot + sum(Ndot_faces)
+          chemical.Ndot + physical.Ndot + physical2.Ndot + sum(Ndot_faces)
           "Material conservation";
       end if;
 
@@ -2176,12 +2211,14 @@ Choose any condition besides None.");
             cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(p_faces[
             facesCart[cartTrans[j]], :])*A[cartTrans[j]] else 0) = Data.m*((
             phi_actual_chemical[j] - phi[j])*chemical.Ndot + (
-            phi_actual_physical[j] - phi[j])*physical.Ndot) + direct.translational.mPhidot[
+            phi_actual_physical[j] - phi[j])*physical.Ndot + (
+            phi_actual_physical2[j] - phi[j])*physical2.Ndot) + direct.translational.mPhidot[
             j] + sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((
             faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)] - {phi[j],
             phi[j]})*Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[
             cartWrap(cartTrans[j] - cartFaces[i] + 1)]) for i in 1:n_faces)
             "Conservation of translational momentum";
+
           // Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive
           // form of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
         end if;
@@ -2228,7 +2265,9 @@ Choose any condition besides None.");
           actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
           /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
           actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*Data.m
-          /2)*physical.Ndot + direct.translational.phi*direct.translational.mPhidot
+          /2)*physical.Ndot + (physical2.mu + actualStream(physical2.sT) - h +
+          (actualStream(physical2.phi)*actualStream(physical2.phi) - phi*phi)*
+          Data.m/2)*physical2.Ndot + direct.translational.phi*direct.translational.mPhidot
            + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + sum(intra[
           i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter.Qdot) +
           direct.thermal.Qdot + sum(intra.Qdot) + sum((Data.h(faces[i, :].T,
@@ -2238,6 +2277,7 @@ Choose any condition besides None.");
           cartFaces[i] + 1)]*faces[i, :].mPhidot[cartWrap(cartTrans[j] -
           cartFaces[i] + 1)] for j in 1:n_trans) for i in 1:n_faces) + sum(
           faces.Qdot) "Conservation of energy";
+
         // Note:  In Dymola 7.4 will crash unless the following summation
         //   sum(intra.phi .* intra.mPhidot)
         // is explicitly expanded to
@@ -2277,6 +2317,10 @@ Choose any condition besides None.");
     associated with differences in activity, velocity, and temperature (respectively) between
     each configuration and a common node.  These exchange processes are diffusive.
 
+    <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Exchange.png\">
+<br>Figure 1:  Exchange of a quantity (material, translational momentum, or thermal energy) among configurations
+    (A, B, and C) within a subregion.</p>
+
     <p>In general, the resistances are included within the
     <a href=\"modelica://FCSys.Species\">Species</a> model.  For reactions, however,
     the rate equation is more complex and is included in the
@@ -2292,18 +2336,14 @@ Choose any condition besides None.");
     <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>).
   The rate of advection of translational momentum is the
   product of the velocity of the source (&phi;) and the mass flow rate
-  (<i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
+  (<i>M&#775;</i> or <i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
   specific entropy-temperature product of the source (<i>sT</i>) times the rate of
   material exchange
   (<i>N&#775;</i>).  If there are multiple sources, then
   their contributions are additive.  If there are multiple sinks, then
   translational momentum is split on a mass basis and the thermal stream is split
   on a particle-number basis.</p>
-
-    <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Exchange.png\">
-<br>Figure 1:  Exchange of a quantity (material, translational momentum, or thermal energy) among configurations
-    (A, B, and C) within a subregion.</p>
-
+  
     <p><a href=\"#Fig2\">Figure 2</a> shows how
     a configuration
     is connected between neighboring instances of a
@@ -2377,7 +2417,7 @@ Choose any condition besides None.");
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
     <code>Conservation.steady</code>, then the derivative of the corresponding component of velocity
     is treated as zero and removed from the translational momentum balance.  If <code>consEnergy</code> is
-    <code>Conservation.steady</code>, then <code>T*der(s) + M*phi*der(phi)</code> is treated as
+    <code>Conservation.steady</code>, then <i>T</i>&part;<i>s</i>/&part;<i>t</i> + <i>M</i>&phi;&part;&phi;/&part;<i>t</i> is treated as
     zero and removed from the energy balance.</li>
     <li>If a component of velocity is not included (via the outer <code>inclTrans[:]</code> parameter
     which maps to <code>{inclTransX, inclTransY, inclTransZ}</code> in the
@@ -2385,7 +2425,7 @@ Choose any condition besides None.");
     is taken to be zero in each translational transport equation.  However, the corresponding forces
     in the <code>faces</code> connector array are not included in the momentum or energy balances.
     If it is necessary to set a component of velocity to zero but still include it in the energy balance, then
-    set the corresponding component of <code>phi_IC</code> to zero and <code>consTransX</code>,
+    set the corresponding component of <b>&phi;<b><sub>IC</sub> to zero and <code>consTransX</code>,
     <code>consTransY</code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>consMaterial</code> to <code>Conservation.IC</code> and <code>initMaterial</code>
@@ -2418,7 +2458,6 @@ Choose any condition besides None.");
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
     rotational axis that has all its faces included (i.e., all the faces around the perimeter).  Rotational 
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li></p>
-**Use formatted variable names (Italic, Greek, subscripts).
 
     <p>In the <code>faces</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the material current.
@@ -2447,16 +2486,16 @@ Choose any condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0},
+                  origin={-40,40},
+                  rotation=45)}));
     end PartialSpecies;
   end BaseClasses;
 
