@@ -1218,11 +1218,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-              extent={{-40,40},{40,-40}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash)}),
+            extent={{-40,40},{40,-40}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 
@@ -2050,13 +2050,12 @@ Choose any condition besides None.");
         if Data.phase == Phase.gas then
           physical2.mu = chemical.mu;
         else
-          1e5*tauprime*physical2.Ndot = min(k_N*2*(N - 1e-6*U.C)*(exp((
+          1e5*tauprime*physical2.Ndot = (N - 1e-6*U.C)*min(k_N*2*(exp((
             physical2.mu - chemical.mu)/T) - 1), 0) "Phase change";
           // The first branch avoids nonlinear equations when tauprime=0.
           // Dymola 7.4 can't derive it symbolically from the previous equation.
         end if;
       end if;
-
       //
       // Material via reaction: Determined by the Reaction model.
       //
@@ -2084,8 +2083,8 @@ Choose any condition besides None.");
           // Material
           eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho -
             1/v)*(if inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1
-             + exp(-inSign(side)*I[transCart[cartFaces[i]]]*eta/(2*Lprime[
-            cartFaces[i]])) else 2);
+             + exp(-inSign(side)*faces[i, side].phi[Orient.normal]*N/L[
+            cartFaces[i]]*eta/(2*rho*Lprime[cartFaces[i]])) else 2);
 
           // Translational momentum
           beta*faces[i, side].mPhidot[Orient.normal] = Lprime[cartFaces[i]]*(
@@ -2110,8 +2109,8 @@ Choose any condition besides None.");
           // Thermal energy
           theta*faces[i, side].Qdot = Nu_Q*Lprime[cartFaces[i]]*(faces[i, side].T
              - T)*(if inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1
-             + exp(-inSign(side)*I[transCart[cartFaces[i]]]*theta*Data.c_v(T, p)
-            /(2*Lprime[cartFaces[i]])) else 2);
+             + exp(-inSign(side)*faces[i, side].phi[Orient.normal]*N/L[
+            cartFaces[i]]*theta*Data.c_v(T, p)/(2*Lprime[cartFaces[i]])) else 2);
         end for;
 
         // Direct mapping of transverse forces (calculated above)
@@ -2486,16 +2485,16 @@ Choose any condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0},
-                  origin={-40,40},
-                  rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
     end PartialSpecies;
   end BaseClasses;
 

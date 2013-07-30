@@ -136,7 +136,7 @@ package Subregions
     // TODO: In the documentation of each model, add discussion from the dissertation.
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
-      extends Subregions(inclH2=false, 'inclC+'=false);
+      extends Subregions(inclH2=true, 'inclC+'=false);
       annotation (experiment(StopTime=0.0003, Tolerance=1e-06), Commands(file(
               ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Echo.mos"
@@ -1215,8 +1215,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect(subregion2.xPositive, BC2.face) annotation (Line(
-          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,-2.54679e-16}},
-
+          points={{40,6.10623e-16},{46,6.10623e-16},{46,-2.54679e-16},{52,
+              -2.54679e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));

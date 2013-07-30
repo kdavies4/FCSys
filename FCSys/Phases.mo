@@ -500,13 +500,13 @@ package Phases "Mixtures of species"
       HideResult=true,
       Dialog(group="Reactions", compact=true),
       choices(__Dymola_checkBox=true));
-    parameter Q.CurrentAreicAbsolute J0=1e-7*U.A/U.cm^2
+    parameter Q.CurrentAreicAbsolute J0=1e-7*U.A/U.cm^2 if inclHOR or inclORR
       "Exchange current density" annotation (Dialog(
         group="Reactions",
         enable=inclHOR or inclORR,
         __Dymola_label="<html><i>J</i><sup>o</sup></html>"));
-    parameter Q.CurrentAreic J_irr=0 "Irreversible current of side-reactions"
-      annotation (Dialog(
+    parameter Q.CurrentAreic J_irr=0 if inclHOR or inclORR
+      "Irreversible current of side-reactions" annotation (Dialog(
         group="Reactions",
         enable=inclHOR or inclORR,
         __Dymola_label="<html><i>J</i><sub>irr</sub></html>"));
@@ -750,6 +750,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -757,10 +758,10 @@ package Phases "Mixtures of species"
     extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
           'inclSO3-','inclH+',inclH2O}));
 
-    parameter Q.NumberAbsolute k_EOD=1 "Coupling factor between H+ and H2O"
-      annotation (Dialog(group="Geometry",__Dymola_label=
-            "<html><i>k</i><sub>EOD</sub></html>"));
-    parameter Q.NumberAbsolute k_PEMH2O=18
+    parameter Q.NumberAbsolute k_EOD=1 if 'inclH+' and inclH2O
+      "Coupling factor between H+ and H2O" annotation (Dialog(group="Geometry",
+          __Dymola_label="<html><i>k</i><sub>EOD</sub></html>"));
+    parameter Q.NumberAbsolute k_PEMH2O=18 if 'inclSO3-' and inclH2O
       "Coupling factor between SO3- and H2O" annotation (Dialog(group=
             "Geometry", __Dymola_label=
             "<html><i>k</i><sub>PEM H2O</sub></html>"));
@@ -1159,6 +1160,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1396,50 +1398,58 @@ package Phases "Mixtures of species"
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-        Icon(graphics={Ellipse(
-                  extent={{-40,100},{40,20}},
-                  lineColor={127,127,127},
-                  startAngle=30,
-                  endAngle=149,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{20,-4},{100,-84}},
-                  lineColor={127,127,127},
-                  startAngle=270,
-                  endAngle=390,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{-100,-4},{-20,-84}},
-                  lineColor={127,127,127},
-                  startAngle=149,
-                  endAngle=270,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Polygon(
-                  points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                94.5,-24},{60,-84}},
-                  pattern=LinePattern.None,
-                  fillPattern=FillPattern.Sphere,
-                  smooth=Smooth.None,
-                  fillColor={225,225,225},
-                  lineColor={0,0,0}),Line(
-                  points={{-60,-84.1},{60,-84.1}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{34.5,80},{94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{-34.5,80},{-94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}),
+        Icon(graphics={
+            Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+                  -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),
+            Line(
+              points={{-60,-84.1},{60,-84.1}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
         Diagram(graphics));
     end PartialPhase;
 
