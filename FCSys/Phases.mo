@@ -758,10 +758,10 @@ package Phases "Mixtures of species"
     extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
           'inclSO3-','inclH+',inclH2O}));
 
-    parameter Q.NumberAbsolute k_EOD=1 if 'inclH+' and inclH2O
+    parameter Q.NumberAbsolute k_EOD=1 if 'inclH+' or inclH2O
       "Coupling factor between H+ and H2O" annotation (Dialog(group="Geometry",
           __Dymola_label="<html><i>k</i><sub>EOD</sub></html>"));
-    parameter Q.NumberAbsolute k_PEMH2O=18 if 'inclSO3-' and inclH2O
+    parameter Q.NumberAbsolute k_PEMH2O=18 if 'inclSO3-' or inclH2O
       "Coupling factor between SO3- and H2O" annotation (Dialog(group=
             "Geometry", __Dymola_label=
             "<html><i>k</i><sub>PEM H2O</sub></html>"));
@@ -1347,8 +1347,8 @@ package Phases "Mixtures of species"
       // Note:  These must be public in Dymola 7.4, so HideResult is used.
 
     protected
-      final inner parameter Q.Length Lprime[Axis]=k_DT .* A ./ L if n_spec > 0
-        "Effective cross-sectional area per length";
+      final inner parameter Q.Length Lprime[Axis]=k_DT ./ L if n_spec > 0
+        "**dimension, **Effective cross-sectional area per length **rename";
       outer parameter Integer n_trans
         "Number of components of translational momentum" annotation (
           missingInnerMessage="This model should be used within a subregion model.

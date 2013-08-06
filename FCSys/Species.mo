@@ -1259,7 +1259,24 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         current "Prescribed advective current",
         currentSS "Steady-state advective current")
       "Methods of initializing translational momentum";
-
+    type Axis = enumeration(
+        x "X",
+        y "Y",
+        z "Z") "Enumeration for Cartesian axes";
+    type Orient = enumeration(
+        normal "Normal axis",
+        after "Axis following the normal axis in Cartesian coordinates",
+        before "Axis preceding the normal axis in Cartesian coordinates")
+      "Enumeration for orientations relative to a face" annotation (
+        Documentation(info="
+    <html><p><code>Orient.after</code> indicates the axis following the face-normal axis
+    in Cartesian coordinates (x, y, z).
+    <code>Orient.before</code> indicates the axis preceding the face-normal axis
+    in Cartesian coordinates (or following it twice).</p></html>"));
+    type Side = enumeration(
+        n "Negative",
+        p "Positive (greater position along the Cartesian axis)")
+      "Enumeration for sides of a region or subregion";
     model PartialChemicalSpecies "Partial model for a chemical species"
       extends PartialSpecies;
 
@@ -1304,6 +1321,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Q.Fluidity beta(nominal=10*U.cm*U.s/U.g) = Data.beta(T, v)
         "Dynamic compressibility" annotation (Dialog(group=
               "Material properties", __Dymola_label="<html>&beta;</html>"));
+      Real b(nominal=1/U.Pa) = 0/Data.p0
+        "**remove final **dimension **nominal **default **Dynamic compressibility"
+        annotation (Dialog(group="Material properties", __Dymola_label=
+              "<html><i>b</i></html>"));
       Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v) "Fluidity"
         annotation (Dialog(group="Material properties", __Dymola_label=
               "<html>&zeta;</html>"));
@@ -1602,39 +1623,41 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         stateSelect=StateSelect.never,
         start=U.s) = c_p*nu if environment.analysis
         "Time constant for thermal exchange";
-      output Q.TimeAbsolute tau_NT[n_faces](
-        each stateSelect=StateSelect.never,
-        each start=U.s) = fill(V*eta/2, n_faces) ./ Lprime[cartFaces] if
-        environment.analysis "Time constants for material transport";
-      output Q.TimeAbsolute tau_PhiT_perp[n_faces](
-        each stateSelect=StateSelect.never,
-        each start=U.s) = fill(M*beta/2, n_faces) ./ Lprime[cartFaces] if
-        environment.analysis
-        "Time constants for normal translational transport";
-      output Q.TimeAbsolute tau_PhiT_para[n_faces](
-        each stateSelect=StateSelect.never,
-        each start=U.s) = fill(M*zeta/2, n_faces) ./ Lprime[cartFaces] if
-        environment.analysis
-        "Time constants for transverse translational transport";
-      output Q.TimeAbsolute tau_QT[n_faces](
-        each stateSelect=StateSelect.never,
-        each start=U.s) = fill(N*c_v*theta/2, n_faces) ./ Lprime[cartFaces] if
-        environment.analysis "Time constants for thermal transport";
+      /* **
+  output Q.TimeAbsolute tau_NT[n_faces](
+    each stateSelect=StateSelect.never,
+    each start=U.s) = fill(V*eta/2, n_faces) ./ Lprime[cartFaces] if 
+    environment.analysis "Time constants for material transport";
+  output Q.TimeAbsolute tau_PhiT_perp[n_faces](
+    each stateSelect=StateSelect.never,
+    each start=U.s) = fill(M*beta/2, n_faces) ./ Lprime[cartFaces] if 
+    environment.analysis "Time constants for normal translational transport";
+  output Q.TimeAbsolute tau_PhiT_para[n_faces](
+    each stateSelect=StateSelect.never,
+    each start=U.s) = fill(M*zeta/2, n_faces) ./ Lprime[cartFaces] if 
+    environment.analysis 
+    "Time constants for transverse translational transport";
+  output Q.TimeAbsolute tau_QT[n_faces](
+    each stateSelect=StateSelect.never,
+    each start=U.s) = fill(N*c_v*theta/2, n_faces) ./ Lprime[cartFaces] if 
+    environment.analysis "Time constants for thermal transport";
+  */
       //
       // Peclet numbers (only for the axes with translational momentum included;
       // others are zero)
-      output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = eta*v
-        *I ./ Lprime[cartTrans] if environment.analysis
-        "Material Peclet numbers";
-      output Q.Number Pe_Phi_perp[n_trans](each stateSelect=StateSelect.never)
-         = beta*Data.m*I ./ Lprime[cartTrans] if environment.analysis
-        "Normal translational Peclet numbers";
-      output Q.Number Pe_Phi_para[n_trans](each stateSelect=StateSelect.never)
-         = zeta*Data.m*I ./ Lprime[cartTrans] if environment.analysis
-        "Transverse translational Peclet numbers";
-      output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = theta
-        *Data.c_v(T, p)*I ./ Lprime[cartTrans] if environment.analysis
-        "Thermal Peclet numbers";
+      /* **
+  output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = eta*v*I ./
+    Lprime[cartTrans] if environment.analysis "Material Peclet numbers";
+  output Q.Number Pe_Phi_perp[n_trans](each stateSelect=StateSelect.never) =
+    beta*Data.m*I ./ Lprime[cartTrans] if environment.analysis 
+    "Normal translational Peclet numbers";
+  output Q.Number Pe_Phi_para[n_trans](each stateSelect=StateSelect.never) =
+    zeta*Data.m*I ./ Lprime[cartTrans] if environment.analysis 
+    "Transverse translational Peclet numbers";
+  output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = theta*
+    Data.c_v(T, p)*I ./ Lprime[cartTrans] if environment.analysis 
+    "Thermal Peclet numbers";
+  */
       //
       // Bulk flow rates
       output Q.Force mphiI[n_trans, n_trans](each stateSelect=StateSelect.never)
@@ -1767,7 +1790,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           missingInnerMessage="This model should be used within a subregion model.
 ");
       outer parameter Q.Length Lprime[Axis]
-        "Effective cross-sectional area per length" annotation (
+        "**dimension **Effective cross-sectional area per length" annotation (
           missingInnerMessage="This model should be used within a phase model.
       ");
       outer parameter Boolean inclTrans[Axis]
@@ -2081,36 +2104,37 @@ Choose any condition besides None.");
       for i in 1:n_faces loop
         for side in Side loop
           // Material
-          eta*faces[i, side].Ndot = Lprime[cartFaces[i]]*(faces[i, side].rho -
-            1/v)*(if inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1
-             + exp(-inSign(side)*faces[i, side].phi[Orient.normal]*N/L[
-            cartFaces[i]]*eta/(2*rho*Lprime[cartFaces[i]])) else 2);
+          eta*faces[i, side].Ndot = A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[
+            i, side].rho - 1/v)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(
+            side)*faces[i, side].phi[Orient.normal]*eta/(2*Lprime[cartFaces[i]]))
+             else 2);
 
           // Translational momentum
-          beta*faces[i, side].mPhidot[Orient.normal] = Lprime[cartFaces[i]]*(
-            faces[i, side].phi[Orient.normal] - (if inclTrans[cartFaces[i]]
-             then (V/product(L))^1.5*phi[transCart[cartFaces[i]]] else 0))*2
+          beta*faces[i, side].mPhidot[Orient.normal] + b*der(faces[i, side].mPhidot[
+            Orient.normal]) = A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i,
+            side].phi[Orient.normal] - (if inclTrans[cartFaces[i]] then (V/
+            product(L))^1.5*phi[transCart[cartFaces[i]]] else 0))*2
             "Normal (central difference)";
           zeta*faces_mPhidot[i, side, Orient.after - 1] = Nu_Phi[cartWrap(
-            cartFaces[i] + 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orient.after]
-             - (if inclTrans[cartWrap(cartFaces[i] + 1)] then phi[transCart[
-            cartWrap(cartFaces[i] + 1)]] else 0))*(if inclTrans[cartFaces[i]]
-             and upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
-            cartFaces[i]]]*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
+            cartFaces[i] + 1)]*A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i,
+            side].phi[Orient.after] - (if inclTrans[cartWrap(cartFaces[i] + 1)]
+             then phi[transCart[cartWrap(cartFaces[i] + 1)]] else 0))*(if
+            upstream[cartFaces[i]] then 1 + exp(-inSign(side)*faces[i, side].phi[
+            Orient.normal]*rho*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
             "1st transverse";
           zeta*faces_mPhidot[i, side, Orient.before - 1] = Nu_Phi[cartWrap(
-            cartFaces[i] - 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orient.before]
-             - (if inclTrans[cartWrap(cartFaces[i] - 1)] then phi[transCart[
-            cartWrap(cartFaces[i] - 1)]] else 0))*(if inclTrans[cartFaces[i]]
-             and upstream[cartFaces[i]] then 1 + exp(-inSign(side)*I[transCart[
-            cartFaces[i]]]*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
+            cartFaces[i] - 1)]*A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i,
+            side].phi[Orient.before] - (if inclTrans[cartWrap(cartFaces[i] - 1)]
+             then phi[transCart[cartWrap(cartFaces[i] - 1)]] else 0))*(if
+            upstream[cartFaces[i]] then 1 + exp(-inSign(side)*faces[i, side].phi[
+            Orient.normal]*rho*zeta*Data.m/(2*Lprime[cartFaces[i]])) else 2)
             "2nd transverse";
 
           // Thermal energy
-          theta*faces[i, side].Qdot = Nu_Q*Lprime[cartFaces[i]]*(faces[i, side].T
-             - T)*(if inclTrans[cartFaces[i]] and upstream[cartFaces[i]] then 1
-             + exp(-inSign(side)*faces[i, side].phi[Orient.normal]*N/L[
-            cartFaces[i]]*theta*Data.c_v(T, p)/(2*Lprime[cartFaces[i]])) else 2);
+          theta*faces[i, side].Qdot = Nu_Q*A[cartFaces[i]]*Lprime[cartFaces[i]]
+            *(faces[i, side].T - T)*(if upstream[cartFaces[i]] then 1 + exp(-
+            inSign(side)*faces[i, side].phi[Orient.normal]*rho*theta*Data.c_v(T,
+            p)/(2*Lprime[cartFaces[i]])) else 2);
         end for;
 
         // Direct mapping of transverse forces (calculated above)
@@ -2217,7 +2241,6 @@ Choose any condition besides None.");
             phi[j]})*Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[
             cartWrap(cartTrans[j] - cartFaces[i] + 1)]) for i in 1:n_faces)
             "Conservation of translational momentum";
-
           // Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive
           // form of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
         end if;
@@ -2277,7 +2300,7 @@ Choose any condition besides None.");
           cartFaces[i] + 1)] for j in 1:n_trans) for i in 1:n_faces) + sum(
           faces.Qdot) "Conservation of energy";
 
-        // Note:  In Dymola 7.4 will crash unless the following summation
+        // Note:  In Dymola 7.4 will crash unless
         //   sum(intra.phi .* intra.mPhidot)
         // is explicitly expanded to
         //   sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra)

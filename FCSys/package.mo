@@ -14,11 +14,11 @@ import U = FCSys.Units;
 import Q = FCSys.Quantities;
 
 // Enumerations
-import FCSys.BaseClasses.Axis;
-import FCSys.BaseClasses.Orient;
-import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
+import FCSys.Species.BaseClasses.Axis;
+import FCSys.Species.BaseClasses.Orient;
+import FCSys.Species.BaseClasses.Side;
 import FCSys.Species.BaseClasses.Conservation;
 import FCSys.Species.BaseClasses.InitScalar;
 import FCSys.Species.BaseClasses.InitTranslational;

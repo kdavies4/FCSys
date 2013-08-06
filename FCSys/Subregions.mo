@@ -136,11 +136,17 @@ package Subregions
     // TODO: In the documentation of each model, add discussion from the dissertation.
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
-      extends Subregions(inclH2=true, 'inclC+'=false);
-      annotation (experiment(StopTime=0.0003, Tolerance=1e-06), Commands(file(
-              ensureTranslated=true) =
+      extends Subregions(
+        inclH2=true,
+        'inclC+'=false,
+        subregion1(gas(H2(T(stateSelect=StateSelect.always)))),
+        subregion2(gas(H2(T(stateSelect=StateSelect.always)))));
+      annotation (
+        experiment(StopTime=0.0003, Tolerance=1e-06),
+        Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Echo.mos"
-            "Subregions.Examples.Echo.mos"));
+            "Subregions.Examples.Echo.mos"),
+        experimentSetupOutput);
 
     end Echo;
 

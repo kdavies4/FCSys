@@ -1958,7 +1958,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     model FPToFPLinearize "Test one flow plate to the other"
 
-      extends Modelica.Icons.Example;
+      extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
       Connectors.RealOutput w_V=w[1, 1]/U.V
         annotation (Placement(transformation(extent={{90,-16},{110,4}})));
@@ -2370,7 +2370,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         experimentSetupOutput);
     end FPToFPLinearize;
 
