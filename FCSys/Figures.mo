@@ -177,7 +177,7 @@ package Figures "Graphical layouts for documentation"
       model Declarative_vi
         "Declarative-based circuit with voltage in, current out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput v annotation (Placement(transformation(extent={{-60,
                   -30},{-40,-10}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -276,7 +276,7 @@ package Figures "Graphical layouts for documentation"
       model Declarative_iv
         "Declarative-based circuit with current in, voltage out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput i annotation (Placement(transformation(extent={{-80,
                   -30},{-60,-10}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -374,7 +374,7 @@ package Figures "Graphical layouts for documentation"
 
       model Imperative_vi "Imperative circuit with voltage in, current out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
                   20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -467,7 +467,7 @@ package Figures "Graphical layouts for documentation"
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
 
       public
         Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
@@ -559,7 +559,7 @@ package Figures "Graphical layouts for documentation"
       model ImperativeTF_vi
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
                   20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -586,7 +586,7 @@ package Figures "Graphical layouts for documentation"
       model ImperativeTF_iv
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
 
       public
         Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
@@ -676,7 +676,7 @@ package Figures "Graphical layouts for documentation"
 
       model DeclarativeA "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
                   -100,10}})));
@@ -746,7 +746,7 @@ package Figures "Graphical layouts for documentation"
 
       model DeclarativeB "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -60,-10},{-40,10}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -817,7 +817,7 @@ package Figures "Graphical layouts for documentation"
       model DeclarativeAB
         "Cascaded first and second circuits in declarative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
                   -100,10}})));
@@ -911,7 +911,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeA "First circuit in imperative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
                   {-100,10}})));
@@ -978,7 +978,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeB "Second circuit in imperative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -30,-10},{-10,10}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -1051,7 +1051,7 @@ package Figures "Graphical layouts for documentation"
       model ImperativeAB
         "Cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -1146,7 +1146,7 @@ package Figures "Graphical layouts for documentation"
       model ImperativeABIncorrect
         "Incorrectly cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
                   {-100,10}})));
@@ -1242,7 +1242,7 @@ package Figures "Graphical layouts for documentation"
       model ImperativeABTF
         "Cascaded first and second circuits as a transfer function"
         extends BaseClasses.Parameters;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
         Connectors.RealInput vIn annotation (Placement(transformation(extent={{
                   -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
                   10}})));
@@ -1313,7 +1313,7 @@ package Figures "Graphical layouts for documentation"
   end CellIcon;
 
   model Logo
-    extends FCSys.BaseClasses.Icons.Cell;
+    extends FCSys.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
               extent={{-100,100},{100,65}},
               fillPattern=FillPattern.Solid,

@@ -840,7 +840,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       end Correlated;
 
       model Fixed "Fixed properties"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
 
         extends FCSys.Species.CompressibleSpecies(
           redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
@@ -1122,7 +1122,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
   model Reaction "Electrochemical reaction"
     import Modelica.Math.asinh;
 
-    extends FCSys.BaseClasses.Icons.Names.Top2;
+    extends FCSys.Icons.Names.Top2;
 
     parameter Q.Area A=100*U.cm^2 "Area" annotation (Dialog(group="Geometry",
           __Dymola_label="<html><i>A</i></html>"));
@@ -1218,11 +1218,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}),
+              extent={{-40,40},{40,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 
@@ -1284,12 +1284,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     partial model PartialSpecies
       "Partial model to exchange, transport, and store the material, momentum, and energy of one species"
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.inSign;
-      import FCSys.BaseClasses.Utilities.Delta;
-      import FCSys.BaseClasses.Utilities.Sigma;
-      import assert = FCSys.BaseClasses.Utilities.assertEval;
-      //extends FCSys.BaseClasses.Icons.Names.Top5;
+      import FCSys.Utilities.cartWrap;
+      import FCSys.Utilities.inSign;
+      import FCSys.Utilities.Delta;
+      import FCSys.Utilities.Sigma;
+      import assert = FCSys.Utilities.assertEval;
+      //extends FCSys.Icons.Names.Top5;
 
       // Geometry
       parameter Integer n_faces(
@@ -2496,28 +2496,28 @@ Choose any condition besides None.");
     <p>For the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
     are ordered from negative to positive, according to the
-    <a href=\"modelica://FCSys.BaseClasses.Side\">Side</a> enumeration.
+    <a href=\"modelica://Side\">Side</a> enumeration.
     Velocity and force are additionally indexed by
     the orientation of the momentum with respect to the face.
     The orientations are ordered in Cartesian space starting with the normal axis,
     according to the
-    <a href=\"modelica://FCSys.BaseClasses.Orient\">Orient</a> enumeration.</p>
+    <a href=\"modelica://Orient\">Orient</a> enumeration.</p>
     </html>"),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0},
+                  origin={-40,40},
+                  rotation=45)}));
     end PartialSpecies;
   end BaseClasses;
 

@@ -37,10 +37,10 @@ package Conditions "Models to specify and measure operating conditions"
 
     model FaceConditionPhases
       "Test the conditions for the face of a subregion with phases"
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.countTrue;
-      import FCSys.BaseClasses.Utilities.enumerate;
-      import FCSys.BaseClasses.Utilities.index;
+      import FCSys.Utilities.cartWrap;
+      import FCSys.Utilities.countTrue;
+      import FCSys.Utilities.enumerate;
+      import FCSys.Utilities.index;
       extends Modelica.Icons.Example;
 
       // Geometric parameters
@@ -247,7 +247,7 @@ package Conditions "Models to specify and measure operating conditions"
     model AmagatDalton
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> and <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connectors</html>"
 
-      extends FCSys.BaseClasses.Icons.Names.Top1;
+      extends FCSys.Icons.Names.Top1;
 
       FCSys.Connectors.Amagat amagat "Connector for additivity of volume"
         annotation (Placement(transformation(extent={{10,-10},{30,10}}),
@@ -272,21 +272,21 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Line(
-              points={{-30,0},{30,0}},
-              color={0,0,255},
-              smooth=Smooth.None), Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+                  points={{-30,0},{30,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
 
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.inSign;
-      extends FCSys.BaseClasses.Icons.Names.Top1;
+      import FCSys.Utilities.cartWrap;
+      import FCSys.Utilities.inSign;
+      extends FCSys.Icons.Names.Top1;
 
       // Geometry
       parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
@@ -378,7 +378,7 @@ package Conditions "Models to specify and measure operating conditions"
     model ChemicalReactionMulti
       "<html>Adapter between multiple <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors and a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
-      extends FCSys.BaseClasses.Icons.Names.Top1;
+      extends FCSys.Icons.Names.Top1;
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Dialog(
@@ -447,7 +447,7 @@ package Conditions "Models to specify and measure operating conditions"
     model ChemicalReaction
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
-      extends FCSys.BaseClasses.Icons.Names.Top1;
+      extends FCSys.Icons.Names.Top1;
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Dialog(
@@ -497,28 +497,25 @@ package Conditions "Models to specify and measure operating conditions"
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
+        Icon(graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,-40}},
+                  lineColor={127,127,127},
+                  textString="%n"),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReaction;
 
     model FaceReaction
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
 
-      import FCSys.BaseClasses.Utilities.inSign;
-      extends FCSys.BaseClasses.Icons.Names.Top1;
+      import FCSys.Utilities.inSign;
+      extends FCSys.Icons.Names.Top1;
 
       // Geometry
       parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
@@ -604,20 +601,17 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+        Icon(graphics={Line(
+                  points={{0,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end FaceReaction;
 
     package MSL
@@ -627,7 +621,7 @@ package Conditions "Models to specify and measure operating conditions"
       // TODO: Create a wrapper for the whole cell.
       model Anode
         "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
-        extends FCSys.BaseClasses.Icons.Names.Top4;
+        extends FCSys.Icons.Names.Top4;
 
         replaceable package GasMedium = Media.AnodeGas constrainedby
           Modelica.Media.Interfaces.PartialMedium "Medium model for the gas"
@@ -758,7 +752,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       model Cathode
         "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
-        extends FCSys.BaseClasses.Icons.Names.Top4;
+        extends FCSys.Icons.Names.Top4;
 
         replaceable package GasMedium = Adapters.Media.CathodeGas
           constrainedby Modelica.Media.Interfaces.PartialMedium
@@ -888,7 +882,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       model Conductor
         "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>, with only the graphite phase included"
-        extends FCSys.BaseClasses.Icons.Names.Top4;
+        extends FCSys.Icons.Names.Top4;
 
         replaceable package GasMedium = Adapters.Media.CathodeGas
           constrainedby Modelica.Media.Interfaces.PartialMedium
@@ -1322,7 +1316,7 @@ package Conditions "Models to specify and measure operating conditions"
 
           partial model PartialPhase
             "<html>Partial adapter for a phase between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-            extends FCSys.BaseClasses.Icons.Names.Top3;
+            extends FCSys.Icons.Names.Top3;
 
             Connectors.FaceBus face "FCSys face connector" annotation (
                 Placement(transformation(extent={{-90,-10},{-70,10}}),
@@ -1351,8 +1345,8 @@ package Conditions "Models to specify and measure operating conditions"
 
         model 'e-'
           "<html>Adapter to connect e<sup>-</sup> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (electrical and heat only)</html>"
-          import FCSys.BaseClasses.Utilities.inSign;
-          extends FCSys.BaseClasses.Icons.Names.Top2;
+          import FCSys.Utilities.inSign;
+          extends FCSys.Icons.Names.Top2;
 
           // Geometry
           parameter Q.Area A=U.cm^2 "Area of the interface" annotation (Dialog(
@@ -1413,8 +1407,8 @@ package Conditions "Models to specify and measure operating conditions"
 
         model Fluid
           "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          import FCSys.BaseClasses.Utilities.inSign;
-          extends FCSys.BaseClasses.Icons.Names.Top3;
+          import FCSys.Utilities.inSign;
+          extends FCSys.Icons.Names.Top3;
 
           parameter Q.Area A=U.cm^2 "Area of the interface"
             annotation (Dialog(group="Geometry"));
@@ -1505,8 +1499,8 @@ package Conditions "Models to specify and measure operating conditions"
 
         model FluidNeutral
           "<html>Adapter to connect a single neutral fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          import assert = FCSys.BaseClasses.Utilities.assertEval;
-          extends FCSys.BaseClasses.Icons.Names.Top3;
+          import assert = FCSys.Utilities.assertEval;
+          extends FCSys.Icons.Names.Top3;
 
           parameter Q.Area A=U.cm^2 "Area of the interface" annotation (Dialog(
                 group="Geometry", __Dymola_label="<html><i>A</i></html>"));
@@ -1585,7 +1579,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model Solid
           "<html>Adapter to connect a single solid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (heat only)</html>"
-          extends FCSys.BaseClasses.Icons.Names.Top2;
+          extends FCSys.Icons.Names.Top2;
 
           replaceable package Data = Characteristics.BaseClasses.Characteristic
             "Characteristic data (for FCSys)" annotation (
@@ -1643,7 +1637,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model Junction2
           "Junction between two pure substances and their mixture"
-          import assert = FCSys.BaseClasses.Utilities.assertEval;
+          import assert = FCSys.Utilities.assertEval;
           extends BaseClasses.PartialJunction;
 
           replaceable package Medium1 =
@@ -1748,7 +1742,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
         model Junction3
           "Junction between three pure substances and their mixture"
-          import assert = FCSys.BaseClasses.Utilities.assertEval;
+          import assert = FCSys.Utilities.assertEval;
           extends BaseClasses.PartialJunction(redeclare replaceable package
               MixtureMedium = Media.CathodeGas);
 
@@ -1885,7 +1879,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.BasesPackage;
           partial model PartialJunction
             "Partial model for a junction between pure substances and their mixture"
-            extends FCSys.BaseClasses.Icons.Names.Top3;
+            extends FCSys.Icons.Names.Top3;
 
             replaceable package MixtureMedium = Media.AnodeGas constrainedby
               Modelica.Media.Interfaces.PartialMedium
@@ -1990,10 +1984,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model ReactionFlows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.ElectrochemNegative\">ElectrochemNegative</a> or <a href=\"modelica://FCSys.Connectors.ElectrochemPositive\">ElectrochemPositive</a> connector, with flows specified by default</html>"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        import FCSys.BaseClasses.Utilities.enumerate;
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.enumerate;
         import Modelica.Blocks.Sources;
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Icons.Conditions.Single;
 
         // Specification
         // -------------
@@ -2643,9 +2637,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (generally not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model of a material condition"
-          import FCSys.BaseClasses.Utilities.countTrue;
-          import FCSys.BaseClasses.Utilities.index;
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          import FCSys.Utilities.countTrue;
+          import FCSys.Utilities.index;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           parameter Boolean internal=true "Use internal specification"
             annotation (
@@ -2770,7 +2764,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       model PhysicalBusFlows
         "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with flows specified by default</html>"
 
-        extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+        extends FCSys.Icons.Conditions.SingleShort;
 
         // Conditionally include species.
         parameter Boolean 'inclC+'=false
@@ -3250,9 +3244,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.BasesPackage;
 
         partial model PartialCondition "Partial model of a material condition"
-          import FCSys.BaseClasses.Utilities.countTrue;
-          import FCSys.BaseClasses.Utilities.index;
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          import FCSys.Utilities.countTrue;
+          import FCSys.Utilities.index;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           parameter String formula(start="") "Chemical formula of the species"
             annotation (Dialog(group="Material properties"));
@@ -3379,7 +3373,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusFlows
           "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors, with flows specified by default</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Gas gas "Gas" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -3531,7 +3525,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusFluidOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the fluid phases included</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Gas gas "Gas" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -3628,7 +3622,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusGraphiteOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the graphite phase</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Graphite graphite "Graphite" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -4378,7 +4372,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           package BaseClasses "Base classes (generally not for direct use)"
             extends Modelica.Icons.BasesPackage;
             model EmptyPhase "Empty condition for a phase (no species)"
-              extends FCSys.BaseClasses.Icons.Conditions.PairShort;
+              extends FCSys.Icons.Conditions.PairShort;
 
               Connectors.FaceBus negative
                 "Negative-side multi-species connector for material, momentum, and energy"
@@ -4424,7 +4418,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusFlows
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Gas gas "Gas" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -4544,7 +4538,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusFluidOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the fluid phases included</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Gas gas "Gas" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -4616,7 +4610,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceBusGraphiteOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the graphite phase</html>"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           Phases.Graphite graphite "Graphite" annotation (Dialog(group=
                   "Phases (click to edit)", __Dymola_descriptionLabel=true),
@@ -5325,7 +5319,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           package BaseClasses "Base classes (generally not for direct use)"
             extends Modelica.Icons.BasesPackage;
             model EmptyPhase "Empty condition for a phase (no species)"
-              extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+              extends FCSys.Icons.Conditions.SingleShort;
 
               Connectors.FaceBus face
                 "Multi-species connector for material, momentum, and energy"
@@ -5376,7 +5370,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceFlows
           "<html>Conditions for a <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connector, with flows specified by default</html>"
           import Modelica.Blocks.Sources;
-          extends FCSys.BaseClasses.Icons.Conditions.PairShort;
+          extends FCSys.Icons.Conditions.PairShort;
 
           // Specification
           // -------------
@@ -6043,7 +6037,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceFlows
           "<html>Conditions for a <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connector, with flows specified by default</html>"
           import Modelica.Blocks.Sources;
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           // Specification
           // -------------
@@ -6721,10 +6715,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model InertFlows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, with flows specified by default</html>"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        import FCSys.BaseClasses.Utilities.enumerate;
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.enumerate;
         import Modelica.Blocks.Sources;
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Icons.Conditions.Single;
 
         // Specification
         // -------------
@@ -7213,10 +7207,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector</html>"
       model AmagatFlows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector, with flows specifed by default</html>"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        import FCSys.BaseClasses.Utilities.enumerate;
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.enumerate;
         import Modelica.Blocks.Sources;
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Icons.Conditions.Single;
 
         // Specification
         // -------------
@@ -7699,7 +7693,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end AmagatEfforts;
 
       model Volume "Model to establish a fixed total volume"
-        extends FCSys.BaseClasses.Icons.Names.Top3;
+        extends FCSys.Icons.Names.Top3;
 
         parameter Q.Volume V "Volume"
           annotation (Dialog(__Dymola_label="<html><i>V</i></html>"));
@@ -7889,10 +7883,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model DaltonFlows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector, with flow variables specified by default</html>"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        import FCSys.BaseClasses.Utilities.enumerate;
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.enumerate;
         import Modelica.Blocks.Sources;
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Icons.Conditions.Single;
 
         // Specification
         // -------------
@@ -8538,10 +8532,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model TranslationalForce
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector, with force specified by default</html>"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        import FCSys.BaseClasses.Utilities.enumerate;
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.enumerate;
         import Modelica.Blocks.Sources;
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Icons.Conditions.Single;
 
         // Specification
         // -------------
@@ -8923,7 +8917,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         partial model PartialCondition "Partial model for a thermal condition"
 
-          extends FCSys.BaseClasses.Icons.Conditions.SingleShort;
+          extends FCSys.Icons.Conditions.SingleShort;
 
           parameter Boolean internal=true "Use internal specification"
             annotation (
@@ -9047,10 +9041,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model TestStand "Fuel cell test stand (applies boundary conditions)"
       import saturationPressureSI =
         Modelica.Media.Air.MoistAir.saturationPressureLiquid;
-      import FCSys.BaseClasses.Utilities.average;
-      import FCSys.BaseClasses.Utilities.inSign;
+      import FCSys.Utilities.average;
+      import FCSys.Utilities.inSign;
       import FCSys.Conditions.ByConnector.Face.Single;
-      extends FCSys.BaseClasses.Icons.Names.Top9;
+      extends FCSys.Icons.Names.Top9;
 
       // Geometry
       parameter Q.Length L_x_an[:]={8*U.mm}
@@ -9877,7 +9871,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end TestStands;
 
   record Environment "Environmental properties for a simulation"
-    extends FCSys.BaseClasses.Icons.Names.Top3;
+    extends FCSys.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
     final constant U.Bases.Base baseUnits=U.base "Base constants and units"
@@ -9924,56 +9918,47 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,170,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-100}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
-          Ellipse(
-            extent={{32,8},{48,-8}},
-            pattern=LinePattern.None,
-            lineColor={255,255,255},
-            fillColor={50,50,50},
-            fillPattern=FillPattern.Sphere),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Dash)}));
+              100}}), graphics={Rectangle(
+              extent={{-80,60},{80,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,170,255}),Rectangle(
+              extent={{-72,-60},{72,-100}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
+              extent={{32,8},{48,-8}},
+              pattern=LinePattern.None,
+              lineColor={255,255,255},
+              fillColor={50,50,50},
+              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
+            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
+            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
+            -2,-60}}, color={0,0,0}),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash)}));
 
   end Environment;
 
   model Router "Connect two pairs of faces to pass through or cross over"
-    extends FCSys.BaseClasses.Icons.Names.Top3;
+    extends FCSys.Icons.Names.Top3;
     parameter Boolean crossOver=false "Cross over (otherwise, pass through)"
       annotation (choices(__Dymola_checkBox=true));
     Connectors.FaceBus negative1 "Negative face 1" annotation (Placement(

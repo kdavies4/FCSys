@@ -1,4 +1,4 @@
-within FCSys;
+within FCSysTest;
 package Test "Library to facilitate assertion-based testing of Modelica code"
   extends Modelica.Icons.Package;
   function assertValue "Assert that a value is within specification"
@@ -488,6 +488,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
   a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons
   Attribution 3.0 Unported License</a>.  If the <a href=\"modelica://FCSys.Tests\">Tests</a>
   package is removed from the <a href=\"modelica://FCSys\">FCSys</a> distribution, then this
-  package can be safely removed as well.</p></html>"));
+  package can be safely removed as well.</p></html>"), Icon(graphics));
 
 end Test;

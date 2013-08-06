@@ -23,10 +23,6 @@ Please see the
 of the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html).
 
-There are optional subpackages ([Test](FCSys/Test.mo) and [Tests](FCSys/Tests.mo)) to
-perform tests on the rest of the library.  They are not included in the
-documentation and can be safely removed (but may be helpful for debugging).
-
 ### Credits
 
 Please see the acknowledgements on the

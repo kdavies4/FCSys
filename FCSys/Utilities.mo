@@ -45,7 +45,7 @@ package Utilities "Functions that implement useful algorithms"
     <code>countElements(\"C19HF37O5S-\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
   <p>Please see the
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry.readElement\">readElement</a> function
+  <a href=\"modelica://FCSys.Utilities.Chemistry.readElement\">readElement</a> function
   for details about the format of the chemical formula.</p></html>"));
       // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
       // it will be necessary to use the full
@@ -133,7 +133,7 @@ package Utilities "Functions that implement useful algorithms"
   (<code>formula</code>) and returns the symbols (<code>symbols</code>)
   and coefficients (<code>coeffs</code>).  Each element
   is interpreted according to the rules in the
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry.readElement\">readElement</a> function.
+  <a href=\"modelica://FCSys.Utilities.Chemistry.readElement\">readElement</a> function.
   Currently, <code>formula</code> may not contain parentheses or brackets.</p>
 
   <p>The symbols correspond to chemical/physical elements or electrons (\"e-\").
@@ -225,7 +225,7 @@ An unrelated species may be included.");
   among the species given by a vector of chemical formulas (<code>formulas</code>).
   If the reaction is ill-posed or non-unique, then the function will fail with
   a message.  Each formula is interpreted according to the rules in the
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry.readElement\">readElement</a>
+  <a href=\"modelica://FCSys.Utilities.Chemistry.readElement\">readElement</a>
   function.</p>
 
   <p><b>Example:</b><br>
@@ -239,7 +239,7 @@ An unrelated species may be included.");
   package Polynomial "Polynomial functions"
     extends Modelica.Icons.Package;
     function F
-      "<html>&int;<a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
+      "<html>&int;<a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
       import Modelica.Math.log;
       extends Modelica.Icons.Function;
       input Real x "Argument";
@@ -256,12 +256,12 @@ An unrelated species may be included.");
       annotation (Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <i>x</i>
   (with <i>a</i> constant)
-  is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
-  however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
+  is <a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>().  The complete derivative,
+  however, is <a href=\"modelica://FCSys.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
     end F;
 
     function dF
-      "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
+      "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.F\">F</a>()</html>"
       import Modelica.Math.log;
       extends Modelica.Icons.Function;
 
@@ -335,11 +335,11 @@ An unrelated species may be included.");
   <code>n + size(a, 1) - 1</code> (not <code>n</code>).</p>
 
   <p>The derivative of this function is
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>().</p></html>"));
+  <a href=\"modelica://FCSys.Utilities.Polynomial.df\">df</a>().</p></html>"));
     end f;
 
     function df
-      "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
+      "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()</html>"
       extends Modelica.Icons.Function;
       input Real x "Argument";
       input Real a[:] "Coefficients";
@@ -359,11 +359,11 @@ An unrelated species may be included.");
             n) annotation (Inline=true, derivative(order=2) = d2f);
       annotation (Documentation(info="<html>
 <p>The derivative of this function is
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
+  <a href=\"modelica://FCSys.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
     end df;
 
     function d2f
-      "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>()</html>"
+      "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.df\">df</a>()</html>"
       extends Modelica.Icons.Function;
       input Real x "Argument";
       input Real a[:] "Coefficients";

@@ -118,8 +118,6 @@ rpls = [
     ('/FCSys\.Assemblies\.Cells\.CellD\.png"', '/FCSys.Assemblies.Cells.CellD.png" width=600'),
     # Remove some classes from the main page.
     ('<tr><td><img .+>.+<a .+>Figures</a>\n?</td><td>.+</td></tr>\n?', ''),
-    ('<tr><td><img .+>.+<a .+>Test</a>\n?</td><td>.+</td></tr>\n?', ''),
-    ('<tr><td><img .+>.+<a .+>Tests</a>\n?</td><td>.+</td></tr>\n?', ''),
     ('<tr><td><img .+>.+<a .+>WorkInProgress</a>\n?</td><td>.+</td></tr>\n?', ''),
     # Remove nested quotes from meta description.
     ('(<meta name="description" content=")&quot;(.*)&quot;(">)', r'\1\2\3'),

@@ -185,7 +185,7 @@ package Characteristics
 
     model Properties
       "<html>Model that implements the functions of the <a href=\"modelica://FCSys.UsersGuide.References\">Characteristic</a> package</html>"
-      extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
+      extends FCSys.Icons.Blocks.ContinuousShort;
 
       replaceable package Data = Characteristics.BaseClasses.Characteristic
         constrainedby Characteristics.BaseClasses.Characteristic
@@ -837,7 +837,7 @@ package Characteristics
     end CharacteristicNASA;
 
     package Characteristic "Package of thermodynamic and diffusive properties"
-      import FCSys.BaseClasses.Utilities.Chemistry.charge;
+      import FCSys.Utilities.Chemistry.charge;
       extends CharacteristicEOS;
 
       constant String formula "Chemical formula";
@@ -895,7 +895,7 @@ package Characteristics
     public
       function c_p
         "<html>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</html>"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=p0 "Pressure";
@@ -904,7 +904,7 @@ package Characteristics
       protected
         function c0_p
           "Isobaric specific heat capacity at reference pressure as a function of temperature"
-          import FCSys.BaseClasses.Utilities.Polynomial;
+          import FCSys.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           output Q.CapacityThermalSpecific c0_p
             "Isobaric specific heat capacity at reference pressure";
@@ -933,7 +933,7 @@ package Characteristics
 
         function c_p_resid
           "Residual isobaric specific heat capacity for pressure adjustment"
-          import FCSys.BaseClasses.Utilities.Polynomial;
+          import FCSys.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -1008,7 +1008,7 @@ package Characteristics
       end g;
 
       function h "Specific enthalpy as a function of temperature and pressure"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=p0 "Pressure";
@@ -1017,7 +1017,7 @@ package Characteristics
       protected
         function h0_i
           "Return h0 as a function of T using one of the temperature intervals"
-          import FCSys.BaseClasses.Utilities.Polynomial;
+          import FCSys.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           output Q.Potential h0
@@ -1036,7 +1036,7 @@ package Characteristics
 
         function dh0_i "Derivative of h0_i"
           // Note:  This function is necessary for Dymola 7.4 to differentiate h().
-          import FCSys.BaseClasses.Utilities.Polynomial;
+          import FCSys.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           input Q.Temperature dT "Derivative of temperature";
@@ -1053,7 +1053,7 @@ package Characteristics
 
         function h_resid
           "Residual specific enthalpy for pressure adjustment for selected rows of b_v"
-          import FCSys.BaseClasses.Utilities.Polynomial;
+          import FCSys.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -1114,7 +1114,7 @@ package Characteristics
       end h;
 
       function s "Specific entropy as a function of temperature and pressure"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=p0 "Pressure";
@@ -1123,7 +1123,7 @@ package Characteristics
       protected
         function s0_i
           "Return s0 as a function of T using one of the temperature intervals"
-          import FCSys.BaseClasses.Utilities.Polynomial.F;
+          import FCSys.Utilities.Polynomial.F;
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           output Q.NumberAbsolute s0
@@ -1141,7 +1141,7 @@ package Characteristics
 
         function ds0_i "Derivative of s0_i"
           // Note:  This function is necessary for Dymola 7.4 to differentiate s().
-          import FCSys.BaseClasses.Utilities.Polynomial.f;
+          import FCSys.Utilities.Polynomial.f;
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           input Q.Temperature dT "Derivative of temperature";
@@ -1561,7 +1561,7 @@ temperature difference.</p>
     public
       function dp_Tv
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
@@ -1590,7 +1590,7 @@ temperature difference.</p>
 
       function dv_Tp
         "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
@@ -1615,7 +1615,7 @@ temperature difference.</p>
       end dv_Tp;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
@@ -1645,7 +1645,7 @@ temperature difference.</p>
       end p_Tv;
 
       function v_Tp "Specific volume as a function of temperature and pressure"
-        import FCSys.BaseClasses.Utilities.Polynomial;
+        import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";

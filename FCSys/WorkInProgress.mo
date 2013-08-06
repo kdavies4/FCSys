@@ -1,7 +1,7 @@
 within FCSys;
 package WorkInProgress "Incomplete classes under development"
   extends Modelica.Icons.Package;
-  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
+  extends FCSys.Icons.PackageUnderConstruction;
 
   model ConditionsAdaptersPhasesIonomer
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
@@ -145,7 +145,7 @@ package WorkInProgress "Incomplete classes under development"
 
   model EISPlaceholder
     "Placeholder model for electrochemical-impedance spectroscopy"
-    extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+    extends FCSys.Icons.Blocks.Continuous;
 
     parameter Modelica.SIunits.CurrentDensity zJ_large_SI=0.01
       "Large-signal current density in SI base units";
@@ -383,9 +383,9 @@ package WorkInProgress "Incomplete classes under development"
   model FaceReaction
     "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
     extends Modelica.Icons.UnderConstruction;
-    import FCSys.BaseClasses.Utilities.cartWrap;
-    import FCSys.BaseClasses.Utilities.inSign;
-    extends FCSys.BaseClasses.Icons.Names.Top1;
+    import FCSys.Utilities.cartWrap;
+    import FCSys.Utilities.inSign;
+    extends FCSys.Icons.Names.Top1;
 
     // Geometry
     parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(

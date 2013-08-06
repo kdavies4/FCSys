@@ -15,7 +15,7 @@ package Quantities "Quantities to represent physical properties"
     end Display;
 
     model ExampleModel "Model that uses all of the quantities"
-      extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+      extends FCSys.Icons.Blocks.Continuous;
 
       // Generated from FCSys/Resources/quantities.xls, 2013-6-10
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";

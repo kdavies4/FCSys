@@ -105,7 +105,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model EIS "Model for electrochemical-impedance spectroscopy"
         import FCSys;
-        extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+        extends FCSys.Icons.Blocks.Continuous;
 
         parameter Modelica.SIunits.Current zI_large_A=100
           "Large-signal current in amperes";
@@ -174,8 +174,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
     end Examples;
 
     model Cell "Single-cell PEMFC"
-      import FCSys.BaseClasses.Utilities.average;
-      extends FCSys.BaseClasses.Icons.Cell;
+      import FCSys.Utilities.average;
+      extends FCSys.Icons.Cell;
 
       // **Add overall parameter to include or exclude liquid H2O.
 
@@ -383,7 +383,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
     model SimpleCell
       "Cell model with integrated catalyst and gas diffusion layers"
-      extends FCSys.BaseClasses.Icons.Cell;
+      extends FCSys.Icons.Cell;
 
       // **Add overall parameter to include or exclude liquid H2O.
 
