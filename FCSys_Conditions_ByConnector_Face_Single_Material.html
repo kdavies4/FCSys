@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Face.Single.Material</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Material conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -57,200 +60,218 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Density" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Density">Density</a>
-</td><td>Specify density (measure current)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Pressure" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Pressure">Pressure</a>
-</td><td>Specify pressure (measure diffusion current)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Current" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Current</a>
-</td><td>Specify diffusion current (measure density)</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Custom">Custom</a>
-</td><td>Custom</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.BaseClassesS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.density" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">density</a>
+</td><td>Density</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.pressure" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">pressure</a>
+</td><td>Thermodynamic pressure</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.current" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">current</a>
+</td><td>Diffusion current</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a>
+</td><td>Partial function to select a material quantity</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Density" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Single.Material.Density"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.Density</h2>
-<b>Specify density (measure current)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Density">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.density" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Material.density"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.density</h2>
+<b>Density</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a> (Partial function to select a material quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.De&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho</td><td>&nbsp;</td><td>Density (<i>&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Orient]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Density <font color="darkgreen">&quot;Specify density (measure current)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Density,
-    u(<font color="blue">final </font>unit=&quot;N/l3&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/T&quot;) = face.Ndot);
+<font color="blue">function</font> density <font color="darkgreen">&quot;Density&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a>;
+<font color="blue">algorithm </font>
+  x := rho;
 
-<font color="blue">equation </font>
-  face.rho = u_final;
-<font color="blue">end </font>Density;
+<font color="blue">end </font>density;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Pressure" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Single.Material.Pressure"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.Pressure</h2>
-<b>Specify pressure (measure diffusion current)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Pressure">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.pressure" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Material.pressure"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.pressure</h2>
+<b>Thermodynamic pressure</b>
 
 <h3>Information</h3>
 
-<p>The default characteristic data represents an ideal gas.</p><p>
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a> (Partial function to select a material quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Pr&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho</td><td>&nbsp;</td><td>Density (<i>&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Orient]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Pressure <font color="darkgreen">&quot;Specify pressure (measure diffusion current)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Pressure,
-    u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/T&quot;) = face.Ndot);
+<font color="blue">function</font> pressure <font color="darkgreen">&quot;Thermodynamic pressure&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a>;
 
-  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
-    constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">Characteristics.BaseClasses.CharacteristicEOS</a> <font color="blue">
+    constrainedby </font>Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
     &quot;Characteristic data&quot;</font>;
 
-<font color="blue">equation </font>
-  <font color="red">Data.p_Tv</font>(face.T, 1/face.rho) = u_final;
-<font color="blue">end </font>Pressure;
+<font color="blue">algorithm </font>
+  x := <font color="red">Data.p_Tv</font>(T, 1/rho);
+<font color="blue">end </font>pressure;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Current" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Single.Material.Current"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.Current</h2>
-<b>Specify diffusion current (measure density)</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Current">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.current" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Material.current"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.current</h2>
+<b>Diffusion current</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a> (Partial function to select a material quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho</td><td>&nbsp;</td><td>Density (<i>&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Orient]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Current <font color="darkgreen">&quot;Specify diffusion current (measure density)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Current,
-    u(<font color="blue">final </font>unit=&quot;N/T&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;N/l3&quot;) = face.rho);
+<font color="blue">function</font> current <font color="darkgreen">&quot;Diffusion current&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition">PartialCondition</a>;
 
-<font color="blue">equation </font>
-  face.Ndot = u_final;
-<font color="blue">end </font>Current;
+<font color="blue">algorithm </font>
+  x := Ndot;
+
+<font color="blue">end </font>current;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Custom" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Single.Material.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.Custom</h2>
-<b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.DensityD.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.Custom">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Single.Material.densityI.png" alt="FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Single.Material.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material">FCSys.Conditions.ByConnector.Face.Single.Material</a>.PartialCondition</h2>
+<b>Partial function to select a material quantity</b>
 
 <h3>Information</h3>
 
-<p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.rho</code> and/or <code>face.Ndot</code>.</p><p>
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
+<p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>face.rho</td><td>Expression to which the condition is applied</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>face.Ndot</td><td>Measurement expression</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>rho</td><td>&nbsp;</td><td>Density (<i>&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[Orient]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
-<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Single.Material.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
-      y=face.Ndot);
+<font color="blue">partial </font><font color="blue">function</font> PartialCondition <font color="darkgreen">
+  &quot;Partial function to select a material quantity&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  Real x=face.rho <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+  <font color="darkgreen">// Material</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> rho <font color="darkgreen">&quot;Density (<i>&rho;</i>)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot <font color="darkgreen">&quot;Diffusion current (<i>N&#775;</i>)&quot;</font>;
 
-<font color="blue">equation </font>
-  x = u_final;
-<font color="blue">end </font>Custom;
+  <font color="darkgreen">// Translational</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[Orient] <font color="darkgreen">&quot;Velocity (&phi;)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[Orient] <font color="darkgreen">
+    &quot;Non-equilibrium force (<i>m</i>&Phi;dot)&quot;</font>;
+
+  <font color="darkgreen">// Thermal</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot <font color="darkgreen">&quot;Rate of thermal conduction (<i>Q&#775;</i>)&quot;</font>;
+
+  <font color="blue">output </font>Real x <font color="darkgreen">&quot;Value of condition&quot;</font>;
+<font color="blue">end </font>PartialCondition;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:16 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:23 2013.
 </div>
 </body>
 </html>

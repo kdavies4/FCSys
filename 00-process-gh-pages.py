@@ -29,7 +29,9 @@ rpls = [
     # Change the meta description of the main page.
     ('<meta name="description" content="Modelica library of fuel cell models">', '<meta name="description" content="Open-source library of declarative, dynamic, and flexible models of proton exchange membrane fuel cells in the Modelica language">'),
     # Add the download link.
-    ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
+    ("""(Icons</a></li>
+ *</ul>
+)( *</div>)""", r"""\1
   <h3>Download</h3>
     <ul>
       <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>

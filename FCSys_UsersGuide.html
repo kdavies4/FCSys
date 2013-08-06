@@ -3,7 +3,7 @@
 <title>FCSys.UsersGuide</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -55,7 +58,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.GettingStarted" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted">GettingStarted</a>
 </td><td>Getting started</td></tr>
-<tr><td><img src="images/FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.SampleResults" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.SampleResults">SampleResults</a>
+<tr><td><img src="images/FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.SampleResults" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide_SampleResults.html#FCSys.UsersGuide.SampleResults">SampleResults</a>
 </td><td>Sample results</td></tr>
 <tr><td><img src="images/FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.Glossary" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Glossary">Glossary</a>
 </td><td>Glossary</td></tr>
@@ -70,6 +73,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuideI.png" alt="FCSys.UsersGuide.GettingStarted" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.GettingStarted"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.GettingStarted</h2>
+<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.GettingStarted">
 
     <table border=1 cellspacing=0 cellpadding=4 bordercolor=#86989b >
       <tr bgcolor=#afc1c4>
@@ -122,12 +126,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
             Overview of the connectors</li>
             <li><a href="FCSys_Subregions.html#FCSys.Subregions.Volume">FCSys.Subregions.Volume</a> model:
             Discussion of how species are mixed within phases and how phases are combined within subregions</li>
-            <li><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">FCSys.Subregions.Species.Species</a> model:
+            <li><a href="FCSys_Species.html#FCSys.Species.Species">FCSys.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, translational momentum, and
             energy</li>
             <li>A region or layer model such as <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
-            <li><a href="FCSys_Subregions.html#FCSys.Subregions.DoubleLayer">FCSys.Subregions.DoubleLayer</a> model:
+            <li><a href="FCSys_Subregions.html#FCSys.Subregions.DepletionLayer">FCSys.Subregions.DepletionLayer</a> model:
             Discussion of the electrochemical reaction</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
@@ -158,54 +162,29 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 <hr>
 
-<h2><img src="images/FCSys.UsersGuideI.png" alt="FCSys.UsersGuide.SampleResults" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.UsersGuide.SampleResults"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.SampleResults</h2>
-<p>The figures below show results from some of the examples in
-    FCSys.  The figures are ordered from low-level tests to evaluations
-    of the complete cell.  For more information about any of the results, please
-    follow the links to the associated models.  The models have been simulated using Dymola 7.4 and the plots have been
-    generated using <a href="http://kdavies4.github.io/ModelicaRes/">ModelicaRes</a>.</p>
-
-    <p align=center id="Fig1"><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionsSound"><img src="images/SubregionsSound.png"></a>
-    <br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.  The nonlinearity is due to upstream discretization (<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionsSound">FCSys.Subregions.Examples.SubregionsSound</a>).</p>
-
-    <p align=center id="Fig2"><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.ThermalConduction"><img src="images/ThermalConduction.png"></a>
-    <br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions (<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.ThermalConduction">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
-
-    <p align=center id="Fig3"><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.ThermalConductionConvection"><img src="images/ThermalConductionConvection.png"></a>
-    <br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction (<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.ThermalConductionConvection">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
-
-    <p align=center id="Fig4"><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SaturationPressure"><img src="images/SaturationPressure.png"></a>
-    <br>Figure 4: H<sub>2</sub>O saturation pressure as a function of temperature (<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SaturationPressure">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
-
-    <p align=center id="Fig5"><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionEvaporation"><img src="images/SubregionEvaporation.png"></a>
-    <br>Figure 5: H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected (<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionEvaporation">FCSys.Subregions.Examples.SubregionEvaporation</a>).</p>
-
-    <p>**Add various polarization curves.</p>
-
-    <p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
-<hr>
-
 <h2><img src="images/FCSys.UsersGuideI.png" alt="FCSys.UsersGuide.Glossary" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.Glossary"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Glossary</h2>
-<p>The following terms appear in this library with new or somewhat unique meanings:
+<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Glossary">
+<p>The following terms appear in this library and are uncommon or unique here:
     <ul>
-      <li><b>configuration</b>&mdash;a species in a certain phase within a subregion<br>
+      <li><b>configuration</b> &ndash; a species in a certain phase within a subregion<br>
 
-      <li><b>dynamic compressibility</b>&mdash;reciprocal of volume, second, or bulk viscosity
+      <li><b>dynamic compressibility</b> &ndash; reciprocal of volume, second, or bulk viscosity
       (see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.beta">&beta;</a>())<br>
 
-      <li><b>exchange</b>&mdash;transfer of a conserved quantity among configurations within a region<br>
+      <li><b>equivalent current</b> &ndash; rate of supply of a reactant required to support the given current
+      assuming the reactant is entirely consumed (complete utilization)<br>
 
-      <li><b>specific</b>&mdash;adjective that indicates the quotient of the following quantity and its associated particle number<br>
+      <li><b>exchange</b> &ndash; transfer of a conserved quantity among configurations within a region<br>
 
-      <li><b>thermal independity</b>&mdash;extent to which an exchange of thermal energy between species causes or requires a temperature difference
+      <li><b>specific</b> &ndash; adjective that indicates the quotient of the following quantity and its associated particle number<br>
+
+      <li><b>thermal independity</b> &ndash; extent to which an exchange of thermal energy between species causes or requires a temperature difference
       (see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.nu">&nu;</a>())<br>
 
-      <li><b>translational Nusselt number</b>&mdash;correction to Newton's law of viscous shear for the shape of the flow profile<br>
+      <li><b>translational Nusselt number</b> &ndash; correction to Newton's law of viscous shear for the shape of the flow profile<br>
 
-      <li><b>transport</b>&mdash;transfer of a conserved quantity between adjacent subregions
+<li><b>transport</b> &ndash; transfer of a conserved quantity between adjacent subregions
     </ul></p>
     </table>
     <p>
@@ -214,10 +193,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuide.ReferencesI.png" alt="FCSys.UsersGuide.References" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.References"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.References</h2>
+<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.References">
 
-    <p>These papers describe work leading to the current FCSys package (most recent at the top):
+    <p>This library is described in the following dissertation
+    (<a href="http://kdavies4.github.io/Dissertation/Davies - Declarative Modeling of PEMFCs for System Design.pdf">PDF</a> and
+    <a href="https://github.com/kdavies4/Dissertation">source</a>):
     <ol>
-    <li>K. L. Davies, "<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/UsersGuide/References/Declarative Modeling of PEMFCS (dissertation).pdf">Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design</a>," Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    <li>K. L. Davies, "Declarative Modeling of Proton Exchange Membrane Fuel Cells for System Design," Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    </ol></p>
+
+    <p>These papers describe work leading up to it (most recent at the top):
+    <ol>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>," in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
     <li>K. L. Davies, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082">Natural Unit Representation in Modelica</a>," in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>," in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
@@ -397,7 +383,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Takenaka1990" class=bookmark>Takenaka1990</a>]</td>
-      <td valign=top class=noBorder>M. Takenaka and R. Masui, "<a href="http://iopscience.iop.org/0026-1394/27/4/001">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0 &deg;C&ndash;85&deg;C</a>," <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
+      <td valign=top class=noBorder>M. Takenaka and R. Masui, "<a href="http://iopscience.iop.org/0026-1394/27/4/001">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0&nbsp;&deg;C&ndash;85&deg;C</a>," <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Tissandier1998" class=bookmark>Tissandier1998</a>]</td>
@@ -422,6 +408,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuide.ContactI.png" alt="FCSys.UsersGuide.Contact" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.Contact"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Contact</h2>
+<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
     <p>Updates to this package may be available online at the
     <a href="http://kdavies4.github.io/FCSys/">main project site</a> or the
@@ -464,6 +451,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuide.ModelicaLicense2I.png" alt="FCSys.UsersGuide.ModelicaLicense2" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.ModelicaLicense2"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.ModelicaLicense2</h2>
+<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.ModelicaLicense2">
 
 <style type="text/css">
 *       { font-size: 10pt; font-family: Arial,sans-serif; }
@@ -1000,7 +988,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:44 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:05:30 2013.
 </div>
 </body>
 </html>

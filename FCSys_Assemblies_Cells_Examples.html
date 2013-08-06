@@ -3,7 +3,7 @@
 <title>FCSys.Assemblies.Cells.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -59,16 +62,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellS.png" alt="FCSys.Assemblies.Cells.Examples.Cell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a>
 </td><td>Isolated <code>Cell</code> model</td></tr>
-<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellS.png" alt="FCSys.Assemblies.Cells.Examples.CellProfile" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a>
-</td><td>Apply boundary conditions to a cell according to a test profile</td></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellS.png" alt="FCSys.Assemblies.Cells.Examples.Polarization" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Polarization">Polarization</a>
 </td><td>Run a cell polarization</td></tr>
-<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileIOS.png" alt="FCSys.Assemblies.Cells.Examples.CellProfileIO" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfileIO">CellProfileIO</a>
-</td><td>Apply Conditions to a cell according to a test profile, with inputs and outputs</td></tr>
-<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaS.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellModelica">CellModelica</a>
-</td><td>Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package</td></tr>
-<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.plotS.png" alt="FCSys.Assemblies.Cells.Examples.plot" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.plot">plot</a>
-</td><td>Create plots using FCRes</td></tr>
+<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.EISS.png" alt="FCSys.Assemblies.Cells.Examples.EIS" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.EIS">EIS</a>
+</td><td>Model for electrochemical-impedance spectroscopy</td></tr>
 </table>
 <hr>
 
@@ -79,212 +76,164 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare Cells.Cell cell</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare Cells.Cell cell</td><td>Fuel cell</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Cell <font color="darkgreen">&quot;Isolated <code>Cell</code> model&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
-    analysis=false,
-    p=149.6*U.kPa,
-    T=333.15*U.K);
-  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cells.Cell</a> cell;
+  <font color="darkgreen">// **Remove this model once Polarization is running.</font>
+
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment;
+  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cells.Cell</a> cell <font color="darkgreen">&quot;Fuel cell&quot;</font>;
 
 <font color="blue">end </font>Cell;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Assemblies.Cells.Examples.CellI.png" alt="FCSys.Assemblies.Cells.Examples.CellProfile" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Assemblies.Cells.Examples.CellProfile"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.CellProfile</h2>
-<b>Apply boundary conditions to a cell according to a test profile</b><p>
-<img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png" alt="FCSys.Assemblies.Cells.Examples.CellProfile">
-
-<h3>Information</h3>
-
-Extends from <a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestProfile">FCSys.Conditions.TestStands.TestProfile</a> (Cell test profile), <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
-<p>
-<h3>Parameters</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
-</table>
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> CellProfile <font color="darkgreen">
-  &quot;Apply boundary conditions to a cell according to a test profile&quot;</font>
-
-  <font color="blue">extends </font><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestProfile">FCSys.Conditions.TestStands.TestProfile</a>(anEnd(<font color="blue">each </font>graphite(&#39;incle-&#39;=true,
-          &#39;e-&#39;(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(height=10000*
-                U.A, duration=500)))), caEnd(<font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(<font color="blue">
-            redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(height=-10000*U.A,
-              duration=500)))));
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a> cell;
-
-<font color="blue">equation </font>
-  <font color="red">connect</font>(cell.anFPX, anEnd.face);
-
-  <font color="red">connect</font>(cell.caFPX, caEnd.face);
-
-  <font color="red">connect</font>(anSource.face, cell.anFPNegY);
-
-  <font color="red">connect</font>(cell.anFPPosY, anSink.face);
-  <font color="red">connect</font>(caSink.face, cell.caFPPosY);
-  <font color="red">connect</font>(cell.caFPNegY, caSource.face);
-<font color="blue">end </font>CellProfile;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Assemblies.Cells.Examples.CellI.png" alt="FCSys.Assemblies.Cells.Examples.Polarization" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Assemblies.Cells.Examples.Polarization"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.Polarization</h2>
 <b>Run a cell polarization</b><p>
-<img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png" alt="FCSys.Assemblies.Cells.Examples.Polarization">
+<img src="images/FCSys.Assemblies.Cells.Examples.PolarizationD.png" alt="FCSys.Assemblies.Cells.Examples.Polarization">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a> (Apply boundary conditions to a cell according to a test profile), <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare Cells.Cell cell</td><td>Fuel cell</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Polarization <font color="darkgreen">&quot;Run a cell polarization&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <font color="darkgreen">/* **
+                 params=dict(comp=[&#39;&quot;O2&quot;&#39;],
+                             anStoich=[1.5, 1.1, 2],
+                             caStoich=[9.5, 7.5, 12.5],
+                             anRH=[0.8, 0.6, 1],
+                             caRH=[0.5, 0.3, 0.7],
+                             T_degC=[60, 40, 80],
+                             p_kPag=[48.3, 0, 202.7]),
+                             */</font>
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+  <a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStand">Conditions.TestStands.TestStand</a> testStand(
+    zJ=currentDensity.y,
+    anInletRH(displayUnit=&quot;1&quot;) = 0.8,
+    caInletRH(displayUnit=&quot;1&quot;) = 0.5,
+    T_an=333.15*U.K,
+    T_ca=333.15*U.K,
+    anStoich=1.5,
+    caStoich=2.0);
+
+  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cells.Cell</a> cell <font color="darkgreen">&quot;Fuel cell&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> currentDensity(
+    height=100*U.A/U.cm^2,
+    duration=100,
+    startTime=0.1);
+<font color="blue">equation </font>
+
+  <font color="red">connect</font>(testStand.an, cell.an);
+
+  <font color="red">connect</font>(cell.ca, testStand.ca);
+
+  <font color="red">connect</font>(testStand.anPositive, cell.anPositive);
+  <font color="red">connect</font>(testStand.caNegative, cell.caNegative);
+  <font color="red">connect</font>(cell.anNegative, testStand.anNegative);
+
+  <font color="red">connect</font>(cell.caPositive, testStand.caPositive);
 
 <font color="blue">end </font>Polarization;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileIOI.png" alt="FCSys.Assemblies.Cells.Examples.CellProfileIO" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Assemblies.Cells.Examples.CellProfileIO"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.CellProfileIO</h2>
-<b>Apply Conditions to a cell according to a test profile, with inputs and outputs</b><p>
-<img src="images/FCSys.Assemblies.Cells.Examples.CellProfileIOD.png" alt="FCSys.Assemblies.Cells.Examples.CellProfileIO">
+<h2><img src="images/FCSys.Assemblies.Cells.Examples.EISI.png" alt="FCSys.Assemblies.Cells.Examples.EIS" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.Examples.EIS"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.EIS</h2>
+<b>Model for electrochemical-impedance spectroscopy</b><p>
+<img src="images/FCSys.Assemblies.Cells.Examples.EISD.png" alt="FCSys.Assemblies.Cells.Examples.EIS">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a> (Apply boundary conditions to a cell according to a test profile), <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a> (Icon for a continuous-time block), <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+Extends from <a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.Continuous">FCSys.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Current">Current</a></td><td>zI_large_A</td><td>100</td><td>Large-signal current in amperes [A]</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare FCSys.Assemblies.C&hellip;</td><td>Fuel cell model</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus</td></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>zJ_small_SI</td><td>Small-signal current density in SI base units</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>w_V</td><td>Cell potential in volts</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> CellProfileIO <font color="darkgreen">
-  &quot;Apply Conditions to a cell according to a test profile, with inputs and outputs&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a>(testStand(<font color="blue">final </font>inclIO=true));
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus&quot;</font>;
+<font color="blue">model</font> EIS <font color="darkgreen">&quot;Model for electrochemical-impedance spectroscopy&quot;</font>
+  <font color="blue">import </font><a href="index.html#FCSys">FCSys</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.Continuous">FCSys.Icons.Blocks.Continuous</a>;
 
+  <font color="blue">parameter </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Current">Modelica.SIunits.Current</a> zI_large_A=100 <font color="darkgreen">
+    &quot;Large-signal current in amperes&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> zJ_small_SI <font color="darkgreen">
+    &quot;Small-signal current density in SI base units&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">Connectors.RealOutput</a> w_V <font color="darkgreen">&quot;Cell potential in volts&quot;</font>;
+  <a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStandEIS">Conditions.TestStands.TestStandEIS</a> testStandEIS;
+  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a> cell <font color="darkgreen">&quot;Fuel cell model&quot;</font>;
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
+    analysis=false,
+    p=149.6*U.kPa,
+    T=333.15*U.K) <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 <font color="blue">equation </font>
-  <font color="red">connect</font>(y, testStand.y);
+  <font color="red">connect</font>(zJ_small_SI, testStandEIS.zJ_small_SI);
+  <font color="red">connect</font>(testStandEIS.w_V, w_V);
 
-  <font color="red">connect</font>(u, testStand.u);
-<font color="blue">end </font>CellProfileIO;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaI.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Assemblies.Cells.Examples.CellModelica"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.CellModelica</h2>
-<b>Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package</b><p>
-<img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaD.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica">
-
-<h3>Information</h3>
-
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> CellModelica <font color="darkgreen">
-  &quot;Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a> cell(anFP(<font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions(
-        <font color="blue">each </font><font color="blue">final </font>inclX=true,
-        <font color="blue">each </font>inclY=true,
-        <font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(perfectMaterialDiff={{{{true,false}}}})),
-
-        <font color="blue">each </font>gas(inclH2=true, inclH2O=true))));
-
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=false);
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Graphite">Conditions.Adapters.Phases.Graphite</a> caModelicaAdapt(A=cell.L_y[1]*cell.L_z[1]);
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Graphite">Conditions.Adapters.Phases.Graphite</a> anModelicaAdapt(A=cell.L_y[1]*cell.L_z[1]);
-  FCSys.WorkInProgress.TanConduct tanConduct;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> loadSweep(duration=1000) <font color="darkgreen">
-    &quot;This is the arctangent of conductance.&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="red">connect</font>(anModelicaAdapt.normal, cell.anFPX[1, 1]);
-
-  <font color="red">connect</font>(caModelicaAdapt.normal, cell.caFPX[1, 1]);
-
-  <font color="red">connect</font>(loadSweep.y, tanConduct.atanGstar);
-  <font color="red">connect</font>(tanConduct.p, caModelicaAdapt.pin);
-  <font color="red">connect</font>(tanConduct.n, anModelicaAdapt.pin);
-<font color="blue">end </font>CellModelica;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Assemblies.Cells.Examples.plotI.png" alt="FCSys.Assemblies.Cells.Examples.plot" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Assemblies.Cells.Examples.plot"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.plot</h2>
-<b>Create plots using FCRes</b>
-<h3>Information</h3>
-
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
-<p>
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">function</font> plot <font color="darkgreen">&quot;Create plots using FCRes&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica.Utilities.System.command</font>(&quot;loadres&quot;);
-
-<font color="blue">end </font>plot;
+  <font color="red">connect</font>(testStandEIS.caNegative, cell.caNegative);
+  <font color="red">connect</font>(testStandEIS.anPositive, cell.anPositive);
+  <font color="red">connect</font>(testStandEIS.an, cell.an);
+  <font color="red">connect</font>(cell.anNegative, testStandEIS.anNegative);
+  <font color="red">connect</font>(cell.caPositive, testStandEIS.caPositive);
+  <font color="red">connect</font>(cell.ca, testStandEIS.ca);
+<font color="blue">end </font>EIS;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:34 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:52 2013.
 </div>
 </body>
 </html>

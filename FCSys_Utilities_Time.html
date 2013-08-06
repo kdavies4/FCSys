@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>FCSys.Utilities.Time</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-8-6">
+<meta name="description" content="Functions to check translation time">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Utilities.Time"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Time</h2>
+
+<b>Functions to check translation time</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Utilities.roundS.png" alt="FCSys.Utilities.Time.get_time" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time.get_time">get_time</a>
+</td><td>Return the current time</td></tr>
+<tr><td><img src="images/FCSys.Utilities.Time.timeTranslationS.png" alt="FCSys.Utilities.Time.timeTranslation" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time.timeTranslation">timeTranslation</a>
+</td><td>Print the time required to translate a model</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.Time.get_timeI.png" alt="FCSys.Utilities.Time.get_time" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Time.get_time"></a><a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time">FCSys.Utilities.Time</a>.get_time</h2>
+<b>Return the current time</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>t</td><td>Time in milliseconds since January 1, 1970</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> get_time <font color="darkgreen">&quot;Return the current time&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">output </font>Integer t <font color="darkgreen">&quot;Time in milliseconds since January 1, 1970&quot;</font>;
+
+<font color="blue">external</font>&quot;C&quot;;
+  <font color="darkgreen">// Note:  Since Dymola 7.4 doesn&#39;t support the IncludeDirectory annotation,</font>
+  <font color="darkgreen">// it will be necessary to use the full</font>
+  <font color="darkgreen">// path in the Include annotation, e.g.</font>
+  <font color="darkgreen">//   Include=&quot;#include \&quot;FCSys/FCSys 2.0/Resources/Source/C/time.c\&quot;&quot;</font>
+
+<font color="blue">end </font>get_time;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Utilities.Time.timeTranslation"></a><a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time">FCSys.Utilities.Time</a>.timeTranslation</h2>
+
+<b>Print the time required to translate a model</b>
+
+<h3>Information</h3>
+
+<p>The time is rounded down to the integer second.</p><p>
+
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>String</td><td>problem</td><td>&nbsp;</td><td>Path and name of the model (with modifiers, if any)</td></tr>
+<tr><td>String</td><td>fileName</td><td>&quot;translg.txt&quot;</td><td>File where to print (empty string is the terminal)</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>ok</td><td><code>true</code> if successful</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> timeTranslation <font color="darkgreen">
+  &quot;Print the time required to translate a model&quot;</font>
+  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Utilities.Streams.html#Modelica.Utilities.Streams.print">Modelica.Utilities.Streams.print</a>;
+  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Utilities.Files.html#Modelica.Utilities.Files.remove">Modelica.Utilities.Files.remove</a>;
+
+  <font color="blue">input </font>String problem <font color="darkgreen">&quot;Path and name of the model (with modifiers, if any)&quot;</font>;
+  <font color="blue">input </font>String fileName=&quot;translg.txt&quot; <font color="darkgreen">
+    &quot;File where to print (empty string is the terminal)&quot;</font>;
+  <font color="blue">output </font>Boolean ok <font color="darkgreen">&quot;<code>true</code> if successful&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer t_0 <font color="darkgreen">&quot;Start time in seconds&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>fileName &lt;&gt; &quot;&quot;<font color="blue"> then</font>
+    <font color="red">remove</font>(fileName);
+  <font color="blue">end if</font>;
+
+  t_0 := <font color="red">get_time</font>();
+  ok := <font color="red">translateModel</font>(problem);
+  <font color="red">print</font>(&quot;Translation time: &quot; + <font color="red">String</font>(<font color="red">get_time</font>() - t_0) + &quot; s&quot;, fileName);
+
+<font color="blue">end </font>timeTranslation;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:09:01 2013.
+</div>
+</body>
+</html>

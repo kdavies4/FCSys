@@ -3,8 +3,8 @@
 <title>FCSys.Conditions.Adapters</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
-<meta name="description" content="&lt;html&gt;Adapters to the &lt;a href=\&quot;modelica://Modelica\&quot;&gt;Modelica Standard Library&lt;/a&gt;&lt;/html&gt;">
+<meta name="date" content="2013-8-6">
+<meta name="description" content="&lt;html&gt;Interfaces to the &lt;a href=\&quot;modelica://Modelica\&quot;&gt;Modelica Standard Library&lt;/a&gt;&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -47,7 +50,7 @@
 
 <h2><a name="FCSys.Conditions.Adapters"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Adapters</h2>
 
-<b>Adapters to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></b>
+<b>Interfaces to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></b>
 
 <h3>Information</h3>
 
@@ -57,172 +60,435 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.AnodeS.png" alt="FCSys.Conditions.Adapters.Anode" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a>
-</td><td>Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.AnodeS.png" alt="FCSys.Conditions.Adapters.Cathode" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Cathode">Cathode</a>
-</td><td>Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.PhasesS.png" alt="FCSys.Conditions.Adapters.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases">Phases</a>
-</td><td>Adapters for material phases</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.PhasesS.png" alt="FCSys.Conditions.Adapters.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species">Species</a>
-</td><td>Adapters for single species</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.PhasesS.png" alt="FCSys.Conditions.Adapters.Junctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions">Junctions</a>
-</td><td><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> junctions between pure substances and their mixtures</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Adapters.MediaS.png" alt="FCSys.Conditions.Adapters.Media" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Media.html#FCSys.Conditions.Adapters.Media">Media</a>
-</td><td><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica.Media">Modelica media</a> models to interface with the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">cell</a></td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.AmagatDaltonS.png" alt="FCSys.Conditions.Adapters.AmagatDalton" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">AmagatDalton</a>
+</td><td>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.ChemicalFaceS.png" alt="FCSys.Conditions.Adapters.ChemicalFace" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalFace">ChemicalFace</a>
+</td><td>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.ChemicalReactionMultiS.png" alt="FCSys.Conditions.Adapters.ChemicalReactionMulti" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReactionMulti">ChemicalReactionMulti</a>
+</td><td>Adapter between multiple <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> connectors and a <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.ChemicalReactionMultiS.png" alt="FCSys.Conditions.Adapters.ChemicalReaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">ChemicalReaction</a>
+</td><td>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.FaceReactionS.png" alt="FCSys.Conditions.Adapters.FaceReaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.FaceReaction">FaceReaction</a>
+</td><td>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Adapters.MSLS.png" alt="FCSys.Conditions.Adapters.MSL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL">MSL</a>
+</td><td>Adapters to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Adapters.AnodeI.png" alt="FCSys.Conditions.Adapters.Anode" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.Adapters.Anode"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.Anode</h2>
-<b>Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></b><p>
-<img src="images/FCSys.Conditions.Adapters.AnodeD.png" alt="FCSys.Conditions.Adapters.Anode">
+<h2><img src="images/FCSys.Conditions.Adapters.AmagatDaltonI.png" alt="FCSys.Conditions.Adapters.AmagatDalton" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.AmagatDalton"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.AmagatDalton</h2>
+<b>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connectors</b><p>
+<img src="images/FCSys.Conditions.Adapters.AmagatDaltonD.png" alt="FCSys.Conditions.Adapters.AmagatDalton">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
+<p>This model is used to convert between the representation of mixtures
+    with Amagat's law of partial volumes and Dalton's law of partial pressures.</p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for translational momentum and heat</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>gasPort</td><td>Modelica fluid port for the gas</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>dalton</td><td>Connector for additivity of pressure</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Anode <font color="darkgreen">
-  &quot;Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>;
+<font color="blue">model</font> AmagatDalton <font color="darkgreen">
+  &quot;Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connectors&quot;</font>
 
-  <font color="blue">replaceable </font><font color="blue">package</font> GasMedium = <a href="FCSys_Conditions_Adapters_Media_AnodeGas.html#FCSys.Conditions.Adapters.Media.AnodeGas">Media.AnodeGas</a> <font color="blue">constrainedby </font>
-    Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model for the gas&quot;</font>;
-  <font color="blue">replaceable </font><font color="blue">package</font> LiquidMedium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.Water.ConstantPropertyLiquidWater.html#Modelica.Media.Water.ConstantPropertyLiquidWater">Modelica.Media.Water.ConstantPropertyLiquidWater</a>
-    <font color="blue">constrainedby </font>Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">
-    &quot;Medium model for the liquid&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
-    &quot;Multi-species connector for translational momentum and heat&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> gasPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium
-      = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Anode.GasMedium">GasMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the gas&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
-    &quot;Modelica electrical pin&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
-    &quot;Modelica heat port&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> liquidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Anode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the liquid&quot;</font>;
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.AnodeGas">Phases.AnodeGas</a> gas(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Anode.GasMedium">GasMedium</a>) <font color="darkgreen">
-    &quot;Gas subadapter&quot;</font>;
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Graphite">Phases.Graphite</a> graphite <font color="darkgreen">&quot;Graphite subadapter&quot;</font>;
-
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Anode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">
-    &quot;Liquid subadapter&quot;</font>;
-
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
-    &quot;Modelica translational flanges&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">FCSys.Connectors.Amagat</a> amagat <font color="darkgreen">&quot;Connector for additivity of volume&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">FCSys.Connectors.Dalton</a> dalton <font color="darkgreen">&quot;Connector for additivity of pressure&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="red">connect</font>(gas.face, face.gas);
-  <font color="red">connect</font>(gasPort, gas.fluidPort);
-  <font color="red">connect</font>(gas.heatPort, heatPort);
+  <font color="darkgreen">// Static balances</font>
+  0 = amagat.p + dalton.p <font color="darkgreen">&quot;Pressure&quot;</font>;
+  0 = amagat.V + dalton.V <font color="darkgreen">&quot;Volume&quot;</font>;
 
-  <font color="red">connect</font>(graphite.face, face.graphite);
-
-  <font color="red">connect</font>(graphite.pin, pin);
-  <font color="red">connect</font>(graphite.heatPort, heatPort);
-  <font color="red">connect</font>(liquid.face, face.liquid);
-  <font color="red">connect</font>(liquidPort, liquid.fluidPort);
-  <font color="red">connect</font>(liquid.heatPort, heatPort);
-  <font color="red">connect</font>(gas.flange, flange);
-  <font color="red">connect</font>(graphite.flange, flange);
-
-  <font color="red">connect</font>(liquid.flange, flange);
-<font color="blue">end </font>Anode;
+<font color="blue">end </font>AmagatDalton;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Adapters.AnodeI.png" alt="FCSys.Conditions.Adapters.Cathode" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.Adapters.Cathode"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.Cathode</h2>
-<b>Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></b><p>
-<img src="images/FCSys.Conditions.Adapters.AnodeD.png" alt="FCSys.Conditions.Adapters.Cathode">
+<h2><img src="images/FCSys.Conditions.Adapters.ChemicalFaceI.png" alt="FCSys.Conditions.Adapters.ChemicalFace" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.ChemicalFace"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.ChemicalFace</h2>
+<b>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</b><p>
+<img src="images/FCSys.Conditions.Adapters.ChemicalFaceD.png" alt="FCSys.Conditions.Adapters.ChemicalFace">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
+<p>This model is used to determine the electrochemical potential available in
+    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across
+    the boundary is due entirely to the electrochemical reaction.</p>
+
+    <p>Assumptions:<ol>
+    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
+    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
+    potential.</li>
+    </ol></p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
 <p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>&nbsp;</td><td>Cross-sectional area of the face [l2]</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>Axis of the electrochemical reaction</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>side</td><td>&nbsp;</td><td>Side of the face w.r.t., the reaction</td></tr>
+<tr><td>Integer</td><td>cartTrans[:]</td><td>&nbsp;</td><td>Cartesian-axis indices of the components of translational momentum</td></tr>
+</table>
+<p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for translational momentum and heat</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>gasPort</td><td>Modelica fluid port for the gas</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Interface to the majority region</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Connector for a species in a chemical reaction</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Cathode <font color="darkgreen">
-  &quot;Adapter between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and the face connector of a <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>, <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>, or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>;
+<font color="blue">model</font> ChemicalFace <font color="darkgreen">
+  &quot;Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors&quot;</font>
 
-  <font color="blue">replaceable </font><font color="blue">package</font> GasMedium = <a href="FCSys_Conditions_Adapters_Media_CathodeGas.html#FCSys.Conditions.Adapters.Media.CathodeGas">Adapters.Media.CathodeGas</a> <font color="blue">constrainedby </font>
-    Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model for the gas&quot;</font>;
-  <font color="blue">replaceable </font><font color="blue">package</font> LiquidMedium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.Water.ConstantPropertyLiquidWater.html#Modelica.Media.Water.ConstantPropertyLiquidWater">Modelica.Media.Water.ConstantPropertyLiquidWater</a>
-    <font color="blue">constrainedby </font>Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">
-    &quot;Medium model for the liquid&quot;</font>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.cartWrap">FCSys.Utilities.cartWrap</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.inSign">FCSys.Utilities.inSign</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
-    &quot;Multi-species connector for translational momentum and heat&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> gasPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium
-      = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Cathode.GasMedium">GasMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the gas&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
-    &quot;Modelica electrical pin&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
-    &quot;Modelica heat port&quot;</font>;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> liquidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Cathode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the liquid&quot;</font>;
+  <font color="darkgreen">// Geometry</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A <font color="darkgreen">&quot;Cross-sectional area of the face&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Axis">Axis</a> axis <font color="darkgreen">&quot;Axis of the electrochemical reaction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a> side <font color="darkgreen">&quot;Side of the face w.r.t., the reaction&quot;</font>;
+  <font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
 
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.CathodeGas">Phases.CathodeGas</a> gas(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Cathode.GasMedium">GasMedium</a>) <font color="darkgreen">
-    &quot;Gas subadapter&quot;</font>;
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Graphite">Phases.Graphite</a> graphite <font color="darkgreen">&quot;Graphite subadapter&quot;</font>;
-  <a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_LiquidMedium.html#FCSys.Conditions.Adapters.Cathode.LiquidMedium">LiquidMedium</a>) <font color="darkgreen">
-    &quot;Liquid subadapter&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
+    constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+    &quot;Characteristic data&quot;</font>;
 
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Mechanics.Translational.Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange.a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
-    &quot;Modelica translational flanges&quot;</font>;
+  <font color="darkgreen">// Aliases (for common terms)</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(start=Data.p0) <font color="darkgreen">&quot;Thermodynamic pressure&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> zw(stateSelect=StateSelect.never) = <font color="red">inSign</font>(side)*face.mPhidot[
+    Orient.normal]/(face.rho*A) <font color="darkgreen">&quot;Inward nonequilibrium potential&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">&quot;Interface to the majority region&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for a species in a chemical reaction&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_trans=<font color="red">size</font>(cartTrans, 1) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="red">connect</font>(gas.face, face.gas);
-  <font color="red">connect</font>(gasPort, gas.fluidPort);
-  <font color="red">connect</font>(gas.heatPort, heatPort);
-  <font color="red">connect</font>(graphite.face, face.graphite);
+  <font color="darkgreen">// Aliases</font>
+  p = <font color="red">Data.p_Tv</font>(face.T, 1/face.rho);
 
-  <font color="red">connect</font>(graphite.pin, pin);
-  <font color="red">connect</font>(graphite.heatPort, heatPort);
-  <font color="red">connect</font>(liquid.face, face.liquid);
-  <font color="red">connect</font>(liquidPort, liquid.fluidPort);
-  <font color="red">connect</font>(liquid.heatPort, heatPort);
-  <font color="red">connect</font>(gas.flange, flange);
-  <font color="red">connect</font>(graphite.flange, flange);
+  <font color="darkgreen">// No diffusion across the face</font>
+  face.Ndot = 0 <font color="darkgreen">&quot;Material&quot;</font>;
+  face.mPhidot[2:3] = {0,0} <font color="darkgreen">&quot;Transverse translational momentum&quot;</font>;
+  face.Qdot = 0 <font color="darkgreen">&quot;Energy&quot;</font>;
 
-  <font color="red">connect</font>(liquid.flange, flange);
-<font color="blue">end </font>Cathode;
+  <font color="darkgreen">// Equal intensive properties</font>
+  chemical.mu = <font color="red">Data.h</font>(face.T, p) - chemical.sT + <font color="red">inSign</font>(side)*face.mPhidot[
+    Orient.normal]/(face.rho*A) <font color="darkgreen">&quot;Electrochemical potential&quot;</font>;
+  chemical.phi = {face.phi[<font color="red">cartWrap</font>(i - axis + 1)] <font color="blue">for </font>i<font color="blue"> in </font>cartTrans} <font color="darkgreen">
+    &quot;Velocity&quot;</font>;
+  chemical.sT = <font color="red">Data.s</font>(face.T, p)*face.T <font color="darkgreen">&quot;Specific entropy-temperature product&quot;</font>;
+
+  <font color="darkgreen">// Material conservation (without storage)</font>
+  0 = chemical.Ndot + <font color="red">inSign</font>(side)*face.phi[Orient.normal]*A*face.rho;
+  <font color="darkgreen">// The conservation of translational momentum and energy is inherent</font>
+  <font color="darkgreen">// in the stream connector.</font>
+
+<font color="blue">end </font>ChemicalFace;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Adapters.ChemicalReactionMultiI.png" alt="FCSys.Conditions.Adapters.ChemicalReactionMulti" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.ChemicalReactionMulti"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.ChemicalReactionMulti</h2>
+<b>Adapter between multiple <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> connectors and a <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors</b><p>
+<img src="images/FCSys.Conditions.Adapters.ChemicalReactionMultiD.png" alt="FCSys.Conditions.Adapters.ChemicalReactionMulti">
+
+<h3>Information</h3>
+
+<p>This model is used to add the stoichiometrically weighted chemical potential
+    of a species to the net chemical potential of a reaction.  Meanwhile, the species is produced at the
+    stoichiometrically weighted rate of the reaction.</p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td>Integer</td><td>n[n_spec]</td><td>&nbsp;</td><td>Stoichiometric coefficients</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m[n_spec]</td><td>&nbsp;</td><td>Specific masses [m/N]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_spec]</td><td>Connector for species in a chemical reaction</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>reaction</td><td>Connector for an electrochemical reaction</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ChemicalReactionMulti <font color="darkgreen">
+  &quot;Adapter between multiple <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> connectors and a <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>;
+
+  <font color="blue">parameter </font>Integer n_trans(min=1,max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="blue">parameter </font>Integer n_spec=1 <font color="darkgreen">&quot;Number of species&quot;</font>;
+
+  <font color="blue">parameter </font>Integer n[n_spec] <font color="darkgreen">&quot;Stoichiometric coefficients&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m[n_spec] <font color="darkgreen">&quot;Specific masses&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemical[n_spec](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for species in a chemical reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> reaction(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for an electrochemical reaction&quot;</font>;
+
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> single[n_spec](
+    <font color="blue">each </font><font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>n=n,
+    <font color="blue">final </font>m=m);
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>(single.chemical, chemical);
+
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_spec<font color="blue"> loop</font>
+    <font color="red">connect</font>(single[i].reaction, reaction);
+
+  <font color="blue">end for</font>;
+
+<font color="blue">end </font>ChemicalReactionMulti;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Adapters.ChemicalReactionMultiI.png" alt="FCSys.Conditions.Adapters.ChemicalReaction" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.ChemicalReaction"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.ChemicalReaction</h2>
+<b>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors</b><p>
+<img src="images/FCSys.Conditions.Adapters.ChemicalReactionD.png" alt="FCSys.Conditions.Adapters.ChemicalReaction">
+
+<h3>Information</h3>
+
+<p>This model is used to add the stoichiometrically weighted chemical potential
+    of a species to the net chemical potential of a reaction.  Meanwhile, the species is produced at the
+    stoichiometrically weighted rate of the reaction.</p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td>Integer</td><td>n</td><td>&nbsp;</td><td>Stoichiometric coefficient</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>&nbsp;</td><td>Specific mass [m/N]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Connector for a species in a chemical reaction</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>reaction</td><td>Connector for an electrochemical reaction</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ChemicalReaction <font color="darkgreen">
+  &quot;Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connectors&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>;
+
+  <font color="blue">parameter </font>Integer n_trans(min=1,max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+
+  <font color="blue">parameter </font>Integer n <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m <font color="darkgreen">&quot;Specific mass&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_actualStream[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = <font color="red">actualStream</font>(chemical.phi) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Velocity of the actual stream&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT_actualStream(stateSelect=StateSelect.never) = <font color="red">
+    actualStream</font>(chemical.sT) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Specific entropy-temperature product of the actual stream&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for a species in a chemical reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> reaction(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for an electrochemical reaction&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Equal intensive properties</font>
+  reaction.mu = n*chemical.mu <font color="darkgreen">&quot;Chemical potential&quot;</font>;
+  reaction.phi = chemical.phi <font color="darkgreen">&quot;Velocity&quot;</font>;
+  reaction.sT = chemical.sT <font color="darkgreen">&quot;Specific entropy-temperature product&quot;</font>;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = chemical.Ndot + n*reaction.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">zeros</font>(n_trans) = m*<font color="red">actualStream</font>(chemical.phi)*chemical.Ndot + reaction.mPhidot
+    <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = <font color="red">actualStream</font>(chemical.sT)*chemical.Ndot + reaction.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
+<font color="blue">end </font>ChemicalReaction;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Adapters.FaceReactionI.png" alt="FCSys.Conditions.Adapters.FaceReaction" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Adapters.FaceReaction"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.FaceReaction</h2>
+<b>Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</b><p>
+<img src="images/FCSys.Conditions.Adapters.FaceReactionD.png" alt="FCSys.Conditions.Adapters.FaceReaction">
+
+<h3>Information</h3>
+
+<p>This model is used to determine the electrochemical potential available in
+    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across
+    the boundary is due entirely to the electrochemical reaction.</p>
+
+    <p>Assumptions:<ol>
+    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
+    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
+    potential.</li>
+    </ol></p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n</td><td>&nbsp;</td><td>Stoichiometric coefficient</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>&nbsp;</td><td>Cross-sectional area of the face [l2]</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>Axis of the electrochemical reaction</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>side</td><td>&nbsp;</td><td>Side of the face w.r.t., the reaction</td></tr>
+<tr><td>Integer</td><td>cartTrans[:]</td><td>&nbsp;</td><td>Cartesian-axis indices of the components of translational momentum</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Interface to the majority region</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>reaction</td><td>Connector for an electrochemical reaction</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> FaceReaction <font color="darkgreen">
+  &quot;Adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors&quot;</font>
+
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.inSign">FCSys.Utilities.inSign</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>;
+
+  <font color="darkgreen">// Geometry</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A <font color="darkgreen">&quot;Cross-sectional area of the face&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Axis">Axis</a> axis <font color="darkgreen">&quot;Axis of the electrochemical reaction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a> side <font color="darkgreen">&quot;Side of the face w.r.t., the reaction&quot;</font>;
+  <font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+  <font color="blue">parameter </font>Integer n <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
+
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
+    constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+    &quot;Characteristic data&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> zw(stateSelect=StateSelect.never) = <font color="red">inSign</font>(side)*face.mPhidot[
+    Orient.normal]/(face.rho*A) <font color="darkgreen">&quot;Inward nonequilibrium potential&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">&quot;Interface to the majority region&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> reaction(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for an electrochemical reaction&quot;</font>;
+
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalFace">ChemicalFace</a> chemicalFace(
+    <font color="blue">final </font>axis=axis,
+    <font color="blue">final </font>side=side,
+    <font color="blue">final </font>cartTrans=cartTrans,
+    <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Data = Data,
+    <font color="blue">final </font>A=A);
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">ChemicalReaction</a> reactionChemical(
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>n=n,
+    <font color="blue">final </font>m=Data.m);
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_trans=<font color="red">size</font>(cartTrans, 1) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>(reactionChemical.chemical, chemicalFace.chemical);
+
+  <font color="red">connect</font>(reactionChemical.reaction, reaction);
+
+  <font color="red">connect</font>(chemicalFace.face, face);
+
+<font color="blue">end </font>FaceReaction;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:47 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:05:35 2013.
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -59,23 +62,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionS.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a>
 </td><td>Base model for multi-dimensional, multi-species storage, transport, and exchange</td></tr>
-<tr><td><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.InitCapacitor">InitCapacitor</a>
-</td><td>Methods of initializing a capacitor</td></tr>
 </table>
-<p>
-<h3>Types and constants</h3>
-
-<a name="FCSys.Subregions.BaseClasses.InitCapacitor"></a><pre><font color="blue">type</font> InitCapacitor = <font color="blue">enumeration</font>(
-    None <font color="darkgreen">&quot;No initialization&quot;</font>,
-    SS <font color="darkgreen">&quot;Steady state&quot;</font>,
-    Amount <font color="darkgreen">&quot;Amount of material&quot;</font>,
-    Potential <font color="darkgreen">&quot;Potential&quot;</font>) <font color="darkgreen">&quot;Methods of initializing a capacitor&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionI.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.BaseClasses.EmptySubregion"></a><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">FCSys.Subregions.BaseClasses</a>.EmptySubregion</h2>
-<b>Base model for multi-dimensional, multi-species storage, transport, and exchange</b><p>
-<img src="images/FCSys.Subregions.BaseClasses.EmptySubregionD.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion">
+<b>Base model for multi-dimensional, multi-species storage, transport, and exchange</b>
 
 <h3>Information</h3>
 
@@ -89,12 +81,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths (<b>L</b>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_common</td><td>1</td><td>Coupling factor for exchange among all phases [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -106,35 +101,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-</table>
-<p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> EmptySubregion <font color="darkgreen">
   &quot;Base model for multi-dimensional, multi-species storage, transport, and exchange&quot;</font>
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
-  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top3;</font>
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.cartWrap">FCSys.Utilities.cartWrap</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">FCSys.Utilities.countTrue</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.enumerate">FCSys.Utilities.enumerate</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.index">FCSys.Utilities.index</a>;
+  <font color="darkgreen">// extends FCSys.Icons.Names.Top3;</font>
 
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = {U.cm,U.cm,
-    U.cm} <font color="darkgreen">&quot;Lengths (<b>L</b>)&quot;</font>;
+    U.cm} <font color="darkgreen">&quot;Lengths&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
       2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_common=1 <font color="darkgreen">
+    &quot;Coupling factor for exchange among all phases&quot;</font>;
 
   <font color="darkgreen">// Assumptions</font>
   <font color="darkgreen">// -----------</font>
@@ -148,15 +134,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
   <font color="blue">parameter </font>Boolean inclFacesZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
-
 <font color="blue">protected </font>
-  <font color="blue">parameter </font>Boolean hasSpecies <font color="darkgreen">&quot;true, if any species are included&quot;</font>;
+  <font color="blue">parameter </font>Integer n_spec(start=0) <font color="darkgreen">&quot;Number of species&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
       inclTransZ} <font color="darkgreen">
     &quot;true, if each component of translational momentum is included&quot;</font>;
@@ -180,8 +159,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer facesCart[Axis]=<font color="red">enumerate</font>(inclFaces) <font color="darkgreen">
     &quot;Face-pair indices of the Cartesian axes&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a> volume <font color="blue">if </font>hasSpecies <font color="darkgreen">&quot;Model to establish a fixed total volume&quot;</font>;
-
 <font color="blue">end </font>EmptySubregion;
 </pre>
       </div>
@@ -189,7 +166,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:04 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:08:32 2013.
 </div>
 </body>
 </html>

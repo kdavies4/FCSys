@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Base classes (generally not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -59,66 +62,57 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">PartialCondition</a>
 </td><td>Partial model for a thermal condition</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a>
-</td><td>Types of conditions</td></tr>
 </table>
-<p>
-<h3>Types and constants</h3>
-
-<a name="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
-    Temperature <font color="darkgreen">&quot;Specify temperature (measure heat flow rate)&quot;</font>,
-    HeatRate <font color="darkgreen">&quot;Specify heat flow rate (measure temperature)&quot;</font>,
-    Custom <font color="darkgreen">&quot;Custom&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses">FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model for a thermal condition</b><p>
-<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialConditionD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">
+<img src="images/FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRateD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
+Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a> (Short icon for a single-connector boundary condition).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Measurement</b></td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusion">ThermalDiffusion</a></td><td>thermal</td><td>Connector to transport material, momentum, and energy of a single species</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=3><b>Measurement</b></td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
   &quot;Partial model for a thermal condition&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a>;
 
   <font color="blue">parameter </font>Boolean internal=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
 
   <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> source <font color="blue">if </font>internal <font color="blue">
     constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
-
-  <font color="blue">constant </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusion_BaseClasses.html#FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with</font>
-  <font color="darkgreen">// the results.</font>
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> u <font color="blue">if </font><font color="blue">not </font>internal <font color="darkgreen">&quot;Value of specified condition&quot;</font>;
 
@@ -134,6 +128,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="red">connect</font>(u, u_final);
 
   <font color="red">connect</font>(source.y, u_final);
+
 <font color="blue">end </font>PartialCondition;
 </pre>
       </div>
@@ -141,7 +136,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:28 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:30 2013.
 </div>
 </body>
 </html>

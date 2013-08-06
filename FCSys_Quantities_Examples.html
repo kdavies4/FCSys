@@ -3,7 +3,7 @@
 <title>FCSys.Quantities.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -73,6 +76,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -88,11 +92,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Quantities.Examples.ExampleModelI.png" alt="FCSys.Quantities.Examples.ExampleModel" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Quantities.Examples.ExampleModel"></a><a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples">FCSys.Quantities.Examples</a>.ExampleModel</h2>
 <b>Model that uses all of the quantities</b>
+
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
+Extends from <a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.Continuous">FCSys.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -133,7 +140,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">PermittivityReciprocal</a></td><td>PermittivityReciprocal</td><td>1*U.m/U.H</td><td>Reciprocal of permittivity [l3.m/(N2.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>Potential</td><td>1*U.V</td><td>Potential [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>PotentialAbsolute</td><td>1*U.K</td><td>Absolute potential [l2.m/(N.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">PotentialLineic</a></td><td>PotentialLineic</td><td>1*U.V/U.m</td><td>Lineic potential [l.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">ForceSpecific</a></td><td>ForceSpecific</td><td>1*U.V/U.m</td><td>Specific force [l.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">PotentialPerWavenumber</a></td><td>PotentialPerWavenumber</td><td>1*U.V*U.m/U.rad</td><td>Potential per wavenumber [l3.m/(A.N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>PotentialRate</td><td>1*U.V/U.s</td><td>Rate of potential [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Power</td><td>1*U.W</td><td>Power [l2.m/T3]</td></tr>
@@ -161,11 +168,12 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Wavenumber</a></td><td>Wavenumber</td><td>1*U.rad/U.m</td><td>Wavenumber [A/l]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> ExampleModel <font color="darkgreen">&quot;Model that uses all of the quantities&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.Continuous">FCSys.Icons.Blocks.Continuous</a>;
 
   <font color="darkgreen">// Generated from FCSys/Resources/quantities.xls, 2013-6-10</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> Acceleration=1*U.m/U.s^2 <font color="darkgreen">&quot;Acceleration&quot;</font>;
@@ -210,7 +218,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
     &quot;Reciprocal of permittivity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Potential=1*U.V <font color="darkgreen">&quot;Potential&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> PotentialAbsolute=1*U.K <font color="darkgreen">&quot;Absolute potential&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialLineic">Q.PotentialLineic</a> PotentialLineic=1*U.V/U.m <font color="darkgreen">&quot;Lineic potential&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">Q.ForceSpecific</a> ForceSpecific=1*U.V/U.m <font color="darkgreen">&quot;Specific force&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> PotentialPerWavenumber=1*U.V*U.m/U.rad <font color="darkgreen">
     &quot;Potential per wavenumber&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">Q.PotentialRate</a> PotentialRate=1*U.V/U.s <font color="darkgreen">&quot;Rate of potential&quot;</font>;
@@ -252,7 +260,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:12 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:09:00 2013.
 </div>
 </body>
 </html>

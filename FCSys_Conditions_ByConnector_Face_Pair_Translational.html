@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Face.Pair.Translational</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Translational conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -57,163 +60,175 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">Velocity</a>
-</td><td>Specify velocity difference (measure force), with conservation of translational momentum</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">Force</a>
-</td><td>Specify force (measure velocity difference), with conservation of translational momentum</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom">Custom</a>
-</td><td>Custom</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClassesS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.velocity">velocity</a>
+</td><td>Difference in velocity</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.force">force</a>
+</td><td>Non-equilibrium force</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition">PartialCondition</a>
+</td><td>Partial function to select a translational quantity</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Velocity</h2>
-<b>Specify velocity difference (measure force), with conservation of translational momentum</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Velocity">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.velocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.velocity" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.velocity"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.velocity</h2>
+<b>Difference in velocity</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition">PartialCondition</a> (Partial function to select a translational quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Ve&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Orient">Orient</a></td><td>orient</td><td>&nbsp;</td><td>Orientation of translational momentum w.r.t. the face</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Velocity <font color="darkgreen">
-  &quot;Specify velocity difference (measure force), with conservation of translational momentum&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Velocity,
-    u(<font color="blue">final </font>unit=&quot;l/T&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;) = negative.mPhidot[orientation]);
+<font color="blue">function</font> velocity <font color="darkgreen">&quot;Difference in velocity&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition">PartialCondition</a>;
 
-<font color="blue">equation </font>
-  positive.phi[orientation] - negative.phi[orientation] = u_final;
-<font color="blue">end </font>Velocity;
+<font color="blue">algorithm </font>
+  x := Deltaphi[orient];
+<font color="blue">end </font>velocity;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Force</h2>
-<b>Specify force (measure velocity difference), with conservation of translational momentum</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Force">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.velocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.force" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.force"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.force</h2>
+<b>Non-equilibrium force</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition">PartialCondition</a> (Partial function to select a translational quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Orient">Orient</a></td><td>orient</td><td>&nbsp;</td><td>Orientation of translational momentum w.r.t. the face</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Force <font color="darkgreen">
-  &quot;Specify force (measure velocity difference), with conservation of translational momentum&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Force,
-    u(<font color="blue">final </font>unit=&quot;l.m/T2&quot;),
-    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l/T&quot;) = positive.phi[orientation] - negative.phi[
-      orientation]);
+<font color="blue">function</font> force <font color="darkgreen">&quot;Non-equilibrium force&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition">PartialCondition</a>;
 
-<font color="blue">equation </font>
-  negative.mPhidot[orientation] = u_final;
-<font color="blue">end </font>Force;
+<font color="blue">algorithm </font>
+  x := mPhidot[orient];
+<font color="blue">end </font>force;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.VelocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.Custom</h2>
-<b>Custom</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.Custom">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Translational.velocityI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Translational.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational.html#FCSys.Conditions.ByConnector.Face.Pair.Translational">FCSys.Conditions.ByConnector.Face.Pair.Translational</a>.PartialCondition</h2>
+<b>Partial function to select a translational quantity</b>
 
 <h3>Information</h3>
 
-<p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>negative.phi[orientation]</code>, <code>positive.phi[orientation]</code>,
-    <code>negative.mPhidot[orientation]</code> and/or <code>positive.mPhidot[orientation]</code>.</p><p>
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a transverse translational condition).
+<p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.normal</td><td>Orientation of translational momentum</td></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>positive.phi[orientation] - &hellip;</td><td>Expression to which the condition is applied</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.mPhidot[orientation]</td><td>Measurement expression</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Orient">Orient</a></td><td>orient</td><td>&nbsp;</td><td>Orientation of translational momentum w.r.t. the face</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
-<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Translational_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Translational.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
-      y=negative.mPhidot[orientation]);
+<font color="blue">partial </font><font color="blue">function</font> PartialCondition <font color="darkgreen">
+  &quot;Partial function to select a translational quantity&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  Real x=positive.phi[orientation] - negative.phi[orientation] <font color="darkgreen">
-    &quot;Expression to which the condition is applied&quot;</font>;
+  <font color="darkgreen">// Material</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> Deltarho <font color="darkgreen">
+    &quot;Difference in density (<i>&Delta;&rho;</i>)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot <font color="darkgreen">&quot;Diffusion current (<i>N&#775;</i>)&quot;</font>;
 
-<font color="blue">equation </font>
-  x = u_final;
-<font color="blue">end </font>Custom;
+  <font color="darkgreen">// Translational</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> Deltaphi[Orient] <font color="darkgreen">
+    &quot;Difference in velocity (&Delta;&phi;)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[Orient] <font color="darkgreen">
+    &quot;Non-equilibrium force (<i>m</i>&Phi;dot)&quot;</font>;
+
+  <font color="darkgreen">// Thermal</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> DeltaT <font color="darkgreen">
+    &quot;Difference in temperature (&Delta;<i>T</i>)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot <font color="darkgreen">&quot;Rate of thermal conduction (<i>Q&#775;</i>)&quot;</font>;
+
+  <font color="blue">input </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Orient">Orient</a> orient <font color="darkgreen">&quot;Orientation of translational momentum w.r.t. the face&quot;</font>;
+
+  <font color="blue">output </font>Real x <font color="darkgreen">&quot;Value of condition&quot;</font>;
+<font color="blue">end </font>PartialCondition;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:11 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:15 2013.
 </div>
 </body>
 </html>

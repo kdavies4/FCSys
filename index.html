@@ -3,7 +3,7 @@
 <title>FCSys &mdash; Modelica library of fuel cell models</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Modelica fuel cell library">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -128,8 +131,8 @@ margin-right: auto;" class=noBorder>
     <p align=center id="Fig1"><img src="images/CellFlows.png">
 <br>Figure 1: Layers and primary flows of a PEMFC.</p>
 
-    <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600>-->
-    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600></a>
+    <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600>-->
+    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600></a>
 <br>Figure 2: Diagram of the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">PEMFC model</a>.</p>
 
     <p>The models are primarily based on first principles&mdash;the advection, diffusion, and storage of
@@ -152,10 +155,10 @@ margin-right: auto;" class=noBorder>
     <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid">Modelica.Fluid</a> components using
     <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">adapters</a> that are included.
     <a href="#Fig3">Figure 3</a> shows a series of polarization curves generated
-    from the <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a> model **Update with new plot (currently old result).
-    Please see the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.SampleResults">sample results</a> for more plots.</p>
+    from the <a href="FCSys_Regions_Examples.html#FCSys.Regions.Examples.FPToFP">FPToFP</a> model.
+    Please see the <a href="FCSys_UsersGuide_SampleResults.html#FCSys.UsersGuide.SampleResults">sample results</a> for more plots.</p>
 
-    <p align=center id="Fig3"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/Polarization.png"></a>
+    <p align=center id="Fig3"><a href="FCSys_Regions_Examples.html#FCSys.Regions.Examples.FPToFP"><img src="images/Polarization.png"></a>
 <br>Figure 3: Polarization curves under various conditions.</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
@@ -187,23 +190,29 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>3D arrays of discrete, interconnected subregions</td></tr>
 <tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
 </td><td>Control volumes with multi-species transport, exchange, and storage</td></tr>
-<tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
-</td><td>Declarative and imperative connectors</td></tr>
+<tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases">Phases</a>
+</td><td>Mixtures of species</td></tr>
+<tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species.html#FCSys.Species">Species</a>
+</td><td>Dynamic models of chemical species</td></tr>
 <tr><td><img src="images/FCSys.CharacteristicsS.png" alt="FCSys.Characteristics" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics.html#FCSys.Characteristics">Characteristics</a>
 </td><td>Packages with data and functions to correlate physical properties</td></tr>
+<tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
+</td><td>Declarative and imperative connectors</td></tr>
 <tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Units" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units">Units</a>
 </td><td>Constants and units of physical measure</td></tr>
 <tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Quantities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a>
 </td><td>Quantities to represent physical properties</td></tr>
-<tr><td><img src="images/FCSys.BaseClassesS.png" alt="FCSys.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses.html#FCSys.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Utilities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities">Utilities</a>
+</td><td>Functions that implement useful algorithms</td></tr>
+<tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Icons" width=20  height=20 align=top>&nbsp;<a href="FCSys_Icons.html#FCSys.Icons">Icons</a>
+</td><td>Icons to annotate and represent classes</td></tr>
 </table>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:42 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:05:28 2013.
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Face.Pair.Thermal</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Thermal conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -57,160 +60,170 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature">Temperature</a>
-</td><td>Specify temperature difference (measure heat flow rate), with conservation of energy</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">HeatRate</a>
-</td><td>Specify heat flow rate (measure temperature difference), with conservation of energy</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom">Custom</a>
-</td><td>Apply condition to a custom expression, with conservation of energy</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClassesS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperature">temperature</a>
+</td><td>Difference in temperature</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.heatRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.heatRate">heatRate</a>
+</td><td>Rate of thermal conduction</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.densityS.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition">PartialCondition</a>
+</td><td>Partial function to select a thermal quantity</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.Temperature</h2>
-<b>Specify temperature difference (measure heat flow rate), with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Temperature">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperature" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperature"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.temperature</h2>
+<b>Difference in temperature</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition">PartialCondition</a> (Partial function to select a thermal quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Temperature <font color="darkgreen">
-  &quot;Specify temperature difference (measure heat flow rate), with conservation of energy&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Temperature,
-    u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
-    <font color="blue">final </font>y(unit=&quot;l2.m/T3&quot;) = negative.Qdot);
+<font color="blue">function</font> temperature <font color="darkgreen">&quot;Difference in temperature&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition">PartialCondition</a>;
 
-<font color="blue">equation </font>
-  positive.T - negative.T = u_final;
-<font color="blue">end </font>Temperature;
+<font color="blue">algorithm </font>
+  x := DeltaT;
+<font color="blue">end </font>temperature;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.HeatRate</h2>
-<b>Specify heat flow rate (measure temperature difference), with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.HeatRate">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.heatRate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.heatRate"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.heatRate</h2>
+<b>Rate of thermal conduction</b>
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition">PartialCondition</a> (Partial function to select a thermal quantity).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> HeatRate <font color="darkgreen">
-  &quot;Specify heat flow rate (measure temperature difference), with conservation of energy&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
-    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.HeatRate,
-    u(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;),
-    <font color="blue">final </font>y(
-      <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-      displayUnit=&quot;K&quot;) = positive.T - negative.T);
+<font color="blue">function</font> heatRate <font color="darkgreen">&quot;Rate of thermal conduction&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition">PartialCondition</a>;
 
-<font color="blue">equation </font>
-  negative.Qdot = u_final;
-<font color="blue">end </font>HeatRate;
+<font color="blue">algorithm </font>
+  x := Qdot;
+<font color="blue">end </font>heatRate;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.TemperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.Custom</h2>
-<b>Apply condition to a custom expression, with conservation of energy</b><p>
-<img src="images/FCSys.Conditions.ByConnector.Face.Pair.Material.CurrentD.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.Custom">
+<h2><img src="images/FCSys.Conditions.ByConnector.Face.Pair.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Face.Pair.Thermal.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal">FCSys.Conditions.ByConnector.Face.Pair.Thermal</a>.PartialCondition</h2>
+<b>Partial function to select a thermal quantity</b>
 
 <h3>Information</h3>
 
-<p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>negative.T</code>, <code>positive.T</code>, <code>negative.Qdot</code> and/or <code>positive.Qdot</code>.</p><p>
-Extends from <a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+<p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-<h3>Parameters</h3>
+
+<h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
-<tr><td>Real</td><td>x</td><td>positive.T - negative.T</td><td>Expression to which the condition is applied</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.Qdot</td><td>Measurement expression</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Density</a></td><td>Deltarho</td><td>&nbsp;</td><td>Difference in density (<i>&Delta;&rho;</i>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>&nbsp;</td><td>Diffusion current (<i>N&#775;</i>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>Deltaphi[Orient]</td><td>&nbsp;</td><td>Difference in velocity (&Delta;&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[Orient]</td><td>&nbsp;</td><td>Non-equilibrium force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>DeltaT</td><td>&nbsp;</td><td>Difference in temperature (&Delta;<i>T</i>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
 </table>
 <p>
-<h3>Connectors</h3>
+
+<h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport material, momentum, and energy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport material, momentum, and energy of a single species</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
-<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Custom <font color="darkgreen">
-  &quot;Apply condition to a custom expression, with conservation of energy&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Face_Pair_Thermal_BaseClasses.html#FCSys.Conditions.ByConnector.Face.Pair.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
-      y=negative.Qdot);
+<font color="blue">partial </font><font color="blue">function</font> PartialCondition <font color="darkgreen">
+  &quot;Partial function to select a thermal quantity&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  Real x=positive.T - negative.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+  <font color="darkgreen">// Material</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> Deltarho <font color="darkgreen">
+    &quot;Difference in density (<i>&Delta;&rho;</i>)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot <font color="darkgreen">&quot;Diffusion current (<i>N&#775;</i>)&quot;</font>;
 
-<font color="blue">equation </font>
-  x = u_final;
-<font color="blue">end </font>Custom;
+  <font color="darkgreen">// Translational</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> Deltaphi[Orient] <font color="darkgreen">
+    &quot;Difference in velocity (&Delta;&phi;)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[Orient] <font color="darkgreen">
+    &quot;Non-equilibrium force (<i>m</i>&Phi;dot)&quot;</font>;
+
+  <font color="darkgreen">// Thermal</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> DeltaT <font color="darkgreen">
+    &quot;Difference in temperature (&Delta;<i>T</i>)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot <font color="darkgreen">&quot;Rate of thermal conduction (<i>Q&#775;</i>)&quot;</font>;
+
+  <font color="blue">output </font>Real x <font color="darkgreen">&quot;Value of condition&quot;</font>;
+<font color="blue">end </font>PartialCondition;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:13 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:15 2013.
 </div>
 </body>
 </html>

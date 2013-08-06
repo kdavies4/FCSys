@@ -3,7 +3,7 @@
 <title>FCSys.Units</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -53,7 +56,7 @@
 
 <p>The <a href="FCSys_Units.html#FCSys.Units">Units</a> package is abbreviated as <code>U</code> for convenience throughout
   the rest of <a href="index.html#FCSys.FCSys">FCSys</a>.  For example, an initial pressure might be defined as
-  <code>p_IC = U.atm</code>.</p>
+  <i>p</i><sub>IC</sub> = <code>U.atm</code>.</p>
 
   <p>The information below has been updated from
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].  That paper
@@ -189,7 +192,7 @@ kelvin would be derived from the units kilogram, meter, and second (K
     but SI has seven independent base units (m, kg, s, A, K, mol, and cd).
     In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
-    same base <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.
+    same base <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.
     First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
     is normalized to one. This implies that the mole (mol) is proportional to the coulomb
     (C or Wb&middot;S), which is considered a number of reference particles given the charge number.
@@ -293,7 +296,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_kPag">to_kPag</a>
 </td><td>Convert to gauge pressure in kilopascals</td></tr>
 <tr><td>pi=2*arccos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
-<tr><td>e=exp(1)</td><td>Euler number</td></tr>
 <tr><td>base</td><td>Scalable base constants and units</td></tr>
 <tr><td>rad=base.rad</td><td>radian</td></tr>
 <tr><td>R_inf=base.R_inf</td><td>Rydberg constant (<i>R</i><sub>&infin;</sub>)</td></tr>
@@ -376,21 +378,23 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>c_3_f=2.821439372122079*k_B/h</td><td>Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)</td></tr>
 <tr><td>sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*c^2)</td><td>Stefan-Boltzmann constant (&sigma;)</td></tr>
 <tr><td>bar=1e5*Pa</td><td>bar</td></tr>
-<tr><td>Aring=0.1*nano*m</td><td>angstrom (&#8491;)</td></tr>
+<tr><td>angstrom=0.1*nano*m</td><td>angstrom (&#8491;)</td></tr>
 <tr><td>atm=101325*Pa</td><td>atmosphere</td></tr>
 <tr><td>kPa=kilo*Pa</td><td>kilopascal</td></tr>
 <tr><td>kJ=kilo*J</td><td>kilojoule</td></tr>
 <tr><td>cm=centi*m</td><td>centimeter</td></tr>
 <tr><td>mm=milli*m</td><td>millimeter</td></tr>
+<tr><td>um=micro*m</td><td>micrometer</td></tr>
+<tr><td>ms=milli*s</td><td>millisecond</td></tr>
 <tr><td>'%'=centi</td><td>percent (%)</td></tr>
 <tr><td>M=U.mol/U.L</td><td>molar</td></tr>
 <tr><td>cc=U.cm^3</td><td>cubic centimeter</td></tr>
 </table>
 <p>
+
 <h3>Types and constants</h3>
 
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">arccos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> e=<font color="red">exp</font>(1) <font color="darkgreen">&quot;Euler number&quot;</font>;</pre><p>
 <pre><font color="blue">replaceable </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">Bases.ScaledFC</a> base <font color="blue">constrainedby </font>Bases.Base <font color="darkgreen">
   &quot;Scalable base constants and units&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=base.rad <font color="darkgreen">&quot;radian&quot;</font>;</pre><p>
@@ -495,12 +499,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreicPerPotential4">Q.PowerAreicPerPotential4</a> sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*c^2)
   <font color="darkgreen">&quot;Stefan-Boltzmann constant (&sigma;)&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=1e5*Pa <font color="darkgreen">&quot;bar&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Aring=0.1*nano*m <font color="darkgreen">&quot;angstrom (&#8491;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> angstrom=0.1*nano*m <font color="darkgreen">&quot;angstrom (&#8491;)&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=101325*Pa <font color="darkgreen">&quot;atmosphere&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> kPa=kilo*Pa <font color="darkgreen">&quot;kilopascal&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> kJ=kilo*J <font color="darkgreen">&quot;kilojoule&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> cm=centi*m <font color="darkgreen">&quot;centimeter&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=milli*m <font color="darkgreen">&quot;millimeter&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> um=micro*m <font color="darkgreen">&quot;micrometer&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> ms=milli*s <font color="darkgreen">&quot;millisecond&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=centi <font color="darkgreen">&quot;percent (%)&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> M=U.mol/U.L <font color="darkgreen">&quot;molar&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cm^3 <font color="darkgreen">&quot;cubic centimeter&quot;</font>;</pre><p>
@@ -509,6 +515,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><a name="FCSys.Units.setup"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.setup</h2>
 
 <b>Establish conversions to display quantities in units</b>
+
 <h3>Information</h3>
 
 <p>This has no inputs or outputs.
@@ -519,6 +526,7 @@ For more information, see the documentation for the
 <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -561,7 +569,7 @@ For more information, see the documentation for the
   <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T2.s)&quot;, &quot;V/s&quot;) <font color="darkgreen">
     &quot;for derivative of potential in Dymola&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T2)&quot;, &quot;V&quot;) <font color="darkgreen">&quot;Potential&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.m/(N.T2)&quot;, &quot;V/m&quot;) <font color="darkgreen">&quot;Lineic potential&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.m/(N.T2)&quot;, &quot;V/m&quot;) <font color="darkgreen">&quot;Specific force&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T3)&quot;, &quot;V/s&quot;) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N2.T)&quot;, &quot;ohm&quot;) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/N2&quot;, &quot;uH&quot;) <font color="darkgreen">&quot;Inductance&quot;</font>;
@@ -592,6 +600,7 @@ For more information, see the documentation for the
   <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(T2.l.s)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">
     &quot;for derivative of pressure in Dymola&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;m/N&quot;, &quot;g/mol&quot;) <font color="darkgreen">&quot;Specific mass&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/l3&quot;, &quot;g/cc&quot;) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;m/s&quot;, &quot;g/s&quot;) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;m/T3&quot;, &quot;W/m2&quot;) <font color="darkgreen">&quot;Areic power&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;N&quot;, &quot;C&quot;) <font color="darkgreen">&quot;Amount&quot;</font>;
@@ -736,6 +745,10 @@ For more information, see the documentation for the
     &quot;mm/s&quot;,
     s/mm) <font color="darkgreen">&quot;Velocity&quot;</font>;
   <font color="red">defineUnitConversion</font>(
+    &quot;l/T&quot;,
+    &quot;um/s&quot;,
+    s/um) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
     &quot;l/T2&quot;,
     &quot;cm/s2&quot;,
     s^2/cm) <font color="darkgreen">&quot;Acceleration&quot;</font>;
@@ -794,7 +807,7 @@ For more information, see the documentation for the
   <font color="red">defineUnitConversion</font>(
     &quot;l.m/(N.T2)&quot;,
     &quot;V/m&quot;,
-    m/V) <font color="darkgreen">&quot;Lineic potential&quot;</font>;
+    m/V) <font color="darkgreen">&quot;Specific force&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;l2.m/(N.T3)&quot;,
     &quot;K/s&quot;,
@@ -992,6 +1005,14 @@ For more information, see the documentation for the
     &quot;m/(T2.l.s)&quot;,
     &quot;Pa/s&quot;,
     1/Pa) <font color="darkgreen">&quot;for derivative of pressure in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;m/l3&quot;,
+    &quot;g/cc&quot;,
+    cc/g) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;m/l3&quot;,
+    &quot;kg/m3&quot;,
+    m^3/kg) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;m/N&quot;,
     &quot;g/mol&quot;,
@@ -1224,24 +1245,30 @@ For more information, see the documentation for the
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_degC</h2>
 <b>Convert from temperature in degree Celsius</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>T_degC</td><td>&nbsp;</td><td>Temperature in degree Celsius</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1261,24 +1288,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_degC</h2>
 <b>Convert to temperature in degree Celsius</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>T_degC</td><td>Temperature in degree Celsius</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1298,24 +1331,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_kPag</h2>
 <b>Convert from gauge pressure in kilopascals</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>p_kPag</td><td>&nbsp;</td><td>Gauge pressure in kilopascals</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Absolute pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1335,24 +1374,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_kPag</h2>
 <b>Convert to gauge pressure in kilopascals</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Absolute pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>p_kPag</td><td>Gauge pressure in kilopascals</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1372,7 +1417,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:11 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:08:57 2013.
 </div>
 </body>
 </html>

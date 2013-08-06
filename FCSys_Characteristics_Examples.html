@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -73,17 +76,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_start</td><td>273.15*U.K</td><td>Initial temperature (<i>T</i><sub>start</sub>) [l2.m/(N.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_stop</td><td>473.15*U.K</td><td>Final temperature (<i>T</i><sub>stop</sub>) [l2.m/(N.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_start</td><td>U.bar</td><td>Initial pressure (<i>p</i><sub>start</sub>) [m/(l.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_stop</td><td>U.bar + 0*U.atm</td><td>Final pressure (<i>p</i><sub>stop</sub>) [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_start</td><td>273.15*U.K</td><td>Initial temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_stop</td><td>473.15*U.K</td><td>Final temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_start</td><td>U.bar</td><td>Initial pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_stop</td><td>U.bar + 0*U.atm</td><td>Final pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -91,6 +98,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">RealOutputInternal</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -98,18 +106,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Evaluate the material properties over varying temperature and pressure&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_start=273.15*U.K <font color="darkgreen">
-    &quot;Initial temperature (<i>T</i><sub>start</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_stop=473.15*U.K <font color="darkgreen">
-    &quot;Final temperature (<i>T</i><sub>stop</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_start=U.bar <font color="darkgreen">
-    &quot;Initial pressure (<i>p</i><sub>start</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_stop=U.bar + 0*U.atm <font color="darkgreen">
-    &quot;Final pressure (<i>p</i><sub>stop</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_start=273.15*U.K <font color="darkgreen">&quot;Initial temperature&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_stop=473.15*U.K <font color="darkgreen">&quot;Final temperature&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_start=U.bar <font color="darkgreen">&quot;Initial pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_stop=U.bar + 0*U.atm <font color="darkgreen">&quot;Final pressure&quot;</font>;
 
   <font color="darkgreen">// Property models</font>
   <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> &#39;C+&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a>);
-  <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> &#39;C19HF37O5S-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C19HF37O5S-'_Ionomer.html#FCSys.Characteristics.'C19HF37O5S-'.Ionomer">Characteristics.'C19HF37O5S-'.Ionomer</a>);
+  <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> &#39;SO3-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'SO3-'_Ionomer.html#FCSys.Characteristics.'SO3-'.Ionomer">Characteristics.'SO3-'.Ionomer</a>);
   <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.'e-'.Gas">FCSys.Characteristics.'e-'.Gas</a>);
   <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>);
   <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations.PropertiesRT">PropertiesRT</a> H2(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a>);
@@ -153,8 +157,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="red">connect</font>(p, 'C+'.p);
 
-  <font color="red">connect</font>(T, 'C19HF37O5S-'.T);
-  <font color="red">connect</font>(p, 'C19HF37O5S-'.p);
+  <font color="red">connect</font>(T, 'SO3-'.T);
+  <font color="red">connect</font>(p, 'SO3-'.p);
 
   <font color="red">connect</font>(T, 'e-'.T);
   <font color="red">connect</font>(p, 'e-'.p);
@@ -190,9 +194,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a> (Short icon for a continuous block).
+Extends from <a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.ContinuousShort">FCSys.Icons.Blocks.ContinuousShort</a> (Short icon for a continuous block).
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -200,12 +206,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Properties <font color="darkgreen">
   &quot;Model that implements the functions of the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Characteristic</a> package&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.ContinuousShort">FCSys.Icons.Blocks.ContinuousShort</a>;
 
   <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
     constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
@@ -257,14 +264,18 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 
 Extends from <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Properties">FCSys.Characteristics.Examples.Properties</a> (Model that implements the functions of the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Characteristic</a> package).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -272,6 +283,7 @@ Extends from <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -288,7 +300,7 @@ Extends from <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:05 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:08:51 2013.
 </div>
 </body>
 </html>

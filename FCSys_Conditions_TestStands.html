@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.TestStands</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Test stands">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -57,239 +60,699 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.TestStands.TestProfileS.png" alt="FCSys.Conditions.TestStands.TestProfile" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestProfile">TestProfile</a>
-</td><td>Cell test profile</td></tr>
-<tr><td><img src="images/FCSys.Conditions.TestStands.ReplayS.png" alt="FCSys.Conditions.TestStands.Replay" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.Replay">Replay</a>
-</td><td>Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand</td></tr>
-<tr><td><img src="images/FCSys.Conditions.TestStands.BaseClassesS.png" alt="FCSys.Conditions.TestStands.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.TestStands.TestStandEISS.png" alt="FCSys.Conditions.TestStands.TestStandEIS" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStandEIS">TestStandEIS</a>
+</td><td>Test stand to perform electrochemical impedance spectroscopy</td></tr>
+<tr><td><img src="images/FCSys.Conditions.TestStands.TestStandS.png" alt="FCSys.Conditions.TestStands.TestStand" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStand">TestStand</a>
+</td><td>Fuel cell test stand (applies boundary conditions)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.TestStands.EnumerationsS.png" alt="FCSys.Conditions.TestStands.Enumerations" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations">Enumerations</a>
+</td><td>Choices of options</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.TestStands.TestProfileI.png" alt="FCSys.Conditions.TestStands.TestProfile" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.TestStands.TestProfile"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.TestProfile</h2>
-<b>Cell test profile</b><p>
-<img src="images/FCSys.Conditions.TestStands.TestProfileD.png" alt="FCSys.Conditions.TestStands.TestProfile">
+<h2><img src="images/FCSys.Conditions.TestStands.TestStandEISI.png" alt="FCSys.Conditions.TestStands.TestStandEIS" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.TestStands.TestStandEIS"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.TestStandEIS</h2>
+<b>Test stand to perform electrochemical impedance spectroscopy</b><p>
+<img src="images/FCSys.Conditions.TestStands.TestStandEISD.png" alt="FCSys.Conditions.TestStands.TestStandEIS">
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+<p>This model modulates the electrical current applied to the cell
+    according to an input.
+    The current density is the sum of a steady-state large-signal current density and a small-signal
+    current density introduced via the input <i>zJ</i><sub>small SI</sub>.</p>
+
+    <p>For more information, please see the documentation in the
+    <a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStand">test stand</a> model.</p><p>
+Extends from <a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStand">TestStand</a> (Fuel cell test stand (applies boundary conditions)).
 <p>
-<h3>Modelica definition</h3>
 
-<pre>
-<font color="blue">model</font> TestProfile <font color="darkgreen">&quot;Cell test profile&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO">BaseClasses.PartialTestStandNoIO</a>;
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-
-<font color="blue">end </font>TestProfile;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Conditions.TestStands.ReplayI.png" alt="FCSys.Conditions.TestStands.Replay" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.TestStands.Replay"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.Replay</h2>
-<b>Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand</b><p>
-<img src="images/FCSys.Conditions.TestStands.ReplayD.png" alt="FCSys.Conditions.TestStands.Replay">
-
-<h3>Information</h3>
-
-Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a> (Short icon for a continuous block).
-<p>
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n</td><td>1</td><td>index of the data set</td></tr>
-<tr><td>Boolean</td><td>terminateMaxTime</td><td>true</td><td>Terminate at maximum time of source data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>zJ</td><td>zJ_large + zJ_small_SI*U.A/U&hellip;</td><td>Current density [N/(l2.T)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>zJ_large</td><td>U.A</td><td>Large-signal current density [N/(l2.T)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Cell geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x_an[:]</td><td>{8*U.mm}</td><td>Lengths of the segments through the cell in anode FP [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x_ca[:]</td><td>{8*U.mm}</td><td>Lengths of the segments through the cell in cathode FP [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths of the segments along the channel [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths of the segments across the channel [l]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Conditions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Electrical</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ElectricalSpec">ElectricalSpec</a></td><td>electricalSpec</td><td>ElectricalSpec.currentDensity</td><td>Type of electrical specification</td></tr>
+<tr><td>Real</td><td>u_electrical</td><td>U.A/U.cm^2</td><td>Value of the electrical specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Anode</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>anInletSide</td><td>Side.p</td><td>Side of the inlet</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_an_in</td><td>333.15*U.K</td><td>Inlet temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_an_out</td><td>U.from_kPag(48.3)</td><td>Outlet pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FlowSpec</a></td><td>anFlowSpec</td><td>FlowSpec.stoich</td><td>Type of anode flow specification</td></tr>
+<tr><td>Real</td><td>u_an_flow</td><td>1.5</td><td>Value of the anode flow specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">HumiditySpec</a></td><td>anHumiditySpec</td><td>HumiditySpec.relative</td><td>Type of anode humidity specification</td></tr>
+<tr><td>Real</td><td>u_an_humidity</td><td>0.8</td><td>Value of the anode humidity specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">ThermalSpec</a></td><td>anEndPlateSpec</td><td>ThermalSpec.temperature</td><td>Type of anode end plate specification</td></tr>
+<tr><td>Real</td><td>u_an_end_plate</td><td>333.15*U.K</td><td>Value of the anode end plate specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Cathode</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>caInletSide</td><td>Side.p</td><td>Side of the inlet</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_ca_in</td><td>333.15*U.K</td><td>Inlet temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_ca_out</td><td>U.from_kPag(48.3)</td><td>Outlet pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2_in</td><td>0.208</td><td>Dry-gas concentration of O<sub>2</sub> at the inlet [1]</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FlowSpec</a></td><td>caFlowSpec</td><td>FlowSpec.stoich</td><td>Type of cathode flow specification</td></tr>
+<tr><td>Real</td><td>u_ca_flow</td><td>2.0</td><td>Value of the cathode flow specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">HumiditySpec</a></td><td>caHumiditySpec</td><td>HumiditySpec.relative</td><td>Type of anode humidity specification</td></tr>
+<tr><td>Real</td><td>u_ca_humidity</td><td>0.5</td><td>Value of the cathode humidity specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">ThermalSpec</a></td><td>caEndPlateSpec</td><td>ThermalSpec.temperature</td><td>Type of anode end plate specification</td></tr>
+<tr><td>Real</td><td>u_ca_end_plate</td><td>333.15*U.K</td><td>Value of the cathode end plate specification</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Fluid equations of state</td></tr>
+<tr><TD colspan="2">replaceable package DataH2</td><td>Characteristics.IdealGas</td><td>H<sub>2</sub> gas</td></tr>
+<tr><TD colspan="2">replaceable package DataH2O</td><td>Characteristics.IdealGas</td><td>H<sub>2</sub>O gas</td></tr>
+<tr><TD colspan="2">replaceable package DataH2Ol</td><td>Characteristics.H2O.Liquid</td><td>H<sub>2</sub>O liquid</td></tr>
+<tr><TD colspan="2">replaceable package DataN2</td><td>Characteristics.IdealGas</td><td>N<sub>2</sub> gas</td></tr>
+<tr><TD colspan="2">replaceable package DataO2</td><td>Characteristics.IdealGas</td><td>O<sub>2</sub> gas</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Standard conditions (for volumetric flow rate)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_0</td><td>273.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_0</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output signals as a bus</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>an[n_y, n_z]</td><td>Interface to the anode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anNegative[n_x_an, n_z]</td><td>Negative interface to the anode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anPositive[n_x_an, n_z]</td><td>Positive interface to the anode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>ca[n_y, n_z]</td><td>Interface to the cathode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caNegative[n_x_ca, n_z]</td><td>Negative interface to the cathode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caPositive[n_x_ca, n_z]</td><td>Positive interface to the cathode flow channel</td></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>zJ_small_SI</td><td>Small-signal current density in SI base units</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>w_V</td><td>Cell potential in volts</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Replay <font color="darkgreen">
-  &quot;Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a>;
+<font color="blue">model</font> TestStandEIS <font color="darkgreen">
+  &quot;Test stand to perform electrochemical impedance spectroscopy&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestStand">TestStand</a>(<font color="blue">redeclare </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> zI,zJ=zJ_large + zJ_small_SI*U.A/U.m^2);
 
-  <font color="blue">parameter </font>Integer n(<font color="blue">final </font>min=1) = 1 <font color="darkgreen">&quot;index of the data set&quot;</font>;
-  <font color="blue">parameter </font>Boolean terminateMaxTime=true <font color="darkgreen">
-    &quot;Terminate at maximum time of source data&quot;</font>;
-
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.CombiTimeTable">Modelica.Blocks.Sources.CombiTimeTable</a> combiTimeTable(
-    tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
-    tableName=&quot;data&quot; + <font color="red">String</font>(n),
-    fileName=&quot;FCSys/test/LOOCV/data.mat&quot;,
-    columns=2:19,
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) <font color="darkgreen">
-    &quot;Block to load and replay data&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output signals as a bus&quot;</font>;
-
-<font color="blue">protected </font>
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumAnMFC;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumCaMFC;
-
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_V(k=U.V);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from1_%&#39;(k=U.'%');
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from2_%&#39;(k=U.'%');
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from1_kPag;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from2_kPag;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from3_kPag;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from4_kPag;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from1_LPM(k=U.L/U.min);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from2_LPM(k=U.L/U.min);
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from1_degC;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from2_degC;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from3_degC;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from4_degC;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from5_degC;
-  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from6_degC;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_A(k=U.A);
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> v(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;) <font color="darkgreen">
-    &quot;CVM Cell 1 Voltage&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> RHAnFPNegX(
-    <font color="blue">final </font>unit=&quot;1&quot;,
-    displayUnit=&quot;%&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Anode inlet RH&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> RHCaFPNegX(
-    <font color="blue">final </font>unit=&quot;1&quot;,
-    displayUnit=&quot;%&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Cathode inlet RH&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_anFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
-    &quot;Pressure anode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_anFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>min=0) <font color="darkgreen">
-    &quot;Pressure anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_caFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
-    &quot;Pressure cathode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_caFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>min=0) <font color="darkgreen">
-    &quot;Pressure anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> Vdot_anFPNegY_H2(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
-    &quot;Flow anode H2 MFC&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> Vdot_caFPNegY_air(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
-    &quot;Flow cathode H2 MFC&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPNegY(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature anode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPPosY(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPNegY(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature cathode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPPosY(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature cathode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPX(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature end plate anode&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPX(
-    <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
-    displayUnit=&quot;K&quot;,
-    <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature end plate cathode&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> I(<font color="blue">final </font>unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Measured load&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> zJ_large=U.A <font color="darkgreen">&quot;Large-signal current density&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> zJ_small_SI <font color="darkgreen">
+    &quot;Small-signal current density in SI base units&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">Connectors.RealOutput</a> w_V <font color="darkgreen">&quot;Cell potential in volts&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">//  Terminate as desired</font>
-  <font color="blue">if </font>terminateMaxTime<font color="blue"> then</font>
-    <font color="blue">when </font>time &gt; combiTimeTable.t_max<font color="blue"> then</font>
-      <font color="red">terminate</font>(&quot;The end of the data has been reached.&quot;);
-    <font color="blue">end when</font>;
+  w_V = w/U.V;
+
+<font color="blue">end </font>TestStandEIS;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.TestStands.TestStandI.png" alt="FCSys.Conditions.TestStands.TestStand" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.TestStands.TestStand"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.TestStand</h2>
+<b>Fuel cell test stand (applies boundary conditions)</b><p>
+<img src="images/FCSys.Conditions.TestStands.TestStandD.png" alt="FCSys.Conditions.TestStands.TestStand">
+
+<h3>Information</h3>
+
+<pre>
+    </pre>
+    <p>Any of the settings for the operating conditions can be time-varying expressions.
+    In each group,
+    specify exactly one variable (otherwise the model will be structurally singular).</p>
+
+    <p>The relative humidity (<code>anInletRH</code> or <code>caInletRH</code>) may specified to be greater
+    than 100 %.  In that case, liquid
+    water is injected to provide the amount above saturation.  The relative humidity
+    is taken to be equal to the quotient of the H<sub>2</sub>O vapor pressure
+    (<i>p</i><sub>H2O an in</sub> or <i>p</i><sub>H2O ca in</sub>) and the saturation pressure.
+    Therefore liquid water will also be injected if the specified vapor pressure is specified
+    to be above saturation pressure or the specified dew point (<i>T</i><sub>sat an in</sub> or
+    <i>T</i><sub>sat ca in</sub>) is above the actual temperature.</p>
+
+    <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
+    given current
+    assuming the reactant is entirely consumed (complete utilization).</p>
+
+    <p>Assumptions **review and update:
+    <ol>
+    <li>The outer x-axis surface of each end plate is each uniform in temperature.</li>
+    <li>No heat is conducted from the rest of the cell hardware.</li>
+    <li>The voltage is uniform across each end plate.</li>
+    <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
+    at each inlet boundary).</li>
+    <li>There is no shear force on the fluid at either outlet.</li>
+    <li>The species (gases and liquid) of each stream have the same temperature at each inlet and outlet.</li>
+    <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
+    <li>The temperature is uniform over each inlet and outlet.</li>
+    <li>There is no diffusion of the reactants (H<sub>2</sub> and O<sub>2</sub>) or liquid water
+    into the cell (only advection).</li>
+    <li>There is no diffusion of the fluid species
+    (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, and O<sub>2</sub>)
+    out of the cell (advection only).</li>
+    <li>The inlet and outlet pressures are applied to the gas mixture by Dalton's law.</li>
+    <li>At the inlet, the liquid has the pressure necessary and sufficient for the prescribed
+    humidity (zero unless RH > 100%).</li>
+    <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
+    <li>There is no net thermal conduction across either outlet.</li>
+    </ol></p>
+
+    <li>There is no nonequilibrium force on any species at either inlet.  This means that
+    the velocity of the first subregion along the channel will be the same is the velocity
+    at the inlet.</li>
+
+    <p>The temperatures of the endplates (<i>T</i><sub>an</sub> and <i>T</i><sub>ca</sub>)
+    should not be equal to the temperature of the environment unless <i>G</i><sub>an</sub>
+    and <i>G</i><sub>ca</sub> are explicitly set.  Otherwise there will be a mathematical
+    singularity.  Regard the environment as the ambient conditions, not the conditions to
+    which the cell is held.</p>
+    <p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top9">FCSys.Icons.Names.Top9</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Cell geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x_an[:]</td><td>{8*U.mm}</td><td>Lengths of the segments through the cell in anode FP [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x_ca[:]</td><td>{8*U.mm}</td><td>Lengths of the segments through the cell in cathode FP [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths of the segments along the channel [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths of the segments across the channel [l]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Conditions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Electrical</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ElectricalSpec">ElectricalSpec</a></td><td>electricalSpec</td><td>ElectricalSpec.currentDensity</td><td>Type of electrical specification</td></tr>
+<tr><td>Real</td><td>u_electrical</td><td>U.A/U.cm^2</td><td>Value of the electrical specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Anode</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>anInletSide</td><td>Side.p</td><td>Side of the inlet</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_an_in</td><td>333.15*U.K</td><td>Inlet temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_an_out</td><td>U.from_kPag(48.3)</td><td>Outlet pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FlowSpec</a></td><td>anFlowSpec</td><td>FlowSpec.stoich</td><td>Type of anode flow specification</td></tr>
+<tr><td>Real</td><td>u_an_flow</td><td>1.5</td><td>Value of the anode flow specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">HumiditySpec</a></td><td>anHumiditySpec</td><td>HumiditySpec.relative</td><td>Type of anode humidity specification</td></tr>
+<tr><td>Real</td><td>u_an_humidity</td><td>0.8</td><td>Value of the anode humidity specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">ThermalSpec</a></td><td>anEndPlateSpec</td><td>ThermalSpec.temperature</td><td>Type of anode end plate specification</td></tr>
+<tr><td>Real</td><td>u_an_end_plate</td><td>333.15*U.K</td><td>Value of the anode end plate specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Cathode</td></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>caInletSide</td><td>Side.p</td><td>Side of the inlet</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_ca_in</td><td>333.15*U.K</td><td>Inlet temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_ca_out</td><td>U.from_kPag(48.3)</td><td>Outlet pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2_in</td><td>0.208</td><td>Dry-gas concentration of O<sub>2</sub> at the inlet [1]</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FlowSpec</a></td><td>caFlowSpec</td><td>FlowSpec.stoich</td><td>Type of cathode flow specification</td></tr>
+<tr><td>Real</td><td>u_ca_flow</td><td>2.0</td><td>Value of the cathode flow specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">HumiditySpec</a></td><td>caHumiditySpec</td><td>HumiditySpec.relative</td><td>Type of anode humidity specification</td></tr>
+<tr><td>Real</td><td>u_ca_humidity</td><td>0.5</td><td>Value of the cathode humidity specification</td></tr>
+<tr><td><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">ThermalSpec</a></td><td>caEndPlateSpec</td><td>ThermalSpec.temperature</td><td>Type of anode end plate specification</td></tr>
+<tr><td>Real</td><td>u_ca_end_plate</td><td>333.15*U.K</td><td>Value of the cathode end plate specification</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Standard conditions (for volumetric flow rate)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_0</td><td>273.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_0</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>an[n_y, n_z]</td><td>Interface to the anode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anNegative[n_x_an, n_z]</td><td>Negative interface to the anode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anPositive[n_x_an, n_z]</td><td>Positive interface to the anode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>ca[n_y, n_z]</td><td>Interface to the cathode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caNegative[n_x_ca, n_z]</td><td>Negative interface to the cathode flow channel</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caPositive[n_x_ca, n_z]</td><td>Positive interface to the cathode flow channel</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> TestStand <font color="darkgreen">&quot;Fuel cell test stand (applies boundary conditions)&quot;</font>
+  <font color="blue">import </font>saturationPressureSI = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.Air.MoistAir.html#Modelica.Media.Air.MoistAir.saturationPressureLiquid">Modelica.Media.Air.MoistAir.saturationPressureLiquid</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.average">FCSys.Utilities.average</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.inSign">FCSys.Utilities.inSign</a>;
+  <font color="blue">import </font><a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single">FCSys.Conditions.ByConnector.Face.Single</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top9">FCSys.Icons.Names.Top9</a>;
+
+  <font color="darkgreen">// Geometry</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_x_an[:]={8*U.mm} <font color="darkgreen">
+    &quot;Lengths of the segments through the cell in anode FP&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_x_ca[:]={8*U.mm} <font color="darkgreen">
+    &quot;Lengths of the segments through the cell in cathode FP&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={U.m} <font color="darkgreen">&quot;Lengths of the segments along the channel&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={5*U.mm} <font color="darkgreen">
+    &quot;Lengths of the segments across the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_an=<font color="red">size</font>(L_x_an, 1) <font color="darkgreen">
+    &quot;Number of subregions along the through-cell axis in anode FP&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_ca=<font color="red">size</font>(L_x_ca, 1) <font color="darkgreen">
+    &quot;Number of subregions along the through-cell axis in cathode FP&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of subregions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of subregions across the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=<font color="red">sum</font>(L_y)*<font color="red">sum</font>(L_z) <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A_seg[n_y, n_z]=<font color="red">outerProduct</font>(L_y, L_z) <font color="darkgreen">
+    &quot;Areas of the yz segments&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A_an_seg[n_x_an, n_z]=<font color="red">outerProduct</font>(L_x_an, L_z) <font color="darkgreen">
+    &quot;Areas of the xz segments of the anode flow plate&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A_ca_seg[n_x_ca, n_z]=<font color="red">outerProduct</font>(L_x_ca, L_z) <font color="darkgreen">
+    &quot;Areas of the xz segments of the cathode flow plate&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A_an=<font color="red">sum</font>(L_x_an)*<font color="red">sum</font>(L_z) <font color="darkgreen">
+    &quot;Total cross-sectional area of the anode flow plate in the xz plane&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A_ca=<font color="red">sum</font>(L_x_ca)*<font color="red">sum</font>(L_z) <font color="darkgreen">
+    &quot;Total cross-sectional area of the cathode flow plate in the xz plane&quot;</font>;
+
+  <font color="darkgreen">// Operating conditions</font>
+  <font color="darkgreen">// --------------------</font>
+  <font color="darkgreen">// Electrical</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ElectricalSpec">FCSys.Conditions.TestStands.Enumerations.ElectricalSpec</a>
+    electricalSpec=ElectricalSpec.currentDensity <font color="darkgreen">
+    &quot;Type of electrical specification&quot;</font>;
+  Real u_electrical=U.A/U.cm^2 <font color="darkgreen">&quot;Value of the electrical specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> zJ <font color="darkgreen">&quot;Current density&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> zI <font color="darkgreen">&quot;Current&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> w <font color="darkgreen">&quot;Voltage&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R <font color="darkgreen">&quot;Resistance&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> P <font color="darkgreen">&quot;Power&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// General anode conditions</font>
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a> anInletSide=Side.p <font color="darkgreen">&quot;Side of the inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_an_in=333.15*U.K <font color="darkgreen">&quot;Inlet temperature&quot;</font>;
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_an_out=<font color="red">U.from_kPag</font>(48.3) <font color="darkgreen">&quot;Outlet pressure&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// General cathode conditions</font>
+  <font color="blue">parameter </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a> caInletSide=Side.p <font color="darkgreen">&quot;Side of the inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_ca_in=333.15*U.K <font color="darkgreen">&quot;Inlet temperature&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_ca_out=<font color="red">U.from_kPag</font>(48.3) <font color="darkgreen">&quot;Outlet pressure&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_O2_in(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.208 <font color="darkgreen">
+    &quot;Dry-gas concentration of O<sub>2</sub> at the inlet&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Anode flow rate</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FCSys.Conditions.TestStands.Enumerations.FlowSpec</a> anFlowSpec=
+      FlowSpec.stoich <font color="darkgreen">&quot;Type of anode flow specification&quot;</font>;
+  Real u_an_flow=1.5 <font color="darkgreen">&quot;Value of the anode flow specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> anStoich <font color="darkgreen">&quot;Anode stoichiometric flow rate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J_an <font color="darkgreen">&quot;Equivalent current density of anode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_an <font color="darkgreen">&quot;Equivalent current of anode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">Q.VolumeRate</a> Vdot_g_an_in <font color="darkgreen">&quot;Volumetric flow rate of gas in anode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_an_in <font color="darkgreen">&quot;Anode inlet pressure&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Cathode flow rate</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.FlowSpec">FCSys.Conditions.TestStands.Enumerations.FlowSpec</a> caFlowSpec=
+      FlowSpec.stoich <font color="darkgreen">&quot;Type of cathode flow specification&quot;</font>;
+  Real u_ca_flow=2.0 <font color="darkgreen">&quot;Value of the cathode flow specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> caStoich <font color="darkgreen">&quot;Cathode stoichiometric flow rate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J_ca <font color="darkgreen">&quot;Equivalent current density of cathode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_ca <font color="darkgreen">&quot;Equivalent current of cathode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">Q.VolumeRate</a> Vdot_g_ca_in <font color="darkgreen">&quot;Volumetric flow rate of gas in cathode supply&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_ca_in <font color="darkgreen">&quot;Cathode inlet pressure&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Anode humidity</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">FCSys.Conditions.TestStands.Enumerations.HumiditySpec</a>
+    anHumiditySpec=HumiditySpec.relative <font color="darkgreen">&quot;Type of anode humidity specification&quot;</font>;
+  Real u_an_humidity=0.8 <font color="darkgreen">&quot;Value of the anode humidity specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> anInletRH(displayUnit=&quot;%&quot;) <font color="darkgreen">
+    &quot;Relative humidity at anode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O_an_in <font color="darkgreen">&quot;H2O vapor pressure at anode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_sat_an_in <font color="darkgreen">&quot;Dew point at anode inlet&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Cathode humidity</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.HumiditySpec">FCSys.Conditions.TestStands.Enumerations.HumiditySpec</a>
+    caHumiditySpec=HumiditySpec.relative <font color="darkgreen">&quot;Type of anode humidity specification&quot;</font>;
+  Real u_ca_humidity=0.5 <font color="darkgreen">&quot;Value of the cathode humidity specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> caInletRH(displayUnit=&quot;%&quot;) <font color="darkgreen">
+    &quot;Relative humidity at cathode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O_ca_in <font color="darkgreen">&quot;H2O vapor pressure at cathode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_sat_ca_in <font color="darkgreen">&quot;Dew point at cathode inlet&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Anode end plate</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">FCSys.Conditions.TestStands.Enumerations.ThermalSpec</a> anEndPlateSpec
+    =ThermalSpec.temperature <font color="darkgreen">&quot;Type of anode end plate specification&quot;</font>;
+  Real u_an_end_plate=333.15*U.K <font color="darkgreen">&quot;Value of the anode end plate specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_an <font color="darkgreen">&quot;Temperature of anode end plate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Conductance">Q.Conductance</a> G_an <font color="darkgreen">
+    &quot;Thermal conductance of the anode end plate to the environment&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_an <font color="darkgreen">&quot;Heat flow rate from the anode end plate&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Cathode end plate</font>
+  <font color="blue">parameter </font><a href="FCSys_Conditions_TestStands_Enumerations.html#FCSys.Conditions.TestStands.Enumerations.ThermalSpec">FCSys.Conditions.TestStands.Enumerations.ThermalSpec</a> caEndPlateSpec
+    =ThermalSpec.temperature <font color="darkgreen">&quot;Type of anode end plate specification&quot;</font>;
+  Real u_ca_end_plate=333.15*U.K <font color="darkgreen">&quot;Value of the cathode end plate specification&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_ca <font color="darkgreen">&quot;Temperature of cathode end plate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Conductance">Q.Conductance</a> G_ca <font color="darkgreen">
+    &quot;Thermal conductance of the cathode end plate to the environment&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_ca <font color="darkgreen">&quot;Heat flow rate from the cathode end plate&quot;</font>;
+
+  <font color="darkgreen">// Material properties</font>
+  <font color="blue">replaceable </font><font color="blue">package</font> DataH2 = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">Characteristics.IdealGas</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
+    &quot;H<sub>2</sub> gas&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> DataH2O = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">Characteristics.IdealGas</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
+    &quot;H<sub>2</sub>O gas&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> DataH2Ol = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">Characteristics.H2O.Liquid</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
+    &quot;H<sub>2</sub>O liquid&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> DataN2 = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">Characteristics.IdealGas</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
+    &quot;N<sub>2</sub> gas&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> DataO2 = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">Characteristics.IdealGas</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.CharacteristicEOS <font color="darkgreen">
+    &quot;O<sub>2</sub> gas&quot;</font>;
+
+  <font color="darkgreen">// Standard conditions</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_0=273.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_0=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+
+  <font color="darkgreen">// Derived and measured conditions</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> zJ_seg[n_y, n_z] <font color="darkgreen">&quot;Current density of the segments&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_sat_an_in <font color="darkgreen">&quot;Saturation pressure at the anode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_sat_ca_in <font color="darkgreen">&quot;Saturation pressure at the cathode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2Ol_an_in <font color="darkgreen">&quot;Flow rate of liquid water into anode&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2Ol_ca_in <font color="darkgreen">&quot;Flow rate of liquid water into cathode&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p_H2Ol_an_in <font color="darkgreen">
+    &quot;Non-equilibrium pressure on the H2O liquid at the anode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p_H2Ol_ca_in <font color="darkgreen">
+    &quot;Non-equilibrium pressure on the H2O liquid at the cathode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_an_out <font color="darkgreen">&quot;Anode outlet temperature&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_ca_out <font color="darkgreen">&quot;Cathode outlet temperature&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_an_in[n_y, n_z] <font color="darkgreen">&quot;Velocity profile over the anode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_ca_in[n_y, n_z] <font color="darkgreen">&quot;Velocity profile over the cathode inlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_an_out[n_y, n_z] <font color="darkgreen">&quot;Velocity profile over the anode outlet&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_ca_out[n_y, n_z] <font color="darkgreen">&quot;Velocity profile over the cathode outlet&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary measurements</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot(stateSelect=StateSelect.never) = w*zI <font color="darkgreen">
+    &quot;Electrical power output of the cell&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot_yz[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = -anBC.graphite.
+    'e-'.face.phi[1] .* anBC.graphite.'e-'.face.mPhidot[1] - caBC.graphite.'e-'.face.phi[
+    1] .* caBC.graphite.'e-'.face.mPhidot[1] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Electrical power of the segments&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> zJ_yz[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = -
+    anBC.graphite.'e-'.face.phi[1] .* anBC.graphite.'e-'.face.rho <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Current densities of the segments&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2(stateSelect=StateSelect.never) = <font color="red">sum</font>(anSink.gas.H2.face.Ndot
+     + anSource.gas.H2.face.Ndot) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Net rate of hydrogen into the cell&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2O(stateSelect=StateSelect.never) = <font color="red">sum</font>(anSink.gas.H2O.face.Ndot
+     + anSource.gas.H2O.face.Ndot) + <font color="red">sum</font>(caSink.gas.H2O.face.Ndot + caSource.gas.H2O.face.Ndot)
+    <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Net rate of water from the cell&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_O2(stateSelect=StateSelect.never) = <font color="red">sum</font>(caSink.gas.O2.face.Ndot
+     + caSource.gas.O2.face.Ndot) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Net rate of oxygen into the cell&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> anOutletRH(
+    stateSelect=StateSelect.never,
+    displayUnit=&quot;%&quot;) = anSink.gas.H2O.materialOut.y/(<font color="red">
+    Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(anSink.gas.H2O.face.T/
+    U.K)*U.Pa) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Relative humidity at the anode outlet&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> caOutletRH(
+    stateSelect=StateSelect.never,
+    displayUnit=&quot;%&quot;) = caSink.gas.H2O.materialOut.y/(<font color="red">
+    Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(caSink.gas.H2O.face.T/
+    U.K)*U.Pa) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Relative humidity at the cathode outlet&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> an[n_y, n_z] <font color="darkgreen">&quot;Interface to the anode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anNegative[n_x_an, n_z] <font color="darkgreen">
+    &quot;Negative interface to the anode flow channel&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anPositive[n_x_an, n_z] <font color="darkgreen">
+    &quot;Positive interface to the anode flow channel&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> ca[n_y, n_z] <font color="darkgreen">&quot;Interface to the cathode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caNegative[n_x_ca, n_z] <font color="darkgreen">
+    &quot;Negative interface to the cathode flow channel&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caPositive[n_x_ca, n_z] <font color="darkgreen">
+    &quot;Positive interface to the cathode flow channel&quot;</font>;
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly">ByConnector.FaceBus.Single.FaceBusGraphiteOnly</a> anBC[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(
+        <font color="blue">redeclare </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> normalSet(
+          height=-U.A/U.cm^2,
+          duration=100.1,
+          startTime=0.1),
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        thermalSet(y=environment.T)),
+      &#39;inclC+&#39;=true));
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly">ByConnector.FaceBus.Single.FaceBusGraphiteOnly</a> caBC[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+          thermalSet(y=environment.T)),
+      &#39;inclC+&#39;=true));
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts">ByConnector.FaceBus.Single.FaceBusEfforts</a> anSource[n_x_an, n_z](gas(
+      <font color="blue">each </font>inclH2=true,
+      <font color="blue">each </font>inclH2O=true,
+      H2(
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">FCSys.Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        materialSet(y=(anSource.gas.H2.normalOut.y - <font color="red">fill</font>(
+              zI*anStoich/(2*A_an),
+              n_x_an,
+              n_z)) .* A_an_seg),
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">FCSys.Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">each </font>thermalSet(y=environment.T)),
+      H2O(
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">FCSys.Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        materialSet(y=(anSource.gas.H2O.normalOut.y - <font color="red">fill</font>(
+              zI*anStoich*environment.p_H2O/(2*(environment.p - environment.p_H2O)
+                *A_an),
+              n_x_an,
+              n_z)) .* A_an_seg),
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">FCSys.Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">each </font>thermalSet(y=environment.T))),<font color="blue">each </font>liquid(inclH2O=true));
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">ByConnector.FaceBus.Single.FaceBusFlows</a> anSink[n_x_an, n_z](gas(
+      <font color="blue">each </font>inclH2=true,
+      <font color="blue">each </font>inclH2O=true,
+      H2(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">FCSys.Conditions.ByConnector.Face.Single.Material.pressure</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">FCSys.Characteristics.IdealGas</a>),
+          normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.face.rho ./ (
+              anSink.gas.H2.face.rho + anSink.gas.H2O.face.rho))),
+      H2O(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">FCSys.Conditions.ByConnector.Face.Single.Material.pressure</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">FCSys.Characteristics.IdealGas</a>),
+          normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.face.rho ./ (
+              anSink.gas.H2.face.rho + anSink.gas.H2O.face.rho)))), <font color="blue">each </font>liquid(
+        inclH2O=true));
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts">ByConnector.FaceBus.Single.FaceBusEfforts</a> caSource[n_x_ca, n_z](gas(
+      <font color="blue">each </font>inclH2O=true,
+      <font color="blue">each </font>inclN2=true,
+      <font color="blue">each </font>inclO2=true,
+      H2O(
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">FCSys.Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        materialSet(y=(caSource.gas.H2O.normalOut.y - <font color="red">fill</font>(
+              zI*caStoich*environment.p_H2O/(4*environment.p_O2*A_ca),
+              n_x_ca,
+              n_z)) .* A_ca_seg),
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">FCSys.Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">each </font>thermalSet(y=environment.T)),
+      N2(
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">FCSys.Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        materialSet(y=(caSource.gas.N2.normalOut.y - <font color="red">fill</font>(
+              zI*caStoich*(environment.p - environment.p_O2 - environment.p_H2O)
+                /(4*environment.p_O2*A_ca),
+              n_x_ca,
+              n_z)) .* A_ca_seg),
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">FCSys.Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">each </font>thermalSet(y=environment.T)),
+      O2(
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">FCSys.Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        materialSet(y=(caSource.gas.O2.normalOut.y - <font color="red">fill</font>(
+              zI*caStoich/(4*A_ca),
+              n_x_ca,
+              n_z)) .* A_ca_seg),
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_TranslationalNormal.html#FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.force</a>,
+
+        <font color="blue">each </font>thermalSet(y=environment.T))),<font color="blue">each </font>liquid(inclH2O=true));
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">ByConnector.FaceBus.Single.FaceBusFlows</a> caSink[n_x_ca, n_z](gas(
+      <font color="blue">each </font>inclH2O=true,
+      <font color="blue">each </font>inclN2=true,
+      <font color="blue">each </font>inclO2=true,
+      H2O(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">FCSys.Conditions.ByConnector.Face.Single.Material.pressure</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">FCSys.Characteristics.IdealGas</a>),
+          normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.face.rho ./ (
+              caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho + caSink.gas.O2.face.rho))),
+
+      N2(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">FCSys.Conditions.ByConnector.Face.Single.Material.pressure</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">FCSys.Characteristics.IdealGas</a>),
+          normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.face.rho ./ (
+              caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho + caSink.gas.O2.face.rho))),
+
+      O2(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.pressure">FCSys.Conditions.ByConnector.Face.Single.Material.pressure</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_IdealGas.html#FCSys.Characteristics.IdealGas">FCSys.Characteristics.IdealGas</a>),
+          normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.face.rho ./ (
+              caSink.gas.H2O.face.rho + caSink.gas.N2.face.rho + caSink.gas.O2.face.rho)))),
+      <font color="blue">each </font>liquid(inclH2O=true));
+
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> anPressSet(y(unit=&quot;m/(l.T2)&quot;) =
+      environment.p) <font color="darkgreen">&quot;Setpoint for the total anode outlet pressure&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> caPressSet(y(unit=&quot;m/(l.T2)&quot;) =
+      environment.p) <font color="darkgreen">&quot;Setpoint for the total cathode outlet pressure&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> anThermoPress(y(unit=&quot;m/(l.T2)&quot;) = <font color="red">sum</font>
+      ((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y) .* <font color="red">
+      outerProduct</font>(L_x_an, L_z))/A_an) <font color="darkgreen">
+    &quot;Thermodynamic pressure at the anode outlet&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> caThermoPress(y(unit=&quot;m/(l.T2)&quot;) = <font color="red">sum</font>
+      ((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y + caSink.gas.O2.materialOut.y)
+       .* A_ca_seg)/A_ca) <font color="darkgreen">&quot;Thermodynamic pressure at the cathode outlet&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Feedback">Modelica.Blocks.Math.Feedback</a> anNoneqSet;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Feedback">Modelica.Blocks.Math.Feedback</a> caNoneqSet;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Continuous.html#Modelica.Blocks.Continuous.FirstOrder">Modelica.Blocks.Continuous.FirstOrder</a> anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
+      T=2) <font color="darkgreen">&quot;Dynamics of the anode exit valve&quot;</font>;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Continuous.html#Modelica.Blocks.Continuous.FirstOrder">Modelica.Blocks.Continuous.FirstOrder</a> caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
+      T=2) <font color="darkgreen">&quot;Dynamics of the cathode exit valve&quot;</font>;
+<font color="blue">protected </font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_an_out_noneq(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
+    &quot;Nonequilibrium pressure at the anode outlet&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_ca_out_noneq(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
+    &quot;Nonequilibrium pressure at the cathode outlet&quot;</font>;
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// **remove liq H2O at inlet and outlet (assume no diffusion, adiabatic, no shear force)</font>
+
+  <font color="darkgreen">// Electrical</font>
+  w = R*zI;
+  P = w*zI;
+  A*zJ = zI;
+  zJ_seg = anBC.graphite.'e-'.face.phi[1] .* anBC.graphite.'e-'.face.rho;
+  zI = <font color="red">sum</font>(zJ_seg .* A_seg);
+
+  <font color="darkgreen">// Anode humidity</font>
+  p_sat_an_in = <font color="red">saturationPressureSI</font>(T_an_in/U.K)*U.Pa;
+  p_H2O_an_in = <font color="red">saturationPressureSI</font>(T_sat_an_in/U.K)*U.Pa;
+  p_H2O_an_in = <font color="red">min</font>(anInletRH, 1)*p_sat_an_in;
+  <font color="darkgreen">// Liquid makes up the remainder if RH &gt; 100%:</font>
+  Ndot_H2Ol_an_in = <font color="red">max</font>(anInletRH - 1, 0)*<font color="red">sum</font>(phi_an_in .* A_an_seg)/<font color="red">
+    DataH2O.v_Tp</font>(T_an_in, p_sat_an_in);
+  Ndot_H2Ol_an_in = <font color="red">sum</font>(anSource.liquid.H2O.face.phi[Orient.normal] .* A_an_seg)
+    /<font color="red">DataH2Ol.v_Tp</font>(T_an_in);
+
+  <font color="darkgreen">// Cathode humidity</font>
+  p_sat_ca_in = <font color="red">saturationPressureSI</font>(T_ca_in/U.K)*U.Pa;
+  p_H2O_ca_in = <font color="red">saturationPressureSI</font>(T_sat_ca_in/U.K)*U.Pa;
+  p_H2O_ca_in = <font color="red">max</font>(caInletRH, 1)*p_sat_ca_in;
+  <font color="darkgreen">// Liquid makes up the remainder if RH &gt; 100%:</font>
+  Ndot_H2Ol_ca_in = <font color="red">max</font>(caInletRH - 1, 0)*<font color="red">sum</font>(phi_ca_in .* A_ca_seg)/<font color="red">
+    DataH2O.v_Tp</font>(T_ca_in, p_sat_ca_in);
+  Ndot_H2Ol_ca_in = <font color="red">sum</font>(caSource.liquid.H2O.face.phi[Orient.normal] .* A_ca_seg)
+    /<font color="red">DataH2Ol.v_Tp</font>(T_ca_in);
+
+  <font color="darkgreen">// End plates</font>
+  Qdot_an = G_an*(T_an - environment.T) <font color="darkgreen">&quot;Anode&quot;</font>;
+  Qdot_ca = G_ca*(T_ca - environment.T) <font color="darkgreen">&quot;Cathode&quot;</font>;
+  Qdot_an = <font color="red">sum</font>(anBC.graphite.'C+'.face.Qdot + anBC.graphite.'e-'.face.Qdot);
+  Qdot_ca = <font color="red">sum</font>(caBC.graphite.'C+'.face.Qdot + caBC.graphite.'e-'.face.Qdot);
+
+  <font color="darkgreen">// Anode flow rate</font>
+  anStoich*zI = I_an;
+  J_an*A = I_an;
+  Vdot_g_an_in = <font color="red">inSign</font>(anInletSide)*<font color="red">sum</font>(<font color="red">outerProduct</font>(L_x_an, L_z) .* phi_an_in);
+  I_an = <font color="red">sum</font>(phi_an_in .* anSource.gas.H2.face.rho .* A_an_seg);
+
+  <font color="darkgreen">// Cathode flow rate</font>
+  caStoich*zI = I_ca;
+  J_ca*A = I_ca;
+  Vdot_g_ca_in = <font color="red">inSign</font>(caInletSide)*<font color="red">sum</font>(<font color="red">outerProduct</font>(L_x_ca, L_z) .* phi_ca_in);
+  I_ca = <font color="red">sum</font>(phi_ca_in .* caSource.gas.H2O.face.rho .* A_ca_seg);
+
+  <font color="darkgreen">// Pressures at the inlets and outlets</font>
+  <font color="blue">for </font>j<font color="blue"> in </font>1:n_z<font color="blue"> loop</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n_x_an<font color="blue"> loop</font>
+      p_an_in = <font color="red">DataH2.p_Tv</font>(anSource[i, j].gas.H2.face.T, 1/anSource[i, j].gas.H2.face.rho)
+         + <font color="red">DataH2O.p_Tv</font>(anSource[i, j].gas.H2O.face.T, 1/anSource[i, j].gas.H2O.face.rho)
+         - <font color="red">inSign</font>(anInletSide)*(anSource[i, j].gas.H2.face.mPhidot[Orient.normal]
+         + anSource[i, j].gas.H2O.face.mPhidot[Orient.normal])/A_an_seg[i, j];
+      p_an_out = <font color="red">DataH2.p_Tv</font>(anSink[i, j].gas.H2.face.T, 1/anSink[i, j].gas.H2.face.rho)
+         + <font color="red">DataH2O.p_Tv</font>(anSink[i, j].gas.H2O.face.T, 1/anSink[i, j].gas.H2O.face.rho)
+         + <font color="red">inSign</font>(anInletSide)*(anSink[i, j].gas.H2.face.mPhidot[Orient.normal] +
+        anSink[i, j].gas.H2O.face.mPhidot[Orient.normal])/A_ca_seg[i, j];
+    <font color="blue">end for</font>;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n_x_ca<font color="blue"> loop</font>
+      p_ca_in = <font color="red">DataH2O.p_Tv</font>(caSource[i, j].gas.H2O.face.T, 1/caSource[i, j].gas.H2O.face.rho)
+         + <font color="red">DataN2.p_Tv</font>(caSource[i, j].gas.N2.face.T, 1/caSource[i, j].gas.N2.face.rho)
+         + <font color="red">DataO2.p_Tv</font>(caSource[i, j].gas.O2.face.T, 1/caSource[i, j].gas.O2.face.rho)
+         - <font color="red">inSign</font>(caInletSide)*(caSource[i, j].gas.H2O.face.mPhidot[Orient.normal]
+         + caSource[i, j].gas.N2.face.mPhidot[Orient.normal] + caSource[i, j].gas.O2.face.mPhidot[
+        Orient.normal])/A_ca_seg[i, j];
+      p_ca_out = <font color="red">DataH2O.p_Tv</font>(caSink[i, j].gas.H2O.face.T, 1/caSink[i, j].gas.H2O.face.rho)
+         + <font color="red">DataN2.p_Tv</font>(caSink[i, j].gas.N2.face.T, 1/caSink[i, j].gas.N2.face.rho)
+         + <font color="red">DataO2.p_Tv</font>(caSink[i, j].gas.O2.face.T, 1/caSink[i, j].gas.O2.face.rho)
+         + <font color="red">inSign</font>(caInletSide)*(caSink[i, j].gas.H2O.face.mPhidot[Orient.normal]
+         + caSink[i, j].gas.N2.face.mPhidot[Orient.normal] + caSink[i, j].gas.O2.face.mPhidot[
+        Orient.normal])/A_ca_seg[i, j];
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+
+  <font color="darkgreen">// Assumptions</font>
+  0 = <font color="red">sum</font>(anSink.gas.H2.face.Qdot + anSink.gas.H2O.face.Qdot + anSink.liquid.H2O.face.Qdot)
+    <font color="darkgreen">&quot;Adiabatic across the anode outlet&quot;</font>;
+  0 = <font color="red">sum</font>(caSink.gas.H2O.face.Qdot + caSink.gas.N2.face.Qdot + caSink.gas.O2.face.Qdot
+     + caSink.liquid.H2O.face.Qdot) <font color="darkgreen">&quot;Adiabatic across the cathode outlet&quot;</font>;
+
+  <font color="blue">if </font>anInletSide == Side.n<font color="blue"> then</font>
+    <font color="red">connect</font>(anSource.face, anNegative);
+    <font color="red">connect</font>(anSink.face, anPositive);
+  <font color="blue">else</font>
+    <font color="red">connect</font>(anSource.face, anPositive);
+    <font color="red">connect</font>(anSink.face, anNegative);
   <font color="blue">end if</font>;
+  <font color="blue">if </font>caInletSide == Side.n<font color="blue"> then</font>
+    <font color="red">connect</font>(caSource.face, caNegative);
+    <font color="red">connect</font>(caSink.face, caPositive);
+  <font color="blue">else</font>
+    <font color="red">connect</font>(caSource.face, caPositive);
+    <font color="red">connect</font>(caSink.face, caNegative);
+  <font color="blue">end if</font>;
+  <font color="red">connect</font>(anBC.face, an);
+  <font color="red">connect</font>(caBC.face, ca);
 
-  <font color="darkgreen">// Connections from source to unit conversion</font>
-  <font color="red">connect</font>(from_V.u, combiTimeTable.y[1]);
-
-  <font color="red">connect</font>('from1_%'.u, combiTimeTable.y[2]);
-
-  <font color="red">connect</font>('from2_%'.u, combiTimeTable.y[3]);
-
-  <font color="red">connect</font>(from1_kPag.u, combiTimeTable.y[4]);
-  <font color="red">connect</font>(from2_kPag.u, combiTimeTable.y[5]);
-  <font color="red">connect</font>(from3_kPag.u, combiTimeTable.y[6]);
-  <font color="red">connect</font>(from4_kPag.u, combiTimeTable.y[7]);
-  <font color="red">connect</font>(sumAnMFC.u1, combiTimeTable.y[8]);
-  <font color="red">connect</font>(sumAnMFC.u2, combiTimeTable.y[9]);
-  <font color="red">connect</font>(sumCaMFC.u1, combiTimeTable.y[10]);
-  <font color="red">connect</font>(sumCaMFC.u2, combiTimeTable.y[11]);
-  <font color="red">connect</font>(from1_degC.u, combiTimeTable.y[12]);
-  <font color="red">connect</font>(from2_degC.u, combiTimeTable.y[13]);
-  <font color="red">connect</font>(from3_degC.u, combiTimeTable.y[14]);
-  <font color="red">connect</font>(from4_degC.u, combiTimeTable.y[15]);
-  <font color="red">connect</font>(from5_degC.u, combiTimeTable.y[16]);
-  <font color="red">connect</font>(from6_degC.u, combiTimeTable.y[17]);
-  <font color="red">connect</font>(from_A.u, combiTimeTable.y[18]);
-
-  <font color="darkgreen">// Connections from unit conversion to internal outputs</font>
-  <font color="red">connect</font>(v, from_V.y);
-  <font color="red">connect</font>(RHAnFPNegX, 'from1_%'.y);
-  <font color="red">connect</font>(RHCaFPNegX, 'from2_%'.y);
-  <font color="red">connect</font>(p_anFPNegY, from1_kPag.y);
-  <font color="red">connect</font>(p_anFPPosY, from2_kPag.y);
-  <font color="red">connect</font>(p_caFPNegY, from3_kPag.y);
-  <font color="red">connect</font>(p_caFPPosY, from4_kPag.y);
-  <font color="red">connect</font>(Vdot_anFPNegY_H2, from1_LPM.y);
-  <font color="red">connect</font>(Vdot_caFPNegY_air, from2_LPM.y);
-  <font color="red">connect</font>(T_anFPNegY, from1_degC.y);
-  <font color="red">connect</font>(T_anFPPosY, from2_degC.y);
-  <font color="red">connect</font>(T_caFPNegY, from3_degC.y);
-  <font color="red">connect</font>(T_caFPPosY, from4_degC.y);
-  <font color="red">connect</font>(T_anFPX, from5_degC.y);
-  <font color="red">connect</font>(T_caFPX, from6_degC.y);
-  <font color="red">connect</font>(I, from_A.y);
-
-  <font color="darkgreen">// Summations</font>
-  <font color="red">connect</font>(sumAnMFC.y, from1_LPM.u);
-
-  <font color="red">connect</font>(sumCaMFC.y, from2_LPM.u);
-
-  <font color="darkgreen">// Connections from internal outputs to public output</font>
-  <font color="red">connect</font>(v, y.v);
-
-  <font color="red">connect</font>(RHAnFPNegX, y.RHAnFPNegX);
-
-  <font color="red">connect</font>(RHCaFPNegX, y.RHCaFPNegX);
-
-  <font color="red">connect</font>(p_anFPNegY, y.p_anFPNegY);
-
-  <font color="red">connect</font>(p_anFPPosY, y.p_anFPPosY);
-
-  <font color="red">connect</font>(p_caFPNegY, y.p_caFPNegY);
-
-  <font color="red">connect</font>(p_caFPPosY, y.p_caFPPosY);
-
-  <font color="red">connect</font>(Vdot_anFPNegY_H2, y.Vdot_anFPNegY_H2);
-
-  <font color="red">connect</font>(Vdot_caFPNegY_air, y.Vdot_caFPNegY_air);
-  <font color="red">connect</font>(T_anFPNegY, y.T_anFPNegY);
-  <font color="red">connect</font>(T_anFPPosY, y.T_anFPPosY);
-  <font color="red">connect</font>(T_caFPNegY, y.T_caFPNegY);
-  <font color="red">connect</font>(T_caFPPosY, y.T_caFPPosY);
-  <font color="red">connect</font>(T_anFPX, y.T_anFPX);
-
-  <font color="red">connect</font>(T_caFPX, y.T_caFPX);
-
-  <font color="red">connect</font>(I, y.I);
-<font color="blue">end </font>Replay;
+  <font color="red">connect</font>(anValveDynamics.y, p_an_out_noneq);
+  <font color="red">connect</font>(caValveDynamics.y, p_ca_out_noneq);
+  <font color="red">connect</font>(caPressSet.y, caNoneqSet.u1);
+  <font color="red">connect</font>(caThermoPress.y, caNoneqSet.u2);
+  <font color="red">connect</font>(caNoneqSet.y, caValveDynamics.u);
+  <font color="red">connect</font>(anPressSet.y, anNoneqSet.u1);
+  <font color="red">connect</font>(anNoneqSet.u2, anThermoPress.y);
+  <font color="red">connect</font>(anNoneqSet.y, anValveDynamics.u);
+<font color="blue">end </font>TestStand;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:50 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:32 2013.
 </div>
 </body>
 </html>

@@ -1,0 +1,921 @@
+<html>
+<head>
+<title>FCSys.Utilities</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-8-6">
+<meta name="description" content="Functions that implement useful algorithms">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Utilities"></a><a href="index.html#FCSys">FCSys</a>.Utilities</h2>
+
+<b>Functions that implement useful algorithms</b>
+
+<h3>Information</h3>
+
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
+FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Chemistry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Chemistry.html#FCSys.Utilities.Chemistry">Chemistry</a>
+</td><td>Functions to support chemistry</td></tr>
+<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Polynomial" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">Polynomial</a>
+</td><td>Polynomial functions</td></tr>
+<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Time" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time">Time</a>
+</td><td>Functions to check translation time</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.arrayIntegerEqual" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.arrayIntegerEqual">arrayIntegerEqual</a>
+</td><td>Check if two arrays of integers are equal</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.arrayRealEqual" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.arrayRealEqual">arrayRealEqual</a>
+</td><td>Check if two arrays of <code>Real</code> variables are essentially equal</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.arrayStringEqual" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.arrayStringEqual">arrayStringEqual</a>
+</td><td>Check if two string arrays are equal</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.assertEval" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.assertEval">assertEval</a>
+</td><td>Assert function that forces Dymola to parse the message</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.average" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.average">average</a>
+</td><td>Return the arithmetic mean of numbers</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.cartWrap" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.cartWrap">cartWrap</a>
+</td><td>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.countTrue" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">countTrue</a>
+</td><td>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.Delta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.Delta">Delta</a>
+</td><td>Return the second entry of a vector minus the first (&Delta;)</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.enumerate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.enumerate">enumerate</a>
+</td><td>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.index" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.index">index</a>
+</td><td>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.inSign">inSign</a>
+</td><td>Return the mathematical sign for the direction into a side or face</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayIntegerEqualS.png" alt="FCSys.Utilities.mod1" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.mod1">mod1</a>
+</td><td>Modulo operator for 1-based indexing (compatible with Modelica)</td></tr>
+<tr><td><img src="images/FCSys.Utilities.plot6S.png" alt="FCSys.Utilities.plot6" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.plot6">plot6</a>
+</td><td>Create six plots</td></tr>
+<tr><td><img src="images/FCSys.Utilities.roundS.png" alt="FCSys.Utilities.round" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.round">round</a>
+</td><td>Round a <code>Real</code> variable to the nearest integer</td></tr>
+<tr><td><img src="images/FCSys.Utilities.roundS.png" alt="FCSys.Utilities.Sigma" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.Sigma">Sigma</a>
+</td><td>Return the sum of the first and second entries of a vector (&Sigma;)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.arrayIntegerEqual" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.arrayIntegerEqual"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.arrayIntegerEqual</h2>
+<b>Check if two arrays of integers are equal</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+  <code>arrayIntegerEqual({1,2}, {1,2})</code> returns <code>true</code>, but
+  <code>arrayIntegerEqual({1,2}, {1,3})</code> and <code>arrayIntegerEqual({1,2}, {1,2,3})</code> each return false.
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>u1[:]</td><td>&nbsp;</td><td>First integer vector</td></tr>
+<tr><td>Integer</td><td>u2[:]</td><td>&nbsp;</td><td>Second integer vector</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>equal</td><td><code>true</code>, if all of the entries are equal</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> arrayIntegerEqual <font color="darkgreen">
+  &quot;Check if two arrays of integers are equal&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font>Integer u1[:] <font color="darkgreen">&quot;First integer vector&quot;</font>;
+  <font color="blue">input </font>Integer u2[:] <font color="darkgreen">&quot;Second integer vector&quot;</font>;
+  <font color="blue">output </font>Boolean equal <font color="darkgreen">
+    &quot;<code>true</code>, if all of the entries are equal&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">size</font>(u1, 1) &lt;&gt; <font color="red">size</font>(u2, 1)<font color="blue"> then</font>
+    equal := false;
+    return;
+  <font color="blue">end if</font>;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u1, 1)<font color="blue"> loop</font>
+    <font color="blue">if </font>u1[i] &lt;&gt; u2[i]<font color="blue"> then</font>
+      equal := false;
+      return;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+  equal := true;
+  return;
+<font color="blue">end </font>arrayIntegerEqual;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.arrayRealEqual" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.arrayRealEqual"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.arrayRealEqual</h2>
+<b>Check if two arrays of <code>Real</code> variables are essentially equal</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+  <code>arrayRealEqual({1,2}, {1,2})</code> returns <code>true</code>, but
+  <code>arrayRealEqual({1,2}, {1,2.001})</code> and <code>arrayRealEqual({1,2}, {1,2,3})</code> each return false.
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u1[:]</td><td>&nbsp;</td><td>First real vector</td></tr>
+<tr><td>Real</td><td>u2[:]</td><td>&nbsp;</td><td>Second real vector</td></tr>
+<tr><td>Real</td><td>eps</td><td>1e-7</td><td>Error tolerance</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>equal</td><td><code>true</code>, if all of the entries are equal</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> arrayRealEqual <font color="darkgreen">
+  &quot;Check if two arrays of <code>Real</code> variables are essentially equal&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font>Real u1[:] <font color="darkgreen">&quot;First real vector&quot;</font>;
+  <font color="blue">input </font>Real u2[:] <font color="darkgreen">&quot;Second real vector&quot;</font>;
+  <font color="blue">input </font>Real eps=1e-7 <font color="darkgreen">&quot;Error tolerance&quot;</font>;
+  <font color="blue">output </font>Boolean equal <font color="darkgreen">
+    &quot;<code>true</code>, if all of the entries are equal&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">size</font>(u1, 1) &lt;&gt; <font color="red">size</font>(u2, 1)<font color="blue"> then</font>
+    equal := false;
+    return;
+  <font color="blue">end if</font>;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u1, 1)<font color="blue"> loop</font>
+    <font color="blue">if </font><font color="red">abs</font>(u1[i] - u2[i]) &gt; eps<font color="blue"> then</font>
+      equal := false;
+      return;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+  equal := true;
+  return;
+<font color="blue">end </font>arrayRealEqual;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.arrayStringEqual" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.arrayStringEqual"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.arrayStringEqual</h2>
+<b>Check if two string arrays are equal</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+  <code>arrayStringEqual({"a","bc"}, {"a","bc"})</code> returns <code>true</code>, but
+  <code>arrayStringEqual({"a","bc"}, {"a","b"})</code> and <code>arrayStringEqual({"a","b"}, {"a","b","c"})</code> each return false.
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>String</td><td>u1[:]</td><td>&nbsp;</td><td>First string vector</td></tr>
+<tr><td>String</td><td>u2[:]</td><td>&nbsp;</td><td>Second string vector</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>equal</td><td><code>true</code>, if all of the entries are equal</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> arrayStringEqual <font color="darkgreen">&quot;Check if two string arrays are equal&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font>String u1[:] <font color="darkgreen">&quot;First string vector&quot;</font>;
+  <font color="blue">input </font>String u2[:] <font color="darkgreen">&quot;Second string vector&quot;</font>;
+  <font color="blue">output </font>Boolean equal <font color="darkgreen">
+    &quot;<code>true</code>, if all of the entries are equal&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">size</font>(u1, 1) &lt;&gt; <font color="red">size</font>(u2, 1)<font color="blue"> then</font>
+    equal := false;
+    return;
+  <font color="blue">end if</font>;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u1, 1)<font color="blue"> loop</font>
+    <font color="blue">if </font>u1[i] &lt;&gt; u2[i]<font color="blue"> then</font>
+      equal := false;
+      return;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+  equal := true;
+  return;
+<font color="blue">end </font>arrayStringEqual;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.assertEval" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.assertEval"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.assertEval</h2>
+<b>Assert function that forces Dymola to parse the message</b>
+
+<h3>Information</h3>
+
+<p>When an assert statement is
+  false in the initial equation section of a model, Dymola 7.4 gives
+  the following error during translation:
+  <pre>"Error: The conditions of the following assert statements are always false:"</pre>
+  without parsing the message given to the assert function.  This pass-through function causes the
+  statement to be evaluated during initialization, at
+  which point the message is evaluated.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>condition</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>String</td><td>message</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> assertEval <font color="darkgreen">
+  &quot;Assert function that forces Dymola to parse the message&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Boolean condition;
+  <font color="blue">input </font>String message;
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(condition, &quot;\n&quot; + message + &quot;\n&quot;);
+<font color="blue">end </font>assertEval;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.average" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.average"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.average</h2>
+<b>Return the arithmetic mean of numbers</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u[:]</td><td>&nbsp;</td><td>Vector of numbers</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>average</td><td>Arithmetic mean</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> average <font color="darkgreen">&quot;Return the arithmetic mean of numbers&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
+  <font color="blue">output </font>Real average <font color="darkgreen">&quot;Arithmetic mean&quot;</font>;
+
+<font color="blue">algorithm </font>
+  average := <font color="red">sum</font>(u)/<font color="red">size</font>(u, 1);
+<font color="blue">end </font>average;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.cartWrap" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.cartWrap"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.cartWrap</h2>
+<b>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p><p>
+Extends from <a href="FCSys_Utilities.html#FCSys.Utilities.mod1">mod1</a> (Modulo operator for 1-based indexing (compatible with Modelica)).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>num</td><td>&nbsp;</td><td>Dividend</td></tr>
+<tr><td>Integer</td><td>den</td><td>Axis.z</td><td>Divisor</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>index</td><td>Remainder with 1-based indexing</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> cartWrap = <a href="FCSys_Utilities.html#FCSys.Utilities.mod1">mod1</a> (<font color="blue">final </font>den=Axis.z) <font color="darkgreen">
+  &quot;Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping&quot;</font>;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.countTrue" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.countTrue"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.countTrue</h2>
+<b>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>countTrue({true,false,true})</code> returns 2.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> vector</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n</td><td>Number of true entries</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> countTrue <font color="darkgreen">
+  &quot;Return the number of <code>true</code> entries in a <code>Boolean</code> vector&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> vector&quot;</font>;
+  <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of true entries&quot;</font>;
+
+<font color="blue">algorithm </font>
+  n := <font color="red">sum</font>(<font color="blue">if </font>u[i]<font color="blue"> then </font>1<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1));
+<font color="blue">end </font>countTrue;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.Delta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Delta"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Delta</h2>
+<b>Return the second entry of a vector minus the first (&Delta;)</b>
+
+<h3>Information</h3>
+
+<p>The translator should automatically
+  vectorize (or "matricize") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>Delta</td><td>Second entry minus the first entry</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> Delta <font color="darkgreen">
+  &quot;Return the second entry of a vector minus the first (&Delta;)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
+  <font color="blue">output </font>Real Delta <font color="darkgreen">&quot;Second entry minus the first entry&quot;</font>;
+
+<font color="blue">algorithm </font>
+  Delta := u[2] - u[1];
+<font color="blue">end </font>Delta;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.enumerate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.enumerate"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.enumerate</h2>
+<b>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+  <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> vector</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>enumerated[size(u, 1)]</td><td>Indices of the true entries (increasing order; 0 for false entries)</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> enumerate <font color="darkgreen">
+  &quot;Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> vector&quot;</font>;
+  <font color="blue">output </font>Integer enumerated[<font color="red">size</font>(u, 1)] <font color="darkgreen">
+    &quot;Indices of the true entries (increasing order; 0 for false entries)&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer count <font color="darkgreen">&quot;Counter variable&quot;</font>;
+
+<font color="blue">algorithm </font>
+  count := 1;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1)<font color="blue"> loop</font>
+    <font color="blue">if </font>u[i]<font color="blue"> then</font>
+      enumerated[i] := count;
+      count := count + 1;
+    <font color="blue">else</font>
+      enumerated[i] := 0;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+<font color="blue">end </font>enumerate;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.index" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.index"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.index</h2>
+<b>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</b>
+
+<h3>Information</h3>
+
+<p>The indices are 1-based (Modelica-compatible).</p>
+
+<p><b>Example:</b><br>
+  <code>index({true,false,true})</code> returns <code>{1,3}</code>.<p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> array</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>indices[countTrue(u)]</td><td>Indices of the true entries</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> index <font color="darkgreen">
+  &quot;Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> array&quot;</font>;
+  <font color="blue">output </font>Integer indices[<font color="red">countTrue</font>(u)] <font color="darkgreen">&quot;Indices of the true entries&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer count <font color="darkgreen">&quot;Counter variable&quot;</font>;
+
+<font color="blue">algorithm </font>
+  count := 1;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1)<font color="blue"> loop</font>
+    <font color="blue">if </font>u[i]<font color="blue"> then</font>
+      indices[count] := i;
+      count := count + 1;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+<font color="blue">end </font>index;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.inSign" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.inSign"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.inSign</h2>
+<b>Return the mathematical sign for the direction into a side or face</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+  <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
+  <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a></td><td>side</td><td>&nbsp;</td><td>Side</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>sign</td><td>Sign indicating direction along the axis</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> inSign <font color="darkgreen">
+  &quot;Return the mathematical sign for the direction into a side or face&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Species_BaseClasses.html#FCSys.Species.BaseClasses.Side">Side</a> side <font color="darkgreen">&quot;Side&quot;</font>;
+  <font color="blue">output </font>Integer sign <font color="darkgreen">&quot;Sign indicating direction along the axis&quot;</font>;
+
+<font color="blue">algorithm </font>
+  sign := 3 - 2*side;
+<font color="blue">end </font>inSign;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.arrayIntegerEqualI.png" alt="FCSys.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.mod1"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.mod1</h2>
+<b>Modulo operator for 1-based indexing (compatible with Modelica)</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+  <code>mod1(4,3)</code> returns
+  1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
+  <code>mod</code> is the built-in modulo operator).<p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>num</td><td>&nbsp;</td><td>Dividend</td></tr>
+<tr><td>Integer</td><td>den</td><td>&nbsp;</td><td>Divisor</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>index</td><td>Remainder with 1-based indexing</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> mod1 <font color="darkgreen">
+  &quot;Modulo operator for 1-based indexing (compatible with Modelica)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Integer num <font color="darkgreen">&quot;Dividend&quot;</font>;
+  <font color="blue">input </font>Integer den <font color="darkgreen">&quot;Divisor&quot;</font>;
+  <font color="blue">output </font>Integer index <font color="darkgreen">&quot;Remainder with 1-based indexing&quot;</font>;
+
+<font color="blue">algorithm </font>
+  index := <font color="red">mod</font>(num - 1, den) + 1;
+<font color="blue">end </font>mod1;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Utilities.plot6"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.plot6</h2>
+
+<b>Create six plots</b>
+
+<h3>Information</h3>
+
+<p>This function calls the <code>createPlot()</code> function in
+    Dymola to create a tiled array of six plots.  It may not work with other tools.</p><p>
+
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>String</td><td>y1[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 1<sup>st</sup> plot</td></tr>
+<tr><td>String</td><td>y2[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 2<sup>nd</sup> plot</td></tr>
+<tr><td>String</td><td>y3[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 3<sup>rd</sup> plot</td></tr>
+<tr><td>String</td><td>y4[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 4<sup>th</sup> plot</td></tr>
+<tr><td>String</td><td>y5[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 5<sup>th</sup> plot</td></tr>
+<tr><td>String</td><td>y6[:]</td><td>fill(&quot;&quot;, 0)</td><td>Names of the signals for the 6<sup>th</sup> plot</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> plot6 <font color="darkgreen">&quot;Create six plots&quot;</font>
+  <font color="blue">input </font>String y1[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 1<sup>st</sup> plot&quot;</font>;
+  <font color="blue">input </font>String y2[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 2<sup>nd</sup> plot&quot;</font>;
+  <font color="blue">input </font>String y3[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 3<sup>rd</sup> plot&quot;</font>;
+  <font color="blue">input </font>String y4[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 4<sup>th</sup> plot&quot;</font>;
+  <font color="blue">input </font>String y5[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 5<sup>th</sup> plot&quot;</font>;
+  <font color="blue">input </font>String y6[:]=<font color="red">fill</font>(&quot;&quot;, 0) <font color="darkgreen">
+    &quot;Names of the signals for the 6<sup>th</sup> plot&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="red">createPlot</font>(
+    id=1,
+    position={0,0,440,650},
+    y=y1,
+    erase=false,
+    grid=true,
+    online=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    leftTitleType=1,
+    bottomTitleType=1);
+  <font color="red">createPlot</font>(
+    id=1,
+    position={0,0,440,325},
+    y=y2,
+    erase=false,
+    grid=true,
+    online=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    subPlot=2,
+    leftTitleType=1,
+    bottomTitleType=1);
+  <font color="red">createPlot</font>(
+    id=2,
+    position={450,0,440,650},
+    y=y3,
+    erase=false,
+    grid=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    online=true,
+    leftTitleType=1,
+    bottomTitleType=1);
+  <font color="red">createPlot</font>(
+    id=2,
+    position={450,0,440,325},
+    y=y4,
+    erase=false,
+    grid=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    online=true,
+    subPlot=2,
+    leftTitleType=1,
+    bottomTitleType=1);
+  <font color="red">createPlot</font>(
+    id=3,
+    position={900,0,440,650},
+    y=y5,
+    erase=false,
+    grid=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    online=true,
+    leftTitleType=1,
+    bottomTitleType=1);
+  <font color="red">createPlot</font>(
+    id=3,
+    position={900,0,440,325},
+    y=y6,
+    erase=false,
+    grid=true,
+    legendLocation=5,
+    legendHorizontal=false,
+    online=true,
+    subPlot=2,
+    leftTitleType=1,
+    bottomTitleType=1);
+<font color="blue">end </font>plot6;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.roundI.png" alt="FCSys.Utilities.round" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.round"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.round</h2>
+<b>Round a <code>Real</code> variable to the nearest integer</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+  <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u</td><td>&nbsp;</td><td><code>Real</code> variable</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>y</td><td>Nearest integer</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> round <font color="darkgreen">
+  &quot;Round a <code>Real</code> variable to the nearest integer&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Real u <font color="darkgreen">&quot;<code>Real</code> variable&quot;</font>;
+  <font color="blue">output </font>Integer y <font color="darkgreen">&quot;Nearest integer&quot;</font>;
+
+<font color="blue">algorithm </font>
+  y := <font color="red">integer</font>(u + 0.5);
+<font color="blue">end </font>round;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.roundI.png" alt="FCSys.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Sigma"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Sigma</h2>
+<b>Return the sum of the first and second entries of a vector (&Sigma;)</b>
+
+<h3>Information</h3>
+
+<p>The translator should automatically
+  vectorize (or "matricize") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
+  In contrast, <code>sum([1,2;3,4])</code> returns 10.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>Sigma</td><td>Sum of the first and second entries</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> Sigma <font color="darkgreen">
+  &quot;Return the sum of the first and second entries of a vector (&Sigma;)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
+  <font color="blue">output </font>Real Sigma <font color="darkgreen">&quot;Sum of the first and second entries&quot;</font>;
+
+<font color="blue">algorithm </font>
+  Sigma := u[1] + u[2];
+<font color="blue">end </font>Sigma;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:09:01 2013.
+</div>
+</body>
+</html>

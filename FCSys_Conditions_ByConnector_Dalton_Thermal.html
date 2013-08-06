@@ -1,0 +1,225 @@
+<html>
+<head>
+<title>FCSys.Conditions.ByConnector.Dalton.Thermal</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-8-6">
+<meta name="description" content="Thermal conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.ByConnector.Dalton.Thermal"></a><a href="FCSys_Conditions_ByConnector_Dalton.html#FCSys.Conditions.ByConnector.Dalton">FCSys.Conditions.ByConnector.Dalton</a>.Thermal</h2>
+
+<b>Thermal conditions</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Dalton.Dalton.volumeS.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.temperature">temperature</a>
+</td><td>Temperature</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Dalton.Dalton.volumeS.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.heatRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.heatRate">heatRate</a>
+</td><td>Heat flow rate</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.Dalton.Dalton.volumeS.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition">PartialCondition</a>
+</td><td>Partial function to select a thermal quantity</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Dalton.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.temperature" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Dalton.Thermal.temperature"></a><a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal">FCSys.Conditions.ByConnector.Dalton.Thermal</a>.temperature</h2>
+<b>Temperature</b>
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition">PartialCondition</a> (Partial function to select a thermal quantity).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>&nbsp;</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[:]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[:]</td><td>&nbsp;</td><td>Force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> temperature <font color="darkgreen">&quot;Temperature&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition">PartialCondition</a>;
+
+<font color="blue">algorithm </font>
+  x := T;
+<font color="blue">end </font>temperature;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Dalton.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.heatRate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Dalton.Thermal.heatRate"></a><a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal">FCSys.Conditions.ByConnector.Dalton.Thermal</a>.heatRate</h2>
+<b>Heat flow rate</b>
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition">PartialCondition</a> (Partial function to select a thermal quantity).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>&nbsp;</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[:]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[:]</td><td>&nbsp;</td><td>Force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> heatRate <font color="darkgreen">&quot;Heat flow rate&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition">PartialCondition</a>;
+
+<font color="blue">algorithm </font>
+  x := Qdot;
+<font color="blue">end </font>heatRate;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.Dalton.Thermal.temperatureI.png" alt="FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.Dalton.Thermal.PartialCondition"></a><a href="FCSys_Conditions_ByConnector_Dalton_Thermal.html#FCSys.Conditions.ByConnector.Dalton.Thermal">FCSys.Conditions.ByConnector.Dalton.Thermal</a>.PartialCondition</h2>
+<b>Partial function to select a thermal quantity</b>
+
+<h3>Information</h3>
+
+<p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>&nbsp;</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[:]</td><td>&nbsp;</td><td>Velocity (&phi;) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[:]</td><td>&nbsp;</td><td>Force (<i>m</i>&Phi;dot) [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>&nbsp;</td><td>Rate of thermal conduction (<i>Q&#775;</i>) [l2.m/T3]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>x</td><td>Value of condition</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">function</font> PartialCondition <font color="darkgreen">
+  &quot;Partial function to select a thermal quantity&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="darkgreen">// Additivity of pressure</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+
+  <font color="darkgreen">// Translational</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[:] <font color="darkgreen">&quot;Velocity (&phi;)&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[:] <font color="darkgreen">&quot;Force (<i>m</i>&Phi;dot)&quot;</font>;
+
+  <font color="darkgreen">// Thermal</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot <font color="darkgreen">&quot;Rate of thermal conduction (<i>Q&#775;</i>)&quot;</font>;
+
+  <font color="blue">output </font>Real x <font color="darkgreen">&quot;Value of condition&quot;</font>;
+<font color="blue">end </font>PartialCondition;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:28 2013.
+</div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -77,14 +80,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> FaceCondition <font color="darkgreen">&quot;Test the conditions for the face of a subregion&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-  <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">ByConnector.FaceBus.Single.FaceBus</a> face(gas(inclH2O=true, H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">ByConnector.Face.Single.Material.Current</a>
-          material)));
+  <a href="FCSys_Conditions_ByConnector_Face_Single.html#FCSys.Conditions.ByConnector.Face.Single.FaceEfforts">ByConnector.Face.Single.FaceEfforts</a> face;
   <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
     L={1,1,1}*U.cm,
     inclFacesX=false,
@@ -112,12 +115,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>ones(3)*U.cm</td><td>Length (<b>L</b>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>ones(3)*U.cm</td><td>Length [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>false</td><td>X</td></tr>
@@ -129,20 +134,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> FaceConditionPhases <font color="darkgreen">
   &quot;Test the conditions for the face of a subregion with phases&quot;</font>
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
-  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">FCSys.BaseClasses.Utilities.index</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.cartWrap">FCSys.Utilities.cartWrap</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">FCSys.Utilities.countTrue</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.enumerate">FCSys.Utilities.enumerate</a>;
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.index">FCSys.Utilities.index</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">ones</font>(3)*
-    U.cm <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+    U.cm <font color="darkgreen">&quot;Length&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
   <font color="darkgreen">// Included components of translational momentum</font>
@@ -155,17 +161,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
   <font color="blue">parameter </font>Boolean inclFacesZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">ByConnector.FaceBus.Single.Phases.Gas</a> face(inclH2O=true, H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-        thermal, <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">ByConnector.FaceBus.Single.Phases.Gas</a> face(inclH2O=true, H2O(<font color="blue">redeclare </font>Conditions.ByConnector.Face.Single.Thermal.HeatRate
+        thermal, <font color="blue">redeclare </font>Conditions.ByConnector.Face.Single.Material.Current
         material(source(y=U.A))));
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Subregions.Volume</a> volume(n_phases=1);
-  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Subregions.Phases.Gas</a> gas(
+  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.Volume">FCSys.Conditions.ByConnector.Amagat.Volume</a> volume(n_phases=1);
+  <a href="FCSys_Phases.html#FCSys.Phases.Gas">FCSys.Phases.Gas</a> gas(
     inclH2=false,
     inclH2O=true,
     <font color="blue">final </font>n_faces=n_faces,
     T_IC=environment.T,
-    reduceTemp=false,
+    reduceThermal=false,
     H2O(T_IC=300*U.K));
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
@@ -197,7 +203,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">equation </font>
   <font color="red">connect</font>(gas.yPositive, face.face);
 
-  <font color="red">connect</font>(volume.inertDalton[1], gas.inertDalton);
+  <font color="red">connect</font>(volume.dalton[1], gas.dalton);
 <font color="blue">end </font>FaceConditionPhases;
 </pre>
 <hr>
@@ -211,6 +217,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -234,6 +241,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -243,14 +251,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">inner </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid.System">Modelica.Fluid.System</a> system(T_ambient=293.15 + 5);
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(T=350*U.K);
-  <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> subregion(
+  <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a> subregion(
     L={1,1,1}*U.cm,
     inclFacesY=false,
     inclFacesZ=false,
     gas(inclH2=true, inclH2O=true),
     graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
     liquid(inclH2O=true));
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Adapters.Anode</a> anodeAdapter(<font color="blue">redeclare </font><font color="blue">package</font> LiquidMedium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.CompressibleLiquids.LinearColdWater.html#Modelica.Media.CompressibleLiquids.LinearColdWater">Modelica.Media.CompressibleLiquids.LinearColdWater</a>);
+  <a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL.Anode">Adapters.MSL.Anode</a> anodeAdapter(<font color="blue">redeclare </font><font color="blue">package</font> LiquidMedium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.CompressibleLiquids.LinearColdWater.html#Modelica.Media.CompressibleLiquids.LinearColdWater">Modelica.Media.CompressibleLiquids.LinearColdWater</a>);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Basic.html#Modelica.Electrical.Analog.Basic.Ground">Modelica.Electrical.Analog.Basic.Ground</a> ground;
 
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> gasVolume(
@@ -260,7 +268,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     use_HeatTransfer=true,
     <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
       HeatTransfer,
-    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_Media_AnodeGas.html#FCSys.Conditions.Adapters.Media.AnodeGas">Adapters.Media.AnodeGas</a>,
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = Adapters.Media.AnodeGas,
     medium(p(fixed=true),X(<font color="blue">each </font>fixed=true)));
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> liquidVolume(
     nPorts=1,
@@ -289,7 +297,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:27:46 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:05:34 2013.
 </div>
 </body>
 </html>

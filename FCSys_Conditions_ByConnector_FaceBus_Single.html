@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.FaceBus.Single</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -57,25 +60,31 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">FaceBus</a>
-</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default</td></tr>
-<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated">FaceBusIsolated</a>
-</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with zero normal velocity and otherwise zero flows by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a>
+</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFluidOnly" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFluidOnly">FaceBusFluidOnly</a>
+</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the fluid phases included</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly">FaceBusGraphiteOnly</a>
+</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the graphite phase</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts">FaceBusEfforts</a>
+</td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts specified by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.PhasesS.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases">Phases</a>
 </td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBus</h2>
-<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default</b><p>
-<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">
+<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBusFlows</h2>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
+Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a> (Short icon for a single-connector boundary condition).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -86,7 +95,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -95,13 +106,14 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> FaceBus <font color="darkgreen">
-  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default&quot;</font>
+<font color="blue">model</font> FaceBusFlows <font color="darkgreen">
+  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a>;
 
   <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">Phases.Gas</a> gas <font color="darkgreen">&quot;Gas&quot;</font>;
 
@@ -122,37 +134,54 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="red">connect</font>(gas.face, face.gas);
 
   <font color="red">connect</font>(u.gas, gas.u);
+
   <font color="red">connect</font>(gas.y, y.gas);
 
   <font color="darkgreen">// Graphite</font>
   <font color="red">connect</font>(graphite.face, face.graphite);
 
   <font color="red">connect</font>(u.graphite, graphite.u);
+
   <font color="red">connect</font>(graphite.y, y.graphite);
 
   <font color="darkgreen">// Ionomer</font>
   <font color="red">connect</font>(ionomer.face, face.ionomer);
   <font color="red">connect</font>(u.ionomer, ionomer.u);
+
   <font color="red">connect</font>(ionomer.y, y.ionomer);
 
   <font color="darkgreen">// Liquid</font>
   <font color="red">connect</font>(liquid.face, face.liquid);
   <font color="red">connect</font>(u.liquid, liquid.u);
+
   <font color="red">connect</font>(liquid.y, y.liquid);
-<font color="blue">end </font>FaceBus;
+<font color="blue">end </font>FaceBusFlows;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBusIsolated</h2>
-<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with zero normal velocity and otherwise zero flows by default</b><p>
-<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusIsolated">
+<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFluidOnly" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFluidOnly"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBusFluidOnly</h2>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the fluid phases included</b><p>
+<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFluidOnly">
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">FaceBus</a> (Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default).
+Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a> (Short icon for a single-connector boundary condition).
 <p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
+</table>
+<p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -161,115 +190,391 @@ Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Con
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> FaceBusIsolated <font color="darkgreen">
-  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with zero normal velocity and otherwise zero flows by default&quot;</font>
+<font color="blue">model</font> FaceBusFluidOnly <font color="darkgreen">
+  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the fluid phases included&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBus">FaceBus</a>(
+  <font color="blue">extends </font><a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a>;
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Gas">Phases.Gas</a> gas <font color="darkgreen">&quot;Gas&quot;</font>;
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Liquid">Phases.Liquid</a> liquid <font color="darkgreen">&quot;Liquid&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of multiple species&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Gas</font>
+  <font color="red">connect</font>(gas.face, face.gas);
+
+  <font color="red">connect</font>(u.gas, gas.u);
+
+  <font color="red">connect</font>(gas.y, y.gas);
+
+  <font color="darkgreen">// Liquid</font>
+  <font color="red">connect</font>(liquid.face, face.liquid);
+  <font color="red">connect</font>(u.liquid, liquid.u);
+
+  <font color="red">connect</font>(liquid.y, y.liquid);
+<font color="blue">end </font>FaceBusFluidOnly;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBusGraphiteOnly</h2>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the graphite phase</b><p>
+<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnlyD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusGraphiteOnly">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a> (Short icon for a single-connector boundary condition).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
+<tr><td><a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Connector for material, momentum, and energy of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> FaceBusGraphiteOnly <font color="darkgreen">
+  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default and only the graphite phase&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleShort">FCSys.Icons.Conditions.SingleShort</a>;
+
+  <a href="FCSys_Conditions_ByConnector_FaceBus_Single_Phases.html#FCSys.Conditions.ByConnector.FaceBus.Single.Phases.Graphite">Phases.Graphite</a> graphite <font color="darkgreen">&quot;Graphite&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
+    &quot;Connector for material, momentum, and energy of multiple species&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Graphite</font>
+  <font color="red">connect</font>(graphite.face, face.graphite);
+
+  <font color="red">connect</font>(u.graphite, graphite.u);
+
+  <font color="red">connect</font>(graphite.y, y.graphite);
+
+<font color="blue">end </font>FaceBusGraphiteOnly;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlowsI.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts"></a><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single">FCSys.Conditions.ByConnector.FaceBus.Single</a>.FaceBusEfforts</h2>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts specified by default</b><p>
+<img src="images/FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEffortsD.png" alt="FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusEfforts">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a> (Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows specified by default).
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Connector for material, momentum, and energy of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> FaceBusEfforts <font color="darkgreen">
+  &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts specified by default&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_FaceBus_Single.html#FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows">FaceBusFlows</a>(
     gas(
       H2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+
       N2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+
       O2(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K))),
+
     graphite(&#39;C+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal), &#39;e-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+        &#39;e-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K))),
+
     ionomer(
-      &#39;C19HF37O5S-&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal),
+      &#39;SO3-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+
       &#39;H+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K)),
+
       H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal)),
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K))),
+
     liquid(H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.Current">Conditions.ByConnector.Face.Single.Material.Current</a>
-          material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          following(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.Force">Conditions.ByConnector.Face.Single.Translational.Force</a>
-          preceding(<font color="blue">final </font>orientation),
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.HeatRate">Conditions.ByConnector.Face.Single.Thermal.HeatRate</a>
-          thermal)));
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.density">Conditions.ByConnector.Face.Single.Material.density</a>,
 
-  <font color="darkgreen">// See note in ChemicalNetNoFlow.</font>
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
 
-<font color="blue">end </font>FaceBusIsolated;
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.velocity">Conditions.ByConnector.Face.Single.Translational.velocity</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature">Conditions.ByConnector.Face.Single.Thermal.temperature</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> materialMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Material.html#FCSys.Conditions.ByConnector.Face.Single.Material.current">Conditions.ByConnector.Face.Single.Material.current</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> normalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> followingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> precedingMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Translational.html#FCSys.Conditions.ByConnector.Face.Single.Translational.force">Conditions.ByConnector.Face.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Face_Single_Thermal.html#FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate">Conditions.ByConnector.Face.Single.Thermal.heatRate</a>,
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> materialSet(y=4*U.C/U.cc),
+
+        <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=300*U.K))));
+
+  <font color="darkgreen">// The daltonSource and thermalSet blocks are redeclared as not replaceable</font>
+  <font color="darkgreen">// because y is set directly and cannot be undone at instantiation.</font>
+
+  <font color="darkgreen">// See note in ElectrochemEfforts.</font>
+<font color="blue">end </font>FaceBusEfforts;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:28:06 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:06:04 2013.
 </div>
 </body>
 </html>

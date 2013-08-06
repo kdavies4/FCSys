@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.'H+'.Gas</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-7-2">
+<meta name="date" content="2013-8-6">
 <meta name="description" content="H+ gas">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -19,18 +19,21 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
     </ul>
 
   <h3>Download</h3>
@@ -60,18 +63,22 @@
 
      <p>Additional notes:
      <ul>
-     <li>The source data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] breaks the data into three
+     <li>The default reference enthalpy is zero at 25&nbsp;&deg;C.</li>
+     <li>The source data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] breaks the
+     data into three
    temperature ranges, but the constants are the same for each.
    Therefore, the temperature limits are set here such that the entire
    range is handled without switching.
    The lower temperature limit in the source data
-   is 298.150 K, but here it is expanded down to 200 K.  The constants are
+   is 298.150&nbsp;K, but here it is expanded down to 200&nbsp;K.  The constants are
    independent of temperature anyway.</li>
-   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O (H<sub>2</sub>O &#8640; OH<sup>-</sup> + H<sup>+</sup>) is
-   -96569.804 J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
-   (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
+   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O
+   (H<sub>2</sub>O&nbsp;&#8640;&nbsp;OH<sup>-</sup>&nbsp;+&nbsp;H<sup>+</sup>) is
+   -96569.804&nbsp;J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
+   (H<sub>3</sub>O<sup>+</sup>&nbsp;&#8640;&nbsp;H<sub>2</sub>O&nbsp;+&nbsp;H<sup>+</sup>) is
+   839826.0&nbsp;J/mol.  Based on
    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Tissandier1998</a>], the
-   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol.</li>
+   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3&nbsp;J/mol.</li>
      </ul></p>
 
 <p>For more information, see the
@@ -82,7 +89,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jul  2 09:29:06 2013.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Aug  6 13:08:52 2013.
 </div>
 </body>
 </html>
