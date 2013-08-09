@@ -34,9 +34,20 @@ rpls = [
 )( *</div>)""", r"""\1
   <h3>Download</h3>
     <ul>
-      <li><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
 \2"""),
+    # Add Microdata markup.
+    ('\n<div class="sidebar">', """\n<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">"""),
+    ('\n</body>\n?</html>', '\n</span></body></html>'),
+    ('<p class="sidebar-title">FCSys</p>', '<p itemprop="name" class="sidebar-title">FCSys</p>'),
+    ('img src="images/icon.gif" class="logo"', 'img itemprop="image" src="images/icon.gif" class="logo"'),
+    ('<img src="images/FCSys.Assemblies.Cells.CellD.png" width="600"/>', '<img id="_screenshot8" itemprop="screenshot" src="images/FCSys.Assemblies.Cells.CellD.png" width="600"/>'),
+    ("Kevin Davies, Georgia Tech Research Corporation", """<span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>"""),
     # Move the style sheet.
     ('"\.\./Resources/Documentation/ModelicaDoc\.css"', '"stylesheets/ModelicaDoc.css"'),
     # Add the Google Analytics script.
