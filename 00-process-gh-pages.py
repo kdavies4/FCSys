@@ -21,7 +21,7 @@ rpls = [
     # FCSys.html will be index.html.
     ('FCSys\.html', 'index.html'),
     # Change the title of the main page.
-    ('<title>FCSys</title>', '<title>FCSys &mdash; Modelica library of fuel cell models</title>'),
+    ('<title>FCSys</title>', '<title>FCSys - Modelica library of fuel cell models</title>'),
     # Add meta title and keywords.
     ('<meta name="HTML-Generator" content="Dymola">', r"""<meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
