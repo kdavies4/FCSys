@@ -34,8 +34,9 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.CurrentAreicAbsolute CurrentAreicAbsolute=1*U.A/U.m^2
         "Absolute areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
-      parameter Q.Density Density=1*U.C/U.m^3 "Density";
-      parameter Q.DensityRate DensityRate=1*U.C/(U.m^3*U.s) "Rate of density";
+      parameter Q.Concentration Concentration=1*U.C/U.m^3 "Concentration";
+      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
+        "Rate of concentration";
       parameter Q.Diffusivity Diffusivity=1*U.m^2/U.s "Diffusivity";
       parameter Q.Energy Energy=1*U.J "Energy";
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
@@ -128,8 +129,9 @@ package Quantities "Quantities to represent physical properties"
   type CurrentAreicAbsolute = TypeReal (final unit="N/(l2.T)", min=0)
     "Absolute areic current";
   type CurrentRate = TypeReal (final unit="N/T2") "Rate of current";
-  type Density = TypeReal (final unit="N/l3", min=0);
-  type DensityRate = TypeReal (final unit="N/(l3.T)") "Rate of density";
+  type Concentration = TypeReal (final unit="N/l3", min=0);
+  type ConcentrationRate = TypeReal (final unit="N/(l3.T)")
+    "Rate of concentration";
   type Diffusivity = TypeReal (final unit="l2/T", min=0);
   type Energy = TypeReal (final unit="l2.m/T2");
   type Fluidity = TypeReal (final unit="l.T/m", min=0);
@@ -149,6 +151,8 @@ package Quantities "Quantities to represent physical properties"
   type Mobility = TypeReal (final unit="N.T/m", min=0);
   type MomentumRotational = TypeReal (final unit="l2.m/(A.T)")
     "Rotational momentum";
+  type MomentumTranslationalSpecific = TypeReal (final unit="l.m/(N.T)")
+    "Specific translational momentum";
   type Number = TypeReal (final unit="1");
   type NumberAbsolute = TypeReal (final unit="1", min=0) "Absolute number";
   type Permeability = TypeReal (final unit="l.m/N2", min=0);
@@ -240,7 +244,14 @@ package Quantities "Quantities to represent physical properties"
     in Dymola 7.4.<a href=\"#ref2\" title=\"Jump back to footnote 2 in the text.\">&#8629;</a></p>
     </small>
 
-    </small>
-    </html>"));
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 
 end Quantities;

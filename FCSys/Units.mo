@@ -78,10 +78,10 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("N.T/m", "cm2/(V.s)") "Mobility";
     defineDefaultDisplayUnit("N/(l2.T)", "A/cm2") "Areic current";
     defineDefaultDisplayUnit("N/(l2.T)", "A/cm2") "Absolute areic current";
-    defineDefaultDisplayUnit("N/(l3.T)", "C/(cc.s)") "Rate of density";
+    defineDefaultDisplayUnit("N/(l3.T)", "C/(cc.s)") "Rate of concentration";
     defineDefaultDisplayUnit("N/(T.s)", "A/s")
       "for derivative of current in Dymola";
-    defineDefaultDisplayUnit("N/l3", "C/cc") "Density";
+    defineDefaultDisplayUnit("N/l3", "C/cc") "Concentration";
     defineDefaultDisplayUnit("N/s", "A") "for derivative of amount in Dymola";
     defineDefaultDisplayUnit("N/T", "A") "Current";
     defineDefaultDisplayUnit("N/T2", "A/s") "Rate of current";
@@ -571,15 +571,15 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "N/(l3.T)",
         "C/(cc.s)",
-        cc*s/C) "Rate of density";
+        cc*s/C) "Rate of concentration";
     defineUnitConversion(
         "N/(l3.T)",
         "C/(m3.s)",
-        m^3*s/C) "Rate of density";
+        m^3*s/C) "Rate of concentration";
     defineUnitConversion(
         "N/(l3.T)",
         "M/s",
-        s/M) "Rate of density";
+        s/M) "Rate of concentration";
     defineUnitConversion(
         "N/(T.s)",
         "A/s",
@@ -591,15 +591,15 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "N/l3",
         "C/cc",
-        cc/C) "Density";
+        cc/C) "Concentration";
     defineUnitConversion(
         "N/l3",
         "C/m3",
-        m^3/C) "Density";
+        m^3/C) "Concentration";
     defineUnitConversion(
         "N/l3",
         "M",
-        1/M) "Density";
+        1/M) "Concentration";
     defineUnitConversion(
         "N/s",
         "A",
@@ -862,7 +862,7 @@ For more information, see the documentation for the
       final constant Q.Length cm=U.cm "centimeter";
       final constant Q.Length mm=U.mm "millimeter";
       final constant Q.Number '%'=U.'%' "percent";
-      final constant Q.Density M=U.M "molar";
+      final constant Q.Concentration M=U.M "molar";
       final constant Q.Volume cc=U.cc "cubic centimeter";
       annotation (Documentation(info="<html><p>This model may be used to calculate the values of the
   constants and units.</p>
@@ -1494,11 +1494,11 @@ encompass other systems of units.</p>
     "<html>characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)</html>";
   // See  http://en.wikipedia.org/wiki/Characteristic_impedance_of_vacuum.
   final constant Q.Permeability mu_0=Z_0/c
-    "<html>magnetic constant (&mu;<sup>0</sub>)</html>";
+    "<html>magnetic constant (&mu;<sub>0</sub>)</html>";
   // This is also called the vacuum permeability or permeability of free
   // space.
   final constant Q.Permittivity epsilon_0=1/(Z_0*c)
-    "<html>electric constant (&epsilon;<sup>0</sub>)</html>";
+    "<html>electric constant (&epsilon;<sub>0</sub>)</html>";
   // This is also called the vacuum permittivity or permittivity of free
   // space.
   final constant Q.Permeability k_A=mu_0/(4*pi)
@@ -1588,7 +1588,7 @@ encompass other systems of units.</p>
   final constant Q.Length um=micro*m "micrometer";
   final constant Q.Time ms=milli*s "millisecond";
   final constant Q.Number '%'=centi "percent (%)";
-  final constant Q.Density M=U.mol/U.L "molar";
+  final constant Q.Concentration M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Units\">Units</a> package is abbreviated as <code>U</code> for convenience throughout
@@ -1803,15 +1803,16 @@ most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
     <p id=\"fn1\">1. Hereafter, the value of the quantity is referred to as simply the value, but
     it should not be confused with the <code>value</code> attribute (which, as of version 3.3 of the
     Modelica specification, is the number).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
+    </small>
 
-<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-  it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-  disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-  FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"),
-      Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."));
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"), Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
 end Units;

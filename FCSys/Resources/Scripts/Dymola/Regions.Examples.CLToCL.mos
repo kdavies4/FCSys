@@ -2,7 +2,7 @@
 removePlots();
 createPlot(filename = "CLToCL.mat");
 
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
     y1={"anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
         "PEM.subregions[1, 1, 1].ionomer.H2O.rho",
         "caCL.subregions[1, 1, 1].gas.H2O.rho", "caCL.subregions[1, 1, 1].gas.N2.rho", "caCL.subregions[1, 1, 1].gas.O2.rho"},

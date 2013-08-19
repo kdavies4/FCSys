@@ -22,8 +22,6 @@
 # Kevin Davies, 1/24/2013
 
 # Remove some of the help files.
-rm -f help/FCSys.Test*.png # Test and Tests
-rm -f help/FCSys_Test*.html
 rm -f help/FCSys_Figures*.html
 rm -f help/FCSys.Figures*S.png # Leave the diagrams and icons.
 rm -f help/*WorkInProgress*
@@ -58,10 +56,10 @@ rm ../images/FCSys.Figures*.png
 rm ../*.html
 cp -f help/*.html ../
 mv -f ../FCSys.html ../index.html
-script_dir=$PWD
-cd ..
-./00-process-gh-pages.py
-cd $script_dir
+(
+    cd ..
+    ./00-process-gh-pages.py
+)
 
 # Be sure that all of the files are added to git.
 rm ../images/icon.png # Using .gif version instead

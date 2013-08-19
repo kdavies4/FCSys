@@ -1,7 +1,7 @@
 // Setup
 removePlots();
 createPlot(filename = "Reaction.mat");
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
     y1={"depletion.electrical.Ndot", "depletion.majority.Ndot",
         "depletion.minority.Ndot", "species1.chemical.Ndot",
         "species2.chemical.Ndot"},

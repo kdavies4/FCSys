@@ -12,7 +12,7 @@ species = cat(1,
               if inclO2 then {"gas.O2"} else fill("",0));
 
 for i in 1:size(species, 1) loop
-   FCSys.BaseClasses.Utilities.plot6(
+   FCSys.Utilities.plot6(
        y1=cat(1,
                 {"subregion1." + species[i] + ".faces[1, 1].rho", "subregion1." + species[i] + ".rho"},
                 if n_x==0 then fill("", 0) else {"subregions[" + String(j) + "]." + species[i] + ".rho" for j in 1:n_x},

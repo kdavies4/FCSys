@@ -4,10 +4,10 @@ createPlot(filename = "Correlations.mat");
 species = {"'C+'", "'SO3-'", "'e-'", "'H+'", "H2", "H2IG", "H2O", "H2OLiquid", "N2","O2"};
 
 // Define signals.
-FCSys.BaseClasses.Utilities.plot6({"T"}, {"p"});
+FCSys.Utilities.plot6({"T"}, {"p"});
 
 for i in 1:size(species, 1) loop
-   FCSys.BaseClasses.Utilities.plot6(
+   FCSys.Utilities.plot6(
        y2={species[i] + ".p_RT"},
        y3={species[i] + ".v"},
        y4={species[i] + ".c_v"},

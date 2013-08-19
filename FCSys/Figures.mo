@@ -178,13 +178,13 @@ package Figures "Graphical layouts for documentation"
         "Declarative-based circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput v annotation (Placement(transformation(extent={{-60,
-                  -30},{-40,-10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput i annotation (Placement(transformation(
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-60,-30},{-40,-10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
-              origin={10,10}), iconTransformation(
+              origin={0,10}), iconTransformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
               origin={110,0})));
@@ -249,7 +249,7 @@ package Figures "Graphical layouts for documentation"
             color={0,0,127},
             smooth=Smooth.None));
         connect(i, currentSensor.i) annotation (Line(
-            points={{10,10},{0,10},{0,10},{-10,10}},
+            points={{-5.55112e-16,10},{-5,10},{-5,10},{-10,10}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(cap.n, ground.p) annotation (Line(
@@ -257,7 +257,7 @@ package Figures "Graphical layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(i, i) annotation (Line(
-            points={{10,10},{10,10}},
+            points={{-5.55112e-16,10},{-5.55112e-16,10}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(currentSensor.p, res1.p) annotation (Line(
@@ -269,6 +269,7 @@ package Figures "Graphical layouts for documentation"
                 {-20,-10}},
             color={0,0,255},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-80,-60},{80,60}}), graphics));
       end Declarative_vi;
@@ -277,10 +278,10 @@ package Figures "Graphical layouts for documentation"
         "Declarative-based circuit with current in, voltage out"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput i annotation (Placement(transformation(extent={{-80,
-                  -30},{-60,-10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput v annotation (Placement(transformation(
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-80,-30},{-60,-10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
               origin={10,10}), iconTransformation(
@@ -375,12 +376,12 @@ package Figures "Graphical layouts for documentation"
       model Imperative_vi "Imperative circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput i annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.Integrator ind(k=1/L)
           annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -470,12 +471,12 @@ package Figures "Graphical layouts for documentation"
         extends FCSys.Icons.Blocks.Continuous;
 
       public
-        Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput v annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-90,26},{-70,46}}), iconTransformation(extent={{-120,-10},
+                  {-100,10}})));
+        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-10,0},{10,20}})));
         Modelica.Blocks.Math.Add sum
@@ -501,7 +502,7 @@ package Figures "Graphical layouts for documentation"
             color={255,195,38},
             smooth=Smooth.None));
         connect(i, diff1.u1) annotation (Line(
-            points={{-90,30},{-70,30},{-70,36},{-52,36}},
+            points={{-80,36},{-52,36}},
             color={0,200,0},
             smooth=Smooth.None));
         connect(diff1.u2, ind.y) annotation (Line(
@@ -560,12 +561,12 @@ package Figures "Graphical layouts for documentation"
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput i annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(a={R1*L*C,
               R1*R2*C + L,R2}, b={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -589,12 +590,12 @@ package Figures "Graphical layouts for documentation"
         extends FCSys.Icons.Blocks.Continuous;
 
       public
-        Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput v annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R1*L*C,
               R1*R2*C + L,R2}, a={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -677,12 +678,12 @@ package Figures "Graphical layouts for documentation"
       model DeclarativeA "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
-                  -100,10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{40,-10},{60,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{40,-10},{60,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -747,12 +748,12 @@ package Figures "Graphical layouts for documentation"
       model DeclarativeB "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -60,-10},{-40,10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-60,-10},{-40,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -818,12 +819,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
-                  -100,10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -912,12 +913,12 @@ package Figures "Graphical layouts for documentation"
       model ImperativeA "First circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
-                  {-100,10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{0,-10},{20,10}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{0,-10},{20,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -979,12 +980,12 @@ package Figures "Graphical layouts for documentation"
       model ImperativeB "Second circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -30,-10},{-10,10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
 
       public
         Modelica.Blocks.Math.Gain res2(k=1/R2)
@@ -1024,6 +1025,7 @@ package Figures "Graphical layouts for documentation"
                 6.10623e-16}},
             color={255,195,38},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1052,12 +1054,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.Integrator cap(k=1/C)
           annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -1147,12 +1149,12 @@ package Figures "Graphical layouts for documentation"
         "Incorrectly cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
-                  {-100,10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -1217,6 +1219,7 @@ package Figures "Graphical layouts for documentation"
                 150,5.55112e-16}},
             color={255,195,38},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1243,12 +1246,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits as a transfer function"
         extends BaseClasses.Parameters;
         extends FCSys.Icons.Blocks.Continuous;
-        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R3}, a=
               {C*R1*(R2 + R3),R1 + R2 + R3})
           annotation (Placement(transformation(extent={{-20,30},{0,50}})));
@@ -1283,14 +1286,6 @@ package Figures "Graphical layouts for documentation"
 
   end DeclarativeVsImperative;
 
-  model EnvironmentIcon
-
-    Conditions.Environment Environment
-      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-    annotation (Diagram(graphics));
-
-  end EnvironmentIcon;
-
   model RouterCrossOver
 
     Conditions.Router router(crossOver=true)
@@ -1305,11 +1300,21 @@ package Figures "Graphical layouts for documentation"
 
   end RouterPassThrough;
 
+  model AssemblyIcon
+
+    Assemblies.Cells.Cell Assembly
+      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
+              -120},{120,120}})));
+  end AssemblyIcon;
+
   model CellIcon
 
     Assemblies.Cells.Cell Cell
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
+              -120},{120,120}})));
   end CellIcon;
 
   model Logo
@@ -1376,48 +1381,49 @@ package Figures "Graphical layouts for documentation"
 
     Regions.AnFPs.AnFP Region
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-    annotation (Diagram(graphics));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
+              -120},{120,120}})));
 
   end RegionIcon;
 
-  model Matrix3D
+  model Matrix
 
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg000(
+    FCSys.Subregions.Subregion subreg000(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg001(
+    FCSys.Subregions.Subregion subreg001(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg010(
+    FCSys.Subregions.Subregion subreg010(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg011(
+    FCSys.Subregions.Subregion subreg011(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg100(
+    FCSys.Subregions.Subregion subreg100(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg101(
+    FCSys.Subregions.Subregion subreg101(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{10,-50},{30,-30}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg110(
+    FCSys.Subregions.Subregion subreg110(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,20},{50,40}})));
-    FCSys.Subregions.BaseClasses.EmptySubregion subreg111(
+    FCSys.Subregions.Subregion subreg111(
       inclX=true,
       inclY=true,
       inclZ=true)
@@ -1485,23 +1491,22 @@ package Figures "Graphical layouts for documentation"
         smooth=Smooth.None,
         thickness=0.5));
     annotation (Diagram(graphics));
-  end Matrix3D;
+  end Matrix;
 
   model SubregionIcon
 
-    FCSys.Subregions.BaseClasses.EmptySubregion Subregion(
-      inclX=true,
-      inclZ=true,
-      inclY=true)
+    Subregions.Subregion Subregion
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
+              -120},{120,120}})));
   end SubregionIcon;
 
   partial model PhaseIcon
 
-    FCSys.Phases.BaseClasses.PartialPhase Phase
+    Phases.Gas Phase
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-    annotation (structurallyIncomplete=true);
+    annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
+            preserveAspectRatio=true, extent={{-120,-120},{120,120}})));
 
   end PhaseIcon;
 
@@ -1509,187 +1514,136 @@ package Figures "Graphical layouts for documentation"
 
     FCSys.Species.CompressibleSpecies Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-    annotation (structurallyIncomplete=true);
+    annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
+            preserveAspectRatio=true, extent={{-120,-120},{120,120}})));
 
   end SpeciesIcon;
 
-  model DepletionIcon
+  model Connectors "Extension and instantiation hierarchy of the connectors"
 
-    FCSys.Subregions.DepletionLayer Depletion
-      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+    import FCSys.Connectors;
 
-  end DepletionIcon;
-
-  model VolumeIcon
-
-    FCSys.Conditions.ByConnector.Amagat.Volume Volume
-      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-
-  end VolumeIcon;
-
-  model ConnectorHierarchy
-    "Extension and instantiation hierarchy of the connectors"
-
+  protected
     Connectors.Amagat Amagat
-      annotation (Placement(transformation(extent={{-76,-14},{-56,6}})));
+      annotation (Placement(transformation(extent={{-88,-38},{-68,-18}})));
 
     Connectors.Dalton Dalton
-      annotation (Placement(transformation(extent={{-52,-14},{-32,6}})));
+      annotation (Placement(transformation(extent={{-68,-38},{-48,-18}})));
     Connectors.Chemical Chemical
-      annotation (Placement(transformation(extent={{68,-14},{88,6}})));
-    Connectors.Reaction Reaction
-      annotation (Placement(transformation(extent={{44,-14},{64,6}})));
+      annotation (Placement(transformation(extent={{48,-14},{68,6}})));
+    FCSys.Connectors.Reaction Reaction
+      annotation (Placement(transformation(extent={{24,-14},{44,6}})));
     Connectors.Physical Physical
-      annotation (Placement(transformation(extent={{92,-14},{112,6}})));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-              -40},{120,60}}), graphics={Line(
-              points={{-66,-6.5},{-66,-28}},
+      annotation (Placement(transformation(extent={{72,-14},{92,6}})));
+    Connectors.Direct Direct
+      annotation (Placement(transformation(extent={{0,-14},{20,6}})));
+    Connectors.Translational Material
+      annotation (Placement(transformation(extent={{-48,-38},{-28,-18}})));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
+              -40},{100,40}}), graphics={Line(
+              points={{-36,-6},{-14,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{-42,-6.5},{-42,-28}},
+              points={{-12,-6},{10,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{30,-28},{19,-39},{-56,-39},{-56,-3}},
-              smooth=Smooth.None,
-              color={191,191,191}),Line(
-              points={{6,-28},{-2,-36},{-53,-36},{-53,-5}},
-              color={191,191,191},
-              smooth=Smooth.None),Ellipse(
-              extent={{-56.5,-2.5},{-55.5,-3.5}},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(
-              points={{-63,-3},{-45,-3}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.Filled}),Line(
-              points={{-63,-5},{-45,-5}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.Filled}),Line(
-              points={{80,-6},{102,-28}},
+              points={{-14,-6.5},{-14,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{54,-6.5},{54,-28}},
+              points={{60,-6},{82,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{6,-6.5},{6,-28}},
+              points={{34,-6.5},{34,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{30,-4},{6,-28}},
+              points={{10,-4},{-14,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{8,-6},{30,-28}},
+              points={{-35,-4},{10,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{102,-6.5},{102,-28}},
+              points={{82,-6.5},{82,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{102,20},{102,-4}},
+              points={{82,20},{82,-4}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{30,-4},{30,-28}},
+              points={{10,-4},{10,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{52,-6},{30,-28}},
+              points={{32,-6},{10,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{56,-6},{78,-28}},
+              points={{36,-6},{58,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Rectangle(
-              extent={{-97,58},{-61,38}},
+              extent={{-86,32},{-50,12}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{6,20},{6,-4}},
+              points={{-38,20},{-38,-4}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{4,-6},{-18,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{-88,26},{-88,-24}},
+              points={{-100,26},{-100,-24}},
               color={0,0,0},
               smooth=Smooth.None),Line(
-              points={{-90,22},{-88,26},{-86,22}},
+              points={{-102,22},{-100,26},{-98,22}},
               color={0,0,0},
               smooth=Smooth.None),Text(
-              extent={{-100,32},{-76,27.8}},
+              extent={{-112,32},{-88,27.8}},
               lineColor={0,0,0},
               textString="Composite"),Text(
-              extent={{-102,-26},{-74,-30}},
+              extent={{-114,-26},{-86,-30}},
               lineColor={0,0,0},
               textString="Basic"),Text(
-              extent={{-2,32},{14,28}},
+              extent={{-46,32},{-30,28}},
               lineColor={0,0,0},
               textString="Face"),Text(
-              extent={{-2,28},{14,24}},
+              extent={{-46,28},{-30,24}},
               lineColor={0,0,0},
               textString="Bus"),Ellipse(
-              extent={{3,23},{9,17}},
+              extent={{-41,23},{-35,17}},
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5),Text(
-              extent={{-91.5,44},{-57,40}},
+              extent={{-80.5,18},{-46,14}},
               lineColor={0,0,0},
               textString="    Instantiation"),Text(
-              extent={{-91,45.8},{-57,50}},
+              extent={{-80,19.8},{-46,24}},
               lineColor={0,0,0},
               textString=" Expansion"),Text(
-              extent={{-91,56},{-57,52}},
+              extent={{-80,30},{-46,26}},
               lineColor={0,0,0},
-              textString="Extension"),Ellipse(
-              extent={{-21,-25},{-15,-31}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{3,-25},{9,-31}},
-              lineColor={170,0,0},
-              fillColor={221,23,47},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{18,8},{42,4}},
+              textString="Extension"),Text(
+              extent={{-26,3.8},{-2,-0.2}},
               lineColor={0,0,0},
-              textString="Inert and"),Text(
-              extent={{18,3.8},{42,-0.2}},
+              textString="and Inter"),Text(
+              extent={{-2,-20},{22,-24}},
               lineColor={0,0,0},
-              textString="Inert Internal"),Ellipse(
-              extent={{27,-1},{33,-7}},
-              lineColor={11,43,197},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-69,-25},{-63,-31}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{18,-20},{42,-24}},
-              lineColor={0,0,0},
-              textString="Translational"),Text(
-              extent={{-54,-20},{-30,-24}},
-              lineColor={0,0,0},
-              textString="of Pressure"),Ellipse(
-              extent={{75,-25},{81,-31}},
+              textString="Translational"),Ellipse(
+              extent={{55,-25},{61,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{-95,48},{-85,48}},
+              points={{-84,22},{-74,22}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-85,42},{-95,42}},
+              points={{-74,16},{-84,16}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
@@ -1697,84 +1651,76 @@ package Figures "Graphical layouts for documentation"
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None},
-              origin={-88,54},
+              origin={-77,28},
               rotation=360),Text(
-              extent={{-6,-20},{18,-24}},
+              extent={{-26,-20},{-2,-24}},
               lineColor={0,0,0},
-              textString="Diffusion"),Text(
-              extent={{-30,-20},{-6,-24}},
-              lineColor={0,0,0},
-              textString="Material"),Ellipse(
-              extent={{27,-25},{33,-31}},
+              textString="Diffusive"),Ellipse(
+              extent={{7,-25},{13,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
-              extent={{-6,-16},{18,-20}},
+              extent={{-26,-16},{-2,-20}},
               lineColor={0,0,0},
               textString="Thermal"),Text(
-              extent={{42,-20},{66,-24}},
+              extent={{22,-20},{46,-24}},
               lineColor={0,0,0},
-              textString="Advection"),Ellipse(
-              extent={{51,-25},{57,-31}},
+              textString="Advective"),Ellipse(
+              extent={{31,-25},{37,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{99,-25},{105,-31}},
+              extent={{79,-25},{85,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{99,23},{105,17}},
+              extent={{79,23},{85,17}},
               lineColor={2,157,21},
               fillColor={38,196,52},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5),Text(
-              extent={{90,-20},{114,-24}},
+              extent={{70,-20},{94,-24}},
               lineColor={0,0,0},
-              textString="Potential"),Text(
-              extent={{66,-16},{90,-20}},
+              textString="chemical"),Text(
+              extent={{46,-20},{70,-24}},
               lineColor={0,0,0},
-              textString="Stoichiometric"),Text(
-              extent={{66,-20},{90,-24}},
-              lineColor={0,0,0},
-              textString="Potential"),Text(
-              extent={{86,-16},{118,-20}},
-              lineColor={0,0,0},
-              textString="Chemical"),Text(
-              extent={{42,-16},{66,-20}},
+              textString="metric"),Text(
+              extent={{22,-16},{46,-20}},
               lineColor={0,0,0},
               textString="Thermal"),Ellipse(
-              extent={{3,-1},{9,-7}},
+              extent={{-41,-1},{-35,-7}},
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid),Text(
-              extent={{-2,4},{14,0}},
+              extent={{-46,4},{-30,0}},
               lineColor={0,0,0},
               textString="Face"),Text(
-              extent={{-54,-16},{-30,-20.2}},
+              extent={{62,28},{100,23.8}},
               lineColor={0,0,0},
-              textString="Additivity"),Text(
-              extent={{-78,-16},{-54,-20.2}},
+              textString="Physical Bus"),Text(
+              extent={{46,-16},{70,-20}},
               lineColor={0,0,0},
-              textString="Additivity"),Text(
-              extent={{-78,-20},{-54,-24}},
+              textString="Stoichio-"),Text(
+              extent={{70,-16},{94,-20}},
               lineColor={0,0,0},
-              textString="of Volume"),Ellipse(
-              extent={{-45,-25},{-39,-31}},
+              textString="Electro-"),Ellipse(
+              extent={{-17,-25},{-11,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-53.5,-4.5},{-52.5,-5.5}},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{82,28},{120,23.8}},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-26,8},{-2,3.8}},
               lineColor={0,0,0},
-              textString="Physical Bus Internal"),Text(
-              extent={{82,32},{120,27.8}},
-              lineColor={0,0,0},
-              textString="Physical Bus and")}));
+              textString="Inert, Intra,"),Ellipse(
+              extent={{-17,-1},{-11,-7}},
+              lineColor={11,43,197},
+              fillColor={47,107,251},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-38,-6.5},{-38,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None})}));
 
-  end ConnectorHierarchy;
+  end Connectors;
 
   model FPToFP "Test one flow plate to the other"
 
@@ -2150,4 +2096,15 @@ package Figures "Graphical layouts for documentation"
               100,100}}), graphics),
       experimentSetupOutput);
   end FPToFP;
+
+  model InternalFlow
+    extends Subregions.Examples.InternalFlow(final Vdot_large=Vdot_large_SI*U.m
+          ^3/U.s);
+
+    // Conditions
+    parameter Q.VolumeRate Vdot_large_SI=1e-5
+      "Prescribed large-signal volumetric flow rate in m3/s"
+      annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
+
+  end InternalFlow;
 end Figures;

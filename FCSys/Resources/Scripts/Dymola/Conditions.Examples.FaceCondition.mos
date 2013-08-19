@@ -1,7 +1,7 @@
 // Setup
 removePlots();
 createPlot(filename = "FaceBC.mat");
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
     y1={"subregion.gas.H2O.T", "subregionFaceBC.gas.H2O.entropyBC.u"},
     y2={"subregion.gas.H2O.N"},
     y3={"subregion.gas.H2O.phi[1]"},

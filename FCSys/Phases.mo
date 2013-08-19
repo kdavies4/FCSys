@@ -116,7 +116,7 @@ package Phases "Mixtures of species"
 
     // Auxiliary variables (for analysis)
     output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
-      n_spec > 0 "Total thermoynamic pressure";
+      n_spec > 0 "Total thermodynamic pressure";
 
     Connectors.FaceBus xNegative if inclFaces[Axis.x]
       "Negative face along the x axis" annotation (Placement(transformation(
@@ -192,10 +192,6 @@ package Phases "Mixtures of species"
   equation
     // Phase change
     connect(H2O.physical, physical.H2O) annotation (Line(
-        points={{-38.6,5},{-39,5},{-39,60}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect(H2O.physical2, physical.H2O2) annotation (Line(
         points={{-38.6,5},{-39,5},{-39,60}},
         color={38,196,52},
         smooth=Smooth.None));
@@ -438,6 +434,9 @@ package Phases "Mixtures of species"
     extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
           'inclC+','incle-'}));
 
+    parameter Q.Volume V=U.cc "Volume" annotation (Dialog(group="Geometry",
+          __Dymola_label="<html><i>V</i></html>"));
+
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
       HideResult=true,
@@ -449,8 +448,9 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
-      'inclC+' constrainedby FCSys.Species.CompressibleSpecies(
+      'inclC+' constrainedby FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
+      V=V,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -474,8 +474,9 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_faces) if
       'incle-' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.CompressibleSpecies(
+      FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
+      V=V,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -540,9 +541,10 @@ package Phases "Mixtures of species"
       (Placement(transformation(extent={{60,-40},{80,-20}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
 
-    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
-      annotation (Placement(transformation(extent={{60,-64},{80,-44}}),
-          iconTransformation(extent={{-60,40},{-40,60}})));
+    Connectors.Amagat amagat(final V=V) if n_spec > 0
+      "Connector for additivity of volume" annotation (Placement(transformation(
+            extent={{60,-64},{80,-44}}), iconTransformation(extent={{-60,40},{-40,
+              60}})));
     Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-10,70},{10,90}}), iconTransformation(extent=
@@ -576,9 +578,6 @@ package Phases "Mixtures of species"
     // These make the selected states more readable.
 
   protected
-    Conditions.Adapters.AmagatDalton DA if n_spec > 0
-      "Adapter between additivity of pressure and additivity of volume"
-      annotation (Placement(transformation(extent={{60,-64},{40,-44}})));
     FCSys.Species.Reaction reaction(
       final A=A[Axis.x],
       transSubstrate=true,
@@ -639,18 +638,6 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
     connect('e-'.direct.thermal, direct.thermal) annotation (Line(
         points={{26,-8},{26,-42},{6,-42}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect('e-'.dalton, DA.dalton) annotation (Line(
-        points={{23,-9.4},{23,-54},{46,-54}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect('C+'.dalton, DA.dalton) annotation (Line(
-        points={{-17,-9.4},{-17,-54},{46,-54}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(DA.amagat, amagat) annotation (Line(
-        points={{54,-54},{70,-54}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -779,8 +766,9 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_faces) if
-      'inclSO3-' constrainedby FCSys.Species.CompressibleSpecies(
+      'inclSO3-' constrainedby FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
+      V=V,
       n_intra=1,
       k_intra={k_PEMH2O},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -806,8 +794,9 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_faces) if
       'inclH+' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.CompressibleSpecies(
+      FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
+      V=V,
       n_intra=1,
       k_intra={k_EOD},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -832,8 +821,9 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
+      V=V,
       n_intra=2,
       k_intra={k_EOD,k_PEMH2O},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -1250,10 +1240,6 @@ package Phases "Mixtures of species"
         points={{-8.6,5},{-8.6,60.5},{-9,60.5},{-9,60}},
         color={38,196,52},
         smooth=Smooth.None));
-    connect(H2O.physical2, physical.H2O2) annotation (Line(
-        points={{-8.6,5},{-8.6,60.5},{-9,60.5},{-9,60}},
-        color={38,196,52},
-        smooth=Smooth.None));
 
     // H2O
     // ---
@@ -1386,14 +1372,8 @@ package Phases "Mixtures of species"
     Bruggeman correction factor [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
     the area fill factor for the solid should be set to (1 - &epsilon;)<sup>3/2</sup>
     along each axis, where &epsilon; is the volumetric porosity (or volumetric fill factor
-    of the gas).<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup></p>
+    of the gas).</p>
 
-    <hr>
-
-    <small>
-    <p id=\"fn1\">1. Note that the Bruggeman correction contradicts what one would
-    expect based on geometry&mdash;that the area fill factor would be the volumetric fill factor (1 - &epsilon;)
-    raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
         Icon(graphics={Ellipse(
@@ -1445,6 +1425,17 @@ package Phases "Mixtures of species"
 
   end BaseClasses;
 
-  annotation (Documentation(info="<html><p>The graphite, ionomer, and
-liquid phases can only be used with a compressible phase (gas).</p></html>"));
+  annotation (Documentation(info="
+<html><p>The graphite, ionomer, and
+liquid phases can only be used with a compressible phase (gas).</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"), Documentation(info="<html></html>"));
 end Phases;

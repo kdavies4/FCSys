@@ -408,6 +408,10 @@ package Characteristics
 
     end Gas;
 
+    package Graphite "e- in graphite"
+      extends Gas(n_v={0,0}, b_v='C+'.Graphite.b_v);
+    end Graphite;
+
   end 'e-';
 
   package 'H+' "<html>H<sup>+</sup></html>"
@@ -463,6 +467,9 @@ package Characteristics
 
     end Gas;
 
+    package Ionomer "H+ in ionomer"
+      extends Gas(n_v={0,0}, b_v=[1/(0.95*U.M)]);
+    end Ionomer;
   end 'H+';
 
   package H2 "<html>H<sub>2</sub></html>"
@@ -725,9 +732,9 @@ package Characteristics
       "Thermodynamic package with diffusive properties based on NASA CEA"
       extends Characteristic;
       constant Q.TemperatureAbsolute T_lim_zeta_theta[:]={0,Modelica.Constants.inf}
-        "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
+        "<html>Temperature limits for the rows of <i>b</i><sub>&zeta;</sub> and <i>b</i><sub>&theta;</sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
       constant Real b_zeta[size(T_lim_zeta_theta, 1) - 1, 4]
-        "<html>Correlation constants for fluidity (<i>b</i>&zeta;</sub>)</html>";
+        "<html>Correlation constants for fluidity (<i>b</i><sub>&zeta;</sub>)</html>";
       constant Real b_theta[size(T_lim_zeta_theta, 1) - 1, 4]
         "<html>Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)</html>";
 
@@ -851,7 +858,7 @@ package Characteristics
       constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC
         "Choice of enthalpy reference";
       constant Q.PotentialChemical Deltah0_f
-        "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sub>0f</sub>)</html>";
+        "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sup>o</sup><sub>f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
         "<html><i>h</i><sup>o</sup>(298.15 K) - <i>h</i><sup>o</sup>(0 K) (&Delta;<i>h</i><sup>o</sup>)</html>";
       constant Q.PotentialChemical h_offset=0
@@ -870,7 +877,7 @@ package Characteristics
         "Scaled specific intercept area";
 
       function omega
-        "Rescaled reciprocal of thermal speed (omega = pi*sqrt(m/T)) as a function of temperature"
+        "<html>Rescaled reciprocal of thermal speed as a function of temperature (&omega; = &pi;&middot;sqrt(<i>m</i>/<i>T</i>))</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1482,7 +1489,7 @@ temperature difference.</p>
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
 
-    <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
+    <li><i>b<sub>c</sub></i>: The rows give the coefficients for the temperature intervals bounded
     by the values in <i>T</i><sub>lim <i>c</i></sub>.
     The powers of <i>T</i> increase
     by column.
@@ -1501,10 +1508,10 @@ temperature difference.</p>
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
 
-    <li><i>T</i><sub>lim<i>c</i></sub>: The first and last entries are the minimum and
+    <li><i>T</i><sub>lim <i>c</i></sub>: The first and last entries are the minimum and
     maximum valid temperatures.  The intermediate entries are the thresholds
     between rows of <i>b<sub>c</sub></i> (and <i>B<sub>c</sub></i>).  Therefore, if there are <i>n</i> temperature intervals
-    (and rows in <i>b<sub>c</sub></i> and <i>B<sub>c</sub></i>), then <i>T</i><sub>lim<i>c</i></sub> must
+    (and rows in <i>b<sub>c</sub></i> and <i>B<sub>c</sub></i>), then <i>T</i><sub>lim <i>c</i></sub> must
     have <i>n</i> + 1 entries.</li>
 
     <li>The reference pressure is <i>p</i><sup>o</sup>.   In the
@@ -1515,7 +1522,7 @@ temperature difference.</p>
 
     <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
-    (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
+    (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\"><i>h</i></a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
     </ul></p></html>"));
@@ -1539,28 +1546,29 @@ temperature difference.</p>
       final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
           Modelica.Constants.small and n_v[1] + i - 1 <> 0 for i in 1:size(b_v,
           1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if density depends on pressure</html>";
+        "<html><code>true</code>, if concentration depends on pressure</html>";
       final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
            > Modelica.Constants.small and n_v[2] + j - n_v[1] - i <> 0 for i
            in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if density depends on temperature</html>";
+        "<html><code>true</code>, if concentration depends on temperature</html>";
 
     protected
       final constant Integer n_p[2]={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}
-        "Powers of v and T for 1st row and column of b_p";
+        "<html>Powers of <i>v</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b<sub>p</sub></i></html>";
       final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
            then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1
            or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[
           1] <= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3
            and n_v[1] <= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^
           2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1)
-          :-1:1} "Coefficients of p as a polynomial in v and T";
+          :-1:1}
+        "<html>Coefficients of <i>p</i> as a polynomial in <i>v</i> and <i>T</i></html>";
       // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
       // can be computed using FCSys/Resources/virial-relations.cdf.
 
     public
       function dp_Tv
-        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\"><i>p<sub>T v</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1589,7 +1597,7 @@ temperature difference.</p>
       end dp_Tv;
 
       function dv_Tp
-        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
+        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\"><i>v<sub>T p</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1614,7 +1622,8 @@ temperature difference.</p>
                       dv)));
       end dv_Tp;
 
-      function p_Tv "Pressure as a function of temperature and specific volume"
+      function p_Tv
+        "<html>Pressure as a function of temperature and specific volume (<i>p<sub>T v</sub></i>())</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1644,7 +1653,8 @@ temperature difference.</p>
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
       end p_Tv;
 
-      function v_Tp "Specific volume as a function of temperature and pressure"
+      function v_Tp
+        "<html>Specific volume as a function of temperature and pressure (<i>v<sub>T p</sub></i>())</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1719,13 +1729,14 @@ temperature difference.</p>
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
   <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
 
-<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 
 end Characteristics;

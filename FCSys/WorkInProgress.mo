@@ -244,148 +244,11 @@ package WorkInProgress "Incomplete classes under development"
     annotation (Diagram(graphics), Icon(graphics));
   end EISPlaceholder;
 
-  model PolarizationPlaceholder "**temp"
-    extends Modelica.Icons.Example;
+  model ChargeLayerStoich
+    "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
 
-    parameter Q.NumberAbsolute n_O2=0.21;
-    parameter Q.NumberAbsolute anStoich=1.5;
-    parameter Q.NumberAbsolute caStoich=1;
-    parameter Q.NumberAbsolute anInletRH=0.8;
-    parameter Q.NumberAbsolute caInletRH=0.5;
-    parameter Real T_degC=60;
-    parameter Real p_kPag=48.3;
-
-    Modelica.Electrical.Analog.Basic.Resistor resistor2(R=0.1) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={0,0})));
-    Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={30,0})));
-    Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
-      annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={-100,0})));
-    Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (
-        Placement(transformation(
-          extent={{-10,10},{10,-10}},
-          rotation=270,
-          origin={60,0})));
-    Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.1) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={-20,20})));
-    Modelica.Electrical.Analog.Basic.Ground ground
-      annotation (Placement(transformation(extent={{50,-50},{70,-30}})));
-
-    Connectors.RealOutputInternal w(unit="l2.m/(N.T2)") "Potential"
-      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-
-    Modelica.Electrical.Analog.Sources.RampCurrent rampCurrent(
-      I=200,
-      duration=200,
-      startTime=0.1)
-      annotation (Placement(transformation(extent={{-90,10},{-70,30}})));
-    Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
-      annotation (Placement(transformation(extent={{-60,30},{-40,10}})));
-
-    Connectors.RealOutputInternal zJ(unit="N/(l2.T)") "Current density"
-      annotation (Placement(transformation(extent={{-26,70},{-6,90}})));
-
-    inner Conditions.Environment environment
-      annotation (Placement(transformation(extent={{50,72},{70,92}})));
-    Modelica.Blocks.Math.Gain gain1(k=U.A/(50*U.cm^2)) annotation (Placement(
-          transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=90,
-          origin={-50,56})));
-    Modelica.Blocks.Math.Gain gain2(k=U.V) annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={90,0})));
-  equation
-    connect(resistor2.p, capacitor.p) annotation (Line(
-        points={{2.44753e-15,10},{0,20},{30,20},{30,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(constantVoltage.n, resistor2.n) annotation (Line(
-        points={{-100,-10},{-100,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-
-    connect(capacitor.n, resistor2.n) annotation (Line(
-        points={{30,-10},{30,-20},{-1.22629e-15,-20},{-1.22629e-15,-10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(capacitor.n, voltageSensor.n) annotation (Line(
-        points={{30,-10},{30,-20},{60,-20},{60,-10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(capacitor.p, voltageSensor.p) annotation (Line(
-        points={{30,10},{30,20},{60,20},{60,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(resistor1.n, resistor2.p) annotation (Line(
-        points={{-10,20},{2.44753e-15,20},{2.44753e-15,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(constantVoltage.p, rampCurrent.p) annotation (Line(
-        points={{-100,10},{-100,20},{-90,20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-
-    connect(rampCurrent.n, currentSensor.p) annotation (Line(
-        points={{-70,20},{-60,20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(currentSensor.n, resistor1.p) annotation (Line(
-        points={{-40,20},{-30,20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(zJ, gain1.y) annotation (Line(
-        points={{-16,80},{-50,80},{-50,67}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(gain1.u, currentSensor.i) annotation (Line(
-        points={{-50,44},{-50,30}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(ground.p, voltageSensor.n) annotation (Line(
-        points={{60,-30},{60,-10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(voltageSensor.v, gain2.u) annotation (Line(
-        points={{70,-2.33651e-15},{74,-2.33651e-15},{74,6.66134e-16},{78,
-            6.66134e-16}},
-        color={0,0,127},
-        smooth=Smooth.None));
-
-    connect(gain2.y, w) annotation (Line(
-        points={{101,6.10623e-16},{108.5,6.10623e-16},{108.5,5.55112e-16},{110,
-            5.55112e-16}},
-        color={0,0,127},
-        smooth=Smooth.None));
-
-    annotation (
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
-              100,100}}), graphics),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{100,
-              100}})),
-      experiment(StopTime=210),
-      experimentSetupOutput);
-  end PolarizationPlaceholder;
-
-  model FaceReaction
-    "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
-    extends Modelica.Icons.UnderConstruction;
-    import FCSys.Utilities.cartWrap;
     import FCSys.Utilities.inSign;
-    extends FCSys.Icons.Names.Top1;
+    extends FCSys.Icons.Names.Top2;
 
     // Geometry
     parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
@@ -397,12 +260,8 @@ package WorkInProgress "Incomplete classes under development"
     parameter Integer cartTrans[:]
       "Cartesian-axis indices of the components of translational momentum"
       annotation (Dialog(group="Geometry"));
-    parameter Integer transCart[Axis]
-      "Cartesian-axis indices of the components of translational momentum"
-      annotation (Dialog(group="Geometry"));
-    parameter Integer n "Stoichiometric coefficient";
-    parameter Q.MassSpecific m "Specific mass"
-      annotation (Dialog(group="Material properties"));
+    parameter Integer n "Stoichiometric coefficient"
+      annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
 
     replaceable package Data = Characteristics.BaseClasses.Characteristic
       constrainedby Characteristics.BaseClasses.Characteristic
@@ -411,57 +270,64 @@ package WorkInProgress "Incomplete classes under development"
       choicesAllMatching=true,
       __Dymola_choicesFromPackage=true);
 
-    // Aliases (for common terms)
-    Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
-
-    // Auxiliary variables (for analysis)
-    output Q.Potential zw(stateSelect=StateSelect.never) = inSign(side)*face.mPhidot[
-      Orient.normal]/(face.rho*A) if environment.analysis
-      "Inward nonequilibrium potential";
-
-    Connectors.Face face "Interface to the majority region" annotation (
-        Placement(transformation(extent={{10,-10},{30,10}}), iconTransformation(
-            extent={{-50,-10},{-30,10}})));
-    Connectors.Reaction reaction(final n_trans=n_trans)
+    FCSys.Connectors.Reaction reaction(final n_trans=n_trans)
       "Connector for an electrochemical reaction" annotation (
-        __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
-              -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
+        __Dymola_choicesAllMatching=true, Placement(transformation(extent={{30,
+              -10},{50,10}}), iconTransformation(extent={{30,-10},{50,10}})));
+
+    FCSys.Conditions.Adapters.ChargeLayer chargeLayer(
+      final axis=axis,
+      final side=side,
+      final cartTrans=cartTrans,
+      redeclare final package Data = Data,
+      final A=A)
+      annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+    FCSys.Conditions.Adapters.Stoich stoich(
+      final n_trans=n_trans,
+      final n=n,
+      final m=Data.m)
+      annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 
   protected
     final parameter Integer n_trans=size(cartTrans, 1)
       "Number of components of translational momentum";
 
-    outer Conditions.Environment environment "Environmental conditions";
-
+  public
+    Connectors.Face substrate "Boundary of the substrate" annotation (Placement(
+          transformation(extent={{-50,-30},{-30,-10}}), iconTransformation(
+            extent={{-50,-30},{-30,-10}})));
+  public
+    Connectors.Face carrier "Boundary of the charge carrier" annotation (
+        Placement(transformation(extent={{-50,10},{-30,30}}),
+          iconTransformation(extent={{-50,10},{-30,30}})));
   equation
-    // Aliases
-    p = Data.p_Tv(face.T, 1/face.rho);
 
-    // No diffusion across the face
-    face.Ndot = 0 "Material";
-    //face.mPhidot[2:3] = {0,0} "Transverse translational momentum";
+    connect(stoich.reaction, reaction) annotation (Line(
+        points={{14,6.10623e-16},{40,5.55112e-16}},
+        color={255,195,38},
+        smooth=Smooth.None));
 
-    // Equal intensive properties
-    reaction.mu = n*(Data.h(face.T, p) - reaction.sT + inSign(side)*face.mPhidot[
-      Orient.normal]/(face.rho*A)) "Electrochemical potential";
-    reaction.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
-      "Velocity";
-    reaction.sT = Data.s(face.T, p)*face.T
-      "Specific entropy-temperature product";
+    connect(carrier, chargeLayer.carrier) annotation (Line(
+        points={{-40,20},{-30,20},{-30,2},{-14,2}},
+        color={127,127,127},
+        smooth=Smooth.None));
 
-    // Conservation (without storage)
-    0 = inSign(side)*face.phi[Orient.normal]*A*face.rho - n*reaction.Ndot
-      "Material";
-    for i in 2:3 loop
-      0 = reaction.mPhidot[transCart[cartWrap(axis + i - 1)]] + face.mPhidot[i]
-        "Transverse translational momentum";
-    end for;
-    0 = face.Qdot + reaction.Qdot "Energy";
+    connect(chargeLayer.substrate, substrate) annotation (Line(
+        points={{-14,-2},{-30,-2},{-30,-20},{-40,-20}},
+        color={127,127,127},
+        smooth=Smooth.None));
+    connect(chargeLayer.electrical, stoich.chemical) annotation (Line(
+        points={{-6,6.10623e-16},{6,6.10623e-16},{6,6.10623e-16}},
+        color={255,195,38},
+        smooth=Smooth.None));
 
     annotation (
-      Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
-    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
-    the boundary is due entirely to the electrochemical reaction.</p> 
+      Documentation(info="<html><p>This model provides the stoichiometry-weighted electrical contribution of a charge
+    carrier to an electrochemical reaction.  The <code>carrier</code> and <code>substrate</code>
+    connectors represent the interface with the charge carrier species (e.g., e<sup>-</sup> or H<sup>+</sup>)
+    and the solid species (e.g., C<sup>+</sup>) at concentration at the far edge of the far edge of the 
+    depletion region.  The concentration of the charge carrier there results in the Butler-Volmer equation 
+    in conjunction with the material transport of the charge carrier species.</p>  
     
     <p>Assumptions:<ol>
     <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
@@ -477,28 +343,93 @@ package WorkInProgress "Incomplete classes under development"
               points={{0,0},{30,0}},
               color={255,195,38},
               smooth=Smooth.None),Line(
-              points={{-30,0},{0,0}},
+              points={{-30,20},{0,20}},
               color={127,127,127},
               smooth=Smooth.None),Line(
-              points={{0,-10},{0,10}},
+              points={{0,-30},{0,30}},
               color={127,127,127},
               smooth=Smooth.None,
               thickness=0.5),Text(
+              extent={{-100,-40},{100,-60}},
+              lineColor={127,127,127},
+              textString="%n"),Line(
+              points={{-30,-20},{0,-20}},
+              color={127,127,127},
+              smooth=Smooth.None)}));
+  end ChargeLayerStoich;
+
+  model StoichMulti
+    "<html>Adapter between <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors and a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
+
+    extends FCSys.Icons.Names.Top1;
+
+    parameter Integer n_trans(
+      min=1,
+      max=3) = 1 "Number of components of translational momentum" annotation (
+        Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+    parameter Integer n_spec "Number of species"
+      annotation (Dialog(connectorSizing=true));
+
+    parameter Integer n[n_spec] "Stoichiometric coefficients"
+      annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+    parameter Q.MassSpecific m[n_spec] "Specific masses" annotation (Dialog(
+          group="Material properties", __Dymola_label="<html><i>m</i></html>"));
+
+    Connectors.Chemical chemical[n_spec](each final n_trans=n_trans) if n_spec
+       > 0 "Connector for species in a chemical reaction" annotation (Placement(
+          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
+            extent={{-50,-10},{-30,10}})));
+    Connectors.Reaction reaction(final n_trans=n_trans) if n_spec > 0
+      "Connector for an electrochemical reaction" annotation (Placement(
+          transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
+              {{30,-10},{50,10}})));
+
+  protected
+    Conditions.Adapters.Stoich stoich[n_spec](
+      each final n_trans=n_trans,
+      final n=n,
+      final m=m) if n_spec > 0
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  equation
+    connect(stoich.chemical, chemical) annotation (Line(
+        points={{-4,6.10623e-16},{-12,6.10623e-16},{-12,5.55112e-16},{-20,
+            5.55112e-16}},
+        color={255,195,38},
+        smooth=Smooth.None));
+
+    for i in 1:n_spec loop
+      connect(stoich[i].reaction, reaction) annotation (Line(
+          points={{4,6.10623e-16},{10,6.10623e-16},{10,5.55112e-16},{20,
+              5.55112e-16}},
+          color={255,195,38},
+          smooth=Smooth.None));
+
+    end for;
+
+    annotation (
+      defaultComponentName="stoich",
+      Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted electrochemical potentials
+    of species to the net electrochemical potential of a reaction.  The species are produced at the
+    stoichiometrically-weighted rate of the reaction.</p>
+    
+    <p>See also <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a>.  
+    For more information, please see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Icon(graphics={Line(
+              points={{-30,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),Text(
               extent={{-100,-20},{100,-40}},
               lineColor={127,127,127},
-              textString="%n")}));
-  end FaceReaction;
-
-  model Triangle
-
-    annotation (Diagram(graphics={Polygon(
-              points={{-8,-7},{-4,-7},{4,-7},{8,-7},{10,-3},{7.7725,0.342},{
-              4.683,4.976},{2,9},{-2,9},{-4.5795,5.131},{-7.782,0.327},{-10,-3},
-              {-8,-7}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.Bezier)}));
-  end Triangle;
+              textString="%n"),Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}),
+      Diagram(graphics));
+  end StoichMulti;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

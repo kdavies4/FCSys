@@ -2,12 +2,11 @@
 removePlots();
 createPlot(filename = "InternalFlow.mat");
 
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
    y1={"subregion.liquid.H2O.mrho"},
    y2={"subregion.liquid.H2O.faces[1, 1].phi[1]", "subregion.liquid.H2O.phi[1]",
          "subregion.liquid.H2O.faces[1, 2].phi[1]"},
-   y3={"subregion.liquid.H2O.p_faces[1, 1]", "subregion.liquid.H2O.p",
-         "subregion.liquid.H2O.p_faces[1, 2]"},
+   y3={"Qdot_gen", "Qdot_gen_Poiseuille", "Wdot", "derKE"},
    y4={"subregion.liquid.H2O.faces[1, 1].T", "subregion.liquid.H2O.T",
          "subregion.liquid.H2O.faces[1, 2].T"},
    y5={"subregion.liquid.H2O.faces[1, 1].mPhidot[1]",

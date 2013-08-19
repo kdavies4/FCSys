@@ -2,7 +2,7 @@
 removePlots();
 createPlot(filename = "GDLToGDL.mat");
 
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
     y1={"anGDL.subregions[1, 1, 1].gas.H2.rho", "anGDL.subregions[1, 1, 1].gas.H2O.rho",
         "anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
         "PEM.subregions[1, 1, 1].ionomer.H2O.rho",

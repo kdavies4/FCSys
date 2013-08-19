@@ -1,7 +1,7 @@
 // Setup
 removePlots();
 createPlot(filename = "Polarization.mat");
-FCSys.BaseClasses.Utilities.plot6();
+FCSys.Utilities.plot6();
 
 createPlot(id = 1,
  position = {0, 0, 440, 650},

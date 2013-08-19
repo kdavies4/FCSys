@@ -2,7 +2,7 @@
 removePlots();
 createPlot(filename = "AnFP.mat");
 
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
     y1={"anFP.subregions[1, 1, 1].gas.H2.rho", "anFP.subregions[1, 1, 1].gas.H2O.rho"},
     y2={"anFP.subregions[1, 1, 1].gas.H2.phi[1]", "anFP.subregions[1, 1, 1].gas.H2O.phi[1]"},
     y3={"anFP.subregions[1, 1, 1].gas.H2.p", "anFP.subregions[1, 1, 1].gas.H2O.p"},

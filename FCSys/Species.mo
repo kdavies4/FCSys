@@ -27,7 +27,7 @@ package Species "Dynamic models of chemical species"
               T_lim_c={0,Modelica.Constants.inf},
               b_c=[935*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(
-                  U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
+                  U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*log(298.15*U.K)]),
           final mu=0,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
@@ -158,18 +158,18 @@ package Species "Dynamic models of chemical species"
           redeclare replaceable package Data = Characteristics.'e-'.Graphite,
           final tauprime=0,
           final mu=sigma*Data.v_Tp(T, p),
-          final initMaterial=InitScalar.density);
+          final initMaterial=InitScalar.concentration);
 
         Q.ConductivityElectrical sigma=Data.mu(T, p)/Data.v_Tp(T, p)
-          "<html>Electrical conductivity (&sigma;)</html>"
-          annotation (Dialog(group="Material properties"));
+          "Electrical conductivity" annotation (Dialog(group=
+                "Material properties", __Dymola_label="<html>&sigma;</html>"));
 
         // **Move assumption to Characteristics.'e-'.Graphite, do the same for other e-.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
           Documentation(info="<html>    <p>Assumptions:<ol>
-    <li>The density is equal to that of C<sup>+</sup> as graphite.</li>
+    <li>The concentration is equal to that of C<sup>+</sup> as graphite.</li>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
@@ -184,22 +184,21 @@ package Species "Dynamic models of chemical species"
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
-          redeclare replaceable package Data = Characteristics.'e-'.Gas (n_v={0,
-                  0}, b_v=FCSys.Characteristics.'C+'.Graphite.b_v),
+        extends FCSys.Species.SpeciesIsochoric(
+          redeclare replaceable package Data = Characteristics.'e-'.Graphite,
           final tauprime=0,
           final mu=sigma*v,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          final eta=Modelica.Constants.inf,
           final beta=0,
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
           final theta=Modelica.Constants.inf,
           consMaterial=Conservation.IC,
           invertEOS=false,
-          initMaterial=InitScalar.pressure,
-          upstreamX=false,
-          upstreamY=false,
-          upstreamZ=false);
+          final upstreamX=false,
+          final upstreamY=false,
+          final upstreamZ=false,
+          initMaterial=InitScalar.pressure);
+
         //    redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
 
         parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
@@ -218,7 +217,7 @@ package Species "Dynamic models of chemical species"
           Documentation(info="<html>
 
     <p>Assumptions:<ol>
-    <li>The density is equal to that of C<sup>+</sup> as graphite.</li>
+    <li>The concentration is equal to that of C<sup>+</sup> as graphite.</li>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
@@ -248,13 +247,13 @@ package Species "Dynamic models of chemical species"
         extends SpeciesIsochoric(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final tauprime=0,
-          initMaterial=InitScalar.density);
+          initMaterial=InitScalar.concentration);
 
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
           Documentation(info="<html><p>Assumptions:<ol>
-    <li>The density of H<sup>+</sup> is equal to that of
+    <li>The concentration of H<sup>+</sup> is equal to that of
   C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
   this is greater than that measured by Spry and Fayer (see
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
@@ -269,8 +268,7 @@ package Species "Dynamic models of chemical species"
 
       model Fixed "Fixed properties"
         extends FCSys.Species.CompressibleSpecies(
-          redeclare replaceable package Data = Characteristics.'H+'.Gas (n_v={0,
-                  0}, b_v=[1/(0.95*U.M)]),
+          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -297,7 +295,7 @@ package Species "Dynamic models of chemical species"
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
-          Documentation(info="<html><p>The initial density corresponds to the measurement
+          Documentation(info="<html><p>The initial concentration corresponds to the measurement
   by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
   &lambda; = 12, where &lambda; is the number of
   H<sub>2</sub>O molecules to SO<sub>3</sub>H
@@ -306,7 +304,7 @@ package Species "Dynamic models of chemical species"
 
 <p>Assumptions:<ol>
     <li>The generalized resistivities (&beta;, &zeta;, &theta;) are fixed (e.g., independent of temperature).</li>
-    <li>The density of H<sup>+</sup> is equal to that of
+    <li>The concentration of H<sup>+</sup> is equal to that of
   C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
   this is greater than that measured by Spry and Fayer (see
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
@@ -850,7 +848,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
               T_lim_c={0,Modelica.Constants.inf},
               b_c=[1041*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (1041*U.J*Data.m/U.kg)*298.15, 191.610*U.J/
-                  (U.mol*U.K) - (1041*U.J*Data.m/(U.kg*U.K))*ln(298.15*U.K)]),
+                  (U.mol*U.K) - (1041*U.J*Data.m/(U.kg*U.K))*log(298.15*U.K)]),
+
           redeclare parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -1082,7 +1081,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   model SpeciesIsochoric
     "Base model for an isochoric species (incompressible, without thermal expansion)"
-    extends FCSys.Species.CompressibleSpecies(
+    extends FCSys.Species.BaseClasses.PartialChemicalSpecies(
       invertEOS=false,
       initMaterial=InitScalar.volume,
       final eta=1);
@@ -1218,11 +1217,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-              extent={{-40,40},{40,-40}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash)}),
+            extent={{-40,40},{40,-40}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 
@@ -1238,8 +1237,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         none "No initialization",
         amount "Prescribed amount",
         amountSS "Steady-state amount",
-        density "Prescribed density",
-        densitySS "Steady-state density",
+        concentration "Prescribed concentration",
+        concentrationSS "Steady-state concentration",
         volume "Prescribed volume",
         volumeSS "Steady-state volume",
         pressure "Prescribed pressure",
@@ -1290,6 +1289,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       import FCSys.Utilities.Sigma;
       import assert = FCSys.Utilities.assertEval;
       //extends FCSys.Icons.Names.Top5;
+      // **Be sure to remove enthalpy offset of H+.
+      // **split diffusive and chemical exchange, material and thermal storage into separate model so that it can be used for dielectric
 
       // Geometry
       parameter Integer n_faces(
@@ -1321,10 +1322,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Q.Fluidity beta(nominal=10*U.cm*U.s/U.g) = Data.beta(T, v)
         "Dynamic compressibility" annotation (Dialog(group=
               "Material properties", __Dymola_label="<html>&beta;</html>"));
-      Real b(nominal=1/U.Pa) = 0/Data.p0
-        "**remove final **dimension **nominal **default **Dynamic compressibility"
-        annotation (Dialog(group="Material properties", __Dymola_label=
-              "<html><i>b</i></html>"));
       Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v) "Fluidity"
         annotation (Dialog(group="Material properties", __Dymola_label=
               "<html>&zeta;</html>"));
@@ -1336,12 +1333,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         "Number of exchange connections within the phase"
         annotation (Dialog(connectorSizing=true));
       parameter Q.NumberAbsolute k_intra[n_intra]=ones(n_intra)
-        "Coupling factors for exchange with other species within the phase"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i><b>k</b></i><sub>intra</sub></html>"));
+        "Coupling factors within the phase" annotation (Dialog(group="Geometry",
+            __Dymola_label="<html><i><b>k</b></i><sub>intra</sub></html>"));
       parameter Q.NumberAbsolute k_N=1 "Coupling factor for phase change"
         annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i><b>k</b></i><sub><i>N</i></sub></html>"));
+              "<html><i>k</i><sub><i>N</i></sub></html>"));
 
       // Assumptions
       // -----------
@@ -1377,7 +1373,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           Evaluate=true,
           tab="Assumptions",
           group="Formulation of conservation equations"));
-      parameter Boolean consRot=false "Rotational momentum is conserved"
+      parameter Boolean consRot=false "Conserve rotational momentum"
         annotation (
         Evaluate=true,
         Dialog(tab="Assumptions", group="Formulation of conservation equations"),
@@ -1433,8 +1429,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       // Note:  This parameter is left enabled even it isn't used to
       // explicitly initialize any states, since it's used as a guess value.
       // Similar notes apply to some other initial conditions below.
-      parameter Q.Density rho_IC(start=1/Data.v_Tp(T_IC, p_IC))
-        "Initial density" annotation (Dialog(
+      parameter Q.Concentration rho_IC(start=1/Data.v_Tp(T_IC, p_IC))
+        "Initial concentration" annotation (Dialog(
           tab="Initialization",
           group="Material and energy",
           __Dymola_label="<html>&rho;<sub>IC</sub></html>"));
@@ -1525,7 +1521,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         stateSelect=StateSelect.prefer) "Temperature";
 
       // Aliases (for common terms)
-      input Q.PressureAbsolute p(
+      Q.PressureAbsolute p(
         nominal=U.atm,
         final start=p_IC,
         final fixed=false,
@@ -1569,8 +1565,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       // Auxiliary variables (for analysis)
       // ----------------------------------
       // Misc. properties and conditions
-      output Q.Density rho(stateSelect=StateSelect.never) = 1/v if environment.analysis
-        "Density";
+      output Q.Concentration rho(stateSelect=StateSelect.never) = 1/v if
+        environment.analysis "Concentration";
       output Q.MassVolumic mrho(stateSelect=StateSelect.never) = Data.m*rho if
         environment.analysis "Volumic mass";
       output Q.Potential g(stateSelect=StateSelect.never) = chemical.mu if
@@ -1645,7 +1641,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       //
       // Peclet numbers (only for the axes with translational momentum included;
       // others are zero)
-      /* **
+      /* **update based on diss
   output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = eta*v*I ./
     Lprime[cartTrans] if environment.analysis "Material Peclet numbers";
   output Q.Number Pe_Phi_perp[n_trans](each stateSelect=StateSelect.never) =
@@ -1864,25 +1860,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         "Directly-calculated shear forces";
       Q.Velocity phi_actual_chemical[n_trans] "Velocity of the chemical stream";
       Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
-      Q.Velocity phi_actual_physical2[n_trans]
-        "Velocity of the physical stream";
       // Note:  Dymola 7.4 can't individually index the components of a
       // stream variable (e.g., actualStream(chemical.phi[i])), so these
       // variables are necessary.
 
-    protected
       outer Conditions.Environment environment "Environmental conditions";
 
-    public
-      Connectors.Physical physical2(
-        final formula=Data.formula,
-        final n_trans=n_trans,
-        mu(start=g_IC, fixed=false),
-        phi(final start=phi_IC[cartTrans], each final fixed=false),
-        sT(final start=h_IC - g_IC, final fixed=false))
-        "Connector for phase change" annotation (Placement(transformation(
-              extent={{-56,20},{-36,40}}), iconTransformation(extent={{-76,40},
-                {-96,60}})));
     initial equation
       // Check the initial conditions.
       assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
@@ -1903,23 +1886,21 @@ Choose any condition besides None.");
           N = N_IC;
         elseif initMaterial == InitScalar.amountSS then
           der(N) = 0;
-        elseif initMaterial == InitScalar.density then
+        elseif initMaterial == InitScalar.concentration then
           1/v = rho_IC;
           assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula
              +
-            " is isochoric, yet its material initial condition is based on density.");
-        elseif initMaterial == InitScalar.densitySS then
+            " is isochoric, yet its material initial condition is based on concentration.");
+        elseif initMaterial == InitScalar.concentrationSS then
           der(1/v) = 0;
           assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula
              +
-            " is isochoric, yet its material initial condition is based on density.");
+            " is isochoric, yet its material initial condition is based on concentration.");
         elseif initMaterial == InitScalar.volume then
           V = V_IC;
         elseif initMaterial == InitScalar.volumeSS then
           der(V) = 0;
         elseif initMaterial == InitScalar.pressure then
-          assert(Data.isCompressible, Data.formula +
-            " is incompressible, yet its material initial condition is based on pressure.");
           p = p_IC;
           assert(Data.isCompressible, Data.formula +
             " is incompressible, yet its material initial condition is based on pressure.");
@@ -1982,16 +1963,16 @@ Choose any condition besides None.");
           N = N_IC;
         elseif initEnergy == InitScalar.amountSS then
           der(N) = 0;
-        elseif initEnergy == InitScalar.density then
+        elseif initEnergy == InitScalar.concentration then
           1/v = rho_IC;
           assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula
              +
-            " is isochoric, yet its thermal initial condition is based on density.");
-        elseif initEnergy == InitScalar.densitySS then
+            " is isochoric, yet its thermal initial condition is based on concentration.");
+        elseif initEnergy == InitScalar.concentrationSS then
           der(1/v) = 0;
           assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula
              +
-            " is isochoric, yet its thermal initial condition is based on density.");
+            " is isochoric, yet its thermal initial condition is based on concentration.");
         elseif initEnergy == InitScalar.volume then
           V = V_IC;
         elseif initEnergy == InitScalar.volumeSS then
@@ -2037,7 +2018,6 @@ Choose any condition besides None.");
         n_faces};
       phi_actual_chemical = actualStream(chemical.phi);
       phi_actual_physical = actualStream(physical.phi);
-      phi_actual_physical2 = actualStream(physical2.phi);
 
       // Thermodynamic correlations
       if invertEOS then
@@ -2048,37 +2028,30 @@ Choose any condition besides None.");
       h = Data.h(T, p);
       s = Data.s(T, p);
       //**g0 = Data.g(T, Data.p0);
-      g0 = -3.04*U.V;
+      g0 = -3.21*U.V;
 
       // Diffusive exchange
       // ------------------
       // Material via phase change
-      if cardinality(physical) == 0 or tauprime <= Modelica.Constants.small
-           then
+      //if cardinality(physical) == 0 or tauprime <= Modelica.Constants.small then
+      //  physical.mu = chemical.mu;
+      //else
+      if Data.phase == Phase.gas then
+        //1e5*tauprime*physical.Ndot = min(k_N*2*(N - 1e-6*U.C)*(exp((physical.mu -chemical.mu)/T) - 1), 0) "Phase change";
         physical.mu = chemical.mu;
       else
-        if Data.phase == Phase.gas then
-          1e5*tauprime*physical.Ndot = min(k_N*2*(N - 1e-6*U.C)*(exp((physical.mu
-             - chemical.mu)/T) - 1), 0) "Phase change";
-        else
-          physical.mu = chemical.mu;
-          // The first branch avoids nonlinear equations when tauprime=0.
-          // Dymola 7.4 can't derive it symbolically from the previous equation.
-        end if;
+        //    physical.Ndot = if N > 1e-7*U.C or physical.mu > chemical.mu then sinh((physical.mu - chemical.mu)/T)*N/U.s else 0"Phase change";
+        //physical.Ndot = (exp((physical.mu - g0)/T) - exp((chemical.mu - g0)/T))*N/U.s;
+        //physical.Ndot = if N > 1e-7*U.C or physical.mu > chemical.mu then (exp((physical.mu - g0)/T) - exp((chemical.mu - g0)/T))*N/U.s else 0;
+        //physical.Ndot = if N > 1e-4*U.C or physical.mu > chemical.mu then ((
+        //  physical.mu - chemical.mu)/T)*100000*N/U.s else 0 "Phase change";
+        //    physical.Ndot = if N > 1e-7*U.C or physical.mu > chemical.mu then (exp((
+        //      physical.mu - chemical.mu)/T) - 1)*N/U.s else 0;
+        physical.Ndot = (exp((physical.mu - chemical.mu)/T) - 1)*N*0.1/U.s;
+        // The first branch avoids nonlinear equations when tauprime=0.
+        // Dymola 7.4 can't derive it symbolically from the previous equation.
       end if;
-      if cardinality(physical2) == 0 or tauprime <= Modelica.Constants.small
-           then
-        physical2.mu = chemical.mu;
-      else
-        if Data.phase == Phase.gas then
-          physical2.mu = chemical.mu;
-        else
-          1e5*tauprime*physical2.Ndot = (N - 1e-6*U.C)*min(k_N*2*(exp((
-            physical2.mu - chemical.mu)/T) - 1), 0) "Phase change";
-          // The first branch avoids nonlinear equations when tauprime=0.
-          // Dymola 7.4 can't derive it symbolically from the previous equation.
-        end if;
-      end if;
+      //end if;
       //
       // Material via reaction: Determined by the Reaction model.
       //
@@ -2095,10 +2068,8 @@ Choose any condition besides None.");
       // Properties upon outflow due to reaction and phase change
       chemical.phi = phi;
       physical.phi = phi;
-      physical2.phi = phi;
       chemical.sT = s*T;
       physical.sT = chemical.sT;
-      physical2.sT = chemical.sT;
 
       // Diffusive transport
       for i in 1:n_faces loop
@@ -2108,13 +2079,14 @@ Choose any condition besides None.");
             i, side].rho - 1/v)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(
             side)*faces[i, side].phi[Orient.normal]*eta/(2*Lprime[cartFaces[i]]))
              else 2);
+          // **clean up Lprime reciprocal
+          // **write all peclet numbers with kA on denom, extensive prop such as V on num.
 
           // Translational momentum
-          beta*faces[i, side].mPhidot[Orient.normal] + b*der(faces[i, side].mPhidot[
-            Orient.normal]) = A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i,
-            side].phi[Orient.normal] - (if inclTrans[cartFaces[i]] then (V/
-            product(L))^1.5*phi[transCart[cartFaces[i]]] else 0))*2
-            "Normal (central difference)";
+          beta*faces[i, side].mPhidot[Orient.normal] = A[cartFaces[i]]*Lprime[
+            cartFaces[i]]*(faces[i, side].phi[Orient.normal] - (if inclTrans[
+            cartFaces[i]] then phi[transCart[cartFaces[i]]]*V/product(L) else 0))
+            *2 "Normal (central difference)";
           zeta*faces_mPhidot[i, side, Orient.after - 1] = Nu_Phi[cartWrap(
             cartFaces[i] + 1)]*A[cartFaces[i]]*Lprime[cartFaces[i]]*(faces[i,
             side].phi[Orient.after] - (if inclTrans[cartWrap(cartFaces[i] + 1)]
@@ -2177,9 +2149,9 @@ Choose any condition besides None.");
           N = N_IC;
         elseif initMaterial == InitScalar.amountSS then
           der(N) = 0;
-        elseif initMaterial == InitScalar.density then
+        elseif initMaterial == InitScalar.concentration then
           1/v = rho_IC;
-        elseif initMaterial == InitScalar.densitySS then
+        elseif initMaterial == InitScalar.concentrationSS then
           der(1/v) = 0;
         elseif initMaterial == InitScalar.volume then
           V = V_IC;
@@ -2207,7 +2179,7 @@ Choose any condition besides None.");
         end if;
       else
         (if consMaterial == Conservation.dynamic then der(N)/U.s else 0) =
-          chemical.Ndot + physical.Ndot + physical2.Ndot + sum(Ndot_faces)
+          chemical.Ndot + physical.Ndot + sum(Ndot_faces)
           "Material conservation";
       end if;
 
@@ -2234,8 +2206,7 @@ Choose any condition besides None.");
             cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(p_faces[
             facesCart[cartTrans[j]], :])*A[cartTrans[j]] else 0) = Data.m*((
             phi_actual_chemical[j] - phi[j])*chemical.Ndot + (
-            phi_actual_physical[j] - phi[j])*physical.Ndot + (
-            phi_actual_physical2[j] - phi[j])*physical2.Ndot) + direct.translational.mPhidot[
+            phi_actual_physical[j] - phi[j])*physical.Ndot) + direct.translational.mPhidot[
             j] + sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((
             faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)] - {phi[j],
             phi[j]})*Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[
@@ -2253,9 +2224,9 @@ Choose any condition besides None.");
           N = N_IC;
         elseif initEnergy == InitScalar.amountSS then
           der(N) = 0;
-        elseif initMaterial == InitScalar.density then
+        elseif initMaterial == InitScalar.concentration then
           1/v = rho_IC;
-        elseif initMaterial == InitScalar.densitySS then
+        elseif initMaterial == InitScalar.concentrationSS then
           der(1/v) = 0;
         elseif initEnergy == InitScalar.volume then
           V = V_IC;
@@ -2287,9 +2258,7 @@ Choose any condition besides None.");
           actualStream(chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m
           /2)*chemical.Ndot + (physical.mu + actualStream(physical.sT) - h + (
           actualStream(physical.phi)*actualStream(physical.phi) - phi*phi)*Data.m
-          /2)*physical.Ndot + (physical2.mu + actualStream(physical2.sT) - h +
-          (actualStream(physical2.phi)*actualStream(physical2.phi) - phi*phi)*
-          Data.m/2)*physical2.Ndot + direct.translational.phi*direct.translational.mPhidot
+          /2)*physical.Ndot + direct.translational.phi*direct.translational.mPhidot
            + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + sum(intra[
           i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter.Qdot) +
           direct.thermal.Qdot + sum(intra.Qdot) + sum((Data.h(faces[i, :].T,
@@ -2299,6 +2268,7 @@ Choose any condition besides None.");
           cartFaces[i] + 1)]*faces[i, :].mPhidot[cartWrap(cartTrans[j] -
           cartFaces[i] + 1)] for j in 1:n_trans) for i in 1:n_faces) + sum(
           faces.Qdot) "Conservation of energy";
+        // **be sure this matches diss
 
         // Note:  In Dymola 7.4 will crash unless
         //   sum(intra.phi .* intra.mPhidot)
@@ -2508,17 +2478,28 @@ Choose any condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0},
-                  origin={-40,40},
-                  rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
     end PartialSpecies;
   end BaseClasses;
 
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Species;

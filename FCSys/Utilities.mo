@@ -1,5 +1,5 @@
 within FCSys;
-package Utilities "Functions that implement useful algorithms"
+package Utilities "Functions to implement misc. algorithms"
   extends Modelica.Icons.Package;
   package Chemistry "Functions to support chemistry"
     extends Modelica.Icons.Package;
@@ -401,7 +401,6 @@ An unrelated species may be included.");
       // it will be necessary to use the full
       // path in the Include annotation, e.g.
       //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/time.c\""
-
     end get_time;
 
     function timeTranslation "Print the time required to translate a model"
@@ -423,7 +422,7 @@ An unrelated species may be included.");
       end if;
 
       t_0 := get_time();
-      ok := translateModel(problem);
+      ok := translateModel(problem) > Modelica.Constants.small;
       print("Translation time: " + String(get_time() - t_0) + " s", fileName);
 
       annotation (Documentation(info=
@@ -760,13 +759,15 @@ An unrelated species may be included.");
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
   end Sigma;
-  annotation (Documentation(info="<html>
-<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Utilities;

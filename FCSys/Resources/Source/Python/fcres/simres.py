@@ -144,7 +144,9 @@ class SimRes(SimRes):
 
             unit = self._traj[name].displayUnit
             if unit == '':
-                unit = default_units[self._traj[name].unit]
+                unit = self._traj[name].unit
+                if unit<>'1':
+                    unit = default_units[unit]
             return unit
 
         return self._get(names, _get_unit)

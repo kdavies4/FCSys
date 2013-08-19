@@ -864,7 +864,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      Q.Potential w "Electrical potential";
+      Q.Potential w(start=0.9*U.V) "Electrical potential";
       Q.Current zI=sum(zJ .* anGDL.subregions[1, :, :].A[Axis.x])
         "Electrical current";
       Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.face.phi[1] .* anBC.graphite.
@@ -872,7 +872,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       output Q.Number zJ_Apercm2=(zI/(sum(L_y)*sum(L_z)))*U.cm^2/U.A
         "Average electrical current density, in A/cm2";
 
-      parameter Q.Length L_y[:]=fill(U.m/2, 2) "Lengths along the channel"
+      parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
@@ -3222,39 +3222,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         experimentSetupOutput);
     end FPToFPPulse;
 
-    connector Conn
-
-      Real Ndot_exch "Total exchange current";
-      flow Real Ndot "Current into this species";
-
-    end Conn;
-
-    model Mod
-
-      parameter Real Ndot=-1 "Incoming current due to this species";
-      Real Ndot_other "Incoming current due to the other species";
-
-      Conn conn
-        annotation (Placement(transformation(extent={{-58,14},{-38,34}})));
-
-    equation
-      conn.Ndot_exch = Ndot - Ndot_other;
-      conn.Ndot = Ndot + Ndot_other;
-
-    end Mod;
-
-    model TestMod
-
-      Mod mod annotation (Placement(transformation(extent={{-20,-14},{0,6}})));
-      Mod mod1 annotation (Placement(transformation(extent={{32,-8},{52,12}})));
-    equation
-      connect(mod.conn, mod1.conn) annotation (Line(
-          points={{-14.8,-1.6},{11.6,-1.6},{11.6,4.4},{37.2,4.4}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(graphics));
-    end TestMod;
-
     model FPToFPVoltage "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
@@ -3739,7 +3706,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
-              k_DT=fill((1 - epsilon)^(3/2), 3),
+              k_DT=fill((1 - epsilon)^1.5, 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W)),
@@ -3749,7 +3716,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
@@ -3842,7 +3809,7 @@ this would significantly increase the mathematical size of the model.  Currently
 computational fluid dynamics.</p>
 </ol></li>
 
-<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
+<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
@@ -3990,7 +3957,7 @@ text layer of this model.</p>
             gas(
               reduceTrans=true,
               reduceThermal=true,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               inclH2=true,
               inclH2O=true,
               H2(
@@ -4002,17 +3969,17 @@ text layer of this model.</p>
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
-              k_DT=fill((1 - epsilon)^(3/2), 3),
+              k_DT=fill((1 - epsilon)^1.5, 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none)),
             liquid(
-              inclH2O=false,
-              k_DT=fill(epsilon^(3/2), 3),
+              inclH2O=true,
+              k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
@@ -4346,7 +4313,7 @@ that reference may be outdated.
               reduceThermal=true,
               inclH2=true,
               inclH2O=true,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               H2(
                 initTransX=InitTranslational.none,
                 initTransY=InitTranslational.none,
@@ -4358,7 +4325,7 @@ that reference may be outdated.
               reduceThermal=true,
               'inclC+'=true,
               'incle-'=true,
-              k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
               'C+'(theta=U.m*U.K/(1.18*U.W)),
               J0=U.A/U.cm^2),
             ionomer(
@@ -4366,11 +4333,11 @@ that reference may be outdated.
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
-              k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
               H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(
               inclH2O=false,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
@@ -4426,7 +4393,7 @@ the z axis extends across the width of the channel.</p>
 The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed SGL Sigracet 10 BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References\">Nitta2008</a>].  The default
-  electronical conductivity (&sigma; = <code>40*U.S/(12*U.cm)</code>)
+  electronic conductivity (&sigma; = <code>40*U.S/(12*U.cm)</code>)
   is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href=\"modelica://FCSys.Regions.AnGDLs.Sigracet10BA\">AnGDLs.Sigracet10BA</a>).
   The default
   protonic mobility (&mu; = <code>0.083*U.S/(0.95*U.M*U.cm)</code>)
@@ -4701,7 +4668,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-112 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4720,7 +4687,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-115 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4739,7 +4706,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-117 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4758,7 +4725,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1110 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4776,7 +4743,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1135 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4795,7 +4762,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-211
   in [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004NRE</a>].</p>
@@ -4815,7 +4782,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the density of protons set by
+  and the concentration of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-212
   in [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004NRE</a>].</p>
@@ -4829,6 +4796,7 @@ the z axis extends across the width of the channel.</p>
 
   package CaCLs "Cathode catalyst layers"
     extends Modelica.Icons.Package;
+    // CL -> EDL (electrical double layer)
 
     model CaCL "Cathode catalyst layer"
       // extends FCSys.Icons.Names.Top4;
@@ -4847,7 +4815,7 @@ the z axis extends across the width of the channel.</p>
             gas(
               reduceTrans=true,
               reduceThermal=true,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -4867,7 +4835,7 @@ the z axis extends across the width of the channel.</p>
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
-              k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(theta=U.m*U.K/(1.18*U.W)),
@@ -4875,14 +4843,14 @@ the z axis extends across the width of the channel.</p>
               J_irr=5e-5*U.A/U.cm^2),
             ionomer(
               reduceThermal=true,
-              k_DT=fill((0.5*(1 - epsilon))^(3/2), 3),
+              k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
               H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
             liquid(
               inclH2O=false,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
                 initMaterial=InitScalar.amount,
@@ -4954,93 +4922,112 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
-                  lineColor={64,64,64},
-                  rotation=45,
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={-15.1055,127.699}),Rectangle(
-                  extent={{-105.385,79.1805},{-139.323,70.6948}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  rotation=45,
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={130.507,84.5292}),Polygon(
-                  points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-26,40},{-14,-60}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-6,40},{18,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-14,40},{-6,-60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},
-                {-42,80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,
-                -80},{-42,-80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(points={{0,60},{20,60},{0,
-              40},{-20,40},{0,60}}, lineColor={0,0,0}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-                  lineColor={0,0,0},
-                  fillColor={120,120,120},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,0},{-100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-98}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
+              lineColor={64,64,64},
+              rotation=45,
+              fillColor={127,127,127},
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={-15.1055,127.699}),
+            Rectangle(
+              extent={{-105.385,79.1805},{-139.323,70.6948}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              rotation=45,
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={130.507,84.5292}),
+            Polygon(
+              points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-26,40},{-14,-60}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-6,40},{18,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-14,40},{-6,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},{-42,
+                  80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,-80},
+                  {-42,-80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(points={{0,60},{20,60},{0,40},{-20,40},{0,60}}, lineColor={
+                  0,0,0}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+              lineColor={0,0,0},
+              fillColor={120,120,120},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-98}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -5088,7 +5075,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
             gas(
               reduceTrans=true,
               reduceThermal=true,
-              k_DT=fill(epsilon^(3/2), 3),
+              k_DT=fill(epsilon^1.5, 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -5108,21 +5095,21 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
-              k_DT=fill((1 - epsilon)^(3/2), 3),
+              k_DT=fill((1 - epsilon)^1.5, 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(1.18*U.W)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTranslational.none,
                 initEnergy=InitScalar.none)),
             liquid(
-              inclH2O=false,
-              k_DT=fill(epsilon^(3/2), 3),
+              inclH2O=true,
+              k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
-                N_IC=2e-6*U.C,
+                initMaterial=InitScalar.volume,
+                V_IC=1e-9*U.m^3,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
@@ -5491,7 +5478,7 @@ that reference may be outdated.
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
-              k_DT=fill((1 - epsilon)^(3/2), 3),
+              k_DT=fill((1 - epsilon)^1.5, 3),
               'inclC+'=true,
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W)),
@@ -5501,7 +5488,7 @@ that reference may be outdated.
                 initEnergy=InitScalar.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              inclH2O=false,
+              inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
@@ -5543,11 +5530,11 @@ that reference may be outdated.
   output Q.PressureAbsolute p_ny[n_x, n_z](each stateSelect=StateSelect.never)
      = subregions[:, 1, :].gas.H2O.p_faces[2, Side.n] + subregions[:, 1, :].gas.N2.p_faces[
     2, Side.n] + subregions[:, 1, :].gas.O2.p_faces[2, Side.n] 
-    "Total thermoynamic pressure at the negative-y boundary";
+    "Total thermodynamic pressure at the negative-y boundary";
   output Q.PressureAbsolute p_py[n_x, n_z](each stateSelect=StateSelect.never)
      = subregions[:, 1, :].gas.H2O.p_faces[2, Side.p] + subregions[:, 1, :].gas.N2.p_faces[
     2, Side.p] + subregions[:, 1, :].gas.O2.p_faces[2, Side.p] 
-    "Total thermoynamic pressure at the positive-y boundary";
+    "Total thermodynamic pressure at the positive-y boundary";
 */
 
     protected
@@ -5565,7 +5552,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
 <p>The solid and the fluid phases exist in the same subregions even though a typical flow plate is impermeable 
 to the fluid (except for the channel).  This has some important implications:<ol>
-<li>The fluid species are exposed at the positive x-axis connector (<code>xPosititve</code>).  
+<li>The fluid species are exposed at the positive x-axis connector (<code>xPositive</code>).  
 They should be left disconnected there.</li>
 <li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid. 
 Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
@@ -5588,7 +5575,7 @@ this would significantly increase the mathematical size of the model.  Currently
 computational fluid dynamics.</p>
 </ol></li>
 
-<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Subregions.Species.'C+'.Graphite.Fixed</a>
+<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
@@ -5865,23 +5852,24 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-              extent={{-100,120},{100,160}},
-              textString="%name",
-              visible=inclFacesY,
-              lineColor={0,0,0}),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            extent={{-100,120},{100,160}},
+            textString="%name",
+            visible=inclFacesY,
+            lineColor={0,0,0}), Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            visible=not inclFacesY,
+            lineColor={0,0,0})}));
   end Region;
-  annotation (Documentation(info="<html>
-<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
 

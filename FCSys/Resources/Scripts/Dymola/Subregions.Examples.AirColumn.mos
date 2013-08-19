@@ -2,7 +2,7 @@
 removePlots();
 createPlot(filename = "AirColumn.mat");
 
-FCSys.BaseClasses.Utilities.plot6(
+FCSys.Utilities.plot6(
    y1=cat(1,
             {"subregion1.gas.N2.faces[1, 1].rho", "subregion1.gas.N2.rho"},
             if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.rho" for j in 1:n_y},
@@ -23,8 +23,4 @@ FCSys.BaseClasses.Utilities.plot6(
             if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.faces[1, 1].T" for j in 1:n_y},
             {"subregion2.gas.N2.faces[1, 1].T", "subregion2.gas.N2.T",
              "subregion2.gas.N2.faces[1, 2].T"}),
-   y5=cat(1,
-            {"subregion1.gas.N2.h", "subregion1.gas.N2.chemical.mu"},
-            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.mu" for j in 1:n_y},
-            {"subregion2.gas.N2.h", "subregion2.gas.N2.chemical.mu"}),
    y6={"Deltap", "Deltap_ex"});

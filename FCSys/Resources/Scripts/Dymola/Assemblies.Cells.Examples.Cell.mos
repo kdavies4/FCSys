@@ -1,4 +1,4 @@
 // Setup
 removePlots();
 createPlot(filename = "Cell.mat");
-FCSys.BaseClasses.Utilities.plot6();
+FCSys.Utilities.plot6();
