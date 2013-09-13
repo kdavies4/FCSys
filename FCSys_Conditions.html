@@ -3,7 +3,8 @@
 <title>FCSys.Conditions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-8-9">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Models to specify and measure operating conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -29,6 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,15 +49,27 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
+      <div class="body"></p>
 
 <h2><a name="FCSys.Conditions"></a><a href="index.html#FCSys">FCSys</a>.Conditions</h2>
 
 <b>Models to specify and measure operating conditions</b>
+<p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href="http://www.gtrc.gatech.edu/">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.License">
+FCSys.UsersGuide.License</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+<p></p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_SourcesPackage.html#Modelica.Icons.SourcesPackage">Modelica.Icons.SourcesPackage</a> (Icon for packages containing sources).
+<p></p>
 
 <h3>Package Content</h3>
 
@@ -67,19 +81,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Interfaces to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></td></tr>
 <tr><td><img src="images/FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.ByConnector" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector.html#FCSys.Conditions.ByConnector">ByConnector</a>
 </td><td>Conditions for each type of connector</td></tr>
-<tr><td><img src="images/FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.TestStands" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">TestStands</a>
-</td><td>Test stands</td></tr>
 <tr><td><img src="images/FCSys.Conditions.EnvironmentS.png" alt="FCSys.Conditions.Environment" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>
 </td><td>Environmental properties for a simulation</td></tr>
 <tr><td><img src="images/FCSys.Conditions.RouterS.png" alt="FCSys.Conditions.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a>
-</td><td>Connect two pairs of faces to pass through or cross over</td></tr>
+</td><td>Connect two pairs of boundaries to pass through or cross over</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.EnvironmentI.png" alt="FCSys.Conditions.Environment" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Environment"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Environment</h2>
-<b>Environmental properties for a simulation</b><p>
+<b>Environmental properties for a simulation</b><p></p>
 <img src="images/FCSys.Conditions.EnvironmentD.png" alt="FCSys.Conditions.Environment">
+<p></p>
 
 <h3>Information</h3>
 
@@ -92,14 +105,16 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>0.6</td><td>Relative humidity [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>n_O2</td><td>0.208</td><td>Dry-gas concentration of O<sub>2</sub> [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[Axis]</td><td>{0,Modelica.Constants.g_n*U&hellip;.</td><td>Acceleration due to body forces [l/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">ForceSpecific</a></td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field [l.m/(N.T2)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Thermodynamics</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [M/(L.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>0.5</td><td>Relative humidity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>psi_O2_dry</td><td>0.20946</td><td>Mole fraction of O<sub>2</sub> in the dry gas [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Fields</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[Axis]</td><td>{0,Modelica.Constants.g_n*U&hellip;.</td><td>Acceleration due to body forces [L/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">ForceSpecific</a></td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field [L.M/(N.T2)]</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -112,26 +127,29 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
   <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
 
+  <font color="darkgreen">// Thermodynamics</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) = 298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
-
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(
     displayUnit=&quot;%&quot;,
-    max=1) = 0.6 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O=RH*<font color="red">
-      Modelica.Media.Air.MoistAir.saturationPressureLiquid</font>(T/U.K)*U.Pa <font color="darkgreen">
-    &quot;Pressure of H2O vapor&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> n_O2(
+    max=1) = 0.5 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_O2_dry(
     <font color="blue">final </font>max=1,
-    displayUnit=&quot;%&quot;) = 0.208 <font color="darkgreen">
-    &quot;Dry-gas concentration of O<sub>2</sub>&quot;</font>;
-  <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen</font>
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_O2=n_O2*(p - p_H2O) <font color="darkgreen">&quot;Pressure of O2&quot;</font>;
+    displayUnit=&quot;%&quot;) = 0.20946 <font color="darkgreen">
+    &quot;Mole fraction of O<sub>2</sub> in the dry gas&quot;</font>;
+  <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen, accessed 2013/10/30</font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_sat=<font color="red">Characteristics.H2O.p_sat</font>(T) <font color="darkgreen">
+    &quot;Saturation pressure of H2O vapor&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O=RH*p_sat <font color="darkgreen">&quot;Pressure of H2O vapor&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_dry=p - p_H2O <font color="darkgreen">&quot;Pressure of dry gases&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_O2=psi_O2_dry*p_dry <font color="darkgreen">&quot;Pressure of O2&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_H2O=p_H2O/p <font color="darkgreen">&quot;Mole fraction of H2O&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_dry=1 - psi_H2O <font color="darkgreen">
+    &quot;Mole fraction of dry gases&quot;</font>;
 
+  <font color="darkgreen">// Fields</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0} <font color="darkgreen">
     &quot;Acceleration due to body forces&quot;</font>;
-
   <font color="darkgreen">// The gravity component is positive because it&#39;s added to the transient</font>
   <font color="darkgreen">// term in the Species model.</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">Q.ForceSpecific</a> E[Axis]={0,0,0} <font color="darkgreen">&quot;Electric field&quot;</font>;
@@ -142,8 +160,9 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
 <h2><img src="images/FCSys.Conditions.RouterI.png" alt="FCSys.Conditions.Router" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Router"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Router</h2>
-<b>Connect two pairs of faces to pass through or cross over</b><p>
+<b>Connect two pairs of boundaries to pass through or cross over</b><p></p>
 <img src="images/FCSys.Conditions.RouterD.png" alt="FCSys.Conditions.Router">
+<p></p>
 
 <h3>Information</h3>
 
@@ -175,7 +194,7 @@ connected to <code>positive1</code>, as shown by <a href="FCSys_Conditions.html#
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-<p>
+<p></p>
 Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
 <p>
 
@@ -193,24 +212,24 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative1</td><td>Negative face 1</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive1</td><td>Positive face 1</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative2</td><td>Negative face 2</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive2</td><td>Positive face 2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>negative1</td><td>Negative boundary 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>positive1</td><td>Positive boundary 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>negative2</td><td>Negative boundary 2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>positive2</td><td>Positive boundary 2</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Router <font color="darkgreen">
-  &quot;Connect two pairs of faces to pass through or cross over&quot;</font>
+  &quot;Connect two pairs of boundaries to pass through or cross over&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
   <font color="blue">parameter </font>Boolean crossOver=false <font color="darkgreen">&quot;Cross over (otherwise, pass through)&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> negative1 <font color="darkgreen">&quot;Negative face 1&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> positive1 <font color="darkgreen">&quot;Positive face 1&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> negative2 <font color="darkgreen">&quot;Negative face 2&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> positive2 <font color="darkgreen">&quot;Positive face 2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> negative1 <font color="darkgreen">&quot;Negative boundary 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> positive1 <font color="darkgreen">&quot;Positive boundary 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> negative2 <font color="darkgreen">&quot;Negative boundary 2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> positive2 <font color="darkgreen">&quot;Positive boundary 2&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="blue">if </font>crossOver<font color="blue"> then</font>
@@ -231,6 +250,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Aug  6 13:05:31 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:00:54 2013.
 </div>
 </span></body></html>

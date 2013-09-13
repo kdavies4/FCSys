@@ -3,7 +3,8 @@
 <title>FCSys.Phases</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-8-9">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -29,6 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,17 +49,30 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
+      <div class="body"></p>
 
 <h2><a name="FCSys.Phases"></a><a href="index.html#FCSys">FCSys</a>.Phases</h2>
 
 <b>Mixtures of species</b>
+<p></p>
+<p></p>
 
 <h3>Information</h3>
 
 <p>The graphite, ionomer, and
-liquid phases can only be used with a compressible phase (gas).</p><p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+liquid phases can only be used with a compressible phase (gas).</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href="http://www.gtrc.gatech.edu/">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.License">
+FCSys.UsersGuide.License</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+<p></p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
 
 <h3>Package Content</h3>
 
@@ -71,20 +86,35 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Ionomer phase</td></tr>
 <tr><td><img src="images/FCSys.Phases.LiquidS.png" alt="FCSys.Phases.Liquid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases.Liquid">Liquid</a>
 </td><td>Liquid phase</td></tr>
-<tr><td><img src="images/FCSys.Phases.BaseClassesS.png" alt="FCSys.Phases.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Phases.PartialPhaseS.png" alt="FCSys.Phases.PartialPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a>
+</td><td>Base model for a phase</td></tr>
+<tr><td><img src="images/FCSys.Phases.ExchangeParamsS.png" alt="FCSys.Phases.ExchangeParams" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a>
+</td><td>Independence factors for an exchange process</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Phases.GasI.png" alt="FCSys.Phases.Gas" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Phases.Gas"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.Gas</h2>
-<b>Gas phase</b><p>
+<b>Gas phase</b><p></p>
 <img src="images/FCSys.Phases.GasD.png" alt="FCSys.Phases.Gas">
+<p></p>
 
 <h3>Information</h3>
 
-<p>Please see the documentation of the <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
-Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a> (Partial model for a phase).
+<p>It is usually appropriate to assume that species
+    exist at the same temperature within a phase.  The time constants for thermal exchange (&tau;<sub><i>Q</i>E</sub>)
+    are usually much shorter than the time span of interest due to the very small coupling
+    resistances.  If this is the case, set <code>commonExch.k_Q</code> to zero as <code>final</code>.
+    This will reduce the index of the problem, so it may be
+    necessary to eliminate some initial conditions.</p>
+
+    <p>In bulk flow, it is usually appropriate to assume that species travel with the same velocity within
+    a phase.  If this is the case, set the entries of <code>commonExch.k_Phi</code>
+    to zero as <code>final</code>.  This will reduce the index of the problem, so it may be
+    necessary to eliminate some initial conditions.</p>
+
+<p>Please see the documentation of the <a href="FCSys_Phases.html#FCSys.Phases.Partial">Partial</a> model.</p><p></p>
+Extends from <a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a> (Base model for a phase).
 <p>
 
 <h3>Parameters</h3>
@@ -93,10 +123,13 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_spec</td><td>countTrue({inclH2,inclH2O,in&hellip;</td><td>Number of species</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_DT[Axis]</td><td>{1,1,1}</td><td>Scaling factor for diffusive transport [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter[n_inter]</td><td>ones(n_inter)</td><td>Coupling factor for exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Length factors for transport [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Phi[n_inter, n_trans]</td><td>ones(n_inter, n_trans)</td><td>For translational exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Q[n_inter]</td><td>ones(n_inter)</td><td>For thermal exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>common</td><td>&nbsp;</td><td>Among species in the phase</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Include H2</td></tr>
 <tr><td><a href="FCSys_Species_H2_Gas.html#FCSys.Species.H2.Gas.Fixed">Fixed</a></td><td>H2</td><td>redeclare FCSys.Species.H2.G&hellip;</td><td>H2 model</td></tr>
@@ -106,12 +139,6 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <tr><td><a href="FCSys_Species_N2_Gas.html#FCSys.Species.N2.Gas.Fixed">Fixed</a></td><td>N2</td><td>redeclare FCSys.Species.N2.G&hellip;</td><td>N2 model</td></tr>
 <tr><td>Boolean</td><td>inclO2</td><td>false</td><td>Include O2</td></tr>
 <tr><td><a href="FCSys_Species_O2_Gas.html#FCSys.Species.O2.Gas.Fixed">Fixed</a></td><td>O2</td><td>redeclare FCSys.Species.O2.G&hellip;</td><td>O2 model</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included reactions</td></tr>
-<tr><td>Boolean</td><td>inclHOR</td><td>false</td><td>Hydrogen oxidation</td></tr>
-<tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Oxygen reduction</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceTrans</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceThermal</td><td>false</td><td>Same temperature for all species</td></tr>
 </table>
 <p>
 
@@ -120,217 +147,217 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>chemical</td><td>Connector for an electrochemical reaction</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2[1]</td><td>Chemical connector for H2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2O[3]</td><td>Chemical connector for H2O</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connO2[1]</td><td>Chemical connector for O2</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Gas <font color="darkgreen">&quot;Gas phase&quot;</font>
-  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">FCSys.Utilities.countTrue</a>;
-  <font color="blue">extends </font><a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclH2,
-        inclH2O,inclN2,inclO2}));
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
+
+  <font color="blue">extends </font><a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclH2,inclH2O,inclN2,inclO2}));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Include H2&quot;</font>;
-
-  <font color="blue">replaceable </font><a href="FCSys_Species_H2_Gas.html#FCSys.Species.H2.Gas.Fixed">FCSys.Species.H2.Gas.Fixed</a> H2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2 <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;H2 model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_H2_Gas.html#FCSys.Species.H2.Gas.Fixed">FCSys.Species.H2.Gas.Fixed</a> H2(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>inclH2 <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q}) <font color="darkgreen">&quot;H2 model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Include H2O&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Gas.html#FCSys.Species.H2O.Gas.Fixed">FCSys.Species.H2O.Gas.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;H2O model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Gas.html#FCSys.Species.H2O.Gas.Fixed">FCSys.Species.H2O.Gas.Fixed</a> H2O(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q}) <font color="darkgreen">&quot;H2O model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Include N2&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_N2_Gas.html#FCSys.Species.N2.Gas.Fixed">FCSys.Species.N2.Gas.Fixed</a> N2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclN2 <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;N2 model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_N2_Gas.html#FCSys.Species.N2.Gas.Fixed">FCSys.Species.N2.Gas.Fixed</a> N2(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>inclN2 <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q}) <font color="darkgreen">&quot;N2 model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Include O2&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_O2_Gas.html#FCSys.Species.O2.Gas.Fixed">FCSys.Species.O2.Gas.Fixed</a> O2(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclO2 <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;O2 model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_O2_Gas.html#FCSys.Species.O2.Gas.Fixed">FCSys.Species.O2.Gas.Fixed</a> O2(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>inclO2 <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q}) <font color="darkgreen">&quot;O2 model&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
-  <font color="darkgreen">// These can&#39;t be outer parameters in Dymola 7.4.</font>
+  <font color="darkgreen">// Independence factors</font>
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a> common(k_Phi={2,2,2}, k_Q=0) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Among species in the phase&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Connector for additivity of volume&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Connectors.Inter</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Connector to exchange momentum and energy with other phases&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(stateSelect=StateSelect.never) = amagat.p <font color="blue">if </font>
-    n_spec &gt; 0 <font color="darkgreen">&quot;Total thermodynamic pressure&quot;</font>;
+    n_spec &gt; 0<font color="blue"> and </font>environment.analysis <font color="darkgreen">&quot;Total thermodynamic pressure&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Connector for additivity of volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Connector to exchange momentum and energy with other phases&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
-    &quot;Connector for an electrochemical reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O;
-
-  <font color="darkgreen">// Aliases</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_trans](<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.translational.phi
-    <font color="blue">if </font>n_spec &gt; 1<font color="blue"> and </font>reduceTrans <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> T(<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.thermal.T <font color="blue">if </font>
-    n_spec &gt; 1<font color="blue"> and </font>reduceThermal <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="darkgreen">// These make the selected states more readable.</font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclH2 <font color="darkgreen">
+    &quot;Chemical connector for H2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2O[3](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclH2O <font color="darkgreen">
+    &quot;Chemical connector for H2O&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connO2[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclO2 <font color="darkgreen">
+    &quot;Chemical connector for O2&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> DA <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Adapter between additivity of pressure and additivity of volume&quot;</font>;
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> HOR(
-    <font color="blue">final </font>n_trans=n_trans,
-    n=-1,
-    <font color="blue">final </font>m=H2.Data.m) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Adapter for the contribution of H2 to the hydrogen oxidation reaction&quot;</font>;
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> ORR[2](
-    n={-1,2},
-    <font color="blue">final </font>m={O2.Data.m,H2O.Data.m},
-    <font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Adapter for the contribution of O2 and H2O to the oxygen reduction reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.DirectInternal">Connectors.DirectInternal</a> direct(
-    <font color="blue">final </font>n_trans=n_trans,
-    <font color="blue">final </font>inclTrans=reduceTrans,
-    <font color="blue">final </font>inclThermal=reduceThermal) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceTrans<font color="blue"> or </font>
-    reduceThermal) <font color="darkgreen">
-    &quot;Connector to directly couple velocities and temperatures within the phase&quot;</font>;
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> amagatDalton <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Adapter between additivity of volume and additivity of pressure&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">
+    &quot;Connector for exchange among species in the phase&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Phase change</font>
-  <font color="red">connect</font>(H2O.physical, physical.H2O);
-  <font color="red">connect</font>(H2O.physical2, physical.H2O2);
-
-  <font color="darkgreen">// Reactions</font>
-  <font color="darkgreen">// ---------</font>
-  <font color="darkgreen">// HOR</font>
-  <font color="red">connect</font>(H2.chemical, HOR.chemical);
-  <font color="red">connect</font>(HOR.reaction, chemical);
-
-  <font color="darkgreen">// ORR</font>
-  <font color="red">connect</font>(O2.chemical, ORR[1].chemical);
-  <font color="red">connect</font>(H2O.chemical, ORR[2].chemical);
-  <font color="red">connect</font>(ORR[1].reaction, chemical);
-  <font color="red">connect</font>(ORR[2].reaction, chemical);
+  <font color="darkgreen">// Chemical exchange</font>
+  <font color="red">connect</font>(O2.chemical, connO2);
+  <font color="red">connect</font>(H2.chemical, connH2);
+  <font color="red">connect</font>(H2O.chemical, connH2O);
 
   <font color="darkgreen">// Inert exchange</font>
   <font color="red">connect</font>(H2.inter, inter);
   <font color="red">connect</font>(H2O.inter, inter);
-  <font color="red">connect</font>(O2.inter, inter);
   <font color="red">connect</font>(N2.inter, inter);
-  <font color="red">connect</font>(H2.direct.translational, direct.translational);
-  <font color="red">connect</font>(H2.direct.thermal, direct.thermal);
-  <font color="red">connect</font>(H2O.direct.translational, direct.translational);
-  <font color="red">connect</font>(H2O.direct.thermal, direct.thermal);
-  <font color="red">connect</font>(N2.direct.translational, direct.translational);
-  <font color="red">connect</font>(N2.direct.thermal, direct.thermal);
-  <font color="red">connect</font>(O2.direct.translational, direct.translational);
-  <font color="red">connect</font>(O2.direct.thermal, direct.thermal);
-  <font color="red">connect</font>(H2.dalton, DA.dalton);
-  <font color="red">connect</font>(H2O.dalton, DA.dalton);
-  <font color="red">connect</font>(N2.dalton, DA.dalton);
-  <font color="red">connect</font>(O2.dalton, DA.dalton);
-  <font color="red">connect</font>(DA.amagat, amagat);
+  <font color="red">connect</font>(O2.inter, inter);
+  <font color="red">connect</font>(H2.intra[1], commonExch.node);
+  <font color="red">connect</font>(H2O.intra[1], commonExch.node);
+  <font color="red">connect</font>(N2.intra[1], commonExch.node);
+  <font color="red">connect</font>(O2.intra[1], commonExch.node);
+
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>(H2.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(H2O.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(N2.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(O2.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(amagatDalton.amagat, amagat);
 
   <font color="darkgreen">// Transport</font>
   <font color="darkgreen">// ---------</font>
   <font color="darkgreen">// H2</font>
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.x], Side.n], xNegative.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.x], Side.n], xNegative.H2);
 
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.x], Side.p], xPositive.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.x], Side.p], xPositive.H2);
 
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.y], Side.n], yNegative.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.y], Side.n], yNegative.H2);
 
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.y], Side.p], yPositive.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.y], Side.p], yPositive.H2);
 
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.z], Side.n], zNegative.H2);
-  <font color="red">connect</font>(H2.faces[facesCart[Axis.z], Side.p], zPositive.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.z], Side.n], zNegative.H2);
+  <font color="red">connect</font>(H2.boundaries[transCart[Axis.z], Side.p], zPositive.H2);
   <font color="darkgreen">// H2O</font>
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.x], Side.n], xNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.n], xNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.x], Side.p], xPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.p], xPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.n], yNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.n], yNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.p], yPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.p], yPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O);
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.n], zNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.p], zPositive.H2O);
   <font color="darkgreen">// N2</font>
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.x], Side.n], xNegative.N2);
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.x], Side.n], xNegative.N2);
 
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.x], Side.p], xPositive.N2);
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.x], Side.p], xPositive.N2);
 
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.y], Side.n], yNegative.N2);
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.y], Side.n], yNegative.N2);
 
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.y], Side.p], yPositive.N2);
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.z], Side.n], zNegative.N2);
-  <font color="red">connect</font>(N2.faces[facesCart[Axis.z], Side.p], zPositive.N2);
-
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.y], Side.p], yPositive.N2);
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.z], Side.n], zNegative.N2);
+  <font color="red">connect</font>(N2.boundaries[transCart[Axis.z], Side.p], zPositive.N2);
   <font color="darkgreen">// O2</font>
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.x], Side.n], xNegative.O2);
-
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.x], Side.p], xPositive.O2);
-
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.y], Side.n], yNegative.O2);
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.y], Side.p], yPositive.O2);
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.z], Side.n], zNegative.O2);
-  <font color="red">connect</font>(O2.faces[facesCart[Axis.z], Side.p], zPositive.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.x], Side.n], xNegative.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.x], Side.p], xPositive.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.y], Side.n], yNegative.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.y], Side.p], yPositive.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.z], Side.n], zNegative.O2);
+  <font color="red">connect</font>(O2.boundaries[transCart[Axis.z], Side.p], zPositive.O2);
 <font color="blue">end </font>Gas;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Phases.GraphiteI.png" alt="FCSys.Phases.Graphite" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Phases.Graphite"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.Graphite</h2>
-<b>Graphite phase</b><p>
+<b>Graphite phase</b><p></p>
 <img src="images/FCSys.Phases.GraphiteD.png" alt="FCSys.Phases.Graphite">
+<p></p>
 
 <h3>Information</h3>
 
-<p>See <a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> for assumptions.
-    For more information, see the
- <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
-Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a> (Partial model for a phase).
+<p>From a physical standpoint, it is probably best
+    considered its own phase, but it is modeled as a part of the graphite phase in order to reduce the number of connections.  It is assumed to
+    store no material, translational momentum, or thermal energy.  It only stores electrical energy due to a charge difference.</p>
+
+    <p>C<sup>+</sup> and e<sup>-</sup> are assumed to have the same temperature.
+    C<sup>+</sup> should be used to initialize the temperature.</p>
+
+    <p>See <a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> for assumptions.
+    For more information, please see the
+ <a href="FCSys_Phases.html#FCSys.Phases.Partial">Partial</a> model.</p><p></p>
+Extends from <a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a> (Base model for a phase).
 <p>
 
 <h3>Parameters</h3>
@@ -339,23 +366,20 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_spec</td><td>countTrue({&#39;inclC+&#39;,&#39;incle-&#39;})</td><td>Number of species</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_DT[Axis]</td><td>{1,1,1}</td><td>Scaling factor for diffusive transport [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter[n_inter]</td><td>ones(n_inter)</td><td>Coupling factor for exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Length factors for transport [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Phi[n_inter, n_trans]</td><td>ones(n_inter, n_trans)</td><td>For translational exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Q[n_inter]</td><td>ones(n_inter)</td><td>For thermal exchange with other phases [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Include C+</td></tr>
 <tr><td><a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">Fixed</a></td><td>&#39;C+&#39;</td><td>redeclare FCSys.Species.&#39;C+&#39;&hellip;</td><td>C+ model</td></tr>
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Include e-</td></tr>
 <tr><td><a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">Fixed</a></td><td>&#39;e-&#39;</td><td>redeclare FCSys.Species.&#39;e-&#39;&hellip;</td><td>e- model</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Reactions</td></tr>
-<tr><td>Boolean</td><td>inclHOR</td><td>false</td><td>Include hydrogen oxidation</td></tr>
-<tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Include oxygen reduction</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">CurrentAreicAbsolute</a></td><td>J0</td><td>1e-7*U.A/U.cm^2</td><td>Exchange current density [N/(l2.T)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>J_irr</td><td>0</td><td>Irreversible current of side-reactions [N/(l2.T)]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceTrans</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceThermal</td><td>false</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>&#39;incle-Transfer&#39;</td><td>false</td><td>Include electron transfer</td></tr>
+<tr><td>Boolean</td><td>inclDL</td><td>false</td><td>Include the double-layer capacitance</td></tr>
 </table>
 <p>
 
@@ -364,180 +388,146 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>chemical</td><td>Connector for an electrochemical reaction</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;conne-&#39;[1]</td><td>Chemical connector for e-</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">&quot;Graphite phase&quot;</font>
   <font color="blue">import </font>assert = <a href="FCSys_Utilities.html#FCSys.Utilities.assertEval">FCSys.Utilities.assertEval</a>;
-  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">FCSys.Utilities.countTrue</a>;
-  <font color="blue">extends </font><a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({
-        'inclC+','incle-'}));
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
+
+  <font color="blue">extends </font><a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({'inclC+','incle-'}));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Include C+&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">FCSys.Species.'C+'.Graphite.Fixed</a> &#39;C+&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'inclC+'
-    <font color="blue">constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;C+ model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">FCSys.Species.'C+'.Graphite.Fixed</a> &#39;C+&#39;(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL) <font color="blue">if </font>'inclC+' <font color="blue">constrainedby </font>FCSys.Species.Solid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=n_inter,
+    kL=kL,
+    <font color="blue">final </font>k_intra_Phi={<font color="red">ones</font>(n_trans)},
+    <font color="blue">final </font>k_intra_Q={0}) <font color="darkgreen">&quot;C+ model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Include e-&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">FCSys.Species.'e-'.Graphite.Fixed</a> &#39;e-&#39;(<font color="blue">final </font>n_trans, <font color="blue">final </font>
+      n_inter) <font color="blue">if </font>'incle-' <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=1,
+    n_inter=0,
+    <font color="blue">final </font>k_intra_Phi={<font color="red">ones</font>(n_trans)},
+    <font color="blue">final </font>k_intra_Q={0}) <font color="darkgreen">&quot;e- model&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">FCSys.Species.'e-'.Graphite.Fixed</a> &#39;e-&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'incle-'<font color="blue">
-     and </font><font color="blue">not </font>(inclHOR<font color="blue"> or </font>inclORR) <font color="blue">constrainedby </font>
-    FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;e- model&quot;</font>;
+  <font color="blue">parameter </font>Boolean &#39;incle-Transfer&#39;=false <font color="darkgreen">&quot;Include electron transfer&quot;</font>;
 
-  <font color="darkgreen">//initMaterial=if inclVoid or &#39;inclC+&#39; then else ,</font>
+  <font color="blue">parameter </font>Boolean inclDL=false <font color="darkgreen">&quot;Include the double-layer capacitance&quot;</font>;
 
-  <font color="darkgreen">// Reaction parameters</font>
-  <font color="darkgreen">// -------------------</font>
-  <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Include hydrogen oxidation&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Include oxygen reduction&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreicAbsolute">Q.CurrentAreicAbsolute</a> J0=1e-7*U.A/U.cm^2 <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
-    &quot;Exchange current density&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J_irr=0 <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
-    &quot;Irreversible current of side-reactions&quot;</font>;
-  <font color="darkgreen">// These can&#39;t be outer parameters in Dymola 7.4.</font>
+  <a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.ElectronTransfer">Chemistry.Electrochemistry.ElectronTransfer</a> &#39;e-Transfer&#39;(<font color="blue">redeclare </font><font color="blue">constant </font>Integer
+      n_trans=1) <font color="blue">if </font>'incle-'<font color="blue"> and </font>'incle-Transfer' <font color="darkgreen">&quot;Electron transfer&quot;</font>;
+  <a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.DoubleLayer">Chemistry.Electrochemistry.DoubleLayer</a> doubleLayer(<font color="blue">redeclare </font><font color="blue">constant </font>Integer
+      n_trans=1) <font color="blue">if </font>'incle-'<font color="blue"> and </font>'incle-Transfer'<font color="blue"> and </font>inclDL <font color="darkgreen">
+    &quot;Electrolytic double layer&quot;</font>;
+  <font color="darkgreen">// Note:  n_trans must be constant in Dymola 2014 to prevent errors such as</font>
+  <font color="darkgreen">// &quot;Failed to expand the variable</font>
+  <font color="darkgreen">// subregion.graphite.&#39;e-Transfer&#39;.negative.phi&quot;.  The setting of n_trans=1</font>
+  <font color="darkgreen">// must be manually changed at instantiation if additional transport axes</font>
+  <font color="darkgreen">//  are enabled.</font>
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Connectors.Inter</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Connector to exchange momentum and energy with other phases&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Connector for additivity of volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
-    &quot;Connector for an electrochemical reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Connector for additivity of volume&quot;</font>;
 
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.FaceReaction">Conditions.Adapters.FaceReaction</a> HOR(
-    <font color="blue">final </font>axis=Axis.x,
-    <font color="blue">final </font>side=Side.n,
-    <font color="blue">final </font>A=A[Axis.x],
-    <font color="blue">final </font>cartTrans=cartTrans,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.'e-'.Gas">FCSys.Characteristics.'e-'.Gas</a>,
-    n=2) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Adapter for the contribution of e- to the hydrogen oxidation reaction&quot;</font>;
-
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.FaceReaction">Conditions.Adapters.FaceReaction</a> ORR(
-    <font color="blue">final </font>axis=Axis.x,
-    <font color="blue">final </font>side=Side.p,
-    <font color="blue">final </font>A=A[Axis.x],
-    cartTrans=cartTrans,
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.'e-'.Gas">FCSys.Characteristics.'e-'.Gas</a>,
-    n=-4) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Adapter for the contribution of e- to the oxygen reduction reaction&quot;</font>;
-
-  <font color="darkgreen">// Aliases</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_trans](<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.translational.phi
-    <font color="blue">if </font>n_spec &gt; 1<font color="blue"> and </font>reduceTrans <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> T(<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.thermal.T <font color="blue">if </font>
-    n_spec &gt; 1<font color="blue"> and </font>reduceThermal <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="darkgreen">// These make the selected states more readable.</font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;conne-&#39;[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>'incle-'<font color="blue"> and </font>
+    'incle-Transfer' <font color="darkgreen">&quot;Chemical connector for e-&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> DA <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Adapter between additivity of pressure and additivity of volume&quot;</font>;
-  <a href="FCSys_Species.html#FCSys.Species.Reaction">FCSys.Species.Reaction</a> reaction(
-    <font color="blue">final </font>A=A[Axis.x],
-    transSubstrate=true,
-    thermalSubstrate=true,
-    fromCurrent=true,
-    J0=J0,
-    J_irr=J_irr) <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">&quot;Model to determine the reaction rate&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.DirectInternal">Connectors.DirectInternal</a> direct(
-    <font color="blue">final </font>n_trans=n_trans,
-    <font color="blue">final </font>inclTrans=reduceTrans,
-    <font color="blue">final </font>inclThermal=reduceThermal) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceTrans<font color="blue"> or </font>
-    reduceThermal) <font color="darkgreen">
-    &quot;Connector to directly couple velocities and temperatures within the phase&quot;</font>;
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> amagatDalton <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Adapter between additivity of volume and additivity of pressure&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">
+    &quot;Connector for exchange among all species in the phase&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Reactions</font>
-  <font color="darkgreen">// ---------</font>
-  <font color="red">connect</font>(reaction.inert, 'C+'.direct);
-  <font color="darkgreen">// HOR</font>
-  <font color="red">connect</font>(HOR.face, xNegative.'e-');
-  <font color="darkgreen">// ORR</font>
-  <font color="red">connect</font>(ORR.face, xPositive.'e-');
+  <font color="darkgreen">// Chemical exchange</font>
+  <font color="red">connect</font>('e-Transfer'.negative, doubleLayer.negative);
+  <font color="red">connect</font>('e-Transfer'.positive, doubleLayer.positive);
+  <font color="red">connect</font>('e-Transfer'.negative, 'e-'.chemical[1]);
+  <font color="red">connect</font>('e-Transfer'.positive, 'conne-'[1]);
 
   <font color="darkgreen">// Inert exchange</font>
   <font color="red">connect</font>('C+'.inter, inter);
-  <font color="red">connect</font>('e-'.inter, inter);
-  <font color="red">connect</font>('C+'.direct.translational, direct.translational);
-  <font color="red">connect</font>('C+'.direct.thermal, direct.thermal);
-  <font color="red">connect</font>('e-'.direct.translational, direct.translational);
-  <font color="red">connect</font>('e-'.direct.thermal, direct.thermal);
-  <font color="red">connect</font>('e-'.dalton, DA.dalton);
-  <font color="red">connect</font>('C+'.dalton, DA.dalton);
-  <font color="red">connect</font>(DA.amagat, amagat);
+  <font color="red">connect</font>('C+'.intra[1], commonExch.node);
+  <font color="red">connect</font>('e-'.intra[1], commonExch.node);
+  <font color="red">connect</font>('e-Transfer'.intra, 'C+'.intra[1]);
+  <font color="red">connect</font>(doubleLayer.intra, 'e-Transfer'.intra);
+
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>(amagatDalton.amagat, amagat);
+  <font color="red">connect</font>(amagatDalton.dalton, 'C+'.dalton);
+  <font color="red">connect</font>(amagatDalton.dalton, 'e-'.dalton);
+  <font color="red">connect</font>(doubleLayer.amagat, amagat);
 
   <font color="darkgreen">// Transport</font>
   <font color="darkgreen">// ---------</font>
   <font color="darkgreen">// C+</font>
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.x], Side.n], xNegative.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.x], Side.n], xNegative.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.x], Side.p], xPositive.'C+');
 
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.x], Side.p], xPositive.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.y], Side.n], yNegative.'C+');
 
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.y], Side.n], yNegative.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.y], Side.p], yPositive.'C+');
 
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.y], Side.p], yPositive.'C+');
-
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.z], Side.n], zNegative.'C+');
-  <font color="red">connect</font>('C+'.faces[facesCart[Axis.z], Side.p], zPositive.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.z], Side.n], zNegative.'C+');
+  <font color="red">connect</font>('C+'.boundaries[transCart[Axis.z], Side.p], zPositive.'C+');
 
   <font color="darkgreen">// e-</font>
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.x], Side.n], xNegative.'e-');
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.x], Side.n], xNegative.'e-');
 
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.x], Side.p], xPositive.'e-');
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.x], Side.p], xPositive.'e-');
 
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.y], Side.n], yNegative.'e-');
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.y], Side.n], yNegative.'e-');
 
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.y], Side.p], yPositive.'e-');
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.y], Side.p], yPositive.'e-');
 
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.n], zNegative.'e-');
-  <font color="red">connect</font>('e-'.faces[facesCart[Axis.z], Side.p], zPositive.'e-');
-  <font color="red">connect</font>(HOR.reaction, reaction.reaction);
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.z], Side.n], zNegative.'e-');
+  <font color="red">connect</font>('e-'.boundaries[transCart[Axis.z], Side.p], zPositive.'e-');
 
-  <font color="red">connect</font>(ORR.reaction, reaction.reaction);
-  <font color="red">connect</font>(chemical, reaction.reaction);
 <font color="blue">end </font>Graphite;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Phases.IonomerI.png" alt="FCSys.Phases.Ionomer" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Phases.Ionomer"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.Ionomer</h2>
-<b>Ionomer phase</b><p>
+<b>Ionomer phase</b><p></p>
 <img src="images/FCSys.Phases.IonomerD.png" alt="FCSys.Phases.Ionomer">
+<p></p>
 
 <h3>Information</h3>
 
@@ -547,9 +537,9 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 
     <p>See <a href="FCSys_Species_'H+'_Ionomer.html#FCSys.Species.'H+'.Ionomer.Fixed">Species.'H+'.Ionomer.Fixed</a>
     for additional assumptions.
-    For more information, see the
- <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
-Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a> (Partial model for a phase).
+    For more information, please see the
+ <a href="FCSys_Phases.html#FCSys.Phases.Partial">Partial</a> model.</p><p></p>
+Extends from <a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a> (Base model for a phase).
 <p>
 
 <h3>Parameters</h3>
@@ -558,12 +548,12 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_spec</td><td>countTrue({&#39;inclSO3-&#39;,&#39;inclH&hellip;</td><td>Number of species</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_DT[Axis]</td><td>{1,1,1}</td><td>Scaling factor for diffusive transport [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter[n_inter]</td><td>ones(n_inter)</td><td>Coupling factor for exchange with other phases [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_EOD</td><td>1</td><td>Coupling factor between H+ and H2O [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_PEMH2O</td><td>18</td><td>Coupling factor between SO3- and H2O [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Length factors for transport [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Phi[n_inter, n_trans]</td><td>ones(n_inter, n_trans)</td><td>For translational exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Q[n_inter]</td><td>ones(n_inter)</td><td>For thermal exchange with other phases [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclSO3-&#39;</td><td>false</td><td>Include C19HF37O5S- (abbreviated as SO3-)</td></tr>
 <tr><td><a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Fixed">Fixed</a></td><td>&#39;SO3-&#39;</td><td>redeclare FCSys.Species.&#39;SO3&hellip;</td><td>SO3- model</td></tr>
@@ -571,12 +561,11 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <tr><td><a href="FCSys_Species_'H+'_Ionomer.html#FCSys.Species.'H+'.Ionomer.Fixed">Fixed</a></td><td>&#39;H+&#39;</td><td>redeclare FCSys.Species.&#39;H+&#39;&hellip;</td><td>H+ model</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Include H2O</td></tr>
 <tr><td><a href="FCSys_Species_H2O_Ionomer.html#FCSys.Species.H2O.Ionomer.Fixed">Fixed</a></td><td>H2O</td><td>redeclare FCSys.Species.H2O&hellip;.</td><td>H2O model</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included reactions</td></tr>
-<tr><td>Boolean</td><td>inclHOR</td><td>false</td><td>Hydrogen oxidation</td></tr>
-<tr><td>Boolean</td><td>inclORR</td><td>false</td><td>Oxygen reduction</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceTrans</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceThermal</td><td>false</td><td>Same temperature for all species</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Exchange (click to edit)</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>common</td><td>&nbsp;</td><td>Among all species in the phase</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>protonsSolid</td><td>&nbsp;</td><td>Between H<sup>+</sup> and SO<sub>3</sub><sup>-</sup>)</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>protonsWater</td><td>&nbsp;</td><td>Between H<sup>+</sup> and H<sub>2</sub>O</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>waterSolid</td><td>&nbsp;</td><td>Between H<sub>2</sub>O and SO<sub>3</sub><sup>-</sup></td></tr>
 </table>
 <p>
 
@@ -585,217 +574,203 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a></td><td>chemical</td><td>Connector for an electrochemical reaction</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2O[1]</td><td>Chemical connector for H2O</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;connH+&#39;[1]</td><td>Chemical connector for H+</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Ionomer <font color="darkgreen">&quot;Ionomer phase&quot;</font>
-  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.countTrue">FCSys.Utilities.countTrue</a>;
-  <font color="blue">extends </font><a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({
-        'inclSO3-','inclH+',inclH2O}));
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_EOD=1 <font color="blue">if </font>'inclH+'<font color="blue"> or </font>inclH2O <font color="darkgreen">
-    &quot;Coupling factor between H+ and H2O&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_PEMH2O=18 <font color="blue">if </font>'inclSO3-'<font color="blue"> or </font>inclH2O <font color="darkgreen">
-    &quot;Coupling factor between SO3- and H2O&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({'inclSO3-','inclH+',inclH2O}),
+      n_inter=1);
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclSO3-&#39;=false <font color="darkgreen">
     &quot;Include C19HF37O5S- (abbreviated as SO3-)&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Fixed">FCSys.Species.'SO3-'.Ionomer.Fixed</a> &#39;SO3-&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>
-    'inclSO3-' <font color="blue">constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    n_intra=1,
-    k_intra={k_PEMH2O},
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;SO3- model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Fixed">FCSys.Species.'SO3-'.Ionomer.Fixed</a> &#39;SO3-&#39;(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>'inclSO3-' <font color="blue">constrainedby </font>FCSys.Species.Solid(
+    n_trans=n_trans,
+    n_intra=3,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
+        waterSolid.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q,protonsSolid.k_Q,waterSolid.k_Q}) <font color="darkgreen">&quot;SO3- model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Include H+&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_'H+'_Ionomer.html#FCSys.Species.'H+'.Ionomer.Fixed">FCSys.Species.'H+'.Ionomer.Fixed</a> &#39;H+&#39;(<font color="blue">final </font>n_faces) <font color="blue">if </font>'inclH+'<font color="blue">
-     and </font><font color="blue">not </font>(inclHOR<font color="blue"> or </font>inclORR) <font color="blue">constrainedby </font>
-    FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    n_intra=1,
-    k_intra={k_EOD},
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;H+ model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_'H+'_Ionomer.html#FCSys.Species.'H+'.Ionomer.Fixed">FCSys.Species.'H+'.Ionomer.Fixed</a> &#39;H+&#39;(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>'inclH+' <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=3,
+    n_inter=n_inter,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
+        protonsWater.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q,protonsSolid.k_Q,protonsWater.k_Q}) <font color="darkgreen">&quot;H+ model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Include H2O&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Ionomer.html#FCSys.Species.H2O.Ionomer.Fixed">FCSys.Species.H2O.Ionomer.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    n_intra=2,
-    k_intra={k_EOD,k_PEMH2O},
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;H2O model&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Ionomer.html#FCSys.Species.H2O.Ionomer.Fixed">FCSys.Species.H2O.Ionomer.Fixed</a> H2O(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>n_chem,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>k_intra_Phi,
+    <font color="blue">final </font>k_intra_Q) <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_intra=3,
+    n_inter=0,
+    kL=kL,
+    k_intra_Phi={common.k_Phi[cartTrans],protonsWater.k_Phi[cartTrans],
+        waterSolid.k_Phi[cartTrans]},
+    k_intra_Q={common.k_Q,protonsWater.k_Q,waterSolid.k_Q}) <font color="darkgreen">&quot;H2O model&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclHOR=false <font color="darkgreen">&quot;Hydrogen oxidation&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclORR=false <font color="darkgreen">&quot;Oxygen reduction&quot;</font>;
-  <font color="darkgreen">// These can&#39;t be outer parameters in Dymola 7.4.</font>
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Connector for additivity of volume&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Connectors.Inter</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Connector to exchange momentum and energy with other phases&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Connector for additivity of volume&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2O[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclH2O <font color="darkgreen">
+    &quot;Chemical connector for H2O&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;connH+&#39;[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>'inclH+' <font color="darkgreen">
+    &quot;Chemical connector for H+&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Connectors.Reaction</a> chemical(<font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclHOR<font color="blue"> or </font>inclORR <font color="darkgreen">
-    &quot;Connector for an electrochemical reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O;
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.FaceReaction">Conditions.Adapters.FaceReaction</a> HOR(
-    <font color="blue">final </font>axis=Axis.x,
-    <font color="blue">final </font>side=Side.p,
-    <font color="blue">final </font>A=A[Axis.x],
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>,
-    cartTrans=cartTrans,
-    n=2) <font color="blue">if </font>inclHOR <font color="darkgreen">
-    &quot;Charge layer or adapter for the contribution of H+ to the hydrogen oxidation reaction&quot;</font>;
+  <font color="darkgreen">// Independence factors</font>
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a> common(k_Q=0) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Among all species in the phase&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a> protonsSolid(<font color="blue">final </font>k_Phi, k_Q=Modelica.Constants.inf) <font color="blue">if </font>
+    'inclSO3-'<font color="blue"> or </font>'inclH+' <font color="darkgreen">
+    &quot;Between H<sup>+</sup> and SO<sub>3</sub><sup>-</sup>)&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a> protonsWater(k_Phi=<font color="red">fill</font>(200, 3), k_Q=Modelica.Constants.inf) <font color="blue">
+    if </font>'inclH+'<font color="blue"> or </font>inclH2O <font color="darkgreen">
+    &quot;Between H<sup>+</sup> and H<sub>2</sub>O&quot;</font>;
 
-<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.FaceReaction">Conditions.Adapters.FaceReaction</a> ORR(
-    <font color="blue">final </font>axis=Axis.x,
-    <font color="blue">final </font>side=Side.n,
-    <font color="blue">final </font>A=A[Axis.x],
-    <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>,
-    cartTrans=cartTrans,
-    n=-4) <font color="blue">if </font>inclORR <font color="darkgreen">
-    &quot;Charge layer or adapter for the contribution of H+ to the oxygen reduction reaction&quot;</font>;
-
-  <font color="darkgreen">// Aliases</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_trans](<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.translational.phi
-    <font color="blue">if </font>n_spec &gt; 1<font color="blue"> and </font>reduceTrans <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> T(<font color="blue">each </font>stateSelect=StateSelect.prefer) = direct.thermal.T <font color="blue">if </font>
-    n_spec &gt; 1<font color="blue"> and </font>reduceThermal <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="darkgreen">// These make the selected states more readable.</font>
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a> waterSolid(k_Q=Modelica.Constants.inf) <font color="blue">if </font>'inclSO3-'<font color="blue"> or </font>
+    inclH2O <font color="darkgreen">
+    &quot;Between H<sub>2</sub>O and SO<sub>3</sub><sup>-</sup>&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> DA <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Adapter between additivity of pressure and additivity of volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.DirectInternal">Connectors.DirectInternal</a> direct(
-    <font color="blue">final </font>n_trans=n_trans,
-    <font color="blue">final </font>inclTrans=reduceTrans,
-    <font color="blue">final </font>inclThermal=reduceThermal) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceTrans<font color="blue"> or </font>
-    reduceThermal) <font color="darkgreen">
-    &quot;Connector to directly couple velocities and temperatures within the phase&quot;</font>;
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> amagatDalton <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Adapter between additivity of volume and additivity of pressure&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">
+    &quot;Connector for exchange among all species in the phase&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> protonsSolidExch <font color="darkgreen">
+    &quot;Connector for exchange between H+ and SO3-&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> protonsWaterExch <font color="darkgreen">
+    &quot;Connector for exchange between H+ and H2O&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> waterSolidExch <font color="darkgreen">
+    &quot;Connector for exchange between H2O and SO3-&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Reactions</font>
-  <font color="darkgreen">// ---------</font>
-  <font color="darkgreen">// HOR</font>
-  <font color="red">connect</font>(HOR.face, xPositive.'H+');
-  <font color="darkgreen">// ORR</font>
-  <font color="red">connect</font>(ORR.face, xNegative.'H+');
+  <font color="darkgreen">// Chemical exchange</font>
+  <font color="red">connect</font>(H2O.chemical, connH2O);
+  <font color="red">connect</font>('H+'.chemical, 'connH+');
 
   <font color="darkgreen">// Inert exchange</font>
-  <font color="darkgreen">// --------------</font>
   <font color="red">connect</font>('SO3-'.inter, inter);
-  <font color="red">connect</font>('H+'.inter, inter);
-  <font color="red">connect</font>(H2O.inter, inter);
-  <font color="red">connect</font>('H+'.intra[1], H2O.intra[1]) <font color="darkgreen">&quot;Electro-osmotic drag (EOD)&quot;</font>;
 
-  <font color="red">connect</font>('SO3-'.intra[1], H2O.intra[2]) <font color="darkgreen">&quot;SO3- and H2O&quot;</font>;
+  <font color="red">connect</font>('SO3-'.intra[1], commonExch.node);
+  <font color="red">connect</font>('SO3-'.intra[2], protonsSolidExch.node);
+  <font color="red">connect</font>('SO3-'.intra[3], waterSolidExch.node);
+  <font color="red">connect</font>('H+'.intra[1], commonExch.node);
+  <font color="red">connect</font>('H+'.intra[2], protonsSolidExch.node);
+  <font color="red">connect</font>('H+'.intra[3], protonsWaterExch.node);
 
-  <font color="red">connect</font>('SO3-'.direct.translational, direct.translational);
-  <font color="red">connect</font>('SO3-'.direct.thermal, direct.thermal);
-  <font color="red">connect</font>('H+'.direct.translational, direct.translational);
-  <font color="red">connect</font>('H+'.direct.thermal, direct.thermal);
-  <font color="red">connect</font>(H2O.direct.translational, direct.translational);
-  <font color="red">connect</font>(H2O.direct.thermal, direct.thermal);
-  <font color="red">connect</font>('SO3-'.dalton, DA.dalton);
+  <font color="red">connect</font>(H2O.intra[1], commonExch.node);
+  <font color="red">connect</font>(H2O.intra[2], waterSolidExch.node);
+  <font color="red">connect</font>(H2O.intra[3], protonsWaterExch.node);
 
-  <font color="red">connect</font>('H+'.dalton, DA.dalton);
-
-  <font color="red">connect</font>(H2O.dalton, DA.dalton);
-  <font color="red">connect</font>(DA.amagat, amagat);
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>('SO3-'.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>('H+'.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(H2O.dalton, amagatDalton.dalton);
+  <font color="red">connect</font>(amagatDalton.amagat, amagat);
 
   <font color="darkgreen">// Transport</font>
   <font color="darkgreen">// ---------</font>
   <font color="darkgreen">// SO3-</font>
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.x], Side.n], xNegative.'SO3-');
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.x], Side.n], xNegative.'SO3-');
 
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.x], Side.p], xPositive.'SO3-');
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.x], Side.p], xPositive.'SO3-');
 
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.y], Side.n], yNegative.'SO3-');
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.y], Side.n], yNegative.'SO3-');
 
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.y], Side.p], yPositive.'SO3-');
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.y], Side.p], yPositive.'SO3-');
 
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.z], Side.n], zNegative.'SO3-');
-  <font color="red">connect</font>('SO3-'.faces[facesCart[Axis.z], Side.p], zPositive.'SO3-');
-
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.z], Side.n], zNegative.'SO3-');
+  <font color="red">connect</font>('SO3-'.boundaries[transCart[Axis.z], Side.p], zPositive.'SO3-');
   <font color="darkgreen">// &#39;H+&#39;</font>
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.x], Side.n], xNegative.'H+');
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.x], Side.n], xNegative.'H+');
 
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.x], Side.p], xPositive.'H+');
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.x], Side.p], xPositive.'H+');
 
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.y], Side.n], yNegative.'H+');
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.y], Side.n], yNegative.'H+');
 
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.y], Side.p], yPositive.'H+');
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.y], Side.p], yPositive.'H+');
 
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.z], Side.n], zNegative.'H+');
-  <font color="red">connect</font>('H+'.faces[facesCart[Axis.z], Side.p], zPositive.'H+');
-
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.z], Side.n], zNegative.'H+');
+  <font color="red">connect</font>('H+'.boundaries[transCart[Axis.z], Side.p], zPositive.'H+');
   <font color="darkgreen">// H2O</font>
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.x], Side.n], xNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.n], xNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.x], Side.p], xPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.p], xPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.n], yNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.n], yNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.p], yPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.p], yPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O);
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.n], zNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.p], zPositive.H2O);
 
-  <font color="darkgreen">// Phase change</font>
-  <font color="red">connect</font>(H2O.physical, physical.H2O);
-  <font color="darkgreen">// Reactions</font>
-  <font color="red">connect</font>(ORR.reaction, chemical);
-
-  <font color="red">connect</font>(HOR.reaction, chemical);
 <font color="blue">end </font>Ionomer;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Phases.LiquidI.png" alt="FCSys.Phases.Liquid" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Phases.Liquid"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.Liquid</h2>
-<b>Liquid phase</b><p>
+<b>Liquid phase</b><p></p>
 <img src="images/FCSys.Phases.LiquidD.png" alt="FCSys.Phases.Liquid">
+<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
- <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.EmptyPhase">EmptyPhase</a> model.</p><p>
-Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a> (Partial model for a phase).
+ <a href="FCSys_Phases.html#FCSys.Phases.Partial">Partial</a> model.</p><p></p>
+Extends from <a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a> (Base model for a phase).
 <p>
 
 <h3>Parameters</h3>
@@ -804,16 +779,15 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_spec</td><td>if inclH2O then 1 else 0</td><td>Number of species</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td>Integer</td><td>n_faces</td><td>&nbsp;</td><td>Number of pairs of faces</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_DT[Axis]</td><td>{1,1,1}</td><td>Scaling factor for diffusive transport [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter[n_inter]</td><td>ones(n_inter)</td><td>Coupling factor for exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Length factors for transport [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Phi[n_inter, n_trans]</td><td>ones(n_inter, n_trans)</td><td>For translational exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Q[n_inter]</td><td>ones(n_inter)</td><td>For thermal exchange with other phases [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Include H2O</td></tr>
 <tr><td><a href="FCSys_Species_H2O_Liquid.html#FCSys.Species.H2O.Liquid.Fixed">Fixed</a></td><td>H2O</td><td>redeclare FCSys.Species.H2O&hellip;.</td><td>H2O model</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>reduceTrans</td><td>false</td><td>Same velocity for all species</td></tr>
-<tr><td>Boolean</td><td>reduceThermal</td><td>false</td><td>Same temperature for all species</td></tr>
 </table>
 <p>
 
@@ -822,81 +796,212 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connector to exchange momentum and energy with other phases</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">PhysicalBus</a></td><td>physical</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2O[1]</td><td>Chemical connector for H2O</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">&quot;Liquid phase&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.PartialPhase">FCSys.Phases.BaseClasses.PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="blue">if </font>inclH2O<font color="blue"> then </font>1<font color="blue">
-         else </font>0);
+  <font color="blue">extends </font><a href="FCSys_Phases.html#FCSys.Phases.PartialPhase">PartialPhase</a>(<font color="blue">final </font>n_spec=<font color="blue">if </font>inclH2O<font color="blue"> then </font>1<font color="blue"> else </font>0);
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Include H2O&quot;</font>;
 
-  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Liquid.html#FCSys.Species.H2O.Liquid.Fixed">FCSys.Species.H2O.Liquid.Fixed</a> H2O(<font color="blue">final </font>n_faces) <font color="blue">if </font>inclH2O <font color="blue">
-    constrainedby </font>FCSys.Species.CompressibleSpecies(
-    n_faces=n_faces,
-    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceTrans<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>
-          StateSelect.prefer),
-    T(stateSelect=<font color="blue">if </font>reduceThermal<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
-    <font color="darkgreen">&quot;H2O model&quot;</font>;
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(stateSelect=StateSelect.never) = amagat.p <font color="blue">if </font>
+    n_spec &gt; 0<font color="blue"> and </font>environment.analysis <font color="darkgreen">&quot;Total thermodynamic pressure&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFaces[Axis.x] <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFaces[Axis.y] <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFaces[Axis.z] <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+  <font color="blue">replaceable </font><a href="FCSys_Species_H2O_Liquid.html#FCSys.Species.H2O.Liquid.Fixed">FCSys.Species.H2O.Liquid.Fixed</a> H2O(
+    <font color="blue">final </font>n_trans,
+    <font color="blue">final </font>n_inter,
+    <font color="blue">final </font>kL,
+    <font color="blue">final </font>n_chem) <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>FCSys.Species.Fluid(
+    n_trans=n_trans,
+    n_inter=n_inter,
+    kL=kL) <font color="darkgreen">&quot;H2O model&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTrans[Axis.x] <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTrans[Axis.y] <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTrans[Axis.z] <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Connectors.Inter</a> inter[n_inter](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Connector to exchange momentum and energy with other phases&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Connector for additivity of volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBus">Connectors.PhysicalBus</a> physical <font color="blue">if </font>inclH2O;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Connector for additivity of volume&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2O[1](<font color="blue">each </font><font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclH2O <font color="darkgreen">
+    &quot;Chemical connector for H2O&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> DA <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Adapter between additivity of pressure and additivity of volume&quot;</font>;
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> amagatDalton <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Adapter between additivity of volume and additivity of pressure&quot;</font>;
+
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTensionContact">Chemistry.SurfaceTensionContact</a> surfaceTension(
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>V_w=V,
+    <font color="blue">final </font>V=<font color="red">product</font>(L)) <font color="blue">if </font>inclH2O <font color="darkgreen">
+    &quot;Effect of surface tension on chemical potential&quot;</font>;
 
 <font color="blue">equation </font>
+  <font color="darkgreen">// Chemical exchange</font>
+
   <font color="darkgreen">// Inert exchange</font>
   <font color="red">connect</font>(H2O.inter, inter);
-  <font color="red">connect</font>(H2O.dalton, DA.dalton);
-  <font color="red">connect</font>(DA.amagat, amagat);
 
-  <font color="darkgreen">// Phase change</font>
-  <font color="red">connect</font>(H2O.physical, physical.H2O);
-  <font color="red">connect</font>(H2O.physical2, physical.H2O2);
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>(amagatDalton.amagat, amagat);
+  <font color="red">connect</font>(amagatDalton.dalton, H2O.dalton);
 
-  <font color="darkgreen">// H2O</font>
-  <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Transport</font>
-  <font color="red">connect</font>(H2O.faces[Axis.x, Side.n], xNegative.H2O);
+  <font color="darkgreen">// ---------</font>
+  <font color="darkgreen">// H2O</font>
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.n], xNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[Axis.x, Side.p], xPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.x], Side.p], xPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.n], yNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.n], yNegative.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.y], Side.p], yPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.y], Side.p], yPositive.H2O);
 
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O);
-  <font color="red">connect</font>(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.n], zNegative.H2O);
+  <font color="red">connect</font>(H2O.boundaries[transCart[Axis.z], Side.p], zPositive.H2O);
+
+  <font color="red">connect</font>(surfaceTension.nonwetting, connH2O[1]);
+  <font color="red">connect</font>(surfaceTension.wetting, H2O.chemical[1]);
 <font color="blue">end </font>Liquid;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Phases.PartialPhaseI.png" alt="FCSys.Phases.PartialPhase" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Phases.PartialPhase"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.PartialPhase</h2>
+<b>Base model for a phase</b><p></p>
+<p></p>
+
+<h3>Information</h3>
+
+<p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects
+    the resistance associated with the transport of material, transverse translational momentum, and energy of all of the species
+    within the phase.  It can be used to introduce minor head loss or the effects of
+    porosity or tortousity.  These effects may be anisotropic.  Using
+    Bruggeman correction [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Weber2004</a>, p. 4696],
+    the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>-1/2</sup>
+    along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.
+    The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
+<p></p>
+
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_spec</td><td>&nbsp;</td><td>Number of species</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Length factors for transport [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Phi[n_inter, n_trans]</td><td>ones(n_inter, n_trans)</td><td>For translational exchange with other phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_inter_Q[n_inter]</td><td>ones(n_inter)</td><td>For thermal exchange with other phases [1]</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialPhase <font color="darkgreen">&quot;Base model for a phase&quot;</font>
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.index">Modelica.Math.BooleanVectors.index</a>;
+  <font color="darkgreen">// extends FCSys.Icons.Names.Middle;</font>
+
+  <font color="blue">parameter </font>Integer n_spec(start=0) <font color="darkgreen">&quot;Number of species&quot;</font>;
+  <font color="blue">parameter </font>Integer n_inter=0 <font color="darkgreen">
+    &quot;Number of exchange connections with other phases&quot;</font>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k[Axis](
+    <font color="blue">each </font>min=Modelica.Constants.small,
+    <font color="blue">each </font><font color="blue">final </font>nominal=1) = {1,1,1} <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Length factors for transport&quot;</font>;
+  <font color="blue">parameter </font>Integer n_trans=1 <font color="darkgreen">&quot;Number of transport axes&quot;</font>;
+  <font color="darkgreen">// This cannot be an inner/outer parameter in Dymola 2014.</font>
+  <font color="blue">inner </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Volume of the phase&quot;</font>;
+
+  <font color="darkgreen">// Independence factors</font>
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_inter_Phi[n_inter, n_trans]=<font color="red">ones</font>(n_inter,
+      n_trans) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;For translational exchange with other phases&quot;</font>;
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_inter_Q[n_inter]=<font color="red">ones</font>(n_inter) <font color="blue">if </font>n_spec &gt;
+    0 <font color="darkgreen">&quot;For thermal exchange with other phases&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> epsilon=V/<font color="red">product</font>(L) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>environment.analysis <font color="darkgreen">
+    &quot;Volumetric fill fraction&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Length of the subregion&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> kL[:]=k[cartTrans] .* L[cartTrans] <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Effective transport lengths&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> Aprime[n_trans]=<font color="red">fill</font>(V, n_trans) ./ L[cartTrans] <font color="blue">if </font>n_spec &gt;
+    0 <font color="darkgreen">&quot;Effective cross-sectional areas&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartTrans[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer transCart[:] <font color="darkgreen">
+    &quot;Boundary-pair indices of the Cartesian axes&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclTrans[Axis] <font color="darkgreen">
+    &quot;true, if each pair of boundaries is included&quot;</font>;
+
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">end </font>PartialPhase;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Phases.ExchangeParamsI.png" alt="FCSys.Phases.ExchangeParams" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Phases.ExchangeParams"></a><a href="FCSys_Phases.html#FCSys.Phases">FCSys.Phases</a>.ExchangeParams</h2>
+<b>Independence factors for an exchange process</b><p></p>
+<p></p>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Record">Modelica.Icons.Record</a> (Icon for records).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_Phi[Axis]</td><td>{1,1,1}</td><td>Translational [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_Q</td><td>1</td><td>Thermal [1]</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> ExchangeParams <font color="darkgreen">&quot;Independence factors for an exchange process&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Record">Modelica.Icons.Record</a>;
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_Phi[Axis]={1,1,1} <font color="darkgreen">&quot;Translational&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_Q=1 <font color="darkgreen">&quot;Thermal&quot;</font>;
+
+<font color="blue">end </font>ExchangeParams;
 </pre>
       </div>
     </div>
@@ -906,6 +1011,6 @@ Extends from <a href="FCSys_Phases_BaseClasses.html#FCSys.Phases.BaseClasses.Par
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Aug  6 13:08:45 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:02 2013.
 </div>
 </span></body></html>

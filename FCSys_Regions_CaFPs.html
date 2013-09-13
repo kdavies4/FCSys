@@ -3,7 +3,8 @@
 <title>FCSys.Regions.CaFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-8-9">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -29,6 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,15 +49,18 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
+      <div class="body"></p>
 
 <h2><a name="FCSys.Regions.CaFPs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaFPs</h2>
 
 <b>Cathode flow plates</b>
+<p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
 
 <h3>Package Content</h3>
 
@@ -68,45 +73,42 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Regions.CaFPs.CaFPI.png" alt="FCSys.Regions.CaFPs.CaFP" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaFPs.CaFP"></a><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs">FCSys.Regions.CaFPs</a>.CaFP</h2>
-<b>Cathode flow plate</b><p>
+<b>Cathode flow plate</b><p></p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaFPs.CaFP">
+<p></p>
 
 <h3>Information</h3>
 
 <p>This model represents the cathode flow plate of a PEMFC.
 The x axis extends from the anode to the cathode.
-The y axis extends along the length of the channel. The model is
-bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
-used as the inlet. The z axis extends across the width of the channel.</p>
-
-<p>By default, the cross-sectional area in the xy plane is 100 cm<sup>2</sup>.</p>
+Fluid is considered to travel
+in the y direction, with the associated length factor (<i>k</i><sub>y</sub>) greater than one (by default)
+to represent a serpentine channel.
+The model is
+bidirectional, meaning that either <code>yNegative</code> or <code>yPositive</code> can be
+used as the inlet.  By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
 <p>The solid and the fluid phases exist in the same subregions even though a typical flow plate is impermeable
 to the fluid (except for the channel).  This has some important implications:<ol>
-<li>The fluid species are exposed at the positive x-axis connector (<code>xPositive</code>).
+<li>The fluid species are exposed at the positive x-axis connector (<code>xNegative</code>).
 They should be left disconnected there.</li>
 <li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid.
-Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
-and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
-(<i>k</i><sub>DT</sub>).</li>
-<li>The area fill factors (<i>k</i><sub>DT</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
-generally be greater than one because the fluid is not transported along the entire thickness of the flow plate.
-As an approximation, it should be equal to product of two ratios:<ol>
-<li>the thickness of the flow plate to the depth of the channels, and</li>
-<li>the area of the valleys in the yz plane to the total area of the flow plate in the yz plane (land + valleys).</li>
-</ol>
-<li>For a given volumetric flow rate of the reactant stream, the actual velocity will be greater than
-the modeled velocity by a factor of the area of the flow plate in the xz plane divided by the cross-sectional
-area of the channel (also in the xz plane). This should be taken into account when setting
-<i>k</i><sub>E</sub> to produce the proper pressure drop.</li>
-</ol>
-In theory it is possible
-to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However
-this would significantly increase the mathematical size of the model.  Currently that detail is best left to
+Therefore, the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
+and the coupling factors for exchange (e.g., <i>k</i><sub>common</sub>), not by the fluidity (&eta;), translational Nusselt number (<b><i>Nu</i><sub>&Phi;</sub></b>),
+ and transport factors (<b><i>k</i></b>).</li>
+<li>The x axis-component of the transport factor (<b><i>k</i></b>) for the gas and the liquid should
+generally be greater than one because the transport distance into/out of the GDL is less that half the thickness of the flow plate.
+As an approximation, it should be equal to the product of two ratios:<ol>
+<li>the thickness of the flow plate to the depth of the channels</li>
+<li>the area of the valleys in the yz plane to the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
+the total volume avaialable for the fluid (&epsilon;)</li>
+</ol> The default is 2/&epsilon;.</ol>
+In theory, it is possible
+to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,
+this would significantly increase the mathematical size of the model.  Currently, that level of detail is best left to
 computational fluid dynamics.</p>
-</ol></li>
 
-<p>See <a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">Subregions.Species.'C+'.Graphite.Fixed</a>
+<p>See <a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
@@ -115,9 +117,9 @@ are that of Entegris/Poco Graphite AXF-5Q
   There is additional data in the
 text layer of the <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p>
 
-<p>For more information, see the
+<p>For more information, please see the
     <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
-<p>
+<p></p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
 
@@ -127,16 +129,17 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>D</td><td>1.5*U.mm</td><td>Hydraulic diameter of the channel [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{8*U.mm}</td><td>Lengths along the x axis [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{U.m}</td><td>Lengths along the y axis [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{5*U.mm}</td><td>Lengths across the z axis [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.1</td><td>Fraction of volume for the fluid [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{8}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.0625</td><td>Fraction of volume for the fluid [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
 
@@ -146,119 +149,86 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive boundary along the z axis</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> CaFP <font color="darkgreen">&quot;Cathode flow plate&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
   <font color="darkgreen">// extends FCSys.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x={8*U.mm},
-    L_y={U.m},
-    L_z={5*U.mm},
-    <font color="blue">final </font>inclFacesX=true,
-    <font color="blue">final </font>inclFacesY=true,
-    inclFacesZ=false,
+    L_x={8}*U.mm,
+    L_y={8}*U.cm,
+    L_z={6.25}*U.cm,
+    <font color="blue">final </font>inclTransX=true,
+    <font color="blue">final </font>inclTransY=true,
+    inclTransZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
         (
-        inclTransX=true,
-        inclTransY=true,
-        inclTransZ=false,
-        k_common=3e-10,
-        k_gas_liq=1e-7,
-        k_graphite_liq=1e-5,
+        common(k_Phi={100,inf,100}),
+        gasLiq(k_Phi={inf,1e4,inf},k_Q=inf),
         gas(
-          reduceTrans=true,
-          reduceThermal=true,
-          k_DT={10,1,1},
+          common(k_Phi={inf,inf,inf}),
+          k={2/epsilon,11,Modelica.Constants.eps},
           inclH2O=true,
           inclN2=true,
           inclO2=true,
           H2O(
-            p_IC=environment.p_H2O,
-            consTransX=Conservation.IC,
-            consEnergy=Conservation.dynamic),
+            upstreamX=false,
+            Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
+            zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>(),
+            T(stateSelect=StateSelect.always)),
           N2(
-            initTransX=InitTranslational.none,
-            initTransY=InitTranslational.none,
-            initTransZ=InitTranslational.none,
-            initEnergy=InitScalar.none,
-            p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
+            upstreamX=false,
+            Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
+            zeta=100*<font color="red">Characteristics.N2.Gas.zeta</font>(),
+            initEnergy=Init.none,
+            I(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)),
           O2(
-            initTransX=InitTranslational.none,
-            initTransY=InitTranslational.none,
-            initTransZ=InitTranslational.none,
-            initEnergy=InitScalar.none,
-            p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
+            upstreamX=false,
+            Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
+            zeta=100*<font color="red">Characteristics.O2.Gas.zeta</font>(),
+            initEnergy=Init.none)),
         graphite(
-          reduceThermal=true,
-          k_DT=<font color="red">fill</font>((1 - epsilon)^(3/2), 3),
           &#39;inclC+&#39;=true,
           &#39;incle-&#39;=true,
-          &#39;C+&#39;(theta=U.m*U.K/(95*U.W)),
-          &#39;e-&#39;(
-            consTransY=Conservation.IC,
-            initTransX=InitTranslational.none,
-            initEnergy=InitScalar.none,
-            sigma=U.S/(1.470e-3*U.cm))),
-        liquid(
-          inclH2O=false,
-          k_DT={10,1,1},
-          H2O(
-            consTransX=Conservation.IC,
-            initMaterial=InitScalar.amount,
-            N_IC=2e-6*U.C))),
-    subregions(graphite(&#39;C+&#39;(V_IC=subregions.V*(1 - epsilon)))));
+          &#39;C+&#39;(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
+          &#39;e-&#39;(sigma=U.S/(1.470e-3*U.cm))),
+        liquid(inclH2O=true, H2O(
+            upstreamX=false,
+            Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
+            epsilon_IC=1e-6)),
+        capillaryPressure(theta=90*U.degree)));
 
-  <font color="darkgreen">//final beta=0,</font>
-  <font color="darkgreen">//final beta=0,</font>
-  <font color="darkgreen">//final beta=0,</font>
+  <font color="darkgreen">// **option to exclude capillary pressure (if so, use in AnFP too)?</font>
 
-  <font color="darkgreen">//initTransX=InitTranslational.none,</font>
-  <font color="darkgreen">//initTransX=InitTranslational.none,</font>
-  <font color="darkgreen">//</font>
-  <font color="darkgreen">//final beta=0,</font>
-  <font color="darkgreen">//final beta=0,</font>
-
-  <font color="darkgreen">//  **enable thermal dynamics of the gas</font>
-
-  <font color="darkgreen">//tauprime=FCSys.Characteristics.H2O.Liquid.tauprime()/3e-4,</font>
-
-  <font color="darkgreen">//consTransY=Conservation.IC,</font>
-  <font color="darkgreen">// **temp tauprime (needs units too)</font>
-
-  <font color="darkgreen">// **temp excluded  H2O liq</font>
-  <font color="darkgreen">// See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase</font>
-  <font color="darkgreen">// regarding the settings of k_DT for each phase.</font>
-
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.1 <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.0625 <font color="darkgreen">
     &quot;Fraction of volume for the fluid&quot;</font>;
 
-  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="darkgreen">/*
-  output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never) =
-    subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N) if
-    environment.analysis and hasSubregions &quot;Dry-gas concentration of O2&quot;;
-  output Q.PressureAbsolute p_ny[n_x, n_z](each stateSelect=StateSelect.never)
-     = subregions[:, 1, :].gas.H2O.p_faces[2, Side.n] + subregions[:, 1, :].gas.N2.p_faces[
-    2, Side.n] + subregions[:, 1, :].gas.O2.p_faces[2, Side.n]
-    &quot;Total thermodynamic pressure at the negative-y boundary&quot;;
-  output Q.PressureAbsolute p_py[n_x, n_z](each stateSelect=StateSelect.never)
-     = subregions[:, 1, :].gas.H2O.p_faces[2, Side.p] + subregions[:, 1, :].gas.N2.p_faces[
-    2, Side.p] + subregions[:, 1, :].gas.O2.p_faces[2, Side.p]
-    &quot;Total thermodynamic pressure at the positive-y boundary&quot;;
-*/</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> D=1.5*U.mm <font color="darkgreen">&quot;Hydraulic diameter of the channel&quot;</font>;
 
 <font color="blue">protected </font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_states_H2O[:, :, :](
+    <font color="blue">each </font>stateSelect=StateSelect.always,
+    <font color="blue">each </font>start=0,
+    <font color="blue">each </font>fixed=true) = subregions[:, 2:n_y, :].gas.H2O.phi[2] <font color="blue">if </font>n_y &gt; 1 <font color="darkgreen">
+    &quot;Forced states for H2O&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_states_O2[:, :, :](
+    <font color="blue">each </font>stateSelect=StateSelect.always,
+    <font color="blue">each </font>start=0,
+    <font color="blue">each </font>fixed=true) = subregions[:, 2:n_y, :].gas.O2.phi[2] <font color="blue">if </font>n_y &gt; 1 <font color="darkgreen">
+    &quot;Forced states for O2&quot;</font>;
+  <font color="darkgreen">// Note:  These variables avoid dynamic state selection in Dymola 2014.</font>
+
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
   <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
@@ -273,6 +243,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Aug  6 13:08:12 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:20 2013.
 </div>
 </span></body></html>

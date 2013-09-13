@@ -1,0 +1,421 @@
+<html>
+<head>
+<title>FCSys.Chemistry</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Models associated with chemical reactions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body"></p>
+
+<h2><a name="FCSys.Chemistry"></a><a href="index.html#FCSys">FCSys</a>.Chemistry</h2>
+
+<b>Models associated with chemical reactions</b>
+<p></p>
+<p></p>
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Icons_ChemistryPackage.html#FCSys.Icons.ChemistryPackage">Icons.ChemistryPackage</a> (Icon for packages containing chemical models).
+<p></p>
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Chemistry.ExamplesS.png" alt="FCSys.Chemistry.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Examples.html#FCSys.Chemistry.Examples">Examples</a>
+</td><td>Examples</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.ElectrochemistryS.png" alt="FCSys.Chemistry.Electrochemistry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry">Electrochemistry</a>
+</td><td>Models associated with electrochemical reactions</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.HORS.png" alt="FCSys.Chemistry.HOR" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">HOR</a>
+</td><td>Hydrogen oxidation reaction</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.ORRS.png" alt="FCSys.Chemistry.ORR" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.ORR">ORR</a>
+</td><td>Oxygen reduction reaction</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.SurfaceTensionS.png" alt="FCSys.Chemistry.SurfaceTension" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a>
+</td><td>Surface tension</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.SurfaceTensionContactS.png" alt="FCSys.Chemistry.SurfaceTensionContact" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTensionContact">SurfaceTensionContact</a>
+</td><td>Surface tension, with contact angle</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.HORI.png" alt="FCSys.Chemistry.HOR" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.HOR"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.HOR</h2>
+<b>Hydrogen oxidation reaction</b><p></p>
+<img src="images/FCSys.Chemistry.HORD.png" alt="FCSys.Chemistry.HOR">
+<p></p>
+
+<h3>Information</h3>
+
+<table border=1><tr><td><font size=100 color="gray">H<sub>2</sub> &#8652; 2e<sup>-</sup> + 2H<sup>+</sup></td></tr></table></div><p></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;conne-&#39;</td><td>Connector for e-</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;connH+&#39;</td><td>Connector for H+</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2</td><td>Connector for H2</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> HOR <font color="darkgreen">&quot;Hydrogen oxidation reaction&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <font color="blue">constant </font>Integer n_trans(min=0, max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="darkgreen">// Note:  This must be a constant rather than a parameter due to errors in</font>
+  <font color="darkgreen">// Dymola 2014.</font>
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;e-&#39;(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.'e-'.Gas.m,
+    n=-2);
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;H+&#39;(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.'H+'.Gas.m,
+    n=-2);
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> H2(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.H2.Gas.m,
+    n=1);
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;conne-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+    <font color="darkgreen">&quot;Connector for e-&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;connH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+    <font color="darkgreen">&quot;Connector for H+&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for H2&quot;</font>;
+  <font color="darkgreen">// Note:  These redeclarations are necessary due to errors in Dymola 2014.</font>
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>(connH2, H2.chemical);
+  <font color="red">connect</font>('e-'.chemical, 'conne-');
+  <font color="red">connect</font>('H+'.chemical, 'connH+');
+  <font color="red">connect</font>(H2.reaction, 'e-'.reaction);
+  <font color="red">connect</font>('H+'.reaction, H2.reaction);
+<font color="blue">end </font>HOR;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.ORRI.png" alt="FCSys.Chemistry.ORR" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.ORR"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.ORR</h2>
+<b>Oxygen reduction reaction</b><p></p>
+<img src="images/FCSys.Chemistry.ORRD.png" alt="FCSys.Chemistry.ORR">
+<p></p>
+
+<h3>Information</h3>
+
+<table border=1><tr><td><font size=100 color="gray">4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O</td></tr></table></div><p></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;conne-&#39;</td><td>Connector for e-</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;connH+&#39;</td><td>Connector for H+</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connO2</td><td>Connector for O2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2O</td><td>Connector for H2O</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ORR <font color="darkgreen">&quot;Oxygen reduction reaction&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <font color="blue">constant </font>Integer n_trans(min=0, max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="darkgreen">// Note:  This must be a constant rather than a parameter due to errors in</font>
+  <font color="darkgreen">// Dymola 2014.</font>
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;e-&#39;(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.'e-'.Gas.m,
+    n=4,
+    reaction(Ndot(stateSelect=StateSelect.prefer)));
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;H+&#39;(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.'H+'.Gas.m,
+    n=4);
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> O2(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.O2.Gas.m,
+    n=1);
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> H2O(
+    <font color="blue">final </font>n_trans=n_trans,
+    m=Characteristics.H2O.Gas.m,
+    n=-2);
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;conne-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+    <font color="darkgreen">&quot;Connector for e-&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;connH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+    <font color="darkgreen">&quot;Connector for H+&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connO2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector for O2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2O(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+    <font color="darkgreen">&quot;Connector for H2O&quot;</font>;
+  <font color="darkgreen">// Note:  These redeclarations are necessary due to errors in Dymola 2014.</font>
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>('H+'.chemical, 'connH+');
+  <font color="red">connect</font>('e-'.chemical, 'conne-');
+  <font color="red">connect</font>(O2.chemical, connO2);
+  <font color="red">connect</font>(H2O.chemical, connH2O);
+  <font color="red">connect</font>('e-'.reaction, H2O.reaction);
+  <font color="red">connect</font>('H+'.reaction, H2O.reaction);
+  <font color="red">connect</font>(O2.reaction, H2O.reaction);
+<font color="blue">end </font>ORR;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.SurfaceTensionI.png" alt="FCSys.Chemistry.SurfaceTension" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.SurfaceTension"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.SurfaceTension</h2>
+<b>Surface tension</b><p></p>
+<img src="images/FCSys.Chemistry.SurfaceTensionD.png" alt="FCSys.Chemistry.SurfaceTension">
+<p></p>
+
+<h3>Information</h3>
+
+<p>The characteristic radius (<i>R</i>) is the harmonic mean of the (2) principle radii of the liquid volume.</p>
+
+    <p>The default surface tension (&gamma; = 0.0663 N/m) is for saturated water at 60 &deg;C, interpolated from
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, pp. 924].  Note that the surface tension in
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Wang2001</a>] is incorrect (likely unit conversion error).</p>
+
+    <p>Assumptions:<ol>
+    <li>The fluid is incompressible and isothermal across the surface layer.<li></p>
+
+    <p></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthReciprocal">LengthReciprocal</a></td><td>overR</td><td>1/U.mm</td><td>Reciprocal of characteristic radius [1/L]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_w</td><td>Characteristics.H2O.Liquid.v&hellip;</td><td>Specific volume of the wetting phase [L3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">SurfaceTension</a></td><td>gamma</td><td>0.0663*U.N/U.m</td><td>Surface tension [M/T2]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>wetting</td><td>Chemical interface to the wetting phase</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>nonwetting</td><td>Chemical interface to the nonwetting phase</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> SurfaceTension <font color="darkgreen">&quot;Surface tension&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">constant </font>Integer n_trans(min=0, max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="darkgreen">// Note:  This must be a constant rather than a parameter due to errors in</font>
+  <font color="darkgreen">// Dymola 2014.</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.LengthReciprocal">Q.LengthReciprocal</a> overR=1/U.mm <font color="darkgreen">&quot;Reciprocal of characteristic radius&quot;</font>;
+
+  <font color="darkgreen">// Material properties</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_w=<font color="red">Characteristics.H2O.Liquid.v_Tp</font>() <font color="darkgreen">
+    &quot;Specific volume of the wetting phase&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">Q.SurfaceTension</a> gamma=0.0663*U.N/U.m <font color="darkgreen">&quot;Surface tension&quot;</font>;
+
+  <font color="darkgreen">// Aliases</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Deltap <font color="darkgreen">&quot;Capillary pressure&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis only)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Deltag=wetting.g - nonwetting.g <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Potential of wetting phase w.r.t. nonwetting phase&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> wetting(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical interface to the wetting phase&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> nonwetting(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical interface to the nonwetting phase&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Aliases</font>
+  Deltap = 2*gamma*overR <font color="darkgreen">&quot;Young-Laplace equation&quot;</font>;
+
+  <font color="darkgreen">// Streams</font>
+  wetting.phi = <font color="red">inStream</font>(nonwetting.phi[:]);
+  nonwetting.phi = <font color="red">inStream</font>(wetting.phi[:]);
+  wetting.sT = <font color="red">inStream</font>(nonwetting.sT);
+  nonwetting.sT = <font color="red">inStream</font>(wetting.sT);
+
+  <font color="darkgreen">// Potentials</font>
+  nonwetting.g = wetting.g + v_w*Deltap <font color="darkgreen">&quot;Kelvin equation (see assumption #1)&quot;</font>;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = wetting.Ndot + nonwetting.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+
+<font color="blue">end </font>SurfaceTension;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.SurfaceTensionContactI.png" alt="FCSys.Chemistry.SurfaceTensionContact" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.SurfaceTensionContact"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.SurfaceTensionContact</h2>
+<b>Surface tension, with contact angle</b><p></p>
+<img src="images/FCSys.Chemistry.SurfaceTensionD.png" alt="FCSys.Chemistry.SurfaceTensionContact">
+<p></p>
+
+<h3>Information</h3>
+
+**Note modified Leverett correlation
+
+    <p>The default permeability (&kappa; = 6.46&times;10<sup>-5</sup> mm<sup>2</sup>) is based on
+    the air permeability of SGL Carbon Group Sigracet&reg; 10 BA
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].
+    Wang et al. use &kappa; = 10<sup>-5</sup> mm<sup>2</sup>
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Wang2001</a>].</p>
+
+    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurments listed at
+    <a href="http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a>
+    (accessed Nov. 22, 2103).</p><p></p>
+Extends from <a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a> (Surface tension).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthReciprocal">LengthReciprocal</a></td><td>overR</td><td>cos(theta)/(2*sqrt(kappa))</td><td>Reciprocal of characteristic radius [1/L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>U.cc</td><td>Total volume [L3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_w</td><td>U.cc</td><td>Volume of the wetting phase [L3]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_w</td><td>Characteristics.H2O.Liquid.v&hellip;</td><td>Specific volume of the wetting phase [L3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">SurfaceTension</a></td><td>gamma</td><td>0.0663*U.N/U.m</td><td>Surface tension [M/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Angle</a></td><td>theta</td><td>140*U.degree</td><td>Contact angle [A]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>kappa</td><td>6.46e-5*U.mm^2</td><td>Permeability [L2]</td></tr>
+<tr><TD colspan="2">replaceable function J</td><td>FCSys.Characteristics.H2O.J</td><td>Leverett J function</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>wetting</td><td>Chemical interface to the wetting phase</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>nonwetting</td><td>Chemical interface to the nonwetting phase</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
+<tr><TD colspan="2">replaceable function J</td><td>Leverett J function</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> SurfaceTensionContact <font color="darkgreen">&quot;Surface tension, with contact angle&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a>(<font color="blue">final </font>overR=<font color="red">cos</font>(theta)/(2*<font color="red">sqrt</font>(kappa)));
+  <font color="darkgreen">// ** *J(V_w/V)</font>
+
+  <font color="darkgreen">// Geometry</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=U.cc <font color="darkgreen">&quot;Total volume&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V_w=U.cc <font color="darkgreen">&quot;Volume of the wetting phase&quot;</font>;
+
+  <font color="darkgreen">// Material properties</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> theta=140*U.degree <font color="darkgreen">&quot;Contact angle&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> kappa=6.46e-5*U.mm^2 <font color="darkgreen">&quot;Permeability&quot;</font>;
+
+  <font color="blue">replaceable </font><font color="blue">function</font> J = <a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.J">FCSys.Characteristics.H2O.J</a> <font color="darkgreen">&quot;Leverett J function&quot;</font>;
+
+<font color="blue">end </font>SurfaceTensionContact;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:17 2013.
+</div>
+</span></body></html>

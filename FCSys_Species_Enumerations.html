@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>FCSys.Species.Enumerations</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Choices of options">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body"></p>
+
+<h2><a name="FCSys.Species.Enumerations"></a><a href="FCSys_Species.html#FCSys.Species">FCSys.Species</a>.Enumerations</h2>
+
+<b>Choices of options</b>
+<p></p>
+<p></p>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_TypesPackage.html#Modelica.Icons.TypesPackage">Modelica.Icons.TypesPackage</a> (Icon for packages containing type definitions).
+<p></p>
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a>
+</td><td>Enumeration for Cartesian axes</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Orient">Orient</a>
+</td><td>Enumeration for orientations relative to a boundary</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Side">Side</a>
+</td><td>Enumeration for sides of a region or subregion</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a>
+</td><td>Options for the conservation of material or energy</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a>
+</td><td>Options for the conservation of momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a>
+</td><td>Methods of initializing a thermodynamic quantity (material or energy)</td></tr>
+</table>
+<p></p>
+
+<h3>Types and constants</h3>
+
+<a name="FCSys.Species.Enumerations.Axis"></a><pre><font color="blue">type</font> Axis = <font color="blue">enumeration</font>(
+    x <font color="darkgreen">&quot;X&quot;</font>,
+    y <font color="darkgreen">&quot;Y&quot;</font>,
+    z <font color="darkgreen">&quot;Z&quot;</font>) <font color="darkgreen">&quot;Enumeration for Cartesian axes&quot;</font>;</pre><p></p>
+<a name="FCSys.Species.Enumerations.Orient"></a><pre><font color="blue">type</font> Orient = <font color="blue">enumeration</font>(
+    after <font color="darkgreen">&quot;Axis following the normal axis in Cartesian coordinates&quot;</font>,
+    before <font color="darkgreen">&quot;Axis preceding the normal axis in Cartesian coordinates&quot;</font>) <font color="darkgreen">
+  &quot;Enumeration for orientations relative to a boundary&quot;</font>;</pre><p></p>
+<a name="FCSys.Species.Enumerations.Side"></a><pre><font color="blue">type</font> Side = <font color="blue">enumeration</font>(
+    n <font color="darkgreen">&quot;Negative&quot;</font>,
+    p <font color="darkgreen">&quot;Positive (greater position along the Cartesian axis)&quot;</font>) <font color="darkgreen">
+  &quot;Enumeration for sides of a region or subregion&quot;</font>;</pre><p></p>
+<a name="FCSys.Species.Enumerations.ConsThermo"></a><pre><font color="blue">type</font> ConsThermo = <font color="blue">enumeration</font>(
+    IC <font color="darkgreen">&quot;Initial condition imposed forever (no conservation)&quot;</font>,
+    steady <font color="darkgreen">&quot;Steady (conservation with steady state)&quot;</font>,
+    dynamic <font color="darkgreen">&quot;Dynamic (conservation with storage)&quot;</font>) <font color="darkgreen">
+  &quot;Options for the conservation of material or energy&quot;</font>;</pre><p></p>
+<a name="FCSys.Species.Enumerations.ConsTrans"></a><pre><font color="blue">type</font> ConsTrans = <font color="blue">enumeration</font>(
+    steady <font color="darkgreen">&quot;Steady (conservation with steady state)&quot;</font>,
+    dynamic <font color="darkgreen">&quot;Dynamic (conservation with storage)&quot;</font>) <font color="darkgreen">
+  &quot;Options for the conservation of momentum&quot;</font>;</pre><p></p>
+<a name="FCSys.Species.Enumerations.Init"></a><pre><font color="blue">type</font> Init = <font color="blue">enumeration</font>(
+    none <font color="darkgreen">&quot;No initialization&quot;</font>,
+    amount <font color="darkgreen">&quot;Prescribed amount&quot;</font>,
+    amountSS <font color="darkgreen">&quot;Steady-state amount&quot;</font>,
+    density <font color="darkgreen">&quot;Prescribed density&quot;</font>,
+    densitySS <font color="darkgreen">&quot;Steady-state density&quot;</font>,
+    volume <font color="darkgreen">&quot;Prescribed volume&quot;</font>,
+    volumeSS <font color="darkgreen">&quot;Steady-state volume&quot;</font>,
+    pressure <font color="darkgreen">&quot;Prescribed pressure&quot;</font>,
+    pressureSS <font color="darkgreen">&quot;Steady-state pressure&quot;</font>,
+    temperature <font color="darkgreen">&quot;Prescribed temperature&quot;</font>,
+    temperatureSS <font color="darkgreen">&quot;Steady-state temperature&quot;</font>,
+    specificEnthalpy <font color="darkgreen">&quot;Prescribed specific enthalpy&quot;</font>,
+    specificEnthalpySS <font color="darkgreen">&quot;Steady-state specific enthalpy&quot;</font>,
+    Gibbs <font color="darkgreen">&quot;Prescribed Gibbs potential&quot;</font>,
+    GibbsSS <font color="darkgreen">&quot;Steady-state Gibbs potential&quot;</font>) <font color="darkgreen">
+  &quot;Methods of initializing a thermodynamic quantity (material or energy)&quot;</font>;</pre><p></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:05 2013.
+</div>
+</span></body></html>

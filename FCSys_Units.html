@@ -3,7 +3,8 @@
 <title>FCSys.Units</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-8-9">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -29,6 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,11 +49,13 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
+      <div class="body"></p>
 
 <h2><a name="FCSys.Units"></a><a href="index.html#FCSys">FCSys</a>.Units</h2>
 
 <b>Constants and units of physical measure</b>
+<p></p>
+<p></p>
 
 <h3>Information</h3>
 
@@ -78,77 +82,84 @@ In general, a unit may be the product of powers of other units, whether they are
 units derived from the base units in the same manner.</p>
 
 <p>In Modelica, a physical quantity is generally expressed as an instance of the <code>Real</code>
-type.  Its <code>value</code> attribute is typically the number associated with the value of the
-quantity (not the value of the quantity, as will be seen).  The <code>unit</code> attribute is a
-string that describes the unit by which the value of the quantity is divided to arrive at the
+type.  Its <code>value</code> attribute is typically a number associated with the value of the
+quantity (not the value of the quantity directly).  The <code>unit</code> attribute is a
+string that describes the unit by which the value of the quantity has been divided to arrive at the
 number.<sup><a href="#fn1">1</a></sup>  The <code>displayUnit</code> attribute (also
-a string) describes the unit by which the value should be divided to arrive at the number as it
+a string) describes the unit by which the value of the quantity should be divided to arrive at the number as it
 is entered by or presented to the user.  The <code>Real</code> type contains other attributes as
 well, including <code>quantity</code> string.</p>
 
-<p>The <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits">SIunits</a> package of the Modelica Standard Library contains types that
+<p>The <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits.html#Modelica.SIunits">SIunits</a> package of the Modelica Standard Library contains types that
 extend the <code>Real</code> type.  The type definitions modify the
 <code>unit</code>, <code>displayUnit</code>, and <code>quantity</code> attributes (among others)
 to represent various physical quantities.  The <code>unit</code> and <code>displayUnit</code>
-attributes are based on SI.   The <code>quantity</code> string is generally used to
-describe the name of the physical quantity.  For example, the <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Velocity">Velocity</a> type has
+attributes are based on the International System of Units (Syst&egrave;me international d'unit&eacute;s, SI).   The <code>quantity</code> string is generally used to
+describe the name of the physical quantity.  For example, the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits.html#Modelica.SIunits.Velocity">Velocity</a> type has
 a <code>unit</code> of "m/s" and a <code>quantity</code> of
-"Velocity".</p>
-
-<p>If an instance of <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Velocity">Velocity</a> has
+"Velocity".  If an instance of <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits.html#Modelica.SIunits.Velocity">Velocity</a> has
 a <code>value</code> of one (<i>v</i> = 1),
 then it is meant that "the value of velocity is one meter per second."  Again, the
-<code>value</code> attribute represents the number, or the value divided by the unit, not the
-value itself.  This apparent conflict is solved in <a href="index.html#FCSys">FCSys</a> by
+<code>value</code> attribute represents the number, or the value of the quantity divided by the unit, not the
+value of the quantity itself.</p>
+
+<p>This apparent conflict is solved in <a href="index.html#FCSys">FCSys</a> by
 establishing units (including the meter and the second) as mathematical entities and writing
-<i>v</i> = 1&middot;m/s.  Here, the variable <i>v</i> directly represents the value.
-Its <code>value</code> attribute is truly the value in the context of the statement by BIPM.</p>
+<i>v</i> = 1 m/s (in code, <code>v = 1*U.m/U.s</code> or simply <code>v = U.m/U.s</code>).
+Here, the variable <i>v</i> directly represents the quantity.
+Its <code>value</code> attribute is truly the value of the quantity in the context of the
+statement by BIPM (above).</p>
 
 One advantage is that unit conversion is handled
-naturally.  The essence of unit conversion is that the phrase "value in unit" mathematically means
-"value divided by unit."  Continuing with the previous example, <i>v</i>
+naturally.  The essence of unit conversion is the phrase "value of a quantity in a unit" typically means
+"value of a quantity divided by a unit."  Continuing with the previous example, <i>v</i>
 is divided by m/s in order to display <i>v</i> in meters per second (as a
 number).  If another unit of length like the foot is established by the
-appropriate relation (ft &asymp; 0.3048&middot;m) and <i>v</i> is divided by
-ft/s, the result is velocity in feet per second (&sim;3.2894).</p>
+appropriate relation (ft &asymp; 0.3048&nbsp;m) and <i>v</i> is divided by
+ft/s, the result is velocity in feet per second (&sim;3.2894).  Some units such as &deg;C, Pag, and dB involve
+offsets or nonlinear transformations between the value of the quantity and the number; these are described by
+functions besides simple division.</p>
 
 <p>As another example, frequency is sometimes represented by a variable
 in hertz or cycles per second (e.g., &nu;) and other times by a variable in radians
-per second (e.g., &omega;).  If the variable represents the value directly, then there
+per second (e.g., &omega;).  If the variable represents the quantity directly, then there
 is no need to specify which units it is in.  The units are included; they have not been factored
-out by division.  A common variable (e.g., <i>f</i>) can be used in both cases, which
-standardizes the equations. The math is equivalent due to the relationships
-among units (e.g., 1&middot;cycle = 2&pi;&middot;rad).</p>
+out by division (or another function).  A common variable (e.g., <i>f</i>) can be used in both cases, which
+simplifies and standardizes the equations of a model.  The forms are algebraically equivalent due to the relationships
+among units (e.g., 1&nbsp;cycle = 2&pi;&nbsp;rad).</p>
 
 <p><b>Method:</b></p>
 
-<p>Each unit is represented by a constant.  The values of most units is derived from
-the values of other units and constants (e.g., 1&middot;cycle = 2&pi;&middot;rad).  However,
-there are several units (in SI, 7) that are independent.  These
+<p>In <a href="index.html#FCSys">FCSys</a>, each unit is a constant quantity.
+The values of the units, like other quantities, is the product of a number and a unit.
+Therefore, units may be derived from other units (e.g., cycle = 2&pi;&nbsp;rad).
+This recursive definition leaves several units (in SI, 7) that are locally independent
+and must be established universally.  These
 base units are established by the "particular example of the quantity
 concerned which is used as a reference" quoted previously
-[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  The designation of "base"
-or "derived" is somewhat arbitrary [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Fritzson2004</a>, p. 375]
-but regardless, there are a number of units that must be defined by example.  Considering only
-the immediate physical system, these units are linearly independent.</p>
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  The choice of the base
+units is somewhat arbitrary [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Fritzson2004</a>, p. 375],
+but regardless, there are a number of units that must be defined by example.</p>
 
 <p>If only SI will be used, then it is easiest to strictly set each of the base units of
 SI equal to one&mdash;the meter (m), kilogram (kg), second (s), ampere (A),
 kelvin (K), mole (mol), and candela (cd).  This is implicitly the case in
-<code>Modelica.SIunits</code>, but again, it hardly captures the idea that a value is the
+the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits.html#Modelica.SIunits">SIunits</a> package, but again, it hardly captures the idea that the
+value of a quantity is the
 product of a number and a unit.</p>
 
-<p>Instead, most of the base units are established by universal physical constants.
-The "particular example of the quantity concerned which is used as a reference"
+<p>Instead, in <a href="index.html#FCSys">FCSys</a>, most of the base units are established by universal
+physical constants.
+The "particular example of the quantity"
 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>] is an experiment that yields
-precise and repeatable results in determining a constant rather than a prototype which is
+precise and universally repeatable results in determining a constant rather than a prototype
+(e.g., the International Prototype of the Kilogram) which is
 carefully controlled and distributed via replicas.
 This method of defining the base units from measured physical quantities (rather than
-vice versa) is natural and reflects the way that standards organizations (e.g., NIST) define units.
+vice versa) is natural and reflects the way that standards organizations (e.g., <a href="www.nist.gov">NIST</a>) define units.
 A system of units is considered to be natural if
-all of its base units are established by physical constants
-[<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>].
-Often, those physical constants are defined to be equal to one, but the values can be chosen to scale
+all of its base units are established by universal phsyical constants.
+Often, those universal constants are defined to be equal to one, but the values can be chosen to scale
 the numerical values of variables during simulation.</p>
 
 <p>There are systems where typical values are many orders of magnitude larger or smaller than the
@@ -175,7 +186,8 @@ and where scaling is a concern
 
 <p>The method is neutral
 with regards to not only the values of the base units, but also the choice of the base units and
-even the number of base units.  This is an advantage because many systems of units are used besides
+even the number of base units.  This is an advantage because many systems of units are used in science
+and technology besides
 SI. As mentioned previously, the choice of base units is somewhat
 arbitrary, and different systems of units are based on different choices.  Some systems of units
 have fewer base units (lower rank) than SI, since additional constraints are added that
@@ -186,7 +198,7 @@ The unit K is eliminated
 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Greiner1995</a>, p. 386]
 or, more precisely, considered a derived unit instead of a base unit.  In SI, the
 kelvin would be derived from the units kilogram, meter, and second (K
-&asymp; 1.381&times;10<sup>-23</sup>&middot;kg&middot;m<sup>2</sup>/s<sup>2</sup>).</p>
+&asymp; 1.381&times;10<sup>-23</sup>&nbsp;kg&nbsp;m<sup>2</sup>/s<sup>2</sup>).</p>
 
     <p>There are six independent constants or units in the <a href="FCSys_Units.html#FCSys.Units">Units</a> package (see
     <a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Units.Bases</a>),
@@ -194,16 +206,18 @@ kelvin would be derived from the units kilogram, meter, and second (K
     In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.
-    First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
+    First, the Faraday constant (<i>k</i><sub>F</sub> or 96485.3399&nbsp;C/mol)
     is normalized to one. This implies that the mole (mol) is proportional to the coulomb
-    (C or Wb&middot;S), which is considered a number of reference particles given the charge number.
-    Also, the gas constant (R or 8.314472&middot;J/(mol&middot;K)) is normalized to one.
+    (C), which is considered a number of reference particles given the charge number.
+    Also, the gas constant (R or 8.314472&nbsp;J/(mol&nbsp;K)) is normalized to one.
     Therefore, the kelvin (K) is proportional to the volt
     (V or J/C). In addition, the radian (rad) is defined as a base constant.
     However, it must be set equal to one in the current version of the International System of Units (SI)
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].</p>
 
-<p><b>Implementation:</b><p>The units and constants are defined as variables in this
+<p><b>Implementation:</b></p>
+
+<p>The units and constants are defined as variables in this
 <a href="FCSys_Units.html#FCSys.Units">Units</a> package.  Each is a <code>constant</code> of
 the appropriate type from the <a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a> package. The
 first section of the Modelica definition of this package establishes mathematical constants.  The next
@@ -224,7 +238,7 @@ The function also sets the default display units.  It is automatically called wh
 loaded from the "FCSys/load.mos" script.  It can also be called manually from the
 "Re-initialize the units" command available in Dymola from the
 <a href="FCSys_Units.html#FCSys.Units">Units</a> package or any subpackage.  A spreadsheet
-(<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/quantities.xls">Resources/quantities.xls</a>) is available to help
+(<a href="../Resources/quantities.xls">Resources/quantities.xls</a>) is available to help
 maintain the quantities, default units, and the setup function.</p>
 
 <p>The values of the units, constants, and prefixes can be evaluated by translating the
@@ -237,7 +251,7 @@ does this and saves the result as "units.mos" in the working directory.</p>
   expressed in units.  Functions are
   included for units that involve offsets<!-- or other functions besides simple scaling-->.
   For conversions that require just a scaling factor, it is simpler to use the
-  units directly.  For example, to convert from potential in volts use <code>v = v_V*V</code>,
+  units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
   where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
 
 <p>An instance of the <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a> model is usually included
@@ -246,37 +260,32 @@ all of the other units and constants.  This is important in order to properly in
 base units or constants are later re-adjusted.</p>
 
 <p>Where the <code>der</code> operator is used in models, it is explicitly divided by the unit second
-(e.g., <code>der(x)/s</code>).  This is necessary because the global variable <code>time</code>
-is in seconds.</p>
+(e.g., <code>der(x)/U.s</code>).  This is necessary because the global variable <code>time</code>
+is in seconds (i.e., <code>time</code> is a number, not a quantity).</p>
 
 <p>In theory, standard Modelica unit checking tools may be used to check the dimensions of equations
 in <a href="index.html#FCSys">FCSys</a>.</p>
 
 <p>Some units are defined that include prefixes (e.g., kg, mm, and kPa).  However,
-most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
+most prefixes must be given as explicit factors (e.g., <code>U.kilo*U.m</code>).</p>
 
-  <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the declarations
-  in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
+  <p>Although it is not necessary in the acausal language of <a href="http://www.modelica.org">Modelica</a>, the declarations
+  in this package are sorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href="http://www.python.org">Python</a>, C).  In fact, this has been implemented in the
-  included <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/FCSys/Resources/Source/Python/doc/index.html">FCRes</a> module for
+  included <a href="../Resources/Source/Python/doc/index.html">FCRes</a> module for
   plotting and analysis.</p>
 
-<hr>
-
-    <small>
-    <p id="fn1">1. Hereafter, the value of the quantity is referred to as simply the value, but
-    it should not be confused with the <code>value</code> attribute (which, as of version 3.3 of the
-    Modelica specification, is the number).</p>
-
-<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href="http://www.gtrc.gatech.edu/">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-  it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-  disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
-  FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p><p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.License">
+FCSys.UsersGuide.License</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+<p></p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
 
 <h3>Package Content</h3>
 
@@ -289,14 +298,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Units.BasesS.png" alt="FCSys.Units.Bases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Bases</a>
 </td><td>Sets of base constants and units</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_degC">from_degC</a>
-</td><td>Convert from temperature in degree Celsius</td></tr>
+</td><td>Convert from temperature in degree Celsius to temperature as a quantity</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>
-</td><td>Convert to temperature in degree Celsius</td></tr>
+</td><td>Convert from temperature as a quantity to temperature in degree Celsius</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_kPag">from_kPag</a>
-</td><td>Convert from gauge pressure in kilopascals</td></tr>
+</td><td>Convert from gauge pressure in kilopascals to absolute pressure as a quantity</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_kPag">to_kPag</a>
-</td><td>Convert to gauge pressure in kilopascals</td></tr>
-<tr><td>pi=2*arccos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
+</td><td>Convert from absolute pressure as a quantity to gauge pressure in kilopascals</td></tr>
+<tr><td>pi=2*acos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
 <tr><td>base</td><td>Scalable base constants and units</td></tr>
 <tr><td>rad=base.rad</td><td>radian</td></tr>
 <tr><td>R_inf=base.R_inf</td><td>Rydberg constant (<i>R</i><sub>&infin;</sub>)</td></tr>
@@ -360,13 +369,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>degree=2*pi*rad/360</td><td>degree (&deg;)</td></tr>
 <tr><td>L=(deci*m)^3</td><td>liter (L or l)</td></tr>
 <tr><td>G_0=2/R_K</td><td>conductance quantum (<i>G</i><sub>0</sub>)</td></tr>
-<tr><td>Phi_0=1/k_J</td><td>magnetic flux quantum (&Phi;<sup>0</sub>)</td></tr>
+<tr><td>Phi_0=1/k_J</td><td>magnetic flux quantum (&Phi;<sub>0</sub>)</td></tr>
 <tr><td>q=G_0*Phi_0</td><td>elementary charge</td></tr>
 <tr><td>h=2*q*Phi_0</td><td>Planck constant</td></tr>
 <tr><td>alpha=pi*1e-7*c*s*G_0/(m*S)</td><td>fine-structure constant (&alpha;)</td></tr>
 <tr><td>Z_0=2*R_K*alpha</td><td>characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)</td></tr>
-<tr><td>mu_0=Z_0/c</td><td>magnetic constant (&mu;<sup>0</sub>)</td></tr>
-<tr><td>epsilon_0=1/(Z_0*c)</td><td>electric constant (&epsilon;<sup>0</sub>)</td></tr>
+<tr><td>mu_0=Z_0/c</td><td>magnetic constant (&mu;<sub>0</sub>)</td></tr>
+<tr><td>epsilon_0=1/(Z_0*c)</td><td>electric constant (&epsilon;<sub>0</sub>)</td></tr>
 <tr><td>k_A=mu_0/(4*pi)</td><td>magnetic force constant (<i>k</i><sub>A</sub>)</td></tr>
 <tr><td>k_e=k_A*c^2</td><td>Coulomb constant (<i>k</i><sub>e</sub>)</td></tr>
 <tr><td>E_h=2*R_inf*h*c</td><td>Hartree energy (<i>E</i><sub>h</sub>)</td></tr>
@@ -385,154 +394,159 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>kJ=kilo*J</td><td>kilojoule</td></tr>
 <tr><td>cm=centi*m</td><td>centimeter</td></tr>
 <tr><td>mm=milli*m</td><td>millimeter</td></tr>
+<tr><td>mA=milli*A</td><td>milliampere</td></tr>
 <tr><td>um=micro*m</td><td>micrometer</td></tr>
 <tr><td>ms=milli*s</td><td>millisecond</td></tr>
 <tr><td>'%'=centi</td><td>percent (%)</td></tr>
 <tr><td>M=U.mol/U.L</td><td>molar</td></tr>
 <tr><td>cc=U.cm^3</td><td>cubic centimeter</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Types and constants</h3>
 
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">arccos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p>
-<pre><font color="blue">replaceable </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">Bases.ScaledFC</a> base <font color="blue">constrainedby </font>Bases.Base <font color="darkgreen">
-  &quot;Scalable base constants and units&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=base.rad <font color="darkgreen">&quot;radian&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">acos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p></p>
+<pre><font color="blue">replaceable </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.LH">Bases.LH</a> base <font color="blue">constrainedby </font>Bases.SImols <font color="darkgreen">
+  &quot;Scalable base constants and units&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=base.rad <font color="darkgreen">&quot;radian&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> R_inf=base.R_inf <font color="darkgreen">
-  &quot;Rydberg constant (<i>R</i><sub>&infin;</sub>)&quot;</font>;</pre><p>
+  &quot;Rydberg constant (<i>R</i><sub>&infin;</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> c=base.c <font color="darkgreen">
-  &quot;speed of light in vacuum (<i>c</i>)&quot;</font>;</pre><p>
+  &quot;speed of light in vacuum (<i>c</i>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> k_J=base.k_J <font color="darkgreen">
-  &quot;Josephson constant (<i>k</i><sub>J</sub>)&quot;</font>;</pre><p>
+  &quot;Josephson constant (<i>k</i><sub>J</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R_K=base.R_K <font color="darkgreen">
-  &quot;von Klitzing constant (<i>R</i><sub>K</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=base.'cd' <font color="darkgreen">&quot;candela&quot;</font>;</pre><p>
+  &quot;von Klitzing constant (<i>R</i><sub>K</sub>)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=base.'cd' <font color="darkgreen">&quot;candela&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=base.k_F <font color="darkgreen">
-  &quot;Faraday constant (<i>k</i><sub>F</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=base.R <font color="darkgreen">&quot;gas constant&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> m=10973731.568539*rad/R_inf <font color="darkgreen">&quot;meter&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> s=299792458*m/c <font color="darkgreen">&quot;second&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Wb=483597.870e9/k_J <font color="darkgreen">&quot;weber&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> S=25812.8074434/R_K <font color="darkgreen">&quot;siemen&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> mol=96485.3365*Wb*S/k_F <font color="darkgreen">&quot;mole&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> K=8.3144621*(Wb*rad)^2*S/(s*mol*R) <font color="darkgreen">&quot;kelvin&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> V=Wb*rad/s <font color="darkgreen">&quot;volt&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> A=V*S <font color="darkgreen">&quot;ampere&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> C=A*s <font color="darkgreen">&quot;coulomb&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> J=V*C <font color="darkgreen">&quot;joule&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Gy=(m/s)^2 <font color="darkgreen">&quot;gray&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> kg=J/Sv <font color="darkgreen">&quot;kilogram &quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yotta=1e24 <font color="darkgreen">&quot;yotta (Y)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zetta=1e21 <font color="darkgreen">&quot;zetta (Z)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> exa=1e18 <font color="darkgreen">&quot;exa (E)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> peta=1e15 <font color="darkgreen">&quot;peta (P)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> tera=1e12 <font color="darkgreen">&quot;tera (T)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> giga=1e9 <font color="darkgreen">&quot;giga (G)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> mega=1e6 <font color="darkgreen">&quot;mega (M)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> kilo=1e3 <font color="darkgreen">&quot;kilo (k)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> hecto=1e2 <font color="darkgreen">&quot;hecto (h)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deca=1e1 <font color="darkgreen">&quot;deca (da)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deci=1e-1 <font color="darkgreen">&quot;deci (d)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> centi=1e-2 <font color="darkgreen">&quot;centi (c)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> milli=1e-3 <font color="darkgreen">&quot;milli (m)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> micro=1e-6 <font color="darkgreen">&quot;micro (u)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> nano=1e-9 <font color="darkgreen">&quot;nano (n)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pico=1e-12 <font color="darkgreen">&quot;pico (p)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> femto=1e-15 <font color="darkgreen">&quot;femto (f)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> atto=1e-18 <font color="darkgreen">&quot;atto (a)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zepto=1e-21 <font color="darkgreen">&quot;zepto (z)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yocto=1e-24 <font color="darkgreen">&quot;yocto (y)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> cyc=2*pi*rad <font color="darkgreen">&quot;cycle&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Hz=cyc/s <font color="darkgreen">&quot;hertz&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Q.Angle2</a> sr=rad^2 <font color="darkgreen">&quot;steradian&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> N=J/m <font color="darkgreen">&quot;newton&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Pa=N/m^2 <font color="darkgreen">&quot;pascal&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> W=J/s <font color="darkgreen">&quot;watt&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> F=C/V <font color="darkgreen">&quot;farad&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> ohm=1/S <font color="darkgreen">&quot;ohm (&Omega;)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> H=V*s/A <font color="darkgreen">&quot;henry&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxAreic">Q.MagneticFluxAreic</a> T=Wb/m^2 <font color="darkgreen">&quot;tesla&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> lm='cd'*sr <font color="darkgreen">&quot;lumen&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">Q.PowerAreic</a> lx=lm/m^2 <font color="darkgreen">&quot;lux&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Bq=Hz <font color="darkgreen">&quot;becquerel&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Sv=Gy <font color="darkgreen">&quot;sievert&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> kat=mol/s <font color="darkgreen">&quot;katal&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> g=kg/kilo <font color="darkgreen">&quot;gram&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> min=60*s <font color="darkgreen">&quot;minute&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> hr=60*min <font color="darkgreen">&quot;hour&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> day=24*hr <font color="darkgreen">&quot;day&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> degree=2*pi*rad/360 <font color="darkgreen">&quot;degree (&deg;)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> L=(deci*m)^3 <font color="darkgreen">&quot;liter (L or l)&quot;</font>;</pre><p>
+  &quot;Faraday constant (<i>k</i><sub>F</sub>)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=base.R <font color="darkgreen">&quot;gas constant&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> m=10973731.568539*rad/R_inf <font color="darkgreen">&quot;meter&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> s=299792458*m/c <font color="darkgreen">&quot;second&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Wb=483597.870e9/k_J <font color="darkgreen">&quot;weber&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> S=25812.8074434/R_K <font color="darkgreen">&quot;siemen&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> mol=96485.3365*Wb*S/k_F <font color="darkgreen">&quot;mole&quot;</font>;</pre><p></p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> K=8.3144621*(Wb*rad)^2*S/(s*mol*R) <font color="darkgreen">&quot;kelvin&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> V=Wb*rad/s <font color="darkgreen">&quot;volt&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> A=V*S <font color="darkgreen">&quot;ampere&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> C=A*s <font color="darkgreen">&quot;coulomb&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> J=V*C <font color="darkgreen">&quot;joule&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Gy=(m/s)^2 <font color="darkgreen">&quot;gray&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> kg=J/Sv <font color="darkgreen">&quot;kilogram &quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yotta=1e24 <font color="darkgreen">&quot;yotta (Y)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zetta=1e21 <font color="darkgreen">&quot;zetta (Z)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> exa=1e18 <font color="darkgreen">&quot;exa (E)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> peta=1e15 <font color="darkgreen">&quot;peta (P)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> tera=1e12 <font color="darkgreen">&quot;tera (T)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> giga=1e9 <font color="darkgreen">&quot;giga (G)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> mega=1e6 <font color="darkgreen">&quot;mega (M)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> kilo=1e3 <font color="darkgreen">&quot;kilo (k)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> hecto=1e2 <font color="darkgreen">&quot;hecto (h)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deca=1e1 <font color="darkgreen">&quot;deca (da)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deci=1e-1 <font color="darkgreen">&quot;deci (d)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> centi=1e-2 <font color="darkgreen">&quot;centi (c)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> milli=1e-3 <font color="darkgreen">&quot;milli (m)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> micro=1e-6 <font color="darkgreen">&quot;micro (u)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> nano=1e-9 <font color="darkgreen">&quot;nano (n)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pico=1e-12 <font color="darkgreen">&quot;pico (p)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> femto=1e-15 <font color="darkgreen">&quot;femto (f)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> atto=1e-18 <font color="darkgreen">&quot;atto (a)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zepto=1e-21 <font color="darkgreen">&quot;zepto (z)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yocto=1e-24 <font color="darkgreen">&quot;yocto (y)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> cyc=2*pi*rad <font color="darkgreen">&quot;cycle&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Hz=cyc/s <font color="darkgreen">&quot;hertz&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Q.Angle2</a> sr=rad^2 <font color="darkgreen">&quot;steradian&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> N=J/m <font color="darkgreen">&quot;newton&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Pa=N/m^2 <font color="darkgreen">&quot;pascal&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> W=J/s <font color="darkgreen">&quot;watt&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> F=C/V <font color="darkgreen">&quot;farad&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> ohm=1/S <font color="darkgreen">&quot;ohm (&Omega;)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> H=V*s/A <font color="darkgreen">&quot;henry&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxAreic">Q.MagneticFluxAreic</a> T=Wb/m^2 <font color="darkgreen">&quot;tesla&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> lm='cd'*sr <font color="darkgreen">&quot;lumen&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">Q.PowerAreic</a> lx=lm/m^2 <font color="darkgreen">&quot;lux&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Bq=Hz <font color="darkgreen">&quot;becquerel&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Sv=Gy <font color="darkgreen">&quot;sievert&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> kat=mol/s <font color="darkgreen">&quot;katal&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> g=kg/kilo <font color="darkgreen">&quot;gram&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> min=60*s <font color="darkgreen">&quot;minute&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> hr=60*min <font color="darkgreen">&quot;hour&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> day=24*hr <font color="darkgreen">&quot;day&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> degree=2*pi*rad/360 <font color="darkgreen">&quot;degree (&deg;)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> L=(deci*m)^3 <font color="darkgreen">&quot;liter (L or l)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> G_0=2/R_K <font color="darkgreen">
-  &quot;conductance quantum (<i>G</i><sub>0</sub>)&quot;</font>;</pre><p>
+  &quot;conductance quantum (<i>G</i><sub>0</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Phi_0=1/k_J <font color="darkgreen">
-  &quot;magnetic flux quantum (&Phi;<sup>0</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> q=G_0*Phi_0 <font color="darkgreen">&quot;elementary charge&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MomentumRotational">Q.MomentumRotational</a> h=2*q*Phi_0 <font color="darkgreen">&quot;Planck constant&quot;</font>;</pre><p>
+  &quot;magnetic flux quantum (&Phi;<sub>0</sub>)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> q=G_0*Phi_0 <font color="darkgreen">&quot;elementary charge&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MomentumRotational">Q.MomentumRotational</a> h=2*q*Phi_0 <font color="darkgreen">&quot;Planck constant&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> alpha=pi*1e-7*c*s*G_0/(m*S) <font color="darkgreen">
-  &quot;fine-structure constant (&alpha;)&quot;</font>;</pre><p>
+  &quot;fine-structure constant (&alpha;)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> Z_0=2*R_K*alpha <font color="darkgreen">
-  &quot;characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)&quot;</font>;</pre><p>
+  &quot;characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> mu_0=Z_0/c <font color="darkgreen">
-  &quot;magnetic constant (&mu;<sup>0</sub>)&quot;</font>;</pre><p>
+  &quot;magnetic constant (&mu;<sub>0</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Q.Permittivity</a> epsilon_0=1/(Z_0*c) <font color="darkgreen">
-  &quot;electric constant (&epsilon;<sup>0</sub>)&quot;</font>;</pre><p>
+  &quot;electric constant (&epsilon;<sub>0</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> k_A=mu_0/(4*pi) <font color="darkgreen">
-  &quot;magnetic force constant (<i>k</i><sub>A</sub>)&quot;</font>;</pre><p>
+  &quot;magnetic force constant (<i>k</i><sub>A</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">Q.PermittivityReciprocal</a> k_e=k_A*c^2 <font color="darkgreen">
-  &quot;Coulomb constant (<i>k</i><sub>e</sub>)&quot;</font>;</pre><p>
+  &quot;Coulomb constant (<i>k</i><sub>e</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> E_h=2*R_inf*h*c <font color="darkgreen">
-  &quot;Hartree energy (<i>E</i><sub>h</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> eV=q*V <font color="darkgreen">&quot;electron volt&quot;</font>;</pre><p>
+  &quot;Hartree energy (<i>E</i><sub>h</sub>)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> eV=q*V <font color="darkgreen">&quot;electron volt&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> N_A=k_F/q <font color="darkgreen">
-  &quot;Avogadro constant (<i>N</i><sub>A</sub>)&quot;</font>;</pre><p>
+  &quot;Avogadro constant (<i>N</i><sub>A</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> k_B=R/N_A <font color="darkgreen">
-  &quot;Boltzmann constant (<i>k</i><sub>B</sub>)&quot;</font>;</pre><p>
+  &quot;Boltzmann constant (<i>k</i><sub>B</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">Q.PowerArea</a> c_1=cyc*h*c^2 <font color="darkgreen">
-  &quot;first radiation constant (<i>c</i><sub>1</sub>)&quot;</font>;</pre><p>
+  &quot;first radiation constant (<i>c</i><sub>1</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_2=h*c/k_B <font color="darkgreen">
-  &quot;second radiation constant (<i>c</i><sub>2</sub>)&quot;</font>;</pre><p>
+  &quot;second radiation constant (<i>c</i><sub>2</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_3_lambda=c_2/4.965114231744276 <font color="darkgreen">
-  &quot;Wien wavelength displacement law constant (<i>c</i><sub>3 &lambda;</sub>)&quot;</font>;</pre><p>
+  &quot;Wien wavelength displacement law constant (<i>c</i><sub>3 &lambda;</sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> c_3_f=2.821439372122079*k_B/h <font color="darkgreen">
-  &quot;Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)&quot;</font>;</pre><p>
+  &quot;Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)&quot;</font>;</pre><p></p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreicPerPotential4">Q.PowerAreicPerPotential4</a> sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*c^2)
-  <font color="darkgreen">&quot;Stefan-Boltzmann constant (&sigma;)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=1e5*Pa <font color="darkgreen">&quot;bar&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> angstrom=0.1*nano*m <font color="darkgreen">&quot;angstrom (&#8491;)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=101325*Pa <font color="darkgreen">&quot;atmosphere&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> kPa=kilo*Pa <font color="darkgreen">&quot;kilopascal&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> kJ=kilo*J <font color="darkgreen">&quot;kilojoule&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> cm=centi*m <font color="darkgreen">&quot;centimeter&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=milli*m <font color="darkgreen">&quot;millimeter&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> um=micro*m <font color="darkgreen">&quot;micrometer&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> ms=milli*s <font color="darkgreen">&quot;millisecond&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=centi <font color="darkgreen">&quot;percent (%)&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> M=U.mol/U.L <font color="darkgreen">&quot;molar&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cm^3 <font color="darkgreen">&quot;cubic centimeter&quot;</font>;</pre><p>
+  <font color="darkgreen">&quot;Stefan-Boltzmann constant (&sigma;)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=1e5*Pa <font color="darkgreen">&quot;bar&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> angstrom=0.1*nano*m <font color="darkgreen">&quot;angstrom (&#8491;)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=101325*Pa <font color="darkgreen">&quot;atmosphere&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> kPa=kilo*Pa <font color="darkgreen">&quot;kilopascal&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> kJ=kilo*J <font color="darkgreen">&quot;kilojoule&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> cm=centi*m <font color="darkgreen">&quot;centimeter&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=milli*m <font color="darkgreen">&quot;millimeter&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> mA=milli*A <font color="darkgreen">&quot;milliampere&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> um=micro*m <font color="darkgreen">&quot;micrometer&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> ms=milli*s <font color="darkgreen">&quot;millisecond&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=centi <font color="darkgreen">&quot;percent (%)&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Density">Q.Density</a> M=U.mol/U.L <font color="darkgreen">&quot;molar&quot;</font>;</pre><p></p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cm^3 <font color="darkgreen">&quot;cubic centimeter&quot;</font>;</pre><p></p>
 <hr>
 
-<h2><a name="FCSys.Units.setup"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.setup</h2>
-
-<b>Establish conversions to display quantities in units</b>
+<h2><img src="images/FCSys.Units.setupI.png" alt="FCSys.Units.setup" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.setup"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.setup</h2>
+<b>Establish conversions to display quantities in units</b><p></p>
+<p></p>
 
 <h3>Information</h3>
 
-<p>This has no inputs or outputs.
+<p>This function has no inputs or outputs.  It is essentially a script.
 The <code>defineDefaultDisplayUnit</code> and <code>defineUnitConversion</code> functions
-used by this function are not defined in the Modelica language (as of version 3.3) but are
-recognized by Dymola.
-For more information, see the documentation for the
-<a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
+used here are not defined in the Modelica language (as of version 3.3) but are
+recognized by Dymola.</p>
 
-<p>
+<p>For more information, please see the documentation for the
+<a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p></p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">function</font> setup <font color="darkgreen">&quot;Establish conversions to display quantities in units&quot;</font>
-  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Utilities.Streams.html#Modelica.Utilities.Streams.print">Modelica.Utilities.Streams.print</a>;
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print">Modelica.Utilities.Streams.print</a>;
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
 <font color="blue">algorithm </font>
   <font color="red">print</font>(&quot;Establishing display units&hellip;&quot;);
@@ -544,83 +558,85 @@ For more information, see the documentation for the
   <font color="darkgreen">// quantities in FCSys.Quantities should be used by default, then specify</font>
   <font color="darkgreen">// them here.  Be sure that the desired unit is included in a</font>
   <font color="darkgreen">// defineUnitConversion command below.</font>
-  <font color="darkgreen">// Generated from FCSys/Resources/quantities.xls, 2013-6-10</font>
+  <font color="darkgreen">// Generated from FCSys/Resources/quantities.xls, 2013-11-4</font>
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(A2.T3)&quot;, &quot;cd&quot;) <font color="darkgreen">&quot;Radiant power&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.T2/M&quot;, &quot;1/kPa&quot;) <font color="darkgreen">&quot;Reciprocal of pressure&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;1/L&quot;, &quot;1/m&quot;) <font color="darkgreen">&quot;Reciprocal of length&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;1/N&quot;, &quot;1/mol&quot;) <font color="darkgreen">&quot;Reciprocal of amount&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;A&quot;, &quot;rad&quot;) <font color="darkgreen">&quot;Angle&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;A.N.T/(l2.m)&quot;, &quot;1/Wb&quot;) <font color="darkgreen">
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.T/M&quot;, &quot;1/(Pa.s)&quot;) <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;A.N.T/(L2.M)&quot;, &quot;1/Wb&quot;) <font color="darkgreen">
     &quot;Reciprocal of magnetic flux&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;A/l&quot;, &quot;rad/m&quot;) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;A/T&quot;, &quot;rad/s&quot;) <font color="darkgreen">&quot;Frequency&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;A2&quot;, &quot;sr&quot;) <font color="darkgreen">&quot;Solid angle&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l&quot;, &quot;cm&quot;) <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.m/N2&quot;, &quot;H/m&quot;) <font color="darkgreen">&quot;Permeability&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.m/T2&quot;, &quot;N&quot;) <font color="darkgreen">&quot;Force&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.T/m&quot;, &quot;1/(Pa.s)&quot;) <font color="darkgreen">&quot;Fluidity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.T/N&quot;, &quot;cm/A&quot;) <font color="darkgreen">&quot;Resistivity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.T2/m&quot;, &quot;1/kPa&quot;) <font color="darkgreen">&quot;Reciprocal of pressure&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l/(T.s)&quot;, &quot;cm/s2&quot;) <font color="darkgreen">
-    &quot;for derivative of velocity in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l/N&quot;, &quot;m/mol&quot;) <font color="darkgreen">&quot;Specific length&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l/T&quot;, &quot;cm/s&quot;) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l/T2&quot;, &quot;cm/s2&quot;) <font color="darkgreen">&quot;Acceleration&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2&quot;, &quot;cm2&quot;) <font color="darkgreen">&quot;Area&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(A.N.T)&quot;, &quot;Wb&quot;) <font color="darkgreen">&quot;Magnetic flux&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(A.T)&quot;, &quot;J.s/rad&quot;) <font color="darkgreen">&quot;Rotational momentum&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(A2.T3)&quot;, &quot;cd&quot;) <font color="darkgreen">&quot;Radiant power&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T2.s)&quot;, &quot;V/s&quot;) <font color="darkgreen">
-    &quot;for derivative of potential in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T2)&quot;, &quot;V&quot;) <font color="darkgreen">&quot;Potential&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l.m/(N.T2)&quot;, &quot;V/m&quot;) <font color="darkgreen">&quot;Specific force&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N.T3)&quot;, &quot;V/s&quot;) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/(N2.T)&quot;, &quot;ohm&quot;) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/N2&quot;, &quot;uH&quot;) <font color="darkgreen">&quot;Inductance&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/T2&quot;, &quot;J&quot;) <font color="darkgreen">&quot;Energy&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2.m/T3&quot;, &quot;W&quot;) <font color="darkgreen">&quot;Power&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2/N&quot;, &quot;cm2/C&quot;) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2/N&quot;, &quot;cm2/mol&quot;) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2/T&quot;, &quot;cm2/s&quot;) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l2/T2&quot;, &quot;Sv&quot;) <font color="darkgreen">&quot;Squared velocity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3&quot;, &quot;cc&quot;) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3.m/(A.N.T2)&quot;, &quot;V.m/rad&quot;) <font color="darkgreen">
-    &quot;Potential per wavenumber&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3.m/(N2.T2)&quot;, &quot;m/H&quot;) <font color="darkgreen">&quot;Reciprocal of permittivity&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3/(N.s)&quot;, &quot;cc/(C.s)&quot;) <font color="darkgreen">
-    &quot;for derivative of specific volume in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3/(N.T)&quot;, &quot;cc/(C.s)&quot;) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3/N&quot;, &quot;cc/C&quot;) <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l3/T&quot;, &quot;L/min&quot;) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;l4.m/T3&quot;, &quot;W.m2&quot;) <font color="darkgreen">&quot;Power times area&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m&quot;, &quot;g&quot;) <font color="darkgreen">&quot;Mass&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m.T5/l8&quot;, &quot;W/(m2.K4)&quot;) <font color="darkgreen">
-    &quot;Areic power per 4th power of potential&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(A.N.T)&quot;, &quot;T&quot;) <font color="darkgreen">&quot;Areic magnetic flux&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(l.T2.s)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">
-    &quot;for derivative of pressure in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(l.T2)&quot;, &quot;kPa&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(l.T3)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">&quot;Rate of pressure&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/(T2.l.s)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">
-    &quot;for derivative of pressure in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/N&quot;, &quot;g/mol&quot;) <font color="darkgreen">&quot;Specific mass&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/l3&quot;, &quot;g/cc&quot;) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/s&quot;, &quot;g/s&quot;) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;m/T3&quot;, &quot;W/m2&quot;) <font color="darkgreen">&quot;Areic power&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N&quot;, &quot;C&quot;) <font color="darkgreen">&quot;Amount&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N.T/m&quot;, &quot;cm2/(V.s)&quot;) <font color="darkgreen">&quot;Mobility&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(l2.T)&quot;, &quot;A/cm2&quot;) <font color="darkgreen">&quot;Areic current&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(l2.T)&quot;, &quot;A/cm2&quot;) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(l3.T)&quot;, &quot;C/(cc.s)&quot;) <font color="darkgreen">&quot;Rate of density&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(T.s)&quot;, &quot;A/s&quot;) <font color="darkgreen">
-    &quot;for derivative of current in Dymola&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/l3&quot;, &quot;C/cc&quot;) <font color="darkgreen">&quot;Density&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;N/s&quot;, &quot;A&quot;) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;N/T&quot;, &quot;A&quot;) <font color="darkgreen">&quot;Current&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(L2.T)&quot;, &quot;A/cm2&quot;) <font color="darkgreen">&quot;Areic current&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(T.s)&quot;, &quot;A/s&quot;) <font color="darkgreen">
+    &quot;for derivative of current in Dymola&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;N/T2&quot;, &quot;A/s&quot;) <font color="darkgreen">&quot;Rate of current&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T/(l2.m)&quot;, &quot;S&quot;) <font color="darkgreen">&quot;Electrical conductance&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T2/(l2.m)&quot;, &quot;uF&quot;) <font color="darkgreen">&quot;Capacitance&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T2/(l3.m)&quot;, &quot;F/m&quot;) <font color="darkgreen">&quot;Permittivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.N/T&quot;, &quot;A.m&quot;) <font color="darkgreen">&quot;VelocityAmount&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N&quot;, &quot;C&quot;) <font color="darkgreen">&quot;Amount&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/L3&quot;, &quot;C/cc&quot;) <font color="darkgreen">&quot;Density&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N/(L3.T)&quot;, &quot;C/(cc.s)&quot;) <font color="darkgreen">&quot;Rate of concentration&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3&quot;, &quot;cc&quot;) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3/N&quot;, &quot;cc/C&quot;) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3/(N.s)&quot;, &quot;cc/(C.s)&quot;) <font color="darkgreen">
+    &quot;for derivative of specific volume in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3/(N.T)&quot;, &quot;cc/(C.s)&quot;) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L&quot;, &quot;cm&quot;) <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.T/N&quot;, &quot;cm/A&quot;) <font color="darkgreen">&quot;Resistivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L/T&quot;, &quot;cm/s&quot;) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L/(T.s)&quot;, &quot;cm/s2&quot;) <font color="darkgreen">
+    &quot;for derivative of velocity in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2&quot;, &quot;cm2&quot;) <font color="darkgreen">&quot;Area&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2/N&quot;, &quot;cm2/C&quot;) <font color="darkgreen">&quot;Specific area&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2/T&quot;, &quot;cm2/s&quot;) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N.T/M&quot;, &quot;cm2/(V.s)&quot;) <font color="darkgreen">&quot;Mobility&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T2/(L3.M)&quot;, &quot;F/m&quot;) <font color="darkgreen">&quot;Permittivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M&quot;, &quot;g&quot;) <font color="darkgreen">&quot;Mass&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/L3&quot;, &quot;g/cc&quot;) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/N&quot;, &quot;g/mol&quot;) <font color="darkgreen">&quot;Specific mass&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/s&quot;, &quot;g/s&quot;) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.M/N2&quot;, &quot;H/m&quot;) <font color="darkgreen">&quot;Permeability&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/T2&quot;, &quot;J&quot;) <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(A.T)&quot;, &quot;J.s/rad&quot;) <font color="darkgreen">&quot;Rotational momentum&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;T/N&quot;, &quot;K/W&quot;) <font color="darkgreen">&quot;Thermal resistance&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/(L.T2)&quot;, &quot;kPa&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3/T&quot;, &quot;L/min&quot;) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3.M/(N2.T2)&quot;, &quot;m/H&quot;) <font color="darkgreen">&quot;Reciprocal of permittivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L/N&quot;, &quot;m/mol&quot;) <font color="darkgreen">&quot;Specific length&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L/T2&quot;, &quot;m/s2&quot;) <font color="darkgreen">&quot;Acceleration&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T2/(L2.M)&quot;, &quot;uF&quot;) <font color="darkgreen">&quot;Capacitance&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/N2&quot;, &quot;uH&quot;) <font color="darkgreen">&quot;Inductance&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.M/T2&quot;, &quot;N&quot;) <font color="darkgreen">&quot;Force&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.M/(N.T)&quot;, &quot;N/A&quot;) <font color="darkgreen">&quot;Continuity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(N2.T)&quot;, &quot;ohm&quot;) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/(L.T2.s)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">
+    &quot;for derivative of pressure in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/(L.T3)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">&quot;Rate of pressure&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/(T2.L.s)&quot;, &quot;Pa/s&quot;) <font color="darkgreen">
+    &quot;for derivative of pressure in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;A&quot;, &quot;rad&quot;) <font color="darkgreen">&quot;Angle&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;A/L&quot;, &quot;rad/m&quot;) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;A/T&quot;, &quot;rad/s&quot;) <font color="darkgreen">&quot;Frequency&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T/(L2.M)&quot;, &quot;S&quot;) <font color="darkgreen">&quot;Electrical conductance&quot;</font>;
   <font color="red">defineDefaultDisplayUnit</font>(&quot;T&quot;, &quot;s&quot;) <font color="darkgreen">&quot;Time&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;T/l&quot;, &quot;s/m&quot;) <font color="darkgreen">&quot;Lineic time&quot;</font>;
-  <font color="red">defineDefaultDisplayUnit</font>(&quot;T/l2&quot;, &quot;s/mm2&quot;) <font color="darkgreen">&quot;Material resistivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;N2.T/(L3.M)&quot;, &quot;S/m&quot;) <font color="darkgreen">&quot;Electrical conductivity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;T/L&quot;, &quot;s/m&quot;) <font color="darkgreen">&quot;Lineic time&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;A2&quot;, &quot;sr&quot;) <font color="darkgreen">&quot;Solid angle&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2/T2&quot;, &quot;Sv&quot;) <font color="darkgreen">&quot;Squared velocity&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/(A.N.T)&quot;, &quot;T&quot;) <font color="darkgreen">&quot;Areic magnetic flux&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(N.T2)&quot;, &quot;V&quot;) <font color="darkgreen">&quot;Potential&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L.M/(N.T2)&quot;, &quot;V/m&quot;) <font color="darkgreen">&quot;Specific force&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(N.T2.s)&quot;, &quot;V/s&quot;) <font color="darkgreen">
+    &quot;for derivative of potential in Dymola&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(N.T3)&quot;, &quot;V/s&quot;) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L3.M/(A.N.T2)&quot;, &quot;V.m/rad&quot;) <font color="darkgreen">
+    &quot;Potential per wavenumber&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/T3&quot;, &quot;W&quot;) <font color="darkgreen">&quot;Power&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M/T3&quot;, &quot;W/m2&quot;) <font color="darkgreen">&quot;Areic power&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;M.T5/L8&quot;, &quot;W/(m2.K4)&quot;) <font color="darkgreen">
+    &quot;Areic power per 4th power of potential&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L4.M/T3&quot;, &quot;W.m2&quot;) <font color="darkgreen">&quot;Power times area&quot;</font>;
+  <font color="red">defineDefaultDisplayUnit</font>(&quot;L2.M/(A.N.T)&quot;, &quot;Wb&quot;) <font color="darkgreen">&quot;Magnetic flux&quot;</font>;
 
   <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Conversions to display quantities in units</font>
@@ -630,562 +646,454 @@ For more information, see the documentation for the
     &quot;%&quot;,
     1/'%') <font color="darkgreen">&quot;Number&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;1&quot;,
-    &quot;J/(mol.K)&quot;,
-    mol*K/J) <font color="darkgreen">&quot;Absolute number&quot;</font>;
+    &quot;L2.M/(A2.T3)&quot;,
+    &quot;cd&quot;,
+    1/'cd') <font color="darkgreen">&quot;Radiant power&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;1/N&quot;,
     &quot;1/C&quot;,
     C) <font color="darkgreen">&quot;Reciprocal of amount&quot;</font>;
   <font color="red">defineUnitConversion</font>(
+    &quot;L.T2/M&quot;,
+    &quot;1/kPa&quot;,
+    kilo*Pa) <font color="darkgreen">&quot;Reciprocal of pressure&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;1/L&quot;,
+    &quot;1/m&quot;,
+    m) <font color="darkgreen">&quot;Reciprocal of length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
     &quot;1/N&quot;,
     &quot;1/mol&quot;,
     mol) <font color="darkgreen">&quot;Reciprocal of amount&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;A&quot;,
-    &quot;degree&quot;,
-    1/degree) <font color="darkgreen">&quot;Angle&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A&quot;,
-    &quot;rad&quot;,
-    1/rad) <font color="darkgreen">&quot;Angle&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A.N.T/(l2.m)&quot;,
-    &quot;1/Wb&quot;,
-    Wb) <font color="darkgreen">&quot;Reciprocal of magnetic flux&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A/l&quot;,
-    &quot;cyc/m&quot;,
-    m/cyc) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A/l&quot;,
-    &quot;rad/m&quot;,
-    m/rad) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A/T&quot;,
-    &quot;Hz&quot;,
-    1/Hz) <font color="darkgreen">&quot;Frequency&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A/T&quot;,
-    &quot;rad/s&quot;,
-    s/rad) <font color="darkgreen">&quot;Frequency&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;A2&quot;,
-    &quot;sr&quot;,
-    1/sr) <font color="darkgreen">&quot;Solid angle&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l&quot;,
-    &quot;cm&quot;,
-    1/cm) <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l&quot;,
-    &quot;m&quot;,
-    1/m) <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l&quot;,
-    &quot;mm&quot;,
-    1/mm) <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.m/N2&quot;,
-    &quot;H/m&quot;,
-    m/H) <font color="darkgreen">&quot;Permeability&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.m/T2&quot;,
-    &quot;N&quot;,
-    1/N) <font color="darkgreen">&quot;Force&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T/m&quot;,
-    &quot;1/(Pa.s)&quot;,
-    Pa*s) <font color="darkgreen">&quot;Fluidity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T/N&quot;,
-    &quot;cm/A&quot;,
-    A/cm) <font color="darkgreen">&quot;Resistivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T/N&quot;,
-    &quot;m/A&quot;,
-    A/m) <font color="darkgreen">&quot;Resistivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T/N&quot;,
-    &quot;m.K/W&quot;,
-    W/(m*K)) <font color="darkgreen">&quot;Resistivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T2/m&quot;,
-    &quot;1/kPa&quot;,
-    kilo*Pa) <font color="darkgreen">&quot;Reciprocal of pressure&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.T2/m&quot;,
+    &quot;L.T2/M&quot;,
     &quot;1/Pa&quot;,
     Pa) <font color="darkgreen">&quot;Reciprocal of pressure&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;l/(T.s)&quot;,
-    &quot;cm/s2&quot;,
-    s/cm) <font color="darkgreen">&quot;for derivative of velocity in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/(T.s)&quot;,
-    &quot;m/s2&quot;,
-    s/m) <font color="darkgreen">&quot;for derivative of velocity in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/N&quot;,
-    &quot;m/C&quot;,
-    C/m) <font color="darkgreen">&quot;Specific length&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/N&quot;,
-    &quot;m/mol&quot;,
-    mol/m) <font color="darkgreen">&quot;Specific length&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T&quot;,
-    &quot;cm/s&quot;,
-    s/cm) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T&quot;,
-    &quot;m/s&quot;,
-    s/m) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T&quot;,
-    &quot;mm/s&quot;,
-    s/mm) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T&quot;,
-    &quot;um/s&quot;,
-    s/um) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T2&quot;,
-    &quot;cm/s2&quot;,
-    s^2/cm) <font color="darkgreen">&quot;Acceleration&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l/T2&quot;,
-    &quot;m/s2&quot;,
-    s^2/m) <font color="darkgreen">&quot;Acceleration&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2&quot;,
-    &quot;cm2&quot;,
-    1/cm^2) <font color="darkgreen">&quot;Area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2&quot;,
-    &quot;m2&quot;,
-    1/m^2) <font color="darkgreen">&quot;Area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(A.N.T)&quot;,
-    &quot;Wb&quot;,
-    1/Wb) <font color="darkgreen">&quot;Magnetic flux&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(A.T)&quot;,
-    &quot;J.s/rad&quot;,
-    rad/(J*s)) <font color="darkgreen">&quot;Rotational momentum&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(A2.T3)&quot;,
-    &quot;cd&quot;,
-    1/'cd') <font color="darkgreen">&quot;Radiant power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(A2.T3)&quot;,
-    &quot;W/sr&quot;,
-    sr/W) <font color="darkgreen">&quot;Radiant power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2.s)&quot;,
-    &quot;K/s&quot;,
-    1/K) <font color="darkgreen">&quot;for derivative of potential in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2.s)&quot;,
-    &quot;V/s&quot;,
-    1/V) <font color="darkgreen">&quot;for derivative of potential in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
-    &quot;J/mol&quot;,
-    mol/J) <font color="darkgreen">&quot;Potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
-    &quot;K&quot;,
-    1/K) <font color="darkgreen">&quot;Absolute potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
-    &quot;kJ/mol&quot;,
-    mol/kJ) <font color="darkgreen">&quot;Potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
-    &quot;V&quot;,
-    1/V) <font color="darkgreen">&quot;Potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l.m/(N.T2)&quot;,
-    &quot;V/m&quot;,
-    m/V) <font color="darkgreen">&quot;Specific force&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T3)&quot;,
-    &quot;K/s&quot;,
-    s/K) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T3)&quot;,
-    &quot;V/s&quot;,
-    s/V) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N2.T)&quot;,
-    &quot;ohm&quot;,
-    1/ohm) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/N2&quot;,
-    &quot;H&quot;,
-    1/H) <font color="darkgreen">&quot;Inductance&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/N2&quot;,
-    &quot;uH&quot;,
-    1/(micro*H)) <font color="darkgreen">&quot;Inductance&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/T2&quot;,
-    &quot;J&quot;,
-    1/J) <font color="darkgreen">&quot;Energy&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/T3&quot;,
-    &quot;lm&quot;,
-    1/lm) <font color="darkgreen">&quot;Power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/T3&quot;,
-    &quot;W&quot;,
-    1/W) <font color="darkgreen">&quot;Power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/N&quot;,
-    &quot;cm2/C&quot;,
-    C/cm^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/N&quot;,
-    &quot;cm2/mol&quot;,
-    mol/cm^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/N&quot;,
-    &quot;m2/C&quot;,
-    C/m^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/N&quot;,
-    &quot;m2/mol&quot;,
-    mol/m^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/T&quot;,
-    &quot;cm2/s&quot;,
-    s/cm^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/T&quot;,
-    &quot;m2/s&quot;,
-    s/m^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/T&quot;,
-    &quot;mm2/s&quot;,
-    s/mm^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l2/T2&quot;,
-    &quot;Sv&quot;,
-    1/Sv) <font color="darkgreen">&quot;Squared velocity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3&quot;,
-    &quot;cc&quot;,
-    1/cc) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3&quot;,
-    &quot;L&quot;,
-    1/L) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3&quot;,
-    &quot;m3&quot;,
-    1/m^3) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3.m/(A.N.T2)&quot;,
-    &quot;K.m/rad&quot;,
-    rad/(K*m)) <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3.m/(A.N.T2)&quot;,
-    &quot;V.m/rad&quot;,
-    rad/(V*m)) <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3.m/(N2.T2)&quot;,
-    &quot;m/H&quot;,
-    H/m) <font color="darkgreen">&quot;Reciprocal of permittivity&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.s)&quot;,
-    &quot;cc/(C.s)&quot;,
-    C*s/cc) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.s)&quot;,
-    &quot;m3/(C.s)&quot;,
-    C*s/m^3) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.s)&quot;,
-    &quot;m3/(mol.s)&quot;,
-    mol*s/m^3) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.T)&quot;,
-    &quot;cc/(C.s)&quot;,
-    C*s/cc) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.T)&quot;,
-    &quot;m3/(C.s)&quot;,
-    C*s/m^3) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/(N.T)&quot;,
-    &quot;m3/(mol.s)&quot;,
-    mol*s/m^3) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/N&quot;,
-    &quot;cc/C&quot;,
-    C/cc) <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/N&quot;,
-    &quot;m3/C&quot;,
-    C/m^3) <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/N&quot;,
-    &quot;m3/mol&quot;,
-    mol/m^3) <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/s&quot;,
-    &quot;cc/s&quot;,
-    1/(centi*m)^3) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/s&quot;,
-    &quot;L/min&quot;,
-    min/(L*s)) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/s&quot;,
-    &quot;m3/s&quot;,
-    1/m^3) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/T&quot;,
-    &quot;cc/s&quot;,
-    s/cc) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/T&quot;,
-    &quot;L/min&quot;,
-    min/L) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l3/T&quot;,
-    &quot;m3/s&quot;,
-    s/m^3) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;l4.m/T3&quot;,
-    &quot;W.m2&quot;,
-    1/(W*m^2)) <font color="darkgreen">&quot;Power times area&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m&quot;,
-    &quot;g&quot;,
-    1/g) <font color="darkgreen">&quot;Mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m&quot;,
-    &quot;kg&quot;,
-    1/kg) <font color="darkgreen">&quot;Mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m.T5/l8&quot;,
-    &quot;W/(m2.K4)&quot;,
-    m^2*K^4/W) <font color="darkgreen">&quot;Areic power per 4th power of potential&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(A.N.T)&quot;,
-    &quot;T&quot;,
-    1/T) <font color="darkgreen">&quot;Areic magnetic flux&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2.s)&quot;,
-    &quot;Pa/s&quot;,
-    1/Pa) <font color="darkgreen">&quot;for derivative of pressure in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2)&quot;,
-    &quot;atm&quot;,
-    1/atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2)&quot;,
-    &quot;bar&quot;,
-    1/bar) <font color="darkgreen">&quot;Pressure&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2)&quot;,
-    &quot;kPa&quot;,
-    1/(kilo*Pa)) <font color="darkgreen">&quot;Pressure&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2)&quot;,
-    &quot;Pa&quot;,
-    1/Pa) <font color="darkgreen">&quot;Pressure&quot;</font>;
-
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T3)&quot;,
-    &quot;Pa/s&quot;,
-    s/Pa) <font color="darkgreen">&quot;Rate of pressure&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/(T2.l.s)&quot;,
-    &quot;Pa/s&quot;,
-    1/Pa) <font color="darkgreen">&quot;for derivative of pressure in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/l3&quot;,
-    &quot;g/cc&quot;,
-    cc/g) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/l3&quot;,
-    &quot;kg/m3&quot;,
-    m^3/kg) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/N&quot;,
-    &quot;g/mol&quot;,
-    mol/g) <font color="darkgreen">&quot;Specific mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/N&quot;,
-    &quot;kg/mol&quot;,
-    mol/kg) <font color="darkgreen">&quot;Specific mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/N&quot;,
-    &quot;ug/C&quot;,
-    C/(micro*g)) <font color="darkgreen">&quot;Specific mass&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/s&quot;,
-    &quot;g/s&quot;,
-    s/g) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/s&quot;,
-    &quot;kg/s&quot;,
-    s/kg) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/T3&quot;,
-    &quot;lm/m2&quot;,
-    m^2/lm) <font color="darkgreen">&quot;Areic power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;m/T3&quot;,
-    &quot;W/m2&quot;,
-    m^2/W) <font color="darkgreen">&quot;Areic power&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N&quot;,
-    &quot;C&quot;,
-    1/C) <font color="darkgreen">&quot;Amount&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N&quot;,
-    &quot;J/K&quot;,
-    K/J) <font color="darkgreen">&quot;Amount&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N&quot;,
-    &quot;mol&quot;,
-    1/mol) <font color="darkgreen">&quot;Amount&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N&quot;,
-    &quot;q&quot;,
-    1/q) <font color="darkgreen">&quot;Amount&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N.T/m&quot;,
-    &quot;C.s/g&quot;,
-    g/(C*s)) <font color="darkgreen">&quot;Mobility&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N.T/m&quot;,
-    &quot;cm2/(V.s)&quot;,
-    V*s/cm^2) <font color="darkgreen">&quot;Mobility&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;A/cm2&quot;,
-    cm^2/A) <font color="darkgreen">&quot;Areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;A/cm2&quot;,
-    cm^2/A) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;A/m2&quot;,
-    m^2/A) <font color="darkgreen">&quot;Areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;A/m2&quot;,
-    m^2/A) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;kat/cm2&quot;,
-    cm^2/kat) <font color="darkgreen">&quot;Areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;kat/cm2&quot;,
-    cm^2/kat) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;kat/m2&quot;,
-    m^2/kat) <font color="darkgreen">&quot;Areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l2.T)&quot;,
-    &quot;kat/m2&quot;,
-    m^2/kat) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l3.T)&quot;,
-    &quot;C/(cc.s)&quot;,
-    cc*s/C) <font color="darkgreen">&quot;Rate of density&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l3.T)&quot;,
-    &quot;C/(m3.s)&quot;,
-    m^3*s/C) <font color="darkgreen">&quot;Rate of density&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(l3.T)&quot;,
-    &quot;M/s&quot;,
-    s/M) <font color="darkgreen">&quot;Rate of density&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(T.s)&quot;,
-    &quot;A/s&quot;,
-    1/A) <font color="darkgreen">&quot;for derivative of current in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/(T.s)&quot;,
-    &quot;kat/s&quot;,
-    1/kat) <font color="darkgreen">&quot;for derivative of current in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/l3&quot;,
-    &quot;C/cc&quot;,
-    cc/C) <font color="darkgreen">&quot;Density&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/l3&quot;,
-    &quot;C/m3&quot;,
-    m^3/C) <font color="darkgreen">&quot;Density&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/l3&quot;,
-    &quot;M&quot;,
-    1/M) <font color="darkgreen">&quot;Density&quot;</font>;
+    &quot;L.T/M&quot;,
+    &quot;1/(Pa.s)&quot;,
+    Pa*s) <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A.N.T/(L2.M)&quot;,
+    &quot;1/Wb&quot;,
+    Wb) <font color="darkgreen">&quot;Reciprocal of magnetic flux&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;N/s&quot;,
     &quot;A&quot;,
     1/C) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N/s&quot;,
-    &quot;kat&quot;,
-    1/mol) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
-    &quot;N/s&quot;,
-    &quot;W/K&quot;,
-    K/J) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
-  <font color="red">defineUnitConversion</font>(
     &quot;N/T&quot;,
     &quot;A&quot;,
     1/A) <font color="darkgreen">&quot;Current&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N/T&quot;,
-    &quot;kat&quot;,
-    1/kat) <font color="darkgreen">&quot;Current&quot;</font>;
+    &quot;N/(L2.T)&quot;,
+    &quot;A/cm2&quot;,
+    cm^2/A) <font color="darkgreen">&quot;Areic current&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N/T&quot;,
-    &quot;W/K&quot;,
-    K/W) <font color="darkgreen">&quot;Current&quot;</font>;
+    &quot;N/(L2.T)&quot;,
+    &quot;A/cm2&quot;,
+    cm^2/A) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;A/m2&quot;,
+    m^2/A) <font color="darkgreen">&quot;Areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;A/m2&quot;,
+    m^2/A) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(T.s)&quot;,
+    &quot;A/s&quot;,
+    1/A) <font color="darkgreen">&quot;for derivative of current in Dymola&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;N/T2&quot;,
     &quot;A/s&quot;,
     s/A) <font color="darkgreen">&quot;Rate of current&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N/T2&quot;,
-    &quot;kat/s&quot;,
-    s/kat) <font color="darkgreen">&quot;Rate of current&quot;</font>;
+    &quot;L.N/T&quot;,
+    &quot;A.m&quot;,
+    1/(A*m)) <font color="darkgreen">&quot;VelocityAmount&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N2.T/(l2.m)&quot;,
-    &quot;S&quot;,
-    1/S) <font color="darkgreen">&quot;Electrical conductance&quot;</font>;
+    &quot;M/(L.T2)&quot;,
+    &quot;atm&quot;,
+    1/atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N2.T2/(l2.m)&quot;,
-    &quot;F&quot;,
-    1/F) <font color="darkgreen">&quot;Capacitance&quot;</font>;
+    &quot;M/(L.T2)&quot;,
+    &quot;bar&quot;,
+    1/bar) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N2.T2/(l2.m)&quot;,
-    &quot;uF&quot;,
-    1/(micro*F)) <font color="darkgreen">&quot;Capacitance&quot;</font>;
+    &quot;N&quot;,
+    &quot;C&quot;,
+    1/C) <font color="darkgreen">&quot;Amount&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;N2.T2/(l3.m)&quot;,
-    &quot;F/m&quot;,
-    m/F) <font color="darkgreen">&quot;Permittivity&quot;</font>;
+    &quot;N/L3&quot;,
+    &quot;C/cc&quot;,
+    cc/C) <font color="darkgreen">&quot;Density&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L3.T)&quot;,
+    &quot;C/(cc.s)&quot;,
+    cc*s/C) <font color="darkgreen">&quot;Rate of concentration&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/L3&quot;,
+    &quot;C/m3&quot;,
+    m^3/C) <font color="darkgreen">&quot;Density&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L3.T)&quot;,
+    &quot;C/(m3.s)&quot;,
+    m^3*s/C) <font color="darkgreen">&quot;Rate of concentration&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N.T/M&quot;,
+    &quot;C.s/g&quot;,
+    g/(C*s)) <font color="darkgreen">&quot;Mobility&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3&quot;,
+    &quot;cc&quot;,
+    1/cc) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/N&quot;,
+    &quot;cc/C&quot;,
+    C/cc) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.s)&quot;,
+    &quot;cc/(C.s)&quot;,
+    C*s/cc) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.T)&quot;,
+    &quot;cc/(C.s)&quot;,
+    C*s/cc) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/s&quot;,
+    &quot;cc/s&quot;,
+    1/(centi*m)^3) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/T&quot;,
+    &quot;cc/s&quot;,
+    s/cc) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L&quot;,
+    &quot;cm&quot;,
+    1/cm) <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.T/N&quot;,
+    &quot;cm/A&quot;,
+    A/cm) <font color="darkgreen">&quot;Resistivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T&quot;,
+    &quot;cm/s&quot;,
+    s/cm) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/(T.s)&quot;,
+    &quot;cm/s2&quot;,
+    s/cm) <font color="darkgreen">&quot;for derivative of velocity in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T2&quot;,
+    &quot;cm/s2&quot;,
+    s^2/cm) <font color="darkgreen">&quot;Acceleration&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.T/M&quot;,
+    &quot;cm.s/g&quot;,
+    g/(cm*s)) <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2&quot;,
+    &quot;cm2&quot;,
+    1/cm^2) <font color="darkgreen">&quot;Area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/N&quot;,
+    &quot;cm2/C&quot;,
+    C/cm^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/N&quot;,
+    &quot;cm2/mol&quot;,
+    mol/cm^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/T&quot;,
+    &quot;cm2/s&quot;,
+    s/cm^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N.T/M&quot;,
+    &quot;cm2/(V.s)&quot;,
+    V*s/cm^2) <font color="darkgreen">&quot;Mobility&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A/L&quot;,
+    &quot;cyc/m&quot;,
+    m/cyc) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;T&quot;,
     &quot;day&quot;,
     1/day) <font color="darkgreen">&quot;Time&quot;</font>;
   <font color="red">defineUnitConversion</font>(
+    &quot;A&quot;,
+    &quot;degree&quot;,
+    1/degree) <font color="darkgreen">&quot;Angle&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N2.T2/(L2.M)&quot;,
+    &quot;F&quot;,
+    1/F) <font color="darkgreen">&quot;Capacitance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N2.T2/(L3.M)&quot;,
+    &quot;F/m&quot;,
+    m/F) <font color="darkgreen">&quot;Permittivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M&quot;,
+    &quot;g&quot;,
+    1/g) <font color="darkgreen">&quot;Mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/L3&quot;,
+    &quot;g/cc&quot;,
+    cc/g) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/N&quot;,
+    &quot;g/mol&quot;,
+    mol/g) <font color="darkgreen">&quot;Specific mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/s&quot;,
+    &quot;g/s&quot;,
+    s/g) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/N2&quot;,
+    &quot;H&quot;,
+    1/H) <font color="darkgreen">&quot;Inductance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.M/N2&quot;,
+    &quot;H/m&quot;,
+    m/H) <font color="darkgreen">&quot;Permeability&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
     &quot;T&quot;,
     &quot;hr&quot;,
     1/hr) <font color="darkgreen">&quot;Time&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A/T&quot;,
+    &quot;Hz&quot;,
+    1/Hz) <font color="darkgreen">&quot;Frequency&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/T2&quot;,
+    &quot;J&quot;,
+    1/J) <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N&quot;,
+    &quot;J/K&quot;,
+    K/J) <font color="darkgreen">&quot;Amount&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/L3&quot;,
+    &quot;J/(m3.K)&quot;,
+    m^3*K/J) <font color="darkgreen">&quot;Density&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2)&quot;,
+    &quot;J/mol&quot;,
+    mol/J) <font color="darkgreen">&quot;Potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;1&quot;,
+    &quot;J/(mol.K)&quot;,
+    mol*K/J) <font color="darkgreen">&quot;Absolute number&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(A.T)&quot;,
+    &quot;J.s/rad&quot;,
+    rad/(J*s)) <font color="darkgreen">&quot;Rotational momentum&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2)&quot;,
+    &quot;K&quot;,
+    1/K) <font color="darkgreen">&quot;Absolute potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2.s)&quot;,
+    &quot;K/s&quot;,
+    1/K) <font color="darkgreen">&quot;for derivative of potential in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T3)&quot;,
+    &quot;K/s&quot;,
+    s/K) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;T/N&quot;,
+    &quot;K/W&quot;,
+    W/K) <font color="darkgreen">&quot;Thermal resistance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3.M/(A.N.T2)&quot;,
+    &quot;K.m/rad&quot;,
+    rad/(K*m)) <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/s&quot;,
+    &quot;kat&quot;,
+    1/mol) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/T&quot;,
+    &quot;kat&quot;,
+    1/kat) <font color="darkgreen">&quot;Current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;kat/cm2&quot;,
+    cm^2/kat) <font color="darkgreen">&quot;Areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;kat/cm2&quot;,
+    cm^2/kat) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;kat/m2&quot;,
+    m^2/kat) <font color="darkgreen">&quot;Areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L2.T)&quot;,
+    &quot;kat/m2&quot;,
+    m^2/kat) <font color="darkgreen">&quot;Absolute areic current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(T.s)&quot;,
+    &quot;kat/s&quot;,
+    1/kat) <font color="darkgreen">&quot;for derivative of current in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/T2&quot;,
+    &quot;kat/s&quot;,
+    s/kat) <font color="darkgreen">&quot;Rate of current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M&quot;,
+    &quot;kg&quot;,
+    1/kg) <font color="darkgreen">&quot;Mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/L3&quot;,
+    &quot;kg/m3&quot;,
+    m^3/kg) <font color="darkgreen">&quot;Volumic mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/N&quot;,
+    &quot;kg/mol&quot;,
+    mol/kg) <font color="darkgreen">&quot;Specific mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/s&quot;,
+    &quot;kg/s&quot;,
+    s/kg) <font color="darkgreen">&quot;for derivative of mass in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(L.T2)&quot;,
+    &quot;kPa&quot;,
+    1/(kilo*Pa)) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2)&quot;,
+    &quot;kJ/mol&quot;,
+    mol/kJ) <font color="darkgreen">&quot;Potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3&quot;,
+    &quot;L&quot;,
+    1/L) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/s&quot;,
+    &quot;L/min&quot;,
+    min/(L*s)) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/T&quot;,
+    &quot;L/min&quot;,
+    min/L) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/T3&quot;,
+    &quot;lm&quot;,
+    1/lm) <font color="darkgreen">&quot;Power&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/T3&quot;,
+    &quot;lm/m2&quot;,
+    m^2/lm) <font color="darkgreen">&quot;Areic power&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/L3&quot;,
+    &quot;M&quot;,
+    1/M) <font color="darkgreen">&quot;Density&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L&quot;,
+    &quot;m&quot;,
+    1/m) <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.T/N&quot;,
+    &quot;m/A&quot;,
+    A/m) <font color="darkgreen">&quot;Resistivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/N&quot;,
+    &quot;m/C&quot;,
+    C/m) <font color="darkgreen">&quot;Specific length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3.M/(N2.T2)&quot;,
+    &quot;m/H&quot;,
+    H/m) <font color="darkgreen">&quot;Reciprocal of permittivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/N&quot;,
+    &quot;m/mol&quot;,
+    mol/m) <font color="darkgreen">&quot;Specific length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/(L3.T)&quot;,
+    &quot;M/s&quot;,
+    s/M) <font color="darkgreen">&quot;Rate of concentration&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T&quot;,
+    &quot;m/s&quot;,
+    s/m) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/(T.s)&quot;,
+    &quot;m/s2&quot;,
+    s/m) <font color="darkgreen">&quot;for derivative of velocity in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T2&quot;,
+    &quot;m/s2&quot;,
+    s^2/m) <font color="darkgreen">&quot;Acceleration&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.T/N&quot;,
+    &quot;m.K/W&quot;,
+    W/(m*K)) <font color="darkgreen">&quot;Resistivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2&quot;,
+    &quot;m2&quot;,
+    1/m^2) <font color="darkgreen">&quot;Area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/N&quot;,
+    &quot;m2/C&quot;,
+    C/m^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/N&quot;,
+    &quot;m2/mol&quot;,
+    mol/m^2) <font color="darkgreen">&quot;Specific area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/T&quot;,
+    &quot;m2/s&quot;,
+    s/m^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3&quot;,
+    &quot;m3&quot;,
+    1/m^3) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/N&quot;,
+    &quot;m3/C&quot;,
+    C/m^3) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.s)&quot;,
+    &quot;m3/(C.s)&quot;,
+    C*s/m^3) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.T)&quot;,
+    &quot;m3/(C.s)&quot;,
+    C*s/m^3) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/N&quot;,
+    &quot;m3/mol&quot;,
+    mol/m^3) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.s)&quot;,
+    &quot;m3/(mol.s)&quot;,
+    mol*s/m^3) <font color="darkgreen">&quot;for derivative of specific volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/(N.T)&quot;,
+    &quot;m3/(mol.s)&quot;,
+    mol*s/m^3) <font color="darkgreen">&quot;Rate of specific volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/s&quot;,
+    &quot;m3/s&quot;,
+    1/m^3) <font color="darkgreen">&quot;for derivative of volume in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3/T&quot;,
+    &quot;m3/s&quot;,
+    s/m^3) <font color="darkgreen">&quot;Rate of volume&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N2.T2/(L2.M)&quot;,
+    &quot;uF&quot;,
+    1/(micro*F)) <font color="darkgreen">&quot;Capacitance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/N&quot;,
+    &quot;ug/C&quot;,
+    C/(micro*g)) <font color="darkgreen">&quot;Specific mass&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/N2&quot;,
+    &quot;uH&quot;,
+    1/(micro*H)) <font color="darkgreen">&quot;Inductance&quot;</font>;
   <font color="red">defineUnitConversion</font>(
     &quot;T&quot;,
     &quot;us&quot;,
@@ -1199,23 +1107,153 @@ For more information, see the documentation for the
     &quot;min&quot;,
     1/min) <font color="darkgreen">&quot;Time&quot;</font>;
   <font color="red">defineUnitConversion</font>(
+    &quot;L&quot;,
+    &quot;mm&quot;,
+    1/mm) <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T&quot;,
+    &quot;mm/s&quot;,
+    s/mm) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2/T&quot;,
+    &quot;mm2/s&quot;,
+    s/mm^2) <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N&quot;,
+    &quot;mol&quot;,
+    1/mol) <font color="darkgreen">&quot;Amount&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.N/T&quot;,
+    &quot;mol.m/s&quot;,
+    s/(mol*m)) <font color="darkgreen">&quot;VelocityAmount&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.M/T2&quot;,
+    &quot;N&quot;,
+    1/N) <font color="darkgreen">&quot;Force&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.M/(N.T)&quot;,
+    &quot;N/A&quot;,
+    A/N) <font color="darkgreen">&quot;Continuity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N2.T)&quot;,
+    &quot;ohm&quot;,
+    1/ohm) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(L.T2)&quot;,
+    &quot;Pa&quot;,
+    1/Pa) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(L.T2.s)&quot;,
+    &quot;Pa/s&quot;,
+    1/Pa) <font color="darkgreen">&quot;for derivative of pressure in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(L.T3)&quot;,
+    &quot;Pa/s&quot;,
+    s/Pa) <font color="darkgreen">&quot;Rate of pressure&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(T2.L.s)&quot;,
+    &quot;Pa/s&quot;,
+    1/Pa) <font color="darkgreen">&quot;for derivative of pressure in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N&quot;,
+    &quot;q&quot;,
+    1/q) <font color="darkgreen">&quot;Amount&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A&quot;,
+    &quot;rad&quot;,
+    1/rad) <font color="darkgreen">&quot;Angle&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A/L&quot;,
+    &quot;rad/m&quot;,
+    m/rad) <font color="darkgreen">&quot;Wavenumber&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;A/T&quot;,
+    &quot;rad/s&quot;,
+    s/rad) <font color="darkgreen">&quot;Frequency&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N2.T/(L2.M)&quot;,
+    &quot;S&quot;,
+    1/S) <font color="darkgreen">&quot;Electrical conductance&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
     &quot;T&quot;,
     &quot;s&quot;,
     1/s) <font color="darkgreen">&quot;Time&quot;</font>;
-
   <font color="red">defineUnitConversion</font>(
-    &quot;T/l&quot;,
+    &quot;N2.T/(L3.M)&quot;,
+    &quot;S/m&quot;,
+    m/S) <font color="darkgreen">&quot;Electrical conductivity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;T/L&quot;,
     &quot;s/m&quot;,
     m/s) <font color="darkgreen">&quot;Lineic time&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;T/l2&quot;,
-    &quot;s/m2&quot;,
-    m^2/s) <font color="darkgreen">&quot;Material resistivity&quot;</font>;
+    &quot;A2&quot;,
+    &quot;sr&quot;,
+    1/sr) <font color="darkgreen">&quot;Solid angle&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;T/l2&quot;,
-    &quot;s/mm2&quot;,
-    mm^2/s) <font color="darkgreen">&quot;Material resistivity&quot;</font>;
-
+    &quot;L2/T2&quot;,
+    &quot;Sv&quot;,
+    1/Sv) <font color="darkgreen">&quot;Squared velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/(A.N.T)&quot;,
+    &quot;T&quot;,
+    1/T) <font color="darkgreen">&quot;Areic magnetic flux&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L/T&quot;,
+    &quot;um/s&quot;,
+    s/um) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2)&quot;,
+    &quot;V&quot;,
+    1/V) <font color="darkgreen">&quot;Potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L.M/(N.T2)&quot;,
+    &quot;V/m&quot;,
+    m/V) <font color="darkgreen">&quot;Specific force&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T2.s)&quot;,
+    &quot;V/s&quot;,
+    1/V) <font color="darkgreen">&quot;for derivative of potential in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(N.T3)&quot;,
+    &quot;V/s&quot;,
+    s/V) <font color="darkgreen">&quot;Rate of potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L3.M/(A.N.T2)&quot;,
+    &quot;V.m/rad&quot;,
+    rad/(V*m)) <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/T3&quot;,
+    &quot;W&quot;,
+    1/W) <font color="darkgreen">&quot;Power&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/s&quot;,
+    &quot;W/K&quot;,
+    K/J) <font color="darkgreen">&quot;for derivative of amount in Dymola&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;N/T&quot;,
+    &quot;W/K&quot;,
+    K/W) <font color="darkgreen">&quot;Current&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M/T3&quot;,
+    &quot;W/m2&quot;,
+    m^2/W) <font color="darkgreen">&quot;Areic power&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;M.T5/L8&quot;,
+    &quot;W/(m2.K4)&quot;,
+    m^2*K^4/W) <font color="darkgreen">&quot;Areic power per 4th power of potential&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(A2.T3)&quot;,
+    &quot;W/sr&quot;,
+    sr/W) <font color="darkgreen">&quot;Radiant power&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L4.M/T3&quot;,
+    &quot;W.m2&quot;,
+    1/(W*m^2)) <font color="darkgreen">&quot;Power times area&quot;</font>;
+  <font color="red">defineUnitConversion</font>(
+    &quot;L2.M/(A.N.T)&quot;,
+    &quot;Wb&quot;,
+    1/Wb) <font color="darkgreen">&quot;Magnetic flux&quot;</font>;
   <font color="darkgreen">// -------- end from FCSys/Resources/quantities.xls</font>
 
   <font color="darkgreen">// ------------------------------------------------------------------------</font>
@@ -1223,17 +1261,17 @@ For more information, see the documentation for the
   <font color="darkgreen">// ------------------------------------------------------------------------</font>
 
   <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
+    &quot;L2.M/(N.T2)&quot;,
     &quot;degC&quot;,
     1/K,
     -273.15) <font color="darkgreen">&quot;Temperature in degC&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;l2.m/(N.T2)&quot;,
+    &quot;L2.M/(N.T2)&quot;,
     &quot;degF&quot;,
     9/(5*K),
     32 - (9/5)*273.15) <font color="darkgreen">&quot;Temperature in degF&quot;</font>;
   <font color="red">defineUnitConversion</font>(
-    &quot;m/(l.T2)&quot;,
+    &quot;M/(L.T2)&quot;,
     &quot;kPag&quot;,
     1/kPa,
     -atm/kPa) <font color="darkgreen">&quot;Pressure in kPag&quot;</font>;
@@ -1245,11 +1283,12 @@ For more information, see the documentation for the
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_degC</h2>
-<b>Convert from temperature in degree Celsius</b>
+<b>Convert from temperature in degree Celsius to temperature as a quantity</b><p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a> (Base icon for conversion functions).
 <p>
 
 <h3>Inputs</h3>
@@ -1266,33 +1305,34 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature [L2.M/(N.T2)]</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">function</font> from_degC <font color="darkgreen">&quot;Convert from temperature in degree Celsius&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+<font color="blue">function</font> from_degC <font color="darkgreen">
+  &quot;Convert from temperature in degree Celsius to temperature as a quantity&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a>;
 
   <font color="blue">input </font>Real T_degC <font color="darkgreen">&quot;Temperature in degree Celsius&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
 
 <font color="blue">algorithm </font>
   T := (T_degC + 273.15)*K;
-
 <font color="blue">end </font>from_degC;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_degC</h2>
-<b>Convert to temperature in degree Celsius</b>
+<b>Convert from temperature as a quantity to temperature in degree Celsius</b><p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a> (Base icon for conversion functions).
 <p>
 
 <h3>Inputs</h3>
@@ -1300,7 +1340,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature [L2.M/(N.T2)]</td></tr>
 </table>
 <p>
 
@@ -1311,31 +1351,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>T_degC</td><td>Temperature in degree Celsius</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">function</font> to_degC <font color="darkgreen">&quot;Convert to temperature in degree Celsius&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+<font color="blue">function</font> to_degC <font color="darkgreen">
+  &quot;Convert from temperature as a quantity to temperature in degree Celsius&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
   <font color="blue">output </font>Real T_degC <font color="darkgreen">&quot;Temperature in degree Celsius&quot;</font>;
 
 <font color="blue">algorithm </font>
   T_degC := T/K - 273.15;
-
 <font color="blue">end </font>to_degC;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_kPag</h2>
-<b>Convert from gauge pressure in kilopascals</b>
+<b>Convert from gauge pressure in kilopascals to absolute pressure as a quantity</b><p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a> (Base icon for conversion functions).
 <p>
 
 <h3>Inputs</h3>
@@ -1352,33 +1393,34 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Absolute pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Absolute pressure [M/(L.T2)]</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">function</font> from_kPag <font color="darkgreen">&quot;Convert from gauge pressure in kilopascals&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+<font color="blue">function</font> from_kPag <font color="darkgreen">
+  &quot;Convert from gauge pressure in kilopascals to absolute pressure as a quantity&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a>;
 
   <font color="blue">input </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
 
 <font color="blue">algorithm </font>
   p := p_kPag*kPa + atm;
-
 <font color="blue">end </font>from_kPag;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_kPag</h2>
-<b>Convert to gauge pressure in kilopascals</b>
+<b>Convert from absolute pressure as a quantity to gauge pressure in kilopascals</b><p></p>
+<p></p>
 
 <h3>Information</h3>
 
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a> (Base icon for conversion functions).
 <p>
 
 <h3>Inputs</h3>
@@ -1386,7 +1428,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Absolute pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Absolute pressure [M/(L.T2)]</td></tr>
 </table>
 <p>
 
@@ -1397,20 +1439,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>p_kPag</td><td>Gauge pressure in kilopascals</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">function</font> to_kPag <font color="darkgreen">&quot;Convert to gauge pressure in kilopascals&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+<font color="blue">function</font> to_kPag <font color="darkgreen">
+  &quot;Convert from absolute pressure as a quantity to gauge pressure in kilopascals&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits_Icons.html#Modelica.SIunits.Icons.Conversion">Modelica.SIunits.Icons.Conversion</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
   <font color="blue">output </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
 
 <font color="blue">algorithm </font>
   p_kPag := (p - atm)/kPa;
-
 <font color="blue">end </font>to_kPag;
 </pre>
       </div>
@@ -1421,6 +1463,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Aug  6 13:08:57 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:25 2013.
 </div>
 </span></body></html>

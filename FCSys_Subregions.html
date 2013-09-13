@@ -3,7 +3,8 @@
 <title>FCSys.Subregions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-8-9">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
@@ -29,6 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,24 +49,27 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
+      <div class="body"></p>
 
 <h2><a name="FCSys.Subregions"></a><a href="index.html#FCSys">FCSys</a>.Subregions</h2>
 
 <b>Control volumes with multi-species transport, exchange, and storage</b>
+<p></p>
+<p></p>
 
 <h3>Information</h3>
 
 <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+Copyright 2007&ndash;2013, <a href="http://www.gtrc.gatech.edu/">Georgia Tech Research Corporation</a>.</p>
 
 <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.License">
+FCSys.UsersGuide.License</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-<p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
 
 <h3>Package Content</h3>
 
@@ -74,25 +79,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Examples</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>
 </td><td>Subregion with all phases</td></tr>
-<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionIonomerOnly" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">SubregionIonomerOnly</a>
+<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionIonomer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomer">SubregionIonomer</a>
 </td><td>Subregion with only the ionomer phase</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionNoIonomer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">SubregionNoIonomer</a>
 </td><td>Subregion with all phases except ionomer</td></tr>
-<tr><td><img src="images/FCSys.Subregions.BaseClassesS.png" alt="FCSys.Subregions.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">BaseClasses</a>
-</td><td>Base classes (generally not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.Subregions.PartialSubregionS.png" alt="FCSys.Subregions.PartialSubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>
+</td><td>Base model for multi-dimensional, multi-species storage, transport, and exchange</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.Subregion" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Subregion"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Subregion</h2>
-<b>Subregion with all phases</b><p>
+<b>Subregion with all phases</b><p></p>
 <img src="images/FCSys.Subregions.SubregionD.png" alt="FCSys.Subregions.Subregion">
+<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
-   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p></p>
+Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
 
 <h3>Parameters</h3>
@@ -101,24 +107,20 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_common</td><td>1</td><td>Coupling factor for exchange among all phases [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_gas_liq</td><td>eps</td><td>Additional coupling factor between gas and liquid [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_graphite_liq</td><td>eps</td><td>Additional coupling factor between graphite and liquid [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>common</td><td>&nbsp;</td><td>Among all phases</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>gasLiq</td><td>&nbsp;</td><td>Between gas and liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
 
@@ -127,60 +129,72 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases&quot;</font>
-  <font color="blue">import </font>Modelica.Constants.eps;
-  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec +
-        graphite.n_spec + ionomer.n_spec + liquid.n_spec);
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_gas_liq=eps <font color="darkgreen">
-    &quot;Additional coupling factor between gas and liquid&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_graphite_liq=eps <font color="darkgreen">
-    &quot;Additional coupling factor between graphite and liquid&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec + graphite.n_spec + ionomer.n_spec
+         + liquid.n_spec);
 
   <a href="FCSys_Phases.html#FCSys.Phases.Gas">FCSys.Phases.Gas</a> gas(
     n_inter=2,
-    <font color="blue">final </font>n_faces=n_faces,
-    <font color="blue">final </font>inclHOR=inclHOR,
-    <font color="blue">final </font>inclORR=inclORR,
-    k_inter={k_common,k_gas_liq}) <font color="darkgreen">&quot;Gas&quot;</font>;
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Gas&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Graphite">FCSys.Phases.Graphite</a> graphite(
-    <font color="blue">final </font>n_faces=n_faces,
-    n_inter=2,
-    k_inter={k_common,k_graphite_liq},
-    <font color="blue">final </font>inclHOR=inclHOR,
-    <font color="blue">final </font>inclORR=inclORR) <font color="darkgreen">&quot;Graphite&quot;</font>;
+    n_inter=1,
+    <font color="blue">final </font>n_trans=n_trans,
+    &#39;incle-Transfer&#39;=inclHOR<font color="blue"> or </font>inclORR,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Graphite&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(
-    <font color="blue">final </font>n_faces=n_faces,
     n_inter=1,
-    k_inter={k_common},
-    <font color="blue">final </font>inclHOR=inclHOR,
-    <font color="blue">final </font>inclORR=inclORR) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Liquid">FCSys.Phases.Liquid</a> liquid(
-    <font color="blue">final </font>n_faces=n_faces,
-    n_inter=3,
-    k_inter={k_common,k_gas_liq,k_graphite_liq}) <font color="darkgreen">&quot;Liquid&quot;</font>;
+    n_inter=2,
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Liquid&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">Chemistry.HOR</a> HOR(<font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclHOR <font color="darkgreen">
+    &quot;Hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.ORR">Chemistry.ORR</a> ORR(<font color="blue">final </font>n_trans=n_trans) <font color="blue">if </font>inclORR <font color="darkgreen">
+    &quot;Oxygen reduction reaction&quot;</font>;
+
+  <font color="darkgreen">// Independence factors</font>
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s=liquid.V/(gas.V + liquid.V) <font color="blue">if </font>liquid.n_spec &gt; 0<font color="blue">
+     and </font>gas.n_spec &gt; 0<font color="blue"> and </font>environment.analysis <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font>Boolean inclHOR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>
@@ -188,99 +202,97 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="blue">final </font><font color="blue">parameter </font>Boolean inclORR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>
       gas.inclO2<font color="blue"> and </font>gas.inclH2O <font color="darkgreen">&quot;Include the oxygen reduction reaction&quot;</font>;
 
-  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.Volume">Conditions.ByConnector.Amagat.Volume</a> volume(V=V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(<font color="blue">final </font>V=V, <font color="blue">final </font>setVolume=
+        gas.n_spec &gt; 0<font color="blue"> or </font>liquid.n_spec &gt; 0) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Model to establish a fixed total volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> common <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange among all species&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> gasLiq <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange between gas and liquid&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> graphiteLiq <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange between graphite and liquid&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">&quot;Connector for exchange among all species&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> gasLiqExch <font color="darkgreen">
+    &quot;Connector for exchange between gas and liquid&quot;</font>;
 
-<font color="blue">protected </font>
-  <a href="FCSys_Connectors.html#FCSys.Connectors.PhysicalBusInternal">Connectors.PhysicalBusInternal</a> phaseCh <font color="darkgreen">&quot;Connector for phase change&quot;</font>;
 <font color="blue">equation </font>
-  <font color="darkgreen">// Boundaries and volume-sharing</font>
-  <font color="darkgreen">// -----------------------------</font>
+  <font color="darkgreen">// Boundaries</font>
+  <font color="darkgreen">// ----------</font>
   <font color="darkgreen">// Gas</font>
-  <font color="red">connect</font>(gas.amagat, volume.amagat);
   <font color="red">connect</font>(gas.yNegative, yNegative.gas);
   <font color="red">connect</font>(gas.zPositive, zPositive.gas);
   <font color="red">connect</font>(gas.xNegative, xNegative.gas);
   <font color="red">connect</font>(gas.yPositive, yPositive.gas);
   <font color="red">connect</font>(gas.zNegative, zNegative.gas);
-
   <font color="red">connect</font>(gas.xPositive, xPositive.gas);
   <font color="darkgreen">// Graphite</font>
-  <font color="red">connect</font>(graphite.amagat, volume.amagat);
-
   <font color="red">connect</font>(graphite.yNegative, yNegative.graphite);
   <font color="red">connect</font>(graphite.yPositive, yPositive.graphite);
   <font color="red">connect</font>(graphite.zNegative, zNegative.graphite);
   <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);
   <font color="red">connect</font>(graphite.xNegative, xNegative.graphite);
   <font color="red">connect</font>(graphite.xPositive, xPositive.graphite);
-
   <font color="darkgreen">// Ionomer</font>
-  <font color="red">connect</font>(ionomer.amagat, volume.amagat);
-
   <font color="red">connect</font>(ionomer.yNegative, yNegative.ionomer);
   <font color="red">connect</font>(ionomer.yPositive, yPositive.ionomer);
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);
-
   <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);
   <font color="red">connect</font>(ionomer.xPositive, xPositive.ionomer);
   <font color="darkgreen">// Liquid</font>
-  <font color="red">connect</font>(liquid.amagat, volume.amagat);
-
   <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
   <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
   <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
   <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);
-
   <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
-
   <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
+
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>(graphite.amagat, volume.amagat);
+  <font color="red">connect</font>(ionomer.amagat, volume.amagat);
+  <font color="red">connect</font>(gas.amagat, volume.amagat) <font color="darkgreen">
+    &quot;Bypass capillaryPressure (not shown in diagram)&quot;</font>;
+  <font color="red">connect</font>(liquid.amagat, volume.amagat) <font color="darkgreen">
+    &quot;Bypass capillaryPressure (not shown in diagram)&quot;</font>;
 
   <font color="darkgreen">// Inert exchange</font>
   <font color="darkgreen">// --------------</font>
   <font color="darkgreen">// Common</font>
-  <font color="red">connect</font>(gas.inter[1], common.exchange);
-  <font color="red">connect</font>(graphite.inter[1], common.exchange);
-  <font color="red">connect</font>(ionomer.inter[1], common.exchange);
-  <font color="red">connect</font>(liquid.inter[1], common.exchange);
+  <font color="red">connect</font>(gas.inter[1], commonExch.node);
+  <font color="red">connect</font>(graphite.inter[1], commonExch.node);
+  <font color="red">connect</font>(ionomer.inter[1], commonExch.node);
+  <font color="red">connect</font>(liquid.inter[1], commonExch.node);
   <font color="darkgreen">// Gas-liquid</font>
-  <font color="red">connect</font>(gas.inter[2], gasLiq.exchange);
-  <font color="red">connect</font>(liquid.inter[2], gasLiq.exchange);
-  <font color="darkgreen">// Graphite-liquid</font>
-  <font color="red">connect</font>(graphite.inter[2], graphiteLiq.exchange);
-  <font color="red">connect</font>(liquid.inter[3], graphiteLiq.exchange);
+  <font color="red">connect</font>(gas.inter[2], gasLiqExch.node);
+  <font color="red">connect</font>(liquid.inter[2], gasLiqExch.node);
 
-  <font color="darkgreen">// Phase change</font>
-  <font color="red">connect</font>(phaseCh, gas.physical);
-  <font color="red">connect</font>(phaseCh, liquid.physical);
-  <font color="red">connect</font>(ionomer.physical, phaseCh);
-
-  <font color="darkgreen">// Reactions</font>
-  <font color="darkgreen">// ---------</font>
-  <font color="red">connect</font>(gas.chemical, graphite.chemical);
-  <font color="red">connect</font>(graphite.chemical, ionomer.chemical);
-
+  <font color="darkgreen">// Reactions and phase change (not shown in diagram)</font>
+  <font color="darkgreen">// -------------------------------------------------</font>
+  <font color="red">connect</font>(gas.connH2[1], HOR.connH2);
+  <font color="red">connect</font>(gas.connH2O[1], ORR.connH2O);
+  <font color="red">connect</font>(gas.connO2[1], ORR.connO2);
+  <font color="blue">if </font>gas.inclH2O<font color="blue"> then</font>
+    <font color="blue">if </font>ionomer.inclH2O<font color="blue"> then</font>
+      <font color="red">connect</font>(gas.connH2O[2], ionomer.connH2O[1]);
+    <font color="blue">end if</font>;
+    <font color="blue">if </font>liquid.inclH2O<font color="blue"> then</font>
+      <font color="red">connect</font>(gas.connH2O[3], liquid.connH2O[1]);
+    <font color="blue">end if</font>;
+  <font color="blue">end if</font>;
+  <font color="red">connect</font>(graphite.'conne-'[1], HOR.'conne-');
+  <font color="red">connect</font>(graphite.'conne-'[1], ORR.'conne-');
+  <font color="red">connect</font>(ionomer.'connH+'[1], HOR.'connH+');
+  <font color="red">connect</font>(ionomer.'connH+'[1], ORR.'connH+');
 <font color="blue">end </font>Subregion;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionIonomerOnly" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.SubregionIonomerOnly"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionIonomerOnly</h2>
-<b>Subregion with only the ionomer phase</b><p>
-<img src="images/FCSys.Subregions.SubregionIonomerOnlyD.png" alt="FCSys.Subregions.SubregionIonomerOnly">
+<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionIonomer" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.SubregionIonomer"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionIonomer</h2>
+<b>Subregion with only the ionomer phase</b><p></p>
+<img src="images/FCSys.Subregions.SubregionIonomerD.png" alt="FCSys.Subregions.SubregionIonomer">
+<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
-   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p></p>
+Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
 
 <h3>Parameters</h3>
@@ -289,19 +301,14 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_common</td><td>1</td><td>Coupling factor for exchange among all phases [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
 
@@ -310,42 +317,43 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> SubregionIonomerOnly <font color="darkgreen">&quot;Subregion with only the ionomer phase&quot;</font>
-  <font color="blue">import </font>Modelica.Constants.eps;
-  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a>(<font color="blue">final </font>n_spec=ionomer.n_spec);
+<font color="blue">model</font> SubregionIonomer <font color="darkgreen">&quot;Subregion with only the ionomer phase&quot;</font>
 
-  <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(
-    <font color="blue">final </font>n_faces=n_faces,
-    <font color="blue">final </font>inclHOR=false,
-    <font color="blue">final </font>inclORR=false,
-    n_inter=1,
-    k_inter={k_common}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=ionomer.n_spec);
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(n_inter=0, <font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.Volume">Conditions.ByConnector.Amagat.Volume</a> volume(V=V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Model to establish a fixed total volume&quot;</font>;
+  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(V=V, <font color="blue">final </font>setVolume=false) <font color="blue">
+    if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Model to establish a fixed total volume&quot;</font>;
 <font color="blue">equation </font>
-  <font color="darkgreen">// Boundaries and volume-sharing</font>
-  <font color="darkgreen">// -----------------------------</font>
+  <font color="darkgreen">// Boundaries and mixing</font>
+  <font color="darkgreen">// ---------------------</font>
   <font color="darkgreen">// Ionomer</font>
   <font color="red">connect</font>(ionomer.amagat, volume.amagat);
 
@@ -358,20 +366,21 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);
   <font color="red">connect</font>(ionomer.xPositive, xPositive.ionomer);
 
-<font color="blue">end </font>SubregionIonomerOnly;
+<font color="blue">end </font>SubregionIonomer;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoIonomer" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.SubregionNoIonomer"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoIonomer</h2>
-<b>Subregion with all phases except ionomer</b><p>
+<b>Subregion with all phases except ionomer</b><p></p>
 <img src="images/FCSys.Subregions.SubregionNoIonomerD.png" alt="FCSys.Subregions.SubregionNoIonomer">
+<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
-   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p></p>
+Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a> (Base model for multi-dimensional, multi-species storage, transport, and exchange).
 <p>
 
 <h3>Parameters</h3>
@@ -380,23 +389,19 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_common</td><td>1</td><td>Coupling factor for exchange among all phases [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_gas_liq</td><td>eps</td><td>Additional coupling factor between gas and liquid [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_graphite_liq</td><td>eps</td><td>Additional coupling factor between graphite and liquid [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
 <tr><td><a href="FCSys_Phases.html#FCSys.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>common</td><td>&nbsp;</td><td>Among all phases</td></tr>
+<tr><td><a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">ExchangeParams</a></td><td>gasLiq</td><td>&nbsp;</td><td>Between gas and liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
 
@@ -405,114 +410,193 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive</td><td>Positive boundary along the z axis</td></tr>
 </table>
-<p>
+<p></p>
 
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> SubregionNoIonomer <font color="darkgreen">&quot;Subregion with all phases except ionomer&quot;</font>
-  <font color="blue">import </font>Modelica.Constants.eps;
-  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">FCSys.Subregions.BaseClasses.EmptySubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec +
-        graphite.n_spec + liquid.n_spec);
-
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_gas_liq=eps <font color="darkgreen">
-    &quot;Additional coupling factor between gas and liquid&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_graphite_liq=eps <font color="darkgreen">
-    &quot;Additional coupling factor between graphite and liquid&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec + graphite.n_spec + liquid.n_spec);
 
   <a href="FCSys_Phases.html#FCSys.Phases.Gas">FCSys.Phases.Gas</a> gas(
     n_inter=2,
-    <font color="blue">final </font>inclHOR=false,
-    <font color="blue">final </font>inclORR=false,
-    <font color="blue">final </font>n_faces=n_faces,
-    k_inter={k_common,k_gas_liq}) <font color="darkgreen">&quot;Gas&quot;</font>;
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Gas&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Graphite">FCSys.Phases.Graphite</a> graphite(
-    <font color="blue">final </font>n_faces=n_faces,
-    n_inter=2,
-    <font color="blue">final </font>inclHOR=false,
-    <font color="blue">final </font>inclORR=false,
-    k_inter={k_common,k_graphite_liq}) <font color="darkgreen">&quot;Graphite&quot;</font>;
+    n_inter=1,
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Graphite&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Liquid">FCSys.Phases.Liquid</a> liquid(
-    <font color="blue">final </font>n_faces=n_faces,
-    n_inter=3,
-    k_inter={k_common,k_gas_liq,k_graphite_liq}) <font color="darkgreen">&quot;Liquid&quot;</font>;
+    n_inter=2,
+    <font color="blue">final </font>n_trans=n_trans,
+    <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
+    <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Liquid&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFacesX <font color="darkgreen">&quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFacesY <font color="darkgreen">&quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
+  <font color="darkgreen">// Independence factors</font>
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s=liquid.V/(gas.V + liquid.V) <font color="blue">if </font>liquid.n_spec &gt; 0<font color="blue">
+     and </font>gas.n_spec &gt; 0<font color="blue"> and </font>environment.analysis <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Negative boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yNegative <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Negative boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zNegative <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Negative boundary along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xPositive <font color="blue">if </font>inclTransX <font color="darkgreen">
+    &quot;Positive boundary along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> yPositive <font color="blue">if </font>inclTransY <font color="darkgreen">
+    &quot;Positive boundary along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTransZ <font color="darkgreen">
+    &quot;Positive boundary along the z axis&quot;</font>;
 
 <font color="blue">protected </font>
-  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.Volume">Conditions.ByConnector.Amagat.Volume</a> volume(V=V) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(V=V, <font color="blue">final </font>setVolume=gas.n_spec &gt;
+        0<font color="blue"> or </font>liquid.n_spec &gt; 0) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Model to establish a fixed total volume&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> common <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange among all species&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> gasLiq <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange between gas and liquid&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertBusInternal">Connectors.InertBusInternal</a> graphiteLiq <font color="darkgreen">
-    &quot;Connector for translational and thermal exchange between graphite and liquid&quot;</font>;
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+  <font color="darkgreen">// Exchange</font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> gasLiqExch <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+
 <font color="blue">equation </font>
-  <font color="darkgreen">// Boundaries and volume-sharing</font>
-  <font color="darkgreen">// -----------------------------</font>
+  <font color="darkgreen">// Boundaries</font>
+  <font color="darkgreen">// ----------</font>
   <font color="darkgreen">// Gas</font>
-  <font color="red">connect</font>(gas.amagat, volume.amagat);
   <font color="red">connect</font>(gas.yNegative, yNegative.gas);
   <font color="red">connect</font>(gas.zPositive, zPositive.gas);
   <font color="red">connect</font>(gas.xNegative, xNegative.gas);
   <font color="red">connect</font>(gas.yPositive, yPositive.gas);
   <font color="red">connect</font>(gas.zNegative, zNegative.gas);
-
   <font color="red">connect</font>(gas.xPositive, xPositive.gas);
   <font color="darkgreen">// Graphite</font>
-  <font color="red">connect</font>(graphite.amagat, volume.amagat);
-
   <font color="red">connect</font>(graphite.yNegative, yNegative.graphite);
   <font color="red">connect</font>(graphite.yPositive, yPositive.graphite);
   <font color="red">connect</font>(graphite.zNegative, zNegative.graphite);
   <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);
   <font color="red">connect</font>(graphite.xNegative, xNegative.graphite);
   <font color="red">connect</font>(graphite.xPositive, xPositive.graphite);
-
   <font color="darkgreen">// Liquid</font>
-  <font color="red">connect</font>(liquid.amagat, volume.amagat);
-
   <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
   <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
   <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
   <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);
-
   <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
-
   <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
+
+  <font color="darkgreen">// Mixing</font>
+  <font color="red">connect</font>(graphite.amagat, volume.amagat);
+  <font color="red">connect</font>(gas.amagat, volume.amagat) <font color="darkgreen">
+    &quot;Bypass capillaryPressure (not shown in diagram)&quot;</font>;
+  <font color="red">connect</font>(liquid.amagat, volume.amagat) <font color="darkgreen">
+    &quot;Bypass capillaryPressure (not shown in diagram)&quot;</font>;
 
   <font color="darkgreen">// Inert exchange</font>
   <font color="darkgreen">// --------------</font>
   <font color="darkgreen">// Common</font>
-  <font color="red">connect</font>(gas.inter[1], common.exchange);
-  <font color="red">connect</font>(graphite.inter[1], common.exchange);
-  <font color="red">connect</font>(liquid.inter[1], common.exchange);
+  <font color="red">connect</font>(gas.inter[1], commonExch.node);
+  <font color="red">connect</font>(graphite.inter[1], commonExch.node);
+  <font color="red">connect</font>(liquid.inter[1], commonExch.node);
   <font color="darkgreen">// Gas-liquid</font>
-  <font color="red">connect</font>(gas.inter[2], gasLiq.exchange);
-  <font color="red">connect</font>(liquid.inter[2], gasLiq.exchange);
-  <font color="darkgreen">// Graphite-liquid</font>
-  <font color="red">connect</font>(graphite.inter[2], graphiteLiq.exchange);
-  <font color="red">connect</font>(liquid.inter[3], graphiteLiq.exchange);
+  <font color="red">connect</font>(gas.inter[2], gasLiqExch.node);
+  <font color="red">connect</font>(liquid.inter[2], gasLiqExch.node);
 
-  <font color="darkgreen">// Phase change</font>
-  <font color="red">connect</font>(gas.physical, liquid.physical);
+  <font color="darkgreen">// Phase change (not shown in diagram)</font>
+  <font color="darkgreen">// -----------------------------------</font>
+  <font color="blue">if </font>gas.inclH2O<font color="blue"> and </font>liquid.inclH2O<font color="blue"> then</font>
+    <font color="red">connect</font>(gas.connH2O[3], liquid.connH2O[1]);
+  <font color="blue">end if</font>;
 
 <font color="blue">end </font>SubregionNoIonomer;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.PartialSubregionI.png" alt="FCSys.Subregions.PartialSubregion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.PartialSubregion"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.PartialSubregion</h2>
+<b>Base model for multi-dimensional, multi-species storage, transport, and exchange</b><p></p>
+<p></p>
+
+<h3>Information</h3>
+
+<p>At least one component of translational momentum must be included.
+  All of the components are included by default.</p>
+
+  <p>This model should be extended to include the appropriate phases, reactions, etc.</p>
+  <p></p>
+
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [L]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialSubregion <font color="darkgreen">
+  &quot;Base model for multi-dimensional, multi-species storage, transport, and exchange&quot;</font>
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.enumerate">Modelica.Math.BooleanVectors.enumerate</a>;
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.index">Modelica.Math.BooleanVectors.index</a>;
+  <font color="darkgreen">// extends FCSys.Icons.Names.Top3;</font>
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = {U.cm,U.cm,
+    U.cm} <font color="darkgreen">&quot;Lengths&quot;</font>;
+
+  <font color="darkgreen">// Assumptions</font>
+  <font color="darkgreen">// -----------</font>
+  <font color="darkgreen">// Included boundaries</font>
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]=<font color="red">fill</font>(V, 3) ./ L <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">parameter </font>Integer n_spec(start=0) <font color="darkgreen">&quot;Number of species&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
+      inclTransZ} <font color="darkgreen">&quot;true, if each pair of boundaries is included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclRot[Axis]={inclTransY<font color="blue"> and </font>inclTransZ,
+      inclTransZ<font color="blue"> and </font>inclTransX,inclTransX<font color="blue"> and </font>inclTransY} <font color="darkgreen">
+    &quot;true, if each axis of rotation has all its tangential boundaries included&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
+    &quot;Number of transport axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartRot[:]=<font color="red">index</font>(inclRot) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of rotational momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartTrans[n_trans]=<font color="red">index</font>(inclTrans) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the transport axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer transCart[Axis]=<font color="red">enumerate</font>(inclTrans) <font color="darkgreen">
+    &quot;Transport-axis indices of the Cartesian axes&quot;</font>;
+
+<font color="blue">end </font>PartialSubregion;
 </pre>
       </div>
     </div>
@@ -522,6 +606,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Aug  6 13:08:22 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:35 2013.
 </div>
 </span></body></html>

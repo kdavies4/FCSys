@@ -1,0 +1,307 @@
+<html>
+<head>
+<title>FCSys.Chemistry.Electrochemistry</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-12-5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Models associated with electrochemical reactions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Species</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body"></p>
+
+<h2><a name="FCSys.Chemistry.Electrochemistry"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.Electrochemistry</h2>
+
+<b>Models associated with electrochemical reactions</b>
+<p></p>
+<p></p>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p></p>
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Chemistry.Electrochad3dfaa64f5fc3c2LayerS.png" alt="FCSys.Chemistry.Electrochemistry.DoubleLayer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.DoubleLayer">DoubleLayer</a>
+</td><td>Electrolytic double layer</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.Electroch9540f1e77bbecdd8nsferS.png" alt="FCSys.Chemistry.Electrochemistry.ElectronTransfer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.ElectronTransfer">ElectronTransfer</a>
+</td><td>Electron transfer</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.Electrochad3dfaa64f5fc3c2LayerI.png" alt="FCSys.Chemistry.Electrochemistry.DoubleLayer" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.Electrochemistry.DoubleLayer"></a><a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry">FCSys.Chemistry.Electrochemistry</a>.DoubleLayer</h2>
+<b>Electrolytic double layer</b><p></p>
+<img src="images/FCSys.Chemistry.Electrochad3dfaa64f5fc3c2LayerD.png" alt="FCSys.Chemistry.Electrochemistry.DoubleLayer">
+<p></p>
+
+<h3>Information</h3>
+
+<p>The capacitance (<i>C</i>) is calculated from the surface area (<i>A</i>), length of the gap (<i>L</i>), and the permittivity (&epsilon;) assuming that the
+  charges are uniformly distributed over (infinite) parallel planes.</p>
+
+  <p>If <code>setVelocity</code> is <code>true</code>, then the material exits with the
+  velocity of the <code>direct</code> connector.  Typically, that connector should be connected to the stationary solid,
+  in which case heat will be generated if material arrives with a nonzero velocity.  That heat is rejected to the same connector.
+  </p>
+
+  <p></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>10*U.m^2</td><td>Surface area [L2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L</td><td>1e-10*U.m</td><td>Length of the gap [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Permittivity</a></td><td>epsilon</td><td>U.epsilon_0</td><td>Permittivity of the dielectric [N2.T2/(L3.M)]</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;e-&#39;.Graphite</td><td>Material properties</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>setVelocity</td><td>true</td><td>Material exits at the velocity of the <code>direct</code> connector</td></tr>
+<tr><td>Boolean</td><td>inclVolume</td><td>true</td><td>Include the <code>amagat</code> connector to occupy volume</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Material properties</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>negative</td><td>Chemical connector on the 1st side</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>positive</td><td>Chemical connector on the 2nd side</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra</td><td>Translational and thermal interface with the substrate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> DoubleLayer <font color="darkgreen">&quot;Electrolytic double layer&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <font color="blue">parameter </font>Integer n_trans(min=1,max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=10*U.m^2 <font color="darkgreen">&quot;Surface area&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L=1e-10*U.m <font color="darkgreen">&quot;Length of the gap&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Q.Permittivity</a> epsilon=U.epsilon_0 <font color="darkgreen">&quot;Permittivity of the dielectric&quot;</font>;
+
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> C=epsilon*A/L <font color="darkgreen">&quot;Capacitance&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a> <font color="blue">constrainedby </font>
+    Characteristics.BaseClasses.Characteristic <font color="darkgreen">&quot;Material properties&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean setVelocity=true <font color="darkgreen">
+    &quot;Material exits at the velocity of the <code>direct</code> connector&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclVolume=true <font color="darkgreen">
+    &quot;Include the <code>amagat</code> connector to occupy volume&quot;</font>;
+
+  <font color="darkgreen">// Aliases</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> w(
+    stateSelect=StateSelect.always,
+    start=0,
+    fixed=true) <font color="darkgreen">&quot;Electrical potential&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I <font color="darkgreen">&quot;Material current&quot;</font>;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> Z(stateSelect=StateSelect.never) = C*w <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Amount of charge shifted in the positive direction&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> negative(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical connector on the 1st side&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> positive(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical connector on the 2nd side&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Connectors.Intra</a> intra(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Translational and thermal interface with the substrate&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-A*L) <font color="blue">if </font>inclVolume <font color="darkgreen">
+    &quot;Connector for additivity of volume&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Aliases</font>
+  Data.z*w = positive.g - negative.g;
+  I = positive.Ndot;
+
+  <font color="darkgreen">// Streams</font>
+  <font color="blue">if </font>setVelocity<font color="blue"> then</font>
+    negative.phi = intra.phi;
+    positive.phi = intra.phi;
+  <font color="blue">else</font>
+    negative.phi = <font color="red">inStream</font>(positive.phi);
+    positive.phi = <font color="red">inStream</font>(negative.phi);
+  <font color="blue">end if</font>;
+  negative.sT = <font color="red">inStream</font>(positive.sT);
+  positive.sT = <font color="red">inStream</font>(negative.sT);
+
+  <font color="darkgreen">// Conservation</font>
+  0 = negative.Ndot + positive.Ndot <font color="darkgreen">&quot;Material (no storage)&quot;</font>;
+  <font color="red">zeros</font>(n_trans) = Data.m*(<font color="red">actualStream</font>(negative.phi) - <font color="red">actualStream</font>(positive.phi))
+    *I + intra.mPhidot <font color="darkgreen">&quot;Translational momentum (no storage)&quot;</font>;
+  <font color="red">der</font>(C*w)/U.s = Data.z*I <font color="darkgreen">
+    &quot;Electrical energy (reversible; simplified using material conservation and divided by potential)&quot;</font>;
+  0 = intra.Qdot + (<font color="red">actualStream</font>(negative.phi)*<font color="red">actualStream</font>(negative.phi) - <font color="red">
+    actualStream</font>(positive.phi)*<font color="red">actualStream</font>(positive.phi))*I*Data.m/2 + intra.phi
+    *intra.mPhidot <font color="darkgreen">&quot;Mechanical and thermal energy (no storage)&quot;</font>;
+
+<font color="blue">end </font>DoubleLayer;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Chemistry.Electroch9540f1e77bbecdd8nsferI.png" alt="FCSys.Chemistry.Electrochemistry.ElectronTransfer" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.Electrochemistry.ElectronTransfer"></a><a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry">FCSys.Chemistry.Electrochemistry</a>.ElectronTransfer</h2>
+<b>Electron transfer</b><p></p>
+<img src="images/FCSys.Chemistry.Electroch9540f1e77bbecdd8nsferD.png" alt="FCSys.Chemistry.Electrochemistry.ElectronTransfer">
+<p></p>
+
+<h3>Information</h3>
+
+<p><code>fromI</code> may help to eliminate nonlinear systems of equations if the
+    <a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.DoubleLayer">double layer capacitance</a> is not included.</p><p></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_trans</td><td>&nbsp;</td><td>Number of components of translational momentum</td></tr>
+<tr><td>Integer</td><td>z</td><td>-1</td><td>Charge number</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I0</td><td>U.A</td><td>Exchange current @ 300 K [N/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Chemical parameters</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>E_A</td><td>0</td><td>Activation energy [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>alpha</td><td>0.5</td><td>Charge transfer coefficient [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<tr><td>Boolean</td><td>fromI</td><td>true</td><td>Invert the Butler-Volmer equation, if &alpha;=&frac12;</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>negative</td><td>Chemical connector on the 1st side</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>positive</td><td>Chemical connector on the 2nd side</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra</td><td>Translational and thermal interface with the substrate</td></tr>
+</table>
+<p></p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ElectronTransfer <font color="darkgreen">&quot;Electron transfer&quot;</font>
+  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math.html#Modelica.Math.asinh">Modelica.Math.asinh</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <font color="blue">parameter </font>Integer n_trans(min=1,max=3) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+
+  <font color="blue">parameter </font>Integer z=-1 <font color="darkgreen">&quot;Charge number&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> E_A=0 <font color="darkgreen">&quot;Activation energy&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> alpha(max=1) = 0.5 <font color="darkgreen">&quot;Charge transfer coefficient&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I0=U.A <font color="darkgreen">&quot;Exchange current @ 300 K&quot;</font>;
+  <font color="blue">parameter </font>Boolean fromI=true <font color="darkgreen">
+    &quot;Invert the Butler-Volmer equation, if &alpha;=&frac12;&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> negative(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical connector on the 1st side&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> positive(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Chemical connector on the 2nd side&quot;</font>;
+
+  <font color="darkgreen">// Aliases</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(start=300*U.K) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I(start=0) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Deltag(start=0) <font color="darkgreen">&quot;Potential difference&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Connectors.Intra</a> intra(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Translational and thermal interface with the substrate&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Aliases</font>
+  I = positive.Ndot;
+  Deltag = positive.g - negative.g;
+  T = intra.T;
+
+  <font color="darkgreen">// Streams</font>
+  negative.phi = <font color="red">inStream</font>(positive.phi);
+  positive.phi = <font color="red">inStream</font>(negative.phi);
+  negative.sT = <font color="red">inStream</font>(positive.sT);
+  positive.sT = <font color="red">inStream</font>(negative.sT);
+
+  <font color="darkgreen">// Reaction rate</font>
+  <font color="blue">if </font><font color="red">abs</font>(alpha - 0.5) &lt; Modelica.Constants.eps<font color="blue"> and </font>fromI<font color="blue"> then</font>
+    Deltag = 2*T*<font color="red">asinh</font>(0.5*<font color="red">exp</font>(E_A*(1/T - 1/(300*U.K)))*I/I0);
+  <font color="blue">else</font>
+    I*<font color="red">exp</font>(E_A*(1/T - 1/(300*U.K))) = I0*(<font color="red">exp</font>((1 - alpha)*Deltag/T) - <font color="red">exp</font>(-alpha*
+      Deltag/T));
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  0 = negative.Ndot + positive.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">zeros</font>(n_trans) = intra.mPhidot <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = Deltag*I + intra.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="darkgreen">// Note:  Energy and momentum cancel among the stream terms.</font>
+
+<font color="blue">end </font>ElectronTransfer;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:19 2013.
+</div>
+</span></body></html>
