@@ -1699,10 +1699,6 @@ temperature difference.</p>
 
     end CharacteristicEOS;
 
-    type Phase = enumeration(
-        gas "Gas",
-        solid "Solid",
-        liquid "Liquid") "Enumeration for material phases";
     type ReferenceEnthalpy = enumeration(
         zeroAt0K "Enthalpy at 0 K and p0 is 0 (if no additional offset)",
         zeroAt25degC
@@ -1710,6 +1706,10 @@ temperature difference.</p>
         enthalpyOfFormationAt25degC
           "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
+    type Phase = enumeration(
+        gas "Gas",
+        solid "Solid",
+        liquid "Liquid") "Enumeration for material phases";
 
   end BaseClasses;
   annotation (Documentation(info="<html>

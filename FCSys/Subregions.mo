@@ -723,7 +723,7 @@ package Subregions
         axis=Axis.x,
         minoritySide=Side.n,
         transSubstrate=false,
-        redeclare FCSys.Connectors.Reaction electrical) "Depletion layer"
+        redeclare FCSys.Connectors.Stoichiometric electrical) "Depletion layer"
         annotation (Placement(transformation(extent={{-10,10},{10,30}})));
 
       FCSys.Conditions.ByConnector.Inert.InertEfforts substrate(
@@ -765,12 +765,12 @@ package Subregions
       FCSys.Conditions.Adapters.ChemicalReaction exchange1(
         n=-2,
         m=U.g/U.mol,
-        redeclare FCSys.Connectors.Reaction electrochem)
+        redeclare FCSys.Connectors.Stoichiometric electrochem)
         annotation (Placement(transformation(extent={{-50,-30},{-30,-10}})));
       FCSys.Conditions.Adapters.ChemicalReaction exchange2(
         n=1,
         m=U.g/U.mol,
-        redeclare FCSys.Connectors.Reaction electrochem)
+        redeclare FCSys.Connectors.Stoichiometric electrochem)
         annotation (Placement(transformation(extent={{-50,-60},{-30,-40}})));
 
     protected
@@ -1331,10 +1331,10 @@ package Subregions
           compact=true));
 
       FCSys.Conditions.Adapters.ChemicalFace chargeLayer(redeclare
-          FCSys.Connectors.Reaction electrical)
+          FCSys.Connectors.Stoichiometric electrical)
         annotation (Placement(transformation(extent={{-6,10},{14,30}})));
       FCSys.Conditions.ByConnector.Reaction.ReactionEfforts electrochem(
-        redeclare FCSys.Connectors.Reaction electrochem,
+        redeclare FCSys.Connectors.Stoichiometric electrochem,
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ)
@@ -1364,8 +1364,8 @@ package Subregions
 
   model Subregion "Subregion with all phases"
     import Modelica.Constants.eps;
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=gas.n_spec
-           + graphite.n_spec + ionomer.n_spec + liquid.n_spec);
+    extends FCSys.Subregions.Partial(final n_spec=gas.n_spec + graphite.n_spec
+           + ionomer.n_spec + liquid.n_spec);
 
     parameter Q.NumberAbsolute k_gas_liq=eps
       "Additional coupling factor between gas and liquid" annotation (Dialog(
@@ -1438,22 +1438,22 @@ package Subregions
     Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
       annotation (Placement(transformation(extent={{-102,26},{-82,46}})));
-    Connectors.InertBusInternal common
+    Connectors.InertNode common
       "Connector for translational and thermal exchange among all species"
       annotation (Placement(transformation(extent={{80,-32},{100,-12}}),
           iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertBusInternal gasLiq
+    Connectors.InertNode gasLiq
       "Connector for translational and thermal exchange between gas and liquid"
       annotation (Placement(transformation(extent={{80,-46},{100,-26}}),
           iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertBusInternal graphiteLiq
+    Connectors.InertNode graphiteLiq
       "Connector for translational and thermal exchange between graphite and liquid"
       annotation (Placement(transformation(extent={{80,-60},{100,-40}}),
           iconTransformation(extent={{100,18},{120,38}})));
 
   protected
-    Connectors.PhysicalBusInternal phaseCh "Connector for phase change"
-      annotation (Placement(transformation(extent={{80,-72},{100,-52}}),
+    Connectors.PhysicalBusNode phaseCh "Connector for phase change" annotation
+      (Placement(transformation(extent={{80,-72},{100,-52}}),
           iconTransformation(extent={{64,-42},{84,-22}})));
   equation
     // Boundaries and volume-sharing
@@ -1700,13 +1700,13 @@ package Subregions
     annotation (Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-80},{
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics));
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
     import Modelica.Constants.eps;
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=ionomer.n_spec);
+    extends FCSys.Subregions.Partial(final n_spec=ionomer.n_spec);
 
     FCSys.Phases.Ionomer ionomer(
       final n_faces=n_faces,
@@ -1798,8 +1798,8 @@ package Subregions
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
     import Modelica.Constants.eps;
-    extends FCSys.Subregions.BaseClasses.EmptySubregion(final n_spec=gas.n_spec
-           + graphite.n_spec + liquid.n_spec);
+    extends FCSys.Subregions.Partial(final n_spec=gas.n_spec + graphite.n_spec
+           + liquid.n_spec);
 
     parameter Q.NumberAbsolute k_gas_liq=eps
       "Additional coupling factor between gas and liquid" annotation (Dialog(
@@ -1858,15 +1858,15 @@ package Subregions
     Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
       annotation (Placement(transformation(extent={{-84,26},{-64,46}})));
-    Connectors.InertBusInternal common
+    Connectors.InertNode common
       "Connector for translational and thermal exchange among all species"
       annotation (Placement(transformation(extent={{62,-32},{82,-12}}),
           iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertBusInternal gasLiq
+    Connectors.InertNode gasLiq
       "Connector for translational and thermal exchange between gas and liquid"
       annotation (Placement(transformation(extent={{62,-46},{82,-26}}),
           iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertBusInternal graphiteLiq
+    Connectors.InertNode graphiteLiq
       "Connector for translational and thermal exchange between graphite and liquid"
       annotation (Placement(transformation(extent={{62,-60},{82,-40}}),
           iconTransformation(extent={{100,18},{120,38}})));
@@ -2051,205 +2051,6 @@ package Subregions
               100,80}}), graphics));
   end SubregionNoIonomer;
 
-  package BaseClasses "Base classes (generally not for direct use)"
-
-    extends Modelica.Icons.BasesPackage;
-
-    partial model EmptySubregion
-      "Base model for multi-dimensional, multi-species storage, transport, and exchange"
-      import FCSys.Utilities.cartWrap;
-      import FCSys.Utilities.countTrue;
-      import FCSys.Utilities.enumerate;
-      import FCSys.Utilities.index;
-      // extends FCSys.Icons.Names.Top3;
-
-      // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
-        U.cm,U.cm} "Lengths" annotation (Dialog(group="Geometry",
-            __Dymola_label="<html><b><i>L</i></b></html>"));
-      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
-          axis + 2)] for axis in Axis} "Cross-sectional areas";
-      final inner parameter Q.Volume V=product(L) "Volume";
-      parameter Q.NumberAbsolute k_common=1
-        "Coupling factor for exchange among all phases" annotation (Dialog(
-            group="Geometry", __Dymola_label=
-              "<html><i>k</i><sub>common</sub></html>"));
-
-      // Assumptions
-      // -----------
-      // Included components of translational momentum
-      parameter Boolean inclTransX=true "X" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-      parameter Boolean inclTransY=true "Y" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-      parameter Boolean inclTransZ=true "Z" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-      //
-      // Included faces
-      parameter Boolean inclFacesX=true "X" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          tab="Assumptions",
-          group="Axes with faces included",
-          compact=true));
-      parameter Boolean inclFacesY=true "Y" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          tab="Assumptions",
-          group="Axes with faces included",
-          compact=true));
-      parameter Boolean inclFacesZ=true "Z" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          tab="Assumptions",
-          group="Axes with faces included",
-          compact=true));
-
-    protected
-      parameter Integer n_spec(start=0) "Number of species"
-        annotation (HideResult=true);
-      final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
-          inclTransZ}
-        "true, if each component of translational momentum is included";
-      final inner parameter Boolean inclFaces[Axis]={inclFacesX,inclFacesY,
-          inclFacesZ} "true, if each pairs of faces is included";
-      final inner parameter Boolean inclRot[Axis]={inclFacesY and inclFacesZ,
-          inclFacesZ and inclFacesX,inclFacesX and inclFacesY}
-        "true, if each axis of rotation has all its tangential faces included";
-      final inner parameter Integer n_trans=countTrue(inclTrans)
-        "Number of components of translational momentum";
-      final inner parameter Integer n_faces=countTrue(inclFaces)
-        "Number of pairs of faces";
-      final inner parameter Integer cartTrans[n_trans]=index(inclTrans)
-        "Cartesian-axis indices of the components of translational momentum";
-      final inner parameter Integer cartFaces[n_faces]=index(inclFaces)
-        "Cartesian-axis indices of the pairs of faces";
-      final inner parameter Integer cartRot[:]=index(inclRot)
-        "Cartesian-axis indices of the components of rotational momentum";
-      final inner parameter Integer transCart[Axis]=enumerate(inclTrans)
-        "Translational-momentum-component indices of the Cartesian axes";
-      final inner parameter Integer facesCart[Axis]=enumerate(inclFaces)
-        "Face-pair indices of the Cartesian axes";
-
-      annotation (
-        defaultComponentPrefixes="replaceable",
-        defaultComponentName="subregion",
-        Documentation(info="<html>
-  <p>At least one component of translational momentum must be included.
-  All of the components are included by default.</p>
-
-    <p>At least one pair of faces must be included.
-  All of the faces are included by default.</p>
-
-  <p>This model should be extended to include the appropriate phases and reactions.</p>
-  </html>"),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}),
-        Diagram(graphics));
-
-    end EmptySubregion;
-
-  end BaseClasses;
-
   annotation (Documentation(info="
 <html>
   <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
@@ -2261,4 +2062,195 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+  partial model Partial
+    "Base model for multi-dimensional, multi-species storage, transport, and exchange"
+    import FCSys.Utilities.cartWrap;
+    import FCSys.Utilities.countTrue;
+    import FCSys.Utilities.enumerate;
+    import FCSys.Utilities.index;
+    // extends FCSys.Icons.Names.Top3;
+
+    // Geometric parameters
+    inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
+      U.cm,U.cm} "Lengths" annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html><b><i>L</i></b></html>"));
+    final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(axis
+         + 2)] for axis in Axis} "Cross-sectional areas";
+    final inner parameter Q.Volume V=product(L) "Volume";
+    parameter Q.NumberAbsolute k_common=1
+      "Coupling factor for exchange among all phases" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>k</i><sub>common</sub></html>"));
+
+    // Assumptions
+    // -----------
+    // Included components of translational momentum
+    parameter Boolean inclTransX=true "X" annotation (choices(__Dymola_checkBox
+          =true), Dialog(
+        tab="Assumptions",
+        group="Axes with translational momentum included",
+        compact=true));
+    parameter Boolean inclTransY=true "Y" annotation (choices(__Dymola_checkBox
+          =true), Dialog(
+        tab="Assumptions",
+        group="Axes with translational momentum included",
+        compact=true));
+    parameter Boolean inclTransZ=true "Z" annotation (choices(__Dymola_checkBox
+          =true), Dialog(
+        tab="Assumptions",
+        group="Axes with translational momentum included",
+        compact=true));
+    //
+    // Included faces
+    parameter Boolean inclFacesX=true "X" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        tab="Assumptions",
+        group="Axes with faces included",
+        compact=true));
+    parameter Boolean inclFacesY=true "Y" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        tab="Assumptions",
+        group="Axes with faces included",
+        compact=true));
+    parameter Boolean inclFacesZ=true "Z" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        tab="Assumptions",
+        group="Axes with faces included",
+        compact=true));
+
+  protected
+    parameter Integer n_spec(start=0) "Number of species"
+      annotation (HideResult=true);
+    final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
+        inclTransZ}
+      "true, if each component of translational momentum is included";
+    final inner parameter Boolean inclFaces[Axis]={inclFacesX,inclFacesY,
+        inclFacesZ} "true, if each pairs of faces is included";
+    final inner parameter Boolean inclRot[Axis]={inclFacesY and inclFacesZ,
+        inclFacesZ and inclFacesX,inclFacesX and inclFacesY}
+      "true, if each axis of rotation has all its tangential faces included";
+    final inner parameter Integer n_trans=countTrue(inclTrans)
+      "Number of components of translational momentum";
+    final inner parameter Integer n_faces=countTrue(inclFaces)
+      "Number of pairs of faces";
+    final inner parameter Integer cartTrans[n_trans]=index(inclTrans)
+      "Cartesian-axis indices of the components of translational momentum";
+    final inner parameter Integer cartFaces[n_faces]=index(inclFaces)
+      "Cartesian-axis indices of the pairs of faces";
+    final inner parameter Integer cartRot[:]=index(inclRot)
+      "Cartesian-axis indices of the components of rotational momentum";
+    final inner parameter Integer transCart[Axis]=enumerate(inclTrans)
+      "Translational-momentum-component indices of the Cartesian axes";
+    final inner parameter Integer facesCart[Axis]=enumerate(inclFaces)
+      "Face-pair indices of the Cartesian axes";
+
+    annotation (
+      defaultComponentPrefixes="replaceable",
+      defaultComponentName="subregion",
+      Documentation(info="<html>
+  <p>At least one component of translational momentum must be included.
+  All of the components are included by default.</p>
+
+    <p>At least one pair of faces must be included.
+  All of the faces are included by default.</p>
+
+  <p>This model should be extended to include the appropriate phases and reactions.</p>
+  </html>"),
+      Icon(graphics={
+          Line(
+            points={{-100,0},{-40,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{0,-100}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesY,
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{50,50}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-40,-40},{-16,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-16,40},{-16,-16},{40,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-40,0},{28,0}},
+            color={210,210,210},
+            visible=inclFacesX,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,28},{0,-40}},
+            color={210,210,210},
+            visible=inclFacesY,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{28,0},{100,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,100},{0,28}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesY,
+            smooth=Smooth.None),
+          Line(
+            points={{-12,-12},{40,40}},
+            color={210,210,210},
+            visible=inclFacesZ,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-40,16},{16,16},{16,-40}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-50,-50},{-12,-12}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{16,16}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            lineColor={0,0,0})}),
+      Diagram(graphics));
+
+  end Partial;
 end Subregions;

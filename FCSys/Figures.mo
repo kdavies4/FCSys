@@ -119,7 +119,7 @@ package Figures "Graphical layouts for documentation"
 
         model Declarative
           extends
-            FCSys.Figures.DeclarativeVsImperative.SwitchCausality.BaseClasses.Parameters;
+            FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Parameters;
           extends Modelica.Icons.Example;
           Modelica.Electrical.Analog.Basic.Resistor res1(R=R1) annotation (
               Placement(transformation(
@@ -176,7 +176,7 @@ package Figures "Graphical layouts for documentation"
 
       model Declarative_vi
         "Declarative-based circuit with voltage in, current out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput v annotation (Placement(transformation(
                 extent={{-60,-30},{-40,-10}}), iconTransformation(extent={{-120,
@@ -276,7 +276,7 @@ package Figures "Graphical layouts for documentation"
 
       model Declarative_iv
         "Declarative-based circuit with current in, voltage out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput i annotation (Placement(transformation(
                 extent={{-80,-30},{-60,-10}}), iconTransformation(extent={{-120,
@@ -374,7 +374,7 @@ package Figures "Graphical layouts for documentation"
       end Declarative_iv;
 
       model Imperative_vi "Imperative circuit with voltage in, current out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput v annotation (Placement(transformation(
                 extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
@@ -467,7 +467,7 @@ package Figures "Graphical layouts for documentation"
       end Imperative_vi;
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
 
       public
@@ -559,7 +559,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeTF_vi
         "Equivalent transfer function for voltage in, current out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput v annotation (Placement(transformation(
                 extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
@@ -586,7 +586,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeTF_iv
         "Equivalent transfer function for voltage in, current out"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
 
       public
@@ -613,20 +613,15 @@ package Figures "Graphical layouts for documentation"
                   {-100,-100},{100,100}}), graphics));
       end ImperativeTF_iv;
 
-      package BaseClasses "Base classes (generally not for direct use)"
-        extends Modelica.Icons.BasesPackage;
+    protected
+      partial model Parameters
+        "Base model with parameters for electrical circuit"
+        parameter SI.Resistance R1=10 "Resistance at temperature T_ref";
+        parameter SI.Resistance R2=100 "Resistance at temperature T_ref";
+        parameter SI.Inductance L=0.1 "Inductance";
+        parameter SI.Capacitance C=0.01 "Capacitance";
 
-        partial model Parameters
-          "Base model with parameters for electrical circuit"
-          parameter SI.Resistance R1=10 "Resistance at temperature T_ref";
-          parameter SI.Resistance R2=100 "Resistance at temperature T_ref";
-          parameter SI.Inductance L=0.1 "Inductance";
-          parameter SI.Capacitance C=0.01 "Capacitance";
-
-        end Parameters;
-
-      end BaseClasses;
-
+      end Parameters;
     end SwitchCausality;
 
     package Cascade "Examples showing cascaded electrical circuits"
@@ -676,7 +671,7 @@ package Figures "Graphical layouts for documentation"
       extends Modelica.Icons.Package;
 
       model DeclarativeA "First circuit in declarative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
@@ -746,7 +741,7 @@ package Figures "Graphical layouts for documentation"
       end DeclarativeA;
 
       model DeclarativeB "First circuit in declarative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-60,-10},{-40,10}}), iconTransformation(extent={{-120,
@@ -817,7 +812,7 @@ package Figures "Graphical layouts for documentation"
 
       model DeclarativeAB
         "Cascaded first and second circuits in declarative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
@@ -911,7 +906,7 @@ package Figures "Graphical layouts for documentation"
       end DeclarativeAB;
 
       model ImperativeA "First circuit in imperative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
@@ -978,7 +973,7 @@ package Figures "Graphical layouts for documentation"
       end ImperativeA;
 
       model ImperativeB "Second circuit in imperative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-120,
@@ -1052,7 +1047,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeAB
         "Cascaded first and second circuits in imperative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
@@ -1147,7 +1142,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeABIncorrect
         "Incorrectly cascaded first and second circuits in imperative formalism"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
@@ -1244,7 +1239,7 @@ package Figures "Graphical layouts for documentation"
 
       model ImperativeABTF
         "Cascaded first and second circuits as a transfer function"
-        extends BaseClasses.Parameters;
+        extends Parameters;
         extends FCSys.Icons.Blocks.Continuous;
         FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
                 extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
@@ -1269,19 +1264,14 @@ package Figures "Graphical layouts for documentation"
                   {-120,-80},{120,80}}), graphics));
       end ImperativeABTF;
 
-      package BaseClasses "Base classes (generally not for direct use)"
-        extends Modelica.Icons.BasesPackage;
+    protected
+      partial model Parameters "Base model with parameters"
+        parameter SI.Resistance R1=1 "Resistance at temperature T_ref";
+        parameter SI.Resistance R2=1 "Resistance at temperature T_ref";
+        parameter SI.Resistance R3=1 "Resistance at temperature T_ref";
+        parameter SI.Capacitance C=100e-3 "Capacitance";
 
-        partial model Parameters "Base model with parameters"
-          parameter SI.Resistance R1=1 "Resistance at temperature T_ref";
-          parameter SI.Resistance R2=1 "Resistance at temperature T_ref";
-          parameter SI.Resistance R3=1 "Resistance at temperature T_ref";
-          parameter SI.Capacitance C=100e-3 "Capacitance";
-
-        end Parameters;
-
-      end BaseClasses;
-
+      end Parameters;
     end Cascade;
 
   end DeclarativeVsImperative;
@@ -1320,11 +1310,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1529,9 +1519,9 @@ package Figures "Graphical layouts for documentation"
 
     Connectors.Dalton Dalton
       annotation (Placement(transformation(extent={{-68,-38},{-48,-18}})));
-    Connectors.Chemical Chemical
+    Connectors.Electrochemical Chemical
       annotation (Placement(transformation(extent={{48,-14},{68,6}})));
-    FCSys.Connectors.Reaction Reaction
+    FCSys.Connectors.Stoichiometric Reaction
       annotation (Placement(transformation(extent={{24,-14},{44,6}})));
     Connectors.Physical Physical
       annotation (Placement(transformation(extent={{72,-14},{92,6}})));

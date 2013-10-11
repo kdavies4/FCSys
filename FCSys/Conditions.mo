@@ -318,7 +318,7 @@ package Conditions "Models to specify and measure operating conditions"
       Connectors.Face face "Interface to the majority region" annotation (
           Placement(transformation(extent={{10,-10},{30,10}}),
             iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Chemical chemical(final n_trans=n_trans)
+      Connectors.Electrochemical chemical(final n_trans=n_trans)
         "Connector for a species in a chemical reaction" annotation (
           __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
                 -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
@@ -393,11 +393,11 @@ package Conditions "Models to specify and measure operating conditions"
       parameter Q.MassSpecific m[n_spec] "Specific masses" annotation (Dialog(
             group="Material properties", __Dymola_label="<html><i>m</i></html>"));
 
-      Connectors.Chemical chemical[n_spec](each final n_trans=n_trans)
+      Connectors.Electrochemical chemical[n_spec](each final n_trans=n_trans)
         "Connector for species in a chemical reaction" annotation (Placement(
             transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
               extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
+      Connectors.Stoichiometric reaction(final n_trans=n_trans)
         "Connector for an electrochemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
               extent={{30,-10},{50,10}})));
@@ -467,11 +467,11 @@ package Conditions "Models to specify and measure operating conditions"
          = actualStream(chemical.sT) if environment.analysis
         "Specific entropy-temperature product of the actual stream";
 
-      Connectors.Chemical chemical(final n_trans=n_trans)
+      Connectors.Electrochemical chemical(final n_trans=n_trans)
         "Connector for a species in a chemical reaction" annotation (Placement(
             transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
               extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
+      Connectors.Stoichiometric reaction(final n_trans=n_trans)
         "Connector for an electrochemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
               extent={{30,-10},{50,10}})));
@@ -547,7 +547,7 @@ package Conditions "Models to specify and measure operating conditions"
       Connectors.Face face "Interface to the majority region" annotation (
           Placement(transformation(extent={{30,-10},{50,10}}),
             iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
+      Connectors.Stoichiometric reaction(final n_trans=n_trans)
         "Connector for an electrochemical reaction" annotation (
           __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-50,
                 -10},{-30,10}}), iconTransformation(extent={{30,-10},{50,10}})));
@@ -964,7 +964,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model AnodeGas
           "<html>Adapter for PEMFC anode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          extends BaseClasses.PartialPhase;
+          extends Partial;
 
           replaceable package Medium = Media.AnodeGas constrainedby
             Modelica.Media.Interfaces.PartialMedium "Medium model (Modelica)"
@@ -1054,7 +1054,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model CathodeGas
           "<html>Adapter for PEMFC cathode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          extends BaseClasses.PartialPhase;
+          extends Partial;
 
           replaceable package Medium = Media.CathodeGas constrainedby
             Modelica.Media.Interfaces.PartialMedium "Medium model (Modelica)"
@@ -1188,7 +1188,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model Graphite
           "<html>Adapter for graphite between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          extends BaseClasses.PartialPhase;
+          extends Partial;
 
           Species.'e-' 'e-'(redeclare package Data =
                 Characteristics.'e-'.Graphite)
@@ -1254,7 +1254,7 @@ package Conditions "Models to specify and measure operating conditions"
 
         model Liquid
           "<html>Adapter for liquid between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-          extends BaseClasses.PartialPhase;
+          extends Partial;
 
           replaceable package Medium =
               Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
@@ -1314,33 +1314,28 @@ package Conditions "Models to specify and measure operating conditions"
                           smooth=Smooth.None)}));
         end Liquid;
 
-        package BaseClasses "Base classes (generally not for direct use)"
-          extends Modelica.Icons.BasesPackage;
+      protected
+        partial model Partial
+          "<html>Base model for adapter for a phase between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+          extends FCSys.Icons.Names.Top3;
 
-          partial model PartialPhase
-            "<html>Partial adapter for a phase between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-            extends FCSys.Icons.Names.Top3;
+          Connectors.FaceBus face "FCSys face connector" annotation (Placement(
+                transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
+                  extent={{-90,-10},{-70,10}})));
+          Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+            "Modelica heat port" annotation (Placement(transformation(extent={{
+                    70,-50},{90,-30}}), iconTransformation(extent={{70,-50},{90,
+                    -30}})));
+          annotation (Icon(graphics={Line(
+                          points={{0,0},{-70,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{0,-40},{70,-40}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
 
-            Connectors.FaceBus face "FCSys face connector" annotation (
-                Placement(transformation(extent={{-90,-10},{-70,10}}),
-                  iconTransformation(extent={{-90,-10},{-70,10}})));
-            Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
-              "Modelica heat port" annotation (Placement(transformation(extent=
-                      {{70,-50},{90,-30}}),iconTransformation(extent={{70,-50},
-                      {90,-30}})));
-            annotation (Icon(graphics={Line(
-                              points={{0,0},{-70,0}},
-                              color={127,127,127},
-                              smooth=Smooth.None,
-                              thickness=0.5),Line(
-                              points={{0,-40},{70,-40}},
-                              color={191,0,0},
-                              smooth=Smooth.None)}));
-
-          end PartialPhase;
-
-        end BaseClasses;
-
+        end Partial;
       end Phases;
 
       package Species "Adapters for single species"
@@ -1641,7 +1636,7 @@ package Conditions "Models to specify and measure operating conditions"
         model Junction2
           "Junction between two pure substances and their mixture"
           import assert = FCSys.Utilities.assertEval;
-          extends BaseClasses.PartialJunction;
+          extends Partial;
 
           replaceable package Medium1 =
               Modelica.Media.IdealGases.SingleGases.H2 (referenceChoice=
@@ -1746,8 +1741,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         model Junction3
           "Junction between three pure substances and their mixture"
           import assert = FCSys.Utilities.assertEval;
-          extends BaseClasses.PartialJunction(redeclare replaceable package
-              MixtureMedium = Media.CathodeGas);
+          extends Partial(redeclare replaceable package MixtureMedium =
+                Media.CathodeGas);
 
           replaceable package Medium1 =
               Modelica.Media.IdealGases.SingleGases.H2O (referenceChoice=
@@ -1878,52 +1873,47 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                           smooth=Smooth.None)}));
         end Junction3;
 
-        package BaseClasses "Base classes (generally not for direct use)"
-          extends Modelica.Icons.BasesPackage;
-          partial model PartialJunction
-            "Partial model for a junction between pure substances and their mixture"
-            extends FCSys.Icons.Names.Top3;
+      protected
+        partial model Partial
+          "Base model for a junction between pure substances and their mixture"
+          extends FCSys.Icons.Names.Top3;
 
-            replaceable package MixtureMedium = Media.AnodeGas constrainedby
-              Modelica.Media.Interfaces.PartialMedium
-              "Medium model for the mixture" annotation (choicesAllMatching=
-                  true, Dialog(group="Material properties"));
+          replaceable package MixtureMedium = Media.AnodeGas constrainedby
+            Modelica.Media.Interfaces.PartialMedium
+            "Medium model for the mixture" annotation (choicesAllMatching=true,
+              Dialog(group="Material properties"));
 
-            Modelica.Fluid.Interfaces.FluidPort_a mixturePort(redeclare final
-                package Medium = MixtureMedium) "Fluid port for the mixture"
-              annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
-                  iconTransformation(extent={{-90,-10},{-70,10}})));
+          Modelica.Fluid.Interfaces.FluidPort_a mixturePort(redeclare final
+              package Medium = MixtureMedium) "Fluid port for the mixture"
+            annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+                iconTransformation(extent={{-90,-10},{-70,10}})));
 
-            FCSys.Conditions.Adapters.MSL.SIunits.MassFraction X[MixtureMedium.nX]
-              "Mass fractions within the mixture";
+          FCSys.Conditions.Adapters.MSL.SIunits.MassFraction X[MixtureMedium.nX]
+            "Mass fractions within the mixture";
 
-          equation
-            // Mass fractions
-            X = if MixtureMedium.fixedX then MixtureMedium.reference_X else if
-              MixtureMedium.reducedX then cat(
-                        1,
-                        inStream(mixturePort.Xi_outflow),
-                        1 - sum(X[1:MixtureMedium.nXi])) else inStream(
-              mixturePort.Xi_outflow);
-            X = if MixtureMedium.reducedX then cat(
-                        1,
-                        mixturePort.Xi_outflow,
-                        1 - sum(X[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
-            annotation (defaultComponentName="junction", Icon(graphics={Line(
-                              points={{-80,0},{0,0}},
-                              color={0,127,255},
-                              smooth=Smooth.None),Line(
-                              points={{0,-40},{0,40}},
-                              color={0,127,255},
-                              smooth=Smooth.None),Ellipse(
-                              extent={{-6,6},{6,-6}},
-                              lineColor={0,127,255},
-                              fillColor={255,255,255},
-                              fillPattern=FillPattern.Solid)}));
-          end PartialJunction;
-
-        end BaseClasses;
-
+        equation
+          // Mass fractions
+          X = if MixtureMedium.fixedX then MixtureMedium.reference_X else if
+            MixtureMedium.reducedX then cat(
+                    1,
+                    inStream(mixturePort.Xi_outflow),
+                    1 - sum(X[1:MixtureMedium.nXi])) else inStream(mixturePort.Xi_outflow);
+          X = if MixtureMedium.reducedX then cat(
+                    1,
+                    mixturePort.Xi_outflow,
+                    1 - sum(X[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
+          annotation (defaultComponentName="junction", Icon(graphics={Line(
+                          points={{-80,0},{0,0}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{0,40}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Ellipse(
+                          extent={{-6,6},{6,-6}},
+                          lineColor={0,127,255},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid)}));
+        end Partial;
       end Junctions;
 
       package Media
@@ -1996,7 +1986,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -------------
         // Material
         replaceable function materialSpec = Material.potential constrainedby
-          Material.PartialCondition "Quantity" annotation (
+          Material.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           choicesAllMatching=true,
           Dialog(tab="Specification", group="Material"));
@@ -2021,7 +2011,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // X-axis translational
         replaceable function transXSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -2053,7 +2043,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Y-axis translational
         replaceable function transYSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -2085,7 +2075,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Z-axis translational
         replaceable function transZSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -2117,7 +2107,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalSpec = Thermal.heatRate constrainedby
-          Thermal.PartialCondition "Quantity" annotation (
+          Thermal.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -2144,32 +2134,28 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // Material
         replaceable function materialMeas = Material.reactionRate
-          constrainedby Material.PartialCondition "Material quantity"
-          annotation (__Dymola_choicesFromPackage=true, Dialog(group=
-                "Measurement"));
+          constrainedby Material.Partial "Material quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(group="Measurement"));
 
         // X-axis translational
         replaceable function transXMeas = Translational.velocity constrainedby
-          Translational.PartialCondition "X-axis translational quantity"
-          annotation (__Dymola_choicesFromPackage=true, Dialog(group=
-                "Measurement"));
+          Translational.Partial "X-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(group="Measurement"));
 
         // Y-axis translational
         replaceable function transYMeas = Translational.velocity constrainedby
-          Translational.PartialCondition "Y-axis translational quantity"
-          annotation (__Dymola_choicesFromPackage=true, Dialog(group=
-                "Measurement"));
+          Translational.Partial "Y-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(group="Measurement"));
 
         // Z-axis translational
         replaceable function transZMeas = Translational.velocity constrainedby
-          Translational.PartialCondition "Z-axis translational quantity"
-          annotation (__Dymola_choicesFromPackage=true, Dialog(group=
-                "Measurement"));
+          Translational.Partial "Z-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(group="Measurement"));
 
         // Thermal
         replaceable function thermalMeas = Thermal.specificEntropyTemperature
-          constrainedby Thermal.PartialCondition "Thermal quantity" annotation
-          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Thermal.Partial "Thermal quantity" annotation (
+            __Dymola_choicesFromPackage=true,Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -2472,7 +2458,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.Package;
 
         function reactionRate "Reaction rate"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := Ndot;
@@ -2480,15 +2466,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end reactionRate;
 
         function potential "Electrochemical potential"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mu;
           annotation (Inline=true);
         end potential;
 
-        partial function PartialCondition
-          "Partial function to select a material quantity"
+        partial function Partial
+          "Template of a function to select a material quantity"
           extends Modelica.Icons.Function;
 
           // Material diffusion
@@ -2510,14 +2496,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Material;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
 
         function velocity "Velocity"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := phi[i];
@@ -2525,15 +2511,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end velocity;
 
         function force "Force"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mPhidot[i];
           annotation (Inline=true);
         end force;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Material diffusion
@@ -2557,7 +2543,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Translational;
 
       package Thermal "Thermal conditions"
@@ -2565,7 +2551,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         function specificEntropyTemperature
           "Specific entropy-temperature product"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := sT;
@@ -2573,15 +2559,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end specificEntropyTemperature;
 
         function heatRate "Heat flow rate"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := Qdot;
           annotation (Inline=true);
         end heatRate;
 
-        partial function PartialCondition
-          "Partial function to select a thermal quantity"
+        partial function Partial
+          "Template of a function to select a thermal quantity"
           extends Modelica.Icons.Function;
 
           // Material diffusion
@@ -2603,7 +2589,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
@@ -2618,9 +2604,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Potential "Specify chemical potential (measure current)"
-        extends
-          FCSys.Conditions.ByConnector.Chemical.BaseClasses.PartialCondition(
-            final y=chemical.Ndot);
+        extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.Ndot);
 
       equation
         chemical.mu = u_final;
@@ -2628,126 +2612,121 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
-        extends
-          FCSys.Conditions.ByConnector.Chemical.BaseClasses.PartialCondition(
-            final y=chemical.mu);
+        extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.mu);
 
       equation
         chemical.Ndot = u_final;
 
       end Current;
 
-      package BaseClasses "Base classes (generally not for direct use)"
-        extends Modelica.Icons.BasesPackage;
-        partial model PartialCondition "Partial model of a material condition"
-          import FCSys.Utilities.countTrue;
-          import FCSys.Utilities.index;
-          extends FCSys.Icons.Conditions.SingleShort;
+      partial model Partial "Base model for a material condition"
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.index;
+        extends FCSys.Icons.Conditions.SingleShort;
 
-          parameter Boolean internal=true "Use internal specification"
-            annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(group="Specification of material condition"));
+        parameter Boolean internal=true "Use internal specification"
+          annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Specification of material condition"));
 
-          replaceable Modelica.Blocks.Sources.RealExpression source if internal
-            constrainedby Modelica.Blocks.Interfaces.SO
-            "Source of internal specification" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(group="Specification of material condition", enable=internal),
+        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+          constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(group="Specification of material condition", enable=internal),
 
-            Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-80,10})));
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,10})));
 
-          // Properties upon outflow
-          parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
-                group="Properties upon outflow", __Dymola_label=
-                  "<html><i><b>&phi;</b></i></html>"));
-          parameter Q.PotentialAbsolute sT(start=3000*U.K)
-            "Specific entropy-temperature product" annotation (Dialog(group=
-                  "Properties upon outflow", __Dymola_label=
-                  "<html><i>sT</i></html>"));
+        // Properties upon outflow
+        parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
+              group="Properties upon outflow", __Dymola_label=
+                "<html><i><b>&phi;</b></i></html>"));
+        parameter Q.PotentialAbsolute sT(start=3000*U.K)
+          "Specific entropy-temperature product" annotation (Dialog(group=
+                "Properties upon outflow", __Dymola_label=
+                "<html><i>sT</i></html>"));
 
-          // Included components of translational momentum
-          parameter Boolean inclTransX=true "X" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        // Included components of translational momentum
+        parameter Boolean inclTransX=true "X" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          parameter Boolean inclTransY=true "Y" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        parameter Boolean inclTransY=true "Y" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          parameter Boolean inclTransZ=true "Z" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        parameter Boolean inclTransZ=true "Z" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          Connectors.RealInput u if not internal "Value of specified condition"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-110,0})));
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,0})));
 
-          Connectors.RealOutput y "Measurement expression" annotation (Dialog(
-                tab="Measurement"), Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0}),iconTransformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0})));
-          output Q.Velocity phi_actual[n_trans]=actualStream(chemical.phi)
-            "Velocity of the actual stream";
-          output Q.Potential sT_actual=actualStream(chemical.sT)
-            "Specific entropy-temperature product of the actual stream";
-          Connectors.Chemical chemical(final n_trans=n_trans)
-            "Connector for a species of a chemical reaction"
-            annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
+              ="Measurement"), Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0}),iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
+        output Q.Velocity phi_actual[n_trans]=actualStream(chemical.phi)
+          "Velocity of the actual stream";
+        output Q.Potential sT_actual=actualStream(chemical.sT)
+          "Specific entropy-temperature product of the actual stream";
+        Connectors.Electrochemical chemical(final n_trans=n_trans)
+          "Connector for a species of a chemical reaction"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-        protected
-          final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-              inclTransZ}) "Number of components of translational momentum";
-          final parameter Integer cartTrans[n_trans]=index({inclTransX,
-              inclTransY,inclTransZ})
-            "Cartesian-axis indices of the components of translational momentum";
-          Connectors.RealOutputInternal u_final
-            "Final value of specified condition" annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-36,0}),iconTransformation(extent={{-10,-10},{10,10}},
-                  origin={-20,0})));
+      protected
+        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
+            inclTransZ}) "Number of components of translational momentum";
+        final parameter Integer cartTrans[n_trans]=index({inclTransX,inclTransY,
+            inclTransZ})
+          "Cartesian-axis indices of the components of translational momentum";
+        Connectors.RealOutputInternal u_final
+          "Final value of specified condition" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,0}),iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-20,0})));
 
-        equation
-          chemical.phi = phi[cartTrans];
-          chemical.sT = sT;
+      equation
+        chemical.phi = phi[cartTrans];
+        chemical.sT = sT;
 
-          connect(source.y, u_final) annotation (Line(
-              points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
+        connect(source.y, u_final) annotation (Line(
+            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
 
-          connect(u, u_final) annotation (Line(
-              points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
-                  5.55112e-16},{-36,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          annotation (defaultComponentName="chemical");
-        end PartialCondition;
-      end BaseClasses;
+        connect(u, u_final) annotation (Line(
+            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
+                5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (defaultComponentName="chemical");
+      end Partial;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
                   lineColor={239,142,1},
@@ -2784,7 +2763,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if 'inclC+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2811,7 +2790,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if 'inclSO3-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2836,7 +2815,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if 'incle-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2862,7 +2841,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if 'inclH+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2888,7 +2867,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if inclH2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2914,7 +2893,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if inclH2O constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2940,7 +2919,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if inclN2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -2966,7 +2945,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final inclTransY,
           final inclTransZ,
           final formula) if inclO2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
+          FCSys.Conditions.ByConnector.Physical.Partial(
           inclTransX=inclTransX,
           inclTransY=inclTransY,
           inclTransZ=inclTransZ,
@@ -3224,9 +3203,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Potential "Specify chemical potential (measure current)"
-        extends
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
-            final y=physical.Ndot);
+        extends FCSys.Conditions.ByConnector.Physical.Partial(final y=physical.Ndot);
 
       equation
         physical.mu = u_final;
@@ -3234,128 +3211,121 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
-        extends
-          FCSys.Conditions.ByConnector.Physical.BaseClasses.PartialCondition(
-            final y=physical.mu);
+        extends FCSys.Conditions.ByConnector.Physical.Partial(final y=physical.mu);
 
       equation
         physical.Ndot = u_final;
 
       end Current;
 
-      package BaseClasses "Base classes (generally not for direct use)"
-        extends Modelica.Icons.BasesPackage;
+      partial model Partial "Base model for a material condition"
+        import FCSys.Utilities.countTrue;
+        import FCSys.Utilities.index;
+        extends FCSys.Icons.Conditions.SingleShort;
 
-        partial model PartialCondition "Partial model of a material condition"
-          import FCSys.Utilities.countTrue;
-          import FCSys.Utilities.index;
-          extends FCSys.Icons.Conditions.SingleShort;
+        parameter String formula(start="") "Chemical formula of the species"
+          annotation (Dialog(group="Material properties"));
+        // The start value prevents a warning in Dymola 7.4.
 
-          parameter String formula(start="") "Chemical formula of the species"
-            annotation (Dialog(group="Material properties"));
-          // The start value prevents a warning in Dymola 7.4.
+        parameter Boolean internal=true "Use internal specification"
+          annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Specification of material condition"));
 
-          parameter Boolean internal=true "Use internal specification"
-            annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(group="Specification of material condition"));
+        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+          constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(group="Specification of material condition",enable=internal),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,10})));
 
-          replaceable Modelica.Blocks.Sources.RealExpression source if internal
-            constrainedby Modelica.Blocks.Interfaces.SO
-            "Source of internal specification" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(group="Specification of material condition",enable=internal),
+        // Properties upon outflow
+        parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
+              group="Properties upon outflow", __Dymola_label=
+                "<html><i><b>&phi;</b></i></html>"));
+        parameter Q.PotentialAbsolute sT(start=3000*U.K)
+          "Specific entropy-temperature product" annotation (Dialog(group=
+                "Properties upon outflow", __Dymola_label=
+                "<html><i>sT</i></html>"));
 
-            Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-80,10})));
+        // Included components of translational momentum
+        parameter Boolean inclTransX=true "X" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          // Properties upon outflow
-          parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
-                group="Properties upon outflow", __Dymola_label=
-                  "<html><i><b>&phi;</b></i></html>"));
-          parameter Q.PotentialAbsolute sT(start=3000*U.K)
-            "Specific entropy-temperature product" annotation (Dialog(group=
-                  "Properties upon outflow", __Dymola_label=
-                  "<html><i>sT</i></html>"));
+        parameter Boolean inclTransY=true "Y" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          // Included components of translational momentum
-          parameter Boolean inclTransX=true "X" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        parameter Boolean inclTransZ=true "Z" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
 
-          parameter Boolean inclTransY=true "Y" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,0})));
 
-          parameter Boolean inclTransZ=true "Z" annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Axes with translational momentum included",
-              compact=true));
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
+              ="Measurement"), Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
+        Connectors.Physical physical(final n_trans=n_trans,final formula=
+              formula) "Connector for phase change"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-          Connectors.RealInput u if not internal "Value of specified condition"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-110,0})));
+      protected
+        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
+            inclTransZ}) "Number of components of translational momentum";
+        final parameter Integer cartTrans[n_trans]=index({inclTransX,inclTransY,
+            inclTransZ})
+          "Cartesian-axis indices of the components of translational momentum";
 
-          Connectors.RealOutput y "Measurement expression" annotation (Dialog(
-                tab="Measurement"), Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0}), iconTransformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0})));
-          Connectors.Physical physical(final n_trans=n_trans,final formula=
-                formula) "Connector for phase change"
-            annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+        Connectors.RealOutputInternal u_final
+          "Final value of specified condition" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,0}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-20,0})));
 
-        protected
-          final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-              inclTransZ}) "Number of components of translational momentum";
-          final parameter Integer cartTrans[n_trans]=index({inclTransX,
-              inclTransY,inclTransZ})
-            "Cartesian-axis indices of the components of translational momentum";
+      equation
+        physical.phi = phi[cartTrans];
+        physical.sT = sT;
 
-          Connectors.RealOutputInternal u_final
-            "Final value of specified condition" annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-36,0}), iconTransformation(extent={{-10,-10},{10,10}},
-                  origin={-20,0})));
+        connect(source.y, u_final) annotation (Line(
+            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
 
-        equation
-          physical.phi = phi[cartTrans];
-          physical.sT = sT;
-
-          connect(source.y, u_final) annotation (Line(
-              points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          connect(u, u_final) annotation (Line(
-              points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
-                  5.55112e-16},{-36,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          annotation (defaultComponentName="physical");
-        end PartialCondition;
-      end BaseClasses;
+        connect(u, u_final) annotation (Line(
+            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
+                5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (defaultComponentName="physical");
+      end Partial;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
                   lineColor={2,157,21},
@@ -3913,7 +3883,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Gas "Condition for gas"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean inclH2=false
@@ -4092,7 +4062,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Graphite "Condition for graphite"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean 'inclC+'=false
@@ -4186,7 +4156,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Ionomer "Condition for ionomer"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean 'inclSO3-'=false
@@ -4322,7 +4292,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Liquid "Condition for liquid"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean inclH2O=false
@@ -4372,43 +4342,39 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           end Liquid;
 
-          package BaseClasses "Base classes (generally not for direct use)"
-            extends Modelica.Icons.BasesPackage;
-            model EmptyPhase "Empty condition for a phase (no species)"
-              extends FCSys.Icons.Conditions.PairShort;
+        protected
+          model EmptyPhase "Empty condition for a phase (no species)"
+            extends FCSys.Icons.Conditions.PairShort;
 
-              Connectors.FaceBus negative
-                "Negative-side multi-species connector for material, momentum, and energy"
-                annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
-                    iconTransformation(extent={{-110,-10},{-90,10}})));
-              Connectors.FaceBus positive
-                "Positive-side multi-species connector for material, momentum, and energy"
-                annotation (Placement(transformation(extent={{90,-10},{110,10}}),
-                    iconTransformation(extent={{90,-10},{110,10}})));
-              Connectors.RealInputBus u
-                "Input bus for values of specified conditions" annotation (
-                  Placement(transformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=270,
-                    origin={0,50}), iconTransformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=270,
-                    origin={0,50})));
+            Connectors.FaceBus negative
+              "Negative-side multi-species connector for material, momentum, and energy"
+              annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
+                  iconTransformation(extent={{-110,-10},{-90,10}})));
+            Connectors.FaceBus positive
+              "Positive-side multi-species connector for material, momentum, and energy"
+              annotation (Placement(transformation(extent={{90,-10},{110,10}}),
+                  iconTransformation(extent={{90,-10},{110,10}})));
+            Connectors.RealInputBus u
+              "Input bus for values of specified conditions" annotation (
+                Placement(transformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=270,
+                  origin={0,50}), iconTransformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=270,
+                  origin={0,50})));
 
-              Connectors.RealOutputBus y "Output bus of measurements"
-                annotation (Placement(transformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=270,
-                    origin={0,-50}),iconTransformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=270,
-                    origin={0,-50})));
-              annotation (Icon(graphics));
+            Connectors.RealOutputBus y "Output bus of measurements" annotation
+              (Placement(transformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=270,
+                  origin={0,-50}),iconTransformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=270,
+                  origin={0,-50})));
+            annotation (Icon(graphics));
 
-            end EmptyPhase;
-
-          end BaseClasses;
-
+          end EmptyPhase;
         end Phases;
 
       end Pair;
@@ -4927,7 +4893,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Gas "Condition for gas"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean inclH2=false
@@ -5079,7 +5045,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Graphite "Condition for graphite"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean 'inclC+'=false
@@ -5159,7 +5125,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Ionomer "Condition for ionomer"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean 'inclSO3-'=false
@@ -5277,7 +5243,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           model Liquid "Condition for liquid"
 
-            extends BaseClasses.EmptyPhase;
+            extends EmptyPhase;
 
             // Conditionally include species.
             parameter Boolean inclH2O=false
@@ -5319,38 +5285,34 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           end Liquid;
 
-          package BaseClasses "Base classes (generally not for direct use)"
-            extends Modelica.Icons.BasesPackage;
-            model EmptyPhase "Empty condition for a phase (no species)"
-              extends FCSys.Icons.Conditions.SingleShort;
+        protected
+          model EmptyPhase "Empty condition for a phase (no species)"
+            extends FCSys.Icons.Conditions.SingleShort;
 
-              Connectors.FaceBus face
-                "Multi-species connector for material, momentum, and energy"
-                annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-              Connectors.RealInputBus u
-                "Input bus for values of specified conditions" annotation (
-                  Placement(transformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=0,
-                    origin={-100,0}), iconTransformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=0,
-                    origin={-110,0})));
+            Connectors.FaceBus face
+              "Multi-species connector for material, momentum, and energy"
+              annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+            Connectors.RealInputBus u
+              "Input bus for values of specified conditions" annotation (
+                Placement(transformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=0,
+                  origin={-100,0}), iconTransformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=0,
+                  origin={-110,0})));
 
-              Connectors.RealOutputBus y "Output bus of measurements"
-                annotation (Placement(transformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=0,
-                    origin={100,0}),iconTransformation(
-                    extent={{-10,-10},{10,10}},
-                    rotation=0,
-                    origin={110,0})));
-              annotation (Icon(graphics));
+            Connectors.RealOutputBus y "Output bus of measurements" annotation
+              (Placement(transformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=0,
+                  origin={100,0}),iconTransformation(
+                  extent={{-10,-10},{10,10}},
+                  rotation=0,
+                  origin={110,0})));
+            annotation (Icon(graphics));
 
-            end EmptyPhase;
-
-          end BaseClasses;
-
+          end EmptyPhase;
         end Phases;
 
       end Single;
@@ -6047,8 +6009,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // -------------
           // Material
           replaceable function materialSpec = Material.current constrainedby
-            Conditions.ByConnector.Face.Single.Material.PartialCondition
-            "Quantity" annotation (
+            Material.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             choicesAllMatching=true,
             Dialog(tab="Specification", group="Material"));
@@ -6072,9 +6033,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // Normal translational
           replaceable function normalSpec = TranslationalNormal.force
-            constrainedby
-            Conditions.ByConnector.Face.Single.TranslationalNormal.PartialCondition
-            "Quantity" annotation (
+            constrainedby Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             choicesAllMatching=true,
             Dialog(tab="Specification", group="Normal translational"),
@@ -6099,9 +6058,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // 1st transverse
           replaceable function followingSpec = Translational.force
-            constrainedby
-            Conditions.ByConnector.Face.Single.Translational.PartialCondition
-            "Quantity" annotation (
+            constrainedby Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="First transverse"),
             Placement(transformation(extent={{-24,4},{-4,24}})));
@@ -6126,9 +6083,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // 2nd transverse
           replaceable function precedingSpec = Translational.force
-            constrainedby
-            Conditions.ByConnector.Face.Single.Translational.PartialCondition
-            "Quantity" annotation (
+            constrainedby Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Second transverse"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -6154,8 +6109,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // Thermal
           replaceable function thermalSpec = Thermal.heatRate constrainedby
-            Conditions.ByConnector.Face.Single.Thermal.PartialCondition
-            "Quantity" annotation (
+            Thermal.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -6182,39 +6136,33 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // -----------
           // Material
           replaceable function materialMeas = Material.concentration
-            constrainedby
-            Conditions.ByConnector.Face.Single.Material.PartialCondition
-            "Material quantity" annotation (__Dymola_choicesFromPackage=true,
-              Dialog(tab="Measurement"));
+            constrainedby Material.Partial "Material quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Normal translational
           replaceable function normalMeas = TranslationalNormal.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Single.TranslationalNormal.PartialCondition
-            "Normal translational quantity" annotation (
+            constrainedby Translational.Partial "Normal translational quantity"
+            annotation (
             __Dymola_choicesFromPackage=true,
             choicesAllMatching=true,
             Dialog(tab="Measurement"));
 
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Single.Translational.PartialCondition
-            "First transverse quantity" annotation (__Dymola_choicesFromPackage
-              =true, Dialog(tab="Measurement"));
+            constrainedby Translational.Partial "First transverse quantity"
+            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                  "Measurement"));
 
           // 2nd transverse
           replaceable function precedingMeas = Translational.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Single.Translational.PartialCondition
-            "Second transverse quantity" annotation (
-              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+            constrainedby Translational.Partial "Second transverse quantity"
+            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                  "Measurement"));
 
           // Thermal
           replaceable function thermalMeas = Thermal.temperature constrainedby
-            Conditions.ByConnector.Face.Single.Thermal.PartialCondition
-            "Thermal quantity" annotation (__Dymola_choicesFromPackage=true,
-              Dialog(tab="Measurement"));
+            Thermal.Partial "Thermal quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           Connectors.Face face
             "Connector to transport material, translational momentum, and thermal energy"
@@ -6537,7 +6485,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Package;
 
           function concentration "Concentration"
-            extends PartialCondition;
+            extends Partial;
           algorithm
             x := rho;
 
@@ -6545,7 +6493,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end concentration;
 
           function pressure "Thermodynamic pressure"
-            extends PartialCondition;
+            extends Partial;
 
             replaceable package Data =
                 Characteristics.BaseClasses.CharacteristicEOS constrainedby
@@ -6563,7 +6511,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end pressure;
 
           function current "Diffusion current"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := Ndot;
@@ -6571,8 +6519,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Inline=true);
           end current;
 
-          partial function PartialCondition
-            "Partial function to select a material quantity"
+          partial function Partial
+            "Template of a function to select a material quantity"
             extends Modelica.Icons.Function;
 
             // Material
@@ -6596,13 +6544,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Material;
 
         package TranslationalNormal
           "Translational conditions for the normal axis"
           function currentDensity "Advective current density"
-            extends PartialCondition;
+            extends Translational.Partial;
 
           algorithm
             x := rho*phi[orient];
@@ -6616,7 +6564,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Package;
 
           function velocity "Velocity"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := phi[orient];
@@ -6624,15 +6572,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end velocity;
 
           function force "Non-equilibrium force"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := mPhidot[orient];
             annotation (Inline=true);
           end force;
 
-          partial function PartialCondition
-            "Partial function to select a translational quantity"
+          partial function Partial
+            "Template of a function to select a translational quantity"
             extends Modelica.Icons.Function;
 
             // Material
@@ -6659,14 +6607,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Translational;
 
         package Thermal "Thermal conditions"
           extends Modelica.Icons.Package;
 
           function temperature "Temperature"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := T;
@@ -6674,15 +6622,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end temperature;
 
           function heatRate "Rate of thermal conduction"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := Qdot;
             annotation (Inline=true);
           end heatRate;
 
-          partial function PartialCondition
-            "Partial function to select a thermal quantity"
+          partial function Partial
+            "Template of a function to select a thermal quantity"
             extends Modelica.Icons.Function;
 
             // Material
@@ -6706,7 +6654,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Thermal;
 
       end Single;
@@ -6733,8 +6681,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -------------
         // X-axis translational
         replaceable function transXSpec = Translational.force constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -6766,8 +6713,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Y-axis translational
         replaceable function transYSpec = Translational.force constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -6798,8 +6744,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Z-axis translational
         replaceable function transZSpec = Translational.force constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -6830,8 +6775,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalSpec = Thermal.heatRate constrainedby
-          Conditions.ByConnector.Inert.Thermal.PartialCondition "Quantity"
-          annotation (
+          Thermal.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -6858,27 +6802,23 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // X-axis translational
         replaceable function transXMeas = Translational.velocity constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "X-axis translational quantity" annotation (
+          Translational.Partial "X-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Y-axis translational
         replaceable function transYMeas = Translational.velocity constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "Y-axis translational quantity" annotation (
+          Translational.Partial "Y-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Z-axis translational
         replaceable function transZMeas = Translational.velocity constrainedby
-          Conditions.ByConnector.Inert.Translational.PartialCondition
-          "Z-axis translational quantity" annotation (
+          Translational.Partial "Z-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Thermal
         replaceable function thermalMeas = Thermal.temperature constrainedby
-          Conditions.ByConnector.Inert.Thermal.PartialCondition
-          "Thermal quantity" annotation (__Dymola_choicesFromPackage=true,
-            Dialog(tab="Measurement"));
+          Thermal.Partial "Thermal quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -6903,7 +6843,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        FCSys.Connectors.Inert inert(final n_trans=n_trans)
+        FCSys.Connectors.InertNode inert(final n_trans=n_trans)
           "Connector to exchange translational momentum and thermal energy by diffusion"
           annotation (choicesAllMatching=true, Placement(transformation(extent=
                   {{-10,-110},{10,-90}})));
@@ -7129,7 +7069,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.Package;
 
         function velocity "Velocity"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := phi[i];
@@ -7137,15 +7077,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end velocity;
 
         function force "Force"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mPhidot[i];
           annotation (Inline=true);
         end force;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Translational
@@ -7164,14 +7104,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Translational;
 
       package Thermal "Thermal conditions"
         extends Modelica.Icons.Package;
 
         function temperature "Temperature"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := T;
@@ -7179,15 +7119,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end temperature;
 
         function heatRate "Heat flow rate"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := Qdot;
           annotation (Inline=true);
         end heatRate;
 
-        partial function PartialCondition
-          "Partial function to select a thermal quantity"
+        partial function Partial
+          "Template of a function to select a thermal quantity"
           extends Modelica.Icons.Function;
 
           // Translational
@@ -7204,7 +7144,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
@@ -7226,7 +7166,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -------------
         // Additivity of volume
         replaceable function amagatSpec = Amagat.volume constrainedby
-          Amagat.PartialCondition "Quantity" annotation (
+          Amagat.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           choicesAllMatching=true,
           Dialog(tab="Specification", group="Additivity of volume"));
@@ -7250,7 +7190,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // X-axis translational
         replaceable function transXSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -7282,7 +7222,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Y-axis translational
         replaceable function transYSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -7313,7 +7253,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Z-axis translational
         replaceable function transZSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -7344,7 +7284,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalSpec = Thermal.heatRate constrainedby
-          Thermal.PartialCondition "Quantity" annotation (
+          Thermal.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -7371,35 +7311,35 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // Material
         replaceable function amagatMeas = Amagat.pressure constrainedby
-          Amagat.PartialCondition "Additivity of volume quantity" annotation (
+          Amagat.Partial "Additivity of volume quantity" annotation (
             __Dymola_choicesFromPackage=true,Dialog(tab="Measurement"));
 
         // X-axis translational
         replaceable function transXMeas =
             FCSys.Conditions.ByConnector.Amagat.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "X-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "X-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Y-axis translational
         replaceable function transYMeas =
             FCSys.Conditions.ByConnector.Amagat.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "Y-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "Y-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Z-axis translational
         replaceable function transZMeas =
             FCSys.Conditions.ByConnector.Amagat.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "Z-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "Z-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Thermal
         replaceable function thermalMeas =
             FCSys.Conditions.ByConnector.Amagat.Thermal.temperature
-          constrainedby Thermal.PartialCondition "Thermal quantity" annotation
-          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Thermal.Partial "Thermal quantity" annotation (
+            __Dymola_choicesFromPackage=true,Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -7728,13 +7668,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
-                    -60,-60}},
-                lineColor={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid)}),
+                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
+                  -60},{-60,-60}},
+                      lineColor={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume;
@@ -7743,7 +7683,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.Package;
 
         function pressure "Pressure"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := p;
@@ -7751,15 +7691,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end pressure;
 
         function volume "Volume"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := V;
           annotation (Inline=true);
         end volume;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of volume
@@ -7780,14 +7720,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Amagat;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
 
         function velocity "Velocity"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := phi[i];
@@ -7795,15 +7735,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end velocity;
 
         function force "Force"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mPhidot[i];
           annotation (Inline=true);
         end force;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of volume
@@ -7826,14 +7766,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Translational;
 
       package Thermal "Thermal conditions"
         extends Modelica.Icons.Package;
 
         function temperature "Temperature"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := T;
@@ -7841,15 +7781,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end temperature;
 
         function heatRate "Heat flow rate"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := Qdot;
           annotation (Inline=true);
         end heatRate;
 
-        partial function PartialCondition
-          "Partial function to select a thermal quantity"
+        partial function Partial
+          "Template of a function to select a thermal quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of volume
@@ -7870,7 +7810,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
@@ -7903,7 +7843,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -------------
         // Additivity of pressure
         replaceable function daltonSpec = Dalton.pressure constrainedby
-          Dalton.PartialCondition "Quantity" annotation (
+          Dalton.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           choicesAllMatching=true,
           Dialog(tab="Specification", group="Additivity of pressure"));
@@ -7927,7 +7867,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // X-axis translational
         replaceable function transXSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -7959,7 +7899,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Y-axis translational
         replaceable function transYSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -7990,7 +7930,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Z-axis translational
         replaceable function transZSpec = Translational.force constrainedby
-          Translational.PartialCondition "Quantity" annotation (
+          Translational.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -8021,7 +7961,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalSpec = Thermal.heatRate constrainedby
-          Thermal.PartialCondition "Quantity" annotation (
+          Thermal.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -8048,35 +7988,35 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // Material
         replaceable function daltonMeas = Dalton.volume constrainedby
-          Dalton.PartialCondition "Additivity of pressure quantity" annotation
-          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          Dalton.Partial "Additivity of pressure quantity" annotation (
+            __Dymola_choicesFromPackage=true,Dialog(tab="Measurement"));
 
         // X-axis translational
         replaceable function transXMeas =
             FCSys.Conditions.ByConnector.Dalton.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "X-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "X-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Y-axis translational
         replaceable function transYMeas =
             FCSys.Conditions.ByConnector.Dalton.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "Y-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "Y-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Z-axis translational
         replaceable function transZMeas =
             FCSys.Conditions.ByConnector.Dalton.Translational.velocity
-          constrainedby Translational.PartialCondition
-          "Z-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Translational.Partial "Z-axis translational quantity"
+          annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                "Measurement"));
 
         // Thermal
         replaceable function thermalMeas =
             FCSys.Conditions.ByConnector.Dalton.Thermal.temperature
-          constrainedby Thermal.PartialCondition "Thermal quantity" annotation
-          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+          constrainedby Thermal.Partial "Thermal quantity" annotation (
+            __Dymola_choicesFromPackage=true,Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -8384,7 +8324,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.Package;
 
         function volume "Volume"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := V;
@@ -8392,15 +8332,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end volume;
 
         function pressure "Pressure"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := p;
           annotation (Inline=true);
         end pressure;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of pressure
@@ -8421,14 +8361,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Dalton;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
 
         function velocity "Velocity"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := phi[i];
@@ -8436,15 +8376,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end velocity;
 
         function force "Force"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mPhidot[i];
           annotation (Inline=true);
         end force;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of pressure
@@ -8467,14 +8407,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Translational;
 
       package Thermal "Thermal conditions"
         extends Modelica.Icons.Package;
 
         function temperature "Temperature"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := T;
@@ -8482,15 +8422,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end temperature;
 
         function heatRate "Heat flow rate"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := Qdot;
           annotation (Inline=true);
         end heatRate;
 
-        partial function PartialCondition
-          "Partial function to select a thermal quantity"
+        partial function Partial
+          "Template of a function to select a thermal quantity"
           extends Modelica.Icons.Function;
 
           // Additivity of pressure
@@ -8511,7 +8451,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
@@ -8553,8 +8493,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -------------
         // X-axis translational
         replaceable function transXSpec = Component.force constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "Quantity" annotation (
+          Component.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -8586,8 +8525,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Y-axis translational
         replaceable function transYSpec = Component.force constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "Quantity" annotation (
+          Component.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -8619,8 +8557,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Z-axis translational
         replaceable function transZSpec = Component.force constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "Quantity" annotation (
+          Component.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             tab="Specification",
@@ -8653,20 +8590,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // X-axis translational
         replaceable function transXMeas = Component.velocity constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "X-axis translational quantity" annotation (
+          Component.Partial "X-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Y-axis translational
         replaceable function transYMeas = Component.velocity constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "Y-axis translational quantity" annotation (
+          Component.Partial "Y-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Z-axis translational
         replaceable function transZMeas = Component.velocity constrainedby
-          Conditions.ByConnector.Translational.Component.PartialCondition
-          "Z-axis translational quantity" annotation (
+          Component.Partial "Z-axis translational quantity" annotation (
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Included components of translational momentum
@@ -8859,7 +8793,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package Component "Conditions for a component of translational momentum"
         extends Modelica.Icons.Package;
         function velocity "Velocity "
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := phi[i];
@@ -8868,15 +8802,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end velocity;
 
         function force "Force"
-          extends PartialCondition;
+          extends Partial;
 
         algorithm
           x := mPhidot[i];
 
         end force;
 
-        partial function PartialCondition
-          "Partial function to select a translational quantity"
+        partial function Partial
+          "Template of a function to select a translational quantity"
           extends Modelica.Icons.Function;
 
           // Translational advection
@@ -8890,7 +8824,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-        end PartialCondition;
+        end Partial;
       end Component;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
@@ -8905,9 +8839,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Temperature "Specify temperature (measure heat flow rate)"
-        extends
-          FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition(
-            final y=thermal.Qdot,source(y=298.15*U.K));
+        extends FCSys.Conditions.ByConnector.ThermalDiffusion.Partial(final y=
+              thermal.Qdot, source(y=298.15*U.K));
 
       equation
         thermal.T = u_final;
@@ -8915,85 +8848,80 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
-        extends
-          FCSys.Conditions.ByConnector.ThermalDiffusion.BaseClasses.PartialCondition(
-            final y=thermal.T);
+        extends FCSys.Conditions.ByConnector.ThermalDiffusion.Partial(final y=
+              thermal.T);
 
       equation
         thermal.Qdot = u_final;
 
       end HeatRate;
 
-      package BaseClasses "Base classes (generally not for direct use)"
-        extends Modelica.Icons.BasesPackage;
+      partial model Partial "Base model for a thermal condition"
 
-        partial model PartialCondition "Partial model for a thermal condition"
+        extends FCSys.Icons.Conditions.SingleShort;
 
-          extends FCSys.Icons.Conditions.SingleShort;
+        parameter Boolean internal=true "Use internal specification"
+          annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Specification"));
 
-          parameter Boolean internal=true "Use internal specification"
-            annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(group="Specification"));
+        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+          constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(group="Specification",enable=internal),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-70,30})));
 
-          replaceable Modelica.Blocks.Sources.RealExpression source if internal
-            constrainedby Modelica.Blocks.Interfaces.SO
-            "Source of internal specification" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(group="Specification",enable=internal),
-            Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-70,30})));
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,0})));
 
-          Connectors.RealInput u if not internal "Value of specified condition"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-110,0})));
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
+              ="Measurement"), Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
 
-          Connectors.RealOutput y "Measurement expression" annotation (Dialog(
-                tab="Measurement"), Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0}), iconTransformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={110,0})));
+        Connectors.ThermalDiffusion thermal
+          "Connector to transport material, momentum, and energy of a single species"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-          Connectors.ThermalDiffusion thermal
-            "Connector to transport material, momentum, and energy of a single species"
-            annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+      protected
+        Connectors.RealOutputInternal u_final
+          "Final value of specified condition" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-20,0})));
 
-        protected
-          Connectors.RealOutputInternal u_final
-            "Final value of specified condition" annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-20,0})));
+      equation
+        connect(u, u_final) annotation (Line(
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
+                5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
 
-        equation
-          connect(u, u_final) annotation (Line(
-              points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
-                  -20,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
+        connect(source.y, u_final) annotation (Line(
+            points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
 
-          connect(source.y, u_final) annotation (Line(
-              points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          annotation (defaultComponentName="thermal");
-        end PartialCondition;
-      end BaseClasses;
+        annotation (defaultComponentName="thermal");
+      end Partial;
       annotation (Icon(graphics={Ellipse(
                   extent={{-70,50},{50,-70}},
-                  lineColor={170,0,0},
+                  lineColor={127,127,127},
                   fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
+                  fillColor={255,255,255})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors

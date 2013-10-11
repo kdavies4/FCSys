@@ -4,8 +4,7 @@ package Phases "Mixtures of species"
   // **Use __Dymola_label for incl and species tags
   model Gas "Gas phase"
     import FCSys.Utilities.countTrue;
-    extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
-          inclH2,inclH2O,inclN2,inclO2}));
+    extends Partial(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
     // Conditionally include species.
     parameter Boolean inclH2=false "Include H2" annotation (
@@ -144,12 +143,12 @@ package Phases "Mixtures of species"
     Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
       annotation (Placement(transformation(extent={{90,-64},{110,-44}}),
           iconTransformation(extent={{-60,40},{-40,60}})));
-    Connectors.Inert inter[n_inter](each final n_trans=n_trans) if n_spec > 0
+    Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{90,-40},{110,-20}}),
           iconTransformation(extent={{80,-60},{100,-80}})));
-    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
-      "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
+      inclORR "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-70,50},{-50,70}}),iconTransformation(extent=
               {{50,-94},{70,-74}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
@@ -181,7 +180,7 @@ package Phases "Mixtures of species"
       each final n_trans=n_trans) if inclORR
       "Adapter for the contribution of O2 and H2O to the oxygen reduction reaction"
       annotation (Placement(transformation(extent={{-39,30},{-59,50}})));
-    Connectors.DirectInternal direct(
+    Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
       final inclThermal=reduceThermal) if n_spec > 0 and (reduceTrans or
@@ -424,7 +423,7 @@ package Phases "Mixtures of species"
       Documentation(info="<html>
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{100,
               100}}), graphics));
@@ -433,8 +432,7 @@ package Phases "Mixtures of species"
   model Graphite "Graphite phase"
     import assert = FCSys.Utilities.assertEval;
     import FCSys.Utilities.countTrue;
-    extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
-          'inclC+','incle-'}));
+    extends Partial(final n_spec=countTrue({'inclC+','incle-'}));
 
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
@@ -533,7 +531,7 @@ package Phases "Mixtures of species"
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-68,-22},{-48,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
-    Connectors.Inert inter[n_inter](each final n_trans=n_trans) if n_spec > 0
+    Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{60,-40},{80,-20}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
@@ -541,8 +539,8 @@ package Phases "Mixtures of species"
     Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
       annotation (Placement(transformation(extent={{60,-64},{80,-44}}),
           iconTransformation(extent={{-60,40},{-40,60}})));
-    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
-      "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
+      inclORR "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-10,70},{10,90}}), iconTransformation(extent=
               {{50,-94},{70,-74}})));
 
@@ -585,7 +583,7 @@ package Phases "Mixtures of species"
       J_irr=J_irr) if inclHOR or inclORR "Model to determine the reaction rate"
       annotation (Placement(transformation(extent={{-24,50},{-4,70}})));
 
-    Connectors.DirectInternal direct(
+    Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
       final inclThermal=reduceThermal) if n_spec > 0 and (reduceTrans or
@@ -739,13 +737,11 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Graphite;
 
   model Ionomer "Ionomer phase"
     import FCSys.Utilities.countTrue;
-    extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
-          'inclSO3-','inclH+',inclH2O}));
+    extends Partial(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
 
     parameter Q.NumberAbsolute k_EOD=1 if 'inclH+' or inclH2O
       "Coupling factor between H+ and H2O" annotation (Dialog(group="Geometry",
@@ -874,7 +870,7 @@ package Phases "Mixtures of species"
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-88,-22},{-68,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
-    Connectors.Inert inter[n_inter](each final n_trans=n_trans) if n_spec > 0
+    Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-40},{100,-20}}),
           iconTransformation(extent={{80,-60},{100,-80}})));
@@ -882,8 +878,8 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{80,-76},{100,-56}}),
           iconTransformation(extent={{-60,40},{-40,60}})));
 
-    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
-      "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
+      inclORR "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{10,70},{30,90}}), iconTransformation(extent={
               {50,-94},{70,-74}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
@@ -922,7 +918,7 @@ package Phases "Mixtures of species"
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{80,-76},{60,-56}})));
-    Connectors.DirectInternal direct(
+    Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
       final inclThermal=reduceThermal) if n_spec > 0 and (reduceTrans or
@@ -1150,16 +1146,14 @@ package Phases "Mixtures of species"
     For more information, see the
  <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Ionomer;
 
   model Liquid "Liquid phase"
-    extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=if inclH2O then
-          1 else 0);
+    extends Partial(final n_spec=if inclH2O then 1 else 0);
 
     // Conditionally include species.
     parameter Boolean inclH2O=false "Include H2O" annotation (
@@ -1210,7 +1204,7 @@ package Phases "Mixtures of species"
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
-    Connectors.Inert inter[n_inter](each final n_trans=n_trans) if n_spec > 0
+    Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{30,-24},{50,-4}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
@@ -1220,7 +1214,6 @@ package Phases "Mixtures of species"
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
           transformation(extent={{-19,50},{1,70}}), iconTransformation(extent={
               {20,-94},{40,-74}})));
-
 
   equation
     // Inert exchange
@@ -1285,85 +1278,84 @@ package Phases "Mixtures of species"
               100,100}}), graphics));
   end Liquid;
 
-  package BaseClasses "Base classes (generally not for direct use)"
-    extends Modelica.Icons.BasesPackage;
-    partial model PartialPhase "Partial model for a phase"
-      import FCSys.Utilities.index;
-      // extends FCSys.Icons.Names.Middle;
+protected
+  partial model Partial "Base model for a phase"
+    import FCSys.Utilities.index;
+    // extends FCSys.Icons.Names.Middle;
 
-      parameter Integer n_spec(start=0) "Number of species"
-        annotation (HideResult=true);
-      inner parameter Integer n_inter=0
-        "Number of independent couplings with other phases"
-        annotation (Dialog(connectorSizing=true),HideResult=n_spec == 0);
+    parameter Integer n_spec(start=0) "Number of species"
+      annotation (HideResult=true);
+    inner parameter Integer n_inter=0
+      "Number of independent couplings with other phases"
+      annotation (Dialog(connectorSizing=true),HideResult=n_spec == 0);
 
-      // Geometry
-      parameter Integer n_faces(min=1, max=3) "Number of pairs of faces"
-        annotation (Dialog(group="Geometry",__Dymola_label=
-              "<html><i>n</i><sub>faces</sub></html>"), HideResult=true);
-      // This can't be an outer parameter in Dymola 7.4.
-      parameter Q.NumberAbsolute k_DT[Axis](
-        each min=Modelica.Constants.small,
-        each final nominal=1) = {1,1,1} if n_spec > 0
-        "Scaling factor for diffusive transport" annotation (Dialog(group=
-              "Geometry", __Dymola_label=
-              "<html><b><i>k</i><sub>DT</sub></b></html>"));
-      inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
-         > 0 "Coupling factor for exchange with other phases" annotation (
-          Dialog(group="Geometry", __Dymola_label=
-              "<html><i>k</i><sub>inter</sub></html>"));
+    // Geometry
+    parameter Integer n_faces(min=1, max=3) "Number of pairs of faces"
+      annotation (Dialog(group="Geometry",__Dymola_label=
+            "<html><i>n</i><sub>faces</sub></html>"), HideResult=true);
+    // This can't be an outer parameter in Dymola 7.4.
+    parameter Q.NumberAbsolute k_DT[Axis](
+      each min=Modelica.Constants.small,
+      each final nominal=1) = {1,1,1} if n_spec > 0
+      "Scaling factor for diffusive transport" annotation (Dialog(group=
+            "Geometry", __Dymola_label=
+            "<html><b><i>k</i><sub>DT</sub></b></html>"));
+    inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
+       > 0 "Coupling factor for exchange with other phases" annotation (Dialog(
+          group="Geometry", __Dymola_label=
+            "<html><i>k</i><sub>inter</sub></html>"));
 
-      // Assumptions
-      parameter Boolean reduceTrans=false "Same velocity for all species"
-        annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
-            __Dymola_checkBox=true));
-      //if n_spec > 0
-      parameter Boolean reduceThermal=false "Same temperature for all species"
-        annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
-            __Dymola_checkBox=true));
-      //if n_spec > 0
+    // Assumptions
+    parameter Boolean reduceTrans=false "Same velocity for all species"
+      annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+          __Dymola_checkBox=true));
+    //if n_spec > 0
+    parameter Boolean reduceThermal=false "Same temperature for all species"
+      annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+          __Dymola_checkBox=true));
+    //if n_spec > 0
 
-      outer parameter Q.Length L[Axis] if n_spec > 0 "Length" annotation (
-          HideResult=true,missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Q.Length L[Axis] if n_spec > 0 "Length" annotation (
+        HideResult=true,missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Q.Area A[Axis] if n_spec > 0 "Cross-sectional area"
-        annotation (HideResult=true,missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Q.Area A[Axis] if n_spec > 0 "Cross-sectional area"
+      annotation (HideResult=true,missingInnerMessage="This model should be used within a subregion model.
 ");
-      // Note:  These must be public in Dymola 7.4, so HideResult is used.
+    // Note:  These must be public in Dymola 7.4, so HideResult is used.
 
-    protected
-      final inner parameter Q.Length Lprime[Axis]=k_DT ./ L if n_spec > 0
-        "**dimension, **Effective cross-sectional area per length **rename";
-      outer parameter Integer n_trans
-        "Number of components of translational momentum" annotation (
-          missingInnerMessage="This model should be used within a subregion model.
+  protected
+    final inner parameter Q.Length Lprime[Axis]=k_DT ./ L if n_spec > 0
+      "**dimension, **Effective cross-sectional area per length **rename";
+    outer parameter Integer n_trans
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Integer cartTrans[:]
-        "Cartesian-axis indices of the components of translational momentum"
-        annotation (missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Integer cartTrans[:]
+      "Cartesian-axis indices of the components of translational momentum"
+      annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Integer facesCart[:]
-        "Face-pair indices of the Cartesian axes" annotation (
-          missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Integer facesCart[:]
+      "Face-pair indices of the Cartesian axes" annotation (missingInnerMessage
+        ="This model should be used within a subregion model.
 ");
-      outer parameter Boolean inclTrans[Axis]
-        "true, if each component of translational momentum is included"
-        annotation (missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Boolean inclTrans[Axis]
+      "true, if each component of translational momentum is included"
+      annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-      outer parameter Boolean inclFaces[Axis]
-        "true, if each pairs of faces is included" annotation (
-          missingInnerMessage="This model should be used within a subregion model.
+    outer parameter Boolean inclFaces[Axis]
+      "true, if each pairs of faces is included" annotation (
+        missingInnerMessage="This model should be used within a subregion model.
 ");
 
-      outer Conditions.Environment environment "Environmental conditions";
-      // This component is conditional to prevent a mathematical singularity
-      // when two or more empty phases (without any species included) are
-      // connected.
+    outer Conditions.Environment environment "Environmental conditions";
+    // This component is conditional to prevent a mathematical singularity
+    // when two or more empty phases (without any species included) are
+    // connected.
 
-      annotation (
-        defaultComponentPrefixes="replaceable",
-        defaultComponentName="phase",
-        Documentation(info="<html><p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
+    annotation (
+      defaultComponentPrefixes="replaceable",
+      defaultComponentName="phase",
+      Documentation(info="<html><p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
     the transport coefficients (&beta;, &zeta;, &eta;, and &theta;) of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.</p>
@@ -1377,62 +1369,52 @@ package Phases "Mixtures of species"
 
 
 </html>"),
-        Icon(graphics={
-            Ellipse(
+      Icon(graphics={Ellipse(
               extent={{-40,100},{40,20}},
               lineColor={127,127,127},
               startAngle=30,
               endAngle=149,
               pattern=LinePattern.Dash,
               fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
+              fillColor={225,225,225}),Ellipse(
               extent={{20,-4},{100,-84}},
               lineColor={127,127,127},
               startAngle=270,
               endAngle=390,
               pattern=LinePattern.Dash,
               fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Ellipse(
+              fillColor={225,225,225}),Ellipse(
               extent={{-100,-4},{-20,-84}},
               lineColor={127,127,127},
               startAngle=149,
               endAngle=270,
               pattern=LinePattern.Dash,
               fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),
-            Polygon(
+              fillColor={225,225,225}),Polygon(
               points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-                  -24},{60,-84}},
+              -24},{60,-84}},
               pattern=LinePattern.None,
               fillPattern=FillPattern.Sphere,
               smooth=Smooth.None,
               fillColor={225,225,225},
-              lineColor={0,0,0}),
-            Line(
+              lineColor={0,0,0}),Line(
               points={{-60,-84.1},{60,-84.1}},
               color={127,127,127},
               pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
+              smooth=Smooth.None),Line(
               points={{34.5,80},{94.5,-24}},
               color={127,127,127},
               pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Line(
+              smooth=Smooth.None),Line(
               points={{-34.5,80},{-94.5,-24}},
               color={127,127,127},
               pattern=LinePattern.Dash,
-              smooth=Smooth.None),
-            Text(
+              smooth=Smooth.None),Text(
               extent={{-100,-20},{100,20}},
               textString="%name",
               lineColor={0,0,0})}),
-        Diagram(graphics));
-    end PartialPhase;
-
-  end BaseClasses;
+      Diagram(graphics));
+  end Partial;
 
   annotation (Documentation(info="
 <html><p>The graphite, ionomer, and

@@ -40,6 +40,7 @@ Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias vari
 Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
 Advanced.TranslationInCommandLog = true "Also include translation log in command log";
 Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
+Advanced.IncludeProtectedInBrowser = true "Include protected classes in package browser";
 //Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
 //Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
 //Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";
