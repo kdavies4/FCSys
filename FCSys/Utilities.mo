@@ -252,8 +252,11 @@ An unrelated species may be included.");
       F := f(
             x,
             a .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(a, 1)},
-            n + 1) annotation (Inline=true, derivative=dF);
-      annotation (Documentation(info="<html>
+            n + 1);
+      annotation (
+        Inline=true,
+        derivative=dF,
+        Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <i>x</i>
   (with <i>a</i> constant)
   is <a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>().  The complete derivative,
@@ -281,8 +284,8 @@ An unrelated species may be included.");
             x,
             da .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(a,
           1)},
-            n + 1) annotation (Inline=true);
-
+            n + 1);
+      annotation (Inline=true);
     end dF;
 
     function f
@@ -324,10 +327,13 @@ An unrelated species may be included.");
         *positivePoly(1/x, a[min(size(a, 1), -n):-1:1]) else 0) + (if n <= 0
          and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a, 1) > 1
          then (if n > 1 then x^(n - 1) else 1)*positivePoly(x, a[1 + max(0, 1
-         - n):size(a, 1)]) else 0) annotation (Inline=true, derivative=df);
+         - n):size(a, 1)]) else 0);
       // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
       // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
-      annotation (Documentation(info="<html><p>For high-order polynomials, this
+      annotation (
+        Inline=true,
+        derivative=df,
+        Documentation(info="<html><p>For high-order polynomials, this
   is more computationally efficient than the form
   &Sigma;<i>a</i><sub><i>i</i></sub> <i>x</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
 
@@ -356,8 +362,11 @@ An unrelated species may be included.");
             n=n - 1)*dx + f(
             x,
             da,
-            n) annotation (Inline=true, derivative(order=2) = d2f);
-      annotation (Documentation(info="<html>
+            n);
+      annotation (
+        Inline=true,
+        derivative(order=2) = d2f,
+        Documentation(info="<html>
 <p>The derivative of this function is
   <a href=\"modelica://FCSys.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
     end df;
@@ -381,8 +390,8 @@ An unrelated species may be included.");
             x,
             {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[i]*
           d2x),d2a[i]},
-            n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
-
+            n + i - 3) for i in 1:size(a, 1));
+      annotation (Inline=true);
     end d2f;
 
   end Polynomial;
@@ -405,7 +414,6 @@ An unrelated species may be included.");
 
     function timeTranslation "Print the time required to translate a model"
       import Modelica.Utilities.Streams.print;
-      import Modelica.Utilities.Files.remove;
 
       input String problem
         "Path and name of the model (with modifiers, if any)";
@@ -418,7 +426,7 @@ An unrelated species may be included.");
 
     algorithm
       if fileName <> "" then
-        remove(fileName);
+        Modelica.Utilities.Files.remove(fileName);
       end if;
 
       t_0 := get_time();
@@ -535,8 +543,8 @@ An unrelated species may be included.");
     output Real average "Arithmetic mean";
 
   algorithm
-    average := sum(u)/size(u, 1) annotation (Inline=true);
-    annotation (Documentation(info="<html><p><b>Example:</b><br>
+    average := sum(u)/size(u, 1);
+    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p></html>"));
   end average;
 
@@ -551,9 +559,8 @@ An unrelated species may be included.");
     output Integer n "Number of true entries";
 
   algorithm
-    n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1))
-      annotation (Inline=true);
-    annotation (Documentation(info="<html><p><b>Example:</b><br>
+    n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1));
+    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
   end countTrue;
 
@@ -564,8 +571,8 @@ An unrelated species may be included.");
     output Real Delta "Second entry minus the first entry";
 
   algorithm
-    Delta := u[2] - u[1] annotation (Inline=true);
-    annotation (Documentation(info="<html><p>The translator should automatically
+    Delta := u[2] - u[1];
+    annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p></html>"));
   end Delta;
 
@@ -624,7 +631,7 @@ An unrelated species may be included.");
     output Integer sign "Sign indicating direction along the axis";
 
   algorithm
-    sign := 3 - 2*side annotation (Inline=true);
+    sign := 3 - 2*side;
     annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
   <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
@@ -639,8 +646,8 @@ An unrelated species may be included.");
     output Integer index "Remainder with 1-based indexing";
 
   algorithm
-    index := mod(num - 1, den) + 1 annotation (Inline=true);
-    annotation (Documentation(info="<html><p><b>Examples:</b><br>
+    index := mod(num - 1, den) + 1;
+    annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
   <code>mod1(4,3)</code> returns
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
   <code>mod</code> is the built-in modulo operator).</html>"));
@@ -741,8 +748,8 @@ An unrelated species may be included.");
     output Integer y "Nearest integer";
 
   algorithm
-    y := integer(u + 0.5) annotation (Inline=true);
-    annotation (Documentation(info="<html><p><b>Example:</b><br>
+    y := integer(u + 0.5);
+    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
   end round;
 
@@ -754,8 +761,8 @@ An unrelated species may be included.");
     output Real Sigma "Sum of the first and second entries";
 
   algorithm
-    Sigma := u[1] + u[2] annotation (Inline=true);
-    annotation (Documentation(info="<html><p>The translator should automatically
+    Sigma := u[1] + u[2];
+    annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
   end Sigma;

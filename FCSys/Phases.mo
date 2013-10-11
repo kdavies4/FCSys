@@ -157,11 +157,13 @@ package Phases "Mixtures of species"
             ={{20,-94},{40,-74}})));
 
     // Aliases
+    /*
     Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
       if n_spec > 1 and reduceTrans "Velocity";
-    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if
+    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if 
       n_spec > 1 and reduceThermal "Temperature";
     // These make the selected states more readable.
+  */
 
   protected
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
@@ -434,9 +436,6 @@ package Phases "Mixtures of species"
     extends FCSys.Phases.BaseClasses.PartialPhase(final n_spec=countTrue({
           'inclC+','incle-'}));
 
-    parameter Q.Volume V=U.cc "Volume" annotation (Dialog(group="Geometry",
-          __Dymola_label="<html><i>V</i></html>"));
-
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
       HideResult=true,
@@ -450,7 +449,6 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
       'inclC+' constrainedby FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
-      V=V,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -476,7 +474,6 @@ package Phases "Mixtures of species"
       'incle-' and not (inclHOR or inclORR) constrainedby
       FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
-      V=V,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -541,10 +538,9 @@ package Phases "Mixtures of species"
       (Placement(transformation(extent={{60,-40},{80,-20}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
 
-    Connectors.Amagat amagat(final V=V) if n_spec > 0
-      "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{60,-64},{80,-44}}), iconTransformation(extent={{-60,40},{-40,
-              60}})));
+    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
+      annotation (Placement(transformation(extent={{60,-64},{80,-44}}),
+          iconTransformation(extent={{-60,40},{-40,60}})));
     Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-10,70},{10,90}}), iconTransformation(extent=
@@ -571,11 +567,13 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{70,50},{50,70}})));
 
     // Aliases
+    /*
     Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
       if n_spec > 1 and reduceTrans "Velocity";
-    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if
+    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if 
       n_spec > 1 and reduceThermal "Temperature";
     // These make the selected states more readable.
+*/
 
   protected
     FCSys.Species.Reaction reaction(
@@ -727,16 +725,21 @@ package Phases "Mixtures of species"
         points={{5.55112e-16,80},{5.55112e-16,60},{-14,60}},
         color={255,195,38},
         smooth=Smooth.None));
+    connect(amagat, 'C+'.amagat) annotation (Line(
+        points={{70,-54},{-17,-54},{-17,-9.4}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, see the
  <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -794,7 +797,7 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_faces) if
       'inclH+' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.SpeciesIsochoric(
+      FCSys.Species.CompressibleSpecies(
       n_faces=n_faces,
       V=V,
       n_intra=1,
@@ -821,7 +824,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.SpeciesIsochoric(
+      constrainedby FCSys.Species.CompressibleSpecies(
       n_faces=n_faces,
       V=V,
       n_intra=2,
@@ -907,11 +910,13 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
 
     // Aliases
+    /*
     Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
       if n_spec > 1 and reduceTrans "Velocity";
-    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if
+    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if 
       n_spec > 1 and reduceThermal "Temperature";
     // These make the selected states more readable.
+*/
 
   protected
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
@@ -1149,6 +1154,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1166,7 +1172,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.SpeciesIsochoric(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -1215,23 +1221,11 @@ package Phases "Mixtures of species"
           transformation(extent={{-19,50},{1,70}}), iconTransformation(extent={
               {20,-94},{40,-74}})));
 
-  protected
-    Conditions.Adapters.AmagatDalton DA if n_spec > 0
-      "Adapter between additivity of pressure and additivity of volume"
-      annotation (Placement(transformation(extent={{30,-38},{10,-18}})));
 
   equation
     // Inert exchange
     connect(H2O.inter, inter) annotation (Line(
         points={{9.4,-3},{12,-6},{12,-14},{40,-14}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(H2O.dalton, DA.dalton) annotation (Line(
-        points={{3,-9.4},{3,-28},{16,-28}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(DA.amagat, amagat) annotation (Line(
-        points={{24,-28},{40,-28}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1277,13 +1271,18 @@ package Phases "Mixtures of species"
         points={{6.10623e-16,6.10623e-16},{-20,-20}},
         color={127,127,127},
         smooth=Smooth.None));
+    connect(amagat, H2O.amagat) annotation (Line(
+        points={{40,-28},{3,-28},{3,-9.4}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation of the
  <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
 
       Icon(graphics),
-      Diagram(graphics));
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics));
   end Liquid;
 
   package BaseClasses "Base classes (generally not for direct use)"
@@ -1315,12 +1314,14 @@ package Phases "Mixtures of species"
               "<html><i>k</i><sub>inter</sub></html>"));
 
       // Assumptions
-      parameter Boolean reduceTrans=false if n_spec > 0
-        "Same velocity for all species" annotation (Dialog(tab="Assumptions",
-            enable=n_spec > 1), choices(__Dymola_checkBox=true));
-      parameter Boolean reduceThermal=false if n_spec > 0
-        "Same temperature for all species" annotation (Dialog(tab="Assumptions",
-            enable=n_spec > 1), choices(__Dymola_checkBox=true));
+      parameter Boolean reduceTrans=false "Same velocity for all species"
+        annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+            __Dymola_checkBox=true));
+      //if n_spec > 0
+      parameter Boolean reduceThermal=false "Same temperature for all species"
+        annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+            __Dymola_checkBox=true));
+      //if n_spec > 0
 
       outer parameter Q.Length L[Axis] if n_spec > 0 "Length" annotation (
           HideResult=true,missingInnerMessage="This model should be used within a subregion model.
@@ -1376,50 +1377,58 @@ package Phases "Mixtures of species"
 
 
 </html>"),
-        Icon(graphics={Ellipse(
-                  extent={{-40,100},{40,20}},
-                  lineColor={127,127,127},
-                  startAngle=30,
-                  endAngle=149,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{20,-4},{100,-84}},
-                  lineColor={127,127,127},
-                  startAngle=270,
-                  endAngle=390,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Ellipse(
-                  extent={{-100,-4},{-20,-84}},
-                  lineColor={127,127,127},
-                  startAngle=149,
-                  endAngle=270,
-                  pattern=LinePattern.Dash,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={225,225,225}),Polygon(
-                  points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                94.5,-24},{60,-84}},
-                  pattern=LinePattern.None,
-                  fillPattern=FillPattern.Sphere,
-                  smooth=Smooth.None,
-                  fillColor={225,225,225},
-                  lineColor={0,0,0}),Line(
-                  points={{-60,-84.1},{60,-84.1}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{34.5,80},{94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Line(
-                  points={{-34.5,80},{-94.5,-24}},
-                  color={127,127,127},
-                  pattern=LinePattern.Dash,
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}),
+        Icon(graphics={
+            Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),
+            Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+                  -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),
+            Line(
+              points={{-60,-84.1},{60,-84.1}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
         Diagram(graphics));
     end PartialPhase;
 
@@ -1437,5 +1446,5 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"), Documentation(info="<html></html>"));
+</html>"));
 end Phases;

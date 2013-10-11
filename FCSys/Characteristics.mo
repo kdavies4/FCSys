@@ -747,8 +747,8 @@ package Characteristics
 
       algorithm
         b_zeta := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]
-          *log(U.K) + log(1e4*U.m*U.s/U.g)} annotation (Inline=true);
-
+          *log(U.K) + log(1e4*U.m*U.s/U.g)};
+        annotation (Inline=true);
       end fromNASAViscosity;
 
       function fromNASAThermalConductivity
@@ -759,9 +759,8 @@ package Characteristics
 
       algorithm
         b_theta := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[
-          4] + b_lambda[1]*log(U.K) + log(1e4*U.m*U.K/U.W)}
-          annotation (Inline=true);
-
+          4] + b_lambda[1]*log(U.K) + log(1e4*U.m*U.K/U.W)};
+        annotation (Inline=true);
       end fromNASAThermalConductivity;
 
     public
@@ -788,12 +787,12 @@ package Characteristics
         zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
           T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
            then b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
-          b_zeta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
-          annotation (
+          b_zeta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)));
+        annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=0);
-        annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
+          smoothOrder=0,
+          Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
   <p>Although specific volume is an input to this function, the result is independent of
@@ -884,8 +883,8 @@ package Characteristics
         output Q.TimeLineic omega "Rescaled reciprocal of thermal speed";
 
       algorithm
-        omega := U.pi*sqrt(m/T) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        omega := U.pi*sqrt(m/T);
+        annotation (Inline=true,Documentation(info="<html>
   <p>This function outputs the quotient of &pi; and the root mean square of the thermal
   velocity in one dimension, assuming the speeds of the particles follow the
   Maxwell-Boltzmann distribution.  In combination with &alpha;, this refactorization is
@@ -968,10 +967,10 @@ package Characteristics
           c_p_resid(T, p0) else c_p_resid(
                 T,
                 p0,
-                {1,-n_v[1]})) annotation (Inline=true);
+                {1,-n_v[1]}));
         // See the notes in the algorithm of Characteristic.s.
         // Note:  [Dymond2002, p.17, eqs. 1.45 & 1.46] may be incorrect.
-        annotation (Documentation(info="<html>
+        annotation (Inline=true,Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
@@ -993,11 +992,11 @@ package Characteristics
                 T,
                 p,
                 dT=1,
-                dp=0) "[Moran2004, p. 546, eq. 11.66]" annotation (Inline=true);
+                dp=0) "[Moran2004, p. 546, eq. 11.66]";
         // Note 1:  This reduces to c_v = c_p - 1 for an ideal gas (where in
         // FCSys 1 = U.R).
         // Note 2:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
-        annotation (Documentation(info="<html>
+        annotation (Inline=true,Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
@@ -1010,8 +1009,8 @@ package Characteristics
         output Q.Potential g "Gibbs potential";
 
       algorithm
-        g := h(T, p) - T*s(T, p) annotation (Inline=true);
-
+        g := h(T, p) - T*s(T, p);
+        annotation (Inline=true);
       end g;
 
       function h "Specific enthalpy as a function of temperature and pressure"
@@ -1103,18 +1102,18 @@ package Characteristics
           Phase.gas then h_resid(T, p0) else h_resid(
                 T,
                 p0,
-                {1,-n_v[1]}))
-          annotation (
-          InlineNoEvent=true,
-          Inline=true,
-          smoothOrder=1);
+                {1,-n_v[1]}));
         // The last two terms adjust for the actual pressure relative to the
         // reference.  In general, the lower limit of the integral of
         // (delh/delp)_T*dp is the reference pressure (p0).  However, if the
         // material is gaseous, then the reference is the corresponding ideal gas.
         // In that case, the lower limit of the real gas terms of the integral is
         // p=0, where a real gas behaves as an ideal gas.  See [Rao1997, p. 271].
-        annotation (Documentation(info="<html>
+        annotation (
+          InlineNoEvent=true,
+          Inline=true,
+          smoothOrder=1,
+          Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
@@ -1139,11 +1138,11 @@ package Characteristics
         algorithm
           s0 := F(  T,
                     b_c[i, :],
-                    n_c - 1) + B_c[i, 2]
-            annotation (Inline=true, derivative=ds0_i);
+                    n_c - 1) + B_c[i, 2];
           // This is the integral of c0_p/T*dT up to T at p0 with the absolute
           // entropy at the lower bound [McBride2002, p. 2].
 
+          annotation (Inline=true, derivative=ds0_i);
         end s0_i;
 
         function ds0_i "Derivative of s0_i"
@@ -1158,8 +1157,8 @@ package Characteristics
         algorithm
           ds0 := f( T,
                     b_c[i, :],
-                    n_c - 1)*dT annotation (Inline=true);
-
+                    n_c - 1)*dT;
+          annotation (Inline=true);
         end ds0_i;
 
         function s_resid
@@ -1178,11 +1177,11 @@ package Characteristics
                       T,
                       b_v[i, :] .* {n_v[1] - n_v[2] + i - j for j in 1:size(b_v,
                 2)},  n_v[2] - n_v[1] - i) for i in rowLimits[1]:rowLimits[2]},
-                    n_v[1] + rowLimits[1] - 1)
-            annotation (Inline=true, derivative=ds_resid);
+                    n_v[1] + rowLimits[1] - 1);
           // Note:  According to the Maxwell relations,
           // (dels/delp)_T = -(delv/delT)_p.
 
+          annotation (Inline=true, derivative=ds_resid);
         end s_resid;
 
         function ds_resid "Derivative of s_resid"
@@ -1205,8 +1204,8 @@ package Characteristics
                 2)},  n_v[2] - n_v[1] - i,
                       dT) for i in rowLimits[1]:rowLimits[2]},
                     n_v[1] + rowLimits[1] - 1,
-                    dp) annotation (Inline=true);
-
+                    dp);
+          annotation (Inline=true);
         end ds_resid;
 
       algorithm
@@ -1225,11 +1224,7 @@ package Characteristics
            else s_resid(
                 T,
                 p0,
-                {1,-n_v[1]}))
-          annotation (
-          InlineNoEvent=true,
-          Inline=true,
-          smoothOrder=1);
+                {1,-n_v[1]}));
         // The first term gives the specific entropy at the given temperature and
         // reference pressure (p0).  The following terms adjust for the actual
         // pressure (p) by integrating (dels/delp)_T*dp.  In general, the
@@ -1244,7 +1239,10 @@ package Characteristics
         // Note:  If the phase is gas, the virial equation of state (as defined by
         // b_v and n_v) must include an ideal gas term (v = ... + f(T)/p +
         // ...).  Otherwise, an indexing error will occur.
-
+        annotation (
+          InlineNoEvent=true,
+          Inline=true,
+          smoothOrder=1);
       end s;
 
       replaceable function beta
@@ -1256,8 +1254,8 @@ package Characteristics
         output Q.Fluidity beta "Dynamic compressibility";
 
       algorithm
-        beta := omega(T)*alpha/m annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        beta := omega(T)*alpha/m;
+        annotation (Inline=true,Documentation(info="<html>
   <p><i>Dynamic compressibility</i> is the reciprocal of the volume, second, or bulk dynamic viscosity (see
   <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 
@@ -1279,8 +1277,8 @@ package Characteristics
         output Q.Fluidity zeta "Fluidity";
 
       algorithm
-        zeta := omega(T)*alpha/m annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        zeta := omega(T)*alpha/m;
+        annotation (Inline=true,Documentation(info="<html>
   <p>Fluidity is defined as the reciprocal of dynamic viscosity
   (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 
@@ -1315,8 +1313,8 @@ package Characteristics
         output Q.ResistivityMaterial eta "Material resistivity";
 
       algorithm
-        eta := omega(T)*alpha/v annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        eta := omega(T)*alpha/v;
+        annotation (Inline=true,Documentation(info="<html>
   <p>Material resistivity is the reciprocal of the self-diffusion coefficient
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
 
@@ -1344,8 +1342,8 @@ package Characteristics
         output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
-        theta := omega(T)*alpha/c_v(T, p_Tv(T, v)) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        theta := omega(T)*alpha/c_v(T, p_Tv(T, v));
+        annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>
@@ -1376,8 +1374,8 @@ package Characteristics
                 T=T,
                 p=p,
                 dT=0,
-                dp=1)/v_Tp(T, p) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+                dp=1)/v_Tp(T, p);
+        annotation (Inline=true,Documentation(info="<html>
   <p>Note that the compressibility given by this function is static&mdash;different
   from the dynamic compressibility given by
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>().</p>
@@ -1395,8 +1393,8 @@ package Characteristics
         output Q.TimeAbsolute tauprime "Phase change interval";
 
       algorithm
-        tauprime := omega(T)*T/(alpha*p0) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        tauprime := omega(T)*T/(alpha*p0);
+        annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>
@@ -1428,8 +1426,8 @@ package Characteristics
         output Q.Mobility mu "Mobility";
 
       algorithm
-        mu := omega(T)*v/(alpha*m) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        mu := omega(T)*v/(alpha*m);
+        annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>
@@ -1455,8 +1453,8 @@ package Characteristics
         output Q.TimeAbsolute nu "Thermal independity";
 
       algorithm
-        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v))) annotation (Inline=true);
-        annotation (Documentation(info="<html>
+        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
+        annotation (Inline=true,Documentation(info="<html>
 <p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
 temperature difference.</p>
 

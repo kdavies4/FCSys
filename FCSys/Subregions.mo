@@ -46,7 +46,7 @@ package Subregions
         each L={10,10,10}*U.m,
         each inclTransZ=false,
         each inclFacesZ=false,
-        each k_DE=1e-8,
+        each k_common=1e-8,
         gas(
           each inclH2O=false,
           each inclN2=true,
@@ -67,7 +67,7 @@ package Subregions
         inclTransY=true,
         inclFacesX=false,
         inclFacesY=true,
-        each k_DE=1e-8,
+        each k_common=1e-8,
         gas(
           inclH2O=false,
           inclN2=true,
@@ -1437,7 +1437,7 @@ package Subregions
 
     Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
-      annotation (Placement(transformation(extent={{-100,26},{-80,46}})));
+      annotation (Placement(transformation(extent={{-102,26},{-82,46}})));
     Connectors.InertBusInternal common
       "Connector for translational and thermal exchange among all species"
       annotation (Placement(transformation(extent={{80,-32},{100,-12}}),
@@ -1460,7 +1460,7 @@ package Subregions
     // -----------------------------
     // Gas
     connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-59,5},{-59,36},{-90,36}},
+        points={{-59,5},{-59,36},{-92,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(gas.yNegative, yNegative.gas) annotation (Line(
@@ -1502,7 +1502,7 @@ package Subregions
         smooth=Smooth.None));
     // Graphite
     connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{-23,5},{-23,36},{-90,36}},
+        points={{-23,5},{-23,36},{-92,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1545,7 +1545,7 @@ package Subregions
 
     // Ionomer
     connect(ionomer.amagat, volume.amagat) annotation (Line(
-        points={{13,5},{13,36},{-90,36}},
+        points={{13,5},{13,36},{-92,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1588,7 +1588,7 @@ package Subregions
         smooth=Smooth.None));
     // Liquid
     connect(liquid.amagat, volume.amagat) annotation (Line(
-        points={{49,5},{49,36},{-90,36}},
+        points={{49,5},{49,36},{-92,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1857,7 +1857,7 @@ package Subregions
   protected
     Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
-      annotation (Placement(transformation(extent={{-82,26},{-62,46}})));
+      annotation (Placement(transformation(extent={{-84,26},{-64,46}})));
     Connectors.InertBusInternal common
       "Connector for translational and thermal exchange among all species"
       annotation (Placement(transformation(extent={{62,-32},{82,-12}}),
@@ -1875,7 +1875,7 @@ package Subregions
     // -----------------------------
     // Gas
     connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-41,5},{-41,36},{-72,36}},
+        points={{-41,5},{-41,36},{-74,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(gas.yNegative, yNegative.gas) annotation (Line(
@@ -1917,7 +1917,7 @@ package Subregions
         smooth=Smooth.None));
     // Graphite
     connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{-5,5},{-5,36},{-72,36}},
+        points={{-5,5},{-5,36},{-74,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1960,7 +1960,7 @@ package Subregions
 
     // Liquid
     connect(liquid.amagat, volume.amagat) annotation (Line(
-        points={{31,5},{31,36},{-72,36}},
+        points={{31,5},{31,36},{-74,36}},
         color={47,107,251},
         smooth=Smooth.None));
 

@@ -211,7 +211,6 @@ package Species "Dynamic models of chemical species"
         // add eta to other e- and H+ models.
         // **extend from isochoric.
         annotation (
-          group="Material properties",
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
           Documentation(info="<html>
@@ -1081,7 +1080,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   model SpeciesIsochoric
     "Base model for an isochoric species (incompressible, without thermal expansion)"
-    extends FCSys.Species.BaseClasses.PartialChemicalSpecies(
+    extends IncompressibleSpecies(
       invertEOS=false,
       initMaterial=InitScalar.volume,
       final eta=1);
@@ -1097,12 +1096,24 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
   end SpeciesIsochoric;
 
   model IncompressibleSpecies "Base model for an incompressible species"
-    extends FCSys.Species.BaseClasses.PartialChemicalSpecies;
+    extends FCSys.Species.BaseClasses.PartialSpecies(redeclare
+        Q.PressureAbsolute p, redeclare Q.Volume V);
+    Connectors.Amagat amagat(V(
+        min=0,
+        final start=V_IC,
+        final fixed=false), p(final start=p_IC, final fixed=false))
+      "Connector for translational and thermal diffusive exchange, with additivity of volume"
+      annotation (Placement(transformation(extent={{-30,-50},{-10,-30}}),
+          iconTransformation(extent={{20,-84},{40,-104}})));
+
+  equation
+    p = amagat.p;
+    V = amagat.V;
 
   end IncompressibleSpecies;
 
   model CompressibleSpecies "Base model for a compressible species"
-    extends FCSys.Species.BaseClasses.PartialChemicalSpecies(redeclare
+    extends FCSys.Species.BaseClasses.PartialSpecies(redeclare
         Q.PressureAbsolute p, redeclare Q.Volume V);
     Connectors.Dalton dalton(V(
         min=0,
@@ -1276,10 +1287,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         n "Negative",
         p "Positive (greater position along the Cartesian axis)")
       "Enumeration for sides of a region or subregion";
-    model PartialChemicalSpecies "Partial model for a chemical species"
-      extends PartialSpecies;
-
-    end PartialChemicalSpecies;
 
     partial model PartialSpecies
       "Partial model to exchange, transport, and store the material, momentum, and energy of one species"
@@ -1369,10 +1376,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       //
       // Dynamics
       parameter FCSys.Species.BaseClasses.Conservation consMaterial=
-          Conservation.dynamic "Material" annotation (Dialog(
-          Evaluate=true,
-          tab="Assumptions",
-          group="Formulation of conservation equations"));
+          Conservation.dynamic "Material" annotation (Evaluate=true, Dialog(tab
+            ="Assumptions", group="Formulation of conservation equations"));
+
       parameter Boolean consRot=false "Conserve rotational momentum"
         annotation (
         Evaluate=true,
@@ -1494,10 +1500,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
       // Advanced parameters
       parameter Boolean invertEOS=true "Invert the equation of state"
-        annotation (Dialog(
-          Evaluate=true,
-          tab="Advanced",
-          compact=true), choices(__Dymola_checkBox=true));
+        annotation (
+        Evaluate=true,
+        Dialog(tab="Advanced", compact=true),
+        choices(__Dymola_checkBox=true));
 
       // Preferred states
       // Note:  The start value for this variable (and others below) isn't fixed
@@ -1592,18 +1598,18 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         "Specific entropy-temperature product of the physical stream";
       //
       // Electrical (if applicable)
-      output Q.Potential w[n_faces, Side](each stateSelect=StateSelect.never)
-         = transpose({inSign(side)*faces[:, side].mPhidot[Orient.normal] ./ (
-        faces[:, side].rho*Data.z .* A[cartFaces]) for side in Side}) if
-        environment.analysis and Data.z <> 0
-        "Electrical potentials at the faces";
-      output Q.Potential Deltaw[n_faces](each stateSelect=StateSelect.never) =
-        Delta(w) if environment.analysis and Data.z <> 0
-        "Electrical potential differences between the faces";
-      output Q.Potential zI[n_faces](each stateSelect=StateSelect.never) = Data.z
-        *{I[transCart[axis]] for axis in cartFaces} if environment.analysis
-         and Data.z <> 0
-        "Electrical current between the faces (different indices than I)";
+      /*
+  output Q.Potential w[n_faces, Side](each stateSelect=StateSelect.never) = 
+    transpose({inSign(side)*faces[:, side].mPhidot[Orient.normal] ./ (faces[:,
+    side].rho*Data.z .* A[cartFaces]) for side in Side}) if environment.analysis
+     and Data.z <> 0 "Electrical potentials at the faces";
+  output Q.Potential Deltaw[n_faces](each stateSelect=StateSelect.never) = 
+    Delta(w) if environment.analysis and Data.z <> 0 
+    "Electrical potential differences between the faces";
+  output Q.Potential zI[n_faces](each stateSelect=StateSelect.never) = Data.z*{
+    I[transCart[axis]] for axis in cartFaces} if environment.analysis and Data.z <>
+    0 "Electrical current between the faces (different indices than I)";
+  */
       //
       // Time constants (only for the axes with translational momentum included;
       // others are infinite)
@@ -1787,8 +1793,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 ");
       outer parameter Q.Length Lprime[Axis]
         "**dimension **Effective cross-sectional area per length" annotation (
-          missingInnerMessage="This model should be used within a phase model.
-      ");
+          missingInnerMessage="This model should be used within a phase model.");
       outer parameter Boolean inclTrans[Axis]
         "true, if each component of translational momentum is included"
         annotation (missingInnerMessage="This model should be used within a subregion model.
@@ -1843,12 +1848,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         "Initialization methods for translational momentum"
         annotation (HideResult=true);
       outer parameter Integer n_inter "Number of exchange connections"
-        annotation (missingInnerMessage="This model should be used within a phase model.
-      ");
+        annotation (missingInnerMessage=
+            "This model should be used within a phase model.");
       outer parameter Q.NumberAbsolute k_inter[:]
         "Coupling factor for exchange with other phases" annotation (
-          missingInnerMessage="This model should be used within a phase model.
-      ");
+          missingInnerMessage="This model should be used within a phase model");
 
       // Additional aliases (for common terms)
       Q.Potential g0(
@@ -2490,6 +2494,7 @@ Choose any condition besides None.");
               rotation=45)}));
     end PartialSpecies;
   end BaseClasses;
+
 
   annotation (Documentation(info="
 <html>

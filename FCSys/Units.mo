@@ -869,7 +869,8 @@ For more information, see the documentation for the
 
 <p>For more information, see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
-            executeCall=FCSys.Units.setup() "Re-initialize the units."));
+            executeCall=FCSys.Units.setup() "Re-initialize the units.",
+            executeCall=checkModel("FCSys.Units")));
 
     end Evaluate;
 
@@ -1239,9 +1240,8 @@ encompass other systems of units.</p>
     output Q.TemperatureAbsolute T "Thermodynamic temperature";
 
   algorithm
-    T := (T_degC + 273.15)*K
-      annotation (Inline=true, inverse(T_degC=to_degC(T)));
-
+    T := (T_degC + 273.15)*K;
+    annotation (Inline=true, inverse(T_degC=FCSys.Units.to_degC(T)));
   end from_degC;
 
   function to_degC "Convert to temperature in degree Celsius"
@@ -1251,9 +1251,8 @@ encompass other systems of units.</p>
     output Real T_degC "Temperature in degree Celsius";
 
   algorithm
-    T_degC := T/K - 273.15
-      annotation (Inline=true, inverse(T=from_degC(T_degC)));
-
+    T_degC := T/K - 273.15;
+    annotation (Inline=true, inverse(T=FCSys.Units.from_degC(T_degC)));
   end to_degC;
 
   function from_kPag "Convert from gauge pressure in kilopascals"
@@ -1263,8 +1262,8 @@ encompass other systems of units.</p>
     output Q.PressureAbsolute p "Absolute pressure";
 
   algorithm
-    p := p_kPag*kPa + atm annotation (Inline=true, inverse(p_kPag=to_kPag(p)));
-
+    p := p_kPag*kPa + atm;
+    annotation (Inline=true, inverse(p_kPag=FCSys.Units.to_kPag(p)));
   end from_kPag;
 
   function to_kPag "Convert to gauge pressure in kilopascals"
@@ -1274,9 +1273,8 @@ encompass other systems of units.</p>
     output Real p_kPag "Gauge pressure in kilopascals";
 
   algorithm
-    p_kPag := (p - atm)/kPa
-      annotation (Inline=true, inverse(p=from_kPag(p_kPag)));
-
+    p_kPag := (p - atm)/kPa;
+    annotation (Inline=true, inverse(p=FCSys.Units.from_kPag(p_kPag)));
   end to_kPag;
 
   // ------------------------------------------------------------------------
