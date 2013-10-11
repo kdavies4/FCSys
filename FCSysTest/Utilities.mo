@@ -345,21 +345,10 @@ package Utilities
     assert(cartWrap(0) == 3, "The cartWrap function failed on test 1.");
     assert(cartWrap(4) == 1, "The cartWrap function failed on test 2.");
 
-    // countTrue()
-    assert(countTrue({true,false,true}) == 2, "The countTrue function failed.");
-
     // Delta()
     assert(Delta({1,2}) == 1, "The Delta function failed on test 1.");
     assert(arrayRealEqual(Delta([1, 2; 3, 4]), {1,1}),
       "The Delta function failed on test 2.");
-
-    // enumerate()
-    assert(arrayIntegerEqual(enumerate({true,false,true}), {1,0,2}),
-      "The enumerate function failed.");
-
-    // index()
-    assert(arrayIntegerEqual(index({true,false,true}), {1,3}),
-      "The index function failed.");
 
     // inSign()
     assert(inSign(Side.n) == 1, "The inSign function failed on test 1.");

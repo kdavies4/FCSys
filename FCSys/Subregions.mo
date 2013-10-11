@@ -128,7 +128,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
         experimentSetupOutput);
-
     end AirColumn;
     extends Modelica.Icons.ExamplesPackage;
     // TODO: In the documentation of each model, insert the sample plots or link
@@ -336,7 +335,6 @@ package Subregions
             "Subregions.Examples.Evaporation.mos"),
         Diagram(graphics),
         experimentSetupOutput);
-
     end Evaporation;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
@@ -675,9 +673,9 @@ package Subregions
       // **Make this into a simple runnable 0D FC.
       extends Modelica.Icons.Example;
       import FCSys.Utilities.cartWrap;
-      import FCSys.Utilities.countTrue;
-      import FCSys.Utilities.enumerate;
-      import FCSys.Utilities.index;
+      import Modelica.Math.BooleanVectors.countTrue;
+      import Modelica.Math.BooleanVectors.enumerate;
+      import Modelica.Math.BooleanVectors.index;
       extends Modelica.Icons.UnderConstruction;
       // Geometry
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {10
@@ -1302,9 +1300,9 @@ package Subregions
 
     model ChargeLayer
       import FCSys.Utilities.cartWrap;
-      import FCSys.Utilities.countTrue;
-      import FCSys.Utilities.enumerate;
-      import FCSys.Utilities.index;
+      import Modelica.Math.BooleanVectors.countTrue;
+      import Modelica.Math.BooleanVectors.enumerate;
+      import Modelica.Math.BooleanVectors.index;
 
       // Geometry
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {10
@@ -2052,23 +2050,12 @@ package Subregions
               100,80}}), graphics));
   end SubregionNoIonomer;
 
-  annotation (Documentation(info="
-<html>
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
   partial model Partial
     "Base model for multi-dimensional, multi-species storage, transport, and exchange"
     import FCSys.Utilities.cartWrap;
-    import FCSys.Utilities.countTrue;
-    import FCSys.Utilities.enumerate;
-    import FCSys.Utilities.index;
+    import Modelica.Math.BooleanVectors.countTrue;
+    import Modelica.Math.BooleanVectors.enumerate;
+    import Modelica.Math.BooleanVectors.index;
     // extends FCSys.Icons.Names.Top3;
 
     // Geometric parameters
@@ -2162,96 +2149,91 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-      Icon(graphics={
-          Line(
-            points={{-100,0},{-40,0}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesX,
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{0,-100}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesY,
-            smooth=Smooth.None),
-          Line(
-            points={{40,40},{50,50}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesZ,
-            smooth=Smooth.None),
-          Polygon(
-            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                16}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,-40},{-16,-16}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-16,40},{-16,-16},{40,-16}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-40,0},{28,0}},
-            color={210,210,210},
-            visible=inclFacesX,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,28},{0,-40}},
-            color={210,210,210},
-            visible=inclFacesY,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{28,0},{100,0}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesX,
-            smooth=Smooth.None),
-          Line(
-            points={{0,100},{0,28}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesY,
-            smooth=Smooth.None),
-          Line(
-            points={{-12,-12},{40,40}},
-            color={210,210,210},
-            visible=inclFacesZ,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-40,16},{16,16},{16,-40}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-50,-50},{-12,-12}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclFacesZ,
-            smooth=Smooth.None),
-          Polygon(
-            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                16}},
-            lineColor={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{40,40},{16,16}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,56},{100,96}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Icon(graphics={Line(
+              points={{-100,0},{-40,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesX,
+              smooth=Smooth.None),Line(
+              points={{0,-40},{0,-100}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesY,
+              smooth=Smooth.None),Line(
+              points={{40,40},{50,50}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesZ,
+              smooth=Smooth.None),Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+              16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-40,-40},{-16,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-16,40},{-16,-16},{40,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-40,0},{28,0}},
+              color={210,210,210},
+              visible=inclFacesX,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,28},{0,-40}},
+              color={210,210,210},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{28,0},{100,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesX,
+              smooth=Smooth.None),Line(
+              points={{0,100},{0,28}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesY,
+              smooth=Smooth.None),Line(
+              points={{-12,-12},{40,40}},
+              color={210,210,210},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-40,16},{16,16},{16,-40}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-50,-50},{-12,-12}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclFacesZ,
+              smooth=Smooth.None),Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+              16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{40,40},{16,16}},
+              color={127,127,127},
+              smooth=Smooth.None),Text(
+              extent={{-100,56},{100,96}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(graphics));
 
   end Partial;
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Subregions;

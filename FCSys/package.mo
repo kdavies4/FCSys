@@ -853,23 +853,9 @@ action. This section shall survive the termination of this License.</p>
   end UsersGuide;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   preferedView="info",
-  uses(Modelica(version="3.2")),
+  uses(Modelica(version="3.2.1")),
   Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
   Documentation(info="<html>
     <p><a href=\"modelica://FCSys\">FCSys</a> is an free, open-source library of
@@ -997,36 +983,36 @@ margin-right: auto;\" class=noBorder>
     </html>"),
   Icon(graphics={
       Polygon(
-        points={{-14,42},{-24,32},{-4,32},{6,42},{-14,42}},
+        points={{-4,52},{-14,42},{6,42},{16,52},{-4,52}},
         lineColor={0,0,0},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Polygon(
-        points={{-40,42},{-50,32},{-30,32},{-20,42},{-40,42}},
+        points={{-30,52},{-40,42},{-20,42},{-10,52},{-30,52}},
         lineColor={0,0,0},
         fillPattern=FillPattern.HorizontalCylinder,
         fillColor={0,192,0}),
       Polygon(
-        points={{-20,42},{-30,32},{-24,32},{-14,42},{-20,42}},
+        points={{-10,52},{-20,42},{-14,42},{-4,52},{-10,52}},
         lineColor={0,0,0},
         fillPattern=FillPattern.HorizontalCylinder,
         fillColor={0,0,0}),
       Rectangle(
-        extent={{-4,32},{2,-62}},
+        extent={{6,42},{12,-52}},
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None),
       Polygon(
-        points={{6,42},{-4,32},{2,32},{12,42},{6,42}},
+        points={{16,52},{6,42},{12,42},{22,52},{16,52}},
         lineColor={0,0,0},
         fillPattern=FillPattern.HorizontalCylinder,
         fillColor={0,0,0}),
       Line(
-        points={{-50,32},{-50,-62}},
+        points={{-40,42},{-40,-52}},
         pattern=LinePattern.None,
         smooth=Smooth.None),
       Polygon(
-        points={{-56,54},{-76,34},{-56,34},{-36,54},{-56,54}},
+        points={{-46,64},{-66,44},{-46,44},{-26,64},{-46,64}},
         lineColor={0,0,0},
         fillColor={135,135,135},
         fillPattern=FillPattern.Solid),
@@ -1036,27 +1022,27 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.HorizontalCylinder,
         rotation=45,
         fillColor={255,255,255},
-        origin={46.5067,57.5353}),
+        origin={56.5067,67.5353}),
       Rectangle(
-        extent={{-24,32},{-4,-62}},
+        extent={{-14,42},{6,-52}},
         lineColor={0,0,0},
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={255,255,255}),
-      Line(points={{-40,42},{22,42}}, color={0,0,0}),
+      Line(points={{-30,52},{32,52}}, color={0,0,0}),
       Rectangle(
         extent={{-5.21738,-5.21961},{-33.5017,-33.5041}},
         lineColor={0,0,170},
         fillPattern=FillPattern.VerticalCylinder,
         rotation=45,
         fillColor={0,0,240},
-        origin={21.9983,59.3803}),
+        origin={31.9983,69.3803}),
       Rectangle(
-        extent={{2,32},{42,-62}},
+        extent={{12,42},{52,-52}},
         lineColor={0,0,170},
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={0,0,240}),
       Polygon(
-        points={{-36,54},{-56,34},{-56,-74},{-36,-54},{-36,54}},
+        points={{-26,64},{-46,44},{-46,-64},{-26,-44},{-26,64}},
         lineColor={0,0,0},
         fillColor={95,95,95},
         fillPattern=FillPattern.Solid),
@@ -1066,14 +1052,14 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.HorizontalCylinder,
         rotation=45,
         fillColor={253,52,56},
-        origin={-40.001,69.3803}),
+        origin={-30.001,79.3803}),
       Rectangle(
-        extent={{-70,32},{-30,-62}},
+        extent={{-60,42},{-20,-52}},
         lineColor={196,11,40},
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={253,52,56}),
       Rectangle(
-        extent={{-70,32},{-50,-64}},
+        extent={{-60,42},{-40,-54}},
         fillPattern=FillPattern.Solid,
         fillColor={95,95,95},
         pattern=LinePattern.None,
@@ -1084,17 +1070,17 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.HorizontalCylinder,
         rotation=45,
         fillColor={135,135,135},
-        origin={55.0166,71.3801}),
+        origin={65.0166,81.3801}),
       Rectangle(
-        extent={{-76,34},{-56,-74}},
+        extent={{-66,44},{-46,-64}},
         lineColor={95,95,95},
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={135,135,135}),
       Polygon(
-        points={{36,54},{24,42},{-36,42},{-36,54},{36,54}},
+        points={{46,64},{34,52},{-26,52},{-26,64},{46,64}},
         smooth=Smooth.None,
         fillPattern=FillPattern.Solid,
-        fillColor={240,240,240},
+        fillColor={230,230,230},
         pattern=LinePattern.None,
         lineColor={0,0,0}),
       Rectangle(
@@ -1103,69 +1089,69 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.HorizontalCylinder,
         rotation=45,
         fillColor={135,135,135},
-        origin={147.017,71.3801}),
+        origin={157.017,81.3801}),
       Rectangle(
-        extent={{16,34},{36,-74}},
+        extent={{26,44},{46,-64}},
         lineColor={95,95,95},
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={135,135,135}),
       Polygon(
-        points={{-36,54},{-36,42},{-40,42},{-40,50},{-36,54}},
+        points={{-26,64},{-26,52},{-30,52},{-30,60},{-26,64}},
         smooth=Smooth.None,
         fillColor={95,95,95},
         fillPattern=FillPattern.Solid,
         pattern=LinePattern.None,
         lineColor={0,0,0}),
       Ellipse(
-        extent={{-54,52},{-46,48}},
+        extent={{-44,62},{-36,58}},
         lineColor={135,135,135},
         fillColor={253,52,56},
         fillPattern=FillPattern.Sphere),
       Ellipse(
-        extent={{26,40},{34,36}},
+        extent={{36,50},{44,46}},
         lineColor={135,135,135},
         fillColor={0,0,240},
         fillPattern=FillPattern.Sphere),
       Polygon(
-        points={{-36,54},{-36,42},{-40,42},{-50,32},{-56,34},{-36,54}},
+        points={{-26,64},{-26,52},{-30,52},{-40,42},{-46,44},{-26,64}},
         smooth=Smooth.None,
         fillColor={95,95,95},
         fillPattern=FillPattern.Solid,
         pattern=LinePattern.None,
         lineColor={0,0,0}),
       Line(
-        points={{-40,42},{-50,32}},
+        points={{-30,52},{-40,42}},
         color={0,0,0},
         smooth=Smooth.None),
       Polygon(
-        points={{56,54},{36,34},{36,-74},{56,-54},{56,54}},
+        points={{66,64},{46,44},{46,-64},{66,-44},{66,64}},
         lineColor={0,0,0},
         fillColor={95,95,95},
         fillPattern=FillPattern.Solid),
-      Rectangle(extent={{16,34},{36,-74}}, lineColor={0,0,0}),
-      Rectangle(extent={{-76,34},{-56,-74}}, lineColor={0,0,0}),
+      Rectangle(extent={{26,44},{46,-64}}, lineColor={0,0,0}),
+      Rectangle(extent={{-66,44},{-46,-64}}, lineColor={0,0,0}),
       Line(
-        points={{-36,54},{-36,42}},
+        points={{-26,64},{-26,52}},
         color={0,0,0},
         smooth=Smooth.None),
-      Line(points={{-40,42},{24,42}}, color={0,0,0}),
+      Line(points={{-30,52},{34,52}}, color={0,0,0}),
       Rectangle(
-        extent={{-56,64},{56,54}},
+        extent={{-46,74},{66,64}},
         pattern=LinePattern.None,
-        fillColor={240,240,240},
+        fillColor={230,230,230},
         fillPattern=FillPattern.Solid,
         lineColor={0,0,0}),
       Polygon(
-        points={{-56,54},{-36,54},{-56,34},{-76,34},{-56,54}},
+        points={{-46,64},{-26,64},{-46,44},{-66,44},{-46,64}},
         lineColor={0,0,0},
         smooth=Smooth.None),
       Polygon(
-        points={{36,54},{56,54},{36,34},{16,34},{36,54}},
+        points={{46,64},{66,64},{46,44},{26,44},{46,64}},
         lineColor={0,0,0},
         smooth=Smooth.None),
-      Rectangle(extent={{-50,32},{16,-62}}, lineColor={0,0,0}),
+      Rectangle(extent={{-40,42},{26,-52}}, lineColor={0,0,0}),
       Rectangle(
-        extent={{-30,32},{-24,-62}},
+        extent={{-20,42},{-14,-52}},
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),

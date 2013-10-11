@@ -192,12 +192,13 @@ package Species "Dynamic models of chemical species"
           final beta=0,
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
           final theta=Modelica.Constants.inf,
-          consMaterial=Conservation.IC,
-          invertEOS=false,
           final upstreamX=false,
           final upstreamY=false,
           final upstreamZ=false,
-          initMaterial=InitScalar.pressure);
+          initMaterial=InitScalar.concentration,
+          rho_IC=1/Characteristics.'C+'.Graphite.b_v[1, 1]);
+        // invertEOS=false,
+        //consMaterial=Conservation.IC,
 
         //    redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
 
@@ -1042,7 +1043,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1095,24 +1095,29 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       defaultComponentPrefixes="replaceable",
       defaultComponentName="species",
       Documentation(info="<html>
-  <p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+  <p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics));
 
   end Isochoric;
 
   model Incompressible "Base model for an incompressible species"
     extends Partial(redeclare Q.PressureAbsolute p, redeclare Q.Volume V);
-    Connectors.Amagat amagat(V(
+    Connectors.Dalton dalton(V(
         min=0,
         final start=V_IC,
         final fixed=false), p(final start=p_IC, final fixed=false))
-      "Connector for translational and thermal diffusive exchange, with additivity of volume"
+      "Connector for translational and thermal diffusive exchange, with additivity of pressure"
       annotation (Placement(transformation(extent={{-30,-50},{-10,-30}}),
           iconTransformation(extent={{20,-84},{40,-104}})));
 
   equation
-    p = amagat.p;
-    V = amagat.V;
+    p = dalton.p;
+    V = dalton.V;
 
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}), graphics));
   end Incompressible;
 
   model Compressible "Base model for a compressible species"
@@ -2437,8 +2442,8 @@ public
 
 public
   package Enumerations "Choices of options"
+    extends Modelica.Icons.TypesPackage;
 
-    extends Modelica.Icons.BasesPackage;
     type Conservation = enumeration(
         IC "Initial condition imposed forever (no conservation)",
         steady "Steady (conservation with steady state)",

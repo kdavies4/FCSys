@@ -3,7 +3,7 @@ package Characteristics
   "Packages with data and functions to correlate physical properties"
   import Modelica.Media.IdealGases.Common.FluidData;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
-  extends Modelica.Icons.MaterialPropertiesPackage;
+  extends Modelica.Icons.Package;
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     model Correlations
@@ -741,6 +741,7 @@ package Characteristics
     protected
       function fromNASAViscosity
         "Return constants for fluidity given NASA CEA constants for viscosity"
+        extends Modelica.Icons.Function;
 
         input Real b_eta[4] "NASA CEA constants for viscosity";
         output Real b_zeta[4] "Constants for fluidity";
@@ -753,6 +754,7 @@ package Characteristics
 
       function fromNASAThermalConductivity
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
+        extends Modelica.Icons.Function;
 
         input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
         output Real b_theta[4] "Constants for thermal resistivity";
@@ -1735,6 +1737,43 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
+</html>"), Icon(graphics={
+        Line(
+          points={{-76,-80},{-62,-30},{-32,40},{4,66},{48,66},{73,45},{62,-8},{
+              48,-50},{38,-80}},
+          color={64,64,64},
+          smooth=Smooth.Bezier),
+        Line(
+          points={{-40,20},{68,20}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-40,20},{-44,88},{-44,88}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{68,20},{86,-58}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{56,-28}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{-74,84},{-74,84}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{56,-28},{70,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{38,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{-94,-16},{-94,-16}},
+          color={175,175,175},
+          smooth=Smooth.None)}));
 
 end Characteristics;

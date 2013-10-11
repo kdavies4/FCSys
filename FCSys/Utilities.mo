@@ -1,6 +1,7 @@
 within FCSys;
 package Utilities "Functions to implement misc. algorithms"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.UtilitiesPackage;
+
   package Chemistry "Functions to support chemistry"
     extends Modelica.Icons.Package;
     function charge "Return the charge of a species given its chemical formula"
@@ -412,6 +413,7 @@ An unrelated species may be included.");
     end get_time;
 
     function timeTranslation "Print the time required to translate a model"
+      extends Modelica.Icons.Function;
       import Modelica.Utilities.Streams.print;
 
       input String problem
@@ -551,17 +553,6 @@ An unrelated species may be included.");
     "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
     annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
-  function countTrue
-    "<html>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</html>"
-    extends Modelica.Icons.Function;
-    input Boolean u[:] "<html><code>Boolean</code> vector</html>";
-    output Integer n "Number of true entries";
-
-  algorithm
-    n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1));
-    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
-    <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
-  end countTrue;
 
   function Delta
     "<html>Return the second entry of a vector minus the first (&Delta;)</html>"
@@ -574,54 +565,6 @@ An unrelated species may be included.");
     annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p></html>"));
   end Delta;
-
-  function enumerate
-    "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
-    extends Modelica.Icons.Function;
-    input Boolean u[:] "<html><code>Boolean</code> vector</html>";
-    output Integer enumerated[size(u, 1)]
-      "Indices of the true entries (increasing order; 0 for false entries)";
-
-  protected
-    Integer count "Counter variable";
-
-  algorithm
-    count := 1;
-    for i in 1:size(u, 1) loop
-      if u[i] then
-        enumerated[i] := count;
-        count := count + 1;
-      else
-        enumerated[i] := 0;
-      end if;
-    end for;
-    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
-  <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p></html>"));
-  end enumerate;
-
-  function index
-    "<html>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</html>"
-    extends Modelica.Icons.Function;
-    input Boolean u[:] "<html><code>Boolean</code> array</html>";
-    output Integer indices[countTrue(u)] "Indices of the true entries";
-
-  protected
-    Integer count "Counter variable";
-
-  algorithm
-    count := 1;
-    for i in 1:size(u, 1) loop
-      if u[i] then
-        indices[count] := i;
-        count := count + 1;
-      end if;
-    end for;
-    annotation (Inline=true,Documentation(info="<html>
-  <p>The indices are 1-based (Modelica-compatible).</p>
-
-<p><b>Example:</b><br>
-  <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
-  end index;
 
   function inSign
     "Return the mathematical sign for the direction into a side or face"
@@ -653,6 +596,7 @@ An unrelated species may be included.");
   end mod1;
 
   function plot6 "Create six plots"
+    extends Modelica.Icons.Function;
     input String y1[:]=fill("", 0)
       "<html>Names of the signals for the 1<sup>st</sup> plot</html>";
     input String y2[:]=fill("", 0)

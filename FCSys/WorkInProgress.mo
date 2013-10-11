@@ -356,7 +356,6 @@ package WorkInProgress "Incomplete classes under development"
               points={{-30,-20},{0,-20}},
               color={127,127,127},
               smooth=Smooth.None)}));
-
   end ChargeLayerStoich;
 
   model StoichMulti
@@ -430,7 +429,6 @@ package WorkInProgress "Incomplete classes under development"
               smooth=Smooth.None,
               thickness=0.5)}),
       Diagram(graphics));
-
   end StoichMulti;
   annotation (Commands(
       file="../../units.mos"

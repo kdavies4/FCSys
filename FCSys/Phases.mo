@@ -3,7 +3,7 @@ package Phases "Mixtures of species"
   extends Modelica.Icons.Package;
   // **Use __Dymola_label for incl and species tags
   model Gas "Gas phase"
-    import FCSys.Utilities.countTrue;
+    import Modelica.Math.BooleanVectors.countTrue;
     extends Partial(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
     // Conditionally include species.
@@ -427,12 +427,11 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
     import assert = FCSys.Utilities.assertEval;
-    import FCSys.Utilities.countTrue;
+    import Modelica.Math.BooleanVectors.countTrue;
     extends Partial(final n_spec=countTrue({'inclC+','incle-'}));
 
     // Conditionally include species.
@@ -594,6 +593,10 @@ package Phases "Mixtures of species"
               6,-42}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
               26,-52})));
 
+  protected
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
+      "Adapter between additivity of pressure and additivity of volume"
+      annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
   equation
     // Reactions
     // ---------
@@ -724,8 +727,16 @@ package Phases "Mixtures of species"
         points={{5.55112e-16,80},{5.55112e-16,60},{-14,60}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(amagat, 'C+'.amagat) annotation (Line(
-        points={{70,-54},{-17,-54},{-17,-9.4}},
+    connect(DA.amagat, amagat) annotation (Line(
+        points={{56,-54},{70,-54}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(DA.dalton, 'C+'.dalton) annotation (Line(
+        points={{48,-54},{-17,-54},{-17,-9.4}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(DA.dalton, 'e-'.dalton) annotation (Line(
+        points={{48,-54},{23,-54},{23,-9.4}},
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
@@ -738,11 +749,10 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Graphite;
 
   model Ionomer "Ionomer phase"
-    import FCSys.Utilities.countTrue;
+    import Modelica.Math.BooleanVectors.countTrue;
     extends Partial(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
 
     parameter Q.NumberAbsolute k_EOD=1 if 'inclH+' or inclH2O
@@ -1152,7 +1162,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
-
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1279,12 +1288,25 @@ package Phases "Mixtures of species"
       Icon(graphics),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Liquid;
 
+
+  annotation (Documentation(info="
+<html><p>The graphite, ionomer, and
+liquid phases can only be used with a compressible phase (gas).</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 protected
   partial model Partial "Base model for a phase"
-    import FCSys.Utilities.index;
+    import Modelica.Math.BooleanVectors.index;
     // extends FCSys.Icons.Names.Middle;
 
     parameter Integer n_spec(start=0) "Number of species"
@@ -1427,18 +1449,4 @@ protected
             lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
-
-  annotation (Documentation(info="
-<html><p>The graphite, ionomer, and
-liquid phases can only be used with a compressible phase (gas).</p>
-
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
 end Phases;

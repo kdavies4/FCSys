@@ -107,7 +107,7 @@ package Quantities "Quantities to represent physical properties"
 
   end Examples;
 
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.TypesPackage;
   import Modelica.Icons.TypeReal;
 
   // Generated from FCSys/Resources/quantities.xls, 2013-7-14
@@ -178,7 +178,7 @@ package Quantities "Quantities to represent physical properties"
   type PressureRate = TypeReal (final unit="m/(l.T3)") "Rate of pressure";
   type PressureReciprocal = TypeReal (final unit="l.T2/m", min=0)
     "Reciprocal of pressure";
-  type ResistanceElectrical = TypeReal (final unit="l2.m/(N2.T)", min=0)
+  type ResistanceElectrical = TypeReal (final unit="L2.M/(N2.T)", min=0)
     "Electrical resistance";
   type Resistivity = TypeReal (final unit="l.T/N", min=0);
   type ResistivityMaterial = TypeReal (final unit="T/l2", min=0)
