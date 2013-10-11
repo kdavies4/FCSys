@@ -17,7 +17,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2.Gas.Fixed H2(final n_faces) if inclH2
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -41,7 +41,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Gas.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -65,7 +65,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.N2.Gas.Fixed N2(final n_faces) if inclN2
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -89,7 +89,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.O2.Gas.Fixed O2(final n_faces) if inclO2
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -149,8 +149,8 @@ package Phases "Mixtures of species"
           iconTransformation(extent={{80,-60},{100,-80}})));
     Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
       inclORR "Connector for an electrochemical reaction" annotation (Placement(
-          transformation(extent={{-70,50},{-50,70}}),iconTransformation(extent=
-              {{50,-94},{70,-74}})));
+          transformation(extent={{-70,50},{-50,70}}), iconTransformation(extent
+            ={{50,-94},{70,-74}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
           transformation(extent={{-49,50},{-29,70}}), iconTransformation(extent
             ={{20,-94},{40,-74}})));
@@ -427,6 +427,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -445,7 +446,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
-      'inclC+' constrainedby FCSys.Species.SpeciesIsochoric(
+      'inclC+' constrainedby FCSys.Species.Isochoric(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -470,7 +471,7 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_faces) if
       'incle-' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.SpeciesIsochoric(
+      FCSys.Species.Compressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -737,6 +738,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -765,7 +767,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_faces) if
-      'inclSO3-' constrainedby FCSys.Species.SpeciesIsochoric(
+      'inclSO3-' constrainedby FCSys.Species.Isochoric(
       n_faces=n_faces,
       V=V,
       n_intra=1,
@@ -793,7 +795,7 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_faces) if
       'inclH+' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.CompressibleSpecies(
+      FCSys.Species.Compressible(
       n_faces=n_faces,
       V=V,
       n_intra=1,
@@ -820,7 +822,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.CompressibleSpecies(
+      constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
       V=V,
       n_intra=2,
@@ -1150,6 +1152,7 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1166,7 +1169,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.SpeciesIsochoric(
+      constrainedby FCSys.Species.Isochoric(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -1276,6 +1279,7 @@ package Phases "Mixtures of species"
       Icon(graphics),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Liquid;
 
 protected
@@ -1369,50 +1373,58 @@ protected
 
 
 </html>"),
-      Icon(graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+      Icon(graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
 

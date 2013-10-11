@@ -7,7 +7,7 @@ package Species "Dynamic models of chemical species"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends SpeciesSolid(redeclare replaceable package Data =
+        extends Solid(redeclare replaceable package Data =
               Characteristics.'C+'.Graphite);
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -21,7 +21,7 @@ package Species "Dynamic models of chemical species"
 
       model Fixed "Fixed properties"
 
-        extends SpeciesSolid(
+        extends Solid(
           redeclare replaceable package Data = Characteristics.'C+'.Graphite (
               n_c=0,
               T_lim_c={0,Modelica.Constants.inf},
@@ -112,7 +112,7 @@ package Species "Dynamic models of chemical species"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends SpeciesSolid(redeclare replaceable package Data =
+        extends Solid(redeclare replaceable package Data =
               Characteristics.'SO3-'.Ionomer);
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -123,7 +123,7 @@ package Species "Dynamic models of chemical species"
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends SpeciesSolid(
+        extends Solid(
           redeclare replaceable package Data = Characteristics.'SO3-'.Ionomer,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
@@ -154,7 +154,7 @@ package Species "Dynamic models of chemical species"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends SpeciesIsochoric(
+        extends Isochoric(
           redeclare replaceable package Data = Characteristics.'e-'.Graphite,
           final tauprime=0,
           final mu=sigma*Data.v_Tp(T, p),
@@ -184,7 +184,7 @@ package Species "Dynamic models of chemical species"
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = Characteristics.'e-'.Gas,
           final tauprime=0,
           final mu=sigma*v,
@@ -243,7 +243,7 @@ package Species "Dynamic models of chemical species"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends SpeciesIsochoric(
+        extends Isochoric(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final tauprime=0,
           initMaterial=InitScalar.concentration);
@@ -266,7 +266,7 @@ package Species "Dynamic models of chemical species"
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -388,8 +388,8 @@ package Species "Dynamic models of chemical species"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends FCSys.Species.CompressibleSpecies(redeclare replaceable package
-            Data = Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
+        extends Compressible(redeclare replaceable package Data =
+              Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2",
@@ -402,7 +402,7 @@ package Species "Dynamic models of chemical species"
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                 b_v=[1], n_v={-1,0}),
           redeclare final parameter Q.TimeAbsolute tauprime=0,
@@ -485,8 +485,8 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends FCSys.Species.CompressibleSpecies(redeclare replaceable package
-            Data = Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
+        extends Compressible(redeclare replaceable package Data =
+              Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
         output Q.NumberAbsolute RH(
           stateSelect=StateSelect.never,
           displayUnit="%") = p/(
@@ -504,7 +504,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
                 b_v=[1],n_v={-1,0}),
           redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
@@ -638,8 +638,8 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends FCSys.Species.CompressibleSpecies(redeclare replaceable package
-            Data = Characteristics.H2O.Ionomer, final tauprime=0);
+        extends Compressible(redeclare replaceable package Data =
+              Characteristics.H2O.Ionomer, final tauprime=0);
 
         // Auxiliary variables (for analysis)
         output Q.NumberAbsolute lambda(stateSelect=StateSelect.never) = rho*
@@ -659,7 +659,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
           final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -697,7 +697,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends SpeciesIsochoric(redeclare replaceable package Data =
+        extends Isochoric(redeclare replaceable package Data =
               Characteristics.H2O.Liquid, final tauprime=0);
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -712,7 +712,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends SpeciesIsochoric(
+        extends Isochoric(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
           redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -823,8 +823,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends FCSys.Species.CompressibleSpecies(redeclare replaceable package
-            Data = Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
+        extends Compressible(redeclare replaceable package Data =
+              Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="N2",
@@ -839,7 +839,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       model Fixed "Fixed properties"
         import FCSys.Utilities.Polynomial;
 
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
               b_v=[1],
               n_v={-1,0},
@@ -938,8 +938,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends FCSys.Species.CompressibleSpecies(redeclare replaceable package
-            Data = Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
+        extends Compressible(redeclare replaceable package Data =
+              Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="O2",
@@ -952,7 +952,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends FCSys.Species.CompressibleSpecies(
+        extends Compressible(
           redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                 b_v=[1], n_v={-1,0}),
           redeclare parameter Q.TimeAbsolute tauprime=0,
@@ -1042,15 +1042,16 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Gas;
 
   end O2;
 
-  model SpeciesSolid
+  model Solid
     "<html><a href=\"modelica://FCSys.Species.Species\">Species</a> model for a solid (inert and zero velocity)</html>"
-    extends SpeciesIsochoric(
+    extends Isochoric(
       final upstreamX=false,
       final upstreamY=false,
       final upstreamZ=false,
@@ -1079,11 +1080,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
 
-  end SpeciesSolid;
+  end Solid;
 
-  model SpeciesIsochoric
+  model Isochoric
     "Base model for an isochoric species (incompressible, without thermal expansion)"
-    extends IncompressibleSpecies(
+    extends Incompressible(
       invertEOS=false,
       initMaterial=InitScalar.volume,
       final eta=1);
@@ -1096,9 +1097,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Documentation(info="<html>
   <p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
-  end SpeciesIsochoric;
+  end Isochoric;
 
-  model IncompressibleSpecies "Base model for an incompressible species"
+  model Incompressible "Base model for an incompressible species"
     extends Partial(redeclare Q.PressureAbsolute p, redeclare Q.Volume V);
     Connectors.Amagat amagat(V(
         min=0,
@@ -1112,9 +1113,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     p = amagat.p;
     V = amagat.V;
 
-  end IncompressibleSpecies;
+  end Incompressible;
 
-  model CompressibleSpecies "Base model for a compressible species"
+  model Compressible "Base model for a compressible species"
     extends Partial(redeclare Q.PressureAbsolute p, redeclare Q.Volume V);
     Connectors.Dalton dalton(V(
         min=0,
@@ -1128,7 +1129,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     p = dalton.p;
     V = dalton.V;
     annotation (Icon(graphics));
-  end CompressibleSpecies;
+  end Compressible;
 
 protected
   partial model Partial
@@ -1139,7 +1140,6 @@ protected
     import FCSys.Utilities.Sigma;
     import assert = FCSys.Utilities.assertEval;
     //extends FCSys.Icons.Names.Top5;
-    // **Be sure to remove enthalpy offset of H+.
     // **split diffusive and chemical exchange, material and thermal storage into separate model so that it can be used for dielectric
 
     // Geometry
@@ -1711,14 +1711,14 @@ protected
     assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
       consMaterial == Conservation.steady or consEnergy == Conservation.steady,
       "The initialization methods for material and energy must be different (unless None).");
-    assert(V >= 0, "The volume of " + Data.formula + " is negative.
+    assert(V >= 0, "The volume of " + getInstanceName() + " is negative.
 Check that the volumes of the other phases are set properly.");
 
     // Material
     if consMaterial == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initMaterial <> InitScalar.none, "The material state of " + Data.formula
-         + " is prescribed, yet its condition is not defined.
+      assert(initMaterial <> InitScalar.none, "The material state of " +
+        getInstanceName() + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
     elseif consMaterial == Conservation.dynamic then
       // Initialize since there's a time-varying state.
@@ -1728,11 +1728,13 @@ Choose any condition besides None.");
         der(N) = 0;
       elseif initMaterial == InitScalar.concentration then
         1/v = rho_IC;
-        assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
+        assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
+           +
           " is isochoric, yet its material initial condition is based on concentration.");
       elseif initMaterial == InitScalar.concentrationSS then
         der(1/v) = 0;
-        assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
+        assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
+           +
           " is isochoric, yet its material initial condition is based on concentration.");
       elseif initMaterial == InitScalar.volume then
         V = V_IC;
@@ -1740,7 +1742,7 @@ Choose any condition besides None.");
         der(V) = 0;
       elseif initMaterial == InitScalar.pressure then
         p = p_IC;
-        assert(Data.isCompressible, Data.formula +
+        assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its material initial condition is based on pressure.");
       elseif initMaterial == InitScalar.pressureSS then
         der(p) = 0;
@@ -1770,7 +1772,8 @@ Choose any condition besides None.");
         assert(initTrans[cartTrans[i]] <> InitTranslational.none,
           "The state for the " + (if cartTrans[i] == Axis.x then "x" else if
           cartTrans[i] == Axis.y then "y" else "z") +
-          "-axis component of translational momentum of " + Data.formula + " is prescribed, yet its condition is not defined.
+          "-axis component of translational momentum of " + getInstanceName()
+           + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
       elseif consTrans[cartTrans[i]] == Conservation.dynamic then
         // Initialize since there's a time-varying state.
@@ -1792,8 +1795,8 @@ Choose any condition besides None.");
     // Energy
     if consEnergy == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initEnergy <> InitScalar.none, "The energy state of " + Data.formula
-         + " is prescribed, yet its condition is not defined.
+      assert(initEnergy <> InitScalar.none, "The energy state of " +
+        getInstanceName() + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
     elseif consEnergy == Conservation.dynamic then
       // Initialize since there's a time-varying state.
@@ -1803,11 +1806,13 @@ Choose any condition besides None.");
         der(N) = 0;
       elseif initEnergy == InitScalar.concentration then
         1/v = rho_IC;
-        assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
+        assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
+           +
           " is isochoric, yet its thermal initial condition is based on concentration.");
       elseif initEnergy == InitScalar.concentrationSS then
         der(1/v) = 0;
-        assert(Data.isCompressible or Data.hasThermalExpansion, Data.formula +
+        assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
+           +
           " is isochoric, yet its thermal initial condition is based on concentration.");
       elseif initEnergy == InitScalar.volume then
         V = V_IC;
@@ -1815,11 +1820,11 @@ Choose any condition besides None.");
         der(V) = 0;
       elseif initEnergy == InitScalar.pressure then
         p = p_IC;
-        assert(Data.isCompressible, Data.formula +
+        assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its thermal initial condition is based on pressure.");
       elseif initEnergy == InitScalar.pressureSS then
         der(p) = 0;
-        assert(Data.isCompressible, Data.formula +
+        assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its thermal initial condition is based on pressure.");
       elseif initEnergy == InitScalar.temperature then
         T = T_IC;
@@ -2322,7 +2327,6 @@ Choose any condition besides None.");
             rotation=45)}));
   end Partial;
 
-
 public
   model Reaction "Electrochemical reaction"
     import Modelica.Math.asinh;
@@ -2430,8 +2434,8 @@ public
             pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
-public
 
+public
   package Enumerations "Choices of options"
 
     extends Modelica.Icons.BasesPackage;

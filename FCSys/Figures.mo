@@ -1310,11 +1310,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1502,7 +1502,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    FCSys.Species.CompressibleSpecies Species
+    FCSys.Species.Compressible Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
             preserveAspectRatio=true, extent={{-120,-120},{120,120}})));

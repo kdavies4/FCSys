@@ -21,8 +21,8 @@ package WorkInProgress "Incomplete classes under development"
       annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
     Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
         Medium = Medium) "Modelica fluid port" annotation (Placement(
-          transformation(extent={{70,-50},{90,-30}}), iconTransformation(extent=
-             {{70,-50},{90,-30}})));
+          transformation(extent={{70,-50},{90,-30}}), iconTransformation(extent
+            ={{70,-50},{90,-30}})));
     Modelica.Electrical.Analog.Interfaces.NegativePin pin
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
@@ -87,6 +87,7 @@ package WorkInProgress "Incomplete classes under development"
           each final inclX=true,
           each inclY=true,
           each graphite('incle-'=true, 'e-'(perfectMaterialDiff={{{{true,false}}}})),
+
           each gas(inclH2=true, inclH2O=true))))
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -336,6 +337,7 @@ package WorkInProgress "Incomplete classes under development"
     
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
       Diagram(graphics),
       Icon(graphics={Line(
               points={{0,0},{30,0}},
@@ -354,6 +356,7 @@ package WorkInProgress "Incomplete classes under development"
               points={{-30,-20},{0,-20}},
               color={127,127,127},
               smooth=Smooth.None)}));
+
   end ChargeLayerStoich;
 
   model StoichMulti
@@ -414,6 +417,7 @@ package WorkInProgress "Incomplete classes under development"
     <p>See also <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a>.  
     For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
       Icon(graphics={Line(
               points={{-30,0},{30,0}},
               color={255,195,38},
@@ -426,11 +430,14 @@ package WorkInProgress "Incomplete classes under development"
               smooth=Smooth.None,
               thickness=0.5)}),
       Diagram(graphics));
+
   end StoichMulti;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
+
       file="test/check.mos" "Check all of FCSys using Dymola's check function.",
+
       file="../../../LaTeX/Dissertation/Results/Cell/Simulation/sim.mos"));
 
 end WorkInProgress;

@@ -102,7 +102,6 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
           StopTime=1.5,
           Tolerance=1e-06,
@@ -129,6 +128,7 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
         experimentSetupOutput);
+
     end AirColumn;
     extends Modelica.Icons.ExamplesPackage;
     // TODO: In the documentation of each model, insert the sample plots or link
@@ -336,6 +336,7 @@ package Subregions
             "Subregions.Examples.Evaporation.mos"),
         Diagram(graphics),
         experimentSetupOutput);
+
     end Evaporation;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
@@ -745,13 +746,13 @@ package Subregions
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={44,20})));
-      replaceable Conditions.ByConnector.Chemical.Potential species1(
+      replaceable Conditions.ByConnector.Electrochemical.Potential species1(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=U.V)
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-      replaceable Conditions.ByConnector.Chemical.Current species2(
+      replaceable Conditions.ByConnector.Electrochemical.Current species2(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
@@ -1333,7 +1334,7 @@ package Subregions
       FCSys.Conditions.Adapters.ChemicalFace chargeLayer(redeclare
           FCSys.Connectors.Stoichiometric electrical)
         annotation (Placement(transformation(extent={{-6,10},{14,30}})));
-      FCSys.Conditions.ByConnector.Reaction.ReactionEfforts electrochem(
+      FCSys.Conditions.ByConnector.Stoichiometric.ReactionEfforts electrochem(
         redeclare FCSys.Connectors.Stoichiometric electrochem,
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,

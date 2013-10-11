@@ -245,7 +245,7 @@ package Characteristics
   package 'C+' "<html>C<sup>+</sup></html>"
     extends Modelica.Icons.Package;
     package Graphite "C+ graphite"
-      import Modelica.Math.log;
+
       extends BaseClasses.Characteristic(
         final formula="C+",
         final phase=Phase.solid,
@@ -358,7 +358,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "e- gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.eminus;
-      import Modelica.Math.log;
+
       extends BaseClasses.Characteristic(
         final formula="e-",
         phase=Phase.gas,
@@ -418,7 +418,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H+ gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.Hplus;
-      import Modelica.Math.log;
+
       extends BaseClasses.Characteristic(
         final formula="H+",
         phase=Phase.gas,
@@ -476,7 +476,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2;
-      import Modelica.Math.log;
+
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
         final phase=Phase.gas,
@@ -525,7 +525,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H2O gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2O;
-      import Modelica.Math.log;
+
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
         final phase=Phase.gas,
@@ -591,7 +591,7 @@ package Characteristics
     end Ionomer;
 
     package Liquid "H2O liquid"
-      import Modelica.Math.log;
+
       extends BaseClasses.Characteristic(
         final formula="H2O",
         final phase=Phase.liquid,
@@ -633,7 +633,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "N2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.N2;
-      import Modelica.Math.log;
+
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
         final phase=Phase.gas,
@@ -683,7 +683,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "O2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.O2;
-      import Modelica.Math.log;
+
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
         final phase=Phase.gas,
@@ -741,7 +741,7 @@ package Characteristics
     protected
       function fromNASAViscosity
         "Return constants for fluidity given NASA CEA constants for viscosity"
-        import Modelica.Math.log;
+
         input Real b_eta[4] "NASA CEA constants for viscosity";
         output Real b_zeta[4] "Constants for fluidity";
 
@@ -753,7 +753,7 @@ package Characteristics
 
       function fromNASAThermalConductivity
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
-        import Modelica.Math.log;
+
         input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
         output Real b_theta[4] "Constants for thermal resistivity";
 
@@ -766,7 +766,7 @@ package Characteristics
     public
       redeclare function zeta
         "<html>Fluidity (&zeta;) as a function of temperature</html>"
-        import Modelica.Math.log;
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
@@ -802,7 +802,7 @@ package Characteristics
 
       redeclare function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature</html>"
-        import Modelica.Math.log;
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";

@@ -27,9 +27,6 @@ import FCSys.Conditions.TestStands.Enumerations.FlowSpec;
 import FCSys.Conditions.TestStands.Enumerations.HumiditySpec;
 import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
 
-// TODO:  Use getInstanceName() to improve assertions and other messages
-// once it is better supported (new in Modelica 3.3).
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -549,7 +546,7 @@ package UsersGuide "User's Guide"
 
     <p><b>Acknowledgments:</b><ul>
     <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
-    <li>Technical discussions and insight from Mike Angelo, Guido Bender, Severine Busquet,
+    <li>Technical discussions and insight from Tom Fuller, Sheldon Jeter, Tequila Harris, Mike Angelo, Guido Bender, Severine Busquet,
     Chris Ford, Sebastian Herzig, Ben Lee, George Nelson, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
     <li>Source-code contributions and bug fixes from Mohammad Ali, Kevin Bandy, Martin Sj&ouml;lund, Francois Steinmetz, and Joerg Weiss-Ungeth&uuml;m</li>
 
@@ -564,9 +561,7 @@ package UsersGuide "User's Guide"
     to the <a href=\"http://www.hnei.hawaii.edu\">Hawaii Natural Energy Institute</a></li>
     </ul>
     </ul></p>
-
 </html>"));
-    // **Add committee members.
 
     end Contact;
 
@@ -856,6 +851,20 @@ action. This section shall survive the termination of this License.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

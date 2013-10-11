@@ -117,7 +117,7 @@ package Utilities "Functions to implement misc. algorithms"
       // Read the elements.
       while f <> "" loop
         (symbols[i],coeffs[i],z,f) := readElement(f);
-        assert(symbols[i] <> "", "The formula is invalid.");
+        assert(symbols[i] <> "", "The formula (" + formula + ") is invalid.");
         z_net := z_net + z;
         if symbols[i] <> "e" then
           i := i + 1;
@@ -240,7 +240,7 @@ An unrelated species may be included.");
     extends Modelica.Icons.Package;
     function F
       "<html>&int;<a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
-      import Modelica.Math.log;
+
       extends Modelica.Icons.Function;
       input Real x "Argument";
       input Real a[:] "Coefficients";
@@ -265,7 +265,6 @@ An unrelated species may be included.");
 
     function dF
       "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.F\">F</a>()</html>"
-      import Modelica.Math.log;
       extends Modelica.Icons.Function;
 
       input Real x "Argument";

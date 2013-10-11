@@ -8,13 +8,13 @@ package Icons "Icons to annotate and represent classes"
       // This has been modified from Modelica.Blocks.Interfaces.BlockIcon.
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Rectangle(
-                  extent={{-100,-100},{100,100}},
-                  lineColor={0,0,127},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,-100},{100,100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Continuous;
 
@@ -118,42 +118,50 @@ package Icons "Icons to annotate and represent classes"
 
     partial class Single "Icon for a single-connector boundary condition"
       // extends Names.Middle;
-      annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Line(
-                  points={{-100,-100},{-100,100},{100,100},{100,-100}},
-                  pattern=LinePattern.None,
-                  smooth=Smooth.None),Line(
-                  points={{-100,-100},{100,-100}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-100,100},{100,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Line(
+              points={{-100,-100},{-100,100},{100,100},{100,-100}},
+              pattern=LinePattern.None,
+              smooth=Smooth.None),
+            Line(
+              points={{-100,-100},{100,-100}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Single;
 
     partial class SingleShort
       "Short icon for a single-connector boundary condition"
       // extends Names.Middle;
-      annotation (Icon(graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Line(
-                  points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                  pattern=LinePattern.None,
-                  smooth=Smooth.None),Line(
-                  points={{-100,-40},{100,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Line(
+              points={{-100,-40},{-100,40},{100,40},{100,-40}},
+              pattern=LinePattern.None,
+              smooth=Smooth.None),
+            Line(
+              points={{-100,-40},{100,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end SingleShort;
 
@@ -226,9 +234,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-                  extent={{-100,80},{100,120}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,80},{100,120}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Top4;
 
@@ -236,9 +244,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Top3;
 
@@ -256,9 +264,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Top1;
 
@@ -424,17 +432,6 @@ package Icons "Icons to annotate and represent classes"
 
   end Cell;
 
-  annotation (Documentation(info="
-<html>
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
   partial package PackageUnderConstruction
     "Overlay to indicate that a package is in development"
     // This has been modified from Modelica.Icons.UnderConstruction.
@@ -450,4 +447,15 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
 
   end PackageUnderConstruction;
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Icons;
