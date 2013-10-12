@@ -46,9 +46,9 @@ package UsersGuide "User's Guide"
       <tr bgcolor=#f7f7f7>
         <td>
         FCSys should be compatible with any
-        modeling environment that supports Modelica 3.1.  The following tools have been tested:
+        modeling environment that supports Modelica Standard Library 3.2.1.  The following tools have been tested:
         <ul>
-          <li>Dymola: Supported by versions 7.4, 2012 FD01, and 2013 FD01.
+          <li>Dymola: Supported by versions 2014.
           Dymola's annotations for parameter dialogs and replaceable choices are included.</li>
           <li>MapleSim: Not supported as of version 4.5</li>
           <li>MWorks: Not supported as of version 2.6.10</li>
@@ -86,15 +86,11 @@ package UsersGuide "User's Guide"
             than <a href=\"modelica://Modelica.SIunits\">Modelica.SIunits</a></li>
             <li><a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a> package:
             Overview of the connectors</li>
-            <li><a href=\"modelica://FCSys.Subregions.Volume\">FCSys.Subregions.Volume</a> model:
-            Discussion of how species are mixed within phases and how phases are combined within subregions</li>
-            <li><a href=\"modelica://FCSys.Species.Species\">FCSys.Species.Species</a> model:
+            <li><a href=\"modelica://FCSys.Species.Partial\">FCSys.Species.Partial</a> model:
             Details about the exchange, transport, and storage of material, translational momentum, and
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
-            <li><a href=\"modelica://FCSys.Subregions.DepletionLayer\">FCSys.Subregions.DepletionLayer</a> model:
-            Discussion of the electrochemical reaction</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
         detailed information is given at the appropriate level of inheritance.  If a model does not
@@ -279,25 +275,26 @@ package UsersGuide "User's Guide"
       DocumentationClass=true,
       Documentation(info="<html><p>The following terms appear in this library and are uncommon or unique here:
     <ul>
-      <li><b>configuration</b> &ndash; a species in a certain phase within a subregion<br>
+      <li><b>configuration</b> &ndash; a species in a certain phase within a subregion</li><br>
 
       <li><b>dynamic compressibility</b> &ndash; reciprocal of volume, second, or bulk viscosity
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())<br>
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())</li><br>
 
       <li><b>equivalent current</b> &ndash; rate of supply of a reactant required to support the given current 
-      assuming the reactant is entirely consumed (complete utilization)<br>
+      assuming the reactant is entirely consumed (complete utilization)</li><br>
       
-      <li><b>exchange</b> &ndash; transfer of a conserved quantity among configurations within a region<br>
+      <li><b>exchange</b> &ndash; transfer of a conserved quantity among configurations within a region</li><br>
 
-      <li><b>specific</b> &ndash; adjective that indicates the quotient of the following quantity and its associated particle number<br>
+      <li><b>mass</b> &ndash; adjective that indicates the quotient of the following quantity and its associated mass</li><br>
+
+      <li><b>specific</b> &ndash; adjective that indicates the quotient of the following quantity and its associated amount of material</li><br>
 
       <li><b>thermal independity</b> &ndash; extent to which an exchange of thermal energy between species causes or requires a temperature difference
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())<br>
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())</li><br>
 
-      <li><b>translational Nusselt number</b> &ndash; correction to Newton's law of viscous shear for the shape of the flow profile<br>
+      <li><b>translational Nusselt number</b> &ndash; correction to Newton's law of viscous shear for the shape of the flow profile</li><br>
 
-
-      <li><b>transport</b> &ndash; transfer of a conserved quantity between adjacent subregions
+      <li><b>transport</b> &ndash; transfer of a conserved quantity between adjacent subregions</li>
     </ul></p>
     </table>
     </html>"));
@@ -355,10 +352,6 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Bernardi1992\" class=bookmark>Bernardi1992</a>]</td>
       <td valign=top class=noBorder>D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Dassault2010]</td>
-      <td valign=top class=\"noBorder\">Dassault Syst&eacute;mes, <i>Dymola (Dynamic Modeling Laboratory) User Manual</i>, Lund, Sweden, Jan. 2010.  Distributed with Dymola version 7.4.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"DuPont2004N\" class=bookmark>DuPont2004N</a>]</td>
@@ -539,9 +532,6 @@ package UsersGuide "User's Guide"
     <dd>Kevin Davies</dd>
     <dd><a href=\"http://www.me.gatech.edu\">George W. Woodruff School of Mechanical Engineering</a></dd>
     <dd><a href=\"http://www.gatech.edu\">Georgia Institute of Technology</a></dd>
-    <dd>813 Ferst Drive</dd>
-    <dd>Atlanta, GA 30332-0405</dd>
-    <dd>USA</dd>
     <dd><a href=\"mailto:kdavies4@gmail.com\">kdavies4@gmail.com</a></dd>
 
     <p><b>Acknowledgments:</b><ul>

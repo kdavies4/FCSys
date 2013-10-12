@@ -2,7 +2,12 @@ within FCSys;
 package Subregions
   "Control volumes with multi-species transport, exchange, and storage"
   extends Modelica.Icons.Package;
+  extends FCSys.Icons.PackageUnderConstruction;
   package Examples "Examples"
+    extends Modelica.Icons.ExamplesPackage;
+    // TODO: In the documentation of each model, insert the sample plots or link
+    // to the sample results of the User's Guide.
+    // TODO: In the documentation of each model, add discussion from the dissertation.
     model AirColumn
       "<html>Test a one-dimensional array of subregions with an initial pressure difference (C<sup>+</sup> and N<sub>2</sub> included by default)</html>"
       import FCSys.Utilities.round;
@@ -129,10 +134,7 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         experimentSetupOutput);
     end AirColumn;
-    extends Modelica.Icons.ExamplesPackage;
-    // TODO: In the documentation of each model, insert the sample plots or link
-    // to the sample results of the User's Guide.
-    // TODO: In the documentation of each model, add discussion from the dissertation.
+
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
       extends Subregions(
@@ -481,7 +483,7 @@ package Subregions
             origin={24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -493,7 +495,7 @@ package Subregions
             origin={0,-24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC4(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -505,7 +507,7 @@ package Subregions
             origin={0,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -517,7 +519,7 @@ package Subregions
             origin={24,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC6(liquid(inclH2O=
-              true,H2O(
+              true, H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -722,10 +724,10 @@ package Subregions
         axis=Axis.x,
         minoritySide=Side.n,
         transSubstrate=false,
-        redeclare FCSys.Connectors.Stoichiometric electrical) "Depletion layer"
+        redeclare FCSys.Connectors.Reaction electrical) "Depletion layer"
         annotation (Placement(transformation(extent={{-10,10},{10,30}})));
 
-      FCSys.Conditions.ByConnector.Inert.InertEfforts substrate(
+      FCSys.Conditions.ByConnector.Direct.DirectEfforts substrate(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
@@ -744,13 +746,13 @@ package Subregions
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={44,20})));
-      replaceable Conditions.ByConnector.Electrochemical.Potential species1(
+      replaceable Conditions.ByConnector.Chemical.Potential species1(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=U.V)
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-      replaceable Conditions.ByConnector.Electrochemical.Current species2(
+      replaceable Conditions.ByConnector.Chemical.Current species2(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
@@ -764,12 +766,12 @@ package Subregions
       FCSys.Conditions.Adapters.ChemicalReaction exchange1(
         n=-2,
         m=U.g/U.mol,
-        redeclare FCSys.Connectors.Stoichiometric electrochem)
+        redeclare FCSys.Connectors.Reaction electrochem)
         annotation (Placement(transformation(extent={{-50,-30},{-30,-10}})));
       FCSys.Conditions.Adapters.ChemicalReaction exchange2(
         n=1,
         m=U.g/U.mol,
-        redeclare FCSys.Connectors.Stoichiometric electrochem)
+        redeclare FCSys.Connectors.Reaction electrochem)
         annotation (Placement(transformation(extent={{-50,-60},{-30,-40}})));
 
     protected
@@ -1330,10 +1332,10 @@ package Subregions
           compact=true));
 
       FCSys.Conditions.Adapters.ChemicalFace chargeLayer(redeclare
-          FCSys.Connectors.Stoichiometric electrical)
+          FCSys.Connectors.Reaction electrical)
         annotation (Placement(transformation(extent={{-6,10},{14,30}})));
-      FCSys.Conditions.ByConnector.Stoichiometric.ReactionEfforts electrochem(
-        redeclare FCSys.Connectors.Stoichiometric electrochem,
+      FCSys.Conditions.ByConnector.Reaction.ReactionEfforts electrochem(
+        redeclare FCSys.Connectors.Reaction electrochem,
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ)
@@ -1434,7 +1436,7 @@ package Subregions
     final parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and
         gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
 
-    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+    Conditions.ByConnector.Amagat.Volume2 volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
       annotation (Placement(transformation(extent={{-102,26},{-82,46}})));
     Connectors.InertNode common
@@ -1736,7 +1738,7 @@ package Subregions
           iconTransformation(extent={{-60,-60},{-40,-40}})));
 
   protected
-    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+    Conditions.ByConnector.Amagat.Volume2 volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
       annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
   equation
@@ -1854,7 +1856,7 @@ package Subregions
           iconTransformation(extent={{-60,-60},{-40,-40}})));
 
   protected
-    Conditions.ByConnector.Amagat.Volume volume(V=V) if n_spec > 0
+    Conditions.ByConnector.Amagat.Volume2 volume(V=V) if n_spec > 0
       "Model to establish a fixed total volume"
       annotation (Placement(transformation(extent={{-84,26},{-64,46}})));
     Connectors.InertNode common
@@ -2149,79 +2151,95 @@ package Subregions
 
   <p>This model should be extended to include the appropriate phases and reactions.</p>
   </html>"),
-      Icon(graphics={Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}),
+      Icon(graphics={
+          Line(
+            points={{-100,0},{-40,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{0,-100}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesY,
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{50,50}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-40,-40},{-16,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-16,40},{-16,-16},{40,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-40,0},{28,0}},
+            color={210,210,210},
+            visible=inclFacesX,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,28},{0,-40}},
+            color={210,210,210},
+            visible=inclFacesY,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{28,0},{100,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,100},{0,28}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesY,
+            smooth=Smooth.None),
+          Line(
+            points={{-12,-12},{40,40}},
+            color={210,210,210},
+            visible=inclFacesZ,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-40,16},{16,16},{16,-40}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-50,-50},{-12,-12}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclFacesZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{16,16}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
 
   end Partial;

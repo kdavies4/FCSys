@@ -17,7 +17,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/Resources/quantities.xls, 2013-6-10
+      // Generated from FCSys/Resources/quantities.xls, 2013-10-11
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C
@@ -27,20 +27,23 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.mol "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
+      parameter Q.Concentration Concentration=1*U.C/U.m^3 "Concentration";
+      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
+        "Rate of concentration";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
+      parameter Q.ConductivityElectrical ConductivityElectrical=1*U.S
+        "Electrical conductivity";
       parameter Q.Current Current=1*U.A "Current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentAreicAbsolute CurrentAreicAbsolute=1*U.A/U.m^2
         "Absolute areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
-      parameter Q.Concentration Concentration=1*U.C/U.m^3 "Concentration";
-      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
-        "Rate of concentration";
       parameter Q.Diffusivity Diffusivity=1*U.m^2/U.s "Diffusivity";
       parameter Q.Energy Energy=1*U.J "Energy";
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
+      parameter Q.ForceSpecific ForceSpecific=1*U.V/U.m "Specific force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
       parameter Q.Length Length=1*U.m "Length";
@@ -52,6 +55,7 @@ package Quantities "Quantities to represent physical properties"
         "Reciprocal of magnetic flux";
       parameter Q.Mass Mass=1*U.kg "Mass";
       parameter Q.MassSpecific MassSpecific=1*U.micro*U.g/U.C "Specific mass";
+      parameter Q.MassVolumic MassVolumic=1*U.kg/U.m^3 "Volumic mass";
       parameter Q.Mobility Mobility=1*U.C*U.s/U.g "Mobility";
       parameter Q.MomentumRotational MomentumRotational=1*U.J*U.s/U.rad
         "Rotational momentum";
@@ -65,7 +69,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Potential Potential=1*U.V "Potential";
       parameter Q.PotentialAbsolute PotentialAbsolute=1*U.K
         "Absolute potential";
-      parameter Q.ForceSpecific ForceSpecific=1*U.V/U.m "Specific force";
       parameter Q.PotentialPerWavenumber PotentialPerWavenumber=1*U.V*U.m/U.rad
         "Potential per wavenumber";
       parameter Q.PotentialRate PotentialRate=1*U.V/U.s "Rate of potential";
@@ -110,92 +113,90 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.TypesPackage;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/Resources/quantities.xls, 2013-7-14
-  type Acceleration = TypeReal (final unit="l/T2");
+  // Generated from FCSys/Resources/quantities.xls, 2013-10-11
+  type Acceleration = TypeReal (final unit="L/T2");
   type Amount = TypeReal (final unit="N", min=0);
   type AmountReciprocal = TypeReal (final unit="1/N", min=0)
     "Reciprocal of amount";
   type Angle = TypeReal (final unit="A");
   type Angle2 = TypeReal (final unit="A2") "Solid angle";
-  type Area = TypeReal (final unit="l2", min=0);
-  type AreaSpecific = TypeReal (final unit="l2/N", min=0) "Specific area";
-  type Capacitance = TypeReal (final unit="N2.T2/(l2.m)", min=0);
-  type ConductanceElectrical = TypeReal (final unit="N2.T/(l2.m)", min=0)
+  type Area = TypeReal (final unit="L2", min=0);
+  type AreaSpecific = TypeReal (final unit="L2/N", min=0) "Specific area";
+  type Capacitance = TypeReal (final unit="N2.T2/(L2.M)", min=0);
+  type Concentration = TypeReal (final unit="N/L3", min=0);
+  type ConcentrationRate = TypeReal (final unit="N/(L3.T)")
+    "Rate of concentration";
+  type ConductanceElectrical = TypeReal (final unit="N2.T/(L2.M)", min=0)
     "Electrical conductance";
-  type ConductivityElectrical = TypeReal (final unit="N2.T/(l3.m)", min=0)
+  type ConductivityElectrical = TypeReal (final unit="N2.T/(L3.M)", min=0)
     "Electrical conductivity";
   type Current = TypeReal (final unit="N/T");
-  type CurrentAreic = TypeReal (final unit="N/(l2.T)") "Areic current";
-  type CurrentAreicAbsolute = TypeReal (final unit="N/(l2.T)", min=0)
+  type CurrentAreic = TypeReal (final unit="N/(L2.T)") "Areic current";
+  type CurrentAreicAbsolute = TypeReal (final unit="N/(L2.T)", min=0)
     "Absolute areic current";
   type CurrentRate = TypeReal (final unit="N/T2") "Rate of current";
-  type Concentration = TypeReal (final unit="N/l3", min=0);
-  type ConcentrationRate = TypeReal (final unit="N/(l3.T)")
-    "Rate of concentration";
-  type Diffusivity = TypeReal (final unit="l2/T", min=0);
-  type Energy = TypeReal (final unit="l2.m/T2");
-  type Fluidity = TypeReal (final unit="l.T/m", min=0);
-  type Force = TypeReal (final unit="l.m/T2");
+  type Diffusivity = TypeReal (final unit="L2/T", min=0);
+  type Energy = TypeReal (final unit="L2.M/T2");
+  type Fluidity = TypeReal (final unit="L.T/M", min=0);
+  type Force = TypeReal (final unit="L.M/T2");
+  type ForceSpecific = TypeReal (final unit="L.M/(N.T2)") "Specific force";
   type Frequency = TypeReal (final unit="A/T");
-  type Inductance = TypeReal (final unit="l2.m/N2", min=0);
-  type Length = TypeReal (final unit="l", min=0);
-  type LengthSpecific = TypeReal (final unit="l/N", min=0) "Specific length";
-  type MagneticFlux = TypeReal (final unit="l2.m/(A.N.T)") "Magnetic flux";
-  type MagneticFluxAreic = TypeReal (final unit="m/(A.N.T)")
+  type Inductance = TypeReal (final unit="L2.M/N2", min=0);
+  type Length = TypeReal (final unit="L", min=0);
+  type LengthSpecific = TypeReal (final unit="L/N", min=0) "Specific length";
+  type MagneticFlux = TypeReal (final unit="L2.M/(A.N.T)") "Magnetic flux";
+  type MagneticFluxAreic = TypeReal (final unit="M/(A.N.T)")
     "Areic magnetic flux";
-  type MagneticFluxReciprocal = TypeReal (final unit="A.N.T/(l2.m)")
+  type MagneticFluxReciprocal = TypeReal (final unit="A.N.T/(L2.M)")
     "Reciprocal of magnetic flux";
-  type Mass = TypeReal (final unit="m", min=0);
-  type MassSpecific = TypeReal (final unit="m/N", min=0) "Specific mass";
-  type MassVolumic = TypeReal (final unit="m/l3", min=0) "Volumic mass";
-  type Mobility = TypeReal (final unit="N.T/m", min=0);
-  type MomentumRotational = TypeReal (final unit="l2.m/(A.T)")
+  type Mass = TypeReal (final unit="M", min=0);
+  type MassSpecific = TypeReal (final unit="M/N", min=0) "Specific mass";
+  type MassVolumic = TypeReal (final unit="M/L3", min=0) "Volumic mass";
+  type Mobility = TypeReal (final unit="N.T/M", min=0);
+  type MomentumRotational = TypeReal (final unit="L2.M/(A.T)")
     "Rotational momentum";
-  type MomentumTranslationalSpecific = TypeReal (final unit="l.m/(N.T)")
-    "Specific translational momentum";
   type Number = TypeReal (final unit="1");
   type NumberAbsolute = TypeReal (final unit="1", min=0) "Absolute number";
-  type Permeability = TypeReal (final unit="l.m/N2", min=0);
-  type Permittivity = TypeReal (final unit="N2.T2/(l3.m)", min=0);
-  type PermittivityReciprocal = TypeReal (final unit="l3.m/(N2.T2)", min=0)
+  type Permeability = TypeReal (final unit="L.M/N2", min=0);
+  type Permittivity = TypeReal (final unit="N2.T2/(L3.M)", min=0);
+  type PermittivityReciprocal = TypeReal (final unit="L3.M/(N2.T2)", min=0)
     "Reciprocal of permittivity";
-  type Potential = TypeReal (final unit="l2.m/(N.T2)");
-  type PotentialAbsolute = TypeReal (final unit="l2.m/(N.T2)", min=0)
+  type Potential = TypeReal (final unit="L2.M/(N.T2)");
+  type PotentialAbsolute = TypeReal (final unit="L2.M/(N.T2)", min=0)
     "Absolute potential";
-  type ForceSpecific = TypeReal (final unit="l.m/(N.T2)") "Specific force";
-  type PotentialPerWavenumber = TypeReal (final unit="l3.m/(A.N.T2)")
+  type PotentialPerWavenumber = TypeReal (final unit="L3.M/(A.N.T2)")
     "Potential per wavenumber";
-  type PotentialRate = TypeReal (final unit="l2.m/(N.T3)") "Rate of potential";
-  type Power = TypeReal (final unit="l2.m/T3");
-  type PowerArea = TypeReal (final unit="l4.m/T3") "Power times area";
-  type PowerAreic = TypeReal (final unit="m/T3") "Areic power";
-  type PowerAreicPerPotential4 = TypeReal (final unit="m.T5/l8")
+  type PotentialRate = TypeReal (final unit="L2.M/(N.T3)") "Rate of potential";
+  type Power = TypeReal (final unit="L2.M/T3");
+  type PowerArea = TypeReal (final unit="L4.M/T3") "Power times area";
+  type PowerAreic = TypeReal (final unit="M/T3") "Areic power";
+  type PowerAreicPerPotential4 = TypeReal (final unit="M.T5/L8")
     "Areic power per 4th power of potential";
-  type PowerRadiant = TypeReal (final unit="l2.m/(A2.T3)") "Radiant power";
-  type Pressure = TypeReal (final unit="m/(l.T2)");
-  type PressureAbsolute = TypeReal (final unit="m/(l.T2)", min=0)
+  type PowerRadiant = TypeReal (final unit="L2.M/(A2.T3)") "Radiant power";
+  type Pressure = TypeReal (final unit="M/(L.T2)");
+  type PressureAbsolute = TypeReal (final unit="M/(L.T2)", min=0)
     "Absolute pressure";
-  type PressureRate = TypeReal (final unit="m/(l.T3)") "Rate of pressure";
-  type PressureReciprocal = TypeReal (final unit="l.T2/m", min=0)
+  type PressureRate = TypeReal (final unit="M/(L.T3)") "Rate of pressure";
+  type PressureReciprocal = TypeReal (final unit="L.T2/M", min=0)
     "Reciprocal of pressure";
   type ResistanceElectrical = TypeReal (final unit="L2.M/(N2.T)", min=0)
     "Electrical resistance";
-  type Resistivity = TypeReal (final unit="l.T/N", min=0);
-  type ResistivityMaterial = TypeReal (final unit="T/l2", min=0)
+  type Resistivity = TypeReal (final unit="L.T/N", min=0);
+  type ResistivityMaterial = TypeReal (final unit="T/L2", min=0)
     "Material resistivity";
   type Time = TypeReal (final unit="T");
   type TimeAbsolute = TypeReal (final unit="T", min=0) "Absolute time";
-  type TimeLineic = TypeReal (final unit="T/l") "Lineic time";
-  type Velocity = TypeReal (final unit="l/T");
-  type Velocity2 = TypeReal (final unit="l2/T2") "Squared velocity";
-  type Volume = TypeReal (final unit="l3", min=0);
-  type VolumeRate = TypeReal (final unit="l3/T") "Rate of volume";
-  type VolumeSpecific = TypeReal (final unit="l3/N") "Specific volume";
-  type VolumeSpecificAbsolute = TypeReal (final unit="l3/N", min=0)
+  type TimeLineic = TypeReal (final unit="T/L") "Lineic time";
+  type Velocity = TypeReal (final unit="L/T");
+  type Velocity2 = TypeReal (final unit="L2/T2") "Squared velocity";
+  type Volume = TypeReal (final unit="L3", min=0);
+  type VolumeRate = TypeReal (final unit="L3/T") "Rate of volume";
+  type VolumeSpecific = TypeReal (final unit="L3/N") "Specific volume";
+  type VolumeSpecificAbsolute = TypeReal (final unit="L3/N", min=0)
     "Absolute specific volume";
-  type VolumeSpecificRate = TypeReal (final unit="l3/(N.T)")
+  type VolumeSpecificRate = TypeReal (final unit="L3/(N.T)")
     "Rate of specific volume";
-  type Wavenumber = TypeReal (final unit="A/l");
+  type Wavenumber = TypeReal (final unit="A/L");
 
   // -------- end from FCSys/Resources/quantities.xls
 
@@ -214,7 +215,7 @@ package Quantities "Quantities to represent physical properties"
   type Conductance = Current (displayUnit="W/K") "Conductance";
   annotation (Documentation(info="<html><p>In this package the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
   dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are
-  angle (A), length (l), mass (m), particle number (N), and time (T).<sup><a href=\"#fn2\" id=\"ref1\">2</a></sup>  These
+  angle (A), length (L), mass (M), particle number (N), and time (T).  These
   are combined according to the rules established for unit strings
   [<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>, p. 210].  In
   <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered to be derived dimensions
@@ -240,8 +241,6 @@ package Quantities "Quantities to represent physical properties"
     <small>
     <p id=\"fn1\">1. This misnomer is necessary because <code>Real</code> variables do not have a <code>dimension</code>
     attribute.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
-    <p id=\"fn2\">2. Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized
-    in Dymola 7.4.<a href=\"#ref2\" title=\"Jump back to footnote 2 in the text.\">&#8629;</a></p>
     </small>
 
   <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

@@ -1,7 +1,7 @@
 within FCSys;
 package Phases "Mixtures of species"
   extends Modelica.Icons.Package;
-  // **Use __Dymola_label for incl and species tags
+
   model Gas "Gas phase"
     import Modelica.Math.BooleanVectors.countTrue;
     extends Partial(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
@@ -147,8 +147,8 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{90,-40},{110,-20}}),
           iconTransformation(extent={{80,-60},{100,-80}})));
-    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
-      inclORR "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
+      "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-70,50},{-50,70}}), iconTransformation(extent
             ={{50,-94},{70,-74}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
@@ -168,13 +168,13 @@ package Phases "Mixtures of species"
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{90,-64},{70,-44}})));
-    Conditions.Adapters.ChemicalReaction HOR(
+    Conditions.Adapters.ChemicalReaction stoichHO(
       final n_trans=n_trans,
       n=-1,
       final m=H2.Data.m) if inclHOR
       "Adapter for the contribution of H2 to the hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-81,30},{-61,50}})));
-    Conditions.Adapters.ChemicalReaction ORR[2](
+    Conditions.Adapters.ChemicalReaction stoichOR[2](
       n={-1,2},
       final m={O2.Data.m,H2O.Data.m},
       each final n_trans=n_trans) if inclORR
@@ -200,29 +200,29 @@ package Phases "Mixtures of species"
     // Reactions
     // ---------
     // HOR
-    connect(H2.chemical, HOR.chemical) annotation (Line(
+    connect(H2.chemical, stoichHO.chemical) annotation (Line(
         points={{-75,8.8},{-75,40}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(HOR.reaction, chemical) annotation (Line(
+    connect(stoichHO.reaction, chemical) annotation (Line(
         points={{-67,40},{-60,40},{-60,60}},
         color={255,195,38},
         smooth=Smooth.None));
 
     // ORR
-    connect(O2.chemical, ORR[1].chemical) annotation (Line(
+    connect(O2.chemical, stoichOR[1].chemical) annotation (Line(
         points={{45,8.8},{45,40},{-45,40}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(H2O.chemical, ORR[2].chemical) annotation (Line(
+    connect(H2O.chemical, stoichOR[2].chemical) annotation (Line(
         points={{-35,8.8},{-35,40},{-45,40}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(ORR[1].reaction, chemical) annotation (Line(
+    connect(stoichOR[1].reaction, chemical) annotation (Line(
         points={{-53,40},{-60,40},{-60,60}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(ORR[2].reaction, chemical) annotation (Line(
+    connect(stoichOR[2].reaction, chemical) annotation (Line(
         points={{-53,40},{-60,40},{-60,60}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -539,12 +539,12 @@ package Phases "Mixtures of species"
     Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
       annotation (Placement(transformation(extent={{60,-64},{80,-44}}),
           iconTransformation(extent={{-60,40},{-40,60}})));
-    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
-      inclORR "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
+      "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-10,70},{10,90}}), iconTransformation(extent=
               {{50,-94},{70,-74}})));
 
-    Conditions.Adapters.FaceReaction HOR(
+    Conditions.Adapters.FaceReaction layerHO(
       final axis=Axis.x,
       final side=Side.n,
       final A=A[Axis.x],
@@ -554,7 +554,7 @@ package Phases "Mixtures of species"
       "Adapter for the contribution of e- to the hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
 
-    Conditions.Adapters.FaceReaction ORR(
+    Conditions.Adapters.FaceReaction layerOR(
       final axis=Axis.x,
       final side=Side.p,
       final A=A[Axis.x],
@@ -605,12 +605,12 @@ package Phases "Mixtures of species"
         color={47,107,251},
         smooth=Smooth.None));
     // HOR
-    connect(HOR.face, xNegative.'e-') annotation (Line(
+    connect(layerHO.face, xNegative.'e-') annotation (Line(
         points={{-64,60},{-70,60},{-70,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
     // ORR
-    connect(ORR.face, xPositive.'e-') annotation (Line(
+    connect(layerOR.face, xPositive.'e-') annotation (Line(
         points={{64,60},{70,60},{70,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -714,12 +714,12 @@ package Phases "Mixtures of species"
         points={{20,6.10623e-16},{8,-12},{-58,-12}},
         color={127,127,127},
         smooth=Smooth.None));
-    connect(HOR.reaction, reaction.reaction) annotation (Line(
+    connect(layerHO.reaction, reaction.reaction) annotation (Line(
         points={{-56,60},{-14,60}},
         color={255,195,38},
         smooth=Smooth.None));
 
-    connect(ORR.reaction, reaction.reaction) annotation (Line(
+    connect(layerOR.reaction, reaction.reaction) annotation (Line(
         points={{56,60},{-14,60}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -779,7 +779,6 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_faces) if
       'inclSO3-' constrainedby FCSys.Species.Isochoric(
       n_faces=n_faces,
-      V=V,
       n_intra=1,
       k_intra={k_PEMH2O},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -807,7 +806,6 @@ package Phases "Mixtures of species"
       'inclH+' and not (inclHOR or inclORR) constrainedby
       FCSys.Species.Compressible(
       n_faces=n_faces,
-      V=V,
       n_intra=1,
       k_intra={k_EOD},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -834,7 +832,6 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_faces) if inclH2O
       constrainedby FCSys.Species.Compressible(
       n_faces=n_faces,
-      V=V,
       n_intra=2,
       k_intra={k_EOD,k_PEMH2O},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
@@ -890,14 +887,14 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{80,-76},{100,-56}}),
           iconTransformation(extent={{-60,40},{-40,60}})));
 
-    Connectors.Stoichiometric chemical(final n_trans=n_trans) if inclHOR or
-      inclORR "Connector for an electrochemical reaction" annotation (Placement(
+    Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
+      "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{10,70},{30,90}}), iconTransformation(extent={
               {50,-94},{70,-74}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
           transformation(extent={{-19,70},{1,90}}), iconTransformation(extent={
               {20,-94},{40,-74}})));
-    Conditions.Adapters.FaceReaction HOR(
+    Conditions.Adapters.FaceReaction layerHO(
       final axis=Axis.x,
       final side=Side.p,
       final A=A[Axis.x],
@@ -907,7 +904,7 @@ package Phases "Mixtures of species"
       "Charge layer or adapter for the contribution of H+ to the hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{90,50},{70,70}})));
 
-    Conditions.Adapters.FaceReaction ORR(
+    Conditions.Adapters.FaceReaction layerOR(
       final axis=Axis.x,
       final side=Side.n,
       final A=A[Axis.x],
@@ -944,12 +941,12 @@ package Phases "Mixtures of species"
     // Reactions
     // ---------
     // HOR
-    connect(HOR.face, xPositive.'H+') annotation (Line(
+    connect(layerHO.face, xPositive.'H+') annotation (Line(
         points={{84,60},{90,60},{90,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
     // ORR
-    connect(ORR.face, xNegative.'H+') annotation (Line(
+    connect(layerOR.face, xNegative.'H+') annotation (Line(
         points={{-84,60},{-90,60},{-90,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -1139,12 +1136,12 @@ package Phases "Mixtures of species"
         color={38,196,52},
         smooth=Smooth.None));
     // Reactions
-    connect(ORR.reaction, chemical) annotation (Line(
+    connect(layerOR.reaction, chemical) annotation (Line(
         points={{-76,60},{20,60},{20,80}},
         color={255,195,38},
         smooth=Smooth.None));
 
-    connect(HOR.reaction, chemical) annotation (Line(
+    connect(layerHO.reaction, chemical) annotation (Line(
         points={{76,60},{20,60},{20,80}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -1227,6 +1224,10 @@ package Phases "Mixtures of species"
           transformation(extent={{-19,50},{1,70}}), iconTransformation(extent={
               {20,-94},{40,-74}})));
 
+  protected
+    Conditions.Adapters.AmagatDalton DA if n_spec > 0
+      "Adapter between additivity of pressure and additivity of volume"
+      annotation (Placement(transformation(extent={{30,-38},{10,-18}})));
   equation
     // Inert exchange
     connect(H2O.inter, inter) annotation (Line(
@@ -1276,8 +1277,12 @@ package Phases "Mixtures of species"
         points={{6.10623e-16,6.10623e-16},{-20,-20}},
         color={127,127,127},
         smooth=Smooth.None));
-    connect(amagat, H2O.amagat) annotation (Line(
-        points={{40,-28},{3,-28},{3,-9.4}},
+    connect(DA.amagat, amagat) annotation (Line(
+        points={{24,-28},{40,-28}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(DA.dalton, H2O.dalton) annotation (Line(
+        points={{16,-28},{3,-28},{3,-9.4}},
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
@@ -1290,20 +1295,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics));
   end Liquid;
 
-
-  annotation (Documentation(info="
-<html><p>The graphite, ionomer, and
-liquid phases can only be used with a compressible phase (gas).</p>
-
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
 protected
   partial model Partial "Base model for a phase"
     import Modelica.Math.BooleanVectors.index;
@@ -1350,8 +1341,8 @@ protected
     // Note:  These must be public in Dymola 7.4, so HideResult is used.
 
   protected
-    final inner parameter Q.Length Lprime[Axis]=k_DT ./ L if n_spec > 0
-      "**dimension, **Effective cross-sectional area per length **rename";
+    final inner parameter Q.Area kA[Axis]=k_DT .* A if n_spec > 0
+      "Effective cross-sectional area";
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage="This model should be used within a subregion model.
@@ -1449,4 +1440,17 @@ protected
             lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
+  annotation (Documentation(info="
+<html><p>The graphite, ionomer, and
+liquid phases can only be used with a compressible phase (gas).</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Phases;

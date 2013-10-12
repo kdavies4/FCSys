@@ -270,7 +270,7 @@ package WorkInProgress "Incomplete classes under development"
       choicesAllMatching=true,
       __Dymola_choicesFromPackage=true);
 
-    FCSys.Connectors.Stoichiometric reaction(final n_trans=n_trans)
+    FCSys.Connectors.Reaction reaction(final n_trans=n_trans)
       "Connector for an electrochemical reaction" annotation (
         __Dymola_choicesAllMatching=true, Placement(transformation(extent={{30,
               -10},{50,10}}), iconTransformation(extent={{30,-10},{50,10}})));
@@ -375,11 +375,11 @@ package WorkInProgress "Incomplete classes under development"
     parameter Q.MassSpecific m[n_spec] "Specific masses" annotation (Dialog(
           group="Material properties", __Dymola_label="<html><i>m</i></html>"));
 
-    Connectors.Electrochemical chemical[n_spec](each final n_trans=n_trans) if
-      n_spec > 0 "Connector for species in a chemical reaction" annotation (
-        Placement(transformation(extent={{-30,-10},{-10,10}}),
-          iconTransformation(extent={{-50,-10},{-30,10}})));
-    Connectors.Stoichiometric reaction(final n_trans=n_trans) if n_spec > 0
+    Connectors.Chemical chemical[n_spec](each final n_trans=n_trans) if n_spec
+       > 0 "Connector for species in a chemical reaction" annotation (Placement(
+          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
+            extent={{-50,-10},{-30,10}})));
+    Connectors.Reaction reaction(final n_trans=n_trans) if n_spec > 0
       "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
               {{30,-10},{50,10}})));

@@ -3667,6 +3667,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     end FPToFPVoltage;
   end Examples;
   extends Modelica.Icons.Package;
+  extends FCSys.Icons.PackageUnderConstruction;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
 
   package AnFPs "Anode flow plates"
@@ -3734,9 +3735,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       // **temp excluded  H2O liq
       // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
       // regarding the settings of k_DT for each phase.
-
-      // TODO:  Find a better solution for liquid.H2O.V_IC than
-      // Modelica.Constants.eps and apply it to other layers too.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
         "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",
@@ -3823,108 +3821,127 @@ text layer of this model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-76.648,66.211},{-119.073,52.0689}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={135,135,135},
-                  origin={111.017,77.3801},
-                  pattern=LinePattern.None,
-                  lineColor={95,95,95}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={135,135,135}),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Polygon(
-                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid),Polygon(
-                  points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{
-                16,24},{16,28},{6,18},{6,24},{16,34},{16,48}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{
-                16,4},{16,8},{6,-2},{6,4},{16,14},{16,28}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{
-                16,-16},{16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,
-                -48},{16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Line(
-                  points={{10,0},{100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{-20,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={240,0,0},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Ellipse(
-                  extent={{-4,52},{4,48}},
-                  lineColor={135,135,135},
-                  fillColor={240,0,0},
-                  visible=inclFacesY,
-                  fillPattern=FillPattern.Sphere),Line(
-                  points={{0,100},{0,50}},
-                  color={240,0,0},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-76.648,66.211},{-119.073,52.0689}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={135,135,135},
+              origin={111.017,77.3801},
+              pattern=LinePattern.None,
+              lineColor={95,95,95}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={135,135,135}),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Polygon(
+              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+              lineColor={0,0,0},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{16,
+                  24},{16,28},{6,18},{6,24},{16,34},{16,48}},
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{16,4},
+                  {16,8},{6,-2},{6,4},{16,14},{16,28}},
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{16,-16},
+                  {16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,-48},
+                  {16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Line(
+              points={{10,0},{100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={127,127,127},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={240,0,0},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Ellipse(
+              extent={{-4,52},{4,48}},
+              lineColor={135,135,135},
+              fillColor={240,0,0},
+              visible=inclFacesY,
+              fillPattern=FillPattern.Sphere),
+            Line(
+              points={{0,100},{0,50}},
+              color={240,0,0},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end AnFP;
 
@@ -4024,75 +4041,89 @@ that reference may be outdated.
           Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={42.5001,11.0805}),Rectangle(
-                  extent={{-40,40},{0,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={64,64,64}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={42.5001,11.0805}),
+            Rectangle(
+              extent={{-40,40},{0,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={64,64,64}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end AnGDL;
 
@@ -4368,12 +4399,12 @@ that reference may be outdated.
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
         annotation (Dialog(tab="Initialization",__Dymola_label=
               "<html>&lambda;<sub>IC</sub></html>"));
-
-      // Auxiliary variables (for analysis)
-      output Q.Potential Deltaw[n_y, n_z]=subregions[n_x, :, :].ionomer.HOR.chemicalFace.zw
-           + subregions[1, :, :].graphite.HOR.chemicalFace.zw if environment.analysis
-        "Electrical potential differences along the x axis";
-
+      /*
+  // Auxiliary variables (for analysis)
+  output Q.Potential Deltaw[n_y, n_z]=subregions[n_x, :, :].ionomer.layerHO.chemicalFace.zw
+       + subregions[1, :, :].graphite.layerHO.chemicalFace.zw if environment.analysis
+    "Electrical potential differences along the x axis";
+*/
     protected
       outer Conditions.Environment environment "Environmental conditions";
 
@@ -4411,93 +4442,112 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-22.6085,-62.7355},{-56.551,-79.7156}},
-                  lineColor={64,64,64},
-                  rotation=45,
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={-34.3741,132.347}),Rectangle(
-                  extent={{-105.39,79.1846},{-139.33,70.6991}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  rotation=45,
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={148.513,82.5291}),Polygon(
-                  points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-6,40},{6,-60}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-38,40},{-14,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-14,40},{-6,-60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},
-                {-42,80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,
-                -80},{-42,-80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(points={{0,60},{20,60},{0,
-              40},{-20,40},{0,60}}, lineColor={0,0,0}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,0},{-100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={253,52,56},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={253,52,56},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-22.6085,-62.7355},{-56.551,-79.7156}},
+              lineColor={64,64,64},
+              rotation=45,
+              fillColor={127,127,127},
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={-34.3741,132.347}),
+            Rectangle(
+              extent={{-105.39,79.1846},{-139.33,70.6991}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              rotation=45,
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={148.513,82.5291}),
+            Polygon(
+              points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-6,40},{6,-60}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-38,40},{-14,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-14,40},{-6,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},{-42,
+                  80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,-80},
+                  {-42,-80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(points={{0,60},{20,60},{0,40},{-20,40},{0,60}}, lineColor={
+                  0,0,0}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={253,52,56},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={253,52,56},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -4588,75 +4638,89 @@ the z axis extends across the width of the channel.</p>
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
-                  lineColor={200,200,200},
-                  fillColor={255,255,255},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={95.001,14.864}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  lineColor={200,200,200},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={200,200,200}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={240,0,0},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={127,127,127},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={127,127,127},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={127,127,127},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={127,127,127},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={95.001,14.864}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={200,200,200}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={127,127,127},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={127,127,127},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={127,127,127},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={127,127,127},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
     end PEM;
 
     model DuPontN112 "<html>DuPont<sup>TM</sup> Nafion&reg; N-112</html>"
@@ -4879,9 +4943,11 @@ the z axis extends across the width of the channel.</p>
               "<html>&lambda;<sub>IC</sub></html>"));
 
       // Auxiliary variables (for analysis)
-      output Q.Potential Deltaw[n_y, n_z]=-subregions[n_x, :, :].graphite.ORR.chemicalFace.zw
-           - subregions[1, :, :].ionomer.ORR.chemicalFace.zw if environment.analysis
-        "Electrical potential differences along the x axis";
+      /*
+  output Q.Potential Deltaw[n_y, n_z]=-subregions[n_x, :, :].graphite.layerOR.chemicalFace.zw
+       - subregions[1, :, :].ionomer.layerOR.chemicalFace.zw if environment.analysis
+    "Electrical potential differences along the x axis";
+ */
       /*
   output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never) =
     subregions.gas.O2.N ./ (subregions.gas.N2.N + subregions.gas.O2.N) if 
@@ -4922,93 +4988,112 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
-                  lineColor={64,64,64},
-                  rotation=45,
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={-15.1055,127.699}),Rectangle(
-                  extent={{-105.385,79.1805},{-139.323,70.6948}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  rotation=45,
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  origin={130.507,84.5292}),Polygon(
-                  points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-26,40},{-14,-60}},
-                  lineColor={0,0,0},
-                  fillColor={200,200,200},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-6,40},{18,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
-                  extent={{-14,40},{-6,-60}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},
-                {-42,80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(
-                  points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,
-                -80},{-42,-80},{-42,0},{-20,0}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(points={{0,60},{20,60},{0,
-              40},{-20,40},{0,60}}, lineColor={0,0,0}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-                  lineColor={0,0,0},
-                  fillColor={120,120,120},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,0},{-100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-98}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
+              lineColor={64,64,64},
+              rotation=45,
+              fillColor={127,127,127},
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={-15.1055,127.699}),
+            Rectangle(
+              extent={{-105.385,79.1805},{-139.323,70.6948}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              rotation=45,
+              fillPattern=FillPattern.HorizontalCylinder,
+              origin={130.507,84.5292}),
+            Polygon(
+              points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-26,40},{-14,-60}},
+              lineColor={0,0,0},
+              fillColor={200,200,200},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-6,40},{18,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Rectangle(
+              extent={{-14,40},{-6,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},{-42,
+                  80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,-80},
+                  {-42,-80},{-42,0},{-20,0}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(points={{0,60},{20,60},{0,40},{-20,40},{0,60}}, lineColor={
+                  0,0,0}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+              lineColor={0,0,0},
+              fillColor={120,120,120},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-98}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -5089,8 +5174,8 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.volume,
-                V_IC=1e-9*U.m^3,
+                initMaterial=InitScalar.amount,
+                N_IC=2e-6*U.C,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
@@ -5147,75 +5232,89 @@ that reference may be outdated.
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={52.5001,1.0805}),Rectangle(
-                  extent={{-20,40},{20,-60}},
-                  lineColor={64,64,64},
-                  fillColor={127,127,127},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={127,127,127}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={52.5001,1.0805}),
+            Rectangle(
+              extent={{-20,40},{20,-60}},
+              lineColor={64,64,64},
+              fillColor={127,127,127},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={127,127,127}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end CaGDL;
 
@@ -5570,80 +5669,95 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  visible=not inclFacesY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-76.648,66.211},{-119.073,52.0689}},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={135,135,135},
-                  origin={111.017,77.3801},
-                  pattern=LinePattern.None,
-                  lineColor={95,95,95}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={135,135,135}),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Polygon(
-                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,0},{-100,0}},
-                  color={0,0,240},
-                  visible=inclFacesX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={127,127,127},
-                  visible=inclFacesX,
-                  thickness=0.5),Ellipse(
-                  extent={{-4,52},{4,48}},
-                  lineColor={135,135,135},
-                  fillColor={0,0,240},
-                  visible=inclFacesY,
-                  fillPattern=FillPattern.Sphere),Line(
-                  points={{0,-60},{0,-100}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={0,0,240},
-                  visible=inclFacesY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={0,0,240},
-                  visible=inclFacesZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclFacesY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              visible=not inclFacesY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-76.648,66.211},{-119.073,52.0689}},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={135,135,135},
+              origin={111.017,77.3801},
+              pattern=LinePattern.None,
+              lineColor={95,95,95}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={135,135,135}),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Polygon(
+              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+              lineColor={0,0,0},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={0,0,240},
+              visible=inclFacesX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={127,127,127},
+              visible=inclFacesX,
+              thickness=0.5),
+            Ellipse(
+              extent={{-4,52},{4,48}},
+              lineColor={135,135,135},
+              fillColor={0,0,240},
+              visible=inclFacesY,
+              fillPattern=FillPattern.Sphere),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={0,0,240},
+              visible=inclFacesY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={0,0,240},
+              visible=inclFacesZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclFacesY,
+              lineColor={0,0,0})}));
 
     end CaFP;
 
@@ -5834,14 +5948,14 @@ protected
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-              extent={{-100,120},{100,160}},
-              textString="%name",
-              visible=inclFacesY,
-              lineColor={0,0,0}),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            extent={{-100,120},{100,160}},
+            textString="%name",
+            visible=inclFacesY,
+            lineColor={0,0,0}), Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            visible=not inclFacesY,
+            lineColor={0,0,0})}));
   end Partial;
   annotation (Documentation(info="
 <html>

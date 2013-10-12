@@ -726,6 +726,68 @@ package Characteristics
 
   end O2;
 
+  annotation (Documentation(info="<html>
+  <p>Each species has a subpackage for each material phase in which the species
+  is represented.  The thermodynamic properties are generally different for each phase.</p>
+
+<p>Additional materials may be included as needed.  The thermodynamic data for
+  materials that are condensed at standard conditions is available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+  The thermodynamic data for materials
+  that are gases at standard conditions is available in
+  <a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">Modelica.Media.IdealGases.Common.SingleGasesData</a>
+  (and [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]). Virial coefficients are available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Transport characteristics are available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
+  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"), Icon(graphics={
+        Line(
+          points={{-76,-80},{-62,-30},{-32,40},{4,66},{48,66},{73,45},{62,-8},{
+              48,-50},{38,-80}},
+          color={64,64,64},
+          smooth=Smooth.Bezier),
+        Line(
+          points={{-40,20},{68,20}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-40,20},{-44,88},{-44,88}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{68,20},{86,-58}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{56,-28}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{-74,84},{-74,84}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{56,-28},{70,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{38,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{-94,-16},{-94,-16}},
+          color={175,175,175},
+          smooth=Smooth.None)}));
+
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
     package CharacteristicNASA
@@ -1714,66 +1776,4 @@ temperature difference.</p>
         liquid "Liquid") "Enumeration for material phases";
 
   end BaseClasses;
-  annotation (Documentation(info="<html>
-  <p>Each species has a subpackage for each material phase in which the species
-  is represented.  The thermodynamic properties are generally different for each phase.</p>
-
-<p>Additional materials may be included as needed.  The thermodynamic data for
-  materials that are condensed at standard conditions is available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-  The thermodynamic data for materials
-  that are gases at standard conditions is available in
-  <a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">Modelica.Media.IdealGases.Common.SingleGasesData</a>
-  (and [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]). Virial coefficients are available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Transport characteristics are available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
-
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"), Icon(graphics={
-        Line(
-          points={{-76,-80},{-62,-30},{-32,40},{4,66},{48,66},{73,45},{62,-8},{
-              48,-50},{38,-80}},
-          color={64,64,64},
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-40,20},{68,20}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-40,20},{-44,88},{-44,88}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{68,20},{86,-58}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-60,-28},{56,-28}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-60,-28},{-74,84},{-74,84}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{56,-28},{70,-80}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-76,-80},{38,-80}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-76,-80},{-94,-16},{-94,-16}},
-          color={175,175,175},
-          smooth=Smooth.None)}));
-
 end Characteristics;
