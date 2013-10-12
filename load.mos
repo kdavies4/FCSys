@@ -12,7 +12,6 @@
 Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
 Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
 Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
-Advanced.SimplifySemiLinearCondition = true "Exploit asserts to simplify semiLinear conditions";
 Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
 Advanced.ImprovedPackageConstants = true "Improved code generation for package constants";
 //Advanced.CompileWith64 = 0 "Compile the model as 64-bit; 0 only for dll/server if executable is 64-bit, 1 never, 2 always.";

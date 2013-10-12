@@ -275,26 +275,28 @@ package UsersGuide "User's Guide"
       DocumentationClass=true,
       Documentation(info="<html><p>The following terms appear in this library and are uncommon or unique here:
     <ul>
-      <li><b>configuration</b> &ndash; a species in a certain phase within a subregion</li><br>
+      <li><b>configuration</b> &ndash; (<i>noun</i>) a species in a certain phase within a subregion</li>
 
-      <li><b>dynamic compressibility</b> &ndash; reciprocal of volume, second, or bulk viscosity
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())</li><br>
+      <li><b>dynamic compressibility</b> &ndash; (<i>noun</i>) reciprocal of volume, second, or bulk viscosity
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())</li>
 
-      <li><b>equivalent current</b> &ndash; rate of supply of a reactant required to support the given current 
-      assuming the reactant is entirely consumed (complete utilization)</li><br>
+      <li><b>equivalent current</b> &ndash; (<i>noun</i>) rate of supply of a reactant required to support the given current 
+      assuming the reactant is entirely consumed (complete utilization)</li>
       
-      <li><b>exchange</b> &ndash; transfer of a conserved quantity among configurations within a region</li><br>
+      <li><b>exchange</b> &ndash; (<i>noun</i>) transfer of a conserved quantity among configurations within a region</li>
 
-      <li><b>mass</b> &ndash; adjective that indicates the quotient of the following quantity and its associated mass</li><br>
+      <li><b>Gibbs potential</b> &ndash; (<i>noun</i>) specific Gibbs energy</li>
+      
+      <li><b>mass</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated mass</li>
 
-      <li><b>specific</b> &ndash; adjective that indicates the quotient of the following quantity and its associated amount of material</li><br>
+      <li><b>specific</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated amount of material</li>
 
-      <li><b>thermal independity</b> &ndash; extent to which an exchange of thermal energy between species causes or requires a temperature difference
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())</li><br>
+      <li><b>thermal independity</b> &ndash; (<i>noun</i>) extent to which an exchange of thermal energy between species causes or requires a temperature difference
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())</li>
 
-      <li><b>translational Nusselt number</b> &ndash; correction to Newton's law of viscous shear for the shape of the flow profile</li><br>
+      <li><b>translational Nusselt number</b> &ndash; (<i>noun</i>) correction to Newton's law of viscous shear for the shape of the flow profile</li>
 
-      <li><b>transport</b> &ndash; transfer of a conserved quantity between adjacent subregions</li>
+      <li><b>transport</b> &ndash; (<i>noun</i>) transfer of a conserved quantity between adjacent subregions</li>
     </ul></p>
     </table>
     </html>"));

@@ -1306,11 +1306,7 @@ protected
       "Number of independent couplings with other phases"
       annotation (Dialog(connectorSizing=true),HideResult=n_spec == 0);
 
-    // Geometry
-    parameter Integer n_faces(min=1, max=3) "Number of pairs of faces"
-      annotation (Dialog(group="Geometry",__Dymola_label=
-            "<html><i>n</i><sub>faces</sub></html>"), HideResult=true);
-    // This can't be an outer parameter in Dymola 7.4.
+    // Geometric parameters
     parameter Q.NumberAbsolute k_DT[Axis](
       each min=Modelica.Constants.small,
       each final nominal=1) = {1,1,1} if n_spec > 0
@@ -1321,6 +1317,8 @@ protected
        > 0 "Coupling factor for exchange with other phases" annotation (Dialog(
           group="Geometry", __Dymola_label=
             "<html><i>k</i><sub>inter</sub></html>"));
+    parameter Integer n_faces=1 "Number of pairs of faces";
+    // This cannot be an inner/outer parameter in Dymola 2014.
 
     // Assumptions
     parameter Boolean reduceTrans=false "Same velocity for all species"
@@ -1386,58 +1384,50 @@ protected
 
 
 </html>"),
-      Icon(graphics={
-          Ellipse(
-            extent={{-40,100},{40,20}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{20,-4},{100,-84}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{-100,-4},{-20,-84}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Polygon(
-            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
-                {60,-84}},
-            pattern=LinePattern.None,
-            fillPattern=FillPattern.Sphere,
-            smooth=Smooth.None,
-            fillColor={225,225,225},
-            lineColor={0,0,0}),
-          Line(
-            points={{-60,-84.1},{60,-84.1}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{34.5,80},{94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{-34.5,80},{-94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Icon(graphics={Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+              -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),Line(
+              points={{-60,-84.1},{60,-84.1}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
   annotation (Documentation(info="

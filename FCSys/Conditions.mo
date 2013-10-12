@@ -275,14 +275,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Line(
-              points={{-30,0},{30,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash), Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+                  points={{-30,0},{30,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -366,20 +366,17 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+        Icon(graphics={Line(
+                  points={{0,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end ChemicalFace;
 
     model ChemicalReactionMulti
@@ -437,20 +434,17 @@ package Conditions "Models to specify and measure operating conditions"
     <p>For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
+        Icon(graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,-40}},
+                  lineColor={127,127,127},
+                  textString="%n"),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReactionMulti;
 
@@ -508,20 +502,17 @@ package Conditions "Models to specify and measure operating conditions"
     For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
+        Icon(graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,-40}},
+                  lineColor={127,127,127},
+                  textString="%n"),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReaction;
 
@@ -615,20 +606,17 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{0,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}));
+        Icon(graphics={Line(
+                  points={{0,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{0,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,-10},{0,10}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5)}));
     end FaceReaction;
 
     package MSL
@@ -740,38 +728,31 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,60},{0,-100}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,20},{80,20}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-20},{80,-20}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,60},{80,60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-60},{80,-60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-100},{70,-100}},
-                color={0,127,0},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,60},{0,-100}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,20},{80,20}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-20},{80,-20}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{80,60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-60},{80,-60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-100},{70,-100}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}));
       end Anode;
 
       model Cathode
@@ -877,38 +858,31 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-40},{40,-40},{40,-80},{80,-80}},
             color={0,127,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,60},{0,-100}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,20},{80,20}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-20},{80,-20}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,60},{80,60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-60},{80,-60}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-100},{70,-100}},
-                color={0,127,0},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,60},{0,-100}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,20},{80,20}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-20},{80,-20}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{80,60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-60},{80,-60}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-100},{70,-100}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}));
       end Cathode;
 
       model Conductor
@@ -966,30 +940,25 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,127,0},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,0},{70,0}},
-                color={0,127,0},
-                smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,40},{80,40}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{80,-40}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,0},{70,0}},
+                      color={0,127,0},
+                      smooth=Smooth.None)}), Diagram(graphics));
       end Conductor;
 
       package Phases "Adapters for material phases"
@@ -3692,7 +3661,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             gas(
               H2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3713,7 +3682,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3734,7 +3703,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate),
               N2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3755,7 +3724,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate),
               O2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3776,7 +3745,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3796,7 +3765,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate), 'e-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3818,7 +3787,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ionomer(
               'SO3-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3839,7 +3808,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate),
               'H+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3860,7 +3829,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -3881,7 +3850,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.concentration,
+                    Conditions.ByConnector.Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4667,7 +4636,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             gas(
               H2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4692,7 +4661,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4717,7 +4686,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),
               N2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4742,7 +4711,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),
               O2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4767,7 +4736,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K))),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4791,7 +4760,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)), 'e-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4817,7 +4786,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ionomer(
               'SO3-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4842,7 +4811,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),
               'H+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4867,7 +4836,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -4892,7 +4861,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K))),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.concentration,
+                    Conditions.ByConnector.Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
                     Conditions.ByConnector.Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
@@ -5389,7 +5358,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // -------------
           // Material
           replaceable function materialSpec = Material.current constrainedby
-            Material.PartialCondition "Quantity" annotation (
+            Material.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             choicesAllMatching=true,
             Dialog(tab="Specification", group="Material"));
@@ -5413,8 +5382,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // Normal translational
           replaceable function normalSpec = Translational.force constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "Quantity" annotation (
+            Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Normal translational"),
             Placement(transformation(extent={{-52,18},{-32,38}})));
@@ -5438,9 +5406,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // 1st transverse
           replaceable function followingSpec = Translational.force
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "Quantity" annotation (
+            constrainedby Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="First transverse"),
             Placement(transformation(extent={{-24,4},{-4,24}})));
@@ -5465,9 +5431,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // 2nd transverse
           replaceable function precedingSpec = Translational.force
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "Quantity" annotation (
+            constrainedby Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Second transverse"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -5493,8 +5457,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           //
           // Thermal
           replaceable function thermalSpec = Thermal.heatRate constrainedby
-            Conditions.ByConnector.Face.Pair.Thermal.PartialCondition
-            "Quantity" annotation (
+            Thermal.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -5520,41 +5483,35 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // Measurement
           // -----------
           // Material
-          replaceable function materialMeas = Material.concentration
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Material.PartialCondition
-            "Material quantity" annotation (__Dymola_choicesFromPackage=true,
-              Dialog(tab="Measurement"));
+          replaceable function materialMeas = Material.pressure constrainedby
+            Material.Partial "Material quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Normal translational
           replaceable function normalMeas = Translational.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "Normal translational quantity" annotation (
-              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+            constrainedby Translational.Partial "Normal translational quantity"
+            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                  "Measurement"));
 
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "First transverse quantity" annotation (__Dymola_choicesFromPackage
-              =true, Dialog(tab="Measurement"));
+            constrainedby Translational.Partial "First transverse quantity"
+            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                  "Measurement"));
 
           // 2nd transverse
           replaceable function precedingMeas = Translational.velocity
-            constrainedby
-            Conditions.ByConnector.Face.Pair.Translational.PartialCondition
-            "Second transverse quantity" annotation (
-              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+            constrainedby Translational.Partial "Second transverse quantity"
+            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
+                  "Measurement"));
 
           // Thermal
           replaceable function thermalMeas = Thermal.temperature constrainedby
-            Conditions.ByConnector.Face.Pair.Thermal.PartialCondition
-            "Thermal quantity" annotation (__Dymola_choicesFromPackage=true,
-              Dialog(tab="Measurement"));
+            Thermal.Partial "Thermal quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Aliases
-          Q.Concentration Deltarho "Difference in concentration";
+          Q.Pressure Deltap "Difference in pressure";
           Q.Velocity Deltaphi[Orient] "Difference in velocity";
           Q.Temperature DeltaT "Difference in temperature";
 
@@ -5628,7 +5585,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Outputs
           Connectors.RealOutputInternal _u_material=materialSpec(
-                      Deltarho,
+                      Deltap,
                       negative.Ndot,
                       Deltaphi,
                       negative.mPhidot,
@@ -5640,7 +5597,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={-80,6})));
           Connectors.RealOutputInternal _u_normal=normalSpec(
-                      Deltarho,
+                      Deltap,
                       negative.Ndot,
                       Deltaphi,
                       negative.mPhidot,
@@ -5653,7 +5610,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={-40,6})));
           Connectors.RealOutputInternal _u_following=followingSpec(
-                      Deltarho,
+                      Deltap,
                       negative.Ndot,
                       Deltaphi,
                       negative.mPhidot,
@@ -5666,7 +5623,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={0,6})));
           Connectors.RealOutputInternal _u_preceding=precedingSpec(
-                      Deltarho,
+                      Deltap,
                       negative.Ndot,
                       Deltaphi,
                       negative.mPhidot,
@@ -5679,7 +5636,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={40,6})));
           Connectors.RealOutputInternal _u_thermal=thermalSpec(
-                      Deltarho,
+                      Deltap,
                       negative.Ndot,
                       Deltaphi,
                       negative.mPhidot,
@@ -5692,7 +5649,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={80,6})));
 
           Sources.RealExpression materialOut(y=materialMeas(
-                        Deltarho,
+                        Deltap,
                         negative.Ndot,
                         Deltaphi,
                         negative.mPhidot,
@@ -5703,7 +5660,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={-80,-70})));
           Sources.RealExpression normalOut(y=normalMeas(
-                        Deltarho,
+                        Deltap,
                         negative.Ndot,
                         Deltaphi,
                         negative.mPhidot,
@@ -5715,7 +5672,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={-40,-70})));
           Sources.RealExpression precedingOut(y=precedingMeas(
-                        Deltarho,
+                        Deltap,
                         negative.Ndot,
                         Deltaphi,
                         negative.mPhidot,
@@ -5728,7 +5685,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={40,-70})));
           Sources.RealExpression followingOut(y=followingMeas(
-                        Deltarho,
+                        Deltap,
                         negative.Ndot,
                         Deltaphi,
                         negative.mPhidot,
@@ -5741,7 +5698,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={0,-70})));
           Sources.RealExpression thermalOut(y=thermalMeas(
-                        Deltarho,
+                        Deltap,
                         negative.Ndot,
                         Deltaphi,
                         negative.mPhidot,
@@ -5753,7 +5710,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={80,-70})));
         equation
           // Differences in efforts
-          Deltarho = positive.rho - negative.rho;
+          Deltap = positive.p - negative.p;
           Deltaphi = positive.phi - negative.phi;
           DeltaT = positive.T - negative.T;
 
@@ -5873,7 +5830,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with difference in efforts specified by default</html>"
           extends FaceFlows(
             redeclare replaceable function materialSpec =
-                Conditions.ByConnector.Face.Pair.Material.concentration,
+                Conditions.ByConnector.Face.Pair.Material.pressure,
             redeclare replaceable function normalSpec =
                 Conditions.ByConnector.Face.Pair.Translational.velocity,
             redeclare replaceable function followingSpec =
@@ -5900,29 +5857,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         package Material "Material conditions"
           extends Modelica.Icons.Package;
 
-          function concentration "Difference in concentration"
-            extends PartialCondition;
+          function pressure "Difference in pressure"
+            extends Partial;
 
           algorithm
-            x := Deltarho;
+            x := Deltap;
             annotation (Inline=true);
-          end concentration;
+          end pressure;
 
           function current "Diffusion current"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := Ndot;
             annotation (Inline=true);
           end current;
 
-          partial function PartialCondition
-            "Partial function to select a material quantity"
+          partial function Partial
+            "Template of a function to select a material quantity"
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration Deltarho
-              "<html>Difference in concentration (<i>&Delta;&rho;</i>)</html>";
+            input Q.Pressure Deltap
+              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -5943,33 +5900,34 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Material;
 
         package Translational "Translational conditions"
           extends Modelica.Icons.Package;
 
           function velocity "Difference in velocity"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := Deltaphi[orient];
           end velocity;
 
           function force "Non-equilibrium force"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := mPhidot[orient];
           end force;
 
-          partial function PartialCondition
-            "Partial function to select a translational quantity"
+          partial function Partial
+            "Template of a function to select a translational quantity"
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration Deltarho
-              "<html>Difference in concentration (<i>&Delta;&rho;</i>)</html>";
+            input Q.Pressure Deltap
+              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
+
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -5993,33 +5951,33 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Translational;
 
         package Thermal "Thermal conditions"
           extends Modelica.Icons.Package;
 
           function temperature "Difference in temperature"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := DeltaT;
           end temperature;
 
           function heatRate "Rate of thermal conduction"
-            extends PartialCondition;
+            extends Partial;
 
           algorithm
             x := Qdot;
           end heatRate;
 
-          partial function PartialCondition
-            "Partial function to select a thermal quantity"
+          partial function Partial
+            "Template of a function to select a thermal quantity"
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration Deltarho
-              "<html>Difference in concentration (<i>&Delta;&rho;</i>)</html>";
+            input Q.Pressure Deltap
+              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -6040,7 +5998,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
-          end PartialCondition;
+          end Partial;
         end Thermal;
 
       end Pair;
@@ -6261,7 +6219,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={4,80})));
           Connectors.RealOutputInternal _u_normal=normalSpec(
-                      face.rho,
+                      face.p,
                       face.Ndot,
                       face.phi,
                       face.mPhidot,
@@ -6274,7 +6232,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={4,40})));
           Connectors.RealOutputInternal _u_following=followingSpec(
-                      face.rho,
+                      face.p,
                       face.Ndot,
                       face.phi,
                       face.mPhidot,
@@ -6287,7 +6245,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={4,0})));
           Connectors.RealOutputInternal _u_preceding=precedingSpec(
-                      face.rho,
+                      face.p,
                       face.Ndot,
                       face.phi,
                       face.mPhidot,
@@ -6308,7 +6266,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={4,-80})));
         public
           Sources.RealExpression materialOut(y=materialMeas(
-                        face.rho,
+                        face.p,
                         face.Ndot,
                         face.phi,
                         face.mPhidot,
@@ -6316,7 +6274,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.Qdot)) "Generate the material output"
             annotation (Placement(transformation(extent={{40,70},{60,90}})));
           Sources.RealExpression normalOut(y=normalMeas(
-                        face.rho,
+                        face.p,
                         face.Ndot,
                         face.phi,
                         face.mPhidot,
@@ -6325,7 +6283,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         orient=Orient.normal)) "Generate the normal output"
             annotation (Placement(transformation(extent={{40,30},{60,50}})));
           Sources.RealExpression precedingOut(y=precedingMeas(
-                        face.rho,
+                        face.p,
                         face.Ndot,
                         face.phi,
                         face.mPhidot,
@@ -6335,7 +6293,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Generate the 2nd transverse output"
             annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
           Sources.RealExpression followingOut(y=followingMeas(
-                        face.rho,
+                        face.p,
                         face.Ndot,
                         face.phi,
                         face.mPhidot,
@@ -6345,7 +6303,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Generate the 1st transverse output"
             annotation (Placement(transformation(extent={{40,-10},{60,10}})));
           Sources.RealExpression thermalOut(y=thermalMeas(
-                        face.rho,
+                        face.p,
                         face.Ndot,
                         face.phi,
                         face.mPhidot,
@@ -6354,14 +6312,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(extent={{40,-90},{60,-70}})));
         equation
           _u_material = materialSpec(
-                    face.rho,
+                    face.p,
                     face.Ndot,
                     face.phi,
                     face.mPhidot,
                     face.T,
                     face.Qdot);
           _u_thermal = thermalSpec(
-                    face.rho,
+                    face.p,
                     face.Ndot,
                     face.phi,
                     face.mPhidot,
@@ -6496,7 +6454,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with efforts specified by default</html>"
           extends FaceFlows(
             redeclare replaceable function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.concentration,
+                Conditions.ByConnector.Face.Single.Material.pressure,
             redeclare replaceable function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
 
@@ -6525,22 +6483,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // because y is set directly and cannot be undone at instantiation.
 
           // See note in ElectrochemEfforts.
-          annotation (defaultComponentName="face");
+          annotation (defaultComponentName="face", Diagram(coordinateSystem(
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+                graphics));
 
         end FaceEfforts;
 
         package Material "Material conditions"
           extends Modelica.Icons.Package;
 
-          function concentration "Concentration"
-            extends Partial;
-          algorithm
-            x := rho;
-
-            annotation (Inline=true);
-          end concentration;
-
           function pressure "Thermodynamic pressure"
+            extends Partial;
+
+          algorithm
+            x := p;
+            annotation (Inline=true);
+          end pressure;
+
+          function concentration "Concentration"
             extends Partial;
 
             replaceable package Data =
@@ -6554,9 +6514,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   iconTransformation(extent={{-10,90},{10,110}})));
 
           algorithm
-            x := Data.p_Tv(T, 1/rho);
+            x := 1/Data.v_Tp(T, p);
             annotation (Inline=true);
-          end pressure;
+
+          end concentration;
+
 
           function current "Diffusion current"
             extends Partial;
@@ -6572,8 +6534,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration rho
-              "<html>Concentration (<i>&rho;</i>)</html>";
+            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -6600,8 +6561,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           function currentDensity "Advective current density"
             extends Translational.Partial;
 
+            replaceable package Data =
+                Characteristics.BaseClasses.CharacteristicEOS constrainedby
+              Characteristics.BaseClasses.CharacteristicEOS
+              "Characteristic data" annotation (
+              Dialog(group="Material properties"),
+              choicesAllMatching=true,
+              __Dymola_choicesFromPackage=true,
+              Placement(transformation(extent={{-60,40},{-40,60}}),
+                  iconTransformation(extent={{-10,90},{10,110}})));
+
           algorithm
-            x := rho*phi[orient];
+            x := phi[orient]/Data.v_Tp(T, p);
             annotation (Inline=true);
           end currentDensity;
           extends Translational;
@@ -6632,8 +6603,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration rho
-              "<html>Concentration (<i>&rho;</i>)</html>";
+            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -6682,8 +6652,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Concentration rho
-              "<html>Concentration (<i>&rho;</i>)</html>";
+            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
             input Q.Current Ndot
               "<html>Diffusion current (<i>N&#775;</i>)</html>";
 
@@ -6770,7 +6739,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}),graphics));
-
       end Volume2;
 
       partial model Partial "Base model for a pressure/volume"
@@ -8261,6 +8229,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Translational;
 
+    annotation (Documentation(info="<html>
+  <p>This package contains models to impose conditions on each of the declarative connectors
+  established in <a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a>.  The subpackages
+  are named according to the corresponding connector.</p>
+</html>"));
     package ThermalDiffusion
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ThermalDiffusion\">ThermalDiffusion</a> connector</html>"
       extends Modelica.Icons.Package;
@@ -8350,11 +8323,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               fillPattern=FillPattern.Solid,
               fillColor={255,255,255})}));
     end ThermalDiffusion;
-    annotation (Documentation(info="<html>
-  <p>This package contains models to impose conditions on each of the declarative connectors
-  established in <a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a>.  The subpackages
-  are named according to the corresponding connector.</p>
-</html>"));
   end ByConnector;
 
   package TestStands "Test stands"

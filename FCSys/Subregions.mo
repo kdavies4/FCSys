@@ -1387,8 +1387,8 @@ package Subregions
               {-44,10}})));
 
     FCSys.Phases.Graphite graphite(
-      final n_faces=n_faces,
       n_inter=2,
+      final n_faces=n_faces,
       k_inter={k_common,k_graphite_liq},
       final inclHOR=inclHOR,
       final inclORR=inclORR) "Graphite" annotation (Dialog(group=
@@ -1396,20 +1396,18 @@ package Subregions
               {-8,10}})));
 
     FCSys.Phases.Ionomer ionomer(
-      final n_faces=n_faces,
       n_inter=1,
+      final n_faces=n_faces,
       k_inter={k_common},
       final inclHOR=inclHOR,
       final inclORR=inclORR) "Ionomer" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{8,-10},
               {28,10}})));
 
-    FCSys.Phases.Liquid liquid(
-      final n_faces=n_faces,
-      n_inter=3,
-      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{44,
-              -10},{64,10}})));
+    FCSys.Phases.Liquid liquid(n_inter=3, k_inter={k_common,k_gas_liq,
+          k_graphite_liq}) "Liquid" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{44,-10},
+              {64,10}})));
 
     Connectors.FaceBus xNegative if inclFacesX "Negative face along the x axis"
       annotation (Placement(transformation(extent={{-114,-28},{-94,-8}}),
@@ -1710,10 +1708,10 @@ package Subregions
     extends FCSys.Subregions.Partial(final n_spec=ionomer.n_spec);
 
     FCSys.Phases.Ionomer ionomer(
-      final n_faces=n_faces,
       final inclHOR=false,
       final inclORR=false,
       n_inter=1,
+      final n_faces=n_faces,
       k_inter={k_common}) "Ionomer" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,30},
               {10,50}})));
@@ -1813,28 +1811,26 @@ package Subregions
 
     FCSys.Phases.Gas gas(
       n_inter=2,
+      final n_faces=n_faces,
       final inclHOR=false,
       final inclORR=false,
-      final n_faces=n_faces,
       k_inter={k_common,k_gas_liq}) "Gas" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-48,-10},
               {-26,10}})));
 
     FCSys.Phases.Graphite graphite(
-      final n_faces=n_faces,
       n_inter=2,
+      final n_faces=n_faces,
       final inclHOR=false,
       final inclORR=false,
       k_inter={k_common,k_graphite_liq}) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
 
-    FCSys.Phases.Liquid liquid(
-      final n_faces=n_faces,
-      n_inter=3,
-      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{26,
-              -10},{46,10}})));
+    FCSys.Phases.Liquid liquid(n_inter=3, k_inter={k_common,k_gas_liq,
+          k_graphite_liq}) "Liquid" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{26,-10},
+              {46,10}})));
 
     Connectors.FaceBus xNegative if inclFacesX "Negative face along the x axis"
       annotation (Placement(transformation(extent={{-96,-28},{-76,-8}}),

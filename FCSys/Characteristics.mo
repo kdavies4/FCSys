@@ -726,68 +726,6 @@ package Characteristics
 
   end O2;
 
-  annotation (Documentation(info="<html>
-  <p>Each species has a subpackage for each material phase in which the species
-  is represented.  The thermodynamic properties are generally different for each phase.</p>
-
-<p>Additional materials may be included as needed.  The thermodynamic data for
-  materials that are condensed at standard conditions is available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-  The thermodynamic data for materials
-  that are gases at standard conditions is available in
-  <a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">Modelica.Media.IdealGases.Common.SingleGasesData</a>
-  (and [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]). Virial coefficients are available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Transport characteristics are available in
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
-
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"), Icon(graphics={
-        Line(
-          points={{-76,-80},{-62,-30},{-32,40},{4,66},{48,66},{73,45},{62,-8},{
-              48,-50},{38,-80}},
-          color={64,64,64},
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-40,20},{68,20}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-40,20},{-44,88},{-44,88}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{68,20},{86,-58}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-60,-28},{56,-28}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-60,-28},{-74,84},{-74,84}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{56,-28},{70,-80}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-76,-80},{38,-80}},
-          color={175,175,175},
-          smooth=Smooth.None),
-        Line(
-          points={{-76,-80},{-94,-16},{-94,-16}},
-          color={175,175,175},
-          smooth=Smooth.None)}));
-
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
     package CharacteristicNASA
@@ -1375,9 +1313,10 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.ResistivityMaterial eta "Material resistivity";
+        // **[M/(N.T)] (inverse of mobility)
 
       algorithm
-        eta := omega(T)*alpha/v;
+        eta := omega(T)*alpha*p_Tv(T, v);
         annotation (Inline=true,Documentation(info="<html>
   <p>Material resistivity is the reciprocal of the self-diffusion coefficient
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
@@ -1509,35 +1448,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
       end mu;
 
-      replaceable function nu
-        "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.TimeAbsolute nu "Thermal independity";
-
-      algorithm
-        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
-        annotation (Inline=true,Documentation(info="<html>
-<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
-temperature difference.</p>
-
-  <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
-    \"billiard-ball\"
-    assumption, and it implies that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol>
-  Also, it is assumed that the Einstein relation applies.</p>
-</html>"));
-      end nu;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
@@ -1589,6 +1499,35 @@ temperature difference.</p>
     this requirement.</li>
     </ul></p></html>"));
 
+      replaceable function nu
+        "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
+        output Q.TimeAbsolute nu "Thermal independity";
+
+      algorithm
+        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
+        annotation (Inline=true,Documentation(info="<html>
+<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
+temperature difference.</p>
+
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  Also, it is assumed that the Einstein relation applies.</p>
+</html>"));
+      end nu;
     end Characteristic;
 
     package CharacteristicEOS
@@ -1776,4 +1715,65 @@ temperature difference.</p>
         liquid "Liquid") "Enumeration for material phases";
 
   end BaseClasses;
+  annotation (Documentation(info="<html>
+  <p>Each species has a subpackage for each material phase in which the species
+  is represented.  The thermodynamic properties are generally different for each phase.</p>
+
+<p>Additional materials may be included as needed.  The thermodynamic data for
+  materials that are condensed at standard conditions is available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+  The thermodynamic data for materials
+  that are gases at standard conditions is available in
+  <a href=\"modelica://Modelica.Media.IdealGases.Common.SingleGasesData\">Modelica.Media.IdealGases.Common.SingleGasesData</a>
+  (and [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]). Virial coefficients are available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Transport characteristics are available in
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
+  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
+
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"), Icon(graphics={
+        Line(
+          points={{-76,-80},{-62,-30},{-32,40},{4,66},{48,66},{73,45},{62,-8},{
+              48,-50},{38,-80}},
+          color={64,64,64},
+          smooth=Smooth.Bezier),
+        Line(
+          points={{-40,20},{68,20}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-40,20},{-44,88},{-44,88}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{68,20},{86,-58}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{56,-28}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-60,-28},{-74,84},{-74,84}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{56,-28},{70,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{38,-80}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Line(
+          points={{-76,-80},{-94,-16},{-94,-16}},
+          color={175,175,175},
+          smooth=Smooth.None)}));
 end Characteristics;

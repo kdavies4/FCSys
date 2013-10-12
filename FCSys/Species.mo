@@ -1145,15 +1145,11 @@ protected
     import FCSys.Utilities.Sigma;
     import assert = FCSys.Utilities.assertEval;
     //extends FCSys.Icons.Names.Top5;
-    // **split diffusive and chemical exchange, material and thermal storage into separate model so that it can be used for dielectric
+    // **Split diffusive and chemical exchange, material and thermal storage into separate model so that it can be used for dielectric
 
-    // Geometry
-    parameter Integer n_faces(
-      min=1,
-      max=3) = 1 "Number of pairs of faces" annotation (Dialog(group="Geometry",
-          __Dymola_label="<html><i>n</i><sub>faces</sub></html>"), HideResult=
-          true);
-    // Note:  This can't be an outer parameter in Dymola 7.4.
+    // Geometric parameters
+    parameter Integer n_faces=1 "Number of pairs of faces";
+    // This cannot be an outer parameter in Dymola 2014.
 
     // Material properties
     replaceable package Data = Characteristics.BaseClasses.Characteristic
@@ -1206,7 +1202,7 @@ protected
         enable=inclTrans[1],
         compact=true),
       choices(__Dymola_checkBox=true));
-    parameter Boolean upstreamY=false "Y **temp false" annotation (
+    parameter Boolean upstreamY=true "Y" annotation (
       Evaluate=true,
       Dialog(
         tab="Assumptions",
@@ -1412,8 +1408,6 @@ protected
     Q.Current Ndot_faces[n_faces, Side](nominal=U.A, final start=outerProduct(
           I_IC[cartFaces], {1,-1}))
       "Total current into the faces (advection and diffusion)";
-    Q.PressureAbsolute p_faces[n_faces, Side](each nominal=U.atm, each start=
-          p_IC) "Thermodynamic pressures at the faces";
 
     // Auxiliary variables (for analysis)
     // ----------------------------------
@@ -1442,20 +1436,16 @@ protected
        = actualStream(physical.sT)
       "Specific entropy-temperature product of the physical stream";
     //
-    // Electrical (if applicable)
-    /*
-  output Q.Potential w[n_faces, Side](each stateSelect=StateSelect.never) = 
-    transpose({inSign(side)*faces[:, side].mPhidot[Orient.normal] ./ (faces[:,
-    side].rho .* A[cartFaces]) for side in Side}) if environment.analysis 
-    "Electrical potentials at the faces **rename (w = this/z)";
-
-  output Q.Potential Deltaw[n_faces](each stateSelect=StateSelect.never) = 
-    Delta(w) if environment.analysis 
-    "Electrical potential differences between the faces";
-  output Q.Potential zI[n_faces](each stateSelect=StateSelect.never) = {I[
-    transCart[axis]] for axis in cartFaces} if environment.analysis 
-    "Electrical current between the faces (different indices than I)";
-  */
+    // Potentials and current
+    output Q.Potential g_faces[n_faces, Side](each stateSelect=StateSelect.never)
+       = Data.g(faces.T, faces.p) if environment.analysis
+      "Gibbs potentials at the faces";
+    output Q.Potential Deltag[n_faces](each stateSelect=StateSelect.never) =
+      Delta(g_faces) if environment.analysis
+      "Differences in Gibbs potentials across the faces";
+    output Q.Potential I_avg[n_faces](each stateSelect=StateSelect.never) =
+      Delta(Ndot_faces)/2 if environment.analysis
+      "Average current through the faces";
     //
     // Time constants (only for the axes with translational momentum included;
     // others are infinite)
@@ -1471,11 +1461,12 @@ protected
       stateSelect=StateSelect.never,
       start=U.s) = c_p*nu if environment.analysis
       "Time constant for thermal exchange";
+    output Q.TimeAbsolute tau_NT[n_faces](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = fill(N*eta*Data.kappa(T, p)/(2*A), n_faces) .* Lprime[
+      cartFaces] if environment.analysis
+      "Time constants for material transport (assuming no advection)";
     /* **
-  output Q.TimeAbsolute tau_NT[n_faces](
-    each stateSelect=StateSelect.never,
-    each start=U.s) = fill(V*eta/2, n_faces) .* invL[cartFaces] if 
-    environment.analysis "Time constants for material transport";
   output Q.TimeAbsolute tau_PhiT_perp[n_faces](
     each stateSelect=StateSelect.never,
     each start=U.s) = fill(M*beta/2, n_faces) .* invL[cartFaces] if 
@@ -1521,10 +1512,10 @@ protected
       /U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans] if
       environment.analysis
       "Acceleration force (including acceleration due to body forces)";
-    output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(
-      if inclFaces[cartTrans[i]] then -Delta(p_faces[facesCart[cartTrans[i]], :])
-      *A[cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
     /*
+  output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(if 
+    inclFaces[cartTrans[i]] then -Delta(faces[facesCart[cartTrans[i]], :].p)*A[
+    cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
   output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*((
     actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(physical.phi)
      - phi) .* physical.Ndot) if environment.analysis 
@@ -1535,10 +1526,12 @@ protected
       i]) for i in 1:n_trans} if environment.analysis
       "Friction from other configurations (diffusive exchange)";
     // Note:  The [:] is necessary in Dymola 7.4.
-    output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
-      faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[
-      i]})*Ndot_faces[j, :]*Data.m for j in 1:n_faces) for i in 1:n_trans} if
-      environment.analysis "Acceleration force due to advective transport";
+    /*
+  output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
+    faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[i]})
+    *Ndot_faces[j, :]*Data.m for j in 1:n_faces) for i in 1:n_trans} if 
+    environment.analysis "Acceleration force due to advective transport";
+*/
     output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(
       Sigma(faces[j, :].mPhidot[cartWrap(cartTrans[i] - cartFaces[j] + 1)])
       for j in 1:n_faces) for i in 1:n_trans} if environment.analysis
@@ -1562,17 +1555,19 @@ protected
        in 1:n_inter) + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) +
       direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
-    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
-      :].T, p_faces[j, :]) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
-      cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
-      Ndot_faces[j, :]*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if
-      environment.analysis
-      "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
-    output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[j, :].phi[
-      cartWrap(cartTrans[i] - cartFaces[j] + 1)]*faces[j, :].mPhidot[cartWrap(
-      cartTrans[i] - cartFaces[j] + 1)] for i in 1:n_trans) for j in 1:n_faces)
-       + sum(faces.Qdot) if environment.analysis
-      "Rate of diffusion of energy from other subregions";
+    /*
+  output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
+    :].T, faces[j, :].p) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
+    cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
+    Ndot_faces[j, :]*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if 
+    environment.analysis 
+    "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
+  output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[j, :].phi[
+    cartWrap(cartTrans[i] - cartFaces[j] + 1)]*faces[j, :].mPhidot[cartWrap(
+    cartTrans[i] - cartFaces[j] + 1)] for i in 1:n_trans) for j in 1:n_faces) + 
+    sum(faces.Qdot) if environment.analysis 
+    "Rate of diffusion of energy from other subregions";
+  */
     // Note:  The structure of the problem should not change if these
     // auxiliary variables are included (hence StateSelect.never).
 
@@ -1616,7 +1611,7 @@ protected
           iconTransformation(extent={{84,-20},{104,-40}})));
 
     Connectors.Face faces[n_faces, Side](
-      rho(each start=rho_IC),
+      p(each start=p_IC),
       Ndot(start=outerProduct(I_IC[cartFaces], {1,-1})),
       phi(start={fill({phi_IC[cartWrap(cartFaces[i] + orient - 1)] for orient
              in Orient}, 2) for i in 1:n_faces}),
@@ -1859,10 +1854,9 @@ Choose any condition besides None.");
     M = Data.m*N;
     phi = direct.translational.phi;
     I .* L[cartTrans] = N*phi;
-    p_faces = {{Data.p_Tv(faces[i, side].T, 1/faces[i, side].rho) for side in
-      Side} for i in 1:n_faces};
-    Ndot_faces = faces.Ndot + faces.rho .* {{faces[i, Side.n].phi[Orient.normal],
-      -faces[i, Side.p].phi[Orient.normal]}*A[cartFaces[i]] for i in 1:n_faces};
+    Ndot_faces = faces.Ndot + {{faces[i, Side.n].phi[Orient.normal],-faces[i,
+      Side.p].phi[Orient.normal]}*A[cartFaces[i]] ./ Data.v_Tp(faces[i, :].T,
+      faces[i, :].p) for i in 1:n_faces};
     phi_actual_chemical = actualStream(chemical.phi);
     phi_actual_physical = actualStream(physical.phi);
 
@@ -1923,10 +1917,8 @@ Choose any condition besides None.");
       for side in Side loop
         // Material
         eta*L[cartFaces[i]]*faces[i, side].Ndot = kA[cartFaces[i]]*(faces[i,
-          side].rho - 1/v)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(side)
-          *eta*V*faces[i, side].phi[Orient.normal]/(2*kA[cartFaces[i]])) else 2);
-        // **write all peclet numbers with kA on denom, extensive prop such as V on num.
-        // **use Lprime, not invL
+          side].p - p)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(side)*
+          eta*V*faces[i, side].phi[Orient.normal]/(2*kA[cartFaces[i]])) else 2);
 
         // Translational momentum
         beta*L[cartFaces[i]]*faces[i, side].mPhidot[Orient.normal] = kA[
@@ -2045,8 +2037,8 @@ Choose any condition besides None.");
       else
         M*((if consTrans[cartTrans[j]] == Conservation.dynamic then der(phi[j])
           /U.s else 0) + environment.a[cartTrans[j]]) + N*Data.z*environment.E[
-          cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(p_faces[
-          facesCart[cartTrans[j]], :])*A[cartTrans[j]] else 0) = Data.m*((
+          cartTrans[j]] + (if inclFaces[cartTrans[j]] then Delta(faces[
+          facesCart[cartTrans[j]], :].p)*A[cartTrans[j]] else 0) = Data.m*((
           phi_actual_chemical[j] - phi[j])*chemical.Ndot + (phi_actual_physical[
           j] - phi[j])*physical.Ndot) + direct.translational.mPhidot[j] + sum(
           intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((faces[i, :].phi[
@@ -2103,7 +2095,7 @@ Choose any condition besides None.");
         /2)*physical.Ndot + direct.translational.phi*direct.translational.mPhidot
          + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + sum(intra[i].phi
         *intra[i].mPhidot for i in 1:n_intra) + sum(inter.Qdot) + direct.thermal.Qdot
-         + sum(intra.Qdot) + sum((Data.h(faces[i, :].T, p_faces[i, :]) - {h,h})
+         + sum(intra.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h})
         *Ndot_faces[i, :] + sum((faces[i, :].phi[cartWrap(cartTrans[j] -
         cartFaces[i] + 1)] .^ 2 - fill(phi[j]^2, 2))*Ndot_faces[i, :]*Data.m/2
          + faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)]*faces[i,
