@@ -182,7 +182,7 @@ package Quantities "Quantities to represent physical properties"
   type ResistanceElectrical = TypeReal (final unit="L2.M/(N2.T)", min=0)
     "Electrical resistance";
   type Resistivity = TypeReal (final unit="L.T/N", min=0);
-  type ResistivityMaterial = TypeReal (final unit="T/L2", min=0)
+  type ResistivityMaterial = TypeReal (final unit="M/(N.T)", min=0)
     "Material resistivity";
   type Time = TypeReal (final unit="T");
   type TimeAbsolute = TypeReal (final unit="T", min=0) "Absolute time";

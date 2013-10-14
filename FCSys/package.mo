@@ -846,6 +846,20 @@ action. This section shall survive the termination of this License.</p>
   end UsersGuide;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   preferedView="info",
   uses(Modelica(version="3.2.1")),

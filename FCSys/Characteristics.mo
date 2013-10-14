@@ -35,7 +35,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -927,7 +927,6 @@ package Characteristics
             InlineNoEvent=true,
             Inline=true,
             smoothOrder=0);
-
         end c0_p;
 
         function c_p_resid
@@ -949,11 +948,11 @@ package Characteristics
                  + i - j + 1) for j in 1:size(b_v, 2)},
                       n_v[2] - n_v[1] - i) for i in rowLimits[1]:rowLimits[2]},
                     n_v[1]);
-          annotation (Inline=true);
           // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
           // This is temperature times the isobaric partial derivative of that
           // function with respect to temperature.  It is zero for an ideal gas.
 
+          annotation (Inline=true);
         end c_p_resid;
 
       algorithm
@@ -1299,10 +1298,10 @@ package Characteristics
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.ResistivityMaterial eta "Material resistivity";
-        // **[M/(N.T)] (inverse of mobility)
 
       algorithm
         eta := omega(T)*alpha*p_Tv(T, v);
+
         annotation (Inline=true,Documentation(info="<html>
   <p>Material resistivity is the reciprocal of the self-diffusion coefficient
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
@@ -1409,6 +1408,35 @@ package Characteristics
 </html>"));
       end mu;
 
+      replaceable function nu
+        "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
+        output Q.TimeAbsolute nu "Thermal independity";
+
+      algorithm
+        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
+        annotation (Inline=true,Documentation(info="<html>
+<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
+temperature difference.</p>
+
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  Also, it is assumed that the Einstein relation applies.</p>
+</html>"));
+      end nu;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
@@ -1459,36 +1487,6 @@ package Characteristics
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
     </ul></p></html>"));
-
-      replaceable function nu
-        "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.TimeAbsolute nu "Thermal independity";
-
-      algorithm
-        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
-        annotation (Inline=true,Documentation(info="<html>
-<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
-temperature difference.</p>
-
-  <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
-    \"billiard-ball\"
-    assumption, and it implies that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol>
-  Also, it is assumed that the Einstein relation applies.</p>
-</html>"));
-      end nu;
     end Characteristic;
 
     package CharacteristicEOS
@@ -1638,8 +1636,8 @@ temperature difference.</p>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;
-    public
 
+    public
       function kappa
         "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
         extends Modelica.Icons.Function;

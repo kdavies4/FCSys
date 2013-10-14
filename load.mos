@@ -9,7 +9,6 @@
 // the defaults.
 
 // Options to increase simulation performance
-Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
 Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
 Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
 Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
@@ -24,6 +23,8 @@ Advanced.ImprovedPackageConstants = true "Improved code generation for package c
 //Advanced.GenerateAnalyticJacobian = true "Generate analytic Jacobian for the ODE problem";
 //Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";
 //Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
+//Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
+// Warning: CancelFactors makes translation very, very slow in Dymola 2014!
 
 // Debugging and development options
 Advanced.CheckUnits = false "Check unit consistency of equations";

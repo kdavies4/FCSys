@@ -132,7 +132,7 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
-        experimentSetupOutput,
+        __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
     end AirColumn;
@@ -149,7 +149,7 @@ package Subregions
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Echo.mos"
             "Subregions.Examples.Echo.mos"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
 
     end Echo;
 
@@ -338,7 +338,7 @@ package Subregions
             "Resources/Scripts/Dymola/Subregions.Examples.Evaporation.mos"
             "Subregions.Examples.Evaporation.mos"),
         Diagram(graphics),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
     end Evaporation;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
@@ -411,7 +411,7 @@ package Subregions
         experiment(StopTime=110, Tolerance=1e-06),
         Commands(file="Resources/Scripts/Dymola/Subregions.Examples.HOR.mos"
             "Subregions.Examples.HOR.mos"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
     end HOR;
 
     model Hydration
@@ -485,7 +485,7 @@ package Subregions
             origin={24,0})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC3(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -497,7 +497,7 @@ package Subregions
             origin={0,-24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC4(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -509,7 +509,7 @@ package Subregions
             origin={0,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC5(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -521,7 +521,7 @@ package Subregions
             origin={24,24})));
 
       Conditions.ByConnector.FaceBus.Single.FaceBusEfforts BC6(liquid(inclH2O=
-              true, H2O(
+              true,H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Face.Single.Material.current,
             materialSet(y=0),
@@ -581,7 +581,7 @@ package Subregions
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.InternalFlow.mos"
             "Subregions.Examples.InternalFlow.mos"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
     end InternalFlow;
 
     model ORR "Test the oxygen reduction reaction in one subregion"
@@ -668,7 +668,7 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.ORR.mos"
             "Subregions.Examples.ORR.mos"),
-        experimentSetupOutput,
+        __Dymola_experimentSetupOutput,
         Diagram(graphics));
     end ORR;
 
@@ -839,13 +839,15 @@ package Subregions
       extends Examples.Subregion(
         inclH2O=true,
         inclH2=false,
-        subregion(liquid(inclH2O=inclH2O, H2O(consTransX=Conservation.IC)), gas(
-              H2O(
+        subregion(gas(H2O(
               p_IC=saturationPressureSI(environment.T/U.K)*U.Pa,
               redeclare package Data = FCSys.Characteristics.H2O.Gas,
-              consTransX=Conservation.IC))),
+              consTransX=Conservation.IC)), liquid(H2O(
+              consMaterial=Conservation.IC,
+              initMaterial=InitScalar.volume,
+              V_IC=0.25*U.cc,
+              consTransX=Conservation.IC), inclH2O=true)),
         environment(T=274.15*U.K));
-      // **Remove tauprime mod
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(liquid(
             inclH2O=true, H2O(
@@ -858,7 +860,7 @@ package Subregions
               height=99*U.K,
               duration=3600,
               offset=environment.T,
-              y))), gas(inclH2O=true, H2O(
+              y))), gas(inclH2O=inclH2O, H2O(
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
 
@@ -866,7 +868,7 @@ package Subregions
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
             redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
-              duration=1000,
+              duration=3600,
               offset=environment.T,
               y)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -874,7 +876,7 @@ package Subregions
             origin={-24,0})));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC2(gas(inclH2O=
-              true, H2O(
+              inclH2O, H2O(
             redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
 
@@ -882,7 +884,7 @@ package Subregions
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
             redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
-              duration=1000,
+              duration=3600,
               offset=environment.T,
               y))), liquid(inclH2O=true, H2O(
             redeclare function normalSpec =
@@ -892,7 +894,7 @@ package Subregions
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
             redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
-              duration=1000,
+              duration=3600,
               offset=environment.T,
               y)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
@@ -915,11 +917,11 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=3600, Tolerance=1e-08),
+        experiment(StopTime=3600, Tolerance=1e-006),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.SaturationPressure.mos"
             "Subregions.Examples.SaturationPressure.mos"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
     end SaturationPressure;
 
     model Subregion
@@ -1239,7 +1241,7 @@ package Subregions
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Subregions.mos"
             "Subregions.Examples.Subregions.mos"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
     end Subregions;
 
     model ThermalConduction "Test thermal conduction (through solid)"
@@ -1257,7 +1259,7 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.ThermalConduction.mos"
             "Subregions.Examples.ThermalConduction.mos"),
         experiment(StopTime=500, Algorithm="Dassl"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
 
     end ThermalConduction;
 
@@ -1298,7 +1300,7 @@ package Subregions
           NumberOfIntervals=5000,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        experimentSetupOutput);
+        __Dymola_experimentSetupOutput);
 
     end ThermalConductionConvection;
 
@@ -1363,6 +1365,13 @@ package Subregions
           smooth=Smooth.None));
       annotation (Diagram(graphics));
     end ChargeLayer;
+
+    model test
+      extends Subregion(
+        inclH2=false,
+        inclH2O=true,
+        subregion(liquid(inclH2O=true)));
+    end test;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1452,7 +1461,6 @@ package Subregions
       annotation (Placement(transformation(extent={{80,-60},{100,-40}}),
           iconTransformation(extent={{100,18},{120,38}})));
 
-  protected
     Connectors.PhysicalBusNode phaseCh "Connector for phase change" annotation
       (Placement(transformation(extent={{80,-72},{100,-52}}),
           iconTransformation(extent={{64,-42},{84,-22}})));
@@ -2252,9 +2260,4 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
-  model test
-
-    Conditions.ByConnector.FaceBus.Single.FaceBusFlows face
-      annotation (Placement(transformation(extent={{-42,2},{-22,22}})));
-  end test;
 end Subregions;
