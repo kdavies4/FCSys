@@ -22,10 +22,6 @@ package Utilities "Functions to implement misc. algorithms"
   <p><b>Example:</b><br>
   <code>charge(\"Hg2+2\")</code> returns 2.</p>
   </html>"));
-      // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
-      // it will be necessary to use the full
-      // path in the Include annotation, e.g.
-      //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
     end charge;
 
@@ -48,10 +44,6 @@ package Utilities "Functions to implement misc. algorithms"
   <p>Please see the
   <a href=\"modelica://FCSys.Utilities.Chemistry.readElement\">readElement</a> function
   for details about the format of the chemical formula.</p></html>"));
-      // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
-      // it will be necessary to use the full
-      // path in the Include annotation, e.g.
-      //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
     end countElements;
 
@@ -92,10 +84,6 @@ package Utilities "Functions to implement misc. algorithms"
   <code>(symbol, n, z, remainder) = readElement(\"Hg2+2\")</code> returns
   <code>symbol=\"Hg\"</code>, <code>n=2</code>, <code>z=2</code>, and <code>remainder=\"\"</code>.</p>
   </html>"));
-      // Note:  Since Dymola 7.4 doesn't support the IncludeDirectory annotation,
-      // it will be necessary to use the full
-      // path in the Include annotation, e.g.
-      //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/Chemistry.c\""
 
     end readElement;
 
@@ -328,7 +316,7 @@ An unrelated species may be included.");
          and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a, 1) > 1
          then (if n > 1 then x^(n - 1) else 1)*positivePoly(x, a[1 + max(0, 1
          - n):size(a, 1)]) else 0);
-      // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
+      // Here, Dymola 2014 won't allow indexing via a[1 + max(0, 1 - n):end], so
       // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
       annotation (
         Inline=true,
@@ -530,7 +518,7 @@ An unrelated species may be included.");
   algorithm
     assert(condition, "\n" + message + "\n");
     annotation (Documentation(info="<html><p>When an assert statement is
-  false in the initial equation section of a model, Dymola 7.4 gives
+  false in the initial equation section of a model, Dymola 2014 gives
   the following error during translation:
   <pre>\"Error: The conditions of the following assert statements are always false:\"</pre>
   without parsing the message given to the assert function.  This pass-through function causes the

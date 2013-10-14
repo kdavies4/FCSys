@@ -35,11 +35,11 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
-      // Note that H2O.p diverges from p in Dymola 7.4 due to the large
+      // Note that H2O.p diverges from p in Dymola 2014 due to the large
       // coefficients in the second row of H2O.Data.b_v, which cause numerical
       // errors.
       PropertiesRT H2OLiquid(redeclare package Data =
@@ -226,7 +226,7 @@ package Characteristics
       zeta = Data.zeta(T, v);
       eta = Data.eta(T, v);
       theta = Data.theta(T, v);
-      kappa = Data.kappa(T, p);
+      kappa = BaseClasses.CharacteristicEOS.kappa(T, p);
       tauprime = Data.tauprime(T, v);
       mu = Data.mu(T, v);
       nu = Data.nu(T, v);
@@ -299,7 +299,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Ionomer "C9HF17O5S- ionomer"
       // Note:  HTML formatting isn't used in the description because
-      // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
+      // Dymola 2014 doesn't support it in the GUI for replaceable lists.
       // The same applies to other species.
       extends BaseClasses.Characteristic(
         final formula="C9HF17O5S-",
@@ -777,15 +777,12 @@ package Characteristics
 
       algorithm
         /*
-    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], "Temperature "
+    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[end], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
+    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[end]
     /U.K) + "] K).");
-    */
+  */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_zeta_theta[end] can't be used instead of
-        // T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:
-        //     "Error, not all "end" could be expanded."
         zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
           T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
            then b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
@@ -813,15 +810,12 @@ package Characteristics
 
       algorithm
         /*
-    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], "Temperature "
+    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[end], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
+    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[end]
     /U.K) + "] K).");
-    */
+  */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_zeta_theta[end] can't be used instead of
-        // T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:
-        //     "Error, not all "end" could be expanded."
         theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
           (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
            then b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
@@ -919,20 +913,17 @@ package Characteristics
 
         algorithm
           /*
-    assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
-      String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
-      /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-    */
+  assert(T_lim_c[1] <= T and T <= T_lim_c[end], "Temperature " + String(T/U.K) + " K is out of bounds for "
+     + formula + " ([" + String(T_lim_c[1]/U.K) + ", " + String(T_lim_c[size(
+    T_lim_c, 1)]/U.K) + "] K).");
+  */
           // Note:  This is commented out so that the function can be inlined.
-          // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
-          // instead of T_lim_c[end] due to:
-          //    "Error, not all 'end' could be expanded."
           c0_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[
             i + 1] or i == size(T_lim_c, 1) - 1) then Polynomial.f(
                     T,
                     b_c[i, :],
-                    n_c) else 0 for i in 1:size(T_lim_c, 1) - 1))
-            annotation (
+                    n_c) else 0 for i in 1:size(T_lim_c, 1) - 1));
+          annotation (
             InlineNoEvent=true,
             Inline=true,
             smoothOrder=0);
@@ -957,7 +948,8 @@ package Characteristics
                       b_v[i, :] .* {(n_v[2] - n_v[1] + j - i)*(n_v[1] - n_v[2]
                  + i - j + 1) for j in 1:size(b_v, 2)},
                       n_v[2] - n_v[1] - i) for i in rowLimits[1]:rowLimits[2]},
-                    n_v[1]) annotation (Inline=true);
+                    n_v[1]);
+          annotation (Inline=true);
           // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
           // This is temperature times the isobaric partial derivative of that
           // function with respect to temperature.  It is zero for an ideal gas.
@@ -1088,14 +1080,11 @@ package Characteristics
 
       algorithm
         /*
-    assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
+    assert(T_lim_c[1] <= T and T <= T_lim_c[end], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
-        // instead of T_lim_c[end] due to:
-        //    "Error, not all 'end' could be expanded."
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
           1))) + (if referenceEnthalpy == ReferenceEnthalpy.zeroAt0K then
@@ -1212,14 +1201,11 @@ package Characteristics
 
       algorithm
         /*
-  assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
+  assert(T_lim_c[1] <= T and T <= T_lim_c[end], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
-        // instead of T_lim_c[end] due to:
-        //    "Error, not all 'end' could be expanded.";
         s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then s0_i(T, i) else 0 for i in 1:size(b_c,
           1))) + s_resid(T, p) - (if phase <> Phase.gas then s_resid(T, p0)
@@ -1362,31 +1348,6 @@ package Characteristics
   </ol></p>
 </html>"));
       end theta;
-
-    public
-      function kappa
-        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
-        extends Modelica.Icons.Function;
-
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.PressureReciprocal kappa "Isothermal compressibility";
-
-      algorithm
-        kappa := -dv_Tp(
-                T=T,
-                p=p,
-                dT=0,
-                dp=1)/v_Tp(T, p);
-        annotation (Inline=true,Documentation(info="<html>
-  <p>Note that the compressibility given by this function is static&mdash;different
-  from the dynamic compressibility given by
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>().</p>
-
-  <p>For an ideal gas, this function is independent of temperature
-  (although temperature remains as a valid input).</p>
-  </html>"));
-      end kappa;
 
       replaceable function tauprime
         "<html>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</html>"
@@ -1634,8 +1595,8 @@ temperature difference.</p>
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
-        // been defined as an argument to assert() since Modelica 3.0.
+        // Note:  This isn't used because it creates an error instead of a warning
+        // I=in Dymola 2014
         p := if isCompressible then Polynomial.f(
                 v,
                 {Polynomial.f(
@@ -1677,6 +1638,31 @@ temperature difference.</p>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;
+    public
+
+      function kappa
+        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=p0 "Pressure";
+        output Q.PressureReciprocal kappa "Isothermal compressibility";
+
+      algorithm
+        kappa := -dv_Tp(
+                T=T,
+                p=p,
+                dT=0,
+                dp=1)/v_Tp(T, p);
+        annotation (Inline=true,Documentation(info="<html>
+  <p>Note that the compressibility given by this function is static&mdash;different
+  from the dynamic compressibility given by
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>().</p>
+
+  <p>For an ideal gas, this function is independent of temperature
+  (although temperature remains as a valid input).</p>
+  </html>"));
+      end kappa;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package may be used with
     the assumption of ideal gas or of constant specific volume, although it is more general than

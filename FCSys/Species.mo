@@ -27,13 +27,10 @@ package Species "Dynamic models of chemical species"
               T_lim_c={0,Modelica.Constants.inf},
               b_c=[935*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(
-                  U.mol*U.K) - (935*U.J*Data.m/(U.kg*U.K))*log(298.15*U.K)]),
+                  U.mol*U.K) - Data.b_c[1, 1]*log(298.15*U.K)]),
           final mu=0,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
-
-        // In Dymola 7.4, the specific heat capacity must be entered explicitly in
-        // B_c (i.e., 935*U.J*Data.m/(U.kg*U.K) instead of Data.b_c[1, 1]).
 
         // Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not
         // used here since they would render the parameters unadjustable in Dymola
@@ -1428,7 +1425,8 @@ protected
     output Q.CapacityThermalSpecific c_v(stateSelect=StateSelect.never) =
       Data.c_v(T, p) if environment.analysis "Isochoric specific heat capacity";
     output Q.PressureReciprocal kappa(stateSelect=StateSelect.never) =
-      Data.kappa(T, p) if environment.analysis "Isothermal compressibility";
+      Characteristics.BaseClasses.CharacteristicEOS.kappa(T, p) if environment.analysis
+      "Isothermal compressibility";
     output Q.PotentialAbsolute sT_actual_chemical(stateSelect=StateSelect.never)
        = actualStream(chemical.sT)
       "Specific entropy-temperature product of the chemical stream";
@@ -1463,40 +1461,35 @@ protected
       "Time constant for thermal exchange";
     output Q.TimeAbsolute tau_NT[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(N*eta*Data.kappa(T, p)/(2*A), n_faces) .* Lprime[
-      cartFaces] if environment.analysis
-      "Time constants for material transport (assuming no advection)";
-    /* **
-  output Q.TimeAbsolute tau_PhiT_perp[n_faces](
-    each stateSelect=StateSelect.never,
-    each start=U.s) = fill(M*beta/2, n_faces) .* invL[cartFaces] if 
-    environment.analysis "Time constants for normal translational transport";
-  output Q.TimeAbsolute tau_PhiT_para[n_faces](
-    each stateSelect=StateSelect.never,
-    each start=U.s) = fill(M*zeta/2, n_faces) .* invL[cartFaces] if 
-    environment.analysis 
-    "Time constants for transverse translational transport";
-  output Q.TimeAbsolute tau_QT[n_faces](
-    each stateSelect=StateSelect.never,
-    each start=U.s) = fill(N*c_v*theta/2, n_faces) .* invL[cartFaces] if 
-    environment.analysis "Time constants for thermal transport";
-  */
+      each start=U.s) = (N*eta*Data.kappa(T, p)/2)*L[cartFaces] ./ kA[cartFaces]
+      if environment.analysis
+      "Time constants for material transport (with central difference or no advection)";
+    output Q.TimeAbsolute tau_PhiT_perp[n_faces](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = (M*beta/2)*L[cartFaces] ./ kA[cartFaces] if environment.analysis
+      "Time constants for normal translational transport";
+    output Q.TimeAbsolute tau_PhiT_para[n_faces](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = (M*zeta/2)*L[cartFaces] ./ (Nu_Phi[cartFaces] .* kA[
+      cartFaces]) if environment.analysis
+      "Time constants for transverse translational transport (with central difference or no advection)";
+    output Q.TimeAbsolute tau_QT[n_faces](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*L[cartFaces] ./ kA[cartFaces]
+      if environment.analysis
+      "Time constants for thermal transport (with central difference or no advection)";
     //
     // Peclet numbers (only for the axes with translational momentum included;
     // others are zero)
-    /* **update based on diss
-  output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = eta*v*I .*
-    invL[cartTrans] if environment.analysis "Material Peclet numbers";
-  output Q.Number Pe_Phi_perp[n_trans](each stateSelect=StateSelect.never) =
-    beta*Data.m*I .* invL[cartTrans] if environment.analysis 
-    "Normal translational Peclet numbers";
-  output Q.Number Pe_Phi_para[n_trans](each stateSelect=StateSelect.never) =
-    zeta*Data.m*I .* invL[cartTrans] if environment.analysis 
-    "Transverse translational Peclet numbers";
-  output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = theta*
-    Data.c_v(T, p)*I .* invL[cartTrans] if environment.analysis 
-    "Thermal Peclet numbers";
-  */
+    output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = (eta*V/
+      2)*phi .* kA[cartTrans] if environment.analysis "Material Peclet numbers";
+    // The normal translational Peclet numbers are assumed to be zero.
+    output Q.Number Pe_Phi_para[n_trans](each stateSelect=StateSelect.never) =
+      (zeta*M/2)*phi .* kA[cartTrans] if environment.analysis
+      "Transverse translational Peclet numbers";
+    output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = (N*
+      theta*Data.c_v(T, p)/2)*phi ./ kA[cartTrans] if environment.analysis
+      "Thermal Peclet numbers";
     //
     // Bulk flow rates
     output Q.Force mphiI[n_trans, n_trans](each stateSelect=StateSelect.never)
@@ -1512,20 +1505,18 @@ protected
       /U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans] if
       environment.analysis
       "Acceleration force (including acceleration due to body forces)";
-    /*
-  output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(if 
-    inclFaces[cartTrans[i]] then -Delta(faces[facesCart[cartTrans[i]], :].p)*A[
-    cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
-  output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*((
-    actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(physical.phi)
-     - phi) .* physical.Ndot) if environment.analysis 
-    "Acceleration force due to advective exchange";
-  */
+    output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(
+      if inclFaces[cartTrans[i]] then -Delta(faces[facesCart[cartTrans[i]], :].p)
+      *A[cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
+    output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*(
+      (actualStream(chemical.phi) - phi) .* chemical.Ndot + (actualStream(
+      physical.phi) - phi) .* physical.Ndot) if environment.analysis
+      "Acceleration force due to advective exchange";
     output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.translational.mPhidot
        + {sum(inter[:].mPhidot[i]) for i in 1:n_trans} + {sum(intra[:].mPhidot[
       i]) for i in 1:n_trans} if environment.analysis
       "Friction from other configurations (diffusive exchange)";
-    // Note:  The [:] is necessary in Dymola 7.4.
+    // Note:  The [:] is necessary in Dymola 2014.
     /*
   output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
     faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[i]})
@@ -1641,36 +1632,30 @@ protected
       "true, if each pair of faces is included" annotation (missingInnerMessage
         ="This model should be used within a subregion model.
 ");
-    outer parameter Boolean inclRot[3]
+    outer parameter Boolean inclRot[Axis]
       "true, if each axis of rotation has all its tangential faces included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size is also Axis, but it can't be specified here due to
-    // an error in Dymola 7.4 (failure in check of Phase models).
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartTrans[:]
+    outer parameter Integer cartTrans[n_trans]
       "Cartesian-axis indices of the components of translational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartFaces[:]
+    outer parameter Integer cartFaces[n_trans]
       "Cartesian-axis indices of the pairs of faces" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartRot[:]
+    outer parameter Integer cartRot[n_trans]
       "Cartesian-axis indices of the components of rotational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size of cartTrans, cartFaces, and cartRot is n_trans,
-    // but it can't be specified here due to an error in Dymola 7.4.
-    outer parameter Integer transCart[3]
+    outer parameter Integer transCart[Axis]
       "Translational-momentum-component indices of the Cartesian axes"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size is also Axis, but it can't be specified here due to
-    // an error in Dymola 7.4 (failure in check of Phase models).
     outer parameter Integer facesCart[Axis]
       "Face-pair indices of the Cartesian axes" annotation (missingInnerMessage
         ="This model should be used within a subregion model.

@@ -132,7 +132,9 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
-        experimentSetupOutput);
+        experimentSetupOutput,
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
     end AirColumn;
 
     model Echo
@@ -2250,4 +2252,9 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+  model test
+
+    Conditions.ByConnector.FaceBus.Single.FaceBusFlows face
+      annotation (Placement(transformation(extent={{-42,2},{-22,22}})));
+  end test;
 end Subregions;

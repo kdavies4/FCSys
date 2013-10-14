@@ -123,7 +123,7 @@ package UsersGuide "User's Guide"
   package SampleResults "Sample results"
     extends Modelica.Icons.Information;
     // **create index on this page (hyperlinked)
-    // Note: Hash bookmarks don't won't in Dymola 7.4.  They cause the link to fail entirely.
+    // Note: Hashed (anchored) bookmarks don't work in Dymola 2014.  They cause the link to fail entirely.
     class Basic "Basic"
       extends Modelica.Icons.Information;
       annotation (
@@ -191,6 +191,7 @@ package UsersGuide "User's Guide"
     <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Evaporation.png\"></a>
     <br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected 
     (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
+    
     </html>"));
       end Basic;
 
@@ -221,7 +222,7 @@ package UsersGuide "User's Guide"
       Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>. 
     Please click on any image to see a larger plot with a link to its example model.</p>  
       
-      <p><b>Basic:</b><br><br>
+      <p><b>Basic:</b><br>v<br>
             
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn-small.png\"></a>
@@ -258,7 +259,7 @@ package UsersGuide "User's Guide"
       
       </p>
 
-      <p><b>Cell-level:</b><br><br>
+      <p><b>Cell-level:</b><br>v<br>
       
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Cell\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Cell/Polarization-small.png\"></a>

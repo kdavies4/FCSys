@@ -275,14 +275,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+              points={{-30,0},{30,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash), Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
     end AmagatDalton;
 
     model ChemicalFace
@@ -502,17 +502,20 @@ package Conditions "Models to specify and measure operating conditions"
     For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,-40}},
-                  lineColor={127,127,127},
-                  textString="%n"),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}),
+        Icon(graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,-20},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n"),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}),
         Diagram(graphics));
     end ChemicalReaction;
 
@@ -606,17 +609,20 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{0,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-30,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+        Icon(graphics={
+            Line(
+              points={{0,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-30,0},{0,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-10},{0,10}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}));
     end FaceReaction;
 
     package MSL
@@ -2574,16 +2580,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transZMeas = Translational.force,
           redeclare replaceable function thermalMeas = Thermal.heatRate);
 
-        // Note:  Dymola 7.4 requires that the redeclared models are
-        // resolved to the root of the library, e.g.,
-        //   "Conditions.ByConnector.Electrochem.Material.reactionRate"
-        // instead of
-        //   "Material.Potential".
-        // Otherwise the following error is given:
-        //   "Cannot show paramter [sic] dialog for redeclared class [...] since:
-        //   Could not find type of redeclare :[...] in scope [...]"
-        // Similar notes apply to the other top-level extended models in
-        // FCSys.Conditions.ByConnector.
         annotation (defaultComponentName="electrochem");
 
       end ReactionEfforts;
@@ -3131,42 +3127,42 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       model PhysicalBusEfforts
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with efforts specified by default</html>"
         extends PhysicalBusFlows(
-          redeclare replaceable Conditions.ByConnector.Physical.Current 'C+'(
+          redeclare replaceable Physical.Current 'C+'(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current 'SO3-'(
+          redeclare replaceable Physical.Current 'SO3-'(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current 'e-'(
+          redeclare replaceable Physical.Current 'e-'(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current 'H+'(
+          redeclare replaceable Physical.Current 'H+'(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current H2(
+          redeclare replaceable Physical.Current H2(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current H2O(
+          redeclare replaceable Physical.Current H2O(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current N2(
+          redeclare replaceable Physical.Current N2(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
             final formula),
-          redeclare replaceable Conditions.ByConnector.Physical.Current O2(
+          redeclare replaceable Physical.Current O2(
             final inclTransX,
             final inclTransY,
             final inclTransZ,
@@ -3221,7 +3217,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter String formula(start="") "Chemical formula of the species"
           annotation (Dialog(group="Material properties"));
-        // The start value prevents a warning in Dymola 7.4.
+        // The start value prevents a warning when this model is checked in Dymola 2014.
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -3661,214 +3657,214 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             gas(
               H2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate),
+                    Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate),
+                    Face.Pair.Thermal.heatRate),
               N2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate),
+                    Face.Pair.Thermal.heatRate),
               O2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
+                    Face.Pair.Thermal.heatRate)),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate), 'e-'(
+                    Face.Pair.Thermal.heatRate), 'e-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
+                    Face.Pair.Thermal.heatRate)),
             ionomer(
               'SO3-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate),
+                    Face.Pair.Thermal.heatRate),
               'H+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate),
+                    Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate)),
+                    Face.Pair.Thermal.heatRate)),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Pair.Material.pressure,
+                    Face.Pair.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Pair.Translational.velocity,
+                    Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Pair.Thermal.temperature,
+                    Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Pair.Material.current,
+                    Face.Pair.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Pair.Translational.force,
+                    Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Pair.Thermal.heatRate)));
+                    Face.Pair.Thermal.heatRate)));
           // See note in ElectrochemEfforts.
           annotation (defaultComponentName="face",Diagram(graphics));
         end FaceBusEfforts;
@@ -4636,149 +4632,149 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             gas(
               H2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               N2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               O2(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)), 'e-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
@@ -4786,100 +4782,100 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ionomer(
               'SO3-'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               'H+'(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
-                    Conditions.ByConnector.Face.Single.Material.pressure,
+                    Face.Single.Material.pressure,
                 redeclare replaceable function normalSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
-                    Conditions.ByConnector.Face.Single.Translational.velocity,
+                    Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
-                    Conditions.ByConnector.Face.Single.Thermal.temperature,
+                    Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
-                    Conditions.ByConnector.Face.Single.Material.current,
+                    Face.Single.Material.current,
                 redeclare replaceable function normalMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
-                    Conditions.ByConnector.Face.Single.Translational.force,
+                    Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
-                    Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                    Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
@@ -5829,26 +5825,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceEfforts
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with difference in efforts specified by default</html>"
           extends FaceFlows(
-            redeclare replaceable function materialSpec =
-                Conditions.ByConnector.Face.Pair.Material.pressure,
-            redeclare replaceable function normalSpec =
-                Conditions.ByConnector.Face.Pair.Translational.velocity,
+            redeclare replaceable function materialSpec = Material.pressure,
+            redeclare replaceable function normalSpec = Translational.velocity,
+
             redeclare replaceable function followingSpec =
-                Conditions.ByConnector.Face.Pair.Translational.velocity,
+                Translational.velocity,
             redeclare replaceable function precedingSpec =
-                Conditions.ByConnector.Face.Pair.Translational.velocity,
-            redeclare replaceable function thermalSpec =
-                Conditions.ByConnector.Face.Pair.Thermal.temperature,
-            redeclare replaceable function materialMeas =
-                Conditions.ByConnector.Face.Pair.Material.current,
-            redeclare replaceable function normalMeas =
-                Conditions.ByConnector.Face.Pair.Translational.force,
-            redeclare replaceable function followingMeas =
-                Conditions.ByConnector.Face.Pair.Translational.force,
-            redeclare replaceable function precedingMeas =
-                Conditions.ByConnector.Face.Pair.Translational.force,
-            redeclare replaceable function thermalMeas =
-                Conditions.ByConnector.Face.Pair.Thermal.heatRate);
+                Translational.velocity,
+            redeclare replaceable function thermalSpec = Thermal.temperature,
+            redeclare replaceable function materialMeas = Material.current,
+            redeclare replaceable function normalMeas = Translational.force,
+            redeclare replaceable function followingMeas = Translational.force,
+
+            redeclare replaceable function precedingMeas = Translational.force,
+
+            redeclare replaceable function thermalMeas = Thermal.heatRate);
           // See note in ElectrochemEfforts.
           annotation (defaultComponentName="face");
 
@@ -6453,27 +6444,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model FaceEfforts
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with efforts specified by default</html>"
           extends FaceFlows(
-            redeclare replaceable function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.pressure,
+            redeclare replaceable function materialSpec = Material.pressure,
             redeclare replaceable function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-
+                TranslationalNormal.velocity,
             redeclare replaceable function followingSpec =
-                Conditions.ByConnector.Face.Single.Translational.velocity,
+                Translational.velocity,
             redeclare replaceable function precedingSpec =
-                Conditions.ByConnector.Face.Single.Translational.velocity,
-            redeclare replaceable function thermalSpec =
-                Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare replaceable function materialMeas =
-                Conditions.ByConnector.Face.Single.Material.current,
+                Translational.velocity,
+            redeclare replaceable function thermalSpec = Thermal.temperature,
+            redeclare replaceable function materialMeas = Material.current,
             redeclare replaceable function normalMeas =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.force,
-            redeclare replaceable function followingMeas =
-                Conditions.ByConnector.Face.Single.Translational.force,
-            redeclare replaceable function precedingMeas =
-                Conditions.ByConnector.Face.Single.Translational.force,
-            redeclare replaceable function thermalMeas =
-                Conditions.ByConnector.Face.Single.Thermal.heatRate,
+                TranslationalNormal.force,
+            redeclare replaceable function followingMeas = Translational.force,
+
+            redeclare replaceable function precedingMeas = Translational.force,
+
+            redeclare replaceable function thermalMeas = Thermal.heatRate,
             redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=4*U.C
                   /U.cc),
             redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
@@ -6710,8 +6696,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Q.Volume V "Volume"
           annotation (Dialog(__Dymola_label="<html><i>V</i></html>"));
-        // Note:  These must be public in Dymola 7.4, so HideResult is set true
-        // instead.
 
         Connectors.Amagat amagat "Connector for additivity of volume"
           annotation (Placement(transformation(extent={{90,-50},{110,-30}}),
@@ -6730,15 +6714,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid)}),
+                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
+                    -60,-60}},
+                lineColor={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}),graphics));
+                  {100,100}}), graphics));
+
       end Volume2;
 
       partial model Partial "Base model for a pressure/volume"
@@ -8164,21 +8149,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector, with velocity specified by default</html>"
 
         extends Force(
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.velocity transXSpec,
-
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.velocity transYSpec,
-
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.velocity transZSpec,
-
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.force transXMeas,
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.force transYMeas,
-          redeclare replaceable
-            Conditions.ByConnector.Translational.Component.force transZMeas);
+          redeclare replaceable Component.velocity transXSpec,
+          redeclare replaceable Component.velocity transYSpec,
+          redeclare replaceable Component.velocity transZSpec,
+          redeclare replaceable Component.force transXMeas,
+          redeclare replaceable Component.force transYMeas,
+          redeclare replaceable Component.force transZMeas);
 
         // See note in ElectrochemEfforts.
         annotation (defaultComponentName="translational");
