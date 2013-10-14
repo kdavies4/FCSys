@@ -712,7 +712,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       model Fixed "Fixed properties"
         extends Isochoric(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime=1e8*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=1e10*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity beta=Data.beta(),

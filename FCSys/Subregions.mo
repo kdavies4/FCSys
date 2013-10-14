@@ -291,10 +291,10 @@ package Subregions
               inclH2O=inclH2O, H2O(consEnergy=Conservation.IC))));
       FCSys.Conditions.ByConnector.FaceBus.Single.FaceBusFlows BC1(gas(inclH2O=
               true, H2O(redeclare Modelica.Blocks.Sources.Pulse materialSet(
-              amplitude=-5e5*U.A,
-              width=1e-8,
+              amplitude=-10*U.A,
+              width=1e-4,
               period=10000,
-              startTime=0.01), redeclare function normalSpec =
+              startTime=1), redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)),
           liquid(inclH2O=true, H2O(redeclare function normalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
@@ -329,16 +329,17 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        Documentation(info="<html><p>**Update (new times) Initially, the water vapor is below saturation and liquid water is present.
+        Documentation(info="<html><p>Initially, the water vapor is below saturation and liquid water is present.
   Some of the liquid evaporates until saturation is reached.  Then from 1&nbsp;to&nbsp;2&nbsp;s additional water vapor is injected from the negative boundary
   and some of it condenses.  All of this occurs at a fixed temperature (25&nbsp;&deg;C).</p></html>"),
 
-        experiment(StopTime=0.02, Tolerance=1e-06),
+        experiment(StopTime=2, Tolerance=1e-006),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Evaporation.mos"
             "Subregions.Examples.Evaporation.mos"),
         Diagram(graphics),
         __Dymola_experimentSetupOutput);
+
     end Evaporation;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
