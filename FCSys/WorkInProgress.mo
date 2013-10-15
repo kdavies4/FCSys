@@ -325,8 +325,8 @@ package WorkInProgress "Incomplete classes under development"
       Documentation(info="<html><p>This model provides the stoichiometry-weighted electrical contribution of a charge
     carrier to an electrochemical reaction.  The <code>carrier</code> and <code>substrate</code>
     connectors represent the interface with the charge carrier species (e.g., e<sup>-</sup> or H<sup>+</sup>)
-    and the solid species (e.g., C<sup>+</sup>) at concentration at the far edge of the far edge of the 
-    depletion region.  The concentration of the charge carrier there results in the Butler-Volmer equation 
+    and the solid species (e.g., C<sup>+</sup>) at density at the far edge of the far edge of the 
+    depletion region.  The density of the charge carrier there results in the Butler-Volmer equation 
     in conjunction with the material transport of the charge carrier species.</p>  
     
     <p>Assumptions:<ol>

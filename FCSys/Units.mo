@@ -15,7 +15,7 @@ package Units "Constants and units of physical measure"
     // quantities in FCSys.Quantities should be used by default, then specify
     // them here.  Be sure that the desired unit is included in a
     // defineUnitConversion command below.
-    // Generated from FCSys/Resources/quantities.xls, 2013-10-11
+    // Generated from FCSys/Resources/quantities.xls, 2013-10-17
     defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal of amount";
     defineDefaultDisplayUnit("A", "rad") "Angle";
     defineDefaultDisplayUnit("A.N.T/(L2.M)", "1/Wb")
@@ -50,6 +50,7 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("L2/N", "cm2/C") "Specific area";
     defineDefaultDisplayUnit("L2/T", "cm2/s") "Diffusivity";
     defineDefaultDisplayUnit("L2/T2", "Sv") "Squared velocity";
+    defineDefaultDisplayUnit("L2.M/(N.T)", "Pa.s") "Viscosity";
     defineDefaultDisplayUnit("L3", "cc") "Volume";
     defineDefaultDisplayUnit("L3.M/(A.N.T2)", "V.m/rad")
       "Potential per wavenumber";
@@ -78,10 +79,10 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("N", "C") "Amount";
     defineDefaultDisplayUnit("N.T/M", "cm2/(V.s)") "Mobility";
     defineDefaultDisplayUnit("N/(L2.T)", "A/cm2") "Areic current";
-    defineDefaultDisplayUnit("N/(L3.T)", "C/(cc.s)") "Rate of concentration";
+    defineDefaultDisplayUnit("N/(L3.T)", "C/(cc.s)") "Rate of density";
     defineDefaultDisplayUnit("N/(T.s)", "A/s")
       "for derivative of current in Dymola";
-    defineDefaultDisplayUnit("N/L3", "C/cc") "Concentration";
+    defineDefaultDisplayUnit("N/L3", "C/cc") "Density";
     defineDefaultDisplayUnit("N/s", "A") "for derivative of amount in Dymola";
     defineDefaultDisplayUnit("N/T", "A") "Current";
     defineDefaultDisplayUnit("N/T2", "A/s") "Rate of current";
@@ -91,12 +92,10 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("N2.T2/(L3.M)", "F/m") "Permittivity";
     defineDefaultDisplayUnit("T", "s") "Time";
     defineDefaultDisplayUnit("T/L", "s/m") "Lineic time";
-    defineDefaultDisplayUnit("T/L2", "s/mm2") "Material resistivity";
 
     // ------------------------------------------------------------------------
     // Conversions to display quantities in units
     // ------------------------------------------------------------------------
-
     defineUnitConversion(
         "1",
         "%",
@@ -258,6 +257,10 @@ package Units "Constants and units of physical measure"
         "W/sr",
         sr/W) "Radiant power";
     defineUnitConversion(
+        "L2.M/(N.T)",
+        "Pa.s",
+        1/(Pa*s)) "Viscosity";
+    defineUnitConversion(
         "L2.M/(N.T2.s)",
         "K/s",
         1/K) "for derivative of potential in Dymola";
@@ -271,16 +274,16 @@ package Units "Constants and units of physical measure"
         mol/J) "Potential";
     defineUnitConversion(
         "L2.M/(N.T2)",
+        "K",
+        1/K) "Absolute potential";
+    defineUnitConversion(
+        "L2.M/(N.T2)",
         "kJ/mol",
         mol/kJ) "Potential";
     defineUnitConversion(
         "L2.M/(N.T2)",
         "V",
         1/V) "Potential";
-    defineUnitConversion(
-        "L2.M/(N.T2)",
-        "K",
-        1/K) "Absolute potential";
     defineUnitConversion(
         "L2.M/(N.T3)",
         "K/s",
@@ -543,20 +546,12 @@ package Units "Constants and units of physical measure"
         cm^2/A) "Areic current";
     defineUnitConversion(
         "N/(L2.T)",
-        "A/m2",
-        m^2/A) "Areic current";
-    defineUnitConversion(
-        "N/(L2.T)",
-        "kat/cm2",
-        cm^2/kat) "Areic current";
-    defineUnitConversion(
-        "N/(L2.T)",
-        "kat/m2",
-        m^2/kat) "Areic current";
-    defineUnitConversion(
-        "N/(L2.T)",
         "A/cm2",
         cm^2/A) "Absolute areic current";
+    defineUnitConversion(
+        "N/(L2.T)",
+        "A/m2",
+        m^2/A) "Areic current";
     defineUnitConversion(
         "N/(L2.T)",
         "A/m2",
@@ -564,7 +559,15 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "N/(L2.T)",
         "kat/cm2",
+        cm^2/kat) "Areic current";
+    defineUnitConversion(
+        "N/(L2.T)",
+        "kat/cm2",
         cm^2/kat) "Absolute areic current";
+    defineUnitConversion(
+        "N/(L2.T)",
+        "kat/m2",
+        m^2/kat) "Areic current";
     defineUnitConversion(
         "N/(L2.T)",
         "kat/m2",
@@ -572,15 +575,15 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "N/(L3.T)",
         "C/(cc.s)",
-        cc*s/C) "Rate of concentration";
+        cc*s/C) "Rate of density";
     defineUnitConversion(
         "N/(L3.T)",
         "C/(m3.s)",
-        m^3*s/C) "Rate of concentration";
+        m^3*s/C) "Rate of density";
     defineUnitConversion(
         "N/(L3.T)",
         "M/s",
-        s/M) "Rate of concentration";
+        s/M) "Rate of density";
     defineUnitConversion(
         "N/(T.s)",
         "A/s",
@@ -592,15 +595,15 @@ package Units "Constants and units of physical measure"
     defineUnitConversion(
         "N/L3",
         "C/cc",
-        cc/C) "Concentration";
+        cc/C) "Density";
     defineUnitConversion(
         "N/L3",
         "C/m3",
-        m^3/C) "Concentration";
+        m^3/C) "Density";
     defineUnitConversion(
         "N/L3",
         "M",
-        1/M) "Concentration";
+        1/M) "Density";
     defineUnitConversion(
         "N/s",
         "A",
@@ -681,15 +684,6 @@ package Units "Constants and units of physical measure"
         "T/L",
         "s/m",
         m/s) "Lineic time";
-    defineUnitConversion(
-        "T/L2",
-        "s/m2",
-        m^2/s) "Material resistivity";
-    defineUnitConversion(
-        "T/L2",
-        "s/mm2",
-        mm^2/s) "Material resistivity";
-
     // -------- end from FCSys/Resources/quantities.xls
 
     // ------------------------------------------------------------------------
@@ -866,7 +860,7 @@ For more information, see the documentation for the
       final constant Q.Length cm=U.cm "centimeter";
       final constant Q.Length mm=U.mm "millimeter";
       final constant Q.Number '%'=U.'%' "percent";
-      final constant Q.Concentration M=U.M "molar";
+      final constant Q.Density M=U.M "molar";
       final constant Q.Volume cc=U.cc "cubic centimeter";
       annotation (Documentation(info="<html><p>This model may be used to calculate the values of the
   constants and units.</p>
@@ -1586,7 +1580,7 @@ encompass other systems of units.</p>
   final constant Q.Length um=micro*m "micrometer";
   final constant Q.Time ms=milli*s "millisecond";
   final constant Q.Number '%'=centi "percent (%)";
-  final constant Q.Concentration M=U.mol/U.L "molar";
+  final constant Q.Density M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
   annotation (
     Documentation(info="<html>

@@ -208,7 +208,7 @@ package Characteristics
       Q.NumberAbsolute s "Specific entropy";
       Q.Fluidity beta "Dynamic compressibility";
       Q.Fluidity zeta "Fluidity";
-      Q.ResistivityMaterial eta "Material resistivity";
+      Q.MobilityReciprocal eta "Material resistivity";
       Q.ResistivityThermal theta "Thermal resistivity";
       Q.PressureReciprocal kappa "Isothermal compressibility";
       Q.TimeAbsolute tauprime "Phase change interval";
@@ -224,7 +224,7 @@ package Characteristics
       s = Data.s(T, p);
       beta = Data.beta(T, v);
       zeta = Data.zeta(T, v);
-      eta = Data.eta(T, v);
+      eta = BaseClasses.Characteristic.beta(T, v);
       theta = Data.theta(T, v);
       kappa = BaseClasses.CharacteristicEOS.kappa(T, p);
       tauprime = Data.tauprime(T, v);
@@ -569,7 +569,8 @@ package Characteristics
     end Gas;
 
     package Ionomer "H2O in ionomer"
-      extends Gas(b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,0});
+      extends Gas;
+      //b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,0}
       annotation (Documentation(info="<html>
         <p>Assumptions:
      <ol>
@@ -819,12 +820,12 @@ package Characteristics
         theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
           (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
            then b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
-          b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
-          annotation (
+          b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)));
+        annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=0);
-        annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
+          smoothOrder=0,
+          Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
   <p>Although specific volume is an input to this function, the result is independent of
@@ -1232,29 +1233,6 @@ package Characteristics
           smoothOrder=1);
       end s;
 
-      replaceable function beta
-        "<html>Dynamic compressibility (&beta;) as a function of temperature</html>"
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Fluidity beta "Dynamic compressibility";
-
-      algorithm
-        beta := omega(T)*alpha/m;
-        annotation (Inline=true,Documentation(info="<html>
-  <p><i>Dynamic compressibility</i> is the reciprocal of the volume, second, or bulk dynamic viscosity (see
-  <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
-
-  <p>Although specific volume is an input to this function, the result is independent of
-  specific volume.</p>
-
-  <p>This function is based on the assumption that dynamic compressibility is equal to fluidity.  See
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">zeta</a>() for the additional
-  assumptions used to calculate fluidity.</p>
-</html>"));
-      end beta;
-
       replaceable function zeta
         "<html>Fluidity (&zeta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
@@ -1264,7 +1242,7 @@ package Characteristics
         output Q.Fluidity zeta "Fluidity";
 
       algorithm
-        zeta := omega(T)*alpha/m;
+        zeta := alpha*omega(T)/m;
         annotation (Inline=true,Documentation(info="<html>
   <p>Fluidity is defined as the reciprocal of dynamic viscosity
   (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
@@ -1292,20 +1270,17 @@ package Characteristics
   </html>"));
       end zeta;
 
-      replaceable function eta
-        "<html>Material resistivity (&eta;) as a function of temperature and specific volume</html>"
+      replaceable function beta
+        "<html>Bulk viscosity (&beta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.ResistivityMaterial eta "Material resistivity";
+        output Q.Viscosity beta "Bulk viscosity";
 
       algorithm
-        eta := omega(T)*alpha*p_Tv(T, v);
-
+        beta := m/(alpha*omega(T));
         annotation (Inline=true,Documentation(info="<html>
-  <p>Material resistivity is the reciprocal of the self-diffusion coefficient
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p>
-
+  <p>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
   <ol>
@@ -1320,7 +1295,7 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
 </html>"));
-      end eta;
+      end beta;
 
       replaceable function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
@@ -1330,7 +1305,7 @@ package Characteristics
         output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
-        theta := omega(T)*alpha/c_v(T, p_Tv(T, v));
+        theta := alpha*omega(T)/c_v(T, p_Tv(T, v));
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
@@ -1506,11 +1481,11 @@ temperature difference.</p>
       final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
           Modelica.Constants.small and n_v[1] + i - 1 <> 0 for i in 1:size(b_v,
           1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if concentration depends on pressure</html>";
+        "<html><code>true</code>, if density depends on pressure</html>";
       final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
            > Modelica.Constants.small and n_v[2] + j - n_v[1] - i <> 0 for i
            in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "<html><code>true</code>, if concentration depends on temperature</html>";
+        "<html><code>true</code>, if density depends on temperature</html>";
 
     protected
       final constant Integer n_p[2]={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}

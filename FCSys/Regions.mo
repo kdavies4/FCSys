@@ -68,7 +68,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(H2(p_IC=p - p_H2O_an_in), H2O(
               T_IC=T,
               p_IC=p_H2O_an_in,
-              initTransY=InitTranslational.velocitySS)),
+              initTransY=InitTrans.velocitySS)),
           liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
@@ -86,8 +86,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -126,11 +125,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
           liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
-      //initTransY=InitTranslational.velocitySS
-      //,initTransY=InitTranslational.velocitySS
+      //initTransY=InitTrans.velocitySS
+      //,initTransY=InitTrans.velocitySS
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -143,8 +141,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -165,8 +162,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -199,8 +195,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -218,8 +213,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -267,8 +261,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -442,7 +435,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-05,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         __Dymola_experimentSetupOutput);
     end FPToFP;
 
@@ -518,8 +511,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -543,8 +535,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -557,8 +548,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -579,8 +569,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -614,8 +603,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -633,8 +621,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -682,8 +669,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -890,9 +876,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none,phi(
-                  stateSelect={StateSelect.always,StateSelect.default,
-                    StateSelect.default})))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none,phi(stateSelect={
+                    StateSelect.always,StateSelect.default,StateSelect.default})))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
@@ -901,7 +886,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anBC[n_y, n_z](
+      Conditions.ByConnector.FaceBus.Single.Efforts anBC[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
@@ -923,7 +908,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-64,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caBC[n_y, n_z](
+      Conditions.ByConnector.FaceBus.Single.Efforts caBC[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1035,19 +1020,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initMaterial=InitScalar.none))))
+        Subregion(ionomer('H+'(initMaterial=InitThermo.none))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anBC[n_y, n_z](
+      Conditions.ByConnector.FaceBus.Single.Efforts anBC[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
@@ -1065,7 +1050,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-44,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caBC[n_y, n_z](
+      Conditions.ByConnector.FaceBus.Single.Efforts caBC[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1137,14 +1122,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(L_x={1,1}*U.m)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[anFP.n_y, anFP.n_z]
-        (each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[anFP.n_y, anFP.n_z](
+          each graphite('inclC+'=true,'incle-'=true)) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,0})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[anFP.n_y, anFP.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[anFP.n_y, anFP.n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('incle-'=true),
         each liquid(inclH2O=anFP.subregions[1, 1, 1].liquid.inclH2O))
@@ -1153,14 +1137,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-36,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSource[anFP.n_x,
-        anFP.n_z](each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows anSource[anFP.n_x, anFP.n_z](
+          each gas(inclH2=true,inclH2O=true)) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,-24})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, anFP.n_z]
-        (each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, anFP.n_z](
+          each gas(inclH2=true,inclH2O=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -1205,8 +1189,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[anGDL.n_y, anGDL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[anGDL.n_y, anGDL.n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('incle-'=true),
         each liquid(inclH2O=anGDL.subregions[1, 1, 1].liquid.inclH2O))
@@ -1215,8 +1198,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-64,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[anGDL.n_y, anGDL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[anGDL.n_y, anGDL.n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('incle-'=true),
         each liquid(inclH2O=anGDL.subregions[1, 1, 1].liquid.inclH2O))
@@ -1267,8 +1249,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anBC[anCL.n_y, anCL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Efforts anBC[anCL.n_y, anCL.n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
@@ -1287,8 +1268,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-44,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caBC[anCL.n_y, anCL.n_z]
-        (each ionomer(
+      Conditions.ByConnector.FaceBus.Single.Efforts caBC[anCL.n_y, anCL.n_z](
+          each ionomer(
           'inclH+'=true,
           inclH2O=true,
           'H+'(redeclare function normalSpec =
@@ -1331,15 +1312,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[PEM.n_y, PEM.n_z]
-        (each ionomer('inclH+'=true, inclH2O=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[PEM.n_y, PEM.n_z](each
+          ionomer('inclH+'=true, inclH2O=true)) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-24,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[PEM.n_y, PEM.n_z]
-        (each ionomer('inclH+'=true, inclH2O=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[PEM.n_y, PEM.n_z](each
+          ionomer('inclH+'=true, inclH2O=true)) annotation (Placement(
             transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
@@ -1390,8 +1371,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       CaCLs.CaCL caCL
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anBC[caCL.n_y, caCL.n_z]
-        (each ionomer(
+      Conditions.ByConnector.FaceBus.Single.Efforts anBC[caCL.n_y, caCL.n_z](
+          each ionomer(
           'inclH+'=true,
           inclH2O=true,
           'H+'(redeclare function normalSpec =
@@ -1401,8 +1382,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-4,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caBC[caCL.n_y, caCL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Efforts caBC[caCL.n_y, caCL.n_z](
         each gas(
           inclH2O=true,
           inclO2=true,
@@ -1455,8 +1435,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       CaGDLs.CaGDL caGDL
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[caGDL.n_y, caGDL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[caGDL.n_y, caGDL.n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1468,8 +1447,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={16,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[caGDL.n_y, caGDL.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[caGDL.n_y, caGDL.n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1507,8 +1485,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[caFP.n_y, caFP.n_z]
-        (
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[caFP.n_y, caFP.n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1520,14 +1497,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={36,0})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[caFP.n_y, caFP.n_z]
-        (each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[caFP.n_y, caFP.n_z](
+          each graphite('inclC+'=true,'incle-'=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSource[caFP.n_x,
-        caFP.n_z](each gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSource[caFP.n_x, caFP.n_z](
+          each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true), each liquid(inclH2O=caFP.subregions[1, 1, 1].liquid.inclH2O))
@@ -1535,8 +1512,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,-24})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[caFP.n_x, caFP.n_z]
-        (each gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[caFP.n_x, caFP.n_z](
+          each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true), each liquid(inclH2O=caFP.subregions[1, 1, 1].liquid.inclH2O))
@@ -1649,7 +1626,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T),'H+'(initTransX=InitTranslational.none))))
+        Subregion(ionomer('SO3-'(T_IC=T),'H+'(initTransX=InitTrans.none))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -1673,8 +1650,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Subregion(gas(final inclN2=false,H2O(T_IC=T)),graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
+            'incle-'=true, 'e-'(
             redeclare function normalSpec =
                 Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
 
@@ -1689,15 +1666,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(redeclare function thermalSpec =
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
+            'incle-'=true, 'e-'(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
               thermalSet(y=T)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,40})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -1732,8 +1708,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -1752,8 +1727,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclO2=true,
           H2O(
@@ -1788,8 +1762,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclO2=true,
           H2O(redeclare each function materialMeas =
@@ -2033,8 +2006,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -2058,8 +2030,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2072,8 +2043,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2091,8 +2061,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -2126,8 +2095,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -2145,8 +2113,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -2194,8 +2161,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -2370,7 +2336,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-08,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         __Dymola_experimentSetupOutput);
     end FPToFPLinearize;
 
@@ -2447,8 +2413,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -2484,8 +2449,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{58,-70},{78,-50}})));
       Real yset=A.y + B.y;
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2503,8 +2467,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2516,8 +2479,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,40})));
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -2552,8 +2514,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -2572,8 +2533,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -2622,8 +2582,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -2871,8 +2830,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -2896,8 +2854,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2910,8 +2867,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -2929,8 +2885,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -2964,8 +2919,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -2983,8 +2937,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -3032,8 +2985,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -3288,7 +3240,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           gas(H2(p_IC=p - p_H2O_an_in), H2O(
               T_IC=T,
               p_IC=p_H2O_an_in,
-              initTransY=InitTranslational.velocitySS)),
+              initTransY=InitTrans.velocitySS)),
           liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
@@ -3306,8 +3258,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=
-                  T))))
+        Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
       CaCLs.CaCL caCL(
@@ -3346,11 +3297,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
           liquid(H2O(T_IC=T)),
           graphite('C+'(T_IC=T))))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
-      //initTransY=InitTranslational.velocitySS
-      //,initTransY=InitTranslational.velocitySS
+      //initTransY=InitTrans.velocitySS
+      //,initTransY=InitTrans.velocitySS
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -3363,8 +3313,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={-84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-          graphite(
+      Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(redeclare function thermalSpec =
@@ -3385,8 +3334,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=270,
             origin={84,40})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -3419,8 +3367,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -3438,8 +3385,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,64})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x,
-        n_z](gas(
+      Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -3487,8 +3433,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={60,16})));
 
-      Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -3662,7 +3607,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-05,
           Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         __Dymola_experimentSetupOutput);
     end FPToFPVoltage;
   end Examples;
@@ -3699,10 +3644,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
               inclH2=true,
               inclH2O=true,
               H2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -3713,15 +3658,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
                 consTransY=Conservation.IC,
-                initTransX=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initEnergy=InitThermo.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C,
                 consEnergy=Conservation.dynamic))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
@@ -3733,7 +3678,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       // **temp constant temp H2O liq here and for other layers
       // **temp excluded  H2O liq
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1
@@ -3959,10 +3904,10 @@ text layer of this model.</p>
               inclH2=true,
               inclH2O=true,
               H2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -3973,14 +3918,14 @@ text layer of this model.</p>
               'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
-                initTransX=InitTranslational.none,
-                initEnergy=InitScalar.none)),
+                initTransX=InitTrans.none,
+                initEnergy=InitThermo.none)),
             liquid(
               inclH2O=true,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
@@ -3990,7 +3935,7 @@ text layer of this model.</p>
       //tauprime=1e-6*U.s,
 
       // **temp excluded  H2O liq
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
@@ -4313,10 +4258,10 @@ that reference may be outdated.
               inclH2O=true,
               k_DT=fill(epsilon^1.5, 3),
               H2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.p - environment.p_H2O),
               H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
             graphite(
@@ -4332,13 +4277,13 @@ that reference may be outdated.
               'inclH+'=true,
               inclH2O=false,
               k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
-              H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
+              H2O(initEnergy=InitThermo.none, initMaterial=InitThermo.none)),
             liquid(
               inclH2O=false,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
@@ -4353,9 +4298,9 @@ that reference may be outdated.
       // **H+: mu=0.083*U.S/(0.95*U.M*U.cm),
 
       // TODO:  Initialize for zero reaction rate.
-      // (initMaterial=InitScalar.ReactionRate?) for this and CaCL.
+      // (initMaterial=InitThermo.ReactionRate?) for this and CaCL.
 
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
@@ -4539,9 +4484,9 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'SO3-'(initMaterial=InitScalar.pressure),
-              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitScalar.none),
-              H2O(initMaterial=InitScalar.none,initEnergy=InitScalar.none))))
+              'SO3-'(initMaterial=InitThermo.pressure),
+              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitThermo.none),
+              H2O(initMaterial=InitThermo.none,initEnergy=InitThermo.none))))
         annotation (IconMap(primitivesVisible=false));
 
       parameter Q.NumberAbsolute lambda_IC=14
@@ -4666,7 +4611,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-112 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4685,7 +4630,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-115 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4704,7 +4649,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; N-117 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4723,7 +4668,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1110 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4741,7 +4686,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity  of
   DuPont<sup>TM</sup> Nafion&reg; NE-1135 (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).</p>
 
@@ -4760,7 +4705,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-211
   in [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004NRE</a>].</p>
@@ -4780,7 +4725,7 @@ the z axis extends across the width of the channel.</p>
   is based on the protonic conductivity listed for the
   DuPont<sup>TM</sup> Nafion&reg; N and NE series (0.083 S/cm)
   [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004N</a>]
-  and the concentration of protons set by
+  and the density of protons set by
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">FCSys.Characteristics.'H+'.Ionomer</a>
   (0.95 M).  The conductivity is not listed for DuPont<sup>TM</sup> Nafion&reg; NRE-212
   in [<a href=\"modelica://FCSys.UsersGuide.References\">DuPont2004NRE</a>].</p>
@@ -4819,17 +4764,17 @@ the z axis extends across the width of the channel.</p>
               inclO2=true,
               H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -4845,13 +4790,13 @@ the z axis extends across the width of the channel.</p>
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
-              H2O(initEnergy=InitScalar.none, initMaterial=InitScalar.none)),
+              H2O(initEnergy=InitThermo.none, initMaterial=InitThermo.none)),
             liquid(
               inclH2O=false,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
@@ -4864,7 +4809,7 @@ the z axis extends across the width of the channel.</p>
 
       // **temp H2O not in ionomer
 
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Volumetric porosity"
@@ -5062,17 +5007,17 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               inclO2=true,
               H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
               N2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -5082,14 +5027,14 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5),
               'e-'(
                 sigma=40*U.S/(12*U.cm),
-                initTransX=InitTranslational.none,
-                initEnergy=InitScalar.none)),
+                initTransX=InitTrans.none,
+                initEnergy=InitThermo.none)),
             liquid(
               inclH2O=true,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C,
                 consEnergy=Conservation.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
@@ -5102,7 +5047,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       // **temp tauprime (needs units too)
 
       // **temp excl H2O liq
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88
@@ -5445,17 +5390,17 @@ that reference may be outdated.
                 consTransX=Conservation.IC,
                 consEnergy=Conservation.dynamic),
               N2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
-                initTransX=InitTranslational.none,
-                initTransY=InitTranslational.none,
-                initTransZ=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initTransY=InitTrans.none,
+                initTransZ=InitTrans.none,
+                initEnergy=InitThermo.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -5465,15 +5410,15 @@ that reference may be outdated.
               'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
                 consTransY=Conservation.IC,
-                initTransX=InitTranslational.none,
-                initEnergy=InitScalar.none,
+                initTransX=InitTrans.none,
+                initEnergy=InitThermo.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
                 consTransX=Conservation.IC,
-                initMaterial=InitScalar.amount,
+                initMaterial=InitThermo.amount,
                 N_IC=2e-6*U.C))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
@@ -5482,8 +5427,8 @@ that reference may be outdated.
       //final beta=0,
       //final beta=0,
 
-      //initTransX=InitTranslational.none,
-      //initTransX=InitTranslational.none,
+      //initTransX=InitTrans.none,
+      //initTransX=InitTrans.none,
       //
       //final beta=0,
       //final beta=0,
@@ -5496,7 +5441,7 @@ that reference may be outdated.
       // **temp tauprime (needs units too)
 
       // **temp excluded  H2O liq
-      // See the documentation layer of Subregions.Phases.BaseClasses.EmptyPhase
+      // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.1

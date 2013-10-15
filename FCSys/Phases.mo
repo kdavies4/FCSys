@@ -140,9 +140,10 @@ package Phases "Mixtures of species"
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-118,-22},{-98,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
-    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
-      annotation (Placement(transformation(extent={{90,-64},{110,-44}}),
-          iconTransformation(extent={{-60,40},{-40,60}})));
+    Connectors.Amagat amagat(final V=-V) if n_spec > 0
+      "Connector for additivity of volume" annotation (Placement(transformation(
+            extent={{90,-64},{110,-44}}), iconTransformation(extent={{-60,40},{
+              -40,60}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{90,-40},{110,-20}}),
@@ -421,7 +422,7 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
-<p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
+<p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{
               100,100}}), graphics),
@@ -432,7 +433,10 @@ package Phases "Mixtures of species"
   model Graphite "Graphite phase"
     import assert = FCSys.Utilities.assertEval;
     import Modelica.Math.BooleanVectors.countTrue;
-    extends Partial(final n_spec=countTrue({'inclC+','incle-'}));
+    extends Partial(
+      final reduceTrans=false,
+      final reduceThermal=true,
+      final n_spec=countTrue({'inclC+','incle-'}));
 
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
@@ -445,7 +449,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_faces) if
-      'inclC+' constrainedby FCSys.Species.Isochoric(
+      'inclC+' constrainedby FCSys.Species.Incompressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -536,9 +540,10 @@ package Phases "Mixtures of species"
       (Placement(transformation(extent={{60,-40},{80,-20}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
 
-    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
-      annotation (Placement(transformation(extent={{60,-64},{80,-44}}),
-          iconTransformation(extent={{-60,40},{-40,60}})));
+    Connectors.Amagat amagat(final V=-V) if n_spec > 0
+      "Connector for additivity of volume" annotation (Placement(transformation(
+            extent={{60,-64},{80,-44}}), iconTransformation(extent={{-60,40},{-40,
+              60}})));
     Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for an electrochemical reaction" annotation (Placement(
           transformation(extent={{-10,70},{10,90}}), iconTransformation(extent=
@@ -597,6 +602,7 @@ package Phases "Mixtures of species"
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
+
   equation
     // Reactions
     // ---------
@@ -743,8 +749,7 @@ package Phases "Mixtures of species"
       Documentation(info="<html>
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, see the
- <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
-
+ <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -777,7 +782,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_faces) if
-      'inclSO3-' constrainedby FCSys.Species.Isochoric(
+      'inclSO3-' constrainedby FCSys.Species.Incompressible(
       n_faces=n_faces,
       n_intra=1,
       k_intra={k_PEMH2O},
@@ -804,7 +809,7 @@ package Phases "Mixtures of species"
 
     replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_faces) if
       'inclH+' and not (inclHOR or inclORR) constrainedby
-      FCSys.Species.Compressible(
+      FCSys.Species.Incompressible(
       n_faces=n_faces,
       n_intra=1,
       k_intra={k_EOD},
@@ -883,9 +888,10 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-40},{100,-20}}),
           iconTransformation(extent={{80,-60},{100,-80}})));
-    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
-      annotation (Placement(transformation(extent={{80,-76},{100,-56}}),
-          iconTransformation(extent={{-60,40},{-40,60}})));
+    Connectors.Amagat amagat(final V=-V) if n_spec > 0
+      "Connector for additivity of volume" annotation (Placement(transformation(
+            extent={{80,-76},{100,-56}}), iconTransformation(extent={{-60,40},{
+              -40,60}})));
 
     Connectors.Reaction chemical(final n_trans=n_trans) if inclHOR or inclORR
       "Connector for an electrochemical reaction" annotation (Placement(
@@ -1153,8 +1159,7 @@ package Phases "Mixtures of species"
     <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> 
     for additional assumptions.
     For more information, see the
- <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
-
+ <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -1175,7 +1180,7 @@ package Phases "Mixtures of species"
         __Dymola_joinNext=true));
 
     replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_faces) if inclH2O
-      constrainedby FCSys.Species.Isochoric(
+      constrainedby FCSys.Species.Incompressible(
       n_faces=n_faces,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
@@ -1217,9 +1222,10 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{30,-24},{50,-4}}), iconTransformation(
             extent={{80,-60},{100,-80}})));
-    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
-      annotation (Placement(transformation(extent={{30,-38},{50,-18}}),
-          iconTransformation(extent={{-60,40},{-40,60}})));
+    Connectors.Amagat amagat(final V=-V) if n_spec > 0
+      "Connector for additivity of volume" annotation (Placement(transformation(
+            extent={{30,-38},{50,-18}}), iconTransformation(extent={{-60,40},{-40,
+              60}})));
     Connectors.PhysicalBus physical if inclH2O annotation (Placement(
           transformation(extent={{-19,50},{1,70}}), iconTransformation(extent={
               {20,-94},{40,-74}})));
@@ -1228,6 +1234,7 @@ package Phases "Mixtures of species"
     Conditions.Adapters.AmagatDalton DA if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
       annotation (Placement(transformation(extent={{30,-38},{10,-18}})));
+
   equation
     // Inert exchange
     connect(H2O.inter, inter) annotation (Line(
@@ -1288,8 +1295,7 @@ package Phases "Mixtures of species"
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation of the
- <a href=\"modelica://FCSys.Phases.BaseClasses.EmptyPhase\">EmptyPhase</a> model.</p></html>"),
-
+ <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Icon(graphics),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
@@ -1307,31 +1313,33 @@ protected
       annotation (Dialog(connectorSizing=true),HideResult=n_spec == 0);
 
     // Geometric parameters
-    parameter Q.NumberAbsolute k_DT[Axis](
+    inner parameter Q.NumberAbsolute k[Axis](
       each min=Modelica.Constants.small,
       each final nominal=1) = {1,1,1} if n_spec > 0
       "Scaling factor for diffusive transport" annotation (Dialog(group=
-            "Geometry", __Dymola_label=
-            "<html><b><i>k</i><sub>DT</sub></b></html>"));
+            "Geometry", __Dymola_label="<html><b><i>k</i></b></html>"));
     inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
-       > 0 "Coupling factors for exchange with other phases" annotation (Dialog(
-          group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>inter</sub></html>"));
+       > 0 "Coupling factors with other phases" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>k</i><sub>inter</sub></html>"));
     parameter Integer n_faces=1 "Number of pairs of faces"
       annotation (HideResult=true);
     // This cannot be an inner/outer parameter in Dymola 2014.
 
     // Assumptions
-    parameter Boolean reduceTrans=false "Same velocity for all species"
+    inner parameter Boolean reduceTrans=false "Same velocity for all species"
       annotation (
       HideResult=true,
       Dialog(tab="Assumptions", enable=n_spec > 1),
       choices(__Dymola_checkBox=true));
-    parameter Boolean reduceThermal=false "Same temperature for all species"
-      annotation (
+    inner parameter Boolean reduceThermal=false
+      "Same temperature for all species" annotation (
       HideResult=true,
       Dialog(tab="Assumptions", enable=n_spec > 1),
       choices(__Dymola_checkBox=true));
+
+    inner Q.Volume V if n_spec > 0 "Volume";
+    final inner Q.Number epsilon=V/product(L) if n_spec > 0
+      "Volumetric filling ratio";
 
   protected
     outer parameter Q.Length L[Axis] if n_spec > 0 "Length" annotation (
@@ -1340,9 +1348,8 @@ protected
     outer parameter Q.Area A[Axis] if n_spec > 0 "Cross-sectional area"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-
-    final inner parameter Q.Area kA[Axis]=k_DT .* A if n_spec > 0
-      "Effective cross-sectional area";
+    final inner Q.Length Lprime[Axis]=k*epsilon if n_spec > 0
+      "Effective area divided by transport length";
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage="This model should be used within a subregion model.
@@ -1372,17 +1379,13 @@ protected
     annotation (
       defaultComponentPrefixes="replaceable",
       defaultComponentName="phase",
-      Documentation(info="<html><p>The area fill factor (<b><i>k</i></b>) is a vector which inversely scales all
-    the transport coefficients (&beta;, &zeta;, &eta;, and &theta;) of all of the species
+      Documentation(info="<html><p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects 
+    the rates of diffusion of material, transverse translational momentum, and energy of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
-    porosity or tortousity.  These effects may be anisotropic.</p>
-
-    <p>Porosity is often quoted in material data sheets (e.g.,
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>]) as volumetric porosity.  Using the
+    porosity or tortousity.  These effects may be anisotropic. Using the
     Bruggeman correction factor [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
-    the area fill factor for the solid should be set to (1 - &epsilon;)<sup>3/2</sup>
-    along each axis, where &epsilon; is the volumetric porosity (or volumetric fill factor
-    of the gas).</p>
+    the scaling factor for diffusive transport (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>3/2</sup>
+    along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.</p>
 
 
 </html>"),

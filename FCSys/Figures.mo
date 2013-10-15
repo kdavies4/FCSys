@@ -1764,7 +1764,7 @@ Intra"),Ellipse(
         gas(H2(p_IC=p - p_H2O_an_in), H2O(
             T_IC=T,
             p_IC=p_H2O_an_in,
-            initTransY=InitTranslational.velocitySS)),
+            initTransY=InitTrans.velocitySS)),
         liquid(H2O(T_IC=T)),
         graphite('C+'(T_IC=T))))
       annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
@@ -1782,7 +1782,7 @@ Intra"),Ellipse(
     Regions.PEMs.PEM PEM(
       final L_y=L_y,
       final L_z=L_z,
-      Subregion(ionomer('H+'(initTransX=InitTranslational.none), 'SO3-'(T_IC=T))))
+      Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
       annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
     Regions.CaCLs.CaCL caCL(
@@ -1821,11 +1821,10 @@ Intra"),Ellipse(
         liquid(H2O(T_IC=T)),
         graphite('C+'(T_IC=T))))
       annotation (Placement(transformation(extent={{50,30},{70,50}})));
-    //initTransY=InitTranslational.velocitySS
-    //,initTransY=InitTranslational.velocitySS
+    //initTransY=InitTrans.velocitySS
+    //,initTransY=InitTrans.velocitySS
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusFlows anBC[n_y, n_z](each
-        graphite(
+    Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
         'inclC+'=true,
         'incle-'=true,
         'C+'(redeclare function thermalSpec =
@@ -1838,8 +1837,7 @@ Intra"),Ellipse(
           rotation=270,
           origin={-84,40})));
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusFlows caBC[n_y, n_z](each
-        graphite(
+    Conditions.ByConnector.FaceBus.Single.Flows caBC[n_y, n_z](each graphite(
         'inclC+'=true,
         'incle-'=true,
         'C+'(redeclare function thermalSpec =
@@ -1860,8 +1858,7 @@ Intra"),Ellipse(
           rotation=270,
           origin={84,40})));
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusEfforts anSource[anFP.n_x, n_z]
-      (gas(
+    Conditions.ByConnector.FaceBus.Single.Efforts anSource[anFP.n_x, n_z](gas(
         each inclH2=true,
         each inclH2O=true,
         H2(
@@ -1894,8 +1891,7 @@ Intra"),Ellipse(
           rotation=180,
           origin={-60,16})));
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusFlows anSink[anFP.n_x, n_z](
-        gas(
+    Conditions.ByConnector.FaceBus.Single.Flows anSink[anFP.n_x, n_z](gas(
         each inclH2=true,
         each inclH2O=true,
         H2(redeclare each function materialMeas =
@@ -1913,8 +1909,7 @@ Intra"),Ellipse(
           rotation=0,
           origin={-60,64})));
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusEfforts caSource[caFP.n_x, n_z]
-      (gas(
+    Conditions.ByConnector.FaceBus.Single.Efforts caSource[caFP.n_x, n_z](gas(
         each inclH2O=true,
         each inclN2=true,
         each inclO2=true,
@@ -1962,8 +1957,7 @@ Intra"),Ellipse(
           rotation=180,
           origin={60,16})));
 
-    Conditions.ByConnector.FaceBus.Single.FaceBusFlows caSink[caFP.n_x, n_z](
-        gas(
+    Conditions.ByConnector.FaceBus.Single.Flows caSink[caFP.n_x, n_z](gas(
         each inclH2O=true,
         each inclN2=true,
         each inclO2=true,

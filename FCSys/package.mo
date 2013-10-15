@@ -16,16 +16,16 @@ import Q = FCSys.Quantities;
 // Enumerations
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Species.Enumerations.Axis;
-import FCSys.Species.Enumerations.Orient;
-import FCSys.Species.Enumerations.Side;
-import FCSys.Species.Enumerations.Conservation;
-import FCSys.Species.Enumerations.InitScalar;
-import FCSys.Species.Enumerations.InitTranslational;
 import FCSys.Conditions.TestStands.Enumerations.ElectricalSpec;
 import FCSys.Conditions.TestStands.Enumerations.FlowSpec;
 import FCSys.Conditions.TestStands.Enumerations.HumiditySpec;
 import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
+import FCSys.Species.Enumerations.Axis;
+import FCSys.Species.Enumerations.Orient;
+import FCSys.Species.Enumerations.Side;
+import FCSys.Species.Enumerations.Conservation;
+import FCSys.Species.Enumerations.InitThermo;
+import FCSys.Species.Enumerations.InitTrans;
 
 
 package UsersGuide "User's Guide"
@@ -274,30 +274,40 @@ package UsersGuide "User's Guide"
     annotation (
       preferedView="info",
       DocumentationClass=true,
-      Documentation(info="<html><p>The following terms appear in this library and are uncommon or unique here:
-    <ul>
+      Documentation(info="<html><p>The following terms are uncommon or are used in a unique manner within the library:
+    <ul>            
       <li><b>configuration</b> &ndash; (<i>noun</i>) a species in a certain phase within a subregion</li>
 
-      <li><b>dynamic compressibility</b> &ndash; (<i>noun</i>) reciprocal of volume, second, or bulk viscosity
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())</li>
+      <li><b>density</b> &ndash; (<i>noun</i>) amount of material per volume (i.e., concentration, molar concentration, or number density) [N L<sup>-3</sup>].  
+      Note that mass per volume is volumic mass (see <i>massic</i> below).</li>
 
       <li><b>equivalent current</b> &ndash; (<i>noun</i>) rate of supply of a reactant required to support the given current 
-      assuming the reactant is entirely consumed (complete utilization)</li>
+      assuming the reactant is entirely consumed (complete utilization) [N T<sup>-1</sup>]</li>
       
       <li><b>exchange</b> &ndash; (<i>noun</i>) transfer of a conserved quantity among configurations within a region</li>
 
-      <li><b>Gibbs potential</b> &ndash; (<i>noun</i>) specific Gibbs energy</li>
+      <li><b>fluidity</b> &ndash; (<i>noun</i>) reciprocal of dynamic viscosity [L T M<sup>-1</sup>]
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>())</li>
+
+      <li><b>Gibbs potential</b> &ndash; (<i>noun</i>) specific Gibbs energy [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</li>
       
-      <li><b>mass</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated mass</li>
+      <li><b>lineic</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated length [&times; L<sup>-1</sup>]</li>
 
-      <li><b>specific</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated amount of material</li>
+      <li><b>massic</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated mass [&times; M<sup>-1</sup>]</li>
 
-      <li><b>thermal independity</b> &ndash; (<i>noun</i>) extent to which an exchange of thermal energy between species causes or requires a temperature difference
+      <li><b>particle number</b> &ndash; (<i>noun</i>) number of particles or amount of material [N].  Note that these terms are equivalent due to the system of units 
+      (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</li>
+
+      <li><b>specific</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated particle number [&times; N<sup>-1</sup>]</li>
+
+      <li><b>thermal independity</b> &ndash; (<i>noun</i>) extent to which an exchange of thermal energy between species causes or requires a temperature difference [T]
       (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())</li>
 
-      <li><b>translational Nusselt number</b> &ndash; (<i>noun</i>) correction to Newton's law of viscous shear for the shape of the flow profile</li>
+      <li><b>translational Nusselt number</b> &ndash; (<i>noun</i>) correction to Newton's law of viscous shear for the shape of the flow profile [1]</li>
 
       <li><b>transport</b> &ndash; (<i>noun</i>) transfer of a conserved quantity between adjacent subregions</li>
+
+      <li><b>volumic</b> &ndash; (<i>adj</i>) adjective that indicates the quotient of the following quantity and its associated volume [&times; L<sup>-3</sup>] (e.g., volumic mass [M L<sup>-3</sup>])</li>
     </ul></p>
     </table>
     </html>"));

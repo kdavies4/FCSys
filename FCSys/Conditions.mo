@@ -8,7 +8,7 @@ package Conditions "Models to specify and measure operating conditions"
     model FaceCondition "Test the conditions for the face of a subregion"
       extends Modelica.Icons.Example;
 
-      ByConnector.FaceBus.Single.FaceBusEfforts face
+      ByConnector.FaceBus.Single.Efforts face
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -1972,7 +1972,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model Potential "Specify chemical potential (measure current)"
+      model Potential "Specify electrochemical potential (measure current)"
         extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.Ndot);
 
       equation
@@ -1980,7 +1980,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Potential;
 
-      model Current "Specify current (measure chemical potential)"
+      model Current "Specify current (measure electrochemical potential)"
         extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.mu);
 
       equation
@@ -2112,7 +2112,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model ReactionFlows
+      model Flows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.ElectrochemNegative\">ElectrochemNegative</a> or <a href=\"modelica://FCSys.Connectors.ElectrochemPositive\">ElectrochemPositive</a> connector, with flows specified by default</html>"
         import Modelica.Math.BooleanVectors.countTrue;
         import Modelica.Math.BooleanVectors.enumerate;
@@ -2555,13 +2555,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             points={{-69,-70},{-60,-70},{-60,-80},{-36,-80}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(graphics));
-      end ReactionFlows;
+        annotation (
+          defaultComponentName="reaction",
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics),
+          Icon(graphics));
+      end Flows;
 
-      model ReactionEfforts
+      model Efforts
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.ElectrochemNegative\">ElectrochemNegative</a> or <a href=\"modelica://FCSys.Connectors.ElectrochemPositive\">ElectrochemPositive</a> connector, with efforts specified by default</html>"
-        extends FCSys.Conditions.ByConnector.Reaction.ReactionFlows(
+        extends FCSys.Conditions.ByConnector.Reaction.Flows(
           redeclare replaceable function materialSpec = Material.reactionRate,
           redeclare replaceable function transXSpec = Translational.velocity,
           redeclare replaceable function transYSpec = Translational.velocity,
@@ -2574,9 +2577,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transZMeas = Translational.force,
           redeclare replaceable function thermalMeas = Thermal.heatRate);
 
-        annotation (defaultComponentName="electrochem");
+        annotation (defaultComponentName="reaction");
 
-      end ReactionEfforts;
+      end Efforts;
 
       package Material "Material conditions"
         extends Modelica.Icons.Package;
@@ -2727,7 +2730,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> or <a href=\"modelica://FCSys.Connectors.PhysicalBusNode\">PhysicalBusNode</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model PhysicalBusFlows
+      model Flows
         "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with flows specified by default</html>"
 
         extends FCSys.Icons.Conditions.SingleShort;
@@ -3116,11 +3119,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             thickness=0.5,
             smooth=Smooth.None));
         annotation (defaultComponentName="physical");
-      end PhysicalBusFlows;
+      end Flows;
 
-      model PhysicalBusEfforts
+      model Efforts
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with efforts specified by default</html>"
-        extends PhysicalBusFlows(
+        extends Flows(
           redeclare replaceable Physical.Current 'C+'(
             final inclTransX,
             final inclTransY,
@@ -3163,7 +3166,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             final formula));
         annotation (defaultComponentName="physical");
 
-      end PhysicalBusEfforts;
+      end Efforts;
       annotation (Documentation(info="<html><p>All of the submodels for the individual species in
   <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Gas\">Gas</a>,
   <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Graphite\">Graphite</a>,
@@ -3329,7 +3332,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         extends Modelica.Icons.Package;
 
-        model FaceBusFlows
+        model Flows
           "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors, with flows specified by default</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -3479,9 +3482,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face", Diagram(graphics));
-        end FaceBusFlows;
+        end Flows;
 
-        model FaceBusFluidOnly
+        model FlowsFluidOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the fluid phases included</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -3576,9 +3579,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face");
-        end FaceBusFluidOnly;
+        end FlowsFluidOnly;
 
-        model FaceBusGraphiteOnly
+        model FlowsGraphiteOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the graphite phase</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -3643,17 +3646,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               smooth=Smooth.None));
 
           annotation (defaultComponentName="face", Diagram(graphics));
-        end FaceBusGraphiteOnly;
+        end FlowsGraphiteOnly;
 
-        model FaceBusEfforts
+        model Efforts
           "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors, with differences in efforts specified by default</html>"
-          extends FaceBusFlows(
+          extends Flows(
             gas(
               H2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3662,8 +3663,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3673,8 +3672,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3683,8 +3680,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3694,8 +3689,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               N2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3704,8 +3697,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3715,8 +3706,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               O2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3725,8 +3714,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3736,8 +3723,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             graphite('C+'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3746,8 +3731,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3756,8 +3739,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.heatRate), 'e-'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3766,8 +3747,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3778,8 +3757,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               'SO3-'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3788,8 +3765,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3799,8 +3774,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               'H+'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3809,8 +3782,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3820,8 +3791,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3830,8 +3799,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -3841,8 +3808,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Pair.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -3851,17 +3816,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Pair.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function precedingMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)));
-          // See note in ElectrochemEfforts.
+
           annotation (defaultComponentName="face",Diagram(graphics));
-        end FaceBusEfforts;
+        end Efforts;
 
         package Phases
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
@@ -4379,7 +4342,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         extends Modelica.Icons.Package;
 
-        model FaceBusFlows
+        model Flows
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -4497,9 +4460,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face");
-        end FaceBusFlows;
+        end Flows;
 
-        model FaceBusFluidOnly
+        model FlowsFluidOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the fluid phases included</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -4569,9 +4532,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               thickness=0.5,
               smooth=Smooth.None));
           annotation (defaultComponentName="face");
-        end FaceBusFluidOnly;
+        end FlowsFluidOnly;
 
-        model FaceBusGraphiteOnly
+        model FlowsGraphiteOnly
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with flows specified by default and only the graphite phase</html>"
 
           extends FCSys.Icons.Conditions.SingleShort;
@@ -4618,17 +4581,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               smooth=Smooth.None));
 
           annotation (defaultComponentName="face");
-        end FaceBusGraphiteOnly;
+        end FlowsGraphiteOnly;
 
-        model FaceBusEfforts
+        model Efforts
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with efforts specified by default</html>"
-          extends FaceBusFlows(
+          extends Flows(
             gas(
               H2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4637,8 +4598,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4652,8 +4611,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4662,8 +4619,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4677,8 +4632,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               N2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4687,8 +4640,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4702,8 +4653,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               O2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4712,8 +4661,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4727,8 +4674,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             graphite('C+'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4737,8 +4682,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4751,8 +4694,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       298.15*U.K)),'e-'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4761,8 +4702,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4777,8 +4716,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               'SO3-'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4787,8 +4724,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4802,8 +4737,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               'H+'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4812,8 +4745,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4827,8 +4758,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4837,8 +4766,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4852,8 +4779,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function normalSpec =
-                    Face.Single.Translational.velocity,
                 redeclare replaceable function followingSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function precedingSpec =
@@ -4862,8 +4787,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function normalMeas =
-                    Face.Single.Translational.force,
                 redeclare replaceable function followingMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function precedingMeas =
@@ -4878,9 +4801,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
 
-          // See note in ElectrochemEfforts.
           annotation (defaultComponentName="face",Diagram(graphics));
-        end FaceBusEfforts;
+        end Efforts;
 
         package Phases
           "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
@@ -4900,8 +4822,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Conditions.ByConnector.Face.Single.FaceFlows H2 if inclH2
-              "Include H2" annotation (Dialog(
+            Face.Single.Flows H2 if inclH2 "Include H2" annotation (Dialog(
                 group="Species",
                 __Dymola_label="<html>H<sub>2</sub> conditions</html>",
                 __Dymola_descriptionLabel=true,
@@ -4917,7 +4838,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows H2O if inclH2O "H2O conditions" annotation (
+            Face.Single.Flows H2O if inclH2O "H2O conditions" annotation (
                 Dialog(
                 group="Species",
                 __Dymola_label="<html>H<sub>2</sub>O conditions</html>",
@@ -4934,8 +4855,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows N2 if inclN2 "N2 conditions" annotation (
-                Dialog(
+            Face.Single.Flows N2 if inclN2 "N2 conditions" annotation (Dialog(
                 group="Species",
                 __Dymola_label="<html>N<sub>2</sub>Conditions</html>",
                 __Dymola_descriptionLabel=true,
@@ -4951,8 +4871,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows O2 if inclO2 "O2 conditions" annotation (
-                Dialog(
+            Face.Single.Flows O2 if inclO2 "O2 conditions" annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
                 __Dymola_label="<html>O<sub>2</sub> conditions</html>",
@@ -5056,7 +4975,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows 'C+' if 'inclC+' "C+ conditions" annotation (
+            Face.Single.Flows 'C+' if 'inclC+' "C+ conditions" annotation (
                 Dialog(
                 group="Species",
                 __Dymola_label="<html>C<sup>+</sup> conditions</html>",
@@ -5073,7 +4992,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows 'e-' if 'incle-' "e- conditions" annotation (
+            Face.Single.Flows 'e-' if 'incle-' "e- conditions" annotation (
                 Dialog(
                 group="Species",
                 __Dymola_label="<html>e<sup>-</sup> conditions</html>",
@@ -5141,7 +5060,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows 'SO3-' if 'inclSO3-' "SO3- conditions"
+            Face.Single.Flows 'SO3-' if 'inclSO3-' "SO3- conditions"
               annotation (Dialog(
                 group="Species",
                 __Dymola_label=
@@ -5159,8 +5078,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows 'H+' if 'inclH+' "H+ conditions>" annotation
-              (Dialog(
+            Face.Single.Flows 'H+' if 'inclH+' "H+ conditions>" annotation (
+                Dialog(
                 group="Species",
                 __Dymola_label="<html>H<sup>+</sup> conditions</html",
                 __Dymola_descriptionLabel=true,
@@ -5176,7 +5095,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows H2O if inclH2O "H2O conditions" annotation (
+            Face.Single.Flows H2O if inclH2O "H2O conditions" annotation (
                 Dialog(
                 group="Species",
                 __Dymola_label="<html>H<sub>2</sub>O conditions</html>",
@@ -5261,7 +5180,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Face.Single.FaceFlows H2O if inclH2O "H2O conditions" annotation (
+            Face.Single.Flows H2O if inclH2O "H2O conditions" annotation (
                 Dialog(
                 group="Species",
                 __Dymola_label="<html>H<sub>2</sub>O conditions</html>",
@@ -5368,31 +5287,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-70,40})));
-          //
-          // Normal translational
-          replaceable function normalSpec = Translational.force constrainedby
-            Translational.Partial "Quantity" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(tab="Specification", group="Normal translational"),
-            Placement(transformation(extent={{-52,18},{-32,38}})));
-          parameter Boolean internalNormal=true "Use internal specification"
-            annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(tab="Specification", group="Normal translational"));
-          replaceable Sources.RealExpression normalSet if internalNormal
-            constrainedby Modelica.Blocks.Interfaces.SO
-            "Source of internal specification" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(
-              tab="Specification",
-              group="Normal translational",
-              enable=internalNormal),
-            Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-30,40})));
+                origin={-50,40})));
           //
           // 1st transverse
           replaceable function followingSpec = Translational.force
@@ -5416,7 +5311,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={10,40})));
+                origin={-10,40})));
 
           //
           // 2nd transverse
@@ -5442,7 +5337,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={50,40})));
+                origin={30,40})));
 
           //
           // Thermal
@@ -5468,7 +5363,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={90,40})));
+                origin={70,40})));
 
           // Measurement
           // -----------
@@ -5478,10 +5373,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Normal translational
-          replaceable function normalMeas = Translational.velocity
-            constrainedby Translational.Partial "Normal translational quantity"
-            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
-                  "Measurement"));
 
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
@@ -5533,25 +5424,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Material specification" annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,70}), iconTransformation(
+                origin={-60,70}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-80,110})));
-          Connectors.RealInputInternal u_normal if not internalNormal
-            "Normal translational specification" annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-40,70}), iconTransformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-40,110})));
           Connectors.RealInputInternal u_following if not internalFollowing
             "First transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={0,70}), iconTransformation(
+                origin={-20,70}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,110})));
@@ -5560,7 +5442,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={40,70}), iconTransformation(
+                origin={20,70}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={40,110})));
@@ -5568,7 +5450,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Thermal specification" annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={80,70}), iconTransformation(
+                origin={60,70}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={80,110})));
@@ -5585,20 +5467,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,6})));
-          Connectors.RealOutputInternal _u_normal=normalSpec(
-                      Deltap,
-                      negative.Ndot,
-                      Deltaphi,
-                      negative.mPhidot,
-                      DeltaT,
-                      negative.Qdot,
-                      orient=Orient.normal)
-            "Internal, working value of normal translational specification"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-40,6})));
+                origin={-60,6})));
           Connectors.RealOutputInternal _u_following=followingSpec(
                       Deltap,
                       negative.Ndot,
@@ -5611,7 +5480,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={0,6})));
+                origin={-20,6})));
           Connectors.RealOutputInternal _u_preceding=precedingSpec(
                       Deltap,
                       negative.Ndot,
@@ -5624,7 +5493,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={40,6})));
+                origin={20,6})));
           Connectors.RealOutputInternal _u_thermal=thermalSpec(
                       Deltap,
                       negative.Ndot,
@@ -5636,7 +5505,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={80,6})));
+                origin={60,6})));
 
           Sources.RealExpression materialOut(y=materialMeas(
                         Deltap,
@@ -5648,19 +5517,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,-70})));
-          Sources.RealExpression normalOut(y=normalMeas(
-                        Deltap,
-                        negative.Ndot,
-                        Deltaphi,
-                        negative.mPhidot,
-                        DeltaT,
-                        negative.Qdot,
-                        orient=Orient.normal)) "Generate the normal output"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-40,-70})));
+                origin={-60,-70})));
           Sources.RealExpression precedingOut(y=precedingMeas(
                         Deltap,
                         negative.Ndot,
@@ -5673,7 +5530,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={40,-70})));
+                origin={20,-70})));
           Sources.RealExpression followingOut(y=followingMeas(
                         Deltap,
                         negative.Ndot,
@@ -5686,7 +5543,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={0,-70})));
+                origin={-20,-70})));
           Sources.RealExpression thermalOut(y=thermalMeas(
                         Deltap,
                         negative.Ndot,
@@ -5697,7 +5554,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={80,-70})));
+                origin={60,-70})));
         equation
           // Differences in efforts
           Deltap = positive.p - negative.p;
@@ -5706,136 +5563,120 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Conservation (without storage)
           0 = positive.Ndot + negative.Ndot "Material";
-          zeros(3) = positive.mPhidot + negative.mPhidot
-            "Translational momentum";
+          {0,0} = positive.mPhidot + negative.mPhidot "Translational momentum";
           DeltaT = positive.Qdot + negative.Qdot "Energy";
 
           // Material
           connect(u_material, _u_material) annotation (Line(
-              points={{-80,70},{-80,6}},
+              points={{-60,70},{-60,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(materialSet.y, _u_material) annotation (Line(
-              points={{-70,29},{-70,20},{-80,20},{-80,6}},
+              points={{-50,29},{-50,20},{-60,20},{-60,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           // Normal translational
-          connect(u_normal, _u_normal) annotation (Line(
-              points={{-40,70},{-40,6}},
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          connect(normalSet.y, _u_normal) annotation (Line(
-              points={{-30,29},{-30,20},{-40,20},{-40,6}},
-              color={0,0,127},
-              smooth=Smooth.None));
 
           // First transverse
           connect(u_following, _u_following) annotation (Line(
-              points={{5.55112e-16,70},{5.55112e-16,54},{5.55112e-16,54},{
-                  5.55112e-16,38},{5.55112e-16,6},{5.55112e-16,6}},
+              points={{-20,70},{-20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(followingSet.y, _u_following) annotation (Line(
-              points={{10,29},{10,20},{5.55112e-16,20},{5.55112e-16,6}},
+              points={{-10,29},{-10,20},{-20,20},{-20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           // Second transverse
           connect(u_preceding, _u_preceding) annotation (Line(
-              points={{40,70},{40,6}},
+              points={{20,70},{20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(precedingSet.y, _u_preceding) annotation (Line(
-              points={{50,29},{50,20},{40,20},{40,6}},
+              points={{30,29},{30,20},{20,20},{20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           // Thermal
           connect(u_thermal, _u_thermal) annotation (Line(
-              points={{80,70},{80,6}},
+              points={{60,70},{60,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(thermalSet.y, _u_thermal) annotation (Line(
-              points={{90,29},{90,20},{80,20},{80,6}},
+              points={{70,29},{70,20},{60,20},{60,6}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(materialOut.y, y.material) annotation (Line(
-              points={{-80,-81},{-80,-90},{0,-90},{0,-110},{5.55112e-16,-110}},
-
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          connect(normalOut.y, y.normal) annotation (Line(
-              points={{-40,-81},{-40,-90},{0,-90},{0,-110},{5.55112e-16,-110}},
-
+              points={{-60,-81},{-60,-90},{0,-90},{0,-110}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(followingOut.y, y.following) annotation (Line(
-              points={{-1.40998e-15,-81},{-1.40998e-15,-91},{0,-90},{
-                  5.55112e-16,-110}},
+              points={{-20,-81},{-20,-90},{0,-90},{0,-110}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(precedingOut.y, y.preceding) annotation (Line(
-              points={{40,-81},{40,-90},{0,-90},{0,-110},{5.55112e-16,-110}},
+              points={{20,-81},{20,-90},{0,-90},{0,-110}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(u_material, u.material) annotation (Line(
-              points={{-80,70},{-80,90},{0,90},{0,110},{5.55112e-16,110}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(u_normal, u.normal) annotation (Line(
-              points={{-40,70},{-40,90},{0,90},{0,110},{5.55112e-16,110}},
+              points={{-60,70},{-60,90},{0,90},{0,110}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_following, u.following) annotation (Line(
-              points={{5.55112e-16,70},{0,70},{0,110},{5.55112e-16,110}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(u_preceding, u.preceding) annotation (Line(
-              points={{40,70},{40,90},{0,90},{0,110},{5.55112e-16,110}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(u_thermal, u.thermal) annotation (Line(
-              points={{80,70},{80,90},{0,90},{0,110},{5.55112e-16,110}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(thermalOut.y, y.thermal) annotation (Line(
-              points={{80,-81},{80,-90},{0,-90},{0,-110},{5.55112e-16,-110}},
+              points={{-20,70},{-20,80},{-20,80},{-20,90},{0,90},{0,110},{0,110}},
+
               color={0,0,127},
               smooth=Smooth.None));
 
-          annotation (Diagram(graphics), Icon(graphics));
+          connect(u_preceding, u.preceding) annotation (Line(
+              points={{20,70},{20,90},{-20,90},{-20,90},{0,90},{0,110},{0,110}},
+
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          connect(u_thermal, u.thermal) annotation (Line(
+              points={{60,70},{60,90},{-20,90},{-20,90},{0,90},{0,110},{0,110}},
+
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          connect(thermalOut.y, y.thermal) annotation (Line(
+              points={{60,-81},{60,-90},{0,-90},{0,-110}},
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          annotation (
+            defaultComponentName="face",
+            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics),
+            Icon(graphics));
         end FaceFlows;
 
         model FaceEfforts
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with difference in efforts specified by default</html>"
           extends FaceFlows(
             redeclare replaceable function materialSpec = Material.pressure,
-            redeclare replaceable function normalSpec = Translational.velocity,
-
             redeclare replaceable function followingSpec =
                 Translational.velocity,
             redeclare replaceable function precedingSpec =
                 Translational.velocity,
             redeclare replaceable function thermalSpec = Thermal.temperature,
             redeclare replaceable function materialMeas = Material.current,
-            redeclare replaceable function normalMeas = Translational.force,
             redeclare replaceable function followingMeas = Translational.force,
 
             redeclare replaceable function precedingMeas = Translational.force,
 
             redeclare replaceable function thermalMeas = Thermal.heatRate);
 
-          // See note in ElectrochemEfforts.
+          // See note in ReactionEfforts.
           annotation (defaultComponentName="face");
 
         end FaceEfforts;
@@ -5851,7 +5692,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Inline=true);
           end pressure;
 
-          function current "Diffusion current"
+          function current "Current"
             extends Partial;
 
           algorithm
@@ -5992,7 +5833,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package Single
         "<html>Conditions for a single <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
         extends Modelica.Icons.Package;
-        model FaceFlows
+        model Flows
           "<html>Conditions for a <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connector, with flows specified by default</html>"
           import Modelica.Blocks.Sources;
           extends FCSys.Icons.Conditions.SingleShort;
@@ -6021,32 +5862,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-40,90})));
+                origin={-40,70})));
           //
           // Normal translational
-          replaceable function normalSpec = TranslationalNormal.force
-            constrainedby Translational.Partial "Quantity" annotation (
-            __Dymola_choicesFromPackage=true,
-            choicesAllMatching=true,
-            Dialog(tab="Specification", group="Normal translational"),
-            Placement(transformation(extent={{-52,18},{-32,38}})));
           parameter Boolean internalNormal=true "Use internal specification"
             annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Normal translational"));
-          replaceable Sources.RealExpression normalSet if internalNormal
-            constrainedby Modelica.Blocks.Interfaces.SO
-            "Source of internal specification" annotation (
-            __Dymola_choicesFromPackage=true,
-            Dialog(
-              tab="Specification",
-              group="Normal translational",
-              enable=internalNormal),
-            Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-40,50})));
           //
           // 1st transverse
           replaceable function followingSpec = Translational.force
@@ -6070,7 +5893,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-40,10})));
+                origin={-40,30})));
 
           //
           // 2nd transverse
@@ -6096,7 +5919,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-40,-30})));
+                origin={-40,-10})));
 
           //
           // Thermal
@@ -6122,22 +5945,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-40,-70})));
+                origin={-40,-50})));
 
           // Measurement
           // -----------
           // Material
-          replaceable function materialMeas = Material.concentration
-            constrainedby Material.Partial "Material quantity" annotation (
+          replaceable function materialMeas = Material.density constrainedby
+            Material.Partial "Material quantity" annotation (
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Normal translational
-          replaceable function normalMeas = TranslationalNormal.velocity
-            constrainedby Translational.Partial "Normal translational quantity"
-            annotation (
-            __Dymola_choicesFromPackage=true,
-            choicesAllMatching=true,
-            Dialog(tab="Measurement"));
 
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
@@ -6173,50 +5990,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Material specification" annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-70,80})));
-          Connectors.RealInputInternal u_normal if not internalNormal
-            "Normal translational specification" annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={-70,40})));
+                origin={-70,60})));
           Connectors.RealInputInternal u_following if not internalFollowing
             "First transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-70,0})));
+                origin={-70,20})));
           Connectors.RealInputInternal u_preceding if not internalPreceding
             "Second transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-70,-40})));
+                origin={-70,-20})));
           Connectors.RealInputInternal u_thermal if not internalThermal
             "Thermal specification" annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-70,-80})));
+                origin={-70,-60})));
 
           Connectors.RealOutputInternal _u_material
             "Internal, working value of material specification" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={4,80})));
-          Connectors.RealOutputInternal _u_normal=normalSpec(
-                      face.p,
-                      face.Ndot,
-                      face.phi,
-                      face.mPhidot,
-                      face.T,
-                      face.Qdot,
-                      orient=Orient.normal)
-            "Internal, working value of normal translational specification"
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={4,40})));
+                origin={4,60})));
           Connectors.RealOutputInternal _u_following=followingSpec(
                       face.p,
                       face.Ndot,
@@ -6229,7 +6027,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={4,0})));
+                origin={4,20})));
           Connectors.RealOutputInternal _u_preceding=precedingSpec(
                       face.p,
                       face.Ndot,
@@ -6242,14 +6040,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={4,-40}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={4,-20}), iconTransformation(extent={{-10,-10},{10,10}},
                   origin={6,-48})));
           Connectors.RealOutputInternal _u_thermal
             "Internal, working value of thermal specification" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={4,-80})));
+                origin={4,-60})));
         public
           Sources.RealExpression materialOut(y=materialMeas(
                         face.p,
@@ -6258,16 +6056,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.mPhidot,
                         face.T,
                         face.Qdot)) "Generate the material output"
-            annotation (Placement(transformation(extent={{40,70},{60,90}})));
-          Sources.RealExpression normalOut(y=normalMeas(
-                        face.p,
-                        face.Ndot,
-                        face.phi,
-                        face.mPhidot,
-                        face.T,
-                        face.Qdot,
-                        orient=Orient.normal)) "Generate the normal output"
-            annotation (Placement(transformation(extent={{40,30},{60,50}})));
+            annotation (Placement(transformation(extent={{40,50},{60,70}})));
           Sources.RealExpression precedingOut(y=precedingMeas(
                         face.p,
                         face.Ndot,
@@ -6277,7 +6066,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.Qdot,
                         orient=Orient.before))
             "Generate the 2nd transverse output"
-            annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+            annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
           Sources.RealExpression followingOut(y=followingMeas(
                         face.p,
                         face.Ndot,
@@ -6287,7 +6076,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.Qdot,
                         orient=Orient.after))
             "Generate the 1st transverse output"
-            annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+            annotation (Placement(transformation(extent={{40,10},{60,30}})));
           Sources.RealExpression thermalOut(y=thermalMeas(
                         face.p,
                         face.Ndot,
@@ -6295,7 +6084,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.mPhidot,
                         face.T,
                         face.Qdot)) "Generate the thermal output"
-            annotation (Placement(transformation(extent={{40,-90},{60,-70}})));
+            annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
         equation
           _u_material = materialSpec(
                     face.p,
@@ -6314,21 +6103,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material
           connect(u_material, _u_material) annotation (Line(
-              points={{-70,80},{4,80}},
+              points={{-70,60},{4,60}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(materialSet.y, _u_material) annotation (Line(
-              points={{-29,90},{-20,90},{-20,80},{4,80}},
+              points={{-29,70},{-20,70},{-20,60},{4,60}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_material, u.material) annotation (Line(
-              points={{-70,80},{-90,80},{-90,5.55112e-16},{-110,5.55112e-16}},
+              points={{-70,60},{-90,60},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(materialOut.y, y.material) annotation (Line(
-              points={{61,80},{80,80},{80,5.55112e-16},{110,5.55112e-16}},
+              points={{61,60},{80,60},{80,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -6336,48 +6125,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{6,3},{6,3}}));
 
           // Normal translational
-          connect(u_normal, _u_normal) annotation (Line(
-              points={{-70,40},{4,40}},
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          connect(normalSet.y, _u_normal) annotation (Line(
-              points={{-29,50},{-20,50},{-20,40},{4,40}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(u_normal, u.normal) annotation (Line(
-              points={{-70,40},{-90,40},{-90,5.55112e-16},{-110,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-
-          connect(normalOut.y, y.normal) annotation (Line(
-              points={{61,40},{80,40},{80,5.55112e-16},{110,5.55112e-16}},
-              color={0,0,127},
-              smooth=Smooth.None), Text(
-              string="%second",
-              index=1,
-              extent={{6,3},{6,3}}));
 
           // First transverse
           connect(u_following, _u_following) annotation (Line(
-              points={{-70,5.55112e-16},{-32,-4.87687e-22},{-32,5.55112e-16},{4,
-                  5.55112e-16}},
+              points={{-70,20},{4,20}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(followingSet.y, _u_following) annotation (Line(
-              points={{-29,10},{-20,10},{-20,5.55112e-16},{4,5.55112e-16}},
+              points={{-29,30},{-20,30},{-20,20},{4,20}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_following, u.following) annotation (Line(
-              points={{-70,5.55112e-16},{-90,5.55112e-16},{-90,5.55112e-16},{-110,
-                  5.55112e-16}},
+              points={{-70,20},{-90,20},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(followingOut.y, y.following) annotation (Line(
-              points={{61,6.10623e-16},{80,6.10623e-16},{80,5.55112e-16},{110,
-                  5.55112e-16}},
+              points={{61,20},{80,20},{80,0},{84,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -6386,22 +6151,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Second transverse
           connect(u_preceding, _u_preceding) annotation (Line(
-              points={{-70,-40},{4,-40}},
+              points={{-70,-20},{4,-20}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(precedingSet.y, _u_preceding) annotation (Line(
-              points={{-29,-30},{-20,-30},{-20,-40},{4,-40}},
+              points={{-29,-10},{-20,-10},{-20,-20},{4,-20}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_preceding, u.preceding) annotation (Line(
-              points={{-70,-40},{-90,-40},{-90,5.55112e-16},{-110,5.55112e-16}},
-
+              points={{-70,-20},{-90,-20},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(precedingOut.y, y.preceding) annotation (Line(
-              points={{61,-40},{80,-40},{80,5.55112e-16},{110,5.55112e-16}},
+              points={{61,-20},{80,-20},{80,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -6410,21 +6174,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Thermal
           connect(thermalSet.y, _u_thermal) annotation (Line(
-              points={{-29,-70},{-20,-70},{-20,-80},{4,-80}},
+              points={{-29,-50},{-20,-50},{-20,-60},{4,-60}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(u_thermal, u.thermal) annotation (Line(
-              points={{-70,-80},{-90,-80},{-90,5.55112e-16},{-110,5.55112e-16}},
-
+              points={{-70,-60},{-90,-60},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
           connect(u_thermal, _u_thermal) annotation (Line(
-              points={{-70,-80},{4,-80}},
+              points={{-70,-60},{4,-60}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(thermalOut.y, y.thermal) annotation (Line(
-              points={{61,-80},{80,-80},{80,5.55112e-16},{110,5.55112e-16}},
+              points={{61,-60},{80,-60},{80,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -6434,22 +6197,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="face",
             Diagram(graphics),
             Icon(graphics));
-        end FaceFlows;
+        end Flows;
 
-        model FaceEfforts
+        model Efforts
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with efforts specified by default</html>"
-          extends FaceFlows(
+          extends Flows(
             redeclare replaceable function materialSpec = Material.pressure,
-            redeclare replaceable function normalSpec =
-                TranslationalNormal.velocity,
             redeclare replaceable function followingSpec =
                 Translational.velocity,
             redeclare replaceable function precedingSpec =
                 Translational.velocity,
             redeclare replaceable function thermalSpec = Thermal.temperature,
             redeclare replaceable function materialMeas = Material.current,
-            redeclare replaceable function normalMeas =
-                TranslationalNormal.force,
             redeclare replaceable function followingMeas = Translational.force,
 
             redeclare replaceable function precedingMeas = Translational.force,
@@ -6463,17 +6222,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
 
-          // See note in ElectrochemEfforts.
           annotation (defaultComponentName="face", Diagram(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
 
-        end FaceEfforts;
+        end Efforts;
 
         package Material "Material conditions"
           extends Modelica.Icons.Package;
 
-          function pressure "Thermodynamic pressure"
+          function pressure "Pressure"
             extends Partial;
 
           algorithm
@@ -6481,7 +6239,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Inline=true);
           end pressure;
 
-          function concentration "Concentration"
+          function density "Density"
             extends Partial;
 
             replaceable package Data =
@@ -6497,9 +6255,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           algorithm
             x := 1/Data.v_Tp(T, p);
             annotation (Inline=true);
-          end concentration;
+          end density;
 
-          function current "Diffusion current"
+          function current "Current"
             extends Partial;
 
           algorithm
@@ -6534,29 +6292,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   to a single value.</p></html>"));
           end Partial;
         end Material;
-
-        package TranslationalNormal
-          "Translational conditions for the normal axis"
-          function currentDensity "Advective current density"
-            extends Translational.Partial;
-
-            replaceable package Data =
-                Characteristics.BaseClasses.CharacteristicEOS constrainedby
-              Characteristics.BaseClasses.CharacteristicEOS
-              "Characteristic data" annotation (
-              Dialog(group="Material properties"),
-              choicesAllMatching=true,
-              __Dymola_choicesFromPackage=true,
-              Placement(transformation(extent={{-60,40},{-40,60}}),
-                  iconTransformation(extent={{-10,90},{10,110}})));
-
-          algorithm
-            x := phi[orient]/Data.v_Tp(T, p);
-            annotation (Inline=true);
-          end currentDensity;
-          extends Translational;
-
-        end TranslationalNormal;
 
         package Translational "Translational conditions"
           extends Modelica.Icons.Package;
@@ -6698,7 +6433,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         V = amagat.V;
 
         annotation (
-          Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
+          Documentation(defaultComponentName="volume",info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
     additivity of volume.  In order to use additivity of pressure, use
     the <a href=\"modelica://FCSys.Conditions.Adapters.AmagatDalton\">AmagatDalton</a> adapter.</p>
 
@@ -6715,7 +6450,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}), graphics));
+                  {100,100}}),graphics));
       end Volume2;
 
       partial model Partial "Base model for a pressure/volume"
@@ -6869,7 +6604,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        annotation (defaultComponentName="amagat", Diagram(coordinateSystem(
+        annotation (defaultComponentName="dalton", Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
       end Partial;
@@ -6888,7 +6623,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> or <a href=\"modelica://FCSys.Connectors.DirectNote\">DirectNote</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model DirectFlows
+      model Flows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> connector, with flows specified by default</html>"
         import Modelica.Math.BooleanVectors.countTrue;
         import Modelica.Math.BooleanVectors.enumerate;
@@ -7248,15 +6983,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
         annotation (
-          defaultComponentName="inert",
+          defaultComponentName="direct",
           Diagram(graphics),
           Icon(graphics));
-      end DirectFlows;
+      end Flows;
 
-      model DirectEfforts
+      model Efforts
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> connector, with efforts specified by default</html>"
 
-        extends DirectFlows(
+        extends Flows(
           redeclare replaceable function transXSpec = Translational.velocity,
           redeclare replaceable function transYSpec = Translational.velocity,
           redeclare replaceable function transZSpec = Translational.velocity,
@@ -7271,10 +7006,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
-        // See note in ElectrochemEfforts.
-        annotation (defaultComponentName="inert");
+        annotation (defaultComponentName="direct");
 
-      end DirectEfforts;
+      end Efforts;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
@@ -7366,7 +7100,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     package Inter
       "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector</html>"
-      model InertFlows
+      model Flows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector, with flows specified by default</html>"
         import Modelica.Math.BooleanVectors.countTrue;
         import Modelica.Math.BooleanVectors.enumerate;
@@ -7738,12 +7472,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics),
           Icon(graphics));
-      end InertFlows;
+      end Flows;
       extends Modelica.Icons.Package;
-      model InertEfforts
+      model Efforts
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector, with efforts specified by default</html>"
 
-        extends FCSys.Conditions.ByConnector.Inter.InertFlows(
+        extends FCSys.Conditions.ByConnector.Inter.Flows(
           redeclare replaceable function transXSpec = Translational.velocity,
           redeclare replaceable function transYSpec = Translational.velocity,
           redeclare replaceable function transZSpec = Translational.velocity,
@@ -7758,10 +7492,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // The thermalSet block is redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
 
-        // See note in ElectrochemEfforts.
         annotation (defaultComponentName="inter");
 
-      end InertEfforts;
+      end Efforts;
 
       package Translational "Translational conditions"
         extends Modelica.Icons.Package;
@@ -8148,9 +7881,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable Component.force transXMeas,
           redeclare replaceable Component.force transYMeas,
           redeclare replaceable Component.force transZMeas);
-
-        // See note in ElectrochemEfforts.
-        annotation (defaultComponentName="translational");
 
       end Velocity;
 
@@ -8707,8 +8437,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=270,
             origin={40,160})));
 
-      ByConnector.FaceBus.Single.FaceBusGraphiteOnly anBC[n_y, n_z](each
-          graphite(
+      ByConnector.FaceBus.Single.FlowsGraphiteOnly anBC[n_y, n_z](each graphite(
           'incle-'=true,
           'e-'(
             redeclare function normalSpec =
@@ -8726,8 +8455,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=270,
             origin={-104,0})));
 
-      ByConnector.FaceBus.Single.FaceBusGraphiteOnly caBC[n_y, n_z](each
-          graphite(
+      ByConnector.FaceBus.Single.FlowsGraphiteOnly caBC[n_y, n_z](each graphite(
           'incle-'=true,
           'e-'(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
@@ -8736,7 +8464,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={104,0})));
-      ByConnector.FaceBus.Single.FaceBusEfforts anSource[n_x_an, n_z](gas(
+      ByConnector.FaceBus.Single.Efforts anSource[n_x_an, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(
@@ -8771,7 +8499,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=90,
             origin={-104,-60})));
 
-      ByConnector.FaceBus.Single.FaceBusFlows anSink[n_x_an, n_z](gas(
+      ByConnector.FaceBus.Single.Flows anSink[n_x_an, n_z](gas(
           each inclH2=true,
           each inclH2O=true,
           H2(redeclare each function materialMeas =
@@ -8788,7 +8516,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-56,60})));
-      ByConnector.FaceBus.Single.FaceBusEfforts caSource[n_x_ca, n_z](gas(
+      ByConnector.FaceBus.Single.Efforts caSource[n_x_ca, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,
@@ -8838,7 +8566,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=90,
             origin={56,-60})));
 
-      ByConnector.FaceBus.Single.FaceBusFlows caSink[n_x_ca, n_z](gas(
+      ByConnector.FaceBus.Single.Flows caSink[n_x_ca, n_z](gas(
           each inclH2O=true,
           each inclN2=true,
           each inclO2=true,

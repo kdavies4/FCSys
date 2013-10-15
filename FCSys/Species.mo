@@ -28,7 +28,14 @@ package Species "Dynamic models of chemical species"
               b_c=[935*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(
                   U.mol*U.K) - Data.b_c[1, 1]*log(298.15*U.K)]),
+          final k_intra,
           final mu=0,
+          final tauprime,
+          final initEnergy=InitThermo.temperature,
+          final N_IC,
+          final h_IC,
+          final g_IC,
+          final rho_IC,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
 
@@ -122,6 +129,13 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Solid(
           redeclare replaceable package Data = Characteristics.'SO3-'.Ionomer,
+          final mu=0,
+          final tauprime,
+          final initEnergy=InitThermo.temperature,
+          final N_IC,
+          final h_IC,
+          final g_IC,
+          final rho_IC,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
 
@@ -150,71 +164,43 @@ package Species "Dynamic models of chemical species"
     package Graphite "<html>e<sup>-</sup> in graphite</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-        extends Isochoric(
-          redeclare replaceable package Data = Characteristics.'e-'.Graphite,
-          final tauprime=0,
-          final mu=sigma*Data.v_Tp(T, p),
-          final initMaterial=InitScalar.concentration);
-
-        Q.ConductivityElectrical sigma=Data.mu(T, p)/Data.v_Tp(T, p)
-          "Electrical conductivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label="<html>&sigma;</html>"));
-
-        // **Move assumption to Characteristics.'e-'.Graphite, do the same for other e-.
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'e-'",
-          Documentation(info="<html>    <p>Assumptions:<ol>
-    <li>The concentration is equal to that of C<sup>+</sup> as graphite.</li>
-          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to the substrate
-          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
-          governed by other configurations.</li>
-          <li>The conductivity is mapped to the mobility of the electrons by assuming that
-          the mobility of the substrate (e.g., 
-          <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
-    </ol></p>
-
-    <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
-        extends Compressible(
-          redeclare replaceable package Data = Characteristics.'e-'.Gas,
-          final tauprime=0,
-          final mu=sigma*v,
-          redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          final beta=0,
-          redeclare parameter Q.Fluidity zeta=Data.zeta(),
-          final theta=Modelica.Constants.inf,
+        extends Electrical(
+          redeclare final package Data = Characteristics.'e-'.Graphite,
+          final initMaterial=InitThermo.none,
+          final Nu_Phi,
+          final Nu_Q,
+          final beta=1,
+          final zeta=1,
+          final consMaterial=Conservation.steady,
           final upstreamX=false,
           final upstreamY=false,
           final upstreamZ=false,
-          initMaterial=InitScalar.concentration,
-          rho_IC=1/Characteristics.'C+'.Graphite.b_v[1, 1]);
-        // invertEOS=false,
-        //consMaterial=Conservation.IC,
+          final consTransX=Conservation.IC,
+          final consTransY=Conservation.IC,
+          final consTransZ=Conservation.IC,
+          final mu=1,
+          final tauprime=0,
+          final k_intra,
+          final N_IC,
+          final g_IC,
+          final T_IC,
+          final nu=1,
+          final rho_IC,
+          final p_IC,
+          final h_IC,
+          final V_IC,
+          final consEnergy=Conservation.steady,
+          final initEnergy=InitThermo.none,
+          final theta=Modelica.Constants.inf);
 
-        //    redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
-
-        parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
-          "Electrical conductivity" annotation (Dialog(group=
-                "Material properties", __Dymola_label="<html>&sigma;</html>"));
-        //    redeclare final parameter Q.Fluidity beta=Data.beta(),
-        // **recreate Graphite e- Characteristics model, use it here
-        //    redeclare parameter Q.Mobility eta=Data.eta(),
-        //    redeclare parameter Q.Fluidity beta=1e-5*Data.beta(),
-        // add eta to other e- and H+ models.
-        // **extend from isochoric.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
           Documentation(info="<html>
 
     <p>Assumptions:<ol>
-    <li>The concentration is equal to that of C<sup>+</sup> as graphite.</li>
+    <li>The density is equal to that of C<sup>+</sup> as graphite.</li>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
@@ -240,68 +226,38 @@ package Species "Dynamic models of chemical species"
     package Ionomer "<html>H<sup>+</sup> in ionomer</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-        extends Isochoric(
-          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
-          final tauprime=0,
-          initMaterial=InitScalar.concentration);
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'H+'",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>The concentration of H<sup>+</sup> is equal to that of
-  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
-  this is greater than that measured by Spry and Fayer (see
-  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
-  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
-  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by other configurations.</li>
-    </ol></p>
-
-    <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
-        extends Compressible(
-          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
+        extends Electrical(
+          redeclare replaceable package Data = Characteristics.'H+'.Gas,
           final tauprime=0,
-          redeclare parameter Q.Mobility mu=Data.mu(),
-          redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.Mobility eta=Data.eta(),
           final beta=0,
-          redeclare parameter Q.Fluidity zeta=1/(5.3e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+          final mu=v/r,
+          final N_IC,
+          final g_IC,
+          final T_IC,
+          final nu=1,
+          final rho_IC,
+          final p_IC,
+          final h_IC,
+          final V_IC,
           consMaterial=Conservation.IC,
-          invertEOS=false,
-          initMaterial=InitScalar.pressure,
-          upstreamX=false,
-          upstreamY=false,
-          upstreamZ=false);
-
-        //(n_v={0,0},          b_v=FCSys.Characteristics.'SO3-'.Ionomer.b_v),
-
-        //        final theta=Modelica.Constants.inf,
-
-        // **recreate Ionomer H+ Characteristics model, use it here
-
-        // **set rho_IC, do the same for Correlated and Calibrated.
+          final initEnergy=InitThermo.none,
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
 
         // See the documentation for a table of values.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
-          Documentation(info="<html><p>The initial concentration corresponds to the measurement
+          Documentation(info="<html><p>The initial density corresponds to the measurement
   by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
   &lambda; = 12, where &lambda; is the number of
   H<sub>2</sub>O molecules to SO<sub>3</sub>H
-  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
+  endgroups.  At &lambda; = 22, the density was measured at 0.54 M
   [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>]. **Implement this, copy to Correlated and Calibrated</p>
 
 <p>Assumptions:<ol>
     <li>The generalized resistivities (&beta;, &zeta;, &theta;) are fixed (e.g., independent of temperature).</li>
-    <li>The concentration of H<sup>+</sup> is equal to that of
+    <li>The density of H<sup>+</sup> is equal to that of
   C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
   this is greater than that measured by Spry and Fayer (see
   <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
@@ -310,7 +266,7 @@ package Species "Dynamic models of chemical species"
           <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by other configurations.</li>
     </ol></p>
 
-  <p>The default resistivities (&zeta; = <code>1/(5.3e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(0.1661*U.W)</code>) are of H gas
+  <p>The default thermal resistivities (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
   (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
@@ -406,10 +362,11 @@ package Species "Dynamic models of chemical species"
           redeclare final parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(8.96e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W),
+          final k_intra);
+
         // See the documentation for a table of values.
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -508,10 +465,12 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           redeclare parameter Q.TimeAbsolute tauprime=Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(9.09e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W),
+
+          final k_intra);
+
         // See the documentation for tables of values.
 
         output Q.NumberAbsolute RH(
@@ -659,10 +618,9 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       model Fixed "Fixed properties"
         extends Compressible(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          final tauprime=0,
+          redeclare parameter Q.TimeAbsolute tauprime=1e12*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=Data.zeta(),
           redeclare parameter Q.ResistivityThermal theta=Data.theta());
@@ -695,7 +653,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
-        extends Isochoric(redeclare replaceable package Data =
+        extends Incompressible(redeclare replaceable package Data =
               Characteristics.H2O.Liquid, final tauprime=0);
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -710,14 +668,20 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       end Correlated;
 
       model Fixed "Fixed properties"
-        extends Isochoric(
+        extends Incompressible(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime=1e10*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=1e12*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(855e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.613*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.613*U.W),
+          final k_intra,
+          final initEnergy=InitThermo.temperature,
+          final N_IC,
+          final h_IC,
+          final g_IC,
+          final rho_IC);
 
         // See the documentation for tables of values.
         annotation (
@@ -851,9 +815,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
-          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity zeta=1/(17.82e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
+
+          final k_intra);
 
         // See the documentation for a table of values.
         annotation (
@@ -956,10 +921,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.TimeAbsolute tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
-          redeclare parameter Q.ResistivityMaterial eta=Data.eta(),
           redeclare parameter Q.Fluidity beta=Data.beta(),
           redeclare parameter Q.Fluidity zeta=1/(20.72e-6*U.Pa*U.s),
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W));
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W),
+
+          final k_intra);
+
         // See the documentation for a table of values.
 
         parameter Q.PressureAbsolute p_stop=5*U.Pa
@@ -1046,21 +1013,40 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   end O2;
 
+  model Electrical "Base model for an ion"
+    extends Incompressible(
+      final phi_IC=zeros(3),
+      final I_IC,
+      final consRot,
+      final initTransX,
+      final initTransY,
+      final initTransZ);
+
+    parameter Real r=Data.beta()*Data.v_Tp() "Electrical resistivity"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html><i>r</i></html>"));
+    // **dimension, quantity
+
+  end Electrical;
+
   model Solid
     "<html><a href=\"modelica://FCSys.Species.Species\">Species</a> model for a solid (inert and zero velocity)</html>"
-    extends Isochoric(
+    extends Incompressible(
       final upstreamX=false,
       final upstreamY=false,
       final upstreamZ=false,
       final phi_IC=zeros(3),
       final I_IC,
       final consMaterial=Conservation.IC,
+      final consRot,
       final consTransX=Conservation.IC,
       final consTransY=Conservation.IC,
       final consTransZ=Conservation.IC,
+      final initTransX,
+      final initTransY,
+      final initTransZ,
       final Nu_Phi,
       final Nu_Q,
-      final tauprime=0,
       final beta=1,
       final zeta=1);
 
@@ -1079,25 +1065,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   end Solid;
 
-  model Isochoric
-    "Base model for an isochoric species (incompressible, without thermal expansion)"
-    extends Incompressible(invertEOS=false, initMaterial=InitScalar.volume);
-
-    // Note:  Pressure, which is the default material IC for the base model,
-    // can't be used to initialize an incompressible species.
-    annotation (
-      defaultComponentPrefixes="replaceable",
-      defaultComponentName="species",
-      Documentation(info="<html>
-  <p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
-
-      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-              100,100}}), graphics));
-
-  end Isochoric;
-
   model Incompressible "Base model for an incompressible species"
-    extends Partial(redeclare Q.PressureAbsolute p, redeclare Q.Volume V);
+    extends Partial(initMaterial=InitThermo.volume,final invertEOS);
+    // Note:  Pressure, which is the default material IC for the Partial model,
+    // can't be used to initialize an incompressible species.
+
     Connectors.Dalton dalton(V(
         min=0,
         final start=V_IC,
@@ -1105,38 +1077,25 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Connector for translational and thermal diffusive exchange, with additivity of pressure"
       annotation (Placement(transformation(extent={{-30,-50},{-10,-30}}),
           iconTransformation(extent={{20,-84},{40,-104}})));
-
-  equation
-    p = dalton.p;
-    V = dalton.V;
 
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -100},{100,100}}), graphics));
   end Incompressible;
 
   model Compressible "Base model for a compressible species"
-    extends Partial(redeclare Q.PressureAbsolute p, redeclare Q.Volume V);
-    Connectors.Dalton dalton(V(
-        min=0,
-        final start=V_IC,
-        final fixed=false), p(final start=p_IC, final fixed=false))
-      "Connector for translational and thermal diffusive exchange, with additivity of pressure"
-      annotation (Placement(transformation(extent={{-30,-50},{-10,-30}}),
-          iconTransformation(extent={{20,-84},{40,-104}})));
+    extends Partial(final invertEOS=true);
 
-  equation
-    p = dalton.p;
-    V = dalton.V;
-    annotation (Icon(graphics));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}), graphics));
   end Compressible;
 
 protected
   partial model Partial
     "Base model to exchange, transport, and store the material, momentum, and energy of one species"
+
     import FCSys.Utilities.cartWrap;
     import FCSys.Utilities.inSign;
     import FCSys.Utilities.Delta;
-    import FCSys.Utilities.Sigma;
     import assert = FCSys.Utilities.assertEval;
     //extends FCSys.Icons.Names.Top5;
     // **Split diffusive and chemical exchange, material and thermal storage into separate model so that it can be used for dielectric
@@ -1163,11 +1122,8 @@ protected
     Q.TimeAbsolute nu(nominal=1e-9*U.s) = Data.nu(T, v) "Thermal independity"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&nu;</html>"));
-    Q.ResistivityMaterial eta(nominal=10*U.kg/(U.C*U.s)) = Data.eta(T, v)
-      "Material resistivity" annotation (Dialog(group="Material properties",
-          __Dymola_label="<html>&eta;</html>"));
-    Q.Fluidity beta(nominal=10*U.cm*U.s/U.g) = Data.beta(T, v)
-      "Dynamic compressibility" annotation (Dialog(group="Material properties",
+    Q.Viscosity beta(nominal=0.1*U.g/(U.cm*U.s)) = Data.beta(T, v)
+      "Bulk viscosity" annotation (Dialog(group="Material properties",
           __Dymola_label="<html>&beta;</html>"));
     Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v) "Fluidity"
       annotation (Dialog(group="Material properties", __Dymola_label=
@@ -1178,13 +1134,10 @@ protected
 
     parameter Integer n_intra=0
       "Number of exchange connections within the phase"
-      annotation (Dialog(connectorSizing=true));
+      annotation (HideResult=true,Dialog(connectorSizing=true));
     parameter Q.NumberAbsolute k_intra[n_intra]=ones(n_intra)
       "Coupling factors within the phase" annotation (Dialog(group="Geometry",
           __Dymola_label="<html><i><b>k</b></i><sub>intra</sub></html>"));
-    parameter Q.NumberAbsolute k_N=1 "Coupling factor for phase change"
-      annotation (Dialog(group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub><i>N</i></sub></html>"));
 
     // Assumptions
     // -----------
@@ -1218,7 +1171,6 @@ protected
     parameter Conservation consMaterial=Conservation.dynamic "Material"
       annotation (Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of conservation equations"));
-
     parameter Boolean consRot=false "Conserve rotational momentum" annotation (
       Evaluate=true,
       Dialog(tab="Assumptions", group="Formulation of conservation equations"),
@@ -1240,7 +1192,6 @@ protected
         tab="Assumptions",
         group="Formulation of conservation equations",
         enable=inclTrans[3]));
-
     parameter Conservation consEnergy=Conservation.dynamic "Energy" annotation
       (Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of conservation equations"));
@@ -1260,10 +1211,10 @@ protected
     // Initialization parameters
     // -------------------------
     // Scalar properties
-    parameter InitScalar initMaterial=InitScalar.pressure
+    parameter Enumerations.InitThermo initMaterial=InitThermo.pressure
       "Method of initializing the material state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
-    parameter InitScalar initEnergy=InitScalar.temperature
+    parameter Enumerations.InitThermo initEnergy=InitThermo.temperature
       "Method of initializing the thermal state" annotation (Evaluate=true,
         Dialog(tab="Initialization", group="Material and energy"));
     parameter Q.Amount N_IC(start=V_IC*rho_IC) "Initial particle number"
@@ -1274,8 +1225,8 @@ protected
     // Note:  This parameter is left enabled even it isn't used to
     // explicitly initialize any states, since it's used as a guess value.
     // Similar notes apply to some other initial conditions below.
-    parameter Q.Concentration rho_IC(start=1/Data.v_Tp(T_IC, p_IC))
-      "Initial concentration" annotation (Dialog(
+    parameter Q.Density rho_IC(start=1/Data.v_Tp(T_IC, p_IC)) "Initial density"
+      annotation (Dialog(
         tab="Initialization",
         group="Material and energy",
         __Dymola_label="<html>&rho;<sub>IC</sub></html>"));
@@ -1306,19 +1257,19 @@ protected
         __Dymola_label="<html><i>g</i><sub>IC</sub></html>"));
     //
     // Velocity
-    parameter InitTranslational initTransX=InitTranslational.velocity
+    parameter InitTrans initTransX=InitTrans.velocity
       "Method of initializing the x-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[1]));
-    parameter InitTranslational initTransY=InitTranslational.velocity
+    parameter InitTrans initTransY=InitTrans.velocity
       "Method of initializing the y-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
         group="Translational momentum",
         enable=inclTrans[2]));
-    parameter InitTranslational initTransZ=InitTranslational.velocity
+    parameter InitTrans initTransZ=InitTrans.velocity
       "Method of initializing the z-axis state" annotation (Evaluate=true,
         Dialog(
         tab="Initialization",
@@ -1337,8 +1288,8 @@ protected
         __Dymola_label="<html><i><b>I</b></i><sub>IC</sub></html>"));
 
     // Advanced parameters
-    parameter Boolean invertEOS=true "Invert the equation of state" annotation
-      (
+    parameter Boolean invertEOS=false "Invert the equation of state"
+      annotation (
       Evaluate=true,
       Dialog(tab="Advanced", compact=true),
       choices(__Dymola_checkBox=true));
@@ -1372,11 +1323,6 @@ protected
       stateSelect=StateSelect.never) "Pressure";
     // StateSelect.never avoids dynamic state selection of this variable and
     // others below in Dymola 7.4.
-    input Q.Volume V(
-      nominal=U.cc,
-      final start=V_IC,
-      final fixed=false,
-      stateSelect=StateSelect.never) "Volume";
     Q.Mass M(
       nominal=1e-3*U.g,
       final start=Data.m*N_IC,
@@ -1399,16 +1345,13 @@ protected
       each nominal=U.A,
       final start=I_IC[cartTrans],
       each final fixed=false,
-      stateSelect=StateSelect.never) "Current";
-    Q.Current Ndot_faces[n_faces, Side](nominal=U.A, final start=outerProduct(
-          I_IC[cartFaces], {1,-1}))
-      "Total current into the faces (advection and diffusion)";
+      each stateSelect=StateSelect.never) "Current";
 
     // Auxiliary variables (for analysis)
     // ----------------------------------
     // Misc. properties and conditions
-    output Q.Concentration rho(stateSelect=StateSelect.never) = 1/v if
-      environment.analysis "Concentration";
+    output Q.Density rho(stateSelect=StateSelect.never) = 1/v if environment.analysis
+      "Density";
     output Q.MassVolumic mrho(stateSelect=StateSelect.never) = Data.m*rho if
       environment.analysis "Volumic mass";
     output Q.Potential g(stateSelect=StateSelect.never) = chemical.mu if
@@ -1440,7 +1383,7 @@ protected
       Delta(g_faces) if environment.analysis
       "Differences in Gibbs potentials across the faces";
     output Q.Potential I_avg[n_faces](each stateSelect=StateSelect.never) =
-      Delta(Ndot_faces)/2 if environment.analysis
+      Delta(faces.Ndot)/2 if environment.analysis
       "Average current through the faces";
     //
     // Time constants
@@ -1463,34 +1406,25 @@ protected
     // The translational and thermal time contants for the direct connector are zero.
     output Q.TimeAbsolute tau_NT[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (N*eta*Data.kappa(T, p)/2)*L[cartFaces] ./ kA[cartFaces]
-      if environment.analysis
-      "Time constants for material transport (with central difference or no advection)";
-    output Q.TimeAbsolute tau_PhiT_perp[n_faces](
-      each stateSelect=StateSelect.never,
-      each start=U.s) = (M*beta/2)*L[cartFaces] ./ kA[cartFaces] if environment.analysis
-      "Time constants for normal translational transport";
+      each start=U.s) = fill(beta*Data.kappa(T, p), n_faces) ./ k[cartFaces]
+      if environment.analysis "Time constants for material transport";
     output Q.TimeAbsolute tau_PhiT_para[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (M*zeta/2)*L[cartFaces] ./ (Nu_Phi[cartFaces] .* kA[
-      cartFaces]) if environment.analysis
+      each start=U.s) = (M*zeta/2)*Lprime[cartFaces] ./ Nu_Phi[cartFaces] if
+      environment.analysis
       "Time constants for transverse translational transport (with central difference or no advection)";
     output Q.TimeAbsolute tau_QT[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*L[cartFaces] ./ kA[cartFaces]
-      if environment.analysis
+      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*Lprime[cartFaces] if environment.analysis
       "Time constants for thermal transport (with central difference or no advection)";
     //
     // Peclet numbers (only for the axes with translational momentum included;
     // others are zero)
-    output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = (eta*V/
-      2)*phi .* kA[cartTrans] if environment.analysis "Material Peclet numbers";
-    // The normal translational Peclet numbers are assumed to be zero.
     output Q.Number Pe_Phi_para[n_trans](each stateSelect=StateSelect.never) =
-      (zeta*M/2)*phi .* kA[cartTrans] if environment.analysis
-      "Transverse translational Peclet numbers";
-    output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = (N*
-      theta*Data.c_v(T, p)/2)*phi ./ kA[cartTrans] if environment.analysis
+      (zeta*Data.m/2)*I ./ Lprime[cartTrans] if environment.analysis
+      "Translational Peclet numbers";
+    output Q.Number Pe_Q[n_trans](each stateSelect=StateSelect.never) = (theta*
+      Data.c_v(T, p)/2)*I ./ Lprime[cartTrans] if environment.analysis
       "Thermal Peclet numbers";
     //
     // Bulk flow rates
@@ -1521,11 +1455,11 @@ protected
     // Note:  The [:] is necessary in Dymola 2014.
     output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
       faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[
-      i]})*Ndot_faces[j, :]*Data.m for j in 1:n_faces) for i in 1:n_trans} if
+      i]})*faces[j, :].Ndot*Data.m for j in 1:n_faces) for i in 1:n_trans} if
       environment.analysis "Acceleration force due to advective transport";
-    output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(
-      Sigma(faces[j, :].mPhidot[cartWrap(cartTrans[i] - cartFaces[j] + 1)])
-      for j in 1:n_faces) for i in 1:n_trans} if environment.analysis
+    output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(sum(
+      faces[j, :].mPhidot[cartWrap(cartTrans[i] - cartFaces[j] + 1)]) for j in
+      1:n_faces) for i in 1:n_trans} if environment.analysis
       "Friction from other subregions (diffusive transport, including nonequilibrium force)";
     //
     // Energy balance
@@ -1545,9 +1479,9 @@ protected
       direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
     output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
-      :].T, faces[j, :].p) - {h,h})*Ndot_faces[j, :] + sum((faces[j, :].phi[
+      :].T, faces[j, :].p) - {h,h})*faces[j, :].Ndot + sum((faces[j, :].phi[
       cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
-      Ndot_faces[j, :]*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if
+      faces[j, :].Ndot*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if
       environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
     output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[j, :].phi[
@@ -1581,22 +1515,20 @@ protected
       "Connector to directly couple velocity or temperature with other species"
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
           iconTransformation(extent={{50,-70},{70,-90}})));
-
     Connectors.Intra intra[n_intra](
       each final n_trans=n_trans,
       each phi(final start=phi_IC[cartTrans], final fixed=false),
       each T(final start=T_IC, final fixed=false))
-      "Connector to exchange translational momentum and energy within the phase"
+      "Connectors to exchange translational momentum and energy within the phase"
       annotation (Placement(transformation(extent={{10,-10},{30,10}}),
           iconTransformation(extent={{70,-49},{90,-69}})));
     Connectors.Inter inter[n_inter](
       each final n_trans=n_trans,
       each phi(final start=phi_IC[cartTrans], final fixed=false),
       each T(final start=T_IC,final fixed=false))
-      "Connector to exchange translational momentum and energy with all other species"
+      "Connectors to exchange translational momentum and energy with all other species"
       annotation (Placement(transformation(extent={{30,10},{50,30}}),
           iconTransformation(extent={{84,-20},{104,-40}})));
-
     Connectors.Face faces[n_faces, Side](
       p(each start=p_IC),
       Ndot(start=outerProduct(I_IC[cartFaces], {1,-1})),
@@ -1605,21 +1537,32 @@ protected
       mPhidot(each start=0),
       T(each start=T_IC),
       Qdot(each start=0))
-      "Connectors to transport material, translational momentum, and thermal energy through the boundaries"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
+      "Connectors to transport material, momentum, and energy" annotation (
+        Placement(transformation(extent={{-10,-10},{10,10}}),
           iconTransformation(extent={{-10,-10},{10,10}})));
+    Connectors.Dalton dalton(V(
+        min=0,
+        final start=V_IC,
+        final fixed=false), p(final start=p_IC, final fixed=false))
+      "Connector for additivity of pressure" annotation (Placement(
+          transformation(extent={{-30,-50},{-10,-30}}), iconTransformation(
+            extent={{20,-84},{40,-104}})));
 
     // Geometric parameters
-
   protected
-    outer parameter Q.Length L[Axis] "Lengths" annotation (missingInnerMessage="This model should be used within a subregion model.
+    outer Q.Number epsilon "Volumetric filling ratio" annotation (
+        missingInnerMessage="This model should be used within a phase model.
 ");
+    outer Q.Volume V "Volume" annotation (missingInnerMessage="This model should be used within a phase model.
+");
+    outer Q.Length Lprime[Axis] "Effective area divided by transport length"
+      annotation (missingInnerMessage=
+          "This model should be used within a phase model.");
     outer parameter Q.Area A[Axis] "Cross-sectional areas" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Q.Area kA[Axis] "Effective cross-sectional areas"
-      annotation (missingInnerMessage=
-          "This model should be used within a phase model.");
+    outer parameter Q.Length L[Axis] "Lengths" annotation (missingInnerMessage="This model should be used within a subregion model.
+");
     outer parameter Boolean inclTrans[Axis]
       "true, if each component of translational momentum is included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
@@ -1628,26 +1571,30 @@ protected
       "true, if each pair of faces is included" annotation (missingInnerMessage
         ="This model should be used within a subregion model.
 ");
-    outer parameter Boolean inclRot[Axis]
+    outer parameter Boolean inclRot[3]
       "true, if each axis of rotation has all its tangential faces included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
+    // Note:  The size of is also Axis, but it isn't specified here due
+    // to an error in Dymola 2014.
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartTrans[n_trans]
+    outer parameter Integer cartTrans[:]
       "Cartesian-axis indices of the components of translational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartFaces[n_trans]
+    outer parameter Integer cartFaces[:]
       "Cartesian-axis indices of the pairs of faces" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartRot[n_trans]
+    outer parameter Integer cartRot[:]
       "Cartesian-axis indices of the components of rotational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
+    // Note:  The size of cartTans, cartFaces, and cartRot is n_trans,
+    // but it isn't specified here due to an error in Dymola 2014.
     outer parameter Integer transCart[Axis]
       "Translational-momentum-component indices of the Cartesian axes"
       annotation (missingInnerMessage="This model should be used within a subregion model.
@@ -1662,18 +1609,32 @@ protected
     final parameter Conservation consTrans[Axis]={consTransX,consTransY,
         consTransZ} "Formulation of the translational conservation equations"
       annotation (HideResult=true);
-    final parameter InitTranslational initTrans[Axis]={initTransX,initTransY,
-        initTransZ} "Initialization methods for translational momentum"
+    final parameter InitTrans initTrans[Axis]={initTransX,initTransY,initTransZ}
+      "Initialization methods for translational momentum"
       annotation (HideResult=true);
     outer parameter Integer n_inter "Number of exchange connections"
       annotation (missingInnerMessage=
           "This model should be used within a phase model.");
+    outer parameter Q.NumberAbsolute k[Axis]
+      "Scaling factor for diffusive transport" annotation (missingInnerMessage=
+          "This model should be used within a phase model.");
     outer parameter Q.NumberAbsolute k_inter[:]
-      "Coupling factor for exchange with other phases" annotation (
+      "Coupling factor for diffusive exchange with other phases" annotation (
         missingInnerMessage="This model should be used within a phase model");
+    inner parameter Boolean reduceTrans=false "Same velocity for all species"
+      annotation (
+      HideResult=true,
+      Dialog(tab="Assumptions", enable=n_spec > 1),
+      choices(__Dymola_checkBox=true));
+    inner parameter Boolean reduceThermal=false
+      "Same temperature for all species" annotation (
+      HideResult=true,
+      Dialog(tab="Assumptions", enable=n_spec > 1),
+      choices(__Dymola_checkBox=true));
 
     // Additional aliases (for common terms)
-    Q.Force faces_mPhidot[n_faces, Side, 2] "Directly-calculated shear forces";
+    Q.Force faces_mPhidot[n_faces, Side, Orient]
+      "Directly-calculated shear forces";
     Q.Velocity phi_actual_chemical[n_trans] "Velocity of the chemical stream";
     Q.Velocity phi_actual_physical[n_trans] "Velocity of the physical stream";
     // Note:  Dymola 7.4 can't individually index the components of a
@@ -1684,58 +1645,60 @@ protected
 
   initial equation
     // Check the initial conditions.
-    assert(initMaterial <> initEnergy or initMaterial == InitScalar.none or
-      consMaterial == Conservation.steady or consEnergy == Conservation.steady,
-      "The initialization methods for material and energy must be different (unless None).");
     assert(V >= 0, "The volume of " + getInstanceName() + " is negative.
 Check that the volumes of the other phases are set properly.");
+    assert(initMaterial <> initEnergy or initMaterial == InitThermo.none or
+      consMaterial == Conservation.steady or consEnergy == Conservation.steady,
+      "The initialization methods for material and energy must be different (unless None).");
 
     // Material
     if consMaterial == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initMaterial <> InitScalar.none, "The material state of " +
+      assert(initMaterial <> InitThermo.none, "The material state of " +
         getInstanceName() + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
     elseif consMaterial == Conservation.dynamic then
       // Initialize since there's a time-varying state.
-      if initMaterial == InitScalar.amount then
+      if initMaterial == InitThermo.amount then
         N = N_IC;
-      elseif initMaterial == InitScalar.amountSS then
+      elseif initMaterial == InitThermo.amountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.concentration then
+      elseif initMaterial == InitThermo.density then
         1/v = rho_IC;
         assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
            +
-          " is isochoric, yet its material initial condition is based on concentration.");
-      elseif initMaterial == InitScalar.concentrationSS then
+          " is isochoric, yet its material initial condition is based on density.");
+      elseif initMaterial == InitThermo.densitySS then
         der(1/v) = 0;
         assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
            +
-          " is isochoric, yet its material initial condition is based on concentration.");
-      elseif initMaterial == InitScalar.volume then
+          " is isochoric, yet its material initial condition is based on density.");
+      elseif initMaterial == InitThermo.volume then
         V = V_IC;
-      elseif initMaterial == InitScalar.volumeSS then
+      elseif initMaterial == InitThermo.volumeSS then
         der(V) = 0;
-      elseif initMaterial == InitScalar.pressure then
+      elseif initMaterial == InitThermo.volumeSS then
+        der(V) = 0;
+      elseif initMaterial == InitThermo.pressure then
         p = p_IC;
         assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its material initial condition is based on pressure.");
-      elseif initMaterial == InitScalar.pressureSS then
+      elseif initMaterial == InitThermo.pressureSS then
         der(p) = 0;
-      elseif initMaterial == InitScalar.temperature then
+      elseif initMaterial == InitThermo.temperature then
         T = T_IC;
-      elseif initMaterial == InitScalar.temperatureSS then
+      elseif initMaterial == InitThermo.temperatureSS then
         der(T) = 0;
-      elseif initMaterial == InitScalar.specificEnthalpy then
+      elseif initMaterial == InitThermo.specificEnthalpy then
         h = h_IC;
-      elseif initMaterial == InitScalar.specificEnthalpySS then
+      elseif initMaterial == InitThermo.specificEnthalpySS then
         der(h) = 0;
-      elseif initMaterial == InitScalar.potentialGibbs then
+      elseif initMaterial == InitThermo.potentialGibbs then
         chemical.mu = g_IC;
-      elseif initMaterial == InitScalar.potentialGibbsSS then
+      elseif initMaterial == InitThermo.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Else there's no initial equation since
-        // initMaterial == InitScalar.none or
+        // Else, there's no initial equation since
+        // initMaterial == InitThermo.none or
         // consMaterial == Conservation.steady.
       end if;
     end if;
@@ -1745,24 +1708,23 @@ Choose any condition besides None.");
       if consTrans[cartTrans[i]] == Conservation.IC then
         // Ensure that a condition is selected since the state is
         // prescribed.
-        assert(initTrans[cartTrans[i]] <> InitTranslational.none,
-          "The state for the " + (if cartTrans[i] == Axis.x then "x" else if
-          cartTrans[i] == Axis.y then "y" else "z") +
-          "-axis component of translational momentum of " + getInstanceName()
-           + " is prescribed, yet its condition is not defined.
+        assert(initTrans[cartTrans[i]] <> InitTrans.none, "The state for the "
+           + (if cartTrans[i] == Axis.x then "x" else if cartTrans[i] == Axis.y
+           then "y" else "z") + "-axis component of translational momentum of "
+           + getInstanceName() + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
       elseif consTrans[cartTrans[i]] == Conservation.dynamic then
         // Initialize since there's a time-varying state.
-        if initTrans[cartTrans[i]] == InitTranslational.velocity then
+        if initTrans[cartTrans[i]] == InitTrans.velocity then
           phi[i] = phi_IC[cartTrans[i]];
-        elseif initTrans[cartTrans[i]] == InitTranslational.velocitySS then
+        elseif initTrans[cartTrans[i]] == InitTrans.velocitySS then
           der(phi[i]) = 0;
-        elseif initTrans[cartTrans[i]] == InitTranslational.current then
+        elseif initTrans[cartTrans[i]] == InitTrans.current then
           I[i] = I_IC[cartTrans[i]];
-        elseif initTrans[cartTrans[i]] == InitTranslational.currentSS then
+        elseif initTrans[cartTrans[i]] == InitTrans.currentSS then
           der(I[i]) = 0;
-          // Else there's no initial equation since
-          // initTrans[cartTrans[i]] == InitTranslational.none or
+          // Else, there's no initial equation since
+          // initTrans[cartTrans[i]] == InitTrans.none or
           // consTrans[cartTrans[i]] == Conservation.steady.
         end if;
       end if;
@@ -1771,66 +1733,64 @@ Choose any condition besides None.");
     // Energy
     if consEnergy == Conservation.IC then
       // Ensure that a condition is selected since the state is prescribed.
-      assert(initEnergy <> InitScalar.none, "The energy state of " +
+      assert(initEnergy <> InitThermo.none, "The energy state of " +
         getInstanceName() + " is prescribed, yet its condition is not defined.
 Choose any condition besides None.");
     elseif consEnergy == Conservation.dynamic then
       // Initialize since there's a time-varying state.
-      if initEnergy == InitScalar.amount then
+      if initEnergy == InitThermo.amount then
         N = N_IC;
-      elseif initEnergy == InitScalar.amountSS then
+      elseif initEnergy == InitThermo.amountSS then
         der(N) = 0;
-      elseif initEnergy == InitScalar.concentration then
+      elseif initEnergy == InitThermo.density then
         1/v = rho_IC;
         assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
            +
-          " is isochoric, yet its thermal initial condition is based on concentration.");
-      elseif initEnergy == InitScalar.concentrationSS then
+          " is isochoric, yet its thermal initial condition is based on density.");
+      elseif initEnergy == InitThermo.densitySS then
         der(1/v) = 0;
         assert(Data.isCompressible or Data.hasThermalExpansion, getInstanceName()
            +
-          " is isochoric, yet its thermal initial condition is based on concentration.");
-      elseif initEnergy == InitScalar.volume then
+          " is isochoric, yet its thermal initial condition is based on density.");
+      elseif initEnergy == InitThermo.volume then
         V = V_IC;
-      elseif initEnergy == InitScalar.volumeSS then
+      elseif initEnergy == InitThermo.volumeSS then
         der(V) = 0;
-      elseif initEnergy == InitScalar.pressure then
+      elseif initEnergy == InitThermo.pressure then
         p = p_IC;
         assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its thermal initial condition is based on pressure.");
-      elseif initEnergy == InitScalar.pressureSS then
+      elseif initEnergy == InitThermo.pressureSS then
         der(p) = 0;
         assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its thermal initial condition is based on pressure.");
-      elseif initEnergy == InitScalar.temperature then
+      elseif initEnergy == InitThermo.temperature then
         T = T_IC;
-      elseif initEnergy == InitScalar.temperatureSS then
+      elseif initEnergy == InitThermo.temperatureSS then
         der(T) = 0;
-      elseif initEnergy == InitScalar.specificEnthalpy then
+      elseif initEnergy == InitThermo.specificEnthalpy then
         h = h_IC;
-      elseif initEnergy == InitScalar.specificEnthalpySS then
+      elseif initEnergy == InitThermo.specificEnthalpySS then
         der(h) = 0;
-      elseif initEnergy == InitScalar.potentialGibbs then
+      elseif initEnergy == InitThermo.potentialGibbs then
         chemical.mu = g_IC;
-      elseif initEnergy == InitScalar.potentialGibbsSS then
+      elseif initEnergy == InitThermo.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Else there's no initial equation since
-        // initEnergy == InitScalar.none or
+        // Else, there's no initial equation since
+        // initEnergy == InitThermo.none or
         // consEnergy == Conservation.steady.
       end if;
     end if;
 
   equation
     // Aliases (only to clarify and simplify other equations)
+    p = dalton.p;
     T = direct.thermal.T;
     v*N = V;
     h = chemical.mu + chemical.sT;
     M = Data.m*N;
     phi = direct.translational.phi;
     I .* L[cartTrans] = N*phi;
-    Ndot_faces = faces.Ndot + {{faces[i, Side.n].phi[Orient.normal],-faces[i,
-      Side.p].phi[Orient.normal]}*A[cartFaces[i]] ./ Data.v_Tp(faces[i, :].T,
-      faces[i, :].p) for i in 1:n_faces};
     phi_actual_chemical = actualStream(chemical.phi);
     phi_actual_physical = actualStream(physical.phi);
 
@@ -1850,7 +1810,6 @@ Choose any condition besides None.");
       physical.mu = chemical.mu;
     else
       tauprime*physical.Ndot = N*(exp((physical.mu - chemical.mu)/T) - 1);
-      //physical.Ndot = 0;
       // The first branch avoids nonlinear equations when tauprime=0.
       // Dymola 7.4 can't derive it symbolically from the previous equation.
     end if;
@@ -1875,47 +1834,41 @@ Choose any condition besides None.");
 
     // Diffusive transport
     for i in 1:n_faces loop
-      for side in Side loop
-        // Material
-        eta*L[cartFaces[i]]*faces[i, side].Ndot = kA[cartFaces[i]]*(faces[i,
-          side].p - p)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(side)*
-          eta*V*faces[i, side].phi[Orient.normal]/(2*kA[cartFaces[i]])) else 2);
+      // Material
+      Delta(faces[i, :].Ndot) = (if inclTrans[cartFaces[i]] then -2*I[transCart[
+        cartFaces[i]]] else 0) "Linear current profile across subregion";
+      k[cartFaces[i]]*beta*sum(faces[i, :].Ndot) = N*(sum(faces[i, :].p)/2 - p*
+        epsilon) "Transport into the subregion";
 
-        // Translational momentum
-        beta*L[cartFaces[i]]*faces[i, side].mPhidot[Orient.normal] = kA[
-          cartFaces[i]]*(faces[i, side].phi[Orient.normal] - (if inclTrans[
-          cartFaces[i]] then phi[transCart[cartFaces[i]]]*V/product(L) else 0))
-          *2 "Normal (central difference)";
-        zeta*L[cartFaces[i]]*faces_mPhidot[i, side, Orient.after - 1] = Nu_Phi[
-          cartWrap(cartFaces[i] + 1)]*kA[cartFaces[i]]*(faces[i, side].phi[
-          Orient.after] - (if inclTrans[cartWrap(cartFaces[i] + 1)] then phi[
-          transCart[cartWrap(cartFaces[i] + 1)]] else 0))*(if upstream[
-          cartFaces[i]] then 1 + exp(-inSign(side)*zeta*M*faces[i, side].phi[
-          Orient.normal]/(2*kA[cartFaces[i]])) else 2) "1st transverse";
-        zeta*L[cartFaces[i]]*faces_mPhidot[i, side, Orient.before - 1] = Nu_Phi[
-          cartWrap(cartFaces[i] - 1)]*kA[cartFaces[i]]*(faces[i, side].phi[
-          Orient.before] - (if inclTrans[cartWrap(cartFaces[i] - 1)] then phi[
-          transCart[cartWrap(cartFaces[i] - 1)]] else 0))*(if upstream[
-          cartFaces[i]] then 1 + exp(-inSign(side)*zeta*M*faces[i, side].phi[
-          Orient.normal]/(2*kA[cartFaces[i]])) else 2) "2nd transverse";
+      for side in Side loop
+        // Transverse translational momentum
+        zeta*faces_mPhidot[i, side, Orient.after] = Nu_Phi[cartWrap(cartFaces[i]
+           + 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orient.after] - (if
+          inclTrans[cartWrap(cartFaces[i] + 1)] then phi[transCart[cartWrap(
+          cartFaces[i] + 1)]] else 0))*(if upstream[cartFaces[i]] then 1 + exp(
+          -zeta*Lprime[cartFaces[i]]*Data.m*faces[i, side].Ndot/2) else 2)
+          "1st transverse";
+        zeta*faces_mPhidot[i, side, Orient.before] = Nu_Phi[cartWrap(cartFaces[
+          i] - 1)]*Lprime[cartFaces[i]]*(faces[i, side].phi[Orient.before] - (
+          if inclTrans[cartWrap(cartFaces[i] - 1)] then phi[transCart[cartWrap(
+          cartFaces[i] - 1)]] else 0))*(if upstream[cartFaces[i]] then 1 + exp(
+          -zeta*Lprime[cartFaces[i]]*Data.m*faces[i, side].Ndot/2) else 2)
+          "2nd transverse";
 
         // Thermal energy
-        theta*L[cartFaces[i]]*faces[i, side].Qdot = Nu_Q*kA[cartFaces[i]]*(
-          faces[i, side].T - T)*(if upstream[cartFaces[i]] then 1 + exp(-inSign(
-          side)*theta*N*Data.c_v(T, p)*faces[i, side].phi[Orient.normal]/(2*kA[
-          cartFaces[i]])) else 2);
+        theta*faces[i, side].Qdot = Nu_Q*Lprime[cartFaces[i]]*(faces[i, side].T
+           - T)*(if upstream[cartFaces[i]] then 1 + exp(-theta*Lprime[cartFaces[
+          i]]*Data.c_v(T, p)*faces[i, side].Ndot/2) else 2);
       end for;
 
       // Direct mapping of transverse forces (calculated above)
       if not (consRot and inclRot[cartWrap(cartFaces[i] - 1)]) then
-        faces[i, :].mPhidot[Orient.after] = faces_mPhidot[i, :, Orient.after -
-          1];
-        // Else the force must be mapped for zero torque (below).
+        faces[i, :].mPhidot[Orient.after] = faces_mPhidot[i, :, Orient.after];
+        // Else, the force must be mapped for zero torque (below).
       end if;
       if not (consRot and inclRot[cartWrap(cartFaces[i] + 1)]) then
-        faces[i, :].mPhidot[Orient.before] = faces_mPhidot[i, :, Orient.before
-           - 1];
-        // Else the force must be mapped for zero torque (below).
+        faces[i, :].mPhidot[Orient.before] = faces_mPhidot[i, :, Orient.before];
+        // Else, the force must be mapped for zero torque (below).
       end if;
     end for;
 
@@ -1933,49 +1886,49 @@ Choose any condition besides None.");
            - 1)],3,1},{-L[cartWrap(axis + 1)]/L[cartWrap(axis - 1)],L[cartWrap(
           axis + 1)]/L[cartWrap(axis - 1)],1,3}}*cat(
             1,
-            faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orient.after - 1],
-            faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orient.before - 1]);
+            faces_mPhidot[facesCart[cartWrap(axis + 1)], :, Orient.after],
+            faces_mPhidot[facesCart[cartWrap(axis - 1)], :, Orient.before]);
       end for;
     end if;
 
     // Material dynamics
     if consMaterial == Conservation.IC then
       // Apply the IC forever (material not conserved).
-      if initMaterial == InitScalar.amount then
+      if initMaterial == InitThermo.amount then
         N = N_IC;
-      elseif initMaterial == InitScalar.amountSS then
+      elseif initMaterial == InitThermo.amountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.concentration then
+      elseif initMaterial == InitThermo.density then
         1/v = rho_IC;
-      elseif initMaterial == InitScalar.concentrationSS then
+      elseif initMaterial == InitThermo.densitySS then
         der(1/v) = 0;
-      elseif initMaterial == InitScalar.volume then
+      elseif initMaterial == InitThermo.volume then
         V = V_IC;
-      elseif initMaterial == InitScalar.volumeSS then
+      elseif initMaterial == InitThermo.volumeSS then
         der(V) = 0;
-      elseif initMaterial == InitScalar.pressure then
+      elseif initMaterial == InitThermo.pressure then
         p = p_IC;
-      elseif initMaterial == InitScalar.pressureSS then
+      elseif initMaterial == InitThermo.pressureSS then
         der(p) = 0;
-      elseif initMaterial == InitScalar.temperature then
+      elseif initMaterial == InitThermo.temperature then
         T = T_IC;
-      elseif initMaterial == InitScalar.temperatureSS then
+      elseif initMaterial == InitThermo.temperatureSS then
         der(T) = 0;
-      elseif initMaterial == InitScalar.specificEnthalpy then
+      elseif initMaterial == InitThermo.specificEnthalpy then
         h = h_IC;
-      elseif initMaterial == InitScalar.specificEnthalpySS then
+      elseif initMaterial == InitThermo.specificEnthalpySS then
         der(h) = 0;
-      elseif initMaterial == InitScalar.potentialGibbs then
+      elseif initMaterial == InitThermo.potentialGibbs then
         chemical.mu = g_IC;
       else
-        // if initMaterial == InitScalar.potentialGibbsSS then
+        // if initMaterial == InitThermo.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Note:  initMaterial == InitScalar.none can't occur due to an
+        // Note:  initMaterial == InitThermo.none can't occur due to an
         // assertion.
       end if;
     else
       (if consMaterial == Conservation.dynamic then der(N)/U.s else 0) =
-        chemical.Ndot + physical.Ndot + sum(Ndot_faces) "Material conservation";
+        chemical.Ndot + physical.Ndot + sum(faces.Ndot) "Material conservation";
     end if;
 
     // Translational dynamics
@@ -1983,16 +1936,16 @@ Choose any condition besides None.");
       if consTrans[cartTrans[j]] == Conservation.IC then
         // Apply the IC forever (translational momentum isn't conserved along
         // this axis).
-        if initTrans[cartTrans[j]] == InitTranslational.velocity then
+        if initTrans[cartTrans[j]] == InitTrans.velocity then
           phi[j] = phi_IC[cartTrans[j]];
-        elseif initTrans[cartTrans[j]] == InitTranslational.velocitySS then
+        elseif initTrans[cartTrans[j]] == InitTrans.velocitySS then
           der(phi[j]) = 0;
-        elseif initTransX == InitTranslational.current then
+        elseif initTransX == InitTrans.current then
           I[j] = I_IC[cartTrans[j]];
         else
-          // if initTrans[cartTrans[j]] == InitTranslational.currentSS then
+          // if initTrans[cartTrans[j]] == InitTrans.currentSS then
           der(I[j]) = 0;
-          // Note:  initTrans[cartTrans[j]] == InitTranslational.none can't
+          // Note:  initTrans[cartTrans[j]] == InitTrans.none can't
           // occur due to an assertion.
         end if;
       else
@@ -2003,9 +1956,9 @@ Choose any condition besides None.");
           phi_actual_chemical[j] - phi[j])*chemical.Ndot + (phi_actual_physical[
           j] - phi[j])*physical.Ndot) + direct.translational.mPhidot[j] + sum(
           intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((faces[i, :].phi[
-          cartWrap(cartTrans[j] - cartFaces[i] + 1)] - {phi[j],phi[j]})*
-          Ndot_faces[i, :]*Data.m + Sigma(faces[i, :].mPhidot[cartWrap(
-          cartTrans[j] - cartFaces[i] + 1)]) for i in 1:n_faces)
+          cartWrap(cartTrans[j] - cartFaces[i] + 1)] - {phi[j],phi[j]})*faces[i,
+          :].Ndot*Data.m + sum(faces[i, :].mPhidot[cartWrap(cartTrans[j] -
+          cartFaces[i] + 1)]) for i in 1:n_faces)
           "Conservation of translational momentum";
         // Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive
         // form of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
@@ -2015,36 +1968,36 @@ Choose any condition besides None.");
     // Thermal dynamics
     if consEnergy == Conservation.IC then
       // Apply the IC forever (energy not conserved).
-      if initEnergy == InitScalar.amount then
+      if initEnergy == InitThermo.amount then
         N = N_IC;
-      elseif initEnergy == InitScalar.amountSS then
+      elseif initEnergy == InitThermo.amountSS then
         der(N) = 0;
-      elseif initMaterial == InitScalar.concentration then
+      elseif initEnergy == InitThermo.density then
         1/v = rho_IC;
-      elseif initMaterial == InitScalar.concentrationSS then
+      elseif initEnergy == InitThermo.densitySS then
         der(1/v) = 0;
-      elseif initEnergy == InitScalar.volume then
+      elseif initEnergy == InitThermo.volume then
         V = V_IC;
-      elseif initEnergy == InitScalar.volumeSS then
+      elseif initEnergy == InitThermo.volumeSS then
         der(V) = 0;
-      elseif initEnergy == InitScalar.pressure then
+      elseif initEnergy == InitThermo.pressure then
         p = p_IC;
-      elseif initEnergy == InitScalar.pressureSS then
+      elseif initEnergy == InitThermo.pressureSS then
         der(p) = 0;
-      elseif initEnergy == InitScalar.temperature then
+      elseif initEnergy == InitThermo.temperature then
         T = T_IC;
-      elseif initEnergy == InitScalar.temperatureSS then
+      elseif initEnergy == InitThermo.temperatureSS then
         der(T) = 0;
-      elseif initEnergy == InitScalar.specificEnthalpy then
+      elseif initEnergy == InitThermo.specificEnthalpy then
         h = h_IC;
-      elseif initEnergy == InitScalar.specificEnthalpySS then
+      elseif initEnergy == InitThermo.specificEnthalpySS then
         der(h) = 0;
-      elseif initEnergy == InitScalar.potentialGibbs then
+      elseif initEnergy == InitThermo.potentialGibbs then
         chemical.mu = g_IC;
       else
-        // if initEnergy == InitScalar.potentialGibbsSS then
+        // if initEnergy == InitThermo.potentialGibbsSS then
         der(chemical.mu) = 0;
-        // Note:  initEnergy == InitScalar.none can't occur due to an
+        // Note:  initEnergy == InitThermo.none can't occur due to an
         // assertion.
       end if;
     else
@@ -2057,11 +2010,14 @@ Choose any condition besides None.");
          + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
         *inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
          + sum(inter.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h})
-        *Ndot_faces[i, :] + sum((faces[i, :].phi[cartWrap(cartTrans[j] -
-        cartFaces[i] + 1)] .^ 2 - fill(phi[j]^2, 2))*Ndot_faces[i, :]*Data.m/2
-         + faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i] + 1)]*faces[i,
-        :].mPhidot[cartWrap(cartTrans[j] - cartFaces[i] + 1)] for j in 1:
-        n_trans) for i in 1:n_faces) + sum(faces.Qdot) "Conservation of energy";
+        *faces[i, :].Ndot + sum(((if cartTrans[j] == cartFaces[i] then (faces[i,
+        :].Ndot .* Data.v_Tp(faces[i, :].p, faces[i, :].T)/A[cartTrans[j]]) .^
+        2 else faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i])] .^ 2) -
+        fill(phi[j]^2, 2))*faces[i, :].Ndot*Data.m/2 + faces[i, :].phi[cartWrap(
+        cartTrans[j] - cartFaces[i] + 1)]*faces[i, :].mPhidot[cartWrap(
+        cartTrans[j] - cartFaces[i] + 1)] for j in 1:n_trans) for i in 1:
+        n_faces) + sum(faces.Qdot) "Conservation of energy";
+
       // **temp 0 on physical.mu.  Should it be eliminated?
     end if;
     annotation (
@@ -2166,10 +2122,7 @@ Choose any condition besides None.");
     </table>
 
     <p>Notes regarding the parameters:
-    <ul>
-    <li>Here (and in the rest of <a href=\"modelica://FCSys\">FCSys</a>; see the <a href=\"modelica://FCSys.UsersGuide.Glossary\">glossary</a>), the <i>specific</i>
-    adjective means that the following extensive quantity is divided by particle number.
-    (<i>Massic</i> indicates a quantity divided by mass.)</li>
+    <ol>
     <li>In general, if material resistivity, dynamic compressibility, fluidity, or thermal resistivity is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
     If two configurations
@@ -2178,23 +2131,11 @@ Choose any condition besides None.");
     quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson1993B</a>] is necessary.</li>
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
-    <li>The area fill factor (<b><i>k</i></b>) can be used to account for the effects of porosity and tortousity
-    on the rate of transport.  It may reflect anisotropic properties, since it is a vector with independent components
-    for each axis.
-    By default, its components are unity.  The area fill factor should be adjusted directly with effective
-    area and inversely with effective length.
-    It affects all of the diffusive transport rates (material, translational, and
-    thermal) by the same factor.</li>
     <li>If <code>Conservation.IC</code> is used for a state (via
     <code>consMaterial</code>, <code>consTransX</code>, <code>consTransY</code>,
     <code>consTransZ</code>, or <code>consEnergy</code>),
     then the associated initial condition (IC) will be applied forever instead of the
-    corresponding conservation equation.
-    If <code>consMaterial</code>, <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
-    <code>Conservation.IC</code>, then there may be a secondary effect on the energy conservation equation
-    and thus temperature.
-    In that case, it may help to set <code>consEnergy</code> to <code>Conservation.IC</code> so that
-    the energy conservation equation is not imposed.</li>
+    corresponding conservation equation.</li>
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
     <code>Conservation.steady</code>, then the derivative of the corresponding component of velocity
     is treated as zero and removed from the translational momentum balance.  If <code>consEnergy</code> is
@@ -2210,7 +2151,7 @@ Choose any condition besides None.");
     <code>consTransY</code>, or <code>consTransZ</code> to <code>Conservation.IC</code>.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>consMaterial</code> to <code>Conservation.IC</code> and <code>initMaterial</code>
-    to <code>InitScalar.pressure</code> for one of the species.</li>
+    to <code>InitThermo.pressure</code> for one of the species.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
     temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a> model).
@@ -2238,7 +2179,7 @@ Choose any condition besides None.");
     <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
     rotational axis that has all its faces included (i.e., all the faces around the perimeter).  Rotational 
-    momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li></p>
+    momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li></ol></p>
 
     <p>In the <code>faces</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the material current.
@@ -2266,16 +2207,16 @@ Choose any condition besides None.");
           extent={{-100,-100},{100,100}},
           initialScale=0.1), graphics),
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Partial;
 
 public
@@ -2378,11 +2319,11 @@ public
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-            extent={{-40,40},{40,-40}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash)}),
+              extent={{-40,40},{40,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 
@@ -2390,42 +2331,11 @@ public
   package Enumerations "Choices of options"
     extends Modelica.Icons.TypesPackage;
 
-    type Conservation = enumeration(
-        IC "Initial condition imposed forever (no conservation)",
-        steady "Steady (conservation with steady state)",
-        dynamic "Dynamic (conservation with storage)")
-      "Options for a conservation equation";
-    type InitScalar = enumeration(
-        none "No initialization",
-        amount "Prescribed amount",
-        amountSS "Steady-state amount",
-        concentration "Prescribed concentration",
-        concentrationSS "Steady-state concentration",
-        volume "Prescribed volume",
-        volumeSS "Steady-state volume",
-        pressure "Prescribed pressure",
-        pressureSS "Steady-state pressure",
-        temperature "Prescribed temperature",
-        temperatureSS "Steady-state temperature",
-        specificEnthalpy "Prescribed specific enthalpy",
-        specificEnthalpySS "Steady-state specific enthalpy",
-        potentialGibbs "Prescribed Gibbs potential",
-        potentialGibbsSS "Steady-state Gibbs potential")
-      "Methods of initializing scalar quantities (material and energy)";
-
-    type InitTranslational = enumeration(
-        none "No initialization",
-        velocity "Prescribed velocity",
-        velocitySS "Steady-state velocity",
-        current "Prescribed advective current",
-        currentSS "Steady-state advective current")
-      "Methods of initializing translational momentum";
     type Axis = enumeration(
         x "X",
         y "Y",
         z "Z") "Enumeration for Cartesian axes";
     type Orient = enumeration(
-        normal "Normal axis",
         after "Axis following the normal axis in Cartesian coordinates",
         before "Axis preceding the normal axis in Cartesian coordinates")
       "Enumeration for orientations relative to a face" annotation (
@@ -2438,6 +2348,35 @@ public
         n "Negative",
         p "Positive (greater position along the Cartesian axis)")
       "Enumeration for sides of a region or subregion";
+    type Conservation = enumeration(
+        IC "Initial condition imposed forever (no conservation)",
+        steady "Steady (conservation with steady state)",
+        dynamic "Dynamic (conservation with storage)")
+      "Options for a conservation equation";
+    type InitThermo = enumeration(
+        none "No initialization",
+        amount "Prescribed amount",
+        amountSS "Steady-state amount",
+        density "Prescribed density",
+        densitySS "Steady-state density",
+        volume "Prescribed volume",
+        volumeSS "Steady-state volume",
+        pressure "Prescribed pressure",
+        pressureSS "Steady-state pressure",
+        temperature "Prescribed temperature",
+        temperatureSS "Steady-state temperature",
+        specificEnthalpy "Prescribed specific enthalpy",
+        specificEnthalpySS "Steady-state specific enthalpy",
+        potentialGibbs "Prescribed Gibbs potential",
+        potentialGibbsSS "Steady-state Gibbs potential")
+      "Methods of initializing a thermodynamic quantity (material or energy)";
+    type InitTrans = enumeration(
+        none "No initialization",
+        velocity "Prescribed velocity",
+        velocitySS "Steady-state velocity",
+        current "Prescribed advective current",
+        currentSS "Steady-state advective current")
+      "Methods of initializing translational momentum";
 
   end Enumerations;
   annotation (Documentation(info="

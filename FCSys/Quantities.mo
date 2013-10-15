@@ -17,7 +17,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/Resources/quantities.xls, 2013-10-11
+      // Generated from FCSys/Resources/quantities.xls, 2013-10-15
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C
@@ -27,9 +27,8 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.mol "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
-      parameter Q.Concentration Concentration=1*U.C/U.m^3 "Concentration";
-      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
-        "Rate of concentration";
+      parameter Q.Density Density=1*U.C/U.m^3 "Density";
+      parameter Q.DensityRate DensityRate=1*U.C/(U.m^3*U.s) "Rate of density";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.ConductivityElectrical ConductivityElectrical=1*U.S
@@ -86,13 +85,12 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
-      parameter Q.ResistivityMaterial ResistivityMaterial=1*U.s/U.m^2
-        "Material resistivity";
       parameter Q.Time Time=1*U.s "Time";
       parameter Q.TimeAbsolute TimeAbsolute=1*U.s "Absolute time";
       parameter Q.TimeLineic TimeLineic=1*U.s/U.m "Lineic time";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
+      parameter Q.Viscosity Viscosity=1*U.Pa*U.s "Viscosity";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
@@ -113,7 +111,7 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.TypesPackage;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/Resources/quantities.xls, 2013-10-11
+  // Generated from FCSys/Resources/quantities.xls, 2013-10-17
   type Acceleration = TypeReal (final unit="L/T2");
   type Amount = TypeReal (final unit="N", min=0);
   type AmountReciprocal = TypeReal (final unit="1/N", min=0)
@@ -123,9 +121,8 @@ package Quantities "Quantities to represent physical properties"
   type Area = TypeReal (final unit="L2", min=0);
   type AreaSpecific = TypeReal (final unit="L2/N", min=0) "Specific area";
   type Capacitance = TypeReal (final unit="N2.T2/(L2.M)", min=0);
-  type Concentration = TypeReal (final unit="N/L3", min=0);
-  type ConcentrationRate = TypeReal (final unit="N/(L3.T)")
-    "Rate of concentration";
+  type Density = TypeReal (final unit="N/L3", min=0);
+  type DensityRate = TypeReal (final unit="N/(L3.T)") "Rate of density";
   type ConductanceElectrical = TypeReal (final unit="N2.T/(L2.M)", min=0)
     "Electrical conductance";
   type ConductivityElectrical = TypeReal (final unit="N2.T/(L3.M)", min=0)
@@ -182,13 +179,12 @@ package Quantities "Quantities to represent physical properties"
   type ResistanceElectrical = TypeReal (final unit="L2.M/(N2.T)", min=0)
     "Electrical resistance";
   type Resistivity = TypeReal (final unit="L.T/N", min=0);
-  type ResistivityMaterial = TypeReal (final unit="M/(N.T)", min=0)
-    "Material resistivity";
   type Time = TypeReal (final unit="T");
   type TimeAbsolute = TypeReal (final unit="T", min=0) "Absolute time";
   type TimeLineic = TypeReal (final unit="T/L") "Lineic time";
   type Velocity = TypeReal (final unit="L/T");
   type Velocity2 = TypeReal (final unit="L2/T2") "Squared velocity";
+  type Viscosity = TypeReal (final unit="L2.M/(N.T)", min=0);
   type Volume = TypeReal (final unit="L3", min=0);
   type VolumeRate = TypeReal (final unit="L3/T") "Rate of volume";
   type VolumeSpecific = TypeReal (final unit="L3/N") "Specific volume";
