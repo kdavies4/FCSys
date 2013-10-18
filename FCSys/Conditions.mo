@@ -2097,14 +2097,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="chemical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={255,195,38},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={255,195,38},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None)}));
 
     end Chemical;
 
@@ -2720,10 +2720,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
     end Reaction;
 
     package PhysicalBus
@@ -3179,11 +3179,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52},
-                  lineThickness=0.5)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52},
+              lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3316,10 +3316,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="physical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5243,11 +5243,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191},
-                  lineThickness=0.5)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191},
+              lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -5372,8 +5372,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Material.Partial "Material quantity" annotation (
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
-          // Normal translational
-
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
             constrainedby Translational.Partial "First transverse quantity"
@@ -5400,8 +5398,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 transformation(extent={{-110,-10},{-90,10}})));
           Connectors.Face positive "Positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-          Connectors.RealInputBus u if not (internalMaterial and internalNormal
-             and internalFollowing and internalPreceding and internalThermal)
+          Connectors.RealInputBus u if not (internalMaterial and
+            internalFollowing and internalPreceding and internalThermal)
             "Bus of specifications" annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -5576,8 +5574,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               points={{-50,29},{-50,20},{-60,20},{-60,6}},
               color={0,0,127},
               smooth=Smooth.None));
-
-          // Normal translational
 
           // First transverse
           connect(u_following, _u_following) annotation (Line(
@@ -5864,13 +5860,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={-40,70})));
           //
-          // Normal translational
-          parameter Boolean internalNormal=true "Use internal specification"
-            annotation (
-            HideResult=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(tab="Specification", group="Normal translational"));
-          //
           // 1st transverse
           replaceable function followingSpec = Translational.force
             constrainedby Translational.Partial "Quantity" annotation (
@@ -5954,8 +5943,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Material.Partial "Material quantity" annotation (
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
-          // Normal translational
-
           // 1st transverse
           replaceable function followingMeas = Translational.velocity
             constrainedby Translational.Partial "First transverse quantity"
@@ -5977,8 +5964,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Connector to transport material, translational momentum, and thermal energy"
             annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
                 iconTransformation(extent={{-10,-50},{10,-30}})));
-          Connectors.RealInputBus u if not (internalMaterial and internalNormal
-             and internalFollowing and internalPreceding and internalThermal)
+          Connectors.RealInputBus u if not (internalMaterial and
+            internalFollowing and internalPreceding and internalThermal)
             "Bus of specifications" annotation (Placement(transformation(extent
                   ={{-120,-10},{-100,10}})));
           Connectors.RealOutputBus y "Bus of measurements"
@@ -6124,8 +6111,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               index=1,
               extent={{6,3},{6,3}}));
 
-          // Normal translational
-
           // First transverse
           connect(u_following, _u_following) annotation (Line(
               points={{-70,20},{4,20}},
@@ -6195,7 +6180,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{6,3},{6,3}}));
           annotation (
             defaultComponentName="face",
-            Diagram(graphics),
+            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics),
             Icon(graphics));
         end Flows;
 
@@ -6390,10 +6376,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191})}));
 
     end Face;
 
@@ -6516,14 +6502,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251}),Text(
-                  extent={{-56,56},{56,-56}},
-                  lineColor={255,255,255},
-                  textString="A",
-                  textStyle={TextStyle.Bold})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251}), Text(
+              extent={{-56,56},{56,-56}},
+              lineColor={255,255,255},
+              textString="A",
+              textStyle={TextStyle.Bold})}));
     end Amagat;
 
     package Dalton
@@ -6609,14 +6595,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251}),Text(
-                  extent={{-56,56},{56,-56}},
-                  lineColor={255,255,255},
-                  textString="D",
-                  textStyle={TextStyle.Bold})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251}), Text(
+              extent={{-56,56},{56,-56}},
+              lineColor={255,255,255},
+              textString="D",
+              textStyle={TextStyle.Bold})}));
     end Dalton;
 
     package Direct
@@ -7092,10 +7078,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
     end Direct;
 
     package Inter
@@ -7578,10 +7564,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
     end Inter;
 
     package Translational
@@ -7921,10 +7907,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Component;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end Translational;
 
@@ -8012,10 +7998,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="thermal");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
@@ -9070,27 +9056,31 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

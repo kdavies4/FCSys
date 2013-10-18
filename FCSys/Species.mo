@@ -1107,7 +1107,7 @@ protected
 
     // Material properties
     replaceable package Data = Characteristics.BaseClasses.Characteristic
-      constrainedby Characteristics.BaseClasses.Characteristic
+      constrainedby environment.Characteristics.BaseClasses.Characteristic
       "Characteristic data" annotation (
       Evaluate=true,
       Dialog(group="Material properties"),
@@ -1410,13 +1410,14 @@ protected
       if environment.analysis "Time constants for material transport";
     output Q.TimeAbsolute tau_PhiT_para[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (M*zeta/2)*Lprime[cartFaces] ./ Nu_Phi[cartFaces] if
-      environment.analysis
-      "Time constants for transverse translational transport (with central difference or no advection)";
+      each start=U.s) = (M*zeta) ./ (Lprime[cartFaces] .* Nu_Phi[cartFaces])
+      if environment.analysis
+      "Time constants for transverse translational transport (through the whole subregion)";
     output Q.TimeAbsolute tau_QT[n_faces](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*Lprime[cartFaces] if environment.analysis
-      "Time constants for thermal transport (with central difference or no advection)";
+      each start=U.s) = fill(N*c_v*theta/Nu_Q, n_faces) ./ Lprime[cartFaces]
+      if environment.analysis
+      "Time constants for thermal transport (through the whole subregion)";
     //
     // Peclet numbers (only for the axes with translational momentum included;
     // others are zero)
@@ -2207,16 +2208,16 @@ Choose any condition besides None.");
           extent={{-100,-100},{100,100}},
           initialScale=0.1), graphics),
       Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            environment.extent={{-100,100},{100,-100}},
+            environment.lineColor={127,127,127},
+            environment.pattern=LinePattern.Dash,
+            environment.fillColor={225,225,225},
+            environment.fillPattern=FillPattern.Solid), Text(
+            environment.extent={{-100,-20},{100,20}},
+            environment.textString="%name",
+            environment.lineColor={0,0,0},
+            environment.origin={-40,40},
+            environment.rotation=45)}));
   end Partial;
 
 public
@@ -2319,11 +2320,11 @@ public
 
     <p></p></html>"),
       Icon(graphics={Ellipse(
-              extent={{-40,40},{40,-40}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash)}),
+            environment.extent={{-40,40},{40,-40}},
+            environment.lineColor={127,127,127},
+            environment.fillColor={255,255,255},
+            environment.fillPattern=FillPattern.Solid,
+            environment.pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end Reaction;
 

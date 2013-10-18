@@ -36,7 +36,7 @@ package Subregions
         inclTransY=true,
         inclFacesX=false,
         inclFacesY=true,
-        k_common=1e-8,
+        k_common=1e-7,
         gas(
           inclH2O=false,
           inclN2=true,
@@ -44,14 +44,14 @@ package Subregions
             p_IC=environment.p - Deltap_IC/2,
             N(stateSelect=StateSelect.always),
             upstreamY=false)),
-        graphite('inclC+'=true, 'C+'(V_IC=U.mm^3,T(stateSelect=StateSelect.always))))
+        graphite('inclC+'=true, 'C+'(V_IC=U.mm^3, T(stateSelect=StateSelect.always))))
         annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
 
       FCSys.Subregions.Subregion subregions[n_y](
         each L={10,10,10}*U.m,
         each inclTransZ=false,
         each inclFacesZ=false,
-        each k_common=1e-8,
+        each k_common=1e-7,
         gas(
           each inclH2O=false,
           each inclN2=true,
@@ -61,10 +61,7 @@ package Subregions
             each N(stateSelect=StateSelect.always),
             each phi(each stateSelect=StateSelect.always),
             each upstreamY=false,
-            initTransY=if n_y == 0 then fill(1, 0) else cat(
-                    1,
-                    fill(InitTrans.velocity, n_y - 1),
-                    {InitTrans.none}))),
+            each initTransY=InitTrans.velocity)),
         graphite(each 'inclC+'=true, each 'C+'(V_IC=U.mm^3,T(stateSelect=
                   StateSelect.always))),
         each inclTransX=false,
@@ -81,7 +78,7 @@ package Subregions
         inclTransY=true,
         inclFacesX=false,
         inclFacesY=true,
-        each k_common=1e-8,
+        each k_common=1e-7,
         graphite('inclC+'=true, 'C+'(V_IC=U.mm^3,T(stateSelect=StateSelect.always))),
 
         gas(
@@ -96,6 +93,12 @@ package Subregions
 
       Conditions.ByConnector.FaceBus.Single.Efforts BC(graphite('inclC+'=true))
         annotation (Placement(transformation(extent={{-10,-46},{10,-66}})));
+      Conditions.ByConnector.FaceBus.Single.Efforts BC1(gas(inclN2=true, N2(
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.heatRate,
+            materialSet(y=environment.p),
+            thermalSet(y=0))))
+        annotation (Placement(transformation(extent={{-10,46},{10,66}})));
     equation
       connect(subregion1.yPositive, subregions[1].yNegative) annotation (Line(
           points={{6.10623e-16,-20},{0,-18},{1.22125e-15,-16},{6.10623e-16,-16},
@@ -124,8 +127,13 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+      connect(BC1.face, subregion2.yPositive) annotation (Line(
+          points={{0,52},{0,40}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
       annotation (
-        experiment(__Dymola_Algorithm="Dassl"),
+        experiment(StopTime=8, __Dymola_Algorithm="Dassl"),
         Documentation(info="<html><p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
     regions with N<sub>2</sub> gas.  The upper and lower boundary regions are held with zero velocity.  
     The initial pressure difference is zero, but a pressure difference
@@ -220,10 +228,13 @@ package Subregions
           final 'incle-'='incle-',
           'inclC+'=true,
           'e-'(materialSet(y=-0.05*U.A)),
-          'C+'(redeclare function thermalSpec =
+          'C+'(
+            redeclare function thermalSpec =
                 Conditions.ByConnector.Face.Single.Thermal.temperature,
-              thermalSet(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T),
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
@@ -291,31 +302,22 @@ package Subregions
       extends Examples.Subregion(
         inclH2O=true,
         inclH2=false,
-        subregion(gas(H2O(
-              p_IC=U.kPa,
-              consTransX=Conservation.IC,
-              consEnergy=Conservation.IC)), liquid(inclH2O=inclH2O, H2O(
-                consTransX=Conservation.IC, consEnergy=Conservation.IC))));
+        subregion(gas(H2O(p_IC=U.kPa, consEnergy=Conservation.IC)), liquid(
+              inclH2O=inclH2O, H2O(consEnergy=Conservation.IC))));
+
       FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC1(gas(inclH2O=true,
             H2O(redeclare Modelica.Blocks.Sources.Pulse materialSet(
               amplitude=-10*U.A,
               width=1e-4,
               period=10000,
-              startTime=1), redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)),
-          liquid(inclH2O=true, H2O(redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+              startTime=1))), liquid(inclH2O=true)) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
 
-      FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC2(gas(inclH2O=true,
-            H2O(redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)),
-          liquid(inclH2O=true, H2O(redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+      FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC2(gas(inclH2O=true),
+          liquid(inclH2O=true)) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={24,0})));
@@ -346,6 +348,7 @@ package Subregions
             "Subregions.Examples.Evaporation.mos"),
         Diagram(graphics),
         __Dymola_experimentSetupOutput);
+
     end Evaporation;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
@@ -846,33 +849,22 @@ package Subregions
       extends Examples.Subregion(
         inclH2O=true,
         inclH2=false,
-        subregion(gas(H2O(
-              p_IC=saturationPressureSI(environment.T/U.K)*U.Pa,
-              redeclare package Data = FCSys.Characteristics.H2O.Gas,
-              consTransX=Conservation.IC)), liquid(H2O(
-              initMaterial=InitThermo.volume,
-              V_IC=0.25*U.cc,
-              consTransX=Conservation.IC), inclH2O=true)),
+        subregion(gas(H2O(p_IC=saturationPressureSI(environment.T/U.K)*U.Pa,
+                redeclare package Data = FCSys.Characteristics.H2O.Gas)),
+            liquid(H2O(initMaterial=InitThermo.volume, V_IC=0.25*U.cc), inclH2O
+              =true)),
         environment(T=274.15*U.K));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC1(liquid(inclH2O=true,
-            H2O(
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-
-            redeclare function thermalSpec =
+            H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
+              redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=3600,
               offset=environment.T,
-              y))), gas(inclH2O=inclH2O, H2O(
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-
-            redeclare function thermalSpec =
+              y))), gas(inclH2O=inclH2O, H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
+              redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=3600,
               offset=environment.T,
@@ -882,23 +874,15 @@ package Subregions
             origin={-24,0})));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC2(gas(inclH2O=inclH2O,
-            H2O(
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-
-            redeclare function thermalSpec =
+            H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
+              redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=3600,
               offset=environment.T,
-              y))), liquid(inclH2O=true, H2O(
-            redeclare function normalSpec =
-                FCSys.Conditions.ByConnector.Face.Single.TranslationalNormal.velocity,
-
-            redeclare function thermalSpec =
+              y))), liquid(inclH2O=true, H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
-            redeclare Modelica.Blocks.Sources.Ramp thermalSet(
+              redeclare Modelica.Blocks.Sources.Ramp thermalSet(
               height=99*U.K,
               duration=3600,
               offset=environment.T,
