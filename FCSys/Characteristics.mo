@@ -206,9 +206,8 @@ package Characteristics
       Q.Potential g "Gibbs potential";
       Q.Potential h "Specific enthalpy";
       Q.NumberAbsolute s "Specific entropy";
-      Q.Fluidity beta "Dynamic compressibility";
+      Q.Viscosity beta "Bulk viscosity";
       Q.Fluidity zeta "Fluidity";
-      Q.MobilityReciprocal eta "Material resistivity";
       Q.ResistivityThermal theta "Thermal resistivity";
       Q.PressureReciprocal kappa "Isothermal compressibility";
       Q.TimeAbsolute tauprime "Phase change interval";
@@ -224,9 +223,8 @@ package Characteristics
       s = Data.s(T, p);
       beta = Data.beta(T, v);
       zeta = Data.zeta(T, v);
-      eta = BaseClasses.Characteristic.beta(T, v);
       theta = Data.theta(T, v);
-      kappa = BaseClasses.CharacteristicEOS.kappa(T, p);
+      kappa = Data.kappa(T, p);
       tauprime = Data.tauprime(T, v);
       mu = Data.mu(T, v);
       nu = Data.nu(T, v);
@@ -1233,6 +1231,33 @@ package Characteristics
           smoothOrder=1);
       end s;
 
+      replaceable function beta
+        "<html>Bulk viscosity (&beta;) as a function of temperature and specific volume</html>"
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
+        output Q.Viscosity beta "Bulk viscosity";
+
+      algorithm
+        beta := m/(alpha*omega(T));
+        annotation (Inline=true,Documentation(info="<html>
+  <p>
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol></p>
+</html>"));
+      end beta;
+
       replaceable function zeta
         "<html>Fluidity (&zeta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
@@ -1270,32 +1295,6 @@ package Characteristics
   </html>"));
       end zeta;
 
-      replaceable function beta
-        "<html>Bulk viscosity (&beta;) as a function of temperature and specific volume</html>"
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.Viscosity beta "Bulk viscosity";
-
-      algorithm
-        beta := m/(alpha*omega(T));
-        annotation (Inline=true,Documentation(info="<html>
-  <p>
-  <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
-    \"billiard-ball\"
-    assumption, and it implies that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol></p>
-</html>"));
-      end beta;
 
       replaceable function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"

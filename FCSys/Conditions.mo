@@ -264,7 +264,6 @@ package Conditions "Models to specify and measure operating conditions"
       0 = amagat.V + dalton.V "Volume";
 
       annotation (
-        defaultComponentName="AD",
         Documentation(info="<html><p>This model is used to convert the representation of mixtures 
     between Amagat's law of partial volumes and Dalton's law of partial pressures.</p>
     
@@ -273,185 +272,22 @@ package Conditions "Models to specify and measure operating conditions"
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+        Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
+              points={{-30,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None), Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={47,107,251},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
     end AmagatDalton;
-
-    model ChemicalFace
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
-
-      import FCSys.Utilities.cartWrap;
-      import FCSys.Utilities.inSign;
-      extends FCSys.Icons.Names.Top1;
-
-      // Geometry
-      parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
-            group="Geometry", __Dymola_label="<html><i>A</i></html>"));
-      parameter Axis axis "Axis of the electrochemical reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Side side "Side of the face w.r.t., the reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Integer cartTrans[:]
-        "Cartesian-axis indices of the components of translational momentum"
-        annotation (Dialog(group="Geometry"));
-
-      replaceable package Data = Characteristics.BaseClasses.Characteristic
-        constrainedby Characteristics.BaseClasses.Characteristic
-        "Characteristic data" annotation (
-        Dialog(group="Material properties"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
-
-      // Aliases (for common terms)
-      Q.PressureAbsolute p(start=Data.p0) "Thermodynamic pressure";
-
-      // Auxiliary variables (for analysis)
-      output Q.Potential zw(stateSelect=StateSelect.never) = inSign(side)*face.mPhidot[
-        Orient.normal]/(face.rho*A) "Inward nonequilibrium potential";
-
-      Connectors.Face face "Interface to the majority region" annotation (
-          Placement(transformation(extent={{10,-10},{30,10}}),
-            iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Chemical chemical(final n_trans=n_trans)
-        "Connector for a species in a chemical reaction" annotation (
-          __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-30,
-                -10},{-10,10}}), iconTransformation(extent={{30,-10},{50,10}})));
-
-    protected
-      final parameter Integer n_trans=size(cartTrans, 1)
-        "Number of components of translational momentum";
-
-    equation
-      // Aliases
-      p = Data.p_Tv(face.T, 1/face.rho);
-
-      // No diffusion across the face
-      face.Ndot = 0 "Material";
-      face.mPhidot[2:3] = {0,0} "Transverse translational momentum";
-      face.Qdot = 0 "Energy";
-
-      // Equal intensive properties
-      chemical.mu = Data.h(face.T, p) - chemical.sT + inSign(side)*face.mPhidot[
-        Orient.normal]/(face.rho*A) "Electrochemical potential";
-      chemical.phi = {face.phi[cartWrap(i - axis + 1)] for i in cartTrans}
-        "Velocity";
-      chemical.sT = Data.s(face.T, p)*face.T
-        "Specific entropy-temperature product";
-
-      // Material conservation (without storage)
-      0 = chemical.Ndot + inSign(side)*face.phi[Orient.normal]*A*face.rho;
-      // The conservation of translational momentum and energy is inherent
-      // in the stream connector.
-
-      annotation (
-        Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
-    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
-    the boundary is due entirely to the electrochemical reaction.</p> 
-    
-    <p>Assumptions:<ol>
-    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
-    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
-    potential.</li> 
-    </ol></p>
-        
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{0,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-30,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
-    end ChemicalFace;
-
-    model ChemicalReactionMulti
-      "<html>Adapter between multiple <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors and a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
-
-      extends FCSys.Icons.Names.Top1;
-
-      parameter Integer n_trans(min=1,max=3)
-        "Number of components of translational momentum" annotation (Dialog(
-            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-      parameter Integer n_spec=1 "Number of species"
-        annotation (Dialog(connectorSizing=true));
-
-      parameter Integer n[n_spec] "Stoichiometric coefficients"
-        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
-      parameter Q.MassSpecific m[n_spec] "Specific masses" annotation (Dialog(
-            group="Material properties", __Dymola_label="<html><i>m</i></html>"));
-
-      Connectors.Chemical chemical[n_spec](each final n_trans=n_trans)
-        "Connector for species in a chemical reaction" annotation (Placement(
-            transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-              extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
-        "Connector for an electrochemical reaction" annotation (Placement(
-            transformation(extent={{10,-10},{30,10}}), iconTransformation(
-              extent={{30,-10},{50,10}})));
-
-      Conditions.Adapters.ChemicalReaction single[n_spec](
-        each final n_trans=n_trans,
-        final n=n,
-        final m=m)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-    equation
-      connect(single.chemical, chemical) annotation (Line(
-          points={{-4,6.10623e-16},{-12,6.10623e-16},{-12,5.55112e-16},{-20,
-              5.55112e-16}},
-          color={255,195,38},
-          smooth=Smooth.None));
-
-      for i in 1:n_spec loop
-        connect(single[i].reaction, reaction) annotation (Line(
-            points={{4,6.10623e-16},{10,6.10623e-16},{10,5.55112e-16},{20,
-                5.55112e-16}},
-            color={255,195,38},
-            smooth=Smooth.None));
-
-      end for;
-
-      annotation (
-        Documentation(info="<html><p>This model is used to add the stoichiometrically weighted chemical potential
-    of a species to the net chemical potential of a reaction.  Meanwhile, the species is produced at the
-    stoichiometrically weighted rate of the reaction.</p>
-    
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Icon(graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,-40}},
-                  lineColor={127,127,127},
-                  textString="%n"),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}),
-        Diagram(graphics));
-    end ChemicalReactionMulti;
 
     model ChemicalReaction
       "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
-      extends FCSys.Icons.Names.Top1;
+      //extends FCSys.Icons.Names.Top1;
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Dialog(
@@ -462,12 +298,12 @@ package Conditions "Models to specify and measure operating conditions"
               "Material properties", __Dymola_label="<html><i>m</i></html>"));
 
       // Auxiliary variables (for analysis)
-      output Q.Velocity phi_actualStream[n_trans](each stateSelect=StateSelect.never)
-         = actualStream(chemical.phi) if environment.analysis
-        "Velocity of the actual stream";
-      output Q.PotentialAbsolute sT_actualStream(stateSelect=StateSelect.never)
-         = actualStream(chemical.sT) if environment.analysis
-        "Specific entropy-temperature product of the actual stream";
+      output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) =
+        actualStream(chemical.phi) if environment.analysis
+        "Velocity of the stream";
+      output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) =
+        actualStream(chemical.sT) if environment.analysis
+        "Specific entropy-temperature product of the stream";
 
       Connectors.Chemical chemical(final n_trans=n_trans)
         "Connector for a species in a chemical reaction" annotation (Placement(
@@ -483,7 +319,7 @@ package Conditions "Models to specify and measure operating conditions"
 
     equation
       // Equal intensive properties
-      reaction.mu = n*chemical.mu "Chemical potential";
+      reaction.g = n*chemical.g "Chemical potential";
       reaction.phi = chemical.phi "Velocity (upon outflow)";
       reaction.sT = chemical.sT
         "Specific entropy-temperature product (upon outflow)";
@@ -498,126 +334,26 @@ package Conditions "Models to specify and measure operating conditions"
     of a species to the net electrochemical potential of a reaction.  The species is produced at the
     stoichiometrically-weighted rate of the reaction.</p>
     
-    <p>See also <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReactionMulti\">ChemicalReactionMulti</a>.  
+    <p>
     For more information, please see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-        Icon(graphics={Line(
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+                100,100}}), graphics={Line(
                   points={{-30,0},{30,0}},
-                  color={255,195,38},
+                  color={221,23,47},
                   smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,-40}},
-                  lineColor={127,127,127},
-                  textString="%n"),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
+                  extent={{-100,20},{100,60}},
+                  lineColor={0,0,0},
+                  textString="%n %name"),Polygon(
+                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                  lineColor={221,23,47},
                   smooth=Smooth.None,
-                  thickness=0.5)}),
-        Diagram(graphics));
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
     end ChemicalReaction;
-
-    model FaceReaction
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
-
-      import FCSys.Utilities.inSign;
-      extends FCSys.Icons.Names.Top1;
-
-      // Geometry
-      parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
-            group="Geometry", __Dymola_label="<html><i>A</i></html>"));
-      parameter Axis axis "Axis of the electrochemical reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Side side "Side of the face w.r.t., the reaction"
-        annotation (Dialog(group="Geometry"));
-      parameter Integer cartTrans[:]
-        "Cartesian-axis indices of the components of translational momentum"
-        annotation (Dialog(group="Geometry"));
-      parameter Integer n "Stoichiometric coefficient"
-        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
-
-      replaceable package Data = Characteristics.BaseClasses.Characteristic
-        constrainedby Characteristics.BaseClasses.Characteristic
-        "Characteristic data" annotation (
-        Dialog(group="Material properties"),
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
-
-      // Auxiliary variables (for analysis)
-      output Q.Potential zw(stateSelect=StateSelect.never) = inSign(side)*face.mPhidot[
-        Orient.normal]/(face.rho*A) "Inward nonequilibrium potential";
-
-      Connectors.Face face "Interface to the majority region" annotation (
-          Placement(transformation(extent={{30,-10},{50,10}}),
-            iconTransformation(extent={{-50,-10},{-30,10}})));
-      Connectors.Reaction reaction(final n_trans=n_trans)
-        "Connector for an electrochemical reaction" annotation (
-          __Dymola_choicesAllMatching=true, Placement(transformation(extent={{-50,
-                -10},{-30,10}}), iconTransformation(extent={{30,-10},{50,10}})));
-
-      ChemicalFace chemicalFace(
-        final axis=axis,
-        final side=side,
-        final cartTrans=cartTrans,
-        redeclare final package Data = Data,
-        final A=A)
-        annotation (Placement(transformation(extent={{26,-10},{6,10}})));
-      ChemicalReaction reactionChemical(
-        final n_trans=n_trans,
-        final n=n,
-        final m=Data.m)
-        annotation (Placement(transformation(extent={{-6,-10},{-26,10}})));
-
-    protected
-      final parameter Integer n_trans=size(cartTrans, 1)
-        "Number of components of translational momentum";
-
-    equation
-      connect(reactionChemical.chemical, chemicalFace.chemical) annotation (
-          Line(
-          points={{-12,6.10623e-16},{0,-3.36456e-22},{0,6.10623e-16},{12,
-              6.10623e-16}},
-          color={255,195,38},
-          smooth=Smooth.None));
-
-      connect(reactionChemical.reaction, reaction) annotation (Line(
-          points={{-20,6.10623e-16},{-26,6.10623e-16},{-26,5.55112e-16},{-40,
-              5.55112e-16}},
-          color={255,195,38},
-          smooth=Smooth.None));
-
-      connect(chemicalFace.face, face) annotation (Line(
-          points={{20,6.10623e-16},{25,6.10623e-16},{25,5.55112e-16},{40,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      annotation (
-        Documentation(info="<html><p>This model is used to determine the electrochemical potential available in
-    a species at a boundary.  The potential is the sum of chemical and electrical parts.  The current across 
-    the boundary is due entirely to the electrochemical reaction.</p> 
-    
-    <p>Assumptions:<ol>
-    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
-    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
-    potential.</li> 
-    </ol></p>
-    
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{0,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-30,0},{0,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,-10},{0,10}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5)}));
-    end FaceReaction;
 
     package MSL
       "<html>Adapters to the <a href=\"modelica://Modelica\">Modelica Standard Library</a></html>"
@@ -1973,7 +1709,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Potential "Specify electrochemical potential (measure current)"
-        extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.Ndot);
+        extends Partial(final y=chemical.Ndot);
 
       equation
         chemical.mu = u_final;
@@ -1981,7 +1717,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Potential;
 
       model Current "Specify current (measure electrochemical potential)"
-        extends FCSys.Conditions.ByConnector.Chemical.Partial(final y=chemical.mu);
+        extends Partial(final y=chemical.mu);
 
       equation
         chemical.Ndot = u_final;
@@ -2097,14 +1833,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="chemical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}), Ellipse(
-              extent={{-30,30},{30,-30}},
-              fillColor={255,195,38},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-30,30},{30,-30}},
+                  fillColor={255,195,38},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None)}));
 
     end Chemical;
 
@@ -2720,10 +2456,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={239,142,1},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,195,38})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={239,142,1},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,195,38})}));
     end Reaction;
 
     package PhysicalBus
@@ -2969,7 +2705,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Axes with translational momentum included",
             compact=true));
 
-        Connectors.PhysicalBus physical "Bus of multiple species"
+        Connectors.ChemicalBus physical "Bus of multiple species"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -3179,11 +2915,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
           Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52},
-              lineThickness=0.5)}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52},
+                  lineThickness=0.5)}));
 
     end PhysicalBus;
 
@@ -3192,7 +2928,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Potential "Specify chemical potential (measure current)"
-        extends FCSys.Conditions.ByConnector.Physical.Partial(final y=physical.Ndot);
+        extends Partial(final y=physical.Ndot);
 
       equation
         physical.mu = u_final;
@@ -3200,7 +2936,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Potential;
 
       model Current "Specify current (measure chemical potential)"
-        extends FCSys.Conditions.ByConnector.Physical.Partial(final y=physical.mu);
+        extends Partial(final y=physical.mu);
 
       equation
         physical.Ndot = u_final;
@@ -3316,10 +3052,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="physical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={2,157,21},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={38,196,52})}));
 
     end Physical;
 
@@ -5243,11 +4979,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191},
-              lineThickness=0.5)}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191},
+                  lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -6252,6 +5988,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             annotation (Inline=true);
           end current;
 
+          function volumeRate "Volumic flow rate"
+            extends Partial;
+
+            replaceable package Data =
+                Characteristics.BaseClasses.CharacteristicEOS constrainedby
+              Characteristics.BaseClasses.CharacteristicEOS
+              "Characteristic data" annotation (
+              Dialog(group="Material properties"),
+              choicesAllMatching=true,
+              __Dymola_choicesFromPackage=true,
+              Placement(transformation(extent={{-60,40},{-40,60}}),
+                  iconTransformation(extent={{-10,90},{10,110}})));
+
+          algorithm
+            x := Data.v_Tp(T, p)*Ndot;
+            annotation (Inline=true);
+          end volumeRate;
+
           partial function Partial
             "Template of a function to select a material quantity"
             extends Modelica.Icons.Function;
@@ -6376,10 +6130,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={191,191,191})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={191,191,191})}));
 
     end Face;
 
@@ -6397,8 +6151,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Pressure;
 
       model Volume "Specify volume (measure pressure)"
-        extends FCSys.Conditions.ByConnector.Amagat.Partial(final y=amagat.p,
-            source(y=U.cc));
+        extends Partial(final y=amagat.p, source(y=U.cc));
 
       equation
         amagat.V = u_final;
@@ -6419,7 +6172,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         V = amagat.V;
 
         annotation (
-          Documentation(defaultComponentName="volume",info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
+          defaultComponentName="volume",
+          Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
     additivity of volume.  In order to use additivity of pressure, use
     the <a href=\"modelica://FCSys.Conditions.Adapters.AmagatDalton\">AmagatDalton</a> adapter.</p>
 
@@ -6436,7 +6190,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}),graphics));
+                  {100,100}}), graphics));
       end Volume2;
 
       partial model Partial "Base model for a pressure/volume"
@@ -6502,14 +6256,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}), Text(
-              extent={{-56,56},{56,-56}},
-              lineColor={255,255,255},
-              textString="A",
-              textStyle={TextStyle.Bold})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-56,56},{56,-56}},
+                  lineColor={255,255,255},
+                  textString="A",
+                  textStyle={TextStyle.Bold})}));
     end Amagat;
 
     package Dalton
@@ -6595,14 +6349,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251}), Text(
-              extent={{-56,56},{56,-56}},
-              lineColor={255,255,255},
-              textString="D",
-              textStyle={TextStyle.Bold})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251}),Text(
+                  extent={{-56,56},{56,-56}},
+                  lineColor={255,255,255},
+                  textString="D",
+                  textStyle={TextStyle.Bold})}));
     end Dalton;
 
     package Direct
@@ -7078,10 +6832,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251})}));
     end Direct;
 
     package Inter
@@ -7564,10 +7318,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={47,107,251})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={11,43,197},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={47,107,251})}));
     end Inter;
 
     package Translational
@@ -7907,10 +7661,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Component;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255})}));
 
     end Translational;
 
@@ -7919,8 +7673,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Temperature "Specify temperature (measure heat flow rate)"
-        extends FCSys.Conditions.ByConnector.ThermalDiffusion.Partial(final y=
-              thermal.Qdot,source(y=298.15*U.K));
+        extends Partial(final y=thermal.Qdot, source(y=298.15*U.K));
 
       equation
         thermal.T = u_final;
@@ -7928,8 +7681,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
-        extends FCSys.Conditions.ByConnector.ThermalDiffusion.Partial(final y=
-              thermal.T);
+        extends Partial(final y=thermal.T);
 
       equation
         thermal.Qdot = u_final;
@@ -7998,10 +7750,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="thermal");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
+                  extent={{-60,60},{60,-60}},
+                  lineColor={127,127,127},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
@@ -9056,31 +8808,27 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

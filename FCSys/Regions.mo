@@ -5774,7 +5774,6 @@ protected
   subregions along the x axis and the boundaries along the x axis are
   directly connected.  The same applies to the other axes.</li></p>
 </html>"),
-      Placement(transformation(extent={{-10,-10},{10,10}})),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

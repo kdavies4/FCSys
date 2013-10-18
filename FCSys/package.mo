@@ -33,10 +33,7 @@ package UsersGuide "User's Guide"
 
   class GettingStarted "Getting started"
     extends Modelica.Icons.Information;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html>
+    annotation (preferredView="info", Documentation(info="<html>
     <table border=1 cellspacing=0 cellpadding=4 bordercolor=#86989b >
       <tr bgcolor=#afc1c4>
         <td style=\"border: 1px solid #000000;\">
@@ -126,10 +123,7 @@ package UsersGuide "User's Guide"
     // Note: Hashed (anchored) bookmarks don't work in Dymola 2014.  They cause the link to fail entirely.
     class Basic "Basic"
       extends Modelica.Icons.Information;
-      annotation (
-        preferedView="info",
-        DocumentationClass=true,
-        Documentation(info="<html>    
+      annotation (preferredView="info", Documentation(info="<html>    
     <p>The figures below show the results from some basic, low-level examples of
     <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
     follow the links to the associated models.</p> 
@@ -193,14 +187,12 @@ package UsersGuide "User's Guide"
     (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
     
     </html>"));
+
       end Basic;
 
     class Cell "Cell-level"
       extends Modelica.Icons.Information;
-      annotation (
-        preferedView="info",
-        DocumentationClass=true,
-        Documentation(info="<html><p>The figures below show the results from some cell-level examples of
+      annotation (preferredView="info", Documentation(info="<html><p>The figures below show the results from some cell-level examples of
     <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
     follow the links to the associated models.</p> 
        
@@ -215,11 +207,9 @@ package UsersGuide "User's Guide"
     <p>**Add various polarization curves.</p>
 
     </html>"));
+
       end Cell;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>. 
+    annotation (preferredView="info", Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>. 
     Please click on any image to see a larger plot with a link to its example model.</p>  
       
       <p><b>Basic:</b><br>v<br>
@@ -267,14 +257,12 @@ package UsersGuide "User's Guide"
       </p>
       
     </html>"));
+
     end SampleResults;
 
   class Glossary "Glossary"
     extends Modelica.Icons.Information;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html><p>The following terms are uncommon or are used in a unique manner within the library:
+    annotation (preferredView="info", Documentation(info="<html><p>The following terms are uncommon or are used in a unique manner within the library:
     <ul>            
       <li><b>configuration</b> &ndash; (<i>noun</i>) a species in a certain phase within a subregion</li>
 
@@ -316,10 +304,7 @@ package UsersGuide "User's Guide"
 
   class References "References"
     extends Modelica.Icons.References;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html>
+    annotation (preferredView="info", Documentation(info="<html>
     <p>This library is described in the following dissertation
     (<a href=\"http://kdavies4.github.io/Dissertation/Davies - Declarative Modeling of Coupled Advective and Diffusive Processes as Applied to Fuel Cells.pdf\">PDF</a> and 
     <a href=\"https://github.com/kdavies4/Dissertation\">source</a>):
@@ -529,10 +514,7 @@ package UsersGuide "User's Guide"
 
   class Contact "Contact"
     extends Modelica.Icons.Contact;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html>
+    annotation (preferredView="info", Documentation(info="<html>
     <p>Updates to this package may be available online at the
     <a href=\"http://kdavies4.github.io/FCSys/\">main project site</a> or the
     <a href=\"https://modelica.org/libraries\">Modelica libraries page</a>.
@@ -570,10 +552,7 @@ package UsersGuide "User's Guide"
 
   class License "License"
     extends Modelica.Icons.Information;
-    annotation (
-      preferedView="info",
-      DocumentationClass=true,
-      Documentation(info="<html>
+    annotation (preferredView="info", Documentation(info="<html>
 <p>All files in this directory (FCSys) and all subdirectories are licensed by
 <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a> under the 
 <a href=\"#ModelicaLicense2\">Modelica License 2</a> 
@@ -851,7 +830,7 @@ action. This section shall survive the termination of this License.</p>
 </html>"));
 
     end License;
-  annotation (preferedView="info", DocumentationClass=true);
+  annotation (preferredView="info", DocumentationClass=true);
 
   end UsersGuide;
 
@@ -871,7 +850,7 @@ action. This section shall survive the termination of this License.</p>
 
 
 annotation (
-  preferedView="info",
+  preferredView="info",
   uses(Modelica(version="3.2.1")),
   Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
   Documentation(info="<html>

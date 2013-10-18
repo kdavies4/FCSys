@@ -83,16 +83,18 @@ package Blocks "Imperative models (inputs and outputs only)"
       annotation (Documentation(info="<html>
 <p>Please see the documentation for the
   <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p></html>"),
-          Icon(graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineColor={0,0,0}),Line(points={{-70,0},{10,0}}, color={191,0,
-              0}),Polygon(
-                  points={{70,0},{10,20},{10,-20},{70,0}},
-                  lineColor={191,0,0},
-                  fillColor={191,0,0},
-                  fillPattern=FillPattern.Solid)}));
+          Icon(graphics={
+            Rectangle(
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}),
+            Line(points={{-70,0},{10,0}}, color={191,0,0}),
+            Polygon(
+              points={{70,0},{10,20},{10,-20},{70,0}},
+              lineColor={191,0,0},
+              fillColor={191,0,0},
+              fillPattern=FillPattern.Solid)}));
 
     end Partial;
     annotation (Documentation(info="<html>
