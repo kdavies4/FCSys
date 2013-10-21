@@ -798,10 +798,9 @@ package Subregions
       final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area"
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
-      // **elim nonlin eqs
-
       // Conditions
-      parameter Q.VolumeRate Vdot=-0.1*U.L/U.s "Prescribed volume flow rate"
+      parameter Q.VolumeRate Vdot=-0.1*U.L/U.s
+        "Prescribed large signal volumetric flow rate"
         annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
 
       // Measurements
@@ -809,11 +808,15 @@ package Subregions
         "Measured pressure difference";
       output Q.Length D=2*A/(subregion.L[Axis.y] + subregion.L[Axis.z]);
       output Q.Number Re=subregion.liquid.H2O.phi[Axis.x]*D*subregion.liquid.H2O.zeta
-          *subregion.liquid.H2O.Data.m*subregion.liquid.H2O.rho
+          *subregion.liquid.H2O.Data.m*subregion.liquid.H2O.rho if environment.analysis
         "Reynolds number";
       output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.liquid.H2O.phi[
           Axis.x]/(D^2*subregion.liquid.H2O.zeta)
         "Pressure difference according to Poiseuille's law";
+      output Q.Power Qdot_gen=subregion.liquid.H2O.Edot_AT
+        "Rate of heat generation";
+      output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*subregion.liquid.H2O.Vdot[
+          1] "Rate of heat generation according to Poiseuille's law";
 
       extends Examples.Subregion(
         inclH2=false,
@@ -825,7 +828,9 @@ package Subregions
               final V_IC=subregion.V,
               final beta=0,
               initMaterial=InitThermo.none,
-              initTransX=InitTrans.none))),
+              initTransX=InitTrans.none)),
+          inclTransY=true,
+          inclTransZ=true),
         environment(analysis=true));
 
       Conditions.ByConnector.FaceBus.Single.Flows BC1(liquid(inclH2O=true, H2O(
@@ -849,45 +854,60 @@ package Subregions
             origin={24,0})));
 
       Conditions.ByConnector.FaceBus.Single.Flows BC3(liquid(inclH2O=true, H2O(
-              redeclare function followingSpec =
+            redeclare function followingSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
-              redeclare function precedingSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+
+            redeclare function precedingSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=0,
             origin={0,-24})));
 
-      Conditions.ByConnector.FaceBus.Single.Efforts BC4(liquid(inclH2O=true,
-            H2O(redeclare function followingSpec =
+      Conditions.ByConnector.FaceBus.Single.Flows BC4(liquid(inclH2O=true, H2O(
+            redeclare function followingSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
-              redeclare function precedingSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+
+            redeclare function precedingSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={0,24})));
 
       Conditions.ByConnector.FaceBus.Single.Flows BC5(liquid(inclH2O=true, H2O(
-              redeclare function followingSpec =
+            redeclare function followingSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
-              redeclare function precedingSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+
+            redeclare function precedingSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=315,
             origin={24,24})));
 
-      Conditions.ByConnector.FaceBus.Single.Efforts BC6(liquid(inclH2O=true,
-            H2O(redeclare function followingSpec =
+      Conditions.ByConnector.FaceBus.Single.Flows BC6(liquid(inclH2O=true, H2O(
+            redeclare function followingSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
-              redeclare function precedingSpec =
-                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+
+            redeclare function precedingSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Translational.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Thermal.temperature,
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=315,
             origin={-24,-24})));
-      extends Modelica.Icons.UnderConstruction;
 
     equation
       connect(BC1.face, subregion.xNegative) annotation (Line(
@@ -933,8 +953,8 @@ package Subregions
 
         experiment(
           StopTime=800,
-          Tolerance=1e-08,
-          Algorithm="Dassl"),
+          Tolerance=1e-008,
+          __Dymola_Algorithm="Dassl"),
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.InternalFlow.mos"
             "Subregions.Examples.InternalFlow.mos"),

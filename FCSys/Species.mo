@@ -1464,10 +1464,11 @@ protected
       i]) for i in 1:n_trans} if environment.analysis
       "Friction from other configurations (diffusive exchange)";
     // Note:  The [:] is necessary in Dymola 2014.
-    output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum((
-      faces[j, :].phi[cartWrap(cartTrans[i] - cartFaces[j] + 1)] - {phi[i],phi[
-      i]})*faces[j, :].Ndot*Data.m for j in 1:n_faces) for i in 1:n_trans} if
-      environment.analysis "Acceleration force due to advective transport";
+    output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum(((
+      if cartTrans[i] == cartFaces[j] then phi_faces[j, :] else faces[j, :].phi[
+      cartWrap(cartTrans[i] - cartFaces[j])]) - {phi[i],phi[i]})*faces[j, :].Ndot
+      *Data.m for j in 1:n_faces) for i in 1:n_trans} if environment.analysis
+      "Acceleration force due to advective transport";
     output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(sum(
       if cartTrans[i] == cartFaces[j] then {0,0} else faces[j, :].mPhidot[
       cartWrap(cartTrans[i] - cartFaces[j])]) for j in 1:n_faces) for i in 1:
@@ -1489,10 +1490,10 @@ protected
       direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
     output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
-      :].T, faces[j, :].p) - {h,h})*faces[j, :].Ndot + sum((faces[j, :].phi[
-      cartWrap(cartTrans[i] - cartFaces[j] + 1)] .^ 2 - fill(phi[i]^2, 2))*
-      faces[j, :].Ndot*Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if
-      environment.analysis
+      :].T, faces[j, :].p) - {h,h})*faces[j, :].Ndot + sum(((if cartTrans[i]
+       == cartFaces[j] then phi_faces[j, :] else faces[j, :].phi[cartWrap(
+      cartTrans[i] - cartFaces[j])]) .^ 2 - fill(phi[i]^2, 2))*faces[j, :].Ndot
+      *Data.m/2 for i in 1:n_trans) for j in 1:n_faces) if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
     output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(if
       cartTrans[i] == cartFaces[j] then 0 else faces[j, :].phi[cartWrap(
