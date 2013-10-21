@@ -167,30 +167,7 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Electrical(
           redeclare final package Data = Characteristics.'e-'.Graphite,
-          final initMaterial=InitThermo.none,
-          final Nu_Phi,
-          final Nu_Q,
-          final beta=1,
-          final zeta=1,
-          final consMaterial=Conservation.steady,
-          final upstreamX=false,
-          final upstreamY=false,
-          final upstreamZ=false,
-          final consTransX=Conservation.steady,
-          final consTransY=Conservation.steady,
-          final consTransZ=Conservation.steady,
-          final mu=v/r,
-          final tauprime=0,
           final k_intra,
-          final N_IC,
-          final g_IC,
-          final T_IC,
-          final nu=1,
-          final rho_IC,
-          final p_IC,
-          final h_IC,
-          final V_IC,
-          final consEnergy=Conservation.steady,
           final initEnergy=InitThermo.none,
           final theta=Modelica.Constants.inf);
 
@@ -229,18 +206,6 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Electrical(
           redeclare replaceable package Data = Characteristics.'H+'.Gas,
-          final tauprime=0,
-          final beta=0,
-          final mu=v/r,
-          final N_IC,
-          final g_IC,
-          final T_IC,
-          final nu=1,
-          final rho_IC,
-          final p_IC,
-          final h_IC,
-          final V_IC,
-          consMaterial=Conservation.IC,
           final initEnergy=InitThermo.none,
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
 
@@ -1018,12 +983,35 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   model Electrical "Base model for an ion"
     extends Incompressible(
-      final phi_IC=zeros(3),
-      final I_IC,
+      final Nu_Phi,
+      final Nu_Q,
+      final beta=1,
+      final zeta=1,
+      final mu=v/r,
+      final tauprime=0,
       final consRot,
+      final upstreamX=false,
+      final upstreamY=false,
+      final upstreamZ=false,
+      final consMaterial=Conservation.steady,
+      final consTransX=Conservation.steady,
+      final consTransY=Conservation.steady,
+      final consTransZ=Conservation.steady,
+      final initMaterial=InitThermo.none,
+      final N_IC,
+      final p_IC,
+      final h_IC,
+      final V_IC,
+      final rho_IC,
+      final g_IC,
+      final T_IC,
       final initTransX,
       final initTransY,
-      final initTransZ);
+      final initTransZ,
+      final phi_IC=zeros(3),
+      final I_IC,
+      final nu=1,
+      final consEnergy=Conservation.steady);
 
     parameter Real r=Data.beta()*Data.v_Tp() "Electrical resistivity"
       annotation (Dialog(group="Material properties", __Dymola_label=
@@ -1566,11 +1554,13 @@ protected
 ");
     outer parameter Q.Length L[Axis] "Lengths" annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Boolean inclTrans[Axis]
+    outer parameter Boolean inclTrans[3]
       "true, if each component of translational momentum is included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Boolean inclFaces[Axis]
+    // Note:  The size of is also Axis, but it isn't specified here due
+    // to an error in Dymola 2014.
+    outer parameter Boolean inclFaces[3]
       "true, if each pair of faces is included" annotation (missingInnerMessage
         ="This model should be used within a subregion model.
 ");
@@ -1578,8 +1568,8 @@ protected
       "true, if each axis of rotation has all its tangential faces included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size of is also Axis, but it isn't specified here due
-    // to an error in Dymola 2014.
+    // Note:  The size of inclTrans, inclRot and inclRot is also Axis, but it isn't
+    // specified here due to an error in Dymola 2014.
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage="This model should be used within a subregion model.
@@ -1604,7 +1594,7 @@ protected
 ");
     // Note:  The size of is also Axis, but it isn't specified here due
     // to an error in Dymola 2014.
-    outer parameter Integer facesCart[Axis]
+    outer parameter Integer facesCart[3]
       "Face-pair indices of the Cartesian axes" annotation (missingInnerMessage
         ="This model should be used within a subregion model.
 ");
