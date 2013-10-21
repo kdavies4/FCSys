@@ -386,7 +386,6 @@ package Phases "Mixtures of species"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
@@ -799,7 +798,7 @@ package Phases "Mixtures of species"
     Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if 
       n_spec > 1 and reduceThermal "Temperature";
     // These make the selected states more readable.
-*/
+  */
 
   protected
     Conditions.Adapters.AmagatDalton daltonAmagat if n_spec > 0

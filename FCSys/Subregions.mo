@@ -135,8 +135,8 @@ package Subregions
       friction to dampen the oscillations.</li>
       <li>The central difference scheme is used (no upstream discretization).</ol>
       </p></html>"),
-        Commands(file=
-              "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
+        Commands(file(ensureTranslated=true) =
+            "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -747,7 +747,7 @@ package Subregions
 
     model ThermalConductionConvection
       "Test combined thermal conduction and convection"
-
+      // **eliminate nonlinear eqs
       extends Examples.Subregions(
         n_x=6,
         'inclC+'=true,
@@ -961,16 +961,15 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model HOR "Test the hydrogen oxidation reaction in one subregion"
 
-      output Q.Potential w=positiveBC.ionomer.'H+'.face.mPhidot[1]/(positiveBC.ionomer.
-          'H+'.face.rho*subregion.A[Axis.x]) - negativeBC.graphite.'e-'.face.mPhidot[
-          1]/(negativeBC.graphite.'e-'.face.rho*subregion.A[Axis.x])
-        "Electrical potential";
       /*
+  output Q.Potential w=positiveBC.ionomer.'H+'.face.mPhidot[1]/(positiveBC.ionomer.
+      'H+'.face.rho*subregion.A[Axis.x]) - negativeBC.graphite.'e-'.face.mPhidot[
+      1]/(negativeBC.graphite.'e-'.face.rho*subregion.A[Axis.x]) 
+    "Electrical potential";
   output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot + subregion.graphite.
       'e-'.faces[1, 2].Ndot "Electrical current due to reaction";
   output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A) 
@@ -988,19 +987,20 @@ package Subregions
         'inclH+'=true,
         inclH2=true,
         inclH2O=true,
-        subregion(L={0.287*U.mm,10*U.cm,10*U.cm}, gas(H2(consTransX=
-                  Conservation.IC))));
+        subregion(
+          L={0.287*U.mm,10*U.cm,10*U.cm},
+          gas(H2(consTransX=Conservation.IC)),
+          ionomer(inclH2O=true)));
       extends Modelica.Icons.UnderConstruction;
       Conditions.ByConnector.FaceBus.Single.Efforts negativeBC(gas(
           inclH2=true,
           inclH2O=true,
-          H2(materialSet(y=(environment.p - environment.p_H2O)/environment.T)),
-
-          H2O(materialSet(y=environment.p_H2O/environment.T))), graphite(
-            'incle-'=true, 'e-'(redeclare function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.currentDensity,
-              redeclare Modelica.Blocks.Sources.Ramp normalSet(
-              height=-U.A/U.cm^2,
+          H2(materialSet(y=environment.p - environment.p_H2O)),
+          H2O(materialSet(y=environment.p_H2O))), graphite('incle-'=true, 'e-'(
+              redeclare function materialSpec =
+                Conditions.ByConnector.Face.Single.Material.current, redeclare
+              Modelica.Blocks.Sources.Ramp materialSet(
+              height=-U.A,
               duration=100.1,
               startTime=0.1)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
@@ -1008,9 +1008,7 @@ package Subregions
             origin={-24,0})));
 
       Conditions.ByConnector.FaceBus.Single.Efforts positiveBC(ionomer('inclH+'
-            =true, 'H+'(redeclare function normalSpec =
-                Conditions.ByConnector.Face.Single.TranslationalNormal.force)))
-        annotation (Placement(transformation(
+            =true)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -1366,9 +1364,11 @@ package Subregions
       annotation (Placement(transformation(extent={{-102,-40},{-82,-20}}),
           iconTransformation(extent={{-60,-60},{-40,-40}})));
 
-    Reactions.HOR HOR if inclHOR "Hydrogen oxidation reaction"
+    Reactions.HOR HOR(final n_trans=n_trans) if inclHOR
+      "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{80,-14},{100,6}})));
-    Reactions.ORR ORR if inclORR "Oxygen reduction reaction"
+    Reactions.ORR ORR(final n_trans=n_trans) if inclORR
+      "Oxygen reduction reaction"
       annotation (Placement(transformation(extent={{94,-14},{114,6}})));
 
   protected

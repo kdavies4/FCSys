@@ -1819,8 +1819,9 @@ Choose any condition besides None.");
       // Material
       Delta(faces[i, :].Ndot) = (if inclTrans[cartFaces[i]] then -2*I[transCart[
         cartFaces[i]]] else 0) "Linear current profile across subregion";
-      k[cartFaces[i]]*beta*sum(faces[i, :].Ndot) = N*(sum(faces[i, :].p)/2 - p*
-        epsilon) "Transport into the subregion";
+      k[cartFaces[i]]*beta*sum(faces[i, :].Ndot) = N*(sum(faces[i, :].p)/2 - (p
+         + (if inclTrans[cartFaces[i]] then Data.m*phi[transCart[cartFaces[i]]]
+        ^2/(2*v) else 0))*epsilon) "Transport into the subregion";
 
       for side in Side loop
         // Transverse translational momentum
@@ -1937,11 +1938,10 @@ Choose any condition besides None.");
           facesCart[cartTrans[j]], :].p)*A[cartTrans[j]] else 0) = Data.m*(
           actualStream(chemical.phi[j]) - phi[j])*chemical.Ndot + direct.translational.mPhidot[
           j] + sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum(if
-          cartTrans[j] == cartFaces[i] then (phi_faces[i, :] - {phi[j],phi[j]})
-          *faces[i, :].Ndot*Data.m else (faces[i, :].phi[cartWrap(cartTrans[j]
-           - cartFaces[i])] - {phi[j],phi[j]})*faces[i, :].Ndot*Data.m + sum(
-          faces[i, :].mPhidot[cartWrap(cartTrans[j] - cartFaces[i])]) for i in
-          1:n_faces) "Conservation of translational momentum";
+          cartTrans[j] == cartFaces[i] then 0 else (faces[i, :].phi[cartWrap(
+          cartTrans[j] - cartFaces[i])] - {phi[j],phi[j]})*faces[i, :].Ndot*
+          Data.m + sum(faces[i, :].mPhidot[cartWrap(cartTrans[j] - cartFaces[i])])
+          for i in 1:n_faces) "Conservation of translational momentum";
         // Note:  Dymola 7.4 (Dassl integrator) runs better with this intensive
         // form of the balance (M*der(phi) = ... rather than der(M*phi) = ...).
       end if;
@@ -1990,10 +1990,9 @@ Choose any condition besides None.");
          + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
         *inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
          + sum(inter.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h})
-        *faces[i, :].Ndot + sum(((if cartTrans[j] == cartFaces[i] then
-        phi_faces[i, :] else faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[
-        i])]) .^ 2 - fill(phi[j]^2, 2))*faces[i, :].Ndot*Data.m/2 + (if
-        cartTrans[j] == cartFaces[i] then 0 else faces[i, :].phi[cartWrap(
+        *faces[i, :].Ndot + sum((if cartTrans[j] == cartFaces[i] then 0 else (
+        faces[i, :].phi[cartWrap(cartTrans[j] - cartFaces[i])] .^ 2 - fill(phi[
+        j]^2, 2))*faces[i, :].Ndot*Data.m/2 + faces[i, :].phi[cartWrap(
         cartTrans[j] - cartFaces[i])]*faces[i, :].mPhidot[cartWrap(cartTrans[j]
          - cartFaces[i])]) for j in 1:n_trans) for i in 1:n_faces) + sum(faces.Qdot)
         "Conservation of energy";

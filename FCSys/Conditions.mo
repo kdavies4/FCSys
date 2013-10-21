@@ -339,18 +339,21 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={221,23,47},
-                  smooth=Smooth.None),Text(
-                  extent={{-100,20},{100,60}},
-                  lineColor={0,0,0},
-                  textString="%n %name"),Polygon(
-                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                  lineColor={221,23,47},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}),
+                100,100}}), graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={221,23,47},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,20},{100,60}},
+              lineColor={0,0,0},
+              textString="%n %name"),
+            Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={221,23,47},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
     end ChemicalReaction;
@@ -1699,6 +1702,76 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Media;
     end MSL;
+
+    model ChemicalReaction2
+      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
+
+      //extends FCSys.Icons.Names.Top1;
+
+      parameter Integer n_trans(min=1,max=3)
+        "Number of components of translational momentum" annotation (Dialog(
+            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+      parameter Integer n "Stoichiometric coefficient"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
+              "Material properties", __Dymola_label="<html><i>m</i></html>"));
+
+      Connectors.Reaction reaction(each final n_trans=n_trans)
+        "Connector for an electrochemical reaction" annotation (Placement(
+            transformation(extent={{10,-10},{30,10}}), iconTransformation(
+              extent={{30,-10},{50,10}})));
+
+      Connectors.Chemical chemical(final n_trans=n_trans)
+        "Connector for a species in a chemical reaction" annotation (Placement(
+            transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
+              extent={{-50,-10},{-30,10}})));
+    equation
+      // Equal intensive properties
+      reaction.g = n*chemical.g "Chemical potential";
+      reaction.phi = chemical.phi "Velocity (upon outflow)";
+      reaction.sT = chemical.sT
+        "Specific entropy-temperature product (upon outflow)";
+
+      // Conservation (without storage)
+      0 = chemical.Ndot + n*reaction.Ndot "Material";
+      /* **
+  zeros(n_trans) = m*actualStream(chemical.phi)*chemical.Ndot + reaction.mPhidot
+    "Translational momentum";
+  0 = actualStream(chemical.sT)*chemical.Ndot + reaction.Qdot "Energy";
+  */
+
+      chemical.phi = zeros(n_trans);
+      chemical.sT = 0;
+
+      annotation (
+        Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted electrochemical potential
+    of a species to the net electrochemical potential of a reaction.  The species is produced at the
+    stoichiometrically-weighted rate of the reaction.</p>
+    
+    <p>
+    For more information, please see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+                100,100}}), graphics={
+            Line(
+              points={{-30,0},{30,0}},
+              color={221,23,47},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,20},{100,60}},
+              lineColor={0,0,0},
+              textString="%n %name"),
+            Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={221,23,47},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
+
+    end ChemicalReaction2;
   end Adapters;
 
   package ByConnector "Conditions for each type of connector"
@@ -6182,13 +6255,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid)}),
+                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
+                    -60,-60}},
+                lineColor={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume2;
@@ -8808,27 +8881,31 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="
