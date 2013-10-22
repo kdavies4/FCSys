@@ -1,8 +1,7 @@
 within FCSysTest;
 package Characteristics
   extends Modelica.Icons.ExamplesPackage;
-
-
+  import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
   model TestCellPotentialsGas
     "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(g)</sub></html>"
     import FCSys.Characteristics.*;
@@ -405,33 +404,6 @@ package Characteristics
 
       end s;
 
-      model eta
-        "<html>Test the material resistivity of N<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</html>"
-        import FCSysTest.Test.assertValue;
-        extends Modelica.Icons.Example;
-        replaceable package Data = FCSys.Characteristics.N2.Gas
-          "Material characteristics";
-        parameter FCSys.Quantities.NumberAbsolute eps=3
-          "Relative error tolerance";
-        parameter FCSys.Quantities.TemperatureAbsolute T[:]={77.7,194.7,273.2,
-            353.2}*FCSys.Units.K "Temperatures"
-          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
-        parameter FCSys.Quantities.Diffusivity D_table[size(T, 1)]={0.0168,
-            0.104,0.185,0.287}*FCSys.Units.cm^2/FCSys.Units.s
-          "Tabulated self diffusivity" annotation (Dialog(__Dymola_label=
-                "<html><i>D</i><sub>table</sub></html>"));
-
-      initial equation
-        for i in 1:size(T, 1) loop
-          assertValue(
-                  actual=Data.eta(T[i], Data.v_Tp(T[i], FCSys.Units.atm)),
-                  expected=1/D_table[i],
-                  eps=eps/D_table[i],
-                  name="of material resistivity of " + Data.formula + " at " +
-              String(T[i]/FCSys.Units.K) + " K");
-        end for;
-
-      end eta;
 
       model zeta
         "<html>Test the fluidity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</html>"
@@ -487,14 +459,6 @@ package Characteristics
 
       end c_v;
 
-      model eta
-        "<html>Test the fluidity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 924&ndash;925]</html>"
-        extends N2.Gas.eta(
-          redeclare package Data = FCSys.Characteristics.O2.Gas,
-          eps=3,
-          D_table={0.0153,0.104,0.187,0.301}*FCSys.Units.cm^2/FCSys.Units.s);
-
-      end eta;
 
       model h
         "<html>Test the specific enthalpy of O<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"

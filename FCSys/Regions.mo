@@ -5663,30 +5663,29 @@ protected
     Subregion subregions[n_x, n_y, n_z](final L={{L_x[i_x],L_y[i_y],L_z[i_z]}
           for i_z in 1:n_z, i_y in 1:n_y, i_x in 1:n_x}) if hasSubregions
       "Instances of the subregion model"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
     Connectors.FaceBus xNegative[n_y, n_z] if inclFacesX
       "Negative face along the x axis" annotation (Placement(transformation(
-            extent={{-50,-10},{-30,10}}), iconTransformation(extent={{-110,-10},
+            extent={{-60,-20},{-40,0}}), iconTransformation(extent={{-110,-10},
               {-90,10}})));
     Connectors.FaceBus xPositive[n_y, n_z] if inclFacesX
       "Positive face along the x axis" annotation (Placement(transformation(
-            extent={{30,-10},{50,10}}), iconTransformation(extent={{90,-10},{
-              110,10}})));
+            extent={{20,-20},{40,0}}), iconTransformation(extent={{90,-10},{110,
+              10}})));
     Connectors.FaceBus yNegative[n_x, n_z] if inclFacesY
       "Negative face along the y axis" annotation (Placement(transformation(
-            extent={{-10,-50},{10,-30}}), iconTransformation(extent={{-10,-110},
+            extent={{-20,-60},{0,-40}}), iconTransformation(extent={{-10,-110},
               {10,-90}})));
     Connectors.FaceBus yPositive[n_x, n_z] if inclFacesY
       "Positive face along the y axis" annotation (Placement(transformation(
-            extent={{-10,30},{10,50}}), iconTransformation(extent={{-10,90},{10,
+            extent={{-20,20},{0,40}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.FaceBus zNegative[n_x, n_y] if inclFacesZ
       "Negative face along the z axis" annotation (Placement(transformation(
-            extent={{10,10},{30,30}}), iconTransformation(extent={{40,40},{60,
-              60}})));
+            extent={{0,0},{20,20}}), iconTransformation(extent={{40,40},{60,60}})));
     Connectors.FaceBus zPositive[n_x, n_y] if inclFacesZ
       "Positive face along the z axis" annotation (Placement(transformation(
-            extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
+            extent={{-40,-40},{-20,-20}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
 
   protected
@@ -5696,8 +5695,7 @@ protected
   equation
     // X axis
     connect(xNegative, subregions[1, :, :].xNegative) annotation (Line(
-        points={{-40,5.55112e-16},{-38,5.55112e-16},{-40,0},{-30,0},{-30,
-            6.10623e-16},{-10,6.10623e-16}},
+        points={{-50,-10},{-20,-10}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5708,8 +5706,7 @@ protected
       end for;
     end if;
     connect(subregions[n_x, :, :].xPositive, xPositive) annotation (Line(
-        points={{10,6.10623e-16},{20,6.10623e-16},{20,0},{30,0},{30,5.55112e-16},
-            {40,5.55112e-16}},
+        points={{0,-10},{30,-10}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5720,7 +5717,7 @@ protected
 
     // Y axis
     connect(yNegative, subregions[:, 1, :].yNegative) annotation (Line(
-        points={{5.55112e-16,-40},{0,-10},{6.10623e-16,-10}},
+        points={{-10,-50},{-10,-20}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5731,8 +5728,7 @@ protected
       end for;
     end if;
     connect(subregions[:, n_y, :].yPositive, yPositive) annotation (Line(
-        points={{6.10623e-16,10},{6.10623e-16,24},{0,24},{0,40},{5.55112e-16,40}},
-
+        points={{-10,0},{-10,30}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5744,7 +5740,7 @@ protected
 
     // Z axis
     connect(zNegative, subregions[:, :, 1].zNegative) annotation (Line(
-        points={{20,20},{5,5}},
+        points={{10,10},{-5,-5}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5755,7 +5751,7 @@ protected
       end for;
     end if;
     connect(zPositive, subregions[:, :, n_z].zPositive) annotation (Line(
-        points={{-20,-20},{-5,-5}},
+        points={{-30,-30},{-15,-15}},
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
@@ -5774,18 +5770,18 @@ protected
   subregions along the x axis and the boundaries along the x axis are
   directly connected.  The same applies to the other axes.</li></p>
 </html>"),
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-              100,100}}), graphics),
+      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{40,
+              40}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-              extent={{-100,120},{100,160}},
-              textString="%name",
-              visible=inclFacesY,
-              lineColor={0,0,0}),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              visible=not inclFacesY,
-              lineColor={0,0,0})}));
+            extent={{-100,120},{100,160}},
+            textString="%name",
+            visible=inclFacesY,
+            lineColor={0,0,0}), Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            visible=not inclFacesY,
+            lineColor={0,0,0})}));
   end Partial;
   annotation (Documentation(info="
 <html>

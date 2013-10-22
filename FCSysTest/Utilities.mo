@@ -303,7 +303,7 @@ package Utilities
 
   function testFunctions
     "<html>Test the functions in the <a href=\"modelica://FCSys.Utilities\">Utilities</a> package (non-recursive)</html>"
-    import FCSys.Species.BaseClasses.Side;
+    import FCSys.Species.Enumerations.Side;
     import FCSys.Utilities.*;
     extends Modelica.Icons.Function;
 

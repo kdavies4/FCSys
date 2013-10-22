@@ -4,14 +4,10 @@ package Subregions
 
   model Subregion "Test a single subregion"
     extends FCSys.Subregions.Examples.Subregion(
-      'inclC+'=true,
-      'inclSO3-'=true,
-      'incle-'=true,
       inclH2=true,
       inclH2O=true,
       inclN2=true,
       inclO2=true);
-    // Note:  H+ is excluded to prevent reactions.
     // TODO:  Create a separate model to test reactions.
     // Currently, there are no assertions.  This model just checks that the
     // simulation runs.
@@ -29,7 +25,13 @@ package Subregions
       inclH2O=true,
       inclN2=true,
       inclO2=true,
-      environment(final analysis=true));
+      environment(final analysis=true),
+      BC1(ionomer('SO3-'(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure)),
+          graphite('C+'(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure),
+            'e-'(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Face.Single.Material.pressure))));
     // Note:  H+ is excluded to prevent reactions.
 
     output FCSys.Quantities.Amount S(stateSelect=StateSelect.never) =
@@ -41,7 +43,7 @@ package Subregions
       "Total entropy";
 
   equation
-    assert(der(S) >= 0, "Entropy may not decrease.");
+    assert(der(S) >= 0, "Entropy cannot decrease.");
     annotation (experiment(StopTime=30));
   end Test2Subregions;
 

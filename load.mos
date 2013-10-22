@@ -9,10 +9,9 @@
 // the defaults.
 
 // Options to increase simulation performance
-Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
-Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
 Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
 Advanced.ImprovedPackageConstants = true "Improved code generation for package constants";
+Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
 //Advanced.CompileWith64 = 0 "Compile the model as 64-bit; 0 only for dll/server if executable is 64-bit, 1 never, 2 always.";
 //Evaluate = true "Evaluate parameters to reduce models (improves simulation speed).";
 //Advanced.AllowNumericDifferentiation = true "Allow numeric differentiation for computing Jacobian for non-linear solver";
@@ -24,7 +23,10 @@ Advanced.ImprovedPackageConstants = true "Improved code generation for package c
 //Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";
 //Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
 //Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
-// Warning: CancelFactors makes translation very, very slow in Dymola 2014!
+//  Warning:  This makes translation very, very slow in Dymola 2014!
+//Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
+//  Warning:  Do not use this in Dymola 2014.  Modelica.Blocks.Sources.Ramp 
+//  doesn't run correctly with it!
 
 // Debugging and development options
 Advanced.CheckUnits = false "Check unit consistency of equations";
@@ -41,6 +43,8 @@ Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed wi
 Advanced.TranslationInCommandLog = true "Also include translation log in command log";
 Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
 Advanced.IncludeProtectedInBrowser = true "Include protected classes in package browser";
+Advanced.SmartConnect = false "Create connection automatically if connector over connector.";
+//   Note:  Smart connect sometimes crashes Dymola 2014. 
 //Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
 //Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
 //Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";

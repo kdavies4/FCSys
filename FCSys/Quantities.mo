@@ -200,6 +200,8 @@ package Quantities "Quantities to represent physical properties"
   type CapacityThermal = Amount (displayUnit="J/K") "Thermal capacity";
   type CapacityThermalSpecific = NumberAbsolute (displayUnit="J/(mol.K)")
     "Specific thermal capacity";
+  type CapacityThermalVolumic = Density (displayUnit="J/(m3.K)")
+    "Volumic thermal capacity";
   type PotentialChemical = Potential (displayUnit="J/mol") "Chemical potential";
   type Temperature = Potential (displayUnit="K");
   type TemperatureAbsolute = PotentialAbsolute (displayUnit="degC")

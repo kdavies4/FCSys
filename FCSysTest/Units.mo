@@ -73,7 +73,7 @@ package Units
     test(kat/(mol/s), name="20 in set 3");
     // ----------------------------------------------------------------------
     // Set 4:  Relations from [NIST2010]
-    // Generated from FCSys/Resources/NIST.xls, 2013-1-23
+    // Generated from Resources/NIST.xls, 2013-1-23
     test(1/alpha/137.035999074, name="inverse fine-structure constant");
     test(1/G_0/(12906.4037217*ohm), name="inverse of conductance quantum");
     test(1/m*h*c/(1.239841930e-6*eV), name=

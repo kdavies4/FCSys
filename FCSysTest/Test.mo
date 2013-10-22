@@ -28,10 +28,9 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       assert(abs(actual[i] - expected[i]) <= eps, "Test " + String(i) + (if
         name <> "" then " of " + name else "") + " failed.\n" +
         "The actual value (" + String(actual[i]) + ") was not within " + String(
-        eps) + " of the expected value (" + String(expected[i]) + ").")
-        annotation (Inline=true);
+        eps) + " of the expected value (" + String(expected[i]) + ").");
     end for;
-
+    annotation (Inline=true);
   end assertValues;
 
   function assertLogValue
@@ -49,7 +48,8 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       expected)) <= o, (if name <> "" then "Test " + name + " failed.\n" else
       "") + "The actual value (" + String(actual) + ") was not within " +
       String(o) + " orders of magnitude of the expected value (" + String(
-      expected) + ").") annotation (Inline=true);
+      expected) + ").");
+    annotation (Inline=true);
 
   end assertLogValue;
 
@@ -70,8 +70,9 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
          then " of " + name else "") + " failed.\n" + "The actual value (" +
         String(actual[i]) + ") was not within " + String(o) +
         " orders of magnitude of the expected value (" + String(expected[i]) +
-        ").") annotation (Inline=true);
+        ").");
     end for;
+    annotation (Inline=true);
 
   end assertLogValues;
 

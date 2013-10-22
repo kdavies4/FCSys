@@ -239,6 +239,108 @@ package Conditions "Models to specify and measure operating conditions"
             "Conditions.Examples.Adapteminus.mos"));
     end AnodeAdapter;
 
+    model Stoichiometry "Test the stoichiometry of a reaction"
+
+      extends Modelica.Icons.Example;
+      import FCSys.Utilities.cartWrap;
+      import Modelica.Math.BooleanVectors.countTrue;
+      import Modelica.Math.BooleanVectors.enumerate;
+      import Modelica.Math.BooleanVectors.index;
+
+      // Assumptions
+      // -----------
+      // Included components of translational momentum
+      parameter Boolean inclTransX=true "X" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransY=false "Y" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransZ=false "Z" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+
+      inner Conditions.Environment environment(T=360*U.K)
+        annotation (Placement(transformation(extent={{40,40},{60,60}})));
+
+      replaceable Conditions.ByConnector.Chemical.Current speciesA(
+        final inclTransX=inclTransX,
+        final inclTransY=inclTransY,
+        final inclTransZ=inclTransZ,
+        sT=2000*U.K,
+        redeclare Modelica.Blocks.Sources.Ramp source(duration=100, height=-1*U.A))
+        annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
+      replaceable Conditions.ByConnector.Chemical.Potential speciesB(
+        final inclTransX=inclTransX,
+        final inclTransY=inclTransY,
+        final inclTransZ=inclTransZ,
+        sT=3000*U.K)
+        annotation (Placement(transformation(extent={{30,0},{50,20}})));
+      replaceable Conditions.ByConnector.Chemical.Potential speciesC(
+        final inclTransX=inclTransX,
+        final inclTransY=inclTransY,
+        final inclTransZ=inclTransZ,
+        sT=4000*U.K)
+        annotation (Placement(transformation(extent={{30,-20},{50,0}})));
+      FCSys.Conditions.Adapters.ChemicalReaction A(
+        m=U.g/U.mol,
+        final n_trans=n_trans,
+        n=-1)
+        annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
+      FCSys.Conditions.Adapters.ChemicalReaction B(
+        m=U.g/U.mol,
+        final n_trans=n_trans,
+        n=2) annotation (Placement(transformation(extent={{30,-10},{10,10}})));
+
+      FCSys.Conditions.Adapters.ChemicalReaction C(
+        m=U.g/U.mol,
+        final n_trans=n_trans,
+        n=2) annotation (Placement(transformation(extent={{30,-30},{10,-10}})));
+
+    protected
+      final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
+          inclTransZ}
+        "true, if each component of translational momentum is included";
+      final inner parameter Integer n_trans=countTrue(inclTrans)
+        "Number of components of translational momentum";
+
+    equation
+      connect(A.chemical, speciesA.chemical) annotation (Line(
+          points={{-24,0},{-40,0},{-40,6}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect(B.chemical, speciesB.chemical) annotation (Line(
+          points={{24,0},{40,0},{40,6}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect(C.chemical, speciesC.chemical) annotation (Line(
+          points={{24,-20},{40,-20},{40,-14}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect(C.reaction, B.reaction) annotation (Line(
+          points={{16,-20},{0,-20},{0,0},{16,0}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect(B.reaction, A.reaction) annotation (Line(
+          points={{16,0},{-16,0}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      annotation (
+        experiment(StopTime=120),
+        Commands(file=
+              "Resources/Scripts/Dymola/Subregions.Examples.Stoichiometry.mos"
+            "Subregions.Examples.Stoichiometry.mos"),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics),
+        __Dymola_experimentSetupOutput);
+    end Stoichiometry;
   end Examples;
 
   package Adapters
@@ -274,14 +376,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-              points={{-30,0},{30,0}},
-              color={47,107,251},
-              smooth=Smooth.None), Polygon(
-              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-              lineColor={47,107,251},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+                  points={{-30,0},{30,0}},
+                  color={47,107,251},
+                  smooth=Smooth.None),Polygon(
+                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                  lineColor={47,107,251},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}));
     end AmagatDalton;
 
     model ChemicalReaction
@@ -289,26 +391,30 @@ package Conditions "Models to specify and measure operating conditions"
 
       //extends FCSys.Icons.Names.Top1;
 
-      parameter Integer n_trans(min=1,max=3)
+      constant Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Dialog(
             __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-      parameter Integer n "Stoichiometric coefficient"
+      // Note:  This must be a constant rather than a parameter due to errors
+      // in Dymola 2014.
+      parameter Q.Number n "Stoichiometric coefficient"
         annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
       parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
               "Material properties", __Dymola_label="<html><i>m</i></html>"));
 
       // Auxiliary variables (for analysis)
-      output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) =
-        actualStream(chemical.phi) if environment.analysis
-        "Velocity of the stream";
-      output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) =
-        actualStream(chemical.sT) if environment.analysis
-        "Specific entropy-temperature product of the stream";
+      /*
+  output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) = 
+    actualStream(chemical.phi) if environment.analysis "Velocity of the stream";
+  output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) = actualStream(
+    chemical.sT) if environment.analysis 
+    "Specific entropy-temperature product of the stream";
+*/
 
-      Connectors.Chemical chemical(final n_trans=n_trans)
-        "Connector for a species in a chemical reaction" annotation (Placement(
-            transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-              extent={{-50,-10},{-30,10}})));
+      Connectors.Chemical chemical(redeclare final constant Integer n_trans=
+            n_trans) "Connector for a species in a chemical reaction"
+        annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+            iconTransformation(extent={{-50,-10},{-30,10}})));
+      // Note:  This redeclaration is necessary due to errors in Dymola 2014.
       Connectors.Reaction reaction(final n_trans=n_trans)
         "Connector for an electrochemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
@@ -339,21 +445,18 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              lineColor={0,0,0},
-              textString="%n %name"),
-            Polygon(
-              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-              lineColor={221,23,47},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}),
+                100,100}}), graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,20},{100,60}},
+                  lineColor={0,0,0},
+                  textString="%n %name"),Polygon(
+                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                  lineColor={221,23,47},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
     end ChemicalReaction;
@@ -1703,75 +1806,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Media;
     end MSL;
 
-    model ChemicalReaction2
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
-
-      //extends FCSys.Icons.Names.Top1;
-
-      parameter Integer n_trans(min=1,max=3)
-        "Number of components of translational momentum" annotation (Dialog(
-            __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-      parameter Integer n "Stoichiometric coefficient"
-        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
-      parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
-              "Material properties", __Dymola_label="<html><i>m</i></html>"));
-
-      Connectors.Reaction reaction(each final n_trans=n_trans)
-        "Connector for an electrochemical reaction" annotation (Placement(
-            transformation(extent={{10,-10},{30,10}}), iconTransformation(
-              extent={{30,-10},{50,10}})));
-
-      Connectors.Chemical chemical(final n_trans=n_trans)
-        "Connector for a species in a chemical reaction" annotation (Placement(
-            transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-              extent={{-50,-10},{-30,10}})));
-    equation
-      // Equal intensive properties
-      reaction.g = n*chemical.g "Chemical potential";
-      reaction.phi = chemical.phi "Velocity (upon outflow)";
-      reaction.sT = chemical.sT
-        "Specific entropy-temperature product (upon outflow)";
-
-      // Conservation (without storage)
-      0 = chemical.Ndot + n*reaction.Ndot "Material";
-      /* **
-  zeros(n_trans) = m*actualStream(chemical.phi)*chemical.Ndot + reaction.mPhidot
-    "Translational momentum";
-  0 = actualStream(chemical.sT)*chemical.Ndot + reaction.Qdot "Energy";
-  */
-
-      chemical.phi = zeros(n_trans);
-      chemical.sT = 0;
-
-      annotation (
-        Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted electrochemical potential
-    of a species to the net electrochemical potential of a reaction.  The species is produced at the
-    stoichiometrically-weighted rate of the reaction.</p>
-    
-    <p>
-    For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              lineColor={0,0,0},
-              textString="%n %name"),
-            Polygon(
-              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-              lineColor={221,23,47},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}),
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics));
-
-    end ChemicalReaction2;
   end Adapters;
 
   package ByConnector "Conditions for each type of connector"
@@ -1785,22 +1819,30 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Partial(final y=chemical.Ndot);
 
       equation
-        chemical.mu = u_final;
+        chemical.g = u_final;
 
       end Potential;
 
       model Current "Specify current (measure electrochemical potential)"
-        extends Partial(final y=chemical.mu);
+        extends Partial(final y=chemical.g);
 
       equation
         chemical.Ndot = u_final;
 
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
       end Current;
 
       partial model Partial "Base model for a material condition"
         import Modelica.Math.BooleanVectors.countTrue;
         import Modelica.Math.BooleanVectors.index;
         extends FCSys.Icons.Conditions.SingleShort;
+
+        /*
+  parameter String formula(start="") "Chemical formula of the species"
+    annotation (Dialog(group="Material properties"));
+  */
+        // The start value prevents a warning when this model is checked in Dymola 2014.
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -1874,6 +1916,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Connectors.Chemical chemical(final n_trans=n_trans)
           "Connector for a species of a chemical reaction"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+        // final formula=formula
 
       protected
         final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
@@ -1907,15 +1950,452 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Partial;
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
+                  lineColor={170,0,0},
                   fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={255,195,38},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None)}));
+                  fillColor={221,23,47})}));
 
     end Chemical;
+
+    package ChemicalBus
+      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> or <a href=\"modelica://FCSys.Connectors.ChemicalBusNode\">ChemicalBusNode</a> connector</html>"
+      extends Modelica.Icons.Package;
+
+      model Flows
+        "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, with flows specified by default</html>"
+
+        extends FCSys.Icons.Conditions.SingleShort;
+
+        // Conditionally include species.
+        parameter Boolean 'inclC+'=false "Include C+" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Carbon plus (C<sup>+</sup>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current 'C+'(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if 'inclC+' constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable='inclC+'),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean 'inclSO3-'=false
+          "Include C19HF37O5S- (abbreviated as SO3-)" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label=
+                "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>",
+
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current 'SO3-'(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if 'inclSO3-' constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable='inclSO3-'),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+        parameter Boolean 'incle-'=false "Include e-" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Electrons (e<sup>-</sup>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current 'e-'(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if 'incle-' constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable='incle-'),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean 'inclH+'=false "Include H+" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Protons (H<sup>+</sup>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current 'H+'(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if 'inclH+' constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable='inclH+'),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean inclH2=false "Include H2" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Hydrogen (H<sub>2</sub>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current H2(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if inclH2 constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable=inclH2),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean inclH2O=false "Include H2O" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current H2O(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if inclH2O constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable=inclH2O),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean inclN2=false "Include N2" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Nitrogen (N<sub>2</sub>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current N2(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if inclN2 constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable=inclN2),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean inclO2=false "Include O2" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Species",
+            __Dymola_label="<html>Oxygen (O<sub>2</sub>)</html>",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Chemical.Current O2(
+          final inclTransX,
+          final inclTransY,
+          final inclTransZ) if inclO2 constrainedby
+          FCSys.Conditions.ByConnector.Chemical.Partial(
+          inclTransX=inclTransX,
+          inclTransY=inclTransY,
+          inclTransZ=inclTransZ) "Conditions" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Species",
+            __Dymola_descriptionLabel=true,
+            enable=inclO2),
+          Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        // Assumptions
+        parameter Boolean inclTransX=true "X" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
+        parameter Boolean inclTransY=true "Y" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
+        parameter Boolean inclTransZ=true "Z" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Axes with translational momentum included",
+            compact=true));
+
+        Connectors.ChemicalBus chemical "Bus of multiple species"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+        Connectors.RealInputBus u "Bus of inputs to specify conditions"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,0})));
+
+        Connectors.RealOutputBus y "Bus of measurement outputs" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
+
+      equation
+        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // connectors to be named by the contents of a string variable and the
+        // name of an instance of a model was accessible through a string (like
+        // %name is expanded to be the name of the instance of the model).  Then,
+        // the connection equations that follow could be generic.
+
+        // C+
+        connect('C+'.chemical, chemical.'C+') annotation (Line(
+            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.'C+', 'C+'.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect('C+'.y, y.'C+') annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // C19HF37O5S-
+        connect('SO3-'.chemical, chemical.'SO3-') annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.'SO3-', 'SO3-'.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect('SO3-'.y, y.'SO3-') annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // e-
+        connect('e-'.chemical, chemical.'e-') annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.'e-', 'e-'.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect('e-'.y, y.'e-') annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // H+
+        connect('H+'.chemical, chemical.'H+') annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.'H+', 'H+'.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect('H+'.y, y.'H+') annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // H2
+        connect(H2.chemical, chemical.H2) annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.H2, H2.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(H2.y, y.H2) annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // H2O
+        connect(H2O.chemical, chemical.H2O) annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.H2O, H2O.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(H2O.y, y.H2O) annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // N2
+        connect(N2.chemical, chemical.N2) annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={38,196,52},
+            smooth=Smooth.None));
+        connect(u.N2, N2.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(N2.y, y.N2) annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+
+        // O2
+        connect(O2.chemical, chemical.O2) annotation (Line(
+            points={{6.10623e-16,-4},{5.55112e-16,-40}},
+            color={221,23,47},
+            smooth=Smooth.None,
+            thickness=0.5));
+        connect(u.O2, O2.u) annotation (Line(
+            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(O2.y, y.O2) annotation (Line(
+            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        annotation (defaultComponentName="chemical");
+      end Flows;
+
+      model Efforts
+        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, with efforts specified by default</html>"
+        extends Flows(
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential 'C+'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential
+            'SO3-'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential 'e-'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential 'H+'(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential H2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential H2O(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential N2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ),
+          redeclare replaceable Conditions.ByConnector.Chemical.Potential O2(
+            final inclTransX,
+            final inclTransY,
+            final inclTransZ));
+        annotation (defaultComponentName="chemical");
+        // Note:  In Dymola 2014, the path to Potential must be explicitly given
+        // (Conditions.ByConnector.Chemical.Potential, not Potential) to prevent
+        // the error "Cannot show the parameter dialog for redeclared class [...]".
+      end Efforts;
+      annotation (Documentation(info="<html><p>All of the submodels for the individual species in
+  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Gas\">Gas</a>,
+  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Graphite\">Graphite</a>,
+  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Ionomer\">Ionomer</a>, and
+  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Liquid\">Liquid</a> models
+  are instances of the <a href=\"modelica://FCSys.Conditions.ByConnector.Chemical.Species\">Conditions.ByConnector.Chemical.Species</a>
+  model rather than <a href=\"modelica://FCSys.Conditions.ByConnector.Chemical.Reaction\">Conditions.ByConnector.Chemical.Reaction</a>).
+  That means that the subconnectors in the
+  (<code>chemical</code> connectors of the models in this package are
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
+  (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
+          Icon(graphics={Ellipse(
+                  extent={{-60,60},{60,-60}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={221,23,47},
+                  lineThickness=0.5)}));
+
+    end ChemicalBus;
 
     package Reaction
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
@@ -2159,7 +2639,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Outputs
         final Connectors.RealOutput y_material=materialMeas(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2173,7 +2653,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,80})));
         final Connectors.RealOutput y_transX=transXMeas(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2189,7 +2669,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,0})));
         final Connectors.RealOutput y_transY=transYMeas(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2205,7 +2685,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,40})));
         final Connectors.RealOutput y_transZ=transZMeas(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2221,7 +2701,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,-40})));
         final Connectors.RealOutput y_thermal=thermalMeas(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2247,7 +2727,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         Connectors.RealOutputInternal _u_material=materialSpec(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2259,7 +2739,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,80})));
         Connectors.RealOutputInternal _u_transX=transXSpec(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2272,7 +2752,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,40})));
         Connectors.RealOutputInternal _u_transY=transYSpec(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2285,7 +2765,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,0})));
         Connectors.RealOutputInternal _u_transZ=transZSpec(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2298,7 +2778,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,-40})));
         Connectors.RealOutputInternal _u_thermal=thermalSpec(
                   reaction.Ndot,
-                  reaction.mu,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -2374,18 +2854,30 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       model Efforts
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.ElectrochemNegative\">ElectrochemNegative</a> or <a href=\"modelica://FCSys.Connectors.ElectrochemPositive\">ElectrochemPositive</a> connector, with efforts specified by default</html>"
         extends FCSys.Conditions.ByConnector.Reaction.Flows(
-          redeclare replaceable function materialSpec = Material.reactionRate,
-          redeclare replaceable function transXSpec = Translational.velocity,
-          redeclare replaceable function transYSpec = Translational.velocity,
-          redeclare replaceable function transZSpec = Translational.velocity,
+          redeclare replaceable function materialSpec =
+              Conditions.ByConnector.Reaction.Material.reactionRate,
+          redeclare replaceable function transXSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
+          redeclare replaceable function transYSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
+          redeclare replaceable function transZSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
           redeclare replaceable function thermalSpec =
-              Thermal.specificEntropyTemperature,
-          redeclare replaceable function materialMeas = Material.potential,
-          redeclare replaceable function transXMeas = Translational.force,
-          redeclare replaceable function transYMeas = Translational.force,
-          redeclare replaceable function transZMeas = Translational.force,
-          redeclare replaceable function thermalMeas = Thermal.heatRate);
+              Conditions.ByConnector.Reaction.Thermal.specificEntropyTemperature,
 
+          redeclare replaceable function materialMeas =
+              Conditions.ByConnector.Reaction.Material.potential,
+          redeclare replaceable function transXMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function transYMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function transZMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function thermalMeas =
+              Conditions.ByConnector.Reaction.Thermal.heatRate);
+
+        // Note:  In Dymola 2014, the paths must be explicitly given to prevent
+        // the error "Cannot show the parameter dialog for redeclared class [...]".
         annotation (defaultComponentName="reaction");
 
       end Efforts;
@@ -2405,7 +2897,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Partial;
 
         algorithm
-          x := mu;
+          x := g;
           annotation (Inline=true);
         end potential;
 
@@ -2415,8 +2907,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential mu
-            "<html>Electrochemical potential (<i>&mu;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
@@ -2460,8 +2952,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential mu
-            "<html>Electrochemical potential (<i>&mu;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
@@ -2508,8 +3000,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential mu
-            "<html>Electrochemical potential (<i>&mu;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
@@ -2530,607 +3022,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
+                  lineColor={170,0,0},
                   fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-30,30},{30,-30}},
+                  fillColor={221,23,47},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0})}));
     end Reaction;
-
-    package PhysicalBus
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> or <a href=\"modelica://FCSys.Connectors.PhysicalBusNode\">PhysicalBusNode</a> connector</html>"
-      extends Modelica.Icons.Package;
-
-      model Flows
-        "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with flows specified by default</html>"
-
-        extends FCSys.Icons.Conditions.SingleShort;
-
-        // Conditionally include species.
-        parameter Boolean 'inclC+'=false "Include C+" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Carbon plus (C<sup>+</sup>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential 'C+'(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if 'inclC+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="C+") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='inclC+'),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean 'inclSO3-'=false
-          "Include C19HF37O5S- (abbreviated as SO3-)" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label=
-                "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</html>",
-
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential 'SO3-'(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if 'inclSO3-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="inclC19HF37O5S-") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='inclSO3-'),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-        parameter Boolean 'incle-'=false "Include e-" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Electrons (e<sup>-</sup>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential 'e-'(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if 'incle-' constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="e-") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='incle-'),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean 'inclH+'=false "Include H+" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Protons (H<sup>+</sup>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential 'H+'(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if 'inclH+' constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="H+") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='inclH+'),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclH2=false "Include H2" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Hydrogen (H<sub>2</sub>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential H2(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if inclH2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="H2") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclH2),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclH2O=false "Include H2O" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential H2O(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if inclH2O constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="H2O") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclH2O),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclN2=false "Include N2" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Nitrogen (N<sub>2</sub>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential N2(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if inclN2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="N2") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclO2=false "Include O2" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_label="<html>Oxygen (O<sub>2</sub>)</html>",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-
-        replaceable Physical.Potential O2(
-          final inclTransX,
-          final inclTransY,
-          final inclTransZ,
-          final formula) if inclO2 constrainedby
-          FCSys.Conditions.ByConnector.Physical.Partial(
-          inclTransX=inclTransX,
-          inclTransY=inclTransY,
-          inclTransZ=inclTransZ,
-          formula="O2") "Conditions" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclO2),
-          Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        // Assumptions
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-        parameter Boolean inclTransY=true "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-        parameter Boolean inclTransZ=true "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-
-        Connectors.ChemicalBus physical "Bus of multiple species"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        Connectors.RealInputBus u "Bus of inputs to specify conditions"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-
-        Connectors.RealOutputBus y "Bus of measurement outputs" annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-
-      equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
-        // connectors to be named by the contents of a string variable and the
-        // name of an instance of a model was accessible through a string (like
-        // %name is expanded to be the name of the instance of the model).  Then,
-        // the connection equations that follow could be generic.
-
-        // C+
-        connect('C+'.physical, physical.'C+') annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.'C+', 'C+'.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect('C+'.y, y.'C+') annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // C19HF37O5S-
-        connect('SO3-'.physical, physical.'SO3-') annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.'SO3-', 'SO3-'.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect('SO3-'.y, y.'SO3-') annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // e-
-        connect('e-'.physical, physical.'e-') annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect('e-'.y, y.'e-') annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H+
-        connect('H+'.physical, physical.'H+') annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect('H+'.y, y.'H+') annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H2
-        connect(H2.physical, physical.H2) annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.H2, H2.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(H2.y, y.H2) annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H2O
-        connect(H2O.physical, physical.H2O) annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.H2O, H2O.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(H2O.y, y.H2O) annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // N2
-        connect(N2.physical, physical.N2) annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.N2, N2.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(N2.y, y.N2) annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // O2
-        connect(O2.physical, physical.O2) annotation (Line(
-            points={{6.10623e-16,-4},{5.55112e-16,-40}},
-            color={38,196,52},
-            smooth=Smooth.None));
-        connect(u.O2, O2.u) annotation (Line(
-            points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(O2.y, y.O2) annotation (Line(
-            points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        annotation (defaultComponentName="physical");
-      end Flows;
-
-      model Efforts
-        "<html>Condition for a <a href=\"modelica://FCSys.Connectors.PhysicalBus\">PhysicalBus</a> connector, with efforts specified by default</html>"
-        extends Flows(
-          redeclare replaceable Physical.Current 'C+'(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current 'SO3-'(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current 'e-'(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current 'H+'(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current H2(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current H2O(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current N2(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula),
-          redeclare replaceable Physical.Current O2(
-            final inclTransX,
-            final inclTransY,
-            final inclTransZ,
-            final formula));
-        annotation (defaultComponentName="physical");
-
-      end Efforts;
-      annotation (Documentation(info="<html><p>All of the submodels for the individual species in
-  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Gas\">Gas</a>,
-  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Graphite\">Graphite</a>,
-  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Ionomer\">Ionomer</a>, and
-  <a href=\"modelica://FCSys.Conditions.ByConnector.ChemicalBus.Liquid\">Liquid</a> models
-  are instances of the <a href=\"modelica://FCSys.Conditions.ByConnector.Chemical.Species\">Conditions.ByConnector.Chemical.Species</a>
-  model rather than <a href=\"modelica://FCSys.Conditions.ByConnector.Chemical.Reaction\">Conditions.ByConnector.Chemical.Reaction</a>).
-  That means that the subconnectors in the
-  (<code>chemical</code> connectors of the models in this package are
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
-  (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).</p></html>"),
-          Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52},
-                  lineThickness=0.5)}));
-
-    end PhysicalBus;
-
-    package Physical
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connector</html>"
-      extends Modelica.Icons.Package;
-
-      model Potential "Specify chemical potential (measure current)"
-        extends Partial(final y=physical.Ndot);
-
-      equation
-        physical.mu = u_final;
-
-      end Potential;
-
-      model Current "Specify current (measure chemical potential)"
-        extends Partial(final y=physical.mu);
-
-      equation
-        physical.Ndot = u_final;
-
-      end Current;
-
-      partial model Partial "Base model for a material condition"
-        import Modelica.Math.BooleanVectors.countTrue;
-        import Modelica.Math.BooleanVectors.index;
-        extends FCSys.Icons.Conditions.SingleShort;
-
-        parameter String formula(start="") "Chemical formula of the species"
-          annotation (Dialog(group="Material properties"));
-        // The start value prevents a warning when this model is checked in Dymola 2014.
-
-        parameter Boolean internal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Specification of material condition"));
-
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(group="Specification of material condition",enable=internal),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,10})));
-
-        // Properties upon outflow
-        parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
-              group="Properties upon outflow", __Dymola_label=
-                "<html><i><b>&phi;</b></i></html>"));
-        parameter Q.PotentialAbsolute sT(start=3000*U.K)
-          "Specific entropy-temperature product" annotation (Dialog(group=
-                "Properties upon outflow", __Dymola_label=
-                "<html><i>sT</i></html>"));
-
-        // Included components of translational momentum
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-
-        parameter Boolean inclTransY=true "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-
-        parameter Boolean inclTransZ=true "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Axes with translational momentum included",
-            compact=true));
-
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-
-        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
-              ="Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-        Connectors.Physical physical(final n_trans=n_trans,final formula=
-              formula) "Connector for phase change"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      protected
-        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-            inclTransZ}) "Number of components of translational momentum";
-        final parameter Integer cartTrans[n_trans]=index({inclTransX,inclTransY,
-            inclTransZ})
-          "Cartesian-axis indices of the components of translational momentum";
-
-        Connectors.RealOutputInternal u_final
-          "Final value of specified condition" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,0}), iconTransformation(extent={{-10,-10},{10,10}},
-                origin={-20,0})));
-
-      equation
-        physical.phi = phi[cartTrans];
-        physical.sT = sT;
-
-        connect(source.y, u_final) annotation (Line(
-            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
-                5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (defaultComponentName="physical");
-      end Partial;
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
-
-    end Physical;
 
     package FaceBus
       "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
@@ -3631,6 +3531,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)));
+
+          // Note:  In Dymola 2014, the paths must be explicitly given to prevent
+          // the error "Cannot show the parameter dialog for redeclared class [...]".
 
           annotation (defaultComponentName="face",Diagram(graphics));
         end Efforts;
@@ -4606,6 +4509,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       4*U.C/U.cc),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))));
+
+          // Note:  In Dymola 2014, the paths must be explicitly given to prevent
+          // the error "Cannot show the parameter dialog for redeclared class [...]".
 
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
@@ -6014,6 +5920,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                   298.15*U.K));
 
+          // Note:  In Dymola 2014, the paths must be explicitly given to prevent
+          // the error "Cannot show the parameter dialog for redeclared class [...]".
+
           // The daltonSource and thermalSet blocks are redeclared as not replaceable
           // because y is set directly and cannot be undone at instantiation.
 
@@ -6255,13 +6164,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
-                    -60,-60}},
-                lineColor={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid)}),
+                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
+                  -60},{-60,-60}},
+                      lineColor={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
       end Volume2;
@@ -6332,11 +6241,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   extent={{-60,60},{60,-60}},
                   lineColor={11,43,197},
                   fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251}),Text(
-                  extent={{-56,56},{56,-56}},
-                  lineColor={255,255,255},
-                  textString="A",
-                  textStyle={TextStyle.Bold})}));
+                  fillColor={255,255,255}),Ellipse(
+                  extent={{-30,30},{30,-30}},
+                  fillColor={47,107,251},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0})}));
     end Amagat;
 
     package Dalton
@@ -6425,11 +6335,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   extent={{-60,60},{60,-60}},
                   lineColor={11,43,197},
                   fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251}),Text(
-                  extent={{-56,56},{56,-56}},
-                  lineColor={255,255,255},
-                  textString="D",
-                  textStyle={TextStyle.Bold})}));
+                  fillColor={47,107,251})}));
     end Dalton;
 
     package Direct
@@ -6455,8 +6361,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable=inclTransX),
           Placement(transformation(extent={{-52,18},{-32,38}})));
 
-        parameter Boolean internalTransX=true if inclTransX
-          "Use internal specification" annotation (
+        parameter Boolean internalTransX=true "Use internal specification"
+          annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6487,8 +6393,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable=inclTransY),
           Placement(transformation(extent={{-24,4},{-4,24}})));
 
-        parameter Boolean internalTransY=true if inclTransY
-          "Use internal specification" annotation (
+        parameter Boolean internalTransY=true "Use internal specification"
+          annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6518,8 +6424,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable=inclTransZ),
           Placement(transformation(extent={{4,-10},{24,10}})));
 
-        parameter Boolean internalTransZ=true if inclTransZ
-          "Use internal specification" annotation (
+        parameter Boolean internalTransZ=true "Use internal specification"
+          annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
@@ -6906,9 +6812,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
+                  lineColor={2,157,21},
                   fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+                  fillColor={38,196,52})}));
     end Direct;
 
     package Inter
@@ -7392,9 +7298,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
+                  lineColor={2,157,21},
                   fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+                  fillColor={38,196,52})}));
     end Inter;
 
     package Translational
@@ -8759,54 +8665,45 @@ record is not defined.  For simulation, drag FCSys.Conditions.Environment into
 your model to specify global conditions and defaults.  Otherwise, the default
 settings will be used.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,213,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-100}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(
-            points={{-40,-20},{-30,-28},{-10,-50},{-10,-50},{16,-12},{40,0}},
-            color={0,0,0},
-            smooth=Smooth.Bezier),
-          Ellipse(
-            extent={{32,8},{48,-8}},
-            pattern=LinePattern.None,
-            lineColor={170,213,255},
-            fillColor={50,50,50},
-            fillPattern=FillPattern.Sphere),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Dash),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0})}));
+              100}}), graphics={Rectangle(
+              extent={{-80,60},{80,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,213,255}),Rectangle(
+              extent={{-72,-60},{72,-100}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(
+              points={{-40,-20},{-30,-28},{-10,-50},{-10,-50},{16,-12},{40,0}},
+              color={0,0,0},
+              smooth=Smooth.Bezier),Ellipse(
+              extent={{32,8},{48,-8}},
+              pattern=LinePattern.None,
+              lineColor={170,213,255},
+              fillColor={50,50,50},
+              fillPattern=FillPattern.Sphere),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash),Line(points={{-70,-60},{70,-60}}, color
+            ={0,0,0}),Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),Line(
+            points={{2,-90},{32,-60}}, color={0,0,0}),Line(points={{36,-90},{66,
+            -60}}, color={0,0,0}),Line(points={{-32,-90},{-2,-60}}, color={0,0,
+            0})}));
 
   end Environment;
 
@@ -8881,31 +8778,27 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

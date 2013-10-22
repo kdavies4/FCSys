@@ -1295,7 +1295,6 @@ package Characteristics
   </html>"));
       end zeta;
 
-
       replaceable function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;

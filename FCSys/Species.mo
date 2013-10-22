@@ -30,7 +30,7 @@ package Species "Dynamic models of chemical species"
                   U.mol*U.K) - Data.b_c[1, 1]*log(298.15*U.K)]),
           final k_intra,
           final mu=0,
-          final tauprime,
+          final tauprime=0,
           final initEnergy=InitThermo.temperature,
           final N_IC,
           final h_IC,
@@ -129,15 +129,17 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Solid(
           redeclare replaceable package Data = Characteristics.'SO3-'.Ionomer,
-          final mu=0,
-          final tauprime,
+          final tauprime=0,
           final initEnergy=InitThermo.temperature,
           final N_IC,
           final h_IC,
           final g_IC,
           final rho_IC,
+          redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
+
+        //final mu=0,
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -169,6 +171,9 @@ package Species "Dynamic models of chemical species"
           redeclare final package Data = Characteristics.'e-'.Graphite,
           final k_intra,
           final initEnergy=InitThermo.none,
+          final consTransX=Conservation.steady,
+          final consTransY=Conservation.steady,
+          final consTransZ=Conservation.steady,
           final theta=Modelica.Constants.inf);
 
         annotation (
@@ -198,6 +203,90 @@ package Species "Dynamic models of chemical species"
 
   end 'e-';
 
+public
+  model H "Hydrogen stored as charge across an electrolytic double layer"
+    //extends FCSys.Icons.Names1.Middle;
+
+    parameter Integer n_trans(min=1, max=3)
+      "Number of components of translational momentum" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+    parameter Q.Length L=U.um "Length of the double layer" annotation (Dialog(
+          group="Geometry", __Dymola_label="<html><i>L</i></html>"));
+    parameter Q.Area A=U.cm^2 "Electrochemical active area" annotation (Dialog(
+          group="Geometry", __Dymola_label="<html><i>A</i></html>"));
+    parameter Q.Permittivity epsilon=U.epsilon_0 "Permittivity"
+      annotation (Dialog(__Dymola_label="<html>&epsilon;</html>"));
+    final parameter Q.Capacitance C=epsilon*A/L "Capacitance";
+    Q.Amount N(
+      stateSelect=StateSelect.prefer,
+      final start=if initAmount then N_IC else C*g_IC,
+      final fixed=initAmount) "Amount of material stored";
+    Q.Potential g(
+      stateSelect=StateSelect.prefer,
+      final start=if initAmount then g_IC/C else g_IC,
+      final fixed=not initAmount) "Potential";
+
+    // Initialization parameters
+    parameter Boolean initAmount=false
+      "Initialize the amount of material (otherwise, potential)" annotation (
+      Evaluate=true,
+      Dialog(tab="Initialization", compact=true),
+      choices(__Dymola_checkBox=true));
+    parameter Q.Amount N_IC=0 "Initial particle number" annotation (Dialog(
+        tab="Initialization",
+        enable=initAmount,
+        __Dymola_label="<html><i>N</i><sub>IC</sub></html>"));
+
+    parameter Q.Potential g_IC(displayUnit="V") = 0 "Initial potential"
+      annotation (Dialog(
+        tab="Initialization",
+        enable=not initAmount,
+        __Dymola_label="<html><i>g</i><sub>IC</sub></html>"));
+
+    Connectors.Reaction inlet(final n_trans=n_trans)
+      "Reaction connector for material intake" annotation (Placement(
+          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
+            extent={{-110,-10},{-90,10}})));
+    Connectors.Reaction outlet(final n_trans=n_trans)
+      "Reaction connector for material outflow" annotation (Placement(
+          transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
+              {{90,-10},{110,10}})));
+
+  equation
+    // Aliases
+    g = inlet.g;
+    N = C*g;
+
+    // Properties
+    0 = inlet.g + outlet.g;
+    inlet.phi = outlet.phi;
+    inlet.sT = outlet.sT;
+
+    // Conservation
+    der(N)/U.s = inlet.Ndot - outlet.Ndot "Material";
+    zeros(n_trans) = inlet.mPhidot + outlet.mPhidot
+      "Translational momentum (without storage)";
+    0 = inlet.Qdot + outlet.Qdot "Energy (without storage)";
+
+    annotation (
+      defaultComponentName="H",
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={Line(
+              points={{90,0},{-90,0}},
+              color={221,23,47},
+              smooth=Smooth.None),Ellipse(
+              extent={{-40,-40},{40,40}},
+              lineColor={221,23,47},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics));
+  end H;
+
   package 'H+' "<html>H<sup>+</sup></html>"
     extends Modelica.Icons.Package;
     package Ionomer "<html>H<sup>+</sup> in ionomer</html>"
@@ -205,7 +294,7 @@ package Species "Dynamic models of chemical species"
 
       model Fixed "Fixed properties"
         extends Electrical(
-          redeclare replaceable package Data = Characteristics.'H+'.Gas,
+          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final initEnergy=InitThermo.none,
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
 
@@ -428,7 +517,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
       model Fixed "Fixed properties"
         extends Compressible(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1], n_v={-1,0}),
+                b_v=[1],n_v={-1,0}),
           final tauprime=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -584,7 +673,8 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
       model Fixed "Fixed properties"
         extends Compressible(
-          redeclare replaceable package Data = Characteristics.H2O.Ionomer,
+          redeclare replaceable package Data = Characteristics.H2O.Gas (b_v=[1],
+                n_v={-1,0}),
           redeclare parameter Q.TimeAbsolute tauprime=1e12*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -985,18 +1075,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     extends Incompressible(
       final Nu_Phi,
       final Nu_Q,
-      final beta=1,
-      final zeta=1,
-      final mu=v/r,
       final tauprime=0,
+      final mu=v/r,
+      final zeta=1,
       final consRot,
       final upstreamX=false,
       final upstreamY=false,
       final upstreamZ=false,
       final consMaterial=Conservation.steady,
-      final consTransX=Conservation.steady,
-      final consTransY=Conservation.steady,
-      final consTransZ=Conservation.steady,
       final initMaterial=InitThermo.none,
       final N_IC,
       final p_IC,
@@ -1005,13 +1091,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       final rho_IC,
       final g_IC,
       final T_IC,
-      final initTransX,
-      final initTransY,
-      final initTransZ,
       final phi_IC=zeros(3),
       final I_IC,
       final nu=1,
       final consEnergy=Conservation.steady);
+    //final beta=1,
+    //final initTransX,
+    //final initTransY,
+    //final initTransZ,
 
     parameter Real r=Data.beta()*Data.v_Tp() "Electrical resistivity"
       annotation (Dialog(group="Material properties", __Dymola_label=
@@ -1019,7 +1106,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // **dimension, quantity
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics));
+              -100},{100,100}}), graphics), Diagram(coordinateSystem(
+            preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+          graphics));
   end Electrical;
 
   model Solid
@@ -1082,12 +1171,10 @@ protected
     import FCSys.Utilities.inSign;
     import FCSys.Utilities.Delta;
     import assert = FCSys.Utilities.assertEval;
+    import Modelica.Math.asinh;
     //extends FCSys.Icons.Names.Top5;
 
     // Geometric parameters
-    parameter Q.Number alpha=1 "Symmetry factor for material exchange"
-      annotation (Evaluate=true,Dialog(group="Geometry",__Dymola_label=
-            "<html>&alpha;</html>"));
 
     // Material properties
     replaceable package Data = Characteristics.BaseClasses.Characteristic
@@ -1369,9 +1456,10 @@ protected
       Characteristics.BaseClasses.CharacteristicEOS.kappa(T, p) if environment.analysis
       "Isothermal compressibility";
     output Q.Velocity phi_chemical[n_trans](each stateSelect=StateSelect.never)
-       = actualStream(chemical.phi) "Velocity of the chemical stream";
+       = actualStream(chemical.phi) if environment.analysis
+      "Velocity of the chemical stream";
     output Q.PotentialAbsolute sT_chemical(stateSelect=StateSelect.never) =
-      actualStream(chemical.sT)
+      actualStream(chemical.sT) if environment.analysis
       "Specific entropy-temperature product of the chemical stream";
     //
     // Potentials and current
@@ -1443,7 +1531,8 @@ protected
       "Acceleration force (including acceleration due to body forces)";
     output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(
       if inclFaces[cartTrans[i]] then -Delta(faces[facesCart[cartTrans[i]], :].p)
-      *A[cartTrans[i]] else 0) for i in 1:n_trans} "Thermodynamic force";
+      *A[cartTrans[i]] else 0) for i in 1:n_trans} if environment.analysis
+      "Thermodynamic force";
     output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*(
       actualStream(chemical.phi) - phi) .* chemical.Ndot if environment.analysis
       "Acceleration force due to advective exchange";
@@ -1496,9 +1585,10 @@ protected
       final n_trans=n_trans,
       g(start=g_IC, final fixed=false),
       phi(start=phi_IC[cartTrans], each final fixed=false),
-      sT(start=h_IC - g_IC, final fixed=false)) "Connector for reactions"
-      annotation (Placement(transformation(extent={{-40,0},{-20,20}}),
-          iconTransformation(extent={{-76,40},{-96,60}})));
+      sT(start=h_IC - g_IC, final fixed=false))
+      "Connector for reactions and phase change" annotation (Placement(
+          transformation(extent={{-40,0},{-20,20}}), iconTransformation(extent=
+              {{-76,40},{-96,60}})));
     Connectors.Direct direct(
       final n_trans=n_trans,
       translational(phi(final start=phi_IC[cartTrans], final fixed=false)),
@@ -1797,8 +1887,7 @@ Choose any condition besides None.");
     // Diffusive exchange
     // ------------------
     // Material
-    tauprime*chemical.Ndot = N*(exp(alpha*(chemical.g + chemical.sT - h)/T) -
-      exp((alpha - 1)*(chemical.g + chemical.sT - h)/T));
+    tauprime*chemical.Ndot = N*(exp((chemical.g + chemical.sT - h)/T) - 1);
     //
     // Translational momentum
     for i in 1:n_trans loop
@@ -2185,76 +2274,17 @@ Choose any condition besides None.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Partial;
-
-public
-  model DoubleLayer
-    "Species stored in parts as charge across an electrolytic double layer"
-
-    parameter Integer n_trans(min=1, max=3)
-      "Number of components of translational momentum" annotation (Dialog(
-          __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    parameter Q.Capacitance C=U.F "Capacitance"
-      annotation (Dialog(__Dymola_label="<html><i>C</i></html>"));
-    Q.Amount N "Amount of material stored";
-
-    Connectors.Reaction reaction1(final n_trans=n_trans)
-      "1st connector for the reaction" annotation (Placement(transformation(
-            extent={{-50,-10},{-30,10}}), iconTransformation(extent={{90,-10},{
-              110,10}})));
-    Connectors.Reaction reaction2(final n_trans=n_trans)
-      "2nd connector for the reaction" annotation (Placement(transformation(
-            extent={{30,-10},{50,10}}), iconTransformation(extent={{-110,-10},{
-              -90,10}})));
-
-  equation
-    // Aliases
-    N = C*reaction1.g;
-
-    // Properties
-    0 = reaction1.g + reaction2.g;
-    reaction1.phi = reaction2.phi;
-    reaction1.sT = reaction2.sT;
-
-    // Conservation
-    der(N)/U.s = reaction1.Ndot - reaction2.Ndot "Material";
-    zeros(n_trans) = reaction1.mPhidot + reaction2.mPhidot
-      "Translational momentum (without storage)";
-    0 = reaction1.Qdot + reaction2.Qdot "Energy (without storage)";
-
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics={
-          Line(
-            points={{40,0},{100,0}},
-            color={221,23,47},
-            smooth=Smooth.None),
-          Line(
-            points={{-100,0},{-40,0}},
-            color={221,23,47},
-            smooth=Smooth.None),
-          Ellipse(
-            extent={{-60,-60},{60,60}},
-            lineColor={221,23,47},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-100,-20},{100,20}},
-            lineColor={0,0,0},
-            textString="n %name")}), Diagram(coordinateSystem(
-            preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-          graphics));
-  end DoubleLayer;
 
 public
   package Enumerations "Choices of options"

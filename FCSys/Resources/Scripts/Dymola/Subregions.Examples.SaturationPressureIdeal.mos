@@ -1,0 +1,17 @@
+// Setup
+removePlots();
+
+createPlot(filename = "SaturationPressureIdeal.mat",
+ id = 1,
+ position = {0, 0, 600, 450},
+ x = "T_degC",
+ y = {"subregion.gas.H2O.p", "p_sat"},
+ heading = "Saturation Pressure vs. Temperature",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 4,
+ legendHorizontal = false,
+ legends = {"FCSys (via Gibbs equilibrium)", "Modelica.Media (correlated function)"},
+ leftTitle = "Pressure / kPa",
+ bottomTitle = "Temperature in degC");
