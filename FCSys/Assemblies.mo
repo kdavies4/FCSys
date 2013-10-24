@@ -194,16 +194,16 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions across the channel";
 
       Connectors.FaceBus an[n_y, n_z] "Interface with the anode end plate"
-        annotation (Placement(transformation(extent={{-90,-10},{-70,10}},
+        annotation (Placement(transformation(extent={{-100,-20},{-80,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
       Connectors.FaceBus ca[n_y, n_z] "Interface with the cathode end plate"
-        annotation (Placement(transformation(extent={{70,-10},{90,10}},
-              rotation=0), iconTransformation(extent={{90,-10},{110,10}})));
+        annotation (Placement(transformation(extent={{60,-20},{80,0}}, rotation
+              =0), iconTransformation(extent={{90,-10},{110,10}})));
       Connectors.FaceBus anNegative[anFP.n_x, n_z] "Negative anode fluid port"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-60,-20}), iconTransformation(
+            origin={-70,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,-100})));
@@ -211,7 +211,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Negative cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={60,-20}), iconTransformation(
+            origin={50,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
@@ -219,7 +219,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-60,20}), iconTransformation(
+            origin={-70,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
@@ -227,7 +227,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Positive cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={60,20}), iconTransformation(
+            origin={50,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,100})));
@@ -236,37 +236,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Anode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-70,-10},{-50,10}})));
+        Placement(transformation(extent={{-80,-20},{-60,0}})));
       replaceable Regions.AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
         "Anode gas diffusion layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-50,-10},{-30,10}})));
+        Placement(transformation(extent={{-60,-20},{-40,0}})));
       replaceable Regions.AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         "Anode catalyst layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-30,-10},{-10,10}})));
+        Placement(transformation(extent={{-40,-20},{-20,0}})));
       replaceable Regions.PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
         "Proton exchange membrane" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
+        Placement(transformation(extent={{-20,-20},{0,0}})));
       replaceable Regions.CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         "Cathode catalyst layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{10,-10},{30,10}})));
+        Placement(transformation(extent={{0,-20},{20,0}})));
       replaceable Regions.CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         "Cathode gas diffusion layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{30,-10},{50,10}})));
+        Placement(transformation(extent={{20,-20},{40,0}})));
       replaceable Regions.CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         "Cathode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{50,-10},{70,10}})));
+        Placement(transformation(extent={{40,-20},{60,0}})));
 
     protected
       outer Conditions.Environment environment "Environmental conditions";
@@ -274,67 +274,66 @@ package Assemblies "Combinations of regions (e.g., cells)"
     equation
       // Internal connections (between layers)
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,6.10623e-16},{-50,6.10623e-16}},
+          points={{-60,-10},{-60,-10}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
       connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,6.10623e-16},{-30,6.10623e-16}},
+          points={{-40,-10},{-40,-10}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,6.10623e-16},{-10,6.10623e-16}},
+          points={{-20,-10},{-20,-10}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
       connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,6.10623e-016},{10,6.10623e-016}},
+          points={{0,-10},{0,-10}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,6.10623e-16},{30,6.10623e-16}},
+          points={{20,-10},{20,-10}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,6.10623e-16},{50,6.10623e-16}},
+          points={{40,-10},{40,-10}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
 
       // External connections
       connect(an, anFP.xNegative) annotation (Line(
-          points={{-80,5.55112e-16},{-80,5.55112e-16},{-80,6.10623e-16},{-70,
-              6.10623e-16}},
+          points={{-90,-10},{-80,-10}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
 
       connect(anFP.yNegative, anNegative) annotation (Line(
-          points={{-60,-10},{-60,-20}},
+          points={{-70,-20},{-70,-30}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
       connect(anFP.yPositive, anPositive) annotation (Line(
-          points={{-60,10},{-60,20}},
+          points={{-70,0},{-70,10}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
 
       connect(caFP.xPositive, ca) annotation (Line(
-          points={{70,6.10623e-16},{80,5.55112e-16}},
+          points={{60,-10},{70,-10}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caFP.yNegative, caNegative) annotation (Line(
-          points={{60,-10},{60,-20}},
+          points={{50,-20},{50,-30}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
       connect(caFP.yPositive, caPositive) annotation (Line(
-          points={{60,10},{60,20}},
+          points={{50,0},{50,10}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -344,42 +343,48 @@ package Assemblies "Combinations of regions (e.g., cells)"
     <html><p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
     of a PEMFC is given in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</p>
     </html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-80,-20},{
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-40},{
                 80,20}}), graphics),
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}),
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -402,16 +407,16 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions across the channel";
 
       Connectors.FaceBus an[n_y, n_z] "Interface with the anode end plate"
-        annotation (Placement(transformation(extent={{-70,-10},{-50,10}},
+        annotation (Placement(transformation(extent={{-80,-20},{-60,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
       Connectors.FaceBus ca[n_y, n_z] "Interface with the cathode end plate"
-        annotation (Placement(transformation(extent={{50,-10},{70,10}},
-              rotation=0), iconTransformation(extent={{90,-10},{110,10}})));
+        annotation (Placement(transformation(extent={{40,-20},{60,0}}, rotation
+              =0), iconTransformation(extent={{90,-10},{110,10}})));
       Connectors.FaceBus anNegative[anFP.n_x, n_z] "Negative anode fluid port"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-40,-20}), iconTransformation(
+            origin={-50,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,-100})));
@@ -419,7 +424,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Negative cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={40,-20}), iconTransformation(
+            origin={30,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
@@ -427,7 +432,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-40,20}), iconTransformation(
+            origin={-50,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
@@ -435,7 +440,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Positive cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={40,20}), iconTransformation(
+            origin={30,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,100})));
@@ -444,25 +449,25 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Anode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-50,-10},{-30,10}})));
+        Placement(transformation(extent={{-60,-20},{-40,0}})));
       FCSys.Regions.AnCLs.AnCGDL anCGDL(final L_y=L_y, final L_z=L_z)
         "Anode catalyst and gas diffusion layer" annotation (Dialog(group=
-              "Layers"), Placement(transformation(extent={{-30,-10},{-10,10}})));
+              "Layers"), Placement(transformation(extent={{-40,-20},{-20,0}})));
 
       replaceable Regions.PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
         "Proton exchange membrane" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
+        Placement(transformation(extent={{-20,-20},{0,0}})));
       FCSys.Regions.CaCLs.CaCGDL caCGDL(final L_y=L_y, final L_z=L_z)
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
-              "Layers"), Placement(transformation(extent={{10,-10},{30,10}})));
+              "Layers"), Placement(transformation(extent={{0,-20},{20,0}})));
 
       replaceable Regions.CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         "Cathode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
-        Placement(transformation(extent={{30,-10},{50,10}})));
+        Placement(transformation(extent={{20,-20},{40,0}})));
 
     protected
       outer Conditions.Environment environment "Environmental conditions";
@@ -470,55 +475,55 @@ package Assemblies "Combinations of regions (e.g., cells)"
     equation
       // Internal connections (between layers)
       connect(anFP.xPositive, anCGDL.xNegative) annotation (Line(
-          points={{-30,6.10623e-16},{-30,6.10623e-16}},
+          points={{-40,-10},{-40,-10}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
       connect(anCGDL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,6.10623e-16},{-10,6.10623e-16}},
+          points={{-20,-10},{-20,-10}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
       connect(PEM.xPositive, caCGDL.xNegative) annotation (Line(
-          points={{10,6.10623e-16},{16,-3.36456e-22},{10,6.10623e-16}},
+          points={{0,-10},{0,-10}},
           color={0,0,240},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caCGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{30,6.10623e-16},{26,-3.36456e-22},{36,0},{30,6.10623e-16}},
+          points={{20,-10},{20,-10}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
 
       // External connections
       connect(an, anFP.xNegative) annotation (Line(
-          points={{-60,5.55112e-16},{-60,6.10623e-16},{-50,6.10623e-16}},
+          points={{-70,-10},{-60,-10}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(anFP.yNegative, anNegative) annotation (Line(
-          points={{-40,-10},{-40,-20}},
+          points={{-50,-20},{-50,-30}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
       connect(anFP.yPositive, anPositive) annotation (Line(
-          points={{-40,10},{-40,20}},
+          points={{-50,0},{-50,10}},
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
 
       connect(caFP.xPositive, ca) annotation (Line(
-          points={{50,6.10623e-16},{60,5.55112e-16}},
+          points={{40,-10},{50,-10}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(caFP.yNegative, caNegative) annotation (Line(
-          points={{40,-10},{40,-20}},
+          points={{30,-20},{30,-30}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
       connect(caFP.yPositive, caPositive) annotation (Line(
-          points={{40,10},{40,20}},
+          points={{30,0},{30,10}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -530,42 +535,48 @@ package Assemblies "Combinations of regions (e.g., cells)"
     layers are integrated on each side to reduce the complexity of the model.  An overview
     of a PEMFC is given in the <a href=\"modelica://FCSys\">top-level documentation of FCSys</a>.</p>
     </html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-40},{
                 60,20}}), graphics),
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}));
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
     end SimpleCell;
 
   end Cells;

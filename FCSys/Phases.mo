@@ -30,7 +30,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>H<sub>2</sub> model</html>",
         enable=inclH2),
-      Placement(transformation(extent={{-80,-10},{-60,10}})));
+      Placement(transformation(extent={{-70,-10},{-50,10}})));
 
     parameter Boolean inclH2O=false "Include H2O" annotation (
       HideResult=true,
@@ -54,7 +54,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>H<sub>2</sub>O model</html>",
         enable=inclH2O),
-      Placement(transformation(extent={{-40,-10},{-20,10}})));
+      Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     parameter Boolean inclN2=false "Include N2" annotation (
       HideResult=true,
@@ -78,7 +78,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>N<sub>2</sub> model</html>",
         enable=inclN2),
-      Placement(transformation(extent={{0,-10},{20,10}})));
+      Placement(transformation(extent={{10,-10},{30,10}})));
 
     parameter Boolean inclO2=false "Include O2" annotation (
       HideResult=true,
@@ -102,7 +102,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>O<sub>2</sub> model</html>",
         enable=inclO2),
-      Placement(transformation(extent={{40,-10},{60,10}})));
+      Placement(transformation(extent={{50,-10},{70,10}})));
 
     parameter Boolean inclChemical=false "Include reactions or phase change"
       annotation (
@@ -112,34 +112,34 @@ package Phases "Mixtures of species"
 
     Connectors.FaceBus xNegative if inclFaces[Axis.x]
       "Negative face along the x axis" annotation (Placement(transformation(
-            extent={{-130,-10},{-110,10}}), iconTransformation(extent={{-90,-10},
+            extent={{-120,-10},{-100,10}}), iconTransformation(extent={{-90,-10},
               {-70,10}})));
     Connectors.FaceBus yNegative if inclFaces[Axis.y]
       "Negative face along the y axis" annotation (Placement(transformation(
-            extent={{-106,-34},{-86,-14}}), iconTransformation(extent={{-10,-94},
+            extent={{-96,-34},{-76,-14}}), iconTransformation(extent={{-10,-94},
               {10,-74}})));
     Connectors.FaceBus zNegative if inclFaces[Axis.z]
       "Negative face along the z axis" annotation (Placement(transformation(
-            extent={{78,2},{98,22}}), iconTransformation(extent={{40,40},{60,60}})));
+            extent={{88,2},{108,22}}),iconTransformation(extent={{40,40},{60,60}})));
     Connectors.FaceBus xPositive if inclFaces[Axis.x]
       "Positive face along the x axis" annotation (Placement(transformation(
-            extent={{90,-10},{110,10}}),iconTransformation(extent={{70,-10},{90,
-              10}})));
+            extent={{100,-10},{120,10}}), iconTransformation(extent={{70,-10},{
+              90,10}})));
     Connectors.FaceBus yPositive if inclFaces[Axis.y]
       "Positive face along the y axis" annotation (Placement(transformation(
-            extent={{66,14},{86,34}}), iconTransformation(extent={{-10,90},{10,
+            extent={{76,14},{96,34}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.FaceBus zPositive if inclFaces[Axis.z]
       "Positive face along the z axis" annotation (Placement(transformation(
-            extent={{-118,-22},{-98,-2}}), iconTransformation(extent={{-90,-90},
+            extent={{-108,-22},{-88,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
     Connectors.Amagat amagat(final V=-V) if n_spec > 0
       "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{90,26},{110,46}}), iconTransformation(extent={{-60,40},{-40,
+            extent={{100,26},{120,46}}),iconTransformation(extent={{-60,40},{-40,
               60}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
-      (Placement(transformation(extent={{90,-46},{110,-26}}),
+      (Placement(transformation(extent={{100,-46},{120,-26}}),
           iconTransformation(extent={{70,-70},{90,-90}})));
 
     // Auxiliary variables (for analysis)
@@ -157,18 +157,18 @@ package Phases "Mixtures of species"
 
     Connectors.Chemical connH2(final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
-              {-89,40},{-69,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
+              {-79,40},{-59,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
     Connectors.Chemical connH2O(final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-49,40},{-29,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+              {{-39,40},{-19,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
     Connectors.Chemical connO2(final n_trans=n_trans) if inclO2
       "Chemical connector for O2" annotation (Placement(transformation(extent={
-              {31,40},{51,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
+              {41,40},{61,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
   protected
     Conditions.Adapters.AmagatDalton daltonAmagat if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
-      annotation (Placement(transformation(extent={{74,26},{54,46}})));
+      annotation (Placement(transformation(extent={{84,26},{64,46}})));
     Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
@@ -176,7 +176,7 @@ package Phases "Mixtures of species"
       reduceThermal)
       "Connector to directly couple velocities and temperatures within the phase"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              -6,-48}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
+              4,-48}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
               26,-52})));
 
   equation
@@ -184,79 +184,79 @@ package Phases "Mixtures of species"
 
     // Phase change
     connect(H2O.chemical, connH2O) annotation (Line(
-        points={{-38.6,5},{-38.6,4.5},{-39,4.5},{-39,50}},
+        points={{-28.6,5},{-28.6,50.5},{-29,50.5},{-29,50}},
         color={221,23,47},
         smooth=Smooth.None));
 
     // Inert exchange
     connect(H2.inter, inter) annotation (Line(
-        points={{-61,-3.8},{-59,-6},{-59,-36},{100,-36}},
+        points={{-51,-3.8},{-49,-6},{-49,-36},{110,-36}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2O.inter, inter) annotation (Line(
-        points={{-21,-3.8},{-19,-6},{-19,-36},{100,-36}},
+        points={{-11,-3.8},{-9,-6},{-9,-36},{110,-36}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(N2.inter, inter) annotation (Line(
-        points={{19,-3.8},{21,-6},{21,-36},{100,-36}},
+        points={{29,-3.8},{31,-6},{31,-36},{110,-36}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(O2.inter, inter) annotation (Line(
-        points={{59,-3.8},{61,-6},{61,-36},{100,-36}},
+        points={{69,-3.8},{71,-6},{71,-36},{110,-36}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2.direct.translational, direct.translational) annotation (Line(
-        points={{-66.2,-9},{-66.2,-48},{-6,-48}},
+        points={{-56.2,-9},{-56.2,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2.direct.thermal, direct.thermal) annotation (Line(
-        points={{-66.2,-9},{-66.2,-48},{-6,-48}},
+        points={{-56.2,-9},{-56.2,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2O.direct.translational, direct.translational) annotation (Line(
-        points={{-26.2,-9},{-26.2,-48},{-6,-48}},
+        points={{-16.2,-9},{-16.2,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2O.direct.thermal, direct.thermal) annotation (Line(
-        points={{-26.2,-9},{-26.2,-48},{-6,-48}},
+        points={{-16.2,-9},{-16.2,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(N2.direct.translational, direct.translational) annotation (Line(
-        points={{13.8,-9},{13.8,-48},{-6,-48}},
+        points={{23.8,-9},{23.8,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(N2.direct.thermal, direct.thermal) annotation (Line(
-        points={{13.8,-9},{13.8,-48},{-6,-48}},
+        points={{23.8,-9},{23.8,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(O2.direct.translational, direct.translational) annotation (Line(
-        points={{53.8,-9},{53.8,-48},{-6,-48}},
+        points={{63.8,-9},{63.8,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(O2.direct.thermal, direct.thermal) annotation (Line(
-        points={{53.8,-9},{53.8,-48},{-6,-48}},
+        points={{63.8,-9},{63.8,-48},{4,-48}},
         color={38,196,52},
         smooth=Smooth.None));
 
     // Mixing
     connect(H2.dalton, daltonAmagat.dalton) annotation (Line(
-        points={{-75,8.6},{-75,36},{60,36}},
+        points={{-65,8.6},{-65,36},{70,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(H2O.dalton, daltonAmagat.dalton) annotation (Line(
-        points={{-35,8.6},{-35,36},{60,36}},
+        points={{-25,8.6},{-25,36},{70,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(N2.dalton, daltonAmagat.dalton) annotation (Line(
-        points={{5,8.6},{5,36},{60,36}},
+        points={{15,8.6},{15,36},{70,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(O2.dalton, daltonAmagat.dalton) annotation (Line(
-        points={{45,8.6},{45,36},{60,36}},
+        points={{55,8.6},{55,36},{70,36}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(daltonAmagat.amagat, amagat) annotation (Line(
-        points={{68,36},{100,36}},
+        points={{78,36},{110,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -264,135 +264,135 @@ package Phases "Mixtures of species"
     // ---------
     // H2
     connect(H2.faces[facesCart[Axis.x], Side.n], xNegative.H2) annotation (Line(
-        points={{-70,6.10623e-16},{-120,5.55112e-16}},
+        points={{-60,6.10623e-016},{-110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2.faces[facesCart[Axis.x], Side.p], xPositive.H2) annotation (Line(
-        points={{-70,6.10623e-16},{100,5.55112e-16}},
+        points={{-60,6.10623e-016},{110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2.faces[facesCart[Axis.y], Side.n], yNegative.H2) annotation (Line(
-        points={{-70,6.10623e-16},{-70,-24},{-96,-24}},
+        points={{-60,6.10623e-016},{-60,-24},{-86,-24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2.faces[facesCart[Axis.y], Side.p], yPositive.H2) annotation (Line(
-        points={{-70,6.10623e-16},{-70,24},{76,24}},
+        points={{-60,6.10623e-016},{-60,24},{86,24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2.faces[facesCart[Axis.z], Side.n], zNegative.H2) annotation (Line(
-        points={{-70,6.10623e-16},{-58,12},{88,12}},
+        points={{-60,6.10623e-016},{-48,12},{98,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(H2.faces[facesCart[Axis.z], Side.p], zPositive.H2) annotation (Line(
-        points={{-70,6.10623e-16},{-82,-12},{-108,-12}},
+        points={{-60,6.10623e-016},{-72,-12},{-98,-12}},
         color={127,127,127},
         smooth=Smooth.None));
     // H2O
     connect(H2O.faces[facesCart[Axis.x], Side.n], xNegative.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{-120,5.55112e-16}},
+        points={{-20,6.10623e-016},{-110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.x], Side.p], xPositive.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{100,5.55112e-16}},
+        points={{-20,6.10623e-016},{110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.y], Side.n], yNegative.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{-30,-24},{-96,-24}},
+        points={{-20,6.10623e-016},{-20,-24},{-86,-24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.y], Side.p], yPositive.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{-30,24},{76,24}},
+        points={{-20,6.10623e-016},{-20,24},{86,24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{-18,12},{88,12}},
+        points={{-20,6.10623e-016},{-8,12},{98,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O) annotation (
         Line(
-        points={{-30,6.10623e-16},{-42,-12},{-108,-12}},
+        points={{-20,6.10623e-016},{-32,-12},{-98,-12}},
         color={127,127,127},
         smooth=Smooth.None));
     // N2
     connect(N2.faces[facesCart[Axis.x], Side.n], xNegative.N2) annotation (Line(
-        points={{10,6.10623e-16},{-120,5.55112e-16}},
+        points={{20,6.10623e-016},{-110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(N2.faces[facesCart[Axis.x], Side.p], xPositive.N2) annotation (Line(
-        points={{10,6.10623e-16},{100,5.55112e-16}},
+        points={{20,6.10623e-016},{110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(N2.faces[facesCart[Axis.y], Side.n], yNegative.N2) annotation (Line(
-        points={{10,6.10623e-16},{10,-24},{-96,-24}},
+        points={{20,6.10623e-016},{20,-24},{-86,-24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(N2.faces[facesCart[Axis.y], Side.p], yPositive.N2) annotation (Line(
-        points={{10,6.10623e-16},{10,24},{76,24}},
+        points={{20,6.10623e-016},{20,24},{86,24}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(N2.faces[facesCart[Axis.z], Side.n], zNegative.N2) annotation (Line(
-        points={{10,6.10623e-16},{10,0},{22,12},{88,12}},
+        points={{20,6.10623e-016},{20,0},{32,12},{98,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(N2.faces[facesCart[Axis.z], Side.p], zPositive.N2) annotation (Line(
-        points={{10,6.10623e-16},{-2,-12},{-108,-12}},
+        points={{20,6.10623e-016},{8,-12},{-98,-12}},
         color={127,127,127},
         smooth=Smooth.None));
     // O2
     connect(O2.faces[facesCart[Axis.x], Side.n], xNegative.O2) annotation (Line(
-        points={{50,6.10623e-16},{-120,5.55112e-16}},
+        points={{60,6.10623e-016},{-110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.faces[facesCart[Axis.x], Side.p], xPositive.O2) annotation (Line(
-        points={{50,6.10623e-16},{100,5.55112e-16}},
+        points={{60,6.10623e-016},{110,5.55112e-016}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.faces[facesCart[Axis.y], Side.n], yNegative.O2) annotation (Line(
-        points={{50,6.10623e-16},{50,-24},{-96,-24}},
+        points={{60,6.10623e-016},{60,-24},{-86,-24}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.faces[facesCart[Axis.y], Side.p], yPositive.O2) annotation (Line(
-        points={{50,6.10623e-16},{50,24},{76,24}},
+        points={{60,6.10623e-016},{60,24},{86,24}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.faces[facesCart[Axis.z], Side.n], zNegative.O2) annotation (Line(
-        points={{50,6.10623e-16},{62,12},{88,12}},
+        points={{60,6.10623e-016},{72,12},{98,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.faces[facesCart[Axis.z], Side.p], zPositive.O2) annotation (Line(
-        points={{50,6.10623e-16},{38,-12},{-108,-12}},
+        points={{60,6.10623e-016},{48,-12},{-98,-12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(O2.chemical, connO2) annotation (Line(
-        points={{41.4,5},{41.4,4.5},{41,4.5},{41,50}},
+        points={{51.4,5},{51.4,50.5},{51,50.5},{51,50}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(connH2, H2.chemical) annotation (Line(
-        points={{-79,50},{-79,5},{-78.6,5}},
+        points={{-69,50},{-68.6,50},{-68.6,5}},
         color={221,23,47},
         smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{
-              100,100}}), graphics),
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-60},{
+              120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
   end Gas;
@@ -653,7 +653,7 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     connect('e-'.chemical, 'conne-') annotation (Line(
-        points={{11.4,5},{11.4,4.5},{11,4.5},{11,50}},
+        points={{11.4,5},{11.4,50.5},{11,50.5},{11,50}},
         color={221,23,47},
         smooth=Smooth.None));
     annotation (
@@ -661,8 +661,8 @@ package Phases "Mixtures of species"
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
-      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
-              100,100}}), graphics),
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-60},{80,
+              60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
   end Graphite;
@@ -1008,7 +1008,7 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     connect('H+'.chemical, 'connH+') annotation (Line(
-        points={{-48.6,5},{-48.6,4.5},{-49,4.5},{-49,50}},
+        points={{-48.6,5},{-48.6,50.5},{-49,50.5},{-49,50}},
         color={221,23,47},
         smooth=Smooth.None));
     annotation (
@@ -1020,8 +1020,8 @@ package Phases "Mixtures of species"
     for additional assumptions.
     For more information, see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
-      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
-              100,100}}), graphics),
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-60},{
+              100,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
   end Ionomer;
@@ -1052,7 +1052,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>H<sub>2</sub>O model</html>",
         enable=inclH2O),
-      Placement(transformation(extent={{-10,-10},{10,10}})));
+      Placement(transformation(extent={{-20,-40},{0,-20}})));
 
     parameter Boolean inclChemical=false "Include reactions or phase change"
       annotation (
@@ -1062,65 +1062,64 @@ package Phases "Mixtures of species"
 
     Connectors.FaceBus xNegative if inclFaces[Axis.x]
       "Negative face along the x axis" annotation (Placement(transformation(
-            extent={{-50,-10},{-30,10}}), iconTransformation(extent={{-90,-10},
+            extent={{-60,-40},{-40,-20}}),iconTransformation(extent={{-90,-10},
               {-70,10}})));
     Connectors.FaceBus yNegative if inclFaces[Axis.y]
       "Negative face along the y axis" annotation (Placement(transformation(
-            extent={{-10,-50},{10,-30}}), iconTransformation(extent={{-10,-94},
-              {10,-74}})));
+            extent={{-20,-80},{0,-60}}), iconTransformation(extent={{-10,-94},{
+              10,-74}})));
     Connectors.FaceBus zNegative if inclFaces[Axis.z]
       "Negative face along the z axis" annotation (Placement(transformation(
-            extent={{10,10},{30,30}}), iconTransformation(extent={{40,40},{60,
-              60}})));
+            extent={{0,-20},{20,0}}), iconTransformation(extent={{40,40},{60,60}})));
     Connectors.FaceBus xPositive if inclFaces[Axis.x]
       "Positive face along the x axis" annotation (Placement(transformation(
-            extent={{30,-10},{50,10}}), iconTransformation(extent={{70,-10},{90,
+            extent={{20,-40},{40,-20}}),iconTransformation(extent={{70,-10},{90,
               10}})));
     Connectors.FaceBus yPositive if inclFaces[Axis.y]
       "Positive face along the y axis" annotation (Placement(transformation(
-            extent={{-10,30},{10,50}}), iconTransformation(extent={{-10,90},{10,
+            extent={{-20,0},{0,20}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.FaceBus zPositive if inclFaces[Axis.z]
       "Positive face along the z axis" annotation (Placement(transformation(
-            extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-90,-90},
+            extent={{-40,-60},{-20,-40}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
-      (Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation(
+      (Placement(transformation(extent={{20,-60},{40,-40}}), iconTransformation(
             extent={{70,-70},{90,-90}})));
     Connectors.Amagat amagat(final V=-V) if n_spec > 0
       "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{30,50},{50,70}}), iconTransformation(extent={{-60,40},{-40,
+            extent={{20,20},{40,40}}), iconTransformation(extent={{-60,40},{-40,
               60}})));
     Connectors.Chemical connH2O(final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-19,70},{1,90}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+              {{-29,40},{-9,60}}),iconTransformation(extent={{-10,-50},{10,-30}})));
 
   protected
     Conditions.Adapters.AmagatDalton daltonAmagat if n_spec > 0
       "Adapter between additivity of pressure and additivity of volume"
-      annotation (Placement(transformation(extent={{30,50},{10,70}})));
+      annotation (Placement(transformation(extent={{20,20},{0,40}})));
 
   equation
     // Phase change
     connect(H2O.chemical, connH2O) annotation (Line(
-        points={{-8.6,5},{-8.6,80.5},{-9,80.5},{-9,80}},
+        points={{-18.6,-25},{-18.6,50.5},{-19,50.5},{-19,50}},
         color={221,23,47},
         smooth=Smooth.None));
 
     // Inert exchange
     connect(H2O.inter, inter) annotation (Line(
-        points={{9,-3.8},{11,-6},{11,-20},{40,-20}},
+        points={{-1,-33.8},{1,-36},{1,-50},{30,-50}},
         color={38,196,52},
         smooth=Smooth.None));
 
     // Mixing
     connect(daltonAmagat.amagat, amagat) annotation (Line(
-        points={{24,60},{40,60}},
+        points={{14,30},{30,30}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(daltonAmagat.dalton, H2O.dalton) annotation (Line(
-        points={{16,60},{-5,60},{-5,8.6}},
+        points={{6,30},{-15,30},{-15,-21.4}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1129,37 +1128,36 @@ package Phases "Mixtures of species"
     // H2O
     connect(H2O.faces[facesCart[Axis.x], Side.n], xNegative.H2O) annotation (
         Line(
-        points={{6.10623e-016,6.10623e-016},{6.10623e-016,5.55112e-016},{-40,
-            5.55112e-016}},
+        points={{-10,-30},{-50,-30}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.x], Side.p], xPositive.H2O) annotation (
         Line(
-        points={{6.10623e-016,6.10623e-016},{40,0}},
+        points={{-10,-30},{30,-30}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.y], Side.n], yNegative.H2O) annotation (
         Line(
-        points={{6.10623e-016,6.10623e-016},{0,-40}},
+        points={{-10,-30},{-10,-70}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.y], Side.p], yPositive.H2O) annotation (
         Line(
-        points={{6.10623e-016,6.10623e-016},{6.10623e-016,40},{0,40}},
+        points={{-10,-30},{-10,10}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[facesCart[Axis.z], Side.n], zNegative.H2O) annotation (
         Line(
-        points={{0,6.10623e-016},{20,20}},
+        points={{-10,-30},{10,-10}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(H2O.faces[facesCart[Axis.z], Side.p], zPositive.H2O) annotation (
         Line(
-        points={{6.10623e-016,6.10623e-016},{-20,-20}},
+        points={{-10,-30},{-30,-50}},
         color={127,127,127},
         smooth=Smooth.None));
 
@@ -1169,8 +1167,8 @@ package Phases "Mixtures of species"
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics),
-      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-              100,100}}), graphics));
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-80},{40,
+              60}}), graphics));
   end Liquid;
 
 protected
@@ -1262,50 +1260,58 @@ protected
 
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
 
