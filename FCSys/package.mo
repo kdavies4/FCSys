@@ -23,9 +23,9 @@ import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
 import FCSys.Species.Enumerations.Axis;
 import FCSys.Species.Enumerations.Orient;
 import FCSys.Species.Enumerations.Side;
-import FCSys.Species.Enumerations.Conservation;
-import FCSys.Species.Enumerations.InitThermo;
-import FCSys.Species.Enumerations.InitTrans;
+import FCSys.Species.Enumerations.ConsThermo;
+import FCSys.Species.Enumerations.ConsMom;
+import FCSys.Species.Enumerations.Init;
 
 
 package UsersGuide "User's Guide"
@@ -120,7 +120,7 @@ package UsersGuide "User's Guide"
   package SampleResults "Sample results"
     extends Modelica.Icons.Information;
     // **create index on this page (hyperlinked)
-    // Note: Hashed (anchored) bookmarks don't work in Dymola 2014.  They cause the link to fail entirely.
+    // Note:  Hashed (anchored) bookmarks don't work in Dymola 2014.  They cause the link to fail entirely.
     class Basic "Basic"
       extends Modelica.Icons.Information;
       annotation (preferredView="info", Documentation(info="<html>    
@@ -275,7 +275,7 @@ package UsersGuide "User's Guide"
       <li><b>exchange</b> &ndash; (<i>noun</i>) transfer of a conserved quantity among configurations within a region</li>
 
       <li><b>fluidity</b> &ndash; (<i>noun</i>) reciprocal of dynamic viscosity [L T M<sup>-1</sup>]
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>())</li>
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>())</li>
 
       <li><b>Gibbs potential</b> &ndash; (<i>noun</i>) specific Gibbs energy [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</li>
       

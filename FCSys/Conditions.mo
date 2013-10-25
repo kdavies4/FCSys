@@ -376,14 +376,15 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={47,107,251},
-                  smooth=Smooth.None),Polygon(
-                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                  lineColor={47,107,251},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+              points={{-30,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None), Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={47,107,251},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
+
     end AmagatDalton;
 
     model ChemicalReaction
@@ -396,7 +397,7 @@ package Conditions "Models to specify and measure operating conditions"
             __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
       // Note:  This must be a constant rather than a parameter due to errors
       // in Dymola 2014.
-      parameter Q.Number n "Stoichiometric coefficient"
+      parameter Integer n "Stoichiometric coefficient"
         annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
       parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
               "Material properties", __Dymola_label="<html><i>m</i></html>"));
@@ -419,9 +420,6 @@ package Conditions "Models to specify and measure operating conditions"
         "Connector for an electrochemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
               extent={{30,-10},{50,10}})));
-
-    protected
-      outer Conditions.Environment environment "Environmental conditions";
 
     equation
       // Equal intensive properties
@@ -459,6 +457,7 @@ package Conditions "Models to specify and measure operating conditions"
                   fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end ChemicalReaction;
 
     package MSL
@@ -4317,7 +4316,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               H2O(
@@ -4338,7 +4337,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               N2(
@@ -4359,7 +4358,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               O2(
@@ -4380,7 +4379,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))),
             graphite('C+'(
@@ -4401,7 +4400,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),'e-'(
                 redeclare replaceable function materialSpec =
@@ -4421,7 +4420,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))),
             ionomer(
@@ -4443,7 +4442,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               'H+'(
@@ -4464,7 +4463,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K)),
               H2O(
@@ -4485,7 +4484,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))),
             liquid(H2O(
@@ -4506,7 +4505,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      4*U.C/U.cc),
+                      U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                       298.15*U.K))));
 
@@ -5915,8 +5914,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable function precedingMeas = Translational.force,
 
             redeclare replaceable function thermalMeas = Thermal.heatRate,
-            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=4*U.C
-                  /U.cc),
+            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=U.atm),
+
             redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
                   298.15*U.K));
 
@@ -6143,15 +6142,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       model Volume2 "Model to establish a fixed total volume"
         extends FCSys.Icons.Names.Top3;
 
-        parameter Q.Volume V "Volume"
-          annotation (Dialog(__Dymola_label="<html><i>V</i></html>"));
+        parameter Boolean compressible=true
+          "Set volume (otherwise, pressure matches the environment)"
+          annotation (Dialog(compact=true), choices(__Dymola_checkBox=true));
+        parameter Q.Volume V "Volume" annotation (Dialog(__Dymola_label=
+                "<html><i>V</i></html>", enable=compressible));
 
         Connectors.Amagat amagat "Connector for additivity of volume"
           annotation (Placement(transformation(extent={{90,-50},{110,-30}}),
               iconTransformation(extent={{-10,-10},{10,10}})));
 
+        outer Conditions.Environment environment "Environmental conditions";
+
       equation
-        V = amagat.V;
+        if compressible then
+          amagat.V = V;
+        else
+          amagat.p = environment.p;
+        end if;
 
         annotation (
           defaultComponentName="volume",
@@ -6159,20 +6167,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     additivity of volume.  In order to use additivity of pressure, use
     the <a href=\"modelica://FCSys.Conditions.Adapters.AmagatDalton\">AmagatDalton</a> adapter.</p>
 
+    <p>If <code>compressible</code> is <code>false</code>, the pressure is set (to the pressure
+    of the <code>outer environment</code> model) instead of volume.</p>
+
     <p>See also the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid)}),
+                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
+                    -60,-60}},
+                lineColor={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
+
       end Volume2;
 
       partial model Partial "Base model for a pressure/volume"
@@ -7787,6 +7799,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics));
+
     end TestStandEIS;
 
     model TestStand "Fuel cell test stand (applies boundary conditions)"

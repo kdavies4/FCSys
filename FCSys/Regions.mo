@@ -1020,7 +1020,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(ionomer('H+'(initMaterial=InitThermo.none))))
+        Subregion(ionomer('H+'(initMaterial=Init.none))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
       PEMs.PEM PEM(
@@ -3622,7 +3622,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       import FCSys.Utilities.Polynomial;
       // extends FCSys.Icons.Names.Top4;
 
-      extends Partial(
+      extends Region(
         L_x={8*U.mm},
         L_y={U.m},
         L_z={5*U.mm},
@@ -3647,9 +3647,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
+              H2O(consTransX=ConsMom.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
               k_DT=fill((1 - epsilon)^1.5, 3),
@@ -3657,18 +3657,18 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
-                consTransY=Conservation.IC,
+                consTransY=ConsMom.IC,
                 initTransX=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C,
-                consEnergy=Conservation.dynamic))),
+                consEnergy=ConsThermo.dynamic))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
       //k_gas_liq=1e-7,
@@ -3733,7 +3733,7 @@ to the fluid (except for the channel).  This has some important implications:<ol
 They should be left disconnected there.</li>
 <li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid. 
 Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
-and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
+and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&eta;) and the area fill factor
 (<i>k</i><sub>DT</sub>).</li>
 <li>The area fill factors (<i>k</i><sub>DT</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
 generally be greater than one because the fluid is not transported along the entire thickness of the flow plate.
@@ -3904,7 +3904,7 @@ text layer of this model.</p>
       // parameter dialogs too slowly when __Dymola_choicesAllMatching is
       // used.
 
-      extends Partial(
+      extends Region(
         L_x={0.3*U.mm},
         L_y={U.m},
         L_z={5*U.mm},
@@ -3926,9 +3926,9 @@ text layer of this model.</p>
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
+              H2O(consTransX=ConsMom.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
               k_DT=fill((1 - epsilon)^1.5, 3),
@@ -3938,15 +3938,15 @@ text layer of this model.</p>
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTrans.none,
-                initEnergy=InitThermo.none)),
+                initEnergy=Init.none)),
             liquid(
               inclH2O=true,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C,
-                consEnergy=Conservation.IC))),
+                consEnergy=ConsThermo.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
       //final tauprime=0,
@@ -4273,7 +4273,7 @@ that reference may be outdated.
 
       // **propagate J0 and J_irr up to 'e-'
 
-      extends Partial(
+      extends Region(
         L_x={28.7*U.um},
         L_y={U.m},
         L_z={5*U.mm},
@@ -4294,9 +4294,9 @@ that reference may be outdated.
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.p - environment.p_H2O),
-              H2O(consTransX=Conservation.IC, p_IC=environment.p_H2O)),
+              H2O(consTransX=ConsMom.IC, p_IC=environment.p_H2O)),
             graphite(
               reduceThermal=true,
               'inclC+'=true,
@@ -4310,15 +4310,15 @@ that reference may be outdated.
               'inclH+'=true,
               inclH2O=false,
               k_DT=fill((0.5*(1 - epsilon))^1.5, 3),
-              H2O(initEnergy=InitThermo.none, initMaterial=InitThermo.none)),
+              H2O(initEnergy=Init.none, initMaterial=Init.none)),
             liquid(
               inclH2O=false,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C,
-                consEnergy=Conservation.IC))),
+                consEnergy=ConsThermo.IC))),
         subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
               'SO3-'(V_IC=0.5*subregions.V*(1 - epsilon))))) annotation (
           IconMap(primitivesVisible=false));
@@ -4331,7 +4331,7 @@ that reference may be outdated.
       // **H+: mu=0.083*U.S/(0.95*U.M*U.cm),
 
       // TODO:  Initialize for zero reaction rate.
-      // (initMaterial=InitThermo.ReactionRate?) for this and CaCL.
+      // (initMaterial=Init.ReactionRate?) for this and CaCL.
 
       // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k_DT for each phase.
@@ -4519,7 +4519,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       // parameter dialogs too slowly when __Dymola_choicesAllMatching is
       // used.
 
-      extends Partial(
+      extends Region(
         L_x={100*U.um},
         L_y={U.m},
         L_z={5*U.mm},
@@ -4536,10 +4536,10 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'SO3-'(initMaterial=InitThermo.pressure),
-              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=InitThermo.none),
-              H2O(initMaterial=InitThermo.none,initEnergy=InitThermo.none))))
-        annotation (IconMap(primitivesVisible=false));
+              'SO3-'(initMaterial=Init.pressure),
+              'H+'(mu=0.083*U.S/(0.95*U.M*U.cm), initEnergy=Init.none),
+              H2O(initMaterial=Init.none,initEnergy=Init.none)))) annotation (
+          IconMap(primitivesVisible=false));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
@@ -4810,7 +4810,7 @@ the z axis extends across the width of the channel.</p>
     model CaCL "Cathode catalyst layer"
       // extends FCSys.Icons.Names.Top4;
 
-      extends Partial(
+      extends Region(
         L_x={28.7*U.um},
         L_y={U.m},
         L_z={5*U.mm},
@@ -4828,19 +4828,19 @@ the z axis extends across the width of the channel.</p>
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2O, consTransX=ConsMom.IC),
               N2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -4856,15 +4856,15 @@ the z axis extends across the width of the channel.</p>
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=false,
-              H2O(initEnergy=InitThermo.none, initMaterial=InitThermo.none)),
+              H2O(initEnergy=Init.none, initMaterial=Init.none)),
             liquid(
               inclH2O=false,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C,
-                consEnergy=Conservation.IC))),
+                consEnergy=ConsThermo.IC))),
         subregions(graphite('C+'(V_IC=0.5*subregions.V*(1 - epsilon))), ionomer(
               'SO3-'(V_IC=0.5*subregions.V*(1 - epsilon))))) annotation (
           IconMap(primitivesVisible=false));
@@ -5071,7 +5071,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       // parameter dialogs too slowly when __Dymola_choicesAllMatching is
       // used.
 
-      extends Partial(
+      extends Region(
         L_x={0.3*U.mm},
         L_y={U.m},
         L_z={5*U.mm},
@@ -5090,19 +5090,19 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(p_IC=environment.p_H2O, consTransX=Conservation.IC),
+              H2O(p_IC=environment.p_H2O, consTransX=ConsMom.IC),
               N2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -5113,15 +5113,15 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'e-'(
                 sigma=40*U.S/(12*U.cm),
                 initTransX=InitTrans.none,
-                initEnergy=InitThermo.none)),
+                initEnergy=Init.none)),
             liquid(
               inclH2O=true,
               k_DT=fill(epsilon^1.5, 3),
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C,
-                consEnergy=Conservation.IC))),
+                consEnergy=ConsThermo.IC))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -5462,7 +5462,7 @@ that reference may be outdated.
     model CaFP "Cathode flow plate"
       // extends FCSys.Icons.Names.Top4;
 
-      extends Partial(
+      extends Region(
         L_x={8*U.mm},
         L_y={U.m},
         L_z={5*U.mm},
@@ -5486,20 +5486,20 @@ that reference may be outdated.
               inclO2=true,
               H2O(
                 p_IC=environment.p_H2O,
-                consTransX=Conservation.IC,
-                consEnergy=Conservation.dynamic),
+                consTransX=ConsMom.IC,
+                consEnergy=ConsThermo.dynamic),
               N2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=(1 - environment.n_O2)*(environment.p - environment.p_H2O)),
 
               O2(
                 initTransX=InitTrans.none,
                 initTransY=InitTrans.none,
                 initTransZ=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 p_IC=environment.n_O2*(environment.p - environment.p_H2O))),
             graphite(
               reduceThermal=true,
@@ -5508,16 +5508,16 @@ that reference may be outdated.
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W)),
               'e-'(
-                consTransY=Conservation.IC,
+                consTransY=ConsMom.IC,
                 initTransX=InitTrans.none,
-                initEnergy=InitThermo.none,
+                initEnergy=Init.none,
                 sigma=U.S/(1.470e-3*U.cm))),
             liquid(
               inclH2O=true,
               k_DT={10,1,1},
               H2O(
-                consTransX=Conservation.IC,
-                initMaterial=InitThermo.amount,
+                consTransX=ConsMom.IC,
+                initMaterial=Init.amount,
                 N_IC=2e-6*U.C))),
         subregions(graphite('C+'(V_IC=subregions.V*(1 - epsilon)))))
         annotation (IconMap(primitivesVisible=false));
@@ -5536,7 +5536,7 @@ that reference may be outdated.
 
       //tauprime=FCSys.Characteristics.H2O.Liquid.tauprime()/3e-4,
 
-      //consTransY=Conservation.IC,
+      //consTransY=ConsMom.IC,
       // **temp tauprime (needs units too)
 
       // **temp excluded  H2O liq
@@ -5581,7 +5581,7 @@ to the fluid (except for the channel).  This has some important implications:<ol
 They should be left disconnected there.</li>
 <li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid. 
 Therefore the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
-and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&zeta;) and the area fill factor
+and the coupling factor for exchange (<i>k</i><sub>E</sub>), not by the fluidity (&eta;) and the area fill factor
 (<i>k</i><sub>DT</sub>).</li>
 <li>The area fill factors (<i>k</i><sub>DT</sub>) for the gas and the liquid along the x axis (into/out of the GDL) should
 generally be greater than one because the fluid is not transported along the entire thickness of the flow plate.
@@ -5709,7 +5709,7 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
   end CaFPs;
 
 protected
-  partial model Partial "Base model for a 3D array of subregions"
+  partial model Region "Base model for a 3D array of subregions"
     import FCSys.Utilities.cartWrap;
     // extends FCSys.Icons.Names.Top3;
     // extends FCSys.Icons.Names.Top6;
@@ -5896,7 +5896,7 @@ protected
             textString="%name",
             visible=not inclFacesY,
             lineColor={0,0,0})}));
-  end Partial;
+  end Region;
   annotation (Documentation(info="
 <html>
   <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

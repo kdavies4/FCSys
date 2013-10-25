@@ -691,17 +691,17 @@ package Units "Constants and units of physical measure"
     // ------------------------------------------------------------------------
 
     defineUnitConversion(
-        "l2.m/(N.T2)",
+        "L2.M/(N.T2)",
         "degC",
         1/K,
         -273.15) "Temperature in degC";
     defineUnitConversion(
-        "l2.m/(N.T2)",
+        "L2.M/(N.T2)",
         "degF",
         9/(5*K),
         32 - (9/5)*273.15) "Temperature in degF";
     defineUnitConversion(
-        "m/(l.T2)",
+        "M/(L.T2)",
         "kPag",
         1/kPa,
         -atm/kPa) "Pressure in kPag";
@@ -1191,7 +1191,7 @@ encompass other systems of units.</p>
       // value.  The gas constant isn't adjustable because the equations of FCSys
       // require that it's one, which means that temperature is considered to
       // be a potential.
-      annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation for the
+      annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation of the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 

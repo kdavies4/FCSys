@@ -184,6 +184,7 @@ package Quantities "Quantities to represent physical properties"
   type TimeLineic = TypeReal (final unit="T/L") "Lineic time";
   type Velocity = TypeReal (final unit="L/T");
   type Velocity2 = TypeReal (final unit="L2/T2") "Squared velocity";
+  type VelocityAmount = TypeReal (final unit="L.N/T");
   type Viscosity = TypeReal (final unit="L2.M/(N.T)", min=0);
   type Volume = TypeReal (final unit="L3", min=0);
   type VolumeRate = TypeReal (final unit="L3/T") "Rate of volume";

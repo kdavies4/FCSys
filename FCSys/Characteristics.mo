@@ -206,10 +206,9 @@ package Characteristics
       Q.Potential g "Gibbs potential";
       Q.Potential h "Specific enthalpy";
       Q.NumberAbsolute s "Specific entropy";
-      Q.Viscosity beta "Bulk viscosity";
-      Q.Fluidity zeta "Fluidity";
+      Q.Resistivity eta "Fluidity";
       Q.ResistivityThermal theta "Thermal resistivity";
-      Q.PressureReciprocal kappa "Isothermal compressibility";
+      Q.PressureReciprocal beta "Isothermal compressibility";
       Q.TimeAbsolute tauprime "Phase change interval";
       Q.Mobility mu "Mobility";
       Q.TimeAbsolute nu "Thermal independity";
@@ -221,10 +220,9 @@ package Characteristics
       g = Data.g(T, p);
       h = Data.h(T, p);
       s = Data.s(T, p);
-      beta = Data.beta(T, v);
-      zeta = Data.zeta(T, v);
+      eta = Data.eta(T, v);
       theta = Data.theta(T, v);
-      kappa = Data.kappa(T, p);
+      beta = Data.beta(T, p);
       tauprime = Data.tauprime(T, v);
       mu = Data.mu(T, v);
       nu = Data.nu(T, v);
@@ -491,8 +489,8 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{2.488433516e6,-669.5728110}} .* fill({U.K,1},
             size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         d=(240 + 100.3)*U.pico*U.m/U.q,
-        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_zeta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
+        T_lim_eta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_eta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
             fromNASAViscosity({0.96730605,679.31897,-2.1025179e5,-1.8251697}),
             fromNASAViscosity({1.0126129,1.4973739e3,-1.4428484e6,-2.3254928})},
 
@@ -539,8 +537,8 @@ package Characteristics
         B_c={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[
             :, 2:3]*log(U.K),
         d=282*U.pico*U.m/U.q,
-        T_lim_zeta_theta={373.2,1073.2,5000.0,15000.0}*U.K,
-        b_zeta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
+        T_lim_eta_theta={373.2,1073.2,5000.0,15000.0}*U.K,
+        b_eta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
             fromNASAViscosity({0.58988538,-537.69814,5.4263513e4,2.3386375}),
             fromNASAViscosity({0.64330087,-95.668913,-3.7742283e5,1.8125190})},
 
@@ -649,8 +647,8 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         d=(310 + 145.2)*U.pico*U.m/U.q,
-        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_zeta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
+        T_lim_eta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_eta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
             fromNASAViscosity({0.87395209,561.52222,-1.7394809e5,-0.39335958}),
             fromNASAViscosity({0.88503551,909.02171,-7.3129061e5,-0.53503838})},
 
@@ -699,8 +697,8 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         d=(304 + 128.2)*U.pico*U.m/U.q,
-        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_zeta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
+        T_lim_eta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_eta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
             fromNASAViscosity({0.72216486,175.50839,-5.7974816e4,1.0901044}),
             fromNASAViscosity({0.73981127,391.94906,-3.7833168e5,0.90931780})},
 
@@ -730,11 +728,11 @@ package Characteristics
     package CharacteristicNASA
       "Thermodynamic package with diffusive properties based on NASA CEA"
       extends Characteristic;
-      constant Q.TemperatureAbsolute T_lim_zeta_theta[:]={0,Modelica.Constants.inf}
-        "<html>Temperature limits for the rows of <i>b</i><sub>&zeta;</sub> and <i>b</i><sub>&theta;</sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
-      constant Real b_zeta[size(T_lim_zeta_theta, 1) - 1, 4]
-        "<html>Correlation constants for fluidity (<i>b</i><sub>&zeta;</sub>)</html>";
-      constant Real b_theta[size(T_lim_zeta_theta, 1) - 1, 4]
+      constant Q.TemperatureAbsolute T_lim_eta_theta[:]={0,Modelica.Constants.inf}
+        "<html>Temperature limits for the rows of <i>b</i><sub>&eta;</sub> and <i>b</i><sub>&theta;</sub> (<i>T</i><sub>lim &eta; &theta;</sub>)</html>";
+      constant Real b_eta[size(T_lim_eta_theta, 1) - 1, 4]
+        "<html>Correlation constants for fluidity (<i>b</i><sub>&eta;</sub>)</html>";
+      constant Real b_theta[size(T_lim_eta_theta, 1) - 1, 4]
         "<html>Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)</html>";
 
     protected
@@ -742,12 +740,12 @@ package Characteristics
         "Return constants for fluidity given NASA CEA constants for viscosity"
         extends Modelica.Icons.Function;
 
-        input Real b_eta[4] "NASA CEA constants for viscosity";
-        output Real b_zeta[4] "Constants for fluidity";
+        input Real b[4] "NASA CEA constants for viscosity";
+        output Real b_eta[4] "Constants for fluidity";
 
       algorithm
-        b_zeta := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]
-          *log(U.K) + log(1e4*U.m*U.s/U.g)};
+        b_eta := {-b[1],-b[2]*U.K,-b[3]*U.K^2,-b[4] + b[1]*log(U.K) + log(1e4*U.m
+          *U.s/U.g)};
         annotation (Inline=true);
       end fromNASAViscosity;
 
@@ -755,37 +753,37 @@ package Characteristics
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
         extends Modelica.Icons.Function;
 
-        input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
+        input Real b[4] "NASA CEA constants for thermal conductivity";
         output Real b_theta[4] "Constants for thermal resistivity";
 
       algorithm
-        b_theta := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[
-          4] + b_lambda[1]*log(U.K) + log(1e4*U.m*U.K/U.W)};
+        b_theta := {-b[1],-b[2]*U.K,-b[3]*U.K^2,-b[4] + b[1]*log(U.K) + log(1e4
+          *U.m*U.K/U.W)};
         annotation (Inline=true);
       end fromNASAThermalConductivity;
 
     public
-      redeclare function zeta
-        "<html>Fluidity (&zeta;) as a function of temperature</html>"
+      redeclare function eta
+        "<html>Fluidity (&eta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Fluidity zeta "Fluidity";
+        output Q.Resistivity eta "Fluidity";
 
       algorithm
         /*
-    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[end], "Temperature "
+    assert(T_lim_eta_theta[1] <= T and T <= T_lim_eta_theta[end], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[end]
+    String(T_lim_eta_theta[1]/U.K) + ", " + String(T_lim_eta_theta[end]
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
-          T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
-           then b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
-          b_zeta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)));
+        eta := smooth(0, exp(sum(if (T_lim_eta_theta[i] <= T or i == 1) and (T
+           < T_lim_eta_theta[i + 1] or i == size(T_lim_eta_theta, 1) - 1) then
+          b_eta[i, 1]*log(T) + (b_eta[i, 2] + b_eta[i, 3]/T)/T + b_eta[i, 4]
+           else 0 for i in 1:size(T_lim_eta_theta, 1) - 1)));
         annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -796,7 +794,7 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
   </html>"));
-      end zeta;
+      end eta;
 
       redeclare function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature</html>"
@@ -809,16 +807,16 @@ package Characteristics
 
       algorithm
         /*
-    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[end], "Temperature "
+    assert(T_lim_eta_theta[1] <= T and T <= T_lim_eta_theta[end], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[end]
+    String(T_lim_eta_theta[1]/U.K) + ", " + String(T_lim_eta_theta[end]
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
-          (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
+        theta := smooth(0, exp(sum(if (T_lim_eta_theta[i] <= T or i == 1) and (
+          T < T_lim_eta_theta[i + 1] or i == size(T_lim_eta_theta, 1) - 1)
            then b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
-          b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)));
+          b_theta[i, 4] else 0 for i in 1:size(T_lim_eta_theta, 1) - 1)));
         annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -888,7 +886,7 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>,
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>, and
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>, and
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));
       end omega;
@@ -1231,46 +1229,20 @@ package Characteristics
           smoothOrder=1);
       end s;
 
-      replaceable function beta
-        "<html>Bulk viscosity (&beta;) as a function of temperature and specific volume</html>"
-        extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.Viscosity beta "Bulk viscosity";
-
-      algorithm
-        beta := m/(alpha*omega(T));
-        annotation (Inline=true,Documentation(info="<html>
-  <p>
-  <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
-    \"billiard-ball\"
-    assumption, and it implies that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol></p>
-</html>"));
-      end beta;
-
-      replaceable function zeta
-        "<html>Fluidity (&zeta;) as a function of temperature</html>"
+      replaceable function eta
+        "<html>Fluidity (&eta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Fluidity zeta "Fluidity";
+        output Q.Resistivity eta "Fluidity";
 
       algorithm
-        zeta := alpha*omega(T)/m;
+        eta := alpha*omega(T);
         annotation (Inline=true,Documentation(info="<html>
   <p>Fluidity is defined as the reciprocal of dynamic viscosity
-  (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
+  (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
+  Here, fluidity is specific mass times the reciprocal of dynamic viscosity.</p>
 
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.  According to Present
@@ -1293,7 +1265,7 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
   </html>"));
-      end zeta;
+      end eta;
 
       replaceable function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
@@ -1329,7 +1301,7 @@ package Characteristics
         output Q.TimeAbsolute tauprime "Phase change interval";
 
       algorithm
-        tauprime := omega(T)*T/(alpha*p0);
+        tauprime := omega(T)*v/alpha;
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
@@ -1611,29 +1583,25 @@ temperature difference.</p>
       end v_Tp;
 
     public
-      function kappa
-        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;)</html>"
+      function beta
+        "<html>Isothermal compressibility as a function of temperature and pressure (&beta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.PressureReciprocal kappa "Isothermal compressibility";
+        output Q.PressureReciprocal beta "Isothermal compressibility";
 
       algorithm
-        kappa := -dv_Tp(
+        beta := -dv_Tp(
                 T=T,
                 p=p,
                 dT=0,
                 dp=1)/v_Tp(T, p);
         annotation (Inline=true,Documentation(info="<html>
-  <p>Note that the compressibility given by this function is static&mdash;different
-  from the dynamic compressibility given by
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>().</p>
-
   <p>For an ideal gas, this function is independent of temperature
   (although temperature remains as a valid input).</p>
   </html>"));
-      end kappa;
+      end beta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package may be used with
     the assumption of ideal gas or of constant specific volume, although it is more general than

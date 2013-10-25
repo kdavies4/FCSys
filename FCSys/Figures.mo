@@ -1502,7 +1502,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    FCSys.Species.Compressible Species
+    FCSys.Species.Gas Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
             preserveAspectRatio=true, extent={{-120,-120},{120,120}})));

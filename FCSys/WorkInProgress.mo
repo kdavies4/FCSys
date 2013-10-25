@@ -356,6 +356,7 @@ package WorkInProgress "Incomplete classes under development"
               points={{-30,-20},{0,-20}},
               color={127,127,127},
               smooth=Smooth.None)}));
+
   end ChargeLayerStoich;
 
   model StoichMulti
@@ -429,7 +430,134 @@ package WorkInProgress "Incomplete classes under development"
               smooth=Smooth.None,
               thickness=0.5)}),
       Diagram(graphics));
+
   end StoichMulti;
+
+  model Rate "Butler-Volmer reaction rate"
+    import Modelica.Math.asinh;
+    extends FCSys.Icons.Names.Top2;
+
+    parameter Integer n_trans(
+      min=1,
+      max=3) = 1 "Number of components of translational momentum" annotation (
+        Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+    parameter Q.Current Io(min=0) = 1e-4*U.A "Exchange current"
+      annotation (Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
+    parameter Q.NumberAbsolute alpha(max=1) = 0.5 "Charge transfer coefficient"
+      annotation (Dialog(__Dymola_label="<html>&alpha;</html>"));
+    parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
+            "Material properties", __Dymola_label="<html><i>m</i></html>"));
+    parameter Boolean setVelocity=false
+      "Set the velocity of the stream according to the direct connector"
+      annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        tab="Assumptions",
+        __Dymola_label=
+            "<html>Use the <code>direct</code> connector to set the velocity of the stream</html>",
+
+        compact=true));
+
+    Q.Force mPhidot[n_trans] "Force";
+    Q.Velocity phi[n_trans] "Velocity";
+    Q.Temperature T "Temperature";
+    Q.Potential g "Overpotential";
+    Q.Current Ndot "Reaction rate";
+
+    Connectors.Chemical negative(final n_trans=n_trans)
+      "1st connector for chemical exchange" annotation (Placement(
+          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
+            extent={{-70,-10},{-50,10}})));
+    Connectors.Chemical positive(final n_trans=n_trans)
+      "2nd connector for chemical exchange" annotation (Placement(
+          transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
+              {{50,-10},{70,10}})));
+    Connectors.Direct direct(
+      final n_trans=n_trans,
+      final inclTrans=setVelocity,
+      final inclThermal=true,
+      translational(final phi=phi,final mPhidot=mPhidot))
+      "Connector for translational and thermal exchange" annotation (Placement(
+          transformation(extent={{-10,-30},{10,-10}}), iconTransformation(
+            extent={{-10,-70},{10,-50}})));
+
+  equation
+    // Aliases
+    T = direct.thermal.T;
+    g = negative.g - positive.g;
+    Ndot = negative.Ndot;
+
+    // Reaction rate (material conservation)
+    if abs(alpha - 0.5) > Modelica.Constants.eps then
+      Ndot = Io*(exp(alpha*g/T) - exp((alpha - 1)*g/T));
+    else
+      g = 2*T*asinh(Ndot/(2*Io))
+        "Inverted to eliminate nonlinear system of equations";
+    end if;
+
+    // Streams
+    if setVelocity then
+      negative.phi = phi;
+      positive.phi = phi;
+      zeros(n_trans) = m*(actualStream(negative.phi)*negative.Ndot +
+        actualStream(positive.phi))*positive.Ndot + mPhidot
+        "Conservation of translationa momenum (no storage)";
+    else
+      negative.phi = inStream(positive.phi);
+      positive.phi = inStream(negative.phi);
+      mPhidot = zeros(n_trans) "No extra force";
+      phi = actualStream(positive.phi) "Used only for analysis";
+    end if;
+    negative.sT = inStream(positive.sT);
+    positive.sT = inStream(negative.sT);
+    // **always include translation subconnector, but sometimes leave disconnected?
+    // Conservation (without storage)
+    0 = negative.Ndot + positive.Ndot "Material";
+    // Conservation of translational momentum included is included in the instantiation
+    // of the direct connector above.  If the direct.translational subconnector isn't
+    // included (setVelocity == false), then conservation of translational momentum is
+    // inherent in the stream equations above.
+    0 = g*Ndot + m*(sum(actualStream(negative.phi) .^ 2)*negative.Ndot + sum(
+      actualStream(positive.phi) .^ 2)*positive.Ndot)/2 + phi*mPhidot + direct.thermal.Qdot
+      "Energy";
+    // The stream equations above handle the conservation of energy within the stream.
+
+    annotation (
+      Documentation(info="<html>
+  <p>This model establishes the rate of an electrochemical reaction
+  using the Butler-Volmer equation.</p>
+  
+  <p>If the <code>translational</code> subconnector of the <code>direct</code> connector is connected,
+  then the **velocity of the reaction stream will be set to the velocity at that connector.  Otherwise
+  
+  The <code>thermal</code> subconnector must always be connected.</p>
+  
+  <p>Assumpations:<ol><li>Generated heat is rejected to the <code>direct</code> connector,
+  not into the stream.</li></ol></p>
+
+    <p></p></html>"),
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics),
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={Line(
+              points={{-50,0},{50,0}},
+              color={221,23,47},
+              smooth=Smooth.None),Rectangle(
+              extent={{-40,30},{40,-30}},
+              lineColor={221,23,47},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,10},{30,10},{10,20}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-10,-20},{-30,-10},{30,-10}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{0,-50},{0,-30}},
+              color={38,196,52},
+              smooth=Smooth.None)}));
+  end Rate;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
