@@ -13,7 +13,8 @@ package Utilities
     print("--- Test FCSys.Utilities");
     print("--- Test FCSys.Utilities", logFile);
 
-    ok := Chemistry() and Polynomial.f() and testFunctions();
+    ok := Chemistry(logFile) and Coordinates(logFile) and Polynomial.f() and
+      testFunctions();
     annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
@@ -80,6 +81,36 @@ package Utilities
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
   end Chemistry;
+
+  function Coordinates
+    "<html>Test the <a href=\"modelica://FCSys.Utilities.Coordinates\">Coordinates</a> package</html>"
+
+    import Modelica.Utilities.Streams.print;
+    import FCSys.Species.Enumerations.*;
+    import FCSys.Utilities.Coordinates.*;
+    extends Modelica.Icons.Function;
+
+    input String logFile="FCSysTestLog.txt" "Filename where the log is stored";
+    output Boolean ok "true, if all tests passed";
+
+  algorithm
+    print("... Test of Utilities.Coordinates");
+    print("... Test of Utilities.Coordinates", logFile);
+
+    // after()
+    assert(after(Axis.z) == Axis.x, "The after function failed on test 1.");
+    assert(after(3) == 1, "The after function failed on test 2.");
+
+    // before()
+    assert(before(Axis.x) == Axis.z, "The before function failed on test 1.");
+    assert(before(1) == 3, "The before function failed on test 2.");
+
+    // cartWrap()
+    assert(cartWrap(0) == 3, "The cartWrap function failed on test 1.");
+    assert(cartWrap(4) == 1, "The cartWrap function failed on test 2.");
+
+    ok := true;
+  end Coordinates;
 
   package Polynomial
     extends Modelica.Icons.Package;
@@ -314,6 +345,14 @@ package Utilities
     Integer integers[6];
 
   algorithm
+    // arrayBooleanEqual()
+    assert(arrayBooleanEqual({true,false}, {true,false}),
+      "The arrayBooleanEqual function failed on test 1.");
+    assert(not arrayBooleanEqual({true,false}, {true,true}),
+      "The arrayBooleanEqual function failed on test 2.");
+    assert(not arrayBooleanEqual({true,false}, {true,true,true}),
+      "The arrayBooleanEqual function failed on test 3.");
+
     // arrayIntegerEqual()
     assert(arrayIntegerEqual({1,2}, {1,2}),
       "The arrayIntegerEqual function failed on test 1.");
@@ -341,10 +380,6 @@ package Utilities
     // average()
     assert(average({1,2,3}) == 2, "The average function failed.");
 
-    // cartWrap()
-    assert(cartWrap(0) == 3, "The cartWrap function failed on test 1.");
-    assert(cartWrap(4) == 1, "The cartWrap function failed on test 2.");
-
     // Delta()
     assert(Delta({1,2}) == 1, "The Delta function failed on test 1.");
     assert(arrayRealEqual(Delta([1, 2; 3, 4]), {1,1}),
@@ -362,7 +397,15 @@ package Utilities
 
     // round()
     assert(arrayRealEqual(round({-1.6,-0.4,1.4,1.6,5}), {-2,0,1,2,5}),
-      "The round function failed on entry.");
+      "The round function failed.");
+
+    // selectBooleans()
+    assert(arrayBooleanEqual(selectBooleans({true,false,true}, {1,3}), {true,
+      true}), "The selectBooleans function failed.");
+
+    // selectIntegers()
+    assert(arrayIntegerEqual(selectIntegers({3,2,1}, {1,3}), {3,1}),
+      "The selectIntegers function failed.");
 
     // Sigma()
     assert(Sigma({1,2}) == 3, "The Sigma function failed on test 1.");

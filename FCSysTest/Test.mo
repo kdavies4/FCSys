@@ -50,7 +50,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       String(o) + " orders of magnitude of the expected value (" + String(
       expected) + ").");
     annotation (Inline=true);
-
   end assertLogValue;
 
   function assertLogValues
@@ -73,7 +72,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         ").");
     end for;
     annotation (Inline=true);
-
   end assertLogValues;
 
   model AssertTrajectory

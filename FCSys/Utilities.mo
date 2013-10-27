@@ -427,7 +427,73 @@ An unrelated species may be included.");
     end timeTranslation;
   end Time;
 
-  function arrayIntegerEqual "Check if two arrays of integers are equal"
+  package Coordinates "Functions to handle Cartesian coordinates"
+    extends Modelica.Icons.Package;
+
+    function after
+      "Return the axis following a given axis in Cartesian coordinates"
+      extends Modelica.Icons.Function;
+
+      input Axis axis;
+      output Axis after;
+
+    algorithm
+      after := cartWrap(axis + 1);
+
+      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
+    <code>after(Axis.z)</code> or <code>after(3)</code> returns 1, which is equivalent to <code>Axis.x</code>.</p></html>"));
+    end after;
+
+    function before
+      "Return the axis preceding a given axis in Cartesian coordinates"
+      extends Modelica.Icons.Function;
+
+      input Axis axis;
+      output Axis after;
+
+    algorithm
+      after := cartWrap(axis - 1);
+
+      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
+    <code>after(Axis.x)</code> or <code>after(1)</code> returns 3, which is equivalent to <code>Axis.z</code>.</p></html>"));
+    end before;
+
+    function cartWrap = mod1 (final den=Axis.z)
+      "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
+      annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
+    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
+  end Coordinates;
+
+  function arrayBooleanEqual
+    "<html>Check if two <code>Boolean</code> vectors are equal</html>"
+    extends Modelica.Icons.Function;
+
+    input Boolean u1[:] "First Boolean vector";
+    input Boolean u2[:] "Second Boolean vector";
+    output Boolean equal
+      "<html><code>true</code>, if all of the entries are equal</html>";
+
+  algorithm
+    if size(u1, 1) <> size(u2, 1) then
+      equal := false;
+      return;
+    end if;
+    for i in 1:size(u1, 1) loop
+      if u1[i] <> u2[i] then
+        equal := false;
+        return;
+      end if;
+    end for;
+    equal := true;
+    return;
+    annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+  <code>arrayIntegerEqual({1,2}, {1,2})</code> returns <code>true</code>, but
+  <code>arrayIntegerEqual({1,2}, {1,3})</code> and <code>arrayIntegerEqual({1,2}, {1,2,3})</code> each return false.
+  </html>"));
+  end arrayBooleanEqual;
+
+  function arrayIntegerEqual
+    "<html>Check if two <code>Integer</code> vectors are equal</html>"
     extends Modelica.Icons.Function;
 
     input Integer u1[:] "First integer vector";
@@ -455,7 +521,7 @@ An unrelated species may be included.");
   end arrayIntegerEqual;
 
   function arrayRealEqual
-    "<html>Check if two arrays of <code>Real</code> variables are essentially equal</html>"
+    "<html>Check if two <code>Real</code> vectors are nearly equal</html>"
     extends Modelica.Icons.Function;
 
     input Real u1[:] "First real vector";
@@ -483,7 +549,7 @@ An unrelated species may be included.");
   </html>"));
   end arrayRealEqual;
 
-  function arrayStringEqual "Check if two string arrays are equal"
+  function arrayStringEqual "Check if two vectors of strings are equal"
     extends Modelica.Icons.Function;
 
     input String u1[:] "First string vector";
@@ -537,10 +603,6 @@ An unrelated species may be included.");
     <code>average({1,2,3})</code> returns 2.</p></html>"));
   end average;
 
-  function cartWrap = mod1 (final den=Axis.z)
-    "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
-    annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
-    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
 
   function Delta
     "<html>Return the second entry of a vector minus the first (&Delta;)</html>"
@@ -684,6 +746,46 @@ An unrelated species may be included.");
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
   end round;
 
+  function selectBooleans
+    "<html>Reduce a <code>Boolean</code> vector by selecting indices</html>"
+    extends Modelica.Icons.Function;
+    input Boolean full[:] "Original vector";
+    input Integer indices[:](each min=1) "Selected indices";
+    output Boolean reduced[size(indices, 1)] "Reduced vector";
+
+  algorithm
+    reduced := {full[i] for i in indices};
+    annotation (Inline=true,Documentation(info="<html><p>This function is useful where
+  it is necessary to select entries from a vector that is not an explicit variable.</p>
+  
+  <p><b>Example:</b><br>
+  <code>selectBooleans({true, false, true}, {1,3})</code> returns
+  <code>{true, true}</code>.  An alternative to this function is to assign a variable to the full vector
+  (<code>full = {true, false, true}</code>) and extract from that variable (full[{1,3}]).  However, this 
+  is not valid in Modelica: <code>{true, false, true}[{1,3}]</code>.</p>
+  </html>"));
+  end selectBooleans;
+
+  function selectIntegers
+    "<html>Reduce an <code>Integer</code> vector by selecting indices</html>"
+    extends Modelica.Icons.Function;
+    input Integer full[:] "Original vector";
+    input Integer indices[:](each min=1) "Selected indices";
+    output Integer reduced[size(indices, 1)] "Reduced vector";
+
+  algorithm
+    reduced := {full[i] for i in indices};
+    annotation (Inline=true,Documentation(info="<html><p>This function is useful where
+  it is necessary to select entries from a vector that is not an explicit variable.</p>
+  
+  <p><b>Example:</b><br>
+  <code>selectBooleans({3, 2, 1}, {1,3})</code> returns
+  <code>{3, 1}</code>.  An alternative to this function is to assign a variable to the full vector
+  (<code>full = {3, 2, 1}</code>) and extract from that variable (full[{1,3}]).  However, this 
+  is not valid in Modelica: <code>{3, 2, 1}[{1,3}]</code>.</p>
+  </html>"));
+  end selectIntegers;
+
   function Sigma
     "<html>Return the sum of the first and second entries of a vector (&Sigma;)</html>"
     extends Modelica.Icons.Function;
@@ -697,6 +799,7 @@ An unrelated species may be included.");
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
   end Sigma;
+
   annotation (Documentation(info="
 <html>
   <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

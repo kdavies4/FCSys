@@ -244,320 +244,61 @@ package WorkInProgress "Incomplete classes under development"
     annotation (Diagram(graphics), Icon(graphics));
   end EISPlaceholder;
 
-  model ChargeLayerStoich
-    "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> and <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
+  connector ReactionNode
+    "<html>Internal node for <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
-    import FCSys.Utilities.inSign;
-    extends FCSys.Icons.Names.Top2;
+    // Material diffusion
+    Q.Current Ndot(nominal=U.A) "Rate of reaction";
+    flow Q.Potential g(nominal=U.V) "Electrochemical potential";
 
-    // Geometry
-    parameter Q.Area A "Cross-sectional area of the face" annotation (Dialog(
-          group="Geometry", __Dymola_label="<html><i>A</i></html>"));
-    parameter Axis axis "Axis of the electrochemical reaction"
-      annotation (Dialog(group="Geometry"));
-    parameter Side side "Side of the face w.r.t., the reaction"
-      annotation (Dialog(group="Geometry"));
-    parameter Integer cartTrans[:]
-      "Cartesian-axis indices of the components of translational momentum"
-      annotation (Dialog(group="Geometry"));
-    parameter Integer n "Stoichiometric coefficient"
-      annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+    // Translational advection
+    //  extends Translational;
+    parameter Integer n_trans(min=1,max=3)
+      "Number of components of translational momentum" annotation (HideResult=
+          true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+    Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
 
-    replaceable package Data = Characteristics.BaseClasses.Characteristic
-      constrainedby Characteristics.BaseClasses.Characteristic
-      "Characteristic data" annotation (
-      Dialog(group="Material properties"),
-      choicesAllMatching=true,
-      __Dymola_choicesFromPackage=true);
-
-    FCSys.Connectors.Reaction reaction(final n_trans=n_trans)
-      "Connector for an electrochemical reaction" annotation (
-        __Dymola_choicesAllMatching=true, Placement(transformation(extent={{30,
-              -10},{50,10}}), iconTransformation(extent={{30,-10},{50,10}})));
-
-    FCSys.Conditions.Adapters.ChargeLayer chargeLayer(
-      final axis=axis,
-      final side=side,
-      final cartTrans=cartTrans,
-      redeclare final package Data = Data,
-      final A=A)
-      annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-    FCSys.Conditions.Adapters.Stoich stoich(
-      final n_trans=n_trans,
-      final n=n,
-      final m=Data.m)
-      annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-
-  protected
-    final parameter Integer n_trans=size(cartTrans, 1)
-      "Number of components of translational momentum";
-
-  public
-    Connectors.Face substrate "Boundary of the substrate" annotation (Placement(
-          transformation(extent={{-50,-30},{-30,-10}}), iconTransformation(
-            extent={{-50,-30},{-30,-10}})));
-  public
-    Connectors.Face carrier "Boundary of the charge carrier" annotation (
-        Placement(transformation(extent={{-50,10},{-30,30}}),
-          iconTransformation(extent={{-50,10},{-30,30}})));
-  equation
-
-    connect(stoich.reaction, reaction) annotation (Line(
-        points={{14,6.10623e-16},{40,5.55112e-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
-
-    connect(carrier, chargeLayer.carrier) annotation (Line(
-        points={{-40,20},{-30,20},{-30,2},{-14,2}},
-        color={127,127,127},
-        smooth=Smooth.None));
-
-    connect(chargeLayer.substrate, substrate) annotation (Line(
-        points={{-14,-2},{-30,-2},{-30,-20},{-40,-20}},
-        color={127,127,127},
-        smooth=Smooth.None));
-    connect(chargeLayer.electrical, stoich.chemical) annotation (Line(
-        points={{-6,6.10623e-16},{6,6.10623e-16},{6,6.10623e-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
+    // Thermal advection
+    Q.PotentialAbsolute sT(nominal=3000*U.K)
+      "Specific entropy-temperature product";
+    flow Q.Power Qdot(nominal=U.W) "Rate of thermal advection";
 
     annotation (
-      Documentation(info="<html><p>This model provides the stoichiometry-weighted electrical contribution of a charge
-    carrier to an electrochemical reaction.  The <code>carrier</code> and <code>substrate</code>
-    connectors represent the interface with the charge carrier species (e.g., e<sup>-</sup> or H<sup>+</sup>)
-    and the solid species (e.g., C<sup>+</sup>) at density at the far edge of the far edge of the 
-    depletion region.  The density of the charge carrier there results in the Butler-Volmer equation 
-    in conjunction with the material transport of the charge carrier species.</p>  
-    
-    <p>Assumptions:<ol>
-    <li>There is no diffusion of material, transverse translational momentum, or energy across the face.</li>
-    <li>The diffusive or non-equilibrium normal force is applied to the electrical part of the electrochemical
-    potential.</li> 
-    </ol></p>
-    
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Diagram(graphics),
-      Icon(graphics={Line(
-              points={{0,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{-30,20},{0,20}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{0,-30},{0,30}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Text(
-              extent={{-100,-40},{100,-60}},
-              lineColor={127,127,127},
-              textString="%n"),Line(
-              points={{-30,-20},{0,-20}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
-
-  end ChargeLayerStoich;
-
-  model StoichMulti
-    "<html>Adapter between <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors and a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
-
-    extends FCSys.Icons.Names.Top1;
-
-    parameter Integer n_trans(
-      min=1,
-      max=3) = 1 "Number of components of translational momentum" annotation (
-        Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    parameter Integer n_spec "Number of species"
-      annotation (Dialog(connectorSizing=true));
-
-    parameter Integer n[n_spec] "Stoichiometric coefficients"
-      annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
-    parameter Q.MassSpecific m[n_spec] "Specific masses" annotation (Dialog(
-          group="Material properties", __Dymola_label="<html><i>m</i></html>"));
-
-    Connectors.Chemical chemical[n_spec](each final n_trans=n_trans) if n_spec
-       > 0 "Connector for species in a chemical reaction" annotation (Placement(
-          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-            extent={{-50,-10},{-30,10}})));
-    Connectors.Reaction reaction(final n_trans=n_trans) if n_spec > 0
-      "Connector for an electrochemical reaction" annotation (Placement(
-          transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
-              {{30,-10},{50,10}})));
-
-  protected
-    Conditions.Adapters.Stoich stoich[n_spec](
-      each final n_trans=n_trans,
-      final n=n,
-      final m=m) if n_spec > 0
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-  equation
-    connect(stoich.chemical, chemical) annotation (Line(
-        points={{-4,6.10623e-16},{-12,6.10623e-16},{-12,5.55112e-16},{-20,
-            5.55112e-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
-
-    for i in 1:n_spec loop
-      connect(stoich[i].reaction, reaction) annotation (Line(
-          points={{4,6.10623e-16},{10,6.10623e-16},{10,5.55112e-16},{20,
-              5.55112e-16}},
-          color={255,195,38},
-          smooth=Smooth.None));
-
-    end for;
-
-    annotation (
-      defaultComponentName="stoich",
-      Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted electrochemical potentials
-    of species to the net electrochemical potential of a reaction.  The species are produced at the
-    stoichiometrically-weighted rate of the reaction.</p>
-    
-    <p>See also <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a>.  
-    For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Line(
-              points={{-30,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n"),Line(
-              points={{0,-10},{0,10}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5)}),
-      Diagram(graphics));
-
-  end StoichMulti;
-
-  model Rate "Butler-Volmer reaction rate"
-    import Modelica.Math.asinh;
-    extends FCSys.Icons.Names.Top2;
-
-    parameter Integer n_trans(
-      min=1,
-      max=3) = 1 "Number of components of translational momentum" annotation (
-        Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    parameter Q.Current Io(min=0) = 1e-4*U.A "Exchange current"
-      annotation (Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
-    parameter Q.NumberAbsolute alpha(max=1) = 0.5 "Charge transfer coefficient"
-      annotation (Dialog(__Dymola_label="<html>&alpha;</html>"));
-    parameter Q.MassSpecific m "Specific mass" annotation (Dialog(group=
-            "Material properties", __Dymola_label="<html><i>m</i></html>"));
-    parameter Boolean setVelocity=false
-      "Set the velocity of the stream according to the direct connector"
-      annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        tab="Assumptions",
-        __Dymola_label=
-            "<html>Use the <code>direct</code> connector to set the velocity of the stream</html>",
-
-        compact=true));
-
-    Q.Force mPhidot[n_trans] "Force";
-    Q.Velocity phi[n_trans] "Velocity";
-    Q.Temperature T "Temperature";
-    Q.Potential g "Overpotential";
-    Q.Current Ndot "Reaction rate";
-
-    Connectors.Chemical negative(final n_trans=n_trans)
-      "1st connector for chemical exchange" annotation (Placement(
-          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-            extent={{-70,-10},{-50,10}})));
-    Connectors.Chemical positive(final n_trans=n_trans)
-      "2nd connector for chemical exchange" annotation (Placement(
-          transformation(extent={{10,-10},{30,10}}), iconTransformation(extent=
-              {{50,-10},{70,10}})));
-    Connectors.Direct direct(
-      final n_trans=n_trans,
-      final inclTrans=setVelocity,
-      final inclThermal=true,
-      translational(final phi=phi,final mPhidot=mPhidot))
-      "Connector for translational and thermal exchange" annotation (Placement(
-          transformation(extent={{-10,-30},{10,-10}}), iconTransformation(
-            extent={{-10,-70},{10,-50}})));
-
-  equation
-    // Aliases
-    T = direct.thermal.T;
-    g = negative.g - positive.g;
-    Ndot = negative.Ndot;
-
-    // Reaction rate (material conservation)
-    if abs(alpha - 0.5) > Modelica.Constants.eps then
-      Ndot = Io*(exp(alpha*g/T) - exp((alpha - 1)*g/T));
-    else
-      g = 2*T*asinh(Ndot/(2*Io))
-        "Inverted to eliminate nonlinear system of equations";
-    end if;
-
-    // Streams
-    if setVelocity then
-      negative.phi = phi;
-      positive.phi = phi;
-      zeros(n_trans) = m*(actualStream(negative.phi)*negative.Ndot +
-        actualStream(positive.phi))*positive.Ndot + mPhidot
-        "Conservation of translationa momenum (no storage)";
-    else
-      negative.phi = inStream(positive.phi);
-      positive.phi = inStream(negative.phi);
-      mPhidot = zeros(n_trans) "No extra force";
-      phi = actualStream(positive.phi) "Used only for analysis";
-    end if;
-    negative.sT = inStream(positive.sT);
-    positive.sT = inStream(negative.sT);
-    // **always include translation subconnector, but sometimes leave disconnected?
-    // Conservation (without storage)
-    0 = negative.Ndot + positive.Ndot "Material";
-    // Conservation of translational momentum included is included in the instantiation
-    // of the direct connector above.  If the direct.translational subconnector isn't
-    // included (setVelocity == false), then conservation of translational momentum is
-    // inherent in the stream equations above.
-    0 = g*Ndot + m*(sum(actualStream(negative.phi) .^ 2)*negative.Ndot + sum(
-      actualStream(positive.phi) .^ 2)*positive.Ndot)/2 + phi*mPhidot + direct.thermal.Qdot
-      "Energy";
-    // The stream equations above handle the conservation of energy within the stream.
-
-    annotation (
+      defaultComponentPrefixes="protected",
+      defaultComponentName="equilibrium",
       Documentation(info="<html>
-  <p>This model establishes the rate of an electrochemical reaction
-  using the Butler-Volmer equation.</p>
-  
-  <p>If the <code>translational</code> subconnector of the <code>direct</code> connector is connected,
-  then the **velocity of the reaction stream will be set to the velocity at that connector.  Otherwise
-  
-  The <code>thermal</code> subconnector must always be connected.</p>
-  
-  <p>Assumpations:<ol><li>Generated heat is rejected to the <code>direct</code> connector,
-  not into the stream.</li></ol></p>
+<html><p>This connector is used as an internal node to connect 
+    <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a>
+    connectors.</p>
+    
+<p>For more information, please see the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector and the documentation of the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-    <p></p></html>"),
-      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-              100,100}}), graphics),
-      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Line(
-              points={{-50,0},{50,0}},
-              color={221,23,47},
-              smooth=Smooth.None),Rectangle(
-              extent={{-40,30},{40,-30}},
-              lineColor={221,23,47},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,10},{30,10},{10,20}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-10,-20},{-30,-10},{30,-10}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{0,-50},{0,-30}},
-              color={38,196,52},
-              smooth=Smooth.None)}));
-  end Rate;
+      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+            Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-50,50},{50,-50}},
+              fillColor={221,23,47},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None)}),
+      Diagram(graphics={Ellipse(
+              extent={{-10,10},{10,-10}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-5,5},{5,-5}},
+              fillColor={221,23,47},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-100,10},{100,50}},
+              textString="%name",
+              lineColor={0,0,0})}));
+
+  end ReactionNode;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

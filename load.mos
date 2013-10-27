@@ -17,7 +17,6 @@ Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simuli
 //Advanced.AllowNumericDifferentiation = true "Allow numeric differentiation for computing Jacobian for non-linear solver";
 //Advanced.EvaluateParametersDuringSimulation = true "Generate code for evaluation of parameters during simulations";
 //Advanced.GuardedSqrt = false "Generate error for sqrt of negative numbers";
-//Advanced.NewStateSelection = true "Use new approach to state selection";
 //Advanced.ParameterExpressionTearing = true "Assume parameter expressions being non-zero at tearing";
 //Advanced.GenerateAnalyticJacobian = true "Generate analytic Jacobian for the ODE problem";
 //Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";

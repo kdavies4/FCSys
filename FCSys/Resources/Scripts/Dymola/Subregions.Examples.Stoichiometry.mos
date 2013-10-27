@@ -1,9 +1,0 @@
-// Setup
-removePlots();
-createPlot(filename = "Stoichiometry.mat");
-FCSys.Utilities.plot6(
-    y1={"speciesA.chemical.Ndot", "speciesB.chemical.Ndot",
-        "speciesC.chemical.Ndot"},
-    y2={"speciesA.sT_actual", "speciesB.sT_actual", "speciesC.sT_actual"},
-    y3={"depletion.electrical.mu", "species1.chemical.mu",
-        "species2.chemical.mu"})

@@ -884,8 +884,7 @@ package Characteristics
   convenient for calculating
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>,
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>,
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>,
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.tauprime\">&tau;&prime;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>, and
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));

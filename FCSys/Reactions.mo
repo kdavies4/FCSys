@@ -59,8 +59,8 @@ package Reactions "Electrochemical reactions"
         points={{-6,0},{0,0},{0,10},{6,10}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2.reaction, 'H+'.reaction) annotation (Line(
-        points={{-6,0},{0,0},{0,-10},{6,-10}},
+    connect('H+'.reaction, H2.reaction) annotation (Line(
+        points={{6,-10},{0,-10},{0,0},{-6,0}},
         color={221,23,47},
         smooth=Smooth.None));
     annotation (
@@ -70,15 +70,14 @@ package Reactions "Electrochemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
 
@@ -152,16 +151,16 @@ package Reactions "Electrochemical reactions"
         points={{14,-10},{30,-10}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('e-'.reaction, 'H+'.reaction) annotation (Line(
-        points={{-6,10},{0,10},{0,-10},{-6,-10}},
+    connect('e-'.reaction, H2O.reaction) annotation (Line(
+        points={{-6,10},{0,10},{0,-10},{6,-10}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.reaction, O2.reaction) annotation (Line(
-        points={{6,-10},{0,-10},{0,-30},{-6,-30}},
+    connect('H+'.reaction, H2O.reaction) annotation (Line(
+        points={{-6,-10},{6,-10}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.reaction, 'e-'.reaction) annotation (Line(
-        points={{6,-10},{0,-10},{0,10},{-6,10}},
+    connect(O2.reaction, H2O.reaction) annotation (Line(
+        points={{-6,-30},{0,-30},{0,-10},{6,-10}},
         color={221,23,47},
         smooth=Smooth.None));
     annotation (
@@ -171,18 +170,64 @@ package Reactions "Electrochemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
 
   end ORR;
 
+  package Examples "Examples"
+    extends Modelica.Icons.ExamplesPackage;
+
+    model Stoichiometry
+      "<html>Test the stoichiometry of the <a href=\"modelica://FCSys.Reactions.HOR\">HOR</a></html>"
+      extends Modelica.Icons.Example;
+
+      HOR hOR(n_trans=3)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Conditions.ByConnector.Chemical.Potential H2(sT=1000*U.K, source(y=U.A))
+        annotation (Placement(transformation(extent={{-40,-10},{-20,-30}})));
+      Conditions.ByConnector.Chemical.Current 'e-'(sT=2000*U.K, redeclare
+          Modelica.Blocks.Sources.Ramp source(
+          height=100*U.A,
+          duration=100,
+          startTime=10,
+          offset=U.mA))
+        annotation (Placement(transformation(extent={{-10,-10},{10,-30}})));
+      Conditions.ByConnector.Chemical.Potential 'H+'(sT=3000*U.K)
+        annotation (Placement(transformation(extent={{20,-10},{40,-30}})));
+
+      inner Conditions.Environment environment
+        annotation (Placement(transformation(extent={{20,20},{40,40}})));
+    equation
+      connect(hOR.'connH+', 'H+'.chemical) annotation (Line(
+          points={{4,0},{4,-8},{30,-8},{30,-16}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect(H2.chemical, hOR.connH2) annotation (Line(
+          points={{-30,-16},{-30,-8},{-4,-8},{-4,0}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      connect('e-'.chemical, hOR.'conne-') annotation (Line(
+          points={{0,-16},{0,0}},
+          color={221,23,47},
+          smooth=Smooth.None));
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics),
+        Commands(file=
+              "Resources/Scripts/Dymola/Reactions.Examples.Stoichiometry.mos"
+            "Reactions.Examples.Stoichiometry.mos"),
+        experiment(StopTime=200, Tolerance=1e-006),
+        __Dymola_experimentSetupOutput);
+
+    end Stoichiometry;
+  end Examples;
 end Reactions;

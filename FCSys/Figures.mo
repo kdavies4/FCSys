@@ -1290,15 +1290,6 @@ package Figures "Graphical layouts for documentation"
 
   end RouterPassThrough;
 
-  model AssemblyIcon
-
-    Assemblies.Cells.Cell Assembly
-      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
-
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
-              -120},{120,120}})));
-  end AssemblyIcon;
-
   model CellIcon
 
     Assemblies.Cells.Cell Cell
@@ -1502,7 +1493,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    FCSys.Species.Gas Species
+    FCSys.Species.Fluid Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
             preserveAspectRatio=true, extent={{-120,-120},{120,120}})));
@@ -1519,179 +1510,141 @@ package Figures "Graphical layouts for documentation"
 
     Connectors.Dalton Dalton
       annotation (Placement(transformation(extent={{-68,-38},{-48,-18}})));
-    Connectors.Chemical Chemical
-      annotation (Placement(transformation(extent={{48,-14},{68,6}})));
-    FCSys.Connectors.Reaction Reaction
-      annotation (Placement(transformation(extent={{24,-14},{44,6}})));
-    Connectors.Physical Physical
-      annotation (Placement(transformation(extent={{72,-14},{92,6}})));
+    Connectors.Reaction Reaction
+      annotation (Placement(transformation(extent={{16,-14},{36,6}})));
     Connectors.Direct Direct
-      annotation (Placement(transformation(extent={{0,-14},{20,6}})));
+      annotation (Placement(transformation(extent={{40,-14},{60,6}})));
     Connectors.Translational Material
+      annotation (Placement(transformation(extent={{88,-38},{108,-18}})));
+
+    Connectors.Face Face
+      annotation (Placement(transformation(extent={{88,-14},{108,6}})));
+
+    Connectors.Translational Translational
+      annotation (Placement(transformation(extent={{40,-38},{60,-18}})));
+
+    Connectors.Electrostatic Electrostatic
       annotation (Placement(transformation(extent={{-48,-38},{-28,-18}})));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
-              -40},{100,40}}), graphics={Line(
-              points={{-36,-6},{-14,-28}},
+
+    Connectors.Chemical Chemical
+      annotation (Placement(transformation(extent={{-28,-38},{-8,-18}})));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,
+              -40},{120,40}}), graphics={Line(
+              points={{74,-6.5},{74,-29.9771},{75.815,-26.369},{72,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{-12,-6},{10,-28}},
+              points={{96,-6},{74,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{-14,-6.5},{-14,-28}},
+              points={{26,-6.5},{26,-29.9771},{27.8145,-26.369},{24,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{60,-6},{82,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{34,-6.5},{34,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{10,-4},{-14,-28}},
+              points={{50,-4},{74,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-35,-4},{10,-28}},
+              points={{95,-5},{50,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{82,-6.5},{82,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{82,20},{82,-4}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{10,-4},{10,-28}},
+              points={{50,-4},{50,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{32,-6},{10,-28}},
+              points={{28,-6},{50,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{36,-6},{58,-28}},
+              points={{24,-6},{2,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Rectangle(
-              extent={{-86,32},{-50,12}},
+              extent={{-81,32},{-45,12}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{-38,20},{-38,-4}},
+              points={{98,20},{98,-4}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-100,26},{-100,-24}},
+              points={{-100,-24},{-100,26}},
               color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{-102,22},{-100,26},{-98,22}},
-              color={0,0,0},
-              smooth=Smooth.None),Text(
+              smooth=Smooth.None,
+              arrow={Arrow.None,Arrow.Filled}),Text(
               extent={{-112,32},{-88,27.8}},
               lineColor={0,0,0},
               textString="Composite"),Text(
               extent={{-114,-26},{-86,-30}},
               lineColor={0,0,0},
-              textString="Basic"),Text(
-              extent={{-48,30},{-28,26}},
-              lineColor={0,0,0},
-              textString="Face
-Bus"),Ellipse(extent={{-41,23},{-35,17}},
+              textString="Basic"),Ellipse(
+              extent={{95,23},{101,17}},
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5),Text(
-              extent={{-80.5,18},{-46,14}},
+              extent={{-75.5,18},{-41,14}},
               lineColor={0,0,0},
               textString="    Instantiation"),Text(
-              extent={{-80,19.8},{-46,24}},
+              extent={{-75,19.8},{-41,24}},
               lineColor={0,0,0},
               textString=" Expansion"),Text(
-              extent={{-80,30},{-46,26}},
+              extent={{-75,30},{-41,26}},
               lineColor={0,0,0},
-              textString="Extension"),Text(
-              extent={{-2,-20},{22,-24}},
-              lineColor={0,0,0},
-              textString="Translational"),Ellipse(
-              extent={{55,-25},{61,-31}},
+              textString="Extension"),Ellipse(
+              extent={{-1,-25},{5,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{-84,22},{-74,22}},
+              points={{-79,22},{-69,22}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-74,16},{-84,16}},
+              points={{-69,16},{-79,16}},
               color={0,0,0},
               smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{3,0},{-7,0}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None},
-              origin={-77,28},
-              rotation=360),Ellipse(
-              extent={{7,-25},{13,-31}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-26,-18},{-2,-22}},
-              lineColor={0,0,0},
-              textString="Thermal
-Diffusive"),Ellipse(
-              extent={{31,-25},{37,-31}},
+              pattern=LinePattern.Dash),Ellipse(
+              extent={{23,-25},{29,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{79,-25},{85,-31}},
+              extent={{71,-25},{77,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{79,23},{85,17}},
+              extent={{71,-1},{77,-7}},
               lineColor={2,157,21},
               fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{22,-18},{46,-22}},
+              fillPattern=FillPattern.Solid),Line(
+              points={{98,-6.5},{98,-29.9771},{99.815,-26.369},{96,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{72,-6},{50,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Text(
+              extent={{88,30},{108,26}},
+              lineColor={0,0,0},
+              textString="Face
+Bus"),Text(   extent={{62,-18},{86,-22}},
               lineColor={0,0,0},
               textString="Thermal
-Advective"),Ellipse(
-              extent={{-41,-1},{-35,-7}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-46,4},{-30,0}},
+Diffusive"),Text(
+              extent={{14,-18},{38,-22}},
               lineColor={0,0,0},
-              textString="Face"),Text(
-              extent={{64,30},{100,25.8}},
-              lineColor={0,0,0},
-              textString="Physical
-Bus"),Text(   extent={{46,-18},{70,-22}},
+              textString="Thermal
+Advective"),Text(
+              extent={{-10,-18},{14,-22}},
               lineColor={0,0,0},
               textString="Stoichio-
-metric"),Text(extent={{70,-18},{94,-22}},
+metric"),Text(extent={{62,6},{86,1.8}},
               lineColor={0,0,0},
-              textString="Electro-
-chemical"),Ellipse(
-              extent={{-17,-25},{-11,-31}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-26,6},{-2,1.8}},
-              lineColor={0,0,0},
-              textString="Intra and
-Intra"),Ellipse(
-              extent={{-17,-1},{-11,-7}},
-              lineColor={11,43,197},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-38,-6.5},{-38,-28}},
+              textString="Inter, Intra, 
+and Inert"),Line(
+              points={{-69,28},{-79,28},{-69,28},{-79,28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None})}));
@@ -1761,10 +1714,7 @@ Intra"),Ellipse(
       final L_y=L_y,
       final L_z=L_z,
       Subregion(
-        gas(H2(p_IC=p - p_H2O_an_in), H2O(
-            T_IC=T,
-            p_IC=p_H2O_an_in,
-            initTransY=InitTrans.velocitySS)),
+        gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
         liquid(H2O(T_IC=T)),
         graphite('C+'(T_IC=T))))
       annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
@@ -1782,7 +1732,7 @@ Intra"),Ellipse(
     Regions.PEMs.PEM PEM(
       final L_y=L_y,
       final L_z=L_z,
-      Subregion(ionomer('H+'(initTransX=InitTrans.none), 'SO3-'(T_IC=T))))
+      Subregion(ionomer('SO3-'(T_IC=T))))
       annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
     Regions.CaCLs.CaCL caCL(
@@ -1821,8 +1771,6 @@ Intra"),Ellipse(
         liquid(H2O(T_IC=T)),
         graphite('C+'(T_IC=T))))
       annotation (Placement(transformation(extent={{50,30},{70,50}})));
-    //initTransY=InitTrans.velocitySS
-    //,initTransY=InitTrans.velocitySS
 
     Conditions.ByConnector.FaceBus.Single.Flows anBC[n_y, n_z](each graphite(
         'inclC+'=true,

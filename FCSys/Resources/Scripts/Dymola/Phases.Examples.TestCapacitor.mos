@@ -1,0 +1,7 @@
+// Setup
+removePlots();
+createPlot(filename = "TestCapacitor.mat");
+
+ FCSys.Utilities.plot6(
+     y1={"capacitorMSL.i", "capacitorFCSys.i"},
+     y2={"capacitorMSL.v", "capacitorFCSys.v"});
