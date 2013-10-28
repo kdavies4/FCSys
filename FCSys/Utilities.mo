@@ -603,7 +603,6 @@ An unrelated species may be included.");
     <code>average({1,2,3})</code> returns 2.</p></html>"));
   end average;
 
-
   function Delta
     "<html>Return the second entry of a vector minus the first (&Delta;)</html>"
     extends Modelica.Icons.Function;

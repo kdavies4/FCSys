@@ -1,6 +1,17 @@
 // Setup
 removePlots();
 createPlot(filename = "HOR.mat");
+
+FCSys.Utilities.plot6(
+y1={"subregion.gas.H2.faces[1, 1].Ndot"},
+y2={"subregion.gas.H2.N"},
+y3={"subregion.gas.H2.phi[1]"},
+y4={"subregion.ionomer.'H+'.phi[1]"},
+y5={"subregion.ionomer.'SO3-'.T", "subregion.gas.H2.T", "subregion.graphite.'C+'.T"});
+
+f=f;
+
+
 FCSys.Utilities.plot6(
     y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"},
     y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},

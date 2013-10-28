@@ -70,14 +70,15 @@ package Reactions "Electrochemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
 
@@ -170,14 +171,15 @@ package Reactions "Electrochemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
 

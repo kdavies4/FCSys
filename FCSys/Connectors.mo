@@ -512,14 +512,14 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,10},{100,50}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,10},{100,50}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end InertNode;
 
@@ -659,14 +659,14 @@ package Connectors "Declarative and imperative connectors"
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -780,14 +780,14 @@ package Connectors "Declarative and imperative connectors"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{-100,50},{0,0},{-100,-50},{-100,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealOutputBus;
 

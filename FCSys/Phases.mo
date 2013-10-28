@@ -650,13 +650,16 @@ package Phases "Mixtures of species"
     Connectors.Chemical 'conne-'(final n_trans=n_trans) if 'incle-'
       "Chemical connector for e-" annotation (Placement(transformation(extent={
               {6,20},{26,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Electrostatic electrical if 'incle-'
+    Connectors.Electrostatic electrostatic if 'incle-' and n_spec > 0
       "Interface with the dielectric" annotation (Placement(transformation(
             extent={{60,4},{80,24}}), iconTransformation(extent={{90,-50},{110,
               -30}})));
+    // Note:  ('incle-' and n_spec > 0) can be logically reduced to 'incle-',
+    // but n_spec is included so that the connector always appears in the icon
+    // layer in Dymola 2014.
 
   protected
-    FCSys.Connectors.DirectNode direct(
+    Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
       final inclThermal=reduceThermal) if n_spec > 0 and (reduceTrans or
@@ -678,7 +681,7 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     // Electrical storage
-    connect(electrical, 'e-'.electrical) annotation (Line(
+    connect(electrostatic, 'e-'.electrostatic) annotation (Line(
         points={{70,14},{13,14},{13,-13}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -936,10 +939,13 @@ package Phases "Mixtures of species"
     Connectors.Chemical 'connH+'(final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
               {-54,30},{-34,50}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
-    FCSys.Connectors.Electrostatic electrical if 'inclH+'
+    Connectors.Electrostatic electrostatic if 'inclH+' and n_spec > 0
       "Interface with the dielectric" annotation (Placement(transformation(
             extent={{-100,4},{-80,24}}), iconTransformation(extent={{-110,-50},
               {-90,-30}})));
+    // Note:  ('inclH+' and n_spec > 0) can be logically reduced to 'inclH+',
+    // but n_spec is included so that the connector always appears in the icon
+    // layer in Dymola 2014.
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
@@ -971,7 +977,7 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     // Electrical storage
-    connect(electrical, 'H+'.electrical) annotation (Line(
+    connect(electrostatic, 'H+'.electrostatic) annotation (Line(
         points={{-90,14},{-47,14},{-47,-3}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -1446,7 +1452,7 @@ protected
   end Phase;
 
 public
-  model Dielectric "Dielectric layer"
+  model Dielectric "Dielectric gap"
     extends FCSys.Icons.Names.Top2;
 
     parameter Q.Length L=U.um "Length of the dielectric (not of the region)"

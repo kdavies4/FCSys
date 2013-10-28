@@ -457,21 +457,18 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-30,0},{30,0}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,20},{100,60}},
-              lineColor={0,0,0},
-              textString="%n %name"),
-            Polygon(
-              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-              lineColor={221,23,47},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}),
+                100,100}}), graphics={Line(
+                  points={{-30,0},{30,0}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Text(
+                  extent={{-100,20},{100,60}},
+                  lineColor={0,0,0},
+                  textString="%n %name"),Polygon(
+                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                  lineColor={221,23,47},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
 
@@ -1911,10 +1908,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {100,100}}), graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
     end Electrostatic;
     extends Modelica.Icons.Package;
 
@@ -1945,12 +1942,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         import Modelica.Math.BooleanVectors.index;
         extends FCSys.Icons.Conditions.SingleShort;
 
-        /*
-  parameter String formula(start="") "Chemical formula of the species"
-    annotation (Dialog(group="Material properties"));
-  */
-        // The start value prevents a warning when this model is checked in Dymola 2014.
-
         parameter Boolean internal=true "Use internal specification"
           annotation (
           HideResult=true,
@@ -1972,7 +1963,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
               group="Properties upon outflow", __Dymola_label=
                 "<html><i><b>&phi;</b></i></html>"));
-        parameter Q.PotentialAbsolute sT(start=3000*U.K)
+        parameter Q.PotentialAbsolute sT=3000*U.K
           "Specific entropy-temperature product" annotation (Dialog(group=
                 "Properties upon outflow", __Dymola_label=
                 "<html><i>sT</i></html>"));
@@ -1985,7 +1976,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Assumptions",
             group="Included transport axes",
             compact=true));
-
         parameter Boolean inclTransY=true "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -1993,7 +1983,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             tab="Assumptions",
             group="Included transport axes",
             compact=true));
-
         parameter Boolean inclTransZ=true "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -2056,10 +2045,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="chemical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47})}));
 
     end Chemical;
 
@@ -2687,15 +2676,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Thermal;
 
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={221,23,47},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={221,23,47},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
     end Reaction;
 
     package FaceBus
@@ -3030,101 +3019,101 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate),
               N2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate),
               O2(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)),
             graphite('C+'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate), 'e-'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)),
@@ -3132,68 +3121,68 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               'SO3-'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate),
               'H+'(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate),
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Face.Pair.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Pair.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Pair.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Pair.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Pair.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Pair.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Pair.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Pair.Thermal.heatRate)));
@@ -3971,174 +3960,174 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               H2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K)),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K)),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K)),
               N2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K)),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K)),
               O2(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K))),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K))),
             graphite(redeclare replaceable ThermalDiffusion.Temperature 'C+',
                 'e-'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K))),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K))),
             ionomer(
               redeclare replaceable ThermalDiffusion.Temperature 'SO3-',
               'H+'(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K)),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K)),
               H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K))),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K))),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Face.Single.Material.pressure,
-                redeclare replaceable function followingSpec =
+                redeclare replaceable function afterSpec =
                     Face.Single.Translational.velocity,
-                redeclare replaceable function precedingSpec =
+                redeclare replaceable function beforeSpec =
                     Face.Single.Translational.velocity,
                 redeclare replaceable function thermalSpec =
                     Face.Single.Thermal.temperature,
                 redeclare replaceable function materialMeas =
                     Face.Single.Material.current,
-                redeclare replaceable function followingMeas =
+                redeclare replaceable function afterMeas =
                     Face.Single.Translational.force,
-                redeclare replaceable function precedingMeas =
+                redeclare replaceable function beforeMeas =
                     Face.Single.Translational.force,
                 redeclare replaceable function thermalMeas =
                     Face.Single.Thermal.heatRate,
-                redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
-                      U.atm),
-                redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                      298.15*U.K))));
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  materialSet(y=U.atm),
+                redeclare replaceable Modelica.Blocks.Sources.RealExpression
+                  thermalSet(y=298.15*U.K))));
 
           // Note:  In Dymola 2014, the paths must be explicitly given to prevent
           // the error "Cannot show the parameter dialog for redeclared class [...]".
@@ -4596,11 +4585,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191},
-                  lineThickness=0.5)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191},
+              lineThickness=0.5)}));
 
     end FaceBus;
 
@@ -4643,24 +4632,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={-50,40})));
           //
           // 1st transverse
-          replaceable function followingSpec = Translational.force
-            constrainedby Translational.Partial "Quantity" annotation (
+          replaceable function afterSpec = Translational.force constrainedby
+            Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="First transverse"),
             Placement(transformation(extent={{-24,4},{-4,24}})));
-          parameter Boolean internalFollowing=true "Use internal specification"
+          parameter Boolean internalAfter=true "Use internal specification"
             annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSet if internalFollowing
+          replaceable Sources.RealExpression afterSet if internalAfter
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
               tab="Specification",
               group="First transverse",
-              enable=internalFollowing),
+              enable=internalAfter),
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -4668,25 +4657,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // 2nd transverse
-          replaceable function precedingSpec = Translational.force
-            constrainedby Translational.Partial "Quantity" annotation (
+          replaceable function beforeSpec = Translational.force constrainedby
+            Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Second transverse"),
             Placement(transformation(extent={{4,-10},{24,10}})));
 
-          parameter Boolean internalPreceding=true "Use internal specification"
+          parameter Boolean internalBefore=true "Use internal specification"
             annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSet if internalPreceding
+          replaceable Sources.RealExpression beforeSet if internalBefore
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
               tab="Specification",
               group="Second transverse",
-              enable=internalPreceding),
+              enable=internalBefore),
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -4726,13 +4715,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // 1st transverse
-          replaceable function followingMeas = Translational.velocity
+          replaceable function afterMeas = Translational.velocity
             constrainedby Translational.Partial "First transverse quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
 
           // 2nd transverse
-          replaceable function precedingMeas = Translational.velocity
+          replaceable function beforeMeas = Translational.velocity
             constrainedby Translational.Partial "Second transverse quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
@@ -4751,9 +4740,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 transformation(extent={{-110,-10},{-90,10}})));
           Connectors.Face positive "Positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-          Connectors.RealInputBus u if not (internalMaterial and
-            internalFollowing and internalPreceding and internalThermal)
-            "Bus of specifications" annotation (Placement(transformation(
+          Connectors.RealInputBus u if not (internalMaterial and internalAfter
+             and internalBefore and internalThermal) "Bus of specifications"
+            annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,110}), iconTransformation(
@@ -4779,7 +4768,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-80,110})));
-          Connectors.RealInputInternal u_following if not internalFollowing
+          Connectors.RealInputInternal u_after if not internalAfter
             "First transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -4788,7 +4777,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,110})));
-          Connectors.RealInputInternal u_preceding if not internalPreceding
+          Connectors.RealInputInternal u_before if not internalBefore
             "Second transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -4819,7 +4808,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-60,6})));
-          Connectors.RealOutputInternal _u_following=followingSpec(
+          Connectors.RealOutputInternal _u_after=afterSpec(
                       Deltap,
                       negative.Ndot,
                       Deltaphi,
@@ -4832,7 +4821,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-20,6})));
-          Connectors.RealOutputInternal _u_preceding=precedingSpec(
+          Connectors.RealOutputInternal _u_before=beforeSpec(
                       Deltap,
                       negative.Ndot,
                       Deltaphi,
@@ -4869,7 +4858,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-60,-70})));
-          Sources.RealExpression precedingOut(y=precedingMeas(
+          Sources.RealExpression beforeOut(y=beforeMeas(
                         Deltap,
                         negative.Ndot,
                         Deltaphi,
@@ -4882,7 +4871,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={20,-70})));
-          Sources.RealExpression followingOut(y=followingMeas(
+          Sources.RealExpression afterOut(y=afterMeas(
                         Deltap,
                         negative.Ndot,
                         Deltaphi,
@@ -4929,23 +4918,23 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               smooth=Smooth.None));
 
           // First transverse
-          connect(u_following, _u_following) annotation (Line(
+          connect(u_after, _u_after) annotation (Line(
               points={{-20,70},{-20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingSet.y, _u_following) annotation (Line(
+          connect(afterSet.y, _u_after) annotation (Line(
               points={{-10,29},{-10,20},{-20,20},{-20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
           // Second transverse
-          connect(u_preceding, _u_preceding) annotation (Line(
+          connect(u_before, _u_before) annotation (Line(
               points={{20,70},{20,6}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingSet.y, _u_preceding) annotation (Line(
+          connect(beforeSet.y, _u_before) annotation (Line(
               points={{30,29},{30,20},{20,20},{20,6}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -4965,12 +4954,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingOut.y, y.following) annotation (Line(
+          connect(afterOut.y, y.after) annotation (Line(
               points={{-20,-81},{-20,-90},{0,-90},{0,-110}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingOut.y, y.preceding) annotation (Line(
+          connect(beforeOut.y, y.before) annotation (Line(
               points={{20,-81},{20,-90},{0,-90},{0,-110}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -4979,13 +4968,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               points={{-60,70},{-60,90},{0,90},{0,110}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(u_following, u.following) annotation (Line(
+          connect(u_after, u.after) annotation (Line(
               points={{-20,70},{-20,80},{-20,80},{-20,90},{0,90},{0,110},{0,110}},
 
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(u_preceding, u.preceding) annotation (Line(
+          connect(u_before, u.before) annotation (Line(
               points={{20,70},{20,90},{-20,90},{-20,90},{0,90},{0,110},{0,110}},
 
               color={0,0,127},
@@ -5013,16 +5002,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with difference in efforts specified by default</html>"
           extends FaceFlows(
             redeclare replaceable function materialSpec = Material.pressure,
-            redeclare replaceable function followingSpec =
-                Translational.velocity,
-            redeclare replaceable function precedingSpec =
-                Translational.velocity,
+            redeclare replaceable function afterSpec = Translational.velocity,
+            redeclare replaceable function beforeSpec = Translational.velocity,
+
             redeclare replaceable function thermalSpec = Thermal.temperature,
             redeclare replaceable function materialMeas = Material.current,
-            redeclare replaceable function followingMeas = Translational.force,
-
-            redeclare replaceable function precedingMeas = Translational.force,
-
+            redeclare replaceable function afterMeas = Translational.force,
+            redeclare replaceable function beforeMeas = Translational.force,
             redeclare replaceable function thermalMeas = Thermal.heatRate);
 
           // See note in ReactionEfforts.
@@ -5214,24 +5200,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={-40,70})));
           //
           // 1st transverse
-          replaceable function followingSpec = Translational.force
-            constrainedby Translational.Partial "Quantity" annotation (
+          replaceable function afterSpec = Translational.force constrainedby
+            Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="First transverse"),
             Placement(transformation(extent={{-24,4},{-4,24}})));
-          parameter Boolean internalFollowing=true "Use internal specification"
+          parameter Boolean internalAfter=true "Use internal specification"
             annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="First transverse"));
-          replaceable Sources.RealExpression followingSet if internalFollowing
+          replaceable Sources.RealExpression afterSet if internalAfter
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
               tab="Specification",
               group="First transverse",
-              enable=internalFollowing),
+              enable=internalAfter),
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
@@ -5239,25 +5225,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // 2nd transverse
-          replaceable function precedingSpec = Translational.force
-            constrainedby Translational.Partial "Quantity" annotation (
+          replaceable function beforeSpec = Translational.force constrainedby
+            Translational.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Second transverse"),
             Placement(transformation(extent={{4,-10},{24,10}})));
 
-          parameter Boolean internalPreceding=true "Use internal specification"
+          parameter Boolean internalBefore=true "Use internal specification"
             annotation (
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(tab="Specification", group="Second transverse"));
-          replaceable Sources.RealExpression precedingSet if internalPreceding
+          replaceable Sources.RealExpression beforeSet if internalBefore
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(
               tab="Specification",
               group="Second transverse",
-              enable=internalPreceding),
+              enable=internalBefore),
             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
@@ -5297,13 +5283,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // 1st transverse
-          replaceable function followingMeas = Translational.velocity
+          replaceable function afterMeas = Translational.velocity
             constrainedby Translational.Partial "First transverse quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
 
           // 2nd transverse
-          replaceable function precedingMeas = Translational.velocity
+          replaceable function beforeMeas = Translational.velocity
             constrainedby Translational.Partial "Second transverse quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
@@ -5317,10 +5303,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Connector to transport material, translational momentum, and thermal energy"
             annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
                 iconTransformation(extent={{-10,-50},{10,-30}})));
-          Connectors.RealInputBus u if not (internalMaterial and
-            internalFollowing and internalPreceding and internalThermal)
-            "Bus of specifications" annotation (Placement(transformation(extent
-                  ={{-120,-10},{-100,10}})));
+          Connectors.RealInputBus u if not (internalMaterial and internalAfter
+             and internalBefore and internalThermal) "Bus of specifications"
+            annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
           Connectors.RealOutputBus y "Bus of measurements"
             annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
@@ -5331,13 +5316,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-70,60})));
-          Connectors.RealInputInternal u_following if not internalFollowing
+          Connectors.RealInputInternal u_after if not internalAfter
             "First transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-70,20})));
-          Connectors.RealInputInternal u_preceding if not internalPreceding
+          Connectors.RealInputInternal u_before if not internalBefore
             "Second transverse specification" annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -5355,7 +5340,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={4,60})));
-          Connectors.RealOutputInternal _u_following=followingSpec(
+          Connectors.RealOutputInternal _u_after=afterSpec(
                       face.p,
                       face.Ndot,
                       face.phi,
@@ -5368,7 +5353,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={4,20})));
-          Connectors.RealOutputInternal _u_preceding=precedingSpec(
+          Connectors.RealOutputInternal _u_before=beforeSpec(
                       face.p,
                       face.Ndot,
                       face.phi,
@@ -5397,7 +5382,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         face.T,
                         face.Qdot)) "Generate the material output"
             annotation (Placement(transformation(extent={{40,50},{60,70}})));
-          Sources.RealExpression precedingOut(y=precedingMeas(
+          Sources.RealExpression beforeOut(y=beforeMeas(
                         face.p,
                         face.Ndot,
                         face.phi,
@@ -5407,7 +5392,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                         orient=Orient.before))
             "Generate the 2nd transverse output"
             annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
-          Sources.RealExpression followingOut(y=followingMeas(
+          Sources.RealExpression afterOut(y=afterMeas(
                         face.p,
                         face.Ndot,
                         face.phi,
@@ -5465,21 +5450,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{6,3},{6,3}}));
 
           // First transverse
-          connect(u_following, _u_following) annotation (Line(
+          connect(u_after, _u_after) annotation (Line(
               points={{-70,20},{4,20}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingSet.y, _u_following) annotation (Line(
+          connect(afterSet.y, _u_after) annotation (Line(
               points={{-29,30},{-20,30},{-20,20},{4,20}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(u_following, u.following) annotation (Line(
+          connect(u_after, u.after) annotation (Line(
               points={{-70,20},{-90,20},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(followingOut.y, y.following) annotation (Line(
+          connect(afterOut.y, y.after) annotation (Line(
               points={{61,20},{80,20},{80,0},{84,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -5488,21 +5473,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{6,3},{6,3}}));
 
           // Second transverse
-          connect(u_preceding, _u_preceding) annotation (Line(
+          connect(u_before, _u_before) annotation (Line(
               points={{-70,-20},{4,-20}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingSet.y, _u_preceding) annotation (Line(
+          connect(beforeSet.y, _u_before) annotation (Line(
               points={{-29,-10},{-20,-10},{-20,-20},{4,-20}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(u_preceding, u.preceding) annotation (Line(
+          connect(u_before, u.before) annotation (Line(
               points={{-70,-20},{-90,-20},{-90,0},{-110,0}},
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(precedingOut.y, y.preceding) annotation (Line(
+          connect(beforeOut.y, y.before) annotation (Line(
               points={{61,-20},{80,-20},{80,0},{110,0}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -5542,21 +5527,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "<html>Conditions for a pair of <a href=\\\"modelica://FCSys.Connectors.Face\\\">Face</a> connectors, with efforts specified by default</html>"
           extends Flows(
             redeclare replaceable function materialSpec = Material.pressure,
-            redeclare replaceable function followingSpec =
-                Translational.velocity,
-            redeclare replaceable function precedingSpec =
-                Translational.velocity,
+            redeclare replaceable function afterSpec = Translational.velocity,
+            redeclare replaceable function beforeSpec = Translational.velocity,
+
             redeclare replaceable function thermalSpec = Thermal.temperature,
             redeclare replaceable function materialMeas = Material.current,
-            redeclare replaceable function followingMeas = Translational.force,
-
-            redeclare replaceable function precedingMeas = Translational.force,
-
+            redeclare replaceable function afterMeas = Translational.force,
+            redeclare replaceable function beforeMeas = Translational.force,
             redeclare replaceable function thermalMeas = Thermal.heatRate,
-            redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=U.atm),
-
-            redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=
-                  298.15*U.K));
+            redeclare replaceable Modelica.Blocks.Sources.RealExpression
+              materialSet(y=U.atm),
+            redeclare replaceable Modelica.Blocks.Sources.RealExpression
+              thermalSet(y=298.15*U.K));
 
           // Note:  In Dymola 2014, the paths must be explicitly given to prevent
           // the error "Cannot show the parameter dialog for redeclared class [...]".
@@ -5750,10 +5732,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191})}));
 
     end Face;
 
@@ -5822,7 +5804,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 fillColor={255,255,255},
                 fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}), graphics));
+                  {100,100}}),graphics));
 
       end Volume2;
 
@@ -5889,15 +5871,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={47,107,251},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={47,107,251},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
     end Amagat;
 
     package Dalton
@@ -5983,10 +5965,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
     end Dalton;
 
     package Direct
@@ -6370,8 +6352,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transYMeas = Translational.force,
           redeclare replaceable function transZMeas = Translational.force,
           redeclare replaceable function thermalMeas = Thermal.heatRate,
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=298.15*
-                U.K));
+          redeclare replaceable Modelica.Blocks.Sources.RealExpression
+            thermalSet(y=298.15*U.K));
 
         // The daltonSource and thermalSet blocks are redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
@@ -6462,10 +6444,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
     end Direct;
 
     package Inert
@@ -6856,8 +6838,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transYMeas = Translational.force,
           redeclare replaceable function transZMeas = Translational.force,
           redeclare replaceable function thermalMeas = Thermal.heatRate,
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=298.15*
-                U.K));
+          redeclare replaceable Modelica.Blocks.Sources.RealExpression
+            thermalSet(y=298.15*U.K));
 
         // The thermalSet block is redeclared as not replaceable
         // because y is set directly and cannot be undone at instantiation.
@@ -6948,10 +6930,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Thermal;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
     end Inert;
 
     package Translational
@@ -7291,10 +7273,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Component;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end Translational;
 
@@ -7380,10 +7362,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="thermal");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
     end ThermalDiffusion;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
@@ -7464,7 +7446,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm}
         "Lengths of the segments across the channel" annotation (Dialog(group=
-              "Cell geometry", __Dymola_label=
+              "Cell geometry",__Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_x_an=size(L_x_an, 1)
         "Number of subregions along the through-cell axis in anode FP"
@@ -8183,11 +8165,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {120,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                 160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
+                  extent={{-160,160},{160,-160}},
+                  lineColor={191,191,191},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+              {160,-160}}, lineColor={0,0,0})}),
         Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.

@@ -5731,13 +5731,13 @@ protected
               40}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics={Text(
-            extent={{-100,120},{100,160}},
-            textString="%name",
-            visible=inclTransY,
-            lineColor={0,0,0}), Text(
-            extent={{-100,56},{100,96}},
-            textString="%name",
-            visible=not inclTransY,
-            lineColor={0,0,0})}));
+              extent={{-100,120},{100,160}},
+              textString="%name",
+              visible=inclTransY,
+              lineColor={0,0,0}),Text(
+              extent={{-100,56},{100,96}},
+              textString="%name",
+              visible=not inclTransY,
+              lineColor={0,0,0})}));
   end Region;
 end Regions;

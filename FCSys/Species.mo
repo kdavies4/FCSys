@@ -184,6 +184,10 @@ package Species "Dynamic models of chemical species"
 
         parameter Q.Current Io=U.A "Exchange current density" annotation (
             Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
+
+        output Q.Potential wprime(stateSelect=StateSelect.never) = chemical.g
+           - g if environment.analysis "Reaction overpotential";
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
@@ -1060,7 +1064,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     extends Fluid(
       alpha=0.5,
       final mu=sigma*v,
-      dalton(final V=(N - electrical.Z/Data.z)*v));
+      dalton(final V=(N - electrostatic.Z/Data.z)*v));
     // Note:  The amount of material includes the additional amount in the
     // charge layer, which may be positive or negative.
 
@@ -1068,7 +1072,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Electrical conductivity" annotation (Dialog(group="Material properties",
           __Dymola_label="<html>&sigma;</html>"));
 
-    Connectors.Electrostatic electrical "Interface with the dielectric"
+    Connectors.Electrostatic electrostatic "Interface with the dielectric"
       annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
           iconTransformation(extent={{-80,60},{-60,80}})));
 
@@ -1076,7 +1080,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     assert(Data.z <> 0, "The Ion model can only be used for charged species.");
 
   equation
-    g = Data.z*electrical.w;
+    g = Data.z*electrostatic.w;
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
@@ -1219,7 +1223,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Volume flow rates into the faces";
     output Q.PressureAbsolute q[n_trans](each stateSelect=StateSelect.never) =
       Data.m*phi .* I ./ (2*A[cartTrans]) if environment.analysis
-      "Dynamic pressure";
+      "Dynamic pre ssure";
     output Q.Velocity phi_chemical[n_trans](each stateSelect=StateSelect.never)
        = actualStream(chemical.phi) if environment.analysis
       "Velocity of the chemical stream";
@@ -1229,11 +1233,13 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     //
     // Potentials and current
     output Q.Potential g_faces[n_trans, Side](each stateSelect=StateSelect.never)
-       = Data.g(faces.T, faces.p) if environment.analysis
+       = Data.g(faces.T, faces.p) if environment.analysis and false
       "Gibbs potentials at the faces";
+    // **temp false; pressure is invalid of boundary disconnected
     output Q.Potential Deltag[n_trans](each stateSelect=StateSelect.never) =
-      Delta(g_faces) if environment.analysis
+      Delta(g_faces) if environment.analysis and false
       "Differences in Gibbs potentials across the faces";
+    // **Temp false
     //
     // Time constants
     output Q.TimeAbsolute tau_NT[n_trans](
@@ -1336,12 +1342,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
               {{-30,80},{-50,100}})));
 
     // Geometric parameters
-    /* **
-  outer parameter Q.Area A[Axis] "Cross-sectional areas" annotation (
-      missingInnerMessage="This model should be used within a subregion model.
-");
-
-  */
   protected
     outer Q.Length Lprime[:]
       "Effective area divided by length of the transport axes" annotation (
@@ -1385,9 +1385,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           "This model should be used within a phase model.");
 
     // Additional aliases (for common terms)
-    Q.CurrentRate Idot[n_trans](each nominal=U.A/U.s, each stateSelect=
-          StateSelect.never)
-      "Lineic force, excluding thermodynamic and unsteady boundary terms";
+    Q.Force mPhidot[n_trans](each nominal=U.N, each stateSelect=StateSelect.never)
+      "Force, excluding effects of thermodynamic pressure, dynamic pressure, and unsteady current";
     Q.Force faces_mPhidot[n_trans, Side, Orient]
       "Directly-calculated shear forces";
 
@@ -1512,14 +1511,12 @@ Choose any condition besides None.");
     I .* L[cartTrans] = N*phi;
     phi_faces = faces.Ndot .* Data.v_Tp(faces.T, faces.p) ./ {A[cartTrans[i]]*{
       1,-1} for i in 1:n_trans};
-    Data.m*Idot .* L[cartTrans] + M*environment.a[cartTrans] + Data.z*N*
-      environment.E[cartTrans] = Data.m*actualStream(chemical.phi)*chemical.Ndot
-       + direct.translational.mPhidot + {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[
-      j]) + sum((if i == j then phi[j]*I[i]*Data.m else faces[i, :].phi[
-      cartWrap(cartTrans[j] - cartTrans[i])]*faces[i, :].Ndot*Data.m + sum(
-      faces[i, :].mPhidot[cartWrap(cartTrans[j] - cartTrans[i])])) for i in 1:
-      n_trans) for j in 1:n_trans}
-      "Idot encompasses all forces except thermodynamic and unsteady terms";
+    mPhidot + M*environment.a[cartTrans] + Data.z*N*environment.E[cartTrans] =
+      Data.m*actualStream(chemical.phi)*chemical.Ndot + direct.translational.mPhidot
+       + {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((if i == j
+       then 0 else faces[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*faces[
+      i, :].Ndot*Data.m + sum(faces[i, :].mPhidot[cartWrap(cartTrans[j] -
+      cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans};
 
     // Properties upon outflow due to reaction and phase change
     chemical.phi = phi;
@@ -1529,20 +1526,20 @@ Choose any condition besides None.");
     if abs(alpha - 0.5) > Modelica.Constants.eps then
       v*tauprime*chemical.Ndot = V*(exp(alpha*(chemical.g - g)/T) - exp((alpha
          - 1)*(chemical.g - g)/T));
-      // Note:  v/V is different than N for the Electrical species, which inherits from
-      // this model.
+      // Note:  v/V is different than N for the Ion model, which inherits from
+      // this one.
     else
       chemical.g = g + 2*T*asinh(chemical.Ndot*v*tauprime/(2*V))
-        "Inverted explicitly to eliminate nonlinear system of equations";
+        "Explicitly inverted to avoid nonlinear system of equations";
     end if;
 
     // Transport
     for i in 1:n_trans loop
       for side in Side loop
         // Material/conservation of translational momentum
-        (if consTrans[i] == ConsMom.dynamic then der(faces[i, side].Ndot)/U.s
-           else 0) = 2*Lprime[i]*(faces[i, side].p - p)/Data.m + inSign(side)*
-          Idot[i];
+        (if consTrans[i] == ConsMom.dynamic then Data.m*der(faces[i, side].Ndot)
+          /U.s else 0) = Lprime[i]*(faces[i, side].p - p)*2 + Data.m*faces[i,
+          side].Ndot^2/N + inSign(side)*mPhidot[i]/L[cartTrans[i]];
 
         // Transverse translational momentum
         eta*faces_mPhidot[i, side, Orient.after] = Nu_Phi[after(cartTrans[i])]*
@@ -1671,20 +1668,17 @@ Choose any condition besides None.");
         // assertion.
       end if;
     else
-      (if consEnergy == ConsThermo.dynamic then (N*T*der(s) + M*phi*der(phi))/U.s
-         else 0) = (chemical.g + actualStream(chemical.sT) - h + (actualStream(
-        chemical.phi)*actualStream(chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot
-         + direct.translational.phi*direct.translational.mPhidot + sum(intra[i].phi
-        *intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot
-        for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot)
-         + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h})*faces[i, :].Ndot
-         + sum((if j == i then 0 else (faces[i, :].phi[cartWrap(cartTrans[j] -
-        cartTrans[i])] .^ 2 - fill(phi[j]^2, 2))*faces[i, :].Ndot*Data.m/2 +
-        faces[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*faces[i, :].mPhidot[
-        cartWrap(cartTrans[j] - cartTrans[i])]) for j in 1:n_trans) for i in 1:
-        n_trans) + sum(faces.Qdot) "Conservation of energy";
-      // **Move dynamic pressure to be explicit as Ndot^2*m/(rho*A) across boundary
-
+      (if consEnergy == ConsThermo.dynamic then (N*T*der(s) + der(M*phi*phi)/2)
+        /U.s else 0) = (chemical.g + actualStream(chemical.sT) - h +
+        actualStream(chemical.phi)*actualStream(chemical.phi)*Data.m/2)*
+        chemical.Ndot + direct.translational.phi*direct.translational.mPhidot
+         + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
+        *inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
+         + sum(inter.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h}
+         + (phi_faces[i, :] .^ 2 + sum(faces[i, :].phi[orient] .^ 2 for orient
+         in Orient))*(Data.m/2))*faces[i, :].Ndot + sum(faces[i, :].phi[orient]
+        *faces[i, :].mPhidot[orient] for orient in Orient) for i in 1:n_trans)
+         + sum(faces.Qdot) "Conservation of energy";
     end if;
     annotation (
       defaultComponentPrefixes="replaceable",
