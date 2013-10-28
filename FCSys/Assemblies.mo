@@ -4,7 +4,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
   package Cells "Single-cell PEMFC models"
     extends Modelica.Icons.Package;
-    extends FCSys.Icons.PackageUnderConstruction;
+    extends Modelica.Icons.UnderConstruction;
     package Examples "Examples"
 
       model Cell

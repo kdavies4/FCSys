@@ -110,16 +110,19 @@ package Phases "Mixtures of species"
           color={0,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(graphics={Line(points={
-              {-6,28},{-6,-28}}, color={0,0,255}),Line(points={{-90,0},{-6,0}},
-              color={0,0,255}),Line(points={{6,0},{90,0}}, color={0,0,255}),
-              Line(points={{6,28},{6,-28}}, color={0,0,255}),Text(
-                  extent={{-136,-60},{136,-92}},
-                  lineColor={0,0,0},
-                  textString="C=%C_SI F"),Text(
-                  extent={{-150,85},{150,45}},
-                  textString="%name",
-                  lineColor={0,0,255})}));
+                -100,-100},{100,100}}), graphics), Icon(graphics={
+            Line(points={{-6,28},{-6,-28}}, color={0,0,255}),
+            Line(points={{-90,0},{-6,0}}, color={0,0,255}),
+            Line(points={{6,0},{90,0}}, color={0,0,255}),
+            Line(points={{6,28},{6,-28}}, color={0,0,255}),
+            Text(
+              extent={{-136,-60},{136,-92}},
+              lineColor={0,0,0},
+              textString="C=%C_SI F"),
+            Text(
+              extent={{-150,85},{150,45}},
+              textString="%name",
+              lineColor={0,0,255})}));
     end Capacitor;
 
     model Plate "Plate of a capacitor (for charge storage)"
@@ -135,21 +138,6 @@ package Phases "Mixtures of species"
       Connectors.Electrostatic electrical "FCSys electrical connector"
         annotation (Placement(transformation(extent={{30,-10},{50,10}}),
             iconTransformation(extent={{30,-10},{50,10}})));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics={Polygon(
-                  points={{-20,0},{0,20},{20,0},{0,-20},{-20,0}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{20,0},{30,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-30,0},{-20,0}},
-                  color={0,0,255},
-                  smooth=Smooth.None)}));
 
     equation
       // Aliases
@@ -161,13 +149,31 @@ package Phases "Mixtures of species"
       // Conservation
       der(N)/U.s = (pin.i*U.A)/z "Material";
 
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics={
+            Polygon(
+              points={{-20,0},{0,20},{20,0},{0,-20},{-20,0}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{20,0},{30,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-30,0},{-20,0}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end Plate;
   end Examples;
 
   model Gas "Gas phase"
     import Modelica.Math.BooleanVectors.countTrue;
 
-    extends Phase(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
+    extends Partial(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
     // Conditionally include species.
     parameter Boolean inclH2=false "Include H2" annotation (
@@ -178,9 +184,10 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>Hydrogen (H<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
-    replaceable FCSys.Species.H2.Gas.Fixed H2(final n_trans) if inclH2
-      constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2.Gas.Fixed H2(final n_trans,final n_inter) if
+      inclH2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -202,9 +209,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Gas.Fixed H2O(final n_trans) if inclH2O
-      constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2O.Gas.Fixed H2O(final n_trans,final n_inter)
+      if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -226,9 +234,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Nitrogen (N<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.N2.Gas.Fixed N2(final n_trans) if inclN2
-      constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.N2.Gas.Fixed N2(final n_trans,final n_inter) if
+      inclN2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -250,9 +259,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Oxygen (O<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.O2.Gas.Fixed O2(final n_trans) if inclO2
-      constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.O2.Gas.Fixed O2(final n_trans,final n_inter) if
+      inclO2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -301,22 +311,22 @@ package Phases "Mixtures of species"
     output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
-    // Aliases
-    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
-      if n_spec > 1 and reduceTrans "Velocity";
-    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if
-      n_spec > 1 and reduceThermal "Temperature";
-    // These make the selected states more readable.
-
-    Connectors.Chemical connH2(final n_trans=n_trans) if inclH2
+    Connectors.Electrochemical connH2(final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
               {-74,40},{-54,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
-    Connectors.Chemical connH2O(final n_trans=n_trans) if inclH2O
+    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-34,40},{-14,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Chemical connO2(final n_trans=n_trans) if inclO2
+    Connectors.Electrochemical connO2(final n_trans=n_trans) if inclO2
       "Chemical connector for O2" annotation (Placement(transformation(extent={
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
+
+    // Aliases
+    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
+      if n_spec > 0 and reduceTrans "Velocity";
+    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.thermal.T if
+      n_spec > 0 and reduceThermal "Temperature";
+    // These make the selected states more readable.
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
@@ -334,15 +344,15 @@ package Phases "Mixtures of species"
 
   equation
     // Chemical exchange
-    connect(O2.chemical, connO2) annotation (Line(
+    connect(O2.electrochemical, connO2) annotation (Line(
         points={{56,9},{56,50}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2.chemical, connH2) annotation (Line(
+    connect(H2.electrochemical, connH2) annotation (Line(
         points={{-64,9},{-64,50}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.electrochemical, connH2O) annotation (Line(
         points={{-24,9},{-24,50}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -553,7 +563,7 @@ package Phases "Mixtures of species"
     import assert = FCSys.Utilities.assertEval;
     import Modelica.Math.BooleanVectors.countTrue;
 
-    extends Phase(
+    extends Partial(
       final reduceTrans=false,
       final reduceThermal=true,
       final n_spec=countTrue({'inclC+','incle-'}));
@@ -568,9 +578,11 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Carbon plus (C<sup>+</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_trans) if
-      'inclC+' constrainedby FCSys.Species.Solid(
+    replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_trans, final
+        n_inter) if 'inclC+' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
+      n_intra=1,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -581,7 +593,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>C<sup>+</sup> model</html>",
         enable='inclC+'),
-      Placement(transformation(extent={{-30,-30},{-10,-10}})));
+      Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     parameter Boolean 'incle-'=false "Include e-" annotation (
       HideResult=true,
@@ -592,9 +604,11 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Electrons (e<sup>-</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_trans) if
-      'incle-' constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_trans,final
+        n_inter) if 'incle-' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_intra=1,
+      n_inter=0,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -605,58 +619,59 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>'e-' model</html>",
         enable='incle-'),
-      Placement(transformation(extent={{10,-30},{30,-10}})));
+      Placement(transformation(extent={{10,-10},{30,10}})));
 
     Connectors.FaceBus xNegative if inclTrans[Axis.x]
       "Negative face along the x axis" annotation (Placement(transformation(
-            extent={{-80,-30},{-60,-10}}),iconTransformation(extent={{-90,-10},
+            extent={{-80,-10},{-60,10}}), iconTransformation(extent={{-90,-10},
               {-70,10}})));
     Connectors.FaceBus yNegative if inclTrans[Axis.y]
       "Negative face along the y axis" annotation (Placement(transformation(
-            extent={{-56,-54},{-36,-34}}),iconTransformation(extent={{-10,-94},
+            extent={{-56,-34},{-36,-14}}),iconTransformation(extent={{-10,-94},
               {10,-74}})));
     Connectors.FaceBus zNegative if inclTrans[Axis.z]
       "Negative face along the z axis" annotation (Placement(transformation(
-            extent={{48,-18},{68,2}}),iconTransformation(extent={{40,40},{60,60}})));
+            extent={{48,2},{68,22}}), iconTransformation(extent={{40,40},{60,60}})));
     Connectors.FaceBus xPositive if inclTrans[Axis.x]
       "Positive face along the x axis" annotation (Placement(transformation(
-            extent={{60,-30},{80,-10}}),iconTransformation(extent={{70,-10},{90,
+            extent={{60,-10},{80,10}}), iconTransformation(extent={{70,-10},{90,
               10}})));
     Connectors.FaceBus yPositive if inclTrans[Axis.y]
       "Positive face along the y axis" annotation (Placement(transformation(
-            extent={{36,-6},{56,14}}), iconTransformation(extent={{-10,90},{10,
+            extent={{36,14},{56,34}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.FaceBus zPositive if inclTrans[Axis.z]
       "Positive face along the z axis" annotation (Placement(transformation(
-            extent={{-68,-42},{-48,-22}}),iconTransformation(extent={{-90,-90},
+            extent={{-68,-22},{-48,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
-      (Placement(transformation(extent={{60,-66},{80,-46}}), iconTransformation(
+      (Placement(transformation(extent={{60,-46},{80,-26}}), iconTransformation(
             extent={{-60,60},{-40,40}})));
 
     Connectors.Amagat amagat(final V=-V) if n_spec > 0
       "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-80,4},{-60,24}}), iconTransformation(extent={{70,-90},{90,
+            extent={{-80,24},{-60,44}}),iconTransformation(extent={{70,-90},{90,
               -70}})));
+
+    Connectors.Electrochemical 'conne-'(final n_trans=n_trans) if 'incle-'
+      "Electrochemical connector for e-" annotation (Placement(transformation(
+            extent={{6,40},{26,60}}), iconTransformation(extent={{-10,-50},{10,
+              -30}})));
+    Connectors.Electrostatic electrostatic if 'incle-' and n_spec > 0
+      "Interface with the dielectric" annotation (Placement(transformation(
+            extent={{60,24},{80,44}}), iconTransformation(extent={{90,-50},{110,
+              -30}})));
+    // Note:  ('incle-' and n_spec > 0) is logically equivalent to 'incle-',
+    // but n_spec is included so that the connector always appears in the icon
+    // layer in Dymola 2014.
 
     // Aliases
     Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
-      if n_spec > 1 and reduceTrans "Velocity";
-    Q.Temperature T(each stateSelect=StateSelect.prefer) = direct.thermal.T if
-      n_spec > 1 and reduceThermal "Temperature";
+      if n_spec > 0 and reduceTrans "Velocity";
+    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.thermal.T if
+      n_spec > 0 and reduceThermal "Temperature";
     // These make the selected states more readable.
-
-    Connectors.Chemical 'conne-'(final n_trans=n_trans) if 'incle-'
-      "Chemical connector for e-" annotation (Placement(transformation(extent={
-              {6,20},{26,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Electrostatic electrostatic if 'incle-' and n_spec > 0
-      "Interface with the dielectric" annotation (Placement(transformation(
-            extent={{60,4},{80,24}}), iconTransformation(extent={{90,-50},{110,
-              -30}})));
-    // Note:  ('incle-' and n_spec > 0) can be logically reduced to 'incle-',
-    // but n_spec is included so that the connector always appears in the icon
-    // layer in Dymola 2014.
 
   protected
     Connectors.DirectNode direct(
@@ -666,63 +681,71 @@ package Phases "Mixtures of species"
       reduceThermal)
       "Connector to directly couple velocities and temperatures within the phase"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              0,-68}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
+              0,-60}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
               26,-52})));
 
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
-      annotation (Placement(transformation(extent={{-60,4},{-40,24}})));
+      annotation (Placement(transformation(extent={{-60,24},{-40,44}})));
 
+    Connectors.InertNode electronsSolid
+      "Connection node for drag betweene- and C+ (electrical resistance)"
+      annotation (Placement(transformation(extent={{36,-58},{56,-38}}),
+          iconTransformation(extent={{48,-76},{68,-56}})));
   equation
     // Chemical exchange
-    connect('e-'.chemical, 'conne-') annotation (Line(
-        points={{16,-11},{16,30}},
+    connect('e-'.electrochemical, 'conne-') annotation (Line(
+        points={{16,9},{16,50}},
         color={221,23,47},
         smooth=Smooth.None));
 
     // Electrical storage
     connect(electrostatic, 'e-'.electrostatic) annotation (Line(
-        points={{70,14},{13,14},{13,-13}},
+        points={{70,34},{13,34},{13,7}},
         color={255,195,38},
         smooth=Smooth.None));
 
     // Inert exchange
     connect('C+'.inter, inter) annotation (Line(
-        points={{-11,-23.8},{-9,-26},{-9,-56},{70,-56}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect('e-'.inter, inter) annotation (Line(
-        points={{29,-23.8},{31,-26},{31,-56},{70,-56}},
+        points={{-11,-3.8},{-9,-6},{-9,-36},{70,-36}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('C+'.direct.translational, direct.translational) annotation (Line(
-        points={{-16.2,-29},{-16.2,-68},{0,-68}},
+        points={{-16.2,-9},{-16.2,-60},{0,-60}},
         color={47,107,251},
         smooth=Smooth.None));
     connect('C+'.direct.thermal, direct.thermal) annotation (Line(
-        points={{-16.2,-29},{-16.2,-68},{0,-68}},
+        points={{-16.2,-9},{-16.2,-60},{0,-60}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('e-'.direct.translational, direct.translational) annotation (Line(
-        points={{23.8,-29},{23.8,-68},{0,-68}},
+        points={{23.8,-9},{23.8,-60},{0,-60}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('e-'.direct.thermal, direct.thermal) annotation (Line(
-        points={{23.8,-29},{23.8,-68},{0,-68}},
+        points={{23.8,-9},{23.8,-60},{0,-60}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect('e-'.intra[1], electronsSolid.exchange) annotation (Line(
+        points={{27,-7},{27,-48},{46,-48}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect('C+'.intra[1], electronsSolid.exchange) annotation (Line(
+        points={{-13,-7},{-13,-48},{46,-48}},
         color={38,196,52},
         smooth=Smooth.None));
 
     // Mixing
     connect(amagatDalton.amagat, amagat) annotation (Line(
-        points={{-54,14},{-70,14}},
+        points={{-54,34},{-70,34}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(amagatDalton.dalton, 'C+'.dalton) annotation (Line(
-        points={{-46,14},{-29,14},{-29,-16}},
+        points={{-46,34},{-29,34},{-29,4}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(amagatDalton.dalton, 'e-'.dalton) annotation (Line(
-        points={{-46,14},{11,14},{11,-16}},
+        points={{-46,34},{11,34},{11,4}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -731,81 +754,81 @@ package Phases "Mixtures of species"
     // C+
     connect('C+'.faces[transCart[Axis.x], Side.n], xNegative.'C+') annotation (
         Line(
-        points={{-20,-20},{-70,-20}},
+        points={{-20,0},{-70,0}},
         color={127,127,127},
         smooth=Smooth.None));
     connect('C+'.faces[transCart[Axis.x], Side.p], xPositive.'C+') annotation (
         Line(
-        points={{-20,-20},{70,-20}},
+        points={{-20,0},{70,0}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('C+'.faces[transCart[Axis.y], Side.n], yNegative.'C+') annotation (
         Line(
-        points={{-20,-20},{-20,-44},{-46,-44}},
+        points={{-20,0},{-20,-24},{-46,-24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('C+'.faces[transCart[Axis.y], Side.p], yPositive.'C+') annotation (
         Line(
-        points={{-20,-20},{-20,4},{46,4}},
+        points={{-20,0},{-20,24},{46,24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('C+'.faces[transCart[Axis.z], Side.n], zNegative.'C+') annotation (
         Line(
-        points={{-20,-20},{-8,-8},{58,-8}},
+        points={{-20,0},{-8,12},{58,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect('C+'.faces[transCart[Axis.z], Side.p], zPositive.'C+') annotation (
         Line(
-        points={{-20,-20},{-32,-32},{-58,-32}},
+        points={{-20,0},{-32,-12},{-58,-12}},
         color={127,127,127},
         smooth=Smooth.None));
 
     // e-
     connect('e-'.faces[transCart[Axis.x], Side.n], xNegative.'e-') annotation (
         Line(
-        points={{20,-20},{-70,-20}},
+        points={{20,0},{-70,0}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('e-'.faces[transCart[Axis.x], Side.p], xPositive.'e-') annotation (
         Line(
-        points={{20,-20},{70,-20}},
+        points={{20,0},{70,0}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('e-'.faces[transCart[Axis.y], Side.n], yNegative.'e-') annotation (
         Line(
-        points={{20,-20},{20,-44},{-46,-44}},
+        points={{20,0},{20,-24},{-46,-24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('e-'.faces[transCart[Axis.y], Side.p], yPositive.'e-') annotation (
         Line(
-        points={{20,-20},{20,4},{46,4}},
+        points={{20,0},{20,24},{46,24}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('e-'.faces[transCart[Axis.z], Side.n], zNegative.'e-') annotation (
         Line(
-        points={{20,-20},{32,-8},{58,-8}},
+        points={{20,0},{32,12},{58,12}},
         color={127,127,127},
         smooth=Smooth.None));
     connect('e-'.faces[transCart[Axis.z], Side.p], zPositive.'e-') annotation (
         Line(
-        points={{20,-20},{8,-32},{-58,-32}},
+        points={{20,0},{8,-12},{-58,-12}},
         color={127,127,127},
         smooth=Smooth.None));
 
     annotation (
       Documentation(info="<html>
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
-    For more information, see the
+    For more information, please see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-80},{80,
-              40}}), graphics),
+              60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
   end Graphite;
@@ -813,12 +836,13 @@ package Phases "Mixtures of species"
   model Ionomer "Ionomer phase"
     import Modelica.Math.BooleanVectors.countTrue;
 
-    extends Phase(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
+    extends Partial(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
 
-    parameter Q.NumberAbsolute k_common=1
-      "Coupling factor for exchange among all species within the phase"
-      annotation (Dialog(group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>common</sub></html>"));
+    parameter Q.NumberAbsolute k_EOD=1
+      "Coupling factor for electro-osmotic drag" annotation (Evaluate=true,
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><i>k</i><sub>EOD</sub></html>"));
+    // TODO:  Set an appropriate value (possibly use a new parameter for the current ratio).
 
     // Conditionally include species.
     parameter Boolean 'inclSO3-'=false
@@ -833,11 +857,12 @@ package Phases "Mixtures of species"
 
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_trans) if
-      'inclSO3-' constrainedby FCSys.Species.Solid(
+    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_trans,final
+        n_inter) if 'inclSO3-' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
-      n_intra=1,
-      k_intra={k_common},
+      n_intra=2,
+      n_inter=n_inter,
+      k_intra={Modelica.Constants.inf,Modelica.Constants.inf},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -848,7 +873,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>SO<sub>3</sub><sup>-</sup> model</html>",
         enable='inclSO3-'),
-      Placement(transformation(extent={{30,-20},{50,0}})));
+      Placement(transformation(extent={{30,10},{50,30}})));
 
     parameter Boolean 'inclH+'=false "Include H+" annotation (
       HideResult=true,
@@ -859,11 +884,12 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Protons (H<sup>+</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_trans) if
-      'inclH+' constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_trans,final
+        n_inter) if 'inclH+' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_intra=1,
-      k_intra={k_common},
+      n_intra=2,
+      n_inter=0,
+      k_intra={1,k_EOD},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -874,7 +900,7 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>H<sup>+</sup> model</html>",
         enable='inclH+'),
-      Placement(transformation(extent={{-50,-20},{-30,0}})));
+      Placement(transformation(extent={{-50,10},{-30,30}})));
 
     parameter Boolean inclH2O=false "Include H2O" annotation (
       HideResult=true,
@@ -885,11 +911,12 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_trans, n_intra=1)
+    replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_trans,final n_inter)
       if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_intra=1,
-      k_intra={k_common},
+      n_intra=2,
+      n_inter=0,
+      k_intra={1,k_EOD},
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -900,154 +927,175 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>H<sub>2</sub>O model</html>",
         enable=inclH2O),
-      Placement(transformation(extent={{-10,-20},{10,0}})));
+      Placement(transformation(extent={{-10,10},{10,30}})));
 
     Connectors.FaceBus xNegative if inclTrans[Axis.x]
       "Negative face along the x axis" annotation (Placement(transformation(
-            extent={{-100,-20},{-80,0}}), iconTransformation(extent={{-90,-10},
+            extent={{-100,10},{-80,30}}), iconTransformation(extent={{-90,-10},
               {-70,10}})));
     Connectors.FaceBus yNegative if inclTrans[Axis.y]
       "Negative face along the y axis" annotation (Placement(transformation(
-            extent={{-76,-44},{-56,-24}}),iconTransformation(extent={{-10,-94},
-              {10,-74}})));
+            extent={{-76,-14},{-56,6}}), iconTransformation(extent={{-10,-94},{
+              10,-74}})));
     Connectors.FaceBus zNegative if inclTrans[Axis.z]
       "Negative face along the z axis" annotation (Placement(transformation(
-            extent={{68,-8},{88,12}}),iconTransformation(extent={{40,40},{60,60}})));
+            extent={{68,22},{88,42}}),iconTransformation(extent={{40,40},{60,60}})));
     Connectors.FaceBus xPositive if inclTrans[Axis.x]
       "Positive face along the x axis" annotation (Placement(transformation(
-            extent={{80,-20},{100,0}}), iconTransformation(extent={{70,-10},{90,
+            extent={{80,10},{100,30}}), iconTransformation(extent={{70,-10},{90,
               10}})));
     Connectors.FaceBus yPositive if inclTrans[Axis.y]
       "Positive face along the y axis" annotation (Placement(transformation(
-            extent={{56,4},{76,24}}), iconTransformation(extent={{-10,90},{10,
+            extent={{56,34},{76,54}}),iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.FaceBus zPositive if inclTrans[Axis.z]
       "Positive face along the z axis" annotation (Placement(transformation(
-            extent={{-88,-32},{-68,-12}}),iconTransformation(extent={{-90,-90},
-              {-70,-70}})));
+            extent={{-88,-2},{-68,18}}), iconTransformation(extent={{-90,-90},{
+              -70,-70}})));
     Connectors.Amagat amagat(final V=-V) if n_spec > 0
       "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-100,16},{-80,36}}), iconTransformation(extent={{70,-90},{
+            extent={{-100,46},{-80,66}}), iconTransformation(extent={{70,-90},{
               90,-70}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
-      (Placement(transformation(extent={{80,-56},{100,-36}}),
-          iconTransformation(extent={{-60,60},{-40,40}})));
-    Connectors.Chemical connH2O(final n_trans=n_trans) if inclH2O
+      (Placement(transformation(extent={{80,-26},{100,-6}}), iconTransformation(
+            extent={{-60,60},{-40,40}})));
+    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-14,30},{6,50}}), iconTransformation(extent={{10,-50},{30,-30}})));
-    Connectors.Chemical 'connH+'(final n_trans=n_trans) if 'inclH+'
-      "Chemical connector for H+" annotation (Placement(transformation(extent={
-              {-54,30},{-34,50}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
+              {{-14,60},{6,80}}), iconTransformation(extent={{10,-50},{30,-30}})));
+    Connectors.Electrochemical 'connH+'(final n_trans=n_trans) if 'inclH+'
+      "Electrochemical connector for H+" annotation (Placement(transformation(
+            extent={{-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{
+              -10,-30}})));
     Connectors.Electrostatic electrostatic if 'inclH+' and n_spec > 0
       "Interface with the dielectric" annotation (Placement(transformation(
-            extent={{-100,4},{-80,24}}), iconTransformation(extent={{-110,-50},
+            extent={{-100,34},{-80,54}}), iconTransformation(extent={{-110,-50},
               {-90,-30}})));
-    // Note:  ('inclH+' and n_spec > 0) can be logically reduced to 'inclH+',
+    // Note:  ('inclH+' and n_spec > 0) is logically equivalent to 'inclH+',
     // but n_spec is included so that the connector always appears in the icon
     // layer in Dymola 2014.
+
+    // Aliases
+    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.translational.phi
+      if n_spec > 0 and reduceTrans "Velocity";
+    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.thermal.T if
+      n_spec > 0 and reduceThermal "Temperature";
+    // These make the selected states more readable.
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
-      annotation (Placement(transformation(extent={{-80,16},{-60,36}})));
-    FCSys.Connectors.DirectNode direct(
+      annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
+    Connectors.DirectNode direct(
       final n_trans=n_trans,
       final inclTrans=reduceTrans,
       final inclThermal=reduceThermal) if n_spec > 0 and (reduceTrans or
       reduceThermal)
       "Connector to directly couple velocities and temperatures within the phase"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              24,-70}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
+              24,-64}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
               26,-52})));
 
-    Connectors.InertNode intra "Connection node for exchange within the phase"
-      annotation (Placement(transformation(extent={{18,-68},{38,-48}}),
+    Connectors.InertNode protonsSolid
+      "Connection node for drag between H+ and SO3- (electrical resistance)"
+      annotation (Placement(transformation(extent={{56,-38},{76,-18}}),
           iconTransformation(extent={{48,-76},{68,-56}})));
-
+    Connectors.InertNode waterSolid
+      "Connection node for drag between H2O and SO3-" annotation (Placement(
+          transformation(extent={{56,-50},{76,-30}}), iconTransformation(extent
+            ={{48,-76},{68,-56}})));
+    Connectors.InertNode EOD
+      "Connection node for electro-osmotic drag (between H+ and H2O)"
+      annotation (Placement(transformation(extent={{56,-62},{76,-42}}),
+          iconTransformation(extent={{48,-76},{68,-56}})));
   equation
     // Chemical exchange
-    connect(H2O.chemical, connH2O) annotation (Line(
-        points={{-4,-1},{-4,40}},
+    connect(H2O.electrochemical, connH2O) annotation (Line(
+        points={{-4,29},{-4,70}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.chemical, 'connH+') annotation (Line(
-        points={{-44,-1},{-44,40}},
+    connect('H+'.electrochemical, 'connH+') annotation (Line(
+        points={{-44,29},{-44,70}},
         color={221,23,47},
         smooth=Smooth.None));
 
     // Electrical storage
     connect(electrostatic, 'H+'.electrostatic) annotation (Line(
-        points={{-90,14},{-47,14},{-47,-3}},
+        points={{-90,44},{-47,44},{-47,27}},
         color={255,195,38},
         smooth=Smooth.None));
 
     // Inert exchange
     connect('SO3-'.inter, inter) annotation (Line(
-        points={{49,-13.8},{52,-13.8},{52,-46},{90,-46}},
+        points={{49,16.2},{52,16.2},{52,-16},{90,-16}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('SO3-'.direct.translational, direct.translational) annotation (Line(
-        points={{43.8,-19},{43.8,-70},{24,-70}},
+        points={{43.8,11},{43.8,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('SO3-'.direct.thermal, direct.thermal) annotation (Line(
-        points={{43.8,-19},{43.8,-70},{24,-70}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect('H+'.inter, inter) annotation (Line(
-        points={{-31,-13.8},{-28,-13.8},{-28,-46},{90,-46}},
+        points={{43.8,11},{43.8,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('H+'.direct.translational, direct.translational) annotation (Line(
-        points={{-36.2,-19},{-36.2,-70},{24,-70}},
+        points={{-36.2,11},{-36.2,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
     connect('H+'.direct.thermal, direct.thermal) annotation (Line(
-        points={{-36.2,-19},{-36.2,-70},{24,-70}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect(H2O.inter, inter) annotation (Line(
-        points={{9,-13.8},{12,-13.8},{12,-46},{90,-46}},
+        points={{-36.2,11},{-36.2,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2O.direct.translational, direct.translational) annotation (Line(
-        points={{3.8,-19},{3.8,-70},{24,-70}},
+        points={{3.8,11},{3.8,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(H2O.direct.thermal, direct.thermal) annotation (Line(
-        points={{3.8,-19},{3.8,-70},{24,-70}},
+        points={{3.8,11},{3.8,-64},{24,-64}},
         color={38,196,52},
         smooth=Smooth.None));
 
-    connect('SO3-'.intra[1], intra.exchange) annotation (Line(
-        points={{47,-17},{47,-58},{28,-58}},
+    connect('SO3-'.intra[1], protonsSolid.exchange) annotation (Line(
+        points={{47,13},{47,-28},{66,-28}},
         color={38,196,52},
         smooth=Smooth.None));
-    connect('H+'.intra[1], intra.exchange) annotation (Line(
-        points={{-33,-17},{-33,-58},{28,-58}},
+    connect('SO3-'.intra[2], waterSolid.exchange) annotation (Line(
+        points={{47,13},{47,-40},{66,-40}},
         color={38,196,52},
         smooth=Smooth.None));
-    connect(H2O.intra[1], intra.exchange) annotation (Line(
-        points={{7,-17},{7,-58},{28,-58}},
+    connect('H+'.intra[1], protonsSolid.exchange) annotation (Line(
+        points={{-33,13},{-33,-28},{66,-28}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect('H+'.intra[2], EOD.exchange) annotation (Line(
+        points={{-33,13},{-33,-52},{66,-52}},
+        color={38,196,52},
+        smooth=Smooth.None));
+
+    connect(H2O.intra[1], waterSolid.exchange) annotation (Line(
+        points={{7,13},{7,-40},{66,-40}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(H2O.intra[2], EOD.exchange) annotation (Line(
+        points={{7,13},{7,-52},{66,-52}},
         color={38,196,52},
         smooth=Smooth.None));
 
     // Mixing
     connect('SO3-'.dalton, amagatDalton.dalton) annotation (Line(
-        points={{31,-6},{31,26},{-66,26}},
+        points={{31,24},{31,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
     connect('H+'.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-49,-6},{-49,26},{-66,26}},
+        points={{-49,24},{-49,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(H2O.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-9,-6},{-9,26},{-66,26}},
+        points={{-9,24},{-9,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(amagatDalton.amagat, amagat) annotation (Line(
-        points={{-74,26},{-90,26}},
+        points={{-74,56},{-90,56}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1056,106 +1104,106 @@ package Phases "Mixtures of species"
     // SO3-
     connect('SO3-'.faces[transCart[Axis.x], Side.n], xNegative.'SO3-')
       annotation (Line(
-        points={{40,-10},{-90,-10}},
+        points={{40,20},{-90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('SO3-'.faces[transCart[Axis.x], Side.p], xPositive.'SO3-')
       annotation (Line(
-        points={{40,-10},{90,-10}},
+        points={{40,20},{90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('SO3-'.faces[transCart[Axis.y], Side.n], yNegative.'SO3-')
       annotation (Line(
-        points={{40,-10},{40,-34},{-66,-34}},
+        points={{40,20},{40,-4},{-66,-4}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('SO3-'.faces[transCart[Axis.y], Side.p], yPositive.'SO3-')
       annotation (Line(
-        points={{40,-10},{40,14},{66,14}},
+        points={{40,20},{40,44},{66,44}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('SO3-'.faces[transCart[Axis.z], Side.n], zNegative.'SO3-')
       annotation (Line(
-        points={{40,-10},{52,2},{78,2}},
+        points={{40,20},{52,32},{78,32}},
         color={127,127,127},
         smooth=Smooth.None));
     connect('SO3-'.faces[transCart[Axis.z], Side.p], zPositive.'SO3-')
       annotation (Line(
-        points={{40,-10},{28,-22},{-78,-22}},
+        points={{40,20},{28,8},{-78,8}},
         color={127,127,127},
         smooth=Smooth.None));
     // 'H+'
     connect('H+'.faces[transCart[Axis.x], Side.n], xNegative.'H+') annotation (
         Line(
-        points={{-40,-10},{-90,-10}},
+        points={{-40,20},{-90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('H+'.faces[transCart[Axis.x], Side.p], xPositive.'H+') annotation (
         Line(
-        points={{-40,-10},{90,-10}},
+        points={{-40,20},{90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('H+'.faces[transCart[Axis.y], Side.n], yNegative.'H+') annotation (
         Line(
-        points={{-40,-10},{-40,-34},{-66,-34}},
+        points={{-40,20},{-40,-4},{-66,-4}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('H+'.faces[transCart[Axis.y], Side.p], yPositive.'H+') annotation (
         Line(
-        points={{-40,-10},{-40,14},{66,14}},
+        points={{-40,20},{-40,44},{66,44}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect('H+'.faces[transCart[Axis.z], Side.n], zNegative.'H+') annotation (
         Line(
-        points={{-40,-10},{-28,2},{78,2}},
+        points={{-40,20},{-28,32},{78,32}},
         color={127,127,127},
         smooth=Smooth.None));
     connect('H+'.faces[transCart[Axis.z], Side.p], zPositive.'H+') annotation (
         Line(
-        points={{-40,-10},{-52,-22},{-78,-22}},
+        points={{-40,20},{-52,8},{-78,8}},
         color={127,127,127},
         smooth=Smooth.None));
     // H2O
     connect(H2O.faces[transCart[Axis.x], Side.n], xNegative.H2O) annotation (
         Line(
-        points={{0,-10},{-90,-10}},
+        points={{0,20},{-90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[transCart[Axis.x], Side.p], xPositive.H2O) annotation (
         Line(
-        points={{0,-10},{90,-10}},
+        points={{0,20},{90,20}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[transCart[Axis.y], Side.n], yNegative.H2O) annotation (
         Line(
-        points={{0,-10},{0,-34},{-66,-34}},
+        points={{0,20},{0,-4},{-66,-4}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[transCart[Axis.y], Side.p], yPositive.H2O) annotation (
         Line(
-        points={{0,-10},{0,14},{66,14}},
+        points={{0,20},{0,44},{66,44}},
         color={127,127,127},
         smooth=Smooth.None));
 
     connect(H2O.faces[transCart[Axis.z], Side.n], zNegative.H2O) annotation (
         Line(
-        points={{0,-10},{12,2},{78,2}},
+        points={{0,20},{12,32},{78,32}},
         color={127,127,127},
         smooth=Smooth.None));
     connect(H2O.faces[transCart[Axis.z], Side.p], zPositive.H2O) annotation (
         Line(
-        points={{0,-10},{0,-22},{-78,-22}},
+        points={{0,20},{0,8},{-78,8}},
         color={127,127,127},
         smooth=Smooth.None));
 
@@ -1166,16 +1214,16 @@ package Phases "Mixtures of species"
     
     <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> 
     for additional assumptions.
-    For more information, see the
+    For more information, please see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-80},{
-              100,60}}), graphics),
+              100,80}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
   end Ionomer;
 
   model Liquid "Liquid phase"
-    extends Phase(final n_spec=if inclH2O then 1 else 0);
+    extends Partial(final n_spec=if inclH2O then 1 else 0,reduceThermal=true);
 
     // Conditionally include species.
     parameter Boolean inclH2O=false "Include H2O" annotation (
@@ -1187,9 +1235,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_trans) if inclH2O
-      constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_trans,final n_inter)
+      if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
+      n_inter=n_inter,
       phi(each stateSelect=if reduceTrans then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if reduceThermal then StateSelect.default else StateSelect.prefer))
@@ -1233,7 +1282,7 @@ package Phases "Mixtures of species"
       "Connector for additivity of volume" annotation (Placement(transformation(
             extent={{-60,0},{-40,20}}), iconTransformation(extent={{70,-90},{90,
               -70}})));
-    Connectors.Chemical connH2O(final n_trans=n_trans) if inclH2O
+    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-24,40},{-4,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -1244,7 +1293,7 @@ package Phases "Mixtures of species"
 
   equation
     // Chemical exchange
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.electrochemical, connH2O) annotation (Line(
         points={{-14,-1},{-14,50}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1314,15 +1363,15 @@ package Phases "Mixtures of species"
   end Liquid;
 
 protected
-  partial model Phase "Base model for a phase"
+  partial model Partial "Base model for a phase"
     import Modelica.Math.BooleanVectors.index;
     // extends FCSys.Icons.Names.Middle;
 
     parameter Integer n_spec(start=0) "Number of species"
       annotation (HideResult=true);
-    inner parameter Integer n_inter=0
-      "Number of independent couplings with other phases"
-      annotation (Dialog(connectorSizing=true),HideResult=n_spec == 0);
+    parameter Integer n_inter=0
+      "Number of exchange connections with other phases"
+      annotation (Dialog(connectorSizing=true),HideResult=true);
 
     // Geometric parameters
     inner parameter Q.NumberAbsolute k[Axis](
@@ -1449,16 +1498,16 @@ protected
             textString="%name",
             lineColor={0,0,0})}),
       Diagram(graphics));
-  end Phase;
+  end Partial;
 
 public
   model Dielectric "Dielectric gap"
     extends FCSys.Icons.Names.Top2;
 
-    parameter Q.Length L=U.um "Length of the dielectric (not of the region)"
-      annotation (Dialog(group="Geometry", __Dymola_label=
-            "<html><i>L</i></html>"));
-    parameter Q.Area A=U.cm^2
+    parameter Q.Length L=1e-9*U.m
+      "Length of the dielectric (not of the region)" annotation (Dialog(group=
+            "Geometry",__Dymola_label="<html><i>L</i></html>"));
+    parameter Q.Area A=100*U.m^2
       "Cross-sectional area of the dielectric (not of the region)" annotation (
         Dialog(group="Geometry", __Dymola_label="<html><i>A</i></html>"));
     parameter Q.Permittivity epsilon=U.epsilon_0 "Permittivity"

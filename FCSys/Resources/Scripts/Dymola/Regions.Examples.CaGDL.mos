@@ -6,4 +6,4 @@ FCSys.Utilities.plot6(
     y1={"caGDL.subregions[1, 1, 1].gas.H2O.rho", "caGDL.subregions[1, 1, 1].gas.N2.rho", "caGDL.subregions[1, 1, 1].gas.O2.rho"},
     y3={"caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p"},
     y4={"caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T"},
-    y5={"caGDL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.chemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.chemical.mu"})
+    y5={"caGDL.subregions[1, 1, 1].gas.H2O.electrochemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.electrochemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.electrochemical.mu"})

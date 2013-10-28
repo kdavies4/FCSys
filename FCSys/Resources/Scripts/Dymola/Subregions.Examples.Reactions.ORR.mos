@@ -1,19 +1,18 @@
 // Setup
 removePlots();
 createPlot(filename = "ORR.mat");
+
 FCSys.Utilities.plot6(
-    y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.O2.rho", "subregion.gas.H2O.rho"},
-    y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.O2.phi[1]", "subregion.gas.H2O.phi[1]"},
-    y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.O2.p", "subregion.gas.H2O.p"},
-    y4={"subregion.graphite.'C+'.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.O2.T", "subregion.gas.H2O.T"},
-    y5={"subregion.graphite.ORR.reaction.mu", "subregion.ionomer.ORR.reaction.mu", "subregion.gas.ORR[1].reaction.mu", "subregion.gas.ORR[2].reaction.mu", "subregion.graphite.depletionORR.chemical.mu", "subregion.ionomer.depletionORR.chemical.mu", "subregion.reaction.chemical.mu"},
-    y6 = {"subregion.reaction.chemical.Ndot"});
+    y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"},
+    y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},
+    y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"},
+    y4={"subregion.graphite.'C+'.T", "subregion.ionomer.'SO3-'.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"});
 
 createPlot(id = 4,
  position = {220, 0, 440, 650},
  x = "zJ_Apercm2",
- y = {"w"},
- heading = "Reaction Potential",
+ y = {"wprime"},
+ heading = "Overpotential",
  range = {0, 8.0, 0.05, -0.35},
  grid = true,
  online = true,
@@ -26,10 +25,8 @@ createPlot(id = 4,
 createPlot(id = 4,
  position = {220, 0, 440, 325},
  x = "zJ_Apercm2",
- y = {"Qdot",
-      "P",
-      "eta"},
- legends = {"Rate of heat generation", "Electrical power", "Efficiency"},
+ y = {"Qdot", "P"},
+ legends = {"Rate of heat generation", "Electrical power"},
  heading = "Energy Rates",
  range = {0, 8.0, 0.05, -0.35},
  grid = true,

@@ -271,19 +271,19 @@ package Characteristics
 
      <p>Additional notes:
      <ul>
-     <li>The data for this species is for C rather than C<sup>+</sup> (with the exception of specific mass).</li>
+     <li>The data for this species is for C rather than C<sup>+</sup>, with the exception of specific mass.</li>
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-     <li>The default specific volume (<i>v</i> = <code>U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
+     <li>The default specific volume (<code>v = U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
   at 300&nbsp;K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
-  are (also at 300&nbsp;K and based on the same reference) are:
+  are (Ibid., also at 300&nbsp;K) are:
   <ul>
-       <li>Amorphous carbon:  <i>v</i> = <code>U.cc*m/(1.950*U.g)</code></li>
-       <li>Diamond (type IIa):  <i>v</i> = <code>U.cc*m/(3.500*U.g)</code></li>
+       <li>Amorphous carbon:  <code>v = U.cc*m/(1.950*U.g)</code></li>
+       <li>Diamond (type IIa):  <code>v = U.cc*m/(3.500*U.g)</code></li>
        </li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Graphite;
@@ -311,6 +311,7 @@ package Characteristics
         b_c=[4188*U.J*m/(U.kg*U.K)],
         B_c=[Deltah0_f - 298.15*U.K*b_c[1, 1], 0],
         d=(294 + 2259.8)*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
        <p>Assumptions:
      <ol>
@@ -318,6 +319,14 @@ package Characteristics
           thermal expansion)</li>
      </ol></p>
 
+    <p>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
+   [<a href=\"modelica://FCSys.UsersGuide.References\">Lin2006</a>, p. A1327].  Note that this is 
+   approximately 1.912 M, which does not match 
+   the default density of 
+  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">'H+'.Ionomer</a> (0.95 M), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</p>
+  
      <p>Additional notes:
      <ul>
      <li>Most of the data for this species is for C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S rather than
@@ -338,12 +347,9 @@ package Characteristics
    <a href=\"http://en.wikipedia.org/wiki/Nafion\">http://en.wikipedia.org/wiki/Nafion</a>,
        \"the molecular weight of Nafion is uncertain due to differences in
         processing and solution morphology.\"</li>
-     <li>The specific volume (<i>v</i> = <code>U.cc*m/(2.00*U.g)</code>) is based on
-   [<a href=\"modelica://FCSys.UsersGuide.References\">Lin2006</a>, p. A1327].
-       </li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Ionomer;
@@ -399,13 +405,16 @@ package Characteristics
   </li>
 </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
     package Graphite "e- in graphite"
       extends Gas(n_v={0,0}, b_v='C+'.Graphite.b_v);
+      annotation (Documentation(info="<html><p>Assumptions:<ol>
+      <li>There is a 1:1 ratio of free (conductance band) electrons and carbon atoms.  The density of the carbon is set by 
+      <a href=\"modelica://FCSys.Characteristics.'C+'.Graphite\">'C+'.Graphite</a>.</li></ol></p></html>"));
     end Graphite;
 
   end 'e-';
@@ -458,13 +467,19 @@ package Characteristics
    enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3&nbsp;J/mol.</li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
     package Ionomer "H+ in ionomer"
       extends Gas(n_v={0,0}, b_v=[1/(0.95*U.M)]);
+      annotation (Documentation(info="<html><p>The initial density corresponds to the measurement
+  by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
+  &lambda; = 12, where &lambda; is the number of
+  H<sub>2</sub>O molecules to SO<sub>3</sub>H
+  endgroups.  At &lambda; = 22, the density was measured at 0.54 M
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>].</p></html>"));
     end Ionomer;
   end 'H+';
 
@@ -510,7 +525,7 @@ package Characteristics
   temperature range of the coefficients is [60, 500] K, but this is not enforced in the functions.</li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
@@ -559,26 +574,24 @@ package Characteristics
   temperature range of the coefficients is [350, 770] K, but this is not enforced in the functions.</li>
      </ul></p>
 
-  <p>For more information, see the
+  <p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
 
     package Ionomer "H2O in ionomer"
       extends Gas;
-      //b_v=[1; U.cc*'SO3-'.Ionomer.m/(2.00*U.g)/14], n_v={-1,0}
+
       annotation (Documentation(info="<html>
         <p>Assumptions:
      <ol>
   <li>The properties are the same as H<sub>2</sub>O gas.</li>
      </ol></p>
 
-  <p>For more information, see the
+  <p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
-      // Note:  U.cc*'SO3-'.Ionomer.m/(2.00*U.g) is
-      // 'SO3-'.Ionomer.b_v[1, 1], but it can't be inserted directly.
 
-      // **
+      // TODO:  Map b_v, b_c, and/or B_c using absorption data.
       // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
       // Nafion EW 1100 series:
       //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
@@ -615,11 +628,11 @@ package Characteristics
 
 <p>Additional notes:
      <ul>
-     <li>See note in <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
+     <li>See <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
      <li>The default specific volume (<i>b<sub>v</sub></i> = <code>[U.cc*m/(0.99656*U.g)]</code>) is at 300&nbsp;K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Liquid;
@@ -669,7 +682,7 @@ package Characteristics
   <a href=\"http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm\">http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm</a>.</li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
@@ -716,7 +729,7 @@ package Characteristics
   temperature range of the coefficients is [70, 495] K, but this is not enforced in the functions.</li>
      </ul></p>
 
-<p>For more information, see the
+<p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end Gas;
@@ -830,7 +843,7 @@ package Characteristics
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]. For more information, see the
+  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]. For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
     end CharacteristicNASA;
@@ -841,10 +854,7 @@ package Characteristics
 
       constant String formula "Chemical formula";
       constant Phase phase "Material phase";
-      constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
-      // Note:  The positive minimum value prevents a structural singularity
-      // when checking FCSys.Species.SpeciesInertStagnant in Dymola
-      // 7.4.
+      constant Q.MassSpecific m "Specific mass";
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
       constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC

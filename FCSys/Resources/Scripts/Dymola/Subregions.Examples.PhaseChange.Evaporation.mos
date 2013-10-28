@@ -21,8 +21,8 @@ for i in 1:size(species, 1) loop
        y4={"subregion." + species[i] + ".faces[1, 1].T", "subregion." + species[i] + ".T",
              "subregion." + species[i] + ".faces[1, 2].T"},
        y5={"subregion." + species[i] + ".g",
-             "subregion." + species[i] + ".chemical.g"},
-       y6={"subregion." + species[i] + ".chemical.Ndot"});
+             "subregion." + species[i] + ".electrochemical.g"},
+       y6={"subregion." + species[i] + ".electrochemical.Ndot"});
 end for;
 
 FCSys.Utilities.plot6(y3={"p_sat"});

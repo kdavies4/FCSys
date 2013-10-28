@@ -49,11 +49,15 @@ package Subregions
           'inclSO3-'=true,
           inclH2O=true,
           inclH2=false,
-          subregion(gas(H2O(p_IC=1.001*U.atm)), ionomer(inclH2O=inclH2O)));
+          subregion(gas(H2O(
+                initEnergy=Init.temperature,
+                p_IC=1.001*U.atm,
+                N(stateSelect=StateSelect.always))), ionomer(
+              reduceThermal=true,
+              inclH2O=inclH2O,
+              H2O(N(stateSelect=StateSelect.always)))));
         // In Dymola 7.4, p_IC=1.1*environment.p has no effect on the
         // initial pressure, but p_IC=1.1*U.atm does.
-        extends Modelica.Icons.UnderConstruction;
-        // TODO: Update the EOS for H2O in ionomer and recheck the result.
         annotation (experiment(StopTime=0.003, Tolerance=1e-06), Commands(file(
                 ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
@@ -151,7 +155,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"
               "Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"),
           __Dymola_experimentSetupOutput);
-
       end SaturationPressureIdeal;
     end PhaseChange;
 
@@ -160,21 +163,16 @@ package Subregions
 
       model HOR "Test the hydrogen oxidation reaction in one subregion"
 
-        /*
-  output Q.Potential w=positiveBC.ionomer.'H+'.face.mPhidot[1]/(positiveBC.ionomer.
-      'H+'.face.rho*subregion.A[Axis.x]) - negativeBC.graphite.'e-'.face.mPhidot[
-      1]/(negativeBC.graphite.'e-'.face.rho*subregion.A[Axis.x]) 
-    "Electrical potential";
-  output Q.Current zI=subregion.graphite.'e-'.chemical.Ndot + subregion.graphite.
-      'e-'.faces[1, 2].Ndot "Electrical current due to reaction";
-  output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A) 
-    "Electrical current density, in A/cm2";
-  output Q.Power Qdot=subregion.graphite.'C+'.Edot_DE "Rate of heat generation";
-  output Q.Power P=w*zI "Electrical power";
-  output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
-  // **Fix Qdot, P, eta
-  // **Update plots
-  */
+        output Q.Potential wprime=subregion.graphite.'e-'.wprime
+          "Overpotential";
+        output Q.Current zI=-subregion.graphite.'e-'.faces[1, 1].Ndot
+          "Electrical current";
+        output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+          "Electrical current density, in A/cm2";
+        output Q.Power Qdot=-subregion.graphite.'e-'.Edot_DE
+          "Rate of heat generation";
+        output Q.Power P=wprime*zI "Electrical power";
+
         extends Examples.Subregion(
           'inclC+'=true,
           'inclSO3-'=true,
@@ -183,41 +181,35 @@ package Subregions
           inclH2=true,
           subregion(
             L={0.287*U.mm,10*U.cm,10*U.cm},
-            gas(H2(
-                T(stateSelect=StateSelect.always),
-                initMaterial=Init.pressure,
-                phi(each fixed=true,each stateSelect=StateSelect.always))),
-            graphite('C+'(T(stateSelect=StateSelect.always)),'e-'(N(stateSelect
-                    =StateSelect.default))),
+            gas(
+              reduceThermal=true,
+              T(stateSelect=StateSelect.always),
+              H2(phi(each fixed=true, each stateSelect=StateSelect.always))),
+            graphite(T(stateSelect=StateSelect.always)),
+            dielectric(final A=0),
             ionomer(
               reduceThermal=true,
-              inclH2O=false,
-              'SO3-'(T(stateSelect=StateSelect.always)),
-              'H+'(consTransX=ConsMom.steady,phi(each fixed=false,each
-                    stateSelect=StateSelect.default)))),
-          environment(analysis=true));
+              T(stateSelect=StateSelect.always),
+              'H+'(consTransX=ConsMom.steady))));
 
-        extends Modelica.Icons.UnderConstruction;
+        // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
+        // A = 0 eliminates it.
 
         Conditions.ByConnector.FaceBus.Single.Efforts negativeBC(graphite(
-              'inclC+'=false, 'incle-'=true), gas(inclH2=true)) annotation (
-            Placement(transformation(
+              'incle-'=true, 'e-'(redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Face.Single.Material.current,
+                redeclare Modelica.Blocks.Sources.Ramp materialSet(height=200*U.A,
+                  duration=20))), gas(inclH2=true)) annotation (Placement(
+              transformation(
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-24,0})));
-        Conditions.ByConnector.FaceBus.Single.Efforts positiveBC(gas(inclH2=
-                false), ionomer(
-            'inclH+'=true,
-            'inclSO3-'=false,
-            'H+'(redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Face.Single.Material.current,
-                redeclare Modelica.Blocks.Sources.Ramp materialSet(height=200*U.A,
-                  duration=20)))) annotation (Placement(transformation(
+
+        Conditions.ByConnector.FaceBus.Single.Efforts positiveBC(ionomer(
+              'inclH+'=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={24,0})));
-      initial equation
-        // subregion.gas.H2.faces[1, 1].Ndot = 0;
 
       equation
         connect(subregion.xPositive, positiveBC.face) annotation (Line(
@@ -231,7 +223,7 @@ package Subregions
             thickness=0.5,
             smooth=Smooth.None));
         annotation (
-          experiment(StopTime=20, Tolerance=1e-006),
+          experiment(StopTime=30, Tolerance=1e-006),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.Reactions.HOR.mos"
               "Subregions.Examples.Reactions.HOR.mos"),
@@ -241,20 +233,16 @@ package Subregions
       end HOR;
 
       model ORR "Test the oxygen reduction reaction in one subregion"
-        /* **
-    output Q.Potential w=negativeBC.ionomer.'H+'.face.mPhidot[1]/(negativeBC.ionomer.
-      'H+'.face.rho*subregion.A[Axis.x]) - positiveBC.graphite.'e-'.face.mPhidot[
-      1]/(positiveBC.graphite.'e-'.face.rho*subregion.A[Axis.x]) 
-    "Electrical potential";
-  output Q.Current zI=-subregion.graphite.'e-'.chemical.Ndot 
-    "Electrical current due to reaction";
-  output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A) 
-    "Electrical current density, in A/cm2";
-  output Q.Power Qdot=subregion.graphite.'C+'.Edot_DE "Rate of heat generation";
-  output Q.Power P=w*zI "Electrical power";
-  output Q.NumberAbsolute eta=P/(P + Qdot) "Efficiency";
-*/
-        // **Fix Qdot, P, eta
+
+        output Q.Potential wprime=-subregion.graphite.'e-'.wprime
+          "Overpotential";
+        output Q.Current zI=subregion.graphite.'e-'.faces[1, 2].Ndot
+          "Electrical current";
+        output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+          "Electrical current density, in A/cm2";
+        output Q.Power Qdot=-subregion.graphite.'e-'.Edot_DE
+          "Rate of heat generation";
+        output Q.Power P=wprime*zI "Electrical power";
 
         extends Examples.Subregion(
           'inclC+'=true,
@@ -263,62 +251,59 @@ package Subregions
           'inclH+'=true,
           inclH2=false,
           inclH2O=true,
-          inclN2=true,
           inclO2=true,
-          subregion(L={0.287*U.mm,10*U.cm,10*U.cm}, gas(
+          subregion(
+            L={0.287*U.mm,10*U.cm,10*U.cm},
+            gas(
               reduceThermal=true,
-              H2O(p_IC=environment.p_H2O),
-              N2(p_IC=environment.p - environment.p_H2O - environment.p_O2,
-                  initEnergy=Init.none),
-              O2(p_IC=environment.p_O2, initEnergy=Init.none))));
+              T(stateSelect=StateSelect.always),
+              H2O(phi(each fixed=true, each stateSelect=StateSelect.always)),
+              O2(phi(each fixed=true, each stateSelect=StateSelect.always),
+                  initEnergy=Init.none)),
+            graphite(T(stateSelect=StateSelect.always)),
+            dielectric(final A=0),
+            ionomer(
+              reduceThermal=true,
+              T(stateSelect=StateSelect.always),
+              'H+'(consTransX=ConsMom.steady))));
 
-        extends Modelica.Icons.UnderConstruction;
+        // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
+        // A = 0 eliminates it.
+
         Conditions.ByConnector.FaceBus.Single.Efforts negativeBC(ionomer(
               'inclH+'=true)) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={24,0})));
+        Conditions.ByConnector.FaceBus.Single.Efforts positiveBC(graphite(
+              'incle-'=true, 'e-'(redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Face.Single.Material.current,
+                redeclare Modelica.Blocks.Sources.Ramp materialSet(height=-200*
+                    U.A, duration=20))), gas(inclH2O=true, inclO2=true))
+          annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-24,0})));
 
-        Conditions.ByConnector.FaceBus.Single.Efforts positiveBC(gas(
-            inclH2O=true,
-            inclN2=true,
-            inclO2=true,
-            H2O(materialSet(y=environment.p_H2O/environment.T)),
-            H2(materialSet(y=(environment.p - environment.p_H2O - environment.p_O2)
-                    /environment.T)),
-            O2(materialSet(y=environment.p_O2/environment.T))), graphite(
-              'incle-'=true, 'e-'(redeclare function materialSpec =
-                  Conditions.ByConnector.Face.Single.Material.current,
-                redeclare Modelica.Blocks.Sources.Ramp materialSet(
-                height=-U.A/U.cm^2,
-                duration=100.1,
-                startTime=0.1)))) annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={24,0})));
-
       equation
-        connect(negativeBC.face, subregion.xNegative) annotation (Line(
-            points={{-20,-1.34539e-15},{-16,-1.34539e-15},{-16,6.10623e-16},{-10,
-                6.10623e-16}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
         connect(subregion.xPositive, positiveBC.face) annotation (Line(
-            points={{10,6.10623e-16},{14,6.10623e-16},{14,1.23436e-15},{20,
-                1.23436e-15}},
+            points={{10,0},{-20,6.66134e-016}},
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
-
+        connect(negativeBC.face, subregion.xNegative) annotation (Line(
+            points={{20,-8.88178e-016},{-10,-8.88178e-016},{-10,0}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
         annotation (
-          experiment(StopTime=110, Tolerance=1e-06),
+          experiment(StopTime=30, Tolerance=1e-006),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.Reactions.ORR.mos"
               "Subregions.Examples.Reactions.ORR.mos"),
           __Dymola_experimentSetupOutput,
-          Diagram(graphics));
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics));
       end ORR;
     end Reactions;
 
@@ -746,7 +731,6 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion
@@ -1144,7 +1128,6 @@ package Subregions
     inner Reactions.HOR HOR(n_trans=n_trans) if graphite.'incle-' and ionomer.
       'inclH+' and gas.inclH2 "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{80,-30},{100,-10}})));
-    // **temp true
     inner Reactions.ORR ORR(final n_trans=n_trans) if graphite.'incle-' and
       ionomer.'inclH+' and gas.inclO2 and gas.inclH2O
       "Oxygen reduction reaction"
@@ -1438,12 +1421,9 @@ on diagram)")}));
     import Modelica.Constants.eps;
     extends Partial(final n_spec=ionomer.n_spec);
 
-    FCSys.Phases.Ionomer ionomer(
-      n_inter=1,
-      final n_trans=n_trans,
-      k_inter={k_common}) "Ionomer" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-20,0},
-              {0,20}})));
+    FCSys.Phases.Ionomer ionomer(n_inter=0, final n_trans=n_trans) "Ionomer"
+      annotation (Dialog(group="Phases (click to edit)"), Placement(
+          transformation(extent={{-20,0},{0,20}})));
 
     Connectors.FaceBus xNegative if inclTransX "Negative face along the x axis"
       annotation (Placement(transformation(extent={{-60,0},{-40,20}}),
@@ -1550,10 +1530,12 @@ on diagram)")}));
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-18},
               {10,2}})));
 
-    FCSys.Phases.Liquid liquid(n_inter=3, k_inter={k_common,k_gas_liq,
-          k_graphite_liq}) "Liquid" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{30,-18},
-              {50,2}})));
+    FCSys.Phases.Liquid liquid(
+      n_inter=3,
+      final n_trans=n_trans,
+      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
+          group="Phases (click to edit)"), Placement(transformation(extent={{30,
+              -18},{50,2}})));
 
     Connectors.FaceBus xNegative if inclTransX "Negative face along the x axis"
       annotation (Placement(transformation(extent={{-100,-36},{-80,-16}}),

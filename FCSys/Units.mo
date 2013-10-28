@@ -711,7 +711,7 @@ package Units "Constants and units of physical measure"
 The <code>defineDefaultDisplayUnit</code> and <code>defineUnitConversion</code> functions
 used by this function are not defined in the Modelica language (as of version 3.3) but are
 recognized by Dymola.
-For more information, see the documentation for the
+For more information, please see the documentation for the
 <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
   end setup;
 
@@ -865,7 +865,7 @@ For more information, see the documentation for the
       annotation (Documentation(info="<html><p>This model may be used to calculate the values of the
   constants and units.</p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units.",
             executeCall=checkModel("FCSys.Units")));
@@ -891,7 +891,7 @@ to fully establish the values of the base constants and units of the
 <a href=\"modelica://FCSys.Units\">Units</a> package.  Gaussian units
 encompass other systems of units.</p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
 
     end Gaussian;
@@ -906,7 +906,7 @@ encompass other systems of units.</p>
       annotation (Documentation(info="<html><p>The candela (<code>'cd'</code>)
   is not final because luminous intensity is not included in Hartree units.</p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -927,7 +927,7 @@ to fully establish the values of the base constants and units of the
 <a href=\"modelica://FCSys.Units\">Units</a> package.  Lorentz-Heaviside units
 encompass other systems of units.</p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
 
     end LH;
@@ -940,7 +940,7 @@ encompass other systems of units.</p>
   include the gravitational constant.  The candela (<code>'cd'</code>)
   is not final because luminous intensity is not included in Stoney units.</p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -969,7 +969,7 @@ encompass other systems of units.</p>
        <li>10 m/s &asymp; 1</li>
        <li>9.872e-5 atm &asymp; 1</li></ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -991,7 +991,7 @@ encompass other systems of units.</p>
   <li>K &asymp; 8.31446</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1013,7 +1013,7 @@ encompass other systems of units.</p>
   <li>m &asymp; 0.346803</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1034,7 +1034,7 @@ encompass other systems of units.</p>
   <li>s &asymp; 2.88348</li>
   </ul></p>
 
-  <p>For more information, see the documentation for the
+  <p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1055,7 +1055,7 @@ encompass other systems of units.</p>
   <li>mol &asymp; 96485.3</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1076,7 +1076,7 @@ encompass other systems of units.</p>
   <li>s &asymp; 1.03643e-5</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1097,7 +1097,7 @@ encompass other systems of units.</p>
   <li>mol &asymp; 96485.3</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1118,7 +1118,7 @@ encompass other systems of units.</p>
   <li>s &asymp; 1.03643e-5</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1139,7 +1139,7 @@ encompass other systems of units.</p>
   <li>s &asymp; 0.0441697</li>
   </ul></p>
 
-<p>For more information, see the documentation for the
+<p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1191,7 +1191,7 @@ encompass other systems of units.</p>
       // value.  The gas constant isn't adjustable because the equations of FCSys
       // require that it's one, which means that temperature is considered to
       // be a potential.
-      annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation of the
+      annotation (Documentation(info="<html><p>For more information, please see the notes in the Modelica code and the documentation of the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1221,7 +1221,7 @@ encompass other systems of units.</p>
   <a href=\"modelica://FCSys.Units.Bases.SIms\">SIms</a>,
   <a href=\"modelica://FCSys.Units.Bases.SImols\">SImols</a>).</p>
 
-  <p>For more information, see the documentation for the
+  <p>For more information, please see the documentation for the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
           executeCall=FCSys.Units.setup() "Re-initialize the units."));
 

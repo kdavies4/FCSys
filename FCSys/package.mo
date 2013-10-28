@@ -914,7 +914,7 @@ margin-right: auto;\" class=noBorder>
           2H<sub>2</sub>O
         </td>
         <td class=noBorder>
-          (net)
+          (total)
         </td>
       </tr>
     </table></p>

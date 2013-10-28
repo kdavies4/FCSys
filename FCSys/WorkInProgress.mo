@@ -1,7 +1,7 @@
 within FCSys;
 package WorkInProgress "Incomplete classes under development"
   extends Modelica.Icons.Package;
-  extends FCSys.Icons.PackageUnderConstruction;
+  extends Modelica.Icons.UnderConstruction;
 
   model ConditionsAdaptersPhasesIonomer
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
@@ -57,25 +57,30 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   model CellModelica
@@ -275,16 +280,18 @@ package WorkInProgress "Incomplete classes under development"
 <p>For more information, please see the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector and the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
-            Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-50,50},{50,-50}},
-              fillColor={221,23,47},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}),
+      Icon(graphics={
+          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={170,0,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-50,50},{50,-50}},
+            fillColor={221,23,47},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None)}),
       Diagram(graphics={Ellipse(
               extent={{-10,10},{10,-10}},
               lineColor={170,0,0},

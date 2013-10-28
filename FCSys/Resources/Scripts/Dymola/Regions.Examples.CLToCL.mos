@@ -12,9 +12,9 @@ FCSys.Utilities.plot6(
     y4={"anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T",
         "PEM.subregions[1, 1, 1].ionomer.H2O.T",
         "caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T"},
-    y5={"anCL.subregions[1, 1, 1].gas.H2.chemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.chemical.mu",
-        "PEM.subregions[1, 1, 1].ionomer.H2O.chemical.mu",
-        "caCL.subregions[1, 1, 1].gas.H2O.chemical.mu", "caCL.subregions[1, 1, 1].gas.N2.chemical.mu", "caCL.subregions[1, 1, 1].gas.O2.chemical.mu"})
+    y5={"anCL.subregions[1, 1, 1].gas.H2.electrochemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.electrochemical.mu",
+        "caCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu", "caCL.subregions[1, 1, 1].gas.N2.electrochemical.mu", "caCL.subregions[1, 1, 1].gas.O2.electrochemical.mu"})
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},

@@ -6,4 +6,4 @@ FCSys.Utilities.plot6(
     y1={"anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho"},
     y3={"anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p"},
     y4={"anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T"},
-    y5={"anCL.subregions[1, 1, 1].gas.H2.chemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.chemical.mu"})
+    y5={"anCL.subregions[1, 1, 1].gas.H2.electrochemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu"})

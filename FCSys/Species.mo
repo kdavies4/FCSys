@@ -9,11 +9,14 @@ package Species "Dynamic models of chemical species"
       model Correlated "Correlated properties"
         extends Solid(redeclare replaceable package Data =
               Characteristics.'C+'.Graphite);
+
+        // TODO: Update this to pull properties and settings from Fixed.
+        // Do the same for other species.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'C+'",
           Documentation(info=
-                "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+                "<html><p>Please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
 
@@ -45,7 +48,7 @@ package Species "Dynamic models of chemical species"
           Documentation(info="<html><p>Assumptions:<ol>
     <li>The specific heat capacity is fixed (independent of temperature).</li>
     <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
-    <li>Mobility is zero (by default).</li>
+    <li>Mobility is zero.</li>
     </ol></p>
 
    <p>The default isobaric specific heat capacity (<i>b<sub>c</sub></i> = <code>[935*U.J*Data.m/(U.kg*U.K)]</code>)
@@ -94,7 +97,7 @@ package Species "Dynamic models of chemical species"
 <tr><td>2000</td><td>-</td><td>-</td><td>-</td><td>2043</td><td>1/262</td><td>1/0.81</td><td>-</td><td>-</td><td>-</td></tr>
   </table>
 
-  <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+  <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
 
@@ -106,7 +109,7 @@ package Species "Dynamic models of chemical species"
     "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
     extends Modelica.Icons.Package;
     package Ionomer
-      "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S ionomer</html>"
+      "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> ionomer</html>"
       extends Modelica.Icons.Package;
 
       model Correlated "Correlated properties"
@@ -116,7 +119,7 @@ package Species "Dynamic models of chemical species"
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'SO3-'",
           Documentation(info=
-                "<html><p>Please see the documentation of the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+                "<html><p>Please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -126,8 +129,6 @@ package Species "Dynamic models of chemical species"
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
-
-        //final mu=0,
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -140,7 +141,7 @@ package Species "Dynamic models of chemical species"
     <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277].</p>
 
-<p>For more information, see the
+<p>For more information, please see the
     <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
@@ -182,11 +183,12 @@ package Species "Dynamic models of chemical species"
           final tauprime=V/(v*Io),
           final theta=Modelica.Constants.inf);
 
-        parameter Q.Current Io=U.A "Exchange current density" annotation (
+        parameter Q.Current Io(min=0) = 10*U.A "Exchange current" annotation (
             Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
 
-        output Q.Potential wprime(stateSelect=StateSelect.never) = chemical.g
-           - g if environment.analysis "Reaction overpotential";
+        output Q.Potential wprime(stateSelect=StateSelect.never) =
+          electrochemical.w - g if environment.analysis
+          "Reaction overpotential";
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -194,18 +196,17 @@ package Species "Dynamic models of chemical species"
           Documentation(info="<html>
 
     <p>Assumptions:<ol>
-    <li>The density is equal to that of C<sup>+</sup> as graphite.</li>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is
-          governed by other configurations.</li>
+          <li>The exchange current density (<i>I</i><sup>o</sup>) is mapped to the reaction interval (&tau;&prime;) of electrons assuming that 
+          the reaction interval is zero for other species involved in the reaction.</li>
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
           the mobility of the substrate (e.g., 
           <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
 
-    <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+    <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -227,9 +228,9 @@ package Species "Dynamic models of chemical species"
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final initEnergy=Init.none,
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+          sigma=0.083*U.S/U.cm,
           final Nu_Phi,
           final Nu_Q,
-          final tauprime,
           final consRot,
           final upstreamX=false,
           final upstreamY=false,
@@ -245,31 +246,26 @@ package Species "Dynamic models of chemical species"
           final g_IC,
           final T_IC,
           final nu=1,
+          final tauprime=0,
           final consEnergy=ConsThermo.steady);
 
         // See the documentation for a table of values.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
-          Documentation(info="<html><p>The initial density corresponds to the measurement
-  by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
-  &lambda; = 12, where &lambda; is the number of
-  H<sub>2</sub>O molecules to SO<sub>3</sub>H
-  endgroups.  At &lambda; = 22, the density was measured at 0.54 M
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>]. TODO: Implement this, copy to Correlated.</p>
-
+          Documentation(info="<html>  
 <p>Assumptions:<ol>
     <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-    <li>The density of H<sup>+</sup> is equal to that of
-  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
-  this is greater than that measured by Spry and Fayer (see
-  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
-  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
-  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</li>
-          <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by other configurations.</li>
+    <li>The electrochemical reaction rate is governed by the electrons.  Therefore, the reaction interval (&tau;&prime;) is zero for protons.</li>
+              <li>The conductivity is mapped to the mobility of the protons by assuming that
+          the mobility of the substrate (e.g., 
+          <a href=\"modelica://FCSys.Species.'SO3-'.Ionomer\">C19HF37O5S-</a>) is zero.</li>
     </ol></p>
 
-  <p>The default thermal resistivities (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
+<p>The default conductivity (&sigma; = <code>0.083*U.S/U.cm</code>)
+  is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].</p>
+
+  <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
   (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
@@ -331,7 +327,7 @@ package Species "Dynamic models of chemical species"
 <tr><td>5000</td><td>1/54.1e-6</td><td>1/1.6750</td></tr>
   </table></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
 
@@ -354,7 +350,7 @@ package Species "Dynamic models of chemical species"
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -426,11 +422,11 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 <tr><td>2000</td><td>18.25e3</td><td>1/318.2e-7</td><td>1/878e-3</td></tr>
     </tr>
   </table>
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
+                  {100,100}}),graphics));
 
       end Fixed;
 
@@ -459,7 +455,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -491,6 +487,8 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
         <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
+                <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
+        other configurations (e.g., liquid).</li>
     </ol></p>
 
   <p>Notes:<ul>
@@ -591,7 +589,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <tr><td>850</td><td>2.186e3</td><td>1/296.9e-7</td><td>1/63.7e-3</td></tr>
   </table></ul></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
 
@@ -614,11 +612,11 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
+    <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
    other configurations (e.g., gas).</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -627,7 +625,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Gas (b_v=[1],
                 n_v={-1,0}),
-          redeclare parameter Q.TimeAbsolute tauprime=1e12*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=2e11*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity eta=Data.eta(),
@@ -655,24 +653,22 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           stateSelect=StateSelect.never)
           "Ratio of H2O molecules to SO3- end-groups";
 
+
+      equation
+        lambda = rho*Characteristics.'SO3-'.Ionomer.b_v[1, 1];
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
         <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., gas).</li>
     </ol></p></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Diagram(graphics),
           Icon(graphics));
-
-      equation
-        lambda = rho*Characteristics.'SO3-'.Ionomer.b_v[1, 1];
-
       end Fixed;
 
     end Ionomer;
@@ -690,11 +686,11 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
+        <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
         other configurations (e.g., gas).</li>
     </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -707,7 +703,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime=1e12*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=5e10*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity eta=1/(855e-6*U.Pa*U.s),
@@ -720,7 +716,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final rho_IC,
           final p_IC,
           final V_IC=epsilon_IC*product(L),
-          final initMaterial=Init.none,
+          final initMaterial=Init.volume,
           final alpha);
 
         // See the documentation for tables of values.
@@ -730,8 +726,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
         <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-        <li>The phase change interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., gas).</li>
     </ol></p>
 
           <p>Notes:<ul>
@@ -810,7 +804,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
   </table>
 
-  <p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+  <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
@@ -837,7 +831,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -869,7 +863,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           defaultComponentName="N2",
           Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Fixed specific heat capacity (independent of temperature)</ol>
+    <li>Fixed specific heat capacity (independent of temperature)</li>
         <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
 
     </ol></p>
@@ -880,8 +874,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
    The integration offset for specific entropy is set such that
    the specific entropy is 191.610&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;bar).
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.  <a href=\"#Tab2\">Table 2</a> lists
-  values of the material resistivity or self diffusion coefficient.</p>
+   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
@@ -911,26 +904,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>1300</td><td>1.219e3</td><td>1/466.2e-7</td><td>1/81.0e-3</td></tr>
   </table>
 
-<br>
-
-  <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of N<sub>2</sub> gas at 1&nbsp;atm
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
-  <tr>
-      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
-      <th width=1><code>&eta;*U.s<br>/U.cm^2</code></th>
-    </tr>
-<tr><td>77.7</td><td>0.0168</td></tr>
-<tr><td>194.7</td><td>0.104</td></tr>
-<tr><td>273.2</td><td>0.185</td></tr>
-<tr><td>353.2</td><td>0.287</td></tr>
-  </table></p>
-
   <p>The fluidity of air at 15.0&nbsp;&deg;C and 1&nbsp;atm is given by
        &eta; = <code>1/(17.8e-6*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
 
@@ -954,7 +932,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     <li>Ideal gas</li>
           </ol></p>
 
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Correlated;
 
@@ -1002,8 +980,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   <p>The default resistivities (&eta; = <code>1/(207.2e-7*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
-  <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures. <a href=\"#Tab2\">Table 2</a> lists
-  values of the material resistivity or self diffusion coefficient.</p>
+  <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1&nbsp;atm
@@ -1034,25 +1011,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>1300</td><td>1.125e3</td><td>1/588.4e-7</td><td>1/87.1e-3</td></tr>
   </table></p>
 
-<br>
-
-  <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab2\">Table 2: Material resistivity of O<sub>2</sub> gas at 1&nbsp;atm
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</caption>
-  <tr>
-      <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
-      <th width=1><code>&eta;*U.s<br>/U.cm^2</code></th>
-    </tr>
-<tr><td>77.7</td><td>0.0153</td></tr>
-<tr><td>194.7</td><td>0.104</td></tr>
-<tr><td>273.2</td><td>0.187</td></tr>
-<tr><td>353.2</td><td>0.301</td></tr>
-  </table></p>
-
-<p>For more information, see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1080,7 +1041,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     assert(Data.z <> 0, "The Ion model can only be used for charged species.");
 
   equation
-    g = Data.z*electrostatic.w;
+    electrochemical.w = g + Data.z*electrostatic.w
+      "The electrochemical potential is the sum of chemical and electrostatic contributions.";
+
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
@@ -1092,7 +1055,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           initialScale=0.1),graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Ion;
 
   model Fluid "Base model for a fluid species"
@@ -1225,21 +1187,23 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Data.m*phi .* I ./ (2*A[cartTrans]) if environment.analysis
       "Dynamic pre ssure";
     output Q.Velocity phi_chemical[n_trans](each stateSelect=StateSelect.never)
-       = actualStream(chemical.phi) if environment.analysis
+       = actualStream(electrochemical.phi) if environment.analysis
       "Velocity of the chemical stream";
     output Q.PotentialAbsolute sT_chemical(stateSelect=StateSelect.never) =
-      actualStream(chemical.sT) if environment.analysis
+      actualStream(electrochemical.sT) if environment.analysis
       "Specific entropy-temperature product of the chemical stream";
     //
     // Potentials and current
     output Q.Potential g_faces[n_trans, Side](each stateSelect=StateSelect.never)
-       = Data.g(faces.T, faces.p) if environment.analysis and false
+       = Data.g(faces.T, faces.p) if environment.analysis and not Data.isCompressible
       "Gibbs potentials at the faces";
-    // **temp false; pressure is invalid of boundary disconnected
     output Q.Potential Deltag[n_trans](each stateSelect=StateSelect.never) =
-      Delta(g_faces) if environment.analysis and false
+      Delta(g_faces) if environment.analysis and not Data.isCompressible
       "Differences in Gibbs potentials across the faces";
-    // **Temp false
+    // Note:  If a face is left unconnnected, then it is possible that its pressure
+    // may become negative.  If the equation of state has ideal-gas term,
+    // then the Gibbs energy will involve a logarithm of pressure.  Therefore,
+    // to be safe, these variables are included only for incompressible species.
     //
     // Time constants
     output Q.TimeAbsolute tau_NT[n_trans](
@@ -1283,22 +1247,21 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       *A[cartTrans[i]] else 0) for i in 1:n_trans} if environment.analysis
       "Thermodynamic force";
     output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*(
-      actualStream(chemical.phi) - phi) .* chemical.Ndot if environment.analysis
-      "Acceleration force due to advective exchange";
+      actualStream(electrochemical.phi) - phi) .* electrochemical.Ndot if
+      environment.analysis "Acceleration force due to advective exchange";
     output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.translational.mPhidot
        + {sum(inter[:].mPhidot[i]) for i in 1:n_trans} + {sum(intra[:].mPhidot[
       i]) for i in 1:n_trans} if environment.analysis
       "Friction from other configurations (diffusive exchange)";
     // Note:  The [:] is necessary in Dymola 2014.
     output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum(((
-      if cartTrans[i] == cartTrans[j] then phi_faces[j, :] else faces[j, :].phi[
-      cartWrap(cartTrans[i] - cartTrans[j])]) - {phi[i],phi[i]})*faces[j, :].Ndot
-      *Data.m for j in 1:n_trans) for i in 1:n_trans} if environment.analysis
+      if i == j then phi_faces[j, :] else faces[j, :].phi[cartWrap(cartTrans[i]
+       - cartTrans[j])]) - {phi[i],phi[i]})*faces[j, :].Ndot*Data.m for j in 1:
+      n_trans) for i in 1:n_trans} if environment.analysis
       "Acceleration force due to advective transport";
     output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(sum(
-      if cartTrans[i] == cartTrans[j] then {0,0} else faces[j, :].mPhidot[
-      cartWrap(cartTrans[i] - cartTrans[j])]) for j in 1:n_trans) for i in 1:
-      n_trans} if environment.analysis
+      if i == j then {0,0} else faces[j, :].mPhidot[cartWrap(cartTrans[i] -
+      cartTrans[j])]) for j in 1:n_trans) for i in 1:n_trans} if environment.analysis
       "Shear force from other subregions (diffusive transport)";
     //
     // Energy balance
@@ -1306,36 +1269,37 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       der(phi))/U.s if environment.analysis
       "Rate of energy storage (internal and kinetic) and boundary work at constant mass";
     // Note that T*der(s) = der(u) + p*der(v).
-    output Q.Power Edot_AE(stateSelect=StateSelect.never) = (chemical.g +
-      actualStream(chemical.sT) - h + (actualStream(chemical.phi)*actualStream(
-      chemical.phi) - phi*phi)*Data.m/2)*chemical.Ndot if environment.analysis
+    output Q.Power Edot_AE(stateSelect=StateSelect.never) = (electrochemical.w
+       + actualStream(electrochemical.sT) - h + (actualStream(electrochemical.phi)
+      *actualStream(electrochemical.phi) - phi*phi)*Data.m/2)*electrochemical.Ndot
+      if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
     output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.translational.phi
       *direct.translational.mPhidot + sum(inter[i].phi*inter[i].mPhidot for i
        in 1:n_inter) + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) +
       direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
-    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[j,
-      :].T, faces[j, :].p) - {h,h})*faces[j, :].Ndot + sum(((if cartTrans[i]
-       == cartTrans[j] then phi_faces[j, :] else faces[j, :].phi[cartWrap(
-      cartTrans[i] - cartTrans[j])]) .^ 2 - fill(phi[i]^2, 2))*faces[j, :].Ndot
-      *Data.m/2 for i in 1:n_trans) for j in 1:n_trans) if environment.analysis
+    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[i,
+      :].T, faces[i, :].p) - {h,h} + (phi_faces[i, :] .^ 2 + sum(faces[i, :].phi[
+      orient] .^ 2 for orient in Orient) - fill(phi*phi, 2))*(Data.m/2))*faces[
+      i, :].Ndot for i in 1:n_trans) if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
-    output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(if
-      cartTrans[i] == cartTrans[j] then 0 else faces[j, :].phi[cartWrap(
-      cartTrans[i] - cartTrans[j])]*faces[j, :].mPhidot[cartWrap(cartTrans[i]
-       - cartTrans[j])] for i in 1:n_trans) for j in 1:n_trans) + sum(faces.Qdot)
-      if environment.analysis
+    output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[i, :].phi[
+      orient]*faces[i, :].mPhidot[orient] for orient in Orient) for i in 1:
+      n_trans) + sum(faces.Qdot) if environment.analysis
       "Rate of diffusion of energy from other subregions";
     // Note:  The structure of the problem should not change if these
     // auxiliary variables are included (hence, StateSelect.never).
 
-    Connectors.Face faces[n_trans, Side](p(each start=p_IC), T(each start=T_IC))
-      "Connectors for transport" annotation (Placement(transformation(extent={{
-              -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
-    Connectors.Chemical chemical(
+    Connectors.Face faces[n_trans, Side](
+      p(each start=p_IC),
+      T(each start=T_IC),
+      Ndot(each start=0)) "Connectors for transport" annotation (Placement(
+          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
+            ={{-10,-10},{10,10}})));
+    Connectors.Electrochemical electrochemical(
       final n_trans=n_trans,
-      g(start=g_IC, final fixed=false),
+      w(start=g_IC, final fixed=false),
       sT(start=h_IC - g_IC, final fixed=false))
       "Connector for reactions and phase change" annotation (Placement(
           transformation(extent={{-10,30},{10,50}}), iconTransformation(extent=
@@ -1512,24 +1476,24 @@ Choose any condition besides None.");
     phi_faces = faces.Ndot .* Data.v_Tp(faces.T, faces.p) ./ {A[cartTrans[i]]*{
       1,-1} for i in 1:n_trans};
     mPhidot + M*environment.a[cartTrans] + Data.z*N*environment.E[cartTrans] =
-      Data.m*actualStream(chemical.phi)*chemical.Ndot + direct.translational.mPhidot
+      Data.m*actualStream(electrochemical.phi)*electrochemical.Ndot + direct.translational.mPhidot
        + {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((if i == j
        then 0 else faces[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*faces[
       i, :].Ndot*Data.m + sum(faces[i, :].mPhidot[cartWrap(cartTrans[j] -
       cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans};
 
     // Properties upon outflow due to reaction and phase change
-    chemical.phi = phi;
-    chemical.sT = h - g;
+    electrochemical.phi = phi;
+    electrochemical.sT = h - g;
 
     // Material exchange
     if abs(alpha - 0.5) > Modelica.Constants.eps then
-      v*tauprime*chemical.Ndot = V*(exp(alpha*(chemical.g - g)/T) - exp((alpha
-         - 1)*(chemical.g - g)/T));
-      // Note:  v/V is different than N for the Ion model, which inherits from
+      v*tauprime*electrochemical.Ndot = V*(exp(alpha*(electrochemical.w - g)/T)
+         - exp((alpha - 1)*(electrochemical.w - g)/T));
+      // Note:  V/v is different than N for the Ion model, which inherits from
       // this one.
     else
-      chemical.g = g + 2*T*asinh(chemical.Ndot*v*tauprime/(2*V))
+      electrochemical.w = g + 2*T*asinh(electrochemical.Ndot*tauprime*v/(2*V))
         "Explicitly inverted to avoid nonlinear system of equations";
     end if;
 
@@ -1623,8 +1587,8 @@ Choose any condition besides None.");
         // assertion.
       end if;
     else
-      (if consMaterial == ConsThermo.dynamic then der(N)/U.s else 0) = chemical.Ndot
-         + sum(faces.Ndot) "Material conservation";
+      (if consMaterial == ConsThermo.dynamic then der(N)/U.s else 0) =
+        electrochemical.Ndot + sum(faces.Ndot) "Material conservation";
     end if;
 
     // Linear current profile
@@ -1669,9 +1633,9 @@ Choose any condition besides None.");
       end if;
     else
       (if consEnergy == ConsThermo.dynamic then (N*T*der(s) + der(M*phi*phi)/2)
-        /U.s else 0) = (chemical.g + actualStream(chemical.sT) - h +
-        actualStream(chemical.phi)*actualStream(chemical.phi)*Data.m/2)*
-        chemical.Ndot + direct.translational.phi*direct.translational.mPhidot
+        /U.s else 0) = (electrochemical.w + actualStream(electrochemical.sT) -
+        h + actualStream(electrochemical.phi)*actualStream(electrochemical.phi)
+        *Data.m/2)*electrochemical.Ndot + direct.translational.phi*direct.translational.mPhidot
          + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
         *inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
          + sum(inter.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h}
@@ -1778,7 +1742,6 @@ Choose any condition besides None.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
@@ -1815,6 +1778,10 @@ protected
     parameter Integer n_intra=0
       "Number of exchange connections within the phase"
       annotation (HideResult=true,Dialog(connectorSizing=true));
+    parameter Integer n_inter=0
+      "Number of exchange connections with other phases" annotation (Dialog(
+          __Dymola_label="<html><i>n</i><sub>interM/sub></html>"), HideResult=
+          true);
 
     // Initialization parameters
     parameter Q.Amount N_IC(start=V_IC*rho_IC) "Initial amount of material"
@@ -1870,7 +1837,7 @@ protected
       nominal=U.V,
       final start=g_IC,
       final fixed=false,
-      stateSelect=StateSelect.never) "Electrochemical potential";
+      stateSelect=StateSelect.never) "Specific Gibbs energy";
     Q.Mass M(
       nominal=1e-3*U.g,
       final start=Data.m*N_IC,
@@ -1907,14 +1874,14 @@ protected
       T, p) if environment.analysis "Isothermal compressibility";
     //
     // Time constants
-    output Q.TimeAbsolute tau_PhiE_inter[n_inter](
-      each stateSelect=StateSelect.never,
-      each start=U.s) = fill(Data.m*mu, n_inter) ./ k_inter if environment.analysis
-      "Time constant for translational intra-phase exchange";
     output Q.TimeAbsolute tau_PhiE_intra[n_intra](
       each stateSelect=StateSelect.never,
       each start=U.s) = fill(Data.m*mu, n_intra) ./ k_intra if environment.analysis
-      "Time constant for translational inter-phase exchange";
+      "Time constant for translational intra-phase exchange";
+    output Q.TimeAbsolute tau_PhiE_inter[n_inter](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = fill(Data.m*mu, n_inter) ./ k_inter if environment.analysis
+       and n_inter > 0 "Time constant for translational inter-phase exchange";
     output Q.TimeAbsolute tau_QE_intra[n_intra](
       each stateSelect=StateSelect.never,
       each start=U.s) = fill(c_p*nu, n_intra) ./ k_intra if environment.analysis
@@ -1922,7 +1889,7 @@ protected
     output Q.TimeAbsolute tau_QE_inter[n_inter](
       each stateSelect=StateSelect.never,
       each start=U.s) = fill(c_p*nu, n_inter) ./ k_inter if environment.analysis
-      "Time constant for thermal inter-phase exchange";
+       and n_inter > 0 "Time constant for thermal inter-phase exchange";
     // Note:  The time contants for the direct connector are zero because it has
     // no resistance.
     // Note:  The structure of the problem should not change if these
@@ -1966,9 +1933,6 @@ protected
     outer parameter Q.Length L[Axis] "Lengths of the subregion" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer n_inter "Number of exchange connections"
-      annotation (missingInnerMessage=
-          "This model should be used within a phase model.");
     outer parameter Q.NumberAbsolute k_inter[:]
       "Coupling factor for diffusive exchange with other phases" annotation (
         missingInnerMessage="This model should be used within a phase model");
@@ -2001,13 +1965,20 @@ Check that the volumes of the other phases are set properly.");
     // --------
     // Translational momentum
     for i in 1:n_trans loop
-      mu*intra.mPhidot[i] = k_intra*N .* (intra.phi[i] - fill(phi[i], n_intra));
-      mu*inter.mPhidot[i] = k_inter*N .* (inter.phi[i] - fill(phi[i], n_inter));
+      v*mu*intra.mPhidot[i] = k_intra*V .* (intra.phi[i] - fill(phi[i], n_intra));
+      if n_inter > 0 then
+        v*mu*inter.mPhidot[i] = k_inter*V .* (inter.phi[i] - fill(phi[i],
+          n_inter));
+      end if;
     end for;
     //
     // Thermal energy
-    nu*intra.Qdot = k_intra*N .* (intra.T - fill(T, n_intra));
-    nu*inter.Qdot = k_inter*N .* (inter.T - fill(T, n_inter));
+    v*nu*intra.Qdot = k_intra*V .* (intra.T - fill(T, n_intra));
+    if n_inter > 0 then
+      v*nu*inter.Qdot = k_inter*V .* (inter.T - fill(T, n_inter));
+    end if;
+    // Note:  V/v is different than N for the Ion model, which inherits from
+    // this one.
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
@@ -2063,7 +2034,7 @@ Check that the volumes of the other phases are set properly.");
 
     <p>The advective exchange is modeled using <code>stream</code> connectors
     (<a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> and
-    <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>).
+    <a href=\"modelica://FCSys.Connectors.Electrochemical\">Electrochemical</a>).
   The rate of advection of translational momentum is the
   product of the velocity of the source (&phi;) and the mass flow rate
   (<i>M&#775;</i> or <i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
@@ -2211,17 +2182,6 @@ Check that the volumes of the other phases are set properly.");
             rotation=45)}));
   end Species;
 
-  annotation (Documentation(info="
-<html>
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
-
-<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
-FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
 public
   package Enumerations "Choices of options"
     extends Modelica.Icons.TypesPackage;
@@ -2271,4 +2231,15 @@ public
       "Methods of initializing a thermodynamic quantity (material or energy)";
 
   end Enumerations;
+  annotation (Documentation(info="
+<html>
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
+FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end Species;
