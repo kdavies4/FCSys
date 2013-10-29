@@ -390,14 +390,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={47,107,251},
-                  smooth=Smooth.None),Polygon(
-                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                  lineColor={47,107,251},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+              points={{-30,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None), Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={47,107,251},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
     end AmagatDalton;
 
     model ElectrochemicalReaction
@@ -4309,8 +4309,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            replaceable ThermalDiffusion.HeatRate 'C+' if 'inclC+'
-              constrainedby
+            replaceable FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate
+              'C+' if 'inclC+' constrainedby
               FCSys.Conditions.ByConnector.ThermalDiffusion.Partial
               "C+ conditions" annotation (
               __Dymola_choicesFromPackage=true,
@@ -4398,8 +4398,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            replaceable ThermalDiffusion.HeatRate 'SO3-' if 'inclSO3-'
-              constrainedby
+            replaceable FCSys.Conditions.ByConnector.ThermalDiffusion.HeatRate
+              'SO3-' if 'inclSO3-' constrainedby
               FCSys.Conditions.ByConnector.ThermalDiffusion.Partial
               "SO3- conditions" annotation (
               __Dymola_choicesFromPackage=true,
@@ -5796,13 +5796,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid)}),
+                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
+                    -60,-60}},
+                lineColor={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}),graphics));
       end Volume2;

@@ -1,5 +1,7 @@
 within FCSys;
 package Regions "3D arrays of discrete, interconnected subregions"
+  extends Modelica.Icons.Package;
+
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     model FPToFP "Test one flow plate to the other"
@@ -998,15 +1000,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      /* **update these and plot script
-  Q.Potential w "Electrical potential";
-  Q.Current zI=sum(zJ .* anCL.subregions[1, :, :].A[Axis.x]) 
-    "Electrical current";
-  Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.face.phi[1] .* anBC.graphite.
-      'e-'.face.rho "Electrical current density";
-  output Q.Number zJ_Apercm2=(zI/(sum(L_y)*sum(L_z)))*U.cm^2/U.A 
-    "Average electrical current density, in A/cm2";
-*/
+      output Q.Potential w=anCL.subregions[1, 1, 1].graphite.'e-'.g_faces[1,
+          Side.n] - caCL.subregions[1, 1, 1].graphite.'e-'.g_faces[1, Side.p]
+        if environment.analysis "Electrical potential";
+      output Q.Current zI=-sum(anCL.subregions[1, :, :].graphite.'e-'.I[1]) if
+        environment.analysis "Electrical current";
+      output Q.Number zJ_Apercm2=zI*U.cm^2/(anCL.A[Axis.x]*U.A)
+        "Electrical current density, in A/cm2";
 
       parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -1029,8 +1029,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
             H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
                     StateSelect.always, each fixed=true)),
             H2O(N(stateSelect=StateSelect.always))),
-          each graphite(T(stateSelect=StateSelect.always)),
-          each ionomer(T(stateSelect=StateSelect.always)),
+          graphite(each T(stateSelect=StateSelect.always)),
+          each ionomer(
+            reduceThermal=true,
+            T(stateSelect=StateSelect.always),
+            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
+                    StateSelect.always, each fixed=true))),
           each liquid(H2O(N(stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
       PEMs.PEM PEM(subregions(ionomer(T(each stateSelect=StateSelect.always),
@@ -1044,8 +1048,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
             N2(N(stateSelect=StateSelect.always)),
             H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
                     StateSelect.always, each fixed=true))),
-          each graphite(T(stateSelect=StateSelect.always)),
-          each ionomer(T(stateSelect=StateSelect.always)),
+          graphite(each T(stateSelect=StateSelect.always)),
+          each ionomer(
+            reduceThermal=true,
+            T(stateSelect=StateSelect.always),
+            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
+                    StateSelect.always, each fixed=true))),
           each liquid(H2O(N(stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
       Conditions.ByConnector.FaceBus.Single.Efforts anBC[anCL.n_y, anCL.n_z](
@@ -1100,9 +1108,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
             "Regions.Examples.CLToCL.mos"),
         experiment(
-          StopTime=240,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
+          StopTime=40,
+          Tolerance=1e-006,
+          __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
@@ -1274,7 +1282,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
                     StateSelect.always, each fixed=true)),
             H2O(N(stateSelect=StateSelect.always))),
-          each graphite(T(stateSelect=StateSelect.always)),
+          graphite(each T(stateSelect=StateSelect.always)),
           each ionomer(T(stateSelect=StateSelect.always)),
           each liquid(H2O(N(stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
@@ -1408,8 +1416,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         __Dymola_experimentSetupOutput);
     end PEM;
 
-
-
     model CaCL "Test the cathode catalyst layer"
 
       extends Modelica.Icons.Example;
@@ -1432,7 +1438,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             N2(N(stateSelect=StateSelect.always)),
             H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
                     StateSelect.always, each fixed=true))),
-          each graphite(T(stateSelect=StateSelect.always)),
+          graphite(each T(stateSelect=StateSelect.always)),
           each ionomer(T(stateSelect=StateSelect.always)),
           each liquid(H2O(N(stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
@@ -3704,9 +3710,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         __Dymola_experimentSetupOutput);
     end FPToFPVoltage;
   end Examples;
-  extends Modelica.Icons.Package;
-
-  import Modelica.Media.IdealGases.Common.SingleGasesData;
 
   package AnFPs "Anode flow plates"
     extends Modelica.Icons.Package;
@@ -4328,19 +4331,19 @@ that reference may be outdated).
               k=fill(sqrt(0.5*(1 - epsilon)), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5,epsilon=0.5
-                    *(1 - epsilon)),
+              'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5, epsilon=
+                    0.5*(1 - epsilon)),
               'e-'(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5)),
             ionomer(
               k=fill(sqrt(0.5*(1 - epsilon)), 3),
               reduceThermal=true,
               'inclSO3-'=true,
               'inclH+'=true,
-              inclH2O=false,
+              inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon))),
             liquid(inclH2O=true, H2O(epsilon_IC=1e-4))),
-        subregions(graphite('e-'(final Io=Jo*A[Axis.x])))) annotation (IconMap(
-            primitivesVisible=false));
+        subregions(graphite('e-'(final Io=Jo*subregions.A[Axis.x]))))
+        annotation (IconMap(primitivesVisible=false));
 
       // TODO:  Initialize for zero reaction rate
       // (initMaterial=Init.ReactionRate?) for this and CaCL.
@@ -4359,12 +4362,12 @@ that reference may be outdated).
       parameter Q.CurrentAreic Jo(min=0) = 10*U.A/U.cm^2
         "Exchange current density"
         annotation (Dialog(__Dymola_label="<html><i>J</i><sup>o</sup></html>"));
-
-      // Auxiliary variables (for analysis)
-      output Q.Potential Deltaw[n_y, n_z]=subregions[n_x, :, :].ionomer.'H+'.g_faces[
-          1, Side.n] + subregions[1, :, :].graphite.'e-'.g_faces[1, Side.p] if
-        environment.analysis
-        "Electrical potential differences over the yz plane";
+      /*
+  // Auxiliary variables (for analysis)
+  output Q.Potential Deltaw[n_y, n_z]=subregions[n_x, :, :].ionomer.'H+'.g_faces[
+      1, Side.n] + subregions[1, :, :].graphite.'e-'.g_faces[1, Side.p] if 
+    environment.analysis "Electrical potential differences over the yz plane";
+*/
 
     protected
       outer Conditions.Environment environment "Environmental conditions";
@@ -4803,11 +4806,11 @@ the z axis extends across the width of the channel.</p>
               reduceThermal=true,
               'inclSO3-'=true,
               'inclH+'=true,
-              inclH2O=false,
+              inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon))),
             liquid(inclH2O=true, H2O(epsilon_IC=1e-4*U.C))),
-        subregions(graphite('e-'(final Io=Jo*A[Axis.x])))) annotation (IconMap(
-            primitivesVisible=false));
+        subregions(graphite('e-'(final Io=Jo*subregions.A[Axis.x]))))
+        annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Subregions.Phases.Partial
       // regarding the settings of k for each phase.

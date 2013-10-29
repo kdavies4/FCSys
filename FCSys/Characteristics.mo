@@ -580,7 +580,11 @@ package Characteristics
     end Gas;
 
     package Ionomer "H2O in ionomer"
-      extends Gas;
+      import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2O;
+      extends Gas(
+        b_v=[1],
+        n_v={-1,0},
+        h_offset=-0.2688*U.V);
 
       annotation (Documentation(info="<html>
         <p>Assumptions:
@@ -591,7 +595,10 @@ package Characteristics
   <p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
 
-      // TODO:  Map b_v, b_c, and/or B_c using absorption data.
+      // TODO:  Map h_offset, b_v, b_c, and/or B_c using absorption data.
+      // The current setting (h_offset=-0.2688*U.V) is a hack (by trial and error)
+      // that reaches lambda ~= 14 in equilibrium with saturated vapor at 25 degC.
+      //
       // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
       // Nafion EW 1100 series:
       //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3

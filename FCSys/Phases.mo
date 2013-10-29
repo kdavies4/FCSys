@@ -595,7 +595,7 @@ package Phases "Mixtures of species"
         enable='inclC+'),
       Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-    parameter Boolean 'incle-'=false "Include e-" annotation (
+    parameter Boolean 'incle-'=true "Include e-" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(

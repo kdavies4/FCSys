@@ -51,17 +51,26 @@ package Subregions
           inclH2=false,
           subregion(gas(H2O(
                 initEnergy=Init.temperature,
-                p_IC=1.001*U.atm,
+                consMaterial=ConsThermo.IC,
+                p_IC=environment.p_H2O,
                 N(stateSelect=StateSelect.always))), ionomer(
               reduceThermal=true,
-              inclH2O=inclH2O,
-              H2O(N(stateSelect=StateSelect.always)))));
-        // In Dymola 7.4, p_IC=1.1*environment.p has no effect on the
-        // initial pressure, but p_IC=1.1*U.atm does.
-        annotation (experiment(StopTime=0.003, Tolerance=1e-06), Commands(file(
-                ensureTranslated=true) =
+              inclH2O=true,
+              'SO3-'(consEnergy=ConsThermo.IC,T_IC=environment.T),
+              H2O(lambda_IC=8, N(stateSelect=StateSelect.always)))));
+
+        annotation (
+          Documentation(info="<html><p>The water vapor is held at saturation pressure at the environmental temperature
+  Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
+  comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
+  </p></html>"),
+          experiment(StopTime=2400, Tolerance=1e-006),
+          Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
-              "Subregions.Examples.PhaseChange.Hydration.mos"));
+              "Subregions.Examples.PhaseChange.Hydration.mos"),
+          __Dymola_experimentSetupOutput,
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics));
 
       end Hydration;
 

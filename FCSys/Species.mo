@@ -623,8 +623,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
       model Fixed "Fixed properties"
 
         extends Fluid(
-          redeclare replaceable package Data = Characteristics.H2O.Gas (b_v=[1],
-                n_v={-1,0}),
+          redeclare replaceable package Data = Characteristics.H2O.Ionomer,
           redeclare parameter Q.TimeAbsolute tauprime=2e11*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -653,7 +652,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           stateSelect=StateSelect.never)
           "Ratio of H2O molecules to SO3- end-groups";
 
-
       equation
         lambda = rho*Characteristics.'SO3-'.Ionomer.b_v[1, 1];
 
@@ -669,6 +667,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
           Diagram(graphics),
           Icon(graphics));
+
       end Fixed;
 
     end Ionomer;
