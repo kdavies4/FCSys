@@ -1,9 +1,26 @@
 // Setup
 removePlots();
 createPlot(filename = "AnCL.mat");
-
+    
 FCSys.Utilities.plot6(
-    y1={"anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho"},
-    y3={"anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p"},
-    y4={"anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T"},
-    y5={"anCL.subregions[1, 1, 1].gas.H2.electrochemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu"})
+    y1={"anCL.subregions[1, 1, 1].gas.H2O.RH"},
+    y2={"anCL.subregions[1, 1, 1].gas.H2O.p", 
+        "anCL.subregions[1, 1, 1].gas.N2.p", 
+        "anCL.subregions[1, 1, 1].gas.O2.p"},
+    y3={"anCL.subregions[1, 1, 1].gas.T", "anCL.subregions[1, 1, 1].graphite.T"},
+    y4={"w"}, 
+    y5={"zI"});
+
+createPlot(id = 4,
+ position = {220, 0, 440, 325},
+ x = "zJ_Apercm2",
+ y = {"wprime"},
+ heading = "Overpotential",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legend = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Potential / V",
+ bottomTitle = "Current density / (A/cm2)");

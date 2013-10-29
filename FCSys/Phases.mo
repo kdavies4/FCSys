@@ -1388,15 +1388,12 @@ protected
 
     // Assumptions
     inner parameter Boolean reduceTrans=false "Same velocity for all species"
-      annotation (
-      HideResult=true,
-      Dialog(tab="Assumptions", enable=n_spec > 1),
-      choices(__Dymola_checkBox=true));
+      annotation (Dialog(tab="Assumptions", enable=n_spec > 1), choices(
+          __Dymola_checkBox=true));
+
     inner parameter Boolean reduceThermal=false
-      "Same temperature for all species" annotation (
-      HideResult=true,
-      Dialog(tab="Assumptions", enable=n_spec > 1),
-      choices(__Dymola_checkBox=true));
+      "Same temperature for all species" annotation (Dialog(tab="Assumptions",
+          enable=n_spec > 1), choices(__Dymola_checkBox=true));
 
     inner Q.Volume V if n_spec > 0 "Volume";
 
@@ -1435,14 +1432,13 @@ protected
       defaultComponentPrefixes="replaceable",
       defaultComponentName="phase",
       Documentation(info="<html><p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects 
-    the rates of diffusion of material, transverse translational momentum, and energy of all of the species
+    the conductance of material, transverse translational momentum, and energy of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
-    porosity or tortousity.  These effects may be anisotropic. Using the
-    Bruggeman correction factor [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
-    the scaling factor for diffusive transport (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>3/2</sup>
-    along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.</p>
-
-
+    porosity or tortousity.  These effects may be anisotropic.  Using
+    Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
+    the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>1/2</sup>
+    along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.
+    The Bruggeman factor itself is &epsilon;<sup>3/2</sup>, but a factor of &epsilon; is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={
