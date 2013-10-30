@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "FPToFP.mat");
+createPlot(filename = "FPtoFP.mat");
 
 FCSys.Utilities.plot6(
     y1={"anFP.subregions[1, 1, 1].gas.H2.rho", "anFP.subregions[1, 1, 1].gas.H2O.rho",

@@ -624,7 +624,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime=2e8*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=2e10*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity eta=Data.eta(),
@@ -1014,6 +1014,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Gas;
@@ -1081,9 +1082,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     parameter Init initEnergy=Init.temperature
       "Method of initializing the thermal state"
       annotation (Evaluate=true, Dialog(tab="Initialization"));
-    extends Species;
-    // The extension is after these parameters so that they appear first
+    extends Species(N(stateSelect=if consMaterial == ConsThermo.dynamic then
+            StateSelect.always else StateSelect.prefer));
+    // Note:  The extension is after these parameters so that they appear first
     // in the parameter dialog.
+    // Note:  StateSelect.always is not ideal, but it is necessary to avoid dynamic
+    // state selection in Dymola 2014.  In some cases it isn't appropriate (e.g.,
+    // an incompressible liquid that fills the entire subregion), and it those
+    // cases it can be modified at instantiation.
 
     // Material properties
     Q.TimeAbsolute tauprime(nominal=1e-6*U.s) = 0
@@ -1292,11 +1298,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // auxiliary variables are included (hence, StateSelect.never).
 
     Connectors.Face faces[n_trans, Side](
-      p(each start=p_IC),
-      T(each start=T_IC),
-      Ndot(each start=0)) "Connectors for transport" annotation (Placement(
-          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
-            ={{-10,-10},{10,10}})));
+      each p(start=p_IC),
+      each T(start=T_IC),
+      each Ndot(start=0,stateSelect=StateSelect.never))
+      "Connectors for transport" annotation (Placement(transformation(extent={{
+              -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
     Connectors.Electrochemical electrochemical(
       final n_trans=n_trans,
       w(start=g_IC, final fixed=false),
@@ -1351,8 +1357,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // Additional aliases (for common terms)
     Q.Force mPhidot[n_trans](each nominal=U.N, each stateSelect=StateSelect.never)
       "Force, excluding effects of thermodynamic pressure, dynamic pressure, and unsteady current";
-    Q.Force faces_mPhidot[n_trans, Side, Orient]
-      "Directly-calculated shear forces";
+    Q.Force faces_mPhidot[n_trans, Side, Orient](each nominal=U.N, each
+        stateSelect=StateSelect.never) "Directly-calculated shear forces";
 
     outer Conditions.Environment environment "Environmental conditions";
 
@@ -1632,17 +1638,21 @@ Choose any condition besides None.");
         // assertion.
       end if;
     else
-      (if consEnergy == ConsThermo.dynamic then (N*T*der(s) + der(M*phi*phi)/2)
-        /U.s else 0) = (electrochemical.w + actualStream(electrochemical.sT) -
-        h + actualStream(electrochemical.phi)*actualStream(electrochemical.phi)
-        *Data.m/2)*electrochemical.Ndot + direct.translational.phi*direct.translational.mPhidot
-         + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
-        *inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
-         + sum(inter.Qdot) + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h}
-         + (phi_faces[i, :] .^ 2 + sum(faces[i, :].phi[orient] .^ 2 for orient
-         in Orient))*(Data.m/2))*faces[i, :].Ndot + sum(faces[i, :].phi[orient]
-        *faces[i, :].mPhidot[orient] for orient in Orient) for i in 1:n_trans)
-         + sum(faces.Qdot) "Conservation of energy";
+      (if consEnergy == ConsThermo.dynamic then (N*T*der(Data.s(T, p)) + der(M*
+        phi*phi)/2)/U.s else 0) = (electrochemical.w + actualStream(
+        electrochemical.sT) - h + actualStream(electrochemical.phi)*
+        actualStream(electrochemical.phi)*Data.m/2)*electrochemical.Ndot +
+        direct.translational.phi*direct.translational.mPhidot + sum(intra[i].phi
+        *intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot
+        for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot)
+         + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h} + (phi_faces[i, :]
+         .^ 2 + sum(faces[i, :].phi[orient] .^ 2 for orient in Orient))*(Data.m
+        /2))*faces[i, :].Ndot + sum(faces[i, :].phi[orient]*faces[i, :].mPhidot[
+        orient] for orient in Orient) for i in 1:n_trans) + sum(faces.Qdot)
+        "Conservation of energy";
+      // Note:  In Dymola 2014, der(Data.s(T, p)) is better than der(s) because it avoids
+      // dynamic state selection.  Dymola sometimes chooses s as a state even though its
+      // stateSelect is StateSelect.never.
     end if;
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -1742,6 +1752,7 @@ Choose any condition besides None.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected
@@ -1810,20 +1821,20 @@ protected
     // Note:  The start values for these variable aren't fixed because
     // the initial equation section will be used instead.
     Q.Amount N(
-      min=Modelica.Constants.small,
+      final min=Modelica.Constants.small,
       nominal=4*U.C,
       final start=N_IC,
       final fixed=false,
       stateSelect=StateSelect.prefer) "Amount of material";
-    Q.Velocity phi[n_trans](
-      each nominal=10*U.cm/U.s,
-      each start=0,
-      each stateSelect=StateSelect.prefer) "Velocity";
     Q.TemperatureAbsolute T(
       nominal=300*U.K,
       final start=T_IC,
       final fixed=false,
       stateSelect=StateSelect.prefer) "Temperature";
+    Q.Velocity phi[n_trans](
+      each nominal=10*U.cm/U.s,
+      each start=0,
+      each stateSelect=StateSelect.prefer) "Velocity";
 
     // Aliases (for common terms)
     // Note:  StateSelect.never helps avoid dynamic state selection of these

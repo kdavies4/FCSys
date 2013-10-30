@@ -4,7 +4,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
-    model FPToFP "Test one flow plate to the other"
+    model FPtoFP "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -427,8 +427,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=240,
           Tolerance=1e-05,
@@ -436,9 +436,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFP;
+    end FPtoFP;
 
-    model FPToFPCycle "Test one flow plate to the other"
+    model FPtoFPCycle "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -836,8 +836,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=220,
           Tolerance=1e-06,
@@ -845,114 +845,89 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPCycle;
+    end FPtoFPCycle;
 
-    model GDLToGDL "Test one GDL to the other"
+    model GDLtoGDL "Test one GDL to the other"
 
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+      output Q.Potential w=anGDL.subregions[1, 1, 1].graphite.'e-'.g_faces[1,
+          Side.n] - caGDL.subregions[1, 1, 1].graphite.'e-'.g_faces[1, Side.p]
+        if environment.analysis "Electrical potential";
+      output Q.Current zI=-sum(anGDL.subregions[1, :, :].graphite.'e-'.faces[1,
+          Side.n].Ndot) if environment.analysis "Electrical current";
+      output Q.Number zJ_Apercm2=zI*U.cm^2/(anGDL.A[Axis.x]*U.A)
+        "Electrical current density, in A/cm2";
 
-      inner Conditions.Environment environment(analysis=true)
+      inner Conditions.Environment environment(analysis=true, RH=0.8)
         "Environmental conditions"
         annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 
-      AnGDLs.AnGDL anGDL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each graphite(T(stateSelect=StateSelect.always)),
-          each liquid(H2O(
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always),
-              phi(each stateSelect=StateSelect.always, each fixed=true)))))
+      AnGDLs.AnGDL anGDL(subregions(each gas(H2(phi(each stateSelect=
+                    StateSelect.always, each fixed=true)), H2O(phi(each
+                  stateSelect=StateSelect.always, each fixed=true))), each
+            liquid(H2O(phi(each stateSelect=StateSelect.always, each fixed=true)))))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      AnCLs.AnCL anCL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(
-            reduceThermal=true,
-            T(stateSelect=StateSelect.always),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each liquid(H2O(N(stateSelect=StateSelect.always),T(stateSelect=
-                    StateSelect.always)))))
+      AnCLs.AnCL anCL(subregions(each ionomer(reduceThermal=true, H2O(each phi(
+                  stateSelect=StateSelect.always, each fixed=true)))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-      PEMs.PEM PEM(subregions(ionomer(T(each stateSelect=StateSelect.always),
-              H2O(each N(stateSelect=StateSelect.always)))))
+
+      PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       CaCLs.CaCL caCL(subregions(
           each gas(
-            T(stateSelect=StateSelect.always),
-            O2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            N2(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(
-            reduceThermal=true,
-            T(stateSelect=StateSelect.always),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each liquid(H2O(
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always),
-              phi(each stateSelect=StateSelect.always, each fixed=true)))))
+            O2(phi(each stateSelect=StateSelect.always, each fixed=true)),
+            N2(phi(each stateSelect=StateSelect.always, each fixed=true)),
+            H2O(phi(each stateSelect=StateSelect.always, each fixed=true))),
+          each ionomer(reduceThermal=true, H2O(phi(each stateSelect=StateSelect.always,
+                  each fixed=true))),
+          each liquid(H2O(phi(each stateSelect=StateSelect.always, each fixed=
+                    true)))))
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-      CaGDLs.CaGDL caGDL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            O2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            N2(N(stateSelect=StateSelect.always)),
-            H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each graphite(T(stateSelect=StateSelect.always)),
-          each liquid(H2O(N(stateSelect=StateSelect.always),T(stateSelect=
-                    StateSelect.always)))))
+
+      CaGDLs.CaGDL caGDL(subregions(each gas(O2(phi(each stateSelect=
+                    StateSelect.always, each fixed=true)), H2O(phi(each
+                  stateSelect=StateSelect.always, each fixed=true))), each
+            liquid(H2O(phi(each stateSelect=StateSelect.always, each fixed=true)))))
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+
       Conditions.ByConnector.FaceBus.Single.Efforts anBC[anCL.n_y, anCL.n_z](
           each gas(
           inclH2=true,
           H2(materialSet(y=environment.p - environment.p_H2O)),
           inclH2O=true,
-          H2O(materialSet(y=environment.p_H2O), redeclare
-              Modelica.Blocks.Sources.RealExpression thermalSet(y=environment.T))),
+          H2O(materialSet(y=environment.p_H2O), thermalSet(y=environment.T))),
           each graphite(
           'incle-'=true,
           'e-'(redeclare function materialSpec =
-                Conditions.ByConnector.Face.Single.Material.current, redeclare
-              Modelica.Blocks.Sources.Ramp materialSet(
-              height=100*U.A,
-              duration=20,
-              offset=U.mA)),
+                Conditions.ByConnector.Face.Single.Material.current,
+              materialSet(y=currentSetpoint)),
           'inclC+'=true)) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-64,0})));
       Conditions.ByConnector.FaceBus.Single.Efforts caBC[caCL.n_y, caCL.n_z](
-          each gas(
+        each gas(
+          inclN2=false,
           inclO2=true,
           inclH2O=true,
           O2(materialSet(y=(environment.p - environment.p_H2O)*environment.n_O2)),
 
-          H2O(materialSet(y=environment.p_H2O))), each graphite('incle-'=true,
-            'inclC+'=true)) annotation (Placement(transformation(
+          H2O(materialSet(y=environment.p_H2O))),
+        each graphite('incle-'=true, 'inclC+'=true),
+        each liquid(inclH2O=true,H2O(redeclare
+              Modelica.Blocks.Sources.RealExpression materialSet(y=environment.p))))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
-    equation
 
+      Modelica.Blocks.Sources.Ramp currentSet(height=100*U.A, duration=300)
+        annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    protected
+      Connectors.RealOutputInternal currentSetpoint
+        annotation (Placement(transformation(extent={{14,-50},{34,-30}})));
+    equation
       connect(anBC.face, anGDL.xNegative) annotation (Line(
           points={{-60,-6.66134e-016},{-52,-6.66134e-016},{-52,0},{-50,0}},
           color={240,0,0},
@@ -983,19 +958,23 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+      connect(currentSet.y, currentSetpoint) annotation (Line(
+          points={{1,-40},{24,-40}},
+          color={0,0,127},
+          smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLToGDL.mos"
-            "Regions.Examples.GDLToGDL.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLtoGDL.mos"
+            "Regions.Examples.GDLtoGDL.mos"),
         experiment(
-          StopTime=40,
-          Tolerance=1e-006,
+          StopTime=600,
+          Tolerance=1e-005,
           __Dymola_Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end GDLToGDL;
+    end GDLtoGDL;
 
-    model CLToCL "Test one catalyst layer to the other"
+    model CLtoCL "Test one catalyst layer to the other"
 
       extends Modelica.Icons.Example;
 
@@ -1022,42 +1001,16 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Environmental conditions"
         annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 
-      AnCLs.AnCL anCL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(
-            reduceThermal=true,
-            T(stateSelect=StateSelect.always),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each liquid(H2O(N(stateSelect=StateSelect.always),T(stateSelect=
-                    StateSelect.always)))))
+      AnCLs.AnCL anCL(subregions(each ionomer(reduceThermal=true, H2O(each phi(
+                  stateSelect=StateSelect.always, each fixed=true)))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-      PEMs.PEM PEM(subregions(ionomer(T(each stateSelect=StateSelect.always),
-              H2O(each N(stateSelect=StateSelect.always)))))
+
+      PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      CaCLs.CaCL caCL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            O2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            N2(N(stateSelect=StateSelect.always)),
-            H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(
-            reduceThermal=true,
-            T(stateSelect=StateSelect.always),
-            H2O(N(stateSelect=StateSelect.always), phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          each liquid(H2O(N(stateSelect=StateSelect.always),T(stateSelect=
-                    StateSelect.always)))))
+      CaCLs.CaCL caCL(subregions(each ionomer(reduceThermal=true, H2O(each phi(
+                  stateSelect=StateSelect.always, fixed=true)))))
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+
       Conditions.ByConnector.FaceBus.Single.Efforts anBC[anCL.n_y, anCL.n_z](
           each gas(
           inclH2=true,
@@ -1111,23 +1064,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLToCL.mos"
-            "Regions.Examples.CLToCL.mos"),
-        experiment(
-          StopTime=40,
-          Tolerance=1e-006,
-          __Dymola_Algorithm="Dassl"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLtoCL.mos"
+            "Regions.Examples.CLtoCL.mos"),
+        experiment(StopTime=40, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-    end CLToCL;
+    end CLtoCL;
 
     model AnFP "Test the anode flow plate"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      AnFPs.AnFP anFP(L_x={1,1}*U.m)
+      AnFPs.AnFP anFP(subregions(each gas(H2(each phi(stateSelect=StateSelect.always)),
+              H2O(each phi(stateSelect=StateSelect.always))), each liquid(H2O(N(
+                  stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
       Conditions.ByConnector.FaceBus.Single.Flows anBC[anFP.n_y, anFP.n_z](
@@ -1157,7 +1109,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,-24})));
       Conditions.ByConnector.FaceBus.Single.Efforts anSink[anFP.n_x, anFP.n_z](
-          each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+          each gas(inclH2=true,inclH2O=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -1209,11 +1161,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           1].graphite.'e-'.sigma*anGDL.A[Axis.x]*anGDL.subregions[1, 1, 1].graphite.epsilon
           ^1.5) if environment.analysis "Expected electrical resistance";
 
-      AnGDLs.AnGDL anGDL(subregions(each gas(
-            T(stateSelect=StateSelect.always),
-            H2(N(stateSelect=StateSelect.always)),
-            H2O(N(stateSelect=StateSelect.always))), each liquid(H2O(T(
-                  stateSelect=StateSelect.always), N(stateSelect=StateSelect.always)))))
+      AnGDLs.AnGDL anGDL
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
       Conditions.ByConnector.FaceBus.Single.Flows anBC[anGDL.n_y, anGDL.n_z](
@@ -1263,9 +1211,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=500, Tolerance=1e-006),
+        experiment(StopTime=100),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"),
         __Dymola_experimentSetupOutput);
+
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -1283,13 +1232,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Electrical current density, in A/cm2";
 
       AnCLs.AnCL anCL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            H2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            H2O(N(stateSelect=StateSelect.always))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(T(stateSelect=StateSelect.always)),
+          each gas(H2O(N(stateSelect=StateSelect.always))),
+          each ionomer(H2O(N(stateSelect=StateSelect.always))),
           each liquid(H2O(N(stateSelect=StateSelect.always)))))
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
@@ -1336,7 +1280,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(StopTime=50, Tolerance=1e-005),
+        experiment(StopTime=50),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
         __Dymola_experimentSetupOutput);
@@ -1356,14 +1300,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'H+'.sigma*PEM.A[Axis.x]) if environment.analysis
         "Expected electrical resistance";
 
-      PEMs.PEM PEM(subregions(ionomer(T(each stateSelect=StateSelect.always),
-              H2O(faces(each Ndot(stateSelect=StateSelect.always, fixed=true)),
-                each N(stateSelect=StateSelect.always)))))
+      PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       Conditions.ByConnector.FaceBus.Single.Flows anBC[PEM.n_y, PEM.n_z](each
           ionomer(
-          inclH2O=true,
+          inclH2O=false,
           'inclSO3-'=true,
           'inclH+'=true,
           H2O(redeclare function materialSpec =
@@ -1384,7 +1326,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           ionomer(
           'inclSO3-'=true,
           'inclH+'=true,
-          inclH2O=true,
+          inclH2O=false,
           'H+'(redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Face.Single.Material.pressure,
               materialSet(y=0)),
@@ -1419,7 +1361,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Documentation(info="<html><p>The protonic resistance is slightly higher than expected
   due solely to electrical resistance.  Electro-osmotic drag applies additional resistance to the migration of protons.</p>
   </html>"),
-        experiment(StopTime=30, Tolerance=1e-006),
+        experiment(StopTime=30),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
             "Regions.Examples.PEM.mos"),
         __Dymola_experimentSetupOutput);
@@ -1439,17 +1381,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       output Q.Number zJ_Apercm2=zI*U.cm^2/(caCL.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
 
-      CaCLs.CaCL caCL(subregions(
-          each gas(
-            T(stateSelect=StateSelect.always),
-            O2(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true)),
-            N2(N(stateSelect=StateSelect.always)),
-            H2O(N(stateSelect=StateSelect.always),phi(each stateSelect=
-                    StateSelect.always, each fixed=true))),
-          graphite(each T(stateSelect=StateSelect.always)),
-          each ionomer(T(stateSelect=StateSelect.always)),
-          each liquid(H2O(N(stateSelect=StateSelect.always)))))
+      CaCLs.CaCL caCL
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
       Conditions.ByConnector.FaceBus.Single.Efforts caBC[caCL.n_y, caCL.n_z](
@@ -1496,7 +1428,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(StopTime=50, Tolerance=1e-005),
+        experiment(StopTime=50),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.CaCL.mos"
             "Regions.Examples.CaCL.mos"),
         __Dymola_experimentSetupOutput);
@@ -1516,12 +1448,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           1].graphite.'e-'.sigma*caGDL.A[Axis.x]*caGDL.subregions[1, 1, 1].graphite.epsilon
           ^1.5) if environment.analysis "Expected electrical resistance";
 
-      CaGDLs.CaGDL caGDL(subregions(each gas(
-            T(stateSelect=StateSelect.always),
-            O2(N(stateSelect=StateSelect.always)),
-            N2(N(stateSelect=StateSelect.always)),
-            H2O(N(stateSelect=StateSelect.always))), each liquid(H2O(T(
-                  stateSelect=StateSelect.always), N(stateSelect=StateSelect.always)))))
+      CaGDLs.CaGDL caGDL
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
       Conditions.ByConnector.FaceBus.Single.Flows caBC[caGDL.n_y, caGDL.n_z](
@@ -1659,7 +1586,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               "Resources/Scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
 
-    model FPToFPO2 "Test one flow plate to the other"
+    model FPtoFPO2 "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -2025,8 +1952,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=230,
           Tolerance=1e-08,
@@ -2034,9 +1961,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPO2;
+    end FPtoFPO2;
 
-    model FPToFPLinearize "Test one flow plate to the other"
+    model FPtoFPLinearize "Test one flow plate to the other"
 
       extends FCSys.Icons.Blocks.Continuous;
       extends Modelica.Icons.UnderConstruction;
@@ -2437,8 +2364,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=230,
           Tolerance=1e-08,
@@ -2446,9 +2373,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPLinearize;
+    end FPtoFPLinearize;
 
-    model FPToFPSine "Test one flow plate to the other"
+    model FPtoFPSine "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -2856,8 +2783,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=230,
           Tolerance=1e-08,
@@ -2865,9 +2792,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPSine;
+    end FPtoFPSine;
 
-    model FPToFPPulse "Test one flow plate to the other"
+    model FPtoFPPulse "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -3274,8 +3201,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=220,
           Tolerance=1e-06,
@@ -3283,9 +3210,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPPulse;
+    end FPtoFPPulse;
 
-    model FPToFPVoltage "Test one flow plate to the other"
+    model FPtoFPVoltage "Test one flow plate to the other"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -3708,8 +3635,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-            "Regions.Examples.FPToFP.mos"),
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+            "Regions.Examples.FPtoFP.mos"),
         experiment(
           StopTime=240,
           Tolerance=1e-05,
@@ -3717,12 +3644,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPToFPVoltage;
+    end FPtoFPVoltage;
 
     model ElectroOsmoticDrag
       "<html>Example to calibrate the coupling between H<sup>+</sup> and H<sub>2</sub>O in the PEM</html>"
 
-      extends CLToCL(anCL(redeclare model Subregion = Subregions.Subregion (
+      extends CLtoCL(anCL(redeclare model Subregion = Subregions.Subregion (
                 ionomer(redeclare FCSys.Species.H2O.Gas.Fixed H2O(
                   redeclare package Data = FCSys.Characteristics.'H+'.Ionomer,
                   p_IC=65536*U.kPa,
@@ -3732,6 +3659,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
                   redeclare package Data = FCSys.Characteristics.'H+'.Ionomer,
                   p_IC=65536*U.kPa,
                   consMaterial=ConsThermo.IC)))));
+
       extends Modelica.Icons.UnderConstruction;
     end ElectroOsmoticDrag;
   end Examples;
@@ -4848,7 +4776,7 @@ the z axis extends across the width of the channel.</p>
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
         annotation (Dialog(tab="Initialization",__Dymola_label=
               "<html>&lambda;<sub>IC</sub></html>"));
-      parameter Q.CurrentAreic Jo(min=0) = 10*U.mA/U.cm^2
+      parameter Q.CurrentAreic Jo(min=0) = 0.1*U.mA/U.cm^2
         "Exchange current density"
         annotation (Dialog(__Dymola_label="<html><i>J</i><sup>o</sup></html>"));
 
@@ -4997,6 +4925,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               textString="%name",
               visible=not inclTransY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"

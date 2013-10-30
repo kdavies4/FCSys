@@ -956,10 +956,10 @@ margin-right: auto;\" class=noBorder>
     <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a> components using
     <a href=\"modelica://FCSys.Conditions.Adapters\">adapters</a> that are included.
     <a href=\"#Fig3\">Figure 3</a> shows a series of polarization curves generated
-    from the <a href=\"modelica://FCSys.Regions.Examples.FPToFP\">FPToFP</a> model.
+    from the <a href=\"modelica://FCSys.Regions.Examples.FPtoFP\">FPtoFP</a> model.
     Please see the <a href=\"modelica://FCSys.UsersGuide.SampleResults\">sample results</a> for more plots.</p>
 
-    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Regions.Examples.FPToFP\"><img src=\"modelica://FCSys/Resources/Documentation/Polarization.png\"></a>
+    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Regions.Examples.FPtoFP\"><img src=\"modelica://FCSys/Resources/Documentation/Polarization.png\"></a>
 <br>Figure 3: Polarization curves under various conditions.</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>

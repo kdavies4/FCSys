@@ -164,6 +164,7 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"
               "Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"),
           __Dymola_experimentSetupOutput);
+
       end SaturationPressureIdeal;
     end PhaseChange;
 
@@ -320,6 +321,7 @@ package Subregions
       "<html>Vertical array of subregions with an initial pressure difference (C<sup>+</sup> and N<sub>2</sub> included by default)</html>"
       import FCSys.Utilities.round;
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       parameter Integer n_y=3
         "Number of discrete subregions along the y axis, besides the 2 boundary subregions"
@@ -348,7 +350,6 @@ package Subregions
         k_common=1e-7,
         gas(inclN2=true, N2(
             p_IC=environment.p - Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
             upstreamY=false,
             phi(each stateSelect=StateSelect.always, each fixed=true))),
         graphite('inclC+'='inclC+', 'C+'(epsilon=1e-9, T(stateSelect=
@@ -362,7 +363,6 @@ package Subregions
         gas(each inclN2=true, N2(
             p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i in
                 1:n_y},
-            each N(stateSelect=StateSelect.always),
             each upstreamY=false,
             each phi(each stateSelect=StateSelect.always,each fixed=true))),
         graphite(each 'inclC+'='inclC+', each 'C+'(epsilon=1e-9,T(stateSelect=
@@ -381,7 +381,6 @@ package Subregions
 
         gas(inclN2=true, N2(
             p_IC=environment.p + Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
             upstreamY=false,
             phi(each stateSelect=StateSelect.always,each fixed=true))))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -582,7 +581,7 @@ package Subregions
 
     model InternalFlow "Internal, laminar flow of liquid water"
       import FCSys.Utilities.Delta;
-
+      extends Modelica.Icons.UnderConstruction;
       final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area"
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
@@ -610,7 +609,8 @@ package Subregions
           L={U.m,U.cm,U.cm},
           inclTransY=true,
           inclTransZ=true,
-          liquid(inclH2O=true, H2O(final epsilon_IC=1))));
+          liquid(inclH2O=true, H2O(N(stateSelect=StateSelect.default),final
+                epsilon_IC=1))));
 
       Conditions.ByConnector.FaceBus.Single.Flows BC1(liquid(inclH2O=true, H2O(
               redeclare Modelica.Blocks.Sources.Sine materialSet(
@@ -740,6 +740,7 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -791,8 +792,7 @@ package Subregions
           final inclH2=inclH2,
           final inclH2O=inclH2O,
           final inclN2=inclN2,
-          final inclO2=inclO2,
-          H2(N(stateSelect=StateSelect.always))),
+          final inclO2=inclO2),
         liquid(H2O(epsilon_IC=0.25)),
         ionomer(
           final 'inclSO3-'='inclSO3-',
@@ -864,30 +864,18 @@ package Subregions
           final inclH2O=inclH2O,
           final inclN2=inclN2,
           final inclO2=inclO2,
-          H2O(
-            p_IC=environment.p - Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
-            T(stateSelect=StateSelect.always),
-            phi(each stateSelect=StateSelect.always,each fixed=true)),
-          N2(
-            p_IC=environment.p - Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
-            T(stateSelect=StateSelect.always),
-            phi(each stateSelect=StateSelect.always,each fixed=true)),
-          O2(
-            p_IC=environment.p - Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
-            T(stateSelect=StateSelect.always),
-            phi(each stateSelect=StateSelect.always,each fixed=true)),
-          H2(
-            p_IC=environment.p - Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
-            T(stateSelect=StateSelect.always),
-            phi(each stateSelect=StateSelect.always,each fixed=true))),
+          H2O(p_IC=environment.p - Deltap_IC/2, phi(each stateSelect=
+                  StateSelect.always, each fixed=true)),
+          N2(p_IC=environment.p - Deltap_IC/2, phi(each stateSelect=StateSelect.always,
+                each fixed=true)),
+          O2(p_IC=environment.p - Deltap_IC/2, phi(each stateSelect=StateSelect.always,
+                each fixed=true)),
+          H2(p_IC=environment.p - Deltap_IC/2, phi(each stateSelect=StateSelect.always,
+                each fixed=true))),
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'C+'(epsilon=0.001,T(stateSelect=StateSelect.always))),
+          'C+'(epsilon=0.001)),
         ionomer(
           final 'inclSO3-'='inclSO3-',
           final 'inclH+'='inclH+',
@@ -936,7 +924,7 @@ package Subregions
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'C+'(epsilon=0.001,T(stateSelect=StateSelect.always))),
+          'C+'(epsilon=0.001)),
         ionomer(
           final 'inclSO3-'=false,
           final 'inclH+'='inclH+',
@@ -950,10 +938,7 @@ package Subregions
           H2O(p_IC=environment.p + Deltap_IC/2),
           N2(p_IC=environment.p + Deltap_IC/2),
           O2(p_IC=environment.p + Deltap_IC/2),
-          H2(
-            p_IC=environment.p + Deltap_IC/2,
-            N(stateSelect=StateSelect.always),
-            T(stateSelect=StateSelect.always))))
+          H2(p_IC=environment.p + Deltap_IC/2)))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
       FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC1(

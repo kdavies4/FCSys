@@ -28,6 +28,7 @@ Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simuli
 //  doesn't run correctly with it!
 
 // Debugging and development options
+Advanced.EnableAnnotationCheck = true "Can set to enable annotation check for Modelica 3.1 and later";
 Advanced.CheckUnits = false "Check unit consistency of equations";
 LogStateSelection = true "List continuous time states selected";
 OutputCPUtime = true "Include a variable for elapsed CPU time during simulation";
@@ -40,10 +41,10 @@ Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
 Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
 Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
 Advanced.TranslationInCommandLog = true "Also include translation log in command log";
-Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
 Advanced.IncludeProtectedInBrowser = true "Include protected classes in package browser";
 Advanced.SmartConnect = false "Create connection automatically if connector over connector.";
 //   Note:  Smart connect sometimes crashes Dymola 2014. 
+//Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
 //Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
 //Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
 //Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";

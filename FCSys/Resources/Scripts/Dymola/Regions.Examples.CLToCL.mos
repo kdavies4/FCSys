@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "CLToCL.mat");
+createPlot(filename = "CLtoCL.mat");
 
 FCSys.Utilities.plot6(
     y1={"anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",

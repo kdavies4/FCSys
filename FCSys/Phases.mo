@@ -550,6 +550,7 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -644,8 +645,8 @@ package Phases "Mixtures of species"
 
     Connectors.Amagat amagat(final V=-V) if n_spec > 0
       "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-80,24},{-60,44}}),iconTransformation(extent={{70,-90},{90,
-              -70}})));
+            extent={{-80,24},{-60,44}}), iconTransformation(extent={{70,-90},{
+              90,-70}})));
 
     Connectors.Electrochemical 'conne-'(final n_trans=n_trans) if 'incle-'
       "Electrochemical connector for e-" annotation (Placement(transformation(
@@ -849,7 +850,7 @@ package Phases "Mixtures of species"
 
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_trans,final
+    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_trans, final
         n_inter) if 'inclSO3-' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
       n_intra=2,

@@ -1662,7 +1662,7 @@ static"),Ellipse(
 
   end Connectors;
 
-  model FPToFP "Test one flow plate to the other"
+  model FPtoFP "Test one flow plate to the other"
 
     extends Modelica.Icons.Example;
     parameter Q.NumberAbsolute n_O2=0.21;
@@ -2015,8 +2015,8 @@ static"),Ellipse(
         smooth=Smooth.None));
 
     annotation (
-      Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPToFP.mos"
-          "Regions.Examples.FPToFP.mos"),
+      Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
+          "Regions.Examples.FPtoFP.mos"),
       experiment(
         StopTime=230,
         Tolerance=1e-05,
@@ -2024,7 +2024,7 @@ static"),Ellipse(
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       __Dymola_experimentSetupOutput);
-  end FPToFP;
+  end FPtoFP;
 
   model InternalFlow
     extends Subregions.Examples.InternalFlow(final Vdot_large=Vdot_large_SI*U.m

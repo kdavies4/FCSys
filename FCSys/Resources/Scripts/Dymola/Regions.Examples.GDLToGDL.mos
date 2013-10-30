@@ -1,28 +1,24 @@
 // Setup
 removePlots();
-createPlot(filename = "GDLToGDL.mat");
+createPlot(filename = "GDLtoGDL.mat");
 
 FCSys.Utilities.plot6(
-    y1={"anGDL.subregions[1, 1, 1].gas.H2.rho", "anGDL.subregions[1, 1, 1].gas.H2O.rho",
-        "anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
+    y1={"anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
         "PEM.subregions[1, 1, 1].ionomer.H2O.rho",
-        "caCL.subregions[1, 1, 1].gas.H2O.rho", "caCL.subregions[1, 1, 1].gas.N2.rho", "caCL.subregions[1, 1, 1].gas.O2.rho",
-        "caGDL.subregions[1, 1, 1].gas.H2O.rho", "caGDL.subregions[1, 1, 1].gas.N2.rho", "caGDL.subregions[1, 1, 1].gas.O2.rho"},
-    y3={"anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p",
-        "anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p",
+        "caCL.subregions[1, 1, 1].gas.H2O.rho", "caCL.subregions[1, 1, 1].gas.N2.rho", "caCL.subregions[1, 1, 1].gas.O2.rho"},
+    y2={"anCL.subregions[1, 1, 1].liquid.H2O.electrochemical.Ndot",
+        "anCL.subregions[1, 1, 1].ionomer.H2O.electrochemical.Ndot",
+        "caCL.subregions[1, 1, 1].liquid.H2O.electrochemical.Ndot",
+        "caCL.subregions[1, 1, 1].ionomer.H2O.electrochemical.Ndot"},
+    y3={"anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p",
         "PEM.subregions[1, 1, 1].ionomer.H2O.p",
-        "caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p",
-        "caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p"},
-    y4={"anGDL.subregions[1, 1, 1].gas.H2.T", "anGDL.subregions[1, 1, 1].gas.H2O.T",
-        "anCL.subregions[1, 1, 1].gas.H2.T", "anCL.subregions[1, 1, 1].gas.H2O.T",
-        "PEM.subregions[1, 1, 1].ionomer.H2O.T",
-        "caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].gas.N2.T", "caCL.subregions[1, 1, 1].gas.O2.T",
-        "caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].gas.N2.T", "caGDL.subregions[1, 1, 1].gas.O2.T"},
-    y5={"anGDL.subregions[1, 1, 1].gas.H2.electrochemical.mu", "anGDL.subregions[1, 1, 1].gas.H2O.electrochemical.mu",
-        "anCL.subregions[1, 1, 1].gas.H2.electrochemical.mu", "anCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu",
-        "PEM.subregions[1, 1, 1].ionomer.H2O.electrochemical.mu",
-        "caCL.subregions[1, 1, 1].gas.H2O.electrochemical.mu", "caCL.subregions[1, 1, 1].gas.N2.electrochemical.mu", "caCL.subregions[1, 1, 1].gas.O2.electrochemical.mu",
-        "caGDL.subregions[1, 1, 1].gas.H2O.electrochemical.mu", "caGDL.subregions[1, 1, 1].gas.N2.electrochemical.mu", "caGDL.subregions[1, 1, 1].gas.O2.electrochemical.mu"})
+        "caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p"},
+    y4={"anCL.subregions[1, 1, 1].gas.T", "anCL.subregions[1, 1, 1].graphite.T", 
+        "PEM.subregions[1, 1, 1].ionomer.T", 
+        "caCL.subregions[1, 1, 1].gas.T", "caCL.subregions[1, 1, 1].graphite.T"},
+    y5={"anCL.subregions[1, 1, 1].gas.H2.electrochemical.w", "anCL.subregions[1, 1, 1].gas.H2O.electrochemical.w",
+        "PEM.subregions[1, 1, 1].ionomer.H2O.electrochemical.w",
+        "caCL.subregions[1, 1, 1].gas.H2O.electrochemical.w", "caCL.subregions[1, 1, 1].gas.O2.electrochemical.w"})
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},
