@@ -193,21 +193,22 @@ package Assemblies "Combinations of regions (e.g., cells)"
       final parameter Integer n_z=size(L_z, 1)
         "Number of subregions across the channel";
 
-      Connectors.FaceBus an[n_y, n_z] "Interface with the anode end plate"
+      Connectors.BoundaryBus an[n_y, n_z] "Interface with the anode end plate"
         annotation (Placement(transformation(extent={{-100,-20},{-80,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
-      Connectors.FaceBus ca[n_y, n_z] "Interface with the cathode end plate"
-        annotation (Placement(transformation(extent={{60,-20},{80,0}}, rotation
-              =0), iconTransformation(extent={{90,-10},{110,10}})));
-      Connectors.FaceBus anNegative[anFP.n_x, n_z] "Negative anode fluid port"
-        annotation (Placement(transformation(
+      Connectors.BoundaryBus ca[n_y, n_z]
+        "Interface with the cathode end plate" annotation (Placement(
+            transformation(extent={{60,-20},{80,0}}, rotation=0),
+            iconTransformation(extent={{90,-10},{110,10}})));
+      Connectors.BoundaryBus anNegative[anFP.n_x, n_z]
+        "Negative anode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-70,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,-100})));
-      Connectors.FaceBus caNegative[caFP.n_x, n_z]
+      Connectors.BoundaryBus caNegative[caFP.n_x, n_z]
         "Negative cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -215,15 +216,15 @@ package Assemblies "Combinations of regions (e.g., cells)"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
-      Connectors.FaceBus anPositive[anFP.n_x, n_z] "Positive anode fluid port"
-        annotation (Placement(transformation(
+      Connectors.BoundaryBus anPositive[anFP.n_x, n_z]
+        "Positive anode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-70,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
-      Connectors.FaceBus caPositive[caFP.n_x, n_z]
+      Connectors.BoundaryBus caPositive[caFP.n_x, n_z]
         "Positive cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -400,21 +401,22 @@ package Assemblies "Combinations of regions (e.g., cells)"
       final parameter Integer n_z=size(L_z, 1)
         "Number of subregions across the channel";
 
-      Connectors.FaceBus an[n_y, n_z] "Interface with the anode end plate"
+      Connectors.BoundaryBus an[n_y, n_z] "Interface with the anode end plate"
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
-      Connectors.FaceBus ca[n_y, n_z] "Interface with the cathode end plate"
-        annotation (Placement(transformation(extent={{40,-20},{60,0}}, rotation
-              =0), iconTransformation(extent={{90,-10},{110,10}})));
-      Connectors.FaceBus anNegative[anFP.n_x, n_z] "Negative anode fluid port"
-        annotation (Placement(transformation(
+      Connectors.BoundaryBus ca[n_y, n_z]
+        "Interface with the cathode end plate" annotation (Placement(
+            transformation(extent={{40,-20},{60,0}}, rotation=0),
+            iconTransformation(extent={{90,-10},{110,10}})));
+      Connectors.BoundaryBus anNegative[anFP.n_x, n_z]
+        "Negative anode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-50,-30}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,-100})));
-      Connectors.FaceBus caNegative[caFP.n_x, n_z]
+      Connectors.BoundaryBus caNegative[caFP.n_x, n_z]
         "Negative cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -422,15 +424,15 @@ package Assemblies "Combinations of regions (e.g., cells)"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
-      Connectors.FaceBus anPositive[anFP.n_x, n_z] "Positive anode fluid port"
-        annotation (Placement(transformation(
+      Connectors.BoundaryBus anPositive[anFP.n_x, n_z]
+        "Positive anode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-50,10}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
-      Connectors.FaceBus caPositive[caFP.n_x, n_z]
+      Connectors.BoundaryBus caPositive[caFP.n_x, n_z]
         "Positive cathode fluid port" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,

@@ -269,6 +269,10 @@ package UsersGuide "User's Guide"
       <li><b>density</b> &ndash; (<i>noun</i>) amount of material per volume (i.e., concentration, molar concentration, or number density) [N L<sup>-3</sup>].  
       Note that mass per volume is volumic mass (see <i>massic</i> below).</li>
 
+      <li><b>continuity</b> &ndash; (<i>noun</i>) resistivity to axial compression or material storage during transport 
+      [M N<sup>-1</sup> T<sup>-1</sup>]
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>())</li>
+
       <li><b>equivalent current</b> &ndash; (<i>noun</i>) rate of supply of a reactant required to support the given current 
       assuming the reactant is entirely consumed (complete utilization) [N T<sup>-1</sup>]</li>
       

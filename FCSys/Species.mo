@@ -181,6 +181,7 @@ package Species "Dynamic models of chemical species"
           final T_IC,
           final nu=1,
           final tauprime=V/(v*Io),
+          final zeta=0,
           final theta=Modelica.Constants.inf);
 
         parameter Q.Current Io(min=0) = 10*U.A "Exchange current" annotation (
@@ -210,7 +211,7 @@ package Species "Dynamic models of chemical species"
 
           Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
+                  {100,100}}),graphics));
 
       end Fixed;
 
@@ -247,6 +248,7 @@ package Species "Dynamic models of chemical species"
           final T_IC,
           final nu=1,
           final tauprime=0,
+          final zeta=0,
           final consEnergy=ConsThermo.steady);
 
         // See the documentation for a table of values.
@@ -361,6 +363,7 @@ package Species "Dynamic models of chemical species"
           final tauprime,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+          redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(8.96e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W),
           final k_intra,
@@ -445,9 +448,8 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
               Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
         output Q.NumberAbsolute RH(
           stateSelect=StateSelect.never,
-          displayUnit="%") = p/(
-          Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa) if
-          environment.analysis "Relative humidity (approximate)";
+          displayUnit="%") = p/(Characteristics.H2O.p_sat(T)) if environment.analysis
+          "Relative humidity (approximate)";
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
@@ -467,6 +469,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           final tauprime,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+          redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(9.09e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W),
 
@@ -477,9 +480,8 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
         output Q.NumberAbsolute RH(
           stateSelect=StateSelect.never,
-          displayUnit="%") = p/(
-          Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa) if
-          environment.analysis "Relative humidity (approximate)";
+          displayUnit="%") = p/Characteristics.H2O.p_sat(T) if environment.analysis
+          "Relative humidity (approximate)";
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -668,7 +670,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
           Diagram(graphics),
           Icon(graphics));
-
       end Fixed;
 
     end Ionomer;
@@ -851,6 +852,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           final tauprime,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+          redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
 
@@ -944,6 +946,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           final tauprime,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+          redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(20.72e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W),
 
@@ -1014,7 +1017,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1084,6 +1086,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       annotation (Evaluate=true, Dialog(tab="Initialization"));
     extends Species(N(stateSelect=if consMaterial == ConsThermo.dynamic then
             StateSelect.always else StateSelect.prefer));
+
     // Note:  The extension is after these parameters so that they appear first
     // in the parameter dialog.
     // Note:  StateSelect.always is not ideal, but it is necessary to avoid dynamic
@@ -1095,7 +1098,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     Q.TimeAbsolute tauprime(nominal=1e-6*U.s) = 0
       "Interval for chemical exchange" annotation (Dialog(group=
             "Material properties", __Dymola_label="<html>&tau;&prime;</html>"));
-    Q.Resistivity eta(nominal=10*U.cm/U.A) = Data.eta(T, v) "Fluidity"
+    Q.Continuity zeta(nominal=10*U.kg/(U.C*U.s)) = Data.zeta(T, v) "Continuity"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html>&zeta;</html>"));
+    Q.Fluidity eta(nominal=1e5/(U.Pa*U.s)) = Data.eta(T, v) "Fluidity"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&eta;</html>"));
     Q.ResistivityThermal theta(nominal=10*U.cm/U.A) = Data.theta(T, v)
@@ -1174,21 +1180,21 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // Aliases (for common terms)
     Q.Current I[n_trans](each nominal=U.A, each stateSelect=StateSelect.never)
       "Current";
-    Q.Velocity phi_faces[n_trans, Side](each nominal=10*U.cm/U.s, each
-        stateSelect=StateSelect.never) "Normal velocities at the faces";
+    Q.Velocity phi_boundaries[n_trans, Side](each nominal=10*U.cm/U.s, each
+        stateSelect=StateSelect.never) "Normal velocities at the boundaries";
 
     // Auxiliary variables (for analysis)
     // ----------------------------------
     // Misc. conditions
-    output Q.Density rho_faces[n_trans, Side](each stateSelect=StateSelect.never)
+    output Q.Density rho_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
        = fill(
         1,
         n_trans,
-        2) ./ Data.v_Tp(faces.T, faces.p) if environment.analysis
-      "Densities at the faces";
-    output Q.VolumeRate Vdot_faces[n_trans, Side](each stateSelect=StateSelect.never)
-       = faces.Ndot ./ rho_faces if environment.analysis
-      "Volume flow rates into the faces";
+        2) ./ Data.v_Tp(boundaries.T, boundaries.p) if environment.analysis
+      "Densities at the boundaries";
+    output Q.VolumeRate Vdot_boundaries[n_trans, Side](each stateSelect=
+          StateSelect.never) = boundaries.Ndot ./ rho_boundaries if environment.analysis
+      "Volume flow rates into the boundaries";
     output Q.PressureAbsolute q[n_trans](each stateSelect=StateSelect.never) =
       Data.m*phi .* I ./ (2*A[cartTrans]) if environment.analysis
       "Dynamic pre ssure";
@@ -1200,13 +1206,13 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Specific entropy-temperature product of the chemical stream";
     //
     // Potentials and current
-    output Q.Potential g_faces[n_trans, Side](each stateSelect=StateSelect.never)
-       = Data.g(faces.T, faces.p) if environment.analysis and not Data.isCompressible
-      "Gibbs potentials at the faces";
+    output Q.Potential g_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
+       = Data.g(boundaries.T, boundaries.p) if environment.analysis and not
+      Data.isCompressible "Gibbs potentials at the boundaries";
     output Q.Potential Deltag[n_trans](each stateSelect=StateSelect.never) =
-      Delta(g_faces) if environment.analysis and not Data.isCompressible
-      "Differences in Gibbs potentials across the faces";
-    // Note:  If a face is left unconnnected, then it is possible that its pressure
+      Delta(g_boundaries) if environment.analysis and not Data.isCompressible
+      "Differences in Gibbs potentials across the boundaries";
+    // Note:  If a boundary is left unconnnected, then it is possible that its pressure
     // may become negative.  If the equation of state has ideal-gas term,
     // then the Gibbs energy will involve a logarithm of pressure.  Therefore,
     // to be safe, these variables are included only for incompressible species.
@@ -1249,25 +1255,25 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       environment.analysis
       "Acceleration force (including acceleration due to body forces)";
     output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(
-      if inclTrans[cartTrans[i]] then -Delta(faces[transCart[cartTrans[i]], :].p)
-      *A[cartTrans[i]] else 0) for i in 1:n_trans} if environment.analysis
+      if inclTrans[cartTrans[i]] then -Delta(boundaries[transCart[cartTrans[i]],
+      :].p)*A[cartTrans[i]] else 0) for i in 1:n_trans} if environment.analysis
       "Thermodynamic force";
     output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*(
       actualStream(electrochemical.phi) - phi) .* electrochemical.Ndot if
       environment.analysis "Acceleration force due to advective exchange";
-    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.translational.mPhidot
+    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.trans.mPhidot
        + {sum(inter[:].mPhidot[i]) for i in 1:n_trans} + {sum(intra[:].mPhidot[
       i]) for i in 1:n_trans} if environment.analysis
       "Friction from other configurations (diffusive exchange)";
     // Note:  The [:] is necessary in Dymola 2014.
     output Q.Force f_AT[n_trans](each stateSelect=StateSelect.never) = {sum(((
-      if i == j then phi_faces[j, :] else faces[j, :].phi[cartWrap(cartTrans[i]
-       - cartTrans[j])]) - {phi[i],phi[i]})*faces[j, :].Ndot*Data.m for j in 1:
-      n_trans) for i in 1:n_trans} if environment.analysis
+      if i == j then phi_boundaries[j, :] else boundaries[j, :].phi[cartWrap(
+      cartTrans[i] - cartTrans[j])]) - {phi[i],phi[i]})*boundaries[j, :].Ndot*
+      Data.m for j in 1:n_trans) for i in 1:n_trans} if environment.analysis
       "Acceleration force due to advective transport";
     output Q.Force f_DT[n_trans](each stateSelect=StateSelect.never) = {sum(sum(
-      if i == j then {0,0} else faces[j, :].mPhidot[cartWrap(cartTrans[i] -
-      cartTrans[j])]) for j in 1:n_trans) for i in 1:n_trans} if environment.analysis
+      if i == j then {0,0} else boundaries[j, :].mPhidot[cartWrap(cartTrans[i]
+       - cartTrans[j])]) for j in 1:n_trans) for i in 1:n_trans} if environment.analysis
       "Shear force from other subregions (diffusive transport)";
     //
     // Energy balance
@@ -1280,24 +1286,25 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       *actualStream(electrochemical.phi) - phi*phi)*Data.m/2)*electrochemical.Ndot
       if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to phase change and reaction";
-    output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.translational.phi
-      *direct.translational.mPhidot + sum(inter[i].phi*inter[i].mPhidot for i
-       in 1:n_inter) + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) +
-      direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
+    output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.trans.phi*
+      direct.trans.mPhidot + sum(inter[i].phi*inter[i].mPhidot for i in 1:
+      n_inter) + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + direct.thermo.Qdot
+       + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
-    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(faces[i,
-      :].T, faces[i, :].p) - {h,h} + (phi_faces[i, :] .^ 2 + sum(faces[i, :].phi[
-      orient] .^ 2 for orient in Orient) - fill(phi*phi, 2))*(Data.m/2))*faces[
-      i, :].Ndot for i in 1:n_trans) if environment.analysis
+    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(
+      boundaries[i, :].T, boundaries[i, :].p) - {h,h} + (phi_boundaries[i, :]
+       .^ 2 + sum(boundaries[i, :].phi[orient] .^ 2 for orient in Orient) -
+      fill(phi*phi, 2))*(Data.m/2))*boundaries[i, :].Ndot for i in 1:n_trans)
+      if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
-    output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(faces[i, :].phi[
-      orient]*faces[i, :].mPhidot[orient] for orient in Orient) for i in 1:
-      n_trans) + sum(faces.Qdot) if environment.analysis
+    output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(boundaries[
+      i, :].phi[orient]*boundaries[i, :].mPhidot[orient] for orient in Orient)
+      for i in 1:n_trans) + sum(boundaries.Qdot) if environment.analysis
       "Rate of diffusion of energy from other subregions";
     // Note:  The structure of the problem should not change if these
     // auxiliary variables are included (hence, StateSelect.never).
 
-    Connectors.Face faces[n_trans, Side](
+    Connectors.Boundary boundaries[n_trans, Side](
       each p(start=p_IC),
       each T(start=T_IC),
       each Ndot(start=0,stateSelect=StateSelect.never))
@@ -1317,7 +1324,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Effective area divided by length of the transport axes" annotation (
         missingInnerMessage="This model should be used within a phase model.");
     outer parameter Boolean inclRot[3]
-      "true, if each axis of rotation has all its tangential faces included"
+      "true, if each axis of rotation has all its tangential boundaries included"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
     outer parameter Boolean inclTrans[3]
@@ -1337,8 +1344,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // Note:  The size of cartRot and cartTrans is n_trans,
     // but it isn't specified here due to an error in Dymola 2014.
     outer parameter Integer transCart[3]
-      "Face-pair indices of the Cartesian axes" annotation (missingInnerMessage
-        ="This model should be used within a subregion model.
+      "Boundary-pair indices of the Cartesian axes" annotation (
+        missingInnerMessage="This model should be used within a subregion model.
 ");
     // Note:  The size is also Axis, but it isn't specified here due
     // to an error in Dymola 2014.
@@ -1356,8 +1363,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     // Additional aliases (for common terms)
     Q.Force mPhidot[n_trans](each nominal=U.N, each stateSelect=StateSelect.never)
-      "Force, excluding effects of thermodynamic pressure, dynamic pressure, and unsteady current";
-    Q.Force faces_mPhidot[n_trans, Side, Orient](each nominal=U.N, each
+      "Body, shear, and exchange forces (all forces except thermodynamic, dynamic, nonequilibrium, and storage)";
+    Q.Force boundaries_mPhidot[n_trans, Side, Orient](each nominal=U.N, each
         stateSelect=StateSelect.never) "Directly-calculated shear forces";
 
     outer Conditions.Environment environment "Environmental conditions";
@@ -1479,14 +1486,15 @@ Choose any condition besides None.");
   equation
     // Aliases (only to clarify and simplify other equations)
     I .* L[cartTrans] = N*phi;
-    phi_faces = faces.Ndot .* Data.v_Tp(faces.T, faces.p) ./ {A[cartTrans[i]]*{
-      1,-1} for i in 1:n_trans};
+    phi_boundaries = boundaries.Ndot .* Data.v_Tp(boundaries.T, boundaries.p)
+       ./ {A[cartTrans[i]]*{1,-1} for i in 1:n_trans};
     mPhidot + M*environment.a[cartTrans] + Data.z*N*environment.E[cartTrans] =
-      Data.m*actualStream(electrochemical.phi)*electrochemical.Ndot + direct.translational.mPhidot
+      Data.m*actualStream(electrochemical.phi)*electrochemical.Ndot + direct.trans.mPhidot
        + {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((if i == j
-       then 0 else faces[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*faces[
-      i, :].Ndot*Data.m + sum(faces[i, :].mPhidot[cartWrap(cartTrans[j] -
-      cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans};
+       then 0 else boundaries[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*
+      boundaries[i, :].Ndot*Data.m + sum(boundaries[i, :].mPhidot[cartWrap(
+      cartTrans[j] - cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans}
+      "Conservation of translational momentum (establishes mPhidot)";
 
     // Properties upon outflow due to reaction and phase change
     electrochemical.phi = phi;
@@ -1500,42 +1508,46 @@ Choose any condition besides None.");
       // this one.
     else
       electrochemical.w = g + 2*T*asinh(electrochemical.Ndot*tauprime*v/(2*V))
-        "Explicitly inverted to avoid nonlinear system of equations";
+        "Explicitly inverted to avoid nonlinear equations";
     end if;
 
     // Transport
     for i in 1:n_trans loop
       for side in Side loop
-        // Material/conservation of translational momentum
-        (if consTrans[i] == ConsMom.dynamic then Data.m*der(faces[i, side].Ndot)
-          /U.s else 0) = Lprime[i]*(faces[i, side].p - p)*2 + Data.m*faces[i,
-          side].Ndot^2/N + inSign(side)*mPhidot[i]/L[cartTrans[i]];
+        // Material
+        zeta*(boundaries[i, side].Ndot - inSign(side)*I[i]) + (if consTrans[i]
+           == ConsMom.dynamic then Data.m*(der(boundaries[i, side].Ndot)/U.s +
+          I[i]^2/N) else 0) = (Lprime[i]*(boundaries[i, side].p - p) + inSign(
+          side)*mPhidot[i]/L[cartTrans[i]])*(if upstream[i] then 1 + exp(zeta*
+          Data.beta(T, p)*boundaries[i, side].Ndot/(2*Lprime[i])) else 2);
 
         // Transverse translational momentum
-        eta*faces_mPhidot[i, side, Orient.after] = Nu_Phi[after(cartTrans[i])]*
-          Lprime[i]*(faces[i, side].phi[Orient.after] - (if inclTrans[after(
-          cartTrans[i])] then phi[transCart[after(cartTrans[i])]] else 0))*(if
-          upstream[i] then 1 + exp(-eta*Lprime[i]*faces[i, side].Ndot/2) else 2)
-          "1st transverse";
-        eta*faces_mPhidot[i, side, Orient.before] = Nu_Phi[before(cartTrans[i])]
-          *Lprime[i]*(faces[i, side].phi[Orient.before] - (if inclTrans[before(
-          cartTrans[i])] then phi[transCart[before(cartTrans[i])]] else 0))*(
-          if upstream[i] then 1 + exp(-eta*Lprime[i]*faces[i, side].Ndot/2)
-           else 2) "2nd transverse";
+        eta*boundaries_mPhidot[i, side, Orient.after] = Nu_Phi[after(cartTrans[
+          i])]*Lprime[i]*(boundaries[i, side].phi[Orient.after] - (if inclTrans[
+          after(cartTrans[i])] then phi[transCart[after(cartTrans[i])]] else 0))
+          *(if upstream[i] then 1 + exp(-eta*Data.m*boundaries[i, side].Ndot/(2
+          *Lprime[i])) else 2) "1st transverse";
+        eta*boundaries_mPhidot[i, side, Orient.before] = Nu_Phi[before(
+          cartTrans[i])]*Lprime[i]*(boundaries[i, side].phi[Orient.before] - (
+          if inclTrans[before(cartTrans[i])] then phi[transCart[before(
+          cartTrans[i])]] else 0))*(if upstream[i] then 1 + exp(-eta*Data.m*
+          boundaries[i, side].Ndot/(2*Lprime[i])) else 2) "2nd transverse";
 
         // Thermal energy
-        theta*faces[i, side].Qdot = Nu_Q*Lprime[i]*(faces[i, side].T - T)*(if
-          upstream[i] then 1 + exp(-theta*Lprime[i]*Data.c_v(T, p)*faces[i,
-          side].Ndot/2) else 2);
+        theta*boundaries[i, side].Qdot = Nu_Q*Lprime[i]*(boundaries[i, side].T
+           - T)*(if upstream[i] then 1 + exp(-theta*Data.c_v(T, p)*boundaries[i,
+          side].Ndot/(2*Lprime[i])) else 2);
       end for;
 
       // Direct mapping of shear forces (calculated above)
       if not (consRot and inclRot[before(cartTrans[i])]) then
-        faces[i, :].mPhidot[Orient.after] = faces_mPhidot[i, :, Orient.after];
+        boundaries[i, :].mPhidot[Orient.after] = boundaries_mPhidot[i, :,
+          Orient.after];
         // Else, the force must be mapped for zero torque (below).
       end if;
       if not (consRot and inclRot[after(cartTrans[i])]) then
-        faces[i, :].mPhidot[Orient.before] = faces_mPhidot[i, :, Orient.before];
+        boundaries[i, :].mPhidot[Orient.before] = boundaries_mPhidot[i, :,
+          Orient.before];
         // Else, the force must be mapped for zero torque (below).
       end if;
     end for;
@@ -1545,15 +1557,16 @@ Choose any condition besides None.");
       for axis in cartRot loop
         4*cat(
             1,
-            faces[transCart[after(axis)], :].mPhidot[Orient.after],
-            faces[transCart[before(axis)], :].mPhidot[Orient.before]) = {{3,1,L[
-          before(axis)]/L[after(axis)],-L[before(axis)]/L[after(axis)]},{1,3,-L[
-          before(axis)]/L[after(axis)],L[before(axis)]/L[after(axis)]},{L[after(
-          axis)]/L[before(axis)],-L[after(axis)]/L[before(axis)],3,1},{-L[after(
-          axis)]/L[before(axis)],L[after(axis)]/L[before(axis)],1,3}}*cat(
+            boundaries[transCart[after(axis)], :].mPhidot[Orient.after],
+            boundaries[transCart[before(axis)], :].mPhidot[Orient.before]) = {{
+          3,1,L[before(axis)]/L[after(axis)],-L[before(axis)]/L[after(axis)]},{
+          1,3,-L[before(axis)]/L[after(axis)],L[before(axis)]/L[after(axis)]},{
+          L[after(axis)]/L[before(axis)],-L[after(axis)]/L[before(axis)],3,1},{
+          -L[after(axis)]/L[before(axis)],L[after(axis)]/L[before(axis)],1,3}}*
+          cat(
             1,
-            faces_mPhidot[transCart[after(axis)], :, Orient.after],
-            faces_mPhidot[transCart[before(axis)], :, Orient.before]);
+            boundaries_mPhidot[transCart[after(axis)], :, Orient.after],
+            boundaries_mPhidot[transCart[before(axis)], :, Orient.before]);
       end for;
     end if;
 
@@ -1594,12 +1607,12 @@ Choose any condition besides None.");
       end if;
     else
       (if consMaterial == ConsThermo.dynamic then der(N)/U.s else 0) =
-        electrochemical.Ndot + sum(faces.Ndot) "Material conservation";
+        electrochemical.Ndot + sum(boundaries.Ndot) "Material conservation";
     end if;
 
     // Linear current profile
     for i in 1:n_trans loop
-      0 = 2*I[i] + Delta(faces[i, :].Ndot);
+      0 = 2*I[i] + Delta(boundaries[i, :].Ndot);
     end for;
 
     // Thermal dynamics
@@ -1642,14 +1655,14 @@ Choose any condition besides None.");
         phi*phi)/2)/U.s else 0) = (electrochemical.w + actualStream(
         electrochemical.sT) - h + actualStream(electrochemical.phi)*
         actualStream(electrochemical.phi)*Data.m/2)*electrochemical.Ndot +
-        direct.translational.phi*direct.translational.mPhidot + sum(intra[i].phi
-        *intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot
-        for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot) + sum(inter.Qdot)
-         + sum((Data.h(faces[i, :].T, faces[i, :].p) - {h,h} + (phi_faces[i, :]
-         .^ 2 + sum(faces[i, :].phi[orient] .^ 2 for orient in Orient))*(Data.m
-        /2))*faces[i, :].Ndot + sum(faces[i, :].phi[orient]*faces[i, :].mPhidot[
-        orient] for orient in Orient) for i in 1:n_trans) + sum(faces.Qdot)
-        "Conservation of energy";
+        direct.trans.phi*direct.trans.mPhidot + sum(intra[i].phi*intra[i].mPhidot
+        for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot for i in 1:
+        n_inter) + direct.thermo.Qdot + sum(intra.Qdot) + sum(inter.Qdot) + sum(
+        (Data.h(boundaries[i, :].T, boundaries[i, :].p) - {h,h} + (
+        phi_boundaries[i, :] .^ 2 + sum(boundaries[i, :].phi[orient] .^ 2 for
+        orient in Orient))*(Data.m/2))*boundaries[i, :].Ndot + sum(boundaries[i,
+        :].phi[orient]*boundaries[i, :].mPhidot[orient] for orient in Orient)
+        for i in 1:n_trans) + sum(boundaries.Qdot) "Conservation of energy";
       // Note:  In Dymola 2014, der(Data.s(T, p)) is better than der(s) because it avoids
       // dynamic state selection.  Dymola sometimes chooses s as a state even though its
       // stateSelect is StateSelect.never.
@@ -1661,7 +1674,7 @@ Choose any condition besides None.");
     <ol>    
     <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
-    rotational axis that has all its faces included (i.e., all the faces around the perimeter).  Rotational 
+    rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational 
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li></ol></p>
     
     <p>For more information, please see the
@@ -1698,7 +1711,7 @@ Choose any condition besides None.");
         Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of the conservation equations"));
 
-    Connectors.ThermalDiffusion faces[n_trans, Side](T(each start=T_IC))
+    Connectors.ThermoDiffusive boundaries[n_trans, Side](T(each start=T_IC))
       "Connectors for transport" annotation (Placement(transformation(extent={{
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
 
@@ -1707,7 +1720,7 @@ Choose any condition besides None.");
       "Effective area divided by length of the transport axes" annotation (
         missingInnerMessage="This model should be used within a phase model.");
     outer parameter Integer cartTrans[:]
-      "Cartesian-axis indices of the pairs of faces" annotation (
+      "Cartesian-axis indices of the pairs of boundaries" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
 
@@ -1724,7 +1737,8 @@ Choose any condition besides None.");
     // Thermal transport (conduction)
     for i in 1:n_trans loop
       for side in Side loop
-        faces[i, side].Qdot = 2*Lprime[i]*(faces[i, side].T - T)/theta;
+        boundaries[i, side].Qdot = 2*Lprime[i]*(boundaries[i, side].T - T)/
+          theta;
       end for;
     end for;
 
@@ -1735,8 +1749,8 @@ Choose any condition besides None.");
     else
       (if consEnergy == ConsThermo.dynamic then N*T*der(s)/U.s else 0) = sum(
         intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*
-        inter[i].mPhidot for i in 1:n_inter) + direct.thermal.Qdot + sum(intra.Qdot)
-         + sum(inter.Qdot) + sum(faces.Qdot) "Conservation of energy";
+        inter[i].mPhidot for i in 1:n_inter) + direct.thermo.Qdot + sum(intra.Qdot)
+         + sum(inter.Qdot) + sum(boundaries.Qdot) "Conservation of energy";
     end if;
 
     annotation (
@@ -1752,7 +1766,6 @@ Choose any condition besides None.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
@@ -1910,7 +1923,7 @@ protected
       final n_trans=n_trans,
       final inclTrans=true,
       final inclThermal=true,
-      thermal(T(final start=T_IC, final fixed=false)))
+      thermo(T(final start=T_IC, final fixed=false)))
       "Connector to directly couple velocity or temperature with other species"
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
           iconTransformation(extent={{28,-80},{48,-100}})));
@@ -1958,14 +1971,15 @@ Check that the volumes of the other phases are set properly.");
   equation
     // Aliases (only to clarify and simplify other equations)
     p = dalton.p;
-    T = direct.thermal.T;
+    T = direct.thermo.T;
     h = g + T*s;
     M = Data.m*N;
-    phi = direct.translational.phi;
+    phi = direct.trans.phi;
 
     // Thermodynamic correlations
-    if Data.isCompressible then
+    if Data.isCompressible and false then
       p = Data.p_Tv(T, v);
+      // TODO:  Not needed, remove in the future.
     else
       v = Data.v_Tp(T, p);
     end if;
@@ -2004,7 +2018,7 @@ Check that the volumes of the other phases are set properly.");
     
     <p>This model is based on the following fixed assumptions:
     <ol>
-       <li>All faces are rectangular.
+       <li>All boundaries are rectangular.
        <li>The material is orthorhombic.  This implies that a gradient which induces diffusion
        along an axis does not induce diffusion along axes orthogonal to it
        [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>,
@@ -2104,7 +2118,7 @@ Check that the volumes of the other phases are set properly.");
       is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
     If two configurations
-    are connected through their <code>intra</code>, <code>inter</code>, or <code>faces</code>
+    are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code>
     and both have zero generalized resistivities for a
     quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson1993B</a>] is necessary.</li>
     
@@ -2154,7 +2168,7 @@ Check that the volumes of the other phases are set properly.");
     correspond to the axes of material advection, not the axes of
     transport of linear momentum.</li>
    
-    <p>In the <code>faces</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
+    <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the current.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
     thermal energy is determined from the thermodynamic state at the boundary and the current.</p>
@@ -2170,7 +2184,7 @@ Check that the volumes of the other phases are set properly.");
     are ordered from negative to positive, according to the
     <a href=\"modelica://FCSys.Species.Enumerations.Side\">Side</a> enumeration.
     Velocity and force are additionally indexed by
-    the orientation of the momentum with respect to the face.
+    the orientation of the momentum with respect to the boundary.
     The orientations are ordered following the normal axis in Cartesian space,
     according to the
     <a href=\"modelica://FCSys.Species.Enumerations.Orient\">Orient</a> enumeration.</p>
@@ -2204,9 +2218,9 @@ public
     type Orient = enumeration(
         after "Axis following the normal axis in Cartesian coordinates",
         before "Axis preceding the normal axis in Cartesian coordinates")
-      "Enumeration for orientations relative to a face" annotation (
+      "Enumeration for orientations relative to a boundary" annotation (
         Documentation(info="
-    <html><p><code>Orient.after</code> indicates the axis following the axis normal to the face
+    <html><p><code>Orient.after</code> indicates the axis following the axis normal to the boundary
     in Cartesian coordinates (x, y, z).
     <code>Orient.before</code> indicates the axis preceding the normal axis
     in Cartesian coordinates (or following it twice).</p></html>"));

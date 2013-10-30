@@ -17,10 +17,10 @@ for i in 1:size(species, 1) loop
    FCSys.Utilities.plot6(
        y1={"subregion." + species[i] + ".lambda"},
        y2={"subregion." + species[i] + ".rho"},
-       y3={"subregion." + species[i] + ".faces[1, 1].p", "subregion." + species[i] + ".p",
-             "subregion." + species[i] + ".faces[1, 2].p"},
-       y4={"subregion." + species[i] + ".faces[1, 1].T", "subregion." + species[i] + ".T",
-             "subregion." + species[i] + ".faces[1, 2].T"},
+       y3={"subregion." + species[i] + ".boundaries[1, 1].p", "subregion." + species[i] + ".p",
+             "subregion." + species[i] + ".boundaries[1, 2].p"},
+       y4={"subregion." + species[i] + ".boundaries[1, 1].T", "subregion." + species[i] + ".T",
+             "subregion." + species[i] + ".boundaries[1, 2].T"},
        y5={"subregion." + species[i] + ".g",
              "subregion." + species[i] + ".electrochemical.w"},
        y6={"subregion." + species[i] + ".electrochemical.Ndot"});

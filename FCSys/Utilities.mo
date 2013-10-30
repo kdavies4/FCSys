@@ -616,7 +616,7 @@ An unrelated species may be included.");
   end Delta;
 
   function inSign
-    "Return the mathematical sign for the direction into a side or face"
+    "Return the mathematical sign for the direction into a side or boundary"
     extends Modelica.Icons.Function;
     input Side side "Side";
     output Integer sign "Sign indicating direction along the axis";

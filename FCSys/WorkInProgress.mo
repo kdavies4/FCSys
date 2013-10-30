@@ -28,15 +28,15 @@ package WorkInProgress "Incomplete classes under development"
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
   equation
-    connect('SO3-'.face.thermal, face.'SO3-'.thermal) annotation (Line(
+    connect('SO3-'.boundary.thermal, boundary.'SO3-'.thermal) annotation (Line(
         points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
-    connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
+    connect('H+'.boundary.normal, boundary.'H+'.normal) annotation (Line(
         points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
-    connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
+    connect('H+'.boundary.thermal, boundary.'H+'.thermal) annotation (Line(
         points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -261,7 +261,7 @@ package WorkInProgress "Incomplete classes under development"
 
     // Thermal advection
     Q.PotentialAbsolute sT(nominal=3000*U.K)
-      "Specific entropy-temperature product";
+      "Product of specific entropy and temperature";
     flow Q.Power Qdot(nominal=U.W) "Rate of thermal advection";
 
     annotation (
@@ -299,6 +299,24 @@ package WorkInProgress "Incomplete classes under development"
               lineColor={0,0,0})}));
 
   end ReactionNode;
+
+  model ElectroOsmoticDrag
+    "<html>Example to calibrate the coupling between H<sup>+</sup> and H<sub>2</sub>O in the PEM</html>"
+
+    extends Regions.Examples.CLtoCL(anCL(redeclare model Subregion =
+            Subregions.Subregion (ionomer(redeclare FCSys.Species.H2O.Gas.Fixed
+                H2O(
+                redeclare package Data = FCSys.Characteristics.'H+'.Ionomer,
+                p_IC=65536*U.kPa,
+                consMaterial=ConsThermo.IC)))), caCL(redeclare model Subregion
+          = Subregions.Subregion (ionomer(redeclare FCSys.Species.H2O.Gas.Fixed
+                H2O(
+                redeclare package Data = FCSys.Characteristics.'H+'.Ionomer,
+                p_IC=65536*U.kPa,
+                consMaterial=ConsThermo.IC)))));
+
+    extends Modelica.Icons.UnderConstruction;
+  end ElectroOsmoticDrag;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

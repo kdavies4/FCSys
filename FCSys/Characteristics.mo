@@ -644,6 +644,17 @@ package Characteristics
 
     end Liquid;
 
+    function p_sat
+      "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
+      extends Modelica.Icons.Function;
+
+      input Q.TemperatureAbsolute T "Temperature";
+      output Q.PressureAbsolute p_sat "Saturation pressure";
+
+    algorithm
+      p_sat := Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa;
+      annotation (Inline=true);
+    end p_sat;
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"
@@ -1245,20 +1256,39 @@ package Characteristics
           smoothOrder=1);
       end s;
 
+      replaceable function zeta
+        "<html>Continuity (&zeta;) as a function of temperature</html>"
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
+        output Q.Continuity zeta "Continuity";
+
+      algorithm
+        zeta := alpha*m/(omega(T)*v);
+        annotation (Inline=true,Documentation(info="<html>
+  <p>Continuity is a property is defined in <a href=\"modelica://FCSys\">FCSys</a>
+  resistivity to axial compression or material storage during transport.  It is the resistivity in the generalized 
+  diffusive transport equation where pressure is the effort and material current is the flow.  Its
+  dimension is the same as the reciprocal of mobility.</p>
+  
+  <p>This correlation is based on the assumption that continuity is the reciprocal of mobility.
+  (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>()).</p>
+  </html>"));
+      end zeta;
+
       replaceable function eta
         "<html>Fluidity (&eta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Resistivity eta "Fluidity";
+        output Q.Fluidity eta "Fluidity";
 
       algorithm
-        eta := alpha*omega(T);
+        eta := alpha*omega(T)/m;
         annotation (Inline=true,Documentation(info="<html>
   <p>Fluidity is defined as the reciprocal of dynamic viscosity
-  (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
-  Here, fluidity is specific mass times the reciprocal of dynamic viscosity.</p>
+  (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.  According to Present
@@ -1489,7 +1519,7 @@ temperature difference.</p>
 
     public
       function dp_Tv
-        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\"><i>p<sub>T v</sub></i></a>()</html>"
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv\"><i>p<sub>T v</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1518,7 +1548,7 @@ temperature difference.</p>
       end dp_Tv;
 
       function dv_Tp
-        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\"><i>v<sub>T p</sub></i></a>()</html>"
+        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp\"><i>v<sub>T p</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1571,7 +1601,7 @@ temperature difference.</p>
           Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
 
-<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
+<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv\">dp_Tv</a>().</p></html>"));
       end p_Tv;
 
       function v_Tp
@@ -1595,10 +1625,9 @@ temperature difference.</p>
           derivative=dv_Tp,
           Documentation(info="<html>
   <p>The derivative of this function is
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;
 
-    public
       function beta
         "<html>Isothermal compressibility as a function of temperature and pressure (&beta;)</html>"
         extends Modelica.Icons.Function;

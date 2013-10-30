@@ -3,15 +3,15 @@ removePlots();
 createPlot(filename = "ThermalConductionConvection.mat");
 FCSys.Utilities.plot6(
     y1=cat(1,
-             {"subregion1.graphite.'C+'.faces[1, 1].T", "subregion1.graphite.'C+'.T"},
-             {"subregions[" + String(i) + "].graphite.'C+'.faces[1, 1].T" for i in 1:n_x},
+             {"subregion1.graphite.'C+'.boundaries[1, 1].T", "subregion1.graphite.'C+'.T"},
+             {"subregions[" + String(i) + "].graphite.'C+'.boundaries[1, 1].T" for i in 1:n_x},
              {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
-             {"subregion2.graphite.'C+'.faces[1, 1].T", "subregion2.graphite.'C+'.T"}),
+             {"subregion2.graphite.'C+'.boundaries[1, 1].T", "subregion2.graphite.'C+'.T"}),
     y2=cat(1,
-             {"subregion1.gas.N2.faces[1, 1].T", "subregion1.gas.N2.T"},
-             {"subregions[" + String(i) + "].gas.N2.faces[1, 1].T" for i in 1:n_x},
+             {"subregion1.gas.N2.boundaries[1, 1].T", "subregion1.gas.N2.T"},
+             {"subregions[" + String(i) + "].gas.N2.boundaries[1, 1].T" for i in 1:n_x},
              {"subregions[" + String(i) + "].gas.N2.T" for i in 1:n_x},
-             {"subregion2.gas.N2.faces[1, 1].T", "subregion2.gas.N2.T"}),
+             {"subregion2.gas.N2.boundaries[1, 1].T", "subregion2.gas.N2.T"}),
     y3=cat(1,
              {"subregion1.graphite.'C+'.M"},
              {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
@@ -25,9 +25,9 @@ FCSys.Utilities.plot6(
              {"subregions[" + String(i) + "].gas.N2.p" for i in 1:n_x},
              {"subregion2.gas.N2.p"}),
     y6=cat(1,
-             {"subregion1.gas.N2.faces[1, 1].p"},
-             {"subregions[" + String(i) + "].gas.N2.faces[1, 1].p" for i in 1:n_x},
-             {"subregion2.gas.N2.faces[1, 1].p"}));
+             {"subregion1.gas.N2.boundaries[1, 1].p"},
+             {"subregions[" + String(i) + "].gas.N2.boundaries[1, 1].p" for i in 1:n_x},
+             {"subregion2.gas.N2.boundaries[1, 1].p"}));
 
 createPlot(id = 4,
  position = {0, 100, 500, 400},

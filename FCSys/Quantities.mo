@@ -127,6 +127,7 @@ package Quantities "Quantities to represent physical properties"
     "Electrical conductance";
   type ConductivityElectrical = TypeReal (final unit="N2.T/(L3.M)", min=0)
     "Electrical conductivity";
+  type Continuity = TypeReal (final unit="M/(N.T)", min=0);
   type Current = TypeReal (final unit="N/T");
   type CurrentAreic = TypeReal (final unit="N/(L2.T)") "Areic current";
   type CurrentAreicAbsolute = TypeReal (final unit="N/(L2.T)", min=0)
@@ -185,7 +186,6 @@ package Quantities "Quantities to represent physical properties"
   type Velocity = TypeReal (final unit="L/T");
   type Velocity2 = TypeReal (final unit="L2/T2") "Squared velocity";
   type VelocityAmount = TypeReal (final unit="L.N/T");
-  type Viscosity = TypeReal (final unit="L2.M/(N.T)", min=0);
   type Volume = TypeReal (final unit="L3", min=0);
   type VolumeRate = TypeReal (final unit="L3/T") "Rate of volume";
   type VolumeSpecific = TypeReal (final unit="L3/N") "Specific volume";
