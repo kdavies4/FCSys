@@ -716,7 +716,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final rho_IC,
           final p_IC,
           final V_IC=epsilon_IC*product(L),
-          final initMaterial=Init.volume,
+          initMaterial=Init.volume,
           final alpha);
 
         // See the documentation for tables of values.

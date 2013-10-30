@@ -20,20 +20,15 @@ package Subregions
         extends Examples.Subregion(
           inclH2O=true,
           inclH2=false,
-          subregion(gas(H2O(
-                p_IC=U.kPa,
-                consEnergy=ConsThermo.dynamic,
-                N(stateSelect=StateSelect.always))), liquid(inclH2O=inclH2O,
-                H2O(
-                consEnergy=ConsThermo.dynamic,
-                N(stateSelect=StateSelect.always),
-                epsilon_IC=0.001))));
+          subregion(gas(H2O(p_IC=U.kPa, consEnergy=ConsThermo.dynamic)), liquid(
+                inclH2O=inclH2O, H2O(consEnergy=ConsThermo.dynamic, epsilon_IC=
+                    0.001))));
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
   Some of the liquid evaporates until saturation is reached. The boundaries are adiabatic; therefore, the temperature of the liquid and the gas 
   decreases due to the enthalpy of formation.</p></html>"),
-          experiment(StopTime=120),
+          experiment(StopTime=20),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Evaporation.mos"
               "Subregions.Examples.PhaseChange.Evaporation.mos"),
@@ -52,19 +47,18 @@ package Subregions
           subregion(gas(H2O(
                 initEnergy=Init.temperature,
                 consMaterial=ConsThermo.IC,
-                p_IC=environment.p_H2O,
-                N(stateSelect=StateSelect.always))), ionomer(
+                p_IC=environment.p_H2O)), ionomer(
               reduceThermal=true,
               inclH2O=true,
               'SO3-'(consEnergy=ConsThermo.IC,T_IC=environment.T),
-              H2O(lambda_IC=8, N(stateSelect=StateSelect.always)))));
+              H2O(lambda_IC=8))));
 
         annotation (
           Documentation(info="<html><p>The water vapor is held at saturation pressure at the environmental temperature
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
   comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
   </p></html>"),
-          experiment(StopTime=2400, Tolerance=1e-006),
+          experiment(StopTime=240),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
               "Subregions.Examples.PhaseChange.Hydration.mos"),
@@ -101,10 +95,8 @@ package Subregions
         extends Examples.Subregion(
           inclH2O=true,
           inclH2=false,
-          subregion(gas(H2O(N(stateSelect=StateSelect.always),p_IC=
-                    saturationPressureSI(environment.T/U.K)*U.Pa)), liquid(H2O(
-                  N(stateSelect=StateSelect.always), epsilon_IC=0.25), inclH2O=
-                  true)),
+          subregion(gas(H2O(p_IC=saturationPressureSI(environment.T/U.K)*U.Pa)),
+              liquid(H2O(epsilon_IC=0.25), inclH2O=true)),
           environment(T=274.15*U.K));
 
         FCSys.Conditions.ByConnector.FaceBus.Single.Flows BC1(liquid(inclH2O=
@@ -191,16 +183,10 @@ package Subregions
           inclH2=true,
           subregion(
             L={0.287*U.mm,10*U.cm,10*U.cm},
-            gas(
-              reduceThermal=true,
-              T(stateSelect=StateSelect.always),
-              H2(phi(each fixed=true, each stateSelect=StateSelect.always))),
-            graphite(T(stateSelect=StateSelect.always)),
+            gas(reduceThermal=true, H2(phi(each fixed=true, each stateSelect=
+                      StateSelect.always))),
             dielectric(final A=0),
-            ionomer(
-              reduceThermal=true,
-              T(stateSelect=StateSelect.always),
-              'H+'(consTransX=ConsMom.steady))));
+            ionomer(reduceThermal=true, 'H+'(consTransX=ConsMom.steady))));
 
         // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
         // A = 0 eliminates it.
@@ -266,16 +252,11 @@ package Subregions
             L={0.287*U.mm,10*U.cm,10*U.cm},
             gas(
               reduceThermal=true,
-              T(stateSelect=StateSelect.always),
               H2O(phi(each fixed=true, each stateSelect=StateSelect.always)),
               O2(phi(each fixed=true, each stateSelect=StateSelect.always),
                   initEnergy=Init.none)),
-            graphite(T(stateSelect=StateSelect.always)),
             dielectric(final A=0),
-            ionomer(
-              reduceThermal=true,
-              T(stateSelect=StateSelect.always),
-              'H+'(consTransX=ConsMom.steady))));
+            ionomer(reduceThermal=true, 'H+'(consTransX=ConsMom.steady))));
 
         // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
         // A = 0 eliminates it.
@@ -581,7 +562,6 @@ package Subregions
 
     model InternalFlow "Internal, laminar flow of liquid water"
       import FCSys.Utilities.Delta;
-      extends Modelica.Icons.UnderConstruction;
       final parameter Q.Area A=subregion.A[Axis.x] "Cross-sectional area"
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
@@ -609,8 +589,7 @@ package Subregions
           L={U.m,U.cm,U.cm},
           inclTransY=true,
           inclTransZ=true,
-          liquid(inclH2O=true, H2O(N(stateSelect=StateSelect.default),final
-                epsilon_IC=1))));
+          liquid(inclH2O=true, H2O(initMaterial=Init.none))));
 
       Conditions.ByConnector.FaceBus.Single.Flows BC1(liquid(inclH2O=true, H2O(
               redeclare Modelica.Blocks.Sources.Sine materialSet(
@@ -1018,9 +997,7 @@ package Subregions
         n_x=6,
         'inclC+'=true,
         inclH2=false,
-        subregion1(graphite('C+'(T_IC=environment.T + 30*U.K))),
-        subregions(graphite('C+'(each T(stateSelect=StateSelect.always)))),
-        subregion2(graphite('C+'(s(stateSelect=StateSelect.never)))));
+        subregion1(graphite('C+'(T_IC=environment.T + 30*U.K))));
 
       annotation (
         Commands(file=
@@ -1042,26 +1019,13 @@ package Subregions
         subregion1(gas(N2(
               T_IC=environment.T + 30*U.K,
               p_IC=environment.p,
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always),
               phi(stateSelect=StateSelect.always,displayUnit="mm/s"))),
-            graphite('C+'(
-              T_IC=environment.T + 30*U.K,
-              epsilon=0.5,
-              T(stateSelect=StateSelect.always)))),
-        subregions(each gas(N2(
-              p_IC=environment.p,
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always),
-              phi(each stateSelect=StateSelect.always,displayUnit="mm/s"))),
-            each graphite('C+'(epsilon=0.5, T(stateSelect=StateSelect.always)))),
-
-        subregion2(gas(N2(
-              p_IC=environment.p,
-              phi(displayUnit="mm/s"),
-              N(stateSelect=StateSelect.always),
-              T(stateSelect=StateSelect.always))), graphite('C+'(epsilon=0.5, T(
-                  stateSelect=StateSelect.always)))));
+            graphite('C+'(T_IC=environment.T + 30*U.K, epsilon=0.5))),
+        subregions(each gas(N2(p_IC=environment.p, phi(each stateSelect=
+                    StateSelect.always, displayUnit="mm/s"))), each graphite(
+              'C+'(epsilon=0.5))),
+        subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
+            graphite('C+'(epsilon=0.5))));
 
       annotation (
         Commands(file=
