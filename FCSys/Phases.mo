@@ -110,19 +110,16 @@ package Phases "Mixtures of species"
           color={0,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(graphics={
-            Line(points={{-6,28},{-6,-28}}, color={0,0,255}),
-            Line(points={{-90,0},{-6,0}}, color={0,0,255}),
-            Line(points={{6,0},{90,0}}, color={0,0,255}),
-            Line(points={{6,28},{6,-28}}, color={0,0,255}),
-            Text(
-              extent={{-136,-60},{136,-92}},
-              lineColor={0,0,0},
-              textString="C=%C_SI F"),
-            Text(
-              extent={{-150,85},{150,45}},
-              textString="%name",
-              lineColor={0,0,255})}));
+                -100,-100},{100,100}}), graphics), Icon(graphics={Line(points={
+              {-6,28},{-6,-28}}, color={0,0,255}),Line(points={{-90,0},{-6,0}},
+              color={0,0,255}),Line(points={{6,0},{90,0}}, color={0,0,255}),
+              Line(points={{6,28},{6,-28}}, color={0,0,255}),Text(
+                  extent={{-136,-60},{136,-92}},
+                  lineColor={0,0,0},
+                  textString="C=%C_SI F"),Text(
+                  extent={{-150,85},{150,45}},
+                  textString="%name",
+                  lineColor={0,0,255})}));
     end Capacitor;
 
     model Plate "Plate of a capacitor (for charge storage)"
@@ -152,21 +149,18 @@ package Phases "Mixtures of species"
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics={
-            Polygon(
-              points={{-20,0},{0,20},{20,0},{0,-20},{-20,0}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{20,0},{30,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-30,0},{-20,0}},
-              color={0,0,255},
-              smooth=Smooth.None)}));
+            graphics={Polygon(
+                  points={{-20,0},{0,20},{20,0},{0,-20},{-20,0}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{20,0},{30,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-30,0},{-20,0}},
+                  color={0,0,255},
+                  smooth=Smooth.None)}));
     end Plate;
   end Examples;
 
@@ -556,7 +550,6 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
@@ -838,10 +831,9 @@ package Phases "Mixtures of species"
 
     extends Partial(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
 
-    parameter Q.NumberAbsolute k_EOD=1
-      "Coupling factor for electro-osmotic drag" annotation (Evaluate=true,
-        Dialog(group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>EOD</sub></html>"));
+    parameter Q.NumberAbsolute k_EOD=0.5
+      "Coupling factor for electro-osmotic drag" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>k</i><sub>EOD</sub></html>"));
     // TODO:  Set an appropriate value (possibly use a new parameter for the current ratio).
 
     // Conditionally include species.

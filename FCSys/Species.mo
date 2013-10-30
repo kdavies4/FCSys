@@ -624,7 +624,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime=2e11*Data.tauprime(),
+          redeclare parameter Q.TimeAbsolute tauprime=2e8*Data.tauprime(),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity eta=Data.eta(),
@@ -637,6 +637,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final V_IC,
           final T_IC,
           final alpha,
+          final consMaterial,
           final initMaterial=Init.none,
           final initEnergy=Init.none);
 

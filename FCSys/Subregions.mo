@@ -1418,11 +1418,11 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-80},{
               120,80}}), graphics={Text(
-            extent={{70,-44},{110,-50}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown 
+              extent={{70,-44},{110,-50}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown 
 on diagram)")}));
   end Subregion;
 
