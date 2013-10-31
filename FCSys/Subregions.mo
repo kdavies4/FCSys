@@ -10,8 +10,8 @@ package Subregions
     //   2. Add discussion from the dissertation.
     package PhaseChange "Examples of phase change"
       extends Modelica.Icons.ExamplesPackage;
-      model Evaporation
-        "<html>Evaporation of H<sub>2</sub>O liquid into sub-saturated vapor</html>"
+      model Condensation
+        "<html>Condensation of super-saturated H<sub>2</sub>O vapor</html>"
 
         output Q.Pressure p_sat=Characteristics.H2O.p_sat(subregion.gas.H2O.T)
           "Saturation pressure via Modelica.Media";
@@ -19,22 +19,22 @@ package Subregions
         extends Examples.Subregion(
           inclH2O=true,
           inclH2=false,
-          subregion(gas(H2O(p_IC=U.kPa, consEnergy=ConsThermo.dynamic)), liquid(
-                inclH2O=inclH2O, H2O(consEnergy=ConsThermo.dynamic, epsilon_IC=
-                    0.001))));
+          subregion(gas(H2O(p_IC=30*U.kPa, consEnergy=ConsThermo.dynamic)),
+              liquid(inclH2O=inclH2O, H2O(consEnergy=ConsThermo.dynamic,
+                  epsilon_IC=0.001))));
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
   Some of the liquid evaporates until saturation is reached. The boundaries are adiabatic; therefore, the temperature of the liquid and the gas 
   decreases due to the enthalpy of formation.</p></html>"),
-          experiment(StopTime=20),
+          experiment(StopTime=10),
           Commands(file=
-                "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Evaporation.mos"
-              "Subregions.Examples.PhaseChange.Evaporation.mos"),
+                "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Condensation.mos"
+              "Subregions.Examples.PhaseChange.Condensation.mos"),
           Diagram(graphics),
           __Dymola_experimentSetupOutput);
 
-      end Evaporation;
+      end Condensation;
 
       model Hydration
         "<html>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</html>"
@@ -76,7 +76,7 @@ package Subregions
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.SaturationPressure.mos"
               "Subregions.Examples.PhaseChange.SaturationPressure.mos"),
-          experiment(StopTime=3600, Tolerance=1e-006),
+          experiment(StopTime=86400, Tolerance=1e-006),
           __Dymola_experimentSetupOutput);
 
       end SaturationPressure;
@@ -121,8 +121,8 @@ package Subregions
 
         Modelica.Blocks.Sources.Ramp temperatureSet(
           height=99*U.K,
-          duration=3600,
-          offset=environment.T)
+          offset=environment.T,
+          duration=86400)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
       equation
         connect(BC1.boundary, subregion.xNegative) annotation (Line(
@@ -140,11 +140,12 @@ package Subregions
             smooth=Smooth.None));
 
         annotation (
-          experiment(StopTime=3600, Tolerance=1e-006),
+          experiment(StopTime=86400, Tolerance=1e-006),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"
               "Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"),
           __Dymola_experimentSetupOutput);
+
       end SaturationPressureIdeal;
     end PhaseChange;
 
@@ -157,7 +158,7 @@ package Subregions
           "Overpotential";
         output Q.Current zI=-subregion.graphite.'e-'.boundaries[1, 1].Ndot
           "Electrical current";
-        output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+        output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
         output Q.Power Qdot=-subregion.graphite.'e-'.Edot_DE
           "Rate of heat generation";
@@ -232,7 +233,7 @@ package Subregions
           "Overpotential";
         output Q.Current zI=subregion.graphite.'e-'.boundaries[1, 2].Ndot
           "Electrical current";
-        output Q.Number zJ_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
+        output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
         output Q.Power Qdot=-subregion.graphite.'e-'.Edot_DE
           "Rate of heat generation";
@@ -449,7 +450,11 @@ package Subregions
 
     model Echo
       "Two regions of gas with initial pressure difference, no dampening"
-      extends Subregions(inclH2=true, 'inclC+'=false);
+      parameter Q.NumberAbsolute k=1 "Damping factor";
+
+      extends Subregions(subregion1(gas(H2(zeta=k*
+                  FCSys.Characteristics.H2.Gas.zeta()))), subregion2(gas(H2(
+                zeta=k*FCSys.Characteristics.H2.Gas.zeta()))));
       annotation (
         experiment(StopTime=0.0001),
         Commands(file(ensureTranslated=true) =
@@ -461,8 +466,7 @@ package Subregions
 
     model EchoCentral
       "Two regions of gas with initial pressure difference, no dampening, with central difference scheme"
-      extends Subregions(
-        'inclC+'=false,
+      extends Echo(
         subregion1(gas(
             H2(upstreamX=false),
             H2O(upstreamX=false),
@@ -609,85 +613,53 @@ package Subregions
           liquid(inclH2O=true, H2O(initMaterial=Init.none))));
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC1(liquid(inclH2O=true,
-            H2O(redeclare Modelica.Blocks.Sources.Sine materialSet(
+            H2O(
+            redeclare Modelica.Blocks.Sources.Sine materialSet(
               amplitude=0.2*Vdot,
               offset=Vdot,
-              freqHz=0.01), redeclare function materialSpec =
+              freqHz=0.01),
+            redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.volumeRate
-                (redeclare package Data = FCSys.Characteristics.H2O.Liquid))))
-        annotation (Placement(transformation(
+                (redeclare package Data = FCSys.Characteristics.H2O.Liquid),
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-24,0})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Source BC2(liquid(inclH2O=true,
-            H2O(redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-              materialSet(y=U.atm)))) annotation (Placement(transformation(
+      Conditions.ByConnector.BoundaryBus.Single.Sink BC2(liquid(inclH2O=true,
+            H2O(materialSet(y=U.atm)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC3(liquid(inclH2O=true,
-            H2O(
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+              thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=0,
             origin={0,-24})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC4(liquid(inclH2O=true,
-            H2O(
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+              thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={0,24})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC5(liquid(inclH2O=true,
-            H2O(
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+              thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=315,
             origin={24,24})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC6(liquid(inclH2O=true,
-            H2O(
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+              thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=315,
             origin={-24,-24})));
@@ -744,6 +716,7 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -817,7 +790,7 @@ package Subregions
     end Subregion;
 
     model Subregions
-      "<html>Horizontal array of subregions with an initial pressure difference (C<sup>+</sup> and H<sub>2</sub> included by default)</html>"
+      "<html>Horizontal array of subregions with an initial pressure difference (H<sub>2</sub> included by default)</html>"
       extends Modelica.Icons.Example;
 
       parameter Integer n_x=0
@@ -826,7 +799,7 @@ package Subregions
       parameter Q.Pressure Deltap_IC=-100*U.Pa "Initial pressure difference"
         annotation (Dialog(__Dymola_label=
               "<html>&Delta;<i>p</i><sub>IC</sub></html>"));
-      parameter Boolean 'inclC+'=true
+      parameter Boolean 'inclC+'=false
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
@@ -1026,18 +999,14 @@ package Subregions
   end Examples;
 
   model Subregion "Subregion with all phases"
-    import Modelica.Constants.eps;
+
     extends Partial(final n_spec=gas.n_spec + graphite.n_spec + ionomer.n_spec
            + liquid.n_spec);
 
-    parameter Q.NumberAbsolute k_gas_liq=eps
+    parameter Q.NumberAbsolute k_gas_liq=Modelica.Constants.eps
       "Additional coupling factor between gas and liquid" annotation (Dialog(
           group="Geometry",__Dymola_label=
             "<html><i>k</i><sub>gas liq</sub></html>"));
-    parameter Q.NumberAbsolute k_graphite_liq=eps
-      "Additional coupling factor between graphite and liquid" annotation (
-        Dialog(group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>graphite liq</sub></html>"));
 
     FCSys.Phases.Gas gas(
       n_inter=2,
@@ -1047,9 +1016,9 @@ package Subregions
               {-70,-2}})));
 
     FCSys.Phases.Graphite graphite(
-      n_inter=2,
+      n_inter=1,
       final n_trans=n_trans,
-      k_inter={k_common,k_graphite_liq}) "Graphite" annotation (Dialog(group=
+      k_inter={k_common}) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-50,-22},
               {-30,-2}})));
 
@@ -1061,11 +1030,11 @@ package Subregions
               {30,-2}})));
 
     FCSys.Phases.Liquid liquid(
-      n_inter=3,
+      n_inter=2,
       final n_trans=n_trans,
-      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{50,
-              -22},{70,-2}})));
+      k_inter={k_common,k_gas_liq}) "Liquid" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{50,-22},
+              {70,-2}})));
 
     inner Reactions.HOR HOR(n_trans=n_trans) if graphite.'incle-' and ionomer.
       'inclH+' and gas.inclH2 "Hydrogen oxidation reaction"
@@ -1115,10 +1084,6 @@ package Subregions
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiq
       "Connector for translational and thermal exchange between gas and liquid"
-      annotation (Placement(transformation(extent={{76,56},{96,76}}),
-          iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertNode graphiteLiq
-      "Connector for translational and thermal exchange between graphite and liquid"
       annotation (Placement(transformation(extent={{76,44},{96,64}}),
           iconTransformation(extent={{100,18},{120,38}})));
 
@@ -1311,7 +1276,7 @@ package Subregions
         color={38,196,52},
         smooth=Smooth.None));
     connect(graphite.inter[1], common.exchange) annotation (Line(
-        points={{-45,-6.5},{-45,42},{86,42}},
+        points={{-45,-7},{-45,42},{86,42}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(ionomer.inter[1], common.exchange) annotation (Line(
@@ -1319,27 +1284,19 @@ package Subregions
         color={38,196,52},
         smooth=Smooth.None));
     connect(liquid.inter[1], common.exchange) annotation (Line(
-        points={{55,-6.33333},{55,42},{86,42}},
+        points={{55,-6.5},{55,42},{86,42}},
         color={38,196,52},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiq.exchange) annotation (Line(
-        points={{-85,-7.5},{-85,66},{86,66}},
+        points={{-85,-7.5},{-85,54},{86,54}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
-        points={{55,-7},{55,66},{86,66}},
+        points={{55,-7.5},{55,54},{86,54}},
         color={38,196,52},
         smooth=Smooth.None));
     // Graphite-liquid
-    connect(graphite.inter[2], graphiteLiq.exchange) annotation (Line(
-        points={{-45,-7.5},{-45,54},{86,54}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect(liquid.inter[3], graphiteLiq.exchange) annotation (Line(
-        points={{55,-7.66667},{55,54},{86,54}},
-        color={38,196,52},
-        smooth=Smooth.None));
 
     // Reactions and phase change (not shown in diagram)
     // -------------------------------------------------
@@ -1356,7 +1313,7 @@ package Subregions
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-80},{
-              120,80}}), graphics={Text(
+              120,60}}), graphics={Text(
               extent={{70,-44},{110,-50}},
               lineColor={0,0,0},
               fillColor={255,255,255},
@@ -1457,80 +1414,70 @@ on diagram)")}));
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
-    import Modelica.Constants.eps;
     extends Partial(final n_spec=gas.n_spec + graphite.n_spec + liquid.n_spec);
 
-    parameter Q.NumberAbsolute k_gas_liq=eps
+    parameter Q.NumberAbsolute k_gas_liq=Modelica.Constants.eps
       "Additional coupling factor between gas and liquid" annotation (Dialog(
           group="Geometry",__Dymola_label=
             "<html><i>k</i><sub>gas liq</sub></html>"));
-    parameter Q.NumberAbsolute k_graphite_liq=eps
-      "Additional coupling factor between graphite and liquid" annotation (
-        Dialog(group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>graphite liq</sub></html>"));
 
     FCSys.Phases.Gas gas(
       n_inter=2,
       final n_trans=n_trans,
       k_inter={k_common,k_gas_liq}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-50,-18},
-              {-30,2}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-50,-26},
+              {-30,-6}})));
 
     FCSys.Phases.Graphite graphite(
-      n_inter=2,
+      n_inter=1,
       final n_trans=n_trans,
-      k_inter={k_common,k_graphite_liq}) "Graphite" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-18},
-              {10,2}})));
+      k_inter={k_common}) "Graphite" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,-26},
+              {10,-6}})));
 
     FCSys.Phases.Liquid liquid(
-      n_inter=3,
+      n_inter=2,
       final n_trans=n_trans,
-      k_inter={k_common,k_gas_liq,k_graphite_liq}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{30,
-              -18},{50,2}})));
+      k_inter={k_common,k_gas_liq}) "Liquid" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{30,-26},
+              {50,-6}})));
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
-            extent={{-100,-36},{-80,-16}}), iconTransformation(extent={{-110,-10},
+            extent={{-100,-44},{-80,-24}}), iconTransformation(extent={{-110,-10},
               {-90,10}})));
     Connectors.BoundaryBus yNegative if inclTransY
       "Negative boundary along the y axis" annotation (Placement(transformation(
-            extent={{-76,-60},{-56,-40}}), iconTransformation(extent={{-10,-110},
+            extent={{-76,-68},{-56,-48}}), iconTransformation(extent={{-10,-110},
               {10,-90}})));
     Connectors.BoundaryBus zNegative if inclTransZ
       "Negative boundary along the z axis" annotation (Placement(transformation(
-            extent={{68,12},{88,32}}), iconTransformation(extent={{40,40},{60,
-              60}})));
+            extent={{68,4},{88,24}}), iconTransformation(extent={{40,40},{60,60}})));
     Connectors.BoundaryBus xPositive if inclTransX
       "Positive boundary along the x axis" annotation (Placement(transformation(
-            extent={{80,0},{100,20}}), iconTransformation(extent={{90,-10},{110,
-              10}})));
+            extent={{80,-8},{100,12}}), iconTransformation(extent={{90,-10},{
+              110,10}})));
     Connectors.BoundaryBus yPositive if inclTransY
       "Positive boundary along the y axis" annotation (Placement(transformation(
-            extent={{56,24},{76,44}}), iconTransformation(extent={{-10,90},{10,
+            extent={{56,16},{76,36}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.BoundaryBus zPositive if inclTransZ
       "Positive boundary along the z axis" annotation (Placement(transformation(
-            extent={{-88,-48},{-68,-28}}), iconTransformation(extent={{-60,-60},
+            extent={{-88,-56},{-68,-36}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
 
   protected
     Conditions.ByConnector.Amagat.VolumeFixed volume(V=V, final setVolume=gas.n_spec
            > 0 or liquid.n_spec > 0) if n_spec > 0
       "Model to establish a fixed total volume"
-      annotation (Placement(transformation(extent={{56,-72},{76,-52}})));
+      annotation (Placement(transformation(extent={{56,-80},{76,-60}})));
     Connectors.InertNode common
       "Connector for translational and thermal exchange among all species"
-      annotation (Placement(transformation(extent={{56,36},{76,56}}),
+      annotation (Placement(transformation(extent={{56,28},{76,48}}),
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiq
       "Connector for translational and thermal exchange between gas and liquid"
-      annotation (Placement(transformation(extent={{56,60},{76,80}}),
-          iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertNode graphiteLiq
-      "Connector for translational and thermal exchange between graphite and liquid"
-      annotation (Placement(transformation(extent={{56,48},{76,68}}),
+      annotation (Placement(transformation(extent={{56,40},{76,60}}),
           iconTransformation(extent={{100,18},{120,38}})));
 
   equation
@@ -1538,128 +1485,128 @@ on diagram)")}));
     // ---------------------
     // Gas
     connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-32,-16},{-32,-62},{66,-62}},
+        points={{-32,-24},{-32,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{-40,-16.4},{-40,-50},{-66,-50}},
+        points={{-40,-24.4},{-40,-58},{-66,-58}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-48,-16},{-48,-38},{-78,-38}},
+        points={{-48,-24},{-48,-46},{-78,-46}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-48,-8},{-56,-8},{-56,-26},{-90,-26}},
+        points={{-48,-16},{-56,-16},{-56,-34},{-90,-34}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{-40,2},{-40,34},{66,34}},
+        points={{-40,-6},{-40,26},{66,26}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{-35,-3},{-32,0},{-32,22},{78,22}},
+        points={{-35,-11},{-32,-8},{-32,14},{78,14}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{-32,-8},{-24,-8},{-24,10},{90,10}},
+        points={{-32,-16},{-24,-16},{-24,2},{90,2}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     // Graphite
     connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{8,-16},{8,-62},{66,-62}},
+        points={{8,-24},{8,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
 
     connect(graphite.yNegative, yNegative.graphite) annotation (Line(
-        points={{0,-16.4},{0,-50},{-66,-50}},
+        points={{0,-24.4},{0,-58},{-66,-58}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.yPositive, yPositive.graphite) annotation (Line(
-        points={{0,2},{0,34},{66,34}},
+        points={{0,-6},{0,26},{66,26}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zNegative, zNegative.graphite) annotation (Line(
-        points={{5,-3},{8,0},{8,22},{78,22}},
+        points={{5,-11},{8,-8},{8,14},{78,14}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zPositive, zPositive.graphite) annotation (Line(
-        points={{-8,-16},{-8,-38},{-78,-38}},
+        points={{-8,-24},{-8,-46},{-78,-46}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.xNegative, xNegative.graphite) annotation (Line(
-        points={{-8,-8},{-16,-8},{-16,-26},{-90,-26}},
+        points={{-8,-16},{-16,-16},{-16,-34},{-90,-34}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.xPositive, xPositive.graphite) annotation (Line(
-        points={{8,-8},{16,-8},{16,10},{90,10}},
+        points={{8,-16},{16,-16},{16,2},{90,2}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     // Liquid
     connect(liquid.amagat, volume.amagat) annotation (Line(
-        points={{48,-16},{48,-62},{66,-62}},
+        points={{48,-24},{48,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
 
     connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{40,-16.4},{40,-50},{-66,-50}},
+        points={{40,-24.4},{40,-58},{-66,-58}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{40,2},{40,34},{66,34}},
+        points={{40,-6},{40,26},{66,26}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-        points={{45,-3},{48,0},{48,22},{78,22}},
+        points={{45,-11},{48,-8},{48,14},{78,14}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{32,-16},{32,-38},{-78,-38}},
+        points={{32,-24},{32,-46},{-78,-46}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{32,-8},{24,-8},{24,-26},{-90,-26}},
+        points={{32,-16},{24,-16},{24,-34},{-90,-34}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-        points={{48,-8},{56,-8},{56,10},{90,10}},
+        points={{48,-16},{56,-16},{56,2},{90,2}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1669,35 +1616,27 @@ on diagram)")}));
     // --------------
     // Common
     connect(gas.inter[1], common.exchange) annotation (Line(
-        points={{-45,-2.5},{-45,46},{66,46}},
+        points={{-45,-10.5},{-45,38},{66,38}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(graphite.inter[1], common.exchange) annotation (Line(
-        points={{-5,-2.5},{-5,46},{66,46}},
+        points={{-5,-11},{-5,38},{66,38}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(liquid.inter[1], common.exchange) annotation (Line(
-        points={{35,-2.33333},{35,46},{66,46}},
+        points={{35,-10.5},{35,38},{66,38}},
         color={38,196,52},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiq.exchange) annotation (Line(
-        points={{-45,-3.5},{-45,70},{66,70}},
+        points={{-45,-11.5},{-45,50},{66,50}},
         color={38,196,52},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
-        points={{35,-3},{35,70},{66,70}},
+        points={{35,-11.5},{35,50},{66,50}},
         color={38,196,52},
         smooth=Smooth.None));
     // Graphite-liquid
-    connect(graphite.inter[2], graphiteLiq.exchange) annotation (Line(
-        points={{-5,-3.5},{-5,58},{66,58}},
-        color={38,196,52},
-        smooth=Smooth.None));
-    connect(liquid.inter[3], graphiteLiq.exchange) annotation (Line(
-        points={{35,-3.66667},{35,58},{66,58}},
-        color={38,196,52},
-        smooth=Smooth.None));
 
     // Phase change (not shown in diagram)
     // -----------------------------------
@@ -1707,12 +1646,11 @@ on diagram)")}));
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-80},{
-              100,80}}), graphics));
+              100,60}}), graphics));
   end SubregionNoIonomer;
 
   partial model Partial
     "Base model for multi-dimensional, multi-species storage, transport, and exchange"
-    import FCSys.Utilities.Coordinates.cartWrap;
     import Modelica.Math.BooleanVectors.countTrue;
     import Modelica.Math.BooleanVectors.enumerate;
     import Modelica.Math.BooleanVectors.index;
@@ -1722,9 +1660,6 @@ on diagram)")}));
     inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
       U.cm,U.cm} "Lengths" annotation (Dialog(group="Geometry", __Dymola_label=
             "<html><b><i>L</i></b></html>"));
-    final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(axis
-         + 2)] for axis in Axis} "Cross-sectional areas";
-    final inner parameter Q.Volume V=product(L) "Volume";
     parameter Q.NumberAbsolute k_common=1
       "Coupling factor for exchange among all phases" annotation (Dialog(group=
             "Geometry", __Dymola_label="<html><i>k</i><sub>common</sub></html>"));
@@ -1754,11 +1689,15 @@ on diagram)")}));
         group="Included transport axes",
         compact=true));
 
+    // Auxiliary variables (for analysis)
+    final inner parameter Q.Volume V=product(L) "Volume";
+    final parameter Q.Area A[Axis]=fill(V, 3) ./ L "Cross-sectional areas";
+
   protected
     parameter Integer n_spec(start=0) "Number of species"
       annotation (HideResult=true);
     final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
-        inclTransZ} "true, if each pairs of boundaries is included";
+        inclTransZ} "true, if each pair of boundaries is included";
     final inner parameter Boolean inclRot[Axis]={inclTransY and inclTransZ,
         inclTransZ and inclTransX,inclTransX and inclTransY}
       "true, if each axis of rotation has all its tangential boundaries included";
@@ -1778,10 +1717,7 @@ on diagram)")}));
   <p>At least one component of translational momentum must be included.
   All of the components are included by default.</p>
 
-    <p>At least one transport axis must be included.
-  All of the boundaries are included by default.</p>
-
-  <p>This model should be extended to include the appropriate phases and reactions.</p>
+  <p>This model should be extended to include the appropriate phases, reactions, etc.</p>
   </html>"),
       Icon(graphics={
           Line(

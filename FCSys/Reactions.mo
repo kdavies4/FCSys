@@ -81,6 +81,7 @@ package Reactions "Electrochemical reactions"
             "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
+
   end HOR;
 
   model ORR "Oxygen reduction reaction"
@@ -181,6 +182,7 @@ package Reactions "Electrochemical reactions"
             "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
+
   end ORR;
 
   package Examples "Examples"

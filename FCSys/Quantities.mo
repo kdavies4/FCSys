@@ -90,7 +90,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.TimeLineic TimeLineic=1*U.s/U.m "Lineic time";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
-      parameter Q.Viscosity Viscosity=1*U.Pa*U.s "Viscosity";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
@@ -127,7 +126,7 @@ package Quantities "Quantities to represent physical properties"
     "Electrical conductance";
   type ConductivityElectrical = TypeReal (final unit="N2.T/(L3.M)", min=0)
     "Electrical conductivity";
-  type Continuity = TypeReal (final unit="M/(N.T)", min=0);
+  type Continuity = TypeReal (final unit="L.M/(N.T)", min=0);
   type Current = TypeReal (final unit="N/T");
   type CurrentAreic = TypeReal (final unit="N/(L2.T)") "Areic current";
   type CurrentAreicAbsolute = TypeReal (final unit="N/(L2.T)", min=0)
@@ -141,6 +140,8 @@ package Quantities "Quantities to represent physical properties"
   type Frequency = TypeReal (final unit="A/T");
   type Inductance = TypeReal (final unit="L2.M/N2", min=0);
   type Length = TypeReal (final unit="L", min=0);
+  type LengthReciprocal = TypeReal (final unit="1/L", min=0)
+    "Reciprocal of length";
   type LengthSpecific = TypeReal (final unit="L/N", min=0) "Specific length";
   type MagneticFlux = TypeReal (final unit="L2.M/(A.N.T)") "Magnetic flux";
   type MagneticFluxAreic = TypeReal (final unit="M/(A.N.T)")

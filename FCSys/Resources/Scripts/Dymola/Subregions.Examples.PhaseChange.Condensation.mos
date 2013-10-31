@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "Evaporation.mat");
+createPlot(filename = "Condensation.mat");
 species = cat(1,
               if 'inclC+' then {"graphite.'C+'"} else fill("",0),
               if 'inclSO3-' then {"ionomer.'SO3-'"} else fill("",0),

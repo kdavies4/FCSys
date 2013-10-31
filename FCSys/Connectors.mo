@@ -218,30 +218,35 @@ package Connectors "Declarative and imperative connectors"
     the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,32},{100,72}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-15,15},{15,-15}},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}),
-      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={47,107,251}),
-            Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={11,43,197},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-50,50},{50,-50}},
-              fillColor={47,107,251},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+      Diagram(graphics={
+          Text(
+            extent={{-100,32},{100,72}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-15,15},{15,-15}},
+            fillColor={47,107,251},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}),
+      Icon(graphics={
+          Ellipse(extent={{-80,80},{80,-80}}, lineColor={47,107,251}),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-50,50},{50,-50}},
+            fillColor={47,107,251},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Amagat;
 
@@ -368,23 +373,25 @@ package Connectors "Declarative and imperative connectors"
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52}),Text(
-              extent={{-100,10},{100,50}},
-              textString="%name",
-              lineColor={0,0,0})}),
-      Icon(graphics={Ellipse(extent={{-76,76},{84,-84}}, lineColor={38,196,52}),
-            Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52}),Text(
-              extent={{-100,100},{100,-100}},
-              lineColor={255,255,255},
-              textString="0",
-              textStyle={TextStyle.Bold})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillPattern=FillPattern.Solid,
+            fillColor={38,196,52}), Text(
+            extent={{-100,10},{100,50}},
+            textString="%name",
+            lineColor={0,0,0})}),
+      Icon(graphics={
+          Ellipse(extent={{-76,76},{84,-84}}, lineColor={38,196,52}),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={2,157,21},
+            fillPattern=FillPattern.Solid,
+            fillColor={38,196,52}),
+          Text(
+            extent={{-100,100},{100,-100}},
+            lineColor={255,255,255},
+            textString="0",
+            textStyle={TextStyle.Bold})}));
 
   end DirectNode;
 
@@ -510,24 +517,24 @@ package Connectors "Declarative and imperative connectors"
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-80,80},{80,-80}},
-              lineColor={38,196,52},
-              lineThickness=0.5),Ellipse(
-              extent={{-100,100},{100,-100}},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineColor={2,157,21},
-              lineThickness=0.5)}),
+            extent={{-80,80},{80,-80}},
+            lineColor={38,196,52},
+            lineThickness=0.5), Ellipse(
+            extent={{-100,100},{100,-100}},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineColor={2,157,21},
+            lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,10},{100,50}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={2,157,21},
+            fillColor={38,196,52},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,10},{100,50}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end InertNode;
 

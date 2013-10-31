@@ -169,6 +169,11 @@ package Phases "Mixtures of species"
 
     extends Partial(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
+    parameter Q.NumberAbsolute k_common=1 if n_spec > 0
+      "Coupling factor among all the species in the phase" annotation (Dialog(
+          group="Geometry", __Dymola_label=
+            "<html><i>k</i><sub>intra</sub></html>"));
+
     // Conditionally include species.
     parameter Boolean inclH2=false "Include H2" annotation (
       HideResult=true,
@@ -178,10 +183,12 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>Hydrogen (H<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
-    replaceable FCSys.Species.H2.Gas.Fixed H2(final n_trans,final n_inter) if
+    replaceable FCSys.Species.H2.Gas.Fixed H2(final n_trans, final n_inter) if
       inclH2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
+      n_intra=1,
+      k_intra={k_common},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -207,6 +214,8 @@ package Phases "Mixtures of species"
       if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
+      n_intra=1,
+      k_intra={k_common},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -232,6 +241,8 @@ package Phases "Mixtures of species"
       inclN2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
+      n_intra=1,
+      k_intra={k_common},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -257,6 +268,8 @@ package Phases "Mixtures of species"
       inclO2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
+      n_intra=1,
+      k_intra={k_common},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -337,6 +350,10 @@ package Phases "Mixtures of species"
               4,-48}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
               26,-52})));
 
+    Connectors.InertNode common
+      "Connector for translational and thermal exchange among all species"
+      annotation (Placement(transformation(extent={{88,38},{108,58}}),
+          iconTransformation(extent={{100,18},{120,38}})));
   equation
     // Chemical exchange
     connect(O2.electrochemical, connO2) annotation (Line(
@@ -561,6 +578,22 @@ package Phases "Mixtures of species"
         points={{60,6.10623e-016},{48,-12},{-98,-12}},
         color={127,127,127},
         smooth=Smooth.None));
+    connect(H2.intra, common.exchange) annotation (Line(
+        points={{-53,-7},{22.5,-7},{22.5,48},{98,48}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(H2O.intra, common.exchange) annotation (Line(
+        points={{-13,-7},{42.5,-7},{42.5,48},{98,48}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(N2.intra, common.exchange) annotation (Line(
+        points={{27,-7},{62.5,-7},{62.5,48},{98,48}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect(O2.intra, common.exchange) annotation (Line(
+        points={{67,-7},{67,20.5},{98,20.5},{98,48}},
+        color={38,196,52},
+        smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
@@ -569,6 +602,7 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -850,7 +884,7 @@ package Phases "Mixtures of species"
 
     extends Partial(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}));
 
-    parameter Q.NumberAbsolute k_EOD=0.5
+    parameter Q.NumberAbsolute k_EOD=0.5 if n_spec > 0
       "Coupling factor for electro-osmotic drag" annotation (Dialog(group=
             "Geometry", __Dymola_label="<html><i>k</i><sub>EOD</sub></html>"));
     // TODO:  Set an appropriate value (possibly use a new parameter for the current ratio).
@@ -1386,10 +1420,10 @@ protected
       annotation (Dialog(connectorSizing=true),HideResult=true);
 
     // Geometric parameters
-    inner parameter Q.NumberAbsolute k[Axis](
+    parameter Q.NumberAbsolute k[Axis](
       each min=Modelica.Constants.small,
       each final nominal=1) = {1,1,1} if n_spec > 0
-      "Scaling factor for diffusive transport" annotation (Dialog(group=
+      "Length factor for diffusive transport" annotation (Dialog(group=
             "Geometry", __Dymola_label="<html><b><i>k</i></b></html>"));
     inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
        > 0 "Coupling factors with other phases" annotation (Dialog(group=
@@ -1417,11 +1451,10 @@ protected
     outer parameter Q.Length L[Axis] if n_spec > 0 "Length of the subregion"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Q.Area A[Axis] if n_spec > 0
-      "Cross-sectional area of the subregion" annotation (missingInnerMessage="This model should be used within a subregion model.
-");
-    final inner Q.Length Lprime[n_trans]=k[cartTrans]*V ./ L[cartTrans] .^ 2
-      if n_spec > 0 "Effective area divided by transport length";
+    final inner parameter Q.Length kL[:]=k[cartTrans] .* L[cartTrans] if n_spec
+       > 0 "Effective transport lengths";
+    final inner Q.Area Aprime[n_trans]=fill(V, n_trans) ./ L[cartTrans] if
+      n_spec > 0 "Effective cross-sectional areas";
     outer parameter Integer cartTrans[:]
       "Cartesian-axis indices of the components of translational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
@@ -1444,59 +1477,67 @@ protected
       defaultComponentPrefixes="replaceable",
       defaultComponentName="phase",
       Documentation(info="<html><p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects 
-    the conductance of material, transverse translational momentum, and energy of all of the species
+    the resistance associated with the transport of material, transverse translational momentum, and energy of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.  Using
     Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
-    the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>1/2</sup>
+    the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>-1/2</sup>
     along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.
-    The Bruggeman factor itself is &epsilon;<sup>3/2</sup>, but a factor of &epsilon; is included inherently.</p>
+    The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end Partial;
 
@@ -1542,19 +1583,23 @@ public
 <li>No heat capacity (follows from #1)</li>
 <li>The charges exist on parallel planes (used to calculate capacitance).</li> 
 </ol></p></html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics={Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{-20,0},{-50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{50,0},{20,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+              -100},{100,100}}), graphics={
+          Line(
+            points={{-20,30},{-20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{20,30},{20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,0},{-50,0}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{50,0},{20,0}},
+            color={255,195,38},
+            smooth=Smooth.None)}));
   end Dielectric;
   annotation (Documentation(info="
 <html><p>The graphite, ionomer, and

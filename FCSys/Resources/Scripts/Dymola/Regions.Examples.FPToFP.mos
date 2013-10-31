@@ -35,8 +35,8 @@ FCSys.Utilities.plot6(
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},
- x = "J_Apercm2[1, 1]",
- y = {"w[1, 1]"},
+ x = "J_Apercm2",
+ y = {"w"},
  heading = "Polarization",
  range = {0, 8.0, 0.05, -0.35},
  grid = true,

@@ -893,26 +893,28 @@ package Characteristics
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
 
     protected
-      constant Q.AreaSpecific alpha=3*sqrt(U.pi)*d^2*U.q/2
+      constant Q.AreaSpecific alpha=3*U.pi^1.5*d^2*U.q/(2)
         "Scaled specific intercept area";
 
       function omega
-        "<html>Rescaled reciprocal of thermal speed as a function of temperature (&omega; = &pi;&middot;sqrt(<i>m</i>/<i>T</i>))</html>"
+        "<html>Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style=\"text-decoration:overline;\">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.TimeLineic omega "Rescaled reciprocal of thermal speed";
+        output Q.Velocity omega
+          "Root mean square of thermal velocity in one dimension";
 
       algorithm
-        omega := U.pi*sqrt(m/T);
+        omega := sqrt(T/m);
         annotation (Inline=true,Documentation(info="<html>
-  <p>This function outputs the quotient of &pi; and the root mean square of the thermal
-  velocity in one dimension, assuming the speeds of the particles follow the
+  <p>This function outputs the root mean square of the thermal
+  velocity in any one dimension, assuming the speeds of the particles follow the
   Maxwell-Boltzmann distribution.  In combination with &alpha;, this refactorization is
   convenient for calculating
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.tauprime\">&tau;&prime;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>,
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.tauprime\">&tau;&prime;</a>,
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>,
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>, and
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));
@@ -1258,26 +1260,28 @@ package Characteristics
 
       replaceable function zeta
         "<html>Continuity (&zeta;) as a function of temperature</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.Continuity zeta "Continuity";
 
       algorithm
-        zeta := alpha*m/(omega(T)*v);
+        zeta := m*omega(T);
+
         annotation (Inline=true,Documentation(info="<html>
   <p>Continuity is a property is defined in <a href=\"modelica://FCSys\">FCSys</a>
   resistivity to axial compression or material storage during transport.  It is the resistivity in the generalized 
-  diffusive transport equation where pressure is the effort and material current is the flow.  Its
-  dimension is the same as the reciprocal of mobility.</p>
+  diffusive transport equation where pressure is the effort and material current is the flow.</p>
   
-  <p>This correlation is based on the assumption that continuity is the reciprocal of mobility.
+  <p>This correlation is based on the assumption that continuity is the reciprocal of mobility
   (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>()).</p>
   </html>"));
       end zeta;
 
       replaceable function eta
         "<html>Fluidity (&eta;) as a function of temperature</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
@@ -1285,7 +1289,7 @@ package Characteristics
         output Q.Fluidity eta "Fluidity";
 
       algorithm
-        eta := alpha*omega(T)/m;
+        eta := alpha/(m*omega(T));
         annotation (Inline=true,Documentation(info="<html>
   <p>Fluidity is defined as the reciprocal of dynamic viscosity
   (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
@@ -1315,13 +1319,14 @@ package Characteristics
 
       replaceable function theta
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
-        theta := alpha*omega(T)/c_v(T, p_Tv(T, v));
+        theta := alpha/(c_v(T, p_Tv(T, v))*omega(T));
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
@@ -1341,13 +1346,14 @@ package Characteristics
 
       replaceable function tauprime
         "<html>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.TimeAbsolute tauprime "Phase change interval";
 
       algorithm
-        tauprime := omega(T)*v/alpha;
+        tauprime := v/(alpha*omega(T));
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
@@ -1374,13 +1380,14 @@ package Characteristics
 
       replaceable function mu
         "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.Mobility mu "Mobility";
 
       algorithm
-        mu := omega(T)*v/(alpha*m);
+        mu := v/(m*alpha*omega(T));
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
@@ -1401,13 +1408,14 @@ package Characteristics
 
       replaceable function nu
         "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
+
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.TimeAbsolute nu "Thermal independity";
 
       algorithm
-        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v)));
+        nu := v/(c_p(T, p_Tv(T, v))*alpha*omega(T));
         annotation (Inline=true,Documentation(info="<html>
 <p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
 temperature difference.</p>

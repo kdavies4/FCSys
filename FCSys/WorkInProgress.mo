@@ -244,62 +244,6 @@ package WorkInProgress "Incomplete classes under development"
     annotation (Diagram(graphics), Icon(graphics));
   end EISPlaceholder;
 
-  connector ReactionNode
-    "<html>Internal node for <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
-
-    // Material diffusion
-    Q.Current Ndot(nominal=U.A) "Rate of reaction";
-    flow Q.Potential g(nominal=U.V) "Electrochemical potential";
-
-    // Translational advection
-    //  extends Translational;
-    parameter Integer n_trans(min=1,max=3)
-      "Number of components of translational momentum" annotation (HideResult=
-          true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
-    flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
-
-    // Thermal advection
-    Q.PotentialAbsolute sT(nominal=3000*U.K)
-      "Product of specific entropy and temperature";
-    flow Q.Power Qdot(nominal=U.W) "Rate of thermal advection";
-
-    annotation (
-      defaultComponentPrefixes="protected",
-      defaultComponentName="equilibrium",
-      Documentation(info="<html>
-<html><p>This connector is used as an internal node to connect 
-    <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a>
-    connectors.</p>
-    
-<p>For more information, please see the <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector and the documentation of the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
-            Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-50,50},{50,-50}},
-              fillColor={221,23,47},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None)}),
-      Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-5,5},{5,-5}},
-              fillColor={221,23,47},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-100,10},{100,50}},
-              textString="%name",
-              lineColor={0,0,0})}));
-
-  end ReactionNode;
-
   model ElectroOsmoticDrag
     "<html>Example to calibrate the coupling between H<sup>+</sup> and H<sub>2</sub>O in the PEM</html>"
 
