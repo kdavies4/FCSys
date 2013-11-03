@@ -14,12 +14,12 @@ import U = FCSys.Units;
 import Q = FCSys.Quantities;
 
 // Enumerations
+import FCSys.Assemblies.Cells.Examples.Enumerations.ElectricalSpec;
+import FCSys.Assemblies.Cells.Examples.Enumerations.FlowSpec;
+import FCSys.Assemblies.Cells.Examples.Enumerations.HumiditySpec;
+import FCSys.Assemblies.Cells.Examples.Enumerations.ThermalSpec;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Conditions.TestStands.Enumerations.ElectricalSpec;
-import FCSys.Conditions.TestStands.Enumerations.FlowSpec;
-import FCSys.Conditions.TestStands.Enumerations.HumiditySpec;
-import FCSys.Conditions.TestStands.Enumerations.ThermalSpec;
 import FCSys.Species.Enumerations.Axis;
 import FCSys.Species.Enumerations.Orient;
 import FCSys.Species.Enumerations.Side;
@@ -45,8 +45,8 @@ package UsersGuide "User's Guide"
         FCSys should be compatible with any
         modeling environment that supports Modelica Standard Library 3.2.1.  The following tools have been tested:
         <ul>
-          <li>Dymola: Supported by versions 2014.
-          Dymola's annotations for parameter dialogs and replaceable choices are included.</li>
+          <li>Dymola: Supported by version 2014.
+          Dymola's annotations for parameter dialogs and replaceable choices are used.</li>
           <li>MapleSim: Not supported as of version 4.5</li>
           <li>MWorks: Not supported as of version 2.6.10</li>
           <li>OpenModelica: Not supported as of version 1.8.1</li>
@@ -65,7 +65,7 @@ package UsersGuide "User's Guide"
         <li>Call <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a>() to
         establish the display units.  This is automatic if FCSys
         is loaded via the <a href=\"modelica://FCSys/../load.mos\">load.mos</a> script.
-        <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
+        <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.TestStand\">FCSys.Assemblies.Cells.Examples.TestStand</a>
         model.
         There are scripts in <a href=\"modelica://FCSys/Resources/Scripts/Dymola/README.md\">Resources/Scripts/Dymola/</a> to 
         create useful plots of that model and others.
@@ -83,7 +83,7 @@ package UsersGuide "User's Guide"
             than <a href=\"modelica://Modelica.SIunits\">Modelica.SIunits</a></li>
             <li><a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a> package:
             Overview of the connectors</li>
-            <li><a href=\"modelica://FCSys.Species.Partial\">FCSys.Species.Partial</a> model:
+            <li><a href=\"modelica://FCSys.Species.Species\">FCSys.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, translational momentum, and
             energy</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
@@ -111,7 +111,7 @@ package UsersGuide "User's Guide"
         <li>Please share your additions or modifications to the source code so that the library
         can be improved and others may benefit.  The best way is to create a fork from the
         development page at <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
-        Please also feel free to use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
+        Please also use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
     </ol></p>
     </html>"));
 

@@ -165,7 +165,6 @@ package Species "Dynamic models of chemical species"
           final upstreamY=false,
           final upstreamZ=false,
           final k_intra,
-          final consMaterial=ConsThermo.steady,
           final consTransX=ConsMom.steady,
           final consTransY=ConsMom.steady,
           final consTransZ=ConsMom.steady,
@@ -173,6 +172,7 @@ package Species "Dynamic models of chemical species"
           final initMaterial=Init.none,
           final initEnergy=Init.none,
           final N_IC,
+          consMaterial=ConsThermo.steady,
           final p_IC,
           final h_IC,
           final V_IC,
@@ -211,7 +211,7 @@ package Species "Dynamic models of chemical species"
 
           Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}),graphics));
+                  {100,100}}), graphics));
 
       end Fixed;
 
@@ -237,10 +237,10 @@ package Species "Dynamic models of chemical species"
           final upstreamY=false,
           final upstreamZ=false,
           final alpha,
-          final consMaterial=ConsThermo.steady,
           final initMaterial=Init.none,
           final N_IC,
           final p_IC,
+          consMaterial=ConsThermo.steady,
           final h_IC,
           final V_IC,
           final rho_IC,
@@ -1042,8 +1042,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     assert(Data.z <> 0, "The Ion model can only be used for charged species.");
 
   equation
-    electrochemical.w = g + Data.z*electrostatic.w
-      "The electrochemical potential is the sum of chemical and electrostatic contributions.";
+    electrochemical.w = g + Data.z*electrostatic.w;
 
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -1313,7 +1312,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     Connectors.Boundary boundaries[n_trans, Side](
       each p(start=p_IC),
       each T(start=T_IC),
-      each Ndot(start=0,stateSelect=StateSelect.never))
+      Ndot(each start=0, each stateSelect=StateSelect.never))
       "Connectors for transport" annotation (Placement(transformation(extent={{
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
     Connectors.Electrochemical electrochemical(
@@ -1488,9 +1487,9 @@ Choose any condition besides None.");
 
   equation
     // Aliases (only to clarify and simplify other equations)
-    kL .* I = N*phi;
-    {Aprime[i]*{1,-1} for i in 1:n_trans} .* phi_boundaries = boundaries.Ndot
-       .* Data.v_Tp(boundaries.T, boundaries.p);
+    v*I = Aprime .* phi;
+    Data.v_Tp(boundaries.T, boundaries.p) .* boundaries.Ndot = {Aprime[i]*{1,-1}
+      for i in 1:n_trans} .* phi_boundaries;
     for i in 1:n_trans loop
       0 = 2*I[i] + Delta(boundaries[i, :].Ndot)
         "Assumption of a linear current profile";
@@ -1501,14 +1500,15 @@ Choose any condition besides None.");
     electrochemical.sT = h - g;
 
     // Material exchange
-    if abs(alpha - 0.5) > Modelica.Constants.eps then
+    if abs(alpha - 0.5) < Modelica.Constants.eps or tauprime < Modelica.Constants.eps
+        *U.s then
+      electrochemical.w = g + 2*T*asinh(electrochemical.Ndot*tauprime*v/(2*V))
+        "Explicitly inverted to avoid nonlinear equations";
+    else
       v*tauprime*electrochemical.Ndot = V*(exp(alpha*(electrochemical.w - g)/T)
          - exp((alpha - 1)*(electrochemical.w - g)/T));
       // Note:  V/v is different than N for the Ion model, which inherits from
       // this one.
-    else
-      electrochemical.w = g + 2*T*asinh(electrochemical.Ndot*tauprime*v/(2*V))
-        "Explicitly inverted to avoid nonlinear equations";
     end if;
 
     // Transport
@@ -1982,7 +1982,7 @@ Check that the volumes of the other phases are set properly.");
     phi = direct.trans.phi;
 
     // Thermodynamic correlations
-    if Data.isCompressible and false then
+    if Data.isCompressible then
       p = Data.p_Tv(T, v);
     else
       v = Data.v_Tp(T, p);
@@ -2199,16 +2199,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Species;
 
 public

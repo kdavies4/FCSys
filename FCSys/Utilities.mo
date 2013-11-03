@@ -419,7 +419,7 @@ An unrelated species may be included.");
       end if;
 
       t_0 := get_time();
-      ok := translateModel(problem) > Modelica.Constants.small;
+      ok := translateModel(problem);
       print("Translation time: " + String(get_time() - t_0) + " s", fileName);
 
       annotation (Documentation(info=

@@ -27,7 +27,7 @@ package Subregions
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
   Some of the liquid evaporates until saturation is reached. The boundaries are adiabatic; therefore, the temperature of the liquid and the gas 
   decreases due to the enthalpy of formation.</p></html>"),
-          experiment(StopTime=10),
+          experiment(StopTime=0.005),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Condensation.mos"
               "Subregions.Examples.PhaseChange.Condensation.mos"),
@@ -57,7 +57,7 @@ package Subregions
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
   comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
   </p></html>"),
-          experiment(StopTime=240),
+          experiment(StopTime=30),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
               "Subregions.Examples.PhaseChange.Hydration.mos"),
@@ -93,28 +93,21 @@ package Subregions
           inclH2O=true,
           inclH2=false,
           subregion(gas(H2O(p_IC=Characteristics.H2O.p_sat(environment.T))),
-              liquid(H2O(epsilon_IC=0.25), inclH2O=true)),
+              liquid(H2O(epsilon_IC=0.25, tauprime=100*U.s), inclH2O=true)),
           environment(T=274.15*U.K));
 
         FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC1(liquid(
-              inclH2O=true, H2O(redeclare Modelica.Blocks.Sources.Ramp
-                thermalSet(
-                height=99*U.K,
-                duration=3600,
-                offset=environment.T,
-                y))), gas(inclH2O=true, H2O(thermalSet(y=temperatureSet.y))))
-          annotation (Placement(transformation(
+              inclH2O=true, H2O(thermalSet(y=temperatureSet.y))), gas(inclH2O=
+                true,H2O(thermalSet(y=temperatureSet.y)))) annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-24,0})));
 
         FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC2(gas(inclH2O=
-                inclH2O, H2O(redeclare Modelica.Blocks.Sources.Ramp thermalSet(
-                height=99*U.K,
-                duration=3600,
-                offset=environment.T,
-                y))), liquid(inclH2O=true, H2O(thermalSet(y=temperatureSet.y))))
-          annotation (Placement(transformation(
+                inclH2O, H2O(thermalSet(y=temperatureSet.y))), liquid(inclH2O=
+                true, H2O(thermalSet(y=temperatureSet.y)))) annotation (
+            Placement(transformation(
               extent={{-10,10},{10,-10}},
               rotation=90,
               origin={24,0})));
@@ -174,16 +167,17 @@ package Subregions
             L={0.287*U.mm,10*U.cm,10*U.cm},
             gas(oneTemperature=true, H2(phi(each fixed=true, each stateSelect=
                       StateSelect.always))),
-            dielectric(final A=0),
             ionomer(oneTemperature=true, 'H+'(consTransX=ConsMom.steady))));
 
-        // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
-        // A = 0 eliminates it.
+        Real states[:](each stateSelect=StateSelect.always) = {subregion.gas.T,
+          subregion.graphite.T,subregion.ionomer.T}
+          "Forced state selection to eliminate nonlinear equations";
 
         Conditions.ByConnector.BoundaryBus.Single.Sink anBC(graphite(
             'incle-'=true,
             'inclC+'=true,
-            redeclare FCSys.Conditions.ByConnector.ThermoDiffusive.Temperature
+            redeclare
+              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
               'C+'(source(y=environment.T)),
             'e-'(redeclare function materialSpec =
                   FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
@@ -254,11 +248,11 @@ package Subregions
               H2O(phi(each fixed=true, each stateSelect=StateSelect.always)),
               O2(phi(each fixed=true, each stateSelect=StateSelect.always),
                   initEnergy=Init.none)),
-            dielectric(final A=0),
             ionomer(oneTemperature=true, 'H+'(consTransX=ConsMom.steady))));
 
-        // Note:  The double layer capacitance introduces nonlinear equations in Dymola 2014.
-        // A = 0 eliminates it.
+        Real states[:](each stateSelect=StateSelect.always) = {subregion.gas.T,
+          subregion.graphite.T,subregion.ionomer.T}
+          "Forced state selection to eliminate nonlinear equations";
 
         Conditions.ByConnector.BoundaryBus.Single.Source anBC(ionomer('inclH+'=
                 true, 'H+'(
@@ -319,6 +313,7 @@ package Subregions
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end ORR;
+
     end Reactions;
 
     model AirColumn
@@ -350,7 +345,7 @@ package Subregions
         inclTransX=false,
         inclTransY=true,
         inclTransZ=false,
-        k_common=1e-7,
+        k_common=1e-8,
         gas(inclN2=true, N2(
             p_IC=environment.p - Deltap_IC/2,
             upstreamY=false,
@@ -361,7 +356,7 @@ package Subregions
       FCSys.Subregions.Subregion subregions[n_y](
         each L={10,10,10}*U.m,
         each inclTransZ=false,
-        each k_common=1e-7,
+        each k_common=1e-8,
         gas(each inclN2=true, N2(
             p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i in
                 1:n_y},
@@ -377,7 +372,7 @@ package Subregions
         inclTransZ=false,
         inclTransX=false,
         inclTransY=true,
-        each k_common=1e-7,
+        each k_common=1e-8,
         graphite('inclC+'='inclC+', 'C+'(epsilon=1e-9)),
         gas(inclN2=true, N2(
             p_IC=environment.p + Deltap_IC/2,
@@ -448,8 +443,7 @@ package Subregions
                 {100,100}}), graphics));
     end AirColumn;
 
-    model Echo
-      "Two regions of gas with initial pressure difference, no dampening"
+    model Echo "Two regions of gas with initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
 
       extends Subregions(subregion1(gas(H2(zeta=k*
@@ -465,7 +459,7 @@ package Subregions
     end Echo;
 
     model EchoCentral
-      "Two regions of gas with initial pressure difference, no dampening, with central difference scheme"
+      "Two regions of gas with initial pressure difference, with central difference scheme"
       extends Echo(
         subregion1(gas(
             H2(upstreamX=false),
@@ -531,7 +525,8 @@ package Subregions
       FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink BC2(graphite(
           'inclC+'=true,
           'incle-'='incle-',
-          redeclare FCSys.Conditions.ByConnector.ThermoDiffusive.Temperature
+          redeclare
+            FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
             'C+'(source(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
@@ -940,7 +935,7 @@ package Subregions
 
       annotation (
         experiment(
-          StopTime=4,
+          StopTime=2,
           Tolerance=1e-006,
           __Dymola_Algorithm="Dassl"),
         Commands(file(ensureTranslated=true) =
@@ -996,6 +991,66 @@ package Subregions
 
     end ThermalConductionConvection;
 
+    model BinaryDiffusion "Example of coupled diffusion"
+      extends Subregion(
+        inclH2O=true,
+        'inclC+'=true,
+        subregion(gas(
+            oneTemperature=true,
+            T(stateSelect=StateSelect.always),
+            H2(initEnergy=Init.none, boundaries(Ndot(each stateSelect=
+                      StateSelect.always))),
+            H2O(boundaries(Ndot(each stateSelect=StateSelect.always))))));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source source(gas(
+          inclH2=true,
+          inclH2O=true,
+          H2O(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+              materialSet(y=environment.p)),
+          H2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+              redeclare Modelica.Blocks.Sources.Ramp materialSet(
+              duration=10,
+              height=U.bar,
+              offset=environment.p)))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-24,0})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Sink sink(gas(
+          inclH2=true,
+          H2(materialSet(y=environment.p)),
+          inclH2O=true,
+          H2O(materialSet(y=environment.p)))) annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={24,0})));
+
+    equation
+      connect(source.boundary, subregion.xNegative) annotation (Line(
+          points={{-20,-4.44089e-016},{-16,-4.44089e-016},{-16,0},{-10,0}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(subregion.xPositive, sink.boundary) annotation (Line(
+          points={{10,0},{20,0}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics),
+        experiment(
+          StopTime=100,
+          Tolerance=1e-005,
+          __Dymola_Algorithm="Dassl"),
+        __Dymola_experimentSetupOutput,
+        Commands(file=
+              "Resources/Scripts/Dymola/Subregions.Examples.BinaryDiffusion.mos"
+            "Subregions.Examples.BinaryDiffusion.mos"));
+    end BinaryDiffusion;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1090,6 +1145,19 @@ package Subregions
   equation
     // Boundaries and mixing
     // ---------------------
+    // Dielectric
+    connect(dielectric.amagat, volume.amagat) annotation (Line(
+        points={{-10,-16},{-10,-66},{86,-66}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(graphite.electrostatic, dielectric.negative) annotation (Line(
+        points={{-30,-16},{-16,-16}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(dielectric.positive, ionomer.electrostatic) annotation (Line(
+        points={{-4,-16},{10,-16}},
+        color={255,195,38},
+        smooth=Smooth.None));
     // Gas
     connect(gas.amagat, volume.amagat) annotation (Line(
         points={{-72,-20},{-72,-66},{86,-66}},
@@ -1254,19 +1322,6 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-    // Dielectric
-    connect(dielectric.amagat, volume.amagat) annotation (Line(
-        points={{-10,-16},{-10,-66},{86,-66}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphite.electrostatic, dielectric.negative) annotation (Line(
-        points={{-30,-16},{-16,-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
-    connect(dielectric.positive, ionomer.electrostatic) annotation (Line(
-        points={{-4,-16},{10,-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
 
     // Inert exchange
     // --------------
@@ -1322,7 +1377,7 @@ package Subregions
 on diagram)")}));
   end Subregion;
 
-  model SubregionIonomerOnly "Subregion with only the ionomer phase"
+  model SubregionIonomer "Subregion with only the ionomer phase"
     import Modelica.Constants.eps;
     extends Partial(final n_spec=ionomer.n_spec);
 
@@ -1411,7 +1466,7 @@ on diagram)")}));
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{
               40,60}}), graphics));
-  end SubregionIonomerOnly;
+  end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
     extends Partial(final n_spec=gas.n_spec + graphite.n_spec + liquid.n_spec);
@@ -1719,95 +1774,79 @@ on diagram)")}));
 
   <p>This model should be extended to include the appropriate phases, reactions, etc.</p>
   </html>"),
-      Icon(graphics={
-          Line(
-            points={{-100,0},{-40,0}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransX,
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{0,-100}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransY,
-            smooth=Smooth.None),
-          Line(
-            points={{40,40},{50,50}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransZ,
-            smooth=Smooth.None),
-          Polygon(
-            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                16}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,-40},{-16,-16}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-16,40},{-16,-16},{40,-16}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-40,0},{28,0}},
-            color={210,210,210},
-            visible=inclTransX,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,28},{0,-40}},
-            color={210,210,210},
-            visible=inclTransY,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{28,0},{100,0}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransX,
-            smooth=Smooth.None),
-          Line(
-            points={{0,100},{0,28}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransY,
-            smooth=Smooth.None),
-          Line(
-            points={{-12,-12},{40,40}},
-            color={210,210,210},
-            visible=inclTransZ,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-40,16},{16,16},{16,-40}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-50,-50},{-12,-12}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=inclTransZ,
-            smooth=Smooth.None),
-          Polygon(
-            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                16}},
-            lineColor={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{40,40},{16,16}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,56},{100,96}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Icon(graphics={Line(
+              points={{-100,0},{-40,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransX,
+              smooth=Smooth.None),Line(
+              points={{0,-40},{0,-100}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransY,
+              smooth=Smooth.None),Line(
+              points={{40,40},{50,50}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransZ,
+              smooth=Smooth.None),Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+              16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-40,-40},{-16,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-16,40},{-16,-16},{40,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-40,0},{28,0}},
+              color={210,210,210},
+              visible=inclTransX,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,28},{0,-40}},
+              color={210,210,210},
+              visible=inclTransY,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{28,0},{100,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransX,
+              smooth=Smooth.None),Line(
+              points={{0,100},{0,28}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransY,
+              smooth=Smooth.None),Line(
+              points={{-12,-12},{40,40}},
+              color={210,210,210},
+              visible=inclTransZ,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-40,16},{16,16},{16,-40}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-50,-50},{-12,-12}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclTransZ,
+              smooth=Smooth.None),Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+              16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{40,40},{16,16}},
+              color={127,127,127},
+              smooth=Smooth.None),Text(
+              extent={{-100,56},{100,96}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
 

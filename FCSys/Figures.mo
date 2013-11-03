@@ -1492,8 +1492,9 @@ package Figures "Graphical layouts for documentation"
   end PhaseIcon;
 
   partial model SpeciesIcon
+    import FCSys;
 
-    FCSys.Species.Fluid Species
+    FCSys.Species.Ion Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
             preserveAspectRatio=true, extent={{-120,-120},{120,120}})));
@@ -2037,11 +2038,10 @@ static"),Ellipse(
   end FPtoFP;
 
   model InternalFlow
-    extends Subregions.Examples.InternalFlow(final Vdot_large=Vdot_large_SI*U.m
-          ^3/U.s);
+    extends Subregions.Examples.InternalFlow(final Vdot=Vdot_SI*U.m^3/U.s);
 
     // Conditions
-    parameter Q.VolumeRate Vdot_large_SI=1e-5
+    parameter Q.VolumeRate Vdot_SI=1e-5
       "Prescribed large-signal volumetric flow rate in m3/s"
       annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
 

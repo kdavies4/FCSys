@@ -180,6 +180,8 @@ package Quantities "Quantities to represent physical properties"
     "Reciprocal of pressure";
   type ResistanceElectrical = TypeReal (final unit="L2.M/(N2.T)", min=0)
     "Electrical resistance";
+  type ResistanceThermal = TypeReal (final unit="T/N", min=0)
+    "Thermal resistance";
   type Resistivity = TypeReal (final unit="L.T/N", min=0);
   type Time = TypeReal (final unit="T");
   type TimeAbsolute = TypeReal (final unit="T", min=0) "Absolute time";

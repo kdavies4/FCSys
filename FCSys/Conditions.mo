@@ -76,7 +76,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       ByConnector.BoundaryBus.Single.Phases.Gas boundary(inclH2O=true, H2O(
             redeclare
-            Conditions.ByConnector.Boundary.Single.ThermoDiffusive.HeatRate
+            Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate
             thermal, redeclare
             Conditions.ByConnector.Boundary.Single.Material.Current material(
               source(y=U.A))))
@@ -393,14 +393,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-              points={{-30,0},{30,0}},
-              color={47,107,251},
-              smooth=Smooth.None), Polygon(
-              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-              lineColor={47,107,251},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+                  points={{-30,0},{30,0}},
+                  color={47,107,251},
+                  smooth=Smooth.None),Polygon(
+                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                  lineColor={47,107,251},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}));
 
     end AmagatDalton;
 
@@ -1827,6 +1827,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end Adapters;
 
   package ByConnector "Conditions for each type of connector"
+
+    extends Modelica.Icons.Package;
+
     package Electrostatic
       "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Electrostatic\">Electrostatic</a> connector</html>"
       extends Modelica.Icons.Package;
@@ -1913,783 +1916,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {100,100}}), graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
     end Electrostatic;
-    extends Modelica.Icons.Package;
-
-    package Electrochemical
-      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Electrochemical\">Electrochemical</a> connector</html>"
-      extends Modelica.Icons.Package;
-
-      model Potential "Specify electrochemical potential (measure current)"
-        extends Partial(final y=electrochemical.Ndot);
-
-      equation
-        electrochemical.w = u_final;
-
-      end Potential;
-
-      model Current "Specify current (measure electrochemical potential)"
-        extends Partial(final y=electrochemical.w);
-
-      equation
-        electrochemical.Ndot = u_final;
-
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
-      end Current;
-
-      partial model Partial "Base model for a material condition"
-        import Modelica.Math.BooleanVectors.countTrue;
-        import Modelica.Math.BooleanVectors.index;
-        extends FCSys.Icons.Conditions.SingleShort;
-
-        parameter Boolean internal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Specification of material condition"));
-
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(group="Specification of material condition", enable=internal),
-
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,10})));
-
-        // Properties upon outflow
-        parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
-              group="Properties upon outflow", __Dymola_label=
-                "<html><i><b>&phi;</b></i></html>"));
-        parameter Q.PotentialAbsolute sT=3000*U.K
-          "Product of specific entropy and temperature" annotation (Dialog(
-              group="Properties upon outflow", __Dymola_label=
-                "<html><i>sT</i></html>"));
-
-        // Included components of translational momentum
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransY=true "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransZ=true "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-
-        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
-              ="Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0}),iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-        output Q.Velocity phi_actual[n_trans]=actualStream(electrochemical.phi)
-          "Velocity of the actual stream";
-        output Q.Potential sT_actual=actualStream(electrochemical.sT)
-          "Specific entropy-temperature product of the actual stream";
-        Connectors.Electrochemical electrochemical(final n_trans=n_trans)
-          "Connector for a species of a chemical reaction"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      protected
-        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-            inclTransZ}) "Number of components of translational momentum";
-        final parameter Integer cartTrans[n_trans]=index({inclTransX,inclTransY,
-            inclTransZ})
-          "Cartesian-axis indices of the components of translational momentum";
-        Connectors.RealOutputInternal u_final
-          "Final value of specified condition" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,0}),iconTransformation(extent={{-10,-10},{10,10}},
-                origin={-20,0})));
-
-      equation
-        electrochemical.phi = phi[cartTrans];
-        electrochemical.sT = sT;
-
-        connect(source.y, u_final) annotation (Line(
-            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
-                5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (defaultComponentName="chemical");
-      end Partial;
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
-
-    end Electrochemical;
-
-    package Reaction
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
-      extends Modelica.Icons.Package;
-
-      model Rate
-        "<html>Impose a reaction rate via a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
-        import Modelica.Math.BooleanVectors.countTrue;
-        import Modelica.Math.BooleanVectors.enumerate;
-        import Modelica.Blocks.Sources;
-        extends FCSys.Icons.Conditions.Single;
-
-        // Specification
-        // -------------
-        // Material
-        replaceable function materialSpec = Material.reactionRate
-          constrainedby Material.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          choicesAllMatching=true,
-          Dialog(tab="Specification", group="Material"));
-        parameter Boolean internalMaterial=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(tab="Specification", group="Material"));
-        replaceable Sources.RealExpression materialSet if internalMaterial
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Material",
-            enable=internalMaterial),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,90})));
-
-        //
-        // X-axis translational
-        replaceable function transXSpec = Translational.velocity constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX),
-          Placement(transformation(extent={{-52,18},{-32,38}})));
-
-        parameter Boolean internalTransX=true if inclTransX
-          "Use internal specification" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX));
-        replaceable Sources.RealExpression transXSet if inclTransX and
-          internalTransX constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX and internalTransX),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,50})));
-
-        //
-        // Y-axis translational
-        replaceable function transYSpec = Translational.velocity constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY),
-          Placement(transformation(extent={{-24,4},{-4,24}})));
-
-        parameter Boolean internalTransY=true if inclTransY
-          "Use internal specification" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY));
-        replaceable Sources.RealExpression transYSet if inclTransY and
-          internalTransY constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY and internalTransY),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,10})));
-
-        //
-        // Z-axis translational
-        replaceable function transZSpec = Translational.velocity constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ),
-          Placement(transformation(extent={{4,-10},{24,10}})));
-
-        parameter Boolean internalTransZ=true if inclTransZ
-          "Use internal specification" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ));
-        replaceable Sources.RealExpression transZSet if inclTransZ and
-          internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ and internalTransZ),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,-30})));
-
-        //
-        // Thermal
-        replaceable function thermalSpec =
-            ThermoAdvective.specificEntropyTemperature constrainedby
-          ThermoAdvective.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(tab="Specification", group="Thermal"),
-          Placement(transformation(extent={{4,-10},{24,10}})));
-
-        parameter Boolean internalThermal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSet if internalThermal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Thermal",
-            enable=internalThermal),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,-70})));
-
-        // Measurement
-        // -----------
-        // Material
-        replaceable function materialMeas = Material.potential constrainedby
-          Material.Partial "Material quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // X-axis translational
-        replaceable function transXMeas = Translational.force constrainedby
-          Translational.Partial "X-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Y-axis translational
-        replaceable function transYMeas = Translational.force constrainedby
-          Translational.Partial "Y-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Z-axis translational
-        replaceable function transZMeas = Translational.force constrainedby
-          Translational.Partial "Z-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Thermal
-        replaceable function thermalMeas = ThermoAdvective.heatRate
-          constrainedby ThermoAdvective.Partial "Thermal quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Included components of translational momentum
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransY=true "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransZ=true "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-
-        // Inputs
-        Connectors.RealInput u_material if not internalMaterial
-          "Material specification" annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,80})));
-        Connectors.RealInput u_transX if inclTransX and not internalTransX
-          "X-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,40})));
-        Connectors.RealInput u_transY if inclTransY and not internalTransY
-          "Y-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-        Connectors.RealInput u_transZ if inclTransZ and not internalTransZ
-          "Z-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,-40})));
-        Connectors.RealInput u_thermal if not internalThermal
-          "Thermal specification" annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,-80})));
-
-        // Outputs
-        final Connectors.RealOutput y_material=materialMeas(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot) "Material measurement" annotation (Dialog(tab=
-                "Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,80}),iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,80})));
-        final Connectors.RealOutput y_transX=transXMeas(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.x]) if inclTransX
-          "X-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,40}),iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-        final Connectors.RealOutput y_transY=transYMeas(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.y]) if inclTransY
-          "Y-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,40})));
-        final Connectors.RealOutput y_transZ=transZMeas(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.z]) if inclTransZ
-          "Z-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-40}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-40})));
-        final Connectors.RealOutput y_thermal=thermalMeas(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot) "Thermal measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-80}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-80})));
-
-        Connectors.Reaction reaction(final n_trans=n_trans)
-          "Stoichiometric connector for the electrochemical reaction"
-          annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-
-      protected
-        final inner parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-            inclTransZ}) "Number of components of translational momentum";
-        final inner parameter Integer transCart[Axis]=enumerate({inclTransX,
-            inclTransY,inclTransZ})
-          "Translational-momentum-component indices of the Cartesian axes";
-
-        Connectors.RealOutputInternal _u_material=materialSpec(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot)
-          "Internal, working value of material specification" annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,80})));
-        Connectors.RealOutputInternal _u_transX=transXSpec(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.x]) if inclTransX
-          "Internal, working value of X-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,40})));
-        Connectors.RealOutputInternal _u_transY=transYSpec(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.y]) if inclTransY
-          "Internal, working value of Y-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,0})));
-        Connectors.RealOutputInternal _u_transZ=transZSpec(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot,
-                  i=transCart[Axis.z]) if inclTransZ
-          "Internal, working value of Z-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,-40})));
-        Connectors.RealOutputInternal _u_thermal=thermalSpec(
-                  reaction.Ndot,
-                  reaction.w,
-                  reaction.phi,
-                  reaction.mPhidot,
-                  reaction.sT,
-                  reaction.Qdot)
-          "Internal, working value of thermal specification" annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,-80})));
-
-      equation
-        // Material
-        connect(u_material, _u_material) annotation (Line(
-            points={{-110,80},{-36,80}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(materialSet.y, _u_material) annotation (Line(
-            points={{-69,90},{-60,90},{-60,80},{-36,80}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // X-axis translational
-        connect(u_transX, _u_transX) annotation (Line(
-            points={{-110,40},{-36,40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transXSet.y, _u_transX) annotation (Line(
-            points={{-69,50},{-60,50},{-60,40},{-36,40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Y-axis translational
-        connect(u_transY, _u_transY) annotation (Line(
-            points={{-110,5.55112e-16},{-36,5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transYSet.y, _u_transY) annotation (Line(
-            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Z-axis translational
-        connect(u_transZ, _u_transZ) annotation (Line(
-            points={{-110,-40},{-36,-40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transZSet.y, _u_transZ) annotation (Line(
-            points={{-69,-30},{-60,-30},{-60,-40},{-36,-40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Thermal
-        connect(u_thermal, _u_thermal) annotation (Line(
-            points={{-110,-80},{-36,-80}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(thermalSet.y, _u_thermal) annotation (Line(
-            points={{-69,-70},{-60,-70},{-60,-80},{-36,-80}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(graphics));
-      end Rate;
-
-      model Offset
-        "<html>Add a potential to a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
-
-        extends FCSys.Conditions.ByConnector.Reaction.Rate(
-          redeclare replaceable function materialSpec = Material.potential,
-          redeclare replaceable function transXSpec =
-              Conditions.ByConnector.Reaction.Translational.velocity,
-          redeclare replaceable function transYSpec =
-              Conditions.ByConnector.Reaction.Translational.velocity,
-          redeclare replaceable function transZSpec =
-              Conditions.ByConnector.Reaction.Translational.velocity,
-          redeclare replaceable function thermalSpec =
-              Conditions.ByConnector.Reaction.ThermoAdvective.specificEntropyTemperature,
-
-          redeclare replaceable function materialMeas =
-              Conditions.ByConnector.Reaction.Material.reactionRate,
-          redeclare replaceable function transXMeas =
-              Conditions.ByConnector.Reaction.Translational.force,
-          redeclare replaceable function transYMeas =
-              Conditions.ByConnector.Reaction.Translational.force,
-          redeclare replaceable function transZMeas =
-              Conditions.ByConnector.Reaction.Translational.force,
-          redeclare replaceable function thermalMeas =
-              Conditions.ByConnector.Reaction.ThermoAdvective.heatRate);
-
-        // Note:  In Dymola 2014, the paths must be explicitly given to prevent
-        // the error "Cannot show the parameter dialog for redeclared class [...]".
-
-      end Offset;
-
-      package Material "Material conditions"
-        extends Modelica.Icons.Package;
-
-        function reactionRate "Rate of the reaction"
-          extends Partial;
-
-        algorithm
-          x := Ndot;
-          annotation (Inline=true);
-        end reactionRate;
-
-        function potential "Offset from the potential of the reaction"
-          extends Partial;
-
-        algorithm
-          x := g;
-          annotation (Inline=true);
-        end potential;
-
-        partial function Partial
-          "Template of a function to select a material quantity"
-          extends Modelica.Icons.Function;
-
-          // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
-
-          // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
-
-          // Thermal advection
-          input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
-
-          output Real x "Value of condition";
-          annotation (Inline=true, Documentation(info="<html>
-  <p>This function takes as inputs all the efforts and flows of the associated
-  connector.  It should be extended to add an algorithm that maps these inputs
-  to a single value.</p></html>"));
-        end Partial;
-      end Material;
-
-      package Translational "Translational conditions"
-        extends Modelica.Icons.Package;
-
-        function velocity "Velocity of the product"
-          extends Partial;
-
-        algorithm
-          x := phi[i];
-          annotation (Inline=true);
-        end velocity;
-
-        function force "Force from the stream"
-          extends Partial;
-
-        algorithm
-          x := mPhidot[i];
-          annotation (Inline=true);
-        end force;
-
-        partial function Partial
-          "Template of a function to select a translational quantity"
-          extends Modelica.Icons.Function;
-
-          // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
-
-          // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
-
-          // Thermal advection
-          input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
-
-          input Integer i(min=1,max=3) "Index of the translational axis";
-
-          output Real x "Value of condition";
-          annotation (Inline=true, Documentation(info="<html>
-  <p>This function takes as inputs all the efforts and flows of the associated
-  connector.  It should be extended to add an algorithm that maps these inputs
-  to a single value.</p></html>"));
-        end Partial;
-      end Translational;
-
-      package ThermoAdvective "Conditions for thermal advection"
-        extends Modelica.Icons.Package;
-
-        function specificEntropyTemperature
-          "Product of specific entropy and temperature of the product"
-          extends Partial;
-
-        algorithm
-          x := sT;
-          annotation (Inline=true);
-        end specificEntropyTemperature;
-
-        function heatRate "Rate of heat from the stream"
-          extends Partial;
-
-        algorithm
-          x := Qdot;
-          annotation (Inline=true);
-        end heatRate;
-
-        partial function Partial
-          "Template of a function to select a thermal quantity"
-          extends Modelica.Icons.Function;
-
-          // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
-
-          // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
-
-          // Thermal advection
-          input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
-
-          output Real x "Value of condition";
-          annotation (Inline=true, Documentation(info="<html>
-  <p>This function takes as inputs all the efforts and flows of the associated
-  connector.  It should be extended to add an algorithm that maps these inputs
-  to a single value.</p></html>"));
-        end Partial;
-      end ThermoAdvective;
-
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={221,23,47},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
-    end Reaction;
 
     package BoundaryBus
       "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a> connector</html>"
@@ -2698,7 +1929,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package Pair
         "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a> connectors</html>"
 
-        // **Update the C+ and SO3- conditions (thermal only, not full Boundary connector)
         extends Modelica.Icons.Package;
 
         model Temperature
@@ -2925,23 +2155,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
                     Boundary.Pair.ThermoDiffusive.temperature)),
-            graphite('C+'(
-                redeclare replaceable function materialSpec =
-                    Boundary.Pair.Material.pressure,
-                redeclare replaceable function afterSpec =
-                    Boundary.Pair.Translational.force,
-                redeclare replaceable function beforeSpec =
-                    Boundary.Pair.Translational.force,
-                redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
-                redeclare replaceable function materialMeas =
-                    Boundary.Pair.Material.current,
-                redeclare replaceable function afterMeas =
-                    Boundary.Pair.Translational.velocity,
-                redeclare replaceable function beforeMeas =
-                    Boundary.Pair.Translational.velocity,
-                redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature), 'e-'(
+            graphite(redeclare replaceable
+                Conditions.ByConnector.ThermoDiffusive.Pair.HeatRate 'C+', 'e-'
+                (
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
                 redeclare replaceable function afterSpec =
@@ -2959,23 +2175,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function thermalMeas =
                     Boundary.Pair.ThermoDiffusive.temperature)),
             ionomer(
-              'SO3-'(
-                redeclare replaceable function materialSpec =
-                    Boundary.Pair.Material.pressure,
-                redeclare replaceable function afterSpec =
-                    Boundary.Pair.Translational.force,
-                redeclare replaceable function beforeSpec =
-                    Boundary.Pair.Translational.force,
-                redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
-                redeclare replaceable function materialMeas =
-                    Boundary.Pair.Material.current,
-                redeclare replaceable function afterMeas =
-                    Boundary.Pair.Translational.velocity,
-                redeclare replaceable function beforeMeas =
-                    Boundary.Pair.Translational.velocity,
-                redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature),
+              redeclare replaceable
+                Conditions.ByConnector.ThermoDiffusive.Pair.HeatRate 'SO3-',
               'H+'(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -3235,7 +2436,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Boundary.Pair.Temperature 'C+' if 'inclC+' "C+ conditions"
+            ThermoDiffusive.Pair.HeatRate 'C+' if 'inclC+' "C+ conditions"
               annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
@@ -3263,8 +2464,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           equation
             // C+
             connect('C+'.negative, negative.'C+') annotation (Line(
-                points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
-
+                points={{-10,-0.2},{-10,5.55112e-016},{-100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
@@ -3282,39 +2482,39 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 smooth=Smooth.None));
 
             connect('C+'.y, y.'C+') annotation (Line(
-                points={{6.10623e-16,-5},{-4.87687e-22,-50},{-4.87687e-22,-50},
-                    {5.55112e-16,-50}},
+                points={{6.10623e-016,-5},{-4.87687e-022,-50},{5.55112e-016,-50}},
+
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             // e-
             connect('e-'.negative, negative.'e-') annotation (Line(
-                points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
-
+                points={{-10,0},{-10,5.55112e-016},{-100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect('e-'.positive, positive.'e-') annotation (Line(
-                points={{10,6.10623e-16},{10,5.55112e-16},{100,5.55112e-16}},
+                points={{10,0},{100,0}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect(u.'e-', 'e-'.u) annotation (Line(
-                points={{5.55112e-16,50},{6.10623e-16,5}},
+                points={{5.55112e-016,50},{0,5}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('e-'.y, y.'e-') annotation (Line(
-                points={{6.10623e-16,-5},{-4.87687e-22,-50},{-4.87687e-22,-50},
-                    {5.55112e-16,-50}},
+                points={{0,-5},{0,-50},{5.55112e-016,-50}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
+            annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                    extent={{-100,-100},{100,100}}), graphics));
           end Graphite;
 
           model Ionomer "Condition for ionomer"
@@ -3334,8 +2534,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            Boundary.Pair.Temperature 'SO3-' if 'inclSO3-' "SO3- conditions"
-              annotation (Dialog(
+            ThermoDiffusive.Pair.HeatRate 'SO3-' if 'inclSO3-'
+              "SO3- conditions" annotation (Dialog(
                 group="Species",
                 __Dymola_label=
                     "<html>SO<sub>3</sub><sup>-</sup> conditions</html>",
@@ -3380,8 +2580,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           equation
             // C19HF37O5S-
             connect('SO3-'.negative, negative.'SO3-') annotation (Line(
-                points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
-
+                points={{-10,-0.2},{-10,5.55112e-016},{-100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
@@ -3406,52 +2605,50 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
             // H+
             connect('H+'.negative, negative.'H+') annotation (Line(
-                points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
-
+                points={{-10,0},{-10,5.55112e-016},{-100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect('H+'.positive, positive.'H+') annotation (Line(
-                points={{10,6.10623e-16},{10,5.55112e-16},{100,5.55112e-16}},
+                points={{10,0},{10,5.55112e-016},{100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect(u.'H+', 'H+'.u) annotation (Line(
-                points={{5.55112e-16,50},{6.10623e-16,5}},
+                points={{5.55112e-016,50},{0,5}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect('H+'.y, y.'H+') annotation (Line(
-                points={{6.10623e-16,-5},{5.55112e-16,-50}},
+                points={{0,-5},{5.55112e-016,-50}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             // H2O
             connect(H2O.negative, negative.H2O) annotation (Line(
-                points={{-10,6.10623e-16},{-10,5.55112e-16},{-100,5.55112e-16}},
-
+                points={{-10,0},{-10,5.55112e-016},{-100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect(H2O.positive, positive.H2O) annotation (Line(
-                points={{10,6.10623e-16},{10,5.55112e-16},{100,5.55112e-16}},
+                points={{10,0},{10,5.55112e-016},{100,5.55112e-016}},
                 color={127,127,127},
                 pattern=LinePattern.None,
                 smooth=Smooth.None));
 
             connect(u.H2O, H2O.u) annotation (Line(
-                points={{5.55112e-16,50},{6.10623e-16,5}},
+                points={{5.55112e-016,50},{0,5}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
 
             connect(H2O.y, y.H2O) annotation (Line(
-                points={{6.10623e-16,-5},{5.55112e-16,-50}},
+                points={{0,-5},{5.55112e-016,-50}},
                 color={0,0,127},
                 thickness=0.5,
                 smooth=Smooth.None));
@@ -3761,7 +2958,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
 
-            graphite(redeclare replaceable ThermoDiffusive.HeatRate 'C+', 'e-'(
+            graphite(redeclare replaceable ThermoDiffusive.Single.HeatRate 'C+',
+                'e-'(
                 redeclare replaceable function materialSpec =
                     Boundary.Single.Material.pressure,
                 redeclare replaceable function afterSpec =
@@ -3783,7 +2981,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
 
             ionomer(
-              redeclare replaceable ThermoDiffusive.HeatRate 'SO3-',
+              redeclare replaceable ThermoDiffusive.Single.HeatRate 'SO3-',
               'H+'(
                 redeclare replaceable function materialSpec =
                     Boundary.Single.Material.pressure,
@@ -4030,9 +3228,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_joinNext=true));
 
             replaceable
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Temperature 'C+' if
-              'inclC+' constrainedby
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Partial
+              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
+              'C+' if 'inclC+' constrainedby
+              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Partial
               "C+ conditions" annotation (
               __Dymola_choicesFromPackage=true,
               Dialog(
@@ -4119,9 +3317,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            replaceable FCSys.Conditions.ByConnector.ThermoDiffusive.HeatRate
+            replaceable
+              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.HeatRate
               'SO3-' if 'inclSO3-' constrainedby
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Partial
+              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Partial
               "SO3- conditions" annotation (
               __Dymola_choicesFromPackage=true,
               Dialog(
@@ -4306,11 +3505,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191},
-                  lineThickness=0.5)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191},
+              lineThickness=0.5)}));
 
     end BoundaryBus;
 
@@ -5476,10 +4675,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191})}));
 
     end Boundary;
 
@@ -5540,13 +4739,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
-                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
-                    -60,-60}},
-                lineColor={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid)}),
+                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
+                  -60},{-60,-60}},
+                      lineColor={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}),graphics));
 
@@ -5615,15 +4814,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={47,107,251},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={47,107,251},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
     end Amagat;
 
     package Dalton
@@ -5709,10 +4908,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
     end Dalton;
 
     package Direct
@@ -6192,14 +5391,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end ThermoDiffusive;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52}),Text(
-                  extent={{-70,70},{70,-70}},
-                  lineColor={255,255,255},
-                  textStyle={TextStyle.Bold},
-                  textString="0")}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52}), Text(
+              extent={{-70,70},{70,-70}},
+              lineColor={255,255,255},
+              textStyle={TextStyle.Bold},
+              textString="0")}));
     end Direct;
 
     package Inert
@@ -6684,10 +5883,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end ThermoDiffusive;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={2,157,21},
+              fillPattern=FillPattern.Solid,
+              fillColor={38,196,52})}));
     end Inert;
 
     package Translational
@@ -7027,52 +6226,277 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Component;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end Translational;
 
     package ThermoDiffusive
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
+      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model Temperature "Specify temperature (measure heat flow rate)"
-        extends Partial(final y=thermo.Qdot, source(y=298.15*U.K));
+      annotation (Icon(graphics={Ellipse(
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
+      package Pair
+        "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connectors</html>"
+        extends Modelica.Icons.Package;
+
+        model HeatRate "Specify heat flow rate (measure temperature)"
+          extends Partial(final y=positive.T - negative.T);
+
+        equation
+          negative.Qdot = u_final;
+
+        end HeatRate;
+
+        model Temperature "Specify temperature (measure heat flow rate)"
+          extends Partial(final y=negative.Qdot);
+
+        equation
+          positive.T - negative.T = u_final;
+
+        end Temperature;
+
+        partial model Partial "Base model for a thermal condition"
+
+          extends FCSys.Icons.Conditions.PairShort;
+
+          parameter Boolean internal=true "Use internal specification"
+            annotation (
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(group="Specification"));
+
+          replaceable Modelica.Blocks.Sources.RealExpression source if internal
+            constrainedby Modelica.Blocks.Interfaces.SO
+            "Source of internal specification" annotation (
+            __Dymola_choicesFromPackage=true,
+            Dialog(group="Specification",enable=internal),
+            Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={10,40})));
+
+          Connectors.RealInput u if not internal "Value of specified condition"
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={0,110}), iconTransformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={0,50})));
+
+          Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+                tab="Measurement"), Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={0,-110}),iconTransformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={0,-50})));
+
+          Connectors.ThermoDiffusive negative
+            "Negative connector for thermal diffusion"
+            annotation (Placement(transformation(extent={{-110,-12},{-90,8}})));
+
+        protected
+          Connectors.RealOutputInternal u_final
+            "Final value of specified condition" annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={0,8})));
+
+        public
+          Connectors.ThermoDiffusive positive
+            "Postive connector for thermal diffusion"
+            annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+        equation
+
+          // Conservation of energy
+          0 = negative.Qdot + positive.Qdot;
+          connect(u, u_final) annotation (Line(
+              points={{0,110},{0,8}},
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          connect(source.y, u_final) annotation (Line(
+              points={{10,29},{10,20},{0,20},{0,8}},
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          annotation (
+            defaultComponentName="thermal",
+            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics),
+            Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics));
+        end Partial;
+      end Pair;
+
+      package Single
+        "<html>Conditions for a single <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
+        extends Modelica.Icons.Package;
+
+        model HeatRate "Specify heat flow rate (measure temperature)"
+          extends Partial(final y=thermo.T);
+
+        equation
+          thermo.Qdot = u_final;
+
+        end HeatRate;
+
+        model Temperature "Specify temperature (measure heat flow rate)"
+          extends Partial(final y=thermo.Qdot, source(y=298.15*U.K));
+
+        equation
+          thermo.T = u_final;
+
+        end Temperature;
+
+        partial model Partial "Base model for a thermal condition"
+
+          extends FCSys.Icons.Conditions.SingleShort;
+
+          parameter Boolean internal=true "Use internal specification"
+            annotation (
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(group="Specification"));
+
+          replaceable Modelica.Blocks.Sources.RealExpression source if internal
+            constrainedby Modelica.Blocks.Interfaces.SO
+            "Source of internal specification" annotation (
+            __Dymola_choicesFromPackage=true,
+            Dialog(group="Specification",enable=internal),
+            Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={-70,30})));
+
+          Connectors.RealInput u if not internal "Value of specified condition"
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={-110,0})));
+
+          Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+                tab="Measurement"), Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={110,0}), iconTransformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={110,0})));
+
+          Connectors.ThermoDiffusive thermo "Connector for thermal diffusion"
+            annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+        protected
+          Connectors.RealOutputInternal u_final
+            "Final value of specified condition" annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={-20,0})));
+
+        equation
+          connect(u, u_final) annotation (Line(
+              points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
+                  -20,5.55112e-16}},
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          connect(source.y, u_final) annotation (Line(
+              points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
+              color={0,0,127},
+              smooth=Smooth.None));
+
+          annotation (defaultComponentName="thermal");
+        end Partial;
+      end Single;
+    end ThermoDiffusive;
+
+    package Electrochemical
+      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Electrochemical\">Electrochemical</a> connector</html>"
+      extends Modelica.Icons.Package;
+
+      model Potential "Specify electrochemical potential (measure current)"
+        extends Partial(final y=electrochemical.Ndot);
 
       equation
-        thermo.T = u_final;
+        electrochemical.w = u_final;
 
-      end Temperature;
+      end Potential;
 
-      model HeatRate "Specify heat flow rate (measure temperature)"
-        extends Partial(final y=thermo.T);
+      model Current "Specify current (measure electrochemical potential)"
+        extends Partial(final y=electrochemical.w);
 
       equation
-        thermo.Qdot = u_final;
+        electrochemical.Ndot = u_final;
 
-      end HeatRate;
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+      end Current;
 
-      partial model Partial "Base model for a thermal condition"
-
+      partial model Partial "Base model for a material condition"
+        import Modelica.Math.BooleanVectors.countTrue;
+        import Modelica.Math.BooleanVectors.index;
         extends FCSys.Icons.Conditions.SingleShort;
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Specification"));
+          Dialog(group="Specification of material condition"));
 
         replaceable Modelica.Blocks.Sources.RealExpression source if internal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
-          Dialog(group="Specification",enable=internal),
+          Dialog(group="Specification of material condition", enable=internal),
+
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-70,30})));
+              origin={-80,10})));
+
+        // Properties upon outflow
+        parameter Q.Velocity phi[Axis]={0,0,0} "Velocity" annotation (Dialog(
+              group="Properties upon outflow", __Dymola_label=
+                "<html><i><b>&phi;</b></i></html>"));
+        parameter Q.PotentialAbsolute sT=3000*U.K
+          "Product of specific entropy and temperature" annotation (Dialog(
+              group="Properties upon outflow", __Dymola_label=
+                "<html><i>sT</i></html>"));
+
+        // Included components of translational momentum
+        parameter Boolean inclTransX=true "X" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
+        parameter Boolean inclTransY=true "Y" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
+        parameter Boolean inclTransZ=true "Z" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
 
         Connectors.RealInput u if not internal "Value of specified condition"
           annotation (Placement(transformation(
@@ -7084,1685 +6508,696 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               ="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={110,0}), iconTransformation(
+              origin={110,0}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
-
-        Connectors.ThermoDiffusive thermo "Connector for thermal diffusion"
+        output Q.Velocity phi_actual[n_trans]=actualStream(electrochemical.phi)
+          "Velocity of the actual stream";
+        output Q.Potential sT_actual=actualStream(electrochemical.sT)
+          "Specific entropy-temperature product of the actual stream";
+        Connectors.Electrochemical electrochemical(final n_trans=n_trans)
+          "Connector for a species of a chemical reaction"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
+        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
+            inclTransZ}) "Number of components of translational momentum";
+        final parameter Integer cartTrans[n_trans]=index({inclTransX,inclTransY,
+            inclTransZ})
+          "Cartesian-axis indices of the components of translational momentum";
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-20,0})));
+              origin={-36,0}),iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-20,0})));
 
       equation
-        connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
-                5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
+        electrochemical.phi = phi[cartTrans];
+        electrochemical.sT = sT;
 
         connect(source.y, u_final) annotation (Line(
-            points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
+            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
-        annotation (defaultComponentName="thermal");
+        connect(u, u_final) annotation (Line(
+            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
+                5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (defaultComponentName="chemical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
-    end ThermoDiffusive;
+              extent={{-60,60},{60,-60}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47})}));
+
+    end Electrochemical;
+
+    package Reaction
+      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
+      extends Modelica.Icons.Package;
+
+      model Rate
+        "<html>Impose a reaction rate via a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
+        import Modelica.Math.BooleanVectors.countTrue;
+        import Modelica.Math.BooleanVectors.enumerate;
+        import Modelica.Blocks.Sources;
+        extends FCSys.Icons.Conditions.Single;
+
+        // Specification
+        // -------------
+        // Material
+        replaceable function materialSpec = Material.reactionRate
+          constrainedby Material.Partial "Quantity" annotation (
+          __Dymola_choicesFromPackage=true,
+          choicesAllMatching=true,
+          Dialog(tab="Specification", group="Material"));
+        parameter Boolean internalMaterial=true "Use internal specification"
+          annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(tab="Specification", group="Material"));
+        replaceable Sources.RealExpression materialSet if internalMaterial
+          constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Material",
+            enable=internalMaterial),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,90})));
+
+        //
+        // X-axis translational
+        replaceable function transXSpec = Translational.velocity constrainedby
+          Translational.Partial "Quantity" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="X-axis translational",
+            enable=inclTransX),
+          Placement(transformation(extent={{-52,18},{-32,38}})));
+
+        parameter Boolean internalTransX=true if inclTransX
+          "Use internal specification" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Specification",
+            group="X-axis translational",
+            enable=inclTransX));
+        replaceable Sources.RealExpression transXSet if inclTransX and
+          internalTransX constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="X-axis translational",
+            enable=inclTransX and internalTransX),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,50})));
+
+        //
+        // Y-axis translational
+        replaceable function transYSpec = Translational.velocity constrainedby
+          Translational.Partial "Quantity" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Y-axis translational",
+            enable=inclTransY),
+          Placement(transformation(extent={{-24,4},{-4,24}})));
+
+        parameter Boolean internalTransY=true if inclTransY
+          "Use internal specification" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Specification",
+            group="Y-axis translational",
+            enable=inclTransY));
+        replaceable Sources.RealExpression transYSet if inclTransY and
+          internalTransY constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Y-axis translational",
+            enable=inclTransY and internalTransY),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,10})));
+
+        //
+        // Z-axis translational
+        replaceable function transZSpec = Translational.velocity constrainedby
+          Translational.Partial "Quantity" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Z-axis translational",
+            enable=inclTransZ),
+          Placement(transformation(extent={{4,-10},{24,10}})));
+
+        parameter Boolean internalTransZ=true if inclTransZ
+          "Use internal specification" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Specification",
+            group="Z-axis translational",
+            enable=inclTransZ));
+        replaceable Sources.RealExpression transZSet if inclTransZ and
+          internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Z-axis translational",
+            enable=inclTransZ and internalTransZ),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,-30})));
+
+        //
+        // Thermal
+        replaceable function thermalSpec =
+            ThermoAdvective.specificEntropyTemperature constrainedby
+          ThermoAdvective.Partial "Quantity" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(tab="Specification", group="Thermal"),
+          Placement(transformation(extent={{4,-10},{24,10}})));
+
+        parameter Boolean internalThermal=true "Use internal specification"
+          annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(tab="Specification", group="Thermal"));
+        replaceable Sources.RealExpression thermalSet if internalThermal
+          constrainedby Modelica.Blocks.Interfaces.SO
+          "Source of internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            tab="Specification",
+            group="Thermal",
+            enable=internalThermal),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-80,-70})));
+
+        // Measurement
+        // -----------
+        // Material
+        replaceable function materialMeas = Material.potential constrainedby
+          Material.Partial "Material quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+
+        // X-axis translational
+        replaceable function transXMeas = Translational.force constrainedby
+          Translational.Partial "X-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+
+        // Y-axis translational
+        replaceable function transYMeas = Translational.force constrainedby
+          Translational.Partial "Y-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+
+        // Z-axis translational
+        replaceable function transZMeas = Translational.force constrainedby
+          Translational.Partial "Z-axis translational quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+
+        // Thermal
+        replaceable function thermalMeas = ThermoAdvective.heatRate
+          constrainedby ThermoAdvective.Partial "Thermal quantity" annotation (
+            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+
+        // Included components of translational momentum
+        parameter Boolean inclTransX=true "X" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
+        parameter Boolean inclTransY=true "Y" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
+        parameter Boolean inclTransZ=true "Z" annotation (
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            tab="Assumptions",
+            group="Included transport axes",
+            compact=true));
+
+        // Inputs
+        Connectors.RealInput u_material if not internalMaterial
+          "Material specification" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,80})));
+        Connectors.RealInput u_transX if inclTransX and not internalTransX
+          "X-axis translational specification" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,40})));
+        Connectors.RealInput u_transY if inclTransY and not internalTransY
+          "Y-axis translational specification" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,0})));
+        Connectors.RealInput u_transZ if inclTransZ and not internalTransZ
+          "Z-axis translational specification" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,-40})));
+        Connectors.RealInput u_thermal if not internalThermal
+          "Thermal specification" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-110,-80})));
+
+        // Outputs
+        final Connectors.RealOutput y_material=materialMeas(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot) "Material measurement" annotation (Dialog(tab=
+                "Measurement"), Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,80}),iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,80})));
+        final Connectors.RealOutput y_transX=transXMeas(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.x]) if inclTransX
+          "X-axis translational measurement" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,40}),iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
+        final Connectors.RealOutput y_transY=transYMeas(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.y]) if inclTransY
+          "Y-axis translational measurement" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,40})));
+        final Connectors.RealOutput y_transZ=transZMeas(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.z]) if inclTransZ
+          "Z-axis translational measurement" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,-40}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,-40})));
+        final Connectors.RealOutput y_thermal=thermalMeas(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot) "Thermal measurement" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,-80}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,-80})));
+
+        Connectors.Reaction reaction(final n_trans=n_trans)
+          "Stoichiometric connector for the electrochemical reaction"
+          annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+
+      protected
+        final inner parameter Integer n_trans=countTrue({inclTransX,inclTransY,
+            inclTransZ}) "Number of components of translational momentum";
+        final inner parameter Integer transCart[Axis]=enumerate({inclTransX,
+            inclTransY,inclTransZ})
+          "Translational-momentum-component indices of the Cartesian axes";
+
+        Connectors.RealOutputInternal _u_material=materialSpec(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot)
+          "Internal, working value of material specification" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,80})));
+        Connectors.RealOutputInternal _u_transX=transXSpec(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.x]) if inclTransX
+          "Internal, working value of X-axis translational specification"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,40})));
+        Connectors.RealOutputInternal _u_transY=transYSpec(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.y]) if inclTransY
+          "Internal, working value of Y-axis translational specification"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,0})));
+        Connectors.RealOutputInternal _u_transZ=transZSpec(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot,
+                  i=transCart[Axis.z]) if inclTransZ
+          "Internal, working value of Z-axis translational specification"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,-40})));
+        Connectors.RealOutputInternal _u_thermal=thermalSpec(
+                  reaction.Ndot,
+                  reaction.w,
+                  reaction.phi,
+                  reaction.mPhidot,
+                  reaction.sT,
+                  reaction.Qdot)
+          "Internal, working value of thermal specification" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-36,-80})));
+
+      equation
+        // Material
+        connect(u_material, _u_material) annotation (Line(
+            points={{-110,80},{-36,80}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(materialSet.y, _u_material) annotation (Line(
+            points={{-69,90},{-60,90},{-60,80},{-36,80}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        // X-axis translational
+        connect(u_transX, _u_transX) annotation (Line(
+            points={{-110,40},{-36,40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(transXSet.y, _u_transX) annotation (Line(
+            points={{-69,50},{-60,50},{-60,40},{-36,40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        // Y-axis translational
+        connect(u_transY, _u_transY) annotation (Line(
+            points={{-110,5.55112e-16},{-36,5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(transYSet.y, _u_transY) annotation (Line(
+            points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        // Z-axis translational
+        connect(u_transZ, _u_transZ) annotation (Line(
+            points={{-110,-40},{-36,-40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(transZSet.y, _u_transZ) annotation (Line(
+            points={{-69,-30},{-60,-30},{-60,-40},{-36,-40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        // Thermal
+        connect(u_thermal, _u_thermal) annotation (Line(
+            points={{-110,-80},{-36,-80}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(thermalSet.y, _u_thermal) annotation (Line(
+            points={{-69,-70},{-60,-70},{-60,-80},{-36,-80}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics), Icon(graphics));
+      end Rate;
+
+      model Offset
+        "<html>Add a potential to a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
+
+        extends FCSys.Conditions.ByConnector.Reaction.Rate(
+          redeclare replaceable function materialSpec = Material.potential,
+          redeclare replaceable function transXSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
+          redeclare replaceable function transYSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
+          redeclare replaceable function transZSpec =
+              Conditions.ByConnector.Reaction.Translational.velocity,
+          redeclare replaceable function thermalSpec =
+              Conditions.ByConnector.Reaction.ThermoAdvective.specificEntropyTemperature,
+
+          redeclare replaceable function materialMeas =
+              Conditions.ByConnector.Reaction.Material.reactionRate,
+          redeclare replaceable function transXMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function transYMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function transZMeas =
+              Conditions.ByConnector.Reaction.Translational.force,
+          redeclare replaceable function thermalMeas =
+              Conditions.ByConnector.Reaction.ThermoAdvective.heatRate);
+
+        // Note:  In Dymola 2014, the paths must be explicitly given to prevent
+        // the error "Cannot show the parameter dialog for redeclared class [...]".
+
+      end Offset;
+
+      package Material "Material conditions"
+        extends Modelica.Icons.Package;
+
+        function reactionRate "Rate of the reaction"
+          extends Partial;
+
+        algorithm
+          x := Ndot;
+          annotation (Inline=true);
+        end reactionRate;
+
+        function potential "Offset from the potential of the reaction"
+          extends Partial;
+
+        algorithm
+          x := g;
+          annotation (Inline=true);
+        end potential;
+
+        partial function Partial
+          "Template of a function to select a material quantity"
+          extends Modelica.Icons.Function;
+
+          // Material diffusion
+          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
+
+          // Translational advection
+          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
+          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+
+          // Thermal advection
+          input Q.PotentialAbsolute sT
+            "Product of specific entropy and temperature";
+          input Q.Power Qdot
+            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+
+          output Real x "Value of condition";
+          annotation (Inline=true, Documentation(info="<html>
+  <p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p></html>"));
+        end Partial;
+      end Material;
+
+      package Translational "Translational conditions"
+        extends Modelica.Icons.Package;
+
+        function velocity "Velocity of the product"
+          extends Partial;
+
+        algorithm
+          x := phi[i];
+          annotation (Inline=true);
+        end velocity;
+
+        function force "Force from the stream"
+          extends Partial;
+
+        algorithm
+          x := mPhidot[i];
+          annotation (Inline=true);
+        end force;
+
+        partial function Partial
+          "Template of a function to select a translational quantity"
+          extends Modelica.Icons.Function;
+
+          // Material diffusion
+          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
+
+          // Translational advection
+          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
+          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+
+          // Thermal advection
+          input Q.PotentialAbsolute sT
+            "Product of specific entropy and temperature";
+          input Q.Power Qdot
+            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+
+          input Integer i(min=1,max=3) "Index of the translational axis";
+
+          output Real x "Value of condition";
+          annotation (Inline=true, Documentation(info="<html>
+  <p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p></html>"));
+        end Partial;
+      end Translational;
+
+      package ThermoAdvective "Conditions for thermal advection"
+        extends Modelica.Icons.Package;
+
+        function specificEntropyTemperature
+          "Product of specific entropy and temperature of the product"
+          extends Partial;
+
+        algorithm
+          x := sT;
+          annotation (Inline=true);
+        end specificEntropyTemperature;
+
+        function heatRate "Rate of heat from the stream"
+          extends Partial;
+
+        algorithm
+          x := Qdot;
+          annotation (Inline=true);
+        end heatRate;
+
+        partial function Partial
+          "Template of a function to select a thermal quantity"
+          extends Modelica.Icons.Function;
+
+          // Material diffusion
+          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
+          input Q.Potential g
+            "<html>Electrochemical potential (<i>g</i>)</html>";
+
+          // Translational advection
+          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
+          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+
+          // Thermal advection
+          input Q.PotentialAbsolute sT
+            "Product of specific entropy and temperature";
+          input Q.Power Qdot
+            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+
+          output Real x "Value of condition";
+          annotation (Inline=true, Documentation(info="<html>
+  <p>This function takes as inputs all the efforts and flows of the associated
+  connector.  It should be extended to add an algorithm that maps these inputs
+  to a single value.</p></html>"));
+        end Partial;
+      end ThermoAdvective;
+
+      annotation (Icon(graphics={Ellipse(
+              extent={{-60,60},{60,-60}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={221,23,47},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
+    end Reaction;
     annotation (Documentation(info="<html>
   <p>This package contains models to impose conditions on each of the declarative connectors
   established in <a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a>.  The subpackages
   are named according to the corresponding connector.</p>
 </html>"));
   end ByConnector;
-
-  package TestStands "Test stands"
-    extends Modelica.Icons.Package;
-    extends Modelica.Icons.UnderConstruction;
-
-    model TestStandEIS
-      "Test stand to perform electrochemical impedance spectroscopy"
-      extends TestStand(redeclare Q.Current zI,zJ=zJ_large + zJ_small_SI*U.A/U.m
-            ^2);
-
-      parameter Q.CurrentAreic zJ_large=U.A "Large-signal current density"
-        annotation (Dialog(__Dymola_label=
-              "<html><i>zJ</i><sub>large</sub></html>"));
-      Connectors.RealInput zJ_small_SI
-        "Small-signal current density in SI base units" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=-45,
-            origin={-107,107}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=-45,
-            origin={-167,167})));
-      Connectors.RealOutput w_V "Cell potential in volts" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=-45,
-            origin={107,-107}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=-45,
-            origin={167,-167})));
-
-    equation
-      w_V = w/U.V;
-
-      annotation (
-        Documentation(info="<html><p>This model modulates the electrical current applied to the cell 
-    according to an input.
-    The current density is the sum of a steady-state large-signal current density and a small-signal 
-    current density introduced via the input <i>zJ</i><sub>small SI</sub>.</p>
-       
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"),
-
-        Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
-                100,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                160,160}}), graphics));
-
-    end TestStandEIS;
-
-    model TestStand "Fuel cell test stand (applies boundary conditions)"
-
-      import FCSys.Utilities.average;
-      import FCSys.Utilities.inSign;
-      import FCSys.Conditions.ByConnector.Boundary.Single;
-      import Characteristics.H2O.p_sat;
-      extends FCSys.Icons.Names.Top9;
-
-      // Geometry
-      parameter Q.Length L_x_an[:]={8*U.mm}
-        "Lengths of the segments through the cell in anode FP" annotation (
-          Dialog(group="Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>x an</sub></html>"));
-      parameter Q.Length L_x_ca[:]={8*U.mm}
-        "Lengths of the segments through the cell in cathode FP" annotation (
-          Dialog(group="Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>x ca</sub></html>"));
-      parameter Q.Length L_y[:]={U.m}
-        "Lengths of the segments along the channel" annotation (Dialog(group=
-              "Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "Lengths of the segments across the channel" annotation (Dialog(group=
-              "Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_x_an=size(L_x_an, 1)
-        "Number of subregions along the through-cell axis in anode FP"
-        annotation (Dialog(group="Cell geometry"));
-      final parameter Integer n_x_ca=size(L_x_ca, 1)
-        "Number of subregions along the through-cell axis in cathode FP"
-        annotation (Dialog(group="Cell geometry"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of subregions along the channel";
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of subregions across the channel";
-      final parameter Q.Area A=sum(L_y)*sum(L_z) "Cross-sectional area";
-      final parameter Q.Area A_seg[n_y, n_z]=outerProduct(L_y, L_z)
-        "Areas of the yz segments";
-      final parameter Q.Area A_an_seg[n_x_an, n_z]=outerProduct(L_x_an, L_z)
-        "Areas of the xz segments of the anode flow plate";
-      final parameter Q.Area A_ca_seg[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
-        "Areas of the xz segments of the cathode flow plate";
-      final parameter Q.Area A_an=sum(L_x_an)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(L_x_ca)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      // Operating conditions
-      // --------------------
-      // Electrical
-      parameter Enumerations.ElectricalSpec electricalSpec=ElectricalSpec.currentDensity
-        "Type of electrical specification" annotation (Dialog(
-          tab="Conditions",
-          group="Electrical",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of specification",
-          __Dymola_joinNext=true));
-      Real u_electrical=U.A/U.cm^2 "Value of the electrical specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Electrical",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>electrical</sub>)</html>"));
-      Q.CurrentAreic zJ "Current density";
-      Q.Current zI "Current";
-      Q.Potential w "Voltage";
-      Q.ResistanceElectrical R "Resistance";
-      Q.Power P "Power";
-      //
-      // General anode conditions
-      parameter Side anInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(tab="Conditions",group="Anode"));
-      Q.TemperatureAbsolute T_an_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_label="<html><i>T</i><sub>an in</sub></html>"));
-
-      Q.PressureAbsolute p_an_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_label="<html><i>p</i><sub>an out</sub></html>"));
-      //
-      // General cathode conditions
-      parameter Side caInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(tab="Conditions",group="Cathode"));
-      Q.TemperatureAbsolute T_ca_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>T</i><sub>ca in</sub></html>"));
-      Q.PressureAbsolute p_ca_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>p</i><sub>ca out</sub></html>"));
-      Q.NumberAbsolute psi_O2_dry_in(
-        final max=1,
-        displayUnit="%") = 0.208
-        "<html>Dry-gas concentration of O<sub>2</sub> at the inlet</html>"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>n</i><sub>O2 in</sub></html>"));
-      //
-      // Anode flow rate
-      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec anFlowSpec=
-          FlowSpec.stoich "Type of anode flow specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of flow specification",
-          __Dymola_joinNext=true));
-      Real u_an_flow=1.5 "Value of the anode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an flow</sub>)</html>"));
-      Q.NumberAbsolute anStoich "Anode stoichiometric flow rate";
-      Q.CurrentAreic J_an "Equivalent current density of anode supply";
-      Q.Current I_an "Equivalent current of anode supply";
-      Q.VolumeRate Vdot_g_an_in "Volumetric flow rate of gas in anode supply";
-      Q.PressureAbsolute p_an_in "Anode inlet pressure";
-      //
-      // Cathode flow rate
-      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec caFlowSpec=
-          FlowSpec.stoich "Type of cathode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of flow specification",
-          __Dymola_joinNext=true));
-      Real u_ca_flow=2.0 "Value of the cathode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca flow</sub>)</html>"));
-      Q.NumberAbsolute caStoich "Cathode stoichiometric flow rate";
-      Q.CurrentAreic J_ca "Equivalent current density of cathode supply";
-      Q.Current I_ca "Equivalent current of cathode supply";
-      Q.VolumeRate Vdot_g_ca_in "Volumetric flow rate of gas in cathode supply";
-      Q.PressureAbsolute p_ca_in "Cathode inlet pressure";
-      //
-      // Anode humidity
-      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
-        anHumiditySpec=HumiditySpec.relative
-        "Type of anode humidity specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of humidity specification",
-          __Dymola_joinNext=true));
-      Real u_an_humidity=0.8 "Value of the anode humidity specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an humidity</sub>)</html>"));
-      Q.NumberAbsolute anInletRH(displayUnit="%")
-        "Relative humidity at anode inlet";
-      Q.PressureAbsolute p_H2O_an_in "H2O vapor pressure at anode inlet";
-      Q.TemperatureAbsolute T_sat_an_in "Dew point at anode inlet";
-      //
-      // Cathode humidity
-      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
-        caHumiditySpec=HumiditySpec.relative
-        "Type of anode humidity specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of humidity specification",
-          __Dymola_joinNext=true));
-      Real u_ca_humidity=0.5 "Value of the cathode humidity specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca humidity</sub>)</html>"));
-      Q.NumberAbsolute caInletRH(displayUnit="%")
-        "Relative humidity at cathode inlet";
-      Q.PressureAbsolute p_H2O_ca_in "H2O vapor pressure at cathode inlet";
-      Q.TemperatureAbsolute T_sat_ca_in "Dew point at cathode inlet";
-      //
-      // Anode end plate
-      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
-        anEndPlateSpec=ThermalSpec.temperature
-        "Type of anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of end plate specification",
-          __Dymola_joinNext=true));
-      Real u_an_end_plate=333.15*U.K
-        "Value of the anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an end plate</sub>)</html>"));
-      Q.TemperatureAbsolute T_an "Temperature of anode end plate";
-      Q.Conductance G_an
-        "Thermal conductance of the anode end plate to the environment";
-      Q.Power Qdot_an "Heat flow rate from the anode end plate";
-      //
-      // Cathode end plate
-      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
-        caEndPlateSpec=ThermalSpec.temperature
-        "Type of anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of end plate specification",
-          __Dymola_joinNext=true));
-      Real u_ca_end_plate=333.15*U.K
-        "Value of the cathode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca end plate</sub>)</html>"));
-      Q.TemperatureAbsolute T_ca "Temperature of cathode end plate";
-      Q.Conductance G_ca
-        "Thermal conductance of the cathode end plate to the environment";
-      Q.Power Qdot_ca "Heat flow rate from the cathode end plate";
-
-      // Material properties
-      replaceable package DataH2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataH2O = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataH2Ol = Characteristics.H2O.Liquid constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O liquid</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataN2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>N<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataO2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>O<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-
-      // Standard conditions
-      parameter Q.TemperatureAbsolute T_0=273.15*U.K "Temperature" annotation (
-          Dialog(
-          tab="Advanced",
-          group="Standard conditions (for volumetric flow rate)",
-          __Dymola_label="<html><i>T</i><sub>0</sub>"));
-      parameter Q.PressureAbsolute p_0=U.atm "Pressure" annotation (Dialog(
-          tab="Advanced",
-          group="Standard conditions (for volumetric flow rate)",
-          __Dymola_label="<html><i>p</i><sub>0</sub>"));
-
-      // Derived and measured conditions
-      Q.CurrentAreic zJ_seg[n_y, n_z] "Current density of the segments";
-      Q.PressureAbsolute p_sat_an_in "Saturation pressure at the anode inlet";
-      Q.PressureAbsolute p_sat_ca_in "Saturation pressure at the cathode inlet";
-      Q.Current Ndot_H2Ol_an_in "Flow rate of liquid water into anode";
-      Q.Current Ndot_H2Ol_ca_in "Flow rate of liquid water into cathode";
-      Q.Pressure p_H2Ol_an_in
-        "Non-equilibrium pressure on the H2O liquid at the anode inlet";
-      Q.Pressure p_H2Ol_ca_in
-        "Non-equilibrium pressure on the H2O liquid at the cathode inlet";
-      Q.TemperatureAbsolute T_an_out "Anode outlet temperature";
-      Q.TemperatureAbsolute T_ca_out "Cathode outlet temperature";
-      Q.Velocity phi_an_in[n_y, n_z] "Velocity profile over the anode inlet";
-      Q.Velocity phi_ca_in[n_y, n_z] "Velocity profile over the cathode inlet";
-      Q.Velocity phi_an_out[n_y, n_z] "Velocity profile over the anode outlet";
-      Q.Velocity phi_ca_out[n_y, n_z]
-        "Velocity profile over the cathode outlet";
-
-      // Auxiliary measurements
-      /* **
-  output Q.Power Wdot(stateSelect=StateSelect.never) = w*zI 
-    "Electrical power output of the cell";
-  output Q.Power Wdot_yz[n_y, n_z](each stateSelect=StateSelect.never) = -anBC.graphite.
-    'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.mPhidot[1] - caBC.graphite.
-    'e-'.boundary.phi[1] .* caBC.graphite.'e-'.boundary.mPhidot[1] if 
-    environment.analysis "Electrical power of the segments";
-  output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never) = -
-    anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.rho if 
-    environment.analysis "Current densities of the segments";
-  output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anSink.gas.H2.boundary.Ndot
-     + anSource.gas.H2.boundary.Ndot) if environment.analysis 
-    "Net rate of hydrogen into the cell";
-  output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anSink.gas.H2O.boundary.Ndot
-     + anSource.gas.H2O.boundary.Ndot) + sum(caSink.gas.H2O.boundary.Ndot +
-    caSource.gas.H2O.boundary.Ndot) if environment.analysis 
-    "Net rate of water from the cell";
-  output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caSink.gas.O2.boundary.Ndot
-     + caSource.gas.O2.boundary.Ndot) if environment.analysis 
-    "Net rate of oxygen into the cell";
-  output Q.NumberAbsolute anOutletRH(
-    stateSelect=StateSelect.never,
-    displayUnit="%") = anSink.gas.H2O.materialOut.y/p_sat(anSink.gas.H2O.boundary.T)
-    if environment.analysis "Relative humidity at the anode outlet";
-  output Q.NumberAbsolute caOutletRH(
-    stateSelect=StateSelect.never,
-    displayUnit="%") = caSink.gas.H2O.materialOut.y/p_sat(caSink.gas.H2O.boundary.T)
-    if environment.analysis "Relative humidity at the cathode outlet";
-*/
-
-      Connectors.BoundaryBus an[n_y, n_z] "Interface to the anode end plate"
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-120,0}),iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-160,0})));
-      Connectors.BoundaryBus anNegative[n_x_an, n_z]
-        "Negative interface to the anode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-80,-100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-40,-160})));
-      Connectors.BoundaryBus anPositive[n_x_an, n_z]
-        "Positive interface to the anode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-80,100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-40,160})));
-      Connectors.BoundaryBus ca[n_y, n_z] "Interface to the cathode end plate"
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={200,0}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={162,0})));
-      Connectors.BoundaryBus caNegative[n_x_ca, n_z]
-        "Negative interface to the cathode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={160,-100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={40,-160})));
-      Connectors.BoundaryBus caPositive[n_x_ca, n_z]
-        "Positive interface to the cathode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={160,100}),iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={40,160})));
-
-      ByConnector.BoundaryBus.Single.Sink anBC[cell.n_y, cell.n_z](each
-          graphite(
-          'incle-'=true,
-          'e-'(materialSet(y=U.bar)),
-          'inclC+'=true,
-          redeclare FCSys.Conditions.ByConnector.ThermoDiffusive.Temperature
-            'C+'(source(y=environment.T)))) "Anode end plate" annotation (
-          Dialog(tab="Advanced", group="Boundary conditions"), Placement(
-            transformation(
-            extent={{10,10},{-10,-10}},
-            rotation=90,
-            origin={-104,0})));
-      ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each graphite(
-          'incle-'=true,
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-              thermalSet(y=environment.T)),
-          'inclC+'=true)) "Cathode end plate" annotation (Placement(
-            transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={184,0})));
-      ByConnector.BoundaryBus.Single.Source anSource[cell.anFP.n_x, cell.n_z](
-          each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(materialSet(y=-Ndot_H2), thermalSet(y=environment.T)),
-          H2O(materialSet(y=-Ndot_H2O_an), thermalSet(y=environment.T))))
-        "Anode source" annotation (Dialog(tab="Advanced", group=
-              "Boundary conditions"), Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-64,-20})));
-      ByConnector.BoundaryBus.Single.Source caSource[cell.caFP.n_x, cell.n_z](
-          each gas(
-          inclO2=true,
-          inclN2=true,
-          inclH2O=true,
-          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T)),
-          N2(materialSet(y=-Ndot_N2), thermalSet(y=environment.T)),
-          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T))))
-        "Cathode source" annotation (Dialog(tab="Advanced", group=
-              "Boundary conditions"), Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={144,-20})));
-      ByConnector.BoundaryBus.Single.Sink anSink[cell.anFP.n_x, cell.n_z](gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2O(materialSet(y=fill(
-                      environment.p,
-                      cell.anFP.n_x,
-                      cell.n_z) - anSink.gas.H2.p)),
-          H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* cell.anFP.subregions[
-                  :, cell.n_y, :].gas.H2O.v ./ cell.anFP.subregions[:, cell.n_y,
-                  :].gas.H2.v), redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
-          each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
-        "Anode sink" annotation (Dialog(tab="Advanced", group=
-              "Boundary conditions"), Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-64,20})));
-      ByConnector.BoundaryBus.Single.Sink caSink[cell.caFP.n_x, cell.n_z](gas(
-          each inclO2=true,
-          each inclN2=true,
-          each inclH2O=true,
-          H2O(materialSet(y=fill(
-                      environment.p,
-                      cell.caFP.n_x,
-                      cell.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
-          N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* cell.caFP.subregions[
-                  :, cell.n_y, :].gas.H2O.v ./ cell.caFP.subregions[:, cell.n_y,
-                  :].gas.N2.v), redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
-
-          O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* cell.caFP.subregions[
-                  :, cell.n_y, :].gas.H2O.v ./ cell.caFP.subregions[:, cell.n_y,
-                  :].gas.O2.v), redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
-          each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
-        "Cathode sink" annotation (Dialog(tab="Advanced", group=
-              "Boundary conditions"), Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={144,20})));
-
-    public
-      Router anRouter[cell.anFP.n_x, cell.n_z](each crossOver=anReverse)
-        annotation (Dialog, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-72,0})));
-      Router caRouter[cell.anFP.n_x, cell.n_z](each crossOver=caReverse)
-        annotation (Dialog, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={152,0})));
-    protected
-      outer Conditions.Environment environment "Environmental conditions";
-
-    public
-      parameter Boolean anReverse=false "Anode flow in reverse direction"
-        annotation (choices(__Dymola_checkBox=true));
-      parameter Boolean caReverse=false "Cathode flow in reverse direction"
-        annotation (choices(__Dymola_checkBox=true));
-      replaceable Modelica.Blocks.Sources.Ramp currentProfile(
-        offset=U.mA,
-        height=100*U.A,
-        duration=600) constrainedby Modelica.Blocks.Interfaces.SO
-        "Current profile" annotation (__Dymola_choicesFromPackage=true,
-          Placement(transformation(extent={{-40,30},{-20,50}})));
-      Modelica.Blocks.Math.Gain stoichH2(k=1.2/2)
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-      Modelica.Blocks.Math.Gain anStoichH2O(k=psi_H2O/psi_H2)
-        annotation (Placement(transformation(extent={{70,30},{90,50}})));
-      Modelica.Blocks.Math.Gain stoichO2(k=1.6/4)
-        annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
-      Modelica.Blocks.Math.Gain caStoichH2O(k=psi_H2O/psi_O2)
-        annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-      Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
-        annotation (Placement(transformation(extent={{70,-50},{90,-30}})));
-    protected
-      Connectors.RealOutputInternal Ndot_H2O_an(unit="N/T")
-        "Rate of supply of H2O into the anode" annotation (Placement(
-            transformation(extent={{94,30},{114,50}}), iconTransformation(
-              extent={{254,30},{274,50}})));
-      Connectors.RealOutputInternal Ndot_O2(unit="N/T") "Rate of supply of O2"
-        annotation (Placement(transformation(extent={{34,-30},{54,-10}}),
-            iconTransformation(extent={{194,-30},{214,-10}})));
-      Connectors.RealOutputInternal Ndot_H2O_ca(unit="N/T")
-        "Rate of supply of H2O into the cathode" annotation (Placement(
-            transformation(extent={{94,-10},{114,10}}), iconTransformation(
-              extent={{254,-10},{274,10}})));
-      Connectors.RealOutputInternal Ndot_N2(unit="N/T") "Rate of supply of N2"
-        annotation (Placement(transformation(extent={{94,-50},{114,-30}}),
-            iconTransformation(extent={{254,-50},{274,-30}})));
-      Connectors.RealOutputInternal zI1(unit="N/T") "Electrical current"
-        annotation (Placement(transformation(extent={{-16,30},{4,50}}),
-            iconTransformation(extent={{144,30},{164,50}})));
-      Connectors.RealOutputInternal Ndot_H2(unit="N/T") "Rate of supply of H2"
-        annotation (Placement(transformation(extent={{34,30},{54,50}}),
-            iconTransformation(extent={{194,30},{214,50}})));
-    equation
-      // Electrical
-      w = R*zI;
-      P = w*zI;
-      A*zJ = zI;
-      zJ_seg = anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.rho;
-      zI = sum(zJ_seg .* A_seg);
-
-      // Anode humidity
-      p_sat_an_in = p_sat(T_an_in);
-      p_H2O_an_in = p_sat(T_sat_an_in);
-      p_H2O_an_in = min(anInletRH, 1)*p_sat_an_in;
-      // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an_seg)/
-        DataH2O.v_Tp(T_an_in, p_sat_an_in);
-      Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.boundary.phi[Orient.normal] .*
-        A_an_seg)/DataH2Ol.v_Tp(T_an_in);
-
-      // Cathode humidity
-      p_sat_ca_in = p_sat(T_ca_in);
-      p_H2O_ca_in = p_sat(T_sat_ca_in);
-      p_H2O_ca_in = max(caInletRH, 1)*p_sat_ca_in;
-      // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca_seg)/
-        DataH2O.v_Tp(T_ca_in, p_sat_ca_in);
-      Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.boundary.phi[Orient.normal] .*
-        A_ca_seg)/DataH2Ol.v_Tp(T_ca_in);
-
-      // End plates
-      Qdot_an = G_an*(T_an - environment.T) "Anode";
-      Qdot_ca = G_ca*(T_ca - environment.T) "Cathode";
-      Qdot_an = sum(anBC.graphite.'C+'.boundary.Qdot + anBC.graphite.'e-'.boundary.Qdot);
-      Qdot_ca = sum(caBC.graphite.'C+'.boundary.Qdot + caBC.graphite.'e-'.boundary.Qdot);
-
-      // Anode flow rate
-      anStoich*zI = I_an;
-      J_an*A = I_an;
-      Vdot_g_an_in = inSign(anInletSide)*sum(outerProduct(L_x_an, L_z) .*
-        phi_an_in);
-      I_an = sum(phi_an_in .* anSource.gas.H2.boundary.rho .* A_an_seg);
-
-      // Cathode flow rate
-      caStoich*zI = I_ca;
-      J_ca*A = I_ca;
-      Vdot_g_ca_in = inSign(caInletSide)*sum(outerProduct(L_x_ca, L_z) .*
-        phi_ca_in);
-      I_ca = sum(phi_ca_in .* caSource.gas.H2O.boundary.rho .* A_ca_seg);
-
-      // Pressures at the inlets and outlets
-      for j in 1:n_z loop
-        for i in 1:n_x_an loop
-          p_an_in = DataH2.p_Tv(anSource[i, j].gas.H2.boundary.T, 1/anSource[i,
-            j].gas.H2.boundary.rho) + DataH2O.p_Tv(anSource[i, j].gas.H2O.boundary.T,
-            1/anSource[i, j].gas.H2O.boundary.rho) - inSign(anInletSide)*(
-            anSource[i, j].gas.H2.boundary.mPhidot[Orient.normal] + anSource[i,
-            j].gas.H2O.boundary.mPhidot[Orient.normal])/A_an_seg[i, j];
-          p_an_out = DataH2.p_Tv(anSink[i, j].gas.H2.boundary.T, 1/anSink[i, j].gas.H2.boundary.rho)
-             + DataH2O.p_Tv(anSink[i, j].gas.H2O.boundary.T, 1/anSink[i, j].gas.H2O.boundary.rho)
-             + inSign(anInletSide)*(anSink[i, j].gas.H2.boundary.mPhidot[Orient.normal]
-             + anSink[i, j].gas.H2O.boundary.mPhidot[Orient.normal])/A_ca_seg[i,
-            j];
-        end for;
-        for i in 1:n_x_ca loop
-          p_ca_in = DataH2O.p_Tv(caSource[i, j].gas.H2O.boundary.T, 1/caSource[
-            i, j].gas.H2O.boundary.rho) + DataN2.p_Tv(caSource[i, j].gas.N2.boundary.T,
-            1/caSource[i, j].gas.N2.boundary.rho) + DataO2.p_Tv(caSource[i, j].gas.O2.boundary.T,
-            1/caSource[i, j].gas.O2.boundary.rho) - inSign(caInletSide)*(
-            caSource[i, j].gas.H2O.boundary.mPhidot[Orient.normal] + caSource[i,
-            j].gas.N2.boundary.mPhidot[Orient.normal] + caSource[i, j].gas.O2.boundary.mPhidot[
-            Orient.normal])/A_ca_seg[i, j];
-          p_ca_out = DataH2O.p_Tv(caSink[i, j].gas.H2O.boundary.T, 1/caSink[i,
-            j].gas.H2O.boundary.rho) + DataN2.p_Tv(caSink[i, j].gas.N2.boundary.T,
-            1/caSink[i, j].gas.N2.boundary.rho) + DataO2.p_Tv(caSink[i, j].gas.O2.boundary.T,
-            1/caSink[i, j].gas.O2.boundary.rho) + inSign(caInletSide)*(caSink[i,
-            j].gas.H2O.boundary.mPhidot[Orient.normal] + caSink[i, j].gas.N2.boundary.mPhidot[
-            Orient.normal] + caSink[i, j].gas.O2.boundary.mPhidot[Orient.normal])
-            /A_ca_seg[i, j];
-        end for;
-      end for;
-
-      // Assumptions
-      0 = sum(anSink.gas.H2.boundary.Qdot + anSink.gas.H2O.boundary.Qdot +
-        anSink.liquid.H2O.boundary.Qdot) "Adiabatic across the anode outlet";
-      0 = sum(caSink.gas.H2O.boundary.Qdot + caSink.gas.N2.boundary.Qdot +
-        caSink.gas.O2.boundary.Qdot + caSink.liquid.H2O.boundary.Qdot)
-        "Adiabatic across the cathode outlet";
-
-      connect(caBC.boundary, ca) annotation (Line(
-          points={{188,0},{200,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anRouter.positive2, anSink.boundary) annotation (Line(
-          points={{-64,4},{-64,16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anRouter.positive1, anSource.boundary) annotation (Line(
-          points={{-64,-4},{-64,-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anPositive, anRouter.negative2) annotation (Line(
-          points={{-80,100},{-80,4}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anRouter.negative1, anNegative) annotation (Line(
-          points={{-80,-4},{-80,-100}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caRouter.negative2) annotation (Line(
-          points={{144,16},{144,4}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caRouter.negative1) annotation (Line(
-          points={{144,-16},{144,-4}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caRouter.positive2, caPositive) annotation (Line(
-          points={{160,4},{160,100}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caRouter.positive1, caNegative) annotation (Line(
-          points={{160,-4},{160,-100}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, an) annotation (Line(
-          points={{-108,0},{-120,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(currentProfile.y, zI1) annotation (Line(
-          points={{-19,40},{-6,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(zI1, stoichH2.u) annotation (Line(
-          points={{-6,40},{8,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(stoichH2.y, Ndot_H2) annotation (Line(
-          points={{31,40},{44,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Ndot_H2, anStoichH2O.u) annotation (Line(
-          points={{44,40},{68,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anStoichH2O.y, Ndot_H2O_an) annotation (Line(
-          points={{91,40},{104,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(stoichO2.y, Ndot_O2) annotation (Line(
-          points={{31,-20},{44,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Ndot_O2, caStoichH2O.u) annotation (Line(
-          points={{44,-20},{60,-20},{60,0},{68,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caStoichH2O.y, Ndot_H2O_ca) annotation (Line(
-          points={{91,0},{104,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(stoichN2.y, Ndot_N2) annotation (Line(
-          points={{91,-40},{104,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(stoichN2.u, Ndot_O2) annotation (Line(
-          points={{68,-40},{60,-40},{60,-20},{44,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(stoichO2.u, zI1) annotation (Line(
-          points={{8,-20},{0,-20},{0,40},{-6,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        structurallyIncomplete=true,
-        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},
-                {200,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
-        Documentation(info="
-    <html>
-    <p>Any of the settings for the operating conditions can be time-varying expressions.
-    In each group,
-    specify exactly one variable (otherwise the model will be structurally singular).</p>
-
-    <p>The relative humidity (<code>anInletRH</code> or <code>caInletRH</code>) may specified to be greater 
-    than 100 %.  In that case, liquid
-    water is injected to provide the amount above saturation.  The relative humidity
-    is taken to be equal to the quotient of the H<sub>2</sub>O vapor pressure 
-    (<i>p</i><sub>H2O an in</sub> or <i>p</i><sub>H2O ca in</sub>) and the saturation pressure.
-    Therefore, liquid water will also be injected if the specified vapor pressure is specified 
-    to be above saturation pressure or the specified dew point (<i>T</i><sub>sat an in</sub> or 
-    <i>T</i><sub>sat ca in</sub>) is above the actual temperature.</p>
-    
-    <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
-    given current
-    assuming the reactant is entirely consumed (complete utilization).</p>
-
-    <p>Assumptions **review and update:
-    <ol>
-    <li>The outer x-axis surboundary of each end plate is each uniform in temperature.</li>
-    <li>No heat is conducted from the rest of the cell hardware.</li>
-    <li>The voltage is uniform across each end plate.</li>
-    <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
-    at each inlet boundary).</li>
-    <li>There is no shear force on the fluid at either outlet.</li>
-    <li>The species (gases and liquid) of each stream have the same temperature at each inlet and outlet.</li>
-    <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
-    <li>The temperature is uniform over each inlet and outlet.</li>
-    <li>There is no diffusion of the reactants (H<sub>2</sub> and O<sub>2</sub>) or liquid water
-    into the cell (only advection).</li>
-    <li>There is no diffusion of the fluid species 
-    (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, and O<sub>2</sub>) 
-    out of the cell (advection only).</li>
-    <li>The inlet and outlet pressures are applied to the gas mixture by Dalton's law.</li>
-    <li>At the inlet, the liquid has the pressure necessary and sufficient for the prescribed 
-    humidity (zero unless RH > 100%).</li>
-    <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
-    <li>There is no net thermal conduction across either outlet.</li>
-    </ol></p>
-        
-    <li>There is no nonequilibrium force on any species at either inlet.  This means that
-    the velocity of the first subregion along the channel will be the same is the velocity
-    at the inlet.</li>
-
-    <p>The temperatures of the endplates (<i>T</i><sub>an</sub> and <i>T</i><sub>ca</sub>)
-    should not be equal to the temperature of the environment unless <i>G</i><sub>an</sub>
-    and <i>G</i><sub>ca</sub> are explicitly set.  Otherwise there will be a mathematical
-    singularity.  Regard the environment as the ambient conditions, not the conditions to
-    which the cell is held.</p>
-    </html>"));
-    end TestStand;
-
-    package Enumerations "Choices of options"
-
-      extends Modelica.Icons.BasesPackage;
-
-      type ElectricalSpec = enumeration(
-          currentDensity "Current density",
-          current "Current",
-          voltage "Voltage",
-          resistance "Resistance",
-          power "Power") "Ways to specify the electrical load";
-      type FlowSpec = enumeration(
-          stoich "Stoichiometric rate",
-          currentDensity "Equivalent current density",
-          current "Equivalent current",
-          volumetric "Standard volumetric rate (conditions on Advanced tab)",
-          pressure "Inlet pressure") "Ways to specify the anode flow rate";
-
-      type HumiditySpec = enumeration(
-          relative "Relative humidity",
-          pressure "Vapor pressure",
-          dewPoint "Dew point") "Ways to specify humidity";
-      type ThermalSpec = enumeration(
-          temperature "Temperature",
-          conductance "Thermal conductance with the environment",
-          rate "Heat flow rate") "Ways to specify a thermal condition";
-    end Enumerations;
-
-    model TestStand2 "Fuel cell test stand (applies boundary conditions)"
-
-      import FCSys.Utilities.average;
-      import FCSys.Utilities.inSign;
-      import FCSys.Conditions.ByConnector.Boundary.Single;
-      import Characteristics.H2O.p_sat;
-      extends FCSys.Icons.Names.Top9;
-
-      // Geometry
-      parameter Q.Length L_x_an[:]={8*U.mm}
-        "Lengths of the segments through the cell in anode FP" annotation (
-          Dialog(group="Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>x an</sub></html>"));
-      parameter Q.Length L_x_ca[:]={8*U.mm}
-        "Lengths of the segments through the cell in cathode FP" annotation (
-          Dialog(group="Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>x ca</sub></html>"));
-      parameter Q.Length L_y[:]={U.m}
-        "Lengths of the segments along the channel" annotation (Dialog(group=
-              "Cell geometry", __Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm}
-        "Lengths of the segments across the channel" annotation (Dialog(group=
-              "Cell geometry",__Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_x_an=size(L_x_an, 1)
-        "Number of subregions along the through-cell axis in anode FP"
-        annotation (Dialog(group="Cell geometry"));
-      final parameter Integer n_x_ca=size(L_x_ca, 1)
-        "Number of subregions along the through-cell axis in cathode FP"
-        annotation (Dialog(group="Cell geometry"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of subregions along the channel";
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of subregions across the channel";
-      final parameter Q.Area A=sum(L_y)*sum(L_z) "Cross-sectional area";
-      final parameter Q.Area A_seg[n_y, n_z]=outerProduct(L_y, L_z)
-        "Areas of the yz segments";
-      final parameter Q.Area A_an_seg[n_x_an, n_z]=outerProduct(L_x_an, L_z)
-        "Areas of the xz segments of the anode flow plate";
-      final parameter Q.Area A_ca_seg[n_x_ca, n_z]=outerProduct(L_x_ca, L_z)
-        "Areas of the xz segments of the cathode flow plate";
-      final parameter Q.Area A_an=sum(L_x_an)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(L_x_ca)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      // Operating conditions
-      // --------------------
-      // Electrical
-      parameter Enumerations.ElectricalSpec electricalSpec=ElectricalSpec.currentDensity
-        "Type of electrical specification" annotation (Dialog(
-          tab="Conditions",
-          group="Electrical",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of specification",
-          __Dymola_joinNext=true));
-      Real u_electrical=U.A/U.cm^2 "Value of the electrical specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Electrical",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>electrical</sub>)</html>"));
-      Q.CurrentAreic zJ "Current density";
-      Q.Current zI "Current";
-      Q.Potential w "Voltage";
-      Q.ResistanceElectrical R "Resistance";
-      Q.Power P "Power";
-      //
-      // General anode conditions
-      parameter Side anInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(tab="Conditions",group="Anode"));
-      Q.TemperatureAbsolute T_an_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_label="<html><i>T</i><sub>an in</sub></html>"));
-
-      Q.PressureAbsolute p_an_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_label="<html><i>p</i><sub>an out</sub></html>"));
-      //
-      // General cathode conditions
-      parameter Side caInletSide=Side.p "Side of the inlet"
-        annotation (Dialog(tab="Conditions",group="Cathode"));
-      Q.TemperatureAbsolute T_ca_in=333.15*U.K "Inlet temperature" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>T</i><sub>ca in</sub></html>"));
-      Q.PressureAbsolute p_ca_out=U.from_kPag(48.3) "Outlet pressure"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>p</i><sub>ca out</sub></html>"));
-      Q.NumberAbsolute psi_O2_dry_in(
-        final max=1,
-        displayUnit="%") = 0.208
-        "<html>Dry-gas concentration of O<sub>2</sub> at the inlet</html>"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_label="<html><i>n</i><sub>O2 in</sub></html>"));
-      //
-      // Anode flow rate
-      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec anFlowSpec=
-          FlowSpec.stoich "Type of anode flow specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of flow specification",
-          __Dymola_joinNext=true));
-      Real u_an_flow=1.5 "Value of the anode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an flow</sub>)</html>"));
-      Q.NumberAbsolute anStoich "Anode stoichiometric flow rate";
-      Q.CurrentAreic J_an "Equivalent current density of anode supply";
-      Q.Current I_an "Equivalent current of anode supply";
-      Q.VolumeRate Vdot_g_an_in "Volumetric flow rate of gas in anode supply";
-      Q.PressureAbsolute p_an_in "Anode inlet pressure";
-      //
-      // Cathode flow rate
-      parameter FCSys.Conditions.TestStands.Enumerations.FlowSpec caFlowSpec=
-          FlowSpec.stoich "Type of cathode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of flow specification",
-          __Dymola_joinNext=true));
-      Real u_ca_flow=2.0 "Value of the cathode flow specification" annotation (
-          Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca flow</sub>)</html>"));
-      Q.NumberAbsolute caStoich "Cathode stoichiometric flow rate";
-      Q.CurrentAreic J_ca "Equivalent current density of cathode supply";
-      Q.Current I_ca "Equivalent current of cathode supply";
-      Q.VolumeRate Vdot_g_ca_in "Volumetric flow rate of gas in cathode supply";
-      Q.PressureAbsolute p_ca_in "Cathode inlet pressure";
-      //
-      // Anode humidity
-      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
-        anHumiditySpec=HumiditySpec.relative
-        "Type of anode humidity specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of humidity specification",
-          __Dymola_joinNext=true));
-      Real u_an_humidity=0.8 "Value of the anode humidity specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an humidity</sub>)</html>"));
-      Q.NumberAbsolute anInletRH(displayUnit="%")
-        "Relative humidity at anode inlet";
-      Q.PressureAbsolute p_H2O_an_in "H2O vapor pressure at anode inlet";
-      Q.TemperatureAbsolute T_sat_an_in "Dew point at anode inlet";
-      //
-      // Cathode humidity
-      parameter FCSys.Conditions.TestStands.Enumerations.HumiditySpec
-        caHumiditySpec=HumiditySpec.relative
-        "Type of anode humidity specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of humidity specification",
-          __Dymola_joinNext=true));
-      Real u_ca_humidity=0.5 "Value of the cathode humidity specification"
-        annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca humidity</sub>)</html>"));
-      Q.NumberAbsolute caInletRH(displayUnit="%")
-        "Relative humidity at cathode inlet";
-      Q.PressureAbsolute p_H2O_ca_in "H2O vapor pressure at cathode inlet";
-      Q.TemperatureAbsolute T_sat_ca_in "Dew point at cathode inlet";
-      //
-      // Anode end plate
-      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
-        anEndPlateSpec=ThermalSpec.temperature
-        "Type of anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of end plate specification",
-          __Dymola_joinNext=true));
-      Real u_an_end_plate=333.15*U.K
-        "Value of the anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Anode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>an end plate</sub>)</html>"));
-      Q.TemperatureAbsolute T_an "Temperature of anode end plate";
-      Q.Conductance G_an
-        "Thermal conductance of the anode end plate to the environment";
-      Q.Power Qdot_an "Heat flow rate from the anode end plate";
-      //
-      // Cathode end plate
-      parameter FCSys.Conditions.TestStands.Enumerations.ThermalSpec
-        caEndPlateSpec=ThermalSpec.temperature
-        "Type of anode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="Type of end plate specification",
-          __Dymola_joinNext=true));
-      Real u_ca_end_plate=333.15*U.K
-        "Value of the cathode end plate specification" annotation (Dialog(
-          tab="Conditions",
-          group="Cathode",
-          __Dymola_descriptionLabel=true,
-          __Dymola_label="<html>Value (<i>u</i><sub>ca end plate</sub>)</html>"));
-      Q.TemperatureAbsolute T_ca "Temperature of cathode end plate";
-      Q.Conductance G_ca
-        "Thermal conductance of the cathode end plate to the environment";
-      Q.Power Qdot_ca "Heat flow rate from the cathode end plate";
-
-      // Material properties
-      replaceable package DataH2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataH2O = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataH2Ol = Characteristics.H2O.Liquid constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>H<sub>2</sub>O liquid</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataN2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>N<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-      replaceable package DataO2 = Characteristics.IdealGas constrainedby
-        Characteristics.BaseClasses.CharacteristicEOS
-        "<html>O<sub>2</sub> gas</html>" annotation (Dialog(tab="Advanced",
-            group="Fluid equations of state"), choicesAllMatching=true);
-
-      // Standard conditions
-      parameter Q.TemperatureAbsolute T_0=273.15*U.K "Temperature" annotation (
-          Dialog(
-          tab="Advanced",
-          group="Standard conditions (for volumetric flow rate)",
-          __Dymola_label="<html><i>T</i><sub>0</sub>"));
-      parameter Q.PressureAbsolute p_0=U.atm "Pressure" annotation (Dialog(
-          tab="Advanced",
-          group="Standard conditions (for volumetric flow rate)",
-          __Dymola_label="<html><i>p</i><sub>0</sub>"));
-
-      // Derived and measured conditions
-      Q.CurrentAreic zJ_seg[n_y, n_z] "Current density of the segments";
-      Q.PressureAbsolute p_sat_an_in "Saturation pressure at the anode inlet";
-      Q.PressureAbsolute p_sat_ca_in "Saturation pressure at the cathode inlet";
-      Q.Current Ndot_H2Ol_an_in "Flow rate of liquid water into anode";
-      Q.Current Ndot_H2Ol_ca_in "Flow rate of liquid water into cathode";
-      Q.Pressure p_H2Ol_an_in
-        "Non-equilibrium pressure on the H2O liquid at the anode inlet";
-      Q.Pressure p_H2Ol_ca_in
-        "Non-equilibrium pressure on the H2O liquid at the cathode inlet";
-      Q.TemperatureAbsolute T_an_out "Anode outlet temperature";
-      Q.TemperatureAbsolute T_ca_out "Cathode outlet temperature";
-      Q.Velocity phi_an_in[n_y, n_z] "Velocity profile over the anode inlet";
-      Q.Velocity phi_ca_in[n_y, n_z] "Velocity profile over the cathode inlet";
-      Q.Velocity phi_an_out[n_y, n_z] "Velocity profile over the anode outlet";
-      Q.Velocity phi_ca_out[n_y, n_z]
-        "Velocity profile over the cathode outlet";
-
-      // Auxiliary measurements
-      output Q.Power Wdot(stateSelect=StateSelect.never) = w*zI
-        "Electrical power output of the cell";
-      output Q.Power Wdot_yz[n_y, n_z](each stateSelect=StateSelect.never) = -
-        anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.mPhidot[
-        1] - caBC.graphite.'e-'.boundary.phi[1] .* caBC.graphite.'e-'.boundary.mPhidot[
-        1] if environment.analysis "Electrical power of the segments";
-      output Q.CurrentAreic zJ_yz[n_y, n_z](each stateSelect=StateSelect.never)
-         = -anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.rho
-        if environment.analysis "Current densities of the segments";
-      output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anSink.gas.H2.boundary.Ndot
-         + anSource.gas.H2.boundary.Ndot) if environment.analysis
-        "Net rate of hydrogen into the cell";
-      output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anSink.gas.H2O.boundary.Ndot
-         + anSource.gas.H2O.boundary.Ndot) + sum(caSink.gas.H2O.boundary.Ndot
-         + caSource.gas.H2O.boundary.Ndot) if environment.analysis
-        "Net rate of water from the cell";
-      output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caSink.gas.O2.boundary.Ndot
-         + caSource.gas.O2.boundary.Ndot) if environment.analysis
-        "Net rate of oxygen into the cell";
-      output Q.NumberAbsolute anOutletRH(
-        stateSelect=StateSelect.never,
-        displayUnit="%") = anSink.gas.H2O.materialOut.y/p_sat(anSink.gas.H2O.boundary.T)
-        if environment.analysis "Relative humidity at the anode outlet";
-      output Q.NumberAbsolute caOutletRH(
-        stateSelect=StateSelect.never,
-        displayUnit="%") = caSink.gas.H2O.materialOut.y/p_sat(caSink.gas.H2O.boundary.T)
-        if environment.analysis "Relative humidity at the cathode outlet";
-
-      Connectors.BoundaryBus an[n_y, n_z] "Interface to the anode end plate"
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-120,0}),iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-160,0})));
-      Connectors.BoundaryBus anNegative[n_x_an, n_z]
-        "Negative interface to the anode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-80,-100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-40,-160})));
-      Connectors.BoundaryBus anPositive[n_x_an, n_z]
-        "Positive interface to the anode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-80,100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-40,160})));
-      Connectors.BoundaryBus ca[n_y, n_z] "Interface to the cathode end plate"
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={120,0}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={162,0})));
-      Connectors.BoundaryBus caNegative[n_x_ca, n_z]
-        "Negative interface to the cathode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={80,-100}),iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={40,-160})));
-      Connectors.BoundaryBus caPositive[n_x_ca, n_z]
-        "Positive interface to the cathode flow channel" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={80,100}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={40,160})));
-
-      ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each graphite(
-          'incle-'=true,
-          'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare Modelica.Blocks.Sources.Ramp normalSet(
-              height=-U.A/U.cm^2,
-              duration=100.1,
-              startTime=0.1),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-
-            thermalSet(y=environment.T)),
-          'inclC+'=true)) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-104,0})));
-
-      ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each graphite(
-          'incle-'=true,
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
-              thermalSet(y=environment.T)),
-          'inclC+'=true)) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={104,0})));
-      ByConnector.BoundaryBus.Single.Sink anSource[n_x_an, n_z](gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      n_x_an,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=environment.T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*environment.p_H2O/(2*environment.p_dry*A_an),
-                      n_x_an,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=environment.T))),each liquid(inclH2O=true))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
-            origin={-104,-60})));
-
-      ByConnector.BoundaryBus.Single.Source anSink[n_x_an, n_z](gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))),
-          each liquid(inclH2O=true)) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-56,60})));
-
-      ByConnector.BoundaryBus.Single.Sink caSource[n_x_ca, n_z](gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*environment.p_H2O/(4*environment.p_O2*A_ca),
-                      n_x_ca,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=environment.T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(environment.p_dry - environment.p_O2)/(4*
-                    environment.p_O2*A_ca),
-                      n_x_ca,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=environment.T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      n_x_ca,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=environment.T))),each liquid(inclH2O=true))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
-            origin={56,-60})));
-
-      ByConnector.BoundaryBus.Single.Source caSink[n_x_ca, n_z](gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho)))), each liquid(inclH2O=true))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={104,60})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(L_x_an, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{0,10},{20,30}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
-    protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet" annotation (Placement(
-            transformation(extent={{34,10},{54,30}}), iconTransformation(extent
-              ={{174,-40},{194,-20}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet" annotation (Placement(
-            transformation(extent={{34,-30},{54,-10}}), iconTransformation(
-              extent={{174,-80},{194,-60}})));
-    protected
-      outer Conditions.Environment environment "Environmental conditions";
-
-    equation
-      // **remove liq H2O at inlet and outlet (assume no diffusion, adiabatic, no shear force)
-
-      // Electrical
-      w = R*zI;
-      P = w*zI;
-      A*zJ = zI;
-      zJ_seg = anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.'e-'.boundary.rho;
-      zI = sum(zJ_seg .* A_seg);
-
-      // Anode humidity
-      p_sat_an_in = p_sat(T_an_in);
-      p_H2O_an_in = p_sat(T_sat_an_in);
-      p_H2O_an_in = min(anInletRH, 1)*p_sat_an_in;
-      // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_an_in = max(anInletRH - 1, 0)*sum(phi_an_in .* A_an_seg)/
-        DataH2O.v_Tp(T_an_in, p_sat_an_in);
-      Ndot_H2Ol_an_in = sum(anSource.liquid.H2O.boundary.phi[Orient.normal] .*
-        A_an_seg)/DataH2Ol.v_Tp(T_an_in);
-
-      // Cathode humidity
-      p_sat_ca_in = p_sat(T_ca_in);
-      p_H2O_ca_in = p_sat(T_sat_ca_in);
-      p_H2O_ca_in = max(caInletRH, 1)*p_sat_ca_in;
-      // Liquid makes up the remainder if RH > 100%:
-      Ndot_H2Ol_ca_in = max(caInletRH - 1, 0)*sum(phi_ca_in .* A_ca_seg)/
-        DataH2O.v_Tp(T_ca_in, p_sat_ca_in);
-      Ndot_H2Ol_ca_in = sum(caSource.liquid.H2O.boundary.phi[Orient.normal] .*
-        A_ca_seg)/DataH2Ol.v_Tp(T_ca_in);
-
-      // End plates
-      Qdot_an = G_an*(T_an - environment.T) "Anode";
-      Qdot_ca = G_ca*(T_ca - environment.T) "Cathode";
-      Qdot_an = sum(anBC.graphite.'C+'.boundary.Qdot + anBC.graphite.'e-'.boundary.Qdot);
-      Qdot_ca = sum(caBC.graphite.'C+'.boundary.Qdot + caBC.graphite.'e-'.boundary.Qdot);
-
-      // Anode flow rate
-      anStoich*zI = I_an;
-      J_an*A = I_an;
-      Vdot_g_an_in = inSign(anInletSide)*sum(outerProduct(L_x_an, L_z) .*
-        phi_an_in);
-      I_an = sum(phi_an_in .* anSource.gas.H2.boundary.rho .* A_an_seg);
-
-      // Cathode flow rate
-      caStoich*zI = I_ca;
-      J_ca*A = I_ca;
-      Vdot_g_ca_in = inSign(caInletSide)*sum(outerProduct(L_x_ca, L_z) .*
-        phi_ca_in);
-      I_ca = sum(phi_ca_in .* caSource.gas.H2O.boundary.rho .* A_ca_seg);
-
-      // Pressures at the inlets and outlets
-      for j in 1:n_z loop
-        for i in 1:n_x_an loop
-          p_an_in = DataH2.p_Tv(anSource[i, j].gas.H2.boundary.T, 1/anSource[i,
-            j].gas.H2.boundary.rho) + DataH2O.p_Tv(anSource[i, j].gas.H2O.boundary.T,
-            1/anSource[i, j].gas.H2O.boundary.rho) - inSign(anInletSide)*(
-            anSource[i, j].gas.H2.boundary.mPhidot[Orient.normal] + anSource[i,
-            j].gas.H2O.boundary.mPhidot[Orient.normal])/A_an_seg[i, j];
-          p_an_out = DataH2.p_Tv(anSink[i, j].gas.H2.boundary.T, 1/anSink[i, j].gas.H2.boundary.rho)
-             + DataH2O.p_Tv(anSink[i, j].gas.H2O.boundary.T, 1/anSink[i, j].gas.H2O.boundary.rho)
-             + inSign(anInletSide)*(anSink[i, j].gas.H2.boundary.mPhidot[Orient.normal]
-             + anSink[i, j].gas.H2O.boundary.mPhidot[Orient.normal])/A_ca_seg[i,
-            j];
-        end for;
-        for i in 1:n_x_ca loop
-          p_ca_in = DataH2O.p_Tv(caSource[i, j].gas.H2O.boundary.T, 1/caSource[
-            i, j].gas.H2O.boundary.rho) + DataN2.p_Tv(caSource[i, j].gas.N2.boundary.T,
-            1/caSource[i, j].gas.N2.boundary.rho) + DataO2.p_Tv(caSource[i, j].gas.O2.boundary.T,
-            1/caSource[i, j].gas.O2.boundary.rho) - inSign(caInletSide)*(
-            caSource[i, j].gas.H2O.boundary.mPhidot[Orient.normal] + caSource[i,
-            j].gas.N2.boundary.mPhidot[Orient.normal] + caSource[i, j].gas.O2.boundary.mPhidot[
-            Orient.normal])/A_ca_seg[i, j];
-          p_ca_out = DataH2O.p_Tv(caSink[i, j].gas.H2O.boundary.T, 1/caSink[i,
-            j].gas.H2O.boundary.rho) + DataN2.p_Tv(caSink[i, j].gas.N2.boundary.T,
-            1/caSink[i, j].gas.N2.boundary.rho) + DataO2.p_Tv(caSink[i, j].gas.O2.boundary.T,
-            1/caSink[i, j].gas.O2.boundary.rho) + inSign(caInletSide)*(caSink[i,
-            j].gas.H2O.boundary.mPhidot[Orient.normal] + caSink[i, j].gas.N2.boundary.mPhidot[
-            Orient.normal] + caSink[i, j].gas.O2.boundary.mPhidot[Orient.normal])
-            /A_ca_seg[i, j];
-        end for;
-      end for;
-
-      // Assumptions
-      0 = sum(anSink.gas.H2.boundary.Qdot + anSink.gas.H2O.boundary.Qdot +
-        anSink.liquid.H2O.boundary.Qdot) "Adiabatic across the anode outlet";
-      0 = sum(caSink.gas.H2O.boundary.Qdot + caSink.gas.N2.boundary.Qdot +
-        caSink.gas.O2.boundary.Qdot + caSink.liquid.H2O.boundary.Qdot)
-        "Adiabatic across the cathode outlet";
-
-      if anInletSide == Side.n then
-        connect(anSource.boundary, anNegative) annotation (Line(
-            points={{-100,-60},{-90,-60},{-90,-90},{-80,-100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(anSink.boundary, anPositive) annotation (Line(
-            points={{-60,60},{-70,60},{-70,90},{-80,100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-      else
-        connect(anSource.boundary, anPositive) annotation (Line(
-            points={{-100,-60},{-90,-60},{-90,90},{-80,100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash));
-        connect(anSink.boundary, anNegative) annotation (Line(
-            points={{-60,60},{-70,60},{-70,-90},{-80,-100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash));
-      end if;
-      if caInletSide == Side.n then
-        connect(caSource.boundary, caNegative) annotation (Line(
-            points={{60,-60},{70,-60},{70,-90},{80,-100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(caSink.boundary, caPositive) annotation (Line(
-            points={{100,60},{90,60},{90,90},{80,100}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-      else
-        connect(caSource.boundary, caPositive) annotation (Line(
-            points={{60,-60},{70,-60},{70,90},{80,100}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(caSink.boundary, caNegative) annotation (Line(
-            points={{100,60},{90,60},{90,-90},{80,-100}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            thickness=0.5,
-            smooth=Smooth.None));
-      end if;
-      connect(anBC.boundary, an) annotation (Line(
-          points={{-108,1.23436e-15},{-108,5.55112e-16},{-120,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caBC.boundary, ca) annotation (Line(
-          points={{108,-1.34539e-15},{112,0},{114,-7.90278e-16},{114,
-              5.55112e-16},{120,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{21,20},{44,20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{21,-20},{44,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-39,-20},{-28,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-39,-40},{-20,-40},{-20,-28}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-11,-20},{-2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-39,20},{-28,20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-20,12},{-20,6.10623e-16},{-39,6.10623e-16}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-11,20},{-2,20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        structurallyIncomplete=true,
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},
-                {120,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                160,160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                  160,-160}}, lineColor={0,0,0})}),
-        Documentation(info="
-    <html>
-    <p>Any of the settings for the operating conditions can be time-varying expressions.
-    In each group,
-    specify exactly one variable (otherwise the model will be structurally singular).</p>
-
-    <p>The relative humidity (<code>anInletRH</code> or <code>caInletRH</code>) may specified to be greater 
-    than 100 %.  In that case, liquid
-    water is injected to provide the amount above saturation.  The relative humidity
-    is taken to be equal to the quotient of the H<sub>2</sub>O vapor pressure 
-    (<i>p</i><sub>H2O an in</sub> or <i>p</i><sub>H2O ca in</sub>) and the saturation pressure.
-    Therefore, liquid water will also be injected if the specified vapor pressure is specified 
-    to be above saturation pressure or the specified dew point (<i>T</i><sub>sat an in</sub> or 
-    <i>T</i><sub>sat ca in</sub>) is above the actual temperature.</p>
-    
-    <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
-    given current
-    assuming the reactant is entirely consumed (complete utilization).</p>
-
-    <p>Assumptions **review and update:
-    <ol>
-    <li>The outer x-axis surboundary of each end plate is each uniform in temperature.</li>
-    <li>No heat is conducted from the rest of the cell hardware.</li>
-    <li>The voltage is uniform across each end plate.</li>
-    <li>There is no turbulence in the fluid at either inlet (i.e., zero transverse velocity
-    at each inlet boundary).</li>
-    <li>There is no shear force on the fluid at either outlet.</li>
-    <li>The species (gases and liquid) of each stream have the same temperature at each inlet and outlet.</li>
-    <li>The sum of the thermodynamic and nonequilibrium pressure is uniform over each inlet and outlet.</li>
-    <li>The temperature is uniform over each inlet and outlet.</li>
-    <li>There is no diffusion of the reactants (H<sub>2</sub> and O<sub>2</sub>) or liquid water
-    into the cell (only advection).</li>
-    <li>There is no diffusion of the fluid species 
-    (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, and O<sub>2</sub>) 
-    out of the cell (advection only).</li>
-    <li>The inlet and outlet pressures are applied to the gas mixture by Dalton's law.</li>
-    <li>At the inlet, the liquid has the pressure necessary and sufficient for the prescribed 
-    humidity (zero unless RH > 100%).</li>
-    <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
-    <li>There is no net thermal conduction across either outlet.</li>
-    </ol></p>
-        
-    <li>There is no nonequilibrium force on any species at either inlet.  This means that
-    the velocity of the first subregion along the channel will be the same is the velocity
-    at the inlet.</li>
-
-    <p>The temperatures of the endplates (<i>T</i><sub>an</sub> and <i>T</i><sub>ca</sub>)
-    should not be equal to the temperature of the environment unless <i>G</i><sub>an</sub>
-    and <i>G</i><sub>ca</sub> are explicitly set.  Otherwise there will be a mathematical
-    singularity.  Regard the environment as the ambient conditions, not the conditions to
-    which the cell is held.</p>
-    </html>"));
-    end TestStand2;
-  end TestStands;
 
   record Environment "Environmental properties for a simulation"
     extends FCSys.Icons.Names.Top3;
@@ -8804,7 +7239,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces" annotation (Dialog(__Dymola_label=
             "<html><b><i>a</i></b></html>", group="Fields"));
-
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
     parameter Q.ForceSpecific E[Axis]={0,0,0} "Electric field" annotation (
@@ -8990,7 +7424,6 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
             thickness=0.5,
             visible=crossOver,
             smooth=Smooth.Bezier)}));
-
   end Router;
 
   annotation (Documentation(info="
