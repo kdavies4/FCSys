@@ -286,37 +286,37 @@ package Conditions "Models to specify and measure operating conditions"
       inner Conditions.Environment environment(T=360*U.K)
         annotation (Placement(transformation(extent={{40,40},{60,60}})));
 
-      replaceable Conditions.ByConnector.Electrochemical.Current speciesA(
+      replaceable ByConnector.Chemical.Current speciesA(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=2000*U.K,
         redeclare Modelica.Blocks.Sources.Ramp source(duration=100, height=-1*U.A))
         annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
-      replaceable Conditions.ByConnector.Electrochemical.Potential speciesB(
+      replaceable ByConnector.Chemical.Potential speciesB(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=3000*U.K)
         annotation (Placement(transformation(extent={{30,0},{50,20}})));
-      replaceable Conditions.ByConnector.Electrochemical.Potential speciesC(
+      replaceable ByConnector.Chemical.Potential speciesC(
         final inclTransX=inclTransX,
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=4000*U.K)
         annotation (Placement(transformation(extent={{30,-20},{50,0}})));
-      FCSys.Conditions.Adapters.ElectrochemicalReaction A(
+      FCSys.Conditions.Adapters.ChemicalReaction A(
         m=U.g/U.mol,
         final n_trans=n_trans,
         n=-1)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.Conditions.Adapters.ElectrochemicalReaction B(
+      FCSys.Conditions.Adapters.ChemicalReaction B(
         m=U.g/U.mol,
         final n_trans=n_trans,
         n=2) annotation (Placement(transformation(extent={{30,-10},{10,10}})));
 
-      FCSys.Conditions.Adapters.ElectrochemicalReaction C(
+      FCSys.Conditions.Adapters.ChemicalReaction C(
         m=U.g/U.mol,
         final n_trans=n_trans,
         n=2) annotation (Placement(transformation(extent={{30,-30},{10,-10}})));
@@ -329,15 +329,15 @@ package Conditions "Models to specify and measure operating conditions"
         "Number of components of translational momentum";
 
     equation
-      connect(A.electrochemical, speciesA.electrochemical) annotation (Line(
+      connect(A.chemical, speciesA.chemical) annotation (Line(
           points={{-24,0},{-40,0},{-40,6}},
           color={221,23,47},
           smooth=Smooth.None));
-      connect(B.electrochemical, speciesB.electrochemical) annotation (Line(
+      connect(B.chemical, speciesB.chemical) annotation (Line(
           points={{24,0},{40,0},{40,6}},
           color={221,23,47},
           smooth=Smooth.None));
-      connect(C.electrochemical, speciesC.electrochemical) annotation (Line(
+      connect(C.chemical, speciesC.chemical) annotation (Line(
           points={{24,-20},{40,-20},{40,-14}},
           color={221,23,47},
           smooth=Smooth.None));
@@ -404,8 +404,8 @@ package Conditions "Models to specify and measure operating conditions"
 
     end AmagatDalton;
 
-    model ElectrochemicalReaction
-      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Electrochemical\">Electrochemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
+    model ChemicalReaction
+      "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connectors</html>"
 
       //extends FCSys.Icons.Names.Top1;
 
@@ -422,39 +422,37 @@ package Conditions "Models to specify and measure operating conditions"
       // Auxiliary variables (for analysis)
       /*
   output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) = 
-    actualStream(electrochemical.phi) if environment.analysis "Velocity of the stream";
+    actualStream(chemical.phi) if environment.analysis "Velocity of the stream";
   output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) = actualStream(
-    electrochemical.sT) if environment.analysis 
+    chemical.sT) if environment.analysis 
     "Specific entropy-temperature product of the stream";
 */
 
-      Connectors.Electrochemical electrochemical(redeclare final constant
-          Integer n_trans=n_trans)
-        "Connector for a species in a chemical reaction" annotation (Placement(
-            transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
-              extent={{-50,-10},{-30,10}})));
+      Connectors.Chemical chemical(redeclare final constant Integer n_trans=
+            n_trans) "Connector for a species in a chemical reaction"
+        annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+            iconTransformation(extent={{-50,-10},{-30,10}})));
       // Note:  This redeclaration is necessary due to errors in Dymola 2014.
       Connectors.Reaction reaction(final n_trans=n_trans)
-        "Connector for an electrochemical reaction" annotation (Placement(
+        "Connector for a chemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
               extent={{30,-10},{50,10}})));
 
     equation
       // Equal intensive properties
-      reaction.w = n*electrochemical.w "Electrochemical potential";
-      reaction.phi = electrochemical.phi "Velocity (upon outflow)";
-      reaction.sT = electrochemical.sT
+      reaction.g = n*chemical.g "Chemical potential";
+      reaction.phi = chemical.phi "Velocity (upon outflow)";
+      reaction.sT = chemical.sT
         "Specific entropy-temperature product (upon outflow)";
 
       // Conservation (without storage)
-      0 = electrochemical.Ndot + n*reaction.Ndot "Material";
-      zeros(n_trans) = m*actualStream(electrochemical.phi)*electrochemical.Ndot
-         + reaction.mPhidot "Translational momentum";
-      0 = actualStream(electrochemical.sT)*electrochemical.Ndot + reaction.Qdot
-        "Energy";
+      0 = chemical.Ndot + n*reaction.Ndot "Material";
+      zeros(n_trans) = m*actualStream(chemical.phi)*chemical.Ndot + reaction.mPhidot
+        "Translational momentum";
+      0 = actualStream(chemical.sT)*chemical.Ndot + reaction.Qdot "Energy";
       annotation (
-        Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted electrochemical potential
-    of a species to the net electrochemical potential of a reaction.  The species is produced at the
+        Documentation(info="<html><p>This model is used to add the stoichiometrically-weighted chemical potential
+    of a species to the net chemical potential of a reaction.  The species is produced at the
     stoichiometrically-weighted rate of the reaction.</p>
     
     <p>
@@ -477,7 +475,7 @@ package Conditions "Models to specify and measure operating conditions"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
 
-    end ElectrochemicalReaction;
+    end ChemicalReaction;
 
     package MSL
       "<html>Adapters to the <a href=\"modelica://Modelica\">Modelica Standard Library</a></html>"
@@ -6237,11 +6235,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      annotation (Icon(graphics={Ellipse(
-              extent={{-60,60},{60,-60}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255})}));
       package Pair
         "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connectors</html>"
         extends Modelica.Icons.Package;
@@ -6420,25 +6413,30 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           annotation (defaultComponentName="thermal");
         end Partial;
       end Single;
+      annotation (Icon(graphics={Ellipse(
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
     end ThermoDiffusive;
 
-    package Electrochemical
-      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Electrochemical\">Electrochemical</a> connector</html>"
+    package Chemical
+      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model Potential "Specify electrochemical potential (measure current)"
-        extends Partial(final y=electrochemical.Ndot);
+      model Potential "Specify chemical potential (measure current)"
+        extends Partial(final y=chemical.Ndot);
 
       equation
-        electrochemical.w = u_final;
+        chemical.g = u_final;
 
       end Potential;
 
-      model Current "Specify current (measure electrochemical potential)"
-        extends Partial(final y=electrochemical.w);
+      model Current "Specify current (measure chemical potential)"
+        extends Partial(final y=chemical.g);
 
       equation
-        electrochemical.Ndot = u_final;
+        chemical.Ndot = u_final;
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics));
@@ -6512,11 +6510,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
-        output Q.Velocity phi_actual[n_trans]=actualStream(electrochemical.phi)
+        output Q.Velocity phi_actual[n_trans]=actualStream(chemical.phi)
           "Velocity of the actual stream";
-        output Q.Potential sT_actual=actualStream(electrochemical.sT)
+        output Q.Potential sT_actual=actualStream(chemical.sT)
           "Specific entropy-temperature product of the actual stream";
-        Connectors.Electrochemical electrochemical(final n_trans=n_trans)
+        Connectors.Chemical chemical(final n_trans=n_trans)
           "Connector for a species of a chemical reaction"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -6535,8 +6533,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={-20,0})));
 
       equation
-        electrochemical.phi = phi[cartTrans];
-        electrochemical.sT = sT;
+        chemical.phi = phi[cartTrans];
+        chemical.sT = sT;
 
         connect(source.y, u_final) annotation (Line(
             points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
@@ -6556,7 +6554,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               fillPattern=FillPattern.Solid,
               fillColor={221,23,47})}));
 
-    end Electrochemical;
+    end Chemical;
 
     package Reaction
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector</html>"
@@ -6801,7 +6799,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Outputs
         final Connectors.RealOutput y_material=materialMeas(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6815,7 +6813,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,80})));
         final Connectors.RealOutput y_transX=transXMeas(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6831,7 +6829,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,0})));
         final Connectors.RealOutput y_transY=transYMeas(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6847,7 +6845,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,40})));
         final Connectors.RealOutput y_transZ=transZMeas(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6863,7 +6861,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,-40})));
         final Connectors.RealOutput y_thermal=thermalMeas(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6877,7 +6875,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={110,-80})));
 
         Connectors.Reaction reaction(final n_trans=n_trans)
-          "Stoichiometric connector for the electrochemical reaction"
+          "Stoichiometric connector for the chemical reaction"
           annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
       protected
@@ -6889,7 +6887,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         Connectors.RealOutputInternal _u_material=materialSpec(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6901,7 +6899,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,80})));
         Connectors.RealOutputInternal _u_transX=transXSpec(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6914,7 +6912,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,40})));
         Connectors.RealOutputInternal _u_transY=transYSpec(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6927,7 +6925,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,0})));
         Connectors.RealOutputInternal _u_transZ=transZSpec(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -6940,7 +6938,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-36,-40})));
         Connectors.RealOutputInternal _u_thermal=thermalSpec(
                   reaction.Ndot,
-                  reaction.w,
+                  reaction.g,
                   reaction.phi,
                   reaction.mPhidot,
                   reaction.sT,
@@ -7065,8 +7063,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
+          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
@@ -7111,8 +7108,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
+          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
@@ -7160,8 +7156,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           // Material diffusion
           input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g
-            "<html>Electrochemical potential (<i>g</i>)</html>";
+          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
 
           // Translational advection
           input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";

@@ -363,6 +363,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="e-",
+        final z=-1,
         phase=Phase.gas,
         m=Data.MM*U.kg/U.mol,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
@@ -426,6 +427,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="H+",
+        final z=1,
         phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         referenceEnthalpy=ReferenceEnthalpy.zeroAt25degC,
@@ -874,7 +876,7 @@ package Characteristics
       constant Phase phase "Material phase";
       constant Q.MassSpecific m "Specific mass";
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
-      final constant Integer z=charge(formula) "Charge number";
+      constant Integer z=charge(formula) "Charge number";
       constant ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC
         "Choice of enthalpy reference";
       constant Q.PotentialChemical Deltah0_f

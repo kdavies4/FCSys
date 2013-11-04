@@ -17,7 +17,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/Resources/quantities.xls, 2013-10-15
+      // Generated from FCSys/Resources/quantities.xls, 2013-11-4
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C
@@ -27,17 +27,19 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.mol "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
-      parameter Q.Density Density=1*U.C/U.m^3 "Density";
-      parameter Q.DensityRate DensityRate=1*U.C/(U.m^3*U.s) "Rate of density";
+      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
+        "Rate of concentration";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
-      parameter Q.ConductivityElectrical ConductivityElectrical=1*U.S
+      parameter Q.ConductivityElectrical ConductivityElectrical=1*U.S/U.m
         "Electrical conductivity";
+      parameter Q.Continuity Continuity=1*U.N/U.A "Continuity";
       parameter Q.Current Current=1*U.A "Current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentAreicAbsolute CurrentAreicAbsolute=1*U.A/U.m^2
         "Absolute areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
+      parameter Q.Density Density=1*U.C/U.m^3 "Density";
       parameter Q.Diffusivity Diffusivity=1*U.m^2/U.s "Diffusivity";
       parameter Q.Energy Energy=1*U.J "Energy";
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
@@ -46,6 +48,8 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
       parameter Q.Length Length=1*U.m "Length";
+      parameter Q.LengthReciprocal LengthReciprocal=1/U.m
+        "Reciprocal of length";
       parameter Q.LengthSpecific LengthSpecific=1*U.m/U.C "Specific length";
       parameter Q.MagneticFlux MagneticFlux=1*U.Wb "Magnetic flux";
       parameter Q.MagneticFluxAreic MagneticFluxAreic=1*U.T
@@ -84,12 +88,15 @@ package Quantities "Quantities to represent physical properties"
         "Reciprocal of pressure";
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
+      parameter Q.ResistanceThermal ResistanceThermal=1*U.K/U.W
+        "Thermal resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
       parameter Q.Time Time=1*U.s "Time";
       parameter Q.TimeAbsolute TimeAbsolute=1*U.s "Absolute time";
       parameter Q.TimeLineic TimeLineic=1*U.s/U.m "Lineic time";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
+      parameter Q.VelocityAmount VelocityAmount=1*U.A*U.m "VelocityAmount";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";

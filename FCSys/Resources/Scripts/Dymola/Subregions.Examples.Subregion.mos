@@ -21,5 +21,5 @@ for i in 1:size(species, 1) loop
        y4={"subregion." + species[i] + ".boundaries[1, 1].T", "subregion." + species[i] + ".T",
              "subregion." + species[i] + ".boundaries[1, 2].T"},
        y5={"subregion." + species[i] + ".h",
-             "subregion." + species[i] + ".electrochemical.mu"});
+             "subregion." + species[i] + ".chemical.mu"});
 end for;

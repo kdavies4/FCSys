@@ -46,6 +46,7 @@ package Subregions
           subregion(gas(H2O(
                 initEnergy=Init.temperature,
                 consMaterial=ConsThermo.IC,
+                N(stateSelect=StateSelect.always),
                 p_IC=environment.p_H2O)), ionomer(
               oneTemperature=true,
               inclH2O=true,
@@ -93,7 +94,7 @@ package Subregions
           inclH2O=true,
           inclH2=false,
           subregion(gas(H2O(p_IC=Characteristics.H2O.p_sat(environment.T))),
-              liquid(H2O(epsilon_IC=0.25, tauprime=100*U.s), inclH2O=true)),
+              liquid(H2O(epsilon_IC=0.25, tauprime={100*U.s}), inclH2O=true)),
           environment(T=274.15*U.K));
 
         FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC1(liquid(
@@ -167,7 +168,7 @@ package Subregions
             L={0.287*U.mm,10*U.cm,10*U.cm},
             gas(oneTemperature=true, H2(phi(each fixed=true, each stateSelect=
                       StateSelect.always))),
-            ionomer(oneTemperature=true, 'H+'(consTransX=ConsMom.steady))));
+            ionomer(oneTemperature=true, 'H+'(consTransX=ConsTrans.steady))));
 
         Real states[:](each stateSelect=StateSelect.always) = {subregion.gas.T,
           subregion.graphite.T,subregion.ionomer.T}
@@ -248,7 +249,7 @@ package Subregions
               H2O(phi(each fixed=true, each stateSelect=StateSelect.always)),
               O2(phi(each fixed=true, each stateSelect=StateSelect.always),
                   initEnergy=Init.none)),
-            ionomer(oneTemperature=true, 'H+'(consTransX=ConsMom.steady))));
+            ionomer(oneTemperature=true, 'H+'(consTransX=ConsTrans.steady))));
 
         Real states[:](each stateSelect=StateSelect.always) = {subregion.gas.T,
           subregion.graphite.T,subregion.ionomer.T}
@@ -290,8 +291,8 @@ package Subregions
 
         Modelica.Blocks.Sources.Ramp currentSet(
           duration=20,
-          height=-200*U.A,
-          offset=-U.mA)
+          offset=-U.mA,
+          height=-200*U.A)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
@@ -314,10 +315,11 @@ package Subregions
                   {100,100}}), graphics));
       end ORR;
 
+
     end Reactions;
 
     model AirColumn
-      "<html>Vertical array of subregions with an initial pressure difference (C<sup>+</sup> and N<sub>2</sub> included by default)</html>"
+      "<html>Gas in a vertical array of subregions, affected by gravity</html>"
       import FCSys.Utilities.round;
       extends Modelica.Icons.Example;
 
@@ -327,7 +329,7 @@ package Subregions
       parameter Q.Pressure Deltap_IC=0 "Initial pressure difference"
         annotation (Dialog(__Dymola_label=
               "<html>&Delta;<i>p</i><sub>IC</sub></html>"));
-      parameter Boolean 'inclC+'=true
+      parameter Boolean 'inclC+'=false
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
@@ -338,6 +340,8 @@ package Subregions
           Characteristics.N2.Gas.m*subregions[round(n_y/2)].gas.N2.rho
         "Expected pressure difference";
 
+      parameter Q.NumberAbsolute k=10 "Damping factor";
+
       inner Conditions.Environment environment(p=U.bar)
         annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
       FCSys.Subregions.Subregion subregion1(
@@ -347,6 +351,7 @@ package Subregions
         inclTransZ=false,
         k_common=1e-8,
         gas(inclN2=true, N2(
+            zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC=environment.p - Deltap_IC/2,
             upstreamY=false,
             phi(each stateSelect=StateSelect.always, each fixed=true))),
@@ -358,6 +363,7 @@ package Subregions
         each inclTransZ=false,
         each k_common=1e-8,
         gas(each inclN2=true, N2(
+            each zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i in
                 1:n_y},
             each upstreamY=false,
@@ -375,6 +381,7 @@ package Subregions
         each k_common=1e-8,
         graphite('inclC+'='inclC+', 'C+'(epsilon=1e-9)),
         gas(inclN2=true, N2(
+            zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC=environment.p + Deltap_IC/2,
             upstreamY=false,
             phi(each stateSelect=StateSelect.always,each fixed=true))))
@@ -413,26 +420,26 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        experiment(
-          StopTime=8,
-          Tolerance=1e-005,
-          __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
         Documentation(info="<html><p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
-    regions with N<sub>2</sub> gas.  The upper and lower boundary regions are held with zero velocity.  
-    The initial pressure difference is zero, but a pressure difference
-    develops due to gravity.  There are some oscillations due to the pressure/translational dynamics.
+    regions with N<sub>2</sub> gas.  The upper boundary is held at 1 bar and the lower boundary has zero velocity.  
+    The initial pressure difference is zero, but a gas enters the upper boundary and a pressure difference
+    develops due to gravity.  There are oscillations due to the inertance and compression of the gas.
     After about 1.5&nbsp;s, the pressure difference settles to 
       <i>L</i><sub>y</sub> <i>a</i><sub>y</sub> <i>m</i> &rho;
       as expected.</p>
       
       <p>A temperature gradient is created due to the thermodynamics of the expanding and contracting 
-      gases.  It takes much longer (about a day) for the temperatures to equalize since the gas has a
-      relatively low thermal conductivity.</p>
+      gases.  It takes much longer (over a year!) for the temperatures to equalize due to the size of the system and the low
+      thermal conductivity of the gas.  With a stiff solver, the model should simulate at this time scale as well.</p>
       
+      <p>The damping factor (<i>k</i>) can be used to scale the continuitiy (&zeta;) of the gas in the regions.  
+      The oscillations are dampened considerably at <i>k</i> = 100.  However, with high values of the factor, the boundary pressures
+      are decoupled from the pressures in the region because the nonequilibrium force is considerable.</p>
+
+      <p> 
       <p>Assumptions:
       <ol>
-      <li>Graphite is included as a solid, stationary species with small relative volume and very slight 
-      friction to dampen the oscillations.</li>
       <li>The central difference scheme is used (no upstream discretization).</ol>
       </p></html>"),
         Commands(file(ensureTranslated=true) =
@@ -443,7 +450,7 @@ package Subregions
                 {100,100}}), graphics));
     end AirColumn;
 
-    model Echo "Two regions of gas with initial pressure difference"
+    model Echo "Two regions of gas with an initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
 
       extends Subregions(subregion1(gas(H2(zeta=k*
@@ -459,7 +466,7 @@ package Subregions
     end Echo;
 
     model EchoCentral
-      "Two regions of gas with initial pressure difference, with central difference scheme"
+      "Two regions of gas with an initial pressure difference, with central difference scheme"
       extends Echo(
         subregion1(gas(
             H2(upstreamX=false),
@@ -698,7 +705,9 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        Documentation(info="<html><p>Note that the temperature increases due to viscous dissipation.  
+        Documentation(info="<html><p>A small-signal variation is added to the time-average flow rate in order to demonstrate the effects of inertance.</p>
+    
+    <p>Note that the temperature increases due to viscous dissipation.  
         However, the temperature rise is limited because the walls are held at constant temperature.</p></html>"),
 
         experiment(
@@ -772,10 +781,10 @@ package Subregions
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       annotation (
-        Documentation(info="<html><p>This model is boring.  It just sets up a
+        Documentation(info="<html><p>This model is boring.  It just establishes a
   single subregion with H<sub>2</sub> by default.  There are no boundary conditions
   other than those implied by the open connectors (no diffusion current, no forces, 
-  no thermal conduction).  Other examples in this package are extended from this one.</p>
+  no thermal conduction).  Other examples in this package extend from this one.</p>
   </html>"),
         experiment(StopTime=10),
         Commands(file(ensureTranslated=true) =
@@ -991,7 +1000,8 @@ package Subregions
 
     end ThermalConductionConvection;
 
-    model BinaryDiffusion "Example of coupled diffusion"
+    model BinaryDiffusion
+      "<html>H<sub>2</sub> traveling due to a pressure gradient, dragging H<sub>2</sub>O</html>"
       extends Subregion(
         inclH2O=true,
         'inclC+'=true,
@@ -1150,11 +1160,11 @@ package Subregions
         points={{-10,-16},{-10,-66},{86,-66}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(graphite.electrostatic, dielectric.negative) annotation (Line(
+    connect(graphite.electrostatic[1], dielectric.negative) annotation (Line(
         points={{-30,-16},{-16,-16}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(dielectric.positive, ionomer.electrostatic) annotation (Line(
+    connect(dielectric.positive, ionomer.electrostatic[1]) annotation (Line(
         points={{-4,-16},{10,-16}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -1355,15 +1365,21 @@ package Subregions
 
     // Reactions and phase change (not shown in diagram)
     // -------------------------------------------------
-    connect(gas.connH2, HOR.connH2);
-    connect(gas.connH2O, ORR.connH2O);
-    connect(gas.connO2, ORR.connO2);
-    connect(gas.connH2O, ionomer.connH2O);
-    connect(gas.connH2O, liquid.connH2O);
-    connect(graphite.'conne-', HOR.'conne-');
-    connect(graphite.'conne-', ORR.'conne-');
-    connect(ionomer.'connH+', HOR.'connH+');
-    connect(ionomer.'connH+', ORR.'connH+');
+    connect(gas.connH2[1], HOR.connH2);
+    connect(gas.connH2O[1], ORR.connH2O);
+    connect(gas.connO2[1], ORR.connO2);
+    if gas.inclH2O then
+      if ionomer.inclH2O then
+        connect(gas.connH2O[2], ionomer.connH2O[1]);
+      end if;
+      if liquid.inclH2O then
+        connect(gas.connH2O[3], liquid.connH2O[1]);
+      end if;
+    end if;
+    connect(graphite.'conne-'[1], HOR.'conne-');
+    connect(graphite.'conne-'[1], ORR.'conne-');
+    connect(ionomer.'connH+'[1], HOR.'connH+');
+    connect(ionomer.'connH+'[1], ORR.'connH+');
     annotation (Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
@@ -1695,7 +1711,9 @@ on diagram)")}));
 
     // Phase change (not shown in diagram)
     // -----------------------------------
-    connect(gas.connH2O, liquid.connH2O);
+    if gas.inclH2O and liquid.inclH2O then
+      connect(gas.connH2O[3], liquid.connH2O[1]);
+    end if;
 
     annotation (Documentation(info="<html>
    <p>Please see the documentation of the
@@ -1774,79 +1792,95 @@ on diagram)")}));
 
   <p>This model should be extended to include the appropriate phases, reactions, etc.</p>
   </html>"),
-      Icon(graphics={Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransX,
-              smooth=Smooth.None),Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransY,
-              smooth=Smooth.None),Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclTransX,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransX,
-              smooth=Smooth.None),Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransY,
-              smooth=Smooth.None),Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}),
+      Icon(graphics={
+          Line(
+            points={{-100,0},{-40,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{0,-100}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransY,
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{50,50}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-40,-40},{-16,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-16,40},{-16,-16},{40,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-40,0},{28,0}},
+            color={210,210,210},
+            visible=inclTransX,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,28},{0,-40}},
+            color={210,210,210},
+            visible=inclTransY,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{28,0},{100,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,100},{0,28}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransY,
+            smooth=Smooth.None),
+          Line(
+            points={{-12,-12},{40,40}},
+            color={210,210,210},
+            visible=inclTransZ,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-40,16},{16,16},{16,-40}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-50,-50},{-12,-12}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{16,16}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
 

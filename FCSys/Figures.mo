@@ -1524,6 +1524,9 @@ package Figures "Graphical layouts for documentation"
     Connectors.Translational Translational
       annotation (Placement(transformation(extent={{40,-38},{60,-18}})));
 
+  public
+    Connectors.Chemical Chemical
+      annotation (Placement(transformation(extent={{-28,-38},{-8,-18}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,
               -40},{120,40}}), graphics={Line(
               points={{74,-6.5},{74,-29.9771},{75.815,-26.369},{72,-28}},
@@ -1647,10 +1650,6 @@ and Inert"),Line(
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Text(
-              extent={{-30,-18},{-6,-22}},
-              lineColor={0,0,0},
-              textString="Electro-
-chemical"),Text(
               extent={{-50,-18},{-26,-22}},
               lineColor={0,0,0},
               textString="Electro-
@@ -1658,10 +1657,6 @@ static"),Ellipse(
               extent={{-41,-25},{-35,-31}},
               lineColor={239,142,1},
               fillColor={255,195,38},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-21,-25},{-15,-31}},
-              lineColor={170,0,0},
-              fillColor={221,23,47},
               fillPattern=FillPattern.Solid)}));
 
   end Connectors;

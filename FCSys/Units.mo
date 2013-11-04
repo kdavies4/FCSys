@@ -15,83 +15,86 @@ package Units "Constants and units of physical measure"
     // quantities in FCSys.Quantities should be used by default, then specify
     // them here.  Be sure that the desired unit is included in a
     // defineUnitConversion command below.
-    // Generated from FCSys/Resources/quantities.xls, 2013-10-17
+    // Generated from FCSys/Resources/quantities.xls, 2013-11-4
+    defineDefaultDisplayUnit("L2.M/(A2.T3)", "cd") "Radiant power";
+    defineDefaultDisplayUnit("L.T2/M", "1/kPa") "Reciprocal of pressure";
+    defineDefaultDisplayUnit("1/L", "1/m") "Reciprocal of length";
     defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal of amount";
-    defineDefaultDisplayUnit("A", "rad") "Angle";
+    defineDefaultDisplayUnit("L.T/M", "1/(Pa.s)") "Fluidity";
     defineDefaultDisplayUnit("A.N.T/(L2.M)", "1/Wb")
       "Reciprocal of magnetic flux";
-    defineDefaultDisplayUnit("A/L", "rad/m") "Wavenumber";
-    defineDefaultDisplayUnit("A/T", "rad/s") "Frequency";
-    defineDefaultDisplayUnit("A2", "sr") "Solid angle";
-    defineDefaultDisplayUnit("L", "cm") "Length";
-    defineDefaultDisplayUnit("L.M/(N.T2)", "V/m") "Specific force";
-    defineDefaultDisplayUnit("L.M/N2", "H/m") "Permeability";
-    defineDefaultDisplayUnit("L.M/T2", "N") "Force";
-    defineDefaultDisplayUnit("L.T/M", "1/(Pa.s)") "Fluidity";
-    defineDefaultDisplayUnit("L.T/N", "cm/A") "Resistivity";
-    defineDefaultDisplayUnit("L.T2/M", "1/kPa") "Reciprocal of pressure";
-    defineDefaultDisplayUnit("L/(T.s)", "cm/s2")
-      "for derivative of velocity in Dymola";
-    defineDefaultDisplayUnit("L/N", "m/mol") "Specific length";
-    defineDefaultDisplayUnit("L/T", "cm/s") "Velocity";
-    defineDefaultDisplayUnit("L/T2", "m/s2") "Acceleration";
-    defineDefaultDisplayUnit("L2", "cm2") "Area";
-    defineDefaultDisplayUnit("L2.M/(A.N.T)", "Wb") "Magnetic flux";
-    defineDefaultDisplayUnit("L2.M/(A.T)", "J.s/rad") "Rotational momentum";
-    defineDefaultDisplayUnit("L2.M/(A2.T3)", "cd") "Radiant power";
-    defineDefaultDisplayUnit("L2.M/(N.T2.s)", "V/s")
-      "for derivative of potential in Dymola";
-    defineDefaultDisplayUnit("L2.M/(N.T2)", "V") "Potential";
-    defineDefaultDisplayUnit("L2.M/(N.T3)", "V/s") "Rate of potential";
-    defineDefaultDisplayUnit("L2.M/(N2.T)", "ohm") "Electrical resistance";
-    defineDefaultDisplayUnit("L2.M/N2", "uH") "Inductance";
-    defineDefaultDisplayUnit("L2.M/T2", "J") "Energy";
-    defineDefaultDisplayUnit("L2.M/T3", "W") "Power";
-    defineDefaultDisplayUnit("L2/N", "cm2/C") "Specific area";
-    defineDefaultDisplayUnit("L2/T", "cm2/s") "Diffusivity";
-    defineDefaultDisplayUnit("L2/T2", "Sv") "Squared velocity";
-    defineDefaultDisplayUnit("L2.M/(N.T)", "Pa.s") "Viscosity";
+    defineDefaultDisplayUnit("N/s", "A") "for derivative of amount in Dymola";
+    defineDefaultDisplayUnit("N/T", "A") "Current";
+    defineDefaultDisplayUnit("N/(L2.T)", "A/cm2") "Areic current";
+    defineDefaultDisplayUnit("N/(T.s)", "A/s")
+      "for derivative of current in Dymola";
+    defineDefaultDisplayUnit("N/T2", "A/s") "Rate of current";
+    defineDefaultDisplayUnit("L.N/T", "A.m") "VelocityAmount";
+    defineDefaultDisplayUnit("N", "C") "Amount";
+    defineDefaultDisplayUnit("N/L3", "C/cc") "Density";
+    defineDefaultDisplayUnit("N/(L3.T)", "C/(cc.s)") "Rate of concentration";
     defineDefaultDisplayUnit("L3", "cc") "Volume";
-    defineDefaultDisplayUnit("L3.M/(A.N.T2)", "V.m/rad")
-      "Potential per wavenumber";
-    defineDefaultDisplayUnit("L3.M/(N2.T2)", "m/H")
-      "Reciprocal of permittivity";
+    defineDefaultDisplayUnit("L3/N", "cc/C") "Specific volume";
     defineDefaultDisplayUnit("L3/(N.s)", "cc/(C.s)")
       "for derivative of specific volume in Dymola";
     defineDefaultDisplayUnit("L3/(N.T)", "cc/(C.s)") "Rate of specific volume";
-    defineDefaultDisplayUnit("L3/N", "cc/C") "Specific volume";
-    defineDefaultDisplayUnit("L3/T", "L/min") "Rate of volume";
-    defineDefaultDisplayUnit("L4.M/T3", "W.m2") "Power times area";
+    defineDefaultDisplayUnit("L", "cm") "Length";
+    defineDefaultDisplayUnit("L.T/N", "cm/A") "Resistivity";
+    defineDefaultDisplayUnit("L/T", "cm/s") "Velocity";
+    defineDefaultDisplayUnit("L/(T.s)", "cm/s2")
+      "for derivative of velocity in Dymola";
+    defineDefaultDisplayUnit("L2", "cm2") "Area";
+    defineDefaultDisplayUnit("L2/N", "cm2/C") "Specific area";
+    defineDefaultDisplayUnit("L2/T", "cm2/s") "Diffusivity";
+    defineDefaultDisplayUnit("N.T/M", "cm2/(V.s)") "Mobility";
+    defineDefaultDisplayUnit("N2.T2/(L3.M)", "F/m") "Permittivity";
     defineDefaultDisplayUnit("M", "g") "Mass";
-    defineDefaultDisplayUnit("M.T5/L8", "W/(m2.K4)")
-      "Areic power per 4th power of potential";
-    defineDefaultDisplayUnit("M/(A.N.T)", "T") "Areic magnetic flux";
-    defineDefaultDisplayUnit("M/(L.T2.s)", "Pa/s")
-      "for derivative of pressure in Dymola";
-    defineDefaultDisplayUnit("M/(L.T2)", "kPa") "Pressure";
-    defineDefaultDisplayUnit("M/(L.T3)", "Pa/s") "Rate of pressure";
-    defineDefaultDisplayUnit("M/(T2.L.s)", "Pa/s")
-      "for derivative of pressure in Dymola";
     defineDefaultDisplayUnit("M/L3", "g/cc") "Volumic mass";
     defineDefaultDisplayUnit("M/N", "g/mol") "Specific mass";
     defineDefaultDisplayUnit("M/s", "g/s") "for derivative of mass in Dymola";
-    defineDefaultDisplayUnit("M/T3", "W/m2") "Areic power";
-    defineDefaultDisplayUnit("N", "C") "Amount";
-    defineDefaultDisplayUnit("N.T/M", "cm2/(V.s)") "Mobility";
-    defineDefaultDisplayUnit("N/(L2.T)", "A/cm2") "Areic current";
-    defineDefaultDisplayUnit("N/(L3.T)", "C/(cc.s)") "Rate of density";
-    defineDefaultDisplayUnit("N/(T.s)", "A/s")
-      "for derivative of current in Dymola";
-    defineDefaultDisplayUnit("N/L3", "C/cc") "Density";
-    defineDefaultDisplayUnit("N/s", "A") "for derivative of amount in Dymola";
-    defineDefaultDisplayUnit("N/T", "A") "Current";
-    defineDefaultDisplayUnit("N/T2", "A/s") "Rate of current";
-    defineDefaultDisplayUnit("N2.T/(L2.M)", "S") "Electrical conductance";
-    defineDefaultDisplayUnit("N2.T/(L3.M)", "S") "Electrical conductivity";
+    defineDefaultDisplayUnit("L.M/N2", "H/m") "Permeability";
+    defineDefaultDisplayUnit("L2.M/T2", "J") "Energy";
+    defineDefaultDisplayUnit("L2.M/(A.T)", "J.s/rad") "Rotational momentum";
+    defineDefaultDisplayUnit("T/N", "K/W") "Thermal resistance";
+    defineDefaultDisplayUnit("M/(L.T2)", "kPa") "Pressure";
+    defineDefaultDisplayUnit("L3/T", "L/min") "Rate of volume";
+    defineDefaultDisplayUnit("L3.M/(N2.T2)", "m/H")
+      "Reciprocal of permittivity";
+    defineDefaultDisplayUnit("L/N", "m/mol") "Specific length";
+    defineDefaultDisplayUnit("L/T2", "m/s2") "Acceleration";
     defineDefaultDisplayUnit("N2.T2/(L2.M)", "uF") "Capacitance";
-    defineDefaultDisplayUnit("N2.T2/(L3.M)", "F/m") "Permittivity";
+    defineDefaultDisplayUnit("L2.M/N2", "uH") "Inductance";
+    defineDefaultDisplayUnit("L.M/T2", "N") "Force";
+    defineDefaultDisplayUnit("L.M/(N.T)", "N/A") "Continuity";
+    defineDefaultDisplayUnit("L2.M/(N2.T)", "ohm") "Electrical resistance";
+    defineDefaultDisplayUnit("M/(L.T2.s)", "Pa/s")
+      "for derivative of pressure in Dymola";
+    defineDefaultDisplayUnit("M/(L.T3)", "Pa/s") "Rate of pressure";
+    defineDefaultDisplayUnit("M/(T2.L.s)", "Pa/s")
+      "for derivative of pressure in Dymola";
+    defineDefaultDisplayUnit("A", "rad") "Angle";
+    defineDefaultDisplayUnit("A/L", "rad/m") "Wavenumber";
+    defineDefaultDisplayUnit("A/T", "rad/s") "Frequency";
+    defineDefaultDisplayUnit("N2.T/(L2.M)", "S") "Electrical conductance";
     defineDefaultDisplayUnit("T", "s") "Time";
+    defineDefaultDisplayUnit("N2.T/(L3.M)", "S/m") "Electrical conductivity";
     defineDefaultDisplayUnit("T/L", "s/m") "Lineic time";
+    defineDefaultDisplayUnit("A2", "sr") "Solid angle";
+    defineDefaultDisplayUnit("L2/T2", "Sv") "Squared velocity";
+    defineDefaultDisplayUnit("M/(A.N.T)", "T") "Areic magnetic flux";
+    defineDefaultDisplayUnit("L2.M/(N.T2)", "V") "Potential";
+    defineDefaultDisplayUnit("L.M/(N.T2)", "V/m") "Specific force";
+    defineDefaultDisplayUnit("L2.M/(N.T2.s)", "V/s")
+      "for derivative of potential in Dymola";
+    defineDefaultDisplayUnit("L2.M/(N.T3)", "V/s") "Rate of potential";
+    defineDefaultDisplayUnit("L3.M/(A.N.T2)", "V.m/rad")
+      "Potential per wavenumber";
+    defineDefaultDisplayUnit("L2.M/T3", "W") "Power";
+    defineDefaultDisplayUnit("M/T3", "W/m2") "Areic power";
+    defineDefaultDisplayUnit("M.T5/L8", "W/(m2.K4)")
+      "Areic power per 4th power of potential";
+    defineDefaultDisplayUnit("L4.M/T3", "W.m2") "Power times area";
+    defineDefaultDisplayUnit("L2.M/(A.N.T)", "Wb") "Magnetic flux";
 
     // ------------------------------------------------------------------------
     // Conversions to display quantities in units
@@ -101,445 +104,45 @@ package Units "Constants and units of physical measure"
         "%",
         1/'%') "Number";
     defineUnitConversion(
-        "1",
-        "J/(mol.K)",
-        mol*K/J) "Absolute number";
+        "L2.M/(A2.T3)",
+        "cd",
+        1/'cd') "Radiant power";
     defineUnitConversion(
         "1/N",
         "1/C",
         C) "Reciprocal of amount";
     defineUnitConversion(
-        "1/N",
-        "1/mol",
-        mol) "Reciprocal of amount";
-    defineUnitConversion(
-        "A",
-        "degree",
-        1/degree) "Angle";
-    defineUnitConversion(
-        "A",
-        "rad",
-        1/rad) "Angle";
-    defineUnitConversion(
-        "A.N.T/(L2.M)",
-        "1/Wb",
-        Wb) "Reciprocal of magnetic flux";
-    defineUnitConversion(
-        "A/L",
-        "cyc/m",
-        m/cyc) "Wavenumber";
-    defineUnitConversion(
-        "A/L",
-        "rad/m",
-        m/rad) "Wavenumber";
-    defineUnitConversion(
-        "A/T",
-        "Hz",
-        1/Hz) "Frequency";
-    defineUnitConversion(
-        "A/T",
-        "rad/s",
-        s/rad) "Frequency";
-    defineUnitConversion(
-        "A2",
-        "sr",
-        1/sr) "Solid angle";
-    defineUnitConversion(
-        "L",
-        "cm",
-        1/cm) "Length";
-    defineUnitConversion(
-        "L",
-        "m",
-        1/m) "Length";
-    defineUnitConversion(
-        "L",
-        "mm",
-        1/mm) "Length";
-    defineUnitConversion(
-        "L.M/(N.T2)",
-        "V/m",
-        m/V) "Specific force";
-    defineUnitConversion(
-        "L.M/N2",
-        "H/m",
-        m/H) "Permeability";
-    defineUnitConversion(
-        "L.M/T2",
-        "N",
-        1/N) "Force";
-    defineUnitConversion(
-        "L.T/M",
-        "1/(Pa.s)",
-        Pa*s) "Fluidity";
-    defineUnitConversion(
-        "L.T/N",
-        "cm/A",
-        A/cm) "Resistivity";
-    defineUnitConversion(
-        "L.T/N",
-        "m/A",
-        A/m) "Resistivity";
-    defineUnitConversion(
-        "L.T/N",
-        "m.K/W",
-        W/(m*K)) "Resistivity";
-    defineUnitConversion(
         "L.T2/M",
         "1/kPa",
         kilo*Pa) "Reciprocal of pressure";
+    defineUnitConversion(
+        "1/L",
+        "1/m",
+        m) "Reciprocal of length";
+    defineUnitConversion(
+        "1/N",
+        "1/mol",
+        mol) "Reciprocal of amount";
     defineUnitConversion(
         "L.T2/M",
         "1/Pa",
         Pa) "Reciprocal of pressure";
     defineUnitConversion(
-        "L/(T.s)",
-        "cm/s2",
-        s/cm) "for derivative of velocity in Dymola";
-    defineUnitConversion(
-        "L/(T.s)",
-        "m/s2",
-        s/m) "for derivative of velocity in Dymola";
-    defineUnitConversion(
-        "L/N",
-        "m/C",
-        C/m) "Specific length";
-    defineUnitConversion(
-        "L/N",
-        "m/mol",
-        mol/m) "Specific length";
-    defineUnitConversion(
-        "L/T",
-        "cm/s",
-        s/cm) "Velocity";
-    defineUnitConversion(
-        "L/T",
-        "m/s",
-        s/m) "Velocity";
-    defineUnitConversion(
-        "L/T",
-        "mm/s",
-        s/mm) "Velocity";
-    defineUnitConversion(
-        "L/T",
-        "um/s",
-        s/um) "Velocity";
-    defineUnitConversion(
-        "L/T2",
-        "cm/s2",
-        s^2/cm) "Acceleration";
-    defineUnitConversion(
-        "L/T2",
-        "m/s2",
-        s^2/m) "Acceleration";
-    defineUnitConversion(
-        "L2",
-        "cm2",
-        1/cm^2) "Area";
-    defineUnitConversion(
-        "L2",
-        "m2",
-        1/m^2) "Area";
-    defineUnitConversion(
-        "L2.M/(A.N.T)",
-        "Wb",
-        1/Wb) "Magnetic flux";
-    defineUnitConversion(
-        "L2.M/(A.T)",
-        "J.s/rad",
-        rad/(J*s)) "Rotational momentum";
-    defineUnitConversion(
-        "L2.M/(A2.T3)",
-        "cd",
-        1/'cd') "Radiant power";
-    defineUnitConversion(
-        "L2.M/(A2.T3)",
-        "W/sr",
-        sr/W) "Radiant power";
-    defineUnitConversion(
-        "L2.M/(N.T)",
-        "Pa.s",
-        1/(Pa*s)) "Viscosity";
-    defineUnitConversion(
-        "L2.M/(N.T2.s)",
-        "K/s",
-        1/K) "for derivative of potential in Dymola";
-    defineUnitConversion(
-        "L2.M/(N.T2.s)",
-        "V/s",
-        1/V) "for derivative of potential in Dymola";
-    defineUnitConversion(
-        "L2.M/(N.T2)",
-        "J/mol",
-        mol/J) "Potential";
-    defineUnitConversion(
-        "L2.M/(N.T2)",
-        "K",
-        1/K) "Absolute potential";
-    defineUnitConversion(
-        "L2.M/(N.T2)",
-        "kJ/mol",
-        mol/kJ) "Potential";
-    defineUnitConversion(
-        "L2.M/(N.T2)",
-        "V",
-        1/V) "Potential";
-    defineUnitConversion(
-        "L2.M/(N.T3)",
-        "K/s",
-        s/K) "Rate of potential";
-    defineUnitConversion(
-        "L2.M/(N.T3)",
-        "V/s",
-        s/V) "Rate of potential";
-    defineUnitConversion(
-        "L2.M/(N2.T)",
-        "ohm",
-        1/ohm) "Electrical resistance";
-    defineUnitConversion(
-        "L2.M/N2",
-        "H",
-        1/H) "Inductance";
-    defineUnitConversion(
-        "L2.M/N2",
-        "uH",
-        1/(micro*H)) "Inductance";
-    defineUnitConversion(
-        "L2.M/T2",
-        "J",
-        1/J) "Energy";
-    defineUnitConversion(
-        "L2.M/T3",
-        "lm",
-        1/lm) "Power";
-    defineUnitConversion(
-        "L2.M/T3",
-        "W",
-        1/W) "Power";
-    defineUnitConversion(
-        "L2/N",
-        "cm2/C",
-        C/cm^2) "Specific area";
-    defineUnitConversion(
-        "L2/N",
-        "cm2/mol",
-        mol/cm^2) "Specific area";
-    defineUnitConversion(
-        "L2/N",
-        "m2/C",
-        C/m^2) "Specific area";
-    defineUnitConversion(
-        "L2/N",
-        "m2/mol",
-        mol/m^2) "Specific area";
-    defineUnitConversion(
-        "L2/T",
-        "cm2/s",
-        s/cm^2) "Diffusivity";
-    defineUnitConversion(
-        "L2/T",
-        "m2/s",
-        s/m^2) "Diffusivity";
-    defineUnitConversion(
-        "L2/T",
-        "mm2/s",
-        s/mm^2) "Diffusivity";
-    defineUnitConversion(
-        "L2/T2",
-        "Sv",
-        1/Sv) "Squared velocity";
-    defineUnitConversion(
-        "L3",
-        "cc",
-        1/cc) "Volume";
-    defineUnitConversion(
-        "L3",
-        "L",
-        1/L) "Volume";
-    defineUnitConversion(
-        "L3",
-        "m3",
-        1/m^3) "Volume";
-    defineUnitConversion(
-        "L3.M/(A.N.T2)",
-        "K.m/rad",
-        rad/(K*m)) "Potential per wavenumber";
-    defineUnitConversion(
-        "L3.M/(A.N.T2)",
-        "V.m/rad",
-        rad/(V*m)) "Potential per wavenumber";
-    defineUnitConversion(
-        "L3.M/(N2.T2)",
-        "m/H",
-        H/m) "Reciprocal of permittivity";
-    defineUnitConversion(
-        "L3/(N.s)",
-        "cc/(C.s)",
-        C*s/cc) "for derivative of specific volume in Dymola";
-    defineUnitConversion(
-        "L3/(N.s)",
-        "m3/(C.s)",
-        C*s/m^3) "for derivative of specific volume in Dymola";
-    defineUnitConversion(
-        "L3/(N.s)",
-        "m3/(mol.s)",
-        mol*s/m^3) "for derivative of specific volume in Dymola";
-    defineUnitConversion(
-        "L3/(N.T)",
-        "cc/(C.s)",
-        C*s/cc) "Rate of specific volume";
-    defineUnitConversion(
-        "L3/(N.T)",
-        "m3/(C.s)",
-        C*s/m^3) "Rate of specific volume";
-    defineUnitConversion(
-        "L3/(N.T)",
-        "m3/(mol.s)",
-        mol*s/m^3) "Rate of specific volume";
-    defineUnitConversion(
-        "L3/N",
-        "cc/C",
-        C/cc) "Specific volume";
-    defineUnitConversion(
-        "L3/N",
-        "m3/C",
-        C/m^3) "Specific volume";
-    defineUnitConversion(
-        "L3/N",
-        "m3/mol",
-        mol/m^3) "Specific volume";
-    defineUnitConversion(
-        "L3/s",
-        "cc/s",
-        1/(centi*m)^3) "for derivative of volume in Dymola";
-    defineUnitConversion(
-        "L3/s",
-        "L/min",
-        min/(L*s)) "for derivative of volume in Dymola";
-    defineUnitConversion(
-        "L3/s",
-        "m3/s",
-        1/m^3) "for derivative of volume in Dymola";
-    defineUnitConversion(
-        "L3/T",
-        "cc/s",
-        s/cc) "Rate of volume";
-    defineUnitConversion(
-        "L3/T",
-        "L/min",
-        min/L) "Rate of volume";
-    defineUnitConversion(
-        "L3/T",
-        "m3/s",
-        s/m^3) "Rate of volume";
-    defineUnitConversion(
-        "L4.M/T3",
-        "W.m2",
-        1/(W*m^2)) "Power times area";
-    defineUnitConversion(
-        "M",
-        "g",
-        1/g) "Mass";
-    defineUnitConversion(
-        "M",
-        "kg",
-        1/kg) "Mass";
-    defineUnitConversion(
-        "M.T5/L8",
-        "W/(m2.K4)",
-        m^2*K^4/W) "Areic power per 4th power of potential";
-    defineUnitConversion(
-        "M/(A.N.T)",
-        "T",
-        1/T) "Areic magnetic flux";
-    defineUnitConversion(
-        "M/(L.T2.s)",
-        "Pa/s",
-        1/Pa) "for derivative of pressure in Dymola";
-    defineUnitConversion(
-        "M/(L.T2)",
-        "atm",
-        1/atm) "Pressure";
-    defineUnitConversion(
-        "M/(L.T2)",
-        "bar",
-        1/bar) "Pressure";
-    defineUnitConversion(
-        "M/(L.T2)",
-        "kPa",
-        1/(kilo*Pa)) "Pressure";
-    defineUnitConversion(
-        "M/(L.T2)",
-        "Pa",
-        1/Pa) "Pressure";
-    defineUnitConversion(
-        "M/(L.T3)",
-        "Pa/s",
-        s/Pa) "Rate of pressure";
-    defineUnitConversion(
-        "M/(T2.L.s)",
-        "Pa/s",
-        1/Pa) "for derivative of pressure in Dymola";
-    defineUnitConversion(
-        "M/L3",
-        "g/cc",
-        cc/g) "Volumic mass";
-    defineUnitConversion(
-        "M/L3",
-        "kg/m3",
-        m^3/kg) "Volumic mass";
-    defineUnitConversion(
-        "M/N",
-        "g/mol",
-        mol/g) "Specific mass";
-    defineUnitConversion(
-        "M/N",
-        "kg/mol",
-        mol/kg) "Specific mass";
-    defineUnitConversion(
-        "M/N",
-        "ug/C",
-        C/(micro*g)) "Specific mass";
-    defineUnitConversion(
-        "M/s",
-        "g/s",
-        s/g) "for derivative of mass in Dymola";
-    defineUnitConversion(
-        "M/s",
-        "kg/s",
-        s/kg) "for derivative of mass in Dymola";
-    defineUnitConversion(
-        "M/T3",
-        "lm/m2",
-        m^2/lm) "Areic power";
-    defineUnitConversion(
-        "M/T3",
-        "W/m2",
-        m^2/W) "Areic power";
-    defineUnitConversion(
-        "N",
-        "C",
-        1/C) "Amount";
-    defineUnitConversion(
-        "N",
-        "J/K",
-        K/J) "Amount";
-    defineUnitConversion(
-        "N",
-        "mol",
-        1/mol) "Amount";
-    defineUnitConversion(
-        "N",
-        "q",
-        1/q) "Amount";
-    defineUnitConversion(
-        "N.T/M",
-        "C.s/g",
-        g/(C*s)) "Mobility";
-    defineUnitConversion(
-        "N.T/M",
-        "cm2/(V.s)",
-        V*s/cm^2) "Mobility";
+        "L.T/M",
+        "1/(Pa.s)",
+        Pa*s) "Fluidity";
+    defineUnitConversion(
+        "A.N.T/(L2.M)",
+        "1/Wb",
+        Wb) "Reciprocal of magnetic flux";
+    defineUnitConversion(
+        "N/s",
+        "A",
+        1/C) "for derivative of amount in Dymola";
+    defineUnitConversion(
+        "N/T",
+        "A",
+        1/A) "Current";
     defineUnitConversion(
         "N/(L2.T)",
         "A/cm2",
@@ -557,6 +160,222 @@ package Units "Constants and units of physical measure"
         "A/m2",
         m^2/A) "Absolute areic current";
     defineUnitConversion(
+        "N/(T.s)",
+        "A/s",
+        1/A) "for derivative of current in Dymola";
+    defineUnitConversion(
+        "N/T2",
+        "A/s",
+        s/A) "Rate of current";
+    defineUnitConversion(
+        "L.N/T",
+        "A.m",
+        1/(A*m)) "VelocityAmount";
+    defineUnitConversion(
+        "M/(L.T2)",
+        "atm",
+        1/atm) "Pressure";
+    defineUnitConversion(
+        "M/(L.T2)",
+        "bar",
+        1/bar) "Pressure";
+    defineUnitConversion(
+        "N",
+        "C",
+        1/C) "Amount";
+    defineUnitConversion(
+        "N/L3",
+        "C/cc",
+        cc/C) "Density";
+    defineUnitConversion(
+        "N/(L3.T)",
+        "C/(cc.s)",
+        cc*s/C) "Rate of concentration";
+    defineUnitConversion(
+        "N/L3",
+        "C/m3",
+        m^3/C) "Density";
+    defineUnitConversion(
+        "N/(L3.T)",
+        "C/(m3.s)",
+        m^3*s/C) "Rate of concentration";
+    defineUnitConversion(
+        "N.T/M",
+        "C.s/g",
+        g/(C*s)) "Mobility";
+    defineUnitConversion(
+        "L3",
+        "cc",
+        1/cc) "Volume";
+    defineUnitConversion(
+        "L3/N",
+        "cc/C",
+        C/cc) "Specific volume";
+    defineUnitConversion(
+        "L3/(N.s)",
+        "cc/(C.s)",
+        C*s/cc) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
+        "L3/(N.T)",
+        "cc/(C.s)",
+        C*s/cc) "Rate of specific volume";
+    defineUnitConversion(
+        "L3/s",
+        "cc/s",
+        1/(centi*m)^3) "for derivative of volume in Dymola";
+    defineUnitConversion(
+        "L3/T",
+        "cc/s",
+        s/cc) "Rate of volume";
+    defineUnitConversion(
+        "L",
+        "cm",
+        1/cm) "Length";
+    defineUnitConversion(
+        "L.T/N",
+        "cm/A",
+        A/cm) "Resistivity";
+    defineUnitConversion(
+        "L/T",
+        "cm/s",
+        s/cm) "Velocity";
+    defineUnitConversion(
+        "L/(T.s)",
+        "cm/s2",
+        s/cm) "for derivative of velocity in Dymola";
+    defineUnitConversion(
+        "L/T2",
+        "cm/s2",
+        s^2/cm) "Acceleration";
+    defineUnitConversion(
+        "L.T/M",
+        "cm.s/g",
+        g/(cm*s)) "Fluidity";
+    defineUnitConversion(
+        "L2",
+        "cm2",
+        1/cm^2) "Area";
+    defineUnitConversion(
+        "L2/N",
+        "cm2/C",
+        C/cm^2) "Specific area";
+    defineUnitConversion(
+        "L2/N",
+        "cm2/mol",
+        mol/cm^2) "Specific area";
+    defineUnitConversion(
+        "L2/T",
+        "cm2/s",
+        s/cm^2) "Diffusivity";
+    defineUnitConversion(
+        "N.T/M",
+        "cm2/(V.s)",
+        V*s/cm^2) "Mobility";
+    defineUnitConversion(
+        "A/L",
+        "cyc/m",
+        m/cyc) "Wavenumber";
+    defineUnitConversion(
+        "T",
+        "day",
+        1/day) "Time";
+    defineUnitConversion(
+        "A",
+        "degree",
+        1/degree) "Angle";
+    defineUnitConversion(
+        "N2.T2/(L2.M)",
+        "F",
+        1/F) "Capacitance";
+    defineUnitConversion(
+        "N2.T2/(L3.M)",
+        "F/m",
+        m/F) "Permittivity";
+    defineUnitConversion(
+        "M",
+        "g",
+        1/g) "Mass";
+    defineUnitConversion(
+        "M/L3",
+        "g/cc",
+        cc/g) "Volumic mass";
+    defineUnitConversion(
+        "M/N",
+        "g/mol",
+        mol/g) "Specific mass";
+    defineUnitConversion(
+        "M/s",
+        "g/s",
+        s/g) "for derivative of mass in Dymola";
+    defineUnitConversion(
+        "L2.M/N2",
+        "H",
+        1/H) "Inductance";
+    defineUnitConversion(
+        "L.M/N2",
+        "H/m",
+        m/H) "Permeability";
+    defineUnitConversion(
+        "T",
+        "hr",
+        1/hr) "Time";
+    defineUnitConversion(
+        "A/T",
+        "Hz",
+        1/Hz) "Frequency";
+    defineUnitConversion(
+        "L2.M/T2",
+        "J",
+        1/J) "Energy";
+    defineUnitConversion(
+        "N",
+        "J/K",
+        K/J) "Amount";
+    defineUnitConversion(
+        "N/L3",
+        "J/(m3.K)",
+        m^3*K/J) "Density";
+    defineUnitConversion(
+        "L2.M/(N.T2)",
+        "J/mol",
+        mol/J) "Potential";
+    defineUnitConversion(
+        "1",
+        "J/(mol.K)",
+        mol*K/J) "Absolute number";
+    defineUnitConversion(
+        "L2.M/(A.T)",
+        "J.s/rad",
+        rad/(J*s)) "Rotational momentum";
+    defineUnitConversion(
+        "L2.M/(N.T2)",
+        "K",
+        1/K) "Absolute potential";
+    defineUnitConversion(
+        "L2.M/(N.T2.s)",
+        "K/s",
+        1/K) "for derivative of potential in Dymola";
+    defineUnitConversion(
+        "L2.M/(N.T3)",
+        "K/s",
+        s/K) "Rate of potential";
+    defineUnitConversion(
+        "T/N",
+        "K/W",
+        W/K) "Thermal resistance";
+    defineUnitConversion(
+        "L3.M/(A.N.T2)",
+        "K.m/rad",
+        rad/(K*m)) "Potential per wavenumber";
+    defineUnitConversion(
+        "N/s",
+        "kat",
+        1/mol) "for derivative of amount in Dymola";
+    defineUnitConversion(
+        "N/T",
+        "kat",
+        1/kat) "Current";
+    defineUnitConversion(
         "N/(L2.T)",
         "kat/cm2",
         cm^2/kat) "Areic current";
@@ -573,97 +392,166 @@ package Units "Constants and units of physical measure"
         "kat/m2",
         m^2/kat) "Absolute areic current";
     defineUnitConversion(
-        "N/(L3.T)",
-        "C/(cc.s)",
-        cc*s/C) "Rate of density";
-    defineUnitConversion(
-        "N/(L3.T)",
-        "C/(m3.s)",
-        m^3*s/C) "Rate of density";
-    defineUnitConversion(
-        "N/(L3.T)",
-        "M/s",
-        s/M) "Rate of density";
-    defineUnitConversion(
-        "N/(T.s)",
-        "A/s",
-        1/A) "for derivative of current in Dymola";
-    defineUnitConversion(
         "N/(T.s)",
         "kat/s",
         1/kat) "for derivative of current in Dymola";
-    defineUnitConversion(
-        "N/L3",
-        "C/cc",
-        cc/C) "Density";
-    defineUnitConversion(
-        "N/L3",
-        "C/m3",
-        m^3/C) "Density";
-    defineUnitConversion(
-        "N/L3",
-        "M",
-        1/M) "Density";
-    defineUnitConversion(
-        "N/s",
-        "A",
-        1/C) "for derivative of amount in Dymola";
-    defineUnitConversion(
-        "N/s",
-        "kat",
-        1/mol) "for derivative of amount in Dymola";
-    defineUnitConversion(
-        "N/s",
-        "W/K",
-        K/J) "for derivative of amount in Dymola";
-    defineUnitConversion(
-        "N/T",
-        "A",
-        1/A) "Current";
-    defineUnitConversion(
-        "N/T",
-        "kat",
-        1/kat) "Current";
-    defineUnitConversion(
-        "N/T",
-        "W/K",
-        K/W) "Current";
-    defineUnitConversion(
-        "N/T2",
-        "A/s",
-        s/A) "Rate of current";
     defineUnitConversion(
         "N/T2",
         "kat/s",
         s/kat) "Rate of current";
     defineUnitConversion(
-        "N2.T/(L2.M)",
-        "S",
-        1/S) "Electrical conductance";
+        "M",
+        "kg",
+        1/kg) "Mass";
     defineUnitConversion(
-        "N2.T/(L3.M)",
-        "S",
-        1/S) "Electrical conductivity";
+        "M/L3",
+        "kg/m3",
+        m^3/kg) "Volumic mass";
     defineUnitConversion(
-        "N2.T2/(L2.M)",
-        "F",
-        1/F) "Capacitance";
+        "M/N",
+        "kg/mol",
+        mol/kg) "Specific mass";
+    defineUnitConversion(
+        "M/s",
+        "kg/s",
+        s/kg) "for derivative of mass in Dymola";
+    defineUnitConversion(
+        "M/(L.T2)",
+        "kPa",
+        1/(kilo*Pa)) "Pressure";
+    defineUnitConversion(
+        "L2.M/(N.T2)",
+        "kJ/mol",
+        mol/kJ) "Potential";
+    defineUnitConversion(
+        "L3",
+        "L",
+        1/L) "Volume";
+    defineUnitConversion(
+        "L3/s",
+        "L/min",
+        min/(L*s)) "for derivative of volume in Dymola";
+    defineUnitConversion(
+        "L3/T",
+        "L/min",
+        min/L) "Rate of volume";
+    defineUnitConversion(
+        "L2.M/T3",
+        "lm",
+        1/lm) "Power";
+    defineUnitConversion(
+        "M/T3",
+        "lm/m2",
+        m^2/lm) "Areic power";
+    defineUnitConversion(
+        "N/L3",
+        "M",
+        1/M) "Density";
+    defineUnitConversion(
+        "L",
+        "m",
+        1/m) "Length";
+    defineUnitConversion(
+        "L.T/N",
+        "m/A",
+        A/m) "Resistivity";
+    defineUnitConversion(
+        "L/N",
+        "m/C",
+        C/m) "Specific length";
+    defineUnitConversion(
+        "L3.M/(N2.T2)",
+        "m/H",
+        H/m) "Reciprocal of permittivity";
+    defineUnitConversion(
+        "L/N",
+        "m/mol",
+        mol/m) "Specific length";
+    defineUnitConversion(
+        "N/(L3.T)",
+        "M/s",
+        s/M) "Rate of concentration";
+    defineUnitConversion(
+        "L/T",
+        "m/s",
+        s/m) "Velocity";
+    defineUnitConversion(
+        "L/(T.s)",
+        "m/s2",
+        s/m) "for derivative of velocity in Dymola";
+    defineUnitConversion(
+        "L/T2",
+        "m/s2",
+        s^2/m) "Acceleration";
+    defineUnitConversion(
+        "L.T/N",
+        "m.K/W",
+        W/(m*K)) "Resistivity";
+    defineUnitConversion(
+        "L2",
+        "m2",
+        1/m^2) "Area";
+    defineUnitConversion(
+        "L2/N",
+        "m2/C",
+        C/m^2) "Specific area";
+    defineUnitConversion(
+        "L2/N",
+        "m2/mol",
+        mol/m^2) "Specific area";
+    defineUnitConversion(
+        "L2/T",
+        "m2/s",
+        s/m^2) "Diffusivity";
+    defineUnitConversion(
+        "L3",
+        "m3",
+        1/m^3) "Volume";
+    defineUnitConversion(
+        "L3/N",
+        "m3/C",
+        C/m^3) "Specific volume";
+
+    defineUnitConversion(
+        "L3/(N.s)",
+        "m3/(C.s)",
+        C*s/m^3) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
+        "L3/(N.T)",
+        "m3/(C.s)",
+        C*s/m^3) "Rate of specific volume";
+    defineUnitConversion(
+        "L3/N",
+        "m3/mol",
+        mol/m^3) "Specific volume";
+    defineUnitConversion(
+        "L3/(N.s)",
+        "m3/(mol.s)",
+        mol*s/m^3) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
+        "L3/(N.T)",
+        "m3/(mol.s)",
+        mol*s/m^3) "Rate of specific volume";
+    defineUnitConversion(
+        "L3/s",
+        "m3/s",
+        1/m^3) "for derivative of volume in Dymola";
+    defineUnitConversion(
+        "L3/T",
+        "m3/s",
+        s/m^3) "Rate of volume";
     defineUnitConversion(
         "N2.T2/(L2.M)",
         "uF",
         1/(micro*F)) "Capacitance";
     defineUnitConversion(
-        "N2.T2/(L3.M)",
-        "F/m",
-        m/F) "Permittivity";
+        "M/N",
+        "ug/C",
+        C/(micro*g)) "Specific mass";
     defineUnitConversion(
-        "T",
-        "day",
-        1/day) "Time";
-    defineUnitConversion(
-        "T",
-        "hr",
-        1/hr) "Time";
+        "L2.M/N2",
+        "uH",
+        1/(micro*H)) "Inductance";
     defineUnitConversion(
         "T",
         "us",
@@ -677,13 +565,153 @@ package Units "Constants and units of physical measure"
         "min",
         1/min) "Time";
     defineUnitConversion(
+        "L",
+        "mm",
+        1/mm) "Length";
+    defineUnitConversion(
+        "L/T",
+        "mm/s",
+        s/mm) "Velocity";
+    defineUnitConversion(
+        "L2/T",
+        "mm2/s",
+        s/mm^2) "Diffusivity";
+    defineUnitConversion(
+        "N",
+        "mol",
+        1/mol) "Amount";
+    defineUnitConversion(
+        "L.N/T",
+        "mol.m/s",
+        s/(mol*m)) "VelocityAmount";
+    defineUnitConversion(
+        "L.M/T2",
+        "N",
+        1/N) "Force";
+    defineUnitConversion(
+        "L.M/(N.T)",
+        "N/A",
+        A/N) "Continuity";
+    defineUnitConversion(
+        "L2.M/(N2.T)",
+        "ohm",
+        1/ohm) "Electrical resistance";
+    defineUnitConversion(
+        "M/(L.T2)",
+        "Pa",
+        1/Pa) "Pressure";
+    defineUnitConversion(
+        "M/(L.T2.s)",
+        "Pa/s",
+        1/Pa) "for derivative of pressure in Dymola";
+    defineUnitConversion(
+        "M/(L.T3)",
+        "Pa/s",
+        s/Pa) "Rate of pressure";
+    defineUnitConversion(
+        "M/(T2.L.s)",
+        "Pa/s",
+        1/Pa) "for derivative of pressure in Dymola";
+    defineUnitConversion(
+        "N",
+        "q",
+        1/q) "Amount";
+    defineUnitConversion(
+        "A",
+        "rad",
+        1/rad) "Angle";
+    defineUnitConversion(
+        "A/L",
+        "rad/m",
+        m/rad) "Wavenumber";
+    defineUnitConversion(
+        "A/T",
+        "rad/s",
+        s/rad) "Frequency";
+    defineUnitConversion(
+        "N2.T/(L2.M)",
+        "S",
+        1/S) "Electrical conductance";
+    defineUnitConversion(
         "T",
         "s",
         1/s) "Time";
     defineUnitConversion(
+        "N2.T/(L3.M)",
+        "S/m",
+        m/S) "Electrical conductivity";
+    defineUnitConversion(
         "T/L",
         "s/m",
         m/s) "Lineic time";
+    defineUnitConversion(
+        "A2",
+        "sr",
+        1/sr) "Solid angle";
+    defineUnitConversion(
+        "L2/T2",
+        "Sv",
+        1/Sv) "Squared velocity";
+    defineUnitConversion(
+        "M/(A.N.T)",
+        "T",
+        1/T) "Areic magnetic flux";
+    defineUnitConversion(
+        "L/T",
+        "um/s",
+        s/um) "Velocity";
+    defineUnitConversion(
+        "L2.M/(N.T2)",
+        "V",
+        1/V) "Potential";
+    defineUnitConversion(
+        "L.M/(N.T2)",
+        "V/m",
+        m/V) "Specific force";
+    defineUnitConversion(
+        "L2.M/(N.T2.s)",
+        "V/s",
+        1/V) "for derivative of potential in Dymola";
+    defineUnitConversion(
+        "L2.M/(N.T3)",
+        "V/s",
+        s/V) "Rate of potential";
+    defineUnitConversion(
+        "L3.M/(A.N.T2)",
+        "V.m/rad",
+        rad/(V*m)) "Potential per wavenumber";
+    defineUnitConversion(
+        "L2.M/T3",
+        "W",
+        1/W) "Power";
+    defineUnitConversion(
+        "N/s",
+        "W/K",
+        K/J) "for derivative of amount in Dymola";
+    defineUnitConversion(
+        "N/T",
+        "W/K",
+        K/W) "Current";
+    defineUnitConversion(
+        "M/T3",
+        "W/m2",
+        m^2/W) "Areic power";
+    defineUnitConversion(
+        "M.T5/L8",
+        "W/(m2.K4)",
+        m^2*K^4/W) "Areic power per 4th power of potential";
+    defineUnitConversion(
+        "L2.M/(A2.T3)",
+        "W/sr",
+        sr/W) "Radiant power";
+    defineUnitConversion(
+        "L4.M/T3",
+        "W.m2",
+        1/(W*m^2)) "Power times area";
+    defineUnitConversion(
+        "L2.M/(A.N.T)",
+        "Wb",
+        1/Wb) "Magnetic flux";
     // -------- end from FCSys/Resources/quantities.xls
 
     // ------------------------------------------------------------------------

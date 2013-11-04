@@ -37,16 +37,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         // Electrical
         parameter Enumerations.ElectricalSpec electricalSpec=ElectricalSpec.voltage
           "Method of specification" annotation (Dialog(tab="Electrical"));
-        replaceable Modelica.Blocks.Sources.Ramp electricalSet(
-          offset=U.mA,
-          height=100*U.A,
-          duration=600) constrainedby Modelica.Blocks.Interfaces.SO "Setpoint"
-          annotation (
+        replaceable Modelica.Blocks.Sources.RealExpression electricalSet
+          constrainedby Modelica.Blocks.Interfaces.SO "Setpoint" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Electrical"),
           Placement(transformation(extent={{-30,-10},{-10,10}})));
         Q.Potential w "Voltage";
-        Q.ResistanceElectrical R "Resistance";
         Q.Power P "Power";
         //
         // Anode composition
@@ -113,7 +109,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         // Electrical
         // ----------
         // Relations
-        zI = R*w "**";
         P = w*zI;
         //
         // Setpoint
@@ -121,8 +116,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           zI = electricalSet.y;
         elseif electricalSpec == ElectricalSpec.voltage then
           w = electricalSet.y;
-        elseif electricalSpec == ElectricalSpec.resistance then
-          R = electricalSet.y;
         else
           // electricalSpec == ElectricalSpec.power
           P = electricalSet.y;
@@ -158,26 +151,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
     assuming the reactant is entirely consumed (complete utilization).</p></html>"));
       end TestConditions;
 
-      model TestStandEIS
-        "Test stand to perform electrochemical impedance spectroscopy"
-        extends TestStand(testConditions(final electricalSpec=ElectricalSpec.current,
-              final u_electrical=zI_large + zI_small_A*U.A));
-
-        parameter Q.Current zI_large=U.A "Large-signal current" annotation (
-            Dialog(__Dymola_label="<html><i>zJ</i><sub>large</sub></html>"));
-        Connectors.RealInput zI_small_A "Small-signal current in amperes";
-        Connectors.RealOutput w_V=w/U.V "Cell potential in volts";
-
-        annotation (Documentation(info="<html><p>This model modulates the electrical current applied to the cell 
-    according to an input.
-    The current is the sum of a steady-state large-signal current and a small-signal 
-    current introduced via the input <i>zI</i><sub>small A</sub>.</p>
-       
-    <p>For more information, please see the documentation in the
-    <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"));
-
-      end TestStandEIS;
-
       package Enumerations "Choices of options"
 
         extends Modelica.Icons.BasesPackage;
@@ -185,7 +158,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         type ElectricalSpec = enumeration(
             current "Current",
             voltage "Voltage",
-            resistance "Resistance",
             power "Power") "Ways to specify the electrical load";
         type FlowSpec = enumeration(
             stoich "Stoichiometric rate",
@@ -196,6 +168,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model TestStand "Simulate the fuel cell with prescribed conditions"
         import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
+        import DataH2 = FCSys.Characteristics.H2.Gas;
+        import DataH2O = FCSys.Characteristics.H2O.Gas;
+        import DataO2 = FCSys.Characteristics.O2.Gas;
         extends Modelica.Icons.Example;
 
         parameter Boolean inclLiq=false "Include liquid H2O";
@@ -204,8 +179,38 @@ package Assemblies "Combinations of regions (e.g., cells)"
         output Q.Potential w=cell.anFP.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
             1, Side.n] - cell.caFP.subregions[end, 1, 1].graphite.'e-'.g_boundaries[
             1, Side.p] if environment.analysis "Electrical potential";
+        output Q.PressureAbsolute p_an_in=sum(anSource.gas.H2.boundary.p +
+            anSource.gas.H2O.boundary.p) "Total pressure at the anode inlet";
+        output Q.PressureAbsolute p_ca_in=sum(caSource.gas.H2O.boundary.p +
+            caSource.gas.N2.boundary.p + caSource.gas.O2.boundary.p)
+          "Total pressure at the cathode inlet";
+        output Q.Pressure Deltap_an=testConditions.p - p_an_in
+          "Pressure difference down the anode channel";
+        output Q.Pressure Deltap_ca=testConditions.p - p_ca_in
+          "Pressure difference down the cathode channel";
+        output Q.Potential Deltaw_O2=(DataO2.g(caSource[1, 1].gas.O2.boundary.T,
+            caSource[1, 1].gas.O2.boundary.p) - cell.caCL.subregions[1, 1, 1].gas.O2.g)
+            /4 if environment.analysis "Voltage loss due to O2 supply";
+        output Q.Potential Deltaw_H2O=(DataH2O.g(caSource[1, 1].gas.H2O.boundary.T,
+            caSource[1, 1].gas.H2O.boundary.p) - cell.caCL.subregions[1, 1, 1].gas.H2O.g)
+            /2 if environment.analysis "Voltage loss due to H2O removal";
+        output Q.Potential Deltaw_H2=(DataH2.g(anSource[1, 1].gas.H2.boundary.T,
+            anSource[1, 1].gas.H2.boundary.p) - cell.anCL.subregions[1, 1, 1].gas.H2.g)
+            /2 if environment.analysis "Voltage loss due to H2 supply";
+        output Q.Potential 'Deltaw_e-'=cell.caFP.subregions[1, 1, 1].graphite.
+            'e-'.g_boundaries[1, Side.p] - cell.caCL.subregions[1, 1, 1].graphite.
+            'e-'.g + cell.anCL.subregions[1, 1, 1].graphite.'e-'.g - cell.anFP.subregions[
+            1, 1, 1].graphite.'e-'.g_boundaries[1, Side.n] if environment.analysis
+          "Voltage loss due to e- transport";
+        output Q.Potential 'Deltaw_H+'=cell.anCL.subregions[1, 1, 1].ionomer.
+            'H+'.g - cell.caCL.subregions[1, 1, 1].ionomer.'H+'.g if
+          environment.analysis "Voltage loss due to H+ transport";
+        output Q.Potential Deltaw_an=cell.anCL.subregions[1, 1, 1].dielectric.w
+          if environment.analysis "Anode overpotential";
+        output Q.Potential Deltaw_ca=-cell.caCL.subregions[1, 1, 1].dielectric.w
+          if environment.analysis "Anode overpotential";
 
-        inner Conditions.Environment environment(analysis=true, a={0,0,0})
+        inner Conditions.Environment environment(a={0,0,0}, analysis=true)
           "Environmental conditions"
           annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
 
@@ -282,7 +287,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             H2O(materialSet(y=fill(
                           testConditions.p,
                           cell.anFP.n_x,
-                          cell.anFP.n_z) - anSink.gas.H2.p)),
+                          cell.n_z) - anSink.gas.H2.p)),
             H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* cell.anFP.subregions[
                     :, cell.anFP.n_y, :].gas.H2O.v ./ cell.anFP.subregions[:,
                     cell.anFP.n_y, :].gas.H2.v), redeclare each function
@@ -316,11 +321,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
             inclO2=true,
             inclN2=true,
             inclH2O=true,
-            O2(materialSet(y=-testConditions.I_an/4), thermalSet(y=
+            O2(materialSet(y=-testConditions.I_ca/4), thermalSet(y=
                     testConditions.T)),
-            N2(materialSet(y=-(testConditions.I_an/4)*testConditions.psi_N2/
+            N2(materialSet(y=-(testConditions.I_ca/4)*testConditions.psi_N2/
                     testConditions.psi_O2), thermalSet(y=testConditions.T)),
-            H2O(materialSet(y=-(testConditions.I_an/4)*testConditions.psi_H2O_ca
+            H2O(materialSet(y=-(testConditions.I_ca/4)*testConditions.psi_H2O_ca
                     /testConditions.psi_O2),thermalSet(y=testConditions.T))))
           annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
@@ -335,8 +340,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             H2O(materialSet(y=fill(
                           testConditions.p,
                           cell.caFP.n_x,
-                          cell.caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
-
+                          cell.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
             N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* cell.caFP.subregions[
                     :, cell.caFP.n_y, :].gas.H2O.v ./ cell.caFP.subregions[:,
                     cell.caFP.n_y, :].gas.N2.v), redeclare function
@@ -355,45 +359,16 @@ package Assemblies "Combinations of regions (e.g., cells)"
               origin={56,4})));
 
         TestConditions testConditions(
-          zI=-sum(caBC.graphite.'e-'.boundary.Ndot),
-          electricalSpec=FCSys.Assemblies.Cells.Examples.Enumerations.ElectricalSpec.resistance,
-
-          electricalSet(
+          final zI=-sum(caBC.graphite.'e-'.boundary.Ndot),
+          electricalSpec=ElectricalSpec.current,
+          redeclare replaceable Modelica.Blocks.Sources.Ramp electricalSet(
+            offset=U.mA,
             startTime=100,
-            height=1e-4*U.S,
-            offset=1e-10*U.S)) "Test conditions" annotation (Dialog, Placement(
-              transformation(extent={{10,10},{30,30}})));
+            height=100*U.A,
+            duration=600)) annotation (Dialog, Placement(transformation(extent=
+                  {{10,10},{30,30}})));
 
       protected
-        Q.Velocity phi_states[:](
-          each stateSelect=StateSelect.always,
-          each start=0,
-          each fixed=true) = {cell.anFP.subregions[1, 1, 1].gas.H2.phi[1],cell.anFP.subregions[
-          1, 1, 1].gas.H2O.phi[1],cell.caFP.subregions[1, 1, 1].gas.H2O.phi[1],
-          cell.caFP.subregions[1, 1, 1].gas.N2.phi[1],cell.caFP.subregions[1, 1,
-          1].gas.O2.phi[1],cell.caGDL.subregions[1, 1, 1].gas.O2.phi[1],cell.PEM.subregions[
-          1, 1, 1].ionomer.H2O.phi[1],cell.caGDL.subregions[1, 1, 1].gas.H2O.phi[
-          1],cell.caGDL.subregions[1, 1, 1].gas.N2.phi[1],cell.anGDL.subregions[
-          1, 1, 1].gas.H2O.phi[1],cell.anGDL.subregions[1, 1, 1].gas.H2.phi[1],
-          cell.anCL.subregions[1, 1, 1].ionomer.H2O.phi[1]}
-          "Velocities for state selection";
-
-        // Note:  These must be forced to avoid dynamic state selection in Dymola 2014.
-        Q.Velocity phi_states_liq[:](
-          each stateSelect=StateSelect.always,
-          each start=0,
-          each fixed=true) = {cell.anGDL.subregions[1, 1, 1].liquid.H2O.phi[1],
-          cell.anFP.subregions[1, 1, 1].liquid.H2O.phi[1],cell.caFP.subregions[
-          1, 1, 1].liquid.H2O.phi[1],cell.caGDL.subregions[1, 1, 1].liquid.H2O.phi[
-          1]} if inclLiq "Liquid velocities for state selection";
-        Q.Current Ndot_states[:](
-          each stateSelect=StateSelect.always,
-          each start=0,
-          each fixed=true) = {cell.anFP.subregions[1, 1, 1].gas.H2O.boundaries[
-          2, 2].Ndot,cell.caFP.subregions[1, 1, 1].gas.H2O.boundaries[2, 2].Ndot,
-          cell.caCL.subregions[1, 1, 1].ORR.'e-'.reaction.Ndot}
-          "Currents for state selection";
-
         Q.Pressure p_ca_elec "Electronic pressure on the cathode";
         Conditions.Router anRouter[cell.anFP.n_x, cell.n_z] annotation (Dialog,
             Placement(transformation(
@@ -405,8 +380,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{10,-10},{-10,10}},
               rotation=0,
               origin={48,-20})));
-      equation
 
+      equation
         testConditions.w = 'Datae-'.g(testConditions.T, U.bar) - 'Datae-'.g(
           testConditions.T, p_ca_elec);
 
@@ -487,13 +462,61 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStand-states.mos"
               "Assemblies.Cells.Examples.TestStand-states.mos"),
           experiment(
-            StopTime=600,
-            Tolerance=1e-005,
+            StopTime=700,
+            Tolerance=1e-006,
             __Dymola_Algorithm="Dassl"),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},
                   {80,40}}), graphics),
           __Dymola_experimentSetupOutput);
       end TestStand;
+
+      model TestStandO2
+        "Simulate the fuel cell with prescribed conditions, with pure oxygen"
+        extends TestStand(
+          p_ca_in=sum(caSource.gas.H2O.boundary.p + caSource.gas.O2.boundary.p),
+
+          cell(final inclN2=false),
+          testConditions(final psi_O2_dry=1),
+          caSource(gas(each final inclN2=false)),
+          caSink(gas(H2O(materialSet(y=fill(
+                            testConditions.p,
+                            cell.anFP.n_x,
+                            cell.n_z) - caSink.gas.O2.p)), each final inclN2=
+                  false)));
+
+        annotation (experiment(StopTime=700, Tolerance=1e-005),
+            __Dymola_experimentSetupOutput);
+      end TestStandO2;
+
+      model TestStandVoltage "**"
+        extends TestStand(
+          testConditions(electricalSpec=ElectricalSpec.voltage, electricalSet(
+              startTime=100,
+              height=-U.V,
+              offset=1.2048*U.V)),
+          cell(PEM(subregions(ionomer(each 'H+'(phi(each stateSelect=
+                          StateSelect.always)))))),
+          anSource(each gas(H2(materialSet(y=-firstOrder.y/2)), H2O(materialSet(
+                    y=-(firstOrder.y/2)*(testConditions.psi_H2O_an/
+                      testConditions.psi_H2))))),
+          caSource(each gas(
+              O2(materialSet(y=-firstOrder1.y/4)),
+              N2(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_N2/
+                      testConditions.psi_O2)),
+              H2O(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_H2O_ca/
+                      testConditions.psi_O2)))));
+
+        Modelica.Blocks.Continuous.FirstOrder firstOrder(T=1, initType=Modelica.Blocks.Types.Init.InitialOutput)
+          annotation (Placement(transformation(extent={{-6,-66},{14,-46}})));
+        Modelica.Blocks.Continuous.FirstOrder firstOrder1(
+          T=1,
+          initType=Modelica.Blocks.Types.Init.InitialOutput,
+          y_start=0)
+          annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
+      equation
+        firstOrder.u = testConditions.I_an;
+        firstOrder1.u = testConditions.I_ca;
+      end TestStandVoltage;
     end Examples;
 
     model Cell "Single-cell PEMFC"
@@ -512,8 +535,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions across the channel";
 
       // Assumptions
-      parameter Boolean inclLiq=false "Include liquid H2O" annotation (Dialog(
-            tab="Assumptions", compact=true), choices(__Dymola_checkBox=true));
+      parameter Boolean inclLiq=false "<html>Include H<sub>2</sub>O</html>"
+        annotation (Dialog(tab="Assumptions", compact=true), choices(
+            __Dymola_checkBox=true));
+      parameter Boolean inclN2=true "<html>Include N<sub>2</sub></html>"
+        annotation (Dialog(tab="Assumptions", compact=true), choices(
+            __Dymola_checkBox=true));
 
       Connectors.BoundaryBus an[n_y, n_z] "Interface with the anode end plate"
         annotation (Placement(transformation(extent={{-100,-20},{-80,0}},
@@ -587,24 +614,27 @@ package Assemblies "Combinations of regions (e.g., cells)"
       replaceable Regions.CaCLs.CaCL caCL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq))) "Cathode catalyst layer"
-        annotation (
+        subregions(each liquid(inclH2O=inclLiq), gas(each inclN2=inclN2,each O2
+              (p_IC=environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
+        "Cathode catalyst layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{0,-20},{20,0}})));
       replaceable Regions.CaGDLs.CaGDL caGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq))) "Cathode gas diffusion layer"
-        annotation (
+        subregions(each liquid(inclH2O=inclLiq), gas(each inclN2=inclN2,each O2
+              (p_IC=environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
+        "Cathode gas diffusion layer" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{20,-20},{40,0}})));
       replaceable Regions.CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq))) "Cathode flow plate"
-        annotation (
+        subregions(each liquid(inclH2O=inclLiq), gas(each inclN2=inclN2,each O2
+              (p_IC=environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
+        "Cathode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{40,-20},{60,0}})));
@@ -685,37 +715,43 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}),
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -736,9 +772,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions across the channel";
 
       // Assumptions
-      parameter Boolean inclLiq=false "Include liquid H2O" annotation (Dialog(
-            tab="Assumptions", compact=true), choices(__Dymola_checkBox=true));
-
+      parameter Boolean inclLiq=false "<html>Include H<sub>2</sub>O</html>"
+        annotation (Dialog(tab="Assumptions", compact=true), choices(
+            __Dymola_checkBox=true));
+      parameter Boolean inclN2=true "<html>Include N<sub>2</sub></html>"
+        annotation (Dialog(tab="Assumptions", compact=true), choices(
+            __Dymola_checkBox=true));
+      // **N2 params
       Connectors.BoundaryBus an[n_y, n_z] "Interface with the anode end plate"
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
@@ -805,15 +845,17 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.CaCLs.CaCGDL caCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq)))
+        subregions(each liquid(inclH2O=inclLiq),each gas(inclN2=inclN2,O2(p_IC=
+                  environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{0,-20},{20,0}})));
 
       replaceable Regions.CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq))) "Cathode flow plate"
-        annotation (
+        subregions(each liquid(inclH2O=inclLiq),each gas(inclN2=inclN2,O2(p_IC=
+                  environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
+        "Cathode flow plate" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{20,-20},{40,0}})));
@@ -888,38 +930,71 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}));
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
     end SimpleCell;
+
+    model Math
+      import ln = Modelica.Math.log;
+      Real a=time "Activity (p_H2Og/p_sat)";
+      Real lambda=springer(a) "Hydration";
+
+      Real lna=time "Natural log of activity";
+      Real lnlambda=ln(springer(exp(lna))) "Natural log of hydration";
+      parameter Real lnlambda_sat=ln(springer(1))
+        "Natural log of hydration in equil with saturated vapor";
+      Real lnlambdastar=(ln(springer(exp(lna))) - lnlambda_sat)/(ln(springer(
+          exp(1))) - lnlambda_sat) "Compare to time";
+      Real lna_check "Should match lna";
+
+      function springer
+        input Real a;
+        output Real lambda;
+      algorithm
+        lambda := 0.043 + 17.81*a - 39.85*a^2 + 36*a^3;
+      end springer;
+
+    equation
+      springer(exp(lna_check)) = exp(lnlambda);
+
+      annotation (experiment(Tolerance=1e-006, __Dymola_Algorithm="Dassl"),
+          __Dymola_experimentSetupOutput);
+    end Math;
   end Cells;
   annotation (Documentation(info="
 <html>

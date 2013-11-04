@@ -917,6 +917,41 @@ package WorkInProgress "Incomplete classes under development"
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -100},{100,100}}), graphics));
   end SubregionsExamplesCapacitor;
+
+  model AssembliesCellsExamplesTestStandEIS
+    "Test stand to perform electrochemical impedance spectroscopy"
+    extends Assemblies.Cells.Examples.TestStand(redeclare
+        Assemblies.Cells.Examples.TestConditions testConditions(final
+          electricalSpec=ElectricalSpec.current, electricalSet(y=zI_large +
+              firstOrder.y*U.A)));
+
+    parameter Q.Current zI_large=50*U.A "Large-signal current" annotation (
+        Dialog(__Dymola_label="<html><i>zJ</i><sub>large</sub></html>"));
+    Connectors.RealInput zI_small_A "Small-signal current in amperes"
+      annotation (Placement(transformation(extent={{-24,-66},{-4,-46}})));
+    Connectors.RealOutput w_V=w/U.V "Cell potential in volts";
+
+    Modelica.Blocks.Continuous.FirstOrder firstOrder(
+      initType=Modelica.Blocks.Types.Init.InitialOutput,
+      y_start=0,
+      T=1e-8)
+      annotation (Placement(transformation(extent={{-24,-66},{-4,-46}})));
+  equation
+    connect(firstOrder.u, zI_small_A) annotation (Line(
+        points={{-26,-56},{-20,-56},{-20,-56},{-14,-56}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Documentation(info="<html><p>This model modulates the electrical current applied to the cell 
+    according to an input.
+    The current is the sum of a steady-state large-signal current and a small-signal 
+    current introduced via the input <i>zI</i><sub>small A</sub>.</p>
+       
+    <p>For more information, please see the documentation in the
+    <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},{
+              80,40}}), graphics));
+
+  end AssembliesCellsExamplesTestStandEIS;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

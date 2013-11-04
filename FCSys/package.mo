@@ -24,7 +24,7 @@ import FCSys.Species.Enumerations.Axis;
 import FCSys.Species.Enumerations.Orient;
 import FCSys.Species.Enumerations.Side;
 import FCSys.Species.Enumerations.ConsThermo;
-import FCSys.Species.Enumerations.ConsMom;
+import FCSys.Species.Enumerations.ConsTrans;
 import FCSys.Species.Enumerations.Init;
 
 

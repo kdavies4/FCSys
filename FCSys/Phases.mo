@@ -183,8 +183,10 @@ package Phases "Mixtures of species"
         __Dymola_descriptionLabel=true,
         __Dymola_label="<html>Hydrogen (H<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
-    replaceable FCSys.Species.H2.Gas.Fixed H2(final n_trans, final n_inter) if
-      inclH2 constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2.Gas.Fixed H2(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclH2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
@@ -210,8 +212,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Gas.Fixed H2O(final n_trans,final n_inter)
-      if inclH2O constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2O.Gas.Fixed H2O(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
@@ -237,8 +241,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Nitrogen (N<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.N2.Gas.Fixed N2(final n_trans,final n_inter) if
-      inclN2 constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.N2.Gas.Fixed N2(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclN2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
@@ -264,8 +270,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Oxygen (O<sub>2</sub>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.O2.Gas.Fixed O2(final n_trans,final n_inter) if
-      inclO2 constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.O2.Gas.Fixed O2(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclO2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
@@ -319,13 +327,13 @@ package Phases "Mixtures of species"
     output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
-    Connectors.Electrochemical connH2(final n_trans=n_trans) if inclH2
+    Connectors.Chemical connH2[1](each final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
               {-74,40},{-54,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
-    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
+    Connectors.Chemical connH2O[3](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-34,40},{-14,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Electrochemical connO2(final n_trans=n_trans) if inclO2
+    Connectors.Chemical connO2[1](each final n_trans=n_trans) if inclO2
       "Chemical connector for O2" annotation (Placement(transformation(extent={
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
@@ -356,15 +364,15 @@ package Phases "Mixtures of species"
           iconTransformation(extent={{100,18},{120,38}})));
   equation
     // Chemical exchange
-    connect(O2.electrochemical, connO2) annotation (Line(
+    connect(O2.chemical, connO2) annotation (Line(
         points={{56,9},{56,50}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2.electrochemical, connH2) annotation (Line(
+    connect(H2.chemical, connH2) annotation (Line(
         points={{-64,9},{-64,50}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.electrochemical, connH2O) annotation (Line(
+    connect(H2O.chemical, connH2O) annotation (Line(
         points={{-24,9},{-24,50}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -650,7 +658,7 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Electrons (e<sup>-</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_trans,final
+    replaceable FCSys.Species.'e-'.Graphite.Fixed 'e-'(final n_trans, final
         n_inter) if 'incle-' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_intra=1,
@@ -700,11 +708,10 @@ package Phases "Mixtures of species"
             extent={{-80,24},{-60,44}}), iconTransformation(extent={{70,-90},{
               90,-70}})));
 
-    Connectors.Electrochemical 'conne-'(final n_trans=n_trans) if 'incle-'
-      "Electrochemical connector for e-" annotation (Placement(transformation(
-            extent={{6,40},{26,60}}), iconTransformation(extent={{-10,-50},{10,
-              -30}})));
-    Connectors.Electrostatic electrostatic if 'incle-' and n_spec > 0
+    Connectors.Chemical 'conne-'[1](each final n_trans=n_trans) if 'incle-'
+      "Chemical connector for e-" annotation (Placement(transformation(extent={
+              {6,40},{26,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+    Connectors.Electrostatic electrostatic[1] if 'incle-' and n_spec > 0
       "Interface with the dielectric" annotation (Placement(transformation(
             extent={{60,24},{80,44}}), iconTransformation(extent={{90,-50},{110,
               -30}})));
@@ -740,7 +747,7 @@ package Phases "Mixtures of species"
           iconTransformation(extent={{48,-76},{68,-56}})));
   equation
     // Chemical exchange
-    connect('e-'.electrochemical, 'conne-') annotation (Line(
+    connect('e-'.chemical, 'conne-') annotation (Line(
         points={{16,9},{16,50}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -929,8 +936,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Protons (H<sup>+</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(final n_trans,final
-        n_inter) if 'inclH+' constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(
+      final n_trans,
+      final n_inter,
+      final n_chem) if 'inclH+' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_intra=2,
       n_inter=0,
@@ -956,8 +965,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(final n_trans,final n_inter)
-      if inclH2O constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_intra=2,
       n_inter=0,
@@ -1006,14 +1017,13 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-26},{100,-6}}), iconTransformation(
             extent={{-60,60},{-40,40}})));
-    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
+    Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-14,60},{6,80}}), iconTransformation(extent={{10,-50},{30,-30}})));
-    Connectors.Electrochemical 'connH+'(final n_trans=n_trans) if 'inclH+'
-      "Electrochemical connector for H+" annotation (Placement(transformation(
-            extent={{-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{
-              -10,-30}})));
-    Connectors.Electrostatic electrostatic if 'inclH+' and n_spec > 0
+    Connectors.Chemical 'connH+'[1](each final n_trans=n_trans) if 'inclH+'
+      "Chemical connector for H+" annotation (Placement(transformation(extent={
+              {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
+    Connectors.Electrostatic electrostatic[1] if 'inclH+' and n_spec > 0
       "Interface with the dielectric" annotation (Placement(transformation(
             extent={{-100,34},{-80,54}}), iconTransformation(extent={{-110,-50},
               {-90,-30}})));
@@ -1056,19 +1066,13 @@ package Phases "Mixtures of species"
           iconTransformation(extent={{48,-76},{68,-56}})));
   equation
     // Chemical exchange
-    connect(H2O.electrochemical, connH2O) annotation (Line(
+    connect(H2O.chemical, connH2O) annotation (Line(
         points={{-4,29},{-4,70}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.electrochemical, 'connH+') annotation (Line(
+    connect('H+'.chemical, 'connH+') annotation (Line(
         points={{-44,29},{-44,70}},
         color={221,23,47},
-        smooth=Smooth.None));
-
-    // Electrical storage
-    connect(electrostatic, 'H+'.electrostatic) annotation (Line(
-        points={{-90,44},{-47,44},{-47,27}},
-        color={255,195,38},
         smooth=Smooth.None));
 
     // Inert exchange
@@ -1253,6 +1257,12 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
+    // Electrical storage
+    connect(electrostatic, 'H+'.electrostatic) annotation (Line(
+        points={{-90,44},{-47,44},{-47,27}},
+        color={255,195,38},
+        smooth=Smooth.None));
+
     annotation (
       Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
@@ -1282,8 +1292,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.H2O.Liquid.Fixed H2O(final n_trans,final n_inter)
-      if inclH2O constrainedby FCSys.Species.Fluid(
+    replaceable FCSys.Species.H2O.Liquid.Fixed H2O(
+      final n_trans,
+      final n_inter,
+      final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
@@ -1329,7 +1341,7 @@ package Phases "Mixtures of species"
       "Connector for additivity of volume" annotation (Placement(transformation(
             extent={{-60,0},{-40,20}}), iconTransformation(extent={{70,-90},{90,
               -70}})));
-    Connectors.Electrochemical connH2O(final n_trans=n_trans) if inclH2O
+    Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-24,40},{-4,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -1340,7 +1352,7 @@ package Phases "Mixtures of species"
 
   equation
     // Chemical exchange
-    connect(H2O.electrochemical, connH2O) annotation (Line(
+    connect(H2O.chemical, connH2O) annotation (Line(
         points={{-14,-1},{-14,50}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1488,50 +1500,58 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end PartialPhase;
 
@@ -1577,19 +1597,23 @@ public
 <li>No heat capacity (follows from #1)</li>
 <li>The charges exist on parallel planes (used to calculate capacitance).</li> 
 </ol></p></html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics={Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{-20,0},{-50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{50,0},{20,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+              -100},{100,100}}), graphics={
+          Line(
+            points={{-20,30},{-20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{20,30},{20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,0},{-50,0}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{50,0},{20,0}},
+            color={255,195,38},
+            smooth=Smooth.None)}));
   end Dielectric;
   annotation (Documentation(info="
 <html><p>The graphite, ionomer, and
