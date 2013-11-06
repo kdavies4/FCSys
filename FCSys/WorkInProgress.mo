@@ -950,7 +950,6 @@ package WorkInProgress "Incomplete classes under development"
     <a href=\"modelica://FCSys.Conditions.TestStands.TestStand\">test stand</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},{
               80,40}}), graphics));
-
   end AssembliesCellsExamplesTestStandEIS;
   annotation (Commands(
       file="../../units.mos"

@@ -582,11 +582,16 @@ package Characteristics
     end Gas;
 
     package Ionomer "H2O in ionomer"
-      import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2O;
       extends Gas(
         b_v=[1],
         n_v={-1,0},
-        h_offset=-0.2688*U.V);
+        b_c=Gas.b_c + fill({0,0,1,-2*0.2580123533308264/U.K,6*
+            4.841882910380711e-4/U.K^2,-12*3.328156493413594e-7/U.K^3,0}, 2),
+        B_c=Gas.B_c + fill({0,47.15136731353458 - log('SO3-'.Ionomer.b_v[1, 1]*
+            U.atm/14)}, 2));
+      // These coefficients are based on the saturation pressure correlation
+      // (Eq. 15) from Springer1991.  The factor of 1/14 in the 2nd column of
+      // B_c gives lambda = 14 in equilibrium with saturated vapor.
 
       annotation (Documentation(info="<html>
         <p>Assumptions:
@@ -596,16 +601,6 @@ package Characteristics
 
   <p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
-
-      // TODO:  Map h_offset, b_v, b_c, and/or B_c using absorption data.
-      // The current setting (h_offset=-0.2688*U.V) is a hack (by trial and error)
-      // that reaches lambda ~= 14 in equilibrium with saturated vapor at 25 degC.
-      //
-      // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
-      // Nafion EW 1100 series:
-      //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
-      //     => lambda = 3.4855 in equilibrium with 50% RH gas @ 30 degC
-      //     => lambda = 14.003 in equilibrium with 100% RH gas @ 30 degC
 
     end Ionomer;
 
@@ -657,6 +652,70 @@ package Characteristics
       p_sat := Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa;
       annotation (Inline=true);
     end p_sat;
+
+    model Math "**temp"
+      import ln = Modelica.Math.log;
+      import FCSys;
+      Real a=time "Activity (p_H2Og/p_sat)";
+      Real lambda=FCSys.Characteristics.H2O.springer(a) "Hydration";
+
+      Real lna=time "Natural log of activity";
+      Real lnlambda=ln(FCSys.Characteristics.H2O.springer(exp(lna)))
+        "Natural log of hydration";
+      parameter Real lnlambda_sat=ln(FCSys.Characteristics.H2O.springer(1))
+        "Natural log of hydration in equil with saturated vapor";
+      Real lnlambdastar=(ln(FCSys.Characteristics.H2O.springer(exp(lna))) -
+          lnlambda_sat)/(ln(FCSys.Characteristics.H2O.springer(exp(1))) -
+          lnlambda_sat) "Compare to time";
+      Real lna_check "Should match lna";
+
+    equation
+      FCSys.Characteristics.H2O.springer(exp(lna_check)) = exp(lnlambda);
+
+      annotation (experiment(Tolerance=1e-006, __Dymola_Algorithm="Dassl"),
+          __Dymola_experimentSetupOutput);
+    end Math;
+
+    function springer
+      input Real a;
+      output Real lambda;
+    algorithm
+      lambda := 0.043 + 17.81*a - 39.85*a^2 + 36*a^3;
+    end springer;
+
+    function p_sat2
+      "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
+      extends Modelica.Icons.Function;
+
+      input Q.TemperatureAbsolute T "Temperature";
+      output Q.PressureAbsolute lnp_sat[4] "Saturation pressure";
+    protected
+      Real T_degC;
+    algorithm
+      T_degC := -273.15^3 + (273.15^2 + 2*273.15^2)*T/U.K - (2*273.15 + 273.15)
+        *(T/U.K)^2 + (T/U.K)^3;
+
+      lnp_sat := fill(log(10), 4) .* {-2.1794 - 0.02953*273.15 - 9.1837e-5*
+        273.15^2 - 1.4454e-7*273.15^3,(0.02953 + 9.1837e-5*2*273.15 + 1.4454e-7
+        *(273.15^2 + 2*273.15^2)),-(9.1837e-5 + 1.4454e-7*(2*273.15 + 273.15)),
+        1.4454e-7};
+      annotation (Inline=true);
+
+      /*
+    T_degC := 273.15^2*T/U.K - (2*273.15 + 273.15)*(T/U.K)^2 + (T/U.K)^3 - 273.15*
+    273.15^2 + 273.15*2*273.15*T/U.K;
+
+  p_sat := 10^(-2.1794 - 0.02953*273.15 - 9.1837e-5*273.15^2 + (0.02953 + 9.1837e-5
+    *2*273.15)*T/U.K - 9.1837e-5*(T/U.K)^2 + 1.4454e-7*T_degC)*U.bar;
+
+
+  lnp_sat := log(10)*{-2.1794 - 0.02953*273.15 - 1.4454e-7*273.15^3 - 9.1837e-5*
+    273.15^2,(0.02953 + 9.1837e-5*2*273.15 + 1.4454e-7*3*273.15^2),(9.1837e-5 +
+    1.4454e-7*(2*273.15 + 273.15)),1.4454e-7}*{1,(T/U.K),(T/U.K)^3,(T/U.K)^3}*U.bar;
+*/
+
+      //p_sat := Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa;
+    end p_sat2;
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"

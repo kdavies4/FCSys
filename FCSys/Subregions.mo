@@ -38,7 +38,6 @@ package Subregions
 
       model Hydration
         "<html>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</html>"
-
         extends Examples.Subregion(
           'inclSO3-'=true,
           inclH2O=true,
@@ -51,14 +50,15 @@ package Subregions
               oneTemperature=true,
               inclH2O=true,
               'SO3-'(consEnergy=ConsThermo.IC,T_IC=environment.T),
-              H2O(lambda_IC=8))));
+              H2O(lambda_IC=8))),
+          environment(T=333.15*U.K, RH=1));
 
         annotation (
           Documentation(info="<html><p>The water vapor is held at saturation pressure at the environmental temperature
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
   comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
   </p></html>"),
-          experiment(StopTime=30),
+          experiment(StopTime=1e-005),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
               "Subregions.Examples.PhaseChange.Hydration.mos"),
@@ -72,6 +72,8 @@ package Subregions
         "<html>Evaluate the saturation pressure curve of H<sub>2</sub>O by varying temperature</html>"
         extends SaturationPressureIdeal(subregion(gas(H2O(redeclare package
                   Data = FCSys.Characteristics.H2O.Gas))));
+        import FCSys.Characteristics.H2O.Liquid;
+        import FCSys.Characteristics.H2O.Gas;
 
         annotation (
           Commands(file=
@@ -79,6 +81,12 @@ package Subregions
               "Subregions.Examples.PhaseChange.SaturationPressure.mos"),
           experiment(StopTime=86400, Tolerance=1e-006),
           __Dymola_experimentSetupOutput);
+
+        Q.Pressure p_sat2;
+
+      equation
+        Liquid.g(subregion.gas.H2O.T, p_sat2) = Gas.g(subregion.gas.H2O.T,
+          p_sat2);
 
       end SaturationPressure;
 
@@ -139,8 +147,91 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"
               "Subregions.Examples.PhaseChange.SaturationPressureIdeal.mos"),
           __Dymola_experimentSetupOutput);
-
       end SaturationPressureIdeal;
+
+      model EquilibriumHydration
+        "<html>**Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</html>"
+        parameter Q.PressureAbsolute p_sat=Characteristics.H2O.p_sat(
+            environment.T) "Vapor saturation pressure";
+        output Q.Number a=subregion.gas.H2O.p/p_sat if environment.analysis
+          "Activity";
+        output Q.PressureAbsolute p0=FCSys.Characteristics.H2O.Ionomer.p0 if
+          environment.analysis "Reference pressure in the ionomer";
+        parameter Real Rprime=FCSys.Characteristics.H2O.Ionomer.b_v[1, 1] if
+          environment.analysis "Modified gas constant in the ionomer";
+        output Q.Number lambda_Springer=FCSys.Characteristics.H2O.springer(a)
+          if environment.analysis "Hydration according to Springer correlation";
+        extends Examples.Subregion(
+          'inclSO3-'=true,
+          inclH2O=true,
+          inclH2=false,
+          subregion(gas(H2O(
+                consEnergy=ConsThermo.IC,
+                N(stateSelect=StateSelect.always),
+                p_IC=humiditySet.offset*p_sat)), ionomer(
+              oneTemperature=true,
+              inclH2O=true,
+              'SO3-'(consEnergy=ConsThermo.IC,T_IC=environment.T),
+              H2O(lambda_IC=14))),
+          environment(T=303.15*U.K));
+        //initEnergy=Init.temperature,
+        //consMaterial=ConsThermo.IC,
+
+        // **
+        // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
+        // Nafion EW 1100 series:
+        //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
+        //     => lambda = 3.4855 in equilibrium with 50% RH gas @ 30 degC
+        //     => lambda = 14.003 in equilibrium with 100% RH gas @ 30 degC
+
+        FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC1(gas(inclH2O=
+                true, H2O(materialSet(y=humiditySet.y*p_sat), redeclare
+                function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure)))
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={-24,0})));
+
+        FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC2(gas(inclH2O=
+                true, H2O(materialSet(y=humiditySet.y*p_sat), redeclare
+                function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure)))
+          annotation (Placement(transformation(
+              extent={{-10,10},{10,-10}},
+              rotation=90,
+              origin={24,0})));
+
+        Modelica.Blocks.Sources.Ramp humiditySet(
+          height=-0.999,
+          offset=1,
+          duration=172800) "Set the relative humidity"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      equation
+        connect(BC1.boundary, subregion.xNegative) annotation (Line(
+            points={{-20,0},{-10,0}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(subregion.xPositive, BC2.boundary) annotation (Line(
+            points={{10,0},{20,0}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        annotation (
+          Documentation(info="<html><p>The water vapor is held at saturation pressure at the environmental temperature
+  Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
+  comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
+  </p></html>"),
+          experiment(StopTime=172800),
+          Commands(file=
+                "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.EquilibriumHydration.mos"
+              "Subregions.Examples.PhaseChange.EquilibriumHydration.mos"),
+          __Dymola_experimentSetupOutput,
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics));
+      end EquilibriumHydration;
     end PhaseChange;
 
     package Reactions "Examples of phase change"
@@ -314,7 +405,6 @@ package Subregions
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end ORR;
-
 
     end Reactions;
 
@@ -720,7 +810,6 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion

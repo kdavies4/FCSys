@@ -628,7 +628,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={2e10*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={1e13*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -653,10 +653,10 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
                 "<html>&lambda;<sub>IC</sub></html>"));
 
         // Auxiliary variables (for analysis)
-        Q.NumberAbsolute lambda(
+        output Q.NumberAbsolute lambda(
           start=lambda_IC,
           fixed=true,
-          stateSelect=StateSelect.never)
+          stateSelect=StateSelect.never) if environment.analysis
           "Ratio of H2O molecules to SO3- end-groups";
 
       equation
@@ -1024,7 +1024,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1515,6 +1514,8 @@ Choose any condition besides none.");
         tauprime[i]*chemical[i].Ndot = N_bulk*exp((1 - alpha[i])*chemical[i].g/
           T)*(exp(alpha[i]*(chemical[i].g - g)/T) - exp((alpha[i] - 1)*(
           chemical[i].g - g)/T));
+        // Note:  The activation energy has been factored out (a la Butler-
+        // Volmer) to improve the numerics.
       end if;
     end for;
 
@@ -1790,7 +1791,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected

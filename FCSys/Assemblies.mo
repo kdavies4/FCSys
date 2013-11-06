@@ -968,33 +968,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
               visible=inclX,
               thickness=0.5)}));
     end SimpleCell;
-
-    model Math
-      import ln = Modelica.Math.log;
-      Real a=time "Activity (p_H2Og/p_sat)";
-      Real lambda=springer(a) "Hydration";
-
-      Real lna=time "Natural log of activity";
-      Real lnlambda=ln(springer(exp(lna))) "Natural log of hydration";
-      parameter Real lnlambda_sat=ln(springer(1))
-        "Natural log of hydration in equil with saturated vapor";
-      Real lnlambdastar=(ln(springer(exp(lna))) - lnlambda_sat)/(ln(springer(
-          exp(1))) - lnlambda_sat) "Compare to time";
-      Real lna_check "Should match lna";
-
-      function springer
-        input Real a;
-        output Real lambda;
-      algorithm
-        lambda := 0.043 + 17.81*a - 39.85*a^2 + 36*a^3;
-      end springer;
-
-    equation
-      springer(exp(lna_check)) = exp(lnlambda);
-
-      annotation (experiment(Tolerance=1e-006, __Dymola_Algorithm="Dassl"),
-          __Dymola_experimentSetupOutput);
-    end Math;
   end Cells;
   annotation (Documentation(info="
 <html>
