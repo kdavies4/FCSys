@@ -51,6 +51,7 @@ package Characteristics
         annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
 
       // Conditions
+    protected
       Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
         "Temperature" annotation (Placement(transformation(extent={{-10,10},{10,
                 30}}), iconTransformation(extent={{-10,16},{10,36}})));
@@ -229,14 +230,133 @@ package Characteristics
       annotation (Diagram(graphics));
     end Properties;
 
-  end Examples;
+    model SaturationPressure
+      "<html>Evaluate the saturation pressure curve of H<sub>2</sub>O</html>"
+      import FCSys.Characteristics.H2O.Liquid;
+      import FCSys.Characteristics.H2O.Gas;
+      package IdealGas = FCSys.Characteristics.H2O.Gas (b_v=[1], n_v={-1,0});
 
-  package IdealGas "Ideal gas"
-    extends BaseClasses.CharacteristicEOS(final n_v={-1,0},final b_v=[1]);
-    annotation (defaultComponentPrefixes="replaceable", Documentation(info="<html>
-    <p>This package contains the pressure-volume-temperature relationship of an ideal gas.  Thermal
-    data (e.g., heat capacity) is not included.</p></html>"));
-  end IdealGas;
+      extends Modelica.Icons.Example;
+
+      Q.TemperatureAbsolute T "Temperature";
+      Q.PressureAbsolute p_sat(start=U.kPa)
+        "Saturation pressure via chemical equilibrium";
+      Q.PressureAbsolute p_sat_IG(start=U.kPa)
+        "Saturation pressure of ideal gas via chemical equilibrium";
+      output Q.PressureAbsolute p_sat_MSL=Characteristics.H2O.p_sat(T)
+        "Saturation pressure via Modelica.Media";
+      output Q.Number T_degC=U.to_degC(T) "Temperature in degree Celsius";
+
+      Modelica.Blocks.Sources.Ramp temperatureSet(
+        height=99*U.K,
+        duration=10,
+        offset=274.15*U.K)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      T = temperatureSet.y;
+      Liquid.g(T, p_sat) = Gas.g(T, p_sat);
+      Liquid.g(T, p_sat_IG) = IdealGas.g(T, p_sat_IG);
+
+      annotation (
+        Documentation(info=
+              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Condensation\">Subregions.Examples.PhaseChange.Condensation</a>.</p></html>"),
+
+        experiment(StopTime=10, Tolerance=1e-006),
+        Commands(file(ensureTranslated=true) =
+            "Resources/Scripts/Dymola/Characteristics.Examples.SaturationPressure.mos"
+            "Characteristics.Examples.SaturationPressure.mos"),
+        __Dymola_experimentSetupOutput);
+    end SaturationPressure;
+
+    model Hydration
+      "Evaluate the equilibrium hydration of the ionomer as a function of relative humidity"
+      extends Modelica.Icons.Example;
+      import Absorbed = FCSys.Characteristics.H2O.Ionomer;
+      package Gas = FCSys.Characteristics.H2O.Gas (b_v=[1], n_v={-1,0});
+      import Solid = FCSys.Characteristics.'SO3-'.Ionomer;
+      import FCSys.Characteristics.H2O.p_sat;
+
+      Q.Number RH "Relative humidity";
+      output Q.Number lambda=Solid.v_Tp()/Absorbed.v_Tp(environment.T, p_abs)
+        "Hydration due to chemical equilibrium";
+      output Q.Number lambda_Springer=FCSys.Characteristics.H2O.lambda_eq(RH)
+        if environment.analysis
+        "Hydration according to Springer et al. correlation";
+      Q.PressureAbsolute p_abs "H2O pressure in the ionomer";
+
+      Modelica.Blocks.Sources.Ramp humiditySet(
+        height=-0.999,
+        offset=1,
+        duration=10) "Set the relative humidity"
+        annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+
+      inner Conditions.Environment environment(T=303.15*U.K)
+        annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+
+    equation
+      RH = humiditySet.y;
+      Absorbed.g(environment.T, p_abs) = Gas.g(environment.T, RH*p_sat(
+        environment.T));
+
+      annotation (
+        Documentation(info=
+              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Hydration\">Subregions.Examples.PhaseChange.Hydration</a>.</p></html>"),
+
+        experiment(StopTime=10),
+        Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.Hydration.mos"
+            "Characteristics.Examples.Hydration.mos"),
+        __Dymola_experimentSetupOutput,
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
+    end Hydration;
+
+    model CellPotential
+      "<html>Evaluate the potential of an H<sub>2</sub>/O<sub>2</sub> cell as a function of temperature</html>"
+      import FCSys.Characteristics.H2O.Liquid;
+      import H2O = FCSys.Characteristics.H2O.Gas;
+      import H2 = FCSys.Characteristics.H2.Gas;
+      import O2 = FCSys.Characteristics.O2.Gas;
+      import H2OLiquid = FCSys.Characteristics.H2O.Liquid;
+      package H2OIG = FCSys.Characteristics.H2O.Gas (b_v=[1], n_v={-1,0});
+      package O2IG = FCSys.Characteristics.O2.Gas (b_v=[1], n_v={-1,0});
+      package H2IG = FCSys.Characteristics.H2.Gas (b_v=[1], n_v={-1,0});
+
+      extends Modelica.Icons.Example;
+
+      output Real T_degC=U.to_degC(T) "Temperature in deg C";
+      output Q.Potential w_gas=0.5*H2.g(T, environment.p_dry) + 0.25*O2.g(T,
+          environment.p_O2) - 0.5*H2O.g(T, environment.p_H2O)
+        "Cell potential with H2O as gas";
+      output Q.Potential w_IG=0.5*H2IG.g(T, environment.p_dry) + 0.25*O2IG.g(T,
+          environment.p_O2) - 0.5*H2OIG.g(T, environment.p_H2O)
+        "Cell potential with ideal gases";
+      output Q.Potential w_liq=0.5*H2.g(T, environment.p_dry) + 0.25*O2.g(T,
+          environment.p_O2) - 0.5*H2OLiquid.g(T, environment.p)
+        "Cell potential with H2O as liquid";
+
+      Q.TemperatureAbsolute T "Temperature";
+
+      Modelica.Blocks.Sources.Ramp temperatureSet(
+        height=99*U.K,
+        duration=10,
+        offset=274.15*U.K)
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      inner Conditions.Environment environment
+        annotation (Placement(transformation(extent={{-10,0},{10,20}})));
+    equation
+      T = temperatureSet.y;
+
+      annotation (
+        experiment(StopTime=10, Tolerance=1e-006),
+        Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.CellPotential.mos"
+            "Characteristics.Examples.CellPotential.mos"),
+        __Dymola_experimentSetupOutput);
+    end CellPotential;
+  end Examples;
 
   package 'C+' "<html>C<sup>+</sup></html>"
     extends Modelica.Icons.Package;
@@ -593,11 +713,12 @@ package Characteristics
       // (Eq. 15) from Springer1991.  The factor of 1/14 in the 2nd column of
       // B_c gives lambda = 14 in equilibrium with saturated vapor.
 
-      annotation (Documentation(info="<html>
-        <p>Assumptions:
-     <ol>
-  <li>The properties are the same as H<sub>2</sub>O gas.</li>
-     </ol></p>
+      annotation (Documentation(info="<html><p>The thermodynamic data is set such that the
+  density in equilibrium with H<sub>2</sub>O vapor will match the Springer et al. 
+   hydration curve
+  ([<a href=\"modelica://FCSys.UsersGuide.References\">Springer1991</a>], see <a href=\"modelica://FCSys.Characteristics.H2O.lambda_eq\">lambda_eq</a>())
+  at &lambda; = 14 and &lambda; = 0.
+  Otherwise, the properties are the same as H<sub>2</sub>O as an ideal gas.</p>
 
   <p>For more information, please see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package.</p></html>"));
@@ -653,69 +774,21 @@ package Characteristics
       annotation (Inline=true);
     end p_sat;
 
-    model Math "**temp"
-      import ln = Modelica.Math.log;
-      import FCSys;
-      Real a=time "Activity (p_H2Og/p_sat)";
-      Real lambda=FCSys.Characteristics.H2O.springer(a) "Hydration";
-
-      Real lna=time "Natural log of activity";
-      Real lnlambda=ln(FCSys.Characteristics.H2O.springer(exp(lna)))
-        "Natural log of hydration";
-      parameter Real lnlambda_sat=ln(FCSys.Characteristics.H2O.springer(1))
-        "Natural log of hydration in equil with saturated vapor";
-      Real lnlambdastar=(ln(FCSys.Characteristics.H2O.springer(exp(lna))) -
-          lnlambda_sat)/(ln(FCSys.Characteristics.H2O.springer(exp(1))) -
-          lnlambda_sat) "Compare to time";
-      Real lna_check "Should match lna";
-
-    equation
-      FCSys.Characteristics.H2O.springer(exp(lna_check)) = exp(lnlambda);
-
-      annotation (experiment(Tolerance=1e-006, __Dymola_Algorithm="Dassl"),
-          __Dymola_experimentSetupOutput);
-    end Math;
-
-    function springer
-      input Real a;
-      output Real lambda;
-    algorithm
-      lambda := 0.043 + 17.81*a - 39.85*a^2 + 36*a^3;
-    end springer;
-
-    function p_sat2
-      "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
+    function lambda_eq
+      "<html>Equilibrium hydration of ionomer in contact with vapor (&lambda;<sub>eq</sub>) as a function of relative humidity</html>"
       extends Modelica.Icons.Function;
 
-      input Q.TemperatureAbsolute T "Temperature";
-      output Q.PressureAbsolute lnp_sat[4] "Saturation pressure";
-    protected
-      Real T_degC;
+      input Q.NumberAbsolute RH "Relative humidity";
+      output Real lambda "Mole ratio of H2O to SO3-";
+
     algorithm
-      T_degC := -273.15^3 + (273.15^2 + 2*273.15^2)*T/U.K - (2*273.15 + 273.15)
-        *(T/U.K)^2 + (T/U.K)^3;
+      lambda := 0.043 + 17.81*RH - 39.85*RH^2 + 36*RH^3;
 
-      lnp_sat := fill(log(10), 4) .* {-2.1794 - 0.02953*273.15 - 9.1837e-5*
-        273.15^2 - 1.4454e-7*273.15^3,(0.02953 + 9.1837e-5*2*273.15 + 1.4454e-7
-        *(273.15^2 + 2*273.15^2)),-(9.1837e-5 + 1.4454e-7*(2*273.15 + 273.15)),
-        1.4454e-7};
-      annotation (Inline=true);
+      annotation (Documentation(info="<html><p>This implements the correlation by Springer et al. [<a href=\"modelica://FCSys.UsersGuid.References\">Springer1991</a>]
+  for the ratio of H<sub>2</sup></sub>O molecules to SO<sub>3</sub><sup>-</sup> units of
+  Nafion&reg; EW 1100 series ionomer.</p></html>"), Inline=true);
+    end lambda_eq;
 
-      /*
-    T_degC := 273.15^2*T/U.K - (2*273.15 + 273.15)*(T/U.K)^2 + (T/U.K)^3 - 273.15*
-    273.15^2 + 273.15*2*273.15*T/U.K;
-
-  p_sat := 10^(-2.1794 - 0.02953*273.15 - 9.1837e-5*273.15^2 + (0.02953 + 9.1837e-5
-    *2*273.15)*T/U.K - 9.1837e-5*(T/U.K)^2 + 1.4454e-7*T_degC)*U.bar;
-
-
-  lnp_sat := log(10)*{-2.1794 - 0.02953*273.15 - 1.4454e-7*273.15^3 - 9.1837e-5*
-    273.15^2,(0.02953 + 9.1837e-5*2*273.15 + 1.4454e-7*3*273.15^2),(9.1837e-5 +
-    1.4454e-7*(2*273.15 + 273.15)),1.4454e-7}*{1,(T/U.K),(T/U.K)^3,(T/U.K)^3}*U.bar;
-*/
-
-      //p_sat := Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa;
-    end p_sat2;
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"
@@ -814,6 +887,13 @@ package Characteristics
     end Gas;
 
   end O2;
+
+  package IdealGas "Ideal gas"
+    extends BaseClasses.CharacteristicEOS(final n_v={-1,0},final b_v=[1]);
+    annotation (defaultComponentPrefixes="replaceable", Documentation(info="<html>
+    <p>This package contains the pressure-volume-temperature relationship of an ideal gas.  Thermal
+    data (e.g., heat capacity) is not included.</p></html>"));
+  end IdealGas;
 
   package BaseClasses "Base classes (generally not for direct use)"
     extends Modelica.Icons.BasesPackage;
@@ -954,8 +1034,10 @@ package Characteristics
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
 
     protected
-      constant Q.AreaSpecific alpha=3*U.pi^1.5*d^2*U.q/(2)
+      constant Q.AreaSpecific alpha=1.5*U.pi^1.5*d^2*U.q
         "Scaled specific intercept area";
+      // The intercept area is U.pi*d^2*U.q, and the additional factor is
+      // 3*sqrt(U.pi)/2.
 
       function omega
         "<html>Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style=\"text-decoration:overline;\">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)</html>"

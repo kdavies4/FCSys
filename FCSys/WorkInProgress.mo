@@ -57,25 +57,30 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   model CellModelica
@@ -142,107 +147,6 @@ package WorkInProgress "Incomplete classes under development"
     Modelica.Utilities.System.command("loadres");
 
   end plot;
-
-  model EISPlaceholder
-    "Placeholder model for electrochemical-impedance spectroscopy"
-    extends FCSys.Icons.Blocks.Continuous;
-
-    parameter Modelica.SIunits.CurrentDensity zJ_large_SI=0.01
-      "Large-signal current density in SI base units";
-    Modelica.Electrical.Analog.Basic.Resistor resistor2(R=0.1) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={10,-10})));
-    Modelica.Electrical.Analog.Basic.Capacitor capacitor(C=1e-3) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={40,-10})));
-    Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=1)
-      annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=270,
-          origin={-80,-10})));
-    Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (
-        Placement(transformation(
-          extent={{-10,10},{10,-10}},
-          rotation=270,
-          origin={70,-10})));
-    Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=
-          zJ_large_SI)
-      annotation (Placement(transformation(extent={{-60,20},{-40,0}})));
-    Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent
-      annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-    Connectors.RealInput zJ_small_SI
-      "Small-signal cell current density in SI base units" annotation (
-        Placement(transformation(extent={{-110,40},{-90,60}}),
-          iconTransformation(extent={{-120,-10},{-100,10}})));
-    Connectors.RealOutput w_V "Cell potential in volts" annotation (Placement(
-          transformation(extent={{90,-20},{110,0}}), iconTransformation(extent=
-              {{100,-10},{120,10}})));
-    Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.1) annotation (
-        Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={-10,10})));
-    Modelica.Electrical.Analog.Basic.Ground ground
-      annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-  equation
-    connect(zJ_small_SI, signalCurrent.i) annotation (Line(
-        points={{-100,50},{-50,50},{-50,37}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(signalCurrent.n, constantCurrent.n) annotation (Line(
-        points={{-40,30},{-30,30},{-30,10},{-40,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(signalCurrent.p, constantCurrent.p) annotation (Line(
-        points={{-60,30},{-70,30},{-70,10},{-60,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(constantVoltage.p, constantCurrent.p) annotation (Line(
-        points={{-80,5.55112e-16},{-80,10},{-60,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(voltageSensor.v, w_V) annotation (Line(
-        points={{80,-10},{90,-10},{90,-10},{100,-10}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(resistor2.p, capacitor.p) annotation (Line(
-        points={{10,5.55112e-16},{10,10},{40,10},{40,5.55112e-16}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(constantVoltage.n, resistor2.n) annotation (Line(
-        points={{-80,-20},{-80,-30},{10,-30},{10,-20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(capacitor.n, resistor2.n) annotation (Line(
-        points={{40,-20},{40,-30},{10,-30},{10,-20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(capacitor.n, voltageSensor.n) annotation (Line(
-        points={{40,-20},{40,-30},{70,-30},{70,-20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(capacitor.p, voltageSensor.p) annotation (Line(
-        points={{40,5.55112e-16},{40,10},{70,10},{70,5.55112e-16}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(constantCurrent.n, resistor1.p) annotation (Line(
-        points={{-40,10},{-20,10}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(resistor1.n, resistor2.p) annotation (Line(
-        points={{5.55112e-16,10},{10,10},{10,5.55112e-16}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    connect(ground.p, voltageSensor.n) annotation (Line(
-        points={{70,-40},{70,-20}},
-        color={0,0,255},
-        smooth=Smooth.None));
-    annotation (Diagram(graphics), Icon(graphics));
-  end EISPlaceholder;
 
   model ElectroOsmoticDrag
     "<html>Example to calibrate the coupling between H<sup>+</sup> and H<sub>2</sub>O in the PEM</html>"
@@ -806,11 +710,11 @@ package WorkInProgress "Incomplete classes under development"
               40}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-160,-160},{160,
               160}}), graphics={Rectangle(
-              extent={{-160,160},{160,-160}},
-              lineColor={191,191,191},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},{
-            160,-160}}, lineColor={0,0,0})}),
+            extent={{-160,160},{160,-160}},
+            lineColor={191,191,191},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
+                160,-160}}, lineColor={0,0,0})}),
       Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.</p>
@@ -874,49 +778,6 @@ package WorkInProgress "Incomplete classes under development"
               160}}), graphics));
 
   end ConditionsTestStandsTestStandEIS;
-
-  model SubregionsExamplesCapacitor
-    "Test the storage of charge on the electrolytic double layer"
-    extends Subregions.Examples.Subregion(
-      subregion(ionomer('H+'(N(stateSelect=StateSelect.default)))),
-      inclH2=true,
-      'inclC+'=true,
-      'incle-'=true,
-      'inclSO3-'=true,
-      'inclH+'=true);
-
-    output Q.Potential Sigmag=subregion.graphite.'e-'.g + subregion.ionomer.
-        'H+'.g "Sum of the electronic and protonic potentials";
-
-    Conditions.ByConnector.BoundaryBus.Single.Source electrons(graphite(
-          'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
-            materialSet(height=-U.A, duration=1)))) annotation (Placement(
-          transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=90,
-          origin={-24,0})));
-    Conditions.ByConnector.BoundaryBus.Single.Source protons(ionomer('inclH+'=
-            true,'H+'(redeclare function materialSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=U.bar)))) annotation (Placement(transformation(
-          extent={{-10,10},{10,-10}},
-          rotation=90,
-          origin={24,0})));
-
-  equation
-    connect(protons.boundary, subregion.xPositive) annotation (Line(
-        points={{20,0},{10,0}},
-        color={127,127,127},
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(electrons.boundary, subregion.xNegative) annotation (Line(
-        points={{-20,0},{-10,0}},
-        color={127,127,127},
-        thickness=0.5,
-        smooth=Smooth.None));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics));
-  end SubregionsExamplesCapacitor;
 
   model AssembliesCellsExamplesTestStandEIS
     "Test stand to perform electrochemical impedance spectroscopy"

@@ -1524,7 +1524,6 @@ package Figures "Graphical layouts for documentation"
     Connectors.Translational Translational
       annotation (Placement(transformation(extent={{40,-38},{60,-18}})));
 
-  public
     Connectors.Chemical Chemical
       annotation (Placement(transformation(extent={{-28,-38},{-8,-18}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,

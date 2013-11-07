@@ -105,6 +105,7 @@ package Species "Dynamic models of chemical species"
 
   end 'C+';
 
+
   package 'SO3-'
     "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
     extends Modelica.Icons.Package;
@@ -164,15 +165,13 @@ package Species "Dynamic models of chemical species"
           final upstreamX=false,
           final upstreamY=false,
           final upstreamZ=false,
-          final k_intra,
+          final initMaterial=Init.none,
+          final initEnergy=Init.none,
           final consTransX=ConsTrans.steady,
           final consTransY=ConsTrans.steady,
           final consTransZ=ConsTrans.steady,
           final consEnergy=ConsThermo.steady,
-          final initMaterial=Init.none,
-          final initEnergy=Init.none,
           final N_IC,
-          consMaterial=ConsThermo.steady,
           final p_IC,
           final h_IC,
           final V_IC,
@@ -183,7 +182,13 @@ package Species "Dynamic models of chemical species"
           final n_chem=1,
           final tauprime={V/(v*Io)},
           final zeta=0,
-          final theta=Modelica.Constants.inf);
+          final k_intra,
+          final theta=Modelica.Constants.inf,
+          N(stateSelect=StateSelect.default));
+        // The stateSelect of N is default.  If a dielectric (Phases.Dielectric)
+        // is connected, then its charge shift (Z) is preferred as a state.  If
+        // a dielectric isn't connected, then N = N_bulk, which is constant.
+        // der(N) = 0 and there is no state.
 
         parameter Q.Current Io(min=0) = U.A
           "Exchange current (excluding the activation factor)" annotation (
@@ -196,6 +201,11 @@ package Species "Dynamic models of chemical species"
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
           Documentation(info="<html>
+
+<p><code>consMaterial</code> is <code>ConsThermo.steady</code> by default.  If the 
+<a href=\"modelica://FCSys.Phases.Dielectric\">dielectric</a> is connected, then set  
+<code>consMaterial</code> to <code>ConsThermo.dynamic</code> for both the negative (this model) and
+positive charge carriers.</p>
 
     <p>Assumptions:<ol>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
@@ -228,30 +238,34 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Ion(
           redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
-          final initEnergy=Init.none,
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
-          sigma=0.083*U.S/U.cm,
           final Nu_Phi,
           final Nu_Q,
           final consRot,
           final upstreamX=false,
           final upstreamY=false,
           final upstreamZ=false,
-          final alpha,
           final initMaterial=Init.none,
+          final consEnergy=ConsThermo.steady,
           final N_IC,
           final p_IC,
-          consMaterial=ConsThermo.steady,
           final h_IC,
           final V_IC,
           final rho_IC,
           final g_IC,
           final T_IC,
           final nu=1,
-          final tauprime,
           n_chem=1,
+          final tauprime,
           final zeta=0,
-          final consEnergy=ConsThermo.steady);
+          final alpha,
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+          sigma=0.083*U.S/U.cm,
+          N(stateSelect=StateSelect.default));
+
+        // The stateSelect of N is default.  If a dielectric (Phases.Dielectric)
+        // is connected, then its charge shift (Z) is preferred as a state.  If
+        // a dielectric isn't connected, then N = N_bulk, which is constant.
+        // der(N) = 0 and there is no state.
 
         // See the documentation for a table of values.
         annotation (
@@ -369,7 +383,8 @@ package Species "Dynamic models of chemical species"
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W),
           final tauprime,
           n_chem=1,
-          final alpha);
+          final alpha,
+          p_IC=environment.p_dry);
 
         // See the documentation for a table of values.
         annotation (
@@ -476,7 +491,8 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           redeclare parameter Q.Fluidity eta=1/(9.09e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W),
 
-          final alpha);
+          final alpha,
+          p_IC=environment.p_H2O);
 
         // See the documentation for tables of values.
 
@@ -628,7 +644,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e13*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={1e12*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -644,8 +660,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final alpha,
           final consMaterial,
           n_chem=1,
-          final initMaterial=Init.none,
-          final initEnergy=Init.none);
+          final initMaterial=Init.none);
 
         parameter Q.NumberAbsolute lambda_IC=14
           "<html>Initial ratio of H<sub>2</sub>O molecules to SO<sub>3</sub><sup>-</sup> end-groups</html>"
@@ -674,7 +689,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
           Diagram(graphics),
           Icon(graphics));
-
       end Fixed;
 
     end Ionomer;
@@ -864,7 +878,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.Fluidity eta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
 
-          final alpha);
+          final alpha,
+          p_IC=environment.p_dry - p_IC - environment.p_O2);
 
         // See the documentation for a table of values.
         annotation (
@@ -958,7 +973,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W),
 
           n_chem=1,
-          final alpha);
+          final alpha,
+          p_IC=environment.p_O2);
 
         // See the documentation for a table of values.
 
@@ -1035,7 +1051,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     extends Fluid(
       alpha=fill(0.5, n_chem),
       final mu=sigma*v,
-      dalton(final V=(N - sum(electrostatic.Z)/Data.z)*v));
+      dalton(final V=(N - electrostatic[1].Z/Data.z)*v));
     // Note:  The amount of material includes the additional amount in the
     // charge layer, which may be positive or negative.
 
@@ -1053,6 +1069,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   equation
     g = Data.z*electrostatic[1].w;
+    // **eliminate array, use only one
+
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
@@ -1412,13 +1430,13 @@ Choose any condition besides none.");
       elseif initMaterial == Init.volumeSS then
         der(V) = 0;
       elseif initMaterial == Init.pressure then
-        assert(Data.isCompressible, getInstanceName() +
-          " is incompressible, yet its material initial condition is based on pressure.");
         p = p_IC;
-      elseif initMaterial == Init.pressureSS then
         assert(Data.isCompressible, getInstanceName() +
           " is incompressible, yet its material initial condition is based on pressure.");
+      elseif initMaterial == Init.pressureSS then
         der(p) = 0;
+        assert(Data.isCompressible, getInstanceName() +
+          " is incompressible, yet its material initial condition is based on pressure.");
       elseif initMaterial == Init.temperature then
         T = T_IC;
       elseif initMaterial == Init.temperatureSS then
@@ -1490,6 +1508,7 @@ Choose any condition besides none.");
     end if;
 
   equation
+
     // Aliases (only to clarify and simplify other equations)
     v*I = Aprime .* phi "Current vs. velocity";
     Data.v_Tp(boundaries.T, boundaries.p) .* boundaries.Ndot = {Aprime[i]*{1,-1}
@@ -1734,6 +1753,14 @@ Choose any condition besides none.");
         Evaluate=true, Dialog(tab="Assumptions", group=
             "Formulation of the conservation equations"));
 
+    // Auxiliary variables (for analysis)
+    // ----------------------------------
+    // Time constants
+    output Q.TimeAbsolute tau_QT[n_trans](
+      each stateSelect=StateSelect.never,
+      each start=U.s) = N*c_v*theta*kL ./ Aprime if environment.analysis
+      "Time constants for thermal transport (through the whole subregion)";
+
     Connectors.ThermoDiffusive boundaries[n_trans, Side](T(each start=T_IC))
       "Connectors for transport" annotation (Placement(transformation(extent={{
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1791,6 +1818,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected

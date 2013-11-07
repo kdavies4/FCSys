@@ -151,21 +151,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
     assuming the reactant is entirely consumed (complete utilization).</p></html>"));
       end TestConditions;
 
-      package Enumerations "Choices of options"
-
-        extends Modelica.Icons.BasesPackage;
-
-        type ElectricalSpec = enumeration(
-            current "Current",
-            voltage "Voltage",
-            power "Power") "Ways to specify the electrical load";
-        type FlowSpec = enumeration(
-            stoich "Stoichiometric rate",
-            current "Equivalent current",
-            pressure "Inlet pressure") "Ways to specify the anode flow rate";
-
-      end Enumerations;
-
       model TestStand "Simulate the fuel cell with prescribed conditions"
         import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
         import DataH2 = FCSys.Characteristics.H2.Gas;
@@ -517,6 +502,21 @@ package Assemblies "Combinations of regions (e.g., cells)"
         firstOrder.u = testConditions.I_an;
         firstOrder1.u = testConditions.I_ca;
       end TestStandVoltage;
+
+      package Enumerations "Choices of options"
+
+        extends Modelica.Icons.BasesPackage;
+
+        type ElectricalSpec = enumeration(
+            current "Current",
+            voltage "Voltage",
+            power "Power") "Ways to specify the electrical load";
+        type FlowSpec = enumeration(
+            stoich "Stoichiometric rate",
+            current "Equivalent current",
+            pressure "Inlet pressure") "Ways to specify the anode flow rate";
+
+      end Enumerations;
     end Examples;
 
     model Cell "Single-cell PEMFC"

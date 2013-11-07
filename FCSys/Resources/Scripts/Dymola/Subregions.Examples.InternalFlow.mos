@@ -4,9 +4,10 @@ createPlot(filename = "InternalFlow.mat");
 
 FCSys.Utilities.plot6(
    y1={"subregion.liquid.H2O.mrho"},
-   y2={"subregion.liquid.H2O.phi_boundaries[1, 1]", "subregion.liquid.H2O.phi[1]",
-         "subregion.liquid.H2O.phi_boundaries[1, 2]"},
-   y3={"Qdot_gen", "Qdot_gen_Poiseuille", "subregion.liquid.H2O.Edot_DT", 
+   y2={"subregion.liquid.H2O.phi_boundaries[1, 1]", 
+       "subregion.liquid.H2O.phi[1]", 
+       "subregion.liquid.H2O.phi_boundaries[1, 2]"},
+   y3={"Qdot_gen", "Qdot_gen_Poiseuille", "subregion.liquid.H2O.Edot_AT", 
        "subregion.liquid.H2O.Ndere"},
    y4={"subregion.liquid.H2O.boundaries[1, 1].T", "subregion.liquid.H2O.T",
          "subregion.liquid.H2O.boundaries[1, 2].T"},

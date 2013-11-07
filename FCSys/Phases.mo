@@ -220,6 +220,8 @@ package Phases "Mixtures of species"
       n_inter=n_inter,
       n_intra=1,
       k_intra={k_common},
+      initEnergy=if oneTemperature and inclH2 then Init.none else Init.temperature,
+
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -249,6 +251,8 @@ package Phases "Mixtures of species"
       n_inter=n_inter,
       n_intra=1,
       k_intra={k_common},
+      initEnergy=if oneTemperature and (inclH2 or inclH2O) then Init.none else
+          Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -278,6 +282,8 @@ package Phases "Mixtures of species"
       n_inter=n_inter,
       n_intra=1,
       k_intra={k_common},
+      initEnergy=if oneTemperature and (inclH2 or inclH2O or inclN2) then Init.none
+           else Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -603,13 +609,18 @@ package Phases "Mixtures of species"
         color={38,196,52},
         smooth=Smooth.None));
     annotation (
-      Documentation(info="<html>
+      Documentation(info="<html><p>By default, <code>oneTemperature</code> is true, so all of the species have the 
+    same temperature.  Only one of the species may be used to initialize the temperature.  By default, the 
+    included species with the earliest alphabetical order (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, then O<sub>2</sub>)
+    has <code>initEnergy = Init.temperature</code> and the others have <code>initEnergy = Init.none</code>.</p>
+    
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -638,8 +649,7 @@ package Phases "Mixtures of species"
       n_inter=n_inter,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "C+ model" annotation (
+      T(stateSelect=StateSelect.default)) "C+ model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -664,8 +674,7 @@ package Phases "Mixtures of species"
       n_inter=0,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "e- model" annotation (
+      T(stateSelect=StateSelect.default)) "e- model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -778,12 +787,12 @@ package Phases "Mixtures of species"
         points={{23.8,-9},{23.8,-60},{0,-60}},
         color={38,196,52},
         smooth=Smooth.None));
-    connect('e-'.intra[1], electronsSolid.exchange) annotation (Line(
-        points={{27,-7},{27,-48},{46,-48}},
-        color={38,196,52},
-        smooth=Smooth.None));
     connect('C+'.intra[1], electronsSolid.exchange) annotation (Line(
         points={{-13,-7},{-13,-48},{46,-48}},
+        color={38,196,52},
+        smooth=Smooth.None));
+    connect('e-'.intra[1], electronsSolid.exchange) annotation (Line(
+        points={{27,-7},{27,-48},{46,-48}},
         color={38,196,52},
         smooth=Smooth.None));
 
@@ -875,7 +884,9 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     annotation (
-      Documentation(info="<html>
+      Documentation(info="<html><p>C<sup>+</sup> and e<sup>-</sup> are assumed to have the same temperature.  
+    C<sup>+</sup> should be used to initialize the temperature.</p>
+    
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, please see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
@@ -943,6 +954,7 @@ package Phases "Mixtures of species"
       n_intra=2,
       n_inter=0,
       k_intra={1,k_EOD},
+      initEnergy=if oneTemperature then Init.none else Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -972,6 +984,7 @@ package Phases "Mixtures of species"
       n_intra=2,
       n_inter=0,
       k_intra={1,k_EOD},
+      initEnergy=if oneTemperature then Init.none else Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
@@ -1267,6 +1280,12 @@ package Phases "Mixtures of species"
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
     </ol</p>
     
+    <p>By default, <code>oneTemperature</code> is true, so all of the species have the 
+    same temperature.  SO<sub>3</sub><sup>-</sup> has <code>initEnergy = Init.temperature</code>, so
+    it should be used to initialize the temperature.  If SO<sub>3</sub><sup>-</sup> is not included, 
+    then the <code>initEnergy</code>
+    of one of the other species should be set to something other than <code>Init.none</code>.</p>
+    
     <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> 
     for additional assumptions.
     For more information, please see the
@@ -1278,8 +1297,8 @@ package Phases "Mixtures of species"
   end Ionomer;
 
   model Liquid "Liquid phase"
-    extends PartialPhase(final n_spec=if inclH2O then 1 else 0, oneTemperature=
-          true);
+    extends PartialPhase(final n_spec=if inclH2O then 1 else 0, final
+        oneTemperature=true);
 
     // Conditionally include species.
     parameter Boolean inclH2O=false "Include H2O" annotation (
@@ -1299,8 +1318,7 @@ package Phases "Mixtures of species"
       n_inter=n_inter,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "H2O model" annotation (
+      T(stateSelect=StateSelect.default)) "H2O model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -1445,13 +1463,13 @@ protected
     // This cannot be an inner/outer parameter in Dymola 2014.
 
     // Assumptions
-    inner parameter Boolean oneVelocity=false "Same velocity for all species"
-      annotation (Dialog(
+    inner parameter Boolean oneVelocity=false if n_spec > 0
+      "Same velocity for all species" annotation (Dialog(
         tab="Assumptions",
         enable=n_spec > 1,
         compact=true), choices(__Dymola_checkBox=true));
 
-    inner parameter Boolean oneTemperature=false
+    inner parameter Boolean oneTemperature=true if n_spec > 0
       "Same temperature for all species" annotation (Dialog(
         tab="Assumptions",
         enable=n_spec > 1,
@@ -1499,50 +1517,58 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end PartialPhase;
 
@@ -1552,7 +1578,7 @@ public
 
     parameter Q.Length L=1e-9*U.m
       "Length of the dielectric (not of the region)" annotation (Dialog(group=
-            "Geometry",__Dymola_label="<html><i>L</i></html>"));
+            "Geometry", __Dymola_label="<html><i>L</i></html>"));
     parameter Q.Area A=10*U.m^2
       "Cross-sectional area of the dielectric (not of the region)" annotation (
         Dialog(group="Geometry", __Dymola_label="<html><i>A</i></html>"));
@@ -1560,7 +1586,10 @@ public
       annotation (Dialog(__Dymola_label="<html>&epsilon;</html>"));
     final parameter Q.Capacitance C=epsilon*A/L "Capacitance";
 
-    Q.Amount Z "Amount of charge shifted in the positive direction";
+    Q.Amount Z(
+      stateSelect=StateSelect.prefer,
+      start=0,
+      fixed=true) "Amount of charge shifted in the positive direction";
     Q.Potential w "Electrical potential";
 
     Connectors.Electrostatic negative "Reference electrical connector"
@@ -1588,19 +1617,23 @@ public
 <li>No heat capacity (follows from #1)</li>
 <li>The charges exist on parallel planes (used to calculate capacitance).</li> 
 </ol></p></html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics={Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{-20,0},{-50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),Line(
-              points={{50,0},{20,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+              -100},{100,100}}), graphics={
+          Line(
+            points={{-20,30},{-20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{20,30},{20,-30}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,0},{-50,0}},
+            color={255,195,38},
+            smooth=Smooth.None),
+          Line(
+            points={{50,0},{20,0}},
+            color={255,195,38},
+            smooth=Smooth.None)}));
   end Dielectric;
   annotation (Documentation(info="
 <html><p>The graphite, ionomer, and

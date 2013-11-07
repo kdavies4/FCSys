@@ -9,7 +9,7 @@ FCSys.Utilities.plot6(
     y4={"subregion.graphite.'C+'.T", "subregion.ionomer.'SO3-'.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"});
 
 createPlot(id = 4,
- position = {220, 0, 440, 650},
+ position = {900, 0, 440, 325},
  x = "J_Apercm2",
  y = {"wprime"},
  heading = "Overpotential",
@@ -20,18 +20,4 @@ createPlot(id = 4,
  legendLocation = 5,
  legendHorizontal = false,
  leftTitle = "Potential / V",
- bottomTitle = "Current density / (A/cm2)");
-
-createPlot(id = 4,
- position = {220, 0, 440, 325},
- x = "J_Apercm2",
- y = {"Qdot", "P"},
- legends = {"Rate of heat generation", "Electrical power"},
- heading = "Energy Rates",
- range = {0, 8.0, 0.05, -0.35},
- grid = true,
- online = true,
- legendLocation = 5,
- legendHorizontal = false,
- subPlot = 2,
  bottomTitle = "Current density / (A/cm2)");
