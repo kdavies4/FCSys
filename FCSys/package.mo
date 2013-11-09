@@ -1,4 +1,4 @@
-within ;
+﻿within ;
 package FCSys "Modelica fuel cell library"
 
 // Maximum line width before a new word is wrapped in the code listing in
@@ -478,6 +478,10 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Shah2009\" class=bookmark>Shah2009</a>]</td>
       <td valign=top class=noBorder>A. A. Shah, T. R. Ralph, and F. C. Walsh, \"Modeling and Simulation of the Degradation of Perfluorinated Ion-Exchange Membranes in PEM Fuel Cells,\" <i>J. Electrochem. Soc.</i>, vol. 156, no. 4, pp. B465&ndash;B484, 2009.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Siversten2005\" class=bookmark>Siversten2005</a>]</td>
+      <td valign=top class=noBorder>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>Journal of Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Springer1991\" class=bookmark>Springer1991</a>]</td>

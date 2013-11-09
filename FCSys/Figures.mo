@@ -1512,51 +1512,51 @@ package Figures "Graphical layouts for documentation"
     Connectors.Dalton Dalton
       annotation (Placement(transformation(extent={{-68,-38},{-48,-18}})));
     Connectors.Reaction Reaction
-      annotation (Placement(transformation(extent={{16,-14},{36,6}})));
+      annotation (Placement(transformation(extent={{-4,-14},{16,6}})));
     Connectors.Direct Direct
-      annotation (Placement(transformation(extent={{40,-14},{60,6}})));
+      annotation (Placement(transformation(extent={{20,-14},{40,6}})));
     Connectors.Translational Material
-      annotation (Placement(transformation(extent={{88,-38},{108,-18}})));
+      annotation (Placement(transformation(extent={{68,-38},{88,-18}})));
 
     Connectors.Boundary Boundary
-      annotation (Placement(transformation(extent={{88,-14},{108,6}})));
+      annotation (Placement(transformation(extent={{68,-14},{88,6}})));
 
     Connectors.Translational Translational
-      annotation (Placement(transformation(extent={{40,-38},{60,-18}})));
+      annotation (Placement(transformation(extent={{20,-38},{40,-18}})));
 
     Connectors.Chemical Chemical
-      annotation (Placement(transformation(extent={{-28,-38},{-8,-18}})));
+      annotation (Placement(transformation(extent={{-48,-38},{-28,-18}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,
-              -40},{120,40}}), graphics={Line(
-              points={{74,-6.5},{74,-29.9771},{75.815,-26.369},{72,-28}},
+              -40},{100,40}}), graphics={Line(
+              points={{54,-6.5},{54,-29.9771},{55.815,-26.369},{52,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{96,-6},{74,-28}},
+              points={{76,-6},{54,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{26,-6.5},{26,-29.9771},{27.8145,-26.369},{24,-28}},
+              points={{6,-6.5},{6,-29.9771},{7.8145,-26.369},{4,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{50,-4},{74,-28}},
+              points={{30,-4},{54,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{95,-5},{50,-28}},
+              points={{75,-5},{30,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{50,-4},{50,-28}},
+              points={{30,-4},{30,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{28,-6},{50,-28}},
+              points={{8,-6},{30,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{24,-6},{2,-28}},
+              points={{4,-6},{-18,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Rectangle(
@@ -1564,7 +1564,7 @@ package Figures "Graphical layouts for documentation"
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{98,20},{98,-4}},
+              points={{78,20},{78,-4}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
@@ -1578,7 +1578,7 @@ package Figures "Graphical layouts for documentation"
               extent={{-114,-26},{-86,-30}},
               lineColor={0,0,0},
               textString="Basic"),Ellipse(
-              extent={{95,23},{101,17}},
+              extent={{75,23},{81,17}},
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid,
@@ -1595,7 +1595,7 @@ package Figures "Graphical layouts for documentation"
               lineColor={0,0,0},
               horizontalAlignment=TextAlignment.Left,
               textString="Extension"),Ellipse(
-              extent={{-1,-25},{5,-31}},
+              extent={{-21,-25},{-15,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
@@ -1607,56 +1607,48 @@ package Figures "Graphical layouts for documentation"
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Ellipse(
-              extent={{23,-25},{29,-31}},
+              extent={{3,-25},{9,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{71,-25},{77,-31}},
+              extent={{51,-25},{57,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{71,-1},{77,-7}},
+              extent={{51,-1},{57,-7}},
               lineColor={2,157,21},
               fillColor={38,196,52},
               fillPattern=FillPattern.Solid),Line(
-              points={{98,-6.5},{98,-29.9771},{99.815,-26.369},{96,-28}},
+              points={{78,-6.5},{78,-29.9771},{79.815,-26.369},{76,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{72,-6},{50,-28}},
+              points={{52,-6},{30,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Text(
-              extent={{88,30},{108,26}},
+              extent={{68,30},{88,26}},
               lineColor={0,0,0},
               textString="Boundary
-Bus"),Text(   extent={{62,-18},{86,-22}},
+Bus"),Text(   extent={{42,-18},{66,-22}},
               lineColor={0,0,0},
-              textString="Thermo-
-diffusive"),Text(
-              extent={{14,-18},{38,-22}},
+              textString="Thermal
+Diffusive"),Text(
+              extent={{-6,-18},{18,-22}},
               lineColor={0,0,0},
-              textString="Thermo-
-advective"),Text(
-              extent={{-10,-18},{14,-22}},
+              textString="Thermal
+Advective"),Text(
+              extent={{-30,-18},{-6,-22}},
               lineColor={0,0,0},
               textString="Stoichio-
-metric"),Text(extent={{62,6},{86,2}},
+metric"),Text(extent={{42,6},{66,2}},
               lineColor={0,0,0},
               textString="Inter, Intra, 
 and Inert"),Line(
               points={{-68,22},{-78,22},{-68,22},{-78,22}},
               color={191,191,191},
               smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Text(
-              extent={{-50,-18},{-26,-22}},
-              lineColor={0,0,0},
-              textString="Electro-
-static"),Ellipse(
-              extent={{-41,-25},{-35,-31}},
-              lineColor={239,142,1},
-              fillColor={255,195,38},
-              fillPattern=FillPattern.Solid)}));
+              arrow={Arrow.Filled,Arrow.None})}));
 
   end Connectors;
 
@@ -1784,10 +1776,10 @@ static"),Ellipse(
         'inclC+'=true,
         'incle-'=true,
         'C+'(redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
             thermalSet(y=T)),
         'e-'(redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
             thermalSet(y=T)))) annotation (Placement(transformation(
           extent={{-10,10},{10,-10}},
           rotation=270,
@@ -1798,7 +1790,7 @@ static"),Ellipse(
         'inclC+'=true,
         'incle-'=true,
         'C+'(redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
             thermalSet(y=T)),
         'e-'(
           redeclare function normalSpec =
@@ -1809,7 +1801,7 @@ static"),Ellipse(
             duration=225.1,
             startTime=10.1),
           redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
           thermalSet(y=T)))) annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},

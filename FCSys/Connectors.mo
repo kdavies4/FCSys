@@ -2,33 +2,6 @@ within FCSys;
 package Connectors "Declarative and imperative connectors"
   extends Modelica.Icons.InterfacesPackage;
 
-  connector Electrostatic "Static electrical connector"
-
-    Q.Potential w(nominal=U.V) "Electrostatic potential";
-    flow Q.Amount Z(nominal=U.C) "Charge";
-
-    annotation (
-      Documentation(info="<html>
-<p>Please see the documentation of the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={255,195,38}),
-            Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={239,142,1},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,195,38})}),
-      Diagram(graphics={Text(
-            extent={{-100,32},{100,72}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={239,142,1},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,195,38})}));
-
-  end Electrostatic;
-
   connector Chemical
     "Connector for a species in a reaction or phase change process"
 
@@ -65,20 +38,20 @@ package Connectors "Declarative and imperative connectors"
 <p>Please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={255,195,38}),
             Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={170,0,0},
+            lineColor={239,142,1},
             fillPattern=FillPattern.Solid,
-            fillColor={221,23,47})}),
+            fillColor={255,195,38})}),
       Diagram(graphics={Text(
             extent={{-100,32},{100,72}},
             textString="%name",
             lineColor={0,0,0}), Ellipse(
             extent={{-30,30},{30,-30}},
-            lineColor={170,0,0},
+            lineColor={239,142,1},
             fillPattern=FillPattern.Solid,
-            fillColor={221,23,47})}));
+            fillColor={255,195,38})}));
 
   end Chemical;
 
@@ -103,27 +76,30 @@ package Connectors "Declarative and imperative connectors"
 <p>For more information, please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Icon(graphics={
-          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={
+          Ellipse(extent={{-80,80},{80,-80}}, lineColor={255,195,38}),
           Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={170,0,0},
+            lineColor={239,142,1},
             fillPattern=FillPattern.Solid,
             fillColor={255,255,255}),
           Ellipse(
             extent={{-50,50},{50,-50}},
-            fillColor={221,23,47},
+            fillColor={255,195,38},
             fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None)}),
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}),
       Diagram(graphics={Ellipse(
             extent={{-30,30},{30,-30}},
-            lineColor={170,0,0},
+            lineColor={239,142,1},
             fillPattern=FillPattern.Solid,
             fillColor={255,255,255}), Ellipse(
             extent={{-15,15},{15,-15}},
-            fillColor={221,23,47},
+            fillColor={255,195,38},
             fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None)}));
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Reaction;
 
@@ -167,7 +143,7 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Force mPhidot[Orient](each nominal=U.N) "Force";
 
     // Thermal
-    extends ThermoDiffusive;
+    extends ThermalDiffusive;
     annotation (
       Documentation(info="<html><p>This connector applies to a single species in a single phase.
     For multiple species or phases, use the <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a>
@@ -302,7 +278,7 @@ package Connectors "Declarative and imperative connectors"
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean inclThermal=true "Include the thermal subconnector"
+    parameter Boolean inclTherm=true "Include the thermal subconnector"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
@@ -310,7 +286,7 @@ package Connectors "Declarative and imperative connectors"
 
     Translational trans(final n_trans=n_trans) if inclTrans
       "Subconnector for translational exchange";
-    ThermoDiffusive thermo if inclThermal "Subconnector for thermal exchange";
+    ThermalDiffusive therm if inclTherm "Subconnector for thermal exchange";
 
     annotation (
       Documentation(info="<html><p>Please see the documentation of the
@@ -319,9 +295,9 @@ package Connectors "Declarative and imperative connectors"
       Diagram(graphics={
           Ellipse(
             extent={{-30,30},{30,-30}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}),
+            fillColor={221,23,47}),
           Text(
             extent={{-30,30},{30,-30}},
             lineColor={255,255,255},
@@ -332,12 +308,12 @@ package Connectors "Declarative and imperative connectors"
             textString="%name",
             lineColor={0,0,0})}),
       Icon(graphics={
-          Ellipse(extent={{-76,76},{84,-84}}, lineColor={38,196,52}),
+          Ellipse(extent={{-76,76},{84,-84}}, lineColor={221,23,47}),
           Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}),
+            fillColor={221,23,47}),
           Text(
             extent={{-100,100},{100,-100}},
             lineColor={255,255,255},
@@ -358,7 +334,7 @@ package Connectors "Declarative and imperative connectors"
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean inclThermal=true "Include the thermal subconnector"
+    parameter Boolean inclTherm=true "Include the thermal subconnector"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
@@ -366,7 +342,7 @@ package Connectors "Declarative and imperative connectors"
 
     Translational trans(final n_trans=n_trans) if inclTrans
       "Translational subconnector";
-    ThermoDiffusive thermo if inclThermal "Thermal subconnector";
+    ThermalDiffusive therm if inclTherm "Thermal subconnector";
 
     annotation (
       defaultComponentPrefixes="protected",
@@ -376,19 +352,19 @@ package Connectors "Declarative and imperative connectors"
 
       Diagram(graphics={Ellipse(
             extent={{-10,10},{10,-10}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}), Text(
+            fillColor={221,23,47}), Text(
             extent={{-100,10},{100,50}},
             textString="%name",
             lineColor={0,0,0})}),
       Icon(graphics={
-          Ellipse(extent={{-76,76},{84,-84}}, lineColor={38,196,52}),
+          Ellipse(extent={{-76,76},{84,-84}}, lineColor={221,23,47}),
           Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}),
+            fillColor={221,23,47}),
           Text(
             extent={{-100,100},{100,-100}},
             lineColor={255,255,255},
@@ -401,7 +377,7 @@ package Connectors "Declarative and imperative connectors"
     "Connector for translational and thermal exchange among species within a phase"
 
     extends Translational;
-    //extends ThermoDiffusive;
+    //extends ThermalDiffusive;
     // Inheritance isn't used to prevent overlap of the labels in
     // Dymola 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
@@ -414,20 +390,20 @@ package Connectors "Declarative and imperative connectors"
 
       Diagram(graphics={Ellipse(
             extent={{-30,30},{30,-30}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}), Text(
+            fillColor={221,23,47}), Text(
             extent={{-30,30},{30,-30}},
             lineColor={255,255,255},
-            textString="1",
-            textStyle={TextStyle.Bold})}),
+            textStyle={TextStyle.Bold},
+            textString="1")}),
       Icon(graphics={
-          Ellipse(extent={{-80,80},{80,-80}}, lineColor={38,196,52}),
+          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
           Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}),
+            fillColor={221,23,47}),
           Text(
             extent={{-100,100},{100,-100}},
             lineColor={255,255,255},
@@ -440,7 +416,7 @@ package Connectors "Declarative and imperative connectors"
     "Connector for translational and thermal exchange among species, regardless of phase"
 
     extends Translational;
-    //extends ThermoDiffusive;
+    //extends ThermalDiffusive;
     // Inheritance isn't used to prevent overlap of the labels in
     // Dymola 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
@@ -452,25 +428,30 @@ package Connectors "Declarative and imperative connectors"
 
       Diagram(graphics={Ellipse(
             extent={{-30,30},{30,-30}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}), Text(
+            fillColor={221,23,47}), Text(
             extent={{-30,30},{30,-30}},
             lineColor={255,255,255},
-            textString="2",
-            textStyle={TextStyle.Bold})}),
+            textStyle={TextStyle.Bold},
+            textString="2")}),
       Icon(graphics={
-          Ellipse(extent={{-80,80},{80,-80}}, lineColor={38,196,52}),
           Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={2,157,21},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52}),
+            fillColor={221,23,47}),
           Text(
             extent={{-100,100},{100,-100}},
             lineColor={255,255,255},
-            textString="2",
-            textStyle={TextStyle.Bold})}));
+            textStyle={TextStyle.Bold},
+            textString="2")}));
 
   end Inter;
 
@@ -478,7 +459,7 @@ package Connectors "Declarative and imperative connectors"
     "<html>Generic <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> or <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> connector</html>"
 
     extends Translational;
-    //extends ThermoDiffusive;
+    //extends ThermalDiffusive;
     // Inheritance isn't used to prevent overlap of the labels in
     // Dymola 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
@@ -492,15 +473,15 @@ package Connectors "Declarative and imperative connectors"
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
               extent={{-30,30},{30,-30}},
-              lineColor={2,157,21},
+              lineColor={170,0,0},
               fillPattern=FillPattern.Solid,
-              fillColor={38,196,52})}),
+              fillColor={221,23,47})}),
       Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={38,196,52}),
             Ellipse(
             extent={{-100,100},{100,-100}},
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={38,196,52})}));
+            fillColor={221,23,47})}));
 
   end Inert;
 
@@ -520,18 +501,18 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
             extent={{-80,80},{80,-80}},
-            lineColor={38,196,52},
+            lineColor={221,23,47},
             lineThickness=0.5), Ellipse(
             extent={{-100,100},{100,-100}},
-            fillColor={38,196,52},
+            fillColor={221,23,47},
             fillPattern=FillPattern.Solid,
-            lineColor={2,157,21},
+            lineColor={170,0,0},
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
             extent={{-10,10},{10,-10}},
-            lineColor={2,157,21},
-            fillColor={38,196,52},
+            lineColor={170,0,0},
+            fillColor={221,23,47},
             fillPattern=FillPattern.Solid,
             lineThickness=0.5), Text(
             extent={{-100,10},{100,50}},
@@ -545,7 +526,7 @@ package Connectors "Declarative and imperative connectors"
 
     parameter Integer n_trans(min=1,max=3)
       "Number of components of translational momentum" annotation (HideResult=
-          true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+          true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     Q.Velocity phi[n_trans](each nominal=U.cm/U.s,each start=0) "Velocity";
     flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";
@@ -571,12 +552,12 @@ package Connectors "Declarative and imperative connectors"
 
   end Translational;
 
-  connector ThermoDiffusive "Connector for diffusion of thermal energy"
+  connector ThermalDiffusive "Connector for diffusion of thermal energy"
 
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
     flow Q.Power Qdot(nominal=U.W) "Rate of thermal conduction";
     annotation (
-      defaultComponentName="thermal",
+      defaultComponentName="therm",
       Documentation(info="<html>
     <p>Please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
@@ -595,7 +576,7 @@ package Connectors "Declarative and imperative connectors"
             textString="%name",
             lineColor={0,0,0})}));
 
-  end ThermoDiffusive;
+  end ThermalDiffusive;
 
   connector RealInput = input Real
     "<html>\"<code>input Real</code>\" as a connector</html>" annotation (
@@ -844,14 +825,12 @@ package Connectors "Declarative and imperative connectors"
   end RealOutputBusInternal;
 
   annotation (Documentation(info="<html>
-  <p><a href=\"modelica://FCSys\">FCSys</a> uses five types of declarative connectors.
+  <p><a href=\"modelica://FCSys\">FCSys</a> uses four types of declarative connectors.
   The chemical connectors (<a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and
   <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a>)
   represent the diffusion of material and the advection of other quantities among
   configurations (i.e., species in a particular phase) that
   react chemically within a subregion.
-  The <a href=\"modelica://FCSys.Connectors.Electrostatic\">Electrostatic</a> connector represents 
-  the interface between a charge layer and the dielectric of an electrical capacitor.
   The inert connectors
   (<a href=\"modelica://FCSys.Connectors.Direct\">Direct</a>,
   <a href=\"modelica://FCSys.Connectors.DirectNode\">DirectNode</a>,

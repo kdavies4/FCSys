@@ -76,7 +76,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       ByConnector.BoundaryBus.Single.Phases.Gas boundary(inclH2O=true, H2O(
             redeclare
-            Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate
+            Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate
             thermal, redeclare
             Conditions.ByConnector.Boundary.Single.Material.Current material(
               source(y=U.A))))
@@ -458,13 +458,13 @@ package Conditions "Models to specify and measure operating conditions"
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
                 100,100}}), graphics={Line(
                   points={{-30,0},{30,0}},
-                  color={221,23,47},
+                  color={255,195,38},
                   smooth=Smooth.None),Text(
                   extent={{-100,20},{100,60}},
                   lineColor={0,0,0},
                   textString="%n %name"),Polygon(
                   points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                  lineColor={221,23,47},
+                  lineColor={255,195,38},
                   smooth=Smooth.None,
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid)}),
@@ -1823,98 +1823,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     extends Modelica.Icons.Package;
 
-    package Electrostatic
-      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Electrostatic\">Electrostatic</a> connector</html>"
-      extends Modelica.Icons.Package;
-
-      model Potential "Specify potential (measure charge)"
-        extends Partial(final y=electrostatic.Z);
-
-      equation
-        electrostatic.w = u_final;
-
-      end Potential;
-
-      model Charge "Specify charge (measure potential)"
-        extends Partial(final y=electrostatic.w);
-
-      equation
-        electrostatic.Z = u_final;
-
-      end Charge;
-
-      partial model Partial "Base model for a electrostatic condition"
-
-        extends FCSys.Icons.Conditions.SingleShort;
-
-        parameter Boolean internal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Specification"));
-
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(group="Specification",enable=internal),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-70,30})));
-
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-
-        Connectors.RealOutput y "Measurement expression" annotation (Dialog(tab
-              ="Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-
-        Connectors.Electrostatic electrostatic "Static electrical connector"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      protected
-        Connectors.RealOutputInternal u_final
-          "Final value of specified condition" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-20,0})));
-
-      equation
-        connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
-                5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(source.y, u_final) annotation (Line(
-            points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        annotation (
-          defaultComponentName="electrostatic",
-          Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
-      end Partial;
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
-    end Electrostatic;
-
     package BoundaryBus
       "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a> connector</html>"
       extends Modelica.Icons.Package;
@@ -2088,7 +1996,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2096,7 +2004,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature),
+                    Boundary.Pair.ThermalDiffusive.temperature),
               H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2105,7 +2013,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2113,7 +2021,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature),
+                    Boundary.Pair.ThermalDiffusive.temperature),
               N2(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2122,7 +2030,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2130,7 +2038,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature),
+                    Boundary.Pair.ThermalDiffusive.temperature),
               O2(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2139,7 +2047,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2147,10 +2055,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature)),
+                    Boundary.Pair.ThermalDiffusive.temperature)),
             graphite(redeclare replaceable
-                Conditions.ByConnector.ThermoDiffusive.Pair.HeatRate 'C+', 'e-'
-                (
+                Conditions.ByConnector.ThermalDiffusive.Pair.HeatRate 'C+',
+                'e-'(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
                 redeclare replaceable function afterSpec =
@@ -2158,7 +2066,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2166,10 +2074,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature)),
+                    Boundary.Pair.ThermalDiffusive.temperature)),
             ionomer(
               redeclare replaceable
-                Conditions.ByConnector.ThermoDiffusive.Pair.HeatRate 'SO3-',
+                Conditions.ByConnector.ThermalDiffusive.Pair.HeatRate 'SO3-',
               'H+'(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2178,7 +2086,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2186,7 +2094,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature),
+                    Boundary.Pair.ThermalDiffusive.temperature),
               H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2195,7 +2103,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2203,7 +2111,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature)),
+                    Boundary.Pair.ThermalDiffusive.temperature)),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2212,7 +2120,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermoDiffusive.heatRate,
+                    Boundary.Pair.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2220,7 +2128,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermoDiffusive.temperature)));
+                    Boundary.Pair.ThermalDiffusive.temperature)));
 
           // Note:  In Dymola 2014, the paths must be explicitly given to prevent
           // the error "Cannot show the parameter dialog for redeclared class [...]".
@@ -2429,7 +2337,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            ThermoDiffusive.Pair.HeatRate 'C+' if 'inclC+' "C+ conditions"
+            ThermalDiffusive.Pair.HeatRate 'C+' if 'inclC+' "C+ conditions"
               annotation (Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
@@ -2527,7 +2435,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_descriptionLabel=true,
                 __Dymola_joinNext=true));
 
-            ThermoDiffusive.Pair.HeatRate 'SO3-' if 'inclSO3-'
+            ThermalDiffusive.Pair.HeatRate 'SO3-' if 'inclSO3-'
               "SO3- conditions" annotation (Dialog(
                 group="Species",
                 __Dymola_label=
@@ -2875,7 +2783,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2883,7 +2791,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2896,7 +2804,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2904,7 +2812,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2917,7 +2825,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2925,7 +2833,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2938,7 +2846,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2946,13 +2854,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
 
-            graphite(redeclare replaceable ThermoDiffusive.Single.HeatRate 'C+',
-                'e-'(
+            graphite(redeclare replaceable ThermalDiffusive.Single.HeatRate
+                'C+', 'e-'(
                 redeclare replaceable function materialSpec =
                     Boundary.Single.Material.pressure,
                 redeclare replaceable function afterSpec =
@@ -2960,7 +2868,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2968,13 +2876,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
 
             ionomer(
-              redeclare replaceable ThermoDiffusive.Single.HeatRate 'SO3-',
+              redeclare replaceable ThermalDiffusive.Single.HeatRate 'SO3-',
               'H+'(
                 redeclare replaceable function materialSpec =
                     Boundary.Single.Material.pressure,
@@ -2983,7 +2891,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2991,7 +2899,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -3004,7 +2912,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -3012,7 +2920,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
@@ -3025,7 +2933,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermoDiffusive.heatRate,
+                    Boundary.Single.ThermalDiffusive.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -3033,7 +2941,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermoDiffusive.temperature,
+                    Boundary.Single.ThermalDiffusive.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))));
@@ -3221,9 +3129,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_joinNext=true));
 
             replaceable
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
               'C+' if 'inclC+' constrainedby
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Partial
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial
               "C+ conditions" annotation (
               __Dymola_choicesFromPackage=true,
               Dialog(
@@ -3252,7 +3160,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           equation
             // C+
-            connect('C+'.thermo, boundary.'C+') annotation (Line(
+            connect('C+'.therm, boundary.'C+') annotation (Line(
                 points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
                 color={127,127,127},
                 pattern=LinePattern.None,
@@ -3311,9 +3219,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 __Dymola_joinNext=true));
 
             replaceable
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.HeatRate
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.HeatRate
               'SO3-' if 'inclSO3-' constrainedby
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Partial
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial
               "SO3- conditions" annotation (
               __Dymola_choicesFromPackage=true,
               Dialog(
@@ -3359,8 +3267,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       10}})));
 
           equation
-            // C19HF37O5S-
-            connect('SO3-'.thermo, boundary.'SO3-') annotation (Line(
+            // SO3-
+            connect('SO3-'.therm, boundary.'SO3-') annotation (Line(
                 points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
                 color={127,127,127},
                 pattern=LinePattern.None,
@@ -3596,8 +3504,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // Thermal
-          replaceable function thermalSpec = ThermoDiffusive.temperature
-            constrainedby ThermoDiffusive.Partial "Quantity" annotation (
+          replaceable function thermalSpec = ThermalDiffusive.temperature
+            constrainedby ThermalDiffusive.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -3638,8 +3546,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Thermal
-          replaceable function thermalMeas = ThermoDiffusive.heatRate
-            constrainedby ThermoDiffusive.Partial "Thermal quantity"
+          replaceable function thermalMeas = ThermalDiffusive.heatRate
+            constrainedby ThermalDiffusive.Partial "Thermal quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
 
@@ -3914,13 +3822,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable function afterSpec = Translational.force,
             redeclare replaceable function beforeSpec = Translational.force,
             redeclare replaceable function thermalSpec =
-                ThermoDiffusive.heatRate,
+                ThermalDiffusive.heatRate,
             redeclare replaceable function materialMeas = Material.current,
             redeclare replaceable function afterMeas = Translational.velocity,
             redeclare replaceable function beforeMeas = Translational.velocity,
 
             redeclare replaceable function thermalMeas =
-                ThermoDiffusive.temperature);
+                ThermalDiffusive.temperature);
 
           // See note in Reaction.Efforts.
 
@@ -4026,7 +3934,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end Partial;
         end Translational;
 
-        package ThermoDiffusive "Conditions for thermal diffusion"
+        package ThermalDiffusive "Conditions for thermal diffusion"
           extends Modelica.Icons.Package;
 
           function temperature "Difference in temperature"
@@ -4071,7 +3979,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
           end Partial;
-        end ThermoDiffusive;
+        end ThermalDiffusive;
       end Pair;
 
       package Single
@@ -4160,8 +4068,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // Thermal
-          replaceable function thermalSpec = ThermoDiffusive.temperature
-            constrainedby ThermoDiffusive.Partial "Quantity" annotation (
+          replaceable function thermalSpec = ThermalDiffusive.temperature
+            constrainedby ThermalDiffusive.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -4205,8 +4113,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Thermal
-          replaceable function thermalMeas = ThermoDiffusive.heatRate
-            constrainedby ThermoDiffusive.Partial "Thermal quantity"
+          replaceable function thermalMeas = ThermalDiffusive.heatRate
+            constrainedby ThermalDiffusive.Partial "Thermal quantity"
             annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                   "Measurement"));
 
@@ -4442,13 +4350,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable function afterSpec = Translational.force,
             redeclare replaceable function beforeSpec = Translational.force,
             redeclare replaceable function thermalSpec =
-                ThermoDiffusive.heatRate,
+                ThermalDiffusive.heatRate,
             redeclare replaceable function materialMeas = Material.current,
             redeclare replaceable function afterMeas = Translational.velocity,
             redeclare replaceable function beforeMeas = Translational.velocity,
 
             redeclare replaceable function thermalMeas =
-                ThermoDiffusive.temperature,
+                ThermalDiffusive.temperature,
             redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=U.atm),
 
             redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0));
@@ -4569,6 +4477,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
           end Partial;
+
+          function potential "Gibbs potential"
+            extends Partial;
+
+            replaceable package Data =
+                Characteristics.BaseClasses.Characteristic constrainedby
+              Characteristics.BaseClasses.Characteristic "Characteristic data"
+              annotation (
+              Dialog(group="Material properties"),
+              choicesAllMatching=true,
+              __Dymola_choicesFromPackage=true,
+              Placement(transformation(extent={{-60,40},{-40,60}}),
+                  iconTransformation(extent={{-10,90},{10,110}})));
+
+          algorithm
+            x := Data.g(T, p);
+            annotation (Inline=true);
+          end potential;
         end Material;
 
         package Translational "Translational conditions"
@@ -4620,7 +4546,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end Partial;
         end Translational;
 
-        package ThermoDiffusive "Conditions for thermal diffusion"
+        package ThermalDiffusive "Conditions for thermal diffusion"
           extends Modelica.Icons.Package;
 
           function temperature "Temperature"
@@ -4664,7 +4590,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
           end Partial;
-        end ThermoDiffusive;
+        end ThermalDiffusive;
 
       end Single;
       annotation (Icon(graphics={Ellipse(
@@ -5014,8 +4940,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-80,-10})));
         //
         // Thermal
-        replaceable function thermalSpec = ThermoDiffusive.heatRate
-          constrainedby ThermoDiffusive.Partial "Quantity" annotation (
+        replaceable function thermalSpec = ThermalDiffusive.heatRate
+          constrainedby ThermalDiffusive.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -5056,9 +4982,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Thermal
-        replaceable function thermalMeas = ThermoDiffusive.temperature
-          constrainedby ThermoDiffusive.Partial "Thermal quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+        replaceable function thermalMeas = ThermalDiffusive.temperature
+          constrainedby ThermalDiffusive.Partial "Thermal quantity" annotation
+          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -5117,8 +5043,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final Connectors.RealOutput y_transX=transXMeas(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.x]) if inclTransX
           "X-axis translational measurement" annotation (Placement(
               transformation(
@@ -5132,8 +5058,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final Connectors.RealOutput y_transY=transYMeas(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.y]) if inclTransY
           "Y-axis translational measurement" annotation (Placement(
               transformation(
@@ -5147,8 +5073,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final Connectors.RealOutput y_transZ=transZMeas(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.z]) if inclTransZ
           "Z-axis translational measurement" annotation (Placement(
               transformation(
@@ -5162,8 +5088,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final Connectors.RealOutput y_thermal=thermalMeas(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot) "Thermal measurement" annotation (Dialog(
+                  direct.therm.T,
+                  direct.therm.Qdot) "Thermal measurement" annotation (Dialog(
               tab="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -5182,8 +5108,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Connectors.RealOutputInternal _u_transX=transXSpec(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.x]) if inclTransX
           "Internal, working value of X-axis translational specification"
           annotation (Placement(transformation(
@@ -5194,8 +5120,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Connectors.RealOutputInternal _u_transY=transYSpec(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.y]) if inclTransY
           "Internal, working value of Y-axis translational specification"
           annotation (Placement(transformation(
@@ -5206,8 +5132,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Connectors.RealOutputInternal _u_transZ=transZSpec(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot,
+                  direct.therm.T,
+                  direct.therm.Qdot,
                   i=transCart[Axis.z]) if inclTransZ
           "Internal, working value of Z-axis translational specification"
           annotation (Placement(transformation(
@@ -5218,8 +5144,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Connectors.RealOutputInternal _u_thermal=thermalSpec(
                   direct.trans.phi,
                   direct.trans.mPhidot,
-                  direct.thermo.T,
-                  direct.thermo.Qdot)
+                  direct.therm.T,
+                  direct.therm.Qdot)
           "Internal, working value of thermal specification" annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -5284,12 +5210,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transYSpec = Translational.velocity,
           redeclare replaceable function transZSpec = Translational.velocity,
           redeclare replaceable function thermalSpec =
-              ThermoDiffusive.temperature,
+              ThermalDiffusive.temperature,
           redeclare replaceable function transXMeas = Translational.force,
           redeclare replaceable function transYMeas = Translational.force,
           redeclare replaceable function transZMeas = Translational.force,
-          redeclare replaceable function thermalMeas = ThermoDiffusive.heatRate,
-
+          redeclare replaceable function thermalMeas =
+              ThermalDiffusive.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=298.15*
                 U.K));
 
@@ -5342,7 +5268,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Translational;
 
-      package ThermoDiffusive "Conditions for thermal diffusion"
+      package ThermalDiffusive "Conditions for thermal diffusion"
         extends Modelica.Icons.Package;
 
         function temperature "Temperature"
@@ -5380,13 +5306,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
         end Partial;
-      end ThermoDiffusive;
+      end ThermalDiffusive;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
+                  lineColor={170,0,0},
                   fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52}),Text(
+                  fillColor={221,23,47}),Text(
                   extent={{-70,70},{70,-70}},
                   lineColor={255,255,255},
                   textStyle={TextStyle.Bold},
@@ -5499,8 +5425,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-80,-10})));
         //
         // Thermal
-        replaceable function thermalSpec = ThermoDiffusive.heatRate
-          constrainedby ThermoDiffusive.Partial "Quantity" annotation (
+        replaceable function thermalSpec = ThermalDiffusive.heatRate
+          constrainedby ThermalDiffusive.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -5548,9 +5474,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalMeas =
-            FCSys.Conditions.ByConnector.Inert.ThermoDiffusive.temperature
-          constrainedby ThermoDiffusive.Partial "Thermal quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+            FCSys.Conditions.ByConnector.Inert.ThermalDiffusive.temperature
+          constrainedby ThermalDiffusive.Partial "Thermal quantity" annotation
+          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -5777,12 +5703,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transYSpec = Translational.velocity,
           redeclare replaceable function transZSpec = Translational.velocity,
           redeclare replaceable function thermalSpec =
-              ThermoDiffusive.temperature,
+              ThermalDiffusive.temperature,
           redeclare replaceable function transXMeas = Translational.force,
           redeclare replaceable function transYMeas = Translational.force,
           redeclare replaceable function transZMeas = Translational.force,
-          redeclare replaceable function thermalMeas = ThermoDiffusive.heatRate,
-
+          redeclare replaceable function thermalMeas =
+              ThermalDiffusive.heatRate,
           redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=298.15*
                 U.K));
 
@@ -5835,7 +5761,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Translational;
 
-      package ThermoDiffusive "Conditions for thermal diffusion"
+      package ThermalDiffusive "Conditions for thermal diffusion"
         extends Modelica.Icons.Package;
 
         function temperature "Temperature"
@@ -5873,12 +5799,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
         end Partial;
-      end ThermoDiffusive;
+      end ThermalDiffusive;
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={2,157,21},
+                  lineColor={170,0,0},
                   fillPattern=FillPattern.Solid,
-                  fillColor={38,196,52})}));
+                  fillColor={221,23,47})}));
     end Inert;
 
     package Translational
@@ -6225,12 +6151,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Translational;
 
-    package ThermoDiffusive
-      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
+    package ThermalDiffusive
+      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ThermalDiffusive\">ThermalDiffusive</a> connector</html>"
       extends Modelica.Icons.Package;
 
       package Pair
-        "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connectors</html>"
+        "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.ThermalDiffusive\">ThermalDiffusive</a> connectors</html>"
         extends Modelica.Icons.Package;
 
         model HeatRate "Specify heat flow rate (measure temperature)"
@@ -6287,7 +6213,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={0,-50})));
 
-          Connectors.ThermoDiffusive negative
+          Connectors.ThermalDiffusive negative
             "Negative connector for thermal diffusion"
             annotation (Placement(transformation(extent={{-110,-12},{-90,8}})));
 
@@ -6300,7 +6226,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 origin={0,8})));
 
         public
-          Connectors.ThermoDiffusive positive
+          Connectors.ThermalDiffusive positive
             "Postive connector for thermal diffusion"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
         equation
@@ -6327,22 +6253,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Pair;
 
       package Single
-        "<html>Conditions for a single <a href=\"modelica://FCSys.Connectors.ThermoDiffusive\">ThermoDiffusive</a> connector</html>"
+        "<html>Conditions for a single <a href=\"modelica://FCSys.Connectors.ThermalDiffusive\">ThermalDiffusive</a> connector</html>"
         extends Modelica.Icons.Package;
 
         model HeatRate "Specify heat flow rate (measure temperature)"
-          extends Partial(final y=thermo.T);
+          extends Partial(final y=therm.T);
 
         equation
-          thermo.Qdot = u_final;
+          therm.Qdot = u_final;
 
         end HeatRate;
 
         model Temperature "Specify temperature (measure heat flow rate)"
-          extends Partial(final y=thermo.Qdot, source(y=298.15*U.K));
+          extends Partial(final y=therm.Qdot, source(y=298.15*U.K));
 
         equation
-          thermo.T = u_final;
+          therm.T = u_final;
 
         end Temperature;
 
@@ -6381,7 +6307,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={110,0})));
 
-          Connectors.ThermoDiffusive thermo "Connector for thermal diffusion"
+          Connectors.ThermalDiffusive therm "Connector for thermal diffusion"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         protected
@@ -6412,7 +6338,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   lineColor={127,127,127},
                   fillPattern=FillPattern.Solid,
                   fillColor={255,255,255})}));
-    end ThermoDiffusive;
+    end ThermalDiffusive;
 
     package Chemical
       "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector</html>"
@@ -6508,7 +6434,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "Velocity of the actual stream";
         output Q.Potential sT_actual=actualStream(chemical.sT)
           "Specific entropy-temperature product of the actual stream";
-        Connectors.Chemical chemical(final n_trans=n_trans)
+        Connectors.Chemical chemical(n_trans=n_trans)
           "Connector for a species of a chemical reaction"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -6544,9 +6470,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Partial;
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
+                  lineColor={239,142,1},
                   fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
+                  fillColor={255,195,38})}));
 
     end Chemical;
 
@@ -6686,8 +6612,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         //
         // Thermal
         replaceable function thermalSpec =
-            ThermoAdvective.specificEntropyTemperature constrainedby
-          ThermoAdvective.Partial "Quantity" annotation (
+            ThermalAdvective.specificEntropyTemperature constrainedby
+          ThermalAdvective.Partial "Quantity" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(tab="Specification", group="Thermal"),
           Placement(transformation(extent={{4,-10},{24,10}})));
@@ -6733,9 +6659,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Thermal
-        replaceable function thermalMeas = ThermoAdvective.heatRate
-          constrainedby ThermoAdvective.Partial "Thermal quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
+        replaceable function thermalMeas = ThermalAdvective.heatRate
+          constrainedby ThermalAdvective.Partial "Thermal quantity" annotation
+          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
         // Included components of translational momentum
         parameter Boolean inclTransX=true "X" annotation (
@@ -7014,7 +6940,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transZSpec =
               Conditions.ByConnector.Reaction.Translational.velocity,
           redeclare replaceable function thermalSpec =
-              Conditions.ByConnector.Reaction.ThermoAdvective.specificEntropyTemperature,
+              Conditions.ByConnector.Reaction.ThermalAdvective.specificEntropyTemperature,
 
           redeclare replaceable function materialMeas =
               Conditions.ByConnector.Reaction.Material.reactionRate,
@@ -7025,7 +6951,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           redeclare replaceable function transZMeas =
               Conditions.ByConnector.Reaction.Translational.force,
           redeclare replaceable function thermalMeas =
-              Conditions.ByConnector.Reaction.ThermoAdvective.heatRate);
+              Conditions.ByConnector.Reaction.ThermalAdvective.heatRate);
 
         // Note:  In Dymola 2014, the paths must be explicitly given to prevent
         // the error "Cannot show the parameter dialog for redeclared class [...]".
@@ -7124,7 +7050,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end Partial;
       end Translational;
 
-      package ThermoAdvective "Conditions for thermal advection"
+      package ThermalAdvective "Conditions for thermal advection"
         extends Modelica.Icons.Package;
 
         function specificEntropyTemperature
@@ -7168,15 +7094,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
         end Partial;
-      end ThermoAdvective;
+      end ThermalAdvective;
 
       annotation (Icon(graphics={Ellipse(
                   extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
+                  lineColor={239,142,1},
                   fillPattern=FillPattern.Solid,
                   fillColor={255,255,255}),Ellipse(
                   extent={{-30,30},{30,-30}},
-                  fillColor={221,23,47},
+                  fillColor={255,195,38},
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None,
                   lineColor={0,0,0})}));

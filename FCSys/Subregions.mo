@@ -77,16 +77,16 @@ package Subregions
 
       model HOR "Test the hydrogen oxidation reaction in one subregion"
 
-        output Q.Potential wprime=subregion.graphite.'e-'.wprime
+        output Q.Potential h0=0.5*Characteristics.H2.Gas.Deltah0_f + 0.25*
+            Characteristics.O2.Gas.Deltah0_f - 0.5*Characteristics.H2O.Gas.Deltah0_f;
+
+        output Q.Potential w=-subregion.graphite.'e-Transfer'.Deltag
           "Overpotential";
-        output Q.Current zI_supply=-subregion.graphite.'e-'.boundaries[1, 1].Ndot
-          "Electrical supply current";
-        output Q.Current zI=subregion.graphite.'e-'.chemical[1].Ndot
-          "Reaction current";
+        output Q.Current zI=-subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density of the reaction, in A/cm2";
-        output Q.Power P=wprime*zI
-          "Electrical power associate with overpotentail";
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.direct.therm.Qdot
+          "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
           'inclC+'=true,
@@ -94,34 +94,21 @@ package Subregions
           'incle-'=true,
           'inclH+'=true,
           inclH2=true,
-          subregion(
-            dielectric(final A=0),
-            L={0.287*U.mm,10*U.cm,10*U.cm},
-            gas(H2(phi(each fixed=true, each stateSelect=StateSelect.always))),
-
-            graphite('e-'(Io=1e6*U.A/U.cm^2)),
-            ionomer('H+'(consTransX=ConsTrans.steady))),
-          environment(RH=0.8));
-        // **re-enable capacitance
-
-        Q.TemperatureAbsolute T_states[:](
-          each stateSelect=StateSelect.always,
-          each start=environment.T) = {subregion.gas.T,subregion.graphite.T,
-          subregion.ionomer.T}
-          "Always selected temperature states to eliminate nonlinear equations";
+          subregion(L={0.287*U.mm,10*U.cm,10*U.cm}),
+          environment(T=333.15*U.K, RH=0.8));
 
         Conditions.ByConnector.BoundaryBus.Single.Sink anBC(graphite(
             'incle-'=true,
             'inclC+'=true,
             redeclare
-              FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
               'C+'(source(y=environment.T)),
             'e-'(redeclare function materialSpec =
                   FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
                 materialSet(y=currentSet.y))), gas(inclH2=true, H2(
               materialSet(y=environment.p_dry),
               redeclare function thermalSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
               thermalSet(y=environment.T)))) annotation (Placement(
               transformation(
@@ -130,12 +117,18 @@ package Subregions
               origin={-24,0})));
 
         Conditions.ByConnector.BoundaryBus.Single.Sink caBC(ionomer('inclH+'=
-                true)) annotation (Placement(transformation(
+                true, 'H+'(redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.potential
+                  (redeclare package Data = FCSys.Characteristics.'H+'.Ionomer),
+                materialSet(y=0)))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={24,0})));
 
-        Modelica.Blocks.Sources.Ramp currentSet(height=200*U.A, duration=20)
+        Modelica.Blocks.Sources.Ramp currentSet(
+          height=200*U.A,
+          duration=20,
+          startTime=5)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
@@ -160,15 +153,13 @@ package Subregions
 
       model ORR "Test the oxygen reduction reaction in one subregion"
 
-        output Q.Potential wprime=-subregion.graphite.'e-'.wprime
+        output Q.Potential w=subregion.graphite.'e-Transfer'.Deltag
           "Overpotential";
-        output Q.Current zI=subregion.graphite.'e-'.boundaries[1, 2].Ndot
-          "Electrical current";
+        output Q.Current zI=subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
-        output Q.Power Qdot=-subregion.graphite.'e-'.Edot_DE
-          "Rate of heat generation";
-        output Q.Power P=wprime*zI "Electrical power";
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.direct.therm.Qdot
+          "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
           'inclC+'=true,
@@ -178,33 +169,22 @@ package Subregions
           inclH2=false,
           inclH2O=true,
           inclO2=true,
-          subregion(
-            L={0.287*U.mm,10*U.cm,10*U.cm},
-            gas(H2O(phi(each fixed=true, each stateSelect=StateSelect.always)),
-                O2(phi(each fixed=true, each stateSelect=StateSelect.always))),
-
-            ionomer('H+'(consTransX=ConsTrans.steady))),
-          environment(RH=0.6));
-
-        Real states[:](each stateSelect=StateSelect.always) = {subregion.gas.T,
-          subregion.graphite.T,subregion.ionomer.T}
-          "Forced state selection to eliminate nonlinear equations";
+          subregion(L={0.287*U.mm,10*U.cm,10*U.cm}),
+          environment(T=333.15*U.K, RH=0.6));
 
         Conditions.ByConnector.BoundaryBus.Single.Source anBC(ionomer('inclH+'=
                 true, 'H+'(
+              thermalSet(y=environment.T),
+              materialSet(y=0),
               redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-              materialSet(y=U.bar),
-              thermalSet(y=environment.T)))) annotation (Placement(
-              transformation(
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.potential
+                  (redeclare package Data = FCSys.Characteristics.'H+'.Ionomer))))
+          annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-24,0})));
 
-        Conditions.ByConnector.BoundaryBus.Single.Source caBC(graphite('incle-'
-              =true, 'e-'(materialSet(y=currentSet.y), thermalSet(y=environment.T))),
-            gas(
+        Conditions.ByConnector.BoundaryBus.Single.Source caBC(gas(
             inclH2O=true,
             inclO2=true,
             H2O(
@@ -218,7 +198,11 @@ package Subregions
                   FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
 
               materialSet(y=environment.p_O2),
-              thermalSet(y=environment.T)))) annotation (Placement(
+              thermalSet(y=environment.T))), graphite(
+            'incle-'=true,
+            'e-'(materialSet(y=currentSet.y), thermalSet(y=environment.T)),
+            'inclC+'=true,
+            'C+'(source(y=environment.T)))) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -226,9 +210,10 @@ package Subregions
 
         Modelica.Blocks.Sources.Ramp currentSet(
           duration=20,
-          offset=-U.mA,
-          height=-200*U.A)
+          height=-200*U.A,
+          startTime=5)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+        //offset=-U.mA,
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
             points={{10,0},{10,8.88178e-016},{20,8.88178e-016}},
@@ -287,8 +272,7 @@ package Subregions
         gas(inclN2=true, N2(
             zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC=environment.p - Deltap_IC/2,
-            upstreamY=false,
-            phi(each stateSelect=StateSelect.always, each fixed=true))),
+            upstreamY=false)),
         graphite('inclC+'='inclC+', 'C+'(epsilon=1e-9)))
         annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
 
@@ -300,8 +284,7 @@ package Subregions
             each zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_y + 1) for i in
                 1:n_y},
-            each upstreamY=false,
-            each phi(each stateSelect=StateSelect.always,each fixed=true))),
+            each upstreamY=false)),
         graphite(each 'inclC+'='inclC+', each 'C+'(epsilon=1e-9)),
         each inclTransX=false,
         each inclTransY=true) if n_y > 0
@@ -317,8 +300,7 @@ package Subregions
         gas(inclN2=true, N2(
             zeta=k*FCSys.Characteristics.H2.Gas.zeta(),
             p_IC=environment.p + Deltap_IC/2,
-            upstreamY=false,
-            phi(each stateSelect=StateSelect.always,each fixed=true))))
+            upstreamY=false)))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
       Conditions.ByConnector.BoundaryBus.Single.Sink BC1(gas(inclN2=true, N2(
@@ -445,55 +427,6 @@ package Subregions
             "Subregions.Examples.BinaryDiffusion.mos"));
     end BinaryDiffusion;
 
-    model DoubleLayer
-      "Test the storage of charge across the electrolytic double layer"
-      extends Subregion(
-        inclH2=false,
-        'inclC+'=true,
-        'incle-'=true,
-        'inclSO3-'=true,
-        'inclH+'=true);
-
-      Conditions.ByConnector.BoundaryBus.Single.Source electrons(graphite(
-            'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Trapezoid
-              materialSet(
-              rising=1,
-              width=1,
-              falling=1,
-              amplitude=-U.A,
-              period=4)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=90,
-            origin={-24,0})));
-      Conditions.ByConnector.BoundaryBus.Single.Source protons(ionomer('inclH+'
-            =true, 'H+'(redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure)))
-        annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=90,
-            origin={24,0})));
-
-    equation
-      connect(protons.boundary, subregion.xPositive) annotation (Line(
-          points={{20,0},{10,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(electrons.boundary, subregion.xNegative) annotation (Line(
-          points={{-20,0},{-10,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics),
-        experiment(StopTime=4),
-        __Dymola_experimentSetupOutput,
-        Commands(file=
-              "Resources/Scripts/Dymola/Subregions.Examples.DoubleLayer.mos"
-            "Subregions.Examples.DoubleLayer.mos"));
-    end DoubleLayer;
-
     model Echo "Two regions of gas with an initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
 
@@ -566,7 +499,7 @@ package Subregions
           'e-'(
             materialSet(y=-0.05*U.A),
             redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
             thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -577,7 +510,7 @@ package Subregions
           'inclC+'=true,
           'incle-'='incle-',
           redeclare
-            FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{-10,10},{10,-10}},
@@ -626,7 +559,6 @@ package Subregions
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
     end ElectricalConduction;
-
 
     model InternalFlow "Internal, laminar flow of liquid water"
       import FCSys.Utilities.Delta;
@@ -681,7 +613,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC3(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=0,
@@ -689,7 +621,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC4(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -697,7 +629,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC5(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=315,
@@ -705,7 +637,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC6(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=315,
@@ -764,7 +696,6 @@ package Subregions
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion
@@ -995,7 +926,7 @@ package Subregions
       extends ThermalConduction(
         inclN2=true,
         subregion1(gas(N2(T_IC=subregion1.graphite.'C+'.T_IC, phi(stateSelect=
-                    StateSelect.always, displayUnit="mm/s"))), graphite('C+'(
+                    StateSelect.always,displayUnit="mm/s"))), graphite('C+'(
                 epsilon=0.5))),
         subregions(gas(N2(each phi(each stateSelect=StateSelect.always,
                   displayUnit="mm/s"))), each graphite('C+'(epsilon=0.5))),
@@ -1031,15 +962,15 @@ package Subregions
       n_inter=2,
       final n_trans=n_trans,
       k_inter={k_common,k_gas_liq}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-90,-22},
-              {-70,-2}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-70,-22},
+              {-50,-2}})));
 
     FCSys.Phases.Graphite graphite(
       n_inter=1,
       final n_trans=n_trans,
       k_inter={k_common}) "Graphite" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-50,-22},
-              {-30,-2}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
+              {-10,-2}})));
 
     FCSys.Phases.Ionomer ionomer(
       n_inter=1,
@@ -1055,7 +986,7 @@ package Subregions
             "Phases (click to edit)"), Placement(transformation(extent={{50,-22},
               {70,-2}})));
 
-    Reactions.HOR HOR(n_trans=n_trans) if graphite.'incle-' and ionomer.
+    Reactions.HOR HOR(final n_trans=n_trans) if graphite.'incle-' and ionomer.
       'inclH+' and gas.inclH2 "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{80,-30},{100,-10}})));
     Reactions.ORR ORR(final n_trans=n_trans) if graphite.'incle-' and ionomer.
@@ -1064,11 +995,11 @@ package Subregions
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
-            extent={{-140,-40},{-120,-20}}), iconTransformation(extent={{-110,-10},
+            extent={{-120,-40},{-100,-20}}), iconTransformation(extent={{-110,-10},
               {-90,10}})));
     Connectors.BoundaryBus yNegative if inclTransY
       "Negative boundary along the y axis" annotation (Placement(transformation(
-            extent={{-116,-64},{-96,-44}}), iconTransformation(extent={{-10,-110},
+            extent={{-96,-64},{-76,-44}}), iconTransformation(extent={{-10,-110},
               {10,-90}})));
     Connectors.BoundaryBus zNegative if inclTransZ
       "Negative boundary along the z axis" annotation (Placement(transformation(
@@ -1084,12 +1015,8 @@ package Subregions
               110}})));
     Connectors.BoundaryBus zPositive if inclTransZ
       "Positive boundary along the z axis" annotation (Placement(transformation(
-            extent={{-128,-52},{-108,-32}}), iconTransformation(extent={{-60,-60},
+            extent={{-108,-52},{-88,-32}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
-
-    Phases.Dielectric dielectric if graphite.'incle-' and ionomer.'inclH+'
-      "Gap associated with the electrolytic double layer"
-      annotation (Placement(transformation(extent={{-20,-26},{0,-6}})));
 
   protected
     Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V, final setVolume
@@ -1108,97 +1035,84 @@ package Subregions
   equation
     // Boundaries and mixing
     // ---------------------
-    // Dielectric
-    connect(dielectric.amagat, volume.amagat) annotation (Line(
-        points={{-10,-16},{-10,-66},{86,-66}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(graphite.electrostatic[1], dielectric.negative) annotation (Line(
-        points={{-30,-16},{-16,-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
-    connect(dielectric.positive, ionomer.electrostatic[1]) annotation (Line(
-        points={{-4,-16},{10,-16}},
-        color={255,195,38},
-        smooth=Smooth.None));
     // Gas
     connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-72,-20},{-72,-66},{86,-66}},
+        points={{-52,-20},{-52,-66},{86,-66}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{-80,-20.4},{-80,-54},{-106,-54}},
+        points={{-60,-20.4},{-60,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-88,-20},{-88,-42},{-118,-42}},
+        points={{-68,-20},{-68,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-88,-12},{-96,-12},{-96,-30},{-130,-30}},
+        points={{-68,-12},{-76,-12},{-76,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{-80,-2},{-80,30},{86,30}},
+        points={{-60,-2},{-60,30},{86,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{-75,-7},{-74,-7},{-72,-4},{-72,18},{98,18}},
+        points={{-55,-7},{-52,-4},{-52,18},{98,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{-72,-12},{-64,-12},{-64,6},{110,6}},
+        points={{-52,-12},{-44,-12},{-44,6},{110,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     // Graphite
     connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{-32,-20},{-32,-66},{86,-66}},
+        points={{-12,-20},{-12,-66},{86,-66}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(graphite.yNegative, yNegative.graphite) annotation (Line(
-        points={{-40,-20.4},{-40,-54},{-106,-54}},
+        points={{-20,-20.4},{-20,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.yPositive, yPositive.graphite) annotation (Line(
-        points={{-40,-2},{-40,30},{86,30}},
+        points={{-20,-2},{-20,30},{86,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zNegative, zNegative.graphite) annotation (Line(
-        points={{-35,-7},{-34,-7},{-32,-4},{-32,18},{98,18}},
+        points={{-15,-7},{-12,-4},{-12,18},{98,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zPositive, zPositive.graphite) annotation (Line(
-        points={{-48,-20},{-48,-42},{-118,-42}},
+        points={{-28,-20},{-28,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.xNegative, xNegative.graphite) annotation (Line(
-        points={{-48,-12},{-56,-12},{-56,-30},{-130,-30}},
+        points={{-28,-12},{-36,-12},{-36,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.xPositive, xPositive.graphite) annotation (Line(
-        points={{-32,-12},{-24,-12},{-24,6},{110,6}},
+        points={{-12,-12},{-4,-12},{-4,6},{110,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1209,7 +1123,7 @@ package Subregions
         color={47,107,251},
         smooth=Smooth.None));
     connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
-        points={{20,-20.4},{20,-54},{-106,-54}},
+        points={{20,-20.4},{20,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1227,13 +1141,13 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     connect(ionomer.zPositive, zPositive.ionomer) annotation (Line(
-        points={{12,-20},{12,-42},{-118,-42}},
+        points={{12,-20},{12,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
-        points={{12,-12},{4,-12},{4,-30},{-130,-30}},
+        points={{12,-12},{4,-12},{4,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1250,7 +1164,7 @@ package Subregions
         color={47,107,251},
         smooth=Smooth.None));
     connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{60,-20.4},{60,-54},{-106,-54}},
+        points={{60,-20.4},{60,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1268,13 +1182,13 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{52,-20},{52,-42},{-118,-42}},
+        points={{52,-20},{52,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{52,-12},{44,-12},{44,-30},{-130,-30}},
+        points={{52,-12},{44,-12},{44,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1290,29 +1204,29 @@ package Subregions
     // --------------
     // Common
     connect(gas.inter[1], common.exchange) annotation (Line(
-        points={{-85,-6.5},{-85,42},{86,42}},
-        color={38,196,52},
+        points={{-65,-6.5},{-65,42},{86,42}},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(graphite.inter[1], common.exchange) annotation (Line(
-        points={{-45,-7},{-45,42},{86,42}},
-        color={38,196,52},
+        points={{-25,-7},{-25,42},{86,42}},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(ionomer.inter[1], common.exchange) annotation (Line(
         points={{15,-7},{15,42},{86,42}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[1], common.exchange) annotation (Line(
         points={{55,-6.5},{55,42},{86,42}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiq.exchange) annotation (Line(
-        points={{-85,-7.5},{-85,54},{86,54}},
-        color={38,196,52},
+        points={{-65,-7.5},{-65,54},{86,54}},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
         points={{55,-7.5},{55,54},{86,54}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
 
     // Reactions and phase change (not shown in diagram)
@@ -1335,13 +1249,13 @@ package Subregions
     annotation (Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-80},{
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-            extent={{70,-44},{110,-50}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown 
+              extent={{70,-44},{110,-50}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown 
 on diagram)")}));
   end Subregion;
 
@@ -1640,24 +1554,24 @@ on diagram)")}));
     // Common
     connect(gas.inter[1], common.exchange) annotation (Line(
         points={{-45,-10.5},{-45,38},{66,38}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(graphite.inter[1], common.exchange) annotation (Line(
         points={{-5,-11},{-5,38},{66,38}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[1], common.exchange) annotation (Line(
         points={{35,-10.5},{35,38},{66,38}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiq.exchange) annotation (Line(
         points={{-45,-11.5},{-45,50},{66,50}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiq.exchange) annotation (Line(
         points={{35,-11.5},{35,50},{66,50}},
-        color={38,196,52},
+        color={221,23,47},
         smooth=Smooth.None));
     // Graphite-liquid
 
@@ -1726,7 +1640,7 @@ on diagram)")}));
     final inner parameter Boolean inclRot[Axis]={inclTransY and inclTransZ,
         inclTransZ and inclTransX,inclTransX and inclTransY}
       "true, if each axis of rotation has all its tangential boundaries included";
-    final inner parameter Integer n_trans=countTrue(inclTrans)
+    final parameter Integer n_trans=countTrue(inclTrans)
       "Number of transport axes";
     final inner parameter Integer cartRot[:]=index(inclRot)
       "Cartesian-axis indices of the components of rotational momentum";

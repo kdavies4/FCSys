@@ -105,7 +105,6 @@ package Species "Dynamic models of chemical species"
 
   end 'C+';
 
-
   package 'SO3-'
     "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (abbreviated as SO<sub>3</sub><sup>-</sup>)</html>"
     extends Modelica.Icons.Package;
@@ -167,7 +166,7 @@ package Species "Dynamic models of chemical species"
           final upstreamZ=false,
           final initMaterial=Init.none,
           final initEnergy=Init.none,
-          final consTransX=ConsTrans.steady,
+          consTransX=ConsTrans.steady,
           final consTransY=ConsTrans.steady,
           final consTransZ=ConsTrans.steady,
           final consEnergy=ConsThermo.steady,
@@ -180,22 +179,11 @@ package Species "Dynamic models of chemical species"
           final T_IC,
           final nu=1,
           final n_chem=1,
-          final tauprime={V/(v*Io)},
+          final tauprime={0},
           final zeta=0,
           final k_intra,
-          final theta=Modelica.Constants.inf,
-          N(stateSelect=StateSelect.default));
-        // The stateSelect of N is default.  If a dielectric (Phases.Dielectric)
-        // is connected, then its charge shift (Z) is preferred as a state.  If
-        // a dielectric isn't connected, then N = N_bulk, which is constant.
-        // der(N) = 0 and there is no state.
-
-        parameter Q.Current Io(min=0) = U.A
-          "Exchange current (excluding the activation factor)" annotation (
-            Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
-
-        output Q.Potential wprime(stateSelect=StateSelect.never) = chemical[1].g
-           - g if environment.analysis "Reaction overpotential";
+          final theta=Modelica.Constants.inf);
+        //**final  consTransX
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -246,6 +234,9 @@ positive charge carriers.</p>
           final upstreamZ=false,
           final initMaterial=Init.none,
           final consEnergy=ConsThermo.steady,
+          consTransX=ConsTrans.steady,
+          consTransY=ConsTrans.steady,
+          consTransZ=ConsTrans.steady,
           final N_IC,
           final p_IC,
           final h_IC,
@@ -255,16 +246,14 @@ positive charge carriers.</p>
           final T_IC,
           final nu=1,
           n_chem=1,
-          final tauprime,
           final zeta=0,
-          final alpha,
+          final tauprime,
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
-          sigma=0.083*U.S/U.cm,
-          N(stateSelect=StateSelect.default));
+          sigma=0.083*U.S/U.cm);
 
         // The stateSelect of N is default.  If a dielectric (Phases.Dielectric)
         // is connected, then its charge shift (Z) is preferred as a state.  If
-        // a dielectric isn't connected, then N = N_bulk, which is constant.
+        // a dielectric isn't connected, then N = N, which is constant.
         // der(N) = 0 and there is no state.
 
         // See the documentation for a table of values.
@@ -383,7 +372,6 @@ positive charge carriers.</p>
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W),
           final tauprime,
           n_chem=1,
-          final alpha,
           p_IC=environment.p_dry);
 
         // See the documentation for a table of values.
@@ -482,7 +470,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1],n_v={-1,0}),
+                b_v=[1], n_v={-1,0}),
           final tauprime,
           n_chem=3,
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -491,7 +479,6 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           redeclare parameter Q.Fluidity eta=1/(9.09e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W),
 
-          final alpha,
           p_IC=environment.p_H2O);
 
         // See the documentation for tables of values.
@@ -657,7 +644,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final p_IC,
           final V_IC,
           final T_IC,
-          final alpha,
           final consMaterial,
           n_chem=1,
           final initMaterial=Init.none);
@@ -667,11 +653,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           annotation (Dialog(tab="Initialization", __Dymola_label=
                 "<html>&lambda;<sub>IC</sub></html>"));
 
-        // Auxiliary variables (for analysis)
-        output Q.NumberAbsolute lambda(
-          start=lambda_IC,
-          fixed=true,
-          stateSelect=StateSelect.never) if environment.analysis
+        Q.NumberAbsolute lambda(start=lambda_IC, fixed=true)
           "Ratio of H2O molecules to SO3- end-groups";
 
       equation
@@ -738,8 +720,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final p_IC,
           n_chem=1,
           final V_IC=epsilon_IC*product(L),
-          initMaterial=Init.volume,
-          final alpha);
+          initMaterial=Init.volume);
 
         // See the documentation for tables of values.
 
@@ -878,7 +859,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.Fluidity eta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
 
-          final alpha,
           p_IC=environment.p_dry - p_IC - environment.p_O2);
 
         // See the documentation for a table of values.
@@ -973,7 +953,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W),
 
           n_chem=1,
-          final alpha,
           p_IC=environment.p_O2);
 
         // See the documentation for a table of values.
@@ -1048,28 +1027,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   model Ion "Base model for an ion"
     import assert = FCSys.Utilities.assertEval;
-    extends Fluid(
-      alpha=fill(0.5, n_chem),
-      final mu=sigma*v,
-      dalton(final V=(N - electrostatic[1].Z/Data.z)*v));
-    // Note:  The amount of material includes the additional amount in the
-    // charge layer, which may be positive or negative.
+    extends Fluid(final mu=sigma*v, N(stateSelect=StateSelect.default));
 
     parameter Q.ConductivityElectrical sigma=Data.mu()/Data.v_Tp()
       "Electrical conductivity" annotation (Dialog(group="Material properties",
           __Dymola_label="<html>&sigma;</html>"));
-
-    Connectors.Electrostatic electrostatic[n_chem]
-      "Interface with the dielectric" annotation (Placement(transformation(
-            extent={{-30,10},{-10,30}}), iconTransformation(extent={{-80,60},{-60,
-              80}})));
-
-  initial equation
-    assert(Data.z <> 0, "The Ion model can only be used for charged species.");
-
-  equation
-    g = Data.z*electrostatic[1].w;
-    // **eliminate array, use only one
 
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -1086,7 +1048,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
   model Fluid "Base model for a fluid species"
 
-    import Modelica.Math.asinh;
     import FCSys.Utilities.Coordinates.after;
     import FCSys.Utilities.Coordinates.before;
     import FCSys.Utilities.Coordinates.cartWrap;
@@ -1095,11 +1056,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     import FCSys.Utilities.selectBooleans;
     import FCSys.Utilities.selectIntegers;
     import assert = FCSys.Utilities.assertEval;
-
-    // Geometric parameters
-    parameter Q.NumberAbsolute alpha[n_chem]=ones(n_chem)
-      "Charge transfer coefficients of the chemical proceses" annotation (
-        Dialog(group="Geometry", __Dymola_label="<html>&alpha;</html>"));
 
     // Initialization parameters
     parameter Init initMaterial=Init.pressure
@@ -1121,9 +1077,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     parameter Integer n_chem=0 "Number of reaction and phase change processes"
       annotation (HideResult=true, Dialog(tab="Assumptions", __Dymola_label=
             "<html><i>n</i><sub>chem</sub></html>"));
-    Q.TimeAbsolute tauprime[n_chem](each nominal=U.ms) = zeros(n_chem)
-      "Interval of the chemical processes" annotation (Dialog(group=
-            "Material properties", __Dymola_label="<html>&tau;&prime;</html>"));
     Q.Continuity zeta(nominal=1e-3*U.N/U.A) = Data.zeta(T, v) "Continuity"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&zeta;</html>"));
@@ -1133,6 +1086,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     Q.ResistivityThermal theta(nominal=10*U.m*U.K/U.W) = Data.theta(T, v)
       "Thermal resistivity" annotation (Dialog(group="Material properties",
           __Dymola_label="<html>&theta;</html>"));
+
+    // Chemical parameters
+    Q.TimeAbsolute tauprime[n_chem](each nominal=U.ms) = zeros(n_chem)
+      "Specific exchange rates" annotation (Evaluate=true,Dialog(group=
+            "Chemical parameters", __Dymola_label="<html>&tau;&prime;</html>"));
 
     // Assumptions
     // -----------
@@ -1204,8 +1162,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
 
     // Aliases (for common terms)
-    Q.Current I[n_trans](each nominal=U.A, each stateSelect=StateSelect.never)
+    Q.Current I[n_trans](each nominal=U.A, each stateSelect=StateSelect.prefer)
       "Current";
+    // **never
     Q.Velocity phi_boundaries[n_trans, Side](each nominal=10*U.cm/U.s, each
         stateSelect=StateSelect.never) "Normal velocities at the boundaries";
     Q.Force mPhidot[n_trans](each nominal=U.N, each stateSelect=StateSelect.never)
@@ -1525,17 +1484,7 @@ Choose any condition besides none.");
 
     // Material exchange
     for i in 1:n_chem loop
-      if abs(alpha[i] - 0.5) < Modelica.Constants.eps or tauprime[i] < Modelica.Constants.eps
-          *U.s then
-        chemical[i].g = g + 2*T*asinh(chemical[i].Ndot*tauprime[i]/(2*N_bulk*
-          exp(chemical[i].g/T/2))) "Inverted to avoid nonlinear equations";
-      else
-        tauprime[i]*chemical[i].Ndot = N_bulk*exp((1 - alpha[i])*chemical[i].g/
-          T)*(exp(alpha[i]*(chemical[i].g - g)/T) - exp((alpha[i] - 1)*(
-          chemical[i].g - g)/T));
-        // Note:  The activation energy has been factored out (a la Butler-
-        // Volmer) to improve the numerics.
-      end if;
+      tauprime[i]*chemical[i].Ndot = N*(exp((chemical[i].g - g)/T) - 1);
     end for;
 
     // Transport
@@ -1544,8 +1493,8 @@ Choose any condition besides none.");
         // Material
         zeta*(boundaries[i, side].Ndot - inSign(side)*I[i]) + (if consTrans[i]
            == ConsTrans.dynamic then kL[i]*Data.m*(der(boundaries[i, side].Ndot)
-          /U.s + I[i]^2/N_bulk) else 0) + inSign(side)*mPhidot[i] = Aprime[i]*(
-          boundaries[i, side].p - p)*(if upstream[i] then 1 + exp(zeta*
+          /U.s + I[i]^2/N) else 0) + inSign(side)*mPhidot[i] = Aprime[i]*(
+          boundaries[i, side].p - p)*(if upstream[i] then 1 + exp(-zeta*
           Data.beta(T, p)*boundaries[i, side].Ndot/(2*Aprime[i])) else 2);
 
         // Translational momentum
@@ -1689,7 +1638,7 @@ Choose any condition besides none.");
          - h + actualStream(chemical[i].phi)*actualStream(chemical[i].phi)*Data.m
         /2)*chemical[i].Ndot for i in 1:n_chem) + direct.trans.phi*direct.trans.mPhidot
          + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
-        *inter[i].mPhidot for i in 1:n_inter) + direct.thermo.Qdot + sum(intra.Qdot)
+        *inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot + sum(intra.Qdot)
          + sum(inter.Qdot) + sum((Data.h(boundaries[i, :].T, boundaries[i, :].p)
          - {h,h} + (phi_boundaries[i, :] .^ 2 + sum(boundaries[i, :].phi[orient]
          .^ 2 for orient in Orient))*(Data.m/2))*boundaries[i, :].Ndot + sum(
@@ -1717,6 +1666,9 @@ Choose any condition besides none.");
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
     rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational 
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li>
+    
+    <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
+    correspond to the orientation of the translational momentum that is transported, not the axes of material transport.</li>
     </ol></p>
     
     <p>For more information, please see the
@@ -1730,7 +1682,7 @@ Choose any condition besides none.");
               100}}), graphics));
   end Fluid;
 
-  model Solid "Base model for a solid species"
+  model Solid "Base model for an inert, stationary solid"
 
     // Geometry
     parameter Q.Number epsilon=0.25 "Volumetric fill fraction" annotation (
@@ -1761,7 +1713,7 @@ Choose any condition besides none.");
       each start=U.s) = N*c_v*theta*kL ./ Aprime if environment.analysis
       "Time constants for thermal transport (through the whole subregion)";
 
-    Connectors.ThermoDiffusive boundaries[n_trans, Side](T(each start=T_IC))
+    Connectors.ThermalDiffusive boundaries[n_trans, Side](T(each start=T_IC))
       "Connectors for transport" annotation (Placement(transformation(extent={{
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
 
@@ -1801,7 +1753,7 @@ Choose any condition besides none.");
     else
       (if consEnergy == ConsThermo.dynamic then N*T*der(s)/U.s else 0) = sum(
         intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*
-        inter[i].mPhidot for i in 1:n_inter) + direct.thermo.Qdot + sum(intra.Qdot)
+        inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot + sum(intra.Qdot)
          + sum(inter.Qdot) + sum(boundaries.Qdot) "Conservation of energy";
     end if;
 
@@ -1818,7 +1770,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
@@ -1899,7 +1850,8 @@ protected
     Q.Velocity phi[n_trans](
       each nominal=10*U.cm/U.s,
       each start=0,
-      each stateSelect=StateSelect.prefer) "Velocity";
+      each stateSelect=StateSelect.default) "Velocity";
+    // **prefer
 
     // Aliases (for common terms)
     // Note:  StateSelect.never helps avoid dynamic state selection of these
@@ -1932,14 +1884,6 @@ protected
       nominal=25,
       final start=(h_IC - g_IC)/T_IC,
       stateSelect=StateSelect.never) "Specific entropy";
-    Q.Amount N_bulk(
-      final min=Modelica.Constants.small,
-      nominal=4*U.C,
-      start=N_IC,
-      fixed=false,
-      stateSelect=StateSelect.never) "Bulk amount of material";
-    // Note:  N_bulk is different than N for the Ion model, which inherits from
-    // this one.  N_bulk excludes the amount stored in the charge layers.
 
     // Auxiliary variables (for analysis)
     // ----------------------------------
@@ -1988,14 +1932,14 @@ protected
     // Energy balance
     output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.trans.phi*
       direct.trans.mPhidot + sum(intra[i].phi*intra[i].mPhidot for i in 1:
-      n_intra) + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + direct.thermo.Qdot
+      n_intra) + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot
        + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
     Connectors.Direct direct(
       final n_trans=n_trans,
       final inclTrans=true,
-      final inclThermal=true,
-      thermo(T(final start=T_IC, final fixed=false)))
+      final inclTherm=true,
+      therm(T(final start=T_IC, final fixed=false)))
       "Connector to directly couple velocity or temperature with other species"
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
           iconTransformation(extent={{28,-80},{48,-100}})));
@@ -2013,7 +1957,7 @@ protected
     Connectors.Dalton dalton(V(
         min=0,
         final start=V_IC,
-        final fixed=false) = v*N, p(final start=p_IC, final fixed=false))
+        final fixed=false), p(final start=p_IC, final fixed=false))
       "Connector for additivity of pressure" annotation (Placement(
           transformation(extent={{-50,-10},{-30,10}}), iconTransformation(
             extent={{-100,50},{-80,30}})));
@@ -2040,11 +1984,11 @@ Check that the volumes of the other phases are set properly.");
   equation
     // Aliases (only to clarify and simplify other equations)
     p = dalton.p;
-    T = direct.thermo.T;
+    T = direct.therm.T;
     h = g + T*s;
     M = Data.m*N;
     phi = direct.trans.phi;
-    v*N_bulk = V;
+    v*N = dalton.V;
 
     // Thermodynamic correlations
     if Data.isCompressible then
@@ -2059,16 +2003,16 @@ Check that the volumes of the other phases are set properly.");
     // --------
     // Within the phase
     for i in 1:n_intra loop
-      mu*intra[i].mPhidot = k_intra[i]*N_bulk .* (intra[i].phi - phi)
+      mu*intra[i].mPhidot = k_intra[i]*N .* (intra[i].phi - phi)
         "Translational";
-      nu*intra[i].Qdot = k_intra[i]*N_bulk .* (intra[i].T - T) "Thermal";
+      nu*intra[i].Qdot = k_intra[i]*N .* (intra[i].T - T) "Thermal";
     end for;
     //
     // With other phases
     for i in 1:n_inter loop
-      mu*inter[i].mPhidot = k_inter[i]*N_bulk .* (inter[i].phi - phi)
+      mu*inter[i].mPhidot = k_inter[i]*N .* (inter[i].phi - phi)
         "Translational";
-      nu*inter[i].Qdot = k_inter[i]*N_bulk .* (inter[i].T - T) "Thermal";
+      nu*inter[i].Qdot = k_inter[i]*N .* (inter[i].T - T) "Thermal";
     end for;
 
     annotation (
@@ -2227,9 +2171,6 @@ Check that the volumes of the other phases are set properly.");
     <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use 
     3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36) 
     if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li>
-    
-    <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
-    correspond to the axes of material transport, not the orientation of the linear momentum that is transported.</li>
    
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the current.
@@ -2259,16 +2200,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Species;
 
 public

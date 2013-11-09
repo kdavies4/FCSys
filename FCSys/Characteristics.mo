@@ -13,14 +13,13 @@ package Characteristics
       parameter Q.TemperatureAbsolute T_start=273.15*U.K "Initial temperature"
         annotation (Dialog(__Dymola_label=
               "<html><i>T</i><sub>start</sub></html>"));
-      parameter Q.TemperatureAbsolute T_stop=473.15*U.K "Final temperature"
+      parameter Q.TemperatureAbsolute T_stop=373.15*U.K "Final temperature"
         annotation (Dialog(__Dymola_label=
               "<html><i>T</i><sub>stop</sub></html>"));
-      parameter Q.PressureAbsolute p_start=U.bar "Initial pressure" annotation
+      parameter Q.PressureAbsolute p_start=U.atm "Initial pressure" annotation
         (Dialog(__Dymola_label="<html><i>p</i><sub>start</sub></html>"));
-      parameter Q.PressureAbsolute p_stop=U.bar + 0*U.atm "Final pressure"
-        annotation (Dialog(__Dymola_label=
-              "<html><i>p</i><sub>stop</sub></html>"));
+      parameter Q.PressureAbsolute p_stop=U.atm "Final pressure" annotation (
+          Dialog(__Dymola_label="<html><i>p</i><sub>stop</sub></html>"));
 
       // Property models
       PropertiesRT 'C+'(redeclare package Data = Characteristics.'C+'.Graphite)
@@ -35,7 +34,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -52,10 +51,10 @@ package Characteristics
 
       // Conditions
     protected
-      Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
+      Connectors.RealOutputInternal T(unit="L2.M/(N.T2)",displayUnit="K")
         "Temperature" annotation (Placement(transformation(extent={{-10,10},{10,
                 30}}), iconTransformation(extent={{-10,16},{10,36}})));
-      Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure" annotation (
+      Connectors.RealOutputInternal p(unit="M/(L.T2)") "Pressure" annotation (
           Placement(transformation(extent={{-10,-30},{10,-10}}),
             iconTransformation(extent={{-10,-36},{10,-16}})));
 
@@ -75,7 +74,7 @@ package Characteristics
         "FCSys.Characteristics.Examples.Properties, with round-trip pressure calculation"
         extends FCSys.Characteristics.Examples.Properties;
 
-        Q.Pressure p_RT=Data.p_Tv(T, v) if Data.isCompressible;
+        Q.PressureAbsolute p_RT=Data.p_Tv(T, v) if Data.isCompressible;
 
       end PropertiesRT;
 
@@ -196,9 +195,9 @@ package Characteristics
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      Connectors.RealInput T(unit="l2.m/(N.T2)") "Temperature"
+      Connectors.RealInput T(unit="L2.M/(N.T2)") "Temperature"
         annotation (Placement(transformation(extent={{-120,10},{-100,30}})));
-      Connectors.RealInput p(unit="m/(l.T2)") "Pressure"
+      Connectors.RealInput p(unit="M/(L.T2)") "Pressure"
         annotation (Placement(transformation(extent={{-120,-30},{-100,-10}})));
 
       Q.VolumeSpecific v "Specific volume";

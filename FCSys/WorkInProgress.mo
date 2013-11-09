@@ -408,8 +408,8 @@ package WorkInProgress "Incomplete classes under development"
         'e-'(materialSet(y=U.bar)),
         'inclC+'=true,
         redeclare
-          FCSys.Conditions.ByConnector.ThermoDiffusive.Single.Temperature 'C+'(
-            source(y=T_an)))) "Anode end plate" annotation (Placement(
+          FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature 'C+'
+          (source(y=T_an)))) "Anode end plate" annotation (Placement(
           transformation(
           extent={{10,10},{-10,-10}},
           rotation=90,
@@ -422,7 +422,7 @@ package WorkInProgress "Incomplete classes under development"
               FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
           materialSet(y=p_ca_elec),
           redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermoDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
           thermalSet(y=T_ca)),
         'inclC+'=true,
@@ -625,7 +625,7 @@ package WorkInProgress "Incomplete classes under development"
     // Measurements
     // T_an is set in anBC.
     Theta_an*Qdot_an = T_an - environment.T;
-    Qdot_an = sum(anBC.graphite.'C+'.thermo.Qdot + anBC.graphite.'e-'.boundary.Qdot);
+    Qdot_an = sum(anBC.graphite.'C+'.therm.Qdot + anBC.graphite.'e-'.boundary.Qdot);
     //
     // Setpoint
     if anThermalSpec == ThermalSpec.temperature then
@@ -642,7 +642,7 @@ package WorkInProgress "Incomplete classes under development"
     // Measurements
     // T_ca is set in caBC.
     Theta_ca*Qdot_ca = T_ca - environment.T;
-    Qdot_ca = sum(caBC.graphite.'C+'.thermo.Qdot + caBC.graphite.'e-'.boundary.Qdot);
+    Qdot_ca = sum(caBC.graphite.'C+'.therm.Qdot + caBC.graphite.'e-'.boundary.Qdot);
     //
     // Setpoint
     if caThermalSpec == ThermalSpec.temperature then
@@ -785,12 +785,12 @@ package WorkInProgress "Incomplete classes under development"
         Assemblies.Cells.Examples.TestConditions testConditions(final
           electricalSpec=ElectricalSpec.current, electricalSet(y=zI_large +
               firstOrder.y*U.A)));
-
+    Connectors.RealOutput w_V=w/U.V "Cell potential in volts";
     parameter Q.Current zI_large=50*U.A "Large-signal current" annotation (
         Dialog(__Dymola_label="<html><i>zJ</i><sub>large</sub></html>"));
+
     Connectors.RealInput zI_small_A "Small-signal current in amperes"
       annotation (Placement(transformation(extent={{-24,-66},{-4,-46}})));
-    Connectors.RealOutput w_V=w/U.V "Cell potential in volts";
 
     Modelica.Blocks.Continuous.FirstOrder firstOrder(
       initType=Modelica.Blocks.Types.Init.InitialOutput,
@@ -812,6 +812,55 @@ package WorkInProgress "Incomplete classes under development"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},{
               80,40}}), graphics));
   end AssembliesCellsExamplesTestStandEIS;
+
+  model DoubleLayer
+    "Test the storage of charge across the electrolytic double layer"
+    extends Subregions.Examples.Subregion(
+      inclH2=false,
+      'inclC+'=true,
+      'incle-'=true,
+      'inclSO3-'=true,
+      'inclH+'=true);
+
+    Conditions.ByConnector.BoundaryBus.Single.Source electrons(graphite(
+          'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Trapezoid
+            materialSet(
+            rising=1,
+            width=1,
+            falling=1,
+            amplitude=-U.A,
+            period=4)))) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={-24,0})));
+    Conditions.ByConnector.BoundaryBus.Single.Source protons(ionomer('inclH+'=
+            true,'H+'(redeclare function materialSpec =
+              FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure)))
+      annotation (Placement(transformation(
+          extent={{-10,10},{10,-10}},
+          rotation=90,
+          origin={24,0})));
+
+  equation
+    connect(protons.boundary, subregion.xPositive) annotation (Line(
+        points={{20,0},{10,0}},
+        color={127,127,127},
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(electrons.boundary, subregion.xNegative) annotation (Line(
+        points={{-20,0},{-10,0}},
+        color={127,127,127},
+        thickness=0.5,
+        smooth=Smooth.None));
+    annotation (
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics),
+      experiment(StopTime=4),
+      __Dymola_experimentSetupOutput,
+      Commands(file=
+            "Resources/Scripts/Dymola/Subregions.Examples.DoubleLayer.mos"
+          "Subregions.Examples.DoubleLayer.mos"));
+  end DoubleLayer;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
