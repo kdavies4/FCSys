@@ -14,7 +14,7 @@ FCSys.Utilities.plot6(
 createPlot(id = 4,
  position = {220, 0, 440, 325},
  x = "J_Apercm2",
- y = {"wprime"},
+ y = {"w"},
  heading = "Overpotential",
  range = {0, 8.0, 0.05, -0.35},
  grid = true,

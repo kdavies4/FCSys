@@ -15,15 +15,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         // Note:  This isn't a record because it contains time-varying variables.
 
-        /* **
-                 params=dict(comp=['"O2"'],
-                             anStoich=[1.5, 1.1, 2],
-                             caStoich=[9.5, 7.5, 12.5],
-                             anRH=[0.8, 0.6, 1],
-                             caRH=[0.5, 0.3, 0.7],
-                             T_degC=[60, 40, 80],
-                             p_kPag=[48.3, 0, 202.7]),
-                             */
         // Basic conditions
         parameter Q.TemperatureAbsolute T=333.15*U.K
           "Temperature (IC, end plate BC, and inlets)"
@@ -212,23 +203,22 @@ package Assemblies "Combinations of regions (e.g., cells)"
           anFP(subregions(gas(H2(
                   each consTransX=ConsTrans.dynamic,
                   each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each
-                    consTransX=ConsTrans.dynamic, each p_IC=testConditions.p*
-                      psi_H2O)), graphite('C+'(each T_IC=testConditions.T),
-                  'e-'(each consTransX=ConsTrans.dynamic)))),
+                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
+                      testConditions.T), 'e-'(each consTransX=ConsTrans.dynamic)))),
+
           anGDL(subregions(gas(H2(
                   each consTransX=ConsTrans.dynamic,
                   each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each
-                    consTransX=ConsTrans.dynamic, each p_IC=testConditions.p*
-                      psi_H2O)), graphite('C+'(each T_IC=testConditions.T)))),
+                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
+                      testConditions.T)))),
           anCL(subregions(
               gas(H2(
                   each consTransX=ConsTrans.dynamic,
                   each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each
-                    consTransX=ConsTrans.dynamic, each p_IC=testConditions.p*
-                      psi_H2O)),
+                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.p*psi_H2O)),
               graphite('C+'(each T_IC=testConditions.T)),
               ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
                       testConditions.T)))),
@@ -242,32 +232,26 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   each consTransX=ConsTrans.dynamic,
                   each T_IC=testConditions.T,
                   each p_IC=testConditions.p*psi_H2O),
-                O2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*testConditions.psi_O2_dry),
-                N2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+
               graphite('C+'(each T_IC=testConditions.T)),
               ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
                       testConditions.T)))),
           caGDL(subregions(gas(
-                H2O(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*psi_H2O),
-                O2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*testConditions.psi_O2_dry),
-                N2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
                 graphite('C+'(each T_IC=testConditions.T)))),
           caFP(subregions(gas(
-                H2O(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*psi_H2O),
-                O2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*testConditions.psi_O2_dry),
-                N2(each consTransX=ConsTrans.dynamic, each p_IC=testConditions.p
-                      *(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
                 graphite('C+'(each T_IC=testConditions.T)))),
           L_y={0.5,0.5}*U.m) "Fuel cell" annotation (
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
@@ -281,13 +265,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         // Conditions
         Conditions.ByConnector.BoundaryBus.Single.Sink anBC[cell.anFP.n_y, cell.anFP.n_z]
-          (each graphite(
-            'incle-'=true,
-            'inclC+'=true,
-            'e-'(materialSet(y=0)),
-            redeclare
-              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-              'C+'(source(y=testConditions.T))), each gas(
+          (each gas(
             inclH2=true,
             inclH2O=true,
             H2(
@@ -310,8 +288,15 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
 
               redeclare function beforeSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)))
-          annotation (Placement(transformation(
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+            each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            'e-'(materialSet(y=0)),
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)))) annotation (Placement(
+              transformation(
               extent={{10,-10},{-10,10}},
               rotation=90,
               origin={-24,-20})));
@@ -348,18 +333,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               rotation=0,
               origin={-56,4})));
         Conditions.ByConnector.BoundaryBus.Single.Source caBC[cell.caFP.n_y,
-          cell.caFP.n_z](each graphite(
-            'incle-'=true,
-            'inclC+'=true,
-            redeclare
-              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-              'C+'(source(y=testConditions.T)),
-            'e-'(
-              redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-              materialSet(y=p_ca_elec),
-              thermalSet(y=testConditions.T))), each gas(
+          cell.caFP.n_z](each gas(
             inclH2O=true,
             H2O(redeclare function thermalSpec =
                   FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
@@ -371,7 +345,19 @@ package Assemblies "Combinations of regions (e.g., cells)"
             inclO2=true,
             O2(redeclare function thermalSpec =
                   FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
-                thermalSet(y=0)))) annotation (Placement(transformation(
+                thermalSet(y=0))),each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)),
+            'e-'(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+
+              materialSet(y=p_ca_elec),
+              thermalSet(y=testConditions.T)))) annotation (Placement(
+              transformation(
               extent={{10,10},{-10,-10}},
               rotation=90,
               origin={24,-20})));
@@ -440,35 +426,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{10,-10},{-10,10}},
               rotation=0,
               origin={48,-20})));
-
-      initial equation
-        der(cell.anCL.subregions[1, 1, 1].graphite.doubleLayer.w) = 0;
-        der(cell.caCL.subregions[1, 1, 1].graphite.doubleLayer.w) = 0;
-
-        //cell.anGDL.subregions[1, 1, 1].gas.H2.p = cell.anFP.subregions[1, 1, 1].gas.H2.p;
-        /*
-  cell.anFP.subregions[1, 1, 1].gas.H2O.I[2] = cell.anFP.subregions[1, 1, 1].gas.H2O.boundaries[
-    1, Side.n].Ndot;
-
-  cell.caFP.subregions[1, 1, 1].gas.N2.I[2] = cell.caFP.subregions[1, 1, 1].gas.N2.boundaries[
-    1, Side.n].Ndot;
-*/
-        /*
-  cell.anFP.subregions[1, 1, 1].gas.H2O.I[1] = cell.anFP.subregions[1, 1, 1].gas.H2O.boundaries[
-    1, Side.n].Ndot;
-  cell.caFP.subregions[1, 1, 1].gas.N2.I[1] = cell.caFP.subregions[1, 1, 1].gas.N2.boundaries[
-    1, Side.n].Ndot;
-*/
-
-        /*
-  cell.anGDL.subregions[1, 1, 1].gas.H2.I[1] = 0;
-  cell.anGDL.subregions[1, 1, 1].gas.H2O.I[1] = 0;
-  cell.caCL.subregions[1, 1, 1].gas.H2O.I[1] = 0;
-  cell.caCL.subregions[1, 1, 1].gas.O2.I[1] = 0;
-  cell.caGDL.subregions[1, 1, 1].gas.H2O.I[1] = 0;
-  cell.caGDL.subregions[1, 1, 1].gas.N2.I[1] = 0;
-  cell.caGDL.subregions[1, 1, 1].gas.O2.I[1] = 0;
-*/
 
       equation
         testConditions.w = 'Datae-'.g(testConditions.T, 0) - 'Datae-'.g(
@@ -572,12 +529,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
                             cell.anFP.n_x,
                             cell.n_z) - caSink.gas.O2.p)), each final inclN2=
                   false)));
+        extends Modelica.Icons.UnderConstruction;
 
         annotation (experiment(StopTime=700, Tolerance=1e-005),
             __Dymola_experimentSetupOutput);
       end TestStandO2;
 
-      model TestStandVoltage "**"
+      model TestStandVoltage
+        "Test the cell with voltage as a boundary condition"
         extends TestStand(
           testConditions(electricalSpec=ElectricalSpec.voltage, electricalSet(
               startTime=100,
@@ -594,6 +553,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
                       testConditions.psi_O2)),
               H2O(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_H2O_ca/
                       testConditions.psi_O2)))));
+
+        extends Modelica.Icons.UnderConstruction;
 
         Modelica.Blocks.Continuous.FirstOrder firstOrder(T=1, initType=Modelica.Blocks.Types.Init.InitialOutput)
           annotation (Placement(transformation(extent={{-6,-66},{14,-46}})));
@@ -743,6 +704,18 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Dialog(group="Layers"),
         Placement(transformation(extent={{40,-20},{60,0}})));
 
+    initial equation
+      /* **
+  der(anCL.subregions.graphite.doubleLayer.w) = zeros(
+    anCL.n_x,
+    n_y,
+    n_z);
+  der(caCL.subregions.graphite.doubleLayer.w) = zeros(
+    caCL.n_x,
+    n_y,
+    n_z);
+*/
+
     equation
       // Internal connections (between layers)
       connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
@@ -882,7 +855,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       parameter Boolean inclN2=true "<html>Include N<sub>2</sub></html>"
         annotation (Dialog(tab="Assumptions", compact=true), choices(
             __Dymola_checkBox=true));
-      // **N2 params
+
       Connectors.BoundaryBus an[n_y, n_z] "Interface with the anode end plate"
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}},
               rotation=0), iconTransformation(extent={{-110,-10},{-90,10}})));
@@ -949,17 +922,23 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.CaCLs.CaCGDL caCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq),each gas(inclN2=inclN2,O2(p_IC=
-                  environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
+        subregions(
+          each gas(inclN2=inclN2),
+          each liquid(inclH2O=inclLiq),
+          each gas(inclN2=inclN2, O2(p_IC=environment.p_dry*(if inclN2 then 1
+                   else environment.p_O2_dry)))))
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{0,-20},{20,0}})));
 
       replaceable Regions.CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq),each gas(inclN2=inclN2,O2(p_IC=
-                  environment.p_dry*(if inclN2 then 1 else environment.p_O2_dry)))))
-        "Cathode flow plate" annotation (
+        subregions(
+          each gas(inclN2=inclN2),
+          each liquid(inclH2O=inclLiq),
+          each gas(inclN2=inclN2, O2(p_IC=environment.p_dry*(if inclN2 then 1
+                   else environment.p_O2_dry))))) "Cathode flow plate"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
         Placement(transformation(extent={{20,-20},{40,0}})));

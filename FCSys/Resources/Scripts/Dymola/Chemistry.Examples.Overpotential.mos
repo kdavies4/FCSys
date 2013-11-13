@@ -1,0 +1,22 @@
+// Setup
+removePlots();
+createPlot(filename = "Overpotential.mat");
+
+ FCSys.Utilities.plot6(
+     y1={"w"},
+     y2={"doubleLayer.I", "'e-Transfer'.I"});
+     
+ createPlot(id = 4,
+ position = {600, 0, 440, 325},
+ x = "I_A",
+ y = {"w"},
+ heading = "Overpotential",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legend = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Potential / V",
+ bottomTitle = "Current / A");
+

@@ -167,7 +167,73 @@ package Species "Dynamic models of chemical species"
           final initMaterial=Init.none,
           final initEnergy=Init.none,
           consTransX=ConsTrans.steady,
-          final consTransY=ConsTrans.steady,
+          consTransY=ConsTrans.steady,
+          consTransZ=ConsTrans.steady,
+          final consEnergy=ConsThermo.steady,
+          final N_IC,
+          final p_IC,
+          final h_IC,
+          final V_IC,
+          final rho_IC,
+          final g_IC,
+          final T_IC,
+          final nu=1,
+          final n_chem=1,
+          final tauprime={0},
+          final zeta=0,
+          final k_intra,
+          final k=A*Data.d*mustar/(4*v),
+          final theta=Modelica.Constants.inf);
+
+        parameter Q.NumberAbsolute mustar=1 "Relative permeability"
+          annotation (Dialog(__Dymola_label="<html>&mu;<sup>*</sup></html>"));
+
+        annotation (
+          defaultComponentPrefixes="replaceable",
+          defaultComponentName="'e-'",
+          Documentation(info="<html>
+
+<p><code>consMaterial</code> is <code>ConsThermo.steady</code> by default.  If the 
+<a href=\"modelica://FCSys.Phases.Dielectric\">dielectric</a> is connected, then set  
+<code>consMaterial</code> to <code>ConsThermo.dynamic</code> for both the negative (this model) and
+positive charge carriers.</p>
+
+<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code>,
+then internal inductance will be included using the relative permeability &mu;<sup>*</sup>.</p>
+ 
+    <p>Assumptions:<ol>
+          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
+          the substrate
+          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          <li>The exchange current density (<i>I</i><sup>o</sup>) is mapped to the reaction interval (&tau;&prime;) of electrons assuming that 
+          the reaction interval is zero for other species involved in the reaction.</li>
+          <li>The conductivity is mapped to the mobility of the electrons by assuming that
+          the mobility of the substrate (e.g., 
+          <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
+    </ol></p>
+
+    <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
+
+          Diagram(graphics),
+          Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics));
+
+      end Fixed;
+
+      model FixedIG "Fixed properties, ideal gas"
+        extends Ion(
+          redeclare final package Data = Characteristics.'e-'.Graphite (b_v=[1],
+                n_v={-1,0}),
+          final Nu_Phi,
+          final Nu_Q,
+          final consRot,
+          final upstreamX=false,
+          final upstreamY=false,
+          final upstreamZ=false,
+          final initMaterial=Init.none,
+          final initEnergy=Init.none,
+          consTransX=ConsTrans.steady,
+          consTransY=ConsTrans.steady,
           final consTransZ=ConsTrans.steady,
           final consEnergy=ConsThermo.steady,
           final N_IC,
@@ -183,7 +249,7 @@ package Species "Dynamic models of chemical species"
           final zeta=0,
           final k_intra,
           final theta=Modelica.Constants.inf);
-        //**final  consTransX
+        //**final consTransX,consTransY
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -212,8 +278,7 @@ positive charge carriers.</p>
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
 
-      end Fixed;
-
+      end FixedIG;
     end Graphite;
 
   end 'e-';
@@ -225,7 +290,8 @@ positive charge carriers.</p>
 
       model Fixed "Fixed properties"
         extends Ion(
-          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
+          redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
+                b_v=[1], n_v={-1,0}),
           final Nu_Phi,
           final Nu_Q,
           final consRot,
@@ -470,7 +536,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1], n_v={-1,0}),
+                b_v=[1],n_v={-1,0}),
           final tauprime,
           n_chem=3,
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -1162,9 +1228,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
 
     // Aliases (for common terms)
-    Q.Current I[n_trans](each nominal=U.A, each stateSelect=StateSelect.prefer)
+    Q.Current I[n_trans](each nominal=U.A, each stateSelect=StateSelect.never)
       "Current";
-    // **never
     Q.Velocity phi_boundaries[n_trans, Side](each nominal=10*U.cm/U.s, each
         stateSelect=StateSelect.never) "Normal velocities at the boundaries";
     Q.Force mPhidot[n_trans](each nominal=U.N, each stateSelect=StateSelect.never)
@@ -1850,8 +1915,7 @@ protected
     Q.Velocity phi[n_trans](
       each nominal=10*U.cm/U.s,
       each start=0,
-      each stateSelect=StateSelect.default) "Velocity";
-    // **prefer
+      each stateSelect=StateSelect.prefer) "Velocity";
 
     // Aliases (for common terms)
     // Note:  StateSelect.never helps avoid dynamic state selection of these
@@ -2200,16 +2264,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

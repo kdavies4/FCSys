@@ -28,7 +28,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
           each graphite(
           'incle-'=true,
-          'e-'(materialSet(y=U.bar)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
           'inclC+'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
@@ -37,6 +42,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,40})));
+
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[anFP.n_y, anFP.n_z]
         (each graphite('incle-'=true, 'e-'(
             materialSet(y=-zI),
@@ -224,7 +230,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
         (each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(materialSet(y=0)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)))) annotation (Placement(
@@ -232,8 +243,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-64,40})));
-    equation
 
+    equation
       connect(anGDL.xPositive, caBC.boundary) annotation (Line(
           points={{-30,40},{-20,40}},
           color={240,0,0},
@@ -245,7 +256,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=50),
+        experiment(StopTime=30),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnGDL.mos"),
         __Dymola_experimentSetupOutput);
     end AnGDL;
@@ -254,7 +265,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      output Q.Current zI=-sum(anCL.subregions[1, :, :].graphite.'e-Transfer'.I)
+      output Q.Current zI=sum(anCL.subregions[1, :, :].graphite.'e-Transfer'.I)
         if environment.analysis "Reaction rate";
       output Q.Potential w=anCL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag
         "Overpotential";
@@ -265,7 +276,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
-          each gas(inclH2=true, H2(
+          each gas(inclH2=true,H2(
             materialSet(y=environment.p_dry),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
@@ -276,10 +287,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
-          'e-'(redeclare function materialSpec =
+          'e-'(
+            redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.current,
-              materialSet(y=currentSet.y)))) annotation (Placement(
-            transformation(
+            materialSet(y=currentSet.y),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-44,40})));
@@ -317,7 +332,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(StopTime=50, Tolerance=1e-006),
+        experiment(StopTime=30),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnCL.mos"
             "Regions.Examples.AnCL.mos"),
         __Dymola_experimentSetupOutput);
@@ -327,15 +342,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      output Q.Potential w=PEM.subregions[1, 1, 1].ionomer.'H+'.Deltag[1] if
-        environment.analysis "Electrical potential";
+      output Q.Potential w=environment.T*log(PEM.subregions[1, 1, 1].ionomer.
+          'H+'.boundaries[1, Side.p].p/PEM.subregions[1, 1, 1].ionomer.'H+'.boundaries[
+          1, Side.n].p) if environment.analysis
+        "Isothermal electrical potential";
       output Q.Current zI=-sum(PEM.subregions[1, :, :].ionomer.'H+'.I[1]) if
         environment.analysis "Electrical current";
-      output Q.ResistanceElectrical R=w/zI if environment.analysis
-        "Measured electrical resistance";
-      output Q.ResistanceElectrical R_ex=PEM.L[Axis.x]/(PEM.subregions[1, 1, 1].ionomer.
-          'H+'.sigma*PEM.A[Axis.x]) if environment.analysis
-        "Expected electrical resistance";
+      output Q.ConductanceElectrical G=zI/w if environment.analysis
+        "Measured electrical conductance";
+      output Q.ConductanceElectrical G_ex=PEM.subregions[1, 1, 1].ionomer.'H+'.sigma
+          *PEM.A[Axis.x]/PEM.L[Axis.x] if environment.analysis
+        "Expected electrical conductance";
 
       PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
@@ -357,7 +374,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each ionomer(
           'inclSO3-'=true,
           'inclH+'=true,
-          'H+'(materialSet(y=0)),
+          'H+'(materialSet(y=U.atm)),
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'SO3-'(source(y=environment.T)))) annotation (Placement(
@@ -405,9 +422,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       extends Modelica.Icons.Example;
 
-      output Q.Current zI=sum(caCL.subregions[1, :, :].graphite.'e-Transfer'.I)
+      output Q.Current zI=-sum(caCL.subregions[1, :, :].graphite.'e-Transfer'.I)
         if environment.analysis "Reaction rate";
-      output Q.Potential w=caCL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag
+      output Q.Potential w=-caCL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag
         "Overpotential";
       output Q.Number J_Apercm2=zI*U.cm^2/(caCL.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
@@ -461,7 +478,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         duration=20,
         height=100*U.A,
         offset=U.mA)
-        annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
       connect(anBC.boundary, caCL.xNegative) annotation (Line(
@@ -531,7 +548,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
         (each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(materialSet(y=0)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)))) annotation (Placement(
@@ -539,8 +561,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={16,40})));
-    equation
 
+    equation
       connect(anBC.boundary, caGDL.xNegative) annotation (Line(
           points={{20,40},{30,40}},
           color={0,0,240},
@@ -552,7 +574,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=50),
+        experiment(StopTime=30, Tolerance=1e-007),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.CaGDL.mos"
             "Regions.Examples.CaGDL.mos"),
         __Dymola_experimentSetupOutput,
@@ -595,7 +617,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={84,40})));
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[caFP.n_y, caFP.n_z](
-          each graphite('incle-'=true,'e-'(materialSet(y=U.bar))), each gas(
+          each graphite('incle-'=true,'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T))), each gas(
           inclO2=true,
           inclH2O=true,
           O2(materialSet(y=environment.p_O2)),
@@ -743,16 +770,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       output Q.Number J_Apercm2=zI*U.cm^2/(anCL.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
 
-      parameter Q.Length L_y[:]=fill(U.m/2, 2) "Lengths along the channel"
+      parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
 
       inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
@@ -794,7 +817,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
-          'e-'(materialSet(y=U.bar)))) annotation (Placement(transformation(
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-44,40})));
@@ -879,19 +907,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-
-      /*
-  Real states[:](each stateSelect=StateSelect.always) = {anCL.subregions[1, 1, 1].gas.H2.phi[
-    1],anCL.subregions[1, 1, 1].graphite.T,anCL.subregions[1, 1, 1].gas.T,anCL.subregions[
-    1, 1, 1].ionomer.T,caCL.subregions[1, 1, 1].gas.T,caCL.subregions[1, 1, 1].graphite.T,
-    caCL.subregions[1, 1, 1].ionomer.T,anGDL.subregions[1, 1, 1].gas.H2O.phi[1],
-    caCL.subregions[1, 1, 1].gas.H2O.phi[1],caCL.subregions[1, 1, 1].gas.O2.phi[
-    1],caGDL.subregions[1, 1, 1].gas.N2.phi[1]};
-*/
 
       inner Conditions.Environment environment(analysis=true)
         "Environmental conditions"
@@ -920,8 +935,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
       Modelica.Blocks.Sources.Ramp currentSet(height=100*U.A, duration=300)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
-          each gas(inclH2=true, H2(
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anGDL.n_y, anGDL.n_z]
+        (each gas(inclH2=true, H2(
             materialSet(y=environment.p_dry),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
@@ -932,12 +947,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
-          'e-'(materialSet(y=U.bar)))) annotation (Placement(transformation(
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-64,40})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caGDL.n_y, caGDL.n_z]
         (each gas(
           inclO2=true,
           inclH2O=true,
@@ -1027,11 +1047,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
           1, Side.n] - caFP.subregions[end, 1, 1].graphite.'e-'.g_boundaries[1,
           Side.p] if environment.analysis "Electrical potential";
 
-      inner Conditions.Environment environment(
-        analysis=true,
-        RH=0.8,
-        a={0,0,0}) "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+      parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
 
       // Layers
       AnFPs.AnFP anFP(
@@ -1039,13 +1060,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
         final L_z=L_z,
         subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
       AnGDLs.AnGDL anGDL(
         final L_y=L_y,
         final L_z=L_z,
         subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
@@ -1056,7 +1075,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq)))
+        subregions(graphite(each inclDL=true, 'e-Transfer'(each fromI=false)),
+            each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
       CaGDLs.CaGDL caGDL(
         final L_y=L_y,
@@ -1070,10 +1090,37 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
       // Conditions
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC1[1, anFP.n_z](each
+          gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
           each graphite(
           'incle-'=true,
-          'e-'(materialSet(y=U.bar)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
           'inclC+'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
@@ -1081,7 +1128,51 @@ package Regions "3D arrays of discrete, interconnected subregions"
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
-            origin={-84,40})));
+            origin={-84,54})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC2[anFP.n_y - 1, anFP.n_z]
+        (each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+          each graphite(
+          'incle-'=true,
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) if anFP.n_y > 1 annotation (
+          Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={-84,26})));
+
       Conditions.ByConnector.BoundaryBus.Single.Source anSource[anFP.n_x, anFP.n_z]
         (each gas(
           inclH2=true,
@@ -1109,10 +1200,26 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,64})));
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caFP.n_y, caFP.n_z]
-        (each graphite(
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC1[1, caFP.n_z](each
+          gas(
+          inclH2O=true,
+          H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclN2=true,
+          N2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclO2=true,
+          O2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0))),each graphite(
           'incle-'=true,
-          'e-'(materialSet(y=-zI), thermalSet(y=environment.T)),
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=-zI),
+            thermalSet(y=environment.T)),
           'inclC+'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
@@ -1120,7 +1227,38 @@ package Regions "3D arrays of discrete, interconnected subregions"
             transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
-            origin={84,40})));
+            origin={84,54})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC2[caFP.n_y - 1, caFP.n_z]
+        (each gas(
+          inclH2O=true,
+          H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclN2=true,
+          N2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclO2=true,
+          O2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0))),each graphite(
+          'incle-'=true,
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+
+            materialSet(y=0),
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) if caFP.n_y > 1 annotation (
+          Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={84,26})));
+
       Conditions.ByConnector.BoundaryBus.Single.Source caSource[caFP.n_x, caFP.n_z]
         (each gas(
           inclO2=true,
@@ -1133,7 +1271,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,16})));
-
       Conditions.ByConnector.BoundaryBus.Single.Sink caSink[caFP.n_x, caFP.n_z]
         (gas(
           each inclO2=true,
@@ -1173,6 +1310,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
       Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
         annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
+
     protected
       Connectors.RealOutputInternal Ndot_H2O_an(unit="N/T")
         "Rate of supply of H2O into the anode"
@@ -1188,6 +1326,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-54,-30},{-34,-10}})));
       Connectors.RealOutputInternal Ndot_H2(unit="N/T") "Rate of supply of H2"
         annotation (Placement(transformation(extent={{-6,-30},{14,-10}})));
+
+      inner Conditions.Environment environment(
+        a={0,0,0},
+        analysis=true,
+        RH=0.8) "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+
+      Real states[:](each stateSelect=StateSelect.always) = {anFP.subregions[1,
+        2, 1].gas.H2.phi[2],caFP.subregions[1, 2, 1].gas.H2O.phi[2],caFP.subregions[
+        1, 2, 1].gas.O2.phi[2],anFP.subregions[1, 2, 1].graphite.T,anFP.subregions[
+        1, 1, 1].graphite.T,anGDL.subregions[1, 1, 1].graphite.T,anGDL.subregions[
+        1, 2, 1].graphite.T,caFP.subregions[1, 1, 1].graphite.T,caFP.subregions[
+        1, 2, 1].graphite.T,caGDL.subregions[1, 1, 1].graphite.T,caGDL.subregions[
+        1, 2, 1].graphite.T,caCL.subregions[1, 2, 1].ionomer.'H+'.phi[1],caCL.subregions[
+        1, 1, 1].ionomer.'H+'.phi[1]} if anFP.n_y > 1 "Force state select";
+      // **caFP.subregions[1, 2, 1].graphite.'e-'.phi[2],
 
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1210,8 +1364,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
+      connect(anBC1[1, :].boundary, anFP.xNegative[1, :]) annotation (Line(
+          points={{-80,54},{-76,54},{-76,40},{-70,40}},
+          color={127,127,127},
+          pattern=LinePattern.None,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anBC2.boundary, anFP.xNegative[2:end, :]) annotation (Line(
+          points={{-80,26},{-76,26},{-76,40},{-70,40}},
           color={127,127,127},
           pattern=LinePattern.None,
           thickness=0.5,
@@ -1246,8 +1406,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           points={{51,-20},{64,-20}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(caBC.boundary, caFP.xPositive) annotation (Line(
-          points={{80,40},{70,40}},
+      connect(caBC1[1, :].boundary, caFP.xPositive[1, :]) annotation (Line(
+          points={{80,54},{76,54},{76,40},{70,40}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caBC2.boundary, caFP.xPositive[2:end, :]) annotation (Line(
+          points={{80,26},{76,26},{76,40},{70,40}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1309,2121 +1474,23 @@ package Regions "3D arrays of discrete, interconnected subregions"
         __Dymola_experimentSetupOutput);
     end FPtoFP;
 
-    model FPtoFPCycle "Test one flow plate to the other"
-
+    model FPtoFPV "Test one flow plate to the other"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
 
-      parameter Q.NumberAbsolute psi_O2_dry=0.21;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      output Q.Potential w[n_y, n_z]=(anBC.graphite.'e-'.boundary.mPhidot[1]
-           ./ anBC.graphite.'e-'.boundary.rho - caBC.graphite.'e-'.boundary.mPhidot[
-          1] ./ caBC.graphite.'e-'.boundary.rho)/PEM.A[Axis.x] "Potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1]
-           .* anBC.graphite.'e-'.boundary.rho "Current density";
-      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
+      parameter Boolean inclLiq=false "Include liquid H2O";
+      parameter Q.NumberAbsolute psi_H2O=environment.psi_H2O
+        "Mole fraction of H2O at the inlet";
+      parameter Q.NumberAbsolute psi_H2=environment.psi_dry
+        "Mole fraction of H2 at the inlet";
+      parameter Q.NumberAbsolute psi_O2=environment.psi_O2_dry*environment.psi_dry
+        "Mole fraction of O2 at the inlet";
+      parameter Q.NumberAbsolute psi_N2=(1 - environment.psi_O2_dry)*
+          environment.psi_dry "Mole fraction of N2 at the inlet";
+      output Q.Number J_Apercm2=zI*U.cm^2/(caFP.A[Axis.x]*U.A)
         "Electrical current density, in A/cm2";
-      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
-        "Total electrical current";
-
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      AnFPs.AnFP anFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
-      AnGDLs.AnGDL anGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
-      AnCLs.AnCL anCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
-      CaCLs.CaCL caCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
-      CaGDLs.CaGDL caGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-      CaFPs.CaFP caFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{50,30},{70,50}})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=T),
-            redeclare Modelica.Blocks.Sources.Pulse normalSet(
-              amplitude=-0.8*U.A/U.cm^2,
-              width=5,
-              period=10)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*environment.p_dry*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*p*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(p - p*psi_O2_dry - p_H2O_ca_in)/(4*p*
-                    psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))))) annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={60,64})));
-
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-
-    protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
-    equation
-
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,40},{-10,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,40},{10,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,40},{30,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anSource.boundary, anFP.yNegative) annotation (Line(
-          points={{-60,20},{-60,30}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anSink.boundary, anFP.yPositive) annotation (Line(
-          points={{-60,60},{-60,50}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caFP.yPositive) annotation (Line(
-          points={{60,60},{60,50}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{11,-20},{34,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{11,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
-        experiment(
-          StopTime=220,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        __Dymola_experimentSetupOutput);
-    end FPtoFPCycle;
-
-    model FPtoFPO2 "Test one flow plate to the other"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      final parameter Q.NumberAbsolute psi_O2_dry=1;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      output Q.Potential w[n_y, n_z]=caBC.graphite.'e-'.boundary.mPhidot[1] ./
-          (caBC.graphite.'e-'.boundary.rho*PEM.A[Axis.x]) - anBC.graphite.'e-'.boundary.mPhidot[
-          1] ./ (anBC.graphite.'e-'.boundary.rho*PEM.A[Axis.x]) "Potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1]
-           .* anBC.graphite.'e-'.boundary.rho "Current density";
-      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
-        "Electrical current density, in A/cm2";
-      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
-        "Total electrical current";
-
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      AnFPs.AnFP anFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)),graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
-      AnGDLs.AnGDL anGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)),graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
-      AnCLs.AnCL anCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T)),
-          ionomer('SO3-'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T),'H+')))
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
-      CaCLs.CaCL caCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          gas(final inclN2=false, H2O(T_IC=T)),
-          graphite('C+'(T_IC=T)),
-          ionomer('SO3-'(T_IC=T))))
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
-      CaGDLs.CaGDL caGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(final inclN2=false,H2O(T_IC=T)),graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-      CaFPs.CaFP caFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(final inclN2=false,H2O(T_IC=T)),graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{50,30},{70,50}})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare Modelica.Blocks.Sources.Ramp normalSet(
-              height=-2.25*U.A/U.cm^2,
-              duration=225.1,
-              startTime=0.1),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite('incle-'=true, 'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*environment.p_dry*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T))), each liquid(inclH2O=anFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))),
-          each liquid(inclH2O=anFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*p*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T))), each liquid(inclH2O=caFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.O2.boundary.rho))),
-
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.O2.boundary.rho)))),
-          each liquid(inclH2O=caFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={60,64})));
-
-      inner Conditions.Environment environment(analysis=true, T=T)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.O2.materialOut.y)
-           .* A_ca_seg)/A_ca) "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-    protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
-    equation
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,40},{-10,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,40},{10,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,40},{30,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anSource.boundary, anFP.yNegative) annotation (Line(
-          points={{-60,20},{-60,30}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anSink.boundary, anFP.yPositive) annotation (Line(
-          points={{-60,60},{-60,50}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caFP.yPositive) annotation (Line(
-          points={{60,60},{60,50}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{11,-20},{34,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{11,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
-        experiment(
-          StopTime=230,
-          Tolerance=1e-08,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        __Dymola_experimentSetupOutput);
-    end FPtoFPO2;
-
-    model FPtoFPLinearize "Test one flow plate to the other"
-
-      extends FCSys.Icons.Blocks.Continuous;
-      extends Modelica.Icons.UnderConstruction;
-
-      Connectors.RealOutput w_V=w[1, 1]/U.V
-        annotation (Placement(transformation(extent={{90,-16},{110,4}})));
-      Connectors.RealInput zJ_Apercm2_small
-        annotation (Placement(transformation(extent={{-114,-10},{-94,10}})));
-
-      parameter Q.NumberAbsolute psi_O2_dry=0.21;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      Q.Potential w[n_y, n_z]=(anBC.graphite.'e-'.boundary.mPhidot[1] ./ anBC.graphite.
-          'e-'.boundary.rho - caBC.graphite.'e-'.boundary.mPhidot[1] ./ caBC.graphite.
-          'e-'.boundary.rho)/PEM.A[Axis.x] "Potential";
-      Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1] .* anBC.graphite.
-          'e-'.boundary.rho "Current density";
-      Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
-        "Electrical current density, in A/cm2";
-      Q.Current zI=sum(zJ .* outerProduct(L_y, L_z)) "Total electrical current";
-
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      AnFPs.AnFP anFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
-      AnGDLs.AnGDL anGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
-      AnCLs.AnCL anCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
-      CaCLs.CaCL caCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
-      CaGDLs.CaGDL caGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-      CaFPs.CaFP caFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{50,30},{70,50}})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            normalSet(y=-(1 + currFilt.y)*U.A/U.cm^2),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*environment.p_dry*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*p*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(p - p*psi_O2_dry - p_H2O_ca_in)/(4*p*
-                    psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))))) annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={60,64})));
-
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-    protected
-      Q.PressureAbsolute p_an_out_noneq
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Q.PressureAbsolute p_ca_out_noneq
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
-    public
-      Modelica.Blocks.Continuous.FirstOrder currFilt(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=1e-6)
-        annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-    equation
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,40},{-10,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,40},{10,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,40},{30,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anSource.boundary, anFP.yNegative) annotation (Line(
-          points={{-60,20},{-60,30}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anSink.boundary, anFP.yPositive) annotation (Line(
-          points={{-60,60},{-60,50}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caFP.yPositive) annotation (Line(
-          points={{60,60},{60,50}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      anValveDynamics.y = p_an_out_noneq;
-      caValveDynamics.y = p_ca_out_noneq;
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(zJ_Apercm2_small, currFilt.u) annotation (Line(
-          points={{-104,5.55112e-16},{-93,5.55112e-16},{-93,6.66134e-16},{-82,
-              6.66134e-16}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
-        experiment(
-          StopTime=230,
-          Tolerance=1e-08,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        __Dymola_experimentSetupOutput);
-    end FPtoFPLinearize;
-
-    model FPtoFPSine "Test one flow plate to the other"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Q.NumberAbsolute psi_O2_dry=0.21;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      output Q.Potential w[n_y, n_z]=caBC.graphite.'e-'.boundary.mPhidot[1] ./
-          (caBC.graphite.'e-'.boundary.rho*PEM.A[Axis.x]) - anBC.graphite.'e-'.boundary.mPhidot[
-          1] ./ (anBC.graphite.'e-'.boundary.rho*PEM.A[Axis.x]) "Potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1]
-           .* anBC.graphite.'e-'.boundary.rho "Current density";
-      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
-        "Electrical current density, in A/cm2";
-      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
-        "Total electrical current";
-
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      AnFPs.AnFP anFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
-      AnGDLs.AnGDL anGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
-      AnCLs.AnCL anCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
-      CaCLs.CaCL caCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
-      CaGDLs.CaGDL caGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-      CaFPs.CaFP caFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{50,30},{70,50}})));
-
-      Modelica.Blocks.Sources.Ramp A(
-        height=-U.A/U.cm^2,
-        duration=100.1,
-        startTime=0.1)
-        annotation (Placement(transformation(extent={{62,-28},{82,-8}})));
-      Modelica.Blocks.Sources.Sine B(
-        amplitude=0.1*U.A/U.cm^2,
-        freqHz=0.1,
-        startTime=110)
-        annotation (Placement(transformation(extent={{58,-70},{78,-50}})));
-      Real yset=A.y + B.y;
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            normalSet(y=yset),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*environment.p_dry*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T))), each liquid(inclH2O=anFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))),
-          each liquid(inclH2O=anFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*p*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(p - p*psi_O2_dry - p_H2O_ca_in)/(4*p*
-                    psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T))), each liquid(inclH2O=caFP.subregions[1, 1, 1].liquid.inclH2O))
-        annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho)))), each liquid(inclH2O=caFP.subregions[
-              1, 1, 1].liquid.inclH2O)) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={60,64})));
-
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-    protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
-    equation
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,40},{-10,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,40},{10,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,40},{30,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anSource.boundary, anFP.yNegative) annotation (Line(
-          points={{-60,20},{-60,30}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anSink.boundary, anFP.yPositive) annotation (Line(
-          points={{-60,60},{-60,50}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caFP.yPositive) annotation (Line(
-          points={{60,60},{60,50}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{11,-20},{34,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{11,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
-        experiment(
-          StopTime=230,
-          Tolerance=1e-08,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        __Dymola_experimentSetupOutput);
-    end FPtoFPSine;
-
-    model FPtoFPPulse "Test one flow plate to the other"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Q.NumberAbsolute psi_O2_dry=0.21;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      output Q.Potential w[n_y, n_z]=(anBC.graphite.'e-'.boundary.mPhidot[1]
-           ./ anBC.graphite.'e-'.boundary.rho - caBC.graphite.'e-'.boundary.mPhidot[
-          1] ./ caBC.graphite.'e-'.boundary.rho)/PEM.A[Axis.x] "Potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1]
-           .* anBC.graphite.'e-'.boundary.rho "Current density";
-      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
-        "Electrical current density, in A/cm2";
-      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
-        "Total electrical current";
-
-      parameter Q.Length L_y[:]={U.m} "Lengths along the channel" annotation (
-          Dialog(group="Geometry",__Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
-
-      AnFPs.AnFP anFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
-      AnGDLs.AnGDL anGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
-      AnCLs.AnCL anCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion('SO3-'(T_IC=T)))
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
-      CaCLs.CaCL caCL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
-      CaGDLs.CaGDL caGDL(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-      CaFPs.CaFP caFP(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(gas(H2O(T_IC=T)), graphite('C+'(T_IC=T))))
-        annotation (Placement(transformation(extent={{50,30},{70,50}})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=T),
-            normalSet(y=-firstOrder.y)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      zI*anStoich/(2*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      zI*anStoich*p_H2O_an_in/(2*environment.p_dry*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))))
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      zI*caStoich*p_H2O_ca_in/(4*p*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      zI*caStoich*(p - p*psi_O2_dry - p_H2O_ca_in)/(4*p*
-                    psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      zI*caStoich/(4*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=180,
-            origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))))) annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={60,64})));
-
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") =
-          environment.p) "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=2) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-
-    protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
-    public
-      Modelica.Blocks.Sources.Pulse pulse(
-        amplitude=0.8*U.A/U.cm^2,
-        period=10,
-        width=50)
-        annotation (Placement(transformation(extent={{-90,80},{-70,100}})));
-      Modelica.Blocks.Continuous.FirstOrder firstOrder(k=0.001)
-        annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
-    equation
-
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
-          points={{-10,40},{-10,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
-          points={{10,40},{10,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
-          points={{30,40},{30,40}},
-          color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anSource.boundary, anFP.yNegative) annotation (Line(
-          points={{-60,20},{-60,30}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anSink.boundary, anFP.yPositive) annotation (Line(
-          points={{-60,60},{-60,50}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caSink.boundary, caFP.yPositive) annotation (Line(
-          points={{60,60},{60,50}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{11,-20},{34,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{11,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-12,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(pulse.y, firstOrder.u) annotation (Line(
-          points={{-69,90},{-62,90}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-        Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
-        experiment(
-          StopTime=220,
-          Tolerance=1e-06,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
-        __Dymola_experimentSetupOutput);
-    end FPtoFPPulse;
-
-    model FPtoFPVoltage "Test one flow plate to the other"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      parameter Q.NumberAbsolute psi_O2_dry=0.21;
-      parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric ratio";
-      parameter Q.NumberAbsolute caStoich=2.0 "Cathode stoichiometric ratio";
-      parameter Q.NumberAbsolute anInletRH=0.8;
-      parameter Q.NumberAbsolute caInletRH=0.5;
-      parameter Real T_degC=60;
-      parameter Real p_kPag=48.3;
-      final parameter Q.TemperatureAbsolute T=U.from_degC(T_degC);
-      final parameter Q.PressureAbsolute p=U.from_kPag(p_kPag);
-      final parameter Q.PressureAbsolute p_H2O_an_in=anInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-      final parameter Q.PressureAbsolute p_H2O_ca_in=caInletRH*
-          Characteristics.H2O.p_sat(T) "Pressure of H2O vapor";
-
-      output Q.Potential w[n_y, n_z]=(anBC.graphite.'e-'.boundary.mPhidot[1]
-           ./ anBC.graphite.'e-'.boundary.rho - caBC.graphite.'e-'.boundary.mPhidot[
-          1] ./ caBC.graphite.'e-'.boundary.rho)/PEM.A[Axis.x] "Potential";
-      output Q.CurrentAreic zJ[n_y, n_z]=-anBC.graphite.'e-'.boundary.phi[1]
-           .* anBC.graphite.'e-'.boundary.rho "Current density";
-      output Q.Number zJ_Apercm2[n_y, n_z]=zJ*U.cm^2/U.A
-        "Electrical current density, in A/cm2";
-      output Q.Current zI=sum(zJ .* outerProduct(L_y, L_z))
-        "Total electrical current";
-      Q.Current I_H2_an_in=zI*anStoich/2;
-      Q.Current I_O2_ca_in=zI*caStoich/4;
+      output Q.Potential w=anFP.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
+          1, Side.n] - caFP.subregions[end, 1, 1].graphite.'e-'.g_boundaries[1,
+          Side.p] if environment.analysis "Electrical potential";
 
       parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
@@ -3431,339 +1498,337 @@ package Regions "3D arrays of discrete, interconnected subregions"
       parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
-      final parameter Integer n_y=size(L_y, 1)
-        "Number of regions along the channel" annotation (HideResult=true);
-      final parameter Integer n_z=size(L_z, 1)
-        "Number of regions across the channel" annotation (HideResult=true);
-      final parameter Q.Area A_an_seg[anFP.n_x, n_z]=outerProduct(anFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the anode flow plate";
-      final parameter Q.Area A_ca_seg[caFP.n_x, n_z]=outerProduct(caFP.L_x, L_z)
-        "Areas of the segments over the xz plane of the cathode flow plate";
-      final parameter Q.Area A_an=sum(anFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the anode flow plate in the xz plane";
-      final parameter Q.Area A_ca=sum(caFP.L_x)*sum(L_z)
-        "Total cross-sectional area of the cathode flow plate in the xz plane";
 
+      // Layers
       AnFPs.AnFP anFP(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-
       AnGDLs.AnGDL anGDL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(H2(p_IC=p - p_H2O_an_in), H2O(T_IC=T, p_IC=p_H2O_an_in)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
-      PEMs.PEM PEM(
-        final L_y=L_y,
-        final L_z=L_z,
-        Subregion(ionomer('SO3-'(T_IC=T))))
+      PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-
       CaCLs.CaCL caCL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          ionomer('SO3-'(T_IC=T)),
-          gas(
-            H2O(T_IC=T, p_IC=p_H2O_ca_in),
-            N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.psi_O2_dry)),
-            O2(p_IC=(p - p_H2O_ca_in)*environment.psi_O2_dry)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(graphite(each inclDL=true, 'e-Transfer'(each fromI=false)),
+            each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
-
       CaGDLs.CaGDL caGDL(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          gas(
-            H2O(T_IC=T, p_IC=p_H2O_ca_in),
-            N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.psi_O2_dry)),
-            O2(p_IC=(p - p_H2O_ca_in)*environment.psi_O2_dry)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
       CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        Subregion(
-          gas(
-            H2O(T_IC=T, p_IC=p_H2O_ca_in),
-            N2(p_IC=(p - p_H2O_ca_in)*(1 - environment.psi_O2_dry)),
-            O2(p_IC=(p - p_H2O_ca_in)*environment.psi_O2_dry)),
-          liquid(H2O(T_IC=T)),
-          graphite('C+'(T_IC=T))))
+        subregions(each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
-          'e-'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=270,
-            origin={-84,40})));
+      // Conditions
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC1[1, anFP.n_z](each
+          gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
 
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[n_y, n_z](each
-          graphite(
-          'inclC+'=true,
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+          each graphite(
           'incle-'=true,
-          'C+'(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-              thermalSet(y=T)),
           'e-'(
-            redeclare function normalSpec =
-                Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            redeclare Modelica.Blocks.Sources.Ramp normalSet(
-              height=(8.55651e7 - 4.76856e7)*U.N,
-              duration=225.1,
-              offset=-8.55651e7*U.N,
-              startTime=10.1),
+            materialSet(y=0),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
-            thermalSet(y=T)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={84,40})));
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) annotation (Placement(
+            transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={-84,54})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Sink anSource[anFP.n_x, n_z](
-          gas(
-          each inclH2=true,
-          each inclH2O=true,
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC2[anFP.n_y - 1, anFP.n_z]
+        (each gas(
+          inclH2=true,
+          inclH2O=true,
           H2(
-            redeclare each function materialSpec =
+            redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2.normalOut.y - fill(
-                      I_H2_an_in/A_an,
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
 
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
 
-            each thermalSet(y=T)),
           H2O(
-            redeclare each function materialSpec =
+            redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(anSource.gas.H2O.normalOut.y - fill(
-                      I_H2_an_in*p_H2O_an_in/((p - p_H2O_an_in)*A_an),
-                      anFP.n_x,
-                      n_z)) .* A_an_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
+            materialSet(y=0),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
 
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+          each graphite(
+          'incle-'=true,
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
 
-            each thermalSet(y=T)))) annotation (Placement(transformation(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) if anFP.n_y > 1 annotation (
+          Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={-84,26})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source anSource[anFP.n_x, anFP.n_z]
+        (each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(materialSet(y=-Ndot_H2), thermalSet(y=environment.T)),
+          H2O(materialSet(y=-Ndot_H2O_an), thermalSet(y=environment.T))))
+        annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source anSink[anFP.n_x, n_z](
-          gas(
+      Conditions.ByConnector.BoundaryBus.Single.Sink anSink[anFP.n_x, anFP.n_z]
+        (gas(
           each inclH2=true,
           each inclH2O=true,
-          H2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho))),
-
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_an_out_noneq*A_an_seg .* anSink.gas.H2O.boundary.rho
-                   ./ (anSink.gas.H2.boundary.rho + anSink.gas.H2O.boundary.rho)))))
+          H2O(materialSet(y=fill(
+                      environment.p,
+                      anFP.n_x,
+                      anFP.n_z) - anSink.gas.H2.p)),
+          H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:,
+                  anFP.n_y, :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v),
+              redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+          each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,64})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink caSource[caFP.n_x, n_z](
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC1[1, caFP.n_z](each
           gas(
-          each inclH2O=true,
-          each inclN2=true,
-          each inclO2=true,
-          H2O(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.H2O.normalOut.y - fill(
-                      I_O2_ca_in*p_H2O_ca_in/((p - p_H2O_ca_in)*psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
+          inclH2O=true,
+          H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclN2=true,
+          N2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclO2=true,
+          O2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0))),each graphite(
+          'incle-'=true,
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
 
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+            materialSet(y=pressSet.y),
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) annotation (Placement(
+            transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={84,54})));
 
-            each thermalSet(y=T)),
-          N2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.N2.normalOut.y - fill(
-                      I_O2_ca_in*(1 - psi_O2_dry)/(psi_O2_dry*A_ca),
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC2[caFP.n_y - 1, caFP.n_z]
+        (each gas(
+          inclH2O=true,
+          H2O(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclN2=true,
+          N2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0)),
+          inclO2=true,
+          O2(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+              thermalSet(y=0))),each graphite(
+          'incle-'=true,
+          'e-'(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
 
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+            materialSet(y=0),
+            thermalSet(y=environment.T)),
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)))) if caFP.n_y > 1 annotation (
+          Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={84,26})));
 
-            each thermalSet(y=T)),
-          O2(
-            redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=(caSource.gas.O2.normalOut.y - fill(
-                      I_O2_ca_in/A_ca,
-                      caFP.n_x,
-                      n_z)) .* A_ca_seg),
-            redeclare each function normalMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.currentDensity,
-
-            redeclare each function normalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.TranslationalNormal.force,
-
-            each thermalSet(y=T)))) annotation (Placement(transformation(
+      Conditions.ByConnector.BoundaryBus.Single.Source caSource[caFP.n_x, caFP.n_z]
+        (each gas(
+          inclO2=true,
+          inclN2=true,
+          inclH2O=true,
+          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T)),
+          N2(materialSet(y=-Ndot_N2), thermalSet(y=environment.T)),
+          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T))))
+        annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,16})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caSink[caFP.n_x, n_z](
-          gas(
-          each inclH2O=true,
-          each inclN2=true,
+      Conditions.ByConnector.BoundaryBus.Single.Sink caSink[caFP.n_x, caFP.n_z]
+        (gas(
           each inclO2=true,
-          H2O(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.H2O.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          N2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.N2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))),
-          O2(redeclare each function materialMeas =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure
-                (redeclare package Data = FCSys.Characteristics.IdealGas),
-              normalSet(y=p_ca_out_noneq*A_ca_seg .* caSink.gas.O2.boundary.rho
-                   ./ (caSink.gas.H2O.boundary.rho + caSink.gas.N2.boundary.rho
-                   + caSink.gas.O2.boundary.rho))))) annotation (Placement(
-            transformation(
+          each inclN2=true,
+          each inclH2O=true,
+          H2O(materialSet(y=fill(
+                      environment.p,
+                      caFP.n_x,
+                      caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
+          N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v),
+              redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
+
+          O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v),
+              redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+          each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,64})));
 
-      inner Conditions.Environment environment(analysis=true, p=48.3*U.kPa + U.atm)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Modelica.Blocks.Sources.RealExpression anPressSet(y(unit="m/(l.T2)") = p)
-        "Setpoint for the total anode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-      Modelica.Blocks.Sources.RealExpression caPressSet(y(unit="m/(l.T2)") = p)
-        "Setpoint for the total cathode outlet pressure"
-        annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
-      Modelica.Blocks.Sources.RealExpression anThermoPress(y(unit="m/(l.T2)")
-           = sum((anSink.gas.H2.materialOut.y + anSink.gas.H2O.materialOut.y)
-           .* outerProduct(anFP.L_x, L_z))/A_an)
-        "Thermodynamic pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
-      Modelica.Blocks.Sources.RealExpression caThermoPress(y(unit="m/(l.T2)")
-           = sum((caSink.gas.H2O.materialOut.y + caSink.gas.N2.materialOut.y +
-          caSink.gas.O2.materialOut.y) .* A_ca_seg)/A_ca)
-        "Thermodynamic pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{-70,-100},{-50,-80}})));
-      Modelica.Blocks.Math.Feedback anNoneqSet
-        annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-      Modelica.Blocks.Math.Feedback caNoneqSet
-        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-      Modelica.Blocks.Continuous.FirstOrder anValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=1) "Dynamics of the anode exit valve"
-        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+      Modelica.Blocks.Sources.Ramp currentSet(
+        offset=U.mA,
+        height=100*U.A,
+        duration=600)
+        annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+      Modelica.Blocks.Math.Gain stoichH2(k=1.2/2)
+        annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
+      Modelica.Blocks.Math.Gain anStoichH2O(k=psi_H2O/psi_H2)
+        annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
+      Modelica.Blocks.Math.Gain stoichO2(k=1.6/4)
+        annotation (Placement(transformation(extent={{-30,-90},{-10,-70}})));
+      Modelica.Blocks.Math.Gain caStoichH2O(k=psi_H2O/psi_O2)
+        annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
+      Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
+        annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
 
     protected
-      Connectors.RealOutputInternal p_an_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the anode outlet"
-        annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-      Connectors.RealOutputInternal p_ca_out_noneq(unit="m/(l.T2)")
-        "Nonequilibrium pressure at the cathode outlet"
-        annotation (Placement(transformation(extent={{24,-80},{44,-60}})));
+      Connectors.RealOutputInternal Ndot_H2O_an(unit="N/T")
+        "Rate of supply of H2O into the anode"
+        annotation (Placement(transformation(extent={{54,-30},{74,-10}})));
+      Connectors.RealOutputInternal Ndot_O2(unit="N/T") "Rate of supply of O2"
+        annotation (Placement(transformation(extent={{-6,-90},{14,-70}})));
+      Connectors.RealOutputInternal Ndot_H2O_ca(unit="N/T")
+        "Rate of supply of H2O into the cathode"
+        annotation (Placement(transformation(extent={{54,-70},{74,-50}})));
+      Connectors.RealOutputInternal Ndot_N2(unit="N/T") "Rate of supply of N2"
+        annotation (Placement(transformation(extent={{54,-110},{74,-90}})));
+      Connectors.RealOutputInternal zI(unit="N/T") "Electrical current"
+        annotation (Placement(transformation(extent={{-54,-30},{-34,-10}})));
+      Connectors.RealOutputInternal Ndot_H2(unit="N/T") "Rate of supply of H2"
+        annotation (Placement(transformation(extent={{-6,-30},{14,-10}})));
+
+      inner Conditions.Environment environment(
+        a={0,0,0},
+        analysis=true,
+        RH=0.8) "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+
+      Real states[:](each stateSelect=StateSelect.always) = {anFP.subregions[1,
+        2, 1].gas.H2.phi[2],caFP.subregions[1, 2, 1].gas.H2O.phi[2],caFP.subregions[
+        1, 2, 1].gas.O2.phi[2],anFP.subregions[1, 2, 1].graphite.T,anFP.subregions[
+        1, 1, 1].graphite.T,anGDL.subregions[1, 1, 1].graphite.T,anGDL.subregions[
+        1, 2, 1].graphite.T,caFP.subregions[1, 1, 1].graphite.T,caFP.subregions[
+        1, 2, 1].graphite.T,caGDL.subregions[1, 1, 1].graphite.T,caGDL.subregions[
+        1, 2, 1].graphite.T,caCL.subregions[1, 2, 1].ionomer.'H+'.phi[1],caCL.subregions[
+        1, 1, 1].ionomer.'H+'.phi[1]} if anFP.n_y > 1 "Force state select";
+      // **caFP.subregions[1, 2, 1].graphite.'e-'.phi[2],
+
     public
-      Modelica.Blocks.Continuous.FirstOrder caValveDynamics(initType=Modelica.Blocks.Types.Init.InitialOutput,
-          T=1) "Dynamics of the cathode exit valve"
-        annotation (Placement(transformation(extent={{-8,-80},{12,-60}})));
+      Modelica.Blocks.Sources.Ramp pressSet(
+        height=1134270000.0,
+        duration=600,
+        offset=-2179410000.0,
+        startTime=50)
+        annotation (Placement(transformation(extent={{-132,-72},{-112,-52}})));
     equation
-
-      connect(anFP.xPositive, anGDL.xNegative) annotation (Line(
-          points={{-50,40},{-50,40}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anGDL.xPositive, anCL.xNegative) annotation (Line(
-          points={{-30,40},{-30,40}},
-          color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
           points={{-10,40},{-10,40}},
           color={240,0,0},
-          smooth=Smooth.None,
-          thickness=0.5));
-
+          thickness=0.5,
+          smooth=Smooth.None));
       connect(PEM.xPositive, caCL.xNegative) annotation (Line(
           points={{10,40},{10,40}},
           color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
+          thickness=0.5,
+          smooth=Smooth.None));
       connect(caCL.xPositive, caGDL.xNegative) annotation (Line(
           points={{30,40},{30,40}},
           color={0,0,240},
-          smooth=Smooth.None,
-          thickness=0.5));
-
-      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
-          points={{50,40},{50,40}},
-          color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
+      connect(anCL.xNegative, anGDL.xPositive) annotation (Line(
+          points={{-30,40},{-30,40}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anBC1[1, :].boundary, anFP.xNegative[1, :]) annotation (Line(
+          points={{-80,54},{-76,54},{-76,40},{-70,40}},
+          color={127,127,127},
+          pattern=LinePattern.None,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anBC2.boundary, anFP.xNegative[2:end, :]) annotation (Line(
+          points={{-80,26},{-76,26},{-76,40},{-70,40}},
+          color={127,127,127},
+          pattern=LinePattern.None,
+          thickness=0.5,
+          smooth=Smooth.None));
       connect(anSource.boundary, anFP.yNegative) annotation (Line(
           points={{-60,20},{-60,30}},
           color={240,0,0},
@@ -3774,8 +1839,68 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
-      connect(caSource.boundary, caFP.yNegative) annotation (Line(
-          points={{60,20},{60,30}},
+      connect(currentSet.y, zI) annotation (Line(
+          points={{-59,-20},{-44,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(zI, stoichH2.u) annotation (Line(
+          points={{-44,-20},{-32,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(stoichH2.y, Ndot_H2) annotation (Line(
+          points={{-9,-20},{4,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(Ndot_H2, anStoichH2O.u) annotation (Line(
+          points={{4,-20},{28,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(anStoichH2O.y, Ndot_H2O_an) annotation (Line(
+          points={{51,-20},{64,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caBC1[1, :].boundary, caFP.xPositive[1, :]) annotation (Line(
+          points={{80,54},{76,54},{76,40},{70,40}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caBC2.boundary, caFP.xPositive[2:end, :]) annotation (Line(
+          points={{80,26},{76,26},{76,40},{70,40}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(stoichO2.y, Ndot_O2) annotation (Line(
+          points={{-9,-80},{4,-80}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(Ndot_O2, caStoichH2O.u) annotation (Line(
+          points={{4,-80},{20,-80},{20,-60},{28,-60}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(caStoichH2O.y, Ndot_H2O_ca) annotation (Line(
+          points={{51,-60},{64,-60}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(stoichN2.y, Ndot_N2) annotation (Line(
+          points={{51,-100},{64,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(stoichN2.u, Ndot_O2) annotation (Line(
+          points={{28,-100},{20,-100},{20,-80},{4,-80}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(anGDL.xNegative, anFP.xPositive) annotation (Line(
+          points={{-50,40},{-50,40}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caGDL.xPositive, caFP.xNegative) annotation (Line(
+          points={{50,40},{50,40}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caFP.yNegative, caSource.boundary) annotation (Line(
+          points={{60,30},{60,20}},
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
@@ -3784,62 +1909,157 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      connect(anBC.boundary, anFP.xNegative) annotation (Line(
-          points={{-80,40},{-70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(caFP.xPositive, caBC.boundary) annotation (Line(
-          points={{70,40},{80,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      connect(anValveDynamics.y, p_an_out_noneq) annotation (Line(
-          points={{11,-20},{34,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caPressSet.y, caNoneqSet.u1) annotation (Line(
-          points={{-49,-70},{-38,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caThermoPress.y, caNoneqSet.u2) annotation (Line(
-          points={{-49,-90},{-30,-90},{-30,-78}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anPressSet.y, anNoneqSet.u1) annotation (Line(
-          points={{-49,-20},{-38,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.u2, anThermoPress.y) annotation (Line(
-          points={{-30,-28},{-30,-40},{-49,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(anNoneqSet.y, anValveDynamics.u) annotation (Line(
-          points={{-21,-20},{-12,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caValveDynamics.y, p_ca_out_noneq) annotation (Line(
-          points={{13,-70},{34,-70}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(caNoneqSet.y, caValveDynamics.u) annotation (Line(
-          points={{-21,-70},{-10,-70}},
+      connect(stoichO2.u, zI) annotation (Line(
+          points={{-32,-80},{-40,-80},{-40,-20},{-44,-20}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.FPtoFP.mos"
-            "Regions.Examples.FPtoFP.mos"),
+            "Regions.Examples.FPtoFP.mos", file=
+              "Resources/Scripts/Dymola/Regions.Examples.FPtoFP-states.mos"
+            "Regions.Examples.FPtoFP-states.mos"),
         experiment(
-          StopTime=240,
-          Tolerance=1e-05,
-          Algorithm="Dassl"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+          StopTime=600,
+          Tolerance=1e-005,
+          __Dymola_Algorithm="Dassl"),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},
+                {100,100}}), graphics),
         __Dymola_experimentSetupOutput);
-    end FPtoFPVoltage;
+    end FPtoFPV;
 
+    model CLtoCLV "Test one catalyst layer to the other"
+
+      extends Modelica.Icons.Example;
+
+      output Q.Potential w=anCL.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
+          1, Side.n] - caCL.subregions[1, 1, 1].graphite.'e-'.g_boundaries[1,
+          Side.p] if environment.analysis "Electrical potential";
+      output Q.Current zI=-sum(anCL.subregions[1, :, :].graphite.'e-'.boundaries[
+          1, Side.n].Ndot) if environment.analysis "Electrical current";
+      output Q.Number J_Apercm2=zI*U.cm^2/(anCL.A[Axis.x]*U.A)
+        "Electrical current density, in A/cm2";
+
+      parameter Q.Length L_y[:]=fill(U.m/1, 1) "Lengths along the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={5*U.mm} "Lengths across the channel"
+        annotation (Dialog(group="Geometry", __Dymola_label=
+              "<html><i>L</i><sub>z</sub></html>"));
+
+      inner Conditions.Environment environment(analysis=true)
+        "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+
+      AnCLs.AnCL anCL(
+        final L_y=L_y,
+        final L_z=L_z,
+        subregions(graphite(each inclDL=true)))
+        annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
+
+      PEMs.PEM PEM(final L_y=L_y,final L_z=L_z)
+        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+      CaCLs.CaCL caCL(
+        final L_y=L_y,
+        final L_z=L_z,
+        subregions(graphite(each inclDL=true)))
+        annotation (Placement(transformation(extent={{10,30},{30,50}})));
+
+      Modelica.Blocks.Sources.Ramp currentSet(duration=300, height=100*U.A)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
+          each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2(
+            materialSet(y=environment.p_dry),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)),
+          H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_H2O),
+            redeclare function thermalSpec =
+                Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+
+            thermalSet(y=0))), each graphite(
+          'incle-'=true,
+          'inclC+'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={-44,40})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
+        (each gas(
+          inclO2=true,
+          inclH2O=true,
+          O2(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_O2),
+            thermalSet(y=environment.T)),
+          H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_H2O),
+            redeclare function thermalSpec =
+                Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+
+            thermalSet(y=0))), each graphite(
+          'incle-'=true,
+          'inclC+'=true,
+          'C+'(source(y=environment.T)),
+          'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=-currentSet.y),
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={44,40})));
+
+    equation
+      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
+          points={{-10,40},{-10,40}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
+          points={{10,40},{10,40}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anBC.boundary, anCL.xNegative) annotation (Line(
+          points={{-40,40},{-30,40}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(caCL.xPositive, caBC.boundary) annotation (Line(
+          points={{30,40},{40,40}},
+          color={0,0,240},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (
+        Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLtoCL.mos"
+            "Regions.Examples.CLtoCL.mos"),
+        experiment(
+          StopTime=600,
+          Tolerance=1e-005,
+          __Dymola_Algorithm="Dassl"),
+        __Dymola_experimentSetupOutput,
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
+    end CLtoCLV;
   end Examples;
 
   package AnFPs "Anode flow plates"
@@ -3875,7 +2095,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'inclC+'=true,
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
-              'e-'(sigma=U.S/(1.470e-3*U.cm))),
+              'e-'(sigma=U.S/(1.470e-3*U.cm),consTransY=ConsTrans.steady)),
             liquid(inclH2O=false, H2O(upstreamX=false, epsilon_IC=1e-4))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -3961,127 +2181,108 @@ text layer of this model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-76.648,66.211},{-119.073,52.0689}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={135,135,135},
-              origin={111.017,77.3801},
-              pattern=LinePattern.None,
-              lineColor={95,95,95}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={135,135,135}),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Polygon(
-              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-              lineColor={0,0,0},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{16,
-                  24},{16,28},{6,18},{6,24},{16,34},{16,48}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{16,4},
-                  {16,8},{6,-2},{6,4},{16,14},{16,28}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{16,-16},
-                  {16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,-48},
-                  {16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Line(
-              points={{10,0},{100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={127,127,127},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={240,0,0},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Ellipse(
-              extent={{-4,52},{4,48}},
-              lineColor={135,135,135},
-              fillColor={240,0,0},
-              visible=inclTransY,
-              fillPattern=FillPattern.Sphere),
-            Line(
-              points={{0,100},{0,50}},
-              color={240,0,0},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-76.648,66.211},{-119.073,52.0689}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={135,135,135},
+                  origin={111.017,77.3801},
+                  pattern=LinePattern.None,
+                  lineColor={95,95,95}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={135,135,135}),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Polygon(
+                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),Polygon(
+                  points={{16,48},{4,36},{4,32},{14,42},{14,36},{4,26},{4,12},{
+                16,24},{16,28},{6,18},{6,24},{16,34},{16,48}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,28},{4,16},{4,12},{14,22},{14,16},{4,6},{4,-8},{
+                16,4},{16,8},{6,-2},{6,4},{16,14},{16,28}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,8},{4,-4},{4,-8},{14,2},{14,-4},{4,-14},{4,-28},{
+                16,-16},{16,-12},{6,-22},{6,-16},{16,-6},{16,8}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{16,-12},{4,-24},{4,-28},{14,-18},{14,-24},{4,-34},{4,
+                -48},{16,-36},{16,-32},{6,-42},{6,-36},{16,-26},{16,-12}},
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Line(
+                  points={{10,0},{100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{-20,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={240,0,0},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Ellipse(
+                  extent={{-4,52},{4,48}},
+                  lineColor={135,135,135},
+                  fillColor={240,0,0},
+                  visible=inclTransY,
+                  fillPattern=FillPattern.Sphere),Line(
+                  points={{0,100},{0,50}},
+                  color={240,0,0},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end AnFP;
 
@@ -4162,89 +2363,75 @@ that reference may be outdated).
           Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              rotation=-45,
-              fillPattern=FillPattern.VerticalCylinder,
-              origin={42.5001,11.0805}),
-            Rectangle(
-              extent={{-40,40},{0,-60}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              fillPattern=FillPattern.VerticalCylinder),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={64,64,64}),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={253,52,56},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={253,52,56},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  rotation=-45,
+                  fillPattern=FillPattern.VerticalCylinder,
+                  origin={42.5001,11.0805}),Rectangle(
+                  extent={{-40,40},{0,-60}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.VerticalCylinder),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={64,64,64}),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-20,0},{-100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={253,52,56},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={253,52,56},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end AnGDL;
 
@@ -4490,9 +2677,6 @@ that reference may be outdated).
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
-      // TODO:  Initialize for zero reaction rate
-      // (initMaterial=Init.ReactionRate?) for this and CaCL.
-
       // See the documentation layer of Subregions.Phases.PartialPhase
       // regarding the settings of k for each phase.
 
@@ -4535,112 +2719,93 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-22.6085,-62.7355},{-56.551,-79.7156}},
-              lineColor={64,64,64},
-              rotation=45,
-              fillColor={127,127,127},
-              fillPattern=FillPattern.HorizontalCylinder,
-              origin={-34.3741,132.347}),
-            Rectangle(
-              extent={{-105.39,79.1846},{-139.33,70.6991}},
-              lineColor={0,0,0},
-              fillColor={200,200,200},
-              rotation=45,
-              fillPattern=FillPattern.HorizontalCylinder,
-              origin={148.513,82.5291}),
-            Polygon(
-              points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-6,40},{6,-60}},
-              lineColor={0,0,0},
-              fillColor={200,200,200},
-              fillPattern=FillPattern.VerticalCylinder),
-            Rectangle(
-              extent={{-38,40},{-14,-60}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              fillPattern=FillPattern.VerticalCylinder),
-            Rectangle(
-              extent={{-14,40},{-6,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},{-42,
-                  80},{-42,0},{-20,0}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,-80},
-                  {-42,-80},{-42,0},{-20,0}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Polygon(points={{0,60},{20,60},{0,40},{-20,40},{0,60}}, lineColor={
-                  0,0,0}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-              lineColor={0,0,0},
-              fillColor={200,200,200},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={253,52,56},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={253,52,56},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={253,52,56},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-22.6085,-62.7355},{-56.551,-79.7156}},
+                  lineColor={64,64,64},
+                  rotation=45,
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  origin={-34.3741,132.347}),Rectangle(
+                  extent={{-105.39,79.1846},{-139.33,70.6991}},
+                  lineColor={0,0,0},
+                  fillColor={200,200,200},
+                  rotation=45,
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  origin={148.513,82.5291}),Polygon(
+                  points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-6,40},{6,-60}},
+                  lineColor={0,0,0},
+                  fillColor={200,200,200},
+                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
+                  extent={{-38,40},{-14,-60}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
+                  extent={{-14,40},{-6,-60}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Polygon(
+                  points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},
+                {-42,80},{-42,0},{-20,0}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Polygon(
+                  points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,
+                -80},{-42,-80},{-42,0},{-20,0}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Polygon(points={{0,60},{20,60},{0,
+              40},{-20,40},{0,60}}, lineColor={0,0,0}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+                  lineColor={0,0,0},
+                  fillColor={200,200,200},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,0},{-100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={253,52,56},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={253,52,56},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={253,52,56},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end AnCL;
 
@@ -4680,7 +2845,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(sigma=60*U.S/U.m, consTransX=ConsTrans.dynamic),
+              'H+'(sigma=60*U.S/U.m, consTransX=ConsTrans.steady),
               H2O(upstreamX=false)))) annotation (IconMap(primitivesVisible=
               false));
 
@@ -5002,112 +3167,93 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
-              lineColor={64,64,64},
-              rotation=45,
-              fillColor={127,127,127},
-              fillPattern=FillPattern.HorizontalCylinder,
-              origin={-15.1055,127.699}),
-            Rectangle(
-              extent={{-105.385,79.1805},{-139.323,70.6948}},
-              lineColor={0,0,0},
-              fillColor={200,200,200},
-              rotation=45,
-              fillPattern=FillPattern.HorizontalCylinder,
-              origin={130.507,84.5292}),
-            Polygon(
-              points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-26,40},{-14,-60}},
-              lineColor={0,0,0},
-              fillColor={200,200,200},
-              fillPattern=FillPattern.VerticalCylinder),
-            Rectangle(
-              extent={{-6,40},{18,-60}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              fillPattern=FillPattern.VerticalCylinder),
-            Rectangle(
-              extent={{-14,40},{-6,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},{-42,
-                  80},{-42,0},{-20,0}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,-80},
-                  {-42,-80},{-42,0},{-20,0}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Polygon(points={{0,60},{20,60},{0,40},{-20,40},{0,60}}, lineColor={
-                  0,0,0}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-              lineColor={0,0,0},
-              fillColor={120,120,120},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={0,0,240},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={0,0,240},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-98}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
+                  lineColor={64,64,64},
+                  rotation=45,
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  origin={-15.1055,127.699}),Rectangle(
+                  extent={{-105.385,79.1805},{-139.323,70.6948}},
+                  lineColor={0,0,0},
+                  fillColor={200,200,200},
+                  rotation=45,
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  origin={130.507,84.5292}),Polygon(
+                  points={{-14,40},{6,60},{14,60},{-6,40},{-14,40}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-26,40},{-14,-60}},
+                  lineColor={0,0,0},
+                  fillColor={200,200,200},
+                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
+                  extent={{-6,40},{18,-60}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.VerticalCylinder),Rectangle(
+                  extent={{-14,40},{-6,-60}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Polygon(
+                  points={{-20,0},{-20,40},{0,60},{20,60},{20,0},{42,0},{42,80},
+                {-42,80},{-42,0},{-20,0}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Polygon(
+                  points={{-20,0},{-20,-60},{0,-60},{20,-40},{20,0},{42,0},{42,
+                -80},{-42,-80},{-42,0},{-20,0}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Polygon(points={{0,60},{20,60},{0,
+              40},{-20,40},{0,60}}, lineColor={0,0,0}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+                  lineColor={0,0,0},
+                  fillColor={120,120,120},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,0},{-100,0}},
+                  color={0,0,240},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={0,0,240},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-98}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -5167,7 +3313,8 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'incle-'=true,
               'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,final epsilon=1
                      - epsilon),
-              'e-'(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
+              'e-'(consTransX=ConsTrans.steady,sigma=40*U.S/(12*U.cm)/(1 -
+                    epsilon)^1.5)),
             liquid(inclH2O=false, H2O(
                 upstreamX=false,
                 epsilon_IC=1e-4,
@@ -5206,88 +3353,74 @@ that reference may be outdated).
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              rotation=-45,
-              fillPattern=FillPattern.VerticalCylinder,
-              origin={52.5001,1.0805}),
-            Rectangle(
-              extent={{-20,40},{20,-60}},
-              lineColor={64,64,64},
-              fillColor={127,127,127},
-              fillPattern=FillPattern.VerticalCylinder),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={127,127,127}),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={0,0,240},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={0,0,240},
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  rotation=-45,
+                  fillPattern=FillPattern.VerticalCylinder,
+                  origin={52.5001,1.0805}),Rectangle(
+                  extent={{-20,40},{20,-60}},
+                  lineColor={64,64,64},
+                  fillColor={127,127,127},
+                  fillPattern=FillPattern.VerticalCylinder),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={127,127,127}),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-20,0},{-100,0}},
+                  color={0,0,240},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={0,0,240},
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end CaGDL;
 
@@ -5522,7 +3655,7 @@ that reference may be outdated).
               'inclC+'=true,
               'incle-'=true,
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
-              'e-'(sigma=U.S/(1.470e-3*U.cm))),
+              'e-'(sigma=U.S/(1.470e-3*U.cm),consTransY=ConsTrans.steady)),
             liquid(
               inclH2O=false,
               k={10,1,1},
@@ -5582,95 +3715,80 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-76.648,66.211},{-119.073,52.0689}},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={135,135,135},
-              origin={111.017,77.3801},
-              pattern=LinePattern.None,
-              lineColor={95,95,95}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={135,135,135}),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Polygon(
-              points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
-              lineColor={0,0,0},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={0,0,240},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={127,127,127},
-              visible=inclTransX,
-              thickness=0.5),
-            Ellipse(
-              extent={{-4,52},{4,48}},
-              lineColor={135,135,135},
-              fillColor={0,0,240},
-              visible=inclTransY,
-              fillPattern=FillPattern.Sphere),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={0,0,240},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={0,0,240},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-76.648,66.211},{-119.073,52.0689}},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={135,135,135},
+                  origin={111.017,77.3801},
+                  pattern=LinePattern.None,
+                  lineColor={95,95,95}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={135,135,135}),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{-20,40},{0,60},{20,60},{0,40},{-20,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Polygon(
+                  points={{20,60},{0,40},{0,-60},{20,-40},{20,60}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,0},{-100,0}},
+                  color={0,0,240},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={127,127,127},
+                  visible=inclTransX,
+                  thickness=0.5),Ellipse(
+                  extent={{-4,52},{4,48}},
+                  lineColor={135,135,135},
+                  fillColor={0,0,240},
+                  visible=inclTransY,
+                  fillPattern=FillPattern.Sphere),Line(
+                  points={{0,-60},{0,-100}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={0,0,240},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={0,0,240},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end CaFP;
 
@@ -5782,7 +3900,7 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
-    if inclTransY then
+    if inclTransX then
       for i in 1:n_x - 1 loop
         connect(subregions[i, :, :].xPositive, subregions[i + 1, :, :].xNegative)
           "Connection b/w neighboring subregions (not shown the diagram)";
@@ -5827,7 +3945,7 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
         color={127,127,127},
         smooth=Smooth.None,
         thickness=0.5));
-    if inclTransY then
+    if inclTransZ then
       for i in 1:n_z - 1 loop
         connect(subregions[:, :, i].zPositive, subregions[:, :, i + 1].zNegative)
           "Connection b/w neighboring subregions (not shown the diagram)";

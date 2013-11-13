@@ -416,13 +416,12 @@ package Conditions "Models to specify and measure operating conditions"
               "Material properties", __Dymola_label="<html><i>m</i></html>"));
 
       // Auxiliary variables (for analysis)
-      /*
-  output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) = 
-    actualStream(chemical.phi) if environment.analysis "Velocity of the stream";
-  output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) = actualStream(
-    chemical.sT) if environment.analysis 
-    "Specific entropy-temperature product of the stream";
-*/
+      output Q.Velocity phi[n_trans](each stateSelect=StateSelect.never) =
+        actualStream(chemical.phi) if environment.analysis
+        "Velocity of the stream";
+      output Q.PotentialAbsolute sT(stateSelect=StateSelect.never) =
+        actualStream(chemical.sT) if environment.analysis
+        "Specific entropy-temperature product of the stream";
 
       Connectors.Chemical chemical(redeclare final constant Integer n_trans=
             n_trans) "Connector for a species in a chemical reaction"
@@ -433,6 +432,9 @@ package Conditions "Models to specify and measure operating conditions"
         "Connector for a chemical reaction" annotation (Placement(
             transformation(extent={{10,-10},{30,10}}), iconTransformation(
               extent={{30,-10},{50,10}})));
+
+    protected
+      outer Conditions.Environment environment "Environmental conditions";
 
     equation
       // Equal intensive properties
@@ -4614,7 +4616,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Pressure;
 
-      model Volume "Specify volume (measure pressure)"
+      model Volume "Provide volume (measure pressure)"
         extends Partial(final y=amagat.p, source(y=U.cc));
 
       equation
@@ -4666,7 +4668,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}),graphics));
+                  {100,100}}), graphics));
       end VolumeFixed;
 
       partial model Partial "Base model for a pressure/volume"

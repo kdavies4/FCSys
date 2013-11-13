@@ -1507,145 +1507,145 @@ package Figures "Graphical layouts for documentation"
 
   protected
     Connectors.Amagat Amagat
-      annotation (Placement(transformation(extent={{-88,-38},{-68,-18}})));
+      annotation (Placement(transformation(extent={{-78,-38},{-58,-18}})));
 
     Connectors.Dalton Dalton
-      annotation (Placement(transformation(extent={{-68,-38},{-48,-18}})));
+      annotation (Placement(transformation(extent={{-58,-38},{-38,-18}})));
     Connectors.Reaction Reaction
-      annotation (Placement(transformation(extent={{-4,-14},{16,6}})));
+      annotation (Placement(transformation(extent={{6,-14},{26,6}})));
     Connectors.Direct Direct
-      annotation (Placement(transformation(extent={{20,-14},{40,6}})));
+      annotation (Placement(transformation(extent={{30,-14},{50,6}})));
     Connectors.Translational Material
-      annotation (Placement(transformation(extent={{68,-38},{88,-18}})));
+      annotation (Placement(transformation(extent={{78,-38},{98,-18}})));
 
     Connectors.Boundary Boundary
-      annotation (Placement(transformation(extent={{68,-14},{88,6}})));
+      annotation (Placement(transformation(extent={{78,-14},{98,6}})));
 
     Connectors.Translational Translational
-      annotation (Placement(transformation(extent={{20,-38},{40,-18}})));
+      annotation (Placement(transformation(extent={{30,-38},{50,-18}})));
 
     Connectors.Chemical Chemical
-      annotation (Placement(transformation(extent={{-48,-38},{-28,-18}})));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,
+      annotation (Placement(transformation(extent={{-38,-38},{-18,-18}})));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
               -40},{100,40}}), graphics={Line(
-              points={{54,-6.5},{54,-29.9771},{55.815,-26.369},{52,-28}},
+              points={{86,-6},{64,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{76,-6},{54,-28}},
+              points={{85,-5},{40,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{6,-6.5},{6,-29.9771},{7.8145,-26.369},{4,-28}},
+              points={{88,-6.5},{88,-29.9771},{89.815,-26.369},{86,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{30,-4},{54,-28}},
+              points={{62,-6},{40,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{64,-6.5},{64,-29.9771},{65.815,-26.369},{62,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{16,-6.5},{16,-29.9771},{17.8145,-26.369},{14,-28}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{40,-4},{64,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{75,-5},{30,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{30,-4},{30,-28}},
+              points={{40,-4},{40,-28}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{8,-6},{30,-28}},
+              points={{18,-6},{40,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{4,-6},{-18,-28}},
+              points={{14,-6},{-8,-28}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None}),Rectangle(
-              extent={{-81,26},{-45,6}},
+              extent={{-71,26},{-35,6}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{78,20},{78,-4}},
+              points={{88,20},{88,-4}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-100,-24},{-100,26}},
+              points={{-90,-24},{-90,26}},
               color={0,0,0},
               smooth=Smooth.None,
               arrow={Arrow.None,Arrow.Filled}),Text(
-              extent={{-112,32},{-88,28}},
+              extent={{-102,32},{-78,28}},
               lineColor={0,0,0},
               textString="Composite"),Text(
-              extent={{-114,-26},{-86,-30}},
+              extent={{-104,-26},{-76,-30}},
               lineColor={0,0,0},
               textString="Basic"),Ellipse(
-              extent={{75,23},{81,17}},
+              extent={{85,23},{91,17}},
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5),Text(
-              extent={{-65,12},{-45,8}},
+              extent={{-55,12},{-35,8}},
               lineColor={0,0,0},
               horizontalAlignment=TextAlignment.Left,
               textString="Instantiation"),Text(
-              extent={{-65,14},{-45,18}},
+              extent={{-55,14},{-35,18}},
               lineColor={0,0,0},
               horizontalAlignment=TextAlignment.Left,
               textString="Expansion"),Text(
-              extent={{-65,24},{-45,20}},
+              extent={{-55,24},{-35,20}},
               lineColor={0,0,0},
               horizontalAlignment=TextAlignment.Left,
               textString="Extension"),Ellipse(
-              extent={{-21,-25},{-15,-31}},
+              extent={{-11,-25},{-5,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Line(
-              points={{-78,16},{-68,16}},
+              points={{-68,16},{-58,16}},
               color={191,191,191},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{-68,10},{-78,10}},
+              points={{-58,10},{-68,10}},
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Ellipse(
-              extent={{3,-25},{9,-31}},
+              extent={{13,-25},{19,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{51,-25},{57,-31}},
+              extent={{61,-25},{67,-31}},
               lineColor={127,127,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{51,-1},{57,-7}},
-              lineColor={2,157,21},
-              fillColor={38,196,52},
-              fillPattern=FillPattern.Solid),Line(
-              points={{78,-6.5},{78,-29.9771},{79.815,-26.369},{76,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Line(
-              points={{52,-6},{30,-28}},
-              color={191,191,191},
-              smooth=Smooth.None,
-              arrow={Arrow.Filled,Arrow.None}),Text(
-              extent={{68,30},{88,26}},
+              extent={{61,-1},{67,-7}},
+              lineColor={170,0,0},
+              fillColor={221,23,47},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{78,30},{98,26}},
               lineColor={0,0,0},
               textString="Boundary
-Bus"),Text(   extent={{42,-18},{66,-22}},
+Bus"),Text(   extent={{52,-18},{76,-22}},
               lineColor={0,0,0},
               textString="Thermal
 Diffusive"),Text(
-              extent={{-6,-18},{18,-22}},
+              extent={{4,-18},{28,-22}},
               lineColor={0,0,0},
               textString="Thermal
 Advective"),Text(
-              extent={{-30,-18},{-6,-22}},
+              extent={{-20,-18},{4,-22}},
               lineColor={0,0,0},
               textString="Stoichio-
-metric"),Text(extent={{42,6},{66,2}},
+metric"),Text(extent={{52,6},{76,2}},
               lineColor={0,0,0},
               textString="Inter, Intra, 
 and Inert"),Line(
-              points={{-68,22},{-78,22},{-68,22},{-78,22}},
+              points={{-58,22},{-68,22},{-58,22},{-68,22}},
               color={191,191,191},
               smooth=Smooth.None,
               arrow={Arrow.Filled,Arrow.None})}));

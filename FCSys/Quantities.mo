@@ -27,8 +27,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.mol "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
-      parameter Q.ConcentrationRate ConcentrationRate=1*U.C/(U.m^3*U.s)
-        "Rate of concentration";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.ConductivityElectrical ConductivityElectrical=1*U.S/U.m

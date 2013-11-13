@@ -80,9 +80,9 @@ package Subregions
         output Q.Potential h0=0.5*Characteristics.H2.Gas.Deltah0_f + 0.25*
             Characteristics.O2.Gas.Deltah0_f - 0.5*Characteristics.H2O.Gas.Deltah0_f;
 
-        output Q.Potential w=-subregion.graphite.'e-Transfer'.Deltag
+        output Q.Potential w=subregion.graphite.'e-Transfer'.Deltag
           "Overpotential";
-        output Q.Current zI=-subregion.graphite.'e-Transfer'.I "Reaction rate";
+        output Q.Current zI=subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density of the reaction, in A/cm2";
         output Q.Power Qdot=-subregion.graphite.'e-Transfer'.direct.therm.Qdot
@@ -153,9 +153,9 @@ package Subregions
 
       model ORR "Test the oxygen reduction reaction in one subregion"
 
-        output Q.Potential w=subregion.graphite.'e-Transfer'.Deltag
+        output Q.Potential w=-subregion.graphite.'e-Transfer'.Deltag
           "Overpotential";
-        output Q.Current zI=subregion.graphite.'e-Transfer'.I "Reaction rate";
+        output Q.Current zI=-subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
         output Q.Power Qdot=-subregion.graphite.'e-Transfer'.direct.therm.Qdot
@@ -946,6 +946,43 @@ package Subregions
 
     end ThermalConductionConvection;
 
+    model Interface
+      SubregionNoIonomer subregion(graphite('incle-'=true))
+        annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+      SubregionNoIonomer subregionIG(graphite('incle-'=true, redeclare
+            FCSys.Species.'e-'.Graphite.FixedIG 'e-'))
+        annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+      inner Conditions.Environment environment
+        annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+      Conditions.ByConnector.BoundaryBus.Single.Source anBC annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-44,0})));
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC annotation (
+          Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=90,
+            origin={44,0})));
+    equation
+      connect(subregion.xPositive, subregionIG.xNegative) annotation (Line(
+          points={{-10,0},{10,0}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anBC.boundary, subregion.xNegative) annotation (Line(
+          points={{-40,0},{-30,0}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(subregionIG.xPositive, caBC.boundary) annotation (Line(
+          points={{30,0},{40,0}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+    end Interface;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -968,7 +1005,8 @@ package Subregions
     FCSys.Phases.Graphite graphite(
       n_inter=1,
       final n_trans=n_trans,
-      k_inter={k_common}) "Graphite" annotation (Dialog(group=
+      k_inter={k_common},
+      'incle-Transfer'=inclHOR or inclORR) "Graphite" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
               {-10,-2}})));
 
@@ -986,11 +1024,11 @@ package Subregions
             "Phases (click to edit)"), Placement(transformation(extent={{50,-22},
               {70,-2}})));
 
-    Reactions.HOR HOR(final n_trans=n_trans) if graphite.'incle-' and ionomer.
-      'inclH+' and gas.inclH2 "Hydrogen oxidation reaction"
+    Chemistry.HOR HOR(final n_trans=n_trans) if inclHOR
+      "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{80,-30},{100,-10}})));
-    Reactions.ORR ORR(final n_trans=n_trans) if graphite.'incle-' and ionomer.
-      'inclH+' and gas.inclO2 and gas.inclH2O "Oxygen reduction reaction"
+    Chemistry.ORR ORR(final n_trans=n_trans) if inclORR
+      "Oxygen reduction reaction"
       annotation (Placement(transformation(extent={{80,-46},{100,-26}})));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1019,6 +1057,11 @@ package Subregions
               {-40,-40}})));
 
   protected
+    final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
+        gas.inclH2 "Include the hydrogen oxidation reaction";
+    final parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and
+        gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
+
     Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V, final setVolume
         =gas.n_spec > 0 or liquid.n_spec > 0) if n_spec > 0
       "Model to establish a fixed total volume"
@@ -1343,11 +1386,14 @@ on diagram)")}));
         thickness=0.5,
         smooth=Smooth.None));
 
-    annotation (Documentation(info="<html>
+    annotation (
+      defaultComponentName="subregion",
+      Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{
-              40,60}}), graphics));
+
+      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
+              60}}), graphics));
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1581,10 +1627,13 @@ on diagram)")}));
       connect(gas.connH2O[3], liquid.connH2O[1]);
     end if;
 
-    annotation (Documentation(info="<html>
+    annotation (
+      defaultComponentName="subregion",
+      Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.EmptySubregion\">EmptySubregion</a> model.</p></html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-80},{
+
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
   end SubregionNoIonomer;
 

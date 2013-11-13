@@ -813,54 +813,6 @@ package WorkInProgress "Incomplete classes under development"
               80,40}}), graphics));
   end AssembliesCellsExamplesTestStandEIS;
 
-  model DoubleLayer
-    "Test the storage of charge across the electrolytic double layer"
-    extends Subregions.Examples.Subregion(
-      inclH2=false,
-      'inclC+'=true,
-      'incle-'=true,
-      'inclSO3-'=true,
-      'inclH+'=true);
-
-    Conditions.ByConnector.BoundaryBus.Single.Source electrons(graphite(
-          'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Trapezoid
-            materialSet(
-            rising=1,
-            width=1,
-            falling=1,
-            amplitude=-U.A,
-            period=4)))) annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=90,
-          origin={-24,0})));
-    Conditions.ByConnector.BoundaryBus.Single.Source protons(ionomer('inclH+'=
-            true,'H+'(redeclare function materialSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure)))
-      annotation (Placement(transformation(
-          extent={{-10,10},{10,-10}},
-          rotation=90,
-          origin={24,0})));
-
-  equation
-    connect(protons.boundary, subregion.xPositive) annotation (Line(
-        points={{20,0},{10,0}},
-        color={127,127,127},
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(electrons.boundary, subregion.xNegative) annotation (Line(
-        points={{-20,0},{-10,0}},
-        color={127,127,127},
-        thickness=0.5,
-        smooth=Smooth.None));
-    annotation (
-      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-              100,100}}), graphics),
-      experiment(StopTime=4),
-      __Dymola_experimentSetupOutput,
-      Commands(file=
-            "Resources/Scripts/Dymola/Subregions.Examples.DoubleLayer.mos"
-          "Subregions.Examples.DoubleLayer.mos"));
-  end DoubleLayer;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

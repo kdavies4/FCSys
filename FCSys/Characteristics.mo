@@ -27,9 +27,11 @@ package Characteristics
       PropertiesRT 'SO3-'(redeclare package Data =
             Characteristics.'SO3-'.Ionomer)
         annotation (Placement(transformation(extent={{30,26},{50,46}})));
-      PropertiesRT 'e-'(redeclare package Data = FCSys.Characteristics.'e-'.Gas)
+      PropertiesRT 'e-'(redeclare package Data =
+            FCSys.Characteristics.'e-'.Graphite)
         annotation (Placement(transformation(extent={{30,14},{50,34}})));
-      PropertiesRT 'H+'(redeclare package Data = FCSys.Characteristics.'H+'.Gas)
+      PropertiesRT 'H+'(redeclare package Data =
+            FCSys.Characteristics.'H+'.Ionomer)
         annotation (Placement(transformation(extent={{30,2},{50,22}})));
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
@@ -200,6 +202,8 @@ package Characteristics
       Connectors.RealInput p(unit="M/(L.T2)") "Pressure"
         annotation (Placement(transformation(extent={{-120,-30},{-100,-10}})));
 
+      Q.MassSpecific m "Specific mass";
+      Q.LengthSpecific d "Specific diamter";
       Q.VolumeSpecific v "Specific volume";
       Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity";
       Q.CapacityThermalSpecific c_v "Isobaric specific heat capacity";
@@ -214,6 +218,8 @@ package Characteristics
       Q.TimeAbsolute nu "Thermal independity";
 
     equation
+      m = Data.m;
+      d = Data.m;
       v = Data.v_Tp(T, p);
       c_p = Data.c_p(T, p);
       c_v = Data.c_v(T, p);
@@ -501,11 +507,7 @@ package Characteristics
      <ul>
      <li>The specific electron mass (<i>m</i>) is also given by the
      constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
-     2 <i>R</i><sub>&infin;</sub>&nbsp;<i>h</i>/(<i>q</i>&nbsp;<i>c</i>&nbsp;&alpha;<sup>2</sup>)
-  (from <a href=\"http://en.wikipedia.org/wiki/Electron_rest_mass\">http://en.wikipedia.org/wiki/Electron_rest_mass</a>,
-  with <i>q</i> representing a single particle).  This evaluates to
-     <i>R</i><sub>&infin;</sub>&nbsp;(<i>R</i><sub>K</sub>&nbsp;m&nbsp;S)<sup>2</sup>/(<i>k</i><sub>J</sub> <i>c</i><sup>3</sup>&nbsp;(&pi;&nbsp;10<sup>-7</sup>&nbsp;s)<sup>2</sup>) or
-     <i>R</i><sub>&infin;</sub>&nbsp;25812.8074434<sup>2</sup>/(<i>k</i><sub>J</sub>&nbsp;<i>c</i>&nbsp;(&pi;&nbsp;10<sup>-7</sup>&nbsp;299792458)<sup>2</sup>) in terms of the base constants.</li>
+     <i>R</i><sub>k</sub>&nbsp;&alpha;/(<i>c</i>&nbsp;<i>d</i>), where <i>d</i> = 2*k_A/m is the specific diameter of an electron.</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
   contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
