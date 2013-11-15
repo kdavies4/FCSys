@@ -182,31 +182,30 @@ package Species "Dynamic models of chemical species"
           final tauprime={0},
           final zeta=0,
           final k_intra,
-          final k=A*Data.d*mustar/(4*v),
+          final kL=fill(Data.d*mustar*N/4, n_trans),
+          final eta=Modelica.Constants.inf,
           final theta=Modelica.Constants.inf);
 
-        parameter Q.NumberAbsolute mustar=1 "Relative permeability"
-          annotation (Dialog(__Dymola_label="<html>&mu;<sup>*</sup></html>"));
+        parameter Q.NumberAbsolute mustar=1 "Relative permeability" annotation
+          (Dialog(group="Material properties", __Dymola_label=
+                "<html>&mu;<sup>*</sup></html>"));
 
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'e-'",
           Documentation(info="<html>
 
-<p><code>consMaterial</code> is <code>ConsThermo.steady</code> by default.  If the 
-<a href=\"modelica://FCSys.Phases.Dielectric\">dielectric</a> is connected, then set  
-<code>consMaterial</code> to <code>ConsThermo.dynamic</code> for both the negative (this model) and
-positive charge carriers.</p>
+<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code> 
+(the default is <code>ConsTrans.steady</code> instead),
+then internal inductance is included using the relative permeability (&mu;<sup>*</sup>).</p>
 
-<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code>,
-then internal inductance will be included using the relative permeability &mu;<sup>*</sup>.</p>
- 
     <p>Assumptions:<ol>
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The exchange current density (<i>I</i><sup>o</sup>) is mapped to the reaction interval (&tau;&prime;) of electrons assuming that 
-          the reaction interval is zero for other species involved in the reaction.</li>
+          <li>The fluiditiy is infinite.  All friction is by translational exchange with the
+          the substrate
+          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
           the mobility of the substrate (e.g., 
           <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
@@ -220,65 +219,6 @@ then internal inductance will be included using the relative permeability &mu;<s
 
       end Fixed;
 
-      model FixedIG "Fixed properties, ideal gas"
-        extends Ion(
-          redeclare final package Data = Characteristics.'e-'.Graphite (b_v=[1],
-                n_v={-1,0}),
-          final Nu_Phi,
-          final Nu_Q,
-          final consRot,
-          final upstreamX=false,
-          final upstreamY=false,
-          final upstreamZ=false,
-          final initMaterial=Init.none,
-          final initEnergy=Init.none,
-          consTransX=ConsTrans.steady,
-          consTransY=ConsTrans.steady,
-          final consTransZ=ConsTrans.steady,
-          final consEnergy=ConsThermo.steady,
-          final N_IC,
-          final p_IC,
-          final h_IC,
-          final V_IC,
-          final rho_IC,
-          final g_IC,
-          final T_IC,
-          final nu=1,
-          final n_chem=1,
-          final tauprime={0},
-          final zeta=0,
-          final k_intra,
-          final theta=Modelica.Constants.inf);
-        //**final consTransX,consTransY
-
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'e-'",
-          Documentation(info="<html>
-
-<p><code>consMaterial</code> is <code>ConsThermo.steady</code> by default.  If the 
-<a href=\"modelica://FCSys.Phases.Dielectric\">dielectric</a> is connected, then set  
-<code>consMaterial</code> to <code>ConsThermo.dynamic</code> for both the negative (this model) and
-positive charge carriers.</p>
-
-    <p>Assumptions:<ol>
-          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
-          the substrate
-          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The exchange current density (<i>I</i><sup>o</sup>) is mapped to the reaction interval (&tau;&prime;) of electrons assuming that 
-          the reaction interval is zero for other species involved in the reaction.</li>
-          <li>The conductivity is mapped to the mobility of the electrons by assuming that
-          the mobility of the substrate (e.g., 
-          <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
-    </ol></p>
-
-    <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
-
-          Diagram(graphics),
-          Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
-
-      end FixedIG;
     end Graphite;
 
   end 'e-';
@@ -290,8 +230,7 @@ positive charge carriers.</p>
 
       model Fixed "Fixed properties"
         extends Ion(
-          redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
-                b_v=[1], n_v={-1,0}),
+          redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
           final Nu_Phi,
           final Nu_Q,
           final consRot,
@@ -1158,6 +1097,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Specific exchange rates" annotation (Evaluate=true,Dialog(group=
             "Chemical parameters", __Dymola_label="<html>&tau;&prime;</html>"));
 
+    // Geometry
+    Q.Length kL[n_trans]=L[cartTrans] "Effective transport length" annotation (
+        Dialog(group="Geometry", __Dymola_label=
+            "<html><b><i>k&nbsp;L</i></b></html>"));
+
     // Assumptions
     // -----------
     // Upstream discretization
@@ -1373,9 +1317,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     // Geometric parameters
   protected
-    outer parameter Q.Length kL[n_trans] "Effective transport length"
-      annotation (missingInnerMessage=
-          "This model should be used within a phase model.");
     outer Q.Area Aprime[n_trans] "Effective cross-sectional area" annotation (
         missingInnerMessage="This model should be used within a phase model.");
     outer parameter Boolean inclRot[3]
@@ -1549,7 +1490,12 @@ Choose any condition besides none.");
 
     // Material exchange
     for i in 1:n_chem loop
-      tauprime[i]*chemical[i].Ndot = N*(exp((chemical[i].g - g)/T) - 1);
+      if tauprime[i] > Modelica.Constants.small then
+        tauprime[i]*chemical[i].Ndot = N*(exp((chemical[i].g - g)/T) - 1);
+      else
+        chemical[i].g = g
+          "Simplified to avoid nonlinear equations in Dymola 2014";
+      end if;
     end for;
 
     // Transport
@@ -1759,6 +1705,9 @@ Choose any condition besides none.");
       final p_IC=environment.p,
       final h_IC,
       final g_IC);
+    parameter Q.Length kL[n_trans]=L[cartTrans] "Effective transport length"
+      annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html><b><i>k&nbsp;L</i></b></html>"));
 
     // Material properties
     Q.ResistivityThermal theta(nominal=10*U.cm/U.A) = Data.theta(T, v)
@@ -1783,9 +1732,6 @@ Choose any condition besides none.");
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
 
   protected
-    outer parameter Q.Length kL[n_trans] "Effective transport length"
-      annotation (missingInnerMessage=
-          "This model should be used within a phase model.");
     outer Q.Area Aprime[n_trans] "Effective cross-sectional area" annotation (
         missingInnerMessage="This model should be used within a phase model.");
     outer parameter Integer cartTrans[:]
@@ -1835,6 +1781,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected

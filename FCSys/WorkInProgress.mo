@@ -57,30 +57,25 @@ package WorkInProgress "Incomplete classes under development"
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   model CellModelica
@@ -710,11 +705,11 @@ package WorkInProgress "Incomplete classes under development"
               40}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-160,-160},{160,
               160}}), graphics={Rectangle(
-            extent={{-160,160},{160,-160}},
-            lineColor={191,191,191},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},{
-                160,-160}}, lineColor={0,0,0})}),
+              extent={{-160,160},{160,-160}},
+              lineColor={191,191,191},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},{
+            160,-160}}, lineColor={0,0,0})}),
       Documentation(info="
     <html>
     <p>Any of the settings for the operating conditions can be time-varying expressions.</p>
@@ -813,6 +808,56 @@ package WorkInProgress "Incomplete classes under development"
               80,40}}), graphics));
   end AssembliesCellsExamplesTestStandEIS;
 
+  model AssembliesCellsExamplesTestStandVoltage
+    "Test the cell with voltage as a boundary condition"
+    extends Assemblies.Cells.Examples.TestStand(
+      testConditions(electricalSpec=ElectricalSpec.voltage, electricalSet(
+          startTime=100,
+          height=-U.V,
+          offset=1.2048*U.V)),
+      cell(PEM(subregions(ionomer(each 'H+'(phi(each stateSelect=StateSelect.always)))))),
+
+      anSource(each gas(H2(materialSet(y=-firstOrder.y/2)), H2O(materialSet(y=-
+                  (firstOrder.y/2)*(testConditions.psi_H2O_an/testConditions.psi_H2))))),
+
+      caSource(each gas(
+          O2(materialSet(y=-firstOrder1.y/4)),
+          N2(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_N2/
+                  testConditions.psi_O2)),
+          H2O(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_H2O_ca/
+                  testConditions.psi_O2)))));
+
+    extends Modelica.Icons.UnderConstruction;
+
+    Modelica.Blocks.Continuous.FirstOrder firstOrder(T=1, initType=Modelica.Blocks.Types.Init.InitialOutput)
+      annotation (Placement(transformation(extent={{-6,-66},{14,-46}})));
+    Modelica.Blocks.Continuous.FirstOrder firstOrder1(
+      T=1,
+      initType=Modelica.Blocks.Types.Init.InitialOutput,
+      y_start=0)
+      annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
+  equation
+    firstOrder.u = testConditions.I_an;
+    firstOrder1.u = testConditions.I_ca;
+  end AssembliesCellsExamplesTestStandVoltage;
+
+  model AssembliesCellsExamplesTestStandO2
+    "Simulate the fuel cell with prescribed conditions, with pure oxygen"
+    extends Assemblies.Cells.Examples.TestStand(
+      p_ca_in=sum(caSource.gas.H2O.boundary.p + caSource.gas.O2.boundary.p),
+      cell(final inclN2=false),
+      testConditions(final psi_O2_dry=1),
+      caSource(gas(each final inclN2=false)),
+      caSink(gas(H2O(materialSet(y=fill(
+                    testConditions.p,
+                    cell.anFP.n_x,
+                    cell.n_z) - caSink.gas.O2.p)), each final inclN2=false)));
+
+    extends Modelica.Icons.UnderConstruction;
+
+    annotation (experiment(StopTime=700, Tolerance=1e-005),
+        __Dymola_experimentSetupOutput);
+  end AssembliesCellsExamplesTestStandO2;
   annotation (Commands(
       file="../../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",

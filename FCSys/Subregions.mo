@@ -946,43 +946,6 @@ package Subregions
 
     end ThermalConductionConvection;
 
-    model Interface
-      SubregionNoIonomer subregion(graphite('incle-'=true))
-        annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-      SubregionNoIonomer subregionIG(graphite('incle-'=true, redeclare
-            FCSys.Species.'e-'.Graphite.FixedIG 'e-'))
-        annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-      inner Conditions.Environment environment
-        annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-      Conditions.ByConnector.BoundaryBus.Single.Source anBC annotation (
-          Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=90,
-            origin={-44,0})));
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC annotation (
-          Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=90,
-            origin={44,0})));
-    equation
-      connect(subregion.xPositive, subregionIG.xNegative) annotation (Line(
-          points={{-10,0},{10,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC.boundary, subregion.xNegative) annotation (Line(
-          points={{-40,0},{-30,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(subregionIG.xPositive, caBC.boundary) annotation (Line(
-          points={{30,0},{40,0}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics));
-    end Interface;
   end Examples;
 
   model Subregion "Subregion with all phases"

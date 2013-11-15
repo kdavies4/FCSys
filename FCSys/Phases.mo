@@ -24,10 +24,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.H2.Gas.Fixed H2(
       final n_trans,
       final n_inter,
+      final kL,
       final n_chem) if inclH2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
+      kL=kL,
       k_intra={k_common},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
@@ -53,10 +55,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.H2O.Gas.Fixed H2O(
       final n_trans,
       final n_inter,
+      final kL,
       final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
+      kL=kL,
       k_intra={k_common},
       initEnergy=if oneTemperature and inclH2 then Init.none else Init.temperature,
 
@@ -84,10 +88,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.N2.Gas.Fixed N2(
       final n_trans,
       final n_inter,
+      final kL,
       final n_chem) if inclN2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
+      kL=kL,
       k_intra={k_common},
       initEnergy=if oneTemperature and (inclH2 or inclH2O) then Init.none else
           Init.temperature,
@@ -115,10 +121,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.O2.Gas.Fixed O2(
       final n_trans,
       final n_inter,
+      final kL,
       final n_chem) if inclO2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
       n_intra=1,
+      kL=kL,
       k_intra={k_common},
       initEnergy=if oneTemperature and (inclH2 or inclH2O or inclN2) then Init.none
            else Init.temperature,
@@ -458,6 +466,7 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -479,11 +488,14 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Carbon plus (C<sup>+</sup>)</html>",
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(final n_trans, final
-        n_inter) if 'inclC+' constrainedby FCSys.Species.Solid(
+    replaceable FCSys.Species.'C+'.Graphite.Fixed 'C+'(
+      final n_trans,
+      final n_inter,
+      final kL) if 'inclC+' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
       n_intra=1,
       n_inter=n_inter,
+      kL=kL,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=StateSelect.default)) "C+ model" annotation (
@@ -810,11 +822,14 @@ package Phases "Mixtures of species"
 
         __Dymola_joinNext=true));
 
-    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(final n_trans, final
-        n_inter) if 'inclSO3-' constrainedby FCSys.Species.Solid(
+    replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(
+      final n_trans,
+      final n_inter,
+      final kL) if 'inclSO3-' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
       n_intra=2,
       n_inter=n_inter,
+      kL=kL,
       k_intra={Modelica.Constants.inf,Modelica.Constants.inf},
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
@@ -840,10 +855,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'H+'.Ionomer.Fixed 'H+'(
       final n_trans,
       final n_inter,
-      final n_chem) if 'inclH+' constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final kL) if 'inclH+' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_intra=2,
       n_inter=n_inter,
+      kL=kL,
       k_intra={1,k_EOD},
       initEnergy=if oneTemperature then Init.none else Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
@@ -870,10 +887,12 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.H2O.Ionomer.Fixed H2O(
       final n_trans,
       final n_inter,
-      final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final kL) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_intra=2,
       n_inter=0,
+      kL=kL,
       k_intra={1,k_EOD},
       initEnergy=if oneTemperature then Init.none else Init.temperature,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
@@ -952,7 +971,6 @@ package Phases "Mixtures of species"
       "Connection node for drag between H+ and SO3- (electrical resistance)"
       annotation (Placement(transformation(extent={{56,-38},{76,-18}}),
           iconTransformation(extent={{48,-76},{68,-56}})));
-
     Connectors.InertNode waterSolid
       "Connection node for drag between H2O and SO3-" annotation (Placement(
           transformation(extent={{56,-50},{76,-30}}), iconTransformation(extent
@@ -1193,9 +1211,11 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.H2O.Liquid.Fixed H2O(
       final n_trans,
       final n_inter,
+      final kL,
       final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
+      kL=kL,
       phi(each stateSelect=if oneVelocity then StateSelect.default else
             StateSelect.prefer),
       T(stateSelect=StateSelect.default)) "H2O model" annotation (
@@ -1368,8 +1388,8 @@ protected
     outer parameter Q.Length L[Axis] if n_spec > 0 "Length of the subregion"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    final inner parameter Q.Length kL[:]=k[cartTrans] .* L[cartTrans] if n_spec
-       > 0 "Effective transport lengths";
+    final parameter Q.Length kL[:]=k[cartTrans] .* L[cartTrans] if n_spec > 0
+      "Effective transport lengths";
     final inner Q.Area Aprime[n_trans]=fill(V, n_trans) ./ L[cartTrans] if
       n_spec > 0 "Effective cross-sectional areas";
     outer parameter Integer cartTrans[:]
@@ -1400,50 +1420,58 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end PartialPhase;
 

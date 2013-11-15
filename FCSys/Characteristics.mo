@@ -498,16 +498,17 @@ package Characteristics
             size(T_lim_c, 1) - 1),
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
-        d=2*U.k_A/m);
+        d=U.alpha^3/(2*U.pi*U.R_inf*U.q));
 
       //    h_offset=H2.Gas.Deltah0_f/4 + 298.15*U.K*(s(298.15*U.K) - H2.Gas.s(298.15*U.K)/4),
 
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
-     <li>The specific electron mass (<i>m</i>) is also given by the
-     constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
-     <i>R</i><sub>k</sub>&nbsp;&alpha;/(<i>c</i>&nbsp;<i>d</i>), where <i>d</i> = 2*k_A/m is the specific diameter of an electron.</li>
+     <li>The specific mass (<i>m</i>) is also 
+     2<i>k</i><sub>A</sub>/<i>d</i>, where <i>k</i><sub>A</sub> (in the <a href=\"modelica://FCSys.Units\">Units</a> package) is the magnetic force constant and 
+     <i>d</i> (in this package) is the specific classical diameter of an electron, 
+     &alpha;<sup>3</sup>/(2&pi;&nbsp;<i>R</i><sub>&infin;</sub>&nbsp;<i>q</i>).</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
   contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>

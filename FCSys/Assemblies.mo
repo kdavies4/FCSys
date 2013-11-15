@@ -194,44 +194,32 @@ package Assemblies "Combinations of regions (e.g., cells)"
         output Q.Potential Deltaw_ca=-cell.caCL.subregions[1, 1, 1].graphite.
             'e-Transfer'.Deltag if environment.analysis "Cathode overpotential";
 
-        inner Conditions.Environment environment(a={0,0,0}, analysis=false)
+        inner Conditions.Environment environment(a={0,0,0}, analysis=true)
           "Environmental conditions"
           annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
 
         Cell cell(
           inclLiq=inclLiq,
-          anFP(subregions(gas(H2(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+          anFP(subregions(gas(H2(each T_IC=testConditions.T, each p_IC=
+                      testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
                       testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
-                      testConditions.T), 'e-'(each consTransX=ConsTrans.dynamic)))),
-
-          anGDL(subregions(gas(H2(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.T)))),
+          anGDL(subregions(gas(H2(each T_IC=testConditions.T, each p_IC=
+                      testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
                       testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
                       testConditions.T)))),
           anCL(subregions(
-              gas(H2(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
-                      testConditions.p*psi_H2O)),
+              gas(H2(each T_IC=testConditions.T, each p_IC=testConditions.p*(1
+                       - psi_H2O)), H2O(each p_IC=testConditions.p*psi_H2O)),
               graphite('C+'(each T_IC=testConditions.T)),
               ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
                       testConditions.T)))),
-          PEM(subregions(ionomer(
-                H2O(each lambda_IC=14*RH),
-                'H+'(each consTransX=ConsTrans.dynamic),
-                'SO3-'(each T_IC=testConditions.T)))),
+          PEM(subregions(ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
+                      testConditions.T)))),
           caCL(subregions(
               gas(
-                H2O(
-                  each consTransX=ConsTrans.dynamic,
-                  each T_IC=testConditions.T,
-                  each p_IC=testConditions.p*psi_H2O),
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
                 O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
 
                 N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
@@ -253,9 +241,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
                 N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
                 graphite('C+'(each T_IC=testConditions.T)))),
-          L_y={0.5,0.5}*U.m) "Fuel cell" annotation (
-            __Dymola_choicesFromPackage=true, Placement(transformation(extent={
-                  {-10,-30},{10,-10}})));
+          L_y={1}*U.m) "Fuel cell" annotation (__Dymola_choicesFromPackage=true,
+            Placement(transformation(extent={{-10,-30},{10,-10}})));
 
         Real states[:](each stateSelect=StateSelect.always) = {cell.anFP.subregions[
           1, 1, 1].graphite.T,cell.anFP.subregions[1, 2, 1].graphite.T,cell.anGDL.subregions[
@@ -516,57 +503,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           __Dymola_experimentSetupOutput);
       end TestStand;
 
-      model TestStandO2
-        "Simulate the fuel cell with prescribed conditions, with pure oxygen"
-        extends TestStand(
-          p_ca_in=sum(caSource.gas.H2O.boundary.p + caSource.gas.O2.boundary.p),
 
-          cell(final inclN2=false),
-          testConditions(final psi_O2_dry=1),
-          caSource(gas(each final inclN2=false)),
-          caSink(gas(H2O(materialSet(y=fill(
-                            testConditions.p,
-                            cell.anFP.n_x,
-                            cell.n_z) - caSink.gas.O2.p)), each final inclN2=
-                  false)));
-        extends Modelica.Icons.UnderConstruction;
-
-        annotation (experiment(StopTime=700, Tolerance=1e-005),
-            __Dymola_experimentSetupOutput);
-      end TestStandO2;
-
-      model TestStandVoltage
-        "Test the cell with voltage as a boundary condition"
-        extends TestStand(
-          testConditions(electricalSpec=ElectricalSpec.voltage, electricalSet(
-              startTime=100,
-              height=-U.V,
-              offset=1.2048*U.V)),
-          cell(PEM(subregions(ionomer(each 'H+'(phi(each stateSelect=
-                          StateSelect.always)))))),
-          anSource(each gas(H2(materialSet(y=-firstOrder.y/2)), H2O(materialSet(
-                    y=-(firstOrder.y/2)*(testConditions.psi_H2O_an/
-                      testConditions.psi_H2))))),
-          caSource(each gas(
-              O2(materialSet(y=-firstOrder1.y/4)),
-              N2(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_N2/
-                      testConditions.psi_O2)),
-              H2O(materialSet(y=-(firstOrder1.y/4)*testConditions.psi_H2O_ca/
-                      testConditions.psi_O2)))));
-
-        extends Modelica.Icons.UnderConstruction;
-
-        Modelica.Blocks.Continuous.FirstOrder firstOrder(T=1, initType=Modelica.Blocks.Types.Init.InitialOutput)
-          annotation (Placement(transformation(extent={{-6,-66},{14,-46}})));
-        Modelica.Blocks.Continuous.FirstOrder firstOrder1(
-          T=1,
-          initType=Modelica.Blocks.Types.Init.InitialOutput,
-          y_start=0)
-          annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
-      equation
-        firstOrder.u = testConditions.I_an;
-        firstOrder1.u = testConditions.I_ca;
-      end TestStandVoltage;
 
       package Enumerations "Choices of options"
 
@@ -582,6 +519,374 @@ package Assemblies "Combinations of regions (e.g., cells)"
             pressure "Inlet pressure") "Ways to specify the anode flow rate";
 
       end Enumerations;
+
+      model TestStandVoltage
+        "Simulate the fuel cell with prescribed conditions, voltage"
+        import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
+        import DataH2 = FCSys.Characteristics.H2.Gas;
+        import DataH2O = FCSys.Characteristics.H2O.Gas;
+        import DataO2 = FCSys.Characteristics.O2.Gas;
+        import FCSys.Utilities.average;
+        extends Modelica.Icons.Example;
+
+        parameter Boolean inclLiq=false "Include liquid H2O";
+        parameter Q.NumberAbsolute psi_H2O=(testConditions.psi_H2O_an +
+            testConditions.psi_H2O_ca)/2
+          "Average molar concentration of H2O at the inlets";
+        parameter Q.NumberAbsolute RH=(testConditions.anRH + testConditions.caRH)
+            /2 "Average relative humidities at the inlets";
+
+        output Q.Number J_Apercm2=testConditions.zI*U.cm^2/(cell.caFP.A[Axis.x]
+            *U.A) "Electrical current density, in A/cm2";
+        output Q.Potential w=cell.anFP.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
+            1, Side.n] - cell.caFP.subregions[end, 1, 1].graphite.'e-'.g_boundaries[
+            1, Side.p] if environment.analysis "Electrical potential";
+        output Q.PressureAbsolute p_an_in=average(average(anSource.gas.H2.boundary.p
+             + anSource.gas.H2O.boundary.p))
+          "Total pressure at the anode inlet";
+        output Q.PressureAbsolute p_ca_in=average(average(caSource.gas.H2O.boundary.p
+             + caSource.gas.N2.boundary.p + caSource.gas.O2.boundary.p))
+          "Total pressure at the cathode inlet";
+        output Q.Pressure Deltap_an=testConditions.p - p_an_in
+          "Pressure difference down the anode channel";
+        output Q.Pressure Deltap_ca=testConditions.p - p_ca_in
+          "Pressure difference down the cathode channel";
+        output Q.Potential Deltaw_O2=(DataO2.g(caSource[1, 1].gas.O2.boundary.T,
+            caSource[1, 1].gas.O2.boundary.p) - cell.caCL.subregions[1, 1, 1].gas.O2.g)
+            /4 if environment.analysis "Voltage loss due to O2 supply";
+        output Q.Potential Deltaw_H2O=(DataH2O.g(caSource[1, 1].gas.H2O.boundary.T,
+            caSource[1, 1].gas.H2O.boundary.p) - cell.caCL.subregions[1, 1, 1].gas.H2O.g)
+            /2 if environment.analysis "Voltage loss due to H2O removal";
+        output Q.Potential Deltaw_H2=(DataH2.g(anSource[1, 1].gas.H2.boundary.T,
+            anSource[1, 1].gas.H2.boundary.p) - cell.anCL.subregions[1, 1, 1].gas.H2.g)
+            /2 if environment.analysis "Voltage loss due to H2 supply";
+        output Q.Potential 'Deltaw_e-'=cell.caFP.subregions[1, 1, 1].graphite.
+            'e-'.g_boundaries[1, Side.p] - cell.caCL.subregions[1, 1, 1].graphite.
+            'e-'.g + cell.anCL.subregions[1, 1, 1].graphite.'e-'.g - cell.anFP.subregions[
+            1, 1, 1].graphite.'e-'.g_boundaries[1, Side.n] if environment.analysis
+          "Voltage loss due to e- transport";
+        output Q.Potential 'Deltaw_H+'=cell.anCL.subregions[1, 1, 1].ionomer.
+            'H+'.g - cell.caCL.subregions[1, 1, 1].ionomer.'H+'.g if
+          environment.analysis "Voltage loss due to H+ transport";
+        output Q.Potential Deltaw_an=cell.anCL.subregions[1, 1, 1].graphite.
+            'e-Transfer'.Deltag if environment.analysis "Anode overpotential";
+        output Q.Potential Deltaw_ca=-cell.caCL.subregions[1, 1, 1].graphite.
+            'e-Transfer'.Deltag if environment.analysis "Cathode overpotential";
+
+        inner Conditions.Environment environment(a={0,0,0}, analysis=true)
+          "Environmental conditions"
+          annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
+
+        Cell cell(
+          inclLiq=inclLiq,
+          anFP(subregions(gas(H2(each T_IC=testConditions.T, each p_IC=
+                      testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
+                      testConditions.T)))),
+          anGDL(subregions(gas(H2(each T_IC=testConditions.T, each p_IC=
+                      testConditions.p*(1 - psi_H2O)), H2O(each p_IC=
+                      testConditions.p*psi_H2O)), graphite('C+'(each T_IC=
+                      testConditions.T)))),
+          anCL(subregions(
+              gas(H2(each T_IC=testConditions.T, each p_IC=testConditions.p*(1
+                       - psi_H2O)), H2O(each p_IC=testConditions.p*psi_H2O)),
+              graphite('C+'(each T_IC=testConditions.T)),
+              ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
+                      testConditions.T)))),
+          PEM(subregions(ionomer(
+                H2O(each lambda_IC=14*RH),
+                'SO3-'(each T_IC=testConditions.T),
+                'H+'(each consTransX=ConsTrans.dynamic)))),
+          caCL(subregions(
+              gas(
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+
+              graphite('C+'(each T_IC=testConditions.T)),
+              ionomer(H2O(each lambda_IC=14*RH), 'SO3-'(each T_IC=
+                      testConditions.T)))),
+          caGDL(subregions(gas(
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+                graphite('C+'(each T_IC=testConditions.T)))),
+          caFP(subregions(gas(
+                H2O(each T_IC=testConditions.T, each p_IC=testConditions.p*
+                      psi_H2O),
+                O2(each p_IC=testConditions.p*(1 - psi_H2O)*testConditions.psi_O2_dry),
+
+                N2(each p_IC=testConditions.p*(1 - psi_H2O)*(1 - testConditions.psi_O2_dry))),
+                graphite('C+'(each T_IC=testConditions.T)))),
+          L_y={0.5,0.5}*U.m) "Fuel cell" annotation (
+            __Dymola_choicesFromPackage=true, Placement(transformation(extent={
+                  {-10,-30},{10,-10}})));
+
+        Real states[:](each stateSelect=StateSelect.always) = {cell.anFP.subregions[
+          1, 1, 1].graphite.T,cell.anFP.subregions[1, 2, 1].graphite.T,cell.anGDL.subregions[
+          1, 1, 1].graphite.T,cell.anGDL.subregions[1, 2, 1].graphite.T,cell.caFP.subregions[
+          1, 2, 1].gas.H2O.phi[2],cell.caFP.subregions[1, 2, 1].gas.O2.phi[2],
+          cell.anFP.subregions[1, 2, 1].gas.H2.phi[2],cell.caCL.subregions[1, 1,
+          1].ORR.'e-'.reaction.Ndot,cell.caCL.subregions[1, 2, 1].ORR.'e-'.reaction.Ndot}
+          if cell.n_y == 2;
+
+        // Conditions
+        Conditions.ByConnector.BoundaryBus.Single.Sink anBC[1, cell.anFP.n_z](
+            each gas(
+            inclH2=true,
+            inclH2O=true,
+            H2(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+
+              materialSet(y=0),
+              redeclare function afterSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+              redeclare function beforeSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+            H2O(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+
+              materialSet(y=0),
+              redeclare function afterSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+              redeclare function beforeSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+            each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            'e-'(materialSet(y=0)),
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)))) annotation (Placement(
+              transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=90,
+              origin={-24,-20})));
+
+        Conditions.ByConnector.BoundaryBus.Single.Source anSource[cell.anFP.n_x,
+          cell.anFP.n_z](each gas(
+            inclH2=true,
+            inclH2O=true,
+            H2(materialSet(y=-testConditions.I_an/2), thermalSet(y=
+                    testConditions.T)),
+            H2O(materialSet(y=-(testConditions.I_an/2)*(testConditions.psi_H2O_an
+                    /testConditions.psi_H2)),thermalSet(y=testConditions.T))))
+          annotation (Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=180,
+              origin={-56,-44})));
+
+        Conditions.ByConnector.BoundaryBus.Single.Sink anSink[cell.anFP.n_x,
+          cell.anFP.n_z](gas(
+            each inclH2=true,
+            each inclH2O=true,
+            H2O(materialSet(y=fill(
+                          testConditions.p,
+                          cell.anFP.n_x,
+                          cell.n_z) - anSink.gas.H2.p)),
+            H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* cell.anFP.subregions[
+                    :, cell.anFP.n_y, :].gas.H2O.v ./ cell.anFP.subregions[:,
+                    cell.anFP.n_y, :].gas.H2.v), redeclare each function
+                materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+            each liquid(H2O(materialSet(y=testConditions.p)), inclH2O=inclLiq))
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-56,4})));
+        Conditions.ByConnector.BoundaryBus.Single.Source caBC[1, cell.caFP.n_z]
+          (each gas(
+            inclH2O=true,
+            H2O(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0)),
+            inclN2=true,
+            N2(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0)),
+            inclO2=true,
+            O2(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0))),each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)),
+            'e-'(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
+
+              materialSet(y=p_ca_elec),
+              thermalSet(y=testConditions.T)))) annotation (Placement(
+              transformation(
+              extent={{10,10},{-10,-10}},
+              rotation=90,
+              origin={24,-20})));
+
+        Conditions.ByConnector.BoundaryBus.Single.Source caSource[cell.caFP.n_x,
+          cell.caFP.n_z](each gas(
+            inclO2=true,
+            inclN2=true,
+            inclH2O=true,
+            O2(materialSet(y=-testConditions.I_ca/4), thermalSet(y=
+                    testConditions.T)),
+            N2(materialSet(y=-(testConditions.I_ca/4)*testConditions.psi_N2/
+                    testConditions.psi_O2), thermalSet(y=testConditions.T)),
+            H2O(materialSet(y=-(testConditions.I_ca/4)*testConditions.psi_H2O_ca
+                    /testConditions.psi_O2),thermalSet(y=testConditions.T))))
+          annotation (Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=180,
+              origin={56,-44})));
+
+        Conditions.ByConnector.BoundaryBus.Single.Sink caSink[cell.caFP.n_x,
+          cell.caFP.n_z](gas(
+            each inclO2=true,
+            each inclN2=true,
+            each inclH2O=true,
+            H2O(materialSet(y=fill(
+                          testConditions.p,
+                          cell.caFP.n_x,
+                          cell.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
+            N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* cell.caFP.subregions[
+                    :, cell.caFP.n_y, :].gas.H2O.v ./ cell.caFP.subregions[:,
+                    cell.caFP.n_y, :].gas.N2.v), redeclare function
+                materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
+
+            O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* cell.caFP.subregions[
+                    :, cell.caFP.n_y, :].gas.H2O.v ./ cell.caFP.subregions[:,
+                    cell.caFP.n_y, :].gas.O2.v), redeclare function
+                materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+            each liquid(H2O(materialSet(y=testConditions.p)), inclH2O=inclLiq))
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={56,4})));
+
+        TestConditions testConditions(
+          final zI=-sum(caBC.graphite.'e-'.boundary.Ndot),
+          electricalSpec=FCSys.Assemblies.Cells.Examples.Enumerations.ElectricalSpec.voltage,
+
+          redeclare replaceable Modelica.Blocks.Sources.Ramp electricalSet(
+            duration=600,
+            startTime=50,
+            height=-0.6*U.V,
+            offset=1.2*U.V)) annotation (Dialog, Placement(transformation(
+                extent={{10,10},{30,30}})));
+
+      protected
+        Q.Pressure p_ca_elec "Electronic pressure on the cathode";
+        Conditions.Router anRouter[cell.anFP.n_x, cell.n_z] annotation (Dialog,
+            Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=0,
+              origin={-48,-20})));
+        Conditions.Router caRouter[cell.anFP.n_x, cell.n_z] annotation (Dialog,
+            Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=0,
+              origin={48,-20})));
+
+      equation
+        testConditions.w = 'Datae-'.g(testConditions.T, 0) - 'Datae-'.g(
+          testConditions.T, p_ca_elec);
+
+        connect(cell.ca[1, :], caBC[1, :].boundary) annotation (Line(
+            points={{10,-20},{20,-20}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.an[1, :], anBC[1, :].boundary) annotation (Line(
+            points={{-10,-20},{-20,-20}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(anRouter.positive2, anSink.boundary) annotation (Line(
+            points={{-56,-16},{-56,0}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(anRouter.positive1, anSource.boundary) annotation (Line(
+            points={{-56,-24},{-56,-40}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.anPositive, anRouter.negative2) annotation (Line(
+            points={{-4,-10},{-4,0},{-40,0},{-40,-16}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.anNegative, anRouter.negative1) annotation (Line(
+            points={{-4,-30},{-4,-40},{-40,-40},{-40,-24}},
+            color={240,0,0},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(caSink.boundary, caRouter.negative2) annotation (Line(
+            points={{56,0},{56,-16}},
+            color={0,0,240},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(caSource.boundary, caRouter.negative1) annotation (Line(
+            points={{56,-40},{56,-24}},
+            color={0,0,240},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(caRouter.positive2, cell.caPositive) annotation (Line(
+            points={{40,-16},{40,0},{4,0},{4,-10}},
+            color={0,0,240},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(caRouter.positive1, cell.caNegative) annotation (Line(
+            points={{40,-24},{40,-40},{4,-40},{4,-30}},
+            color={0,0,240},
+            thickness=0.5,
+            smooth=Smooth.None));
+        annotation (
+          Documentation(info="<html>
+    <p>Any of the settings for the operating conditions can be time-varying expressions.</p>
+    
+    <p><i>Equivalent current</i> is the rate of supply of a reactant required to support the
+    given current
+    assuming the reactant is entirely consumed (complete utilization).</p>
+
+    <p>Assumptions:
+    <ol>
+    <li>The outer yz surface of each end plate is each uniform in temperature.</li>
+    <li>No heat is conducted from the rest of the cell hardware.</li>
+    <li>The electronic pressure is uniform across each end plate.</li>
+    <li>There is no shear force on the fluid at either outlet.</li>
+    <li>The pressure of each gas is uniform over the inlets.</li>
+    <li>The volumetric flow rate of the gases is equal at each outlet.</li>
+    <li>The outlet pressure is applied to the gas mixture by Dalton's law (additivity of pressure).</li>
+    <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
+    <li>There is no thermal conduction across either outlet.</li>
+    </ol></p>
+    </html>"),
+          Commands(file=
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStand.mos"
+              "Assemblies.Cells.Examples.TestStand.mos", file=
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStand-states.mos"
+              "Assemblies.Cells.Examples.TestStand-states.mos"),
+          experiment(
+            StopTime=650,
+            Tolerance=1e-006,
+            __Dymola_Algorithm="Dassl"),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},
+                  {80,40}}), graphics),
+          __Dymola_experimentSetupOutput);
+      end TestStandVoltage;
     end Examples;
 
     model Cell "Single-cell PEMFC"
@@ -714,7 +1019,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
     caCL.n_x,
     n_y,
     n_z);
-*/
+  */
 
     equation
       // Internal connections (between layers)
