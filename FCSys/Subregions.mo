@@ -142,7 +142,7 @@ package Subregions
             thickness=0.5,
             smooth=Smooth.None));
         annotation (
-          experiment(StopTime=30, Tolerance=1e-006),
+          experiment(StopTime=30),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.Reactions.HOR.mos"
               "Subregions.Examples.Reactions.HOR.mos"),
@@ -259,7 +259,7 @@ package Subregions
           Characteristics.N2.Gas.m*subregions[round(n_y/2)].gas.N2.rho
         "Expected pressure difference";
 
-      parameter Q.NumberAbsolute k=10 "Damping factor";
+      parameter Q.NumberAbsolute k=5 "Damping factor";
 
       inner Conditions.Environment environment(p=U.bar)
         annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
@@ -417,10 +417,7 @@ package Subregions
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(
-          StopTime=100,
-          Tolerance=1e-005,
-          __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=100, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.BinaryDiffusion.mos"
@@ -434,7 +431,7 @@ package Subregions
                   FCSys.Characteristics.H2.Gas.zeta()))), subregion2(gas(H2(
                 zeta=k*FCSys.Characteristics.H2.Gas.zeta()))));
       annotation (
-        experiment(StopTime=0.0001),
+        experiment(StopTime=5e-005),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.Echo.mos"
             "Subregions.Examples.Echo.mos"),
@@ -533,7 +530,7 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=100, Tolerance=1e-06),
+        experiment(StopTime=100, Tolerance=1e-005),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"
             "Subregions.Examples.ElectricalConduction.mos"),
@@ -557,7 +554,8 @@ package Subregions
     radiation&mdash;only conduction to the sides.</p>
     </html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics));
+                {100,100}}), graphics),
+        __Dymola_experimentSetupOutput);
     end ElectricalConduction;
 
     model InternalFlow "Internal, laminar flow of liquid water"
@@ -938,10 +936,7 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"
             "Subregions.Examples.ThermalConductionConvection.mos"),
-        experiment(
-          StopTime=500,
-          Tolerance=1e-005,
-          __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=500, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput);
 
     end ThermalConductionConvection;

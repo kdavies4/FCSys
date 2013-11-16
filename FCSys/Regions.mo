@@ -25,44 +25,30 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP
         annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
 
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
           each graphite(
+          'inclC+'=true,
           'incle-'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
           'e-'(
             materialSet(y=0),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,40})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[anFP.n_y, anFP.n_z]
-        (each graphite('incle-'=true, 'e-'(
-            materialSet(y=-zI),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T))), each gas(
+        (each gas(
           inclH2=true,
           inclH2O=true,
           H2(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-            materialSet(y=environment.p_dry),
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
+            materialSet(y=-zI/2),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
@@ -72,16 +58,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
 
             materialSet(y=environment.p_H2O),
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
-
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
-            thermalSet(y=0)))) annotation (Placement(transformation(
+            thermalSet(y=0))), each graphite('incle-'=true, 'e-'(materialSet(y=
+                  -zI), thermalSet(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,40})));
@@ -96,14 +78,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={-60,16})));
-
       Conditions.ByConnector.BoundaryBus.Single.Sink anSink[anFP.n_x, anFP.n_z]
-        (each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(materialSet(y=environment.p_dry)),
-          H2O(materialSet(y=environment.p_H2O)))) annotation (Placement(
-            transformation(
+        (gas(
+          each inclH2=true,
+          each inclH2O=true,
+          H2O(materialSet(y=fill(
+                      environment.p,
+                      anFP.n_x,
+                      anFP.n_z) - anSink.gas.H2.p)),
+          H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:,
+                  anFP.n_y, :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v),
+              redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,64})));
@@ -120,7 +107,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         duration=300,
         offset=U.mA)
         annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
-      Modelica.Blocks.Math.Gain stoichH2(k=1.2/2)
+      Modelica.Blocks.Math.Gain stoichH2(k=1.5/2)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
       Modelica.Blocks.Math.Gain stoichH2O(k=psi_H2O/psi_H2)
         annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
@@ -177,7 +164,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=500, Tolerance=1e-006),
+        experiment(StopTime=500),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.AnFP.mos"
             "Regions.Examples.AnFP.mos"),
         __Dymola_experimentSetupOutput,
@@ -202,6 +189,35 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
+      // Conditions
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anGDL.n_y, anGDL.n_z]
+        (each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
+          'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={-64,40})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[anGDL.n_y, anGDL.n_z]
+        (each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          'C+'(source(y=environment.T)),
+          'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T))))
+        annotation (Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={-16,40})));
+
       inner Conditions.Environment environment(
         analysis=true,
         T=333.15*U.K,
@@ -214,35 +230,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         height=100*U.A,
         offset=U.mA)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[anGDL.n_y, anGDL.n_z]
-        (each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T)),
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
-            extent={{10,10},{-10,-10}},
-            rotation=90,
-            origin={-16,40})));
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anGDL.n_y, anGDL.n_z]
-        (each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)),
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
-            origin={-64,40})));
 
     equation
       connect(anGDL.xPositive, caBC.boundary) annotation (Line(
@@ -275,15 +262,16 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
-          each gas(inclH2=true,H2(
+          each gas(inclH2=true, H2(
             materialSet(y=environment.p_dry),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
             thermalSet(y=environment.T))), each graphite(
-          'incle-'=true,
           'inclC+'=true,
+          'incle-'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
@@ -357,14 +345,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM PEM
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Source anBC[PEM.n_y, PEM.n_z](
           each ionomer(
           'inclSO3-'=true,
           'inclH+'=true,
           'H+'(materialSet(y=-currentSet.y), thermalSet(y=environment.T)),
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'SO3-'(source(y=environment.T)))) annotation (Placement(
+          'SO3-'(source(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
@@ -374,7 +361,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each ionomer(
           'inclSO3-'=true,
           'inclH+'=true,
-          'H+'(materialSet(y=U.atm)),
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'SO3-'(source(y=environment.T)))) annotation (Placement(
@@ -387,7 +373,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         analysis=true,
         T=333.15*U.K,
         p=U.from_kPag(48.3),
-        RH=0.8) "Environmental conditions"
+        RH=0.7) "Environmental conditions"
         annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 
       Modelica.Blocks.Sources.Ramp currentSet(
@@ -412,7 +398,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Documentation(info="<html><p>The protonic resistance is slightly higher than expected
   due solely to electrical resistance.  Electro-osmotic drag applies additional resistance to the migration of protons.</p>
   </html>"),
-        experiment(StopTime=30),
+        experiment(StopTime=30, Tolerance=1e-006),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.PEM.mos"
             "Regions.Examples.PEM.mos"),
         __Dymola_experimentSetupOutput);
@@ -432,32 +418,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
-        (each gas(
-          inclO2=true,
-          inclH2O=true,
-          O2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=environment.p_O2),
-            thermalSet(y=environment.T)),
-          H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=environment.p_H2O),
-            thermalSet(y=environment.T))), each graphite(
-          'incle-'=true,
-          'inclC+'=false,
-          'C+'(source(y=environment.T)),
-          'e-'(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=-currentSet.y),
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={44,40})));
-
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Source anBC[caCL.n_y, caCL.n_z]
         (each ionomer('inclH+'=true, 'H+'(
             redeclare function materialSpec =
@@ -467,6 +428,31 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-4,40})));
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
+        (each gas(
+          inclH2O=true,
+          inclO2=true,
+          H2O(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_H2O),
+            thermalSet(y=environment.T)),
+          O2(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_O2),
+            thermalSet(y=environment.T))), each graphite(
+          'inclC+'=false,
+          'incle-'=true,
+          'C+'(source(y=environment.T)),
+          'e-'(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=-currentSet.y),
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={44,40})));
 
       inner Conditions.Environment environment(
         analysis=true,
@@ -519,6 +505,33 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
 
+      // Conditions
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[caGDL.n_y, caGDL.n_z]
+        (each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
+          'e-'(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+              thermalSet(y=environment.T)))) annotation (Placement(
+            transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={16,40})));
+
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caGDL.n_y, caGDL.n_z]
+        (each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          'C+'(source(y=environment.T)),
+          'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T))))
+        annotation (Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={64,40})));
+
       inner Conditions.Environment environment(
         analysis=true,
         T=333.15*U.K,
@@ -531,36 +544,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         height=100*U.A,
         offset=U.mA)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caGDL.n_y, caGDL.n_z]
-        (each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T)),
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
-            extent={{10,10},{-10,-10}},
-            rotation=90,
-            origin={64,40})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[caGDL.n_y, caGDL.n_z]
-        (each graphite(
-          'inclC+'=true,
-          'incle-'=true,
-          'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)),
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
-            origin={16,40})));
 
     equation
       connect(anBC.boundary, caGDL.xNegative) annotation (Line(
@@ -574,7 +557,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=30, Tolerance=1e-007),
+        experiment(StopTime=30),
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.CaGDL.mos"
             "Regions.Examples.CaGDL.mos"),
         __Dymola_experimentSetupOutput,
@@ -604,32 +587,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caFP.n_y, caFP.n_z]
-        (each graphite(
-          'incle-'=true,
-          'e-'(materialSet(y=-zI),thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
-            extent={{10,10},{-10,-10}},
-            rotation=90,
-            origin={84,40})));
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[caFP.n_y, caFP.n_z](
-          each graphite('incle-'=true,'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T))), each gas(
-          inclO2=true,
+          each gas(
           inclH2O=true,
-          O2(materialSet(y=environment.p_O2)),
+          inclN2=true,
+          inclO2=true,
           H2O(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=-zI/2),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+          N2(
+            materialSet(y=environment.p*psi_N2),
             redeclare function afterSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
 
@@ -639,33 +614,91 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
+            thermalSet(y=environment.T)),
+          O2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=zI/4),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
+            thermalSet(y=environment.T))), each graphite('incle-'=true, 'e-'(
+            materialSet(y=0),
+            redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={36,40})));
 
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caFP.n_y, caFP.n_z]
+        (each gas(
+          inclH2O=true,
+          inclN2=true,
+          inclO2=true,
+          H2O(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            thermalSet(y=environment.T)),
+          N2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            thermalSet(y=environment.T)),
+          O2(
+            redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+            materialSet(y=0),
+            thermalSet(y=environment.T))), each graphite(
+          'inclC+'=true,
+          'incle-'=true,
+          'C+'(source(y=environment.T)),
+          'e-'(materialSet(y=-zI),thermalSet(y=environment.T)))) annotation (
+          Placement(transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={84,40})));
+
       Conditions.ByConnector.BoundaryBus.Single.Source caSource[caFP.n_x, caFP.n_z]
         (each gas(
-          inclO2=true,
-          inclN2=true,
           inclH2O=true,
-          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T)),
+          inclN2=true,
+          inclO2=true,
+          H2O(materialSet(y=-Ndot_H2O), thermalSet(y=environment.T)),
           N2(materialSet(y=-Ndot_N2), thermalSet(y=environment.T)),
-          H2O(materialSet(y=-Ndot_H2O), thermalSet(y=environment.T))))
+          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T))))
         annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,16})));
 
       Conditions.ByConnector.BoundaryBus.Single.Sink caSink[caFP.n_x, caFP.n_z]
-        (each gas(
-          inclO2=true,
-          inclN2=true,
-          inclH2O=true,
-          O2(materialSet(y=environment.p_O2)),
-          N2(materialSet(y=environment.p_dry - environment.p_O2)),
-          H2O(materialSet(y=environment.p_H2O)))) annotation (Placement(
-            transformation(
+        (gas(
+          each inclO2=true,
+          each inclN2=true,
+          each inclH2O=true,
+          H2O(materialSet(y=fill(
+                      environment.p,
+                      caFP.n_x,
+                      caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
+          N2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v)),
+
+          O2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v))))
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,64})));
@@ -682,12 +715,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
         duration=300,
         offset=U.mA)
         annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
-      Modelica.Blocks.Math.Gain stoichO2(k=1.6/4)
+      Modelica.Blocks.Math.Gain stoichO2(k=2/4)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
       Modelica.Blocks.Math.Gain stoichH2O(k=psi_H2O/psi_O2)
         annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
       Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
         annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
+
     protected
       Connectors.RealOutputInternal zI(unit="N/T") "Electrical current"
         annotation (Placement(transformation(extent={{-56,-30},{-36,-10}})));
@@ -698,6 +732,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{54,-30},{74,-10}})));
       Connectors.RealOutputInternal Ndot_N2(unit="N/T") "Rate of supply of N2"
         annotation (Placement(transformation(extent={{54,-70},{74,-50}})));
+
     equation
       connect(anBC.boundary, caFP.xNegative) annotation (Line(
           points={{40,40},{50,40}},
@@ -777,23 +812,30 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
 
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each gas(H2O(phi(each stateSelect=StateSelect.always)))))
+        subregions(gas(H2(each zeroX=true,consTransX=ConsTrans.steady), H2O(
+                each zeroX=true, consTransX=ConsTrans.steady)), ionomer(H2O(
+                each zeroX=false, consTransX=ConsTrans.dynamic))))
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
-      PEMs.PEM PEM(final L_y=L_y,final L_z=L_z)
+      PEMs.PEM PEM(
+        final L_y=L_y,
+        final L_z=L_z,
+        subregions(ionomer(H2O(each zeroX=false, consTransX=ConsTrans.dynamic))))
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-      CaCLs.CaCL caCL(final L_y=L_y,final L_z=L_z)
+      CaCLs.CaCL caCL(
+        final L_y=L_y,
+        final L_z=L_z,
+        subregions(gas(
+            N2(each zeroX=true,consTransX=ConsTrans.steady),
+            O2(each zeroX=true,consTransX=ConsTrans.steady),
+            H2O(each zeroX=true,consTransX=ConsTrans.steady)),ionomer(H2O(each
+                zeroX=false, consTransX=ConsTrans.dynamic))))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
 
-      Modelica.Blocks.Sources.Ramp currentSet(duration=300, height=100*U.A)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
           each gas(
           inclH2=true,
@@ -809,33 +851,26 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p_H2O),
             redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
-            thermalSet(y=0))), each graphite(
-          'incle-'=true,
+            thermalSet(y=environment.T))), each graphite(
           'inclC+'=true,
+          'incle-'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
-          'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
+          'e-'(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+              thermalSet(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-44,40})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
         (each gas(
-          inclO2=true,
           inclH2O=true,
-          O2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=environment.p_O2),
-            thermalSet(y=environment.T)),
+          inclO2=true,
           H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
@@ -843,9 +878,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function thermalSpec =
                 Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
-            thermalSet(y=0))), each graphite(
-          'incle-'=true,
+            thermalSet(y=0)),
+          O2(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_O2),
+            thermalSet(y=environment.T))), each graphite(
           'inclC+'=true,
+          'incle-'=true,
           'C+'(source(y=environment.T)),
           'e-'(
             redeclare function materialSpec =
@@ -855,6 +895,16 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,40})));
+
+      inner Conditions.Environment environment(
+        analysis=true,
+        T=333.15*U.K,
+        p=U.from_kPag(48.3),
+        RH=0.7) "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+
+      Modelica.Blocks.Sources.Ramp currentSet(duration=300, height=100*U.A)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -880,10 +930,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.CLtoCL.mos"
             "Regions.Examples.CLtoCL.mos"),
-        experiment(
-          StopTime=600,
-          Tolerance=1e-005,
-          __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=600, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
@@ -909,10 +956,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
 
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
@@ -927,12 +970,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(
-          graphite(each inclDL=true, 'e-Transfer'(each fromI=false)),
-          ionomer('H+'(each consTransX=ConsTrans.steady)),
-          each ORR('e-'(reaction(Ndot(stateSelect=StateSelect.always))))))
+        subregions(graphite(each inclDL=true, 'e-Transfer'(each fromI=false)),
+            each ORR('e-'(reaction(Ndot(stateSelect=StateSelect.always))))))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
 
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anCL.n_y, anCL.n_z](
           each gas(
           inclH2=true,
@@ -951,13 +993,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
             thermalSet(y=0))), each graphite(
-          'incle-'=true,
           'inclC+'=true,
+          'incle-'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
           'e-'(
-            materialSet(y=0),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
@@ -972,13 +1013,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[caCL.n_y, caCL.n_z]
         (each gas(
-          inclO2=true,
           inclH2O=true,
-          O2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=environment.p_O2),
-            thermalSet(y=environment.T)),
+          inclO2=true,
           H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
@@ -986,9 +1022,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function thermalSpec =
                 Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
-            thermalSet(y=0))), graphite(
-          each 'incle-'=true,
+            thermalSet(y=0)),
+          O2(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_O2),
+            thermalSet(y=environment.T))), graphite(
           each 'inclC+'=true,
+          each 'incle-'=true,
           each 'C+'(source(y=environment.T)),
           'e-'(
             redeclare each function materialSpec =
@@ -1007,9 +1048,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       Modelica.Blocks.Sources.Ramp voltageSet(
         duration=300,
-        offset=1.22527*U.V,
-        height=-0.7*U.V)
+        offset=1.19997*U.V,
+        height=-0.8*U.V)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      inner Conditions.Environment environment(
+        analysis=true,
+        T=333.15*U.K,
+        p=U.from_kPag(48.3),
+        RH=0.7) "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
           points={{-10,40},{-10,40}},
@@ -1037,7 +1084,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             "Regions.Examples.CLtoCLVoltage.mos"),
         experiment(
           StopTime=600,
-          Tolerance=1e-005,
+          Tolerance=1e-007,
           __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -1063,10 +1110,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
 
-      inner Conditions.Environment environment(analysis=true)
-        "Environmental conditions"
-        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
       AnGDLs.AnGDL anGDL(final L_y=L_y,final L_z=L_z)
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
@@ -1088,8 +1131,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       CaGDLs.CaGDL caGDL(final L_y=L_y,final L_z=L_z)
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
-      Modelica.Blocks.Sources.Ramp currentSet(height=100*U.A, duration=300)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      /*
+  Real states[:](each stateSelect=StateSelect.always) = {anGDL.subregions[1, 1,
+    1].gas.H2.boundaries[1, 2].Ndot,caGDL.subregions[1, 1, 1].gas.H2O.boundaries[
+    1, 1].Ndot,caGDL.subregions[1, 1, 1].gas.O2.boundaries[1, 1].Ndot};
+*/
+
+      // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anGDL.n_y, anGDL.n_z]
         (each gas(inclH2=true, H2(
             materialSet(y=environment.p_dry),
@@ -1097,30 +1146,23 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
             thermalSet(y=environment.T))), each graphite(
-          'incle-'=true,
           'inclC+'=true,
+          'incle-'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(source(y=environment.T)),
-          'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
+          'e-'(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)))) annotation (Placement(transformation(
+              thermalSet(y=environment.T)))) annotation (Placement(
+            transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-64,40})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[caGDL.n_y, caGDL.n_z]
         (each gas(
-          inclO2=true,
           inclH2O=true,
-          O2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.pressure,
-            materialSet(y=environment.p_O2),
-            thermalSet(y=environment.T)),
+          inclO2=true,
           H2O(
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
@@ -1128,9 +1170,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function thermalSpec =
                 Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
 
-            thermalSet(y=0))), each graphite(
-          'incle-'=true,
+            thermalSet(y=0)),
+          O2(
+            redeclare function materialSpec =
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
+            materialSet(y=environment.p_O2),
+            thermalSet(y=environment.T))), each graphite(
           'inclC+'=true,
+          'incle-'=true,
           'C+'(source(y=environment.T)),
           'e-'(
             redeclare function materialSpec =
@@ -1140,6 +1187,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,40})));
+
+      Modelica.Blocks.Sources.Ramp currentSet(height=100*U.A, duration=300)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      inner Conditions.Environment environment(
+        analysis=true,
+        T=333.15*U.K,
+        p=U.from_kPag(48.3),
+        RH=0.7) "Environmental conditions"
+        annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1175,10 +1231,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Commands(file="Resources/Scripts/Dymola/Regions.Examples.GDLtoGDL.mos"
             "Regions.Examples.GDLtoGDL.mos"),
-        experiment(
-          StopTime=600,
-          Tolerance=1e-005,
-          __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=600, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
@@ -1245,8 +1298,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
       // Conditions
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC1[1, anFP.n_z](each
-          gas(
+      Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
+          each gas(
           inclH2=true,
           inclH2O=true,
           H2(
@@ -1269,64 +1322,18 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function beforeSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
           each graphite(
-          'incle-'=true,
-          'e-'(
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)),
           'inclC+'=true,
+          'incle-'=true,
           redeclare
             FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
+            'C+'(source(y=environment.T)),
+          'e-'(redeclare function thermalSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+              thermalSet(y=environment.T)))) annotation (Placement(
             transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
-            origin={-84,54})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Sink anBC2[anFP.n_y - 1, anFP.n_z]
-        (each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-          H2O(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-            redeclare function beforeSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
-          each graphite(
-          'incle-'=true,
-          'e-'(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
-
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) if anFP.n_y > 1 annotation (
-          Placement(transformation(
-            extent={{10,-10},{-10,10}},
-            rotation=90,
-            origin={-84,26})));
+            origin={-84,40})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source anSource[anFP.n_x, anFP.n_z]
         (each gas(
@@ -1346,104 +1353,72 @@ package Regions "3D arrays of discrete, interconnected subregions"
                       environment.p,
                       anFP.n_x,
                       anFP.n_z) - anSink.gas.H2.p)),
-          H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:,
-                  anFP.n_y, :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v),
-              redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+          H2(redeclare each function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:,
+                  anFP.n_y, :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v))),
           each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,64})));
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC1[1, caFP.n_z](each
-          gas(
+      Conditions.ByConnector.BoundaryBus.Single.Source caBC[caFP.n_y, caFP.n_z]
+        (each gas(
           inclH2O=true,
+          inclN2=true,
+          inclO2=true,
           H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclN2=true,
           N2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclO2=true,
           O2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0))),each graphite(
+          'inclC+'=true,
           'incle-'=true,
+          'C+'(source(y=environment.T)),
           'e-'(
             redeclare function materialSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=-zI),
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
-            origin={84,54})));
-
-      Conditions.ByConnector.BoundaryBus.Single.Source caBC2[caFP.n_y - 1, caFP.n_z]
-        (each gas(
-          inclH2O=true,
-          H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
-              thermalSet(y=0)),
-          inclN2=true,
-          N2(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
-              thermalSet(y=0)),
-          inclO2=true,
-          O2(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
-              thermalSet(y=0))),each graphite(
-          'incle-'=true,
-          'e-'(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-            materialSet(y=0),
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) if caFP.n_y > 1 annotation (
-          Placement(transformation(
-            extent={{10,10},{-10,-10}},
-            rotation=90,
-            origin={84,26})));
+            origin={84,40})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source caSource[caFP.n_x, caFP.n_z]
         (each gas(
-          inclO2=true,
-          inclN2=true,
           inclH2O=true,
-          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T)),
+          inclN2=true,
+          inclO2=true,
+          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T)),
           N2(materialSet(y=-Ndot_N2), thermalSet(y=environment.T)),
-          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T))))
+          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T))))
         annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,16})));
+
       Conditions.ByConnector.BoundaryBus.Single.Sink caSink[caFP.n_x, caFP.n_z]
         (gas(
-          each inclO2=true,
-          each inclN2=true,
           each inclH2O=true,
+          each inclN2=true,
+          each inclO2=true,
           H2O(materialSet(y=fill(
                       environment.p,
                       caFP.n_x,
                       caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
-          N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
-                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v),
-              redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
+          N2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v)),
 
-          O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
-                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v),
-              redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+          O2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v))),
           each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -1453,13 +1428,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Modelica.Blocks.Sources.Ramp currentSet(
         offset=U.mA,
         height=100*U.A,
+        startTime=50,
         duration=600)
         annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
-      Modelica.Blocks.Math.Gain stoichH2(k=1.2/2)
+      Modelica.Blocks.Math.Gain stoichH2(k=1.5/2)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
       Modelica.Blocks.Math.Gain anStoichH2O(k=psi_H2O/psi_H2)
         annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-      Modelica.Blocks.Math.Gain stoichO2(k=1.6/4)
+      Modelica.Blocks.Math.Gain stoichO2(k=2/4)
         annotation (Placement(transformation(extent={{-30,-90},{-10,-70}})));
       Modelica.Blocks.Math.Gain caStoichH2O(k=psi_H2O/psi_O2)
         annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
@@ -1485,17 +1461,10 @@ package Regions "3D arrays of discrete, interconnected subregions"
       inner Conditions.Environment environment(
         a={0,0,0},
         analysis=true,
-        RH=0.8) "Environmental conditions"
+        T=333.15*U.K,
+        p=U.from_kPag(48.3),
+        RH=0.7) "Environmental conditions"
         annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-
-      Real states[:](each stateSelect=StateSelect.always) = {anFP.subregions[1,
-        2, 1].gas.H2.phi[2],caFP.subregions[1, 2, 1].gas.H2O.phi[2],caFP.subregions[
-        1, 2, 1].gas.O2.phi[2],anFP.subregions[1, 2, 1].graphite.T,anFP.subregions[
-        1, 1, 1].graphite.T,anGDL.subregions[1, 1, 1].graphite.T,anGDL.subregions[
-        1, 2, 1].graphite.T,caFP.subregions[1, 1, 1].graphite.T,caFP.subregions[
-        1, 2, 1].graphite.T,caGDL.subregions[1, 1, 1].graphite.T,caGDL.subregions[
-        1, 2, 1].graphite.T,caCL.subregions[1, 2, 1].ionomer.'H+'.phi[1],caCL.subregions[
-        1, 1, 1].ionomer.'H+'.phi[1]} if anFP.n_y > 1 "Force state select";
 
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1518,14 +1487,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
-      connect(anBC1[1, :].boundary, anFP.xNegative[1, :]) annotation (Line(
-          points={{-80,54},{-76,54},{-76,40},{-70,40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anBC2.boundary, anFP.xNegative[2:end, :]) annotation (Line(
-          points={{-80,26},{-76,26},{-76,40},{-70,40}},
+      connect(anBC.boundary, anFP.xNegative) annotation (Line(
+          points={{-80,40},{-70,40}},
           color={127,127,127},
           pattern=LinePattern.None,
           thickness=0.5,
@@ -1560,13 +1523,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           points={{51,-20},{64,-20}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(caBC1[1, :].boundary, caFP.xPositive[1, :]) annotation (Line(
-          points={{80,54},{76,54},{76,40},{70,40}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(caBC2.boundary, caFP.xPositive[2:end, :]) annotation (Line(
-          points={{80,26},{76,26},{76,40},{70,40}},
+      connect(caBC.boundary, caFP.xPositive) annotation (Line(
+          points={{80,40},{70,40}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -1620,8 +1578,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
               "Resources/Scripts/Dymola/Regions.Examples.FPtoFP-states.mos"
             "Regions.Examples.FPtoFP-states.mos"),
         experiment(
-          StopTime=600,
-          Tolerance=1e-005,
+          StopTime=650,
+          Tolerance=1e-006,
           __Dymola_Algorithm="Dassl"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},
                 {100,100}}), graphics),
@@ -1631,6 +1589,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
     model FPtoFPVoltage
       "Test one flow plate to the other, with prescribed voltage"
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       parameter Boolean inclLiq=false "Include liquid H2O";
       parameter Q.NumberAbsolute psi_H2O=environment.psi_H2O
@@ -1668,7 +1627,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq)))
+        subregions(graphite(each inclDL=false, 'e-Transfer'(each fromI=true)),
+            each liquid(inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
       PEMs.PEM PEM(
         final L_y=L_y,
@@ -1679,9 +1639,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         final L_y=L_y,
         final L_z=L_z,
         subregions(
-          graphite(each inclDL=true, 'e-Transfer'(each fromI=false)),
+          graphite(each inclDL=false, 'e-Transfer'(each fromI=true)),
           each liquid(inclH2O=inclLiq),
-          each ORR('e-'(reaction(Ndot(stateSelect=StateSelect.always))))))
+          each ORR('e-'(reaction(Ndot(stateSelect=StateSelect.default))))))
         annotation (Placement(transformation(extent={{10,30},{30,50}})));
       CaGDLs.CaGDL caGDL(
         final L_y=L_y,
@@ -1691,7 +1651,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(each liquid(inclH2O=inclLiq)))
+        subregions(graphite('e-'(each consTransY=ConsTrans.steady)),each liquid(
+              inclH2O=inclLiq)))
         annotation (Placement(transformation(extent={{50,30},{70,50}})));
 
       // Conditions
@@ -1719,18 +1680,20 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function beforeSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
           each graphite(
+          'inclC+'=true,
           'incle-'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
           'e-'(
-            materialSet(y=0),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
+            thermalSet(y=environment.T),
+            redeclare function materialMeas =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.potential
+                (redeclare package Data = FCSys.Characteristics.'e-'.Graphite))))
+        annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,54})));
@@ -1759,20 +1722,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function beforeSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
           each graphite(
+          'inclC+'=true,
           'incle-'=true,
+          redeclare
+            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+            'C+'(source(y=environment.T)),
           'e-'(
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=0),
             redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
 
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) if anFP.n_y > 1 annotation (
+            thermalSet(y=environment.T)))) if anFP.n_y > 1 annotation (
           Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
@@ -1792,74 +1754,75 @@ package Regions "3D arrays of discrete, interconnected subregions"
         (gas(
           each inclH2=true,
           each inclH2O=true,
-          H2O(materialSet(y=fill(
-                      environment.p,
-                      anFP.n_x,
-                      anFP.n_z) - anSink.gas.H2.p)),
           H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:,
                   anFP.n_y, :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v),
               redeclare each function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
-          each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
-        annotation (Placement(transformation(
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
+
+          H2O(materialSet(y=fill(
+                      environment.p,
+                      anFP.n_x,
+                      anFP.n_z) - anSink.gas.H2.p))), each liquid(H2O(
+              materialSet(y=environment.p)), inclH2O=inclLiq)) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-60,64})));
+
       Conditions.ByConnector.BoundaryBus.Single.Source caBC1[1, caFP.n_z](each
           gas(
           inclH2O=true,
+          inclN2=true,
+          inclO2=true,
           H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclN2=true,
           N2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclO2=true,
           O2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
-              thermalSet(y=0))),each graphite(
-          'incle-'=true,
-          'e-'(
-            redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
-            materialSet(y=pressSet.y),
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) annotation (Placement(
-            transformation(
+              thermalSet(y=0))), graphite(
+          each 'inclC+'=true,
+          each 'incle-'=true,
+          each 'C+'(source(y=environment.T)),
+          'e-'(each materialSet(y=-zI), each thermalSet(y=environment.T))))
+        annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
             origin={84,54})));
-
+      /*
+      'e-'(
+        redeclare each function materialSpec = 
+            FCSys.Conditions.ByConnector.Boundary.Single.Material.potential (
+              redeclare package Data = FCSys.Characteristics.'e-'.Graphite),
+        materialSet(y=anBC1.graphite.'e-'.materialOut.y + fill(
+              -voltageSet.y,
+              1,
+              caCL.n_z)),
+              */
       Conditions.ByConnector.BoundaryBus.Single.Source caBC2[caFP.n_y - 1, caFP.n_z]
         (each gas(
           inclH2O=true,
+          inclN2=true,
+          inclO2=true,
           H2O(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclN2=true,
           N2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0)),
-          inclO2=true,
           O2(redeclare function thermalSpec =
                 FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
               thermalSet(y=0))),each graphite(
+          'inclC+'=true,
           'incle-'=true,
+          'C+'(source(y=environment.T)),
           'e-'(
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=0),
-            thermalSet(y=environment.T)),
-          'inclC+'=true,
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-            'C+'(source(y=environment.T)))) if caFP.n_y > 1 annotation (
+            thermalSet(y=environment.T)))) if caFP.n_y > 1 annotation (
           Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
@@ -1867,34 +1830,35 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       Conditions.ByConnector.BoundaryBus.Single.Source caSource[caFP.n_x, caFP.n_z]
         (each gas(
-          inclO2=true,
-          inclN2=true,
           inclH2O=true,
-          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T)),
+          inclN2=true,
+          inclO2=true,
+          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T)),
           N2(materialSet(y=-Ndot_N2), thermalSet(y=environment.T)),
-          H2O(materialSet(y=-Ndot_H2O_ca), thermalSet(y=environment.T))))
+          O2(materialSet(y=-Ndot_O2), thermalSet(y=environment.T))))
         annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=180,
             origin={60,16})));
+
       Conditions.ByConnector.BoundaryBus.Single.Sink caSink[caFP.n_x, caFP.n_z]
         (gas(
-          each inclO2=true,
-          each inclN2=true,
           each inclH2O=true,
+          each inclN2=true,
+          each inclO2=true,
           H2O(materialSet(y=fill(
                       environment.p,
                       caFP.n_x,
                       caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
-          N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
-                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v),
-              redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current),
+          N2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v)),
 
-          O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
-                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v),
-              redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.current)),
+          O2(redeclare function materialSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+              materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:,
+                  caFP.n_y, :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v))),
           each liquid(H2O(materialSet(y=environment.p)), inclH2O=inclLiq))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -1904,18 +1868,26 @@ package Regions "3D arrays of discrete, interconnected subregions"
       Modelica.Blocks.Sources.Ramp currentSet(
         offset=U.mA,
         height=100*U.A,
-        duration=600)
+        duration=600,
+        startTime=0)
         annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
-      Modelica.Blocks.Math.Gain stoichH2(k=1.2/2)
+      Modelica.Blocks.Math.Gain stoichH2(k=1.5/2)
         annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
       Modelica.Blocks.Math.Gain anStoichH2O(k=psi_H2O/psi_H2)
         annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-      Modelica.Blocks.Math.Gain stoichO2(k=1.6/4)
+      Modelica.Blocks.Math.Gain stoichO2(k=2/4)
         annotation (Placement(transformation(extent={{-30,-90},{-10,-70}})));
       Modelica.Blocks.Math.Gain caStoichH2O(k=psi_H2O/psi_O2)
         annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
       Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
         annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
+
+      Modelica.Blocks.Sources.Ramp voltageSet(
+        height=-0.6*U.V,
+        duration=600,
+        offset=1.19997*U.V,
+        startTime=0)
+        annotation (Placement(transformation(extent={{-80,-70},{-60,-50}})));
 
     protected
       Connectors.RealOutputInternal Ndot_H2O_an(unit="N/T")
@@ -1936,27 +1908,37 @@ package Regions "3D arrays of discrete, interconnected subregions"
       inner Conditions.Environment environment(
         a={0,0,0},
         analysis=true,
-        RH=0.8) "Environmental conditions"
+        T=333.15*U.K,
+        p=U.from_kPag(48.3),
+        RH=0.7) "Environmental conditions"
         annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 
-      Real states[:](each stateSelect=StateSelect.always) = {anFP.subregions[1,
-        2, 1].gas.H2.phi[2],caFP.subregions[1, 2, 1].gas.H2O.phi[2],caFP.subregions[
-        1, 2, 1].gas.O2.phi[2],anFP.subregions[1, 2, 1].graphite.T,anFP.subregions[
-        1, 1, 1].graphite.T,anGDL.subregions[1, 1, 1].graphite.T,anGDL.subregions[
-        1, 2, 1].graphite.T,caFP.subregions[1, 1, 1].graphite.T,caFP.subregions[
-        1, 2, 1].graphite.T,caGDL.subregions[1, 1, 1].graphite.T,caGDL.subregions[
-        1, 2, 1].graphite.T,caCL.subregions[1, 2, 1].ionomer.'H+'.phi[1],caCL.subregions[
-        1, 1, 1].ionomer.'H+'.phi[1]} if anFP.n_y > 1 "Force state select";
+      /*
+  Real states[:](each stateSelect=StateSelect.always) = {caFP.subregions[1, 1, 1].gas.O2.boundaries[
+    2, 2].Ndot,caFP.subregions[1, 1, 1].gas.H2O.boundaries[2, 2].Ndot,anFP.subregions[
+    1, 1, 1].gas.H2.boundaries[2, 2].Ndot} if anFP.n_y > 1 "Force state select";
+  */
 
-    public
-      Modelica.Blocks.Sources.Ramp pressSet(
-        height=1134270000.0,
-        duration=600,
-        offset=-2179410000.0,
-        startTime=50)
-        annotation (Placement(transformation(extent={{-132,-72},{-112,-52}})));
+      Real states[:](each stateSelect=StateSelect.always) = {caFP.subregions[1,
+        1, 1].gas.O2.boundaries[2, 2].Ndot,caFP.subregions[1, 1, 1].gas.H2O.boundaries[
+        2, 2].Ndot,anFP.subregions[1, 1, 1].gas.H2.boundaries[2, 2].Ndot,caCL.subregions[
+        1, 2, 1].ORR.'e-'.reaction.Ndot} if anFP.n_y > 1 "Force state select";
+
     initial equation
-      der(caCL.subregions[1, 1, 1].graphite.doubleLayer.w) = 0;
+      /* **
+  der(caCL.subregions[1, 1, 1].graphite.doubleLayer.w) = 0;
+  der(caCL.subregions[1, 2, 1].graphite.doubleLayer.w) = 0;
+  anCL.subregions[1, 1, 1].graphite.'e-Transfer'.I = 0;
+  anCL.subregions[1, 2, 1].graphite.'e-Transfer'.I = 0;
+  der(anCL.subregions[1, 1, 1].graphite.'e-Transfer'.I) = 0;
+  der(anCL.subregions[1, 2, 1].graphite.'e-Transfer'.I) = 0;
+    caCL.subregions[1, 1, 1].graphite.'e-Transfer'.I = 0;
+  caCL.subregions[1, 2, 1].graphite.'e-Transfer'.I = 0;
+  der(caCL.subregions[1, 1, 1].graphite.'e-Transfer'.I) = 0;
+  der(caCL.subregions[1, 2, 1].graphite.'e-Transfer'.I) = 0;
+    PEM.subregions[1, 1, 1].ionomer.'H+'.I[1] = U.mA;
+  PEM.subregions[1, 2, 1].ionomer.'H+'.I[1] = U.mA;
+*/
 
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1985,6 +1967,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           pattern=LinePattern.None,
           thickness=0.5,
           smooth=Smooth.None));
+
       connect(anBC2.boundary, anFP.xNegative[2:end, :]) annotation (Line(
           points={{-80,26},{-76,26},{-76,40},{-70,40}},
           color={127,127,127},
@@ -2078,7 +2061,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (
         Commands(file=
               "Resources/Scripts/Dymola/Regions.Examples.FPtoFPVoltage.mos"
-            "Regions.Examples.FPtoFPVoltage.mos"),
+            "Regions.Examples.FPtoFPVoltage.mos", file=
+              "Resources/Scripts/Dymola/Regions.Examples.FPtoFPVoltage-states.mos"
+            "Regions.Examples.FPtoFPVoltage-states.mos"),
         experiment(
           StopTime=600,
           Tolerance=1e-006,
@@ -2361,10 +2346,16 @@ text layer of this model.</p>
               k=fill(epsilon^(-0.5), 3),
               inclH2=true,
               inclH2O=true,
-              H2(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false)),
-              H2O(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false))),
+              H2(
+                upstreamX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.always, each fixed=false)),
+              H2O(
+                upstreamX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.always, each fixed=false))),
             graphite(
               k=fill((1 - epsilon)^(-0.5), 3),
               'inclC+'=true,
@@ -2710,9 +2701,17 @@ that reference may be outdated).
               inclH2=true,
               inclH2O=true,
               T(stateSelect=StateSelect.always),
-              H2(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false)),
-              H2O(upstreamX=false)),
+              H2(
+                upstreamX=false,
+                zeroX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.default, each fixed=false)),
+              H2O(
+                upstreamX=false,
+                zeroX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0)),
             graphite(
               k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclC+'=true,
@@ -3166,17 +3165,29 @@ the z axis extends across the width of the channel.</p>
               inclN2=true,
               inclO2=true,
               T(stateSelect=StateSelect.always),
-              H2O(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false)),
-              O2(upstreamX=false, I(each stateSelect=StateSelect.always, each
-                    fixed=false)),
-              N2(upstreamX=false)),
+              H2O(
+                upstreamX=false,
+                zeroX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.default, each fixed=false)),
+              O2(
+                upstreamX=false,
+                zeroX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                I(each stateSelect=StateSelect.default, each fixed=false)),
+              N2(
+                upstreamX=false,
+                zeroX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0)),
             graphite(
               k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclC+'=true,
               'incle-'=true,
-              T(stateSelect=StateSelect.always),
               'incle-Transfer'=true,
+              T(stateSelect=StateSelect.always),
               'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5, epsilon=
                     0.5*(1 - epsilon)),
               'e-'(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5),
@@ -3400,12 +3411,21 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               inclH2O=true,
               inclN2=true,
               inclO2=true,
-              H2O(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false)),
-              N2(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false)),
-              O2(upstreamX=false, phi(each stateSelect=StateSelect.always,
-                    each fixed=false))),
+              H2O(
+                upstreamX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.always, each fixed=false)),
+              N2(
+                upstreamX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.always, each fixed=false)),
+              O2(
+                upstreamX=false,
+                consTransX=ConsTrans.steady,
+                final zeta=0,
+                phi(each stateSelect=StateSelect.always, each fixed=false))),
             graphite(
               k=fill((1 - epsilon)^(-0.5), 3),
               'inclC+'=true,

@@ -7135,7 +7135,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             "Thermodynamics"));
     parameter Q.NumberAbsolute RH(
       displayUnit="%",
-      max=1) = 0.6 "Relative humidity"
+      max=1) = 0.5 "Relative humidity"
       annotation (Dialog(group="Thermodynamics"));
     parameter Q.NumberAbsolute psi_O2_dry(
       final max=1,

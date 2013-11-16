@@ -190,10 +190,14 @@ package Phases "Mixtures of species"
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
     // Aliases
-    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.trans.phi
-      if n_spec > 0 and oneVelocity "Velocity";
-    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.therm.T if n_spec
-       > 0 and oneTemperature "Temperature";
+    Q.Velocity phi[n_trans](
+      each nominal=U.cm/U.s,
+      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
+       and oneVelocity "Velocity";
+    Q.TemperatureAbsolute T(
+      nominal=300*U.K,
+      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
+      oneTemperature "Temperature";
     // These make the selected states more readable.
 
   protected
@@ -466,7 +470,6 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
@@ -547,10 +550,14 @@ package Phases "Mixtures of species"
         compact=true), choices(__Dymola_checkBox=true));
 
     // Aliases
-    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.trans.phi
-      if n_spec > 0 and oneVelocity "Velocity";
-    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.therm.T if n_spec
-       > 0 and oneTemperature "Temperature";
+    Q.Velocity phi[n_trans](
+      each nominal=U.cm/U.s,
+      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
+       and oneVelocity "Velocity";
+    Q.TemperatureAbsolute T(
+      nominal=300*U.K,
+      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
+      oneTemperature "Temperature";
     // These make the selected states more readable.
 
     Chemistry.Electrochemistry.ElectronTransfer 'e-Transfer'(redeclare
@@ -947,10 +954,14 @@ package Phases "Mixtures of species"
               {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
 
     // Aliases
-    Q.Velocity phi[n_trans](each stateSelect=StateSelect.prefer) = direct.trans.phi
-      if n_spec > 0 and oneVelocity "Velocity";
-    Q.Temperature T(stateSelect=StateSelect.prefer) = direct.therm.T if n_spec
-       > 0 and oneTemperature "Temperature";
+    Q.Velocity phi[n_trans](
+      each nominal=U.cm/U.s,
+      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
+       and oneVelocity "Velocity";
+    Q.TemperatureAbsolute T(
+      nominal=300*U.K,
+      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
+      oneTemperature "Temperature";
     // These make the selected states more readable.
 
   protected
@@ -1420,58 +1431,50 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Ellipse(
-            extent={{-40,100},{40,20}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{20,-4},{100,-84}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{-100,-4},{-20,-84}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Polygon(
-            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
-                {60,-84}},
-            pattern=LinePattern.None,
-            fillPattern=FillPattern.Sphere,
-            smooth=Smooth.None,
-            fillColor={225,225,225},
-            lineColor={0,0,0}),
-          Line(
-            points={{-60,-84.1},{60,-84.1}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{34.5,80},{94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{-34.5,80},{-94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              100}}), graphics={Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+              -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),Line(
+              points={{-60,-84.1},{60,-84.1}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(graphics));
   end PartialPhase;
 

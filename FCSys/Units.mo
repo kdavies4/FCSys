@@ -735,11 +735,12 @@ package Units "Constants and units of physical measure"
         -atm/kPa) "Pressure in kPag";
 
     print("Done.");
-    annotation (Documentation(info="<html><p>This has no inputs or outputs.
+    annotation (Documentation(info="<html><p>This function has no inputs or outputs.  It is essentially a script.
 The <code>defineDefaultDisplayUnit</code> and <code>defineUnitConversion</code> functions
-used by this function are not defined in the Modelica language (as of version 3.3) but are
-recognized by Dymola.
-For more information, please see the documentation for the
+used here are not defined in the Modelica language (as of version 3.3) but are
+recognized by Dymola.</p>
+
+<p>For more information, please see the documentation for the
 <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
   end setup;
 
@@ -941,12 +942,12 @@ encompass other systems of units.</p>
     end Hartree;
 
     record LH
-      "<html>Base constants and units for Lorentz-Heaviside units (&mu;<sup>0</sub> = &epsilon;<sup>0</sub> = 1)</html>"
+      "<html>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</html>"
       extends Base(final c=1,final R_K=25812.8074434/(4*pi*299792458*1e-7));
       annotation (Documentation(info="<html><p>Lorentz-Heaviside systems of units impose:
   <ul>
-  <li>&mu;<sup>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
-  <li>&epsilon;<sup>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
+  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
+  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>&nbsp;<i>c</i> = 1/(2&alpha;)</li>
   </ul>
   Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
 
@@ -1013,7 +1014,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>A &asymp; 1.03643e-5</li>
   <li>K &asymp; 8.31446</li>
@@ -1035,7 +1036,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>A &asymp; 1.03643e-5</li>
   <li>m &asymp; 0.346803</li>
@@ -1056,7 +1057,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>A &asymp; 3.59436e-6</li>
   <li>s &asymp; 2.88348</li>
@@ -1077,7 +1078,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>K &asymp; 8.61733e-5</li>
   <li>mol &asymp; 96485.3</li>
@@ -1098,7 +1099,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>K &asymp; 7.74028e10</li>
   <li>s &asymp; 1.03643e-5</li>
@@ -1119,7 +1120,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>m &asymp; 107.724</li>
   <li>mol &asymp; 96485.3</li>
@@ -1140,7 +1141,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>m &asymp; 3.59436e-6</li>
   <li>s &asymp; 1.03643e-5</li>
@@ -1161,7 +1162,7 @@ encompass other systems of units.</p>
         final k_J=483597.870e9*sqrt(S*s)/m,
         final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
-  \"FCSys/Resources/unit-systems.cdf\"):
+  <a href=\"modelica://FCSys/Resources/unit-systems.cdf\">Resources/unit-systems.cdf</a>):
   <ul>
   <li>mol &asymp; 4261.73</li>
   <li>s &asymp; 0.0441697</li>
@@ -1219,7 +1220,7 @@ encompass other systems of units.</p>
       // value.  The gas constant isn't adjustable because the equations of FCSys
       // require that it's one, which means that temperature is considered to
       // be a potential.
-      annotation (Documentation(info="<html><p>For more information, please see the notes in the Modelica code and the documentation of the
+      annotation (Documentation(info="<html><p>Please see the notes in the Modelica code and the documentation of the
   <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
@@ -1231,7 +1232,7 @@ encompass other systems of units.</p>
   generally do not.</p>
 
   <p>Some natural systems of units
-  are not compatible with <a href=\"modelica://FCSys\">FCys</a>.
+  are not compatible with <a href=\"modelica://FCSys\">FCSys</a>.
   Since the Faraday and gas constants
   are both normalized, it follows that <i>k</i><sub>B</sub> = <i>q</i>.  This is not
   the case for the Planck, Rydberg, and Natural systems of units
@@ -1240,7 +1241,7 @@ encompass other systems of units.</p>
   <p>The quasi-SI
   sets in this package are named by listing (in alphabetical order) the two units that are
   <i>not</i> normalized for the sake of setting the Faraday and gas constants equal to one.
-  There are eight possible sets of this type (<a href=\"modelica://FCSys.Units.Bases.AK\">AK</a>,
+  There are eight possible sets of this type (<a href=\"modelica://FCSys.Units.Bases.SIAK\">SIAK</a>,
   <a href=\"modelica://FCSys.Units.Bases.SIAm\">SIAm</a>,
   <a href=\"modelica://FCSys.Units.Bases.SIAs\">SIAs</a>,
   <a href=\"modelica://FCSys.Units.Bases.SIKmol\">SIKmol</a>,
@@ -1255,7 +1256,8 @@ encompass other systems of units.</p>
 
   end Bases;
 
-  function from_degC "Convert from temperature in degree Celsius"
+  function from_degC
+    "Convert from temperature in degree Celsius to temperature as a quantity"
     extends Modelica.SIunits.Icons.Conversion;
 
     input Real T_degC "Temperature in degree Celsius";
@@ -1266,7 +1268,8 @@ encompass other systems of units.</p>
     annotation (Inline=true, inverse(T_degC=FCSys.Units.to_degC(T)));
   end from_degC;
 
-  function to_degC "Convert to temperature in degree Celsius"
+  function to_degC
+    "Convert from temperature as a quantity to temperature in degree Celsius"
     extends Modelica.SIunits.Icons.Conversion;
 
     input Q.TemperatureAbsolute T "Thermodynamic temperature";
@@ -1277,7 +1280,8 @@ encompass other systems of units.</p>
     annotation (Inline=true, inverse(T=FCSys.Units.from_degC(T_degC)));
   end to_degC;
 
-  function from_kPag "Convert from gauge pressure in kilopascals"
+  function from_kPag
+    "Convert from gauge pressure in kilopascals to absolute pressure as a quantity"
     extends Modelica.SIunits.Icons.Conversion;
 
     input Real p_kPag "Gauge pressure in kilopascals";
@@ -1288,7 +1292,8 @@ encompass other systems of units.</p>
     annotation (Inline=true, inverse(p_kPag=FCSys.Units.to_kPag(p)));
   end from_kPag;
 
-  function to_kPag "Convert to gauge pressure in kilopascals"
+  function to_kPag
+    "Convert from absolute pressure as a quantity to gauge pressure in kilopascals"
     extends Modelica.SIunits.Icons.Conversion;
 
     input Q.PressureAbsolute p "Absolute pressure";
@@ -1309,11 +1314,18 @@ encompass other systems of units.</p>
   // Base physical constants and units
   // ------------------------------------------------------------------------
 
-  replaceable constant Bases.ScaledFC base constrainedby Bases.Base
+  replaceable constant Bases.SImols base constrainedby Bases.Base
     "Scalable base constants and units";
   // Note:  The base constants and units may be replaced to suit the scale
   // of the physical system.
-
+  // 2013/11/16:  The following systems result in a smooth temperature trend
+  // in FCSys.Regions.Examples.AnGDL with a tolerance of 0.0001 in Dymola
+  // 2014:
+  //   Gaussian, LH, Stoney, SIAK, SIKmol, SIKs, SImmol, SIms, SImols
+  // Of these, SImols simulates the best (fewest solver warnings with
+  // tolerance of 0.0001) with FCSys.Subregions.Examples.BinaryDiffusion.
+  // These require a tighter tolerance to achieve the same smoothness:
+  //   Hartree, ScaledFC, SIAm, SIAs, Base
   final constant Q.Angle rad=base.rad "radian";
   final constant Q.Wavenumber R_inf=base.R_inf
     "<html>Rydberg constant (<i>R</i><sub>&infin;</sub>)</html>";
@@ -1496,7 +1508,7 @@ encompass other systems of units.</p>
   final constant Q.ConductanceElectrical G_0=2/R_K
     "<html>conductance quantum (<i>G</i><sub>0</sub>)</html>";
   final constant Q.MagneticFlux Phi_0=1/k_J
-    "<html>magnetic flux quantum (&Phi;<sup>0</sub>)</html>";
+    "<html>magnetic flux quantum (&Phi;<sub>0</sub>)</html>";
   final constant Q.Amount q=G_0*Phi_0 "elementary charge";
   final constant Q.MomentumRotational h=2*q*Phi_0 "Planck constant";
   // The Planck constant over 2*pi (hbar) isn't included as a unique
@@ -1636,11 +1648,11 @@ In general, a unit may be the product of powers of other units, whether they are
 units derived from the base units in the same manner.</p>
 
 <p>In Modelica, a physical quantity is generally expressed as an instance of the <code>Real</code>
-type.  Its <code>value</code> attribute is typically the number associated with the value of the
-quantity (not the value of the quantity, as will be seen).  The <code>unit</code> attribute is a
-string that describes the unit by which the value of the quantity is divided to arrive at the
+type.  Its <code>value</code> attribute is typically a number associated with the value of the
+quantity (not the value of the quantity directly).  The <code>unit</code> attribute is a
+string that describes the unit by which the value of the quantity has been divided to arrive at the
 number.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The <code>displayUnit</code> attribute (also
-a string) describes the unit by which the value should be divided to arrive at the number as it
+a string) describes the unit by which the value of the quantity should be divided to arrive at the number as it
 is entered by or presented to the user.  The <code>Real</code> type contains other attributes as
 well, including <code>quantity</code> string.</p>
 
@@ -1648,65 +1660,72 @@ well, including <code>quantity</code> string.</p>
 extend the <code>Real</code> type.  The type definitions modify the
 <code>unit</code>, <code>displayUnit</code>, and <code>quantity</code> attributes (among others)
 to represent various physical quantities.  The <code>unit</code> and <code>displayUnit</code>
-attributes are based on SI.   The <code>quantity</code> string is generally used to
+attributes are based on the International System of Units (Syst&egrave;me international d'unit&eacute;s, SI).   The <code>quantity</code> string is generally used to
 describe the name of the physical quantity.  For example, the <a href=\"modelica://Modelica.SIunits.Velocity\">Velocity</a> type has
 a <code>unit</code> of \"m/s\" and a <code>quantity</code> of
-\"Velocity\".</p>
-
-<p>If an instance of <a href=\"modelica://Modelica.SIunits.Velocity\">Velocity</a> has
+\"Velocity\".  If an instance of <a href=\"modelica://Modelica.SIunits.Velocity\">Velocity</a> has
 a <code>value</code> of one (<i>v</i> = 1),
 then it is meant that \"the value of velocity is one meter per second.\"  Again, the
-<code>value</code> attribute represents the number, or the value divided by the unit, not the
-value itself.  This apparent conflict is solved in <a href=\"modelica://FCSys\">FCSys</a> by
+<code>value</code> attribute represents the number, or the value of the quantity divided by the unit, not the
+value of the quantity itself.</p>
+
+<p>This apparent conflict is solved in <a href=\"modelica://FCSys\">FCSys</a> by
 establishing units (including the meter and the second) as mathematical entities and writing
-<i>v</i> = 1&middot;m/s.  Here, the variable <i>v</i> directly represents the value.
-Its <code>value</code> attribute is truly the value in the context of the statement by BIPM.</p>
+<i>v</i> = 1 m/s (in code, <code>v = 1*U.m/U.s</code> or simply <code>v = U.m/U.s</code>).  
+Here, the variable <i>v</i> directly represents the quantity.
+Its <code>value</code> attribute is truly the value of the quantity in the context of the 
+statement by BIPM (above).</p>
 
 One advantage is that unit conversion is handled
-naturally.  The essence of unit conversion is that the phrase \"value in unit\" mathematically means
-\"value divided by unit.\"  Continuing with the previous example, <i>v</i>
+naturally.  The essence of unit conversion is the phrase \"value of a quantity in a unit\" typically means
+\"value of a quantity divided by a unit.\"  Continuing with the previous example, <i>v</i>
 is divided by m/s in order to display <i>v</i> in meters per second (as a
 number).  If another unit of length like the foot is established by the
-appropriate relation (ft &asymp; 0.3048&middot;m) and <i>v</i> is divided by
-ft/s, the result is velocity in feet per second (&sim;3.2894).</p>
+appropriate relation (ft &asymp; 0.3048&nbsp;m) and <i>v</i> is divided by
+ft/s, the result is velocity in feet per second (&sim;3.2894).  Some units such as &deg;C, Pag, and dB involve 
+offsets or nonlinear transformations between the value of the quantity and the number; these are described by 
+functions besides simple division.</p>
 
 <p>As another example, frequency is sometimes represented by a variable
 in hertz or cycles per second (e.g., &nu;) and other times by a variable in radians
-per second (e.g., &omega;).  If the variable represents the value directly, then there
+per second (e.g., &omega;).  If the variable represents the quantity directly, then there
 is no need to specify which units it is in.  The units are included; they have not been factored
-out by division.  A common variable (e.g., <i>f</i>) can be used in both cases, which
-standardizes the equations. The math is equivalent due to the relationships
-among units (e.g., 1&middot;cycle = 2&pi;&middot;rad).</p>
+out by division (or another function).  A common variable (e.g., <i>f</i>) can be used in both cases, which
+simplifies and standardizes the equations of a model.  The forms are algebraically equivalent due to the relationships
+among units (e.g., 1&nbsp;cycle = 2&pi;&nbsp;rad).</p>
 
 <p><b>Method:</b></p>
 
-<p>Each unit is represented by a constant.  The values of most units is derived from
-the values of other units and constants (e.g., 1&middot;cycle = 2&pi;&middot;rad).  However,
-there are several units (in SI, 7) that are independent.  These
+<p>In <a href=\"modelica://FCSys\">FCSys</a>, each unit is a constant quantity.
+The values of the units, like other quantities, is the product of a number and a unit.  
+Therefore, units may be derived from other units (e.g., cycle = 2&pi;&nbsp;rad).
+This recursive definition leaves several units (in SI, 7) that are locally independent 
+and must be established universally.  These
 base units are established by the \"particular example of the quantity
 concerned which is used as a reference\" quoted previously
-[<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  The designation of \"base\"
-or \"derived\" is somewhat arbitrary [<a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>, p. 375]
-but regardless, there are a number of units that must be defined by example.  Considering only
-the immediate physical system, these units are linearly independent.</p>
+[<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  The choice of the base
+units is somewhat arbitrary [<a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>, p. 375],
+but regardless, there are a number of units that must be defined by example.</p>
 
 <p>If only SI will be used, then it is easiest to strictly set each of the base units of
 SI equal to one&mdash;the meter (m), kilogram (kg), second (s), ampere (A),
 kelvin (K), mole (mol), and candela (cd).  This is implicitly the case in
-<code>Modelica.SIunits</code>, but again, it hardly captures the idea that a value is the
+the <a href=\"modelica://Modelica.SIunits\">SIunits</a> package, but again, it hardly captures the idea that the 
+value of a quantity is the
 product of a number and a unit.</p>
 
-<p>Instead, most of the base units are established by universal physical constants.
-The \"particular example of the quantity concerned which is used as a reference\"
+<p>Instead, in <a href=\"modelica://FCSys\">FCSys</a>, most of the base units are established by universal 
+physical constants.
+The \"particular example of the quantity\"
 [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>] is an experiment that yields
-precise and repeatable results in determining a constant rather than a prototype which is
+precise and universally repeatable results in determining a constant rather than a prototype 
+(e.g., the International Prototype of the Kilogram) which is
 carefully controlled and distributed via replicas.
 This method of defining the base units from measured physical quantities (rather than
-vice versa) is natural and reflects the way that standards organizations (e.g., NIST) define units.
+vice versa) is natural and reflects the way that standards organizations (e.g., <a href=\"www.nist.gov\">NIST</a>) define units.
 A system of units is considered to be natural if
-all of its base units are established by physical constants
-[<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>].
-Often, those physical constants are defined to be equal to one, but the values can be chosen to scale
+all of its base units are established by universal phsyical constants.
+Often, those universal constants are defined to be equal to one, but the values can be chosen to scale
 the numerical values of variables during simulation.</p>
 
 <p>There are systems where typical values are many orders of magnitude larger or smaller than the
@@ -1733,7 +1752,8 @@ and where scaling is a concern
 
 <p>The method is neutral
 with regards to not only the values of the base units, but also the choice of the base units and
-even the number of base units.  This is an advantage because many systems of units are used besides
+even the number of base units.  This is an advantage because many systems of units are used in science 
+and technology besides
 SI. As mentioned previously, the choice of base units is somewhat
 arbitrary, and different systems of units are based on different choices.  Some systems of units
 have fewer base units (lower rank) than SI, since additional constraints are added that
@@ -1744,7 +1764,7 @@ The unit K is eliminated
 [<a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>, p. 386]
 or, more precisely, considered a derived unit instead of a base unit.  In SI, the
 kelvin would be derived from the units kilogram, meter, and second (K
-&asymp; 1.381&times;10<sup>-23</sup>&middot;kg&middot;m<sup>2</sup>/s<sup>2</sup>).</p>
+&asymp; 1.381&times;10<sup>-23</sup>&nbsp;kg&nbsp;m<sup>2</sup>/s<sup>2</sup>).</p>
 
     <p>There are six independent constants or units in the <a href=\"modelica://FCSys.Units\">Units</a> package (see
     <a href=\"modelica://FCSys.Units.Bases\">Units.Bases</a>),
@@ -1752,16 +1772,18 @@ kelvin would be derived from the units kilogram, meter, and second (K
     In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href=\"modelica://FCSys.Species.Species\">Species</a> model.
-    First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
+    First, the Faraday constant (<i>k</i><sub>F</sub> or 96485.3399&nbsp;C/mol)
     is normalized to one. This implies that the mole (mol) is proportional to the coulomb
-    (C or Wb&middot;S), which is considered a number of reference particles given the charge number.
-    Also, the gas constant (R or 8.314472&middot;J/(mol&middot;K)) is normalized to one.
+    (C), which is considered a number of reference particles given the charge number.
+    Also, the gas constant (R or 8.314472&nbsp;J/(mol&nbsp;K)) is normalized to one.
     Therefore, the kelvin (K) is proportional to the volt
     (V or J/C). In addition, the radian (rad) is defined as a base constant.
     However, it must be set equal to one in the current version of the International System of Units (SI)
     [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].</p>
 
-<p><b>Implementation:</b><p><p>The units and constants are defined as variables in this
+<p><b>Implementation:</b></p>
+
+<p>The units and constants are defined as variables in this
 <a href=\"modelica://FCSys.Units\">Units</a> package.  Each is a <code>constant</code> of
 the appropriate type from the <a href=\"modelica://FCSys.Quantities\">Quantities</a> package. The
 first section of the Modelica definition of this package establishes mathematical constants.  The next
@@ -1795,7 +1817,7 @@ does this and saves the result as \"units.mos\" in the working directory.</p>
   expressed in units.  Functions are
   included for units that involve offsets<!-- or other functions besides simple scaling-->.
   For conversions that require just a scaling factor, it is simpler to use the
-  units directly.  For example, to convert from potential in volts use <code>v = v_V*V</code>,
+  units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
   where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
 
 <p>An instance of the <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a> model is usually included
@@ -1804,28 +1826,20 @@ all of the other units and constants.  This is important in order to properly in
 base units or constants are later re-adjusted.</p>
 
 <p>Where the <code>der</code> operator is used in models, it is explicitly divided by the unit second
-(e.g., <code>der(x)/s</code>).  This is necessary because the global variable <code>time</code>
-is in seconds.</p>
+(e.g., <code>der(x)/U.s</code>).  This is necessary because the global variable <code>time</code>
+is in seconds (i.e., <code>time</code> is a number, not a quantity).</p>
 
 <p>In theory, standard Modelica unit checking tools may be used to check the dimensions of equations
 in <a href=\"modelica://FCSys\">FCSys</a>.</p>
 
 <p>Some units are defined that include prefixes (e.g., kg, mm, and kPa).  However,
-most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
+most prefixes must be given as explicit factors (e.g., <code>U.kilo*U.m</code>).</p>
 
-  <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
-  in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
+  <p>Although it is not necessary in the acausal language of <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
+  in this package are sorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href=\"http://www.python.org\">Python</a>, C).  In fact, this has been implemented in the 
   included <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">FCRes</a> module for
   plotting and analysis.</p>
-
-<hr>
-
-    <small>
-    <p id=\"fn1\">1. Hereafter, the value of the quantity is referred to as simply the value, but
-    it should not be confused with the <code>value</code> attribute (which, as of version 3.3 of the
-    Modelica specification, is the number).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
-    </small>
 
   <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
 Copyright 2007&ndash;2013, <a href=\"http://www.gtrc.gatech.edu/\">Georgia Tech Research Corporation</a>.</p>

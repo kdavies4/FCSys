@@ -216,6 +216,7 @@ package Characteristics
       Q.TimeAbsolute tauprime "Phase change interval";
       Q.Mobility mu "Mobility";
       Q.TimeAbsolute nu "Thermal independity";
+      output Real L_m=Data.test();
 
     equation
       m = Data.m;
@@ -267,7 +268,7 @@ package Characteristics
         Documentation(info=
               "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Condensation\">Subregions.Examples.PhaseChange.Condensation</a>.</p></html>"),
 
-        experiment(StopTime=10, Tolerance=1e-006),
+        experiment(StopTime=10),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Characteristics.Examples.SaturationPressure.mos"
             "Characteristics.Examples.SaturationPressure.mos"),
@@ -355,7 +356,7 @@ package Characteristics
       T = temperatureSet.y;
 
       annotation (
-        experiment(StopTime=10, Tolerance=1e-006),
+        experiment(StopTime=10),
         Commands(file=
               "Resources/Scripts/Dymola/Characteristics.Examples.CellPotential.mos"
             "Characteristics.Examples.CellPotential.mos"),
@@ -1410,17 +1411,14 @@ package Characteristics
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
         output Q.Continuity zeta "Continuity";
+        // **dimension
 
       algorithm
         zeta := m*omega(T);
 
         annotation (Inline=true,Documentation(info="<html>
   <p>Continuity is a property is defined in <a href=\"modelica://FCSys\">FCSys</a>
-  resistivity to axial compression or material storage during transport.  It is the resistivity in the generalized 
-  diffusive transport equation where pressure is the effort and material current is the flow.</p>
-  
-  <p>This correlation is based on the assumption that continuity is the reciprocal of mobility
-  (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>()).</p>
+  resistivity to axial compression or material storage during transport.</p>
   </html>"));
       end zeta;
 
@@ -1581,6 +1579,12 @@ temperature difference.</p>
   Also, it is assumed that the Einstein relation applies.</p>
 </html>"));
       end nu;
+
+      function test
+        output Real L_m;
+      algorithm
+        L_m := 300*U.K/(U.atm*alpha)/U.m;
+      end test;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state

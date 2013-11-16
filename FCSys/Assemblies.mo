@@ -503,8 +503,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           __Dymola_experimentSetupOutput);
       end TestStand;
 
-
-
       package Enumerations "Choices of options"
 
         extends Modelica.Icons.BasesPackage;
@@ -672,6 +670,45 @@ package Assemblies "Combinations of regions (e.g., cells)"
               rotation=90,
               origin={-24,-20})));
 
+        Conditions.ByConnector.BoundaryBus.Single.Sink anBC2[cell.anFP.n_y - 1,
+          cell.anFP.n_z](each gas(
+            inclH2=true,
+            inclH2O=true,
+            H2(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+
+              materialSet(y=0),
+              redeclare function afterSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+              redeclare function beforeSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity),
+
+            H2O(
+              redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+
+              materialSet(y=0),
+              redeclare function afterSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity,
+
+              redeclare function beforeSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity)),
+            each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            'e-'(redeclare function materialSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+                materialSet(y=0)),
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)))) if cell.anFP.n_y > 1
+          annotation (Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=90,
+              origin={-24,-20})));
+
         Conditions.ByConnector.BoundaryBus.Single.Source anSource[cell.anFP.n_x,
           cell.anFP.n_z](each gas(
             inclH2=true,
@@ -729,6 +766,31 @@ package Assemblies "Combinations of regions (e.g., cells)"
               materialSet(y=p_ca_elec),
               thermalSet(y=testConditions.T)))) annotation (Placement(
               transformation(
+              extent={{10,10},{-10,-10}},
+              rotation=90,
+              origin={24,-20})));
+
+        Conditions.ByConnector.BoundaryBus.Single.Source caBC2[cell.caFP.n_y -
+          1, cell.caFP.n_z](each gas(
+            inclH2O=true,
+            H2O(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0)),
+            inclN2=true,
+            N2(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0)),
+            inclO2=true,
+            O2(redeclare function thermalSpec =
+                  FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate,
+                thermalSet(y=0))),each graphite(
+            'incle-'=true,
+            'inclC+'=true,
+            redeclare
+              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+              'C+'(source(y=testConditions.T)),
+            'e-'(thermalSet(y=testConditions.T)))) if cell.caFP.n_y > 1
+          annotation (Placement(transformation(
               extent={{10,10},{-10,-10}},
               rotation=90,
               origin={24,-20})));
@@ -809,6 +871,16 @@ package Assemblies "Combinations of regions (e.g., cells)"
             thickness=0.5,
             smooth=Smooth.None));
         connect(cell.an[1, :], anBC[1, :].boundary) annotation (Line(
+            points={{-10,-20},{-20,-20}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.ca[2:end, :], caBC2.boundary) annotation (Line(
+            points={{10,-20},{20,-20}},
+            color={127,127,127},
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(cell.an[2:end, :], anBC2.boundary) annotation (Line(
             points={{-10,-20},{-20,-20}},
             color={127,127,127},
             thickness=0.5,
@@ -1097,43 +1169,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}),
+            initialScale=0.1), graphics={Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -1318,43 +1384,37 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}));
+            initialScale=0.1), graphics={Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}));
     end SimpleCell;
   end Cells;
   annotation (Documentation(info="

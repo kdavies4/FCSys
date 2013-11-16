@@ -122,7 +122,7 @@ package Chemistry "Models associated with chemical reactions"
         Commands(file=
               "Resources/Scripts/Dymola/Chemistry.Examples.Stoichiometry.mos"
             "Reactions.Examples.Stoichiometry.mos"),
-        experiment(StopTime=200, Tolerance=1e-006),
+        experiment(StopTime=200),
         __Dymola_experimentSetupOutput);
     end Stoichiometry;
 
@@ -196,15 +196,14 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -298,18 +297,16 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
-
   end ORR;
 
   package Electrochemistry "Models associated with electrochemical reactions"
@@ -419,23 +416,19 @@ package Chemistry "Models associated with chemical reactions"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{-20,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+                100,100}}), graphics={Line(
+                  points={{-20,30},{-20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,30},{20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{-20,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None)}));
     end DoubleLayer;
 
     model ElectronTransfer "Electron transfer"
@@ -512,31 +505,25 @@ package Chemistry "Models associated with chemical reactions"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{0,-20},{0,-50}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-30,20},{32,-20}},
-              lineColor={255,195,38},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,4},{20,4},{8,12}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,-5},{20,-5},{8,3}},
-              color={255,195,38},
-              smooth=Smooth.None,
-              origin={0,-11},
-              rotation=180)}));
-
+                100,100}}), graphics={Line(
+                  points={{0,-20},{0,-50}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-30,20},{32,-20}},
+                  lineColor={255,195,38},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,4},{20,4},{8,12}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-20,-5},{20,-5},{8,3}},
+                  color={255,195,38},
+                  smooth=Smooth.None,
+                  origin={0,-11},
+                  rotation=180)}));
     end ElectronTransfer;
   end Electrochemistry;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
