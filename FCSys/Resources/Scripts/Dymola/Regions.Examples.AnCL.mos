@@ -7,7 +7,7 @@ FCSys.Utilities.plot6(
     y2={"anCL.subregions[1, 1, 1].gas.H2O.p", 
         "anCL.subregions[1, 1, 1].gas.N2.p", 
         "anCL.subregions[1, 1, 1].gas.O2.p"},
-    y3={"anCL.subregions[1, 1, 1].gas.T", "anCL.subregions[1, 1, 1].graphite.T"},
+    y3={"anCL.subregions[1, 1, 1].gas.H2O.T", "anCL.subregions[1, 1, 1].graphite.T"},
     y4={"w"}, 
     y5={"zI"});
 

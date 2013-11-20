@@ -7,7 +7,8 @@ package Utilities "Functions to implement misc. algorithms"
     function charge "Return the charge of a species given its chemical formula"
       extends Modelica.Icons.Function;
       input String formula "Chemical formula";
-      output Integer z "Charge number";
+      output Integer z "Charge number"
+        annotation (Dialog(__Dymola_label="<html><i>z</i></html>"));
     external"C";
       annotation (
         IncludeDirectory="modelica://FCSys/Resources/Source/C",
@@ -29,7 +30,8 @@ package Utilities "Functions to implement misc. algorithms"
       "Return the number of elements in a chemical formula"
       extends Modelica.Icons.Function;
       input String formula "Chemical formula";
-      output Integer n "Number of elements";
+      output Integer n "Number of elements"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
     external"C";
       annotation (
         IncludeDirectory="modelica://FCSys/Resources/Source/C",
@@ -52,8 +54,10 @@ package Utilities "Functions to implement misc. algorithms"
       extends Modelica.Icons.Function;
       input String formula "Chemical formula";
       output String symbol "Name of element (empty if error)";
-      output Integer n "Stoichiometric coefficient";
-      output Integer z "Charge number";
+      output Integer n "Stoichiometric coefficient"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      output Integer z "Charge number"
+        annotation (Dialog(__Dymola_label="<html><i>z</i></html>"));
       output String remainder "Remainder of the chemical formula";
     external"C" readElement(
             formula,
@@ -138,7 +142,8 @@ package Utilities "Functions to implement misc. algorithms"
       import Modelica.Math.Matrices.singularValues;
       extends Modelica.Icons.Function;
       input String formulas[:] "Chemical formulas of the species";
-      output Integer n[size(formulas, 1)] "Stoichiometric coefficients";
+      output Integer n[size(formulas, 1)] "Stoichiometric coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
 
     protected
       Integer n_species=size(formulas, 1) "Number of species";
@@ -231,11 +236,15 @@ An unrelated species may be included.");
       "<html>&int;<a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
 
       extends Modelica.Icons.Function;
-      input Real x "Argument";
-      input Real a[:] "Coefficients";
+      input Real x "Argument"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+      input Real a[:] "Coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>a</i></html>"));
       input Integer n=0
-        "Power associated with the first term (before integral)";
-      output Real F "Integral";
+        "Power associated with the first term (before integral)"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      output Real F "Integral"
+        annotation (Dialog(__Dymola_label="<html><i>F</i></html>"));
 
     algorithm
       F := f(
@@ -244,7 +253,7 @@ An unrelated species may be included.");
             n + 1);
       annotation (
         Inline=true,
-        derivative=dF,
+        derivative=FCSys.Utilities.Polynomial.dF,
         Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <i>x</i>
   (with <i>a</i> constant)
@@ -256,13 +265,19 @@ An unrelated species may be included.");
       "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.F\">F</a>()</html>"
       extends Modelica.Icons.Function;
 
-      input Real x "Argument";
-      input Real a[:] "Coefficients";
+      input Real x "Argument"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+      input Real a[:] "Coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>a</i></html>"));
       input Integer n=0
-        "Power associated with the first term (before integral)";
-      input Real dx "Derivative of argument";
-      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients";
-      output Real dF "Derivative";
+        "Power associated with the first term (before integral)"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      input Real dx "Derivative of argument"
+        annotation (Dialog(__Dymola_label="<html>d<i>x</i></html>"));
+      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients"
+        annotation (Dialog(__Dymola_label="<html>d<i>a</i></html>"));
+      output Real dF "Derivative"
+        annotation (Dialog(__Dymola_label="<html>d<i>F</i></html>"));
 
     algorithm
       dF := f(
@@ -279,14 +294,18 @@ An unrelated species may be included.");
     function f
       "<html>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</html>"
       extends Modelica.Icons.Function;
-      input Real x "Argument";
-      input Real a[:] "Coefficients";
-      input Integer n=0 "Power of the first term";
-      output Real f "Result";
+      input Real x "Argument"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+      input Real a[:] "Coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>a</i></html>"));
+      input Integer n=0 "Power of the first term"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      output Real f "Result"
+        annotation (Dialog(__Dymola_label="<html><i>f</i></html>"));
 
     protected
       function positivePoly
-        "<html>Polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))</html>"
+        "<html>Polynomial expressed in form: y = x*(a + x*(a<sub>2</sub> + &hellip;))</html>"
         input Real x "Argument";
         input Real a[:] "Coefficients";
         output Real y "Result";
@@ -320,7 +339,7 @@ An unrelated species may be included.");
       // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
       annotation (
         Inline=true,
-        derivative=df,
+        derivative=FCSys.Utilities.Polynomial.df,
         Documentation(info="<html><p>For high-order polynomials, this
   is more computationally efficient than the form
   &Sigma;<i>a</i><sub><i>i</i></sub> <i>x</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
@@ -335,13 +354,19 @@ An unrelated species may be included.");
     function df
       "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()</html>"
       extends Modelica.Icons.Function;
-      input Real x "Argument";
-      input Real a[:] "Coefficients";
+      input Real x "Argument"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+      input Real a[:] "Coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>a</i></html>"));
       input Integer n=0
-        "Power associated with the first term (before derivative)";
-      input Real dx "Derivative of argument";
-      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients";
-      output Real df "Derivative";
+        "Power associated with the first term (before derivative)"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      input Real dx "Derivative of argument"
+        annotation (Dialog(__Dymola_label="<html>d<i>x</i></html>"));
+      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients"
+        annotation (Dialog(__Dymola_label="<html>d<i>a</i></html>"));
+      output Real df "Derivative"
+        annotation (Dialog(__Dymola_label="<html>d<i>f</i></html>"));
 
     algorithm
       df := f(
@@ -353,7 +378,7 @@ An unrelated species may be included.");
             n);
       annotation (
         Inline=true,
-        derivative(order=2) = d2f,
+        derivative(order=2) = FCSys.Utilities.Polynomial.d2f,
         Documentation(info="<html>
 <p>The derivative of this function is
   <a href=\"modelica://FCSys.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
@@ -362,16 +387,24 @@ An unrelated species may be included.");
     function d2f
       "<html>Derivative of <a href=\"modelica://FCSys.Utilities.Polynomial.df\">df</a>()</html>"
       extends Modelica.Icons.Function;
-      input Real x "Argument";
-      input Real a[:] "Coefficients";
+      input Real x "Argument"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+      input Real a[:] "Coefficients"
+        annotation (Dialog(__Dymola_label="<html><i>a</i></html>"));
       input Integer n=0
-        "Power associated with the first term (before derivative)";
-      input Real dx "Derivative of argument";
-      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients";
-      input Real d2x "Second derivative of argument";
+        "Power associated with the first term (before derivative)"
+        annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+      input Real dx "Derivative of argument"
+        annotation (Dialog(__Dymola_label="<html>d<i>x</i></html>"));
+      input Real da[size(a, 1)]=zeros(size(a, 1)) "Derivatives of coefficients"
+        annotation (Dialog(__Dymola_label="<html>d<i>a</i></html>"));
+      input Real d2x "Second derivative of argument" annotation (Dialog(
+            __Dymola_label="<html>d<sup>2</sup><i>x</i></html>"));
       input Real d2a[size(a, 1)]=zeros(size(a, 1))
-        "Second derivatives of coefficients";
-      output Real d2f "Second derivative";
+        "Second derivatives of coefficients" annotation (Dialog(__Dymola_label=
+              "<html>d<sup>2</sup><i>a</i></html>"));
+      output Real d2f "Second derivative" annotation (Dialog(__Dymola_label=
+              "<html>d<sup>2</sup><i>f</i></html>"));
 
     algorithm
       d2f := sum(f(
@@ -389,7 +422,8 @@ An unrelated species may be included.");
     function get_time "Return the current time"
       extends Modelica.Icons.Function;
 
-      output Integer t "Time in milliseconds since January 1, 1970";
+      output Integer t "Time in milliseconds since January 1, 1970"
+        annotation (Dialog(__Dymola_label="<html><i>t</i></html>"));
 
     external"C";
       annotation (IncludeDirectory="modelica://FCSys/Resources/Source/C",
@@ -468,8 +502,10 @@ An unrelated species may be included.");
     "<html>Check if two <code>Boolean</code> vectors are equal</html>"
     extends Modelica.Icons.Function;
 
-    input Boolean u1[:] "First Boolean vector";
-    input Boolean u2[:] "Second Boolean vector";
+    input Boolean u1[:] "First Boolean vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>1</sub></html>"));
+    input Boolean u2[:] "Second Boolean vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>1</sub></html>"));
     output Boolean equal
       "<html><code>true</code>, if all of the entries are equal</html>";
 
@@ -496,8 +532,10 @@ An unrelated species may be included.");
     "<html>Check if two <code>Integer</code> vectors are equal</html>"
     extends Modelica.Icons.Function;
 
-    input Integer u1[:] "First integer vector";
-    input Integer u2[:] "Second integer vector";
+    input Integer u1[:] "First integer vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>1</sub></html>"));
+    input Integer u2[:] "Second integer vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>2</sub></html>"));
     output Boolean equal
       "<html><code>true</code>, if all of the entries are equal</html>";
 
@@ -524,9 +562,12 @@ An unrelated species may be included.");
     "<html>Check if two <code>Real</code> vectors are nearly equal</html>"
     extends Modelica.Icons.Function;
 
-    input Real u1[:] "First real vector";
-    input Real u2[:] "Second real vector";
-    input Real eps=1e-7 "Error tolerance";
+    input Real u1[:] "First real vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>2</sub></html>"));
+    input Real u2[:] "Second real vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>2</sub></html>"));
+    input Real epsilon=1e-7 "Error tolerance"
+      annotation (Dialog(__Dymola_label="<html>&epsilon;</html>"));
     output Boolean equal
       "<html><code>true</code>, if all of the entries are equal</html>";
 
@@ -536,7 +577,7 @@ An unrelated species may be included.");
       return;
     end if;
     for i in 1:size(u1, 1) loop
-      if abs(u1[i] - u2[i]) > eps then
+      if abs(u1[i] - u2[i]) > epsilon then
         equal := false;
         return;
       end if;
@@ -552,8 +593,10 @@ An unrelated species may be included.");
   function arrayStringEqual "Check if two vectors of strings are equal"
     extends Modelica.Icons.Function;
 
-    input String u1[:] "First string vector";
-    input String u2[:] "Second string vector";
+    input String u1[:] "First string vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>1</sub></html>"));
+    input String u2[:] "Second string vector"
+      annotation (Dialog(__Dymola_label="<html><i>u</i><sub>2</sub></html>"));
     output Boolean equal
       "<html><code>true</code>, if all of the entries are equal</html>";
 
@@ -594,7 +637,8 @@ An unrelated species may be included.");
 
   function average "Return the arithmetic mean of numbers"
     extends Modelica.Icons.Function;
-    input Real u[:] "Vector of numbers";
+    input Real u[:] "Vector of numbers"
+      annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
     output Real average "Arithmetic mean";
 
   algorithm
@@ -606,8 +650,10 @@ An unrelated species may be included.");
   function Delta
     "<html>Return the second entry of a vector minus the first (&Delta;)</html>"
     extends Modelica.Icons.Function;
-    input Real u[2] "Vector of size two";
-    output Real Delta "Second entry minus the first entry";
+    input Real u[2] "Vector of size two"
+      annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
+    output Real Delta "Second entry minus the first entry"
+      annotation (Dialog(__Dymola_label="<html>&Delta;</html>"));
 
   algorithm
     Delta := u[2] - u[1];
@@ -647,17 +693,23 @@ An unrelated species may be included.");
   function plot6 "Create six plots"
     extends Modelica.Icons.Function;
     input String y1[:]=fill("", 0)
-      "<html>Names of the signals for the 1<sup>st</sup> plot</html>";
+      "<html>Names of the signals for the 1<sup>st</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>1</sub></html>"));
     input String y2[:]=fill("", 0)
-      "<html>Names of the signals for the 2<sup>nd</sup> plot</html>";
+      "<html>Names of the signals for the 2<sup>nd</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>2</sub></html>"));
     input String y3[:]=fill("", 0)
-      "<html>Names of the signals for the 3<sup>rd</sup> plot</html>";
+      "<html>Names of the signals for the 3<sup>rd</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>3</sub></html>"));
     input String y4[:]=fill("", 0)
-      "<html>Names of the signals for the 4<sup>th</sup> plot</html>";
+      "<html>Names of the signals for the 4<sup>th</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>4</sub></html>"));
     input String y5[:]=fill("", 0)
-      "<html>Names of the signals for the 5<sup>th</sup> plot</html>";
+      "<html>Names of the signals for the 5<sup>th</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>5</sub></html>"));
     input String y6[:]=fill("", 0)
-      "<html>Names of the signals for the 6<sup>th</sup> plot</html>";
+      "<html>Names of the signals for the 6<sup>th</sup> plot</html>"
+      annotation (Dialog(__Dymola_label="<html><i>y</i><sub>6</sub></html>"));
 
   algorithm
     createPlot(
@@ -736,8 +788,10 @@ An unrelated species may be included.");
   function round
     "<html>Round a <code>Real</code> variable to the nearest integer</html>"
     extends Modelica.Icons.Function;
-    input Real u "<html><code>Real</code> variable</html>";
-    output Integer y "Nearest integer";
+    input Real u "<html><code>Real</code> variable</html>"
+      annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
+    output Integer y "Nearest integer"
+      annotation (Dialog(__Dymola_label="<html><i>y</i></html>"));
 
   algorithm
     y := integer(u + 0.5);
@@ -789,8 +843,10 @@ An unrelated species may be included.");
     "<html>Return the sum of the first and second entries of a vector (&Sigma;)</html>"
     extends Modelica.Icons.Function;
 
-    input Real u[2] "Vector of size two";
-    output Real Sigma "Sum of the first and second entries";
+    input Real u[2] "Vector of size two"
+      annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
+    output Real Sigma "Sum of the first and second entries"
+      annotation (Dialog(__Dymola_label="<html>&Sigma;</html>"));
 
   algorithm
     Sigma := u[1] + u[2];

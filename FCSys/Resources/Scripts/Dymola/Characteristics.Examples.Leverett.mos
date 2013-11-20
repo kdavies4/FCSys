@@ -1,0 +1,16 @@
+// Setup
+removePlots();
+
+createPlot(filename = "Leverett.mat",
+ id = 1,
+ position = {0, 0, 600, 450},
+ x = "s",
+ y = {"J"},
+ heading = "Leverett Correlation vs. Liquid Saturation",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Leverett correlation (J)",
+ bottomTitle = "Liquid saturation (s)");

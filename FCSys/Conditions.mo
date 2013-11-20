@@ -79,7 +79,7 @@ package Conditions "Models to specify and measure operating conditions"
             Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate
             thermal, redeclare
             Conditions.ByConnector.Boundary.Single.Material.Current material(
-              source(y=U.A))))
+              set(y=U.A))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 
       FCSys.Conditions.ByConnector.Amagat.VolumeFixed volume(n_phases=1)
@@ -288,7 +288,7 @@ package Conditions "Models to specify and measure operating conditions"
         final inclTransY=inclTransY,
         final inclTransZ=inclTransZ,
         sT=2000*U.K,
-        redeclare Modelica.Blocks.Sources.Ramp source(duration=100, height=-1*U.A))
+        redeclare Modelica.Blocks.Sources.Ramp set(duration=100, height=-1*U.A))
         annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
       replaceable ByConnector.Chemical.Potential speciesB(
         final inclTransX=inclTransX,
@@ -1998,7 +1998,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2006,7 +2006,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature),
+                    Boundary.Pair.Thermal.temperature),
               H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2015,7 +2015,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2023,7 +2023,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature),
+                    Boundary.Pair.Thermal.temperature),
               N2(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2032,7 +2032,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2040,7 +2040,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature),
+                    Boundary.Pair.Thermal.temperature),
               O2(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2049,7 +2049,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2057,7 +2057,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature)),
+                    Boundary.Pair.Thermal.temperature)),
             graphite(redeclare replaceable
                 Conditions.ByConnector.ThermalDiffusive.Pair.HeatRate 'C+',
                 'e-'(
@@ -2068,7 +2068,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2076,7 +2076,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature)),
+                    Boundary.Pair.Thermal.temperature)),
             ionomer(
               redeclare replaceable
                 Conditions.ByConnector.ThermalDiffusive.Pair.HeatRate 'SO3-',
@@ -2088,7 +2088,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2096,7 +2096,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature),
+                    Boundary.Pair.Thermal.temperature),
               H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2105,7 +2105,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2113,7 +2113,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature)),
+                    Boundary.Pair.Thermal.temperature)),
             liquid(H2O(
                 redeclare replaceable function materialSpec =
                     Boundary.Pair.Material.pressure,
@@ -2122,7 +2122,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Pair.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Pair.ThermalDiffusive.heatRate,
+                    Boundary.Pair.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Pair.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2130,7 +2130,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Pair.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Pair.ThermalDiffusive.temperature)));
+                    Boundary.Pair.Thermal.temperature)));
 
           // Note:  In Dymola 2014, the paths must be explicitly given to prevent
           // the error "Cannot show the parameter dialog for redeclared class [...]".
@@ -2785,7 +2785,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2793,7 +2793,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2806,7 +2806,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2814,7 +2814,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2827,7 +2827,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2835,7 +2835,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2848,7 +2848,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2856,7 +2856,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
@@ -2870,7 +2870,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2878,7 +2878,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
@@ -2893,7 +2893,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2901,7 +2901,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0)),
@@ -2914,7 +2914,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2922,7 +2922,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))),
@@ -2935,7 +2935,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeSpec =
                     Boundary.Single.Translational.force,
                 redeclare replaceable function thermalSpec =
-                    Boundary.Single.ThermalDiffusive.heatRate,
+                    Boundary.Single.Thermal.heatRate,
                 redeclare replaceable function materialMeas =
                     Boundary.Single.Material.current,
                 redeclare replaceable function afterMeas =
@@ -2943,7 +2943,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 redeclare replaceable function beforeMeas =
                     Boundary.Single.Translational.velocity,
                 redeclare replaceable function thermalMeas =
-                    Boundary.Single.ThermalDiffusive.temperature,
+                    Boundary.Single.Thermal.temperature,
                 redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=
                       U.atm),
                 redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0))));
@@ -3506,8 +3506,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // Thermal
-          replaceable function thermalSpec = ThermalDiffusive.temperature
-            constrainedby ThermalDiffusive.Partial "Quantity" annotation (
+          replaceable function thermalSpec = Thermal.temperature constrainedby
+            Thermal.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -3548,10 +3548,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Thermal
-          replaceable function thermalMeas = ThermalDiffusive.heatRate
-            constrainedby ThermalDiffusive.Partial "Thermal quantity"
-            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
-                  "Measurement"));
+          replaceable function thermalMeas = Thermal.heatRate constrainedby
+            Thermal.Partial "Thermal quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Aliases
           Q.Pressure Deltap "Difference in pressure";
@@ -3823,14 +3822,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable function materialSpec = Material.pressure,
             redeclare replaceable function afterSpec = Translational.force,
             redeclare replaceable function beforeSpec = Translational.force,
-            redeclare replaceable function thermalSpec =
-                ThermalDiffusive.heatRate,
+            redeclare replaceable function thermalSpec = Thermal.heatRate,
             redeclare replaceable function materialMeas = Material.current,
             redeclare replaceable function afterMeas = Translational.velocity,
             redeclare replaceable function beforeMeas = Translational.velocity,
 
-            redeclare replaceable function thermalMeas =
-                ThermalDiffusive.temperature);
+            redeclare replaceable function thermalMeas = Thermal.temperature);
 
           // See note in Reaction.Efforts.
 
@@ -3860,24 +3857,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Pressure Deltap
-              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.Pressure Deltap "Difference in pressure" annotation (Dialog(
+                  __Dymola_label="<html>&Delta;<i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity Deltaphi[Orient]
-              "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity Deltaphi[Orient] "Difference in velocity"
+              annotation (Dialog(__Dymola_label="<html>&Delta;&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute DeltaT
-              "<html>Difference in temperature (&Delta;<i>T</i>)</html>";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.Temperature DeltaT "Difference in temperature" annotation (
+                Dialog(__Dymola_label="<html>&Delta;<i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -3907,28 +3905,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Pressure Deltap
-              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
-
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.Pressure Deltap "Difference in pressure" annotation (Dialog(
+                  __Dymola_label="<html>&Delta;<i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity Deltaphi[Orient]
-              "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity Deltaphi[Orient] "Difference in velocity"
+              annotation (Dialog(__Dymola_label="<html>&Delta;&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute DeltaT
-              "<html>Difference in temperature (&Delta;<i>T</i>)</html>";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.Temperature DeltaT "Difference in temperature" annotation (
+                Dialog(__Dymola_label="<html>&Delta;<i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
             input Orient orient
               "Orientation of translational momentum w.r.t. the boundary";
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -3936,7 +3935,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end Partial;
         end Translational;
 
-        package ThermalDiffusive "Conditions for thermal diffusion"
+        package Thermal "Conditions for thermal diffusion"
           extends Modelica.Icons.Package;
 
           function temperature "Difference in temperature"
@@ -3958,30 +3957,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.Pressure Deltap
-              "<html>Difference in pressure (&Delta;&<i>p</i>)</html>";
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.Pressure Deltap "Difference in pressure" annotation (Dialog(
+                  __Dymola_label="<html>&Delta;<i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity Deltaphi[Orient]
-              "<html>Difference in velocity (&Delta;&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity Deltaphi[Orient] "Difference in velocity"
+              annotation (Dialog(__Dymola_label="<html>&Delta;&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute DeltaT
-              "<html>Difference in temperature (&Delta;<i>T</i>)</html>";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.Temperature DeltaT "Difference in temperature" annotation (
+                Dialog(__Dymola_label="<html>&Delta;<i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
           end Partial;
-        end ThermalDiffusive;
+        end Thermal;
       end Pair;
 
       package Single
@@ -4070,8 +4070,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           //
           // Thermal
-          replaceable function thermalSpec = ThermalDiffusive.temperature
-            constrainedby ThermalDiffusive.Partial "Quantity" annotation (
+          replaceable function thermalSpec = Thermal.temperature constrainedby
+            Thermal.Partial "Quantity" annotation (
             __Dymola_choicesFromPackage=true,
             Dialog(tab="Specification", group="Thermal"),
             Placement(transformation(extent={{4,-10},{24,10}})));
@@ -4115,10 +4115,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           // Thermal
-          replaceable function thermalMeas = ThermalDiffusive.heatRate
-            constrainedby ThermalDiffusive.Partial "Thermal quantity"
-            annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
-                  "Measurement"));
+          replaceable function thermalMeas = Thermal.heatRate constrainedby
+            Thermal.Partial "Thermal quantity" annotation (
+              __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
           Connectors.Boundary boundary
             "Connector to transport material, translational momentum, and thermal energy"
@@ -4351,14 +4350,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable function materialSpec = Material.pressure,
             redeclare replaceable function afterSpec = Translational.force,
             redeclare replaceable function beforeSpec = Translational.force,
-            redeclare replaceable function thermalSpec =
-                ThermalDiffusive.heatRate,
+            redeclare replaceable function thermalSpec = Thermal.heatRate,
             redeclare replaceable function materialMeas = Material.current,
             redeclare replaceable function afterMeas = Translational.velocity,
             redeclare replaceable function beforeMeas = Translational.velocity,
 
-            redeclare replaceable function thermalMeas =
-                ThermalDiffusive.temperature,
+            redeclare replaceable function thermalMeas = Thermal.temperature,
             redeclare Modelica.Blocks.Sources.RealExpression materialSet(y=U.atm),
 
             redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=0));
@@ -4459,21 +4456,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.PressureAbsolute p "Pressure"
+              annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity phi[Orient] "Velocity"
+              annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute T "Temperature";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.TemperatureAbsolute T "Temperature"
+              annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -4523,24 +4524,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.PressureAbsolute p "Pressure"
+              annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity phi[Orient] "Velocity"
+              annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute T "Temperature";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.TemperatureAbsolute T "Temperature"
+              annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
             input Orient orient
               "Orientation of translational momentum w.r.t. the boundary";
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
+
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -4548,7 +4554,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           end Partial;
         end Translational;
 
-        package ThermalDiffusive "Conditions for thermal diffusion"
+        package Thermal "Conditions for thermal diffusion"
           extends Modelica.Icons.Package;
 
           function temperature "Temperature"
@@ -4572,27 +4578,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extends Modelica.Icons.Function;
 
             // Material
-            input Q.PressureAbsolute p "<html>Pressure (<i>p</i>)</html>";
-            input Q.Current Ndot
-              "<html>Diffusion current (<i>N&#775;</i>)</html>";
+            input Q.PressureAbsolute p "Pressure"
+              annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+            input Q.Current Ndot "Current"
+              annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
 
             // Translational
-            input Q.Velocity phi[Orient] "<html>Velocity (&phi;)</html>";
-            input Q.Force mPhidot[Orient]
-              "<html>Non-equilibrium force (<i>m</i>&Phi;dot)</html>";
+            input Q.Velocity phi[Orient] "Velocity"
+              annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+            input Q.Force mPhidot[Orient] "Shear force" annotation (Dialog(
+                  __Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
             // Thermal
-            input Q.TemperatureAbsolute T "Temperature";
-            input Q.Power Qdot
-              "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+            input Q.TemperatureAbsolute T "Temperature"
+              annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+            input Q.Power Qdot "Rate of thermal conduction"
+              annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-            output Real x "Value of condition";
+            output Real x "Value of condition"
+              annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
             annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
   to a single value.</p></html>"));
           end Partial;
-        end ThermalDiffusive;
+        end Thermal;
 
       end Single;
       annotation (Icon(graphics={Ellipse(
@@ -4609,7 +4619,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model Pressure "Specify pressure (measure volume)"
         extends FCSys.Conditions.ByConnector.Amagat.Partial(final y=amagat.V,
-            source(y=U.atm));
+            set(y=U.atm));
 
       equation
         amagat.p = u_final;
@@ -4617,7 +4627,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Pressure;
 
       model Volume "Provide volume (measure pressure)"
-        extends Partial(final y=amagat.p, source(y=U.cc));
+        extends Partial(final y=amagat.p, set(y=U.cc));
 
       equation
         amagat.V = u_final;
@@ -4652,7 +4662,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     additivity of volume.  In order to use additivity of pressure, use
     the <a href=\"modelica://FCSys.Conditions.Adapters.AmagatDalton\">AmagatDalton</a> adapter.</p>
 
-    <p>If <code>compressible</code> is <code>false</code>, the pressure is set (to the pressure
+    <p>If <code>setVolume</code> is <code>false</code>, then the pressure is set (to the pressure
     of the <code>outer environment</code> model) instead of volume.</p>
 
     <p>See also the documentation in the
@@ -4681,7 +4691,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
 
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+        replaceable Modelica.Blocks.Sources.RealExpression set if internal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -4724,7 +4734,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(source.y, u_final) annotation (Line(
+        connect(set.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -4750,7 +4760,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.Package;
 
       model Volume "Specify volume (measure pressure)"
-        extends Partial(final y=dalton.p, source(y=U.cc));
+        extends Partial(final y=dalton.p, set(y=U.cc));
 
       equation
         dalton.V = u_final;
@@ -4758,7 +4768,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Volume;
 
       model Pressure "Specify pressure (measure volume)"
-        extends Partial(final y=dalton.V, source(y=U.atm));
+        extends Partial(final y=dalton.V, set(y=U.atm));
 
       equation
         dalton.p = u_final;
@@ -4775,7 +4785,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
 
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+        replaceable Modelica.Blocks.Sources.RealExpression set if internal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -4818,7 +4828,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             smooth=Smooth.None));
 
-        connect(source.y, u_final) annotation (Line(
+        connect(set.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -4834,495 +4844,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   fillColor={47,107,251})}));
     end Dalton;
 
-    package Direct
-      "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> or <a href=\"modelica://FCSys.Connectors.DirectNode\">DirectNode</a> connector</html>"
+    package Inter
+      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> or <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> connector</html>"
       extends Modelica.Icons.Package;
 
-      model Flows
-        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> connector, with flows specified by default</html>"
-        import Modelica.Math.BooleanVectors.countTrue;
-        import Modelica.Math.BooleanVectors.enumerate;
-        import Modelica.Blocks.Sources;
-        extends FCSys.Icons.Conditions.Single;
-
-        // Specification
-        // -------------
-        // X-axis translational
-        replaceable function transXSpec = Translational.force constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX),
-          Placement(transformation(extent={{-52,18},{-32,38}})));
-
-        parameter Boolean internalTransX=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX));
-        replaceable Sources.RealExpression transXSet if inclTransX and
-          internalTransX constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="X-axis translational",
-            enable=inclTransX and internalTransX),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,70})));
-
-        //
-        // Y-axis translational
-        replaceable function transYSpec = Translational.force constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY),
-          Placement(transformation(extent={{-24,4},{-4,24}})));
-
-        parameter Boolean internalTransY=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY));
-        replaceable Sources.RealExpression transYSet if inclTransY and
-          internalTransY constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Y-axis translational",
-            enable=inclTransY and internalTransY),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,30})));
-        //
-        // Z-axis translational
-        replaceable function transZSpec = Translational.force constrainedby
-          Translational.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ),
-          Placement(transformation(extent={{4,-10},{24,10}})));
-
-        parameter Boolean internalTransZ=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ));
-        replaceable Sources.RealExpression transZSet if inclTransZ and
-          internalTransZ constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Z-axis translational",
-            enable=inclTransZ and internalTransZ),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,-10})));
-        //
-        // Thermal
-        replaceable function thermalSpec = ThermalDiffusive.heatRate
-          constrainedby ThermalDiffusive.Partial "Quantity" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(tab="Specification", group="Thermal"),
-          Placement(transformation(extent={{4,-10},{24,10}})));
-
-        parameter Boolean internalThermal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(tab="Specification", group="Thermal"));
-        replaceable Sources.RealExpression thermalSet if internalThermal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(
-            tab="Specification",
-            group="Thermal",
-            enable=internalThermal),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-80,-50})));
-
-        // Measurement
-        // -----------
-        // X-axis translational
-        replaceable function transXMeas = Translational.velocity constrainedby
-          Translational.Partial "X-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Y-axis translational
-        replaceable function transYMeas = Translational.velocity constrainedby
-          Translational.Partial "Y-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Z-axis translational
-        replaceable function transZMeas = Translational.velocity constrainedby
-          Translational.Partial "Z-axis translational quantity" annotation (
-            __Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Thermal
-        replaceable function thermalMeas = ThermalDiffusive.temperature
-          constrainedby ThermalDiffusive.Partial "Thermal quantity" annotation
-          (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
-
-        // Included components of translational momentum
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransY=true "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-        parameter Boolean inclTransZ=true "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            tab="Assumptions",
-            group="Included transport axes",
-            compact=true));
-
-        FCSys.Connectors.Direct direct(final n_trans=n_trans)
-          "Connector to exchange translational momentum and thermal energy by diffusion"
-          annotation (choicesAllMatching=true, Placement(transformation(extent=
-                  {{-10,-110},{10,-90}})));
-
-        // Inputs
-        Connectors.RealInput u_transX if inclTransX and not internalTransX
-          "X-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,60})));
-        Connectors.RealInput u_transY if inclTransY and not internalTransY
-          "Y-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,20})));
-        Connectors.RealInput u_transZ if inclTransZ and not internalTransZ
-          "Z-axis translational specification" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,-20})));
-        Connectors.RealInput u_thermal if not internalThermal
-          "Thermal specification" annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,-60})));
-
-        // Outputs
-        final Connectors.RealOutput y_transX=transXMeas(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.x]) if inclTransX
-          "X-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,60}),iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,20})));
-
-        final Connectors.RealOutput y_transY=transYMeas(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.y]) if inclTransY
-          "Y-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,20}),iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,60})));
-
-        final Connectors.RealOutput y_transZ=transZMeas(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.z]) if inclTransZ
-          "Z-axis translational measurement" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-20}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-20})));
-
-        final Connectors.RealOutput y_thermal=thermalMeas(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot) "Thermal measurement" annotation (Dialog(
-              tab="Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-60}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,-60})));
-
-      protected
-        final inner parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-            inclTransZ}) "Number of components of translational momentum";
-        final inner parameter Integer transCart[Axis]=enumerate({inclTransX,
-            inclTransY,inclTransZ})
-          "Translational-momentum-component indices of the Cartesian axes";
-
-        Connectors.RealOutputInternal _u_transX=transXSpec(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.x]) if inclTransX
-          "Internal, working value of X-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,60})));
-
-        Connectors.RealOutputInternal _u_transY=transYSpec(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.y]) if inclTransY
-          "Internal, working value of Y-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,20})));
-
-        Connectors.RealOutputInternal _u_transZ=transZSpec(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot,
-                  i=transCart[Axis.z]) if inclTransZ
-          "Internal, working value of Z-axis translational specification"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,-20})));
-
-        Connectors.RealOutputInternal _u_thermal=thermalSpec(
-                  direct.trans.phi,
-                  direct.trans.mPhidot,
-                  direct.therm.T,
-                  direct.therm.Qdot)
-          "Internal, working value of thermal specification" annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-36,-60})));
-      equation
-        // X-axis translational
-        connect(u_transX, _u_transX) annotation (Line(
-            points={{-110,60},{-36,60}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transXSet.y, _u_transX) annotation (Line(
-            points={{-69,70},{-60,70},{-60,60},{-36,60}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Y-axis translational
-        connect(u_transY, _u_transY) annotation (Line(
-            points={{-110,20},{-36,20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transYSet.y, _u_transY) annotation (Line(
-            points={{-69,30},{-60,30},{-60,20},{-36,20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Z-axis translational
-        connect(u_transZ, _u_transZ) annotation (Line(
-            points={{-110,-20},{-36,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(transZSet.y, _u_transZ) annotation (Line(
-            points={{-69,-10},{-60,-10},{-60,-20},{-36,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // Thermal
-        connect(u_thermal, _u_thermal) annotation (Line(
-            points={{-110,-60},{-36,-60}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(thermalSet.y, _u_thermal) annotation (Line(
-            points={{-69,-50},{-60,-50},{-60,-60},{-36,-60}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (
-          defaultComponentName="direct",
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Icon(graphics));
-      end Flows;
-
-      model Efforts
-        "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Direct\">Direct</a> connector, with efforts specified by default</html>"
-
-        extends Flows(
-          redeclare replaceable function transXSpec = Translational.velocity,
-          redeclare replaceable function transYSpec = Translational.velocity,
-          redeclare replaceable function transZSpec = Translational.velocity,
-          redeclare replaceable function thermalSpec =
-              ThermalDiffusive.temperature,
-          redeclare replaceable function transXMeas = Translational.force,
-          redeclare replaceable function transYMeas = Translational.force,
-          redeclare replaceable function transZMeas = Translational.force,
-          redeclare replaceable function thermalMeas =
-              ThermalDiffusive.heatRate,
-          redeclare Modelica.Blocks.Sources.RealExpression thermalSet(y=298.15*
-                U.K));
-
-        // The thermalSet block is redeclared as not replaceable because
-        // y is set directly and cannot be undone at instantiation.
-
-        annotation (defaultComponentName="direct");
-
-      end Efforts;
-
-      package Translational "Translational conditions"
-        extends Modelica.Icons.Package;
-
-        function velocity "Velocity"
-          extends Partial;
-
-        algorithm
-          x := phi[i];
-          annotation (Inline=true);
-        end velocity;
-
-        function force "Force"
-          extends Partial;
-
-        algorithm
-          x := mPhidot[i];
-          annotation (Inline=true);
-        end force;
-
-        partial function Partial
-          "Template of a function to select a translational quantity"
-          extends Modelica.Icons.Function;
-
-          // Translational
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
-
-          // Thermal
-          input Q.TemperatureAbsolute T "Temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
-
-          input Integer i(min=1,max=3) "Index of the translational axis";
-
-          output Real x "Value of condition";
-          annotation (Inline=true, Documentation(info="<html>
-  <p>This function takes as inputs all the efforts and flows of the associated
-  connector.  It should be extended to add an algorithm that maps these inputs
-  to a single value.</p></html>"));
-        end Partial;
-      end Translational;
-
-      package ThermalDiffusive "Conditions for thermal diffusion"
-        extends Modelica.Icons.Package;
-
-        function temperature "Temperature"
-          extends Partial;
-
-        algorithm
-          x := T;
-          annotation (Inline=true);
-        end temperature;
-
-        function heatRate "Heat flow rate"
-          extends Partial;
-
-        algorithm
-          x := Qdot;
-          annotation (Inline=true);
-        end heatRate;
-
-        partial function Partial
-          "Template of a function to select a thermal quantity"
-          extends Modelica.Icons.Function;
-
-          // Translational
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
-
-          // Thermal
-          input Q.TemperatureAbsolute T "Temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
-
-          output Real x "Value of condition";
-          annotation (Inline=true, Documentation(info="<html>
-  <p>This function takes as inputs all the efforts and flows of the associated
-  connector.  It should be extended to add an algorithm that maps these inputs
-  to a single value.</p></html>"));
-        end Partial;
-      end ThermalDiffusive;
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47}),Text(
-                  extent={{-70,70},{70,-70}},
-                  lineColor={255,255,255},
-                  textStyle={TextStyle.Bold},
-                  textString="0")}));
-    end Direct;
-
-    package Inert
-      "<html>Conditions for an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>, or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector</html>"
       model Flows
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector, with flows specified by default</html>"
         import Modelica.Math.BooleanVectors.countTrue;
@@ -5455,28 +4980,28 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // -----------
         // X-axis translational
         replaceable function transXMeas =
-            FCSys.Conditions.ByConnector.Inert.Translational.velocity
+            FCSys.Conditions.ByConnector.Inter.Translational.velocity
           constrainedby Translational.Partial "X-axis translational quantity"
           annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                 "Measurement"));
         //
         // Y-axis translational
         replaceable function transYMeas =
-            FCSys.Conditions.ByConnector.Inert.Translational.velocity
+            FCSys.Conditions.ByConnector.Inter.Translational.velocity
           constrainedby Translational.Partial "Y-axis translational quantity"
           annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                 "Measurement"));
         //
         // Z-axis translational
         replaceable function transZMeas =
-            FCSys.Conditions.ByConnector.Inert.Translational.velocity
+            FCSys.Conditions.ByConnector.Inter.Translational.velocity
           constrainedby Translational.Partial "Z-axis translational quantity"
           annotation (__Dymola_choicesFromPackage=true, Dialog(tab=
                 "Measurement"));
         //
         // Thermal
         replaceable function thermalMeas =
-            FCSys.Conditions.ByConnector.Inert.ThermalDiffusive.temperature
+            FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature
           constrainedby ThermalDiffusive.Partial "Thermal quantity" annotation
           (__Dymola_choicesFromPackage=true, Dialog(tab="Measurement"));
 
@@ -5503,7 +5028,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Included transport axes",
             compact=true));
 
-        Connectors.Inter inter(final n_trans=n_trans)
+        Connectors.Inert inter(final n_trans=n_trans)
           "Connector to exchange translational momentum and thermal energy by diffusion"
           annotation (choicesAllMatching=true, Placement(transformation(extent=
                   {{-10,-110},{10,-90}})));
@@ -5544,7 +5069,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={110,60}),iconTransformation(
+              origin={110,60}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
@@ -5559,7 +5084,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={110,20}),iconTransformation(
+              origin={110,20}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,40})));
@@ -5696,11 +5221,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {100,100}}), graphics),
           Icon(graphics));
       end Flows;
-      extends Modelica.Icons.Package;
+
       model Efforts
         "<html>Condition for an <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> or <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> connector, with efforts specified by default</html>"
 
-        extends FCSys.Conditions.ByConnector.Inert.Flows(
+        extends FCSys.Conditions.ByConnector.Inter.Flows(
           redeclare replaceable function transXSpec = Translational.velocity,
           redeclare replaceable function transYSpec = Translational.velocity,
           redeclare replaceable function transZSpec = Translational.velocity,
@@ -5717,7 +5242,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // The thermalSet block is redeclared as not replaceable because
         // y is set directly and cannot be undone at instantiation.
 
-        annotation (defaultComponentName="inert");
+        annotation (defaultComponentName="inert", Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics));
 
       end Efforts;
 
@@ -5745,17 +5272,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Translational
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
           // Thermal
-          input Q.TemperatureAbsolute T "Temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+          input Q.TemperatureAbsolute T "Temperature"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+          input Q.Power Qdot "Rate of thermal conduction"
+            annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-          input Integer i(min=1,max=3) "Index of the translational axis";
+          input Integer i(min=1,max=3) "Index of the translational axis"
+            annotation (Dialog(__Dymola_label="<html><i>i</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -5787,15 +5319,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Translational
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
           // Thermal
-          input Q.TemperatureAbsolute T "Temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal conduction (<i>Q&#775;</i>)</html>";
+          input Q.TemperatureAbsolute T "Temperature"
+            annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+          input Q.Power Qdot "Rate of thermal conduction"
+            annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -5807,7 +5343,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   lineColor={170,0,0},
                   fillPattern=FillPattern.Solid,
                   fillColor={221,23,47})}));
-    end Inert;
+    end Inter;
 
     package Translational
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> connector</html>"
@@ -6133,12 +5669,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          // Translational
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
-          input Integer i(min=1,max=3) "Index of the translational axis";
+          input Integer i(min=1,max=3) "Index of the translational axis"
+            annotation (Dialog(__Dymola_label="<html><i>i</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -6187,7 +5728,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             choices(__Dymola_checkBox=true),
             Dialog(group="Specification"));
 
-          replaceable Modelica.Blocks.Sources.RealExpression source if internal
+          replaceable Modelica.Blocks.Sources.RealExpression set if internal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -6240,7 +5781,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(source.y, u_final) annotation (Line(
+          connect(set.y, u_final) annotation (Line(
               points={{10,29},{10,20},{0,20},{0,8}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6267,7 +5808,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end HeatRate;
 
         model Temperature "Specify temperature (measure heat flow rate)"
-          extends Partial(final y=therm.Qdot, source(y=298.15*U.K));
+          extends Partial(final y=therm.Qdot, set(y=298.15*U.K));
 
         equation
           therm.T = u_final;
@@ -6284,7 +5825,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             choices(__Dymola_checkBox=true),
             Dialog(group="Specification"));
 
-          replaceable Modelica.Blocks.Sources.RealExpression source if internal
+          replaceable Modelica.Blocks.Sources.RealExpression set if internal
             constrainedby Modelica.Blocks.Interfaces.SO
             "Source of internal specification" annotation (
             __Dymola_choicesFromPackage=true,
@@ -6327,7 +5868,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               color={0,0,127},
               smooth=Smooth.None));
 
-          connect(source.y, u_final) annotation (Line(
+          connect(set.y, u_final) annotation (Line(
               points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -6375,7 +5916,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification of material condition"));
 
-        replaceable Modelica.Blocks.Sources.RealExpression source if internal
+        replaceable Modelica.Blocks.Sources.RealExpression set if internal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal specification" annotation (
           __Dymola_choicesFromPackage=true,
@@ -6458,7 +5999,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         chemical.phi = phi[cartTrans];
         chemical.sT = sT;
 
-        connect(source.y, u_final) annotation (Line(
+        connect(set.y, u_final) annotation (Line(
             points={{-69,10},{-60,10},{-60,5.55112e-16},{-36,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -6984,20 +6525,26 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
+          input Q.Current Ndot "Rate of reaction"
+            annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
+          input Q.Potential g "Chemical potential"
+            annotation (Dialog(__Dymola_label="<html><i>g</i></html>"));
 
           // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
           // Thermal advection
           input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+            "Product of specific entropy and temperature"
+            annotation (Dialog(__Dymola_label="<html><i>sT</i></html>"));
+          input Q.Power Qdot "Rate of thermal advection"
+            annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -7029,22 +6576,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
+          input Q.Current Ndot "Rate of reaction"
+            annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
+          input Q.Potential g "Chemical potential"
+            annotation (Dialog(__Dymola_label="<html><i>g</i></html>"));
 
           // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
           // Thermal advection
           input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+            "Product of specific entropy and temperature"
+            annotation (Dialog(__Dymola_label="<html><i>sT</i></html>"));
+          input Q.Power Qdot "Rate of thermal advection"
+            annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-          input Integer i(min=1,max=3) "Index of the translational axis";
+          input Integer i(min=1,max=3) "Index of the translational axis"
+            annotation (Dialog(__Dymola_label="<html><i>i</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -7077,20 +6631,26 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extends Modelica.Icons.Function;
 
           // Material diffusion
-          input Q.Current Ndot "<html>Rate of reaction (<i>N&#775;</i>)</html>";
-          input Q.Potential g "<html>Chemical potential (<i>g</i>)</html>";
+          input Q.Current Ndot "Rate of reaction"
+            annotation (Dialog(__Dymola_label="<html><i>N&#775;</i></html>"));
+          input Q.Potential g "Chemical potential"
+            annotation (Dialog(__Dymola_label="<html><i>g</i></html>"));
 
           // Translational advection
-          input Q.Velocity phi[:] "<html>Velocity (&phi;)</html>";
-          input Q.Force mPhidot[:] "<html>Force (<i>m</i>&Phi;dot)</html>";
+          input Q.Velocity phi[:] "Velocity"
+            annotation (Dialog(__Dymola_label="<html>&phi;</html>"));
+          input Q.Force mPhidot[:] "Force"
+            annotation (Dialog(__Dymola_label="<html><i>m</i>&Phi;dot</html>"));
 
           // Thermal advection
           input Q.PotentialAbsolute sT
-            "Product of specific entropy and temperature";
-          input Q.Power Qdot
-            "<html>Rate of thermal advection (<i>Q&#775;</i>)</html>";
+            "Product of specific entropy and temperature"
+            annotation (Dialog(__Dymola_label="<html><i>sT</i></html>"));
+          input Q.Power Qdot "Rate of thermal advection"
+            annotation (Dialog(__Dymola_label="<html><i>Q&#775;</i></html>"));
 
-          output Real x "Value of condition";
+          output Real x "Value of condition"
+            annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
           annotation (Inline=true, Documentation(info="<html>
   <p>This function takes as inputs all the efforts and flows of the associated
   connector.  It should be extended to add an algorithm that maps these inputs
@@ -7290,49 +6850,57 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={225,225,225},
-              thickness=0.5,
-              smooth=Smooth.Bezier,
-              pattern=LinePattern.Dash),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={225,225,225},
-              thickness=0.5,
-              smooth=Smooth.Bezier,
-              pattern=LinePattern.Dash),Line(
-              points={{-82,40},{78,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-82,40},{78,40}},
-              color={225,225,225},
-              visible=crossOver,
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={225,225,225},
-              visible=crossOver,
-              smooth=Smooth.None,
-              thickness=0.5,
-              pattern=LinePattern.Dash),Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={225,225,225},
+            thickness=0.5,
+            smooth=Smooth.Bezier,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={225,225,225},
+            thickness=0.5,
+            smooth=Smooth.Bezier,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-82,40},{78,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-82,40},{78,40}},
+            color={225,225,225},
+            visible=crossOver,
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={225,225,225},
+            visible=crossOver,
+            smooth=Smooth.None,
+            thickness=0.5,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

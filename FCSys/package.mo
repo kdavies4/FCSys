@@ -481,7 +481,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Siversten2005\" class=bookmark>Siversten2005</a>]</td>
-      <td valign=top class=noBorder>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>Journal of Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005.</td>
+      <td valign=top class=noBorder>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Springer1991\" class=bookmark>Springer1991</a>]</td>
@@ -506,6 +506,10 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Toray2010\" class=bookmark>Toray2010</a>]</td>
       <td valign=top class=noBorder>Toray Industries, Inc., \"Carbon Paper,\" <a href = http://www.torayca.com/index2.html>http://www.torayca.com/index2.html</a>, accessed 2010.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Wang2001\" class=bookmark>Wang2001</a>]</td>
+      <td valign=top class=noBorder>Z. H. Wang, C.-Y. Wang, and K. S. Chen, \"Two-phase Flow and Transport in the Air Cathode of Proton Exchange Membrane Fuel Cells</a>,\" <i>J. Power Sources</i>, vol. 94, pp. 40&ndash;50, 2001.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Weber2004\" class=bookmark>Weber2004</a>]</td>

@@ -1,0 +1,16 @@
+// Setup
+removePlots();
+
+createPlot(filename = "LatentHeat.mat",
+ id = 1,
+ position = {0, 0, 600, 450},
+ x = "T_degC",
+ y = {"h_gl"},
+ heading = "Latent Heat of Vaporization vs. Temperature",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Specific enthalpy",
+ bottomTitle = "Temperature in degC");

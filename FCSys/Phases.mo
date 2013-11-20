@@ -7,11 +7,6 @@ package Phases "Mixtures of species"
 
     extends PartialPhase(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
-    parameter Q.NumberAbsolute k_common=0.5 if n_spec > 0
-      "Coupling factor among all the species in the phase" annotation (Dialog(
-          group="Geometry", __Dymola_label=
-            "<html><i>k</i><sub>intra</sub></html>"));
-
     // Conditionally include species.
     parameter Boolean inclH2=false "Include H2" annotation (
       HideResult=true,
@@ -25,16 +20,15 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final kL,
-      final n_chem) if inclH2 constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final k_intra_Phi,
+      final k_intra_Q) if inclH2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_inter=n_inter,
       n_intra=1,
+      n_inter=n_inter,
       kL=kL,
-      k_intra={k_common},
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "H2 model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q}) "H2 model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -56,18 +50,15 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final kL,
-      final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final k_intra_Phi,
+      final k_intra_Q) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_inter=n_inter,
       n_intra=1,
+      n_inter=n_inter,
       kL=kL,
-      k_intra={k_common},
-      initEnergy=if oneTemperature and inclH2 then Init.none else Init.temperature,
-
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "H2O model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q}) "H2O model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -89,18 +80,15 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final kL,
-      final n_chem) if inclN2 constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final k_intra_Phi,
+      final k_intra_Q) if inclN2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_inter=n_inter,
       n_intra=1,
+      n_inter=n_inter,
       kL=kL,
-      k_intra={k_common},
-      initEnergy=if oneTemperature and (inclH2 or inclH2O) then Init.none else
-          Init.temperature,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "N2 model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q}) "N2 model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -122,18 +110,15 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final kL,
-      final n_chem) if inclO2 constrainedby FCSys.Species.Fluid(
+      final n_chem,
+      final k_intra_Phi,
+      final k_intra_Q) if inclO2 constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_inter=n_inter,
       n_intra=1,
+      n_inter=n_inter,
       kL=kL,
-      k_intra={k_common},
-      initEnergy=if oneTemperature and (inclH2 or inclH2O or inclN2) then Init.none
-           else Init.temperature,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "O2 model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q}) "O2 model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -141,6 +126,11 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>O<sub>2</sub> model</html>",
         enable=inclO2),
       Placement(transformation(extent={{50,-10},{70,10}})));
+
+    // Independence factors
+    ExchangeParams common(k_Phi={2,2,2}, k_Q=0) if n_spec > 0
+      "Among species in the phase"
+      annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTrans[Axis.x]
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -189,35 +179,14 @@ package Phases "Mixtures of species"
       "Chemical connector for O2" annotation (Placement(transformation(extent={
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
-    // Aliases
-    Q.Velocity phi[n_trans](
-      each nominal=U.cm/U.s,
-      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
-       and oneVelocity "Velocity";
-    Q.TemperatureAbsolute T(
-      nominal=300*U.K,
-      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
-      oneTemperature "Temperature";
-    // These make the selected states more readable.
-
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-100,26},{-80,46}})));
-    Connectors.DirectNode direct(
-      final n_trans=n_trans,
-      final inclTrans=oneVelocity,
-      final inclTherm=oneTemperature) if n_spec > 0 and (oneVelocity or
-      oneTemperature)
-      "Connector to directly couple velocities and temperatures within the phase"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              4,-60}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
-              26,-52})));
+    Connectors.InertNode commonExch
+      "Connector for exchange among species in the phase"
+      annotation (Placement(transformation(extent={{76,-58},{96,-38}})));
 
-    Connectors.InertNode common
-      "Connector for translational and thermal exchange among all species"
-      annotation (Placement(transformation(extent={{76,-58},{96,-38}}),
-          iconTransformation(extent={{100,18},{120,38}})));
   equation
     // Chemical exchange
     connect(O2.chemical, connO2) annotation (Line(
@@ -235,67 +204,35 @@ package Phases "Mixtures of species"
 
     // Inert exchange
     connect(H2.inter, inter) annotation (Line(
-        points={{-51,-3.8},{-49,-6},{-49,-36},{110,-36}},
+        points={{-51,-3.8},{-51,-36},{110,-36}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(H2O.inter, inter) annotation (Line(
-        points={{-11,-3.8},{-9,-6},{-9,-36},{110,-36}},
+        points={{-11,-3.8},{-11,-36},{110,-36}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(N2.inter, inter) annotation (Line(
-        points={{29,-3.8},{31,-6},{31,-36},{110,-36}},
+        points={{29,-3.8},{29,-36},{110,-36}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(O2.inter, inter) annotation (Line(
-        points={{69,-3.8},{71,-6},{71,-36},{110,-36}},
+        points={{69,-3.8},{69,-36},{110,-36}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2.direct.trans, direct.trans) annotation (Line(
-        points={{-56.2,-9},{-56.2,-60},{4,-60}},
+    connect(H2.intra[1], commonExch.node) annotation (Line(
+        points={{-56,-9},{-56,-48},{86,-48}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2.direct.therm, direct.therm) annotation (Line(
-        points={{-56.2,-9},{-56.2,-60},{4,-60}},
+    connect(H2O.intra[1], commonExch.node) annotation (Line(
+        points={{-16,-9},{-16,-48},{86,-48}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.direct.trans, direct.trans) annotation (Line(
-        points={{-16.2,-9},{-16.2,-60},{4,-60}},
+    connect(N2.intra[1], commonExch.node) annotation (Line(
+        points={{24,-9},{24,-48},{86,-48}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.direct.therm, direct.therm) annotation (Line(
-        points={{-16.2,-9},{-16.2,-60},{4,-60}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(N2.direct.trans, direct.trans) annotation (Line(
-        points={{23.8,-9},{23.8,-60},{4,-60}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(N2.direct.therm, direct.therm) annotation (Line(
-        points={{23.8,-9},{23.8,-60},{4,-60}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(O2.direct.trans, direct.trans) annotation (Line(
-        points={{63.8,-9},{63.8,-60},{4,-60}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(O2.direct.therm, direct.therm) annotation (Line(
-        points={{63.8,-9},{63.8,-60},{4,-60}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(H2.intra[1], common.exchange) annotation (Line(
-        points={{-53,-7},{-53,-48},{86,-48}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(H2O.intra[1], common.exchange) annotation (Line(
-        points={{-13,-7},{-13,-48},{86,-48}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(N2.intra[1], common.exchange) annotation (Line(
-        points={{27,-7},{27,-48},{86,-48}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(O2.intra[1], common.exchange) annotation (Line(
-        points={{67,-7},{67,-48},{86,-48}},
+    connect(O2.intra[1], commonExch.node) annotation (Line(
+        points={{64,-9},{64,-48},{86,-48}},
         color={221,23,47},
         smooth=Smooth.None));
 
@@ -459,14 +396,22 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
     annotation (
-      Documentation(info="<html><p>By default, <code>oneTemperature</code> is true, so all of the species have the 
-    same temperature.  Only one of the species may be used to initialize the temperature.  By default, the 
-    included species with the earliest alphabetical order (H<sub>2</sub>, H<sub>2</sub>O, N<sub>2</sub>, then O<sub>2</sub>)
-    has <code>initEnergy = Init.temperature</code> and the others have <code>initEnergy = Init.none</code>.</p>
+      Documentation(info="<html>    
+    <p>It is usually appropriate to assume that species
+    exist at the same temperature within a phase.  The time constants for thermal exchange (&tau;<sub><i>Q</i>E</sub>)
+    are usually much shorter than the time span of interest due to the very small coupling
+    resistances.  If this is the case, set <code>commonExch.k_Q</code> to zero as <code>final</code>.  
+    This will reduce the index of the problem, so it may be 
+    necessary to eliminate some initial conditions.</p>
+
+    <p>In bulk flow, it is usually appropriate to assume that species travel with the same velocity within
+    a phase.  If this is the case, set the entries of <code>commonExch.k_Phi</code>
+    to zero as <code>final</code>.  This will reduce the index of the problem, so it may be 
+    necessary to eliminate some initial conditions.</p>
     
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-60},{
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
@@ -476,10 +421,7 @@ package Phases "Mixtures of species"
     import assert = FCSys.Utilities.assertEval;
     import Modelica.Math.BooleanVectors.countTrue;
 
-    extends PartialPhase(
-      final oneVelocity=false,
-      final oneTemperature=true,
-      final n_spec=countTrue({'inclC+','incle-'}));
+    extends PartialPhase(final n_spec=countTrue({'inclC+','incle-'}));
 
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
@@ -499,9 +441,8 @@ package Phases "Mixtures of species"
       n_intra=1,
       n_inter=n_inter,
       kL=kL,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=StateSelect.default)) "C+ model" annotation (
+      final k_intra_Phi={ones(n_trans)},
+      final k_intra_Q={0}) "C+ model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -523,9 +464,8 @@ package Phases "Mixtures of species"
       n_trans=n_trans,
       n_intra=1,
       n_inter=0,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=StateSelect.default)) "e- model" annotation (
+      final k_intra_Phi={ones(n_trans)},
+      final k_intra_Q={0}) "e- model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -544,21 +484,13 @@ package Phases "Mixtures of species"
         compact=true));
 
     parameter Boolean inclDL=false "Include the double-layer capacitance"
-      annotation (Dialog(
+      annotation (
+      HideResult=true,
+      Dialog(
         enable='incle-Transfer',
         tab="Assumptions",
-        compact=true), choices(__Dymola_checkBox=true));
-
-    // Aliases
-    Q.Velocity phi[n_trans](
-      each nominal=U.cm/U.s,
-      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
-       and oneVelocity "Velocity";
-    Q.TemperatureAbsolute T(
-      nominal=300*U.K,
-      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
-      oneTemperature "Temperature";
-    // These make the selected states more readable.
+        compact=true),
+      choices(__Dymola_checkBox=true));
 
     Chemistry.Electrochemistry.ElectronTransfer 'e-Transfer'(redeclare
         constant Integer n_trans=1) if 'incle-' and 'incle-Transfer'
@@ -618,24 +550,12 @@ package Phases "Mixtures of species"
               -10,-50},{10,-30}})));
 
   protected
-    Connectors.DirectNode direct(
-      final n_trans=n_trans,
-      final inclTrans=oneVelocity,
-      final inclTherm=oneTemperature) if n_spec > 0 and (oneVelocity or
-      oneTemperature)
-      "Connector to directly couple velocities and temperatures within the phase"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              0,-70}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
-              26,-52})));
-
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-60,14},{-40,34}})));
-
-    Connectors.InertNode electronsSolid
-      "Connection node for drag between e- and C+ (electrical resistance)"
-      annotation (Placement(transformation(extent={{36,-68},{56,-48}}),
-          iconTransformation(extent={{48,-76},{68,-56}})));
+    Connectors.InertNode commonExch
+      "Connector for exchange among all species in the phase"
+      annotation (Placement(transformation(extent={{36,-68},{56,-48}})));
 
   equation
     // Chemical exchange
@@ -658,42 +578,22 @@ package Phases "Mixtures of species"
 
     // Inert exchange
     connect('C+'.inter, inter) annotation (Line(
-        points={{-11,-13.8},{-9,-16},{-9,-46},{70,-46}},
+        points={{-11,-13.8},{-11,-46},{70,-46}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('C+'.direct.trans, direct.trans) annotation (Line(
-        points={{-16.2,-19},{-16.2,-70},{0,-70}},
+    connect('C+'.intra[1], commonExch.node) annotation (Line(
+        points={{-16,-19},{-16,-58},{46,-58}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('C+'.direct.therm, direct.therm) annotation (Line(
-        points={{-16.2,-19},{-16.2,-70},{0,-70}},
+    connect('e-'.intra[1], commonExch.node) annotation (Line(
+        points={{24,-19},{24,-58},{46,-58}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('e-'.direct.trans, direct.trans) annotation (Line(
-        points={{23.8,-19},{23.8,-70},{0,-70}},
+    connect('e-Transfer'.intra, 'C+'.intra[1]) annotation (Line(
+        points={{12,34},{-16,34},{-16,-19}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('e-'.direct.therm, direct.therm) annotation (Line(
-        points={{23.8,-19},{23.8,-70},{0,-70}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('C+'.intra[1], electronsSolid.exchange) annotation (Line(
-        points={{-13,-17},{-13,-58},{46,-58}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('e-'.intra[1], electronsSolid.exchange) annotation (Line(
-        points={{27,-17},{27,-58},{46,-58}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('e-Transfer'.direct.trans, 'C+'.direct.trans) annotation (Line(
-        points={{12,34},{6,34},{6,34},{-16,34},{-16,-19},{-16.2,-19}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('e-Transfer'.direct.therm, 'C+'.direct.therm) annotation (Line(
-        points={{12,34},{4,34},{4,34},{-16.2,34},{-16.2,-19}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(doubleLayer.direct, 'e-Transfer'.direct) annotation (Line(
+    connect(doubleLayer.intra, 'e-Transfer'.intra) annotation (Line(
         points={{-16,34},{12,34}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -712,7 +612,7 @@ package Phases "Mixtures of species"
         color={47,107,251},
         smooth=Smooth.None));
     connect(doubleLayer.amagat, amagat) annotation (Line(
-        points={{-20,34},{-62,34},{-62,24},{-70,24},{-70,24}},
+        points={{-20,34},{-62,34},{-62,24},{-70,24}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -812,10 +712,6 @@ package Phases "Mixtures of species"
     extends PartialPhase(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}),
         n_inter=1);
 
-    parameter Q.NumberAbsolute k_EOD=0.005 if n_spec > 0
-      "Coupling factor for electro-osmotic drag" annotation (Dialog(group=
-            "Geometry", __Dymola_label="<html><i>k</i><sub>EOD</sub></html>"));
-
     // Conditionally include species.
     parameter Boolean 'inclSO3-'=false
       "Include C19HF37O5S- (abbreviated as SO3-)" annotation (
@@ -832,16 +728,17 @@ package Phases "Mixtures of species"
     replaceable FCSys.Species.'SO3-'.Ionomer.Fixed 'SO3-'(
       final n_trans,
       final n_inter,
-      final kL) if 'inclSO3-' constrainedby FCSys.Species.Solid(
+      final kL,
+      final k_intra_Phi,
+      final k_intra_Q) if 'inclSO3-' constrainedby FCSys.Species.Solid(
       n_trans=n_trans,
-      n_intra=2,
+      n_intra=3,
       n_inter=n_inter,
       kL=kL,
-      k_intra={Modelica.Constants.inf,Modelica.Constants.inf},
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "SO3- model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
+          waterSolid.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q,protonsSolid.k_Q,waterSolid.k_Q}) "SO3- model"
+      annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -863,17 +760,17 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final n_chem,
-      final kL) if 'inclH+' constrainedby FCSys.Species.Fluid(
+      final kL,
+      final k_intra_Phi,
+      final k_intra_Q) if 'inclH+' constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_intra=2,
+      n_intra=3,
       n_inter=n_inter,
       kL=kL,
-      k_intra={1,k_EOD},
-      initEnergy=if oneTemperature then Init.none else Init.temperature,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "H+ model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
+          protonsWater.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q,protonsSolid.k_Q,protonsWater.k_Q}) "H+ model"
+      annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -895,17 +792,17 @@ package Phases "Mixtures of species"
       final n_trans,
       final n_inter,
       final n_chem,
-      final kL) if inclH2O constrainedby FCSys.Species.Fluid(
+      final kL,
+      final k_intra_Phi,
+      final k_intra_Q) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
-      n_intra=2,
+      n_intra=3,
       n_inter=0,
       kL=kL,
-      k_intra={1,k_EOD},
-      initEnergy=if oneTemperature then Init.none else Init.temperature,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=if oneTemperature then StateSelect.default else StateSelect.prefer))
-      "H2O model" annotation (
+      k_intra_Phi={common.k_Phi[cartTrans],protonsWater.k_Phi[cartTrans],
+          waterSolid.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q,protonsWater.k_Q,waterSolid.k_Q}) "H2O model"
+      annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -951,45 +848,46 @@ package Phases "Mixtures of species"
               {{-14,60},{6,80}}), iconTransformation(extent={{10,-50},{30,-30}})));
     Connectors.Chemical 'connH+'[1](each final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
-              {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
+              {-54,60},{-34,80}}),iconTransformation(extent={{-30,-50},{-10,-30}})));
 
-    // Aliases
-    Q.Velocity phi[n_trans](
-      each nominal=U.cm/U.s,
-      each stateSelect=StateSelect.prefer) = direct.trans.phi if n_spec > 0
-       and oneVelocity "Velocity";
-    Q.TemperatureAbsolute T(
-      nominal=300*U.K,
-      stateSelect=StateSelect.prefer) = direct.therm.T if n_spec > 0 and
-      oneTemperature "Temperature";
-    // These make the selected states more readable.
+    // Independence factors
+    ExchangeParams common(k_Q=0) if n_spec > 0 "Among all species in the phase"
+      annotation (Dialog(group="Exchange (click to edit)"));
+    ExchangeParams protonsSolid(final k_Phi, k_Q=Modelica.Constants.inf) if
+      'inclSO3-' or 'inclH+'
+      "<html>Between H<sup>+</sup> and SO<sub>3</sub><sup>-</sup>)</html>"
+      annotation (Dialog(group="Exchange (click to edit)"));
+    ExchangeParams protonsWater(k_Phi=fill(200, 3), k_Q=Modelica.Constants.inf)
+      if 'inclH+' or inclH2O
+      "<html>Between H<sup>+</sup> and H<sub>2</sub>O</html>"
+      annotation (Dialog(group="Exchange (click to edit)"));
+
+    ExchangeParams waterSolid(k_Q=Modelica.Constants.inf) if 'inclSO3-' or
+      inclH2O
+      "<html>Between H<sub>2</sub>O and SO<sub>3</sub><sup>-</sup></html>"
+      annotation (Dialog(group="Exchange (click to edit)"));
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
-    Connectors.DirectNode direct(
-      final n_trans=n_trans,
-      final inclTrans=oneVelocity,
-      final inclTherm=oneTemperature) if n_spec > 0 and (oneVelocity or
-      oneTemperature)
-      "Connector to directly couple velocities and temperatures within the phase"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={
-              24,-64}), iconTransformation(extent={{-10,-10},{10,10}}, origin={
-              26,-52})));
 
-    Connectors.InertNode protonsSolid
-      "Connection node for drag between H+ and SO3- (electrical resistance)"
-      annotation (Placement(transformation(extent={{56,-38},{76,-18}}),
-          iconTransformation(extent={{48,-76},{68,-56}})));
-    Connectors.InertNode waterSolid
-      "Connection node for drag between H2O and SO3-" annotation (Placement(
+    Connectors.InertNode commonExch
+      "Connector for exchange among all species in the phase" annotation (
+        Placement(transformation(extent={{56,-38},{76,-18}}),
+          iconTransformation(extent={{86,-50},{106,-30}})));
+    Connectors.InertNode protonsSolidExch
+      "Connector for exchange between H+ and SO3-" annotation (Placement(
           transformation(extent={{56,-50},{76,-30}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
-    Connectors.InertNode EOD
-      "Connection node for electro-osmotic drag (between H+ and H2O)"
-      annotation (Placement(transformation(extent={{56,-62},{76,-42}}),
-          iconTransformation(extent={{48,-76},{68,-56}})));
+    Connectors.InertNode protonsWaterExch
+      "Connector for exchange between H+ and H2O" annotation (Placement(
+          transformation(extent={{56,-62},{76,-42}}), iconTransformation(extent
+            ={{48,-76},{68,-56}})));
+    Connectors.InertNode waterSolidExch
+      "Connector for exchange between H2O and SO3-" annotation (Placement(
+          transformation(extent={{56,-74},{76,-54}}), iconTransformation(extent
+            ={{48,-76},{68,-56}})));
 
   equation
     // Chemical exchange
@@ -1004,57 +902,45 @@ package Phases "Mixtures of species"
 
     // Inert exchange
     connect('SO3-'.inter, inter) annotation (Line(
-        points={{49,16.2},{52,16.2},{52,-16},{90,-16}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('SO3-'.direct.trans, direct.trans) annotation (Line(
-        points={{43.8,11},{43.8,-64},{24,-64}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('SO3-'.direct.therm, direct.therm) annotation (Line(
-        points={{43.8,11},{43.8,-64},{24,-64}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('H+'.direct.trans, direct.trans) annotation (Line(
-        points={{-36.2,11},{-36.2,-64},{24,-64}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect('H+'.direct.therm, direct.therm) annotation (Line(
-        points={{-36.2,11},{-36.2,-64},{24,-64}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(H2O.direct.trans, direct.trans) annotation (Line(
-        points={{3.8,11},{3.8,-64},{24,-64}},
-        color={221,23,47},
-        smooth=Smooth.None));
-    connect(H2O.direct.therm, direct.therm) annotation (Line(
-        points={{3.8,11},{3.8,-64},{24,-64}},
+        points={{49,16.2},{49,-16},{90,-16}},
         color={221,23,47},
         smooth=Smooth.None));
 
-    connect('SO3-'.intra[1], protonsSolid.exchange) annotation (Line(
-        points={{47,13},{47,-28},{66,-28}},
+    connect('SO3-'.intra[1], commonExch.node) annotation (Line(
+        points={{44,11},{44,-28},{66,-28}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('SO3-'.intra[2], waterSolid.exchange) annotation (Line(
-        points={{47,13},{47,-40},{66,-40}},
+    connect('SO3-'.intra[2], protonsSolidExch.node) annotation (Line(
+        points={{44,11},{44,-40},{66,-40}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.intra[1], protonsSolid.exchange) annotation (Line(
-        points={{-33,13},{-33,-28},{66,-28}},
+    connect('SO3-'.intra[3], waterSolidExch.node) annotation (Line(
+        points={{44,11},{44,-64},{66,-64}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.intra[2], EOD.exchange) annotation (Line(
-        points={{-33,13},{-33,-52},{66,-52}},
+    connect('H+'.intra[1], commonExch.node) annotation (Line(
+        points={{-36,11},{-36,-28},{66,-28}},
+        color={221,23,47},
+        smooth=Smooth.None));
+    connect('H+'.intra[2], protonsSolidExch.node) annotation (Line(
+        points={{-36,11},{-36,-40},{66,-40}},
+        color={221,23,47},
+        smooth=Smooth.None));
+    connect('H+'.intra[3], protonsWaterExch.node) annotation (Line(
+        points={{-36,11},{-36,-52},{66,-52}},
         color={221,23,47},
         smooth=Smooth.None));
 
-    connect(H2O.intra[1], waterSolid.exchange) annotation (Line(
-        points={{7,13},{7,-40},{66,-40}},
+    connect(H2O.intra[1], commonExch.node) annotation (Line(
+        points={{4,11},{4,-28},{66,-28}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.intra[2], EOD.exchange) annotation (Line(
-        points={{7,13},{7,-52},{66,-52}},
+    connect(H2O.intra[2], waterSolidExch.node) annotation (Line(
+        points={{4,11},{4,-64},{66,-64}},
+        color={221,23,47},
+        smooth=Smooth.None));
+    connect(H2O.intra[3], protonsWaterExch.node) annotation (Line(
+        points={{4,11},{4,-52},{66,-52}},
         color={221,23,47},
         smooth=Smooth.None));
 
@@ -1188,13 +1074,7 @@ package Phases "Mixtures of species"
       Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
     </ol</p>
-    
-    <p>By default, <code>oneTemperature</code> is true, so all of the species have the 
-    same temperature.  SO<sub>3</sub><sup>-</sup> has <code>initEnergy = Init.temperature</code>, so
-    it should be used to initialize the temperature.  If SO<sub>3</sub><sup>-</sup> is not included, 
-    then the <code>initEnergy</code>
-    of one of the other species should be set to something other than <code>Init.none</code>.</p>
-    
+        
     <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> 
     for additional assumptions.
     For more information, please see the
@@ -1206,8 +1086,7 @@ package Phases "Mixtures of species"
   end Ionomer;
 
   model Liquid "Liquid phase"
-    extends PartialPhase(final n_spec=if inclH2O then 1 else 0, final
-        oneTemperature=true);
+    extends PartialPhase(final n_spec=if inclH2O then 1 else 0);
 
     // Conditionally include species.
     parameter Boolean inclH2O=false "Include H2O" annotation (
@@ -1219,6 +1098,10 @@ package Phases "Mixtures of species"
         __Dymola_label="<html>Water (H<sub>2</sub>O)</html>",
         __Dymola_joinNext=true));
 
+    // Auxiliary variables (for analysis)
+    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
+      n_spec > 0 and environment.analysis "Total thermodynamic pressure";
+
     replaceable FCSys.Species.H2O.Liquid.Fixed H2O(
       final n_trans,
       final n_inter,
@@ -1226,10 +1109,7 @@ package Phases "Mixtures of species"
       final n_chem) if inclH2O constrainedby FCSys.Species.Fluid(
       n_trans=n_trans,
       n_inter=n_inter,
-      kL=kL,
-      phi(each stateSelect=if oneVelocity then StateSelect.default else
-            StateSelect.prefer),
-      T(stateSelect=StateSelect.default)) "H2O model" annotation (
+      kL=kL) "H2O model" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -1271,23 +1151,29 @@ package Phases "Mixtures of species"
               -70}})));
     Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-24,40},{-4,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+              {{-40,40},{-20,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
 
+    Chemistry.SurfaceTensionContact surfaceTension(
+      final n_trans=n_trans,
+      final V_w=V,
+      final V=product(L)) if inclH2O
+      "Effect of surface tension on chemical potential" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={-30,30})));
+
   equation
     // Chemical exchange
-    connect(H2O.chemical, connH2O) annotation (Line(
-        points={{-14,-1},{-14,50}},
-        color={255,195,38},
-        smooth=Smooth.None));
 
     // Inert exchange
     connect(H2O.inter, inter) annotation (Line(
-        points={{-1,-13.8},{1,-16},{1,-30},{30,-30}},
+        points={{-1,-13.8},{-1,-30},{30,-30}},
         color={221,23,47},
         smooth=Smooth.None));
 
@@ -1339,6 +1225,14 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
+    connect(surfaceTension.nonwetting, connH2O[1]) annotation (Line(
+        points={{-30,36},{-30,50}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(surfaceTension.wetting, H2O.chemical[1]) annotation (Line(
+        points={{-30,30},{-30,20},{-14,20},{-14,-1}},
+        color={255,195,38},
+        smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation of the
@@ -1364,32 +1258,22 @@ protected
     parameter Q.NumberAbsolute k[Axis](
       each min=Modelica.Constants.small,
       each final nominal=1) = {1,1,1} if n_spec > 0
-      "Length factor for diffusive transport" annotation (Dialog(group=
+      "Length factors for diffusive transport" annotation (Dialog(group=
             "Geometry", __Dymola_label="<html><b><i>k</i></b></html>"));
-    inner parameter Q.NumberAbsolute k_inter[n_inter]=ones(n_inter) if n_spec
-       > 0 "Coupling factors with other phases" annotation (Dialog(group=
-            "Geometry", __Dymola_label="<html><i>k</i><sub>inter</sub></html>"));
     parameter Integer n_trans=1 "Number of transport axes"
       annotation (HideResult=true);
     // This cannot be an inner/outer parameter in Dymola 2014.
-
-    // Assumptions
-    inner parameter Boolean oneVelocity=false "Same velocity for all species"
-      annotation (Dialog(
-        tab="Assumptions",
-        enable=n_spec > 1,
-        compact=true), choices(__Dymola_checkBox=true));
-
-    inner parameter Boolean oneTemperature=true
-      "Same temperature for all species" annotation (Dialog(
-        tab="Assumptions",
-        enable=n_spec > 1,
-        compact=true), choices(__Dymola_checkBox=true));
-    // Note:  Ideally, these would be conditional (if n_spec > 0),
-    // but that creates warnings in Dymola 2014:
-    //   "Current version of the Modelica translator can only handle
-    //    conditional components with fixed condition."
     inner Q.Volume V if n_spec > 0 "Volume of the phase";
+
+    // Independence factors
+    inner parameter Q.NumberAbsolute k_inter_Phi[n_inter, n_trans]=ones(n_inter,
+        n_trans) if n_spec > 0 "For translational exchange with other phases"
+      annotation (Dialog(group="Independence factors", __Dymola_label=
+            "<html><i>k</i><sub>inter &Phi;</sub></html>"));
+    inner parameter Q.NumberAbsolute k_inter_Q[n_inter]=ones(n_inter) if n_spec
+       > 0 "For thermal exchange with other phases" annotation (Dialog(group=
+            "Independence factors", __Dymola_label=
+            "<html><i>k</i><sub>inter <i>Q</i></sub></html>"));
 
     // Auxiliary variables (for analysis)
     output Q.Number epsilon=V/product(L) if n_spec > 0 and environment.analysis
@@ -1412,7 +1296,7 @@ protected
         missingInnerMessage="This model should be used within a subregion model.
 ");
     outer parameter Boolean inclTrans[Axis]
-      "true, if each pairs of boundaries is included" annotation (
+      "true, if each pair of boundaries is included" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
 
@@ -1431,53 +1315,72 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics={
+          Ellipse(
+            extent={{-40,100},{40,20}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{20,-4},{100,-84}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Ellipse(
+            extent={{-100,-4},{-20,-84}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={225,225,225}),
+          Polygon(
+            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
+                {60,-84}},
+            pattern=LinePattern.None,
+            fillPattern=FillPattern.Sphere,
+            smooth=Smooth.None,
+            fillColor={225,225,225},
+            lineColor={0,0,0}),
+          Line(
+            points={{-60,-84.1},{60,-84.1}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{34.5,80},{94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{-34.5,80},{-94.5,-24}},
+            color={127,127,127},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(graphics));
   end PartialPhase;
 
+public
+  record ExchangeParams "Independence factors for an exchange process"
+    extends Modelica.Icons.Record;
+
+    parameter Q.NumberAbsolute k_Phi[Axis]={1,1,1} "Translational" annotation (
+        Evaluate=true, Dialog(__Dymola_label=
+            "<html><i>k</i><sub>&Phi;</sub></html>"));
+    parameter Q.NumberAbsolute k_Q=1 "Thermal" annotation (Evaluate=true,
+        Dialog(__Dymola_label="<html><i>k<sub>Q</sub></i></html>"));
+
+  end ExchangeParams;
   annotation (Documentation(info="
 <html><p>The graphite, ionomer, and
 liquid phases can only be used with a compressible phase (gas).</p>

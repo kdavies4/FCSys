@@ -7,6 +7,7 @@ package Chemistry "Models associated with chemical reactions"
 
     model Overpotential "Demonstrate the Butler-Volmer overpotential"
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       output Q.Potential w=-'e-Transfer'.Deltag "Overpotential";
       output Q.Current I_A=-'e-Transfer'.I/U.A if environment.analysis
@@ -29,7 +30,7 @@ package Chemistry "Models associated with chemical reactions"
         inclTransY=false,
         inclTransZ=false,
         chemical(redeclare constant Integer n_trans=1),
-        redeclare Modelica.Blocks.Sources.Sine source(
+        redeclare Modelica.Blocks.Sources.Sine set(
           freqHz=1,
           amplitude=100*U.A,
           phase=1.5707963267949)) annotation (Placement(transformation(
@@ -42,7 +43,7 @@ package Chemistry "Models associated with chemical reactions"
         redeclare constant Integer n_trans=1,
         w(fixed=true))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-      Conditions.ByConnector.Direct.Efforts substrate(inclTransY=false,
+      Conditions.ByConnector.Inter.Efforts substrate(inclTransY=false,
           inclTransZ=false)
         annotation (Placement(transformation(extent={{50,10},{70,-10}})));
 
@@ -65,12 +66,12 @@ package Chemistry "Models associated with chemical reactions"
           points={{6,30},{20,30},{20,0},{6,0}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(substrate.direct, doubleLayer.direct) annotation (Line(
+      connect(substrate.inter, doubleLayer.intra) annotation (Line(
           points={{60,10},{60,20},{0,20},{0,26}},
           color={221,23,47},
           smooth=Smooth.None));
-      connect('e-Transfer'.direct, substrate.direct) annotation (Line(
-          points={{0,4},{0,20},{60,20},{60,10}},
+      connect(substrate.inter, 'e-Transfer'.intra) annotation (Line(
+          points={{60,10},{60,20},{0,20},{0,4}},
           color={221,23,47},
           smooth=Smooth.None));
       annotation (
@@ -89,10 +90,10 @@ package Chemistry "Models associated with chemical reactions"
 
       HOR hOR(n_trans=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Conditions.ByConnector.Chemical.Potential H2(sT=1000*U.K, source(y=U.A))
+      Conditions.ByConnector.Chemical.Potential H2(sT=1000*U.K, set(y=U.A))
         annotation (Placement(transformation(extent={{-40,-10},{-20,-30}})));
       Conditions.ByConnector.Chemical.Current 'e-'(sT=2000*U.K, redeclare
-          Modelica.Blocks.Sources.Ramp source(
+          Modelica.Blocks.Sources.Ramp set(
           height=100*U.A,
           duration=100,
           startTime=10,
@@ -106,15 +107,15 @@ package Chemistry "Models associated with chemical reactions"
     equation
       connect(hOR.'connH+', 'H+'.chemical) annotation (Line(
           points={{4,0},{4,-8},{30,-8},{30,-16}},
-          color={221,23,47},
+          color={255,195,38},
           smooth=Smooth.None));
       connect(H2.chemical, hOR.connH2) annotation (Line(
           points={{-30,-16},{-30,-8},{-4,-8},{-4,0}},
-          color={221,23,47},
+          color={255,195,38},
           smooth=Smooth.None));
       connect('e-'.chemical, hOR.'conne-') annotation (Line(
           points={{0,-16},{0,0}},
-          color={221,23,47},
+          color={255,195,38},
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -196,14 +197,15 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -297,17 +299,148 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
+
+public
+  model SurfaceTension "Surface tension"
+
+    extends FCSys.Icons.Names.Top2;
+
+    // Geometric parameters
+    constant Integer n_trans(min=0, max=3)
+      "Number of components of translational momentum" annotation (Dialog(group
+          ="Geometry", __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+    // Note:  This must be a constant rather than a parameter due to errors
+    // in Dymola 2014.
+    Q.LengthReciprocal overR=1/U.mm "Reciprocal of characteristic radius"
+      annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html>1/<i>R</i></html>"));
+
+    // Material properties
+    parameter Q.VolumeSpecific v_w=Characteristics.H2O.Liquid.v_Tp()
+      "Specific volume of the wetting phase" annotation (Dialog(group=
+            "Material properties", __Dymola_label=
+            "<html><i>v</i><sub>w</sub></html>"));
+    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m "Surface tension"
+      annotation (Dialog(group="Material properties", __Dymola_label=
+            "<html>&gamma;</html>"));
+
+    // Aliases
+    Q.Pressure Deltap "Capillary pressure";
+
+    // Auxiliary variables (for analysis only)
+    output Q.Potential Deltag=wetting.g - nonwetting.g if environment.analysis
+      "Potential of wetting phase w.r.t. nonwetting phase";
+
+    Connectors.Chemical wetting(final n_trans=n_trans)
+      "Chemical interface to the wetting phase" annotation (Placement(
+          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
+            ={{-10,-10},{10,10}})));
+    Connectors.Chemical nonwetting(final n_trans=n_trans)
+      "Chemical interface to the nonwetting phase" annotation (Placement(
+          transformation(extent={{50,-10},{70,10}}), iconTransformation(extent=
+              {{50,-10},{70,10}})));
+
+  protected
+    outer Conditions.Environment environment "Environmental conditions";
+
+  equation
+    // Aliases
+    Deltap = 2*gamma*overR "Young-Laplace equation";
+
+    // Streams
+    wetting.phi = inStream(nonwetting.phi[:]);
+    nonwetting.phi = inStream(wetting.phi[:]);
+    wetting.sT = inStream(nonwetting.sT);
+    nonwetting.sT = inStream(wetting.sT);
+
+    // Potentials
+    nonwetting.g = wetting.g + v_w*Deltap "Kelvin equation (see assumption #1)";
+
+    // Conservation (without storage)
+    0 = wetting.Ndot + nonwetting.Ndot "Material";
+
+    annotation (
+      Documentation(info="<html>
+    <p>The characteristic radius (<i>R</i>) is the harmonic mean of the (2) principle radii of the liquid volume.</p>
+    
+    <p>The default surface tension (&gamma; = 0.0663 N/m) is for saturated water at 60 &deg;C, interpolated from
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924].  Note that the surface tension in
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>] is incorrect (likely unit conversion error).</p>  
+    
+    <p>Assumptions:<ol>
+    <li>The fluid is incompressible and isothermal across the surface layer.<li></p>
+    
+    </html>"),
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={Ellipse(
+            extent={{30,30},{-30,-30}},
+            lineColor={47,107,251},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Sphere), Ellipse(extent={{30,30},{-30,-30}},
+              lineColor={0,0,0})}),
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics));
+  end SurfaceTension;
+
+  model SurfaceTensionContact "Surface tension, with contact angle"
+    extends SurfaceTension(final overR=cos(theta)/(2*sqrt(kappa)));
+    // ** *J(V_w/V)
+
+    // Geometry
+    parameter Q.Volume V=U.cc "Total volume" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>V</i></html>"));
+    Q.Volume V_w=U.cc "Volume of the wetting phase" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>V</i><sub>w</sub></html>"));
+
+    // Material properties
+    parameter Q.Angle theta=140*U.degree "Contact angle" annotation (Dialog(
+          group="Material properties", __Dymola_label="<html>&theta;</html>"));
+    parameter Q.Area kappa=6.46e-5*U.mm^2 "Permeability" annotation (Dialog(
+          group="Material properties", __Dymola_label="<html>&kappa;</html>"));
+
+    replaceable function J = FCSys.Characteristics.H2O.J "Leverett J function"
+      annotation (choicesAllMatching=true, Dialog(group="Material properties"));
+
+    annotation (
+      defaultComponentName="surfaceTension",
+      Documentation(info="<html>
+    
+    **Note modified Leverett correlation
+    
+    <p>The default permeability (&kappa; = 6.46&times;10<sup>-5</sup> mm<sup>2</sup>) is based on 
+    the air permeability of SGL Carbon Group Sigracet&reg; 10 BA 
+    [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].  
+    Wang et al. use &kappa; = 10<sup>-5</sup> mm<sup>2</sup>
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>].</p>
+  
+    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurments listed at 
+    <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a> 
+    (accessed Nov. 22, 2103).</p></html>"),
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={
+          Rectangle(
+            extent={{40,-40},{-40,-20}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(points={{-40,-20},{40,-20}}, color={0,0,0}),
+          Line(points={{0,-40},{20,-20}}, color={0,0,0}),
+          Line(points={{-20,-40},{0,-20}}, color={0,0,0}),
+          Line(points={{20,-40},{40,-20}}, color={0,0,0}),
+          Line(points={{-40,-40},{-20,-20}}, color={0,0,0})}));
+  end SurfaceTensionContact;
 
   package Electrochemistry "Models associated with electrochemical reactions"
     extends Modelica.Icons.Package;
@@ -317,7 +450,7 @@ package Chemistry "Models associated with chemical reactions"
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Evaluate=
-            true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
       parameter Q.Area A=10*U.m^2 "Surface area"
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
       parameter Q.Length L=1e-10*U.m "Length of the gap"
@@ -363,7 +496,7 @@ package Chemistry "Models associated with chemical reactions"
         "Chemical connector on the 2nd side" annotation (Placement(
             transformation(extent={{50,-10},{70,10}}), iconTransformation(
               extent={{50,-10},{70,10}})));
-      Connectors.Direct direct(final n_trans=n_trans)
+      Connectors.Intra intra(final n_trans=n_trans)
         "Translational and thermal interface with the substrate" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -382,8 +515,8 @@ package Chemistry "Models associated with chemical reactions"
 
       // Streams
       if setVelocity then
-        negative.phi = direct.trans.phi;
-        positive.phi = direct.trans.phi;
+        negative.phi = intra.phi;
+        positive.phi = intra.phi;
       else
         negative.phi = inStream(positive.phi);
         positive.phi = inStream(negative.phi);
@@ -394,14 +527,12 @@ package Chemistry "Models associated with chemical reactions"
       // Conservation
       0 = negative.Ndot + positive.Ndot "Material (no storage)";
       zeros(n_trans) = Data.m*(actualStream(negative.phi) - actualStream(
-        positive.phi))*I + direct.trans.mPhidot
-        "Translational momentum (no storage)";
+        positive.phi))*I + intra.mPhidot "Translational momentum (no storage)";
       der(C*w)/U.s = Data.z*I
         "Electrical energy (reversible; simplified using material conservation and divided by potential)";
-      0 = direct.therm.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
+      0 = intra.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
          - actualStream(positive.phi)*actualStream(positive.phi))*I*Data.m/2 +
-        direct.trans.phi*direct.trans.mPhidot
-        "Mechanical and thermal energy (no storage)";
+        intra.phi*intra.mPhidot "Mechanical and thermal energy (no storage)";
 
       annotation (
         Documentation(info="<html><p>The capacitance (<i>C</i>) is calculated from the surface area (<i>A</i>), length of the gap (<i>L</i>), and the permittivity (&epsilon;) assuming that the 
@@ -437,7 +568,7 @@ package Chemistry "Models associated with chemical reactions"
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Evaluate=
-            true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
       parameter Integer z=-1 "Charge number";
       parameter Q.Potential E_A=0 "Activation energy" annotation (Dialog(group=
@@ -446,10 +577,8 @@ package Chemistry "Models associated with chemical reactions"
       parameter Q.NumberAbsolute alpha(max=1) = 0.5
         "Charge transfer coefficient" annotation (Dialog(group=
               "Chemical parameters", __Dymola_label="<html>&alpha;</html>"));
-      parameter Q.Temperature T=300*U.K;
-      parameter Q.Current I0=U.A
-        "Exchange current (including the activation reference)";
-
+      parameter Q.Current I0=U.A "Exchange current @ 300 K"
+        annotation (Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
       parameter Boolean fromI=true
         "<html>Invert the Butler-Volmer equation, if &alpha;=&frac12;</html>"
         annotation (Dialog(tab="Advanced", compact=true), choices(
@@ -465,10 +594,11 @@ package Chemistry "Models associated with chemical reactions"
               extent={{50,-10},{70,10}})));
 
       // Aliases
+      Q.TemperatureAbsolute T(start=300*U.K) "Reaction rate";
       Q.Current I(start=0) "Reaction rate";
-      Q.Potential Deltag "Potential difference";
+      Q.Potential Deltag(start=0) "Potential difference";
 
-      Connectors.Direct direct(final n_trans=n_trans)
+      Connectors.Intra intra(final n_trans=n_trans)
         "Translational and thermal interface with the substrate" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -477,6 +607,7 @@ package Chemistry "Models associated with chemical reactions"
       // Aliases
       I = positive.Ndot;
       Deltag = positive.g - negative.g;
+      T = intra.T;
 
       // Streams
       negative.phi = inStream(positive.phi);
@@ -486,15 +617,16 @@ package Chemistry "Models associated with chemical reactions"
 
       // Reaction rate
       if abs(alpha - 0.5) < Modelica.Constants.eps and fromI then
-        Deltag = 2*T*asinh(0.5*exp(E_A/T)*I/I0);
+        Deltag = 2*T*asinh(0.5*exp(E_A*(1/T - 1/(300*U.K)))*I/I0);
       else
-        I*exp(E_A/T) = I0*(exp((1 - alpha)*Deltag/T) - exp(-alpha*Deltag/T));
+        I*exp(E_A*(1/T - 1/(300*U.K))) = I0*(exp((1 - alpha)*Deltag/T) - exp(-
+          alpha*Deltag/T));
       end if;
 
       // Conservation (without storage)
       0 = negative.Ndot + positive.Ndot "Material";
-      zeros(n_trans) = direct.trans.mPhidot "Translational momentum";
-      0 = Deltag*I + direct.therm.Qdot "Energy";
+      zeros(n_trans) = intra.mPhidot "Translational momentum";
+      0 = Deltag*I + intra.Qdot "Energy";
       // Note:  Energy and momentum cancel among the stream terms.
 
       annotation (

@@ -905,6 +905,35 @@ recognized by Dymola.</p>
 
   package Bases "Sets of base constants and units"
     extends Modelica.Icons.Package;
+    record FC
+      "Base constants and units that are well-scaled for fuel cell simulation and analysis"
+      extends Base(
+        final R_inf=1e-1*10973731.568539,
+        final c=1e-1*299792458,
+        final R_K=1e10*25812.8074434,
+        final k_J=483597.870e9*sqrt(S*s/1e4)/m);
+      // Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
+      annotation (Documentation(info="<html><p>The values of this record result in the following values for the base SI units
+  (besides cd = 1, which is the default):
+       <ul>
+       <li>A &asymp; 1e-5 (&rArr; 1e3 C &asymp; 1)
+       <li>K &asymp; 8.617</li>
+       <li>kg = 1e4 (&rArr; 0.1 g = 1)</li>
+       <li>m = 10 (&rArr; 10 cm = 1)</li>
+       <li>mol &asymp; 96.485 (&rArr; 0.01036 mol &asymp;1)</li>
+       <li>s = 100 (&rArr; 10 ms = 1)</li></ul>
+   which are well-scaled for the states and efforts of a single-cell
+   PEMFC.  Also, with these settings:
+       <ul>
+       <li>10 m/s &asymp; 1</li>
+       <li>9.872e-5 atm &asymp; 1</li></ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            executeCall=FCSys.Units.setup() "Re-initialize the units."));
+
+    end FC;
+
     record Gaussian
       "<html>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</html>"
       extends Base(final c=1,final R_K=25812.8074434/(299792458*1e-7));
@@ -974,35 +1003,6 @@ encompass other systems of units.</p>
             executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
     end Stoney;
-
-    record ScaledFC
-      "Base constants and units that are well-scaled for fuel cell simulation and analysis"
-      extends Base(
-        final R_inf=1e-1*10973731.568539,
-        final c=1e-1*299792458,
-        final R_K=1e10*25812.8074434,
-        final k_J=483597.870e9*sqrt(S*s/1e4)/m);
-      // Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
-      annotation (Documentation(info="<html><p>The values of this record result in the following values for the base SI units
-  (besides cd = 1, which is the default):
-       <ul>
-       <li>A &asymp; 1e-5 (&rArr; 1e3 C &asymp; 1)
-       <li>K &asymp; 8.617</li>
-       <li>kg = 1e4 (&rArr; 0.1 g = 1)</li>
-       <li>m = 10 (&rArr; 10 cm = 1)</li>
-       <li>mol &asymp; 96.485 (&rArr; 0.01036 mol &asymp;1)</li>
-       <li>s = 100 (&rArr; 10 ms = 1)</li></ul>
-   which are well-scaled for the states and efforts of a single-cell
-   PEMFC.  Also, with these settings:
-       <ul>
-       <li>10 m/s &asymp; 1</li>
-       <li>9.872e-5 atm &asymp; 1</li></ul></p>
-
-<p>For more information, please see the documentation for the
-  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
-            executeCall=FCSys.Units.setup() "Re-initialize the units."));
-
-    end ScaledFC;
 
     record SIAK
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</html>"
@@ -1314,7 +1314,7 @@ encompass other systems of units.</p>
   // Base physical constants and units
   // ------------------------------------------------------------------------
 
-  replaceable constant Bases.SImols base constrainedby Bases.Base
+  replaceable constant Bases.LH base constrainedby Bases.SImols
     "Scalable base constants and units";
   // Note:  The base constants and units may be replaced to suit the scale
   // of the physical system.
@@ -1322,10 +1322,9 @@ encompass other systems of units.</p>
   // in FCSys.Regions.Examples.AnGDL with a tolerance of 0.0001 in Dymola
   // 2014:
   //   Gaussian, LH, Stoney, SIAK, SIKmol, SIKs, SImmol, SIms, SImols
-  // Of these, SImols simulates the best (fewest solver warnings with
-  // tolerance of 0.0001) with FCSys.Subregions.Examples.BinaryDiffusion.
-  // These require a tighter tolerance to achieve the same smoothness:
-  //   Hartree, ScaledFC, SIAm, SIAs, Base
+  // 2013/12/2:  LH is the only unit system that has steady, zero velocity
+  // when FCSys.Subregions.Examples.Subregions is initialized with uniform
+  // pressure.
   final constant Q.Angle rad=base.rad "radian";
   final constant Q.Wavenumber R_inf=base.R_inf
     "<html>Rydberg constant (<i>R</i><sub>&infin;</sub>)</html>";

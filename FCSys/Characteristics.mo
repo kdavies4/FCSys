@@ -36,7 +36,7 @@ package Characteristics
       PropertiesRT H2(redeclare package Data = FCSys.Characteristics.H2.Gas)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
       PropertiesRT H2IG(redeclare package Data = FCSys.Characteristics.H2.Gas (
-              b_v=[1], n_v={-1,0})) "H2 as ideal gas"
+              b_v=[1],n_v={-1,0})) "H2 as ideal gas"
         annotation (Placement(transformation(extent={{30,-22},{50,-2}})));
       PropertiesRT H2O(redeclare package Data = FCSys.Characteristics.H2O.Gas)
         annotation (Placement(transformation(extent={{30,-34},{50,-14}})));
@@ -362,6 +362,115 @@ package Characteristics
             "Characteristics.Examples.CellPotential.mos"),
         __Dymola_experimentSetupOutput);
     end CellPotential;
+
+    model Leverett
+      "<html>Evaluate the Leverett J function from [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>]</html>"
+      extends Modelica.Icons.Example;
+
+      output Q.NumberAbsolute s=saturationSet.y "Liquid saturation";
+      output Q.NumberAbsolute J=FCSys.Characteristics.H2O.J(s)
+        "Result of Leverret correlation";
+
+      Modelica.Blocks.Sources.Ramp saturationSet(height=1, duration=1)
+        "Set the saturation"
+        annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+
+      inner Conditions.Environment environment(T=303.15*U.K)
+        annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+
+      annotation (
+        experiment,
+        Documentation(info=
+              "<html><p>Please see <a href=\"modelica://FCSys.Characteristics.H2O.J\">H2O.J</a>().</p></html>"),
+
+        Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.Leverett.mos"
+            "Characteristics.Examples.Leverett.mos"),
+        __Dymola_experimentSetupOutput,
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics));
+
+    end Leverett;
+
+    model LatentHeat
+      "<html>Evaluate the latent heat of vaporization of H<sub>2</sub>O</html>"
+      import FCSys.Characteristics.H2O.Liquid;
+      import FCSys.Characteristics.H2O.Gas;
+
+      extends Modelica.Icons.Example;
+
+      parameter Q.PressureAbsolute p(displayUnit="atm") = U.atm
+        "Pressure of the liquid (and total pressure of the gas)";
+      Q.PressureAbsolute p_sat(displayUnit="atm") "Saturation pressure";
+      Q.TemperatureAbsolute T "Temperature";
+      output Q.Number T_degC=U.to_degC(T) "Temperature in degree Celsius";
+      output Q.Potential h_g(displayUnit="J/mol") = Gas.h(T, p_sat)
+        "Specific enthalpy of the saturated vapor";
+      output Q.Potential h_l(displayUnit="J/mol") = Liquid.h(T, p)
+        "Specific enthalpy of the liquid";
+      output Q.Potential h_gl(displayUnit="J/mol") = h_g - h_l
+        "Specific enthalpy of vaporization";
+      output Q.Velocity2 hbar_gl(displayUnit="J/g") = h_gl/Liquid.m
+        "Massic enthalpy of vaporization";
+
+      Modelica.Blocks.Sources.Ramp temperatureSet(
+        height=99*U.K,
+        duration=10,
+        offset=274.15*U.K)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      T = temperatureSet.y;
+      Gas.g(T, p_sat) = Liquid.g(T, p);
+
+      annotation (
+        Documentation(info=
+              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Condensation\">Subregions.Examples.PhaseChange.Condensation</a>.</p></html>"),
+
+        experiment(StopTime=10),
+        Commands(file(ensureTranslated=true) =
+            "Resources/Scripts/Dymola/Characteristics.Examples.LatentHeat.mos"
+            "Characteristics.Examples.LatentHeat.mos"),
+        __Dymola_experimentSetupOutput);
+    end LatentHeat;
+
+    model SurfaceTension
+      "<html>Evaluate the surface tension of H<sub>2</sub>O using the model of Garai</html>"
+      import FCSys.Characteristics.H2O.Liquid;
+      import FCSys.Characteristics.H2O.Gas;
+
+      extends Modelica.Icons.Example;
+
+      parameter Q.PressureAbsolute p(displayUnit="atm") = U.atm
+        "Pressure of the liquid (and total pressure of the gas)";
+      Q.PressureAbsolute p_sat(displayUnit="atm") "Saturation pressure";
+      Q.TemperatureAbsolute T "Temperature";
+      Q.TemperatureAbsolute T_sat(start=373.15*U.K) "Saturation temperature";
+      output Q.Number T_degC=U.to_degC(T) "Temperature in degree Celsius";
+      output Q.Potential h_gl(displayUnit="J/mol") = Gas.h(T, p_sat) - Liquid.h(
+        T, p) "Specific enthalpy of vaporization";
+      output Q.SurfaceTension gamma=(h_gl - T_sat)/(2*U.pi*Liquid.d^2*U.q)
+        "Surface tension";
+
+      Modelica.Blocks.Sources.Ramp temperatureSet(
+        height=99*U.K,
+        duration=10,
+        offset=274.15*U.K)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      T = temperatureSet.y;
+      Gas.g(T_sat, p) = Liquid.g(T_sat, p);
+      Gas.g(T, p_sat) = Liquid.g(T, p);
+
+      annotation (
+        Documentation(info=
+              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Condensation\">Subregions.Examples.PhaseChange.Condensation</a>.</p></html>"),
+
+        experiment(StopTime=10),
+        Commands,
+        __Dymola_experimentSetupOutput);
+    end SurfaceTension;
   end Examples;
 
   package 'C+' "<html>C<sup>+</sup></html>"
@@ -765,12 +874,29 @@ package Characteristics
 
     end Liquid;
 
+    function J "Leverett J function for H2O from [Wang2001]"
+      extends Modelica.Icons.Function;
+
+      input Q.NumberAbsolute s(max=1) "Liquid saturation"
+        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
+      output Real J "Result of Leverett correlation"
+        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
+
+    algorithm
+      J := FCSys.Utilities.Polynomial.f(s, {0.560,-0.966,1.669,-1.263});
+
+      annotation (Inline=true, Documentation(info="<html><p>
+    The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>].</p></html>"));
+    end J;
+
     function p_sat
       "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
       extends Modelica.Icons.Function;
 
-      input Q.TemperatureAbsolute T "Temperature";
-      output Q.PressureAbsolute p_sat "Saturation pressure";
+      input Q.TemperatureAbsolute T "Temperature"
+        annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+      output Q.PressureAbsolute p_sat "Saturation pressure" annotation (Dialog(
+            __Dymola_label="<html><i>p</i><sub>sat</sub></html>"));
 
     algorithm
       p_sat := Modelica.Media.Air.MoistAir.saturationPressureLiquid(T/U.K)*U.Pa;
@@ -782,16 +908,17 @@ package Characteristics
       extends Modelica.Icons.Function;
 
       input Q.NumberAbsolute RH "Relative humidity";
-      output Real lambda "Mole ratio of H2O to SO3-";
+      output Real lambda
+        "<html>Mole ratio of H<sub>2</sub>O to SO<sub>3</sub><sup>-</sup></html>"
+        annotation (Dialog(__Dymola_label="<html>&lambda;<sub>eq</sub></html>"));
 
     algorithm
       lambda := 0.043 + 17.81*RH - 39.85*RH^2 + 36*RH^3;
 
-      annotation (Documentation(info="<html><p>This implements the correlation by Springer et al. [<a href=\"modelica://FCSys.UsersGuid.References\">Springer1991</a>]
+      annotation (Inline=true,Documentation(info="<html><p>This implements the correlation by Springer et al. [<a href=\"modelica://FCSys.UsersGuide.References\">Springer1991</a>]
   for the ratio of H<sub>2</sup></sub>O molecules to SO<sub>3</sub><sup>-</sup> units of
-  Nafion&reg; EW 1100 series ionomer.</p></html>"), Inline=true);
+  Nafion&reg; EW 1100 series ionomer.</p></html>"));
     end lambda_eq;
-
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"
@@ -915,8 +1042,10 @@ package Characteristics
         "Return constants for fluidity given NASA CEA constants for viscosity"
         extends Modelica.Icons.Function;
 
-        input Real b[4] "NASA CEA constants for viscosity";
-        output Real b_eta[4] "Constants for fluidity";
+        input Real b[4] "NASA CEA constants for viscosity"
+          annotation (Dialog(__Dymola_label="<html><i>b</i></html>"));
+        output Real b_eta[4] "Constants for fluidity" annotation (Dialog(
+              __Dymola_label="<html><i>b</i><sub>&eta;<sub></html>"));
 
       algorithm
         b_eta := {-b[1],-b[2]*U.K,-b[3]*U.K^2,-b[4] + b[1]*log(U.K) + log(1e4*U.m
@@ -928,8 +1057,10 @@ package Characteristics
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
         extends Modelica.Icons.Function;
 
-        input Real b[4] "NASA CEA constants for thermal conductivity";
-        output Real b_theta[4] "Constants for thermal resistivity";
+        input Real b[4] "NASA CEA constants for thermal conductivity"
+          annotation (Dialog(__Dymola_label="<html><i>b</i></html>"));
+        output Real b_theta[4] "Constants for thermal resistivity" annotation (
+            Dialog(__Dymola_label="<html><i>b</i><sub>&theta;<sub></html>"));
 
       algorithm
         b_theta := {-b[1],-b[2]*U.K,-b[3]*U.K^2,-b[4] + b[1]*log(U.K) + log(1e4
@@ -942,10 +1073,12 @@ package Characteristics
         "<html>Fluidity (&eta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Resistivity eta "Fluidity";
+        output Q.Resistivity eta "Fluidity"
+          annotation (Dialog(__Dymola_label="<html>&eta;</html>"));
 
       algorithm
         /*
@@ -975,10 +1108,12 @@ package Characteristics
         "<html>Thermal resistivity (&theta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.ResistivityThermal theta "Thermal resistivity";
+        output Q.ResistivityThermal theta "Thermal resistivity"
+          annotation (Dialog(__Dymola_label="<html>&theta;</html>"));
 
       algorithm
         /*
@@ -1046,9 +1181,11 @@ package Characteristics
         "<html>Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style=\"text-decoration:overline;\">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)</html>"
         extends Modelica.Icons.Function;
 
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
         output Q.Velocity omega
-          "Root mean square of thermal velocity in one dimension";
+          "Root mean square of thermal velocity in one dimension"
+          annotation (Dialog(__Dymola_label="<html>&omega;</html>"));
 
       algorithm
         omega := sqrt(T/m);
@@ -1071,9 +1208,12 @@ package Characteristics
         "<html>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        output Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity"
+          annotation (Dialog(__Dymola_label="<html><i>c<sub>p</sub></i></html>"));
 
       protected
         function c0_p
@@ -1144,9 +1284,12 @@ package Characteristics
       function c_v
         "<html>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</html>"
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.CapacityThermalSpecific c_v "Isochoric specific heat capacity";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        output Q.CapacityThermalSpecific c_v "Isochoric specific heat capacity"
+          annotation (Dialog(__Dymola_label="<html><i>c<sub>v</sub></i></html>"));
 
       algorithm
         c_v := c_p(T, p) - T*dp_Tv(
@@ -1169,9 +1312,12 @@ package Characteristics
 
       function g "Gibbs potential as a function of temperature and pressure"
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.Potential g "Gibbs potential";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        output Q.Potential g "Gibbs potential"
+          annotation (Dialog(__Dymola_label="<html><i>g</i></html>"));
 
       algorithm
         g := h(T, p) - T*s(T, p);
@@ -1181,9 +1327,12 @@ package Characteristics
       function h "Specific enthalpy as a function of temperature and pressure"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.Potential h "Specific enthalpy";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        output Q.Potential h "Specific enthalpy"
+          annotation (Dialog(__Dymola_label="<html><i>h</i></html>"));
 
       protected
         function h0_i
@@ -1284,9 +1433,12 @@ package Characteristics
       function s "Specific entropy as a function of temperature and pressure"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
-        output Q.NumberAbsolute s "Specific entropy";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        output Q.NumberAbsolute s "Specific entropy"
+          annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
 
       protected
         function s0_i
@@ -1408,10 +1560,12 @@ package Characteristics
         "<html>Continuity (&zeta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.Continuity zeta "Continuity";
-        // **dimension
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.Continuity zeta "Continuity"
+          annotation (Dialog(__Dymola_label="<html>&zeta;</html>"));
 
       algorithm
         zeta := m*omega(T);
@@ -1426,10 +1580,13 @@ package Characteristics
         "<html>Fluidity (&eta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
         // Note:  Specific volume isn't used here but is included for generality.
-        output Q.Fluidity eta "Fluidity";
+        output Q.Fluidity eta "Fluidity"
+          annotation (Dialog(__Dymola_label="<html>&eta;</html>"));
 
       algorithm
         eta := alpha/(m*omega(T));
@@ -1464,9 +1621,12 @@ package Characteristics
         "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.ResistivityThermal theta "Thermal resistivity";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.ResistivityThermal theta "Thermal resistivity"
+          annotation (Dialog(__Dymola_label="<html>&theta;</html>"));
 
       algorithm
         theta := alpha/(c_v(T, p_Tv(T, v))*omega(T));
@@ -1491,9 +1651,12 @@ package Characteristics
         "<html>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.TimeAbsolute tauprime "Phase change interval";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.TimeAbsolute tauprime "Phase change interval"
+          annotation (Dialog(__Dymola_label="<html>&tau;&prime;</html>"));
 
       algorithm
         tauprime := v/(alpha*omega(T));
@@ -1525,9 +1688,12 @@ package Characteristics
         "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.Mobility mu "Mobility";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.Mobility mu "Mobility"
+          annotation (Dialog(__Dymola_label="<html>&mu;</html>"));
 
       algorithm
         mu := v/(m*alpha*omega(T));
@@ -1553,9 +1719,12 @@ package Characteristics
         "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
 
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume";
-        output Q.TimeAbsolute nu "Thermal independity";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.TimeAbsolute nu "Thermal independity"
+          annotation (Dialog(__Dymola_label="<html>&nu;</html>"));
 
       algorithm
         nu := v/(c_p(T, p_Tv(T, v))*alpha*omega(T));
@@ -1580,11 +1749,6 @@ temperature difference.</p>
 </html>"));
       end nu;
 
-      function test
-        output Real L_m;
-      algorithm
-        L_m := 300*U.K/(U.atm*alpha)/U.m;
-      end test;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
@@ -1679,11 +1843,17 @@ temperature difference.</p>
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv\"><i>p<sub>T v</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
-        input Q.Temperature dT=0 "Derivative of temperature";
-        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
-        output Q.Pressure dp "Derivative of pressure";
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        input Q.Temperature dT=0 "Derivative of temperature"
+          annotation (Dialog(__Dymola_label="<html>d<i>T</i></html>"));
+        input Q.VolumeSpecific dv=0 "Derivative of specific volume"
+          annotation (Dialog(__Dymola_label="<html>d<i>v</i></html>"));
+        output Q.Pressure dp "Derivative of pressure"
+          annotation (Dialog(__Dymola_label="<html>d<i>p</i></html>"));
       algorithm
         dp := if isCompressible then Polynomial.f(
                 v,
@@ -1708,11 +1878,16 @@ temperature difference.</p>
         "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp\"><i>v<sub>T p</sub></i></a>()</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        input Q.Temperature dT=0 "Derivative of temperature";
-        input Q.Pressure dp=0 "Derivative of pressure";
-        output Q.VolumeSpecific dv "Derivative of specific volume";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+        input Q.Temperature dT=0 "Derivative of temperature"
+          annotation (Dialog(__Dymola_label="<html>d<i>T</i></html>"));
+        input Q.Pressure dp=0 "Derivative of pressure"
+          annotation (Dialog(__Dymola_label="<html>d<i>p</i></html>"));
+        output Q.VolumeSpecific dv "Derivative of specific volume"
+          annotation (Dialog(__Dymola_label="<html>d<i>v</i></html>"));
       algorithm
         dv := Polynomial.f(
                 p,
@@ -1734,9 +1909,12 @@ temperature difference.</p>
         "<html>Pressure as a function of temperature and specific volume (<i>p<sub>T v</sub></i>())</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
-        output Q.PressureAbsolute p "Pressure";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.PressureAbsolute p "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
       algorithm
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
@@ -1765,8 +1943,10 @@ temperature difference.</p>
         "<html>Specific volume as a function of temperature and pressure (<i>v<sub>T p</sub></i>())</html>"
         import FCSys.Utilities.Polynomial;
         extends Modelica.Icons.Function;
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
         output Q.VolumeSpecificAbsolute v "Specific volume";
       algorithm
         v := Polynomial.f(
@@ -1789,8 +1969,11 @@ temperature difference.</p>
         "<html>Isothermal compressibility as a function of temperature and pressure (&beta;)</html>"
         extends Modelica.Icons.Function;
 
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=p0 "Pressure";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p=p0 "Pressure"
+          annotation (Dialog(__Dymola_label="<html><i>p</i></html>"));
+
         output Q.PressureReciprocal beta "Isothermal compressibility";
 
       algorithm

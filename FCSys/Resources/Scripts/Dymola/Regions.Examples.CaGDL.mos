@@ -7,7 +7,7 @@ FCSys.Utilities.plot6(
     y2={"caGDL.subregions[1, 1, 1].gas.H2O.p", 
         "caGDL.subregions[1, 1, 1].gas.N2.p", 
         "caGDL.subregions[1, 1, 1].gas.O2.p"},
-    y3={"caGDL.subregions[1, 1, 1].gas.T", "caGDL.subregions[1, 1, 1].graphite.T"},
+    y3={"caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].graphite.T"},
     y4={"w"}, 
     y5={"zI"}, 
     y6={"R", "R_ex"});

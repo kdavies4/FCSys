@@ -404,7 +404,7 @@ package WorkInProgress "Incomplete classes under development"
         'inclC+'=true,
         redeclare
           FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature 'C+'
-          (source(y=T_an)))) "Anode end plate" annotation (Placement(
+          (set(y=T_an)))) "Anode end plate" annotation (Placement(
           transformation(
           extent={{10,10},{-10,-10}},
           rotation=90,
@@ -417,11 +417,11 @@ package WorkInProgress "Incomplete classes under development"
               FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
           materialSet(y=p_ca_elec),
           redeclare function thermalSpec =
-              FCSys.Conditions.ByConnector.Boundary.Single.ThermalDiffusive.temperature,
+              FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature,
 
           thermalSet(y=T_ca)),
         'inclC+'=true,
-        'C+'(source(y=T_ca)))) "Cathode end plate" annotation (Placement(
+        'C+'(set(y=T_ca)))) "Cathode end plate" annotation (Placement(
           transformation(
           extent={{-10,10},{10,-10}},
           rotation=270,

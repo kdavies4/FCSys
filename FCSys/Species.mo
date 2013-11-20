@@ -31,7 +31,6 @@ package Species "Dynamic models of chemical species"
               b_c=[935*U.J*Data.m/(U.kg*U.K)],
               B_c=[Data.Deltah0_f - (935*U.J*Data.m/U.kg)*298.15, 154.663*U.J/(
                   U.mol*U.K) - Data.b_c[1, 1]*log(298.15*U.K)]),
-          final k_intra,
           final mu=0,
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
@@ -46,7 +45,7 @@ package Species "Dynamic models of chemical species"
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'C+'",
           Documentation(info="<html><p>Assumptions:<ol>
-    <li>The specific heat capacity is fixed (independent of temperature).</li>
+    <li>The specific heat capacity is independent of the thermodynamic state.</li>
     <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
     <li>Mobility is zero.</li>
     </ol></p>
@@ -166,9 +165,9 @@ package Species "Dynamic models of chemical species"
           final upstreamZ=false,
           final initMaterial=Init.none,
           final initEnergy=Init.none,
-          consTransX=ConsTrans.steady,
-          consTransY=ConsTrans.steady,
-          consTransZ=ConsTrans.steady,
+          final consTransX=ConsTrans.steady,
+          final consTransY=ConsTrans.steady,
+          final consTransZ=ConsTrans.steady,
           final consEnergy=ConsThermo.steady,
           final N_IC,
           final p_IC,
@@ -181,7 +180,6 @@ package Species "Dynamic models of chemical species"
           final n_chem=1,
           final tauprime={0},
           final zeta=0,
-          final k_intra,
           final kL=fill(Data.d*mustar*N/4, n_trans),
           final eta=Modelica.Constants.inf,
           final theta=Modelica.Constants.inf);
@@ -492,6 +490,11 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           stateSelect=StateSelect.never,
           displayUnit="%") = p/Characteristics.H2O.p_sat(T) if environment.analysis
           "Relative humidity (approximate)";
+        output Q.NumberAbsolute RH_boundaries[n_trans, Side](
+          each stateSelect=StateSelect.never,
+          each displayUnit="%") = boundaries.p ./ Characteristics.H2O.p_sat(
+          boundaries.T) if environment.analysis
+          "Relative humidity at the boundaries (approximate)";
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -710,13 +713,13 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={7e9*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
+          final zeta=0,
           redeclare parameter Q.Fluidity eta=1/(855e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.613*U.W),
-          final k_intra,
           final initEnergy=Init.temperature,
           final N_IC,
           final h_IC,
@@ -864,7 +867,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           redeclare parameter Q.Fluidity eta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
 
-          p_IC=environment.p_dry - p_IC - environment.p_O2);
+          p_IC=environment.p_dry - environment.p_O2);
 
         // See the documentation for a table of values.
         annotation (
@@ -962,15 +965,17 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
         // See the documentation for a table of values.
 
-        parameter Q.PressureAbsolute p_stop=U.Pa
+        parameter Q.Pressure p_stop=-Modelica.Constants.inf
           "Pressure below which the simulation should terminate" annotation (
             Dialog(tab="Advanced", __Dymola_label=
                 "<html><i>p</i><sub>stop</sub></html>"));
 
       equation
-        when p < p_stop then
-          terminate("There is no more " + Data.formula + ".");
-        end when;
+        if p_stop > 0 then
+          when p < p_stop then
+            terminate("There is no more " + Data.formula + ".");
+          end when;
+        end if;
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -1024,6 +1029,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Gas;
@@ -1135,14 +1141,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
             "Formulation of the conservation equations"));
     //
     // Upstream discretization
-    parameter Boolean zeroX=false "X **temp" annotation (
-      Evaluate=true,
-      Dialog(
-        tab="Assumptions",
-        group="Axes with upstream discretization",
-        enable=inclTrans[1],
-        compact=true),
-      choices(__Dymola_checkBox=true));
     parameter Boolean upstreamX=true "X" annotation (
       Evaluate=true,
       Dialog(
@@ -1168,30 +1166,16 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         compact=true),
       choices(__Dymola_checkBox=true));
     //
-    // Dynamic pressure
-    parameter Boolean inclDynamicPressX=true "X" annotation (
-      Evaluate=true,
-      Dialog(
-        tab="Assumptions",
-        group="Axes with dynamic pressure included",
-        compact=true),
-      choices(__Dymola_checkBox=true));
-    parameter Boolean inclDynamicPressY=true "Y" annotation (
-      Evaluate=true,
-      Dialog(
-        tab="Assumptions",
-        group="Axes with dynamic pressure included",
-        compact=true),
-      choices(__Dymola_checkBox=true));
-    parameter Boolean inclDynamicPressZ=true "Z" annotation (
-      Evaluate=true,
-      Dialog(
-        tab="Assumptions",
-        group="Axes with dynamic pressure included",
-        compact=true),
-      choices(__Dymola_checkBox=true));
-    //
     // Flow conditions
+    parameter Boolean approxVelocity=true
+      "Calculate normal boundary velocities assuming uniform density"
+      annotation (
+      Evaluate=true,
+      Dialog(
+        tab="Assumptions",
+        group="Flow conditions",
+        compact=true),
+      choices(__Dymola_checkBox=true));
     parameter Q.NumberAbsolute Nu_Phi[Axis]={4,4,4}
       "Translational Nusselt numbers" annotation (Dialog(
         tab="Assumptions",
@@ -1208,10 +1192,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       each nominal=U.A,
       each stateSelect=StateSelect.never,
       each start=0) "Current";
-    Q.PressureAbsolute qprimeA[n_trans](
-      each nominal=U.kPa,
-      each stateSelect=StateSelect.never,
-      each start=0) "Dynamic and nonequilibrium compressive forces";
     Q.Velocity phi_boundaries[n_trans, Side](
       each nominal=10*U.cm/U.s,
       each stateSelect=StateSelect.never,
@@ -1220,27 +1200,28 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       each nominal=U.N,
       each stateSelect=StateSelect.never,
       each start=0) "Total normal translational force on pairs of boundaries";
-    // This includes the body, shear (transverse translational transport), and
-    // exchange forces due to intermolecular drag and transfer during chemical
-    // reactions and phase change.  It excludes the thermodynamic, dynamic
-    // (advective normal translational transport), and  nonequilibrium (compression
-    // during material transport) forces.  It also excludes transient effects since
-    // translational momentum is stored at the boundaries (not in the subregion).
+    // This (f) includes the body, shear, and exchange forces due to
+    // intermolecular drag and transfer during chemical reactions and phase
+    // change.  It excludes the thermodynamic, dynamic, and  nonequilibrium
+    // compressive forces.  It also excludes transient effects since translational
+    // momentum is stored at the boundaries.
+    Q.Force minusDeltaf[n_trans](
+      each nominal=U.N,
+      each stateSelect=StateSelect.never,
+      each start=0) "Dynamic and nonequilibrium compression forces";
 
     // Auxiliary variables (for analysis)
     // ----------------------------------
     // Misc. conditions
-    /* **
-  output Q.Density rho_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
-     = fill(
-    1,
-    n_trans,
-    2) ./ Data.v_Tp(boundaries.T, boundaries.p) if environment.analysis 
-    "Densities at the boundaries";
-  output Q.VolumeRate Vdot_boundaries[n_trans, Side](each stateSelect=
-        StateSelect.never) = boundaries.Ndot ./ rho_boundaries if environment.analysis
-    "Volume flow rates into the boundaries";
-  */
+    output Q.Density rho_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
+       = fill(
+        1,
+        n_trans,
+        2) ./ Data.v_Tp(boundaries.T, boundaries.p) if environment.analysis
+      "Densities at the boundaries";
+    output Q.VolumeRate Vdot_boundaries[n_trans, Side](each stateSelect=
+          StateSelect.never) = boundaries.Ndot ./ rho_boundaries if environment.analysis
+      "Volume flow rates into the boundaries";
     output Q.PressureAbsolute q[n_trans](each stateSelect=StateSelect.never) =
       (Data.m/2)*phi .* I ./ Aprime if environment.analysis "Dynamic pressure";
     output Q.Velocity phi_chemical[n_chem, n_trans](each stateSelect=
@@ -1249,9 +1230,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     output Q.PotentialAbsolute sT_chemical[n_chem](each stateSelect=StateSelect.never)
        = actualStream(chemical.sT) if environment.analysis and n_chem > 0
       "Specific entropy-temperature product of the chemical streams";
-    output Q.Pressure Deltapprime[n_trans](each stateSelect=StateSelect.never)
-       = Delta(boundaries.pprime) if environment.analysis
-      "Differences in total pressures across the boundaries";
+    output Q.Pressure Deltap[n_trans](each stateSelect=StateSelect.never) =
+      Delta(boundaries.p) if environment.analysis
+      "Differences in pressures across the boundaries";
     //
     // Potentials and current
     output Q.Potential g_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
@@ -1306,12 +1287,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       /U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans] if
       environment.analysis
       "Acceleration force (including acceleration due to body forces)";
-    /*
-  output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = {(if 
-    inclTrans[cartTrans[i]] then -Delta(boundaries[transCart[cartTrans[i]], :].p)
-    *Aprime[i] else 0) for i in 1:n_trans} if environment.analysis 
-    "Thermodynamic force";
-  */
+    output Q.Force f_thermo[n_trans](each stateSelect=StateSelect.never) = -
+      Delta(boundaries.p) .* Aprime if environment.analysis
+      "Thermodynamic force";
     output Q.Force f_AE[n_trans](each stateSelect=StateSelect.never) = Data.m*
       sum((actualStream(chemical[i].phi) - phi)*chemical[i].Ndot for i in 1:
       n_chem) if environment.analysis
@@ -1336,14 +1314,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       actualStream(chemical[i].phi) - phi*phi)*Data.m/2)*chemical[i].Ndot for i
        in 1:n_chem) if environment.analysis
       "Relative rate of energy (internal, flow, and kinetic) due to reactions and phase change";
-    /* **
-  output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(
-    boundaries[i, :].T, boundaries[i, :].p) - {h,h} + (phi_boundaries[i, :] .^ 2
-     + sum(boundaries[i, :].phi[orient] .^ 2 for orient in Orient) - fill(phi*
-    phi, 2))*(Data.m/2))*boundaries[i, :].Ndot for i in 1:n_trans) if 
-    environment.analysis 
-    "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
-  */
+    output Q.Power Edot_AT(stateSelect=StateSelect.never) = sum((Data.h(
+      boundaries[i, :].T, boundaries[i, :].p) - {h,h} + (phi_boundaries[i, :]
+       .^ 2 + sum(boundaries[i, :].phi[orient] .^ 2 for orient in Orient) -
+      fill(phi*phi, 2))*(Data.m/2))*boundaries[i, :].Ndot for i in 1:n_trans)
+      if environment.analysis
+      "Relative rate of energy (internal, flow, and kinetic) due to advective transport";
     output Q.Power Edot_DT(stateSelect=StateSelect.never) = sum(sum(boundaries[
       i, :].phi[orient]*boundaries[i, :].mPhidot[orient] for orient in Orient)
       for i in 1:n_trans) + sum(boundaries.Qdot) if environment.analysis
@@ -1352,7 +1328,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // auxiliary variables are included (hence, StateSelect.never).
 
     Connectors.Boundary boundaries[n_trans, Side](
-      each pprime(start=p_IC),
+      each p(start=p_IC),
       each T(start=T_IC),
       Ndot(each start=0, each stateSelect=StateSelect.never))
       "Connectors for transport" annotation (Placement(transformation(extent={{
@@ -1377,23 +1353,19 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "true, if each transport axis is included" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size of inclRot and inclTrans is also Axis, but it isn't
+    // Note:  The size of inclRot and inclTrans is also Axis, but it can't be
     // specified here due to an error in Dymola 2014.
     outer parameter Integer cartRot[:]
       "Cartesian-axis indices of the components of rotational momentum"
       annotation (missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Integer cartTrans[:]
-      "Cartesian-axis indices of the transport axes" annotation (
-        missingInnerMessage="This model should be used within a subregion model.
-");
-    // Note:  The size of cartRot and cartTrans is n_trans, but it isn't
+    // Note:  The size of cartRot is n_trans, but it can't be
     // specified here due to an error in Dymola 2014.
     outer parameter Integer transCart[3]
       "Boundary-pair indices of the Cartesian axes" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size is also Axis, but it isn't specified here due
+    // Note:  The size is also Axis, but it can't be specified here due
     // to an error in Dymola 2014.
     final parameter ConsTrans consTrans[n_trans]=selectIntegers({consTransX,
         consTransY,consTransZ}, cartTrans)
@@ -1402,10 +1374,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     final parameter Boolean upstream[n_trans]=selectBooleans({upstreamX,
         upstreamY,upstreamZ}, cartTrans)
       "true, if each transport axis uses upstream discretization"
-      annotation (HideResult=true);
-    final parameter Boolean inclDynamicPress[n_trans]=selectBooleans({
-        inclDynamicPressX,inclDynamicPressY,inclDynamicPressZ}, cartTrans)
-      "true, if each transport axis includes dynamic pressure"
       annotation (HideResult=true);
 
     // Additional aliases (for common terms)
@@ -1527,23 +1495,20 @@ Choose any condition besides none.");
     end if;
 
   equation
-
     // Aliases (only to clarify and simplify other equations)
     v*I = Aprime .* phi "Current vs. velocity";
-    Data.v_Tp(boundaries.T, boundaries.pprime) .* boundaries.Ndot = {Aprime[i]*
-      {1,-1} for i in 1:n_trans} .* phi_boundaries
-      "Current vs. velocity at the boundaries";
-    qprimeA = I .* phi*(Data.m/2) + zeta*Sigma(boundaries.Ndot);
+    for i in 1:n_trans loop
+      for side in Side loop
+        (if approxVelocity then v else Data.v_Tp(boundaries[i, side].T,
+          boundaries[i, side].p))*boundaries[i, side].Ndot = inSign(side)*
+          Aprime[i]*phi_boundaries[i, side]
+          "Current vs. velocity at the boundaries";
+      end for;
+    end for;
+    minusDeltaf = I .* phi*Data.m + zeta*Sigma(boundaries.Ndot);
 
     // Assumptions
-    for i in 1:n_trans loop
-      if zeroX then
-        0 = I[i] "**Eliminate or clean up";
-      else
-        0 = 2*I[i] + Delta(boundaries[i, :].Ndot)
-          "Linear current profile (assumption #1)";
-      end if;
-    end for;
+    2*I = -Delta(boundaries.Ndot) "Linear current profile (assumption #1)";
 
     // Properties upon outflow due to reaction and phase change
     chemical.phi = fill(phi, n_chem);
@@ -1552,7 +1517,8 @@ Choose any condition besides none.");
     // Material exchange
     for i in 1:n_chem loop
       if tauprime[i] > Modelica.Constants.small then
-        tauprime[i]*chemical[i].Ndot = N*(exp((chemical[i].g - g)/T) - 1);
+        tauprime[i]*chemical[i].Ndot = U.C*exp((chemical[i].g - g)/T) - N;
+        // **replace U.C with amount when full
       else
         chemical[i].g = g
           "Simplified to avoid nonlinear equations in Dymola 2014";
@@ -1564,10 +1530,10 @@ Choose any condition besides none.");
       for side in Side loop
         // Material
         (if consTrans[i] == ConsTrans.dynamic then kL[i]*Data.m*der(boundaries[
-          i, side].Ndot)/U.s else 0) = (Aprime[i]*(boundaries[i, side].pprime
-           - p) - qprimeA[i])*(if upstream[i] then 1 + exp(-zeta*Data.beta(T, p)
-          *boundaries[i, side].Ndot/(2*Aprime[i])) else 2) + inSign(side)*f[i];
-        // The translational force (f) is split according to assumption #2.
+          i, side].Ndot)/U.s else 0) = (Aprime[i]*(boundaries[i, side].p - p)
+           + phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m -
+          minusDeltaf[i])*(if upstream[i] then 1 + exp(-zeta*Data.beta(T, p)*
+          boundaries[i, side].Ndot/(2*Aprime[i])) else 2) + inSign(side)*f[i];
 
         // Translational momentum
         kL[i]*eta*mPhidot_boundaries[i, side, Orient.after] = Aprime[i]*Nu_Phi[
@@ -1662,13 +1628,14 @@ Choose any condition besides none.");
     // Conservation of translational momentum
     f + M*environment.a[cartTrans] + Data.z*N*environment.E[cartTrans] = Data.m
       *sum(actualStream(chemical[i].phi)*chemical[i].Ndot for i in 1:n_chem) +
-      direct.trans.mPhidot + {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j])
-       + sum((if i == j then 0 else boundaries[i, :].phi[cartWrap(cartTrans[j]
-       - cartTrans[i])]*boundaries[i, :].Ndot*Data.m + sum(boundaries[i, :].mPhidot[
-      cartWrap(cartTrans[j] - cartTrans[i])])) for i in 1:n_trans) for j in 1:
-      n_trans};
+      {sum(intra[:].mPhidot[j]) + sum(inter[:].mPhidot[j]) + sum((if i == j
+       then 0 else boundaries[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*
+      boundaries[i, :].Ndot*Data.m + sum(boundaries[i, :].mPhidot[cartWrap(
+      cartTrans[j] - cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans};
     // Note:  The storage is split between the boundaries via mPhidot, so
-    // a derivative does not appear here (see material transport above).
+    // a derivative doesn't appear here (see material transport above).
+    // Note:  The explicit expansions (intra[:] and inter[:]) are necessary
+    // in Dymola 2014.
 
     // Thermal dynamics
     if consEnergy == ConsThermo.IC then
@@ -1705,53 +1672,91 @@ Choose any condition besides none.");
         // Note:  initEnergy == Init.none can't occur due to an assertion.
       end if;
     else
-      (if consEnergy == ConsThermo.dynamic then (N*T*der(Data.s(T, p)) + der(M*
-        phi*phi)/2)/U.s else 0) = sum((chemical[i].g + actualStream(chemical[i].sT)
-         - h + actualStream(chemical[i].phi)*actualStream(chemical[i].phi)*Data.m
-        /2)*chemical[i].Ndot for i in 1:n_chem) + direct.trans.phi*direct.trans.mPhidot
-         + sum(intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi
-        *inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot + sum(intra.Qdot)
-         + sum(inter.Qdot) + sum((Data.h(boundaries[i, :].T, boundaries[i, :].pprime)
-         - {h,h} + (phi_boundaries[i, :] .^ 2 + sum(boundaries[i, :].phi[orient]
-         .^ 2 for orient in Orient))*(Data.m/2))*boundaries[i, :].Ndot + sum(
-        boundaries[i, :].phi[orient]*boundaries[i, :].mPhidot[orient] for
-        orient in Orient) for i in 1:n_trans) + sum(boundaries.Qdot)
-        "Conservation of energy";
-      // Note:  der(Data.s(T, p)) is used instead of der(s) because it leads
-      // Dymola 2014 to choose T as a state without dynamic state selection.
-      // Dymola sometimes chooses s as a state even though its stateSelect is
-      // StateSelect.never.
+      (if consEnergy == ConsThermo.dynamic then (N*T*der(s) + der(M*phi*phi)/2)
+        /U.s else 0) = sum((chemical[i].g + actualStream(chemical[i].sT) - h +
+        actualStream(chemical[i].phi)*actualStream(chemical[i].phi)*Data.m/2)*
+        chemical[i].Ndot for i in 1:n_chem) + sum(intra[i].phi*intra[i].mPhidot
+        for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot for i in 1:
+        n_inter) + sum(intra.Qdot) + sum(inter.Qdot) + sum((Data.h(boundaries[i,
+        :].T, boundaries[i, :].p) - {h,h} + (phi_boundaries[i, :] .^ 2 + sum(
+        boundaries[i, :].phi[orient] .^ 2 for orient in Orient))*(Data.m/2))*
+        boundaries[i, :].Ndot + sum(boundaries[i, :].phi[orient]*boundaries[i,
+        :].mPhidot[orient] for orient in Orient) for i in 1:n_trans) + sum(
+        boundaries.Qdot) "Conservation of energy";
     end if;
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
-    <p>Assumptions:<ol>
+    <p>Fixed assumptions:<ol>
     <li>The gradient of material current is uniform in the direction of the current.</li>
     <li>The normal translational force on pairs of boundaries is split equally between the boundaries.  This includes
     the body, shear (transverse translational transport), and exchange forces due to intermolecular drag and transfer during 
-    chemical reactions and phase change.  It excludes the effect of pressure, including thermodynamic, dynamic 
+    chemical reactions and phase change.  It excludes the thermodynamic, dynamic 
     (advective normal translational transport), and nonequilibrium (irreversible compression) pressures.  It also excludes 
     transient effects since translational momentum is stored at the boundaries (not in the subregion).</li> 
+    <li>Nonequilibrium pressure is included in the thermodynamic states at the boundaries.  In particular, the specific enthalpy at a boundary 
+    is a function of the temperature and the 
+    sum of the thermodynamic and nonequilibrium pressures at the boundary (and a possible artifact of dynamic pressure; see the first note regarding parameters).  
+    The rate of advection of energy is the product of this
+    specific enthalpy and the material current.
     </ol></p>
-    
+  
     <p>Notes regarding the parameters:
-    <ol>        
+    <ol>  
+    <li>If <code>approxVelocity</code> is <code>true</code>,
+    then the normal velocities at the boundaries are calculated from the boundary currents assuming
+    that the density is uniform.  This 
+    avoids nonlinear systems of equations, but it introduces an artifact of the dynamic pressure into the 
+    thermodynamic states at the boundaries.  The extra pressure is <i>m</i>&nbsp;<i>N&#775;<sub>i</sub></i><sup>2</sup>&nbsp;(<i>v</i> - <i>v<sub>i</sub></i>)/<i>A</i>&prime;, where <i>m</i> is the specific mass, 
+    <i>v</i> is the specific volume in the subregion,  
+    <i>v<sub>i</sub></i> is the specific volume at the boundary, <i>N&#775;<sub>i</sub></i> is the boundary current, and
+    <i>A</i>&prime; is the available cross-sectional area.
+    This affects the energy balance via the specific enthalpy at the boundaries.</li>      
+    
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
-    <code>ConsTrans.steady</code>, then the material derivative of translational momentum (proportional to
-    &part;<i>N</i>dot/&part;<i>t</i> + <i>I</i><sup>2</sup>/<i>N</i>, where the current <i>N</i>dot is at the boundary and 
-    the second term is associated with dynamic pressure expressed in terms of the bulk current <i>I</i>) 
-    normal to the boundaries is treated as zero and removed from the translational momentum balances/material transport equations
-    at the associated boundaries.</li>
+    <code>ConsTrans.steady</code>, then the derivative of translational momentum at and normal to the boundaries (proportional to
+    &part;<i>N&#775;<sub>i</sub></i>/&part;<i>t</i>) 
+    is treated as zero and removed from the translational momentum balances/material transport equations
+    at the corresponding boundaries.</li>
     
     <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
     rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational 
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li>
     
+    <li>Upstream discretization is applied by default.
+    The central difference
+    scheme may be used by setting <code>upstreamX</code>, <code>upstreamY</code>, and <code>upstreamZ</code> to 
+    <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for 
+    the upstream discretization of pressure will be much less (factor of 1/10,000) than the 
+    P&eacute;clet numbers for translational and thermal transport.  Therefore, it may appear
+    that pressure is not advected with the material transort stream.</li>
+    
     <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
     correspond to the orientation of the translational momentum that is transported, not the axes of material transport.</li>
-    </ol></p>
+    
+    <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use 
+    3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36) 
+    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li>      
+    </ol></p>      
         
+    <p>Translational momentum and thermal energy are advected as material is exchanged
+    due to phase change and reactions.  This occurs at the velocity (&phi;) and the specific entropy-temperature
+    product (<i>sT</i>) of the reactants (source configurations), where the reactant/product designation
+    depends on the current conditions.</p>
+
+    <p>The advective exchange is modeled via a <code>stream</code> connector
+    (<a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>).
+  The rate of advection of translational momentum is the
+  product of the velocity of the source (&phi;) and the mass flow rate
+  (<i>M&#775;</i> or <i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
+  specific entropy-temperature product of the source (<i>sT</i>) times the rate of
+  material exchange
+  (<i>N&#775;</i>).  If there are multiple sources, then
+  their contributions are additive.  If there are multiple sinks, then
+  translational momentum is split on a mass basis and the thermal stream is split
+  on a particle-number basis.</p>
+  
     <p>For more information, please see the
      <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p>
     </html>"),
@@ -1774,7 +1779,9 @@ Choose any condition besides none.");
       final rho_IC=1/Data.v_Tp(),
       final p_IC=environment.p,
       final h_IC,
-      final g_IC);
+      final g_IC,
+      T(stateSelect=if consEnergy == ConsThermo.dynamic then StateSelect.always
+             else StateSelect.default));
     parameter Q.Length kL[n_trans]=L[cartTrans] "Effective transport length"
       annotation (Dialog(group="Geometry", __Dymola_label=
             "<html><b><i>k&nbsp;L</i></b></html>"));
@@ -1804,10 +1811,6 @@ Choose any condition besides none.");
   protected
     outer Q.Area Aprime[n_trans] "Effective cross-sectional area" annotation (
         missingInnerMessage="This model should be used within a phase model.");
-    outer parameter Integer cartTrans[:]
-      "Cartesian-axis indices of the pairs of boundaries" annotation (
-        missingInnerMessage="This model should be used within a subregion model.
-");
 
   initial equation
     if consEnergy == ConsThermo.dynamic then
@@ -1834,8 +1837,8 @@ Choose any condition besides none.");
     else
       (if consEnergy == ConsThermo.dynamic then N*T*der(s)/U.s else 0) = sum(
         intra[i].phi*intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*
-        inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot + sum(intra.Qdot)
-         + sum(inter.Qdot) + sum(boundaries.Qdot) "Conservation of energy";
+        inter[i].mPhidot for i in 1:n_inter) + sum(intra.Qdot) + sum(inter.Qdot)
+         + sum(boundaries.Qdot) "Conservation of energy";
     end if;
 
     annotation (
@@ -1857,11 +1860,6 @@ protected
   partial model Species "Base model for one chemical species in one phase"
 
     import assert = FCSys.Utilities.assertEval;
-
-    // Geometry
-    parameter Q.NumberAbsolute k_intra[n_intra]=ones(n_intra)
-      "Coupling factors within the phase" annotation (Dialog(group="Geometry",
-          __Dymola_label="<html><i><b>k</b></i><sub>intra</sub></html>"));
 
     // Material properties
     replaceable package Data = Characteristics.BaseClasses.Characteristic
@@ -1913,6 +1911,16 @@ protected
     parameter Q.Potential g_IC(start=Data.g(T_IC, p_IC), displayUnit="kJ/mol")
       "Initial Gibbs potential" annotation (Dialog(tab="Initialization",
           __Dymola_label="<html><i>g</i><sub>IC</sub></html>"));
+
+    // Independence factors
+    parameter Q.NumberAbsolute k_intra_Phi[n_intra, n_trans]=ones(n_intra,
+        n_trans) "For translational exchange among species within the phase"
+      annotation (Dialog(group="Independence factors", __Dymola_label=
+            "<html><i>k</i><sub>intra &Phi;</sub></html>"));
+    parameter Q.NumberAbsolute k_intra_Q[n_intra]=ones(n_intra)
+      "For thermal exchange among species within the phase" annotation (Dialog(
+          group="Independence factors", __Dymola_label=
+            "<html><i>k</i><sub>intra <i>Q</i></sub></html>"));
 
     // Preferred states
     // Note:  The start values for these variable aren't fixed because the
@@ -1982,52 +1990,43 @@ protected
       T, p) if environment.analysis "Isothermal compressibility";
     //
     // Time constants
-    output Q.TimeAbsolute tau_PhiE_intra[n_intra](
+    output Q.TimeAbsolute tau_PhiE_intra[n_intra, n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(Data.m*mu, n_intra) ./ k_intra if environment.analysis
-      "Time constant for translational intra-phase exchange";
-    output Q.TimeAbsolute tau_PhiE_inter[n_inter](
+      each start=U.s) = {Data.m*mu*k_intra_Phi[i, :] for i in 1:n_intra} if
+      environment.analysis and n_intra > 0
+      "Time constants for translational intra-phase exchange";
+    output Q.TimeAbsolute tau_PhiE_inter[n_inter, n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(Data.m*mu, n_inter) ./ k_inter if environment.analysis
-       and n_inter > 0 "Time constant for translational inter-phase exchange";
+      each start=U.s) = {Data.m*mu*k_inter_Phi[i, :] for i in 1:n_inter} if
+      environment.analysis and n_inter > 0
+      "Time constants for translational inter-phase exchange";
     output Q.TimeAbsolute tau_QE_intra[n_intra](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(c_p*nu, n_intra) ./ k_intra if environment.analysis
-      "Time constant for thermal intra-phase exchange";
+      each start=U.s) = c_p*nu*k_intra_Q if environment.analysis and n_intra >
+      0 "Time constants for thermal intra-phase exchange";
     output Q.TimeAbsolute tau_QE_inter[n_inter](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(c_p*nu, n_inter) ./ k_inter if environment.analysis
-       and n_inter > 0 "Time constant for thermal inter-phase exchange";
-    // Note:  The time contants for the direct connector are zero because it
-    // has no resistance.
+      each start=U.s) = c_p*nu*k_inter_Q if environment.analysis and n_inter >
+      0 "Time constants for thermal inter-phase exchange";
     // Note:  The structure of the problem should not change if these
     // auxiliary variables are included (hence, StateSelect.never).
     //
     // Translational momentum balance
-    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = direct.trans.mPhidot
-       + sum(intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].mPhidot for i
-       in 1:n_inter) if environment.analysis
+    output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = sum(
+      intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].mPhidot for i in 1:
+      n_inter) if environment.analysis
       "Friction from other configurations (diffusive exchange)";
     //
     // Energy balance
-    output Q.Power Edot_DE(stateSelect=StateSelect.never) = direct.trans.phi*
-      direct.trans.mPhidot + sum(intra[i].phi*intra[i].mPhidot for i in 1:
-      n_intra) + sum(inter[i].phi*inter[i].mPhidot for i in 1:n_inter) + direct.therm.Qdot
-       + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
+    output Q.Power Edot_DE(stateSelect=StateSelect.never) = sum(intra[i].phi*
+      intra[i].mPhidot for i in 1:n_intra) + sum(inter[i].phi*inter[i].mPhidot
+      for i in 1:n_inter) + sum(intra.Qdot) + sum(inter.Qdot) if environment.analysis
       "Rate of diffusion of energy from other configurations";
-    Connectors.Direct direct(
-      final n_trans=n_trans,
-      final inclTrans=true,
-      final inclTherm=true,
-      therm(T(final start=T_IC, final fixed=false)))
-      "Connector to directly couple velocity or temperature with other species"
-      annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-          iconTransformation(extent={{28,-80},{48,-100}})));
     Connectors.Intra intra[n_intra](each final n_trans=n_trans, each T(final
           start=T_IC, final fixed=false))
       "Connectors to exchange translational momentum and energy within the phase"
-      annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
-          iconTransformation(extent={{60,-60},{80,-80}})));
+      annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+          iconTransformation(extent={{30,-80},{50,-100}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans, each T(final
           start=T_IC, final fixed=false))
       "Connectors to exchange translational momentum and energy with all other species"
@@ -2050,9 +2049,21 @@ protected
     outer parameter Q.Length L[Axis] "Lengths of the subregion" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    outer parameter Q.NumberAbsolute k_inter[:]
-      "Coupling factors for diffusive exchange with other phases" annotation (
-        missingInnerMessage="This model should be used within a phase model");
+    outer parameter Integer cartTrans[:]
+      "Cartesian-axis indices of the transport axes" annotation (
+        missingInnerMessage="This model should be used within a subregion model.
+");
+    // Note:  The size of cartTrans is n_trans, but it can't be
+    // specified here due to an error in Dymola 2014.
+    outer parameter Q.NumberAbsolute k_inter_Phi[:, :]
+      "Independence factors for translational exchange with other phases"
+      annotation (missingInnerMessage="This model should be used within a phase model.
+");
+    outer parameter Q.NumberAbsolute k_inter_Q[:]
+      "Independence factors for thermal exchange among with other phases"
+      annotation (missingInnerMessage="This model should be used within a phase model.
+");
+    // Note:  The sizes can't be specified due to an error in Dymola 2014.
 
     outer Conditions.Environment environment "Environmental conditions";
 
@@ -2064,10 +2075,8 @@ Check that the volumes of the other phases are set properly.");
   equation
     // Aliases (only to clarify and simplify other equations)
     p = dalton.p;
-    T = direct.therm.T;
     h = g + T*s;
     M = Data.m*N;
-    phi = direct.trans.phi;
     v*N = dalton.V;
 
     // Thermodynamic correlations
@@ -2083,28 +2092,25 @@ Check that the volumes of the other phases are set properly.");
     // --------
     // Within the phase
     for i in 1:n_intra loop
-      mu*intra[i].mPhidot = k_intra[i]*N .* (intra[i].phi - phi)
+      k_intra_Phi[i, :]*mu .* intra[i].mPhidot = N*(intra[i].phi - phi)
         "Translational";
-      nu*intra[i].Qdot = k_intra[i]*N .* (intra[i].T - T) "Thermal";
+      k_intra_Q[i]*nu*intra[i].Qdot = N*(intra[i].T - T) "Thermal";
     end for;
     //
     // With other phases
     for i in 1:n_inter loop
-      mu*inter[i].mPhidot = k_inter[i]*N .* (inter[i].phi - phi)
+      k_inter_Phi[i, :]*mu .* inter[i].mPhidot = N*(inter[i].phi - phi)
         "Translational";
-      nu*inter[i].Qdot = k_inter[i]*N .* (inter[i].T - T) "Thermal";
+      k_inter_Q[i]*nu*inter[i].Qdot = N*(inter[i].T - T) "Thermal";
     end for;
 
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
-    <p>All of the details below are pertinent to the <a href=\"modelica://FCSys.Fluid\">Fluid</a>
-    model (and the derived <a href=\"modelica://FCSys.Gas\">Gas</a> and 
-    <a href=\"modelica://FCSys.Liquid\">Liquid</a> models) which inherits from this model.  
+    <p>All of the details below are pertinent to the <a href=\"modelica://FCSys.Species.Fluid\">Fluid</a>
+    model (and the derived <a href=\"modelica://FCSys.Species.Ion\">Ion</a> model) which inherits from this model.  
     Only some of the details apply to the 
-    <a href=\"modelica://FCSys.Ion\">Ion</a> model because it excludes shear forces between neighboring 
-    regions.
-    The <a href=\"modelica://FCSys.Solid\">Solid</a> model excludes the transport and exchange of 
+    <a href=\"modelica://FCSys.Solid\">Solid</a> model because it excludes the transport and exchange of 
     material.</p>
     
     <p>This model is based on the following fixed assumptions:
@@ -2118,9 +2124,8 @@ Check that the volumes of the other phases are set properly.");
        axes of transport.  For example, if the material is stratified, then the
        layers must be parallel to one of the planes in the rectilinear
        grid.</li>
-       <li>The length factors (<b><i>k</i></b>) that describe anisotropic effects
-          are common to material, translational, and thermal transport for every species 
-          in the phase.</li>
+       <li>The effective transport lengths (<b><i>kL</i></b>)
+          are common to material, translational, and thermal transport.</li>
        <li>There is no radiative heat transfer (or it must be linearized and added to the thermal conductance).</li>
        <li>Rotational momentum is not exchanged, transported, or stored.</li>
     </ol>
@@ -2141,23 +2146,6 @@ Check that the volumes of the other phases are set properly.");
     <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Exchange.png\">
 <br>Figure 1:  Exchange of a quantity (material, translational momentum, or thermal energy) among configurations
     (A, B, and C) within a subregion.</p>
-
-    <p>Translational momentum and thermal energy are advected as material is exchanged
-    due to phase change or reactions.  This occurs at the velocity (&phi;) and the specific entropy-temperature
-    product (<i>sT</i>) of the reactants (source configurations), where the reactant/product designation
-    depends on the current conditions.</p>
-
-    <p>The advective exchange is modeled a <code>stream</code> connector
-    (<a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>).
-  The rate of advection of translational momentum is the
-  product of the velocity of the source (&phi;) and the mass flow rate
-  (<i>M&#775;</i> or <i>m</i><i>N&#775;</i>).  The rate of thermal advection is the
-  specific entropy-temperature product of the source (<i>sT</i>) times the rate of
-  material exchange
-  (<i>N&#775;</i>).  If there are multiple sources, then
-  their contributions are additive.  If there are multiple sinks, then
-  translational momentum is split on a mass basis and the thermal stream is split
-  on a particle-number basis.</p>
   
     <p><a href=\"#Fig2\">Figure 2</a> shows how
     a configuration
@@ -2202,10 +2190,14 @@ Check that the volumes of the other phases are set properly.");
 
     <p>Notes regarding the parameters:
     <ol>
-    <li>Usually, if the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
+    
+    <li>The effect transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
+    transport axes due to tortouisity.  The tortuisity may be anisotropic.</li>
+    
+    <li>If the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
      thermal independity (&nu;), fluidity (&eta;), or thermal resistivity (&theta;)
       is zero, then
-    it should be set as <code>final</code> so that index reduction may be performed.
+    it should usually be set as <code>final</code> so that index reduction may be performed.
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
@@ -2241,39 +2233,14 @@ Check that the volumes of the other phases are set properly.");
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
     
-    <li>Upstream discretization is applied by default.
-    The central difference
-    scheme may be used by setting <code>upstreamX</code>, <code>upstreamY</code>, and <code>upstreamZ</code> to 
-    <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for 
-    the upstream discretization of pressure will be much less (factor of 1/10,000) than the 
-      P&eacute;clet numbers for translational and thermal transport.  Therefore, it may appear
-      that pressure is not advected with the material transort stream.</li>
-        
-    <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use 
-    3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36) 
-    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li>
+    <li><i>N</i><sub>min</sub> establishes an amount of material below which no exchange occurs.  It can
+    help to avoid stiffness when very little of a species exists in a subregion.</li> 
     </p>
    
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the current.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
     thermal energy is determined from the thermodynamic state at the boundary and the current.</p>
-
-    <p>It is usually appropriate to assume that species
-    exist at the same temperature within a phase.  The time constants for thermal exchange (&tau;<sub><i>Q</i>E</sub>)
-    are usually much shorter than the time span of interest due to the very small coupling
-    resistances.  If this is the case, connect the <code>direct.therm</code>
-    connectors of the species.  This will reduce the index of the problem, so it may be 
-    necessary to eliminate some initial conditions.  The <a href=\"modelica://FCSys.Phases.Phase\">Phase</a> models 
-    add these connections and handle the initial conditions automatically when <code>oneTemperature</code> is
-    <code>true</code>.</p>
-
-    <p>In bulk flow, it is usually appropriate to assume that species travel with the same velocity within
-    a phase.  If this is the case, connect the <code>direct.trans</code>
-    connectors of the species.  This will reduce the index of the problem, so it may be 
-    necessary to eliminate some initial conditions.  The <a href=\"modelica://FCSys.Phases.Phase\">Phase</a> models 
-    add these connections and handle the initial conditions automatically when <code>oneVelocity</code> is
-    <code>true</code>.</p>
     
     <p>For the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
