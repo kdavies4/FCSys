@@ -86,7 +86,8 @@ package UsersGuide "User's Guide"
             <li><a href=\"modelica://FCSys.Species.Species\">FCSys.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, momentum, and
             energy</li>
-            <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
+            <li><a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a> or 
+            <a href=\"modelica://FCSys.Regions.CaFPs.CaFP\">FCSys.Regions.CaFPs.CaFP</a>:
             Information about the geometric orientation of the cell</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
@@ -845,21 +846,6 @@ action. This section shall survive the termination of this License.</p>
   annotation (preferredView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

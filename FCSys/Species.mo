@@ -639,7 +639,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e12*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={2e12*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -656,7 +656,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           n_chem=1,
           final initMaterial=Init.none);
 
-        parameter Q.NumberAbsolute lambda_IC=14
+        parameter Q.NumberAbsolute lambda_IC=14*environment.RH
           "<html>Initial ratio of H<sub>2</sub>O molecules to SO<sub>3</sub><sup>-</sup> end-groups</html>"
           annotation (Dialog(tab="Initialization", __Dymola_label=
                 "<html>&lambda;<sub>IC</sub></html>"));
@@ -679,6 +679,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
           Diagram(graphics),
           Icon(graphics));
+
       end Fixed;
 
     end Ionomer;
@@ -713,14 +714,14 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={7e9*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={1e11*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           final zeta=0,
           redeclare parameter Q.Fluidity eta=1/(855e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.613*U.W),
-          final initEnergy=Init.temperature,
+          initEnergy=Init.temperature,
           final N_IC,
           final h_IC,
           final g_IC,
@@ -1029,7 +1030,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1077,7 +1077,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       "Method of initializing the thermal state"
       annotation (Evaluate=true, Dialog(tab="Initialization"));
     extends Species(N(stateSelect=if consMaterial == ConsThermo.dynamic then
-            StateSelect.always else StateSelect.prefer));
+            StateSelect.always else StateSelect.prefer),T(final fixed=false));
     // Note:  The extension is after these parameters so that they appear first
     // in the parameter dialog.
     // Note:  StateSelect.always is not ideal, but it is necessary to avoid
@@ -1781,7 +1781,7 @@ Choose any condition besides none.");
       final h_IC,
       final g_IC,
       T(stateSelect=if consEnergy == ConsThermo.dynamic then StateSelect.always
-             else StateSelect.default));
+             else StateSelect.default,fixed=consEnergy == ConsThermo.dynamic));
     parameter Q.Length kL[n_trans]=L[cartTrans] "Effective transport length"
       annotation (Dialog(group="Geometry", __Dymola_label=
             "<html><b><i>k&nbsp;L</i></b></html>"));
@@ -1811,11 +1811,6 @@ Choose any condition besides none.");
   protected
     outer Q.Area Aprime[n_trans] "Effective cross-sectional area" annotation (
         missingInnerMessage="This model should be used within a phase model.");
-
-  initial equation
-    if consEnergy == ConsThermo.dynamic then
-      T = T_IC;
-    end if;
 
   equation
     // Assumptions
@@ -1934,8 +1929,8 @@ protected
     Q.TemperatureAbsolute T(
       nominal=300*U.K,
       final start=T_IC,
-      final fixed=false,
       stateSelect=StateSelect.prefer) "Temperature";
+
     Q.Velocity phi[n_trans](
       each nominal=10*U.cm/U.s,
       each start=0,

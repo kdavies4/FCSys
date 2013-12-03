@@ -776,7 +776,7 @@ package WorkInProgress "Incomplete classes under development"
 
   model AssembliesCellsExamplesTestStandEIS
     "Test stand to perform electrochemical impedance spectroscopy"
-    extends Assemblies.Cells.Examples.TestStand(redeclare
+    extends Assemblies.Cells.Examples.TestStand2(redeclare
         Assemblies.Cells.Examples.TestConditions testConditions(final
           electricalSpec=ElectricalSpec.current, electricalSet(y=zI_large +
               firstOrder.y*U.A)));
@@ -810,7 +810,7 @@ package WorkInProgress "Incomplete classes under development"
 
   model AssembliesCellsExamplesTestStandVoltage
     "Test the cell with voltage as a boundary condition"
-    extends Assemblies.Cells.Examples.TestStand(
+    extends Assemblies.Cells.Examples.TestStand2(
       testConditions(electricalSpec=ElectricalSpec.voltage, electricalSet(
           startTime=100,
           height=-U.V,
@@ -843,7 +843,7 @@ package WorkInProgress "Incomplete classes under development"
 
   model AssembliesCellsExamplesTestStandO2
     "Simulate the fuel cell with prescribed conditions, with pure oxygen"
-    extends Assemblies.Cells.Examples.TestStand(
+    extends Assemblies.Cells.Examples.TestStand2(
       p_ca_in=sum(caSource.gas.H2O.boundary.p + caSource.gas.O2.boundary.p),
       cell(final inclN2=false),
       testConditions(final psi_O2_dry=1),

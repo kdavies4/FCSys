@@ -197,15 +197,14 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -299,15 +298,14 @@ package Chemistry "Models associated with chemical reactions"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
@@ -385,11 +383,11 @@ public
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{30,30},{-30,-30}},
-            lineColor={47,107,251},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Sphere), Ellipse(extent={{30,30},{-30,-30}},
-              lineColor={0,0,0})}),
+              extent={{30,30},{-30,-30}},
+              lineColor={47,107,251},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Sphere),Ellipse(extent={{30,30},{-30,-30}},
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end SurfaceTension;
@@ -429,17 +427,15 @@ public
     <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a> 
     (accessed Nov. 22, 2103).</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{40,-40},{-40,-20}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(points={{-40,-20},{40,-20}}, color={0,0,0}),
-          Line(points={{0,-40},{20,-20}}, color={0,0,0}),
-          Line(points={{-20,-40},{0,-20}}, color={0,0,0}),
-          Line(points={{20,-40},{40,-20}}, color={0,0,0}),
-          Line(points={{-40,-40},{-20,-20}}, color={0,0,0})}));
+              100}}), graphics={Rectangle(
+              extent={{40,-40},{-40,-20}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(points={{-40,-20},{40,-20}}, color
+            ={0,0,0}),Line(points={{0,-40},{20,-20}}, color={0,0,0}),Line(
+            points={{-20,-40},{0,-20}}, color={0,0,0}),Line(points={{20,-40},{
+            40,-20}}, color={0,0,0}),Line(points={{-40,-40},{-20,-20}}, color={
+            0,0,0})}));
   end SurfaceTensionContact;
 
   package Electrochemistry "Models associated with electrochemical reactions"

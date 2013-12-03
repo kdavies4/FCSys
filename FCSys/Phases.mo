@@ -1258,8 +1258,8 @@ protected
     parameter Q.NumberAbsolute k[Axis](
       each min=Modelica.Constants.small,
       each final nominal=1) = {1,1,1} if n_spec > 0
-      "Length factors for diffusive transport" annotation (Dialog(group=
-            "Geometry", __Dymola_label="<html><b><i>k</i></b></html>"));
+      "Length factors for transport" annotation (Dialog(group="Geometry",
+          __Dymola_label="<html><b><i>k</i></b></html>"));
     parameter Integer n_trans=1 "Number of transport axes"
       annotation (HideResult=true);
     // This cannot be an inner/outer parameter in Dymola 2014.
