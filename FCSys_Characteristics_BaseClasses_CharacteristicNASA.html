@@ -30,7 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
-    <li><a href="FCSys_Chemistry.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -54,17 +54,14 @@
 <h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA"></a><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses">FCSys.Characteristics.BaseClasses</a>.CharacteristicNASA</h2>
 
 <b>Thermodynamic package with diffusive properties based on NASA CEA</b>
-<p></p>
-<p></p>
 
 <h3>Information</h3>
 
 <p>The correlations for transport properties are available in
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>,
   <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>]. For more information, please see the
-  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package.</p><p></p>
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package.</p>
 Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> (Package of thermodynamic and diffusive properties).
-<p></p>
 
 <h3>Package Content</h3>
 
@@ -134,22 +131,20 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.beta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.beta">beta</a>
 </td><td>Isothermal compressibility as a function of temperature and pressure (&beta;)</td></tr>
 </table>
-<p></p>
 
 <h3>Types and constants</h3>
 
 <pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_eta_theta[:]={0,Modelica.Constants.inf} <font color="darkgreen">
-  &quot;Temperature limits for the rows of <i>b</i><sub>&eta;</sub> and <i>b</i><sub>&theta;</sub> (<i>T</i><sub>lim &eta; &theta;</sub>)&quot;</font>;</pre><p></p>
+  &quot;Temperature limits for the rows of <i>b</i><sub>&eta;</sub> and <i>b</i><sub>&theta;</sub> (<i>T</i><sub>lim &eta; &theta;</sub>)&quot;</font>;</pre>
 <pre><font color="blue">constant </font>Real b_eta[<font color="red">size</font>(T_lim_eta_theta, 1) - 1, 4] <font color="darkgreen">
-  &quot;Correlation constants for fluidity (<i>b</i><sub>&eta;</sub>)&quot;</font>;</pre><p></p>
+  &quot;Correlation constants for fluidity (<i>b</i><sub>&eta;</sub>)&quot;</font>;</pre>
 <pre><font color="blue">constant </font>Real b_theta[<font color="red">size</font>(T_lim_eta_theta, 1) - 1, 4] <font color="darkgreen">
-  &quot;Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)&quot;</font>;</pre><p></p>
+  &quot;Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)&quot;</font>;</pre>
 <hr>
 
 <h2><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAViscosity</h2>
-<b>Return constants for fluidity given NASA CEA constants for viscosity</b><p></p>
-<p></p>
+<b>Return constants for fluidity given NASA CEA constants for viscosity</b>
 
 <h3>Information</h3>
 
@@ -172,7 +167,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_eta[4]</td><td>Constants for fluidity</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -193,8 +187,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAThermalConductivity</h2>
-<b>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</b><p></p>
-<p></p>
+<b>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</b>
 
 <h3>Information</h3>
 
@@ -217,7 +210,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_theta[4]</td><td>Constants for thermal resistivity</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -238,8 +230,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.eta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.eta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.eta</h2>
-<b>Fluidity (&eta;) as a function of temperature</b><p></p>
-<p></p>
+<b>Fluidity (&eta;) as a function of temperature</b>
 
 <h3>Information</h3>
 
@@ -248,7 +239,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
-  <p></p>
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
 
@@ -269,7 +260,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Resistivity</a></td><td>eta</td><td>Fluidity [L.T/N]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -301,8 +291,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.theta</h2>
-<b>Thermal resistivity (&theta;) as a function of temperature</b><p></p>
-<p></p>
+<b>Thermal resistivity (&theta;) as a function of temperature</b>
 
 <h3>Information</h3>
 
@@ -311,7 +300,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
-  <p></p>
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
 
@@ -332,7 +321,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Thermal resistivity [L.T/N]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 

@@ -30,7 +30,7 @@
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Phases.html">Phases</a></li>
     <li><a href="FCSys_Species.html">Species</a></li>
-    <li><a href="FCSys_Chemistry.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -54,8 +54,6 @@
 <h2><a name="FCSys.Connectors"></a><a href="index.html#FCSys">FCSys</a>.Connectors</h2>
 
 <b>Declarative and imperative connectors</b>
-<p></p>
-<p></p>
 
 <h3>Information</h3>
 
@@ -203,17 +201,7 @@
     conservation equations.</p>
     </small>
 
-  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2013, <a href="http://www.gtrc.gatech.edu/">Georgia Tech Research Corporation</a>.</p>
-
-  <p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-  it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.License">
-FCSys.UsersGuide.License</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-  <p></p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_InterfacesPackage.html#Modelica.Icons.InterfacesPackage">Modelica.Icons.InterfacesPackage</a> (Icon for packages containing interfaces).
-<p></p>
 
 <h3>Package Content</h3>
 
@@ -264,9 +252,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Connectors.ChemicalI.png" alt="FCSys.Connectors.Chemical" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Chemical"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Chemical</h2>
-<b>Connector for a species in a reaction or phase change process</b><p></p>
+<b>Connector for a species in a reaction or phase change process</b>
 <img src="images/FCSys.Connectors.ChemicalD.png" alt="FCSys.Connectors.Chemical">
-<p></p>
 
 <h3>Information</h3>
 
@@ -278,7 +265,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     which reconciles the different specific masses.</p>
 
 <p>For more information, please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <p>
 
@@ -302,7 +289,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td>stream <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_trans]</td><td>Velocity upon outflow [L/T]</td></tr>
 <tr><td>stream <a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Specific entropy-temperature product upon outflow [L2.M/(N.T2)]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -331,14 +317,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Connectors.ReactionI.png" alt="FCSys.Connectors.Reaction" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Reaction"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Reaction</h2>
-<b>Connector for the combination of species in a chemical reaction</b><p></p>
+<b>Connector for the combination of species in a chemical reaction</b>
 <img src="images/FCSys.Connectors.ReactionD.png" alt="FCSys.Connectors.Reaction">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
 <p>
 
@@ -366,7 +351,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>sT</td><td>Product of specific entropy and temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal advection [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -392,9 +376,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.BoundaryBusI.png" alt="FCSys.Connectors.BoundaryBus" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.BoundaryBus"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.BoundaryBus</h2>
-<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a> connectors (for multiple configurations)</b><p></p>
+<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a> connectors (for multiple configurations)</b>
 <img src="images/FCSys.Connectors.BoundaryBusD.png" alt="FCSys.Connectors.BoundaryBus">
-<p></p>
 
 <h3>Information</h3>
 
@@ -402,9 +385,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     of the <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a> connector.</p>
 
     <p>For more information, please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
-
-<p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <h3>Modelica definition</h3>
 
@@ -418,9 +399,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.BoundaryI.png" alt="FCSys.Connectors.Boundary" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Boundary"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Boundary</h2>
-<b>Connector to transport material, translational momentum, and thermal energy</b><p></p>
+<b>Connector to transport material, translational momentum, and thermal energy</b>
 <img src="images/FCSys.Connectors.BoundaryD.png" alt="FCSys.Connectors.Boundary">
-<p></p>
 
 <h3>Information</h3>
 
@@ -429,7 +409,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     connector.</p>
 
     <p>For more information, please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">ThermalDiffusive</a> (Connector for the diffusion of thermal energy).
 <p>
 
@@ -445,7 +425,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal conduction [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -470,9 +449,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
 <h2><img src="images/FCSys.Connectors.AmagatI.png" alt="FCSys.Connectors.Amagat" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Amagat"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Amagat</h2>
-<b>Connector for additivity of volume</b><p></p>
+<b>Connector for additivity of volume</b>
 <img src="images/FCSys.Connectors.AmagatD.png" alt="FCSys.Connectors.Amagat">
-<p></p>
 
 <h3>Information</h3>
 
@@ -499,7 +477,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
     <p>See also the
     <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connector and
     the documentation in the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <p>
 
@@ -511,7 +489,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Pressure [M/(L.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>Volume [L3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -527,9 +504,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
 <h2><img src="images/FCSys.Connectors.DaltonI.png" alt="FCSys.Connectors.Dalton" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Dalton"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Dalton</h2>
-<b>Connector for additivity of pressure</b><p></p>
+<b>Connector for additivity of pressure</b>
 <img src="images/FCSys.Connectors.DaltonD.png" alt="FCSys.Connectors.Dalton">
-<p></p>
 
 <h3>Information</h3>
 
@@ -546,7 +522,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
     <p>See also the <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a>
     connector and the documentation of the
-  <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+  <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <p>
 
@@ -558,7 +534,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>Volume [L3]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>Pressure [M/(L.T2)]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -574,9 +549,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
 <h2><img src="images/FCSys.Connectors.IntraI.png" alt="FCSys.Connectors.Intra" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Intra"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Intra</h2>
-<b>Connector for translational and thermal exchange among species within a phase</b><p></p>
+<b>Connector for translational and thermal exchange among species within a phase</b>
 <img src="images/FCSys.Connectors.IntraD.png" alt="FCSys.Connectors.Intra">
-<p></p>
 
 <h3>Information</h3>
 
@@ -588,7 +562,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
     <p>Please see <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a>,
     and the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
 <p>
 
@@ -614,7 +588,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal conduction [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -636,9 +609,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.InterI.png" alt="FCSys.Connectors.Inter" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Inter"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Inter</h2>
-<b>Connector for translational and thermal exchange among species, regardless of phase</b><p></p>
+<b>Connector for translational and thermal exchange among species, regardless of phase</b>
 <img src="images/FCSys.Connectors.InterD.png" alt="FCSys.Connectors.Inter">
-<p></p>
 
 <h3>Information</h3>
 
@@ -650,7 +622,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
     <p>Please see <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a>,
     and the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
 <p>
 
@@ -676,7 +648,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal conduction [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -698,9 +669,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.InertI.png" alt="FCSys.Connectors.Inert" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Inert"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Inert</h2>
-<b>Connector for translational and thermal exchange</b><p></p>
+<b>Connector for translational and thermal exchange</b>
 <img src="images/FCSys.Connectors.InertD.png" alt="FCSys.Connectors.Inert">
-<p></p>
 
 <h3>Information</h3>
 
@@ -711,7 +681,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     parameters to scale the translational and thermal independences of the connection.</p>
 
     <p>Please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
 <p>
 
@@ -737,7 +707,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal conduction [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -758,9 +727,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.InertI.png" alt="FCSys.Connectors.InertNode" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.InertNode"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.InertNode</h2>
-<b>Internal node for <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Inter</a></b><p></p>
+<b>Internal node for <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Inter</a></b>
 <img src="images/FCSys.Connectors.InertNodeD.png" alt="FCSys.Connectors.InertNode">
-<p></p>
 
 <h3>Information</h3>
 
@@ -769,9 +737,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
     connectors.  It is an expandable connector with no intrinsic variables.</p>
 
     <p>For more information, please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
-
-<p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <h3>Modelica definition</h3>
 
@@ -785,15 +751,13 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.TranslationalI.png" alt="FCSys.Connectors.Translational" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Translational"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Translational</h2>
-<b>Connector for the advection or diffusion of translational momentum</b><p></p>
+<b>Connector for the advection or diffusion of translational momentum</b>
 <img src="images/FCSys.Connectors.TranslationalD.png" alt="FCSys.Connectors.Translational">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
   <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
-  <p></p>
 
 <p>
 
@@ -815,7 +779,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_trans]</td><td>Velocity [L/T]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_trans]</td><td>Force [L.M/T2]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -835,14 +798,13 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.TranslationalI.png" alt="FCSys.Connectors.ThermalDiffusive" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.ThermalDiffusive"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.ThermalDiffusive</h2>
-<b>Connector for the diffusion of thermal energy</b><p></p>
+<b>Connector for the diffusion of thermal energy</b>
 <img src="images/FCSys.Connectors.ThermalDiffusiveD.png" alt="FCSys.Connectors.ThermalDiffusive">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Please see the documentation of the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p></p>
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 
 <p>
 
@@ -854,7 +816,6 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Rate of thermal conduction [L2.M/T3]</td></tr>
 </table>
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -871,16 +832,14 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <h2><img src="images/FCSys.Connectors.RealInputI.png" alt="FCSys.Connectors.RealInput" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealInput"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealInput</h2>
-<b>"<code>input Real</code>" as a connector</b><p></p>
+<b>"<code>input Real</code>" as a connector</b>
 <img src="images/FCSys.Connectors.RealInputD.png" alt="FCSys.Connectors.RealInput">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Connector with one input signal of type <code>Real</code>.</p>
-<p></p>
+
 Extends from Real.
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -892,16 +851,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealInputI.png" alt="FCSys.Connectors.RealInputInternal" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealInputInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealInputInternal</h2>
-<b>Internal "<code>input Real</code>" as a connector</b><p></p>
+<b>Internal "<code>input Real</code>" as a connector</b>
 <img src="images/FCSys.Connectors.RealInputInternalD.png" alt="FCSys.Connectors.RealInputInternal">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Protected connector with one input signal of type <code>Real</code>.</p>
-<p></p>
+
 Extends from Real.
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -913,17 +870,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealInputBusI.png" alt="FCSys.Connectors.RealInputBus" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealInputBus"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealInputBus</h2>
-<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connectors</b><p></p>
+<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connectors</b>
 <img src="images/FCSys.Connectors.RealInputBusD.png" alt="FCSys.Connectors.RealInputBus">
-<p></p>
 
 <h3>Information</h3>
 
 <p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.<p></p>
-
-<p></p>
+   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.
 
 <h3>Modelica definition</h3>
 
@@ -937,17 +891,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealInputBusI.png" alt="FCSys.Connectors.RealInputBusInternal" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealInputBusInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealInputBusInternal</h2>
-<b>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connectors</b><p></p>
+<b>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connectors</b>
 <img src="images/FCSys.Connectors.RealInputBusInternalD.png" alt="FCSys.Connectors.RealInputBusInternal">
-<p></p>
 
 <h3>Information</h3>
 
 <p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.</p><p></p>
-
-<p></p>
+   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a> connector.</p>
 
 <h3>Modelica definition</h3>
 
@@ -961,16 +912,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealOutputI.png" alt="FCSys.Connectors.RealOutput" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealOutput"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealOutput</h2>
-<b>"<code>output Real</code>" as a connector</b><p></p>
+<b>"<code>output Real</code>" as a connector</b>
 <img src="images/FCSys.Connectors.RealOutputD.png" alt="FCSys.Connectors.RealOutput">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Connector with one output signal of type <code>Real</code>.</p>
-<p></p>
+
 Extends from Real.
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -982,16 +931,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealOutputI.png" alt="FCSys.Connectors.RealOutputInternal" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealOutputInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealOutputInternal</h2>
-<b>Internal "<code>output Real</code>" as a connector</b><p></p>
+<b>Internal "<code>output Real</code>" as a connector</b>
 <img src="images/FCSys.Connectors.RealOutputInternalD.png" alt="FCSys.Connectors.RealOutputInternal">
-<p></p>
 
 <h3>Information</h3>
 
 <p>Protected connector with one output signal of type <code>Real</code>.</p>
-<p></p>
+
 Extends from Real.
-<p></p>
 
 <h3>Modelica definition</h3>
 
@@ -1003,17 +950,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealOutputBusI.png" alt="FCSys.Connectors.RealOutputBus" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealOutputBus"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealOutputBus</h2>
-<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connectors</b><p></p>
+<b>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connectors</b>
 <img src="images/FCSys.Connectors.RealOutputBusD.png" alt="FCSys.Connectors.RealOutputBus">
-<p></p>
 
 <h3>Information</h3>
 
 <p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.<p></p>
-
-<p></p>
+   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.
 
 <h3>Modelica definition</h3>
 
@@ -1027,17 +971,14 @@ Extends from Real.
 
 <h2><img src="images/FCSys.Connectors.RealOutputBusI.png" alt="FCSys.Connectors.RealOutputBusInternal" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.RealOutputBusInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.RealOutputBusInternal</h2>
-<b>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connectors</b><p></p>
+<b>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connectors</b>
 <img src="images/FCSys.Connectors.RealOutputBusInternalD.png" alt="FCSys.Connectors.RealOutputBusInternal">
-<p></p>
 
 <h3>Information</h3>
 
 <p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.</p><p></p>
-
-<p></p>
+   of the <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a> connector.</p>
 
 <h3>Modelica definition</h3>
 
