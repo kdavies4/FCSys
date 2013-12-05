@@ -201,7 +201,7 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The fluiditiy is infinite.  All friction is by translational exchange with the
+          <li>The fluidity is infinite.  All friction is by translational exchange with the
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
@@ -1730,7 +1730,7 @@ Choose any condition besides none.");
     <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for 
     the upstream discretization of pressure will be much less (factor of 1/10,000) than the 
     P&eacute;clet numbers for translational and thermal transport.  Therefore, it may appear
-    that pressure is not advected with the material transort stream.</li>
+    that pressure is not advected with the material transport stream.</li>
     
     <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
     correspond to the orientation of the translational momentum that is transported, not the axes of material transport.</li>

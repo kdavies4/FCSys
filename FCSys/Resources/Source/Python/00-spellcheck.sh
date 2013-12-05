@@ -5,6 +5,5 @@
 
 for f in doc/*.html
     do
-        aspell --extra-dicts=./.modelica.pws --personal=./.fcres.pws -c $f
+        aspell --extra-dicts=$(readlink -f  ../../../../.modelica.pws)  --personal=./.fcres.pws -c $f
     done
-read -p "Done.  Press [Enter] to exit."

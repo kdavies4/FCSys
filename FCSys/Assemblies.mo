@@ -124,7 +124,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         end if;
         annotation (Documentation(info="<html><p>Some conditions are taken from the outer <a href=\"modelica://FCSys.Conditions.Environment\">environment</a> model.  In particular,<ol>
     
-    <li><code>environment.T</code> is used as the initial temperature throughout the cell, the temperature at each inlet, and the exterior temperature of each endplate in the yz plane.</li>
+    <li><code>environment.T</code> is used as the initial temperature throughout the cell, the temperature at each inlet, and the exterior temperature of each end plate in the yz plane.</li>
   
     <li><code>environment.p</code> is used as the initial pressure throughout the cell and the pressure at each outlet.</li>
   
@@ -237,7 +237,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               redeclare function thermalSpec =
                   FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
 
-              thermalSet(y=0)))) "Boundary condition for the cathode endplate"
+              thermalSet(y=0)))) "Boundary condition for the cathode end plate"
           annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=90,
@@ -303,7 +303,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           each liquid(inclH2O=cell.inclLiq, H2O(redeclare function thermalSpec
                 = FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
                 thermalSet(y=0))))
-          "Boundary condition for the cathode endplate" annotation (Placement(
+          "Boundary condition for the cathode end plate" annotation (Placement(
               transformation(
               extent={{10,10},{-10,-10}},
               rotation=90,
@@ -640,7 +640,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
 
               thermalSet(y=0))))
-          "Boundary condition for the anode endplate, except electrical"
+          "Boundary condition for the anode end plate, except electrical"
           annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=90,
@@ -699,7 +699,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           each liquid(inclH2O=cell.inclLiq, H2O(redeclare function thermalSpec
                 = FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
                 thermalSet(y=0))))
-          "Boundary condition for the cathode endplate, except electrical"
+          "Boundary condition for the cathode end plate, except electrical"
           annotation (Placement(transformation(
               extent={{10,10},{-10,-10}},
               rotation=90,

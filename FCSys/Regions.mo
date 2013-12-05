@@ -2267,7 +2267,7 @@ generally be greater than one because the transport distance into/out of the GDL
 As an approximation, it should be equal to the product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels</li>
 <li>the area of the valleys in the yz plane to the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
-the total volume avaialable for the fluid (&epsilon;)</li>
+the total volume available for the fluid (&epsilon;)</li>
 </ol> The default is 2/&epsilon;.</ol> 
 In theory, it is possible
 to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,
@@ -2476,7 +2476,7 @@ text layer of this model.</p>
       outer Conditions.Environment environment "Environmental conditions";
       annotation (Documentation(info="<html>
 <p>This model represents the anode gas diffusion layer of a PEMFC.
-The x axis extends from the anode to the cathodel. 
+The x axis extends from the anode to the cathode. 
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
 <p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.  
@@ -3933,7 +3933,7 @@ generally be greater than one because the transport distance into/out of the GDL
 As an approximation, it should be equal to the product of two ratios:<ol>
 <li>the thickness of the flow plate to the depth of the channels</li>
 <li>the area of the valleys in the yz plane to the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
-the total volume avaialable for the fluid (&epsilon;)</li>
+the total volume available for the fluid (&epsilon;)</li>
 </ol> The default is 2/&epsilon;.</ol> 
 In theory, it is possible
 to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,

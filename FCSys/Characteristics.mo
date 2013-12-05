@@ -203,7 +203,7 @@ package Characteristics
         annotation (Placement(transformation(extent={{-120,-30},{-100,-10}})));
 
       Q.MassSpecific m "Specific mass";
-      Q.LengthSpecific d "Specific diamter";
+      Q.LengthSpecific d "Specific diameter";
       Q.VolumeSpecific v "Specific volume";
       Q.CapacityThermalSpecific c_p "Isobaric specific heat capacity";
       Q.CapacityThermalSpecific c_v "Isobaric specific heat capacity";
@@ -369,7 +369,7 @@ package Characteristics
 
       output Q.NumberAbsolute s=saturationSet.y "Liquid saturation";
       output Q.NumberAbsolute J=FCSys.Characteristics.H2O.J(s)
-        "Result of Leverret correlation";
+        "Result of Leverett correlation";
 
       Modelica.Blocks.Sources.Ramp saturationSet(height=1, duration=1)
         "Set the saturation"

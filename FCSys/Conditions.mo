@@ -3324,7 +3324,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
             // Conditionally include species.
             parameter Boolean 'inclSO3-'=false
-              "Iclude C19HF37O5S- (abbreviated as SO3-)" annotation (
+              "Include C19HF37O5S- (abbreviated as SO3-)" annotation (
               HideResult=true,
               choices(__Dymola_checkBox=true),
               Dialog(
@@ -4557,12 +4557,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             parameter Q.TemperatureAbsolute To=298.15*U.K
               "Standard temperature" annotation (Dialog(__Dymola_label=
                     "<html><i>T</i><sup>o</sup></html>"));
-            parameter Q.PressureAbsolute po=U.bar "Standard pressure"
+            parameter Q.PressureAbsolute p0=U.bar "Standard pressure"
               annotation (Dialog(__Dymola_label=
                     "<html><i>p</i><sup>o</sup></html>"));
 
           algorithm
-            x := Data.v_Tp(To, po)*Ndot;
+            x := Data.v_Tp(To, p0)*Ndot;
             annotation (Inline=true);
           end standardVolumeRate;
 
@@ -5885,7 +5885,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         public
           Connectors.ThermalDiffusive positive
-            "Postive connector for thermal diffusion"
+            "Positive connector for thermal diffusion"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
         equation
 

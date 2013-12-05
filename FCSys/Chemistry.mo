@@ -423,7 +423,7 @@ public
     Wang et al. use &kappa; = 10<sup>-5</sup> mm<sup>2</sup>
     [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>].</p>
   
-    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurments listed at 
+    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurements listed at 
     <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a> 
     (accessed Nov. 22, 2103).</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

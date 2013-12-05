@@ -337,7 +337,7 @@ package Subregions
       gases.  It takes much longer (over a year!) for the temperatures to equalize due to the size of the system and the low
       thermal conductivity of the gas.  With a stiff solver, the model should simulate at this time scale as well.</p>
       
-      <p>The damping factor (<i>k</i>) can be used to scale the continuitiy (&zeta;) of the gas in the regions.  
+      <p>The damping factor (<i>k</i>) can be used to scale the continuity (&zeta;) of the gas in the regions.  
       The oscillations are dampened considerably at <i>k</i> = 100.  However, with high values of the factor, the boundary pressures
       are decoupled from the pressures in the region because the nonequilibrium force is considerable.</p>
 
