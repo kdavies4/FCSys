@@ -1,5 +1,5 @@
 within FCSys;
-package Utilities "Functions to implement misc. algorithms"
+package Utilities "General supporting functions"
   extends Modelica.Icons.UtilitiesPackage;
 
   package Chemistry "Functions to support chemistry"
@@ -232,6 +232,9 @@ An unrelated species may be included.");
 
   package Polynomial "Polynomial functions"
     extends Modelica.Icons.Package;
+    // TODO:  Use or merge with Modelica_LinearSystems2.Math.Polynomials
+    // or functions from MSL.
+
     function F
       "<html>&int;<a href=\"modelica://FCSys.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
 
@@ -432,6 +435,7 @@ An unrelated species may be included.");
       // it will be necessary to use the full
       // path in the Include annotation, e.g.
       //   Include="#include \"FCSys/FCSys 2.0/Resources/Source/C/time.c\""
+
     end get_time;
 
     function timeTranslation "Print the time required to translate a model"
@@ -459,6 +463,7 @@ An unrelated species may be included.");
       annotation (Documentation(info=
               "<html><p>The time is rounded down to the integer second.</p></html>"));
     end timeTranslation;
+
   end Time;
 
   package Coordinates "Functions to handle Cartesian coordinates"
@@ -496,6 +501,7 @@ An unrelated species may be included.");
       "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
       annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
+
   end Coordinates;
 
   function arrayBooleanEqual
@@ -810,11 +816,12 @@ An unrelated species may be included.");
     reduced := {full[i] for i in indices};
     annotation (Inline=true,Documentation(info="<html><p>This function is useful where
   it is necessary to select entries from a vector that is not an explicit variable.</p>
-  
+
   <p><b>Example:</b><br>
   <code>selectBooleans({true, false, true}, {1,3})</code> returns
   <code>{true, true}</code>.  An alternative to this function is to assign a variable to the full vector
-  (<code>full = {true, false, true}</code>) and extract from that variable (full[{1,3}]).  However, this 
+  (<code>full = {true, false, true}</code>) and extract from that variable (full[{1,3}]).  However, this
+
   is not valid in Modelica: <code>{true, false, true}[{1,3}]</code>.</p>
   </html>"));
   end selectBooleans;
@@ -830,11 +837,12 @@ An unrelated species may be included.");
     reduced := {full[i] for i in indices};
     annotation (Inline=true,Documentation(info="<html><p>This function is useful where
   it is necessary to select entries from a vector that is not an explicit variable.</p>
-  
+
   <p><b>Example:</b><br>
   <code>selectBooleans({3, 2, 1}, {1,3})</code> returns
   <code>{3, 1}</code>.  An alternative to this function is to assign a variable to the full vector
-  (<code>full = {3, 2, 1}</code>) and extract from that variable (full[{1,3}]).  However, this 
+  (<code>full = {3, 2, 1}</code>) and extract from that variable (full[{1,3}]).  However, this
+
   is not valid in Modelica: <code>{3, 2, 1}[{1,3}]</code>.</p>
   </html>"));
   end selectIntegers;
@@ -866,4 +874,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Utilities;

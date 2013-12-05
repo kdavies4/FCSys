@@ -197,6 +197,7 @@ package Icons "Icons to annotate and represent classes"
                 70},{-20,70}},
             lineColor={64,64,64},
             smooth=Smooth.Bezier)}));
+
   end ChemistryPackage;
 
   package Names "Icons labeled with the name of the class at various positions"
@@ -296,9 +297,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
     end Top1;
 
@@ -315,7 +316,7 @@ package Icons "Icons to annotate and represent classes"
   end Names;
 
   partial class Cell "Icon for a cell"
-    //extends Names.Top3;
+    // extends Names.Top3;
     annotation (Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
@@ -511,9 +512,9 @@ package Icons "Icons to annotate and represent classes"
             points={{0.0,75.0},{0.0,-75.0}},
             color={64,64,64})}), Documentation(info="<html>
 <p>
-This icon is indicates a record.
-</p>
+This icon is indicates a record.</p>
 </html>"));
+
   end Record;
   annotation (Documentation(info="
 <html>
@@ -526,4 +527,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Icons;

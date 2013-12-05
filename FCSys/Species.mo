@@ -10,7 +10,7 @@ package Species "Dynamic models of chemical species"
         extends Solid(redeclare replaceable package Data =
               Characteristics.'C+'.Graphite);
 
-        // TODO: Update this to pull properties and settings from Fixed.
+        // TODO:  Update this to pull properties and settings from Fixed.
         // Do the same for other species.
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -37,7 +37,7 @@ package Species "Dynamic models of chemical species"
 
         // Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not
         // used here since they would render the parameters unadjustable in Dymola
-        // 7.4.  This also applies to the other species.
+        // 2014.  This also applies to the other species.
 
         // See the documentation layer for a table of values for the specific heat
         // capacity and thermal resistivity.
@@ -54,14 +54,14 @@ package Species "Dynamic models of chemical species"
    and thermal
    resistivity (&theta; = <code>U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
    composite (with heat flow parallel to the fibers) at 300&nbsp;K
-   [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
+   [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 909].
    The integration offset for specific entropy is set such that
    the specific entropy is 154.663&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;atm).
-   This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+   This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].
    Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 909].</caption>
     <tr>
       <th rowspan=3 valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th rowspan=1 colspan=2 width=1 valign=\"middle\">Diamond (type IIa)</th>
@@ -138,7 +138,7 @@ package Species "Dynamic models of chemical species"
     </ol></p>
 
     <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
-  Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277].</p>
+  Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References.Kandlikar2009\">Kandlikar2009</a>, p. 1277].</p>
 
 <p>For more information, please see the
     <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
@@ -193,25 +193,27 @@ package Species "Dynamic models of chemical species"
           defaultComponentName="'e-'",
           Documentation(info="<html>
 
-<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code> 
+<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code>
+
 (the default is <code>ConsTrans.steady</code> instead),
 then internal inductance is included using the relative permeability (&mu;<sup>*</sup>).</p>
 
     <p>Assumptions:<ol>
-          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to 
+          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to
+
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The fluidity is infinite.  All friction is by translational exchange with the
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
-          the mobility of the substrate (e.g., 
+          the mobility of the substrate (e.g.,
+
           <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
 
     <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
-          Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
 
@@ -254,21 +256,18 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
           sigma=0.083*U.S/U.cm);
 
-        // The stateSelect of N is default.  If a dielectric (Phases.Dielectric)
-        // is connected, then its charge shift (Z) is preferred as a state.  If
-        // a dielectric isn't connected, then N = N, which is constant.
-        // der(N) = 0 and there is no state.
-
         // See the documentation for a table of values.
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'H+'",
-          Documentation(info="<html>  
+          Documentation(info="<html>
+
 <p>Assumptions:<ol>
     <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
     <li>The chemical reaction rate is governed by the electrons.  Therefore, the reaction interval (&tau;&prime;) is zero for protons.</li>
               <li>The conductivity is mapped to the mobility of the protons by assuming that
-          the mobility of the substrate (e.g., 
+          the mobility of the substrate (e.g.,
+
           <a href=\"modelica://FCSys.Species.'SO3-'.Ionomer\">C19HF37O5S-</a>) is zero.</li>
     </ol></p>
 
@@ -276,11 +275,11 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
-  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
+  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p. 139].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p. 139]</caption>
 <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1>&eta;<code><br>*U.Pa*U.s</code></th>
@@ -395,11 +394,11 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
 
 <p>The default resistivities (&eta; = <code>1/(89.6e-7*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 919&ndash;920].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 919&ndash;920].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -435,7 +434,6 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
   </table>
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
-          Diagram(graphics),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
 
@@ -513,13 +511,13 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
 <p>The default resistivities (&eta; = <code>1/(9.09e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.  <a href=\"#Tab2\">Table 2</a> lists the properties of H<sub>2</sub>O gas at 1&nbsp;atm.
   See also
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -584,7 +582,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <br>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab2\">Table 2: Properties of H<sub>2</sub>O gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].</caption>
+    <caption align=\"top\" id=\"Tab2\">Table 2: Properties of H<sub>2</sub>O gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -677,7 +675,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
-          Diagram(graphics),
           Icon(graphics));
 
       end Fixed;
@@ -748,13 +745,13 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
 <p>The default resistivities (&eta; = <code>1/(855e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.
   See also
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -883,14 +880,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
 <p>The default specific heat capacity (<i>b<sub>c</sub></i> = <code>[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
 (&eta; = <code>1/(17.82e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920].
    The integration offset for specific entropy is set such that
    the specific entropy is 191.610&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;bar).
-   This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+   This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].
    Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920]</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -995,12 +992,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
   potential.</li></ul></p>
 
   <p>The default resistivities (&eta; = <code>1/(207.2e-7*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 920&ndash;921].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1&nbsp;atm
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
+  [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 920&ndash;921]</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -1030,6 +1027,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Gas;
@@ -1055,6 +1053,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           initialScale=0.1),graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ion;
 
   model Fluid "Base model for a fluid species"
@@ -1062,9 +1061,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     import FCSys.Utilities.Coordinates.after;
     import FCSys.Utilities.Coordinates.before;
     import FCSys.Utilities.Coordinates.cartWrap;
-    import FCSys.Utilities.inSign;
     import FCSys.Utilities.Delta;
     import FCSys.Utilities.Sigma;
+    import FCSys.Utilities.inSign;
     import FCSys.Utilities.selectBooleans;
     import FCSys.Utilities.selectIntegers;
     import assert = FCSys.Utilities.assertEval;
@@ -1080,10 +1079,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
             StateSelect.always else StateSelect.prefer),T(final fixed=false));
     // Note:  The extension is after these parameters so that they appear first
     // in the parameter dialog.
-    // Note:  StateSelect.always is not ideal, but it is necessary to avoid
+    // Note:  StateSelect.always isn't ideal, but it's necessary to avoid
     // dynamic state selection in Dymola 2014.  In some cases it isn't
     // appropriate (e.g., an incompressible liquid that fills the entire
-    // subregion), and it those cases it can be modified at instantiation.
+    // subregion), and in those cases it can be modified at instantiation.
 
     // Material properties
     parameter Integer n_chem=0 "Number of reaction and phase change processes"
@@ -1105,9 +1104,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
             "Chemical parameters", __Dymola_label="<html>&tau;&prime;</html>"));
 
     // Geometry
-    Q.Length kL[n_trans]=L[cartTrans] "Effective transport length" annotation (
-        Dialog(group="Geometry", __Dymola_label=
+    Q.Length kL[:]=L[cartTrans] "Effective transport length" annotation (Dialog(
+          group="Geometry", __Dymola_label=
             "<html><b><i>k&nbsp;L</i></b></html>"));
+    // Note:  The size is n_trans, but it isn't specified here to
+    // prevent a warning in Dymola 2014.
 
     // Assumptions
     // -----------
@@ -1203,8 +1204,8 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // This (f) includes the body, shear, and exchange forces due to
     // intermolecular drag and transfer during chemical reactions and phase
     // change.  It excludes the thermodynamic, dynamic, and  nonequilibrium
-    // compressive forces.  It also excludes transient effects since translational
-    // momentum is stored at the boundaries.
+    // compressive forces.  It also excludes transient effects since
+    // translational momentum is stored at the boundaries.
     Q.Force minusDeltaf[n_trans](
       each nominal=U.N,
       each stateSelect=StateSelect.never,
@@ -1241,10 +1242,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     output Q.Potential Deltag[n_trans](each stateSelect=StateSelect.never) =
       Delta(g_boundaries) if environment.analysis and not Data.isCompressible
       "Differences in Gibbs potentials across the boundaries";
-    // Note:  If a boundary is left unconnnected, then it is possible that its
-    // pressure may become negative.  If the equation of state has ideal-gas
+    // Note:  If a boundary is left unconnnected, then it's possible that its
+    // pressure may become negative.  If the equation of state has an ideal-gas
     // term, then the Gibbs energy will involve a logarithm of pressure.
-    // Therefore, to be safe, these variables are included only for
+    // Therefore, to prevent errors, these variables are included only for
     // incompressible species.
     //
     // Time constants
@@ -1324,7 +1325,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       i, :].phi[orient]*boundaries[i, :].mPhidot[orient] for orient in Orient)
       for i in 1:n_trans) + sum(boundaries.Qdot) if environment.analysis
       "Rate of diffusion of energy from other subregions";
-    // Note:  The structure of the problem should not change if these
+    // Note:  The structure of the problem shouldn't change if these
     // auxiliary variables are included (hence, StateSelect.never).
 
     Connectors.Boundary boundaries[n_trans, Side](
@@ -1338,7 +1339,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       g(each start=g_IC, each final fixed=false),
       sT(each start=h_IC - g_IC, each final fixed=false))
       "Connector for reactions and phase change" annotation (Placement(
-          transformation(extent={{-10,30},{10,50}}), iconTransformation(extent=
+          transformation(extent={{-10,10},{10,30}}), iconTransformation(extent=
               {{-30,80},{-50,100}})));
 
     // Geometric parameters
@@ -1517,11 +1518,12 @@ Choose any condition besides none.");
     // Material exchange
     for i in 1:n_chem loop
       if tauprime[i] > Modelica.Constants.small then
-        tauprime[i]*chemical[i].Ndot = U.C*exp((chemical[i].g - g)/T) - N;
+        tauprime[i]*chemical[i].Ndot = (N + 1000*U.C)*exp((chemical[i].g - g)/T)
+           - N;
         // **replace U.C with amount when full
       else
         chemical[i].g = g
-          "Simplified to avoid nonlinear equations in Dymola 2014";
+          "**Simplified to avoid nonlinear equations in Dymola 2014";
       end if;
     end for;
 
@@ -1632,10 +1634,10 @@ Choose any condition besides none.");
        then 0 else boundaries[i, :].phi[cartWrap(cartTrans[j] - cartTrans[i])]*
       boundaries[i, :].Ndot*Data.m + sum(boundaries[i, :].mPhidot[cartWrap(
       cartTrans[j] - cartTrans[i])])) for i in 1:n_trans) for j in 1:n_trans};
-    // Note:  The storage is split between the boundaries via mPhidot, so
-    // a derivative doesn't appear here (see material transport above).
-    // Note:  The explicit expansions (intra[:] and inter[:]) are necessary
-    // in Dymola 2014.
+    // Note:  The storage is split between the boundaries via mPhidot, so a
+    // derivative doesn't appear here (see material transport above).
+    // Note:  The explicit expansions (intra[:] and inter[:]) are necessary in
+    // Dymola 2014.
 
     // Thermal dynamics
     if consEnergy == ConsThermo.IC then
@@ -1690,56 +1692,76 @@ Choose any condition besides none.");
     <p>Fixed assumptions:<ol>
     <li>The gradient of material current is uniform in the direction of the current.</li>
     <li>The normal translational force on pairs of boundaries is split equally between the boundaries.  This includes
-    the body, shear (transverse translational transport), and exchange forces due to intermolecular drag and transfer during 
-    chemical reactions and phase change.  It excludes the thermodynamic, dynamic 
-    (advective normal translational transport), and nonequilibrium (irreversible compression) pressures.  It also excludes 
-    transient effects since translational momentum is stored at the boundaries (not in the subregion).</li> 
-    <li>Nonequilibrium pressure is included in the thermodynamic states at the boundaries.  In particular, the specific enthalpy at a boundary 
-    is a function of the temperature and the 
-    sum of the thermodynamic and nonequilibrium pressures at the boundary (and a possible artifact of dynamic pressure; see the first note regarding parameters).  
+    the body, shear (transverse translational transport), and exchange forces due to intermolecular drag and transfer during
+
+    chemical reactions and phase change.  It excludes the thermodynamic, dynamic
+
+    (advective normal translational transport), and nonequilibrium (irreversible compression) pressures.  It also excludes
+
+    transient effects since translational momentum is stored at the boundaries (not in the subregion).</li>
+
+    <li>Nonequilibrium pressure is included in the thermodynamic states at the boundaries.  In particular, the specific enthalpy at a boundary
+
+    is a function of the temperature and the
+
+    sum of the thermodynamic and nonequilibrium pressures at the boundary (and a possible artifact of dynamic pressure; see the first note regarding parameters).
+
     The rate of advection of energy is the product of this
     specific enthalpy and the material current.
     </ol></p>
-  
+
     <p>Notes regarding the parameters:
-    <ol>  
+    <ol>
+
     <li>If <code>approxVelocity</code> is <code>true</code>,
     then the normal velocities at the boundaries are calculated from the boundary currents assuming
-    that the density is uniform.  This 
-    avoids nonlinear systems of equations, but it introduces an artifact of the dynamic pressure into the 
-    thermodynamic states at the boundaries.  The extra pressure is <i>m</i>&nbsp;<i>N&#775;<sub>i</sub></i><sup>2</sup>&nbsp;(<i>v</i> - <i>v<sub>i</sub></i>)/<i>A</i>&prime;, where <i>m</i> is the specific mass, 
-    <i>v</i> is the specific volume in the subregion,  
+    that the density is uniform.  This
+
+    avoids nonlinear systems of equations, but it introduces an artifact of the dynamic pressure into the
+
+    thermodynamic states at the boundaries.  The extra pressure is <i>m</i>&nbsp;<i>N&#775;<sub>i</sub></i><sup>2</sup>&nbsp;(<i>v</i> - <i>v<sub>i</sub></i>)/<i>A</i>&prime;, where <i>m</i> is the specific mass,
+
+    <i>v</i> is the specific volume in the subregion,
+
     <i>v<sub>i</sub></i> is the specific volume at the boundary, <i>N&#775;<sub>i</sub></i> is the boundary current, and
     <i>A</i>&prime; is the available cross-sectional area.
-    This affects the energy balance via the specific enthalpy at the boundaries.</li>      
-    
+    This affects the energy balance via the specific enthalpy at the boundaries.</li>
+
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
     <code>ConsTrans.steady</code>, then the derivative of translational momentum at and normal to the boundaries (proportional to
-    &part;<i>N&#775;<sub>i</sub></i>/&part;<i>t</i>) 
+    &part;<i>N&#775;<sub>i</sub></i>/&part;<i>t</i>)
+
     is treated as zero and removed from the translational momentum balances/material transport equations
     at the corresponding boundaries.</li>
-    
+
     <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
-    rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational 
+    rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational
+
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li>
-    
+
     <li>Upstream discretization is applied by default.
     The central difference
-    scheme may be used by setting <code>upstreamX</code>, <code>upstreamY</code>, and <code>upstreamZ</code> to 
-    <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for 
-    the upstream discretization of pressure will be much less (factor of 1/10,000) than the 
+    scheme may be used by setting <code>upstreamX</code>, <code>upstreamY</code>, and <code>upstreamZ</code> to
+
+    <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for
+
+    the upstream discretization of pressure will be much less (factor of 1/10,000) than the
+
     P&eacute;clet numbers for translational and thermal transport.  Therefore, it may appear
     that pressure is not advected with the material transport stream.</li>
-    
+
     <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
     correspond to the orientation of the translational momentum that is transported, not the axes of material transport.</li>
-    
-    <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use 
-    3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36) 
-    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>].</li>      
-    </ol></p>      
-        
+
+    <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use
+
+    3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36)
+
+    if the heat flux is uniform [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>].</li>
+
+    </ol></p>
+
     <p>Translational momentum and thermal energy are advected as material is exchanged
     due to phase change and reactions.  This occurs at the velocity (&phi;) and the specific entropy-temperature
     product (<i>sT</i>) of the reactants (source configurations), where the reactant/product designation
@@ -1756,7 +1778,7 @@ Choose any condition besides none.");
   their contributions are additive.  If there are multiple sinks, then
   translational momentum is split on a mass basis and the thermal stream is split
   on a particle-number basis.</p>
-  
+
     <p>For more information, please see the
      <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p>
     </html>"),
@@ -1782,9 +1804,11 @@ Choose any condition besides none.");
       final g_IC,
       T(stateSelect=if consEnergy == ConsThermo.dynamic then StateSelect.always
              else StateSelect.default,fixed=consEnergy == ConsThermo.dynamic));
-    parameter Q.Length kL[n_trans]=L[cartTrans] "Effective transport length"
+    parameter Q.Length kL[:]=L[cartTrans] "Effective transport length"
       annotation (Dialog(group="Geometry", __Dymola_label=
             "<html><b><i>k&nbsp;L</i></b></html>"));
+    // Note:  The size is n_trans, but it isn't specified here to prevent a
+    // warning in Dymola 2014.
 
     // Material properties
     Q.ResistivityThermal theta(nominal=10*U.cm/U.A) = Data.theta(T, v)
@@ -1849,6 +1873,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected
@@ -1930,7 +1955,6 @@ protected
       nominal=300*U.K,
       final start=T_IC,
       stateSelect=StateSelect.prefer) "Temperature";
-
     Q.Velocity phi[n_trans](
       each nominal=10*U.cm/U.s,
       each start=0,
@@ -2003,8 +2027,8 @@ protected
       each stateSelect=StateSelect.never,
       each start=U.s) = c_p*nu*k_inter_Q if environment.analysis and n_inter >
       0 "Time constants for thermal inter-phase exchange";
-    // Note:  The structure of the problem should not change if these
-    // auxiliary variables are included (hence, StateSelect.never).
+    // Note:  The structure of the problem should not change if these auxiliary
+    // variables are included (hence, StateSelect.never).
     //
     // Translational momentum balance
     output Q.Force f_DE[n_trans](each stateSelect=StateSelect.never) = sum(
@@ -2020,12 +2044,12 @@ protected
     Connectors.Intra intra[n_intra](each final n_trans=n_trans, each T(final
           start=T_IC, final fixed=false))
       "Connectors to exchange translational momentum and energy within the phase"
-      annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+      annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
           iconTransformation(extent={{30,-80},{50,-100}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans, each T(final
           start=T_IC, final fixed=false))
       "Connectors to exchange translational momentum and energy with all other species"
-      annotation (Placement(transformation(extent={{30,-10},{50,10}}),
+      annotation (Placement(transformation(extent={{10,-10},{30,10}}),
           iconTransformation(extent={{80,-28},{100,-48}})));
 
     Connectors.Dalton dalton(V(
@@ -2033,7 +2057,7 @@ protected
         final start=V_IC,
         final fixed=false), p(final start=p_IC, final fixed=false))
       "Connector for additivity of pressure" annotation (Placement(
-          transformation(extent={{-50,-10},{-30,10}}), iconTransformation(
+          transformation(extent={{-30,-10},{-10,10}}), iconTransformation(
             extent={{-100,50},{-80,30}})));
 
     // Geometric parameters
@@ -2048,8 +2072,8 @@ protected
       "Cartesian-axis indices of the transport axes" annotation (
         missingInnerMessage="This model should be used within a subregion model.
 ");
-    // Note:  The size of cartTrans is n_trans, but it can't be
-    // specified here due to an error in Dymola 2014.
+    // Note:  The size of cartTrans is n_trans, but it can't be specified here
+    // due to an error in Dymola 2014.
     outer parameter Q.NumberAbsolute k_inter_Phi[:, :]
       "Independence factors for translational exchange with other phases"
       annotation (missingInnerMessage="This model should be used within a phase model.
@@ -2069,10 +2093,10 @@ Check that the volumes of the other phases are set properly.");
 
   equation
     // Aliases (only to clarify and simplify other equations)
-    p = dalton.p;
     h = g + T*s;
-    M = Data.m*N;
+    p = dalton.p;
     v*N = dalton.V;
+    M = Data.m*N;
 
     // Thermodynamic correlations
     if Data.isCompressible then
@@ -2103,17 +2127,20 @@ Check that the volumes of the other phases are set properly.");
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html>
     <p>All of the details below are pertinent to the <a href=\"modelica://FCSys.Species.Fluid\">Fluid</a>
-    model (and the derived <a href=\"modelica://FCSys.Species.Ion\">Ion</a> model) which inherits from this model.  
-    Only some of the details apply to the 
-    <a href=\"modelica://FCSys.Solid\">Solid</a> model because it excludes the transport and exchange of 
+    model (and the derived <a href=\"modelica://FCSys.Species.Ion\">Ion</a> model) which inherits from this model.
+
+    Only some of the details apply to the
+
+    <a href=\"modelica://FCSys.Solid\">Solid</a> model because it excludes the transport and exchange of
+
     material.</p>
-    
+
     <p>This model is based on the following fixed assumptions:
     <ol>
        <li>All boundaries are rectangular.
        <li>The material is orthorhombic.  This implies that a gradient which induces diffusion
        along an axis does not induce diffusion along axes orthogonal to it
-       [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>,
+       [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>,
        pp. 691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
        axes of transport.  For example, if the material is stratified, then the
@@ -2124,24 +2151,27 @@ Check that the volumes of the other phases are set properly.");
        <li>There is no radiative heat transfer (or it must be linearized and added to the thermal conductance).</li>
        <li>Rotational momentum is not exchanged, transported, or stored.</li>
     </ol>
-    Other assumptions are optional via the parameters.  Additional assumptions may be 
+    Other assumptions are optional via the parameters.  Additional assumptions may be
+
     applied in models that inherit from this one.</p>
 
     <p><a href=\"#Fig1\">Figure 1</a> shows how instances of
     <a href=\"modelica://FCSys.Species\">Species</a> models are
     connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  A single species in
     a single phase is called a <i>configuration</i>. The
-    generalized resistances (<i>R</i>) affect the force and rates of chemical exchange and 
+    generalized resistances (<i>R</i>) affect the force and rates of chemical exchange and
+
     heat flow
     associated with differences in activity, velocity, and temperature (respectively) between
     each configuration and a common node.  These exchange processes are diffusive.
-    Each resistor generates heat 
+    Each resistor generates heat
+
     in the <a href=\"modelica://FCSys.Species\">Species</a> instance that contains it.</p>
-    
+
     <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/Resources/Documentation/Subregions/Species/Species/Exchange.png\">
 <br>Figure 1:  Exchange of a quantity (material, translational momentum, or thermal energy) among configurations
     (A, B, and C) within a subregion.</p>
-  
+
     <p><a href=\"#Fig2\">Figure 2</a> shows how
     a configuration
     is connected between neighboring instances of a
@@ -2160,7 +2190,8 @@ Check that the volumes of the other phases are set properly.");
     partial pressures (see the
     <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector), as shown
     in Figure 3a.  The pressures are additive, and each species is assumed to exist at the
-    total extensive volume of the phase.  Within a 
+    total extensive volume of the phase.  Within a
+
     <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>,
     the <a href=\"modelica://FCSys.Phases\">Phases</a> are combined by Amagat's law of partial volumes
     (see the <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector), as shown
@@ -2185,10 +2216,10 @@ Check that the volumes of the other phases are set properly.");
 
     <p>Notes regarding the parameters:
     <ol>
-    
+
     <li>The effect transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
-    transport axes due to tortouisity.  The tortuisity may be anisotropic.</li>
-    
+    transport axes due to tortouisity.  The tortouisity may be anisotropic.</li>
+
     <li>If the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
      thermal independity (&nu;), fluidity (&eta;), or thermal resistivity (&theta;)
       is zero, then
@@ -2196,25 +2227,26 @@ Check that the volumes of the other phases are set properly.");
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson1993B</a>] is necessary.</li>
-    
+    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson1993B\">Mattsson1993B</a>] is necessary.</li>
+
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
-    
+
     <li>If <code>ConsThermo.IC</code> is used for a state (via
     <code>consMaterial</code> or <code>consEnergy</code>),
     then the associated initial condition (IC) will be applied forever instead of the
     corresponding conservation equation.</li>
-    
+
     <li>If <code>consEnergy</code> is
     <code>ConsThermo.steady</code>, then <i>N</i><i>T</i>&part;<i>s</i>/&part;<i>t</i> + <i>M</i>&phi;&part;&phi;/&part;<i>t</i> is treated as
     zero and removed from the energy balance.</li>
-    
+
     <li>If a transport axis is not included (via the outer <code>inclTrans[:]</code> parameter
     which maps to <code>{inclTransX, inclTransY, inclTransZ}</code> in the
-    <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model), then the associated pair of 
+    <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model), then the associated pair of
+
     boundaries is removed from the model.</li>
-    
+
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
     temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a> model).
@@ -2227,16 +2259,16 @@ Check that the volumes of the other phases are set properly.");
     is related to it via the material characteristics and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    
+
     <li><i>N</i><sub>min</sub> establishes an amount of material below which no exchange occurs.  It can
-    help to avoid stiffness when very little of a species exists in a subregion.</li> 
-    </p>
-   
+    help to avoid stiffness when very little of a species exists in a subregion.</li>
+</p>
+
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the current.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
     thermal energy is determined from the thermodynamic state at the boundary and the current.</p>
-    
+
     <p>For the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
     are ordered from negative to positive, according to the
@@ -2253,16 +2285,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Species;
 
 public
@@ -2325,4 +2357,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Species;

@@ -16,10 +16,9 @@ for i in 1:size(species, 1) loop
        y1={"subregion." + species[i] + ".rho"},
        y2={"subregion." + species[i] + ".phi_boundaries[1, 1]", "subregion." + species[i] + ".phi[1]",
              "subregion." + species[i] + ".phi_boundaries[1, 2]"},
-       y3={"subregion." + species[i] + ".boundaries[1, 1].p", "subregion." + species[i] + ".p",
-             "subregion." + species[i] + ".boundaries[1, 2].p"},
-       y4={"subregion." + species[i] + ".boundaries[1, 1].T", "subregion." + species[i] + ".T",
+       y3={"subregion." + species[i] + ".boundaries[1, 1].T", "subregion." + species[i] + ".T",
              "subregion." + species[i] + ".boundaries[1, 2].T"});
 end for;
 
-FCSys.Utilities.plot6(y4={"T_ex"}, y5={"P", "P_ex"}, y6={"R", "R_ex"});
+FCSys.Utilities.plot6(y3={"T_ex"}, y4={"subregion.graphite.'C+'.tau_QT[1]"},  
+                      y5={"P", "P_ex"}, y6={"R", "R_ex"});

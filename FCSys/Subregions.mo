@@ -1,9 +1,9 @@
 within FCSys;
 package Subregions
-  "Control volumes with multi-species transport, exchange, and storage"
+  "Control volumes with multi-species transport, storage, and exchange"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
-    // TODO: In the documentation of each model:
+    // TODO:  In the documentation of each model:
     //   1. Insert the sample plots or link to the sample results of the User's Guide.
     //   2. Add discussion from the dissertation.
     package PhaseChange "Examples of phase change"
@@ -22,17 +22,17 @@ package Subregions
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
-  Some of the liquid evaporates until saturation is reached. The boundaries are adiabatic; therefore, the temperature of the liquid and the gas 
+  Some of the liquid evaporates until saturation is reached. The boundaries are adiabatic; therefore, the temperature of the liquid and the gas
+
   decreases due to the enthalpy of formation.</p>
-  
+
   <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.SaturationPressure\">Characteristics.Examples.SaturationPressure</a>.
-  
+
   </html>"),
-          experiment(StopTime=0.3),
+          experiment(StopTime=5),
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Condensation.mos"
               "Subregions.Examples.PhaseChange.Condensation.mos"),
-          Diagram(graphics),
           __Dymola_experimentSetupOutput);
 
       end Condensation;
@@ -53,16 +53,15 @@ package Subregions
         annotation (
           Documentation(info="<html><p>The water vapor is held at saturation pressure at the environmental temperature
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
-  comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.  
-  
+  comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.
+
   <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.Hydration\">Characteristics.Examples.Hydration</a>.</p>
-  
-  </p></html>"),
+
+</p></html>"),
           experiment(StopTime=2400),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
               "Subregions.Examples.PhaseChange.Hydration.mos"),
-          __Dymola_experimentSetupOutput,
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
 
@@ -99,15 +98,14 @@ package Subregions
             'incle-'=true,
             'inclC+'=true,
             redeclare
-              FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
-              'C+'(set(y=environment.T)),
+              Conditions.ByConnector.ThermalDiffusive.Single.Temperature 'C+'(
+                set(y=environment.T)),
             'e-'(redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.current,
+                  Conditions.ByConnector.Boundary.Single.Material.current,
                 materialSet(y=currentSet.y))), gas(inclH2=true, H2(
               materialSet(y=environment.p_dry),
               redeclare function thermalSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature,
-
+                  Conditions.ByConnector.Boundary.Single.Thermal.temperature,
               thermalSet(y=environment.T)))) annotation (Placement(
               transformation(
               extent={{-10,10},{10,-10}},
@@ -116,8 +114,8 @@ package Subregions
 
         Conditions.ByConnector.BoundaryBus.Single.Sink caBC(ionomer('inclH+'=
                 true, 'H+'(redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.potential
-                  (redeclare package Data = FCSys.Characteristics.'H+'.Ionomer),
+                  Conditions.ByConnector.Boundary.Single.Material.potential (
+                    redeclare package Data = FCSys.Characteristics.'H+'.Ionomer),
                 materialSet(y=0)))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -144,7 +142,6 @@ package Subregions
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.Reactions.HOR.mos"
               "Subregions.Examples.Reactions.HOR.mos"),
-          __Dymola_experimentSetupOutput,
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end HOR;
@@ -176,8 +173,8 @@ package Subregions
               thermalSet(y=environment.T),
               materialSet(y=0),
               redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.potential
-                  (redeclare package Data = FCSys.Characteristics.'H+'.Ionomer))))
+                  Conditions.ByConnector.Boundary.Single.Material.potential (
+                    redeclare package Data = FCSys.Characteristics.'H+'.Ionomer))))
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
               rotation=270,
@@ -188,14 +185,12 @@ package Subregions
             inclO2=true,
             H2O(
               redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                  Conditions.ByConnector.Boundary.Single.Material.pressure,
               materialSet(y=environment.p_H2O),
               thermalSet(y=environment.T)),
             O2(
               redeclare function materialSpec =
-                  FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                  Conditions.ByConnector.Boundary.Single.Material.pressure,
               materialSet(y=environment.p_O2),
               thermalSet(y=environment.T))), graphite(
             'incle-'=true,
@@ -211,7 +206,7 @@ package Subregions
           height=-200*U.A,
           startTime=5)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-        //offset=-U.mA,
+        // offset=-U.mA,
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
             points={{10,0},{10,8.88178e-016},{20,8.88178e-016}},
@@ -228,7 +223,6 @@ package Subregions
           Commands(file=
                 "Resources/Scripts/Dymola/Subregions.Examples.Reactions.ORR.mos"
               "Subregions.Examples.Reactions.ORR.mos"),
-          __Dymola_experimentSetupOutput,
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end ORR;
@@ -324,34 +318,38 @@ package Subregions
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=4, __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=3, __Dymola_Algorithm="Dassl"),
         Documentation(info="<html><p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
-    regions with N<sub>2</sub> gas.  The upper boundary is held at 1 bar and the lower boundary has zero velocity.  
+    regions with N<sub>2</sub> gas.  The upper boundary is held at 1 bar and the lower boundary has zero velocity.
+
     The initial pressure difference is zero, but a gas enters the upper boundary and a pressure difference
     develops due to gravity.  There are oscillations due to the inertance and compression of the gas.
-    After about 1.5&nbsp;s, the pressure difference settles to 
+    After about 1.5&nbsp;s, the pressure difference settles to
+
       <i>L</i><sub>y</sub> <i>a</i><sub>y</sub> <i>m</i> &rho;
       as expected.</p>
-      
-      <p>A temperature gradient is created due to the thermodynamics of the expanding and contracting 
+
+      <p>A temperature gradient is created due to the thermodynamics of the expanding and contracting
+
       gases.  It takes much longer (over a year!) for the temperatures to equalize due to the size of the system and the low
       thermal conductivity of the gas.  With a stiff solver, the model should simulate at this time scale as well.</p>
-      
-      <p>The damping factor (<i>k</i>) can be used to scale the continuity (&zeta;) of the gas in the regions.  
+
+      <p>The damping factor (<i>k</i>) can be used to scale the continuity (&zeta;) of the gas in the regions.
+
       The oscillations are dampened considerably at <i>k</i> = 100.  However, with high values of the factor, the boundary pressures
       are decoupled from the pressures in the region because the nonequilibrium force is considerable.</p>
 
-      <p> 
+      <p>
       <p>Assumptions:
       <ol>
-      <li>The central difference scheme is used (no upstream discretization).</ol>
-      </p></html>"),
+      <li>The central difference scheme is used (no upstream discretization).</ol></p></html>"),
+
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.AirColumn.mos"
             "Subregions.Examples.AirColumn.mos"),
-        __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end AirColumn;
 
     model BinaryDiffusion
@@ -373,16 +371,14 @@ package Subregions
           H2(
             thermalSet(y=environment.T),
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
             redeclare Modelica.Blocks.Sources.Ramp materialSet(
               height=-U.Pa,
               offset=environment.p_dry,
               duration=10)),
           H2O(
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p_H2O),
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -396,8 +392,7 @@ package Subregions
                   environment.T)),
           H2O(
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure,
-
+                Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p_H2O),
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -419,7 +414,6 @@ package Subregions
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         experiment(StopTime=20, __Dymola_Algorithm="Dassl"),
-        __Dymola_experimentSetupOutput,
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.BinaryDiffusion.mos"
             "Subregions.Examples.BinaryDiffusion.mos"));
@@ -435,14 +429,14 @@ package Subregions
       annotation (Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.CapillaryAction.mos"
             "Subregions.Examples.CapillaryAction.mos"));
+
     end CapillaryAction;
 
     model Echo "Two regions of gas with an initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
 
-      extends Subregions(subregion1(gas(H2(zeta=k*
-                  FCSys.Characteristics.H2.Gas.zeta()))), subregion2(gas(H2(
-                zeta=k*FCSys.Characteristics.H2.Gas.zeta()))));
+      extends Subregions(subregion1(gas(H2(zeta=k*Characteristics.H2.Gas.zeta()))),
+          subregion2(gas(H2(zeta=k*FCSys.Characteristics.H2.Gas.zeta()))));
       annotation (
         experiment(StopTime=5e-005),
         Commands(file(ensureTranslated=true) =
@@ -476,6 +470,7 @@ package Subregions
             "Resources/Scripts/Dymola/Subregions.Examples.EchoCentral.mos"
             "Subregions.Examples.EchoCentral.mos"),
         __Dymola_experimentSetupOutput);
+
     end EchoCentral;
 
     model ElectricalConduction
@@ -502,24 +497,23 @@ package Subregions
         subregion(L={U.cm,U.mm,U.mm}, graphite('C+'(epsilon=1),'e-'(sigma=1e2*U.S
                   /U.m))));
 
-      FCSys.Conditions.ByConnector.BoundaryBus.Single.Source BC1(graphite(
+      Conditions.ByConnector.BoundaryBus.Single.Source BC1(graphite(
           'incle-'='incle-',
           'inclC+'=true,
           'C+'(set(y=environment.T)),
           'e-'(
             materialSet(y=-0.05*U.A),
             redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
+                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
             thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
 
-      FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink BC2(graphite(
+      Conditions.ByConnector.BoundaryBus.Single.Sink BC2(graphite(
           'inclC+'=true,
           'incle-'='incle-',
-          redeclare
-            FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature
+          redeclare Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(set(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=90,
@@ -561,7 +555,8 @@ package Subregions
     <i>T</i><sub>0</sub>&nbsp;=&nbsp;25&nbsp;&deg;C is the boundary temperature and
     &theta; is the thermal resistance.  The factor of one fourth
     is due to the boundary conditions; the conduction length is half of the total length
-    and the heat is rejected to both sides.  There is no thermal convection or 
+    and the heat is rejected to both sides.  There is no thermal convection or
+
     radiation&mdash;only conduction to the sides.</p>
     </html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -576,8 +571,7 @@ package Subregions
 
       // Conditions
       parameter Q.VolumeRate Vdot=-1.5*U.cc/U.s
-        "Prescribed large signal volumetric flow rate"
-        annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
+        "Prescribed large signal volumetric flow rate";
 
       // Measurements
       output Q.Pressure Deltap=Delta(subregion.liquid.H2O.boundaries[1, :].p)
@@ -607,8 +601,8 @@ package Subregions
               offset=Vdot,
               freqHz=1),
             redeclare function materialSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Material.volumeRate
-                (redeclare package Data = FCSys.Characteristics.H2O.Liquid),
+                Conditions.ByConnector.Boundary.Single.Material.volumeRate (
+                  redeclare package Data = FCSys.Characteristics.H2O.Liquid),
             thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=270,
@@ -622,7 +616,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC3(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
+                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=0,
@@ -630,7 +624,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC4(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
+                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
@@ -638,7 +632,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC5(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
+                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=315,
@@ -646,7 +640,7 @@ package Subregions
 
       Conditions.ByConnector.BoundaryBus.Single.Source BC6(liquid(inclH2O=true,
             H2O(redeclare function thermalSpec =
-                FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
+                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
               thermalSet(y=0)))) annotation (Placement(transformation(
             extent={{-10,10},{10,-10}},
             rotation=315,
@@ -692,7 +686,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (
         Documentation(info="<html><p>A small-signal variation is added to the time-average flow rate in order to demonstrate the effects of inertance.</p>
-    
+
     <p>Note that the temperature increases due to viscous dissipation, but the increase is limited by thermal convection.  The walls are adiabatic.</p></html>"),
 
         experiment(
@@ -702,9 +696,9 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.InternalFlow.mos"
             "Subregions.Examples.InternalFlow.mos"),
-        __Dymola_experimentSetupOutput,
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -760,7 +754,8 @@ package Subregions
       annotation (
         Documentation(info="<html><p>This model is boring.  It just establishes a
   single subregion with H<sub>2</sub> by default.  There are no boundary conditions
-  other than those implied by the open connectors (no diffusion current, no forces, 
+  other than those implied by the open connectors (no diffusion current, no forces,
+
   no thermal conduction).  Other examples in this package extend from this one.</p>
   </html>"),
         experiment(StopTime=10),
@@ -931,13 +926,16 @@ package Subregions
 
       extends ThermalConduction(
         inclN2=true,
-        subregion1(gas(N2(T_IC=subregion1.graphite.'C+'.T_IC, phi(stateSelect=
-                    StateSelect.always,displayUnit="mm/s"))), graphite('C+'(
-                epsilon=0.5))),
+        subregion1(gas(N2(
+              T_IC=subregion1.graphite.'C+'.T_IC,
+              phi(stateSelect=StateSelect.always, displayUnit="mm/s"),
+              phi_boundaries(each displayUnit="mm/s"))), graphite('C+'(epsilon=
+                  0.5))),
         subregions(gas(N2(each phi(each stateSelect=StateSelect.always,
-                  displayUnit="mm/s"))), each graphite('C+'(epsilon=0.5))),
-        subregion2(gas(N2(phi(displayUnit="mm/s"))), graphite('C+'(epsilon=0.5))),
-
+                  displayUnit="mm/s"), each phi_boundaries(each displayUnit=
+                    "mm/s"))), each graphite('C+'(epsilon=0.5))),
+        subregion2(gas(N2(phi(displayUnit="mm/s"), phi_boundaries(each
+                  displayUnit="mm/s"))), graphite('C+'(epsilon=0.5))),
         environment(psi_O2_dry=0, RH=0));
 
       annotation (
@@ -1211,13 +1209,11 @@ package Subregions
         points={{68,-20},{68,-70},{86,-70}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gas.amagat, volume.amagat)
-      "Bypass capillaryPressure (not shown in diagram)" annotation (Line(
+    connect(gas.amagat, volume.amagat) annotation (Line(
         points={{-52,-20},{-52,-70},{86,-70}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(liquid.amagat, volume.amagat)
-      "Bypass capillaryPressure (not shown in diagram)" annotation (Line(
+    connect(liquid.amagat, volume.amagat) annotation (Line(
         points={{-12,-20},{-12,-70},{86,-70}},
         color={47,107,251},
         smooth=Smooth.None));
@@ -1277,7 +1273,8 @@ package Subregions
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              textString="(connections not shown 
+              textString="(connections not shown
+
 on diagram)")}));
   end Subregion;
 
@@ -1373,6 +1370,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
               60}}), graphics));
+
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1570,13 +1568,11 @@ on diagram)")}));
         points={{48,-20},{48,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gas.amagat, volume.amagat)
-      "Bypass capillaryPressure (not shown in diagram)" annotation (Line(
+    connect(gas.amagat, volume.amagat) annotation (Line(
         points={{-32,-20},{-32,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(liquid.amagat, volume.amagat)
-      "Bypass capillaryPressure (not shown in diagram)" annotation (Line(
+    connect(liquid.amagat, volume.amagat) annotation (Line(
         points={{8,-20},{8,-70},{66,-70}},
         color={47,107,251},
         smooth=Smooth.None));
@@ -1620,6 +1616,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
+
   end SubregionNoIonomer;
 
   partial model PartialSubregion
@@ -1777,4 +1774,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Subregions;

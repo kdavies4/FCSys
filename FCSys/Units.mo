@@ -1348,8 +1348,8 @@ encompass other systems of units.</p>
 
   constant Q.Length m=10973731.568539*rad/R_inf "meter";
   // SI unit of length
-  // This is the "Rydberg constant" relation [NIST2010].  The unit radian
-  // is included to be explicit, although it's currently one by definition
+  // This is the "Rydberg constant" relation [NIST2010].  The unit radian is
+  // included to be explicit, although it's currently one by definition
   // [BIPM2006].  The Rydberg constant may be determined by measuring the
   // spectra of hydrogen, deuterium, and antiprotonic helium
   // [http://en.wikipedia.org/wiki/Rydberg_constant].
@@ -1372,8 +1372,8 @@ encompass other systems of units.</p>
   // [http://en.wikipedia.org/wiki/Quantum_Hall_effect].
   constant Q.Amount mol=96485.3365*Wb*S/k_F "mole";
   // SI unit of amount of substance
-  // This is the "Faraday constant" relation [NIST2010].  The factor Wb*S
-  // is the coulomb, which is defined below.  The ratio may be determined by
+  // This is the "Faraday constant" relation [NIST2010].  The factor Wb*S is
+  // the coulomb, which is defined below.  The ratio may be determined by
   // electrochemical experiments relating the amount of charge and the
   // amount of substance involved in a reaction.
   constant Q.Potential K=8.3144621*(Wb*rad)^2*S/(s*mol*R) "kelvin";
@@ -1446,11 +1446,11 @@ encompass other systems of units.</p>
   final constant Q.Frequency Hz=cyc/s "hertz";
   // SI unit of frequency
   // Note:  Numerically, this doesn't evaluate to Hz = 1/s as stated by
-  // BIPM (that relation isn't dimensionally correct when considering
-  // angle as a dimension), but allows the conversion of frequency into as
-  // cycles per second (Hz) or radians per second (rad/s).  Since BIPM
-  // defines rad = 1 (also dimensionally incorrect) and given that
-  // cyc = 2*pi*rad, Hz evaluates numerically to 2*pi/s [BIPM2006].
+  // BIPM (that relation isn't dimensionally correct when considering angle
+  // as a dimension), but allows the conversion of frequency into as cycles
+  // per second (Hz) or radians per second (rad/s).  Since BIPM defines
+  // rad = 1 (also dimensionally incorrect) and given that cyc = 2*pi*rad,
+  // Hz evaluates numerically to 2*pi/s [BIPM2006].
   final constant Q.Angle2 sr=rad^2 "steradian";
   // SI unit of solid angle
   // BIPM currently defines rad = 1; therefore, this is consistent with
@@ -1562,20 +1562,19 @@ encompass other systems of units.</p>
   // See the notes for c_3_nu.  The derivation is similar to that of c_3_nu,
   // but here, the value is the solution to exp(x)*(5 - x) =  5.  The value
   // is from Mathematica (FCSys/Resources/math-constants.cdf).  Note that the
-  // frequency displacement constant isn't directly related to the
-  // wavelength displacement constant:  "Because the spectrum resulting from
-  // Planck's law of black body radiation takes a different shape in the
-  // frequency domain from that of the wavelength domain, the frequency
-  // of the peak emission doesn't correspond to the peak wavelength using
-  // the simple relation between frequency, wavelength, and the speed of
-  // light"
+  // frequency displacement constant isn't directly related to the wavelength
+  // displacement constant:  "Because the spectrum resulting from Planck's
+  // law of black body radiation takes a different shape in the frequency
+  // domain from that of the wavelength domain, the frequency of the peak
+  // emission doesn't correspond to the peak wavelength using the simple
+  // relation between frequency, wavelength, and the speed of light"
   // [http://en.wikipedia.org/wiki/Wien's_displacement_law, accessed
   // 1/19/10].
   final constant Q.MagneticFluxReciprocal c_3_f=2.821439372122079*k_B/h
     "<html>Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)</html>";
   // The Wien displacement constant can be derived by setting the derivative
-  // of Planck's law to zero and solving for h*f/(k_B*T) in order to find
-  // the frequency at maximum radiant intensity.  That procedure results in
+  // of Planck's law to zero and solving for h*f/(k_B*T) in order to find the
+  // frequency at maximum radiant intensity.  That procedure results in
   // solving the following equation: exp(x)*(3 - x) = 3, where x is h*f/k_B.
   // The value is from Mathematica (FCSys/Resources/math-constants.cdf).
   final constant Q.PowerAreicPerPotential4 sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*
@@ -1637,7 +1636,7 @@ encompass other systems of units.</p>
 
 <p>Models of physical systems involve variables that represent physical quantities.
 As stated by the Bureau International des Poids et Mesures (BIPM)
-[<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>, p. 103]:
+[<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>, p. 103]:
 <blockquote>
   \"The value of a quantity is generally expressed as the product of a number and a unit.  The
   unit is simply a particular example of the quantity concerned which is used as a reference, and
@@ -1670,9 +1669,11 @@ value of the quantity itself.</p>
 
 <p>This apparent conflict is solved in <a href=\"modelica://FCSys\">FCSys</a> by
 establishing units (including the meter and the second) as mathematical entities and writing
-<i>v</i> = 1 m/s (in code, <code>v = 1*U.m/U.s</code> or simply <code>v = U.m/U.s</code>).  
+<i>v</i> = 1 m/s (in code, <code>v = 1*U.m/U.s</code> or simply <code>v = U.m/U.s</code>).
+
 Here, the variable <i>v</i> directly represents the quantity.
-Its <code>value</code> attribute is truly the value of the quantity in the context of the 
+Its <code>value</code> attribute is truly the value of the quantity in the context of the
+
 statement by BIPM (above).</p>
 
 One advantage is that unit conversion is handled
@@ -1681,8 +1682,10 @@ naturally.  The essence of unit conversion is the phrase \"value of a quantity i
 is divided by m/s in order to display <i>v</i> in meters per second (as a
 number).  If another unit of length like the foot is established by the
 appropriate relation (ft &asymp; 0.3048&nbsp;m) and <i>v</i> is divided by
-ft/s, the result is velocity in feet per second (&sim;3.2894).  Some units such as &deg;C, Pag, and dB involve 
-offsets or nonlinear transformations between the value of the quantity and the number; these are described by 
+ft/s, the result is velocity in feet per second (&sim;3.2894).  Some units such as &deg;C, Pag, and dB involve
+
+offsets or nonlinear transformations between the value of the quantity and the number; these are described by
+
 functions besides simple division.</p>
 
 <p>As another example, frequency is sometimes represented by a variable
@@ -1696,28 +1699,33 @@ among units (e.g., 1&nbsp;cycle = 2&pi;&nbsp;rad).</p>
 <p><b>Method:</b></p>
 
 <p>In <a href=\"modelica://FCSys\">FCSys</a>, each unit is a constant quantity.
-The values of the units, like other quantities, is the product of a number and a unit.  
+The values of the units, like other quantities, is the product of a number and a unit.
+
 Therefore, units may be derived from other units (e.g., cycle = 2&pi;&nbsp;rad).
-This recursive definition leaves several units (in SI, 7) that are locally independent 
+This recursive definition leaves several units (in SI, 7) that are locally independent
+
 and must be established universally.  These
 base units are established by the \"particular example of the quantity
 concerned which is used as a reference\" quoted previously
-[<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  The choice of the base
-units is somewhat arbitrary [<a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>, p. 375],
+[<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>].  The choice of the base
+units is somewhat arbitrary [<a href=\"modelica://FCSys.UsersGuide.References.Fritzson2004\">Fritzson2004</a>, p. 375],
 but regardless, there are a number of units that must be defined by example.</p>
 
 <p>If only SI will be used, then it is easiest to strictly set each of the base units of
 SI equal to one&mdash;the meter (m), kilogram (kg), second (s), ampere (A),
 kelvin (K), mole (mol), and candela (cd).  This is implicitly the case in
-the <a href=\"modelica://Modelica.SIunits\">SIunits</a> package, but again, it hardly captures the idea that the 
+the <a href=\"modelica://Modelica.SIunits\">SIunits</a> package, but again, it hardly captures the idea that the
+
 value of a quantity is the
 product of a number and a unit.</p>
 
-<p>Instead, in <a href=\"modelica://FCSys\">FCSys</a>, most of the base units are established by universal 
+<p>Instead, in <a href=\"modelica://FCSys\">FCSys</a>, most of the base units are established by universal
+
 physical constants.
 The \"particular example of the quantity\"
-[<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>] is an experiment that yields
-precise and universally repeatable results in determining a constant rather than a prototype 
+[<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>] is an experiment that yields
+precise and universally repeatable results in determining a constant rather than a prototype
+
 (e.g., the International Prototype of the Kilogram) which is
 carefully controlled and distributed via replicas.
 This method of defining the base units from measured physical quantities (rather than
@@ -1740,18 +1748,19 @@ usually unnecessary due to the wide range and appropriate distribution of the re
 are representable in floating point space.  The Modelica language specification recommends that
 floating point numbers be represented in at least IEEE double precision, which covers magnitudes
 from &sim;2.225&times;10<sup>-308</sup> to &sim;1.798&times;10<sup>308</sup>
-[<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>, p. 13].
+[<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p. 13].
 However, in some cases it may be preferable to carefully scale the units and use single
 precision instead for the sake of computational performance.  There are fields of research where,
 even today, simulations are sometimes performed in single precision
-[<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a>,
-<a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>]
+[<a href=\"modelica://FCSys.UsersGuide.References.Brown2011\">Brown2011</a>,
+<a href=\"modelica://FCSys.UsersGuide.References.Hess2008\">Hess2008</a>]
 and where scaling is a concern
-[<a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>, p. 29].</p>
+[<a href=\"modelica://FCSys.UsersGuide.References.Rapaport2004\">Rapaport2004</a>, p. 29].</p>
 
 <p>The method is neutral
 with regards to not only the values of the base units, but also the choice of the base units and
-even the number of base units.  This is an advantage because many systems of units are used in science 
+even the number of base units.  This is an advantage because many systems of units are used in science
+
 and technology besides
 SI. As mentioned previously, the choice of base units is somewhat
 arbitrary, and different systems of units are based on different choices.  Some systems of units
@@ -1760,7 +1769,7 @@ exchange base units for derived units.  For example, the Planck, Stoney, Hartree
 systems of units define the Boltzmann constant to be equal to one (<i>k</i><sub>B</sub> = 1)
 [<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>].
 The unit K is eliminated
-[<a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>, p. 386]
+[<a href=\"modelica://FCSys.UsersGuide.References.Greiner1995\">Greiner1995</a>, p. 386]
 or, more precisely, considered a derived unit instead of a base unit.  In SI, the
 kelvin would be derived from the units kilogram, meter, and second (K
 &asymp; 1.381&times;10<sup>-23</sup>&nbsp;kg&nbsp;m<sup>2</sup>/s<sup>2</sup>).</p>
@@ -1778,7 +1787,7 @@ kelvin would be derived from the units kilogram, meter, and second (K
     Therefore, the kelvin (K) is proportional to the volt
     (V or J/C). In addition, the radian (rad) is defined as a base constant.
     However, it must be set equal to one in the current version of the International System of Units (SI)
-    [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].</p>
+    [<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>].</p>
 
 <p><b>Implementation:</b></p>
 
@@ -1792,7 +1801,7 @@ first section of the Modelica definition of this package establishes mathematica
  and the remaining derived units and constants.  The SI prefixes are included in their
  unabbreviated form in order to avoid name conflicts.  All of the primary units of SI
  are included (Tables 1 and 3 of
- [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>]) except for &deg;C, since
+ [<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>]) except for &deg;C, since
  it involves an offset.  Other convenient units are included for the system at hand (e.g.,
  atm).</p>
 
@@ -1836,7 +1845,8 @@ most prefixes must be given as explicit factors (e.g., <code>U.kilo*U.m</code>).
 
   <p>Although it is not necessary in the acausal language of <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
   in this package are sorted so that they can be easily ported to imperative or causal languages (e.g.,
-  <a href=\"http://www.python.org\">Python</a>, C).  In fact, this has been implemented in the 
+  <a href=\"http://www.python.org\">Python</a>, C).  In fact, this has been implemented in the
+
   included <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">FCRes</a> module for
   plotting and analysis.</p>
 

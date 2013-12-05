@@ -12,6 +12,6 @@ createPlot(filename = "SaturationPressure.mat",
  online = true,
  legendLocation = 4,
  legendHorizontal = false,
- legends = {"FCSys (via shemical equilibrium)", "FCSys (ideal gas, via shemical equilibrium)", "Modelica.Media (explicit function)"},
+ legends = {"FCSys (via chemical equilibrium)", "FCSys (ideal gas, via chemical equilibrium)", "Modelica.Media (explicit function)"},
  leftTitle = "Pressure / kPa",
  bottomTitle = "Temperature in degC");

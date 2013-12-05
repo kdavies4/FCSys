@@ -1,5 +1,5 @@
 within FCSys;
-package Connectors "Declarative and imperative connectors"
+package Connectors "Declarative and imperative interfaces"
   extends Modelica.Icons.InterfacesPackage;
 
   connector Chemical
@@ -21,31 +21,35 @@ package Connectors "Declarative and imperative connectors"
     stream Q.PotentialAbsolute sT(nominal=3000*U.K)
       "Specific entropy-temperature product upon outflow";
     annotation (
-      Documentation(info="<html>    
+      Documentation(info="<html>
+
         <p>Note that the product of the translational <code>stream</code> variable (velocity, &phi;) and the <code>flow</code>
     variable (current, <i>N&#775;</i>) is only conserved among species with the same specific mass.
-    This connector is not directly connected among different species.  It is first converted to the 
-    <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector using the 
-    <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a> adapter, 
+    This connector is not directly connected among different species.  It is first converted to the
+
+    <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector using the
+
+    <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a> adapter,
+
     which reconciles the different specific masses.</p>
-    
+
 <p>For more information, please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={255,195,38}),
             Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={239,142,1},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,195,38})}),
+              extent={{-100,100},{100,-100}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}),
       Diagram(graphics={Text(
-            extent={{-100,32},{100,72}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={239,142,1},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,195,38})}));
+              extent={{-100,32},{100,72}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
 
   end Chemical;
 
@@ -66,7 +70,7 @@ package Connectors "Declarative and imperative connectors"
 
     annotation (
       Documentation(info="<html>
-   
+
 <p>Please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -102,7 +106,7 @@ package Connectors "Declarative and imperative connectors"
       defaultComponentName="boundary",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
     of the <a href=\"modelica://FCSys.Connectors.Boundary\">Boundary</a> connector.</p>
-    
+
     <p>For more information, please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -143,22 +147,22 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>This connector applies to a single species in a single phase.
     For multiple species or phases, use the <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a>
     connector.</p>
-    
+
     <p>For more information, please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid)}),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid)}));
 
   end Boundary;
 
@@ -171,17 +175,18 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>The concept of \"additivity of volume\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Amagat's_law\">Amagat's law of partial volumes</a>, which
     states that the partial extensive volumes of the components of a mixture sum to the total
-    extensive volume of the mixture [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>, p. 194].
+    extensive volume of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p. 194].
     The components are assumed to each exist at the total pressure of the
     mixture.</p>
 
-    <p>This concept loses its physical meaning once the species are mixed [<a href=\"modelica://FCSys.UsersGuide.References\">Woo1995</a>].
+    <p>This concept loses its physical meaning once the species are mixed [<a href=\"modelica://FCSys.UsersGuide.References.Woo1995\">Woo1995</a>].
     If the species are truly mixed, then it is impossible to distinguish their particles and thus
     determine their partial volumes.
     Therefore, additivity of volume is only used for distinct phases within the same subregion&mdash;not
     for species within a phase.
     For example, if a system contains a solid phase and a gas phase, then it is assumed that the
-    volumes of the phases are additive.  Within each phase, the pressures of the species are added according to 
+    volumes of the phases are additive.  Within each phase, the pressures of the species are added according to
+
     Dalton's law (see the <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector).</p>
 
     <p>In order to implement Amagat's law, this connector includes volume (not rate of volume) as a flow variable.
@@ -229,7 +234,7 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>The concept of \"additivity of pressure\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>,
     which states that the partial pressures of the components of a mixture sum to the total
-    pressure of the mixture [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>, p. 192].
+    pressure of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p. 192].
     The components are assumed to exist at the total volume of the
     mixture.</p>
 
@@ -242,19 +247,19 @@ package Connectors "Declarative and imperative connectors"
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Text(
-            extent={{-100,32},{100,72}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={11,43,197},
-            fillPattern=FillPattern.Solid,
-            fillColor={47,107,251})}),
+              extent={{-100,32},{100,72}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}),
       Icon(graphics={Ellipse(extent={{-76,76},{84,-84}}, lineColor={47,107,251}),
             Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={11,43,197},
-            fillPattern=FillPattern.Solid,
-            fillColor={47,107,251})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
 
   end Dalton;
 
@@ -263,44 +268,46 @@ package Connectors "Declarative and imperative connectors"
 
     extends Translational;
 
-    //extends ThermalDiffusive;
-    // Note:  Inheritance isn't used to prevent overlap of the labels in
-    // Dymola 2014.
+    // extends ThermalDiffusive;
+    // Note:  Inheritance isn't used to prevent overlap of the labels in Dymola
+    // 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
     flow Q.Power Qdot(nominal=U.W) "Rate of thermal conduction";
 
     annotation (
       Documentation(info="<html><p>This connector is identical to <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a> except for the icon.
-    It should not be connected directly among species.  Rather, it should be connected to 
-    an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or 
-    <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub> 
+    It should not be connected directly among species.  Rather, it should be connected to
+
+    an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
+
+    <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub>
+
     and <i>k<sub>Q</sub></i> (essentially parameters) are set.</p>
-    
-    <p>Please see <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a>, 
+
+    <p>Please see <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a>,
+
     and the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={170,0,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={221,23,47}), Text(
-            extent={{-30,30},{30,-30}},
-            lineColor={255,255,255},
-            textStyle={TextStyle.Bold},
-            textString="1")}),
-      Icon(graphics={
-          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={170,0,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={221,23,47}),
-          Text(
-            extent={{-100,100},{100,-100}},
-            lineColor={255,255,255},
-            textString="1",
-            textStyle={TextStyle.Bold})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47}),Text(
+              extent={{-30,30},{30,-30}},
+              lineColor={255,255,255},
+              textStyle={TextStyle.Bold},
+              textString="1")}),
+      Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
+            Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47}),Text(
+              extent={{-100,100},{100,-100}},
+              lineColor={255,255,255},
+              textString="1",
+              textStyle={TextStyle.Bold})}));
 
   end Intra;
 
@@ -309,7 +316,7 @@ package Connectors "Declarative and imperative connectors"
 
     extends Translational;
 
-    //extends ThermalDiffusive;
+    // extends ThermalDiffusive;
     // Note:  Inheritance isn't used to prevent overlap of the labels in
     // Dymola 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
@@ -317,41 +324,42 @@ package Connectors "Declarative and imperative connectors"
 
     annotation (
       Documentation(info="<html><p>This connector is identical to <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> except for the icon.
-    It should not be connected directly among species.  Rather, it should be connected to 
-    an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or 
-    <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub> 
+    It should not be connected directly among species.  Rather, it should be connected to
+
+    an <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
+
+    <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub>
+
     and <i>k<sub>Q</sub></i> (essentially parameters) are set.</p>
-    
-    <p>Please see <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a>, 
+
+    <p>Please see <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a>,
+
     and the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={170,0,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={221,23,47}), Text(
-            extent={{-30,30},{30,-30}},
-            lineColor={255,255,255},
-            textStyle={TextStyle.Bold},
-            textString="2")}),
-      Icon(graphics={
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={170,0,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={221,23,47}),
-          Text(
-            extent={{-100,100},{100,-100}},
-            lineColor={255,255,255},
-            textStyle={TextStyle.Bold},
-            textString="2")}));
+              extent={{-30,30},{30,-30}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47}),Text(
+              extent={{-30,30},{30,-30}},
+              lineColor={255,255,255},
+              textStyle={TextStyle.Bold},
+              textString="2")}),
+      Icon(graphics={Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Ellipse(extent={{-80,80},{80,-80}},
+            lineColor={221,23,47}),Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47}),Text(
+              extent={{-100,100},{100,-100}},
+              lineColor={255,255,255},
+              textStyle={TextStyle.Bold},
+              textString="2")}));
 
   end Inter;
 
@@ -359,7 +367,7 @@ package Connectors "Declarative and imperative connectors"
 
     extends Translational;
 
-    //extends ThermalDiffusive;
+    // extends ThermalDiffusive;
     // Note:  Inheritance isn't used to prevent overlap of the labels in
     // Dymola 2014.
     Q.TemperatureAbsolute T(nominal=300*U.K) "Temperature";
@@ -367,11 +375,12 @@ package Connectors "Declarative and imperative connectors"
 
     annotation (
       Documentation(info="<html><p>This connector is identical to <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> except for the icon.
-    It is used as a node to connect 
+    It is used as a node to connect
+
     <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> or <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>
     connectors.  It contains outputs (<i>k</i><sub>&Phi;</sub> and <i>k<sub>Q</sub></i>) that are essentially
     parameters to scale the translational and thermal independences of the connection.</p>
-    
+
     <p>Please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -394,10 +403,11 @@ package Connectors "Declarative and imperative connectors"
     "<html>Internal node for <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> and <a href=\"modelica://FCSys.Connectors.Intra\">Inter</a></html>"
 
     annotation (
-      Documentation(info="<html><p>This connector is used as an internal node to connect 
+      Documentation(info="<html><p>This connector is used as an internal node to connect
+
     <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> or <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>
     connectors.  It is an expandable connector with no intrinsic variables.</p>
-    
+
     <p>For more information, please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -437,18 +447,18 @@ package Connectors "Declarative and imperative connectors"
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p>
   </html>"),
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,32},{100,72}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,32},{100,72}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end Translational;
 
@@ -463,18 +473,18 @@ package Connectors "Declarative and imperative connectors"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,32},{100,72}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,32},{100,72}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end ThermalDiffusive;
 
@@ -511,10 +521,10 @@ package Connectors "Declarative and imperative connectors"
     defaultComponentPrefixes="protected",
     defaultComponentName="u",
     Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}, coordinateSystem(
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}, coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true,
         initialScale=0.1,
@@ -524,13 +534,13 @@ package Connectors "Declarative and imperative connectors"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,20},{40,0},{0,-20},{0,20}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,20},{40,0},{0,-20},{0,20}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -639,21 +649,21 @@ package Connectors "Declarative and imperative connectors"
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid)}),
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-40,20},{0,0},{-40,-20},{-40,20}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-40,20},{0,0},{-40,-20},{-40,20}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one output signal of type <code>Real</code>.</p>
 </html>"));
@@ -733,12 +743,14 @@ package Connectors "Declarative and imperative connectors"
   react chemically within a subregion.
   The inert connectors
   (<a href=\"modelica://FCSys.Connectors.Intra\">Intra</a>,
-  <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>, 
+  <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>,
+
   <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, and
   <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a>)
   describe the diffusive exchange of momentum and energy among configurations within a subregion.
   The mixing connectors (<a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> and
-  <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a>) describe 
+  <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a>) describe
+
   how species are combined within a phase and how phases are combined within a subregion.
   The boundary connectors (<a href=\"modelica://FCSys.Connectors.Boundary\">Boundary</a> and
   <a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a>)
@@ -747,13 +759,16 @@ package Connectors "Declarative and imperative connectors"
   <p><a href=\"#Fig1\">Figure 1</a> shows the hierarchy of the declarative connectors.
   The top row contains a bus connector
   (<a href=\"modelica://FCSys.Connectors.BoundaryBus\">BoundaryBus</a>), which
-  expands to group the 
+  expands to group the
+
   <a href=\"modelica://FCSys.Connectors.Boundary\">Boundary</a> connectors of multiple species.
   The connectors in the middle row are
   flat; they build on the connectors of the bottom row by extension.
   Each icon on the bottom row represents one effort/flow
-  pair, which may or may not be implemented as a separate connector. 
-  The 
+  pair, which may or may not be implemented as a separate connector.
+
+  The
+
   <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector also
   has stream variables to represent the advection of translational momentum and
   thermal energy.</p>
@@ -762,7 +777,8 @@ package Connectors "Declarative and imperative connectors"
 <br>Figure 1: Hierarchy of the connectors.</p>
 
   <p>The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>
-  connector is used for a single species in a chemical reaction or phase change process.  
+  connector is used for a single species in a chemical reaction or phase change process.
+
   It expresses the rate of
   consumption or generation of a species at a chemical potential.  The
   <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> connector is
@@ -773,7 +789,8 @@ package Connectors "Declarative and imperative connectors"
   It sums the stoichiometrically weighted chemical potentials of the species
   participating in a reaction.  Its effort variable is the
   rate of the reaction.  <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> and
-  <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> cannot be directly connected because they have opposite efforts and flows.  
+  <a href=\"modelica://FCSys.Connectors.Reaction\">Reaction</a> cannot be directly connected because they have opposite efforts and flows.
+
   An adapter must be used
   (e.g., <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a>),
   which applies the stoichiometry.</p>
@@ -878,4 +895,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
   </html>"));
+
 end Connectors;

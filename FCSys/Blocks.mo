@@ -114,6 +114,7 @@ block with the appropriate factors from <a href=\"modelica://FCSys.Units\">Units
 To convert to current in amperes use:<br>
 <code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
 </html>"));
+
   end UnitConversions;
 
   annotation (Documentation(info="
@@ -149,4 +150,5 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
           points={{-10.0,0.0},{5.0,5.0},{5.0,-5.0}})}));
+
 end Blocks;

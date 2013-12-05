@@ -24,8 +24,8 @@ rpls = [# Remove tabs.
         (r'\n? *Icon\(graphics\), *', ' '),
         (r',\n? *Icon\(graphics\)', ''),
         (r'annotation\(Icon\(graphics\)\);', ''),
-        (r'\n? *experimentSetupOutput, *', ' '),
-        (r',\n? *experimentSetupOutput\)', ')'),
+        (r'\n? *(__Dymola_)?experimentSetupOutput, *', ' '),
+        (r',\n? *(__Dymola_)?experimentSetupOutput\)', ')'),
         # Remove spaces on the outside of bold and underline tags.
         ('<b> ', ' <b>'),
         (' </b>', '</b> '),
@@ -49,7 +49,7 @@ rpls = [# Remove tabs.
         # Remove empty lines above annotations.
         (r'\n+(\n *annotation\()', r'\1'),
         # Don't show the path in the command menu.
-        (r'(file=[\n ]*"Resources/Scripts/Dymola/)([^"]+\.mos")\)', r'\1\2) "\2'),
+        (r'(file=[\n ]*"Resources/Scripts/Dymola/)([^"]+\.mos")\)', r'\1\2r "\2)'),
         # Use shortcuts for Units and Quantities.
         (r' FCSys\.Quantities\.', ' Q.'), # Leading spaces distinguish these from hyperlinks.
         (r' FCSys\.Units\.([^*])', r' U.\1'),

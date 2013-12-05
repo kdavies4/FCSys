@@ -1,5 +1,5 @@
 within FCSys;
-package Quantities "Quantities to represent physical properties"
+package Quantities "Variables to represent physical properties"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
@@ -225,7 +225,7 @@ package Quantities "Quantities to represent physical properties"
   dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are
   angle (A), length (L), mass (M), particle number (N), and time (T).  These
   are combined according to the rules established for unit strings
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>, p. 210].  In
+  [<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p. 210].  In
   <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered to be derived dimensions
   (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p>
 
@@ -233,9 +233,9 @@ package Quantities "Quantities to represent physical properties"
   only used for quantities that imply a certain display unit.</p>
 
   <p>It is helpful to check that the terms of each model equation have the same dimension.  Fortunately, methods for unit checking
-  have been established [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">Aronsson2009</a>] and can, in theory, be applied to
+  have been established [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson2008\">Mattsson2008</a>,
+  <a href=\"modelica://FCSys.UsersGuide.References.Broman2008\">Broman2008</a>,
+  <a href=\"modelica://FCSys.UsersGuide.References.Aronsson2009\">Aronsson2009</a>] and can, in theory, be applied to
   dimension checking instead.</p>
 
   <p>The quantities are generally named with adjectives following the noun so that the

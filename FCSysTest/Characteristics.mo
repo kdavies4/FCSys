@@ -404,7 +404,6 @@ package Characteristics
 
       end s;
 
-
       model zeta
         "<html>Test the fluidity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</html>"
         extends FCSysTest.Characteristics.H2.Gas.zeta(
@@ -458,7 +457,6 @@ package Characteristics
               /(FCSys.Units.g*FCSys.Units.K));
 
       end c_v;
-
 
       model h
         "<html>Test the specific enthalpy of O<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"

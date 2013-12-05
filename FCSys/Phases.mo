@@ -396,25 +396,30 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
     annotation (
-      Documentation(info="<html>    
+      Documentation(info="<html>
+
     <p>It is usually appropriate to assume that species
     exist at the same temperature within a phase.  The time constants for thermal exchange (&tau;<sub><i>Q</i>E</sub>)
     are usually much shorter than the time span of interest due to the very small coupling
-    resistances.  If this is the case, set <code>commonExch.k_Q</code> to zero as <code>final</code>.  
-    This will reduce the index of the problem, so it may be 
+    resistances.  If this is the case, set <code>commonExch.k_Q</code> to zero as <code>final</code>.
+
+    This will reduce the index of the problem, so it may be
+
     necessary to eliminate some initial conditions.</p>
 
     <p>In bulk flow, it is usually appropriate to assume that species travel with the same velocity within
     a phase.  If this is the case, set the entries of <code>commonExch.k_Phi</code>
-    to zero as <code>final</code>.  This will reduce the index of the problem, so it may be 
+    to zero as <code>final</code>.  This will reduce the index of the problem, so it may be
+
     necessary to eliminate some initial conditions.</p>
-    
+
 <p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-60},{
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -504,11 +509,11 @@ package Phases "Mixtures of species"
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-20,34})));
-    // Note:  n_trans must be constant in Dymola 2014 to prevent errors
-    // such as "Failed to expand the variable
-    // subregion.graphite.'e-Transfer'.negative.phi".  The setting of
-    // n_trans=1 must be manually changed at instantiation if additional transport
-    // axes are enabled.
+    // Note:  n_trans must be constant in Dymola 2014 to prevent errors such as
+    // "Failed to expand the variable
+    // subregion.graphite.'e-Transfer'.negative.phi".  The setting of n_trans=1
+    // must be manually changed at instantiation if additional transport axes
+    //  are enabled.
 
     Connectors.BoundaryBus xNegative if inclTrans[Axis.x]
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -690,13 +695,16 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     annotation (
-      Documentation(info="<html><p>From a physical standpoint, it is probably best 
-    considered its own phase, but it is modeled as a part of the graphite phase in order to reduce the number of connections.  It is assumed to 
+      Documentation(info="<html><p>From a physical standpoint, it is probably best
+
+    considered its own phase, but it is modeled as a part of the graphite phase in order to reduce the number of connections.  It is assumed to
+
     store no material, translational momentum, or thermal energy.  It only stores electrical energy due to a charge difference.</p>
-    
-    <p>C<sup>+</sup> and e<sup>-</sup> are assumed to have the same temperature.  
+
+    <p>C<sup>+</sup> and e<sup>-</sup> are assumed to have the same temperature.
+
     C<sup>+</sup> should be used to initialize the temperature.</p>
-    
+
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, please see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
@@ -1074,8 +1082,9 @@ package Phases "Mixtures of species"
       Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
     </ol</p>
-        
-    <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a> 
+
+    <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a>
+
     for additional assumptions.
     For more information, please see the
  <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
@@ -1262,7 +1271,7 @@ protected
           __Dymola_label="<html><b><i>k</i></b></html>"));
     parameter Integer n_trans=1 "Number of transport axes"
       annotation (HideResult=true);
-    // This cannot be an inner/outer parameter in Dymola 2014.
+    // This can't be an inner/outer parameter in Dymola 2014.
     inner Q.Volume V if n_spec > 0 "Volume of the phase";
 
     // Independence factors
@@ -1305,69 +1314,63 @@ protected
     annotation (
       defaultComponentPrefixes="replaceable",
       defaultComponentName="phase",
-      Documentation(info="<html><p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects 
+      Documentation(info="<html><p>The scaling factor for diffusive transport (<b><i>k</i></b>) is a vector which directly affects
+
     the resistance associated with the transport of material, transverse translational momentum, and energy of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.  Using
-    Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
+    Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References.Weber2004\">Weber2004</a>, p. 4696],
     the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>-1/2</sup>
     along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Ellipse(
-            extent={{-40,100},{40,20}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{20,-4},{100,-84}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Ellipse(
-            extent={{-100,-4},{-20,-84}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={225,225,225}),
-          Polygon(
-            points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,-24},
-                {60,-84}},
-            pattern=LinePattern.None,
-            fillPattern=FillPattern.Sphere,
-            smooth=Smooth.None,
-            fillColor={225,225,225},
-            lineColor={0,0,0}),
-          Line(
-            points={{-60,-84.1},{60,-84.1}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{34.5,80},{94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{-34.5,80},{-94.5,-24}},
-            color={127,127,127},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              100}}), graphics={Ellipse(
+              extent={{-40,100},{40,20}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{20,-4},{100,-84}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Ellipse(
+              extent={{-100,-4},{-20,-84}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={225,225,225}),Polygon(
+              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
+              -24},{60,-84}},
+              pattern=LinePattern.None,
+              fillPattern=FillPattern.Sphere,
+              smooth=Smooth.None,
+              fillColor={225,225,225},
+              lineColor={0,0,0}),Line(
+              points={{-60,-84.1},{60,-84.1}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{34.5,80},{94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{-34.5,80},{-94.5,-24}},
+              color={127,127,127},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(graphics));
+
   end PartialPhase;
 
 public
@@ -1394,4 +1397,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.License\">
 FCSys.UsersGuide.License</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Phases;

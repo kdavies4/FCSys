@@ -1,5 +1,5 @@
 within FCSys;
-package Chemistry "Models associated with chemical reactions"
+package Chemistry "Chemical reactions and related models"
   extends Icons.ChemistryPackage;
 
   package Examples "Examples"
@@ -78,7 +78,6 @@ package Chemistry "Models associated with chemical reactions"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         experiment(StopTime=2, __Dymola_NumberOfIntervals=5000),
-        __Dymola_experimentSetupOutput,
         Commands(file=
               "Resources/Scripts/Dymola/Chemistry.Examples.Overpotential.mos"
             "Chemistry.Examples.Overpotential.mos"));
@@ -129,14 +128,236 @@ package Chemistry "Models associated with chemical reactions"
 
   end Examples;
 
+  package Electrochemistry "Models associated with electrochemical reactions"
+    extends Modelica.Icons.Package;
+
+    model DoubleLayer "Electrolytic double layer"
+      extends FCSys.Icons.Names.Top2;
+
+      parameter Integer n_trans(min=1,max=3)
+        "Number of components of translational momentum" annotation (Evaluate=
+            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+      parameter Q.Area A=10*U.m^2 "Surface area"
+        annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
+      parameter Q.Length L=1e-10*U.m "Length of the gap"
+        annotation (Dialog(__Dymola_label="<html><i>L</i></html>"));
+      parameter Q.Permittivity epsilon=U.epsilon_0
+        "Permittivity of the dielectric"
+        annotation (Dialog(__Dymola_label="<html>&epsilon;</html>"));
+
+      final parameter Q.Capacitance C=epsilon*A/L "Capacitance";
+      replaceable package Data = Characteristics.'e-'.Graphite constrainedby
+        Characteristics.BaseClasses.Characteristic "Material properties"
+        annotation (
+        Evaluate=true,
+        choicesAllMatching=true,
+        __Dymola_choicesFromPackage=true);
+
+      parameter Boolean setVelocity=true
+        "<html>Material exits at the velocity of the <code>direct</code> connector</html>"
+        annotation (
+        Evaluate=true,
+        Dialog(tab="Assumptions", compact=true),
+        choices(__Dymola_checkBox=true));
+      parameter Boolean inclVolume=true
+        "<html>Include the <code>amagat</code> connector to occupy volume</html>"
+        annotation (
+        Evaluate=true,
+        Dialog(tab="Assumptions", compact=true),
+        choices(__Dymola_checkBox=true));
+
+      // Aliases
+      Q.Potential w(
+        stateSelect=StateSelect.always,
+        start=0,
+        fixed=true) "Electrical potential";
+      Q.Current I "Material current";
+
+      output Q.Amount Z(stateSelect=StateSelect.never) = C*w if environment.analysis
+        "Amount of charge shifted in the positive direction";
+
+      Connectors.Chemical negative(final n_trans=n_trans)
+        "Chemical connector on the 1st side" annotation (Placement(
+            transformation(extent={{-70,-10},{-50,10}}), iconTransformation(
+              extent={{-70,-10},{-50,10}})));
+      Connectors.Chemical positive(final n_trans=n_trans)
+        "Chemical connector on the 2nd side" annotation (Placement(
+            transformation(extent={{50,-10},{70,10}}), iconTransformation(
+              extent={{50,-10},{70,10}})));
+      Connectors.Intra intra(final n_trans=n_trans)
+        "Translational and thermal interface with the substrate" annotation (
+          Placement(transformation(extent={{-10,-50},{10,-30}}),
+            iconTransformation(extent={{-10,-50},{10,-30}})));
+
+      Connectors.Amagat amagat(final V=-A*L) if inclVolume
+        "Connector for additivity of volume"
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    protected
+      outer Conditions.Environment environment "Environmental conditions";
+
+    equation
+      // Aliases
+      Data.z*w = positive.g - negative.g;
+      I = positive.Ndot;
+
+      // Streams
+      if setVelocity then
+        negative.phi = intra.phi;
+        positive.phi = intra.phi;
+      else
+        negative.phi = inStream(positive.phi);
+        positive.phi = inStream(negative.phi);
+      end if;
+      negative.sT = inStream(positive.sT);
+      positive.sT = inStream(negative.sT);
+
+      // Conservation
+      0 = negative.Ndot + positive.Ndot "Material (no storage)";
+      zeros(n_trans) = Data.m*(actualStream(negative.phi) - actualStream(
+        positive.phi))*I + intra.mPhidot "Translational momentum (no storage)";
+      der(C*w)/U.s = Data.z*I
+        "Electrical energy (reversible; simplified using material conservation and divided by potential)";
+      0 = intra.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
+         - actualStream(positive.phi)*actualStream(positive.phi))*I*Data.m/2 +
+        intra.phi*intra.mPhidot "Mechanical and thermal energy (no storage)";
+
+      annotation (
+        Documentation(info="<html><p>The capacitance (<i>C</i>) is calculated from the surface area (<i>A</i>), length of the gap (<i>L</i>), and the permittivity (&epsilon;) assuming that the
+
+  charges are uniformly distributed over (infinite) parallel planes.</p>
+
+  <p>If <code>setVelocity</code> is <code>true</code>, then the material exits with the
+  velocity of the <code>direct</code> connector.  Typically, that connector should be connected to the stationary solid,
+  in which case heat will be generated if material arrives with a nonzero velocity.  That heat is rejected to the same connector.</p>
+
+  </html>"),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics),
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+                100,100}}), graphics={Line(
+                  points={{-20,30},{-20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,30},{20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{-20,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None)}));
+    end DoubleLayer;
+
+    model ElectronTransfer "Electron transfer"
+      import Modelica.Math.asinh;
+      extends FCSys.Icons.Names.Top2;
+
+      parameter Integer n_trans(min=1,max=3)
+        "Number of components of translational momentum" annotation (Evaluate=
+            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+
+      parameter Integer z=-1 "Charge number";
+      parameter Q.Potential E_A=0 "Activation energy" annotation (Dialog(group=
+              "Chemical parameters", __Dymola_label=
+              "<html><i>E</i><sub>A</sub></html>"));
+      parameter Q.NumberAbsolute alpha(max=1) = 0.5
+        "Charge transfer coefficient" annotation (Dialog(group=
+              "Chemical parameters", __Dymola_label="<html>&alpha;</html>"));
+      parameter Q.Current I0=U.A "Exchange current @ 300 K"
+        annotation (Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
+      parameter Boolean fromI=true
+        "<html>Invert the Butler-Volmer equation, if &alpha;=&frac12;</html>"
+        annotation (Dialog(tab="Advanced", compact=true), choices(
+            __Dymola_checkBox=true));
+
+      Connectors.Chemical negative(final n_trans=n_trans)
+        "Chemical connector on the 1st side" annotation (Placement(
+            transformation(extent={{-70,-10},{-50,10}}), iconTransformation(
+              extent={{-70,-10},{-50,10}})));
+      Connectors.Chemical positive(final n_trans=n_trans)
+        "Chemical connector on the 2nd side" annotation (Placement(
+            transformation(extent={{50,-10},{70,10}}), iconTransformation(
+              extent={{50,-10},{70,10}})));
+
+      // Aliases
+      Q.TemperatureAbsolute T(start=300*U.K) "Reaction rate";
+      Q.Current I(start=0) "Reaction rate";
+      Q.Potential Deltag(start=0) "Potential difference";
+
+      Connectors.Intra intra(final n_trans=n_trans)
+        "Translational and thermal interface with the substrate" annotation (
+          Placement(transformation(extent={{-10,-50},{10,-30}}),
+            iconTransformation(extent={{-10,-50},{10,-30}})));
+
+    equation
+      // Aliases
+      I = positive.Ndot;
+      Deltag = positive.g - negative.g;
+      T = intra.T;
+
+      // Streams
+      negative.phi = inStream(positive.phi);
+      positive.phi = inStream(negative.phi);
+      negative.sT = inStream(positive.sT);
+      positive.sT = inStream(negative.sT);
+
+      // Reaction rate
+      if abs(alpha - 0.5) < Modelica.Constants.eps and fromI then
+        Deltag = 2*T*asinh(0.5*exp(E_A*(1/T - 1/(300*U.K)))*I/I0);
+      else
+        I*exp(E_A*(1/T - 1/(300*U.K))) = I0*(exp((1 - alpha)*Deltag/T) - exp(-
+          alpha*Deltag/T));
+      end if;
+
+      // Conservation (without storage)
+      0 = negative.Ndot + positive.Ndot "Material";
+      zeros(n_trans) = intra.mPhidot "Translational momentum";
+      0 = Deltag*I + intra.Qdot "Energy";
+      // Note:  Energy and momentum cancel among the stream terms.
+
+      annotation (
+        defaultComponentName="'e-Transfer'",
+        Documentation(info="<html><p><code>fromI</code> may help to eliminate nonlinear systems of equations if the
+
+    <a href=\"modelica://FCSys.Chemistry.Electrochemistry.DoubleLayer\">double layer capacitance</a> is not included.</p></html>"),
+
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics),
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+                100,100}}), graphics={Line(
+                  points={{0,-20},{0,-50}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-30,20},{32,-20}},
+                  lineColor={255,195,38},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,4},{20,4},{8,12}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-20,-5},{20,-5},{8,3}},
+                  color={255,195,38},
+                  smooth=Smooth.None,
+                  origin={0,-11},
+                  rotation=180)}));
+
+    end ElectronTransfer;
+
+  end Electrochemistry;
+
   model HOR "Hydrogen oxidation reaction"
     extends FCSys.Icons.Names.Top2;
 
     constant Integer n_trans(min=0, max=3)
       "Number of components of translational momentum" annotation (Dialog(
           __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    // Note:  This must be a constant rather than a parameter due to errors
-    // in Dymola 2014.
+    // Note:  This must be a constant rather than a parameter due to errors in
+    // Dymola 2014.
     Conditions.Adapters.ChemicalReaction 'e-'(
       final n_trans=n_trans,
       m=Characteristics.'e-'.Gas.m,
@@ -207,6 +428,7 @@ package Chemistry "Models associated with chemical reactions"
             "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
+
   end HOR;
 
   model ORR "Oxygen reduction reaction"
@@ -215,8 +437,8 @@ package Chemistry "Models associated with chemical reactions"
     constant Integer n_trans(min=0, max=3)
       "Number of components of translational momentum" annotation (Dialog(
           __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    // Note:  This must be a constant rather than a parameter due to errors
-    // in Dymola 2014.
+    // Note:  This must be a constant rather than a parameter due to errors in
+    // Dymola 2014.
     Conditions.Adapters.ChemicalReaction 'e-'(
       final n_trans=n_trans,
       m=Characteristics.'e-'.Gas.m,
@@ -308,6 +530,7 @@ package Chemistry "Models associated with chemical reactions"
             "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
+
   end ORR;
 
 public
@@ -319,8 +542,8 @@ public
     constant Integer n_trans(min=0, max=3)
       "Number of components of translational momentum" annotation (Dialog(group
           ="Geometry", __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    // Note:  This must be a constant rather than a parameter due to errors
-    // in Dymola 2014.
+    // Note:  This must be a constant rather than a parameter due to errors in
+    // Dymola 2014.
     Q.LengthReciprocal overR=1/U.mm "Reciprocal of characteristic radius"
       annotation (Dialog(group="Geometry", __Dymola_label=
             "<html>1/<i>R</i></html>"));
@@ -356,6 +579,7 @@ public
   equation
     // Aliases
     Deltap = 2*gamma*overR "Young-Laplace equation";
+    // **temp 0
 
     // Streams
     wetting.phi = inStream(nonwetting.phi[:]);
@@ -372,14 +596,14 @@ public
     annotation (
       Documentation(info="<html>
     <p>The characteristic radius (<i>R</i>) is the harmonic mean of the (2) principle radii of the liquid volume.</p>
-    
+
     <p>The default surface tension (&gamma; = 0.0663 N/m) is for saturated water at 60 &deg;C, interpolated from
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924].  Note that the surface tension in
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>] is incorrect (likely unit conversion error).</p>  
-    
+    [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924].  Note that the surface tension in
+    [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>] is incorrect (likely unit conversion error).</p>
+
     <p>Assumptions:<ol>
     <li>The fluid is incompressible and isothermal across the surface layer.<li></p>
-    
+
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
@@ -414,17 +638,22 @@ public
     annotation (
       defaultComponentName="surfaceTension",
       Documentation(info="<html>
-    
+
     **Note modified Leverett correlation
-    
-    <p>The default permeability (&kappa; = 6.46&times;10<sup>-5</sup> mm<sup>2</sup>) is based on 
-    the air permeability of SGL Carbon Group Sigracet&reg; 10 BA 
-    [<a href=\"modelica://FCSys.UsersGuide.References\">SGL2007</a>].  
+
+    <p>The default permeability (&kappa; = 6.46&times;10<sup>-5</sup> mm<sup>2</sup>) is based on
+
+    the air permeability of SGL Carbon Group Sigracet&reg; 10 BA
+
+    [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].
+
     Wang et al. use &kappa; = 10<sup>-5</sup> mm<sup>2</sup>
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Wang2001</a>].</p>
-  
-    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurements listed at 
-    <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a> 
+    [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p>
+
+    <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurements listed at
+
+    <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a>
+
     (accessed Nov. 22, 2103).</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
@@ -436,224 +665,10 @@ public
             points={{-20,-40},{0,-20}}, color={0,0,0}),Line(points={{20,-40},{
             40,-20}}, color={0,0,0}),Line(points={{-40,-40},{-20,-20}}, color={
             0,0,0})}));
+
   end SurfaceTensionContact;
 
-  package Electrochemistry "Models associated with electrochemical reactions"
-    extends Modelica.Icons.Package;
-
-    model DoubleLayer "Electrolytic double layer"
-      extends FCSys.Icons.Names.Top2;
-
-      parameter Integer n_trans(min=1,max=3)
-        "Number of components of translational momentum" annotation (Evaluate=
-            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-      parameter Q.Area A=10*U.m^2 "Surface area"
-        annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
-      parameter Q.Length L=1e-10*U.m "Length of the gap"
-        annotation (Dialog(__Dymola_label="<html><i>L</i></html>"));
-      parameter Q.Permittivity epsilon=U.epsilon_0
-        "Permittivity of the dielectric"
-        annotation (Dialog(__Dymola_label="<html>&epsilon;</html>"));
-
-      final parameter Q.Capacitance C=epsilon*A/L "Capacitance";
-      replaceable package Data = Characteristics.'e-'.Graphite constrainedby
-        Characteristics.BaseClasses.Characteristic "Material properties"
-        annotation (
-        Evaluate=true,
-        choicesAllMatching=true,
-        __Dymola_choicesFromPackage=true);
-
-      parameter Boolean setVelocity=true
-        "<html>Material exits at the velocity of the <code>direct</code> connector</html>"
-        annotation (
-        Evaluate=true,
-        Dialog(tab="Assumptions", compact=true),
-        choices(__Dymola_checkBox=true));
-      parameter Boolean inclVolume=true
-        "<html>Include the <code>amagat</code> connector to occupy volume</html>"
-        annotation (
-        Evaluate=true,
-        Dialog(tab="Assumptions", compact=true),
-        choices(__Dymola_checkBox=true));
-
-      // Aliases
-      Q.Potential w(stateSelect=StateSelect.always, start=0)
-        "Electrical potential";
-      Q.Current I "Material current";
-
-      output Q.Amount Z(stateSelect=StateSelect.never) = C*w if environment.analysis
-        "Amount of charge shifted in the positive direction";
-
-      Connectors.Chemical negative(final n_trans=n_trans)
-        "Chemical connector on the 1st side" annotation (Placement(
-            transformation(extent={{-70,-10},{-50,10}}), iconTransformation(
-              extent={{-70,-10},{-50,10}})));
-      Connectors.Chemical positive(final n_trans=n_trans)
-        "Chemical connector on the 2nd side" annotation (Placement(
-            transformation(extent={{50,-10},{70,10}}), iconTransformation(
-              extent={{50,-10},{70,10}})));
-      Connectors.Intra intra(final n_trans=n_trans)
-        "Translational and thermal interface with the substrate" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-      Connectors.Amagat amagat(final V=-A*L) if inclVolume
-        "Connector for additivity of volume"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-    protected
-      outer Conditions.Environment environment "Environmental conditions";
-
-    equation
-      // Aliases
-      Data.z*w = positive.g - negative.g;
-      I = positive.Ndot;
-
-      // Streams
-      if setVelocity then
-        negative.phi = intra.phi;
-        positive.phi = intra.phi;
-      else
-        negative.phi = inStream(positive.phi);
-        positive.phi = inStream(negative.phi);
-      end if;
-      negative.sT = inStream(positive.sT);
-      positive.sT = inStream(negative.sT);
-
-      // Conservation
-      0 = negative.Ndot + positive.Ndot "Material (no storage)";
-      zeros(n_trans) = Data.m*(actualStream(negative.phi) - actualStream(
-        positive.phi))*I + intra.mPhidot "Translational momentum (no storage)";
-      der(C*w)/U.s = Data.z*I
-        "Electrical energy (reversible; simplified using material conservation and divided by potential)";
-      0 = intra.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
-         - actualStream(positive.phi)*actualStream(positive.phi))*I*Data.m/2 +
-        intra.phi*intra.mPhidot "Mechanical and thermal energy (no storage)";
-
-      annotation (
-        Documentation(info="<html><p>The capacitance (<i>C</i>) is calculated from the surface area (<i>A</i>), length of the gap (<i>L</i>), and the permittivity (&epsilon;) assuming that the 
-  charges are uniformly distributed over (infinite) parallel planes.</p>
-  
-  <p>If <code>setVelocity</code> is <code>true</code>, then the material exits with the
-  velocity of the <code>direct</code> connector.  Typically, that connector should be connected to the stationary solid,
-  in which case heat will be generated if material arrives with a nonzero velocity.  That heat is rejected to the same connector.
-  </p>
-  
-  </html>"),
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-20,30},{-20,-30}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{20,30},{20,-30}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-50,0},{-20,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{20,0},{50,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None)}));
-    end DoubleLayer;
-
-    model ElectronTransfer "Electron transfer"
-      import Modelica.Math.asinh;
-      extends FCSys.Icons.Names.Top2;
-
-      parameter Integer n_trans(min=1,max=3)
-        "Number of components of translational momentum" annotation (Evaluate=
-            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-
-      parameter Integer z=-1 "Charge number";
-      parameter Q.Potential E_A=0 "Activation energy" annotation (Dialog(group=
-              "Chemical parameters", __Dymola_label=
-              "<html><i>E</i><sub>A</sub></html>"));
-      parameter Q.NumberAbsolute alpha(max=1) = 0.5
-        "Charge transfer coefficient" annotation (Dialog(group=
-              "Chemical parameters", __Dymola_label="<html>&alpha;</html>"));
-      parameter Q.Current I0=U.A "Exchange current @ 300 K"
-        annotation (Dialog(__Dymola_label="<html><i>I</i><sup>o</sup></html>"));
-      parameter Boolean fromI=true
-        "<html>Invert the Butler-Volmer equation, if &alpha;=&frac12;</html>"
-        annotation (Dialog(tab="Advanced", compact=true), choices(
-            __Dymola_checkBox=true));
-
-      Connectors.Chemical negative(final n_trans=n_trans)
-        "Chemical connector on the 1st side" annotation (Placement(
-            transformation(extent={{-70,-10},{-50,10}}), iconTransformation(
-              extent={{-70,-10},{-50,10}})));
-      Connectors.Chemical positive(final n_trans=n_trans)
-        "Chemical connector on the 2nd side" annotation (Placement(
-            transformation(extent={{50,-10},{70,10}}), iconTransformation(
-              extent={{50,-10},{70,10}})));
-
-      // Aliases
-      Q.TemperatureAbsolute T(start=300*U.K) "Reaction rate";
-      Q.Current I(start=0) "Reaction rate";
-      Q.Potential Deltag(start=0) "Potential difference";
-
-      Connectors.Intra intra(final n_trans=n_trans)
-        "Translational and thermal interface with the substrate" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-    equation
-      // Aliases
-      I = positive.Ndot;
-      Deltag = positive.g - negative.g;
-      T = intra.T;
-
-      // Streams
-      negative.phi = inStream(positive.phi);
-      positive.phi = inStream(negative.phi);
-      negative.sT = inStream(positive.sT);
-      positive.sT = inStream(negative.sT);
-
-      // Reaction rate
-      if abs(alpha - 0.5) < Modelica.Constants.eps and fromI then
-        Deltag = 2*T*asinh(0.5*exp(E_A*(1/T - 1/(300*U.K)))*I/I0);
-      else
-        I*exp(E_A*(1/T - 1/(300*U.K))) = I0*(exp((1 - alpha)*Deltag/T) - exp(-
-          alpha*Deltag/T));
-      end if;
-
-      // Conservation (without storage)
-      0 = negative.Ndot + positive.Ndot "Material";
-      zeros(n_trans) = intra.mPhidot "Translational momentum";
-      0 = Deltag*I + intra.Qdot "Energy";
-      // Note:  Energy and momentum cancel among the stream terms.
-
-      annotation (
-        defaultComponentName="'e-Transfer'",
-        Documentation(info="<html><p><code>fromI</code> may help to eliminate nonlinear systems of equations if the 
-    <a href=\"modelica://FCSys.Chemistry.Electrochemistry.DoubleLayer\">double layer capacitance</a> is not included.</p></html>"),
-
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics),
-        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{0,-20},{0,-50}},
-                  color={221,23,47},
-                  smooth=Smooth.None),Line(
-                  points={{-50,0},{50,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Rectangle(
-                  extent={{-30,20},{32,-20}},
-                  lineColor={255,195,38},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,4},{20,4},{8,12}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-20,-5},{20,-5},{8,3}},
-                  color={255,195,38},
-                  smooth=Smooth.None,
-                  origin={0,-11},
-                  rotation=180)}));
-    end ElectronTransfer;
-  end Electrochemistry;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));
+
 end Chemistry;
