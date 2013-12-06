@@ -3,13 +3,12 @@ removePlots();
 createPlot(filename = "TestStand.mat");
 
 FCSys.Utilities.plot6(
-    y1={"cell.anFP.subregions[1, 1, 1].gas.H2.rho", "cell.anFP.subregions[1, 1, 1].gas.H2O.rho",
-        "cell.anGDL.subregions[1, 1, 1].gas.H2.rho", "cell.anGDL.subregions[1, 1, 1].gas.H2O.rho",
-        "cell.anCL.subregions[1, 1, 1].gas.H2.rho", "cell.anCL.subregions[1, 1, 1].gas.H2O.rho",
-        //"cell.PEM.subregions[1, 1, 1].ionomer.H2O.rho",
-        "cell.caCL.subregions[1, 1, 1].gas.H2O.rho", "cell.caCL.subregions[1, 1, 1].gas.N2.rho", "cell.caCL.subregions[1, 1, 1].gas.O2.rho",
-        "cell.caGDL.subregions[1, 1, 1].gas.H2O.rho", "cell.caGDL.subregions[1, 1, 1].gas.N2.rho", "cell.caGDL.subregions[1, 1, 1].gas.O2.rho",
-        "cell.caFP.subregions[1, 1, 1].gas.H2O.rho", "cell.caFP.subregions[1, 1, 1].gas.N2.rho", "cell.caFP.subregions[1, 1, 1].gas.O2.rho"},
+    y1={"cell.anFP.subregions[1, 1, 1].gas.p", "cell.anFP.subregions[1, 1, 1].liquid.p",
+        "cell.anGDL.subregions[1, 1, 1].gas.p", "cell.anGDL.subregions[1, 1, 1].liquid.p",
+        "cell.anCL.subregions[1, 1, 1].gas.p", "cell.anCL.subregions[1, 1, 1].liquid.p",
+        "cell.caCL.subregions[1, 1, 1].gas.p", "cell.caCL.subregions[1, 1, 1].liquid.p",
+        "cell.caGDL.subregions[1, 1, 1].gas.p", "cell.caGDL.subregions[1, 1, 1].liquid.p",
+        "cell.caFP.subregions[1, 1, 1].gas.p", "cell.caFP.subregions[1, 1, 1].liquid.p"},
     y2={"cell.anFP.subregions[1, 1, 1].gas.H2.phi[2]", "cell.anFP.subregions[1, 1, 1].gas.H2O.phi[2]", "cell.anFP.subregions[1, 1, 1].liquid.H2O.phi[2]",
         "cell.caFP.subregions[1, 1, 1].gas.H2O.phi[2]", "cell.caFP.subregions[1, 1, 1].gas.N2.phi[2]", "cell.caFP.subregions[1, 1, 1].gas.O2.phi[2]", "cell.caFP.subregions[1, 1, 1].liquid.H2O.phi[2]"},
     y3={"cell.anFP.subregions[1, 1, 1].gas.H2.p", "cell.anFP.subregions[1, 1, 1].gas.H2O.p",
@@ -31,7 +30,13 @@ FCSys.Utilities.plot6(
         "cell.anCL.subregions[1, 1, 1].gas.H2O.RH",
         "cell.caCL.subregions[1, 1, 1].gas.H2O.RH",
         "cell.caGDL.subregions[1, 1, 1].gas.H2O.RH",
-        "cell.caFP.subregions[1, 1, 1].gas.H2O.RH"});
+        "cell.caFP.subregions[1, 1, 1].gas.H2O.RH"},
+    y6={"cell.anFP.subregions[1, 1, 1].volume.s",
+        "cell.anGDL.subregions[1, 1, 1].volume.s",
+        "cell.anCL.subregions[1, 1, 1].volume.s",
+        "cell.caCL.subregions[1, 1, 1].volume.s",
+        "cell.caGDL.subregions[1, 1, 1].volume.s",
+        "cell.caFP.subregions[1, 1, 1].volume.s"});
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},

@@ -120,137 +120,96 @@ package UsersGuide "User's Guide"
 
   package SampleResults "Sample results"
     extends Modelica.Icons.Information;
-    // **create index on this page (hyperlinked)
-    // Note:  Hashed (anchored) bookmarks don't work in Dymola 2014.  They cause the link to fail entirely.
+
+    // TODO:  Used hashed (anchored) bookmarks once they are supported in Dymola (doesn't work in Dymola 2014;
+    // causes the link to fail entirely).
+
     class Basic "Basic"
       extends Modelica.Icons.Information;
+      // **Recreate the plots using the Python script.
+
       annotation (preferredView="info", Documentation(info="<html>
 
-    <p>The figures below show the results from some basic, low-level examples of
-    <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
-    follow the links to the associated models.</p>
-
-    <p>The models have been simulated using Dymola 7.4.  The plots have been
-    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and
-    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/plot.py\">this Python script</a>.</p>
-
-    ** Reorder, renumber:
+    <p>The figures below show the results from several basic, low-level examples of
+    <a href=\"modelica://FCSys\">FCSys</a>.   For more information, please
+    follow the links to the associated models.  For a complete discussion, please see
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Davies, 2013</a>].  There are additional examples
+    throughout the library (e.g.,
+    <a href=\"modelica://FCSys.Subregions.Examples\">FCSys.Subregions.Examples</a> and
+    <a href=\"modelica://FCSys.Characteristics.Examples\">FCSys.Characteristics.Examples</a>).  
+    </p>
 
     <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.AirColumn\">
     <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn.png\"></a>
-<br>Figure 1: **
+<br>Figure 1: Pressure oscillations and steady-steady pressure differences in a vertical column of gas initially at uniform temperature and density
     (<a href=\"modelica://FCSys.Subregions.Examples.AirColumn\">FCSys.Subregions.Examples.AirColumn</a>).</p>
 
     <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.Echo\">
     <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Echo.png\"></a>
-<br>Figure 1: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference.
-
-    The nonlinearity is due to upstream discretization and the initial condition
-
+<br>Figure 2: Pressure waves reflecting across two 1 cm<sup>3</sup> regions with an initial pressure difference
     (<a href=\"modelica://FCSys.Subregions.Examples.Echo\">FCSys.Subregions.Examples.Echo</a>).</p>
 
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/EchoCentral.png\"></a>
-<br>Figure 2: The conditions are the same as for <a href=\"#Fig1\">Figure 1</a>, but the central difference scheme is used
-    (<a href=\"modelica://FCSys.Subregions.Examples.EchoCentral\">FCSys.Subregions.Examples.EchoCentral</a>).</p>
-
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.ElectricalConduction\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ElectricalConduction.png\"></a>
-<br>Figure 1: **
-    (<a href=\"modelica://FCSys.Subregions.Examples.ElectricalConduction\">FCSys.Subregions.Examples.ElectricalConduction</a>).</p>
-
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.ORR\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ORR.png\"></a>
-<br>Figure 1: **
-    (<a href=\"modelica://FCSys.Subregions.Examples.ORR\">FCSys.Subregions.Examples.ORR</a>).</p>
-
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.HOR\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/HOR.png\"></a>
-<br>Figure 1: **
-    (<a href=\"modelica://FCSys.Subregions.Examples.HOR\">FCSys.Subregions.Examples.HOR</a>).</p>
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Subregions.Examples.InternalFlow\">
+    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/InternalFlow.png\"></a>
+<br>Figure 3: Temperature variation due to viscous dissipation under varying flow rate
+    (<a href=\"modelica://FCSys.Subregions.Examples.InternalFlow\">FCSys.Subregions.Examples.InternalFlow</a>).</p>
 
     <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">
     <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConduction.png\"></a>
-<br>Figure 2: Thermal conduction through a graphite bar divided into 1 cm<sup>3</sup> subregions
-
+<br>Figure 6: Thermal conduction through a graphite bar divided into segments, where the first segment is initially hotter
     (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConduction\">FCSys.Subregions.Examples.ThermalConduction</a>).</p>
 
     <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">
     <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConductionConvection.png\"></a>
-<br>Figure 3: Velocity induced in gas in contact with graphite undergoing thermal conduction
-
+<br>Figure 7: Velocity induced in gas in contact with graphite undergoing transient thermal conduction
     (<a href=\"modelica://FCSys.Subregions.Examples.ThermalConductionConvection\">FCSys.Subregions.Examples.ThermalConductionConvection</a>).</p>
 
-    <p align=center id=\"Fig4\"><a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/SaturationPressure.png\"></a>
-<br>Figure 4: Validation of the H<sub>2</sub>O saturation pressure curve derived from Gibbs equilibrium in <a href=\"modelica://FCSys\">FCSys</a>, as compared to
-
-    <a href=\"modelica://Modelica.Media.Air.MoistAir\">Modelica.Media.Air.MoistAir</a>
-
-    (<a href=\"modelica://FCSys.Subregions.Examples.SaturationPressure\">FCSys.Subregions.Examples.SaturationPressure</a>).</p>
-
-    <p align=center id=\"Fig5\"><a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">
-    <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Evaporation.png\"></a>
-<br>Figure 5: Dynamic H<sub>2</sub>O evaporation and condensation.  From 1 to 2 s, additional vapor is injected
-
-    (<a href=\"modelica://FCSys.Subregions.Examples.Evaporation\">FCSys.Subregions.Examples.Evaporation</a>).</p>
-
+    <p>The models were simulated using Dymola 2014.  The plots were
+    generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and
+    <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/plot.py\">this Python script</a>.</p>
+    
     </html>"));
 
       end Basic;
 
     class Cell "Cell-level"
       extends Modelica.Icons.Information;
-      annotation (preferredView="info", Documentation(info="<html><p>The figures below show the results from some cell-level examples of
-    <a href=\"modelica://FCSys\">FCSys</a>.   For more information about any of the results, please
-    follow the links to the associated models.</p>
 
-    <p>The models have been simulated using Dymola 7.4.  The plots have been
+      // **Add various polarization curves.
+
+      annotation (preferredView="info", Documentation(info="<html>
+  
+  <p>The figures below show the results from several basic, cell-level examples of
+    <a href=\"modelica://FCSys\">FCSys</a>.   For more information, please
+    follow the links to the associated models.  For a complete discussion, please see
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Davies, 2013</a>].  There are additional examples
+    in <a href=\"modelica://FCSys.Assemblies.Cells.Examples\">FCSys.Assemblies.Cells.Examples</a>.  
+    </p>
+
+    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.TestStand\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Cell/Polarization.png\"></a>
+<br>Figure 1: Polarization curves of the cell under various cathode flow rates
+    (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.TestStand\">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p>The models were simulated using Dymola 2014.  The plots were
     generated using <a href=\"http://kdavies4.github.io/ModelicaRes/\">ModelicaRes</a> and
     <a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/CellLevel/plot.py\">this Python script</a>.</p>
-
-    <p align=center id=\"Fig1\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.Polarization\"><img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/CellLevel/Polarization.png\"></a>
-<br>Figure 1: **
-
-    (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.Polarization\">FCSys.Assemblies.Cells.Examples.Polarization</a>).</p>
-
-    <p>**Add various polarization curves.</p>
 
     </html>"));
 
       end Cell;
     annotation (preferredView="info", Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>.
-
     Please click on any image to see a larger plot with a link to its example model.</p>
 
-      <p><b>Basic:</b><br>v<br>
+      <p><b>Basic:</b><br>
 
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn-small.png\"></a>
-
+      
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Echo-small.png\"></a>
 
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/EchoCentral-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ElectricalConduction-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Evaporation-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/HOR-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/InternalFlow-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ORR-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/SaturationPressure-small.png\"></a>
 
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConduction-small.png\"></a>
@@ -260,7 +219,7 @@ package UsersGuide "User's Guide"
 
 </p>
 
-      <p><b>Cell-level:</b><br>v<br>
+      <p><b>Cell-level:</b><br>
 
       <a href=\"modelica://FCSys.UsersGuide.SampleResults.Cell\">
       <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Cell/Polarization-small.png\"></a>
@@ -280,6 +239,16 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end 'configuration';
 
+    class 'continuity'
+      "<html>(<i>noun</i>) resistivity to axial compression or material storage during transport [M N<sup>-1</sup> T<sup>-1</sup>]</html>"
+
+      annotation (
+        preferredView="info",
+        DocumentationClass=false,
+        Documentation(info=
+              "<html><p>See <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>().</p></html>"));
+      end 'continuity';
+
     class 'density'
       "<html>(<i>noun</i>) amount of material per volume [N L<sup>-3</sup>]</html>"
 
@@ -291,15 +260,6 @@ package UsersGuide "User's Guide"
     <p>Note that mass per volume is volumic mass (see <a href=\"modelica://FCSys.UsersGuide.Glossary.'massic'\">massic</a>).</p></html>"));
       end 'density';
 
-    class 'continuity'
-      "<html>(<i>noun</i>) resistivity to axial compression or material storage during transport [M N<sup>-1</sup> T<sup>-1</sup>]</html>"
-
-      annotation (
-        preferredView="info",
-        DocumentationClass=false,
-        Documentation(info=
-              "<html><p>See <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>().</p></html>"));
-      end 'continuity';
 
     class 'equivalent current'
       "<html>(<i>noun</i>) rate of supply of a reactant required to support the electrical load at 100% utilization of that reactant [N T<sup>-1</sup>]</html>"
@@ -396,26 +356,6 @@ package UsersGuide "User's Guide"
   package References "References"
 
     extends Modelica.Icons.References;
-    annotation (preferredView="info", Documentation(info="<html>
-    <p>This library is described in the following dissertation
-    (<a href=\"http://kdavies4.github.io/Dissertation/Davies - Declarative Modeling of Coupled Advective and Diffusive Processes as Applied to Fuel Cells.pdf\">PDF</a> and
-
-    <a href=\"https://github.com/kdavies4/Dissertation\">source</a>):
-    <ol>
-    <li>K. L. Davies, \"Declarative Modeling of Coupled Advective and Diffusive Processes as Applied to Fuel Cells,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
-    </ol></p>
-
-    <p>These papers describe work leading up to it (most recent at the top):
-    <ol>
-    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
-    <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
-    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf\">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
-    <li>K. L. Davies, R. M. Moore, and G. Bender, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf\">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
-    <li>K. L. Davies and R. M. Moore, \"<a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
-    </ol></p>
-
-    <p>The external references, which are cited throughout <a href=\"modelica://FCSys\">FCSys</a>, are listed as entries in this package.</p>
-    </html>"));
 
     class Aronsson2009
       "<html>P. Aronsson and D. Broman, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=043;article=105\">Extendable Physical Unit Checking with Understandable Error Reporting</a>,\"  in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009</html>"
@@ -435,6 +375,18 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Bejan2006;
 
+    class Bernardi1992
+      "<html>D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992</html>"
+
+      annotation (preferredView="info", DocumentationClass=false);
+      end Bernardi1992;
+
+    class BIPM2006
+      "<html>International Bureau of Weights and Measures (BIPM), \"<a href=\"http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf\">The International System of Units (SI)</a>,\" 8th ed., 2006</html>"
+
+      annotation (preferredView="info", DocumentationClass=false);
+      end BIPM2006;
+
     class Broman2008
       "<html>D. Broman and P. Aronsson and P. Fritzson, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">Design Considerations for Dimensional Inference and Unit Consistency Checking in Modelica</a>,\"  in <i>Modelica Conference</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008</html>"
 
@@ -447,17 +399,7 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Brown2011;
 
-    class BIPM2006
-      "<html>International Bureau of Weights and Measures (BIPM), \"<a href=\"http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf\">The International System of Units (SI)</a>,\" 8th ed., 2006</html>"
 
-      annotation (preferredView="info", DocumentationClass=false);
-      end BIPM2006;
-
-    class Bernardi1992
-      "<html>D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992</html>"
-
-      annotation (preferredView="info", DocumentationClass=false);
-      end Bernardi1992;
 
     class DuPont2004N
       "<html>DuPont, \"Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004</html>"
@@ -543,17 +485,18 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Mark1999;
 
+    class Mattsson1993B
+      "<html>S. E. Mattsson and G. Soderlind, \"Index Reduction in Differential-Algebraic Equations Using Dummy Derivatives,\" <i>SIAM J. Sci. Comput.</i>, vol. 14, no. 3, pp. 677&ndash;692, May 1993</html>"
+
+      annotation (preferredView="info", DocumentationClass=false);
+      end Mattsson1993B;
+
     class Mattsson2008
       "<html>S. E. Mattsson and H. Elmqvist, \"Unit Checking and Quantity Conservation,\" in <i>Modelica Conf.</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end Mattsson2008;
 
-    class Mattsson1993B
-      "<html>S. E. Mattsson and G. Soderlind, \"Index Reduction in Differential-Algebraic Equations Using Dummy Derivatives,\" <i>SIAM J. Sci. Comput.</i>, vol. 14, no. 3, pp. 677&ndash;692, May 1993</html>"
-
-      annotation (preferredView="info", DocumentationClass=false);
-      end Mattsson1993B;
 
     class McBride1996
       "<html>B. J. McBride and S. Gordon, \"<a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/RP-1311P2.htm\">Computer Program for Calculating Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description</a>,\" NASA Reference Publication 1311, Jun. 1996</html>"
@@ -709,6 +652,26 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Woo1995;
 
+    annotation (preferredView="info", Documentation(info="<html>
+    <p>This library is described in the following dissertation
+    (<a href=\"http://kdavies4.github.io/Dissertation/Davies - Declarative Modeling of Coupled Advective and Diffusive Processes as Applied to Fuel Cells.pdf\">PDF</a> and
+
+    <a href=\"https://github.com/kdavies4/Dissertation\">source</a>):
+    <ol>
+    <li>K. L. Davies, \"Declarative Modeling of Coupled Advective and Diffusive Processes as Applied to Fuel Cells,\" Ph.D. dissertation, Georgia Institute of Technology, Aug. 2013.</li>
+    </ol></p>
+
+    <p>These papers describe work leading up to it (most recent at the top):
+    <ol>
+    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
+    <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i> (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/Resources/Documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
+    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf\">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
+    <li>K. L. Davies, R. M. Moore, and G. Bender, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf\">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>,\" in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</li>
+    <li>K. L. Davies and R. M. Moore, \"<a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
+    </ol></p>
+
+    <p>The external references, which are cited throughout <a href=\"modelica://FCSys\">FCSys</a>, are listed as entries in this package.</p>
+    </html>"));
     end References;
 
   class Contact "Contact"
@@ -1049,6 +1012,7 @@ action. This section shall survive the termination of this License.</p>
 
 
 
+// **Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
 
 annotation (
   preferredView="info",

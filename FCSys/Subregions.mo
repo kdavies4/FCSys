@@ -349,7 +349,6 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end AirColumn;
 
     model BinaryDiffusion
@@ -698,7 +697,6 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion
@@ -960,8 +958,8 @@ package Subregions
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"),Placement(transformation(extent={{-70,-22},
-              {-50,-2}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
+              {-10,-2}})));
 
     FCSys.Phases.Graphite graphite(
       n_inter=1,
@@ -985,8 +983,8 @@ package Subregions
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{-30,
-              -22},{-10,-2}})));
+          group="Phases (click to edit)"), Placement(transformation(extent={{-70,
+              -22},{-50,-2}})));
 
     Chemistry.HOR HOR(final n_trans=n_trans) if inclHOR
       "Hydrogen oxidation reaction"
@@ -1000,6 +998,31 @@ package Subregions
       annotation (Dialog(group="Independence factors"));
     Phases.ExchangeParams gasLiq "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
+
+    // Capillary pressure
+    parameter Boolean inclCapillary=true if liquid.n_spec > 0
+      "Include capillary pressure" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        group="Capillary pressure",
+        compact=true,
+        enable=liquid.n_spec > 0));
+    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m if liquid.n_spec > 0
+      "Surface tension" annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&gamma;</html>",
+        enable=inclCapillary));
+    parameter Q.Area kappa=6.46e-5*U.mm^2 if liquid.n_spec > 0 "Permeability"
+      annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&kappa;</html>",
+        enable=inclCapillary));
+    parameter Q.Angle theta=140*U.degree if liquid.n_spec > 0 "Contact angle"
+      annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&theta;</html>",
+        enable=inclCapillary));
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -1026,8 +1049,16 @@ package Subregions
             extent={{-108,-52},{-88,-32}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
 
-    output Q.NumberAbsolute s=liquid.V/(gas.V + liquid.V) if liquid.n_spec > 0
-       and gas.n_spec > 0 and environment.analysis "Liquid saturation";
+    Chemistry.CapillaryVolume volume(
+      final V=V,
+      final inclGas=gas.n_spec > 0,
+      final inclLiquid=liquid.n_spec > 0,
+      final inclSolid=graphite.n_spec + ionomer.n_spec > 0,
+      final inclCapillary=inclCapillary,
+      final gamma=gamma,
+      final kappa=kappa,
+      final theta=theta) "Volume with capillary pressure included" annotation (
+        Dialog, Placement(transformation(extent={{-24,-80},{-4,-60}})));
 
   protected
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
@@ -1036,10 +1067,6 @@ package Subregions
         gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
 
     outer Conditions.Environment environment "Environmental conditions";
-    Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V, final setVolume
-        =gas.n_spec > 0 or liquid.n_spec > 0) if n_spec > 0
-      "Model to establish a fixed total volume"
-      annotation (Placement(transformation(extent={{76,-80},{96,-60}})));
     Connectors.InertNode commonExch "Connector for exchange among all species"
       annotation (HideResult=true, Placement(transformation(extent={{76,32},{96,
               52}}), iconTransformation(extent={{100,18},{120,38}})));
@@ -1053,37 +1080,37 @@ package Subregions
     // ----------
     // Gas
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{-60,-20.4},{-60,-54},{-86,-54}},
+        points={{-20,-20.4},{-20,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-68,-20},{-68,-42},{-98,-42}},
+        points={{-28,-20},{-28,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-68,-12},{-76,-12},{-76,-30},{-110,-30}},
+        points={{-28,-12},{-36,-12},{-36,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{-60,-2},{-60,30},{86,30}},
+        points={{-20,-2},{-20,30},{86,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{-55,-7},{-52,-4},{-52,18},{98,18}},
+        points={{-15,-7},{-12,-4},{-12,18},{98,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{-52,-12},{-44,-12},{-44,6},{110,6}},
+        points={{-12,-12},{-4,-12},{-4,6},{110,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1164,57 +1191,57 @@ package Subregions
         smooth=Smooth.None));
     // Liquid
     connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{-20,-20.4},{-20,-54},{-86,-54}},
+        points={{-60,-20.4},{-60,-54},{-86,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{-20,-2},{-20,30},{86,30}},
+        points={{-60,-2},{-60,30},{86,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-        points={{-15,-7},{-12,-4},{-12,18},{98,18}},
+        points={{-55,-7},{-52,-4},{-52,18},{98,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{-28,-20},{-28,-42},{-98,-42}},
+        points={{-68,-20},{-68,-42},{-98,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{-28,-12},{-36,-12},{-36,-30},{-110,-30}},
+        points={{-68,-12},{-76,-12},{-76,-30},{-110,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-        points={{-12,-12},{-4,-12},{-4,6},{110,6}},
+        points={{-52,-12},{-44,-12},{-44,6},{110,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     // Mixing
-    connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{28,-20},{28,-70},{86,-70}},
+    connect(gas.amagat, volume.gas) annotation (Line(
+        points={{-12,-20},{-12,-68}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(ionomer.amagat, volume.amagat) annotation (Line(
-        points={{68,-20},{68,-70},{86,-70}},
+    connect(liquid.amagat, volume.liquid) annotation (Line(
+        points={{-52,-20},{-52,-71},{-15,-71}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-52,-20},{-52,-70},{86,-70}},
+    connect(volume.solid, graphite.amagat) annotation (Line(
+        points={{-8,-72},{28,-72},{28,-20}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(liquid.amagat, volume.amagat) annotation (Line(
-        points={{-12,-20},{-12,-70},{86,-70}},
+    connect(volume.solid, ionomer.amagat) annotation (Line(
+        points={{-8,-72},{68,-72},{68,-20}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -1222,7 +1249,7 @@ package Subregions
     // --------------
     // Common
     connect(gas.inter[1], commonExch.node) annotation (Line(
-        points={{-65,-6.5},{-65,42},{86,42}},
+        points={{-25,-6.5},{-25,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(graphite.inter[1], commonExch.node) annotation (Line(
@@ -1234,16 +1261,16 @@ package Subregions
         color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[1], commonExch.node) annotation (Line(
-        points={{-25,-6.5},{-25,42},{86,42}},
+        points={{-65,-6.5},{-65,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiqExch.node) annotation (Line(
-        points={{-65,-7.5},{-65,54},{86,54}},
+        points={{-25,-7.5},{-25,54},{86,54}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiqExch.node) annotation (Line(
-        points={{-25,-7.5},{-25,54},{86,54}},
+        points={{-65,-7.5},{-65,54},{86,54}},
         color={221,23,47},
         smooth=Smooth.None));
 
@@ -1274,7 +1301,6 @@ package Subregions
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="(connections not shown
-
 on diagram)")}));
   end Subregion;
 
@@ -1311,14 +1337,14 @@ on diagram)")}));
               -40,-40}})));
 
   protected
-    Conditions.ByConnector.Amagat.VolumeFixed volume(V=V, final setVolume=false)
-      if n_spec > 0 "Model to establish a fixed total volume"
+    Conditions.ByConnector.Amagat.Void void if n_spec > 0
+      "Model to establish zero pressure"
       annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
   equation
     // Boundaries and mixing
     // ---------------------
     // Ionomer
-    connect(ionomer.amagat, volume.amagat) annotation (Line(
+    connect(ionomer.amagat, void.amagat) annotation (Line(
         points={{-2,2},{20,-20}},
         color={47,107,251},
         smooth=Smooth.None));
@@ -1370,7 +1396,6 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
               60}}), graphics));
-
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1381,8 +1406,8 @@ on diagram)")}));
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"),Placement(transformation(extent={{-50,-22},
-              {-30,-2}})));
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,-22},
+              {10,-2}})));
 
     FCSys.Phases.Graphite graphite(
       n_inter=1,
@@ -1397,8 +1422,8 @@ on diagram)")}));
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Liquid" annotation (Dialog(
-          group="Phases (click to edit)"), Placement(transformation(extent={{-10,
-              -22},{10,-2}})));
+          group="Phases (click to edit)"), Placement(transformation(extent={{-50,
+              -22},{-30,-2}})));
 
     // Independence factors
     Phases.ExchangeParams common "Among all phases"
@@ -1406,8 +1431,30 @@ on diagram)")}));
     Phases.ExchangeParams gasLiq "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
-    output Q.NumberAbsolute s=liquid.V/(gas.V + liquid.V) if liquid.n_spec > 0
-       and gas.n_spec > 0 and environment.analysis "Liquid saturation";
+    // Capillary pressure
+    parameter Boolean inclCapillary=true if liquid.n_spec > 0
+      "Include capillary pressure" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        group="Capillary pressure",
+        compact=true,
+        enable=liquid.n_spec > 0));
+    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m if liquid.n_spec > 0
+      "Surface tension" annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&gamma;</html>",
+        enable=inclCapillary));
+    parameter Q.Area kappa=6.46e-5*U.mm^2 if liquid.n_spec > 0 "Permeability"
+      annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&kappa;</html>",
+        enable=inclCapillary));
+    parameter Q.Angle theta=140*U.degree if liquid.n_spec > 0 "Contact angle"
+      annotation (Dialog(
+        group="Capillary pressure",
+        __Dymola_label="<html>&theta;</html>",
+        enable=inclCapillary));
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -1433,16 +1480,23 @@ on diagram)")}));
             extent={{-88,-52},{-68,-32}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
 
+    Chemistry.CapillaryVolume volume(
+      final V=V,
+      final inclGas=gas.n_spec > 0,
+      final inclLiquid=liquid.n_spec > 0,
+      final inclSolid=graphite.n_spec > 0,
+      final inclCapillary=inclCapillary,
+      final gamma=gamma,
+      final kappa=kappa,
+      final theta=theta) "Volume with capillary pressure included"
+      annotation (Placement(transformation(extent={{-4,-80},{16,-60}})));
+
   protected
-    Conditions.ByConnector.Amagat.VolumeFixed volume(V=V, final setVolume=gas.n_spec
-           > 0 or liquid.n_spec > 0) if n_spec > 0
-      "Model to establish a fixed total volume"
-      annotation (Placement(transformation(extent={{56,-80},{76,-60}})));
     outer Conditions.Environment environment "Environmental conditions";
 
     // Exchange
     Connectors.InertNode commonExch "Among all phases" annotation (HideResult=
-          true,Placement(transformation(extent={{56,32},{76,52}}),
+          true, Placement(transformation(extent={{56,32},{76,52}}),
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiqExch "Between gas and liquid" annotation (
         HideResult=true, Placement(transformation(extent={{56,44},{76,64}}),
@@ -1453,37 +1507,37 @@ on diagram)")}));
     // ----------
     // Gas
     connect(gas.yNegative, yNegative.gas) annotation (Line(
-        points={{-40,-20.4},{-40,-54},{-66,-54}},
+        points={{0,-20.4},{0,-54},{-66,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zPositive, zPositive.gas) annotation (Line(
-        points={{-48,-20},{-48,-42},{-78,-42}},
+        points={{-8,-20},{-8,-42},{-78,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
-        points={{-48,-12},{-56,-12},{-56,-30},{-90,-30}},
+        points={{-8,-12},{-16,-12},{-16,-30},{-90,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.yPositive, yPositive.gas) annotation (Line(
-        points={{-40,-2},{-40,30},{66,30}},
+        points={{0,-2},{0,30},{66,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.zNegative, zNegative.gas) annotation (Line(
-        points={{-35,-7},{-32,-4},{-32,18},{78,18}},
+        points={{5,-7},{8,-4},{8,18},{78,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(gas.xPositive, xPositive.gas) annotation (Line(
-        points={{-32,-12},{-24,-12},{-24,6},{90,6}},
+        points={{8,-12},{16,-12},{16,6},{90,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1527,61 +1581,49 @@ on diagram)")}));
         smooth=Smooth.None));
     // Liquid
     connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-        points={{0,-20.4},{0,-54},{-66,-54}},
+        points={{-40,-20.4},{-40,-54},{-66,-54}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{0,-2},{0,30},{66,30}},
+        points={{-40,-2},{-40,30},{66,30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-        points={{5,-7},{8,-4},{8,18},{78,18}},
+        points={{-35,-7},{-32,-4},{-32,18},{78,18}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-        points={{-8,-20},{-8,-42},{-78,-42}},
+        points={{-48,-20},{-48,-42},{-78,-42}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{-8,-12},{-16,-12},{-16,-30},{-90,-30}},
+        points={{-48,-12},{-56,-12},{-56,-30},{-90,-30}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-        points={{8,-12},{16,-12},{16,6},{90,6}},
+        points={{-32,-12},{-24,-12},{-24,6},{90,6}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
 
     // Mixing
-    connect(graphite.amagat, volume.amagat) annotation (Line(
-        points={{48,-20},{48,-70},{66,-70}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(gas.amagat, volume.amagat) annotation (Line(
-        points={{-32,-20},{-32,-70},{66,-70}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(liquid.amagat, volume.amagat) annotation (Line(
-        points={{8,-20},{8,-70},{66,-70}},
-        color={47,107,251},
-        smooth=Smooth.None));
 
     // Inert exchange
     // --------------
     // Common
     connect(gas.inter[1], commonExch.node) annotation (Line(
-        points={{-45,-6.5},{-45,42},{66,42}},
+        points={{-5,-6.5},{-5,42},{66,42}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(graphite.inter[1], commonExch.node) annotation (Line(
@@ -1589,16 +1631,16 @@ on diagram)")}));
         color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[1], commonExch.node) annotation (Line(
-        points={{-5,-6.5},{-5,42},{66,42}},
+        points={{-45,-6.5},{-45,42},{66,42}},
         color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
     connect(gas.inter[2], gasLiqExch.node) annotation (Line(
-        points={{-45,-7.5},{-45,54},{66,54}},
+        points={{-5,-7.5},{-5,54},{66,54}},
         color={221,23,47},
         smooth=Smooth.None));
     connect(liquid.inter[2], gasLiqExch.node) annotation (Line(
-        points={{-5,-7.5},{-5,54},{66,54}},
+        points={{-45,-7.5},{-45,54},{66,54}},
         color={221,23,47},
         smooth=Smooth.None));
 
@@ -1608,6 +1650,18 @@ on diagram)")}));
       connect(gas.connH2O[3], liquid.connH2O[1]);
     end if;
 
+    connect(liquid.amagat, volume.liquid) annotation (Line(
+        points={{-32,-20},{-32,-71},{5,-71}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(gas.amagat, volume.gas) annotation (Line(
+        points={{8,-20},{8,-68}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(volume.solid, graphite.amagat) annotation (Line(
+        points={{12,-72},{48,-72},{48,-20}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
@@ -1616,7 +1670,6 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
-
   end SubregionNoIonomer;
 
   partial model PartialSubregion
@@ -1686,79 +1739,95 @@ on diagram)")}));
 
   <p>This model should be extended to include the appropriate phases, reactions, etc.</p>
   </html>"),
-      Icon(graphics={Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransX,
-              smooth=Smooth.None),Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransY,
-              smooth=Smooth.None),Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclTransX,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransX,
-              smooth=Smooth.None),Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransY,
-              smooth=Smooth.None),Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclTransZ,
-              smooth=Smooth.None),Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-              16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}),
+      Icon(graphics={
+          Line(
+            points={{-100,0},{-40,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{0,-100}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransY,
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{50,50}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-40,-40},{-16,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-16,40},{-16,-16},{40,-16}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-40,0},{28,0}},
+            color={210,210,210},
+            visible=inclTransX,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,28},{0,-40}},
+            color={210,210,210},
+            visible=inclTransY,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{28,0},{100,0}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransX,
+            smooth=Smooth.None),
+          Line(
+            points={{0,100},{0,28}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransY,
+            smooth=Smooth.None),
+          Line(
+            points={{-12,-12},{40,40}},
+            color={210,210,210},
+            visible=inclTransZ,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-40,16},{16,16},{16,-40}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-50,-50},{-12,-12}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=inclTransZ,
+            smooth=Smooth.None),
+          Polygon(
+            points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                16}},
+            lineColor={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{40,40},{16,16}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,56},{100,96}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
 

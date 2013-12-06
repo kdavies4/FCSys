@@ -345,7 +345,6 @@ package Chemistry "Chemical reactions and related models"
                   smooth=Smooth.None,
                   origin={0,-11},
                   rotation=180)}));
-
     end ElectronTransfer;
 
   end Electrochemistry;
@@ -418,17 +417,17 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
-
   end HOR;
 
   model ORR "Oxygen reduction reaction"
@@ -520,17 +519,17 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
-
   end ORR;
 
 public
@@ -538,60 +537,36 @@ public
 
     extends FCSys.Icons.Names.Top2;
 
-    // Geometric parameters
-    constant Integer n_trans(min=0, max=3)
-      "Number of components of translational momentum" annotation (Dialog(group
-          ="Geometry", __Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
-    // Note:  This must be a constant rather than a parameter due to errors in
-    // Dymola 2014.
+    // Geometry
     Q.LengthReciprocal overR=1/U.mm "Reciprocal of characteristic radius"
       annotation (Dialog(group="Geometry", __Dymola_label=
             "<html>1/<i>R</i></html>"));
 
     // Material properties
-    parameter Q.VolumeSpecific v_w=Characteristics.H2O.Liquid.v_Tp()
-      "Specific volume of the wetting phase" annotation (Dialog(group=
-            "Material properties", __Dymola_label=
-            "<html><i>v</i><sub>w</sub></html>"));
     parameter Q.SurfaceTension gamma=0.0663*U.N/U.m "Surface tension"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&gamma;</html>"));
 
-    // Aliases
-    Q.Pressure Deltap "Capillary pressure";
-
     // Auxiliary variables (for analysis only)
-    output Q.Potential Deltag=wetting.g - nonwetting.g if environment.analysis
-      "Potential of wetting phase w.r.t. nonwetting phase";
+    Q.Pressure Deltap=wetting.p - nonwetting.p if environment.analysis
+      "Pressure difference due to surface tension";
 
-    Connectors.Chemical wetting(final n_trans=n_trans)
-      "Chemical interface to the wetting phase" annotation (Placement(
-          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
-            ={{-10,-10},{10,10}})));
-    Connectors.Chemical nonwetting(final n_trans=n_trans)
-      "Chemical interface to the nonwetting phase" annotation (Placement(
-          transformation(extent={{50,-10},{70,10}}), iconTransformation(extent=
-              {{50,-10},{70,10}})));
+    Connectors.Amagat wetting "Interface to the wetting phase" annotation (
+        Placement(transformation(extent={{-30,-10},{-10,10}}),
+          iconTransformation(extent={{-50,-10},{-30,10}})));
+    Connectors.Amagat nonwetting "Interface to the nonwetting phase"
+      annotation (Placement(transformation(extent={{10,-10},{30,10}}),
+          iconTransformation(extent={{20,-10},{40,10}})));
 
   protected
     outer Conditions.Environment environment "Environmental conditions";
 
   equation
-    // Aliases
-    Deltap = 2*gamma*overR "Young-Laplace equation";
-    // **temp 0
-
-    // Streams
-    wetting.phi = inStream(nonwetting.phi[:]);
-    nonwetting.phi = inStream(wetting.phi[:]);
-    wetting.sT = inStream(nonwetting.sT);
-    nonwetting.sT = inStream(wetting.sT);
-
-    // Potentials
-    nonwetting.g = wetting.g + v_w*Deltap "Kelvin equation (see assumption #1)";
+    // Pressure relation
+    nonwetting.p = wetting.p + 2*gamma*overR "Young-Laplace equation";
 
     // Conservation (without storage)
-    0 = wetting.Ndot + nonwetting.Ndot "Material";
+    0 = wetting.V + nonwetting.V "Volume";
 
     annotation (
       Documentation(info="<html>
@@ -601,74 +576,180 @@ public
     [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924].  Note that the surface tension in
     [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>] is incorrect (likely unit conversion error).</p>
 
-    <p>Assumptions:<ol>
-    <li>The fluid is incompressible and isothermal across the surface layer.<li></p>
-
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{30,30},{-30,-30}},
-              lineColor={47,107,251},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Sphere),Ellipse(extent={{30,30},{-30,-30}},
-            lineColor={0,0,0})}),
+              100}}), graphics={
+          Line(
+            points={{-40,0},{30,0}},
+            color={47,107,251},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Ellipse(
+            extent={{0,40},{-80,-40}},
+            lineColor={47,107,251},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Sphere),
+          Ellipse(extent={{0,40},{-80,-40}}, lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end SurfaceTension;
 
-  model SurfaceTensionContact "Surface tension, with contact angle"
-    extends SurfaceTension(final overR=cos(theta)/(2*sqrt(kappa)));
-    // ** *J(V_w/V)
 
-    // Geometry
-    parameter Q.Volume V=U.cc "Total volume" annotation (Dialog(group=
-            "Geometry", __Dymola_label="<html><i>V</i></html>"));
-    Q.Volume V_w=U.cc "Volume of the wetting phase" annotation (Dialog(group=
-            "Geometry", __Dymola_label="<html><i>V</i><sub>w</sub></html>"));
+  model CapillaryVolume "Volume with capillary pressure applied to the liquid"
+    extends FCSys.Icons.Names.Top3;
 
     // Material properties
-    parameter Q.Angle theta=140*U.degree "Contact angle" annotation (Dialog(
-          group="Material properties", __Dymola_label="<html>&theta;</html>"));
+    parameter Q.Volume V "Volume" annotation (Dialog(group="Geometry",
+          __Dymola_label="<html><i>V</i></html>"));
+
+    // Capillary pressure
+    parameter Boolean inclCapillary=true "Include capillary pressure"
+      annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        group="Material properties",
+        compact=true,
+        enable=inclLiquid));
+    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m "Surface tension"
+      annotation (Dialog(
+        group="Material properties",
+        __Dymola_label="<html>&gamma;</html>",
+        enable=inclLiquid and inclCapillary));
     parameter Q.Area kappa=6.46e-5*U.mm^2 "Permeability" annotation (Dialog(
-          group="Material properties", __Dymola_label="<html>&kappa;</html>"));
+        group="Material properties",
+        __Dymola_label="<html>&kappa;</html>",
+        enable=inclLiquid and inclCapillary));
+    parameter Q.Angle theta=140*U.degree "Contact angle" annotation (Dialog(
+        group="Material properties",
+        __Dymola_label="<html>&theta;</html>",
+        enable=inclLiquid and inclCapillary));
+    replaceable function J = FCSys.Characteristics.H2O.J2 "Leverett J function"
+      annotation (choicesAllMatching=true, Dialog(group="Material properties",
+          enable=inclLiquid and inclCapillary));
 
-    replaceable function J = FCSys.Characteristics.H2O.J "Leverett J function"
-      annotation (choicesAllMatching=true, Dialog(group="Material properties"));
+    // Material properties
+    parameter Boolean inclGas=true "Gas" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(group="Included phases", compact=true));
+    parameter Boolean inclLiquid=true "Liquid" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(group="Included phases", compact=true));
+    parameter Boolean inclSolid=true "Solid" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(group="Included phases", compact=true));
 
+    // Auxiliary variables (for analysis)
+    output Q.NumberAbsolute s(final stateSelect=StateSelect.never) = liquid.V/(
+      gas.V + liquid.V) if inclLiquid and inclGas and environment.analysis
+      "Liquid saturation";
+
+    Connectors.Amagat gas if inclGas "Interface to the gas phase" annotation (
+        Placement(transformation(extent={{30,-10},{50,10}}), iconTransformation(
+            extent={{10,10},{30,30}})));
+    Connectors.Amagat liquid if inclLiquid "Interface to the liquid phase"
+      annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+          iconTransformation(extent={{-20,-20},{0,0}})));
+    Connectors.Amagat solid if inclSolid "Interface to the solid phase"
+      annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
+          iconTransformation(extent={{50,-30},{70,-10}})));
+    SurfaceTension surfaceTension(final gamma=gamma,final overR=cos(theta)*J(
+          liquid.V/(liquid.V + gas.V))/(2*sqrt(kappa))) if inclLiquid and
+      inclCapillary "Additional pressure on the liquid"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V) if inclGas or
+      inclLiquid or inclSolid "Fixed volume"
+      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+    Conditions.ByConnector.Amagat.Void void if inclSolid and not (inclGas or
+      inclLiquid) "Zero pressure"
+      annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
+
+  protected
+    outer Conditions.Environment environment "Environmental conditions";
+
+  equation
+    if not inclCapillary then
+      connect(gas, liquid)
+        "Directly connect gas and liquid (not shown in diagram)";
+    end if;
+
+    connect(surfaceTension.wetting, liquid) annotation (Line(
+        points={{-4,0},{-20,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(solid, volume.amagat) annotation (Line(
+        points={{20,-20},{20,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(volume.amagat, gas) annotation (Line(
+        points={{20,0},{40,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(surfaceTension.nonwetting, volume.amagat) annotation (Line(
+        points={{3,0},{20,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(void.amagat, solid) annotation (Line(
+        points={{40,-20},{20,-20}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
-      defaultComponentName="surfaceTension",
       Documentation(info="<html>
-
-    **Note modified Leverett correlation
+    <p>The default surface tension (&gamma; = 0.0663 N/m) is for saturated water at 60 &deg;C, interpolated from
+    [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924].  Note that the surface tension in
+    [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>] is incorrect (likely unit conversion error).</p>
 
     <p>The default permeability (&kappa; = 6.46&times;10<sup>-5</sup> mm<sup>2</sup>) is based on
-
     the air permeability of SGL Carbon Group Sigracet&reg; 10 BA
-
     [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].
-
     Wang et al. use &kappa; = 10<sup>-5</sup> mm<sup>2</sup>
     [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p>
 
     <p>The default contact angle (&theta; = 140&deg;) is typical of the GDL measurements listed at
-
     <a href=\"http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm\">http://www.chem.mtu.edu/cnlm/research/Movement_of_Water-in_Fuel_Cell_Electrodes.htm</a>
-
-    (accessed Nov. 22, 2103).</p></html>"),
+    (accessed Nov. 22, 2103).</p>
+    
+    </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{40,-40},{-40,-20}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(points={{-40,-20},{40,-20}}, color
-            ={0,0,0}),Line(points={{0,-40},{20,-20}}, color={0,0,0}),Line(
-            points={{-20,-40},{0,-20}}, color={0,0,0}),Line(points={{20,-40},{
-            40,-20}}, color={0,0,0}),Line(points={{-40,-40},{-20,-20}}, color={
-            0,0,0})}));
+              100}}), graphics={
+          Polygon(
+            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+                -60}},
+            lineColor={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid),
+          Polygon(
+            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+            lineColor={191,191,191},
+            smooth=Smooth.Bezier,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-40,8},{20,-30}},
+            lineColor={85,170,255},
+            fillPattern=FillPattern.Sphere,
+            fillColor={255,255,255}),
+          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
+          Line(
+            points={{-60,20},{20,20},{20,-60}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{60,60},{20,20}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None)}),
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics));
 
-  end SurfaceTensionContact;
-
+  end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));
-
 end Chemistry;

@@ -1700,10 +1700,8 @@ among units (e.g., 1&nbsp;cycle = 2&pi;&nbsp;rad).</p>
 
 <p>In <a href=\"modelica://FCSys\">FCSys</a>, each unit is a constant quantity.
 The values of the units, like other quantities, is the product of a number and a unit.
-
 Therefore, units may be derived from other units (e.g., cycle = 2&pi;&nbsp;rad).
 This recursive definition leaves several units (in SI, 7) that are locally independent
-
 and must be established universally.  These
 base units are established by the \"particular example of the quantity
 concerned which is used as a reference\" quoted previously
@@ -1715,17 +1713,14 @@ but regardless, there are a number of units that must be defined by example.</p>
 SI equal to one&mdash;the meter (m), kilogram (kg), second (s), ampere (A),
 kelvin (K), mole (mol), and candela (cd).  This is implicitly the case in
 the <a href=\"modelica://Modelica.SIunits\">SIunits</a> package, but again, it hardly captures the idea that the
-
 value of a quantity is the
 product of a number and a unit.</p>
 
 <p>Instead, in <a href=\"modelica://FCSys\">FCSys</a>, most of the base units are established by universal
-
 physical constants.
 The \"particular example of the quantity\"
 [<a href=\"modelica://FCSys.UsersGuide.References.BIPM2006\">BIPM2006</a>] is an experiment that yields
 precise and universally repeatable results in determining a constant rather than a prototype
-
 (e.g., the International Prototype of the Kilogram) which is
 carefully controlled and distributed via replicas.
 This method of defining the base units from measured physical quantities (rather than
@@ -1760,7 +1755,6 @@ and where scaling is a concern
 <p>The method is neutral
 with regards to not only the values of the base units, but also the choice of the base units and
 even the number of base units.  This is an advantage because many systems of units are used in science
-
 and technology besides
 SI. As mentioned previously, the choice of base units is somewhat
 arbitrary, and different systems of units are based on different choices.  Some systems of units
@@ -1837,16 +1831,15 @@ base units or constants are later re-adjusted.</p>
 (e.g., <code>der(x)/U.s</code>).  This is necessary because the global variable <code>time</code>
 is in seconds (i.e., <code>time</code> is a number, not a quantity).</p>
 
-<p>In theory, standard Modelica unit checking tools may be used to check the dimensions of equations
+<p>In theory, standard Modelica unit-checking tools may be used to check the dimensions of equations
 in <a href=\"modelica://FCSys\">FCSys</a>.</p>
 
 <p>Some units are defined that include prefixes (e.g., kg, mm, and kPa).  However,
 most prefixes must be given as explicit factors (e.g., <code>U.kilo*U.m</code>).</p>
 
-  <p>Although it is not necessary in the acausal language of <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
+  <p>Although it is not necessary due to the acausal nature of <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
   in this package are sorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href=\"http://www.python.org\">Python</a>, C).  In fact, this has been implemented in the
-
   included <a href=\"modelica://FCSys/Resources/Source/Python/doc/index.html\">FCRes</a> module for
   plotting and analysis.</p>
 

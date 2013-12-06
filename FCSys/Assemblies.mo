@@ -230,7 +230,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           a={0,0,0},
           T=333.13*U.K,
           p=U.from_kPag(48.3),
-          RH=0.6) "Environmental conditions"
+          RH=0.65) "Environmental conditions"
           annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
         replaceable Cell cell(inclN2=environment.psi_O2_dry < 1 - Modelica.Constants.eps)
@@ -241,40 +241,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         // Conditions
         Conditions.ByConnector.BoundaryBus.Single.Sink anBC[cell.n_y, cell.n_z]
-          (
-          each gas(
-            inclH2=true,
-            inclH2O=true,
-            H2(
-              redeclare function materialSpec =
-                  Conditions.ByConnector.Boundary.Single.Material.current,
-              materialSet(y=0),
-              redeclare function afterSpec =
-                  Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-              redeclare function beforeSpec =
-                  Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-            H2O(
-              redeclare function materialSpec =
-                  Conditions.ByConnector.Boundary.Single.Material.current,
-              materialSet(y=0),
-              redeclare function afterSpec =
-                  Conditions.ByConnector.Boundary.Single.Translational.velocity,
-
-              redeclare function beforeSpec =
-                  Conditions.ByConnector.Boundary.Single.Translational.velocity)),
-
-          each graphite('inclC+'=true, redeclare
+          (each graphite('inclC+'=true,redeclare
               Conditions.ByConnector.ThermalDiffusive.Single.Temperature 'C+'(
-                set(y=environment.T))),
-          each liquid(inclH2O=cell.inclLiq, H2O(
-              redeclare function materialSpec =
-                  Conditions.ByConnector.Boundary.Single.Material.current,
-              materialSet(y=0),
-              redeclare function thermalSpec =
-                  Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-              thermalSet(y=0))))
+                set(y=environment.T))))
           "Boundary condition for the anode end plate, except electrical"
           annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
@@ -315,24 +284,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               origin={-56,24})));
 
         Conditions.ByConnector.BoundaryBus.Single.Source caBC[cell.n_y, cell.n_z]
-          (
-          each gas(
-            inclH2O=true,
-            inclN2=cell.inclN2,
-            inclO2=true,
-            H2O(redeclare function thermalSpec =
-                  Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-                thermalSet(y=0)),
-            N2(redeclare function thermalSpec =
-                  Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-                thermalSet(y=0)),
-            O2(redeclare function thermalSpec =
-                  Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-                thermalSet(y=0))),
-          each graphite('inclC+'=true, 'C+'(set(y=environment.T))),
-          each liquid(inclH2O=cell.inclLiq, H2O(redeclare function thermalSpec
-                = FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-                thermalSet(y=0))))
+          (each graphite('inclC+'=true,'C+'(set(y=environment.T))))
           "Boundary condition for the cathode end plate, except electrical"
           annotation (Placement(transformation(
               extent={{10,10},{-10,-10}},
@@ -392,26 +344,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         TestConditions testConditions(I_ca=2*zI, I_an=1.5*zI) "Test conditions"
           annotation (Dialog, Placement(transformation(extent={{10,30},{30,50}})));
 
-      protected
-        Conditions.Router anRouter[cell.anFP.n_x, cell.n_z]
-          "Switch to route the anode for reverse flow" annotation (Dialog,
-            Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=0,
-              origin={-48,0})));
-        Conditions.Router caRouter[cell.anFP.n_x, cell.n_z]
-          "Switch to route the cathode for reverse flow" annotation (Dialog,
-            Placement(transformation(
-              extent={{10,-10},{-10,10}},
-              rotation=0,
-              origin={48,0})));
-
-        Connectors.RealInput p_N2_in[cell.caFP.n_x, cell.n_z](each unit=
-              "M/(L.T2)") "Pressure of N2 at inlet";
-        Connectors.RealInput p_N2_out[cell.caFP.n_x, cell.n_z](each unit=
-              "M/(L.T2)") "Pressure of N2 at outlet";
-
-      public
         replaceable Modelica.Electrical.Analog.Sources.RampCurrent load(
           duration=3600,
           startTime=60,
@@ -433,6 +365,25 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={10,-30})));
+
+        Conditions.Router anRouter[cell.anFP.n_x, cell.n_z]
+          "Switch to route the anode for reverse flow" annotation (Dialog,
+            Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=0,
+              origin={-48,0})));
+        Conditions.Router caRouter[cell.anFP.n_x, cell.n_z]
+          "Switch to route the cathode for reverse flow" annotation (Dialog,
+            Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=0,
+              origin={48,0})));
+
+      protected
+        Connectors.RealInput p_N2_in[cell.caFP.n_x, cell.n_z](each unit=
+              "M/(L.T2)") "Pressure of N2 at inlet";
+        Connectors.RealInput p_N2_out[cell.caFP.n_x, cell.n_z](each unit=
+              "M/(L.T2)") "Pressure of N2 at outlet";
 
       equation
         // Aliases
@@ -515,7 +466,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         connect(caAdapt.pin, load.p) annotation (Line(
-            points={{10,-34},{10,-50}},
+            points={{10,-34},{10,-42},{10,-42},{10,-50}},
             color={0,0,255},
             smooth=Smooth.None));
         annotation (

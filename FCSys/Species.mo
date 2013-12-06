@@ -199,11 +199,11 @@ package Species "Dynamic models of chemical species"
 then internal inductance is included using the relative permeability (&mu;<sup>*</sup>).</p>
 
     <p>Assumptions:<ol>
-          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to
-
+          <li>The fluidity is infinite.  All friction is by translational exchange with the
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
-          <li>The fluidity is infinite.  All friction is by translational exchange with the
+          <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to
+
           the substrate
           (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
@@ -676,7 +676,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Ionomer;
@@ -711,7 +710,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e11*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
 
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
@@ -1027,7 +1026,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1194,7 +1192,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       each stateSelect=StateSelect.never,
       each start=0) "Current";
     Q.Velocity phi_boundaries[n_trans, Side](
-      each nominal=10*U.cm/U.s,
+      each nominal=100*U.cm/U.s,
       each stateSelect=StateSelect.never,
       each start=0) "Normal velocities at the boundaries";
     Q.Force f[n_trans](
@@ -1518,12 +1516,10 @@ Choose any condition besides none.");
     // Material exchange
     for i in 1:n_chem loop
       if tauprime[i] > Modelica.Constants.small then
-        tauprime[i]*chemical[i].Ndot = (N + 1000*U.C)*exp((chemical[i].g - g)/T)
-           - N;
-        // **replace U.C with amount when full
+        tauprime[i]*chemical[i].Ndot = (N + U.C)*exp((chemical[i].g - g)/T) - N;
+        // **Use parameter for 1e-2*U.C.
       else
-        chemical[i].g = g
-          "**Simplified to avoid nonlinear equations in Dymola 2014";
+        chemical[i].g = g;
       end if;
     end for;
 
@@ -1793,8 +1789,9 @@ Choose any condition besides none.");
   model Solid "Base model for an inert, stationary solid"
 
     // Geometry
-    parameter Q.Number epsilon=0.25 "Volumetric fill fraction" annotation (
-        Dialog(group="Geometry", __Dymola_label="<html>&epsilon;</html>"));
+    parameter Q.NumberAbsolute epsilon=0.25 "Volumetric fill fraction"
+      annotation (Dialog(group="Geometry", __Dymola_label=
+            "<html>&epsilon;</html>"));
     extends Species(
       final N_IC,
       final V_IC=epsilon*product(L),
@@ -1956,7 +1953,7 @@ protected
       final start=T_IC,
       stateSelect=StateSelect.prefer) "Temperature";
     Q.Velocity phi[n_trans](
-      each nominal=10*U.cm/U.s,
+      each nominal=100*U.cm/U.s,
       each start=0,
       each stateSelect=StateSelect.prefer) "Velocity";
 
@@ -2285,16 +2282,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

@@ -5,6 +5,7 @@ package Phases "Mixtures of species"
   model Gas "Gas phase"
     import Modelica.Math.BooleanVectors.countTrue;
 
+    extends Icons.Phases.Gas;
     extends PartialPhase(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
 
     // Conditionally include species.
@@ -419,13 +420,13 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"
     import assert = FCSys.Utilities.assertEval;
     import Modelica.Math.BooleanVectors.countTrue;
 
+    extends Icons.Phases.Solid;
     extends PartialPhase(final n_spec=countTrue({'inclC+','incle-'}));
 
     // Conditionally include species.
@@ -717,6 +718,7 @@ package Phases "Mixtures of species"
   model Ionomer "Ionomer phase"
     import Modelica.Math.BooleanVectors.countTrue;
 
+    extends Icons.Phases.Solid;
     extends PartialPhase(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}),
         n_inter=1);
 
@@ -856,7 +858,7 @@ package Phases "Mixtures of species"
               {{-14,60},{6,80}}), iconTransformation(extent={{10,-50},{30,-30}})));
     Connectors.Chemical 'connH+'[1](each final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
-              {-54,60},{-34,80}}),iconTransformation(extent={{-30,-50},{-10,-30}})));
+              {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
 
     // Independence factors
     ExchangeParams common(k_Q=0) if n_spec > 0 "Among all species in the phase"
@@ -1095,6 +1097,7 @@ package Phases "Mixtures of species"
   end Ionomer;
 
   model Liquid "Liquid phase"
+    extends Icons.Phases.Liquid;
     extends PartialPhase(final n_spec=if inclH2O then 1 else 0);
 
     // Conditionally include species.
@@ -1160,22 +1163,12 @@ package Phases "Mixtures of species"
               -70}})));
     Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-40,40},{-20,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+              {{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
-
-    Chemistry.SurfaceTensionContact surfaceTension(
-      final n_trans=n_trans,
-      final V_w=V,
-      final V=product(L)) if inclH2O
-      "Effect of surface tension on chemical potential" annotation (Placement(
-          transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=90,
-          origin={-30,30})));
 
   equation
     // Chemical exchange
@@ -1234,12 +1227,8 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
-    connect(surfaceTension.nonwetting, connH2O[1]) annotation (Line(
-        points={{-30,36},{-30,50}},
-        color={255,195,38},
-        smooth=Smooth.None));
-    connect(surfaceTension.wetting, H2O.chemical[1]) annotation (Line(
-        points={{-30,30},{-30,20},{-14,20},{-14,-1}},
+    connect(H2O.chemical, connH2O) annotation (Line(
+        points={{-14,-1},{-14,20},{-30,20},{-30,30}},
         color={255,195,38},
         smooth=Smooth.None));
     annotation (
@@ -1255,7 +1244,6 @@ package Phases "Mixtures of species"
 protected
   partial model PartialPhase "Base model for a phase"
     import Modelica.Math.BooleanVectors.index;
-    // extends FCSys.Icons.Names.Middle;
 
     parameter Integer n_spec(start=0) "Number of species"
       annotation (HideResult=true);
@@ -1285,7 +1273,7 @@ protected
             "<html><i>k</i><sub>inter <i>Q</i></sub></html>"));
 
     // Auxiliary variables (for analysis)
-    output Q.Number epsilon=V/product(L) if n_spec > 0 and environment.analysis
+    output Q.NumberAbsolute epsilon=V/product(L) if n_spec > 0 and environment.analysis
       "Volumetric fill fraction";
 
   protected
@@ -1325,50 +1313,7 @@ protected
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>
 </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(
-              extent={{-40,100},{40,20}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{20,-4},{100,-84}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Ellipse(
-              extent={{-100,-4},{-20,-84}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={225,225,225}),Polygon(
-              points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{94.5,
-              -24},{60,-84}},
-              pattern=LinePattern.None,
-              fillPattern=FillPattern.Sphere,
-              smooth=Smooth.None,
-              fillColor={225,225,225},
-              lineColor={0,0,0}),Line(
-              points={{-60,-84.1},{60,-84.1}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{34.5,80},{94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{-34.5,80},{-94.5,-24}},
-              color={127,127,127},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              100}}), graphics),
       Diagram(graphics));
 
   end PartialPhase;

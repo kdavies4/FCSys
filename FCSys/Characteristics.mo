@@ -269,7 +269,6 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.SaturationPressure.mos"
             "Characteristics.Examples.SaturationPressure.mos"),
         __Dymola_experimentSetupOutput);
-
     end SaturationPressure;
 
     model Hydration
@@ -312,7 +311,6 @@ package Characteristics "Data and functions to correlate physical properties"
             "Characteristics.Examples.Hydration.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end Hydration;
 
     model CellPotential
@@ -428,7 +426,6 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.LatentHeat.mos"
             "Characteristics.Examples.LatentHeat.mos"),
         __Dymola_experimentSetupOutput);
-
     end LatentHeat;
 
     model SurfaceTension
@@ -467,7 +464,6 @@ package Characteristics "Data and functions to correlate physical properties"
         experiment(StopTime=10),
         Commands,
         __Dymola_experimentSetupOutput);
-
     end SurfaceTension;
 
   end Examples;
@@ -932,6 +928,20 @@ package Characteristics "Data and functions to correlate physical properties"
   Nafion&reg; EW 1100 series ionomer.</p></html>"));
     end lambda_eq;
 
+    function J2 "Leverett J function for H2O from [Wang2001]"
+      extends Modelica.Icons.Function;
+
+      input Q.NumberAbsolute s(max=1) "Liquid saturation"
+        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
+      output Real J "Result of Leverett correlation"
+        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
+
+    algorithm
+      J := 5 + 5*s;
+
+      annotation (Inline=true, Documentation(info="<html><p>
+    The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p></html>"));
+    end J2;
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"
