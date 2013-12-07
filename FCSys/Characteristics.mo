@@ -897,6 +897,20 @@ package Characteristics "Data and functions to correlate physical properties"
     The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p></html>"));
     end J;
 
+    function J_identity "Pass-through (1:1) Leverett J function"
+      extends Modelica.Icons.Function;
+
+      input Q.NumberAbsolute s(max=1) "Liquid saturation"
+        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
+      output Real J "Result of Leverett correlation"
+        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
+
+    algorithm
+      J := 1;
+
+      annotation (Inline=true);
+    end J_identity;
+
     function p_sat
       "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
       extends Modelica.Icons.Function;
@@ -928,20 +942,6 @@ package Characteristics "Data and functions to correlate physical properties"
   Nafion&reg; EW 1100 series ionomer.</p></html>"));
     end lambda_eq;
 
-    function J2 "Leverett J function for H2O from [Wang2001]"
-      extends Modelica.Icons.Function;
-
-      input Q.NumberAbsolute s(max=1) "Liquid saturation"
-        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
-      output Real J "Result of Leverett correlation"
-        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
-
-    algorithm
-      J := 5 + 5*s;
-
-      annotation (Inline=true, Documentation(info="<html><p>
-    The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p></html>"));
-    end J2;
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"

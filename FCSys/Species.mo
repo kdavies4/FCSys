@@ -20,8 +20,8 @@ package Species "Dynamic models of chemical species"
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(11.1*U.W));
 
         // Note:  Parameter expressions (e.g., nu=Data.nu(environment.T)) are not
-        // used here since they would render the parameters unadjustable in Dymola
-        // 2014.  This also applies to the other species.
+        // used here since they render the parameters unadjustable after translation
+        // in Dymola 2014.  This also applies to the other species.
 
         // See the documentation layer for a table of values for the specific heat
         // capacity and thermal resistivity.
@@ -229,7 +229,7 @@ then internal inductance is included according to the relative permeability (&mu
           final tauprime,
           final N0,
           n_chem=1,
-          sigma=0.083*U.S/U.cm);
+          sigma=8.3*U.S/U.m);
 
         // See the documentation for a table of values.
         annotation (
@@ -245,7 +245,7 @@ then internal inductance is included according to the relative permeability (&mu
           <a href=\"modelica://FCSys.Species.'SO3-'.Ionomer\">C19HF37O5S-</a>) is zero.</li>
     </ol></p>
 
-<p>The default electrical conductivity (&sigma; = <code>0.083*U.S/U.cm</code>)
+<p>The default electrical conductivity (&sigma; = <code>8.3*U.S/U.m</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
@@ -1109,6 +1109,9 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     output Q.PotentialAbsolute sT_chemical[n_chem](each stateSelect=StateSelect.never)
        = actualStream(chemical.sT) if environment.analysis and n_chem > 0
       "Specific entropy-temperature product of the chemical streams";
+    output Q.Temperature DeltaT[n_trans](each stateSelect=StateSelect.never) =
+      Delta(boundaries.T) if environment.analysis
+      "Differences in temperatures across the boundaries";
     output Q.Pressure Deltap[n_trans](each stateSelect=StateSelect.never) =
       Delta(boundaries.p) if environment.analysis
       "Differences in pressures across the boundaries";
@@ -1666,6 +1669,7 @@ Choose any condition besides none.");
   end Fluid;
 
   model Solid "Base model for an inert, stationary solid"
+    import FCSys.Utilities.Delta;
 
     // Geometry
     parameter Q.NumberAbsolute epsilon=0.25 "Volumetric fill fraction"
@@ -1697,13 +1701,13 @@ Choose any condition besides none.");
             "Formulation of the conservation equations"));
 
     // Auxiliary variables (for analysis)
-    // ----------------------------------
-    // Time constants
     output Q.TimeAbsolute tau_QT[n_trans](
       each stateSelect=StateSelect.never,
       each start=U.s) = N*c_v*theta*kL ./ Aprime if environment.analysis
       "Time constants for thermal transport (through the whole subregion)";
-
+    output Q.Temperature DeltaT[n_trans](each stateSelect=StateSelect.never) =
+      Delta(boundaries.T) if environment.analysis
+      "Differences in temperatures across the boundaries";
     Connectors.ThermalDiffusive boundaries[n_trans, Side](T(each start=T_IC))
       "Connectors for transport" annotation (Placement(transformation(extent={{
               -10,-10},{10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1749,6 +1753,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected

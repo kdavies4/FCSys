@@ -1304,11 +1304,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1655,4 +1655,12 @@ and Inert"),Line(
 
   end InternalFlow;
 
+  model TestStand
+    extends Assemblies.Cells.Examples.TestStand(testConditions(final I_an=
+            anStoich*zI, final I_ca=caStoich*zI));
+
+    parameter Q.NumberAbsolute anStoich=1.5 "Anode stoichiometric flow rate";
+    parameter Q.NumberAbsolute caStoich=2 "Cathode stoichiometric flow rate";
+
+  end TestStand;
 end Figures;

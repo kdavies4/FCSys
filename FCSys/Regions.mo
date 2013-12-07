@@ -25,42 +25,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
-        each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-          H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity)),
-
-        each graphite(
+          each graphite(
           'inclC+'=true,
           'incle-'=true,
           redeclare Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(set(y=environment.T)),
-          'e-'(materialSet(y=0))),
-        each liquid(inclH2O=true, H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+          'e-'(materialSet(y=0)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,0})));
@@ -139,7 +109,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog,Placement(
+            1.5*zI) "Test conditions" annotation (Dialog, Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anBC.boundary, anFP.xNegative) annotation (Line(
@@ -217,17 +187,37 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[anGDL.n_y, anGDL.n_z]
         (
-        each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(thermalSet(y=environment.T)),
-          H2O(thermalSet(y=environment.T))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(set(y=environment.T)),
           'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
-        each liquid(inclH2O=true, H2O(thermalSet(y=environment.T))))
+        each liquid(inclH2O=true, H2O(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)),
+
+        each gas(
+          inclH2=true,
+          inclH2O=true,
+          H2O(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force),
+
+          H2(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)))
         annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
@@ -570,15 +560,42 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          H2O(thermalSet(y=environment.T)),
-          N2(thermalSet(y=environment.T)),
-          O2(thermalSet(y=environment.T))),
+          H2O(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force),
+
+          N2(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force),
+
+          O2(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)),
+
         each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(set(y=environment.T)),
           'e-'(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
-        each liquid(inclH2O=true, H2O(thermalSet(y=environment.T))))
+        each liquid(inclH2O=true, H2O(
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)))
         annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
@@ -819,17 +836,35 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p_H2O),
-            thermalSet(y=environment.T)),
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force),
+
           N2(
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p*(1 - environment.psi_O2_dry)),
-            thermalSet(y=environment.T)),
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force),
+
           O2(
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.pressure,
             materialSet(y=environment.p_O2),
-            thermalSet(y=environment.T))),
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)),
+
         each graphite(
           'inclC+'=true,
           'incle-'=true,
@@ -839,7 +874,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=-currentSet.y),
             thermalSet(y=environment.T))),
-        each liquid(inclH2O=true,H2O(materialSet(y=0), thermalSet(y=environment.T))))
+        each liquid(inclH2O=true,H2O(
+            materialSet(y=0),
+            thermalSet(y=environment.T),
+            redeclare function afterSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force,
+
+            redeclare function beforeSpec =
+                FCSys.Conditions.ByConnector.Boundary.Single.Translational.force)))
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -920,52 +962,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink caBC[caFP.n_y, caFP.n_z](
-        each gas(
-          inclH2O=true,
-          inclN2=false,
-          inclO2=true,
-          H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-          N2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-          O2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity)),
-
-        each graphite(
+          each graphite(
           'inclC+'=true,
           'incle-'=true,
           redeclare Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(set(y=environment.T)),
-          'e-'(materialSet(y=0))),
-        each liquid(inclH2O=true, H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity)))
-        annotation (Placement(transformation(
+          'e-'(materialSet(y=0)))) annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
             origin={84,0})));
@@ -1060,7 +1062,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog,Placement(
+            1.5*zI) "Test conditions" annotation (Dialog, Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
 
@@ -1155,40 +1157,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       // Conditions
       Conditions.ByConnector.BoundaryBus.Single.Sink anBC[anFP.n_y, anFP.n_z](
-        each gas(
-          inclH2=true,
-          inclH2O=true,
-          H2(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity),
-
-          H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function afterSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity,
-            redeclare function beforeSpec =
-                Conditions.ByConnector.Boundary.Single.Translational.velocity)),
-
-        each graphite(
+          each graphite(
           'inclC+'=true,
           'incle-'=true,
           redeclare Conditions.ByConnector.ThermalDiffusive.Single.Temperature
             'C+'(set(y=environment.T)),
-          'e-'(materialSet(y=0))),
-        each liquid(inclH2O=inclLiq, H2O(
-            redeclare function materialSpec =
-                Conditions.ByConnector.Boundary.Single.Material.current,
-            materialSet(y=0),
-            redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-            thermalSet(y=0)))) annotation (Placement(transformation(
+          'e-'(materialSet(y=0)))) annotation (Placement(transformation(
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-84,0})));
@@ -1225,21 +1199,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             origin={-60,24})));
 
       Conditions.ByConnector.BoundaryBus.Single.Source caBC[caFP.n_y, caFP.n_z]
-        (
-        each gas(
-          inclH2O=true,
-          inclN2=true,
-          inclO2=true,
-          H2O(redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-              thermalSet(y=0)),
-          N2(redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-              thermalSet(y=0)),
-          O2(redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-              thermalSet(y=0))),
-        each graphite(
+        (each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(set(y=environment.T)),
@@ -1247,10 +1207,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.current,
             materialSet(y=-zI),
-            thermalSet(y=environment.T))),
-        each liquid(inclH2O=inclLiq, H2O(redeclare function thermalSpec =
-                Conditions.ByConnector.Boundary.Single.Thermal.heatRate,
-              thermalSet(y=0)))) annotation (Placement(transformation(
+            thermalSet(y=environment.T)))) annotation (Placement(transformation(
             extent={{10,10},{-10,-10}},
             rotation=90,
             origin={84,0})));
@@ -1296,9 +1253,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       Modelica.Blocks.Sources.Ramp currentSet(
         offset=U.mA,
-        height=100*U.A,
         startTime=50,
-        duration=600)
+        duration=600,
+        height=100*U.A)
         annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
 
     protected
@@ -1315,7 +1272,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog,Placement(
+            1.5*zI) "Test conditions" annotation (Dialog, Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1412,11 +1369,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
         inclTransZ=false,
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
-            common(k_Phi={100000000,inf,100}),
-            gasLiq(k_Phi={inf,1e4,inf},k_Q=inf),
+            common(k_Phi={1e7,inf,1e7},k_Q=1e5),
+            gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
-              k={epsilon/2,11,Modelica.Constants.eps},
+              k={epsilon/2,11,1/11},
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1436,13 +1393,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
+              k={epsilon/2,11,1/11},
               inclH2O=true,
-              k={epsilon/2,11,Modelica.Constants.eps},
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                epsilon_IC=1e-6)),
-            inclCapillary=false)) annotation (IconMap(primitivesVisible=false));
+                epsilon_IC=1e-5)),
+            volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
+            =false));
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.0625
         "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",
@@ -1458,7 +1416,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         each fixed=true) = subregions[:, 2:n_y, :].gas.H2.phi[2] if n_y > 1
         "Forced states for H2";
       // Note:  This avoids dynamic state selection in Dymola 2014.
-
 
       outer Conditions.Environment environment "Environmental conditions";
 
@@ -1684,18 +1641,19 @@ text layer of this model.</p>
         inclTransZ=false,
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
-            common(k_Phi={30,30,30}, k_Q=3),
-            gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+            common(k_Q=0),
+            gasLiq(k_Phi={2,2,2}, k_Q=inf),
             gas(
+              common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
               inclH2=true,
               inclH2O=true,
               H2(
+                initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 zeta=100*Characteristics.H2.Gas.zeta(),
-                final eta=0,
-                T(stateSelect=StateSelect.always)),
+                final eta=0),
               H2O(
                 initEnergy=Init.none,
                 upstreamX=false,
@@ -1709,12 +1667,19 @@ text layer of this model.</p>
               'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5,final
                   epsilon=1 - epsilon),
               'e-'(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
-            liquid(inclH2O=true, H2O(
+            liquid(
+              k=fill(epsilon^(-0.5), 3),
+              inclH2O=true,
+              H2O(
                 upstreamX=false,
-                epsilon_IC=1e-6,
+                epsilon_IC=1e-5,
                 final eta=0,
-                phi(each stateSelect=StateSelect.always, each fixed=true))),
-            kappa=6.46e-5*U.mm^2)) annotation (IconMap(primitivesVisible=false));
+                mu=100*Characteristics.H2O.Liquid.mu(),
+                phi(each stateSelect=StateSelect.always, each fixed=true),
+                each initEnergy=Init.none,
+                T(each stateSelect=StateSelect.default))))) annotation (IconMap(
+            primitivesVisible=false));
+
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
       // is necessary to produce the appropriate pressure loss down the channel.
@@ -1745,6 +1710,11 @@ that reference may be outdated).
   [<a href=\"modelica://FCSys.UsersGuide.References.Nitta2008\">Nitta2008</a>].  The default
   electrical conductivity
   is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].</p>
+
+<p>Default assumptions (may be adjusted):
+<ol>
+<li>All of the species have the same temperature, even in different phases.</li> 
+</ol></p>
 
 <p>For more information, please see the
     <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p></html>"),
@@ -2046,15 +2016,15 @@ that reference may be outdated).
         inclTransY=false,
         inclTransZ=false,
         redeclare replaceable model Subregion = Subregions.Subregion (
-            common(k_Phi={1000,1000,1000}, k_Q=1000),
-            gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+            common(k_Q=0),
+            gasLiq(k_Phi={2,2,2}, k_Q=inf),
             gas(
-              common(k_Phi={200,200,200}),
-              k=fill((epsilon)^(-0.5), 3),
+              common(k_Q=inf),
+              k=fill(epsilon^(-0.5), 3),
               inclH2=true,
               inclH2O=true,
               H2(
-                T(stateSelect=StateSelect.always),
+                initEnergy=Init.none,
                 upstreamX=false,
                 zeta=100*Characteristics.H2.Gas.zeta(),
                 phi(each stateSelect=StateSelect.always, each fixed=true)),
@@ -2071,26 +2041,33 @@ that reference may be outdated).
                     0.5*(1 - epsilon)),
               'e-'(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5)),
             ionomer(
-              k=fill(sqrt(0.5*(1 - epsilon)), 3),
+              k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'H+'(initEnergy=Init.none, sigma=60*U.S/U.m),
-              'SO3-'(epsilon=0.5*(1 - epsilon)),
+              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
+              'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
+                    stateSelect=StateSelect.default)),
               H2O(initEnergy=Init.none,phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
-            liquid(inclH2O=true, H2O(
+            liquid(
+              k=fill(epsilon^(-0.5), 3),
+              inclH2O=true,
+              H2O(
                 upstreamX=false,
-                epsilon_IC=1e-6,
-                phi(each stateSelect=StateSelect.always, each fixed=true))),
-            kappa=6.46e-6*U.mm^2),
+                epsilon_IC=1e-5,
+                phi(each stateSelect=StateSelect.always, each fixed=true),
+                each initEnergy=Init.none,
+                mu=100*Characteristics.H2O.Liquid.mu(),
+                T(each stateSelect=StateSelect.default))),
+            volume(kappa=6.46e-6*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.5 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -2118,6 +2095,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 
 <p>Default assumptions (may be adjusted):
 <ol>
+<li>All of the species have the same temperature, even in different phases.</li> 
 <li>Half of the solid is graphite and half is ionomer (by volume).</li>
 </ol></p>
 
@@ -2240,8 +2218,11 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       extends AnCLs.AnCL(
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
-        subregions(common(each k_Phi={0.4,0.4,0.4}),ionomer('H+'(each sigma=300
-                  *U.S/U.m))));
+        subregions(
+          common(each k_Phi={0.3,0.3,0.3}),
+          gas(H2(each final eta=0),H2O(each final eta=0)),
+          ionomer('H+'(each sigma=650*U.S/U.m)),
+          liquid(H2O(each final eta=0))));
 
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of
   <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and
@@ -2278,17 +2259,12 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(initEnergy=Init.none, sigma=60*U.S/U.m),
+              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
               H2O(initEnergy=Init.none,upstreamX=false))),
         subregions(ionomer('H+'(consTransX={{{if x > 1 or (y == 1 and z == 1)
                    then ConsTrans.steady else ConsTrans.dynamic for z in 1:n_z}
                   for y in 1:n_y} for x in 1:n_x})))) annotation (IconMap(
             primitivesVisible=false));
-
-      // Auxiliary variables (for analysis)
-      output Q.Force f_EOD[:]=sum(sum(sum(subregions[x, y, z].ionomer.H2O.intra[
-          2].mPhidot for x in 1:n_x) for y in 1:n_y) for z in 1:n_z) if
-        environment.analysis "Total force on H2O due to electro-osmotic drag";
 
     protected
       Q.Current I_states_1[:](
@@ -2525,23 +2501,23 @@ although in reality there is inductance.</p>
       // extends FCSys.Icons.Names.Top4;
 
       extends Region(
-        L_x={0.287}*U.mm,
+        L_x={28.7}*U.um,
         L_y={8}*U.cm,
         L_z={6.25}*U.cm,
         final inclTransX=true,
         inclTransY=false,
         inclTransZ=false,
         redeclare replaceable model Subregion = Subregions.Subregion (
-            common(k_Phi={1000,1000,1000}, k_Q=1000),
-            gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+            common(k_Q=0),
+            gasLiq(k_Phi={2,2,2}, k_Q=inf),
             gas(
-              common(k_Phi={200,200,200}),
+              common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
               H2O(
-                T(stateSelect=StateSelect.always),
+                initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 zeta=100*Characteristics.H2O.Gas.zeta()),
@@ -2565,26 +2541,33 @@ although in reality there is inductance.</p>
               'e-'(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5),
               'e-Transfer'(E_A=0.46*U.V)),
             ionomer(
+              k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              k=fill((0.5*(1 - epsilon))^(-0.5), 3),
-              'SO3-'(epsilon=0.5*(1 - epsilon)),
-              'H+'(initEnergy=Init.none, sigma=60*U.S/U.m),
+              'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
+                    stateSelect=StateSelect.default)),
+              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
               H2O(initEnergy=Init.none,phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
-            liquid(inclH2O=true, H2O(
+            liquid(
+              k=fill(epsilon^(-0.5), 3),
+              inclH2O=true,
+              H2O(
                 upstreamX=false,
-                epsilon_IC=1e-6,
-                phi(each stateSelect=StateSelect.always, each fixed=true))),
-            kappa=6.46e-6*U.mm^2),
+                epsilon_IC=1e-5,
+                phi(each stateSelect=StateSelect.always, each fixed=true),
+                each initEnergy=Init.none,
+                mu=100*Characteristics.H2O.Liquid.mu(),
+                T(each stateSelect=StateSelect.default))),
+            volume(kappa=6.46e-6*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.5 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.4 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -2622,6 +2605,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 
 <p>Default assumptions (may be adjusted):
 <ol>
+<li>All of the species have the same temperature, even in different phases.</li> 
 <li>Half of the solid is graphite and half is ionomer (by volume).</li>
 </ol></p>
 
@@ -2736,14 +2720,18 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               textString="%name",
               visible=not inclTransY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
       extends CaCLs.CaCL(
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
-        subregions(common(each k_Phi={0.4,0.4,0.4}),ionomer('H+'(each sigma=300
-                  *U.S/U.m))));
+        subregions(
+          common(each k_Phi={0.3,0.3,0.3}),
+          gas(H2(each final eta=0),H2O(each final eta=0)),
+          ionomer('H+'(each sigma=650*U.S/U.m)),
+          liquid(H2O(each final eta=0))));
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of
   <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and
   <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a>.</p>
@@ -2775,19 +2763,20 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
         inclTransZ=false,
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
-            common(k_Phi={30,30,30}, k_Q=3),
-            gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+            common(k_Q=0),
+            gasLiq(k_Phi={2,2,2}, k_Q=inf),
             gas(
+              common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
               inclH2O=true,
               inclN2=true,
               inclO2=true,
               H2O(
+                initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 zeta=100*Characteristics.H2O.Gas.zeta(),
-                final eta=0,
-                T(stateSelect=StateSelect.always)),
+                final eta=0),
               N2(
                 initEnergy=Init.none,
                 upstreamX=false,
@@ -2807,12 +2796,19 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,final epsilon=1
                      - epsilon),
               'e-'(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
-            liquid(inclH2O=true, H2O(
+            liquid(
+              k=fill(epsilon^(-0.5), 3),
+              inclH2O=true,
+              H2O(
                 upstreamX=false,
-                epsilon_IC=1e-6,
+                epsilon_IC=1e-5,
                 final eta=0,
-                phi(each stateSelect=StateSelect.always, each fixed=true)))))
-        annotation (IconMap(primitivesVisible=false));
+                phi(each stateSelect=StateSelect.always, each fixed=true),
+                each initEnergy=Init.none,
+                mu=100*Characteristics.H2O.Liquid.mu(),
+                T(each stateSelect=StateSelect.default))))) annotation (IconMap(
+            primitivesVisible=false));
+
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
       // is necessary to produce the appropriate pressure loss down the channel.
@@ -2843,6 +2839,11 @@ that reference may be outdated).
   [<a href=\"modelica://FCSys.UsersGuide.References.Nitta2008\">Nitta2008</a>].  The default
   electrical conductivity
   is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].</p>
+
+<p>Default assumptions (may be adjusted):
+<ol>
+<li>All of the species have the same temperature, even in different phases.</li> 
+</ol></p>
 
 <p>For more information, please see the
     <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
@@ -3150,11 +3151,11 @@ that reference may be outdated).
         inclTransZ=false,
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
-            common(k_Phi={100000000,inf,100}),
-            gasLiq(k_Phi={inf,1e4,inf},k_Q=inf),
+            common(k_Phi={1e7,inf,1e7},k_Q=1e5),
+            gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
-              k={epsilon/2,11,Modelica.Constants.eps},
+              k={epsilon/2,11,1/11},
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -3180,13 +3181,14 @@ that reference may be outdated).
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
+              k={epsilon/2,11,1/11},
               inclH2O=true,
-              k={epsilon/2,11,Modelica.Constants.eps},
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                epsilon_IC=1e-6)),
-            inclCapillary=false)) annotation (IconMap(primitivesVisible=false));
+                epsilon_IC=1e-5)),
+            volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
+            =false));
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.0625
         "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",

@@ -121,8 +121,9 @@ package UsersGuide "User's Guide"
   package SampleResults "Sample results"
     extends Modelica.Icons.Information;
 
-    // TODO:  Used hashed (anchored) bookmarks once they are supported in Dymola (doesn't work in Dymola 2014;
-    // causes the link to fail entirely).
+    // TODO:  Used hashed (anchored) bookmarks once they are supported in
+    // Dymola (doesn't work in Dymola 2014; causes the link to fail
+    // entirely).
 
     class Basic "Basic"
       extends Modelica.Icons.Information;

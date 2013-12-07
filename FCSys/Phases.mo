@@ -569,7 +569,7 @@ package Phases "Mixtures of species"
     Connectors.InertNode commonExch
       "Connector for exchange among all species in the phase"
       annotation (Placement(transformation(extent={{36,-78},{56,-58}})));
-    Connectors.DaltonNode dalton(final V=V)
+    Connectors.DaltonNode dalton(final V=V) if n_spec > 0
       "Internal node for additivity of volume"
       annotation (Placement(transformation(extent={{-39,4},{-19,24}})));
 
@@ -920,7 +920,7 @@ package Phases "Mixtures of species"
           transformation(extent={{56,-74},{76,-54}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
 
-    Connectors.DaltonNode dalton(final V=V)
+    Connectors.DaltonNode dalton(final V=V) if n_spec > 0
       "Internal node for additivity of volume"
       annotation (Placement(transformation(extent={{-59,46},{-39,66}})));
   equation

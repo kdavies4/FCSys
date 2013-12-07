@@ -179,10 +179,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandSimple.mos"
               "Assemblies.Cells.Examples.TestStandSimple.mos"),
-          experiment(
-            StopTime=3650,
-            Tolerance=1e-005,
-            __Dymola_Algorithm="Dassl"),
+          experiment(StopTime=3650, __Dymola_Algorithm="Dassl"),
           __Dymola_experimentSetupOutput);
 
       end TestStandSimple;
@@ -353,7 +350,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           duration=3600,
           startTime=60,
           I=150,
-          offset=0.001) constrainedby
+          offset=0.0001) constrainedby
           Modelica.Electrical.Analog.Interfaces.TwoPin "Electrical load"
           annotation (Placement(transformation(extent={{10,-60},{-10,-40}})));
         Modelica.Electrical.Analog.Basic.Ground ground
@@ -514,19 +511,27 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model TestStandCycle
         "Simulate the fuel cell under prescribed conditions, with cyclical load"
-        extends TestStand(redeclare
-            Modelica.Electrical.Analog.Sources.SineCurrent load(
-            I=48,
-            freqHz=0.5,
-            offset=50,
-            startTime=5));
-        annotation (experiment(
-            StopTime=8,
+        extends TestStand(
+          cell(anCL(subregions(graphite(each inclDL=true, 'e-Transfer'(each
+                      fromI=false)))), caCL(subregions(graphite(each inclDL=
+                      true, 'e-Transfer'(each fromI=false))))),
+          redeclare Modelica.Electrical.Analog.Sources.SineCurrent load(
+            I=10,
+            freqHz=0.2,
+            offset=5,
+            startTime=60),
+          testConditions(I_an=15*U.A, I_ca=20*U.A));
+
+        annotation (
+          experiment(
+            StopTime=75,
             __Dymola_NumberOfIntervals=5000,
-            Tolerance=1e-006,
-            __Dymola_Algorithm="Dassl"), Commands(file=
+            Tolerance=1e-005,
+            __Dymola_Algorithm="Dassl"),
+          Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandCycle.mos"
-              "Assemblies.Cells.Examples.TestStandCycle.mos"));
+              "Assemblies.Cells.Examples.TestStandCycle.mos"),
+          __Dymola_experimentSetupOutput);
 
       end TestStandCycle;
 
@@ -552,6 +557,33 @@ package Assemblies "Combinations of regions (e.g., cells)"
             __Dymola_experimentSetupOutput);
       end TestStandLinearize;
 
+      model TestStandSegmented
+        "Simulate the fuel cell with multiple segments in the y direction"
+
+        parameter Integer n_y=6 "Number of segments in the direction"
+          annotation (Dialog(group="Geometry", __Dymola_label=
+                "<html><i>n</i><sub>y</sub></html>"));
+
+        extends TestStand(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
+            environment(analysis=false));
+        annotation (experiment(
+            StopTime=3660,
+            Tolerance=1e-005,
+            __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput);
+      end TestStandSegmented;
+
+      model TestStandSegmentedFixedFlow
+        "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
+        extends TestStandSegmented(testConditions(I_an=flowSet.y, I_ca=flowSet.y),
+            load(startTime=120));
+        Modelica.Blocks.Sources.Ramp flowSet(
+          height=100*U.A,
+          duration=60,
+          offset=0.1*U.mA,
+          startTime=60)
+          "Specify the equivalent currents of the reactant supplies"
+          annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+      end TestStandSegmentedFixedFlow;
     end Examples;
     extends Modelica.Icons.Package;
 
@@ -858,9 +890,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
         final L_z=L_z,
         subregions(
           common(each k_Q=0),
-          gas(common(each k_Q=inf),H2(each initEnergy=Init.none,T(each
+          gas(common(each k_Q=inf), H2(each initEnergy=Init.none, T(each
                   stateSelect=StateSelect.default))),
-          liquid(each inclH2O=inclLiq, H2O(each initEnergy=Init.none,T(each
+          liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none,T(each
                   stateSelect=StateSelect.default))))) "Anode flow plate"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -870,14 +902,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.AnCLs.AnCGDL anCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(
-          common(each k_Q=0),
-          gas(common(each k_Q=inf),H2(each initEnergy=Init.none,T(each
-                  stateSelect=StateSelect.default))),
-          ionomer('SO3-'(T(each fixed=false,each stateSelect=StateSelect.default))),
-
-          liquid(each inclH2O=inclLiq, H2O(each initEnergy=Init.none,T(each
-                  stateSelect=StateSelect.default)))))
+        subregions(liquid(each inclH2O=inclLiq)))
         "Anode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{-40,-20},{-20,0}})));
 
@@ -889,17 +914,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.CaCLs.CaCGDL caCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(
-          common(each k_Q=0),
-          gas(
-            common(each k_Q=inf),
-            each inclN2=inclN2,
-            H2O(each initEnergy=Init.none,T(each stateSelect=StateSelect.default))),
-
-          ionomer('SO3-'(T(each fixed=false,each stateSelect=StateSelect.default))),
-
-          liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none,T(each
-                  stateSelect=StateSelect.default)))))
+        subregions(gas(each inclN2=inclN2), liquid(each inclH2O=inclLiq)))
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{0,-20},{20,0}})));
 

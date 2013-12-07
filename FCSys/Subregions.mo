@@ -3,9 +3,7 @@ package Subregions
   "Control volumes with multi-species transport, storage, and exchange"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
-    // TODO:  In the documentation of each model:
-    //   1. Insert the sample plots or link to the sample results of the User's Guide.
-    //   2. Add discussion from the dissertation.
+
     package PhaseChange "Examples of phase change"
       extends Modelica.Icons.ExamplesPackage;
       model Condensation
@@ -349,6 +347,7 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end AirColumn;
 
     model BinaryDiffusion
@@ -697,6 +696,7 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -1001,31 +1001,6 @@ package Subregions
     Phases.ExchangeParams gasLiq "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
-    // Capillary pressure
-    parameter Boolean inclCapillary=true if liquid.n_spec > 0
-      "Include capillary pressure" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        group="Capillary pressure",
-        compact=true,
-        enable=liquid.n_spec > 0));
-    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m if liquid.n_spec > 0
-      "Surface tension" annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&gamma;</html>",
-        enable=inclCapillary));
-    parameter Q.Area kappa=6.46e-5*U.mm^2 if liquid.n_spec > 0 "Permeability"
-      annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&kappa;</html>",
-        enable=inclCapillary));
-    parameter Q.Angle theta=140*U.degree if liquid.n_spec > 0 "Contact angle"
-      annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&theta;</html>",
-        enable=inclCapillary));
-
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
             extent={{-120,-40},{-100,-20}}), iconTransformation(extent={{-110,-10},
@@ -1055,13 +1030,9 @@ package Subregions
       final V=V,
       final inclGas=gas.n_spec > 0,
       final inclLiquid=liquid.n_spec > 0,
-      final inclSolid=graphite.n_spec + ionomer.n_spec > 0,
-      final inclCapillary=inclCapillary,
-      final gamma=gamma,
-      final kappa=kappa,
-      final theta=theta) if gas.n_spec + liquid.n_spec > 0
-      "Volume with capillary pressure included" annotation (Dialog, Placement(
-          transformation(extent={{-24,-80},{-4,-60}})));
+      final inclSolid=graphite.n_spec + ionomer.n_spec > 0) if gas.n_spec +
+      liquid.n_spec > 0 "Volume with capillary pressure included" annotation (
+        Dialog, Placement(transformation(extent={{-24,-80},{-4,-60}})));
 
   protected
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
@@ -1343,8 +1314,8 @@ on diagram)")}));
               -40,-40}})));
 
   equation
-    // Boundaries and mixing
-    // ---------------------
+    // Boundaries
+    // ----------
     // Ionomer
 
     connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
@@ -1394,6 +1365,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
               60}}), graphics));
+
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1430,31 +1402,6 @@ on diagram)")}));
     Phases.ExchangeParams gasLiq "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
-    // Capillary pressure
-    parameter Boolean inclCapillary=true if liquid.n_spec > 0
-      "Include capillary pressure" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        group="Capillary pressure",
-        compact=true,
-        enable=liquid.n_spec > 0));
-    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m if liquid.n_spec > 0
-      "Surface tension" annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&gamma;</html>",
-        enable=inclCapillary));
-    parameter Q.Area kappa=6.46e-5*U.mm^2 if liquid.n_spec > 0 "Permeability"
-      annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&kappa;</html>",
-        enable=inclCapillary));
-    parameter Q.Angle theta=140*U.degree if liquid.n_spec > 0 "Contact angle"
-      annotation (Dialog(
-        group="Capillary pressure",
-        __Dymola_label="<html>&theta;</html>",
-        enable=inclCapillary));
-
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
             extent={{-100,-40},{-80,-20}}), iconTransformation(extent={{-110,-10},
@@ -1483,11 +1430,7 @@ on diagram)")}));
       final V=V,
       final inclGas=gas.n_spec > 0,
       final inclLiquid=liquid.n_spec > 0,
-      final inclSolid=graphite.n_spec > 0,
-      final inclCapillary=inclCapillary,
-      final gamma=gamma,
-      final kappa=kappa,
-      final theta=theta) if gas.n_spec + liquid.n_spec > 0
+      final inclSolid=graphite.n_spec > 0) if gas.n_spec + liquid.n_spec > 0
       "Volume with capillary pressure included"
       annotation (Placement(transformation(extent={{-4,-80},{16,-60}})));
 

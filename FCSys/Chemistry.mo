@@ -632,9 +632,9 @@ public
         group="Material properties",
         __Dymola_label="<html>&theta;</html>",
         enable=inclLiquid and inclCapillary));
-    replaceable function J = FCSys.Characteristics.H2O.J2 "Leverett J function"
-      annotation (choicesAllMatching=true, Dialog(group="Material properties",
-          enable=inclLiquid and inclCapillary));
+    replaceable function J = FCSys.Characteristics.H2O.J_identity
+      "Leverett J function" annotation (choicesAllMatching=true, Dialog(group=
+            "Material properties", enable=inclLiquid and inclCapillary));
 
     // Material properties
     parameter Boolean inclGas=true "Gas" annotation (
@@ -749,6 +749,7 @@ public
             smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));

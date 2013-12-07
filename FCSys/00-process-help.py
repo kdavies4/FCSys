@@ -66,7 +66,10 @@ rpls = [
 .*
 .*ModelicaLicense2.*""", ""),
     # Add the sidebar.
-    ('<body><p>', """<body>
+    ('<div class="body">>', """<div class="body">"""),
+    ("""<body>
+
+""", """<body>
 <div class="sidebar">
   <div class="sidebarwrapper">
   <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
