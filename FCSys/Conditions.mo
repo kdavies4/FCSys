@@ -391,14 +391,14 @@ package Conditions "Models to specify and measure operating conditions"
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
                 100,100}}), graphics={Line(
-                  points={{-30,0},{30,0}},
-                  color={47,107,251},
-                  smooth=Smooth.None),Polygon(
-                  points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                  lineColor={47,107,251},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+              points={{-30,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None), Polygon(
+              points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+              lineColor={47,107,251},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
     end AmagatDalton;
 
     model ChemicalReaction
@@ -910,27 +910,30 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,0,255},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={Line(
-                      points={{-30,0},{-20,0}},
-                      color={127,127,127},
-                      visible='incle-' or 'inclC+',
-                      smooth=Smooth.None),Line(
-                      points={{10,0},{40,0}},
-                      color={0,0,255},
-                      visible='incle-',
-                      smooth=Smooth.None),Polygon(
-                      points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                      lineColor={0,0,255},
-                      visible='incle-',
-                      smooth=Smooth.None,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid),Line(
-                      points={{-40,0},{-20,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5)}), Diagram(coordinateSystem(
-                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-              graphics));
+        annotation (Icon(graphics={
+              Line(
+                points={{-30,0},{-20,0}},
+                color={127,127,127},
+                visible='incle-' or 'inclC+',
+                smooth=Smooth.None),
+              Line(
+                points={{10,0},{40,0}},
+                color={0,0,255},
+                visible='incle-',
+                smooth=Smooth.None),
+              Polygon(
+                points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                lineColor={0,0,255},
+                visible='incle-',
+                smooth=Smooth.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Line(
+                points={{-40,0},{-20,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=
+                  false, extent={{-100,-100},{100,100}}), graphics));
       end Electronic;
 
       package Phases "Adapters for material phases"
@@ -3632,11 +3635,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191},
-                  lineThickness=0.5)}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191},
+              lineThickness=0.5)}));
 
     end BoundaryBus;
 
@@ -4847,10 +4850,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={191,191,191})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={191,191,191})}));
 
     end Boundary;
 
@@ -4898,65 +4901,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
-                  100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={225,225,225},
-                      fillPattern=FillPattern.Solid),Line(
-                      points={{60,60},{20,20}},
-                      color={0,0,0},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-60,20},{20,20},{20,-60}},
-                      color={0,0,0},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None)}),
+                  100,100}}), graphics={
+              Polygon(
+                points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{
+                    -60,-60}},
+                lineColor={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                fillColor={225,225,225},
+                fillPattern=FillPattern.Solid),
+              Line(
+                points={{60,60},{20,20}},
+                color={0,0,0},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-60,20},{20,20},{20,-60}},
+                color={0,0,0},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
       end VolumeFixed;
 
-      model Void "Model to establish a zero pressure"
-        extends FCSys.Icons.Names.Top3;
-
-        Connectors.Amagat amagat "Connector for additivity of volume"
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
-              iconTransformation(extent={{-10,-10},{10,10}})));
-
-      equation
-        amagat.p = 0;
-
-        annotation (
-          defaultComponentName="volume",
-          Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector that imposes
-    additivity of volume.  In order to use additivity of pressure, use
-    the <a href=\"modelica://FCSys.Conditions.Adapters.AmagatDalton\">AmagatDalton</a> adapter.</p>
-
-    <p>See also the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-          Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{
-                  100,100}}), graphics={Polygon(
-                      points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,
-                  -60},{-60,-60}},
-                      lineColor={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid),Line(
-                      points={{60,60},{20,20}},
-                      color={0,0,0},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-60,20},{20,20},{20,-60}},
-                      color={0,0,0},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None)}),
-          Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
-                  {100,100}}), graphics));
-      end Void;
 
       partial model Partial "Base model for a pressure/volume"
 
@@ -5021,15 +4988,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={47,107,251},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={47,107,251},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
     end Amagat;
 
@@ -5116,10 +5083,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               graphics));
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={11,43,197},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={47,107,251})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={11,43,197},
+              fillPattern=FillPattern.Solid,
+              fillColor={47,107,251})}));
 
     end Dalton;
 
@@ -5619,10 +5586,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end ThermalDiffusive;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={221,23,47})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={221,23,47})}));
 
     end Inter;
 
@@ -5970,10 +5937,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Component;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end Translational;
 
@@ -6162,10 +6129,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Single;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={127,127,127},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255})}));
 
     end ThermalDiffusive;
 
@@ -6298,10 +6265,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (defaultComponentName="chemical");
       end Partial;
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,195,38})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,195,38})}));
 
     end Chemical;
 
@@ -6951,15 +6918,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end ThermalAdvective;
 
       annotation (Icon(graphics={Ellipse(
-                  extent={{-60,60},{60,-60}},
-                  lineColor={239,142,1},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255}),Ellipse(
-                  extent={{-30,30},{30,-30}},
-                  fillColor={255,195,38},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0})}));
+              extent={{-60,60},{60,-60}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}), Ellipse(
+              extent={{-30,30},{30,-30}},
+              fillColor={255,195,38},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
     end Reaction;
     annotation (Documentation(info="<html>
@@ -7023,45 +6990,54 @@ record is not defined.  For simulation, drag FCSys.Conditions.Environment into
 your model to specify global conditions and defaults.  Otherwise, the default
 settings will be used.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-80,60},{80,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,213,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(
-              points={{-40,-20},{-30,-28},{-10,-50},{-10,-50},{16,-12},{40,0}},
-              color={0,0,0},
-              smooth=Smooth.Bezier),Ellipse(
-              extent={{32,8},{48,-8}},
-              pattern=LinePattern.None,
-              lineColor={170,213,255},
-              fillColor={50,50,50},
-              fillPattern=FillPattern.Sphere),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash),Line(points={{-70,-60},{70,-60}}, color
-            ={0,0,0}),Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),Line(
-            points={{2,-90},{32,-60}}, color={0,0,0}),Line(points={{36,-90},{66,
-            -60}}, color={0,0,0}),Line(points={{-32,-90},{-2,-60}}, color={0,0,
-            0})}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,213,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-100}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(
+            points={{-40,-20},{-30,-28},{-10,-50},{-10,-50},{16,-12},{40,0}},
+            color={0,0,0},
+            smooth=Smooth.Bezier),
+          Ellipse(
+            extent={{32,8},{48,-8}},
+            pattern=LinePattern.None,
+            lineColor={170,213,255},
+            fillColor={50,50,50},
+            fillPattern=FillPattern.Sphere),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0})}));
 
   end Environment;
 
@@ -7136,49 +7112,57 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={225,225,225},
-              thickness=0.5,
-              smooth=Smooth.Bezier,
-              pattern=LinePattern.Dash),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={225,225,225},
-              thickness=0.5,
-              smooth=Smooth.Bezier,
-              pattern=LinePattern.Dash),Line(
-              points={{-82,40},{78,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-82,40},{78,40}},
-              color={225,225,225},
-              visible=crossOver,
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={225,225,225},
-              visible=crossOver,
-              smooth=Smooth.None,
-              thickness=0.5,
-              pattern=LinePattern.Dash),Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={225,225,225},
+            thickness=0.5,
+            smooth=Smooth.Bezier,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={225,225,225},
+            thickness=0.5,
+            smooth=Smooth.Bezier,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-82,40},{78,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-82,40},{78,40}},
+            color={225,225,225},
+            visible=crossOver,
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={225,225,225},
+            visible=crossOver,
+            smooth=Smooth.None,
+            thickness=0.5,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

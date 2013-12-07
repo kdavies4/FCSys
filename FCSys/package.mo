@@ -126,7 +126,7 @@ package UsersGuide "User's Guide"
 
     class Basic "Basic"
       extends Modelica.Icons.Information;
-      // **Recreate the plots using the Python script.
+      // TODO:  Recreate the plots using the Python script.
 
       annotation (preferredView="info", Documentation(info="<html>
 
@@ -175,7 +175,7 @@ package UsersGuide "User's Guide"
     class Cell "Cell-level"
       extends Modelica.Icons.Information;
 
-      // **Add various polarization curves.
+      // TODO:  Add various polarization curves, update the existing plot.
 
       annotation (preferredView="info", Documentation(info="<html>
   
@@ -963,7 +963,22 @@ action. This section shall survive the termination of this License.</p>
 
   end UsersGuide;
 
-// **Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
+// TODO:  Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

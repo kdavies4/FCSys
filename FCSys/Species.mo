@@ -98,10 +98,12 @@ package Species "Dynamic models of chemical species"
       model Fixed "Fixed properties"
         extends Solid(
           redeclare replaceable package Data = Characteristics.'SO3-'.Ionomer,
-          redeclare parameter Q.Mobility mu=Data.mu(),
+          redeclare parameter Q.Mobility mu=Modelica.Constants.small*U.C*U.s/U.g,
+
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
-
+        // Note:  Mobility is small but not zero to prevent a singularity when SO3-
+        // and C+ are both present (e.g., in the catalyst layers).
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'SO3-'",
@@ -142,6 +144,9 @@ package Species "Dynamic models of chemical species"
           final consTransY=ConsTrans.steady,
           final consTransZ=ConsTrans.steady,
           final consEnergy=ConsThermo.steady,
+          final zeta=0,
+          final eta=Modelica.Constants.inf,
+          final theta=Modelica.Constants.inf,
           final N_IC,
           final p_IC,
           final h_IC,
@@ -150,12 +155,10 @@ package Species "Dynamic models of chemical species"
           final g_IC,
           final T_IC,
           final nu=1,
-          final n_chem=1,
           final tauprime={0},
-          final zeta=0,
-          final kL=fill(Data.d*mustar*N/4, n_trans),
-          final eta=Modelica.Constants.inf,
-          final theta=Modelica.Constants.inf);
+          final N0,
+          final n_chem=1,
+          final kL=fill(Data.d*mustar*N/4, n_trans));
 
         parameter Q.NumberAbsolute mustar=1 "Relative permeability" annotation
           (Dialog(group="Material properties", __Dymola_label=
@@ -213,7 +216,9 @@ then internal inductance is included according to the relative permeability (&mu
           consTransX=ConsTrans.steady,
           consTransY=ConsTrans.steady,
           consTransZ=ConsTrans.steady,
+          final zeta=0,
           final N_IC,
+          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
           final p_IC,
           final h_IC,
           final V_IC,
@@ -221,10 +226,9 @@ then internal inductance is included according to the relative permeability (&mu
           final g_IC,
           final T_IC,
           final nu=1,
-          n_chem=1,
-          final zeta=0,
           final tauprime,
-          redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+          final N0,
+          n_chem=1,
           sigma=0.083*U.S/U.cm);
 
         // See the documentation for a table of values.
@@ -329,6 +333,7 @@ then internal inductance is included according to the relative permeability (&mu
           redeclare parameter Q.Fluidity eta=1/(8.96e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.183*U.W),
           final tauprime,
+          final N0,
           n_chem=1,
           p_IC=environment.p_dry);
 
@@ -409,14 +414,15 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
                 b_v=[1], n_v={-1,0}),
-          final tauprime,
-          n_chem=3,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(9.09e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W),
 
+          final tauprime,
+          final N0,
+          n_chem=3,
           p_IC=environment.p_H2O);
 
         // See the documentation for tables of values.
@@ -557,8 +563,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Ionomer,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={2e12*Data.tauprime()},
-
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Fluidity eta=Data.eta(),
@@ -571,6 +575,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final V_IC,
           final T_IC,
           final consMaterial,
+          redeclare parameter Q.TimeAbsolute tauprime[:]={2e12*Data.tauprime()},
           n_chem=1,
           final initMaterial=Init.none);
 
@@ -595,6 +600,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Ionomer;
@@ -611,8 +617,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
         extends Fluid(
           redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
-
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           final zeta=0,
@@ -624,6 +628,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final g_IC,
           final rho_IC,
           final p_IC,
+          redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
           n_chem=1,
           final V_IC=epsilon_IC*product(L),
           initMaterial=Init.volume);
@@ -740,14 +745,15 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
               B_c=[Data.Deltah0_f - (1041*U.J*Data.m/U.kg)*298.15, 191.610*U.J/
                   (U.mol*U.K) - (1041*U.J*Data.m/(U.kg*U.K))*log(298.15*U.K)]),
 
-          final tauprime,
-          n_chem=0,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(17.82e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W),
 
+          final tauprime,
+          final N0,
+          n_chem=0,
           p_IC=environment.p_dry - environment.p_O2);
 
         // See the documentation for a table of values.
@@ -819,13 +825,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                 b_v=[1], n_v={-1,0}),
-          final tauprime,
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Continuity zeta=Data.zeta(),
           redeclare parameter Q.Fluidity eta=1/(20.72e-6*U.Pa*U.s),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W),
 
+          final tauprime,
+          final N0,
           n_chem=1,
           p_IC=environment.p_O2);
 
@@ -893,6 +900,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
+
       end Fixed;
 
     end Gas;
@@ -1052,6 +1060,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         tab="Assumptions",
         group="Flow conditions",
         __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
+
+    // Advanced parameters
+    parameter Q.Amount N0=U.C "Nominal amount of material to prevent depletion"
+      annotation (Dialog(tab="Advanced", __Dymola_label=
+            "<html><i>N</i><sup>o</sup></html>"));
 
     // Aliases (for common terms)
     Q.Current I[n_trans](
@@ -1383,8 +1396,7 @@ Choose any condition besides none.");
     // Material exchange
     for i in 1:n_chem loop
       if tauprime[i] > Modelica.Constants.small then
-        tauprime[i]*chemical[i].Ndot = (N + U.C)*exp((chemical[i].g - g)/T) - N;
-        // **Use parameter for 1e-2*U.C.
+        tauprime[i]*chemical[i].Ndot = (N + N0)*exp((chemical[i].g - g)/T) - N;
       else
         chemical[i].g = g;
       end if;
@@ -2148,16 +2160,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

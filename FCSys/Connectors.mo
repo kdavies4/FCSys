@@ -545,13 +545,13 @@ package Connectors "Declarative and imperative interfaces"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,50},{100,0},{0,-50},{0,50}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,50},{200,90}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -670,13 +670,13 @@ package Connectors "Declarative and imperative interfaces"
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-100,50},{0,0},{-100,-50},{-100,50}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,50},{200,90}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one output signal of type <code>Real</code>.</p>
 </html>"));

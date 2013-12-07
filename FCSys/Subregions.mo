@@ -966,17 +966,19 @@ package Subregions
       final n_trans=n_trans,
       'incle-Transfer'=inclHOR or inclORR,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q}) "Graphite" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{10,-22},
-              {30,-2}})));
+      final k_inter_Q={common.k_Q},
+      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Graphite" annotation (
+        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
+            ={{10,-22},{30,-2}})));
 
     FCSys.Phases.Ionomer ionomer(
       n_inter=1,
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q}) "Ionomer" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{50,-22},
-              {70,-2}})));
+      final k_inter_Q={common.k_Q},
+      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Ionomer" annotation (
+        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
+            ={{50,-22},{70,-2}})));
 
     FCSys.Phases.Liquid liquid(
       n_inter=2,
@@ -1057,8 +1059,9 @@ package Subregions
       final inclCapillary=inclCapillary,
       final gamma=gamma,
       final kappa=kappa,
-      final theta=theta) "Volume with capillary pressure included" annotation (
-        Dialog, Placement(transformation(extent={{-24,-80},{-4,-60}})));
+      final theta=theta) if gas.n_spec + liquid.n_spec > 0
+      "Volume with capillary pressure included" annotation (Dialog, Placement(
+          transformation(extent={{-24,-80},{-4,-60}})));
 
   protected
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
@@ -1408,9 +1411,10 @@ on diagram)")}));
       n_inter=1,
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q}) "Graphite" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{30,-22},
-              {50,-2}})));
+      final k_inter_Q={common.k_Q},
+      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Graphite" annotation (
+        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
+            ={{30,-22},{50,-2}})));
 
     FCSys.Phases.Liquid liquid(
       n_inter=2,
@@ -1483,7 +1487,8 @@ on diagram)")}));
       final inclCapillary=inclCapillary,
       final gamma=gamma,
       final kappa=kappa,
-      final theta=theta) "Volume with capillary pressure included"
+      final theta=theta) if gas.n_spec + liquid.n_spec > 0
+      "Volume with capillary pressure included"
       annotation (Placement(transformation(extent={{-4,-80},{16,-60}})));
 
   protected
@@ -1613,6 +1618,18 @@ on diagram)")}));
         smooth=Smooth.None));
 
     // Mixing
+    connect(liquid.amagat, volume.liquid) annotation (Line(
+        points={{-32,-20},{-32,-71},{5,-71}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(gas.amagat, volume.gas) annotation (Line(
+        points={{8,-20},{8,-68}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(volume.solid, graphite.amagat) annotation (Line(
+        points={{12,-72},{48,-72},{48,-20}},
+        color={47,107,251},
+        smooth=Smooth.None));
 
     // Inert exchange
     // --------------
@@ -1645,18 +1662,6 @@ on diagram)")}));
       connect(gas.connH2O[3], liquid.connH2O[1]);
     end if;
 
-    connect(liquid.amagat, volume.liquid) annotation (Line(
-        points={{-32,-20},{-32,-71},{5,-71}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(gas.amagat, volume.gas) annotation (Line(
-        points={{8,-20},{8,-68}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(volume.solid, graphite.amagat) annotation (Line(
-        points={{12,-72},{48,-72},{48,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
@@ -1665,6 +1670,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
+
   end SubregionNoIonomer;
 
   partial model PartialSubregion

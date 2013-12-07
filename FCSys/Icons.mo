@@ -207,9 +207,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,200},{100,240}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,200},{100,240}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top10;
 
@@ -217,9 +217,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,180},{100,220}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,180},{100,220}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top9;
 
@@ -227,9 +227,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,160},{100,200}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,160},{100,200}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top8;
 
@@ -237,9 +237,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,140},{100,180}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,140},{100,180}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top7;
 
@@ -247,9 +247,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,120},{100,160}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,120},{100,160}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top6;
 
@@ -257,9 +257,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,100},{100,140}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,140}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top5;
 
@@ -267,9 +267,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,80},{100,120}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,80},{100,120}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Top4;
 
@@ -307,9 +307,9 @@ package Icons "Icons to annotate and represent classes"
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end Middle;
 
