@@ -988,10 +988,10 @@ package Subregions
 
     Chemistry.HOR HOR(final n_trans=n_trans) if inclHOR
       "Hydrogen oxidation reaction"
-      annotation (Placement(transformation(extent={{80,-30},{100,-10}})));
+      annotation (Placement(transformation(extent={{88,-30},{108,-10}})));
     Chemistry.ORR ORR(final n_trans=n_trans) if inclORR
       "Oxygen reduction reaction"
-      annotation (Placement(transformation(extent={{80,-46},{100,-26}})));
+      annotation (Placement(transformation(extent={{88,-46},{108,-26}})));
 
     // Independence factors
     Phases.ExchangeParams common "Among all phases"
@@ -1296,11 +1296,11 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-              extent={{70,-44},{110,-50}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="(connections not shown
+            extent={{78,-44},{118,-50}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
@@ -1308,9 +1308,12 @@ on diagram)")}));
 
     extends PartialSubregion(final n_spec=ionomer.n_spec);
 
-    FCSys.Phases.Ionomer ionomer(n_inter=0, final n_trans=n_trans) "Ionomer"
-      annotation (Dialog(group="Phases (click to edit)"), Placement(
-          transformation(extent={{-20,0},{0,20}})));
+    FCSys.Phases.Ionomer ionomer(
+      n_inter=0,
+      final n_trans=n_trans,
+      inclAmagat=false) "Ionomer" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-20,0},
+              {0,20}})));
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -1336,18 +1339,10 @@ on diagram)")}));
             extent={{-40,-20},{-20,0}}), iconTransformation(extent={{-60,-60},{
               -40,-40}})));
 
-  protected
-    Conditions.ByConnector.Amagat.Void void if n_spec > 0
-      "Model to establish zero pressure"
-      annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
   equation
     // Boundaries and mixing
     // ---------------------
     // Ionomer
-    connect(ionomer.amagat, void.amagat) annotation (Line(
-        points={{-2,2},{20,-20}},
-        color={47,107,251},
-        smooth=Smooth.None));
 
     connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
         points={{-10,1.6},{-10,-30}},

@@ -15,9 +15,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
         final parameter Q.NumberAbsolute psi_sat=environment.p_sat/environment.p
           "Mole fraction of H2O at saturation";
 
-        // Anode composition
-        Connectors.RealInputInternal I_an(unit="N/T") "Equivalent current"
-          annotation (Dialog(tab="Anode", __Dymola_label=
+        // Anode
+        Connectors.RealInputInternal I_an(unit="N/T") = U.A
+          "Equivalent current" annotation (Dialog(tab="Anode", __Dymola_label=
                 "<html><i>I</i><sub>an</sub></html>"), Placement(transformation(
                 extent={{-70,30},{-50,50}}), iconTransformation(extent={{0,0},{
                   0,0}})));
@@ -31,10 +31,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "Mole fraction of H2 at the anode inlet";
         //
         // Cathode
-        Connectors.RealInputInternal I_ca(unit="N/T") "Equivalent current"
-          annotation (Dialog(tab="Cathode", __Dymola_label=
-                "<html><i>I</i><sub>ca</sub></html>"), Placement(transformation(
-                extent={{-70,-30},{-50,-10}}), iconTransformation(extent={{0,0},
+        Connectors.RealInputInternal I_ca(unit="N/T") = U.A
+          "Equivalent current" annotation (Dialog(tab="Cathode", __Dymola_label
+              ="<html><i>I</i><sub>ca</sub></html>"), Placement(transformation(
+                extent={{-70,-50},{-50,-30}}), iconTransformation(extent={{0,0},
                   {0,0}})));
         parameter Q.NumberAbsolute caRH(
           displayUnit="%",
@@ -52,11 +52,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Modelica.Blocks.Math.Gain anStoichH2O(k=psi_H2O_an/psi_H2)
           annotation (Placement(transformation(extent={{18,30},{38,50}})));
         Modelica.Blocks.Math.Gain stoichO2(k=1/4)
-          annotation (Placement(transformation(extent={{-42,-30},{-22,-10}})));
+          annotation (Placement(transformation(extent={{-42,-50},{-22,-30}})));
         Modelica.Blocks.Math.Gain caStoichH2O(k=psi_H2O_ca/psi_O2)
-          annotation (Placement(transformation(extent={{18,-10},{38,10}})));
+          annotation (Placement(transformation(extent={{18,-30},{38,-10}})));
         Modelica.Blocks.Math.Gain stoichN2(k=psi_N2/psi_O2)
-          annotation (Placement(transformation(extent={{18,-50},{38,-30}})));
+          annotation (Placement(transformation(extent={{18,-70},{38,-50}})));
 
         Connectors.RealOutputInternal Ndot_H2O_an(unit="N/T")
           "Rate of supply of H2O into the anode" annotation (Placement(
@@ -64,14 +64,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 extent={{0,0},{0,0}})));
         Connectors.RealOutputInternal Ndot_O2(unit="N/T")
           "Rate of supply of O2" annotation (Placement(transformation(extent={{
-                  -18,-30},{2,-10}}), iconTransformation(extent={{0,0},{0,0}})));
+                  -18,-50},{2,-30}}), iconTransformation(extent={{0,0},{0,0}})));
         Connectors.RealOutputInternal Ndot_H2O_ca(unit="N/T")
           "Rate of supply of H2O into the cathode" annotation (Placement(
-              transformation(extent={{42,-10},{62,10}}), iconTransformation(
+              transformation(extent={{42,-30},{62,-10}}),iconTransformation(
                 extent={{0,0},{0,0}})));
         Connectors.RealOutputInternal Ndot_N2(unit="N/T")
           "Rate of supply of N2" annotation (Placement(transformation(extent={{
-                  42,-50},{62,-30}}), iconTransformation(extent={{0,0},{0,0}})));
+                  42,-70},{62,-50}}), iconTransformation(extent={{0,0},{0,0}})));
         Connectors.RealOutputInternal Ndot_H2(unit="N/T")
           "Rate of supply of H2" annotation (Placement(transformation(extent={{
                   -18,30},{2,50}}), iconTransformation(extent={{0,0},{0,0}})));
@@ -93,23 +93,23 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             smooth=Smooth.None));
         connect(stoichO2.y, Ndot_O2) annotation (Line(
-            points={{-21,-20},{-8,-20}},
+            points={{-21,-40},{-8,-40}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(Ndot_O2, caStoichH2O.u) annotation (Line(
-            points={{-8,-20},{8,-20},{8,0},{16,0}},
+            points={{-8,-40},{8,-40},{8,-20},{16,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(caStoichH2O.y, Ndot_H2O_ca) annotation (Line(
-            points={{39,0},{52,0}},
+            points={{39,-20},{52,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(stoichN2.y, Ndot_N2) annotation (Line(
-            points={{39,-40},{52,-40}},
+            points={{39,-60},{52,-60}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(stoichN2.u, Ndot_O2) annotation (Line(
-            points={{16,-40},{8,-40},{8,-20},{-8,-20}},
+            points={{16,-60},{8,-60},{8,-40},{-8,-40}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(I_an, stoichH2.u) annotation (Line(
@@ -117,7 +117,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             smooth=Smooth.None));
         connect(I_ca, stoichO2.u) annotation (Line(
-            points={{-60,-20},{-44,-20}},
+            points={{-60,-40},{-44,-40}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (
@@ -134,7 +134,15 @@ package Assemblies "Combinations of regions (e.g., cells)"
  </ol></p>
  </html>"),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics),
+                  {100,100}}), graphics={Text(
+                extent={{-20,70},{20,60}},
+                lineColor={127,127,127},
+                textStyle={TextStyle.UnderLine},
+                textString="Anode"), Text(
+                extent={{-20,10},{20,0}},
+                lineColor={127,127,127},
+                textStyle={TextStyle.UnderLine},
+                textString="Cathode")}),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end TestConditions;
@@ -226,13 +234,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         output Q.Potential Deltaw_ca=-cell.caCL.subregions[1, 1, 1].graphite.
             'e-Transfer'.Deltag if environment.analysis "Cathode overpotential";
 
-        inner Conditions.Environment environment(
-          a={0,0,0},
-          T=333.13*U.K,
-          p=U.from_kPag(48.3),
-          RH=0.65) "Environmental conditions"
-          annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-
         replaceable Cell cell(inclN2=environment.psi_O2_dry < 1 - Modelica.Constants.eps)
           constrainedby FCSys.Icons.Cell "Fuel cell" annotation (
           __Dymola_choicesFromPackage=true,
@@ -241,7 +242,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         // Conditions
         Conditions.ByConnector.BoundaryBus.Single.Sink anBC[cell.n_y, cell.n_z]
-          (each graphite('inclC+'=true,redeclare
+          (each graphite('inclC+'=true, redeclare
               Conditions.ByConnector.ThermalDiffusive.Single.Temperature 'C+'(
                 set(y=environment.T))))
           "Boundary condition for the anode end plate, except electrical"
@@ -284,7 +285,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               origin={-56,24})));
 
         Conditions.ByConnector.BoundaryBus.Single.Source caBC[cell.n_y, cell.n_z]
-          (each graphite('inclC+'=true,'C+'(set(y=environment.T))))
+          (each graphite('inclC+'=true, 'C+'(set(y=environment.T))))
           "Boundary condition for the cathode end plate, except electrical"
           annotation (Placement(transformation(
               extent={{10,10},{-10,-10}},
@@ -341,8 +342,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
               rotation=0,
               origin={56,24})));
 
-        TestConditions testConditions(I_ca=2*zI, I_an=1.5*zI) "Test conditions"
-          annotation (Dialog, Placement(transformation(extent={{10,30},{30,50}})));
+        inner Conditions.Environment environment(
+          a={0,0,0},
+          T=333.13*U.K,
+          p=U.from_kPag(48.3),
+          RH=0.65) "Environmental conditions"
+          annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
         replaceable Modelica.Electrical.Analog.Sources.RampCurrent load(
           duration=3600,
@@ -378,6 +383,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{10,-10},{-10,10}},
               rotation=0,
               origin={48,0})));
+
+        TestConditions testConditions(I_ca=2*zI, I_an=1.5*zI) "Test conditions"
+          annotation (Dialog, Placement(transformation(extent={{10,30},{30,50}})));
 
       protected
         Connectors.RealInput p_N2_in[cell.caFP.n_x, cell.n_z](each unit=

@@ -89,15 +89,15 @@ package Connectors "Declarative and imperative interfaces"
             pattern=LinePattern.None,
             lineColor={0,0,0})}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={239,142,1},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}), Ellipse(
-            extent={{-15,15},{15,-15}},
-            fillColor={255,195,38},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={239,142,1},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-15,15},{15,-15}},
+              fillColor={255,195,38},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
   end Reaction;
 
@@ -270,6 +270,34 @@ package Connectors "Declarative and imperative interfaces"
 
   end Dalton;
 
+  connector DaltonNode "Internal node for additivity of pressure"
+
+    Q.Volume V(nominal=U.cc) "Volume";
+    flow Q.Pressure p(nominal=U.atm) "Pressure";
+
+    annotation (
+      defaultComponentPrefixes="protected",
+      defaultComponentName="dalton",
+      Documentation(info="<html><p>This connector is identical to <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> except 
+    that it has a smaller icon and a default <code>protected</code> prefix.  For more information, please see that connector.</p></html>"),
+
+      Diagram(graphics={Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={11,43,197},
+            fillColor={47,107,251},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,10},{100,50}},
+            textString="%name",
+            lineColor={0,0,0})}),
+      Icon(graphics={Ellipse(extent={{-76,76},{84,-84}}, lineColor={47,107,251}),
+            Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={11,43,197},
+            fillPattern=FillPattern.Solid,
+            fillColor={47,107,251})}));
+
+  end DaltonNode;
+
   connector Intra
     "Connector for translational and thermal exchange among species within a phase"
 
@@ -404,10 +432,10 @@ package Connectors "Declarative and imperative interfaces"
               fillColor={221,23,47})}),
       Icon(graphics={Ellipse(extent={{-80,80},{80,-80}}, lineColor={221,23,47}),
             Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={221,23,47})}));
+            extent={{-100,100},{100,-100}},
+            lineColor={170,0,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={221,23,47})}));
 
   end Inert;
 
@@ -517,13 +545,13 @@ package Connectors "Declarative and imperative interfaces"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{0,50},{100,0},{0,-50},{0,50}},
-          lineColor={0,0,127},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-200,50},{200,90}},
-          textString="%name",
-          lineColor={0,0,0})}),
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid),Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -602,11 +630,11 @@ package Connectors "Declarative and imperative interfaces"
    of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.</p></html>"),
 
       Icon(graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}, coordinateSystem(
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}, coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
@@ -642,13 +670,13 @@ package Connectors "Declarative and imperative interfaces"
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{-100,50},{0,0},{-100,-50},{-100,50}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-200,50},{200,90}},
-          textString="%name",
-          lineColor={0,0,0})}),
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one output signal of type <code>Real</code>.</p>
 </html>"));
@@ -726,11 +754,11 @@ package Connectors "Declarative and imperative interfaces"
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}),
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}),
       Diagram(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},

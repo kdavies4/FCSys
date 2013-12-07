@@ -244,6 +244,9 @@ package Quantities "Variables to represent physical properties"
   <p>The <a href=\"modelica://FCSys.Quantities\">Quantities</a> package is abbreviated as <code>Q</code> throughout
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.</p>
 
+For more information, please see the 
+  documentation of the <a href=\"modelica://FCSys.Units\">Units</a> package.
+  
     <hr>
 
     <small>

@@ -197,36 +197,6 @@ package UsersGuide "User's Guide"
     </html>"));
 
       end Cell;
-    annotation (preferredView="info", Documentation(info="<html><p>Below is an index of some results from <a href=\"modelica://FCSys\">FCSys</a>.
-    Please click on any image to see a larger plot with a link to its example model.</p>
-
-      <p><b>Basic:</b><br>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/AirColumn-small.png\"></a>
-      
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/Echo-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/InternalFlow-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConduction-small.png\"></a>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Basic\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Basic/ThermalConductionConvection-small.png\"></a>
-
-</p>
-
-      <p><b>Cell-level:</b><br>
-
-      <a href=\"modelica://FCSys.UsersGuide.SampleResults.Cell\">
-      <img src=\"modelica://FCSys/Resources/Documentation/UsersGuide/SampleResults/Cell/Polarization-small.png\"></a>
-
-</p>
-
-    </html>"));
 
     end SampleResults;
 
@@ -240,7 +210,7 @@ package UsersGuide "User's Guide"
       end 'configuration';
 
     class 'continuity'
-      "<html>(<i>noun</i>) resistivity to axial compression or material storage during transport [M N<sup>-1</sup> T<sup>-1</sup>]</html>"
+      "<html>(<i>noun</i>) resistivity to axial compression or material storage during transport [M&nbsp;N<sup>-1</sup>&nbsp;T<sup>-1</sup>]</html>"
 
       annotation (
         preferredView="info",
@@ -250,7 +220,7 @@ package UsersGuide "User's Guide"
       end 'continuity';
 
     class 'density'
-      "<html>(<i>noun</i>) amount of material per volume [N L<sup>-3</sup>]</html>"
+      "<html>(<i>noun</i>) amount of material per volume [N&nbsp;L<sup>-3</sup>]</html>"
 
       annotation (
         preferredView="info",
@@ -260,9 +230,8 @@ package UsersGuide "User's Guide"
     <p>Note that mass per volume is volumic mass (see <a href=\"modelica://FCSys.UsersGuide.Glossary.'massic'\">massic</a>).</p></html>"));
       end 'density';
 
-
     class 'equivalent current'
-      "<html>(<i>noun</i>) rate of supply of a reactant required to support the electrical load at 100% utilization of that reactant [N T<sup>-1</sup>]</html>"
+      "<html>(<i>noun</i>) rate of supply of a reactant required to support the electrical load at 100% utilization of that reactant [N&nbsp;T<sup>-1</sup>]</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end 'equivalent current';
@@ -274,7 +243,7 @@ package UsersGuide "User's Guide"
       end 'exchange';
 
     class 'fluidity'
-      "<html>(<i>noun</i>) reciprocal of dynamic viscosity [L T M<sup>-1</sup>]</html>"
+      "<html>(<i>noun</i>) reciprocal of dynamic viscosity [L&nbsp;T&nbsp;M<sup>-1</sup>]</html>"
 
       annotation (
         preferredView="info",
@@ -284,19 +253,19 @@ package UsersGuide "User's Guide"
       end 'fluidity';
 
     class 'Gibbs potential '
-      "<html>(<i>noun</i>) specific Gibbs energy [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</html>"
+      "<html>(<i>noun</i>) specific Gibbs energy [L<sup>2</sup>&nbsp;M&nbsp;N<sup>-1</sup>&nbsp;T<sup>-2</sup>]</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end 'Gibbs potential ';
 
     class 'lineic '
-      "<html>adjective that indicates the quotient of the following quantity and its associated length [&times; L<sup>-1</sup>]</html>"
+      "<html>adjective that indicates the quotient of the following quantity and its associated length [&times;&nbsp;L<sup>-1</sup>]</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end 'lineic ';
 
     class 'massic'
-      "<html>adjective that indicates the quotient of the following quantity and its associated mass [&times; M<sup>-1</sup>]</html>"
+      "<html>adjective that indicates the quotient of the following quantity and its associated mass [&times;&nbsp;M<sup>-1</sup>]</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end 'massic';
@@ -312,7 +281,7 @@ package UsersGuide "User's Guide"
       end 'particle number';
 
     class 'specific'
-      "<html>adjective that indicates the quotient of the following quantity and its associated particle number [&times; N<sup>-1</sup>]</html>"
+      "<html>adjective that indicates the quotient of the following quantity and its associated particle number [&times;&nbsp;N<sup>-1</sup>]</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end 'specific';
@@ -340,7 +309,7 @@ package UsersGuide "User's Guide"
       end 'transport';
 
     class 'volumic'
-      "<html>adjective that indicates the quotient of the following quantity and its associated volume [&times; L<sup>-3</sup>]</html>"
+      "<html>adjective that indicates the quotient of the following quantity and its associated volume [&times;&nbsp;L<sup>-3</sup>]</html>"
 
       annotation (
         preferredView="info",
@@ -398,8 +367,6 @@ package UsersGuide "User's Guide"
 
       annotation (preferredView="info", DocumentationClass=false);
       end Brown2011;
-
-
 
     class DuPont2004N
       "<html>DuPont, \"Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004</html>"
@@ -496,7 +463,6 @@ package UsersGuide "User's Guide"
 
       annotation (preferredView="info", DocumentationClass=false);
       end Mattsson2008;
-
 
     class McBride1996
       "<html>B. J. McBride and S. Gordon, \"<a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/RP-1311P2.htm\">Computer Program for Calculating Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description</a>,\" NASA Reference Publication 1311, Jun. 1996</html>"
@@ -997,22 +963,8 @@ action. This section shall survive the termination of this License.</p>
 
   end UsersGuide;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // **Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
+
 
 annotation (
   preferredView="info",

@@ -6,22 +6,6 @@ package Species "Dynamic models of chemical species"
     package Graphite "<html>C<sup>+</sup> graphite</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-        extends Solid(redeclare replaceable package Data =
-              Characteristics.'C+'.Graphite);
-
-        // TODO:  Update this to pull properties and settings from Fixed.
-        // Do the same for other species.
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'C+'",
-          Documentation(info=
-                "<html><p>Please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
-
-          Icon(graphics));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
 
         extends Solid(
@@ -45,12 +29,12 @@ package Species "Dynamic models of chemical species"
           defaultComponentPrefixes="replaceable",
           defaultComponentName="'C+'",
           Documentation(info="<html><p>Assumptions:<ol>
-    <li>The specific heat capacity is independent of the thermodynamic state.</li>
-    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature).</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of thermodynamic state).</li>
+    <li>The specific heat capacity is independent of temperature.</li>
     <li>Mobility is zero.</li>
     </ol></p>
 
-   <p>The default isobaric specific heat capacity (<i>b<sub>c</sub></i> = <code>[935*U.J*Data.m/(U.kg*U.K)]</code>)
+   <p>The default isobaric specific heat capacity (via <i>b<sub>c</sub></i> = <code>[935*U.J*Data.m/(U.kg*U.K)]</code>)
    and thermal
    resistivity (&theta; = <code>U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
    composite (with heat flow parallel to the fibers) at 300&nbsp;K
@@ -111,17 +95,6 @@ package Species "Dynamic models of chemical species"
       "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> ionomer</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-        extends Solid(redeclare replaceable package Data =
-              Characteristics.'SO3-'.Ionomer);
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="'SO3-'",
-          Documentation(info=
-                "<html><p>Please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
         extends Solid(
           redeclare replaceable package Data = Characteristics.'SO3-'.Ionomer,
@@ -134,7 +107,7 @@ package Species "Dynamic models of chemical species"
           defaultComponentName="'SO3-'",
           Documentation(info="<html><p>Assumptions:
     <ol>
-    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature)</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of thermodynamic state).</li>
     </ol></p>
 
     <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
@@ -193,24 +166,22 @@ package Species "Dynamic models of chemical species"
           defaultComponentName="'e-'",
           Documentation(info="<html>
 
-<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code>
-
-(the default is <code>ConsTrans.steady</code> instead),
-then internal inductance is included using the relative permeability (&mu;<sup>*</sup>).</p>
-
     <p>Assumptions:<ol>
           <li>The fluidity is infinite.  All friction is by translational exchange with the
           the substrate
-          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to
-
           the substrate
-          (e.g., <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
-          the mobility of the substrate (e.g.,
-
-          <a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
+          the mobility of the substrate (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
     </ol></p>
+
+<p>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is <code>ConsTrans.dynamic</code>
+(the default is <code>ConsTrans.steady</code> instead),
+then internal inductance is included according to the relative permeability (&mu;<sup>*</sup>).</p>
 
     <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
@@ -263,15 +234,14 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
           Documentation(info="<html>
 
 <p>Assumptions:<ol>
-    <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-    <li>The chemical reaction rate is governed by the electrons.  Therefore, the reaction interval (&tau;&prime;) is zero for protons.</li>
+    <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
+    <li>The electrochemical reaction rate is governed by the electrons.  Therefore, the specific exchange current is zero (&tau;&prime; = 0) for protons.</li>
               <li>The conductivity is mapped to the mobility of the protons by assuming that
           the mobility of the substrate (e.g.,
-
           <a href=\"modelica://FCSys.Species.'SO3-'.Ionomer\">C19HF37O5S-</a>) is zero.</li>
     </ol></p>
 
-<p>The default conductivity (&sigma; = <code>0.083*U.S/U.cm</code>)
+<p>The default electrical conductivity (&sigma; = <code>0.083*U.S/U.cm</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
@@ -349,20 +319,6 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
     package Gas "<html>H<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-        extends Fluid(redeclare replaceable package Data =
-              Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
@@ -381,16 +337,10 @@ then internal inductance is included using the relative permeability (&mu;<sup>*
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2",
           Documentation(info="<html><p>Assumptions:<ol>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
     <li>Ideal gas</li>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
 
     </ol></p>
-
-<p>Additional notes:<ul>
-<li>
-  The specific heat capacity is not fixed because it would
-  affect the chemical potential and result in an incorrect cell
-  potential.</li></ul></p>
 
 <p>The default resistivities (&eta; = <code>1/(89.6e-7*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1&nbsp;atm and
@@ -432,6 +382,12 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 <tr><td>2000</td><td>18.25e3</td><td>1/318.2e-7</td><td>1/878e-3</td></tr>
     </tr>
   </table>
+  
+  <p>
+  The specific heat capacity is not fixed because it would
+  affect the chemical potential and result in an incorrect cell
+  potential.</p>
+  
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -448,30 +404,11 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
     package Gas "<html>H<sub>2</sub>O gas</html>"
       extends Modelica.Icons.Package;
 
-      model Correlated "Correlated properties"
-
-        extends Fluid(redeclare replaceable package Data =
-              Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
-        output Q.NumberAbsolute RH(
-          stateSelect=StateSelect.never,
-          displayUnit="%") = p/(Characteristics.H2O.p_sat(T)) if environment.analysis
-          "Relative humidity (approximate)";
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
-
       model Fixed "Fixed properties"
 
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1],n_v={-1,0}),
+                b_v=[1], n_v={-1,0}),
           final tauprime,
           n_chem=3,
           redeclare parameter Q.Mobility mu=Data.mu(),
@@ -498,16 +435,12 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
     <li>Ideal gas</li>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-                <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., liquid).</li>
+        
+                <li>The specific exchange currents (&tau;&prime;) are zero.  The rate of phase change is governed by the
+        other configurations (liquid and ionomer).</li>
     </ol></p>
-
-  <p>Notes:<ul>
-  <li>The specific heat capacity is not fixed because it would
-  affect the chemical potential and result in an incorrect cell
-  potential.</li></ul></p>
 
 <p>The default resistivities (&eta; = <code>1/(9.09e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
@@ -602,6 +535,15 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <tr><td>850</td><td>2.186e3</td><td>1/296.9e-7</td><td>1/63.7e-3</td></tr>
   </table></ul></p>
 
+
+<p>
+  The specific heat capacity is not fixed because it would
+  affect the chemical potential and result in an incorrect cell
+  potential.</p>
+  
+  <p>The relative humidities (RH and RH<sub>boundaries</sub>), which are calculated as output variables, 
+  do not account for surface tension.</p>
+  
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
 
       end Fixed;
@@ -610,28 +552,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
     package Ionomer "<html>H<sub>2</sub>O in ionomer</html>"
       extends Modelica.Icons.Package;
-
-      model Correlated "Correlated properties"
-
-        extends Fluid(redeclare replaceable package Data =
-              Characteristics.H2O.Ionomer, final tauprime);
-
-        // Auxiliary variables (for analysis)
-        output Q.NumberAbsolute lambda(stateSelect=StateSelect.never) = rho*
-          Characteristics.'SO3-'.Ionomer.b_v[1, 1] if environment.analysis
-          "Ratio of H2O molecules to SO3- end-groups";
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-    <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-   other configurations (e.g., gas).</li>
-          </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
 
       model Fixed "Fixed properties"
 
@@ -669,8 +589,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
     </ol></p></p>
 
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
@@ -682,24 +601,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
     package Liquid "<html>H<sub>2</sub>O liquid</html>"
       extends Modelica.Icons.Package;
-
-      model Correlated "Correlated properties"
-
-        extends Fluid(
-          redeclare replaceable package Data = Characteristics.H2O.Liquid,
-          final tauprime,
-          initMaterial=Init.volume);
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="H2O",
-          Documentation(info="<html><p>Assumptions:<ol>
-        <li>The reaction interval (&tau;&prime;) is zero.  The rate of phase change is governed by the
-        other configurations (e.g., gas).</li>
-    </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
 
       model Fixed "Fixed properties"
 
@@ -733,14 +634,8 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           defaultComponentPrefixes="replaceable",
           defaultComponentName="H2O",
           Documentation(info="<html><p>Assumptions:<ol>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
     </ol></p>
-
-          <p>Notes:<ul>
-  <li>
-  The specific heat capacity is not fixed because it would
-  affect the chemical potential and result in an incorrect cell
-  potential.</li></ul></p>
 
 <p>The default resistivities (&eta; = <code>1/(855e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
@@ -812,6 +707,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
   </table>
 
+<p>
+  The specific heat capacity is not fixed because it would
+  affect the chemical potential and result in an incorrect saturation pressure.</p>
+  
   <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -827,21 +726,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     extends Modelica.Icons.Package;
     package Gas "<html>N<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
-
-      model Correlated "Correlated properties"
-
-        extends Fluid(redeclare replaceable package Data =
-              Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="N2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
 
       model Fixed "Fixed properties"
         import FCSys.Utilities.Polynomial;
@@ -871,19 +755,19 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           defaultComponentPrefixes="replaceable",
           defaultComponentName="N2",
           Documentation(info="<html><p>Assumptions:<ol>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
     <li>Ideal gas</li>
-    <li>Fixed specific heat capacity (independent of temperature)</li>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-
+   <li>Fixed specific heat capacity (independent of temperature)</li>
+ 
     </ol></p>
 
-<p>The default specific heat capacity (<i>b<sub>c</sub></i> = <code>[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
+<p>The default specific heat capacity (via <i>b<sub>c</sub></i> = <code>[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
 (&eta; = <code>1/(17.82e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920].
-   The integration offset for specific entropy is set such that
+   The integration offset for specific entropy (<i>B<sub>c</sub></i>) is set such that
    the specific entropy is 191.610&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;bar).
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].
-   Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.
+   Additional data is listed in <a href=\"#Tab1\">Table 1</a>.
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920]</caption>
@@ -913,7 +797,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>1300</td><td>1.219e3</td><td>1/466.2e-7</td><td>1/81.0e-3</td></tr>
   </table>
 
-  <p>The fluidity of air at 15.0&nbsp;&deg;C and 1&nbsp;atm is given by
+  <p>The fluidity of air at 15&nbsp;&deg;C and 1&nbsp;atm is given by
        &eta; = <code>1/(17.8e-6*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
 
@@ -929,21 +813,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     extends Modelica.Icons.Package;
     package Gas "<html>O<sub>2</sub> gas</html>"
       extends Modelica.Icons.Package;
-
-      model Correlated "Correlated properties"
-
-        extends Fluid(redeclare replaceable package Data =
-              Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="O2",
-          Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-          </ol></p>
-
-<p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
-
-      end Correlated;
 
       model Fixed "Fixed properties"
 
@@ -978,17 +847,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
           defaultComponentPrefixes="replaceable",
           defaultComponentName="O2",
           Documentation(info="<html><p>Assumptions:<ol>
-    <li>Ideal gas</li>
-        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
+  <li>Ideal gas</li>
+  
     </ol></p>
-
-<p>Additional notes:
-<ul>
-          <li>
-  The specific heat capacity is not fixed because it would
-  affect the chemical potential and result in an incorrect cell
-  potential.</li></ul></p>
 
   <p>The default resistivities (&eta; = <code>1/(207.2e-7*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
   300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 920&ndash;921].
@@ -1023,6 +885,11 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <tr><td>1300</td><td>1.125e3</td><td>1/588.4e-7</td><td>1/87.1e-3</td></tr>
   </table></p>
 
+<p>
+  The specific heat capacity is not fixed because it would
+  affect the chemical potential and result in an incorrect cell
+  potential.</p>
+  
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
@@ -1098,7 +965,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
     // Chemical parameters
     Q.TimeAbsolute tauprime[n_chem](each nominal=U.ms) = zeros(n_chem)
-      "Specific exchange rates" annotation (Evaluate=true,Dialog(group=
+      "Specific exchange currents" annotation (Evaluate=true,Dialog(group=
             "Chemical parameters", __Dymola_label="<html>&tau;&prime;</html>"));
 
     // Geometry
@@ -1870,7 +1737,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
@@ -2282,16 +2148,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Species;
 
 public

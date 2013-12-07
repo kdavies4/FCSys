@@ -417,15 +417,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -519,15 +518,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
@@ -578,22 +576,19 @@ public
 
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Line(
-            points={{-40,0},{30,0}},
-            color={47,107,251},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Ellipse(
-            extent={{0,40},{-80,-40}},
-            lineColor={47,107,251},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Sphere),
-          Ellipse(extent={{0,40},{-80,-40}}, lineColor={0,0,0})}),
+              100}}), graphics={Line(
+              points={{-40,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Ellipse(
+              extent={{0,40},{-80,-40}},
+              lineColor={47,107,251},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Sphere),Ellipse(extent={{0,40},{-80,-40}},
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end SurfaceTension;
-
 
   model CapillaryVolume "Volume with capillary pressure applied to the liquid"
     extends FCSys.Icons.Names.Top3;
@@ -715,40 +710,34 @@ public
     
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Polygon(
-            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
-                -60}},
-            lineColor={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
-            lineColor={191,191,191},
-            smooth=Smooth.Bezier,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-40,8},{20,-30}},
-            lineColor={85,170,255},
-            fillPattern=FillPattern.Sphere,
-            fillColor={255,255,255}),
-          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
-          Line(
-            points={{-60,20},{20,20},{20,-60}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{60,60},{20,20}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None)}),
+              100}}), graphics={Polygon(
+              points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+              -60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Polygon(
+              points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+              lineColor={191,191,191},
+              smooth=Smooth.Bezier,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{-40,8},{20,-30}},
+              lineColor={85,170,255},
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255}),Ellipse(extent={{-40,8},{20,-30}},
+            lineColor={225,225,225}),Line(
+              points={{-60,20},{20,20},{20,-60}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{60,60},{20,20}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));

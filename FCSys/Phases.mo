@@ -845,7 +845,7 @@ package Phases "Mixtures of species"
       "Positive boundary along the z axis" annotation (Placement(transformation(
             extent={{-88,-2},{-68,18}}), iconTransformation(extent={{-90,-90},{
               -70,-70}})));
-    Connectors.Amagat amagat(final V=-V) if n_spec > 0
+    Connectors.Amagat amagat if n_spec > 0 and inclAmagat
       "Connector for additivity of volume" annotation (Placement(transformation(
             extent={{-100,46},{-80,66}}), iconTransformation(extent={{70,-90},{
               90,-70}})));
@@ -859,6 +859,13 @@ package Phases "Mixtures of species"
     Connectors.Chemical 'connH+'[1](each final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
               {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
+
+    // Advanced parameters
+    parameter Boolean inclAmagat=true
+      "Include the connector for additivity of volume" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(tab="Advanced"));
 
     // Independence factors
     ExchangeParams common(k_Q=0) if n_spec > 0 "Among all species in the phase"
@@ -878,7 +885,7 @@ package Phases "Mixtures of species"
       annotation (Dialog(group="Exchange (click to edit)"));
 
   protected
-    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
+    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0 and inclAmagat
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
 
@@ -899,6 +906,9 @@ package Phases "Mixtures of species"
           transformation(extent={{56,-74},{76,-54}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
 
+    Connectors.DaltonNode dalton(final V=V)
+      "Internal node for additivity of volume"
+      annotation (Placement(transformation(extent={{-59,46},{-39,66}})));
   equation
     // Chemical exchange
     connect(H2O.chemical, connH2O) annotation (Line(
@@ -955,16 +965,16 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     // Mixing
-    connect('SO3-'.dalton, amagatDalton.dalton) annotation (Line(
-        points={{31,24},{31,56},{-66,56}},
+    connect('SO3-'.dalton, dalton) annotation (Line(
+        points={{31,24},{31,56},{-49,56}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect('H+'.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-49,24},{-49,56},{-66,56}},
+    connect('H+'.dalton, dalton) annotation (Line(
+        points={{-49,24},{-49,56},{-49,56}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(H2O.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-9,24},{-9,56},{-66,56}},
+    connect(H2O.dalton, dalton) annotation (Line(
+        points={{-9,24},{-9,56},{-49,56}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(amagatDalton.amagat, amagat) annotation (Line(
@@ -1080,6 +1090,10 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
+    connect(dalton, amagatDalton.dalton) annotation (Line(
+        points={{-49,56},{-66,56}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
       Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>

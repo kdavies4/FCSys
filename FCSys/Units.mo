@@ -1630,7 +1630,8 @@ encompass other systems of units.</p>
   <p>The information below has been updated from
   [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].  That paper
   also offers suggestions as to how the approach might be better integrated in
-  <a href=\"http://www.modelica.org\">Modelica</a>.</p>
+  <a href=\"http://www.modelica.org\">Modelica</a>.  For more information, please also see the 
+  documentation of the <a href=\"modelica://FCSys.Quantities\">Quantities</a> package.</p>
 
 <p><b>Overview:</b></p>
 
@@ -1830,9 +1831,6 @@ base units or constants are later re-adjusted.</p>
 <p>Where the <code>der</code> operator is used in models, it is explicitly divided by the unit second
 (e.g., <code>der(x)/U.s</code>).  This is necessary because the global variable <code>time</code>
 is in seconds (i.e., <code>time</code> is a number, not a quantity).</p>
-
-<p>In theory, standard Modelica unit-checking tools may be used to check the dimensions of equations
-in <a href=\"modelica://FCSys\">FCSys</a>.</p>
 
 <p>Some units are defined that include prefixes (e.g., kg, mm, and kPa).  However,
 most prefixes must be given as explicit factors (e.g., <code>U.kilo*U.m</code>).</p>
