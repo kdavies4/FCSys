@@ -3,7 +3,7 @@
 <title>FCSys.Species.'H+'.Ionomer</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;H&lt;sup&gt;+&lt;/sup&gt; in ionomer&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Species.'H+'.Ionomer"></a><a href="FCSys_Species_'H+'.html#FCSys.Species.'H+'">FCSys.Species.'H+'</a>.Ionomer</h2>
 
@@ -76,22 +76,22 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>Assumptions:<ol>
-    <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of temperature).</li>
-    <li>The chemical reaction rate is governed by the electrons.  Therefore, the reaction interval (&tau;&prime;) is zero for protons.</li>
+    <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
+    <li>The electrochemical reaction rate is governed by the electrons.  Therefore, the specific exchange current is zero (&tau;&prime; = 0) for protons.</li>
               <li>The conductivity is mapped to the mobility of the protons by assuming that
           the mobility of the substrate (e.g.,
           <a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer">C19HF37O5S-</a>) is zero.</li>
     </ol></p>
 
-<p>The default conductivity (&sigma; = <code>0.083*U.S/U.cm</code>)
+<p>The default electrical conductivity (&sigma; = <code>8.3*U.S/U.m</code>)
   is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.DuPontN112">DuPontN112</a>].</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
-  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Schetz1996</a>, p. 139].
+  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Schetz1996">Schetz1996</a>, p. 139].
   <a href="#Tab1">Table 1</a> lists the properties at other temperatures.</p>
 
     <table border="1" cellspacing=0 cellpadding=2 style="border-collapse:collapse;">
-  <caption align="top" id="Tab1">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Schetz1996</a>, p. 139]</caption>
+  <caption align="top" id="Tab1">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Schetz1996">Schetz1996</a>, p. 139]</caption>
 <tr>
       <th valign="middle"><i>T</i><br><code>/U.K</code></th>
       <th width=1>&eta;<code><br>*U.Pa*U.s</code></th>
@@ -163,7 +163,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Ion">Ion</a> (Base model 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>1</td><td>Thermal independity [T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Continuity</a></td><td>zeta</td><td>0</td><td>Continuity [L.M/(N.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>eta</td><td>Data.eta(T, v)</td><td>Fluidity [L.T/M]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ConductivityElectrical">ConductivityElectrical</a></td><td>sigma</td><td>0.083*U.S/U.cm</td><td>Electrical conductivity [N2.T/(L3.M)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ConductivityElectrical">ConductivityElectrical</a></td><td>sigma</td><td>8.3*U.S/U.m</td><td>Electrical conductivity [N2.T/(L3.M)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Phi[n_intra, n_trans]</td><td>ones(n_intra, n_trans)</td><td>For translational exchange among species within the phase [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Q[n_intra]</td><td>ones(n_intra)</td><td>For thermal exchange among species within the phase [1]</td></tr>
@@ -227,7 +227,9 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Ion">Ion</a> (Base model 
     consTransX=ConsTrans.steady,
     consTransY=ConsTrans.steady,
     consTransZ=ConsTrans.steady,
+    <font color="blue">final </font>zeta=0,
     <font color="blue">final </font>N_IC,
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.1661*U.W),
     <font color="blue">final </font>p_IC,
     <font color="blue">final </font>h_IC,
     <font color="blue">final </font>V_IC,
@@ -235,11 +237,10 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Ion">Ion</a> (Base model 
     <font color="blue">final </font>g_IC,
     <font color="blue">final </font>T_IC,
     <font color="blue">final </font>nu=1,
-    n_chem=1,
-    <font color="blue">final </font>zeta=0,
     <font color="blue">final </font>tauprime,
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.1661*U.W),
-    sigma=0.083*U.S/U.cm);
+    <font color="blue">final </font>N0,
+    n_chem=1,
+    sigma=8.3*U.S/U.m);
 
   <font color="darkgreen">// See the documentation for a table of values.</font>
 
@@ -253,6 +254,6 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Ion">Ion</a> (Base model 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:03 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:47 2013.
 </div>
 </span></body></html>

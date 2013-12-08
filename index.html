@@ -3,7 +3,7 @@
 <title>FCSys - Modelica library of fuel cell models</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Modelica fuel cell library">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys"></a>FCSys</h2>
 
@@ -62,6 +62,7 @@
     fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
     language.  Chemical, electrical, fluid, and thermal
     phenomena are included.  The implementation is highly modular and reconfigurable.
+
     There are options to adjust the assumptions, spatial discretization
     and dimensionality (1D, 2D, or 3D), and the present chemical species and material
     phases.  The framework is generic and can be extended to other electrochemical
@@ -134,19 +135,22 @@ margin-right: auto;" class=noBorder>
     <p align=center id="Fig1"><img src="images/CellFlows.png">
 <br>Figure 1: Layers and primary flows of a PEMFC.</p>
 
-    <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600 width=600>-->
-    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600></a>
+    <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600>-->
+    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600></a>
 <br>Figure 2: Diagram of the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">PEMFC model</a>.</p>
 
     <p>The models are primarily based on first principles&mdash;the transport, exchange, and storage of
     material, momentum, and energy.  There are two modes of transport and exchange: diffusion and advection.
     Both are important in fuel cells, and both are included in the model.
+
     The model uses a method of upstream
     discretization that reduces to the central difference scheme when the velocity is zero.  This is
     appropriate for pure diffusion (e.g., Fick's law, Newton's law of viscosity, or Fourier's law).
+
     As the velocity becomes infinitely large (in either direction), the approach reduces to the upwind scheme.
     The upwind scheme represents
     pure advection such as through idealized pipes.  It is the basis of
+
     <a href = "http://www.modelica.org/">Modelica</a>
     <code>stream</code> connectors (and previously the <code>semiLinear</code> function).
     In <a href="index.html#FCSys">FCSys</a>, however, the transition between diffusion
@@ -198,23 +202,23 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
 </td><td>3D arrays of discrete, interconnected subregions</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
-</td><td>Control volumes with multi-species transport, exchange, and storage</td></tr>
+</td><td>Control volumes with multi-species transport, storage, and exchange</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases">Phases</a>
 </td><td>Mixtures of species</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species.html#FCSys.Species">Species</a>
 </td><td>Dynamic models of chemical species</td></tr>
 <tr><td><img src="images/FCSys.ChemistryS.png" alt="FCSys.Chemistry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry">Chemistry</a>
-</td><td>Models associated with chemical reactions</td></tr>
+</td><td>Chemical reactions and related models</td></tr>
 <tr><td><img src="images/FCSys.CharacteristicsS.png" alt="FCSys.Characteristics" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics.html#FCSys.Characteristics">Characteristics</a>
-</td><td>Packages with data and functions to correlate physical properties</td></tr>
+</td><td>Data and functions to correlate physical properties</td></tr>
 <tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
-</td><td>Declarative and imperative connectors</td></tr>
+</td><td>Declarative and imperative interfaces</td></tr>
 <tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Units" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units">Units</a>
 </td><td>Constants and units of physical measure</td></tr>
 <tr><td><img src="images/FCSys.QuantitiesS.png" alt="FCSys.Quantities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a>
-</td><td>Quantities to represent physical properties</td></tr>
+</td><td>Variables to represent physical properties</td></tr>
 <tr><td><img src="images/FCSys.UtilitiesS.png" alt="FCSys.Utilities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities">Utilities</a>
-</td><td>Functions to implement misc. algorithms</td></tr>
+</td><td>General supporting functions</td></tr>
 <tr><td><img src="images/FCSys.IconsS.png" alt="FCSys.Icons" width=20  height=20 align=top>&nbsp;<a href="FCSys_Icons.html#FCSys.Icons">Icons</a>
 </td><td>Icons to annotate and represent classes</td></tr>
 </table>
@@ -226,6 +230,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:00:53 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:47:30 2013.
 </div>
 </span></body></html>

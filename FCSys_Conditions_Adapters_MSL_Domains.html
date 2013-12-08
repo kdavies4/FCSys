@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.Adapters.MSL.Domains</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Adapters for physical domains">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Conditions.Adapters.MSL.Domains"></a><a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL">FCSys.Conditions.Adapters.MSL</a>.Domains</h2>
 
@@ -81,6 +81,12 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h3>Information</h3>
 
+<p>Assumptions:<ol>
+  <li>There is no shear force  across the interface.</li>
+   <li>There is no thermal conduction across the interface.</li>
+  </ol>
+  Note that the same assumptions are applied in <a href="FCSys_Species_'e-'_Graphite.html#FCSys.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a>.
+  </p>
 Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons.Names.Top1</a>.
 <p>
 
@@ -126,9 +132,8 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Assumptions</font>
-  boundary.mPhidot = {0,0} <font color="darkgreen">&quot;No shear force&quot;</font>;
-  boundary.Qdot = 0 <font color="darkgreen">&quot;No thermal conduction&quot;</font>;
-  <font color="darkgreen">// Note: These are consistent with the assumptions in Species.&#39;e-&#39;.Fixed.</font>
+  boundary.mPhidot = {0,0} <font color="darkgreen">&quot;No shear force (assumption #1)&quot;</font>;
+  boundary.Qdot = 0 <font color="darkgreen">&quot;No thermal conduction (assumption #2)&quot;</font>;
 
   <font color="red">Data.g</font>(boundary.T, boundary.p) = Data.z*pin.v*U.V <font color="darkgreen">
     &quot;Equal potentials (also conservation of energy)&quot;</font>;
@@ -185,7 +190,10 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top1">FCSys.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>, <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+<p>Assumptions:<ol>
+  <li>There is no shear force across the interface.</li>
+  </ol></p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
 <p>
 
 <h3>Parameters</h3>
@@ -193,9 +201,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area of the interface [L2]</td></tr>
-<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Side">Side</a></td><td>side</td><td>Side.n</td><td>FCSys side of the interface</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data (for FCSys)</td></tr>
 <tr><TD colspan="2">replaceable package Medium</td><td>Modelica.Media.IdealGases.Si&hellip;</td><td>Medium model (for Modelica)</td></tr>
@@ -209,7 +214,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a></td><td>boundary</td><td>Connector for material, momentum, and energy of a single species</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Orient]</td><td>Modelica translational flanges for shear force</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
@@ -222,53 +227,36 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <pre>
 <font color="blue">model</font> Fluid <font color="darkgreen">
   &quot;Adapter to connect a single fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
-  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.inSign">FCSys.Utilities.inSign</a>;
   <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area of the interface&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Side">Side</a> side=Side.n <font color="darkgreen">&quot;FCSys side of the interface&quot;</font>;
+
   <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
     &quot;Characteristic data (for FCSys)&quot;</font>;
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_IdealGases_SingleGases_H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> <font color="blue">
     constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
     &quot;Medium model (for Modelica)&quot;</font>;
 
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_IdealGases_Common_SingleGasNasa.html#Modelica.Media.IdealGases.Common.SingleGasNasa.BaseProperties">Medium.BaseProperties</a> medium <font color="darkgreen">&quot;Base properties of the fluid&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I <font color="darkgreen">&quot;Material current&quot;</font>;
-
   <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Connectors.Boundary</a> boundary <font color="darkgreen">
     &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
-    &quot;Modelica translational flanges&quot;</font>;
+  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orient] <font color="darkgreen">
+    &quot;Modelica translational flanges for shear force&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
     &quot;Modelica heat port&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
     &quot;Modelica electrical pin&quot;</font>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Aliases (for common terms)</font>
-  I = boundary.Ndot + boundary.phi[1]*boundary.rho*A <font color="darkgreen">&quot;Current&quot;</font>;
-
-  <font color="darkgreen">// Base media properties</font>
-  medium.p = fluidPort.p;
-  medium.T = heatPort.T;
-  medium.Xi = <font color="red">ones</font>(Medium.nXi)/Medium.nXi;
-
   <font color="darkgreen">// Equal properties</font>
-  medium.MM*boundary.rho = medium.d*U.mol/U.m^3 <font color="darkgreen">&quot;Density&quot;</font>;
+  boundary.p = fluidPort.p*U.Pa <font color="darkgreen">&quot;Pressure&quot;</font>;
   boundary.phi = <font color="red">der</font>(flange.s)*U.m/U.s <font color="darkgreen">&quot;Velocity&quot;</font>;
   boundary.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  medium.h = fluidPort.h_outflow;
+  <font color="red">Medium.specificEnthalpy_pT</font>(fluidPort.p, heatPort.T) = fluidPort.h_outflow;
 
   <font color="darkgreen">// Conservation (without storage)</font>
-  0 = Data.z*I + pin.i*U.A <font color="darkgreen">&quot;Charge&quot;</font>;
-  0 = I + (fluidPort.m_flow/medium.MM)*U.mol/U.s <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="red">inSign</font>(side)*pin.v*boundary.rho*A*Data.z*U.V = boundary.mPhidot[1] + flange[1].f
-    *U.N <font color="darkgreen">&quot;Normal translational momentum&quot;</font>;
-  {0,0} = boundary.mPhidot[2:3] + flange[2:3].f*U.N <font color="darkgreen">
-    &quot;Transverse translational momentum&quot;</font>;
+  0 = Data.z*boundary.Ndot + pin.i*U.A <font color="darkgreen">&quot;Charge&quot;</font>;
+  0 = boundary.Ndot + (fluidPort.m_flow/Data.m)*U.kg/U.s <font color="darkgreen">&quot;Material&quot;</font>;
+  {0,0} = boundary.mPhidot + flange.f*U.N <font color="darkgreen">&quot;Transverse translational momentum&quot;</font>;
   0 = boundary.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
   <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
   <font color="darkgreen">// cancel across the interface.</font>
@@ -283,7 +271,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>, <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
 <p>
 
 <h3>Parameters</h3>
@@ -291,8 +279,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>A</td><td>U.cm^2</td><td>Area of the interface [L2]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data (for FCSys)</td></tr>
 <tr><TD colspan="2">replaceable package Medium</td><td>Modelica.Media.IdealGases.Si&hellip;</td><td>Medium model (for Modelica)</td></tr>
@@ -306,7 +292,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a></td><td>boundary</td><td>Connector for material, momentum, and energy of a single species</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Axis]</td><td>Modelica translational flanges</td></tr>
+<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Orient]</td><td>Modelica translational flanges for shear force</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data (for FCSys)</td></tr>
@@ -320,22 +306,19 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &quot;Adapter to connect a single neutral fluid species between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
   <font color="blue">import </font>assert = <a href="FCSys_Utilities.html#FCSys.Utilities.assertEval">FCSys.Utilities.assertEval</a>;
   <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A=U.cm^2 <font color="darkgreen">&quot;Area of the interface&quot;</font>;
+
   <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
     &quot;Characteristic data (for FCSys)&quot;</font>;
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_IdealGases_SingleGases_H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> <font color="blue">
     constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
     &quot;Medium model (for Modelica)&quot;</font>;
 
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_IdealGases_Common_SingleGasNasa.html#Modelica.Media.IdealGases.Common.SingleGasNasa.BaseProperties">Medium.BaseProperties</a> medium <font color="darkgreen">&quot;Base properties of the fluid&quot;</font>;
-
   <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Connectors.Boundary</a> boundary <font color="darkgreen">
     &quot;Connector for material, momentum, and energy of a single species&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Axis] <font color="darkgreen">
-    &quot;Modelica translational flanges&quot;</font>;
+  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orient] <font color="darkgreen">
+    &quot;Modelica translational flanges for shear force&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
     &quot;Modelica heat port&quot;</font>;
 
@@ -344,21 +327,15 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
      + Data.formula);
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Base media properties</font>
-  medium.p = fluidPort.p;
-  medium.T = heatPort.T;
-  medium.Xi = <font color="red">ones</font>(Medium.nXi)/Medium.nXi;
-
   <font color="darkgreen">// Equal properties</font>
-  medium.MM*boundary.rho = medium.d*U.mol/U.m^3 <font color="darkgreen">&quot;Density&quot;</font>;
+  boundary.p = fluidPort.p*U.Pa <font color="darkgreen">&quot;Pressure&quot;</font>;
   boundary.phi = <font color="red">der</font>(flange.s)*U.m/U.s <font color="darkgreen">&quot;Velocity&quot;</font>;
   boundary.T = heatPort.T*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  medium.h = fluidPort.h_outflow;
+  <font color="red">Medium.specificEnthalpy_pT</font>(fluidPort.p, heatPort.T) = fluidPort.h_outflow;
 
   <font color="darkgreen">// Conservation (without storage)</font>
-  0 = boundary.Ndot + boundary.phi[1]*boundary.rho*A + (fluidPort.m_flow/medium.MM)
-    *U.mol/U.s <font color="darkgreen">&quot;Material&quot;</font>;
-  {0,0,0} = boundary.mPhidot + flange.f*U.N <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = boundary.Ndot + (fluidPort.m_flow/Data.m)*U.kg/U.s <font color="darkgreen">&quot;Material&quot;</font>;
+  {0,0} = boundary.mPhidot + flange.f*U.N <font color="darkgreen">&quot;Translational momentum&quot;</font>;
   0 = boundary.Qdot + heatPort.Q_flow*U.W <font color="darkgreen">&quot;Energy&quot;</font>;
   <font color="darkgreen">// Note:  All of the advective terms (for all the balance equations)</font>
   <font color="darkgreen">// cancel across the interface.</font>
@@ -372,6 +349,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:01:18 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:47:54 2013.
 </div>
 </span></body></html>

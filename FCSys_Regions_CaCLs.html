@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaCLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Regions.CaCLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaCLs</h2>
 
@@ -79,20 +79,23 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <p>This model represents the cathode catalyst layer of a PEMFC.
 The x axis extends from the anode to the cathode.
+
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Gurau1998</a>].
+<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Gurau1998">Gurau1998</a>].
 The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed SGL Sigracet 10 BA gas diffusion layer
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Nitta2008</a>].  The default
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Nitta2008">Nitta2008</a>].  The default
   electronic mobility (&sigma; = <code>40*U.S/(12*U.cm)</code>)
   is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.Sigracet10BA">CAGDLs.Sigracet10BA</a>).  The
+
   default activation energy for the oxygen reduction reaction (<code>E_A = 73.2e3*U.J/U.mol</code>) is from
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Siversten2005</a>].
-  </p>
+
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Siversten2005">Siversten2005</a>].</p>
 
 <p>Default assumptions (may be adjusted):
 <ol>
+<li>All of the species have the same temperature, even in different phases.</li>
 <li>Half of the solid is graphite and half is ionomer (by volume).</li>
 </ol></p>
 
@@ -110,7 +113,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.Subregion (common&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>J0</td><td>0.11*U.mA/U.cm^2</td><td>Exchange current density @ 300 K [N/(L2.T)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.287}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{28.7}*U.um</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.4</td><td>Porosity [1]</td></tr>
@@ -144,23 +147,23 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// extends FCSys.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x={0.287}*U.mm,
+    L_x={28.7}*U.um,
     L_y={8}*U.cm,
     L_z={6.25}*U.cm,
     <font color="blue">final </font>inclTransX=true,
     inclTransY=false,
     inclTransZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> (
-        common(k_Phi={1000,1000,1000}, k_Q=1000),
-        gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+        common(k_Q=0),
+        gasLiq(k_Phi={2,2,2}, k_Q=inf),
         gas(
-          common(k_Phi={200,200,200}),
+          common(k_Q=inf),
           k=<font color="red">fill</font>(epsilon^(-0.5), 3),
           inclH2O=true,
           inclN2=true,
           inclO2=true,
           H2O(
-            T(stateSelect=StateSelect.always),
+            initEnergy=Init.none,
             upstreamX=false,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
             zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>()),
@@ -184,18 +187,26 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;e-&#39;(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5),
           &#39;e-Transfer&#39;(E_A=0.46*U.V)),
         ionomer(
+          k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
           &#39;inclSO3-&#39;=true,
           &#39;inclH+&#39;=true,
           inclH2O=true,
-          k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
-          &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon)),
-          &#39;H+&#39;(initEnergy=Init.none, sigma=60*U.S/U.m),
+          &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon), T(<font color="blue">each </font>fixed=false, <font color="blue">each </font>
+                stateSelect=StateSelect.default)),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=40*U.S/U.m),
           H2O(initEnergy=Init.none,phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">
                 each </font>fixed=true))),
-        liquid(inclH2O=true, H2O(
+        liquid(
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
+          inclH2O=true,
+          H2O(
             upstreamX=false,
-            epsilon_IC=1e-6,
-            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)))),
+            epsilon_IC=1e-5,
+            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">each </font>initEnergy=Init.none,
+            mu=100*<font color="red">Characteristics.H2O.Liquid.mu</font>(),
+            T(<font color="blue">each </font>stateSelect=StateSelect.default))),
+        volume(kappa=6.46e-6*U.mm^2)),
     subregions(graphite(&#39;e-Transfer&#39;(<font color="blue">final </font>I0=J0*subregions.A[Axis.x]))));
 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
@@ -275,8 +286,11 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.C
   <font color="blue">extends </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a>(
     L_x={(28.7*U.um + 0.3*U.mm)},
     epsilon=0.5,
-    subregions(common(<font color="blue">each </font>k_Phi={0.4,0.4,0.4}),ionomer(&#39;H+&#39;(<font color="blue">each </font>sigma=300*U.S/
-              U.m))));
+    subregions(
+      common(<font color="blue">each </font>k_Phi={0.3,0.3,0.3}),
+      gas(H2(<font color="blue">each </font><font color="blue">final </font>eta=0),H2O(<font color="blue">each </font><font color="blue">final </font>eta=0)),
+      ionomer(&#39;H+&#39;(<font color="blue">each </font>sigma=650*U.S/U.m)),
+      liquid(H2O(<font color="blue">each </font><font color="blue">final </font>eta=0))));
 
 <font color="blue">end </font>CaCGDL;
 </pre>
@@ -288,6 +302,6 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.C
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:03:44 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:50:28 2013.
 </div>
 </span></body></html>

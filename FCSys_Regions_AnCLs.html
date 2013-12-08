@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnCLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Anode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Regions.AnCLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.AnCLs</h2>
 
@@ -79,17 +79,19 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <p>This model represents the anode catalyst layer of a PEMFC.
 The x axis extends from the anode to the cathode.
+
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Gurau1998</a>].
+<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Gurau1998">Gurau1998</a>].
 The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed SGL Sigracet 10 BA gas diffusion layer
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Nitta2008</a>].  The default
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Nitta2008">Nitta2008</a>].  The default
   electronic conductivity (&sigma; = <code>40*U.S/(12*U.cm)</code>)
   is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.Sigracet10BA">AnGDLs.Sigracet10BA</a>).</p>
 
 <p>Default assumptions (may be adjusted):
 <ol>
+<li>All of the species have the same temperature, even in different phases.</li>
 <li>Half of the solid is graphite and half is ionomer (by volume).</li>
 </ol></p>
 
@@ -148,15 +150,15 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     inclTransY=false,
     inclTransZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> (
-        common(k_Phi={1000,1000,1000}, k_Q=1000),
-        gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+        common(k_Q=0),
+        gasLiq(k_Phi={2,2,2}, k_Q=inf),
         gas(
-          common(k_Phi={200,200,200}),
-          k=<font color="red">fill</font>((epsilon)^(-0.5), 3),
+          common(k_Q=inf),
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
           inclH2=true,
           inclH2O=true,
           H2(
-            T(stateSelect=StateSelect.always),
+            initEnergy=Init.none,
             upstreamX=false,
             zeta=100*<font color="red">Characteristics.H2.Gas.zeta</font>(),
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)),
@@ -173,18 +175,26 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
                 epsilon)),
           &#39;e-&#39;(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5)),
         ionomer(
-          k=<font color="red">fill</font>(<font color="red">sqrt</font>(0.5*(1 - epsilon)), 3),
+          k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
           &#39;inclSO3-&#39;=true,
           &#39;inclH+&#39;=true,
           inclH2O=true,
-          &#39;H+&#39;(initEnergy=Init.none, sigma=60*U.S/U.m),
-          &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon)),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=40*U.S/U.m),
+          &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon),T(<font color="blue">each </font>fixed=false, <font color="blue">each </font>stateSelect
+                =StateSelect.default)),
           H2O(initEnergy=Init.none,phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">
                 each </font>fixed=true))),
-        liquid(inclH2O=true, H2O(
+        liquid(
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
+          inclH2O=true,
+          H2O(
             upstreamX=false,
-            epsilon_IC=1e-6,
-            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)))),
+            epsilon_IC=1e-5,
+            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">each </font>initEnergy=Init.none,
+            mu=100*<font color="red">Characteristics.H2O.Liquid.mu</font>(),
+            T(<font color="blue">each </font>stateSelect=StateSelect.default))),
+        volume(kappa=6.46e-6*U.mm^2)),
     subregions(graphite(&#39;e-Transfer&#39;(<font color="blue">final </font>I0=J0*subregions.A[Axis.x]))));
 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
@@ -257,8 +267,11 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.A
   <font color="blue">extends </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.AnCL</a>(
     L_x={(28.7*U.um + 0.3*U.mm)},
     epsilon=0.5,
-    subregions(common(<font color="blue">each </font>k_Phi={0.4,0.4,0.4}),ionomer(&#39;H+&#39;(<font color="blue">each </font>sigma=300*U.S/
-              U.m))));
+    subregions(
+      common(<font color="blue">each </font>k_Phi={0.3,0.3,0.3}),
+      gas(H2(<font color="blue">each </font><font color="blue">final </font>eta=0),H2O(<font color="blue">each </font><font color="blue">final </font>eta=0)),
+      ionomer(&#39;H+&#39;(<font color="blue">each </font>sigma=650*U.S/U.m)),
+      liquid(H2O(<font color="blue">each </font><font color="blue">final </font>eta=0))));
 
 <font color="blue">end </font>AnCGDL;
 </pre>
@@ -270,6 +283,6 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.A
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:03:16 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:50:00 2013.
 </div>
 </span></body></html>

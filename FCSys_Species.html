@@ -3,7 +3,7 @@
 <title>FCSys.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dynamic models of chemical species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Species"></a><a href="index.html#FCSys">FCSys</a>.Species</h2>
 
@@ -128,7 +128,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>f.start[n_trans]</td><td>0</td><td>Total normal translational force on pairs of boundaries [L.M/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>minusDeltaf.start[n_trans]</td><td>0</td><td>Dynamic and nonequilibrium compression forces [L.M/T2]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Chemical parameters</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime[n_chem]</td><td>zeros(n_chem)</td><td>Specific exchange rates [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime[n_chem]</td><td>zeros(n_chem)</td><td>Specific exchange currents [T]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
@@ -159,6 +159,8 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 <tr><td>Boolean</td><td>approxVelocity</td><td>true</td><td>Calculate normal boundary velocities assuming uniform density</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>U.C</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
 </table>
 <p>
 
@@ -199,24 +201,36 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
     <li>The gradient of material current is uniform in the direction of the current.</li>
     <li>The normal translational force on pairs of boundaries is split equally between the boundaries.  This includes
     the body, shear (transverse translational transport), and exchange forces due to intermolecular drag and transfer during
+
     chemical reactions and phase change.  It excludes the thermodynamic, dynamic
+
     (advective normal translational transport), and nonequilibrium (irreversible compression) pressures.  It also excludes
+
     transient effects since translational momentum is stored at the boundaries (not in the subregion).</li>
+
     <li>Nonequilibrium pressure is included in the thermodynamic states at the boundaries.  In particular, the specific enthalpy at a boundary
+
     is a function of the temperature and the
+
     sum of the thermodynamic and nonequilibrium pressures at the boundary (and a possible artifact of dynamic pressure; see the first note regarding parameters).
+
     The rate of advection of energy is the product of this
     specific enthalpy and the material current.
     </ol></p>
 
     <p>Notes regarding the parameters:
     <ol>
+
     <li>If <code>approxVelocity</code> is <code>true</code>,
     then the normal velocities at the boundaries are calculated from the boundary currents assuming
     that the density is uniform.  This
+
     avoids nonlinear systems of equations, but it introduces an artifact of the dynamic pressure into the
+
     thermodynamic states at the boundaries.  The extra pressure is <i>m</i>&nbsp;<i>N&#775;<sub>i</sub></i><sup>2</sup>&nbsp;(<i>v</i> - <i>v<sub>i</sub></i>)/<i>A</i>&prime;, where <i>m</i> is the specific mass,
+
     <i>v</i> is the specific volume in the subregion,
+
     <i>v<sub>i</sub></i> is the specific volume at the boundary, <i>N&#775;<sub>i</sub></i> is the boundary current, and
     <i>A</i>&prime; is the available cross-sectional area.
     This affects the energy balance via the specific enthalpy at the boundaries.</li>
@@ -224,28 +238,36 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
     <li>If <code>consTransX</code>, <code>consTransY</code>, or <code>consTransZ</code> is
     <code>ConsTrans.steady</code>, then the derivative of translational momentum at and normal to the boundaries (proportional to
     &part;<i>N&#775;<sub>i</sub></i>/&part;<i>t</i>)
+
     is treated as zero and removed from the translational momentum balances/material transport equations
     at the corresponding boundaries.</li>
 
     <li>If consRot is <code>true</code>, then rotational momentum is conserved without storage
     (i.e., steady).  This means that the shear forces are mapped so that there is no net torque around any
     rotational axis that has all its boundaries included (i.e., all the boundaries around the perimeter).  Rotational
+
     momentum is not exchanged among species or directly transported (i.e., uniform or shaft rotation).</li>
 
     <li>Upstream discretization is applied by default.
     The central difference
     scheme may be used by setting <code>upstreamX</code>, <code>upstreamY</code>, and <code>upstreamZ</code> to
+
     <code>true</code>.  The typical diffusion properties are such that the P&eacute;clet number for
+
     the upstream discretization of pressure will be much less (factor of 1/10,000) than the
+
     P&eacute;clet numbers for translational and thermal transport.  Therefore, it may appear
-    that pressure is not advected with the material transort stream.</li>
+    that pressure is not advected with the material transport stream.</li>
 
     <li>The indices of the translational Nusselt number (<i>Nu</i><sub>&Phi;</sub>)
     correspond to the orientation of the translational momentum that is transported, not the axes of material transport.</li>
 
     <li>The default thermal Nusselt number is one, which represents pure conduction through the gas.  Use
+
     3.66 for internal flow where the boundaries are uniform in temperature or 48/11 (approximately 4.36)
-    if the heat flux is uniform [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>].</li>
+
+    if the heat flux is uniform [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Incropera2002">Incropera2002</a>].</li>
+
     </ol></p>
 
     <p>Translational momentum and thermal energy are advected as material is exchanged
@@ -291,7 +313,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T.start</td><td>T_IC</td><td>Temperature [L2.M/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi.start[n_trans]</td><td>0</td><td>Velocity [L/T]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Chemical parameters</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime[n_chem]</td><td>zeros(n_chem)</td><td>Specific exchange rates [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime[n_chem]</td><td>zeros(n_chem)</td><td>Specific exchange currents [T]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
@@ -322,6 +344,8 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 <tr><td>Boolean</td><td>approxVelocity</td><td>true</td><td>Calculate normal boundary velocities assuming uniform density</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>U.C</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
 </table>
 <p>
 
@@ -361,7 +385,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
           StateSelect.always<font color="blue"> else </font>StateSelect.prefer),T(<font color="blue">final </font>fixed=false));
   <font color="darkgreen">// Note:  The extension is after these parameters so that they appear first</font>
   <font color="darkgreen">// in the parameter dialog.</font>
-  <font color="darkgreen">// Note:  StateSelect.always is not ideal, but it is necessary to avoid</font>
+  <font color="darkgreen">// Note:  StateSelect.always isn&#39;t ideal, but it&#39;s necessary to avoid</font>
   <font color="darkgreen">// dynamic state selection in Dymola 2014.  In some cases it isn&#39;t</font>
   <font color="darkgreen">// appropriate (e.g., an incompressible liquid that fills the entire</font>
   <font color="darkgreen">// subregion), and in those cases it can be modified at instantiation.</font>
@@ -375,7 +399,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 
   <font color="darkgreen">// Chemical parameters</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime[n_chem](<font color="blue">each </font>nominal=U.ms) = <font color="red">zeros</font>(n_chem) <font color="darkgreen">
-    &quot;Specific exchange rates&quot;</font>;
+    &quot;Specific exchange currents&quot;</font>;
 
   <font color="darkgreen">// Geometry</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> kL[:]=L[cartTrans] <font color="darkgreen">&quot;Effective transport length&quot;</font>;
@@ -408,13 +432,16 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     &quot;Translational Nusselt numbers&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Nu_Q=1 <font color="darkgreen">&quot;Thermal Nusselt number&quot;</font>;
 
+  <font color="darkgreen">// Advanced parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N0=U.C <font color="darkgreen">&quot;Nominal amount of material to prevent depletion&quot;</font>;
+
   <font color="darkgreen">// Aliases (for common terms)</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I[n_trans](
     <font color="blue">each </font>nominal=U.A,
     <font color="blue">each </font>stateSelect=StateSelect.never,
     <font color="blue">each </font>start=0) <font color="darkgreen">&quot;Current&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_boundaries[n_trans, Side](
-    <font color="blue">each </font>nominal=10*U.cm/U.s,
+    <font color="blue">each </font>nominal=100*U.cm/U.s,
     <font color="blue">each </font>stateSelect=StateSelect.never,
     <font color="blue">each </font>start=0) <font color="darkgreen">&quot;Normal velocities at the boundaries&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f[n_trans](
@@ -451,6 +478,9 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> sT_chemical[n_chem](<font color="blue">each </font>stateSelect=StateSelect.never)
      = <font color="red">actualStream</font>(chemical.sT) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>n_chem &gt; 0 <font color="darkgreen">
     &quot;Specific entropy-temperature product of the chemical streams&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> DeltaT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    Delta</font>(boundaries.T) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Differences in temperatures across the boundaries&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Deltap[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">Delta</font>
     (boundaries.p) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Differences in pressures across the boundaries&quot;</font>;
@@ -706,11 +736,9 @@ Choose any condition besides none.&quot;);
   <font color="darkgreen">// Material exchange</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_chem<font color="blue"> loop</font>
     <font color="blue">if </font>tauprime[i] &gt; Modelica.Constants.small<font color="blue"> then</font>
-      tauprime[i]*chemical[i].Ndot = N*<font color="red">exp</font>((chemical[i].g - g)/T - U.C/N) - N;
-      <font color="darkgreen">// **replace U.C with amount when full</font>
+      tauprime[i]*chemical[i].Ndot = (N + N0)*<font color="red">exp</font>((chemical[i].g - g)/T) - N;
     <font color="blue">else</font>
-      chemical[i].g = g <font color="darkgreen">
-        &quot;**Simplified to avoid nonlinear equations in Dymola 2014&quot;</font>;
+      chemical[i].g = g;
     <font color="blue">end if</font>;
   <font color="blue">end for</font>;
 
@@ -899,7 +927,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_inter</td><td>0</td><td>Number of exchange connections with other phases</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>epsilon</td><td>0.25</td><td>Volumetric fill fraction [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.25</td><td>Volumetric fill fraction [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
@@ -939,9 +967,10 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 
 <pre>
 <font color="blue">model</font> Solid <font color="darkgreen">&quot;Base model for an inert, stationary solid&quot;</font>
+  <font color="blue">import </font><a href="FCSys_Utilities.html#FCSys.Utilities.Delta">FCSys.Utilities.Delta</a>;
 
   <font color="darkgreen">// Geometry</font>
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> epsilon=0.25 <font color="darkgreen">&quot;Volumetric fill fraction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon=0.25 <font color="darkgreen">&quot;Volumetric fill fraction&quot;</font>;
   <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Species">Species</a>(
     <font color="blue">final </font>N_IC,
     <font color="blue">final </font>V_IC=epsilon*<font color="red">product</font>(L),
@@ -963,13 +992,13 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="blue">parameter </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a> consEnergy=ConsThermo.dynamic <font color="darkgreen">&quot;Energy&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="darkgreen">// ----------------------------------</font>
-  <font color="darkgreen">// Time constants</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_QT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
     <font color="blue">each </font>start=U.s) = N*c_v*theta*kL ./ Aprime <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Time constants for thermal transport (through the whole subregion)&quot;</font>;
-
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> DeltaT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    Delta</font>(boundaries.T) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Differences in temperatures across the boundaries&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">Connectors.ThermalDiffusive</a> boundaries[n_trans, Side](T(<font color="blue">each </font>start=T_IC)) <font color="darkgreen">
     &quot;Connectors for transport&quot;</font>;
 
@@ -1013,8 +1042,11 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 
 <p>All of the details below are pertinent to the <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a>
     model (and the derived <a href="FCSys_Species.html#FCSys.Species.Ion">Ion</a> model) which inherits from this model.
+
     Only some of the details apply to the
+
     <a href="index.html#FCSys.Solid">Solid</a> model because it excludes the transport and exchange of
+
     material.</p>
 
     <p>This model is based on the following fixed assumptions:
@@ -1022,7 +1054,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
        <li>All boundaries are rectangular.
        <li>The material is orthorhombic.  This implies that a gradient which induces diffusion
        along an axis does not induce diffusion along axes orthogonal to it
-       [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Bejan2006</a>,
+       [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Bejan2006">Bejan2006</a>,
        pp. 691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
        axes of transport.  For example, if the material is stratified, then the
@@ -1034,6 +1066,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
        <li>Rotational momentum is not exchanged, transported, or stored.</li>
     </ol>
     Other assumptions are optional via the parameters.  Additional assumptions may be
+
     applied in models that inherit from this one.</p>
 
     <p><a href="#Fig1">Figure 1</a> shows how instances of
@@ -1041,10 +1074,12 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     connected within a <a href="FCSys_Subregions.html#FCSys.Subregions">Subregion</a>.  A single species in
     a single phase is called a <i>configuration</i>. The
     generalized resistances (<i>R</i>) affect the force and rates of chemical exchange and
+
     heat flow
     associated with differences in activity, velocity, and temperature (respectively) between
     each configuration and a common node.  These exchange processes are diffusive.
     Each resistor generates heat
+
     in the <a href="FCSys_Species.html#FCSys.Species">Species</a> instance that contains it.</p>
 
     <p align=center id="Fig1"><img src="images/Exchange.png">
@@ -1070,6 +1105,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connector), as shown
     in Figure 3a.  The pressures are additive, and each species is assumed to exist at the
     total extensive volume of the phase.  Within a
+
     <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>,
     the <a href="FCSys_Phases.html#FCSys.Phases">Phases</a> are combined by Amagat's law of partial volumes
     (see the <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a> connector), as shown
@@ -1096,7 +1132,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <ol>
 
     <li>The effect transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
-    transport axes due to tortouisity.  The tortuisity may be anisotropic.</li>
+    transport axes due to tortouisity.  The tortouisity may be anisotropic.</li>
 
     <li>If the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
      thermal independity (&nu;), fluidity (&eta;), or thermal resistivity (&theta;)
@@ -1105,7 +1141,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Mattsson1993B</a>] is necessary.</li>
+    quantity, then index reduction [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Mattsson1993B">Mattsson1993B</a>] is necessary.</li>
 
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
@@ -1122,6 +1158,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <li>If a transport axis is not included (via the outer <code>inclTrans[:]</code> parameter
     which maps to <code>{inclTransX, inclTransY, inclTransZ}</code> in the
     <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model), then the associated pair of
+
     boundaries is removed from the model.</li>
 
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
@@ -1139,7 +1176,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 
     <li><i>N</i><sub>min</sub> establishes an amount of material below which no exchange occurs.  It can
     help to avoid stiffness when very little of a species exists in a subregion.</li>
-    </p>
+</p>
 
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the velocity and the current.
@@ -1250,7 +1287,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <font color="blue">final </font>start=T_IC,
     stateSelect=StateSelect.prefer) <font color="darkgreen">&quot;Temperature&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_trans](
-    <font color="blue">each </font>nominal=10*U.cm/U.s,
+    <font color="blue">each </font>nominal=100*U.cm/U.s,
     <font color="blue">each </font>start=0,
     <font color="blue">each </font>stateSelect=StateSelect.prefer) <font color="darkgreen">&quot;Velocity&quot;</font>;
 
@@ -1411,6 +1448,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:03 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:47 2013.
 </div>
 </span></body></html>

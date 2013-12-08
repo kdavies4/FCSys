@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.ThermalDiffusive.Single</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.ThermalDiffusive\&quot;&gt;ThermalDiffusive&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Conditions.ByConnector.ThermalDiffusive.Single"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusive.html#FCSys.Conditions.ByConnector.ThermalDiffusive">FCSys.Conditions.ByConnector.ThermalDiffusive</a>.Single</h2>
 
@@ -67,6 +67,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Specify heat flow rate (measure temperature)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnece4fe5d5a747fbbbatRateS.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Temperature</a>
 </td><td>Specify temperature (measure heat flow rate)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.ByConnece4fe5d5a747fbbbatRateS.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Resistance" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Resistance">Resistance</a>
+</td><td>Specify thermal resistance to the environment (measure temperature)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.ByConnece4fe5d5a747fbbbatRateS.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial">Partial</a>
 </td><td>Base model for a thermal condition</td></tr>
 </table>
@@ -165,10 +167,60 @@ Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#
 </pre>
 <hr>
 
+<h2><img src="images/FCSys.Conditions.ByConnece4fe5d5a747fbbbatRateI.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Resistance" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Resistance"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single">FCSys.Conditions.ByConnector.ThermalDiffusive.Single</a>.Resistance</h2>
+<b>Specify thermal resistance to the environment (measure temperature)</b>
+<img src="images/FCSys.Conditions.ByConnec3e46002fedb70943tanceD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Resistance">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial">Partial</a> (Base model for a thermal condition).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>set</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Measurement</b></td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>therm.T</td><td>Measurement expression</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">ThermalDiffusive</a></td><td>therm</td><td>Connector for thermal diffusion</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=3><b>Measurement</b></td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Resistance <font color="darkgreen">
+  &quot;Specify thermal resistance to the environment (measure temperature)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial">Partial</a>(<font color="blue">final </font>y=therm.T);
+
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  therm.T - environment.T = u_final*therm.Qdot;
+
+<font color="blue">end </font>Resistance;
+</pre>
+<hr>
+
 <h2><img src="images/FCSys.Conditions.ByConnece4fe5d5a747fbbbatRateI.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial"></a><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single">FCSys.Conditions.ByConnector.ThermalDiffusive.Single</a>.Partial</h2>
 <b>Base model for a thermal condition</b>
-<img src="images/FCSys.Conditions.ByConnec5ae7154bf29301c0rtialD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial">
+<img src="images/FCSys.Conditions.ByConnec3e46002fedb70943tanceD.png" alt="FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Partial">
 
 <h3>Information</h3>
 
@@ -236,6 +288,6 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:01:49 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:48:25 2013.
 </div>
 </span></body></html>

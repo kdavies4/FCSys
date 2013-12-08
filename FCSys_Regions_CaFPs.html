@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Regions.CaFPs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaFPs</h2>
 
@@ -84,32 +84,29 @@ The model is
 bidirectional, meaning that either <code>yNegative</code> or <code>yPositive</code> can be
 used as the inlet.  By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The solid and the fluid phases exist in the same subregions even though a typical flow plate is impermeable
-to the fluid (except for the channel).  This has some important implications:<ol>
-<li>The fluid species are exposed at the positive x-axis connector (<code>xNegative</code>).
-They should be left disconnected there.</li>
-<li>The viscous forces are modeled not as shear boundary forces, but as exchange forces with the internal solid.
-Therefore, the pressure drop across the channel is governed primarily by the mobility of the fluid species (&mu;)
-and the coupling factors for exchange (e.g., <i>k</i><sub>common</sub>), not by the fluidity (&eta;), translational Nusselt number (<b><i>Nu</i><sub>&Phi;</sub></b>),
- and transport factors (<b><i>k</i></b>).</li>
-<li>The x axis-component of the transport factor (<b><i>k</i></b>) for the gas and the liquid should
-generally be greater than one because the transport distance into/out of the GDL is less that half the thickness of the flow plate.
-As an approximation, it should be equal to the product of two ratios:<ol>
-<li>the thickness of the flow plate to the depth of the channels</li>
-<li>the area of the valleys in the yz plane to the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
-the total volume avaialable for the fluid (&epsilon;)</li>
-</ol> The default is 2/&epsilon;.</ol>
+<p>The solid and the fluid phases are assumed to exist in the same subregions,
+even though a
+typical flow plate is impermeable
+to the fluid (except for the channel).
 In theory, it is possible
 to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,
 this would significantly increase the mathematical size of the model.  Currently, that level of detail is best left to
 computational fluid dynamics.</p>
+
+<p>The x axis-component of the transport factor (<i>k</i><sub>x</sub>) for the gas and the liquid should
+generally be less than one because the transport distance into/out of the GDL is less that half the
+thickness of the flow plate. It is equal to the product of two ratios:<ol>
+<li>the depth of the channels to the thickness of the flow plate</li>
+<li>the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
+the total volume available for the fluid (&epsilon;) to the area of the valleys in the yz plane</li>
+</ol> The default is &epsilon;/2.</p>
 
 <p>See <a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
 of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
 electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
 are that of Entegris/Poco Graphite AXF-5Q
-[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].
+[<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Entegris2012">Entegris2012</a>].
   There is additional data in the
 text layer of the <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p>
 
@@ -169,11 +166,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     inclTransZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
         (
-        common(k_Phi={100,inf,100}),
-        gasLiq(k_Phi={inf,1e4,inf},k_Q=inf),
+        common(k_Phi={1e7,inf,1e7},k_Q=1e5),
+        gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
         gas(
           common(k_Phi={inf,inf,inf}),
-          k={2/epsilon,11,Modelica.Constants.eps},
+          k={epsilon/2,11,1/11},
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -198,13 +195,14 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;incle-&#39;=true,
           &#39;C+&#39;(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
           &#39;e-&#39;(sigma=U.S/(1.470e-3*U.cm))),
-        liquid(inclH2O=true, H2O(
+        liquid(
+          k={epsilon/2,11,1/11},
+          inclH2O=true,
+          H2O(
             upstreamX=false,
             Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-            epsilon_IC=1e-6)),
-        capillaryPressure(theta=90*U.degree)));
-
-  <font color="darkgreen">// **option to exclude capillary pressure (if so, use in AnFP too)?</font>
+            epsilon_IC=1e-5)),
+        volume(inclCapillary=false)));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.0625 <font color="darkgreen">
     &quot;Fraction of volume for the fluid&quot;</font>;
@@ -238,6 +236,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:20 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:03 2013.
 </div>
 </span></body></html>

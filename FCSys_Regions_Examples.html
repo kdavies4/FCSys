@@ -3,7 +3,7 @@
 <title>FCSys.Regions.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Regions.Examples"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.Examples</h2>
 
@@ -129,59 +129,33 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFPs.AnFP</a> anFP;
 
   <font color="darkgreen">// Conditions</font>
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC[anFP.n_y, anFP.n_z](
-    <font color="blue">each </font>gas(
-      inclH2=true,
-      inclH2O=true,
-      H2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>),
-
-      H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>)),
-
-    <font color="blue">each </font>graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC[anFP.n_y, anFP.n_z](<font color="blue">each </font>
+      graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(materialSet(y=0))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(materialSet(y=0))));
 
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>)));
-
-<a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC[anFP.n_y, anFP.n_z](
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC[anFP.n_y, anFP.n_z](
     <font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(
         materialSet(y=zI/2),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0)),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0))),
     <font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(materialSet(y=-zI), thermalSet(y=
               environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+    <font color="blue">each </font>liquid(inclH2O=true, H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> anSource[anFP.n_x, anFP.n_z]
@@ -200,7 +174,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
               anFP.n_z) - anSink.gas.H2.p)),
       H2(materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:, anFP.n_y,
               :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v), <font color="blue">
-          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>)),
+          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>)),
       <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p))));
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
@@ -273,19 +247,33 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC[anGDL.n_y, anGDL.n_z](
-    <font color="blue">each </font>gas(
-      inclH2=true,
-      inclH2O=true,
-      H2(thermalSet(y=environment.T)),
-      H2O(thermalSet(y=environment.T))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(set(y=environment.T)),
       &#39;e-&#39;(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(thermalSet(y=environment.T))));
+    <font color="blue">each </font>liquid(inclH2O=true, H2O(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+
+    <font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2O(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+
+      H2(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+
+<font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
     T=333.15*U.K,
     p=<font color="red">U.from_kPag</font>(48.3),
@@ -342,7 +330,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
 
         materialSet(y=currentSet.y),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p - U.kPa))));
@@ -571,9 +559,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
           thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p))));
 
@@ -582,17 +570,36 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       inclH2O=true,
       inclN2=true,
       inclO2=true,
-      H2O(thermalSet(y=environment.T)),
-      N2(thermalSet(y=environment.T)),
-      O2(thermalSet(y=environment.T))),
+      H2O(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+
+      N2(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+
+      O2(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(set(y=environment.T)),
       &#39;e-&#39;(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(thermalSet(y=environment.T))));
+    <font color="blue">each </font>liquid(inclH2O=true, H2O(
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+
+<font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
     T=333.15*U.K,
     p=<font color="red">U.from_kPag</font>(48.3),
@@ -659,22 +666,22 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       inclH2O=true,
       H2(
         materialSet(y=environment.p_dry),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T)),
       H2O(
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
           thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p - U.kPa))));
 
@@ -781,27 +788,27 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       inclH2O=true,
       H2(
         materialSet(y=environment.p_dry),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T)),
       H2O(
         materialSet(y=environment.p_H2O),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
       &#39;e-&#39;(
         materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(
         materialSet(y=environment.p),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))));
 
@@ -814,17 +821,29 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
-        thermalSet(y=environment.T)),
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+
       N2(
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p*(1 - environment.psi_O2_dry)),
-        thermalSet(y=environment.T)),
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+
       O2(
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_O2),
-        thermalSet(y=environment.T))),
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
@@ -834,9 +853,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
         materialSet(y=-currentSet.y),
         thermalSet(y=environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=true,H2O(materialSet(y=0), thermalSet(y=environment.T))));
+    <font color="blue">each </font>liquid(inclH2O=true,H2O(
+        materialSet(y=0),
+        thermalSet(y=environment.T),
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+
+<font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
     T=333.15*U.K,
     p=<font color="red">U.from_kPag</font>(48.3),
@@ -901,76 +925,41 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFPs.CaFP</a> caFP;
 
   <font color="darkgreen">// Conditions</font>
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> caBC[caFP.n_y, caFP.n_z](
-    <font color="blue">each </font>gas(
-      inclH2O=true,
-      inclN2=false,
-      inclO2=true,
-      H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>),
-
-      N2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>),
-
-      O2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>)),
-
-    <font color="blue">each </font>graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> caBC[caFP.n_y, caFP.n_z](<font color="blue">each </font>
+      graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(materialSet(y=0))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(materialSet(y=0))));
 
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>)));
-
-<a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> anBC[caFP.n_y, caFP.n_z](
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> anBC[caFP.n_y, caFP.n_z](
     <font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=false,
       inclO2=true,
       H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0)),
       N2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p*psi_N2),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0)),
       O2(
         materialSet(y=zI/2),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0))),
     <font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(materialSet(y=-zI), thermalSet(y=
               environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=true, H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+    <font color="blue">each </font>liquid(inclH2O=true, H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caSource[caFP.n_x, caFP.n_z]
@@ -993,11 +982,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
               caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
       N2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:, caFP.n_y,
               :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v), <font color="blue">
-          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>),
+          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>),
 
       O2(materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:, caFP.n_y,
               :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v), <font color="blue">
-          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>)),
+          redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>)),
       <font color="blue">each </font>liquid(inclH2O=true, H2O(materialSet(y=environment.p))));
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
@@ -1104,39 +1093,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     subregions(<font color="blue">each </font>liquid(inclH2O=inclLiq)));
 
   <font color="darkgreen">// Conditions</font>
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC[anFP.n_y, anFP.n_z](
-    <font color="blue">each </font>gas(
-      inclH2=true,
-      inclH2O=true,
-      H2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>),
-
-      H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>,
-
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity</a>)),
-
-    <font color="blue">each </font>graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC[anFP.n_y, anFP.n_z](<font color="blue">each </font>
+      graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(materialSet(y=0))),
-    <font color="blue">each </font>liquid(inclH2O=inclLiq, H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
-
-        materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
-
-        thermalSet(y=0))));
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(materialSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> anSource[anFP.n_x, anFP.n_z]
     (<font color="blue">each </font>gas(
@@ -1148,7 +1111,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anSink[anFP.n_x, anFP.n_z](gas(
       <font color="blue">each </font>inclH2=true,
       <font color="blue">each </font>inclH2O=true,
-      H2(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      H2(<font color="blue">redeclare </font><font color="blue">each </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
           materialSet(y=anSink.gas.H2O.boundary.Ndot .* anFP.subregions[:, anFP.n_y,
               :].gas.H2O.v ./ anFP.subregions[:, anFP.n_y, :].gas.H2.v)),
       H2O(materialSet(y=<font color="red">fill</font>(
@@ -1157,28 +1120,16 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
               anFP.n_z) - anSink.gas.H2.p))), <font color="blue">each </font>liquid(inclH2O=inclLiq, H2O(
           materialSet(y=environment.p))));
 
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC[caFP.n_y, caFP.n_z](
-    <font color="blue">each </font>gas(
-      inclH2O=true,
-      inclN2=true,
-      inclO2=true,
-      H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
-          thermalSet(y=0)),
-      N2(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
-          thermalSet(y=0)),
-      O2(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
-          thermalSet(y=0))),
-    <font color="blue">each </font>graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC[caFP.n_y, caFP.n_z](<font color="blue">
+      each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(set(y=environment.T)),
       &#39;e-&#39;(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
 
         materialSet(y=-zI),
-        thermalSet(y=environment.T))),
-    <font color="blue">each </font>liquid(inclH2O=inclLiq, H2O(<font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
-          thermalSet(y=0))));
+        thermalSet(y=environment.T))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caSource[caFP.n_x, caFP.n_z]
     (<font color="blue">each </font>gas(
@@ -1198,19 +1149,19 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
               environment.p,
               caFP.n_x,
               caFP.n_z) - caSink.gas.N2.p - caSink.gas.O2.p)),
-      N2(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      N2(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
           materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:, caFP.n_y,
               :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.N2.v)),
-      O2(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      O2(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
           materialSet(y=caSink.gas.H2O.boundary.Ndot .* caFP.subregions[:, caFP.n_y,
               :].gas.H2O.v ./ caFP.subregions[:, caFP.n_y, :].gas.O2.v))), <font color="blue">
       each </font>liquid(inclH2O=inclLiq,H2O(materialSet(y=environment.p))));
 
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> currentSet(
     offset=U.mA,
-    height=100*U.A,
     startTime=50,
-    duration=600);
+    duration=600,
+    height=100*U.A);
 
 <font color="blue">protected </font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> zI(unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Electrical current&quot;</font>;
@@ -1249,6 +1200,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:02:35 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:49:19 2013.
 </div>
 </span></body></html>

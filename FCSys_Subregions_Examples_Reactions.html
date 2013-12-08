@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Examples.Reactions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples of phase change">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Subregions.Examples.Reactions"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.Reactions</h2>
 
@@ -123,17 +123,17 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC(graphite(
       &#39;incle-&#39;=true,
       &#39;inclC+&#39;=true,
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T)),
-      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">FCSys.Conditions.ByConnector.Boundary.Single.Material.current</a>,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
           materialSet(y=currentSet.y))), gas(inclH2=true, H2(
         materialSet(y=environment.p_dry),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
 
         thermalSet(y=environment.T))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> caBC(ionomer(&#39;inclH+&#39;=true,
-        &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">FCSys.Conditions.ByConnector.Boundary.Single.Material.potential</a>
+        &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">Conditions.ByConnector.Boundary.Single.Material.potential</a>
             (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>),
           materialSet(y=0))));
 
@@ -201,19 +201,19 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
         &#39;H+&#39;(
         thermalSet(y=environment.T),
         materialSet(y=0),
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">FCSys.Conditions.ByConnector.Boundary.Single.Material.potential</a>
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">Conditions.ByConnector.Boundary.Single.Material.potential</a>
             (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC(gas(
       inclH2O=true,
       inclO2=true,
       H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
         thermalSet(y=environment.T)),
       O2(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_O2),
         thermalSet(y=environment.T))), graphite(
@@ -226,7 +226,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     duration=20,
     height=-200*U.A,
     startTime=5);
-  <font color="darkgreen">//offset=-U.mA,</font>
+  <font color="darkgreen">// offset=-U.mA,</font>
 <font color="blue">equation </font>
   <font color="red">connect</font>(subregion.xPositive, caBC.boundary);
   <font color="red">connect</font>(anBC.boundary, subregion.xNegative);
@@ -240,6 +240,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:41 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:24 2013.
 </div>
 </span></body></html>

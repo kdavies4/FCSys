@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Regions.CaGDLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaGDLs</h2>
 
@@ -99,17 +99,25 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <p>This model represents the cathode gas diffusion layer of a PEMFC.
 The x axis extends from the anode to the cathode.
+
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
 <p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.
+
 The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
-[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Bernardi1992</a>, p. 2483], although
+
+[<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Bernardi1992">Bernardi1992</a>, p. 2483], although
 that reference may be outdated).
   The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed Sigracet&reg; 10 BA gas diffusion layer
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Nitta2008</a>].  The default
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Nitta2008">Nitta2008</a>].  The default
   electrical conductivity
-  is also for Sigracet&reg; 10 BA [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].</p>
+  is also for Sigracet&reg; 10 BA [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2007">SGL2007</a>].</p>
+
+<p>Default assumptions (may be adjusted):
+<ol>
+<li>All of the species have the same temperature, even in different phases.</li>
+</ol></p>
 
 <p>For more information, please see the
     <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
@@ -127,7 +135,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.3}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.7</td><td>Porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Porosity [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -172,28 +180,32 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     inclTransZ=false,
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
         (
-        common(k_Phi={3,3,3}, k_Q=3),
-        gasLiq(k_Phi={inf,inf,inf}, k_Q=inf),
+        common(k_Q=0),
+        gasLiq(k_Phi={2,2,2}, k_Q=inf),
         gas(
+          common(k_Q=inf),
           k=<font color="red">fill</font>(epsilon^(-0.5), 3),
           inclH2O=true,
           inclN2=true,
           inclO2=true,
           H2O(
+            initEnergy=Init.none,
             upstreamX=false,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
             zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>(),
-            T(stateSelect=StateSelect.always)),
+            <font color="blue">final </font>eta=0),
           N2(
             initEnergy=Init.none,
             upstreamX=false,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
-            zeta=100*<font color="red">Characteristics.N2.Gas.zeta</font>()),
+            zeta=100*<font color="red">Characteristics.N2.Gas.zeta</font>(),
+            <font color="blue">final </font>eta=0),
           O2(
             initEnergy=Init.none,
             upstreamX=false,
             I(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
-            zeta=100*<font color="red">Characteristics.O2.Gas.zeta</font>())),
+            zeta=100*<font color="red">Characteristics.O2.Gas.zeta</font>(),
+            <font color="blue">final </font>eta=0)),
         graphite(
           k=<font color="red">fill</font>((1 - epsilon)^(-0.5), 3),
           &#39;inclC+&#39;=true,
@@ -201,15 +213,26 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;C+&#39;(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,<font color="blue">final </font>epsilon=1 -
                 epsilon),
           &#39;e-&#39;(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
-        liquid(inclH2O=true, H2O(
+        liquid(
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
+          inclH2O=true,
+          H2O(
             upstreamX=false,
-            epsilon_IC=1e-6,
-            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)))));
+            epsilon_IC=1e-5,
+            <font color="blue">final </font>eta=0,
+            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">each </font>initEnergy=Init.none,
+            mu=100*<font color="red">Characteristics.H2O.Liquid.mu</font>(),
+            T(<font color="blue">each </font>stateSelect=StateSelect.default)))));
+
+  <font color="darkgreen">// Note:  The fluid species have zero fluidity (eta=0) so that the transverse</font>
+  <font color="darkgreen">// velocity is zero at the interface with the flow plate.  That condition</font>
+  <font color="darkgreen">// is necessary to produce the appropriate pressure loss down the channel.</font>
 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
   <font color="darkgreen">// settings of k for each phase.</font>
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.7 <font color="darkgreen">&quot;Porosity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.88 <font color="darkgreen">&quot;Porosity&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
@@ -225,7 +248,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2007">SGL2007</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -285,7 +308,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2007">SGL2007</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -345,7 +368,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2007</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2007">SGL2007</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -405,7 +428,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2004</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2004">SGL2004</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -465,7 +488,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2004</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2004">SGL2004</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -525,7 +548,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2004</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2004">SGL2004</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -585,7 +608,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">SGL2004</a>].</p>
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.SGL2004">SGL2004</a>].</p>
 
   <p>For more information, please see the
     <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p>
@@ -645,7 +668,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>].  The electronic mobility (&mu;) is based on the
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Toray2010">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is not listed but is
   taken to be the same as for TGP-H-060, TGP-H-090, and TGP-H-120.</p>
 
@@ -708,7 +731,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>].  The electronic mobility (&mu;) is based on the
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Toray2010">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -772,7 +795,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>].  The electronic mobility (&mu;) is based on the
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Toray2010">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -836,7 +859,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 
 <h3>Information</h3>
 
-<p>The default properties are based on [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Toray2010</a>].  The electronic mobility (&mu;) is based on the
+<p>The default properties are based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Toray2010">Toray2010</a>].  The electronic mobility (&mu;) is based on the
   through-plane value of resistivity.  The thermal conductivity is through the plane at
   room temperature.</p>
 
@@ -899,6 +922,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:17 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:01 2013.
 </div>
 </span></body></html>

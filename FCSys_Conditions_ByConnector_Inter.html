@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Inter</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;Conditions for an &lt;a href=\&quot;modelica://FCSys.Connectors.Intra\&quot;&gt;Intra&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.Inter\&quot;&gt;Inter&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Conditions.ByConnector.Inter"></a><a href="FCSys_Conditions_ByConnector.html#FCSys.Conditions.ByConnector">FCSys.Conditions.ByConnector</a>.Inter</h2>
 
@@ -107,10 +107,10 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
 <tr><td>Boolean</td><td>internalThermal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">RealExpression</a></td><td>thermalSet</td><td>redeclare Sources.RealExpres&hellip;</td><td>Source of internal specification</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Measurement</b></td></tr>
-<tr><TD colspan="2">replaceable function transXMeas</td><td>FCSys.Conditions.ByConnector&hellip;</td><td>X-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function transYMeas</td><td>FCSys.Conditions.ByConnector&hellip;</td><td>Y-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function transZMeas</td><td>FCSys.Conditions.ByConnector&hellip;</td><td>Z-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function thermalMeas</td><td>FCSys.Conditions.ByConnector&hellip;</td><td>Thermal quantity</td></tr>
+<tr><TD colspan="2">replaceable function transXMeas</td><td>Conditions.ByConnector.Inter&hellip;</td><td>X-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function transYMeas</td><td>Conditions.ByConnector.Inter&hellip;</td><td>Y-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function transZMeas</td><td>Conditions.ByConnector.Inter&hellip;</td><td>Z-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function thermalMeas</td><td>Conditions.ByConnector.Inter&hellip;</td><td>Thermal quantity</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -204,19 +204,19 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
   <font color="darkgreen">// Measurement</font>
   <font color="darkgreen">// -----------</font>
   <font color="darkgreen">// X-axis translational</font>
-  <font color="blue">replaceable </font><font color="blue">function</font> transXMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">FCSys.Conditions.ByConnector.Inter.Translational.velocity</a>
+  <font color="blue">replaceable </font><font color="blue">function</font> transXMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;X-axis translational quantity&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Y-axis translational</font>
-  <font color="blue">replaceable </font><font color="blue">function</font> transYMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">FCSys.Conditions.ByConnector.Inter.Translational.velocity</a>
+  <font color="blue">replaceable </font><font color="blue">function</font> transYMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;Y-axis translational quantity&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Z-axis translational</font>
-  <font color="blue">replaceable </font><font color="blue">function</font> transZMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">FCSys.Conditions.ByConnector.Inter.Translational.velocity</a>
+  <font color="blue">replaceable </font><font color="blue">function</font> transZMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;Z-axis translational quantity&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Thermal</font>
-  <font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Inter_ThermalDiffusive.html#FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature">FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature</a>
+  <font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Inter_ThermalDiffusive.html#FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature">Conditions.ByConnector.Inter.ThermalDiffusive.temperature</a>
     <font color="blue">constrainedby </font>ThermalDiffusive.Partial <font color="darkgreen">&quot;Thermal quantity&quot;</font>;
 
   <font color="darkgreen">// Included components of translational momentum</font>
@@ -357,10 +357,10 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inter.html#FCSys.Conditions.B
 <tr><TD colspan="2">replaceable function thermalSpec</td><td>ThermalDiffusive.temperature</td><td>Quantity</td></tr>
 <tr><td>Boolean</td><td>internalThermal</td><td>true</td><td>Use internal specification</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Measurement</b></td></tr>
-<tr><TD colspan="2">replaceable function transXMeas</td><td><a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">velocity</a></td><td>X-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function transYMeas</td><td><a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">velocity</a></td><td>Y-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function transZMeas</td><td><a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">velocity</a></td><td>Z-axis translational quantity</td></tr>
-<tr><TD colspan="2">replaceable function thermalMeas</td><td><a href="FCSys_Conditions_ByConnector_Inter_ThermalDiffusive.html#FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature">temperature</a></td><td>Thermal quantity</td></tr>
+<tr><TD colspan="2">replaceable function transXMeas</td><td>Translational.force</td><td>X-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function transYMeas</td><td>Translational.force</td><td>Y-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function transZMeas</td><td>Translational.force</td><td>Z-axis translational quantity</td></tr>
+<tr><TD colspan="2">replaceable function thermalMeas</td><td>ThermalDiffusive.heatRate</td><td>Thermal quantity</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -417,7 +417,7 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inter.html#FCSys.Conditions.B
     <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Modelica.Blocks.Sources.RealExpression</a> thermalSet(y=298.15*U.K));
 
   <font color="darkgreen">// The thermalSet block is redeclared as not replaceable because</font>
-  <font color="darkgreen">// y is set directly and cannot be undone at instantiation.</font>
+  <font color="darkgreen">// y is set directly and can&#39;t be undone at instantiation.</font>
 
 <font color="blue">end </font>Efforts;
 </pre>
@@ -429,6 +429,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inter.html#FCSys.Conditions.B
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:01:45 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:48:21 2013.
 </div>
 </span></body></html>

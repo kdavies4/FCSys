@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Package of thermodynamic and diffusive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Characteristics.BaseClasses.Characteristic"></a><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses">FCSys.Characteristics.BaseClasses</a>.Characteristic</h2>
 
@@ -58,8 +58,8 @@
 <h3>Information</h3>
 
 <p>This package is compatible with NASA CEA thermodynamic data
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] and the virial equation of state
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Dymond2002</a>].</p>
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>] and the virial equation of state
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Dymond2002">Dymond2002</a>].</p>
 
 <p>Notes regarding the constants:
     <ul>
@@ -67,14 +67,14 @@
 
     <li><i>d</i> is the Van der Waals diameter or the diameter for the
     rigid-sphere ("billiard-ball") approximation of the kinetic theory of gases
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>].</li>
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>].</li>
 
     <li><i>b<sub>c</sub></i>: The rows give the coefficients for the temperature intervals bounded
     by the values in <i>T</i><sub>lim <i>c</i></sub>.
     The powers of <i>T</i> increase
     by column.
     By default,
-    the powers of <i>T</i> for the first column are each -2, which corresponds to [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>].
+    the powers of <i>T</i> for the first column are each -2, which corresponds to [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>].
     In that case, the dimensionalities of the coefficients are {L4.M2/(N2.T4), L2.M/(N.T2), 1, &hellip;}
     for each row, where L is length, M is mass, N is particle number, and T is time. (In <a href="index.html#FCSys">FCSys</a>,
     temperature is a potential with dimension L2.M/(N.T2); see
@@ -85,7 +85,7 @@
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
     25&nbsp;&deg;C is the specific enthalpy of formation at that temperature and reference pressure
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>, p. 2].
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
 
     <li><i>T</i><sub>lim <i>c</i></sub>: The first and last entries are the minimum and
@@ -95,7 +95,7 @@
     have <i>n</i> + 1 entries.</li>
 
     <li>The reference pressure is <i>p</i><sup>o</sup>.   In the
-    NASA CEA data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
+    NASA CEA data [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <i>p</i><sup>o</sup>.
     For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> with
     <code>ReferenceEnthalpy.zeroAt25degC</code> selected is not exactly zero.</li>
@@ -789,13 +789,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.  According to Present
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>], this independence very accurately
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>], this independence very accurately
   matches the measured fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>, p. 41].</p>
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>, p. 41].</p>
 
   <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -854,7 +854,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -912,7 +912,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -926,7 +926,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   </ol>
   Also, it is assumed that the Einstein relation applies.</p>
 
-  <p>Please see [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies2013</a>, Ch. 3] for a derivation
+  <p>Please see [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References">Davies2013</a>, Ch. 3] for a derivation
   of the rate of phase change from kinetic theory.</p>
 
   <p>Although specific volume is an input to this function, the result is independent of
@@ -977,7 +977,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -1039,7 +1039,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 temperature difference.</p>
 
   <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -1242,6 +1242,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:23 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:07 2013.
 </div>
 </span></body></html>

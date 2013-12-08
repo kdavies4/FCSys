@@ -3,9 +3,9 @@
 <title>FCSys.Connectors</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="Declarative and imperative connectors">
+<meta name="description" content="Declarative and imperative interfaces">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -49,11 +49,11 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Connectors"></a><a href="index.html#FCSys">FCSys</a>.Connectors</h2>
 
-<b>Declarative and imperative connectors</b>
+<b>Declarative and imperative interfaces</b>
 
 <h3>Information</h3>
 
@@ -66,11 +66,13 @@
   The inert connectors
   (<a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a>,
   <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a>,
+
   <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>, and
   <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a>)
   describe the diffusive exchange of momentum and energy among configurations within a subregion.
   The mixing connectors (<a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a> and
   <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a>) describe
+
   how species are combined within a phase and how phases are combined within a subregion.
   The boundary connectors (<a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a> and
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a>)
@@ -80,12 +82,15 @@
   The top row contains a bus connector
   (<a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a>), which
   expands to group the
+
   <a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a> connectors of multiple species.
   The connectors in the middle row are
   flat; they build on the connectors of the bottom row by extension.
   Each icon on the bottom row represents one effort/flow
   pair, which may or may not be implemented as a separate connector.
+
   The
+
   <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> connector also
   has stream variables to represent the advection of translational momentum and
   thermal energy.</p>
@@ -95,6 +100,7 @@
 
   <p>The <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
   connector is used for a single species in a chemical reaction or phase change process.
+
   It expresses the rate of
   consumption or generation of a species at a chemical potential.  The
   <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connector is
@@ -106,6 +112,7 @@
   participating in a reaction.  Its effort variable is the
   rate of the reaction.  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> and
   <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> cannot be directly connected because they have opposite efforts and flows.
+
   An adapter must be used
   (e.g., <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">ChemicalReaction</a>),
   which applies the stoichiometry.</p>
@@ -219,6 +226,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Connector for additivity of volume</td></tr>
 <tr><td><img src="images/FCSys.Connectors.DaltonS.png" alt="FCSys.Connectors.Dalton" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a>
 </td><td>Connector for additivity of pressure</td></tr>
+<tr><td><img src="images/FCSys.Connectors.DaltonS.png" alt="FCSys.Connectors.DaltonNode" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.DaltonNode">DaltonNode</a>
+</td><td>Internal node for additivity of pressure</td></tr>
 <tr><td><img src="images/FCSys.Connectors.IntraS.png" alt="FCSys.Connectors.Intra" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a>
 </td><td>Connector for translational and thermal exchange among species within a phase</td></tr>
 <tr><td><img src="images/FCSys.Connectors.InterS.png" alt="FCSys.Connectors.Inter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a>
@@ -260,8 +269,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <p>Note that the product of the translational <code>stream</code> variable (velocity, &phi;) and the <code>flow</code>
     variable (current, <i>N&#775;</i>) is only conserved among species with the same specific mass.
     This connector is not directly connected among different species.  It is first converted to the
+
     <a href="FCSys_Connectors.html#FCSys.Connectors.Reaction">Reaction</a> connector using the
+
     <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">ChemicalReaction</a> adapter,
+
     which reconciles the different specific masses.</p>
 
 <p>For more information, please see the documentation of the
@@ -457,17 +469,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 <p>The concept of "additivity of volume" is defined by
     <a href="http://en.wikipedia.org/wiki/Amagat's_law">Amagat's law of partial volumes</a>, which
     states that the partial extensive volumes of the components of a mixture sum to the total
-    extensive volume of the mixture [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Bejan2006</a>, p. 194].
+    extensive volume of the mixture [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Bejan2006">Bejan2006</a>, p. 194].
     The components are assumed to each exist at the total pressure of the
     mixture.</p>
 
-    <p>This concept loses its physical meaning once the species are mixed [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Woo1995</a>].
+    <p>This concept loses its physical meaning once the species are mixed [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Woo1995">Woo1995</a>].
     If the species are truly mixed, then it is impossible to distinguish their particles and thus
     determine their partial volumes.
     Therefore, additivity of volume is only used for distinct phases within the same subregion&mdash;not
     for species within a phase.
     For example, if a system contains a solid phase and a gas phase, then it is assumed that the
     volumes of the phases are additive.  Within each phase, the pressures of the species are added according to
+
     Dalton's law (see the <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> connector).</p>
 
     <p>In order to implement Amagat's law, this connector includes volume (not rate of volume) as a flow variable.
@@ -512,7 +525,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 <p>The concept of "additivity of pressure" is defined by
     <a href="http://en.wikipedia.org/wiki/Dalton's_law">Dalton's law of partial pressures</a>,
     which states that the partial pressures of the components of a mixture sum to the total
-    pressure of the mixture [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Bejan2006</a>, p. 192].
+    pressure of the mixture [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Bejan2006">Bejan2006</a>, p. 192].
     The components are assumed to exist at the total volume of the
     mixture.</p>
 
@@ -547,6 +560,39 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 </pre>
 <hr>
 
+<h2><img src="images/FCSys.Connectors.DaltonI.png" alt="FCSys.Connectors.DaltonNode" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.DaltonNode"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.DaltonNode</h2>
+<b>Internal node for additivity of pressure</b>
+<img src="images/FCSys.Connectors.DaltonNodeD.png" alt="FCSys.Connectors.DaltonNode">
+
+<h3>Information</h3>
+
+<p>This connector is identical to <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a> except
+    that it has a smaller icon and a default <code>protected</code> prefix.  For more information, please see that connector.</p>
+
+<p>
+
+<h3>Contents</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>Volume [L3]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>p</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">connector</font> DaltonNode <font color="darkgreen">&quot;Internal node for additivity of pressure&quot;</font>
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(nominal=U.cc) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p(nominal=U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
+
+<font color="blue">end </font>DaltonNode;
+</pre>
+<hr>
+
 <h2><img src="images/FCSys.Connectors.IntraI.png" alt="FCSys.Connectors.Intra" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.Intra"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Intra</h2>
 <b>Connector for translational and thermal exchange among species within a phase</b>
@@ -556,11 +602,15 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">T
 
 <p>This connector is identical to <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a> except for the icon.
     It should not be connected directly among species.  Rather, it should be connected to
+
     an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or
+
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub>
+
     and <i>k<sub>Q</sub></i> (essentially parameters) are set.</p>
 
     <p>Please see <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a>,
+
     and the documentation of the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
@@ -597,7 +647,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
   <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a>;
 
-  <font color="darkgreen">//extends ThermalDiffusive;</font>
+  <font color="darkgreen">// extends ThermalDiffusive;</font>
   <font color="darkgreen">// Note:  Inheritance isn&#39;t used to prevent overlap of the labels in Dymola</font>
   <font color="darkgreen">// 2014.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
@@ -616,11 +666,15 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <p>This connector is identical to <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a> except for the icon.
     It should not be connected directly among species.  Rather, it should be connected to
+
     an <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or
+
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a> connector so that <i>k</i><sub>&Phi;</sub>
+
     and <i>k<sub>Q</sub></i> (essentially parameters) are set.</p>
 
     <p>Please see <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a>,
+
     and the documentation of the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p>
 Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a> (Connector for the advection or diffusion of translational momentum).
@@ -657,7 +711,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
   <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a>;
 
-  <font color="darkgreen">//extends ThermalDiffusive;</font>
+  <font color="darkgreen">// extends ThermalDiffusive;</font>
   <font color="darkgreen">// Note:  Inheritance isn&#39;t used to prevent overlap of the labels in</font>
   <font color="darkgreen">// Dymola 2014.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
@@ -676,6 +730,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
 <p>This connector is identical to <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">InertNode</a> except for the icon.
     It is used as a node to connect
+
     <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a>
     connectors.  It contains outputs (<i>k</i><sub>&Phi;</sub> and <i>k<sub>Q</sub></i>) that are essentially
     parameters to scale the translational and thermal independences of the connection.</p>
@@ -715,7 +770,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 
   <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Translational</a>;
 
-  <font color="darkgreen">//extends ThermalDiffusive;</font>
+  <font color="darkgreen">// extends ThermalDiffusive;</font>
   <font color="darkgreen">// Note:  Inheritance isn&#39;t used to prevent overlap of the labels in</font>
   <font color="darkgreen">// Dymola 2014.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
@@ -733,6 +788,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Translational">Tran
 <h3>Information</h3>
 
 <p>This connector is used as an internal node to connect
+
     <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a>
     connectors.  It is an expandable connector with no intrinsic variables.</p>
 
@@ -996,6 +1052,6 @@ Extends from Real.
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:25 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:08 2013.
 </div>
 </span></body></html>

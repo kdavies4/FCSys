@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Subregions.Examples"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Examples</h2>
 
@@ -101,24 +101,27 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <p>This is a model of a vertical column of 10&nbsp;&times;&nbsp;10&nbsp;&times;&nbsp;10&nbsp;m
     regions with N<sub>2</sub> gas.  The upper boundary is held at 1 bar and the lower boundary has zero velocity.
+
     The initial pressure difference is zero, but a gas enters the upper boundary and a pressure difference
     develops due to gravity.  There are oscillations due to the inertance and compression of the gas.
     After about 1.5&nbsp;s, the pressure difference settles to
+
       <i>L</i><sub>y</sub> <i>a</i><sub>y</sub> <i>m</i> &rho;
       as expected.</p>
 
       <p>A temperature gradient is created due to the thermodynamics of the expanding and contracting
+
       gases.  It takes much longer (over a year!) for the temperatures to equalize due to the size of the system and the low
       thermal conductivity of the gas.  With a stiff solver, the model should simulate at this time scale as well.</p>
 
-      <p>The damping factor (<i>k</i>) can be used to scale the continuitiy (&zeta;) of the gas in the regions.
+      <p>The damping factor (<i>k</i>) can be used to scale the continuity (&zeta;) of the gas in the regions.
+
       The oscillations are dampened considerably at <i>k</i> = 100.  However, with high values of the factor, the boundary pressures
       are decoupled from the pressures in the region because the nonequilibrium force is considerable.</p>
 
       <p>Assumptions:
       <ol>
-      <li>The central difference scheme is used (no upstream discretization).</ol>
-      </p>
+      <li>The central difference scheme is used (no upstream discretization).</ol></p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
 
@@ -252,14 +255,14 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
       inclH2O=true,
       H2(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSet(
           height=-U.Pa,
           offset=environment.p_dry,
           duration=10)),
       H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
         thermalSet(y=environment.T))));
@@ -270,7 +273,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
       H2(materialSet(y=-source.gas.H2.boundary.Ndot), thermalSet(y=environment.T)),
 
       H2O(
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_H2O),
         thermalSet(y=environment.T))));
@@ -320,6 +323,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     subregion2(gas(H2(consEnergy=ConsThermo.dynamic))),
     environment(analysis=false));
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
 <font color="blue">end </font>CapillaryAction;
 </pre>
 <hr>
@@ -359,9 +363,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <font color="blue">model</font> Echo <font color="darkgreen">&quot;Two regions of gas with an initial pressure difference&quot;</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k=1 <font color="darkgreen">&quot;Damping factor&quot;</font>;
 
-  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions">Subregions</a>(subregion1(gas(H2(zeta=k*<font color="red">FCSys.Characteristics.H2.Gas.zeta</font>
-              ()))), subregion2(gas(H2(zeta=k*<font color="red">FCSys.Characteristics.H2.Gas.zeta</font>
-              ()))));
+  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions">Subregions</a>(subregion1(gas(H2(zeta=k*<font color="red">Characteristics.H2.Gas.zeta</font>()))),
+      subregion2(gas(H2(zeta=k*<font color="red">FCSys.Characteristics.H2.Gas.zeta</font>()))));
 
 <font color="blue">end </font>Echo;
 </pre>
@@ -417,6 +420,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.E
         H2O(upstreamX=false),
         N2(upstreamX=false),
         O2(upstreamX=false))));
+
 <font color="blue">end </font>EchoCentral;
 </pre>
 <hr>
@@ -445,6 +449,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.E
     &theta; is the thermal resistance.  The factor of one fourth
     is due to the boundary conditions; the conduction length is half of the total length
     and the heat is rejected to both sides.  There is no thermal convection or
+
     radiation&mdash;only conduction to the sides.</p>
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
@@ -491,21 +496,21 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     inclH2=false,
     subregion(L={U.cm,U.mm,U.mm}, graphite(&#39;C+&#39;(epsilon=1),&#39;e-&#39;(sigma=1e2*U.S/U.m))));
 
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">FCSys.Conditions.ByConnector.BoundaryBus.Single.Source</a> BC1(graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> BC1(graphite(
       &#39;incle-&#39;='incle-',
       &#39;inclC+&#39;=true,
       &#39;C+&#39;(set(y=environment.T)),
       &#39;e-&#39;(
         materialSet(y=-0.05*U.A),
-        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
 
         thermalSet(y=0))));
 
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink</a> BC2(graphite(
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> BC2(graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;='incle-',
-      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a>
-        &#39;C+&#39;(set(y=environment.T))));
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T))));
 
 <font color="blue">equation </font>
   <font color="red">connect</font>(BC1.boundary, subregion.xNegative);
@@ -583,7 +588,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
           amplitude=0.2*Vdot,
           offset=Vdot,
           freqHz=1),
-        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.volumeRate">FCSys.Conditions.ByConnector.Boundary.Single.Material.volumeRate</a>
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.volumeRate">Conditions.ByConnector.Boundary.Single.Material.volumeRate</a>
             (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">FCSys.Characteristics.H2O.Liquid</a>),
         thermalSet(y=environment.T))));
 
@@ -591,19 +596,19 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
           materialSet(y=U.atm))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> BC3(liquid(inclH2O=true, H2O(<font color="blue">
-          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> BC4(liquid(inclH2O=true, H2O(<font color="blue">
-          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> BC5(liquid(inclH2O=true, H2O(<font color="blue">
-          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> BC6(liquid(inclH2O=true, H2O(<font color="blue">
-          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
+          redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.heatRate">Conditions.ByConnector.Boundary.Single.Thermal.heatRate</a>,
           thermalSet(y=0))));
 
 <font color="blue">equation </font>
@@ -617,7 +622,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   <font color="red">connect</font>(subregion.zPositive, BC6.boundary);
 
   <font color="red">connect</font>(subregion.zNegative, BC5.boundary);
-
 <font color="blue">end </font>InternalFlow;
 </pre>
 <hr>
@@ -632,6 +636,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <p>This model is boring.  It just establishes a
   single subregion with H<sub>2</sub> by default.  There are no boundary conditions
   other than those implied by the open connectors (no diffusion current, no forces,
+
   no thermal conduction).  Other examples in this package extend from this one.</p>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
@@ -920,6 +925,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.T
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:04:39 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:22 2013.
 </div>
 </span></body></html>

@@ -29,8 +29,8 @@ rpls = [
     # Change the meta description of the main page.
     ('<meta name="description" content="Modelica library of fuel cell models">', '<meta name="description" content="Open-source library of declarative, dynamic, and flexible models of proton exchange membrane fuel cells in the Modelica language">'),
     # Add the download link.
-    ("""(Icons</a></li>
- *</ul>
+    ("""(Icons</a></li> *
+ *</ul> *
 )( *</div>)""", r"""\1
   <h3>Download</h3>
     <ul>

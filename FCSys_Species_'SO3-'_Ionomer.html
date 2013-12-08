@@ -3,7 +3,7 @@
 <title>FCSys.Species.'SO3-'.Ionomer</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-5">
+<meta name="date" content="2013-12-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;C&lt;sub&gt;19&lt;/sub&gt;HF&lt;sub&gt;37&lt;/sub&gt;O&lt;sub&gt;5&lt;/sub&gt;S&lt;sup&gt;-&lt;/sup&gt; ionomer&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -49,7 +49,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body"></p>
+      <div class="body">
 
 <h2><a name="FCSys.Species.'SO3-'.Ionomer"></a><a href="FCSys_Species_'SO3-'.html#FCSys.Species.'SO3-'">FCSys.Species.'SO3-'</a>.Ionomer</h2>
 
@@ -63,89 +63,25 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Species.'SO3-'.Ionomer.CorrelatedS.png" alt="FCSys.Species.'SO3-'.Ionomer.Correlated" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Correlated">Correlated</a>
-</td><td>Correlated properties</td></tr>
-<tr><td><img src="images/FCSys.Species.'SO3-'.Ionomer.CorrelatedS.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Fixed">Fixed</a>
+<tr><td><img src="images/FCSys.Species.'SO3-'.Ionomer.FixedS.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer.Fixed">Fixed</a>
 </td><td>Fixed properties</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Species.'SO3-'.Ionomer.CorrelatedI.png" alt="FCSys.Species.'SO3-'.Ionomer.Correlated" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Species.'SO3-'.Ionomer.Correlated"></a><a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer">FCSys.Species.'SO3-'.Ionomer</a>.Correlated</h2>
-<b>Correlated properties</b>
-<img src="images/FCSys.Species.'C+'.Graphite.CorrelatedD.png" alt="FCSys.Species.'SO3-'.Ionomer.Correlated">
-
-<h3>Information</h3>
-
-<p>Please see the <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.</p>
-Extends from <a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a> (Base model for an inert, stationary solid).
-<p>
-
-<h3>Parameters</h3>
-
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_inter</td><td>0</td><td>Number of exchange connections with other phases</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>epsilon</td><td>0.25</td><td>Volumetric fill fraction [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;SO3-&#39;.Ionomer</td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility [N.T/M]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity [L.T/N]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Phi[n_intra, n_trans]</td><td>ones(n_intra, n_trans)</td><td>For translational exchange among species within the phase [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Q[n_intra]</td><td>ones(n_intra)</td><td>For thermal exchange among species within the phase [1]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi.start[n_trans]</td><td>0</td><td>Velocity [L/T]</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of the conservation equations</td></tr>
-<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a></td><td>consEnergy</td><td>ConsThermo.dynamic</td><td>Energy</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature [L2.M/(N.T2)]</td></tr>
-</table>
-<p>
-
-<h3>Connectors</h3>
-
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra[n_intra]</td><td>Connectors to exchange translational momentum and energy within the phase</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connectors to exchange translational momentum and energy with all other species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>dalton</td><td>Connector for additivity of pressure</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ThermalDiffusive">ThermalDiffusive</a></td><td>boundaries[n_trans, Side]</td><td>Connectors for transport</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
-</table>
-
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'SO3-'_Ionomer.html#FCSys.Characteristics.'SO3-'.Ionomer">Characteristics.'SO3-'.Ionomer</a>);
-
-<font color="blue">end </font>Correlated;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Species.'SO3-'.Ionomer.CorrelatedI.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Species.'SO3-'.Ionomer.FixedI.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Species.'SO3-'.Ionomer.Fixed"></a><a href="FCSys_Species_'SO3-'_Ionomer.html#FCSys.Species.'SO3-'.Ionomer">FCSys.Species.'SO3-'.Ionomer</a>.Fixed</h2>
 <b>Fixed properties</b>
-<img src="images/FCSys.Species.'C+'.Graphite.CorrelatedD.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed">
+<img src="images/FCSys.Species.'C+'.Graphite.FixedD.png" alt="FCSys.Species.'SO3-'.Ionomer.Fixed">
 
 <h3>Information</h3>
 
 <p>Assumptions:
     <ol>
-    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of temperature)</li>
+    <li>The thermal independity and thermal resistivity are fixed (e.g., independent of thermodynamic state).</li>
     </ol></p>
 
     <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
-  Nafion 115 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Kandlikar2009</a>, p. 1277].</p>
+  Nafion 115 [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Kandlikar2009">Kandlikar2009</a>, p. 1277].</p>
 
 <p>For more information, please see the
     <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.</p>
@@ -159,7 +95,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a> (Base mo
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_inter</td><td>0</td><td>Number of exchange connections with other phases</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>epsilon</td><td>0.25</td><td>Volumetric fill fraction [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.25</td><td>Volumetric fill fraction [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;SO3-&#39;.Ionomer</td><td>Characteristic data</td></tr>
@@ -196,9 +132,12 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a> (Base mo
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'SO3-'_Ionomer.html#FCSys.Characteristics.'SO3-'.Ionomer">Characteristics.'SO3-'.Ionomer</a>,
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">Data.mu</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=Modelica.Constants.small*U.C*U.s/U.g,
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.16*U.W));
+
+  <font color="darkgreen">// Note:  Mobility is small but not zero to prevent a singularity when SO3-</font>
+  <font color="darkgreen">// and C+ are both present (e.g., in the catalyst layers).</font>
 
 <font color="blue">end </font>Fixed;
 </pre>
@@ -210,6 +149,6 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Solid">Solid</a> (Base mo
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 05 12:05:03 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:51:47 2013.
 </div>
 </span></body></html>
