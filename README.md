@@ -1,12 +1,5 @@
 FCSys
 -----
-**Warning!**  This package is still in development.  Changes may be made that
-affect the public interfaces of the classes.  The package is not yet under full
-version control and conversion scripts are not being provided for these
-changes.  Some models still have issues or are incomplete.  These models should
-be marked with an "under construction" icon (red triangle) or have notes marked
-with "TODO" or "**".  If you have problems besides those noted, please
-[open an issue](https://github.com/kdavies4/FCSys/issues/new).
 
 [FCSys] is a free, open-source library of proton exchange membrane fuel cell
 models in [Modelica](https://www.modelica.org/).  More information is available
