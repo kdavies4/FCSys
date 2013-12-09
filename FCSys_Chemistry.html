@@ -3,7 +3,7 @@
 <title>FCSys.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Chemical reactions and related models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -103,9 +103,9 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;conne-&#39;</td><td>Connector for e-</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;connH+&#39;</td><td>Connector for H+</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2</td><td>Connector for H2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;cheme-&#39;</td><td>Connector for e-</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;chemH+&#39;</td><td>Connector for H+</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemH2</td><td>Connector for H2</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -131,18 +131,18 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
     m=Characteristics.H2.Gas.m,
     n=1);
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;conne-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;cheme-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
     <font color="darkgreen">&quot;Connector for e-&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;connH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;chemH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
     <font color="darkgreen">&quot;Connector for H+&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemH2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
     &quot;Connector for H2&quot;</font>;
   <font color="darkgreen">// Note:  These redeclarations are necessary due to errors in Dymola 2014.</font>
 
 <font color="blue">equation </font>
-  <font color="red">connect</font>(connH2, H2.chemical);
-  <font color="red">connect</font>('e-'.chemical, 'conne-');
-  <font color="red">connect</font>('H+'.chemical, 'connH+');
+  <font color="red">connect</font>(chemH2, H2.chemical);
+  <font color="red">connect</font>('e-'.chemical, 'cheme-');
+  <font color="red">connect</font>('H+'.chemical, 'chemH+');
   <font color="red">connect</font>(H2.reaction, 'e-'.reaction);
   <font color="red">connect</font>('H+'.reaction, H2.reaction);
 <font color="blue">end </font>HOR;
@@ -174,10 +174,10 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;conne-&#39;</td><td>Connector for e-</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;connH+&#39;</td><td>Connector for H+</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connO2</td><td>Connector for O2</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>connH2O</td><td>Connector for H2O</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;cheme-&#39;</td><td>Connector for e-</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>&#39;chemH+&#39;</td><td>Connector for H+</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemO2</td><td>Connector for O2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemH2O</td><td>Connector for H2O</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -208,21 +208,21 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
     m=Characteristics.H2O.Gas.m,
     n=-2);
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;conne-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;cheme-&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
     <font color="darkgreen">&quot;Connector for e-&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;connH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> &#39;chemH+&#39;(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
     <font color="darkgreen">&quot;Connector for H+&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connO2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemO2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans) <font color="darkgreen">
     &quot;Connector for O2&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> connH2O(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemH2O(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">constant </font>Integer n_trans=n_trans)
     <font color="darkgreen">&quot;Connector for H2O&quot;</font>;
   <font color="darkgreen">// Note:  These redeclarations are necessary due to errors in Dymola 2014.</font>
 
 <font color="blue">equation </font>
-  <font color="red">connect</font>('H+'.chemical, 'connH+');
-  <font color="red">connect</font>('e-'.chemical, 'conne-');
-  <font color="red">connect</font>(O2.chemical, connO2);
-  <font color="red">connect</font>(H2O.chemical, connH2O);
+  <font color="red">connect</font>('H+'.chemical, 'chemH+');
+  <font color="red">connect</font>('e-'.chemical, 'cheme-');
+  <font color="red">connect</font>(O2.chemical, chemO2);
+  <font color="red">connect</font>(H2O.chemical, chemH2O);
   <font color="red">connect</font>('e-'.reaction, H2O.reaction);
   <font color="red">connect</font>('H+'.reaction, H2O.reaction);
   <font color="red">connect</font>(O2.reaction, H2O.reaction);
@@ -418,6 +418,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:00 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 22:35:58 2013.
 </div>
 </span></body></html>

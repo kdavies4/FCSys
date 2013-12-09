@@ -3,7 +3,7 @@
 <title>FCSys.Assemblies.Cells</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Single-cell PEMFC models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -92,8 +92,8 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths in the y direction [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths in the z direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths of segments in the y direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths of segments in the z direction [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
 <tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare Regions.AnFPs.AnFP&hellip;</td><td>Anode flow plate</td></tr>
 <tr><td><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a></td><td>anGDL</td><td>redeclare Regions.AnGDLs.AnG&hellip;</td><td>Anode gas diffusion layer</td></tr>
@@ -128,8 +128,9 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   <font color="blue">extends </font><a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a>;
 
   <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths in the y direction&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">&quot;Lengths in the z direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths of segments in the y direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">
+    &quot;Lengths of segments in the z direction&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
     &quot;Number of subregions in the y direction&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
@@ -222,8 +223,8 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths in the y direction [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths in the z direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths of segments in the y direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths of segments in the z direction [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
 <tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare Regions.AnFPs.AnFP&hellip;</td><td>Anode flow plate</td></tr>
 <tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a></td><td>anCGDL</td><td>&nbsp;</td><td>Anode catalyst and gas diffusion layer</td></tr>
@@ -257,8 +258,9 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   <font color="blue">extends </font><a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a>;
 
   <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths in the y direction&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">&quot;Lengths in the z direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths of segments in the y direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">
+    &quot;Lengths of segments in the z direction&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
     &quot;Number of subregions in the y direction&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
@@ -345,6 +347,6 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:48:37 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 14:59:29 2013.
 </div>
 </span></body></html>

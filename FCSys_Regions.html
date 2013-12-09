@@ -3,7 +3,7 @@
 <title>FCSys.Regions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="3D arrays of discrete, interconnected subregions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -198,12 +198,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">if </font>inclTransX<font color="blue"> then</font>
     <font color="blue">for </font>i<font color="blue"> in </font>1:n_x - 1<font color="blue"> loop</font>
       <font color="red">connect</font>(subregions[i, :, :].xPositive, subregions[i + 1, :, :].xNegative)
-        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
+        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown in the diagram)&quot;</font>;
     <font color="blue">end for</font>;
   <font color="blue">end if</font>;
   <font color="red">connect</font>(subregions[n_x, :, :].xPositive, xPositive);
   <font color="blue">if </font>n_x == 0<font color="blue"> then</font>
-    <font color="red">connect</font>(xNegative, xPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
+    <font color="red">connect</font>(xNegative, xPositive) <font color="darkgreen">
+      &quot;Direct pass-through (not shown in the diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Y axis</font>
@@ -211,13 +212,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">if </font>inclTransY<font color="blue"> then</font>
     <font color="blue">for </font>i<font color="blue"> in </font>1:n_y - 1<font color="blue"> loop</font>
       <font color="red">connect</font>(subregions[:, i, :].yPositive, subregions[:, i + 1, :].yNegative)
-        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
+        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown in the diagram)&quot;</font>;
     <font color="blue">end for</font>;
   <font color="blue">end if</font>;
   <font color="red">connect</font>(subregions[:, n_y, :].yPositive, yPositive);
 
   <font color="blue">if </font>n_y == 0<font color="blue"> then</font>
-    <font color="red">connect</font>(yNegative, yPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
+    <font color="red">connect</font>(yNegative, yPositive) <font color="darkgreen">
+      &quot;Direct pass-through (not shown in the diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Z axis</font>
@@ -225,12 +227,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">if </font>inclTransZ<font color="blue"> then</font>
     <font color="blue">for </font>i<font color="blue"> in </font>1:n_z - 1<font color="blue"> loop</font>
       <font color="red">connect</font>(subregions[:, :, i].zPositive, subregions[:, :, i + 1].zNegative)
-        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
+        <font color="darkgreen">&quot;Connection b/w neighboring subregions (not shown in the diagram)&quot;</font>;
     <font color="blue">end for</font>;
   <font color="blue">end if</font>;
   <font color="red">connect</font>(zPositive, subregions[:, :, n_z].zPositive);
   <font color="blue">if </font>n_z == 0<font color="blue"> then</font>
-    <font color="red">connect</font>(zNegative, zPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
+    <font color="red">connect</font>(zNegative, zPositive) <font color="darkgreen">
+      &quot;Direct pass-through (not shown in the diagram)&quot;</font>;
   <font color="blue">end if</font>;
   <font color="darkgreen">// TODO:  Once primitivesVisible is supported by Modelica tools (not</font>
   <font color="darkgreen">// supported as of Dymola 2014), complete the icon of this model.</font>
@@ -300,6 +303,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:49:13 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:00:05 2013.
 </div>
 </span></body></html>

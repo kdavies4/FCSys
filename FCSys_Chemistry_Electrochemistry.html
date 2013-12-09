@@ -3,7 +3,7 @@
 <title>FCSys.Chemistry.Electrochemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Models associated with electrochemical reactions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -82,7 +82,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   charges are uniformly distributed over (infinite) parallel planes.</p>
 
   <p>If <code>setVelocity</code> is <code>true</code>, then the material exits with the
-  velocity of the <code>direct</code> connector.  Typically, that connector should be connected to the stationary solid,
+  velocity of the <code>inert</code> connector.  Typically, that connector should be connected to the stationary solid,
   in which case heat will be generated if material arrives with a nonzero velocity.  That heat is rejected to the same connector.</p>
 
 Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
@@ -99,7 +99,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Permittivity</a></td><td>epsilon</td><td>U.epsilon_0</td><td>Permittivity of the dielectric [N2.T2/(L3.M)]</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.&#39;e-&#39;.Graphite</td><td>Material properties</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>setVelocity</td><td>true</td><td>Material exits at the velocity of the <code>direct</code> connector</td></tr>
+<tr><td>Boolean</td><td>setVelocity</td><td>true</td><td>Material exits at the velocity of the <code>inert</code> connector</td></tr>
 <tr><td>Boolean</td><td>inclVolume</td><td>true</td><td>Include the <code>amagat</code> connector to occupy volume</td></tr>
 </table>
 <p>
@@ -112,7 +112,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <tr><TD colspan="2">replaceable package Data</td><td>Material properties</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>negative</td><td>Chemical connector on the 1st side</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>positive</td><td>Chemical connector on the 2nd side</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra</td><td>Translational and thermal interface with the substrate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Translational and thermal interface with the substrate</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>amagat</td><td>Connector for additivity of volume</td></tr>
 </table>
 
@@ -133,7 +133,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
     Characteristics.BaseClasses.Characteristic <font color="darkgreen">&quot;Material properties&quot;</font>;
 
   <font color="blue">parameter </font>Boolean setVelocity=true <font color="darkgreen">
-    &quot;Material exits at the velocity of the <code>direct</code> connector&quot;</font>;
+    &quot;Material exits at the velocity of the <code>inert</code> connector&quot;</font>;
   <font color="blue">parameter </font>Boolean inclVolume=true <font color="darkgreen">
     &quot;Include the <code>amagat</code> connector to occupy volume&quot;</font>;
 
@@ -151,7 +151,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
     &quot;Chemical connector on the 1st side&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> positive(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Chemical connector on the 2nd side&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Connectors.Intra</a> intra(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Translational and thermal interface with the substrate&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> amagat(<font color="blue">final </font>V=-A*L) <font color="blue">if </font>inclVolume <font color="darkgreen">
@@ -167,8 +167,8 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 
   <font color="darkgreen">// Streams</font>
   <font color="blue">if </font>setVelocity<font color="blue"> then</font>
-    negative.phi = intra.phi;
-    positive.phi = intra.phi;
+    negative.phi = inert.phi;
+    positive.phi = inert.phi;
   <font color="blue">else</font>
     negative.phi = <font color="red">inStream</font>(positive.phi);
     positive.phi = <font color="red">inStream</font>(negative.phi);
@@ -179,12 +179,12 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
   <font color="darkgreen">// Conservation</font>
   0 = negative.Ndot + positive.Ndot <font color="darkgreen">&quot;Material (no storage)&quot;</font>;
   <font color="red">zeros</font>(n_trans) = Data.m*(<font color="red">actualStream</font>(negative.phi) - <font color="red">actualStream</font>(positive.phi))
-    *I + intra.mPhidot <font color="darkgreen">&quot;Translational momentum (no storage)&quot;</font>;
+    *I + inert.mPhidot <font color="darkgreen">&quot;Translational momentum (no storage)&quot;</font>;
   <font color="red">der</font>(C*w)/U.s = Data.z*I <font color="darkgreen">
     &quot;Electrical energy (reversible; simplified using material conservation and divided by potential)&quot;</font>;
-  0 = intra.Qdot + (<font color="red">actualStream</font>(negative.phi)*<font color="red">actualStream</font>(negative.phi) - <font color="red">
-    actualStream</font>(positive.phi)*<font color="red">actualStream</font>(positive.phi))*I*Data.m/2 + intra.phi
-    *intra.mPhidot <font color="darkgreen">&quot;Mechanical and thermal energy (no storage)&quot;</font>;
+  0 = inert.Qdot + (<font color="red">actualStream</font>(negative.phi)*<font color="red">actualStream</font>(negative.phi) - <font color="red">
+    actualStream</font>(positive.phi)*<font color="red">actualStream</font>(positive.phi))*I*Data.m/2 + inert.phi
+    *inert.mPhidot <font color="darkgreen">&quot;Mechanical and thermal energy (no storage)&quot;</font>;
 
 <font color="blue">end </font>DoubleLayer;
 </pre>
@@ -226,7 +226,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>negative</td><td>Chemical connector on the 1st side</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>positive</td><td>Chemical connector on the 2nd side</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra</td><td>Translational and thermal interface with the substrate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>inert</td><td>Translational and thermal interface with the substrate</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -256,14 +256,14 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I(start=0) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Deltag(start=0) <font color="darkgreen">&quot;Potential difference&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Connectors.Intra</a> intra(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> inert(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
     &quot;Translational and thermal interface with the substrate&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Aliases</font>
   I = positive.Ndot;
   Deltag = positive.g - negative.g;
-  T = intra.T;
+  T = inert.T;
 
   <font color="darkgreen">// Streams</font>
   negative.phi = <font color="red">inStream</font>(positive.phi);
@@ -281,8 +281,8 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 
   <font color="darkgreen">// Conservation (without storage)</font>
   0 = negative.Ndot + positive.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="red">zeros</font>(n_trans) = intra.mPhidot <font color="darkgreen">&quot;Translational momentum&quot;</font>;
-  0 = Deltag*I + intra.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="red">zeros</font>(n_trans) = inert.mPhidot <font color="darkgreen">&quot;Translational momentum&quot;</font>;
+  0 = Deltag*I + inert.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
   <font color="darkgreen">// Note:  Energy and momentum cancel among the stream terms.</font>
 
 <font color="blue">end </font>ElectronTransfer;
@@ -295,6 +295,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:03 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 22:36:00 2013.
 </div>
 </span></body></html>

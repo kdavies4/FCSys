@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Package of thermodynamic and diffusive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -98,12 +98,12 @@
     NASA CEA data [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <i>p</i><sup>o</sup>.
     For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> with
-    <code>ReferenceEnthalpy.zeroAt25degC</code> selected is not exactly zero.</li>
+    <code>ReferenceEnthalpy.zeroAt25degC</code> is not exactly zero.</li>
 
     <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h"><i>h</i></a>) will be ill-posed.
-    Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
+    Typically, the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
     </ul></p>
 Extends from <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">CharacteristicEOS</a> (Base thermodynamic package with only the <i>p</i>-<i>v</i>-<i>T</i> relations).
@@ -1242,6 +1242,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:07 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:03:02 2013.
 </div>
 </span></body></html>

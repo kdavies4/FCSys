@@ -3,7 +3,7 @@
 <title>FCSys.Units.Bases</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-8">
+<meta name="date" content="2013-12-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Sets of base constants and units">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.1.zip">v0.1.1</a></span></li>
     </ul>
   </div>
 </div>
@@ -565,10 +565,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=1 <font color="darkgreen">&quot;radian&quot;</font>;
   <font color="darkgreen">// SI unit of rotation or planar angle</font>
-  <font color="darkgreen">// This condition is required by BIPM [BIPM2006, Table 3].  It can&#39;t</font>
-  <font color="darkgreen">// be relaxed  because BIPM doesn&#39;t explicitly use angle in the</font>
-  <font color="darkgreen">// definitions of Hz, sr, etc. and NIST doesn&#39;t explicitly use angle</font>
-  <font color="darkgreen">// in the relations for R_inf, c_3_nu, etc. [NIST2010].</font>
+  <font color="darkgreen">// This condition is required by BIPM [BIPM2006, Table 3].  It can&#39;t be</font>
+  <font color="darkgreen">// relaxed because BIPM doesn&#39;t explicitly use angle in the definitions of</font>
+  <font color="darkgreen">// Hz, sr, etc. and NIST doesn&#39;t explicitly use angle in the relations for</font>
+  <font color="darkgreen">// R_inf, c_3_nu, etc. [NIST2010].</font>
   <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> R_inf=1 <font color="darkgreen">
     &quot;Rydberg constant (R<sub>&infin;</sub>)&quot;</font>;
   <font color="darkgreen">// The SI unit length (meter) is inversely proportional to this value,</font>
@@ -584,10 +584,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="darkgreen">// value.</font>
   <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R_K=1 <font color="darkgreen">
     &quot;von Klitzing constant (R<sub>K</sub>)&quot;</font>;
-  <font color="darkgreen">// The SI unit of electrical conductance (siemen) is inversely</font>
-  <font color="darkgreen">// proportional to this value, which should be increased for larger</font>
-  <font color="darkgreen">// characteristic conductances.  Also, the SI unit of charge (coulomb) is</font>
-  <font color="darkgreen">// inversely proportional to this value.</font>
+  <font color="darkgreen">// The SI unit of electrical conductance (siemen) is inversely proportional</font>
+  <font color="darkgreen">// to this value, which should be increased for larger characteristic</font>
+  <font color="darkgreen">// conductances.  Also, the SI unit of charge (coulomb) is inversely</font>
+  <font color="darkgreen">// proportional to this value.</font>
   <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=1 <font color="darkgreen">&quot;candela&quot;</font>;
   <font color="darkgreen">// SI unit of luminous intensity</font>
   <font color="darkgreen">// From http://en.wikipedia.org/wiki/Luminous_intensity, accessed 11/5/11:</font>
@@ -598,13 +598,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=1 <font color="darkgreen">&quot;Faraday constant (k<sub>F</sub>)&quot;</font>;
   <font color="darkgreen">// The unit of substance (mole) is inversely proportional to this value.</font>
   <font color="darkgreen">// The Faraday constant isn&#39;t adjustable because the equations of FCSys</font>
-  <font color="darkgreen">// require that it&#39;s one, which means that charge is considered to be</font>
-  <font color="darkgreen">// an amount of substance.</font>
+  <font color="darkgreen">// require that it&#39;s one, which means that charge is considered to be an</font>
+  <font color="darkgreen">// amount of substance.</font>
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=1 <font color="darkgreen">&quot;gas constant&quot;</font>;
   <font color="darkgreen">// The unit of temperature (kelvin) is inversely proportional to this</font>
   <font color="darkgreen">// value.  The gas constant isn&#39;t adjustable because the equations of FCSys</font>
-  <font color="darkgreen">// require that it&#39;s one, which means that temperature is considered to</font>
-  <font color="darkgreen">// be a potential.</font>
+  <font color="darkgreen">// require that it&#39;s one, which means that temperature is considered to be</font>
+  <font color="darkgreen">// a potential.</font>
 
 <font color="blue">end </font>Base;
 </pre>
@@ -616,6 +616,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Dec 08 09:52:09 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:03:03 2013.
 </div>
 </span></body></html>

@@ -34,7 +34,7 @@ rpls = [
 )( *</div>)""", r"""\1
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl"><a href="https://github.com/kdavies4/FCSys/zipball/release" rel="nofollow">Latest version</a></span> (**Empty; please check back soon or contact kdavies4 at gmail.com.)</li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">vx.x.x</a></span></li>
     </ul>
 \2"""),
     # Add Microdata markup.
