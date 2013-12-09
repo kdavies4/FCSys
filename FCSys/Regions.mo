@@ -2537,7 +2537,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 
   default activation energy for the oxygen reduction reaction (<code>E_A = 73.2e3*U.J/U.mol</code>) is from
 
-  [<a href=\"modelica://FCSys.UsersGuide.References.Siversten2005\">Siversten2005</a>].</p>
+  [<a href=\"modelica://FCSys.UsersGuide.References.Sivertsen2005\">Sivertsen2005</a>].</p>
 
 <p>Default assumptions (may be adjusted):
 <ol>

@@ -558,11 +558,11 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Shah2009;
 
-    class Siversten2005
+    class Sivertsen2005
       "<html>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
-      end Siversten2005;
+      end Sivertsen2005;
 
     class Springer1991
       "<html>T. E. Springer, T. A. Zawodzinski, and S. Gottesfeld, \"<a href=\"http://dx.doi.org/10.1149/1.2085971\">Polymer Electrolyte Fuel Cell Model</a>,\" <i>J. Electrochem. Soc.</i>, vol. 138, pp. 2334&ndash;2342, Aug. 1991</html>"
