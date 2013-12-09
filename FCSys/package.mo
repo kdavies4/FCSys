@@ -3,8 +3,7 @@ package FCSys "Modelica fuel cell library"
 
 // Maximum line width before a new word is wrapped in the code listing in
 // the LaTeX document (76 characters, including leading spaces and // )
-// ------------------------------------------------------------------------
-
+// -------------------------------------------------------------------------    
 
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;

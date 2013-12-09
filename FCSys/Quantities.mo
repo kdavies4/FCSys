@@ -221,32 +221,38 @@ package Quantities "Variables to represent physical properties"
   type ResistivityThermal = Resistivity (displayUnit="m.K/W")
     "Thermal resistivity";
   type Conductance = Current (displayUnit="W/K") "Conductance";
-  annotation (Documentation(info="<html><p>In this package the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
-  dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are
+  annotation (Documentation(info="<html><p>In <a href=\"modelica://FCSys.FCSys\">FCSys</a>, the 
+<code>unit</code> attribute of each <code>Real</code> variable actually denotes the
+  dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The fundamental dimensions are
   angle (A), length (L), mass (M), particle number (N), and time (T).  These
   are combined according to the rules established for unit strings
-  [<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p. 210].  In
-  <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered to be derived dimensions
+  [<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p. 210].  
+Temperature and charge are derived dimensions
   (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p>
 
-  <p>The <code>quantity</code> attribute is not used since the type <i>is</i> the quantity.  The <code>displayUnit</code> attribute is
+  <p>The <code>quantity</code> attribute is not used since the type <i>is</i> the quantity.  
+The <code>displayUnit</code> attribute is
   only used for quantities that imply a certain display unit.</p>
 
-  <p>It is helpful to check that the terms of each model equation have the same dimension.  Fortunately, methods for unit checking
+  <p>Methods for unit checking
   have been established [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson2008\">Mattsson2008</a>,
   <a href=\"modelica://FCSys.UsersGuide.References.Broman2008\">Broman2008</a>,
   <a href=\"modelica://FCSys.UsersGuide.References.Aronsson2009\">Aronsson2009</a>] and can, in theory, be applied to
   dimension checking instead.</p>
 
-  <p>The quantities are generally named with adjectives following the noun so that the
-  quantities are grouped when alphabetized.</p>
-
   <p>The <a href=\"modelica://FCSys.Quantities\">Quantities</a> package is abbreviated as <code>Q</code> throughout
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.</p>
-
+The quantities are generally named with adjectives following the noun so that the
+  quantities are grouped when alphabetized.
+Some quantities are aliases to other quantities but with special implied display units.  
+For example, <a href=\"modelica://FCSys.Quantities.Temperature\">Temperature</a> is an alias for 
+<a href=\"modelica://FCSys.Quantities.Potential\">Potential</a> with a default 
+display unit of K.\footnote{Temperature is a potential in the chosen system of units; 
+see the next section (\ref{sec:Units}).}  Also, some quantities have minimum values 
+(e.g., zero for <a href=\"modelica://FCSys.Quantities.PressureAbsolute\">PressureAbsolute</a>).
 For more information, please see the 
   documentation of the <a href=\"modelica://FCSys.Units\">Units</a> package.
-  
+
     <hr>
 
     <small>

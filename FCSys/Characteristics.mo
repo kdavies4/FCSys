@@ -836,7 +836,7 @@ package Characteristics "Data and functions to correlate physical properties"
   density in equilibrium with H<sub>2</sub>O vapor will match the Springer et al.
 
    hydration curve
-  ([<a href=\"modelica://FCSys.UsersGuide.References.Springer1991\">Springer1991</a>], see <a href=\"modelica://FCSys.Characteristics.H2O.lambda_eq\">lambda_eq</a>())
+  [<a href=\"modelica://FCSys.UsersGuide.References.Springer1991\">Springer1991</a>] (see <a href=\"modelica://FCSys.Characteristics.H2O.lambda_eq\">lambda_eq</a>())
   at &lambda; = 14 and &lambda; = 0.
   Otherwise, the properties are the same as H<sub>2</sub>O as an ideal gas.</p>
 
@@ -1815,12 +1815,12 @@ temperature difference.</p>
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
     species.  For gases, the reference state is the ideal gas at <i>p</i><sup>o</sup>.
     For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> with
-    <code>ReferenceEnthalpy.zeroAt25degC</code> selected is not exactly zero.</li>
+    <code>ReferenceEnthalpy.zeroAt25degC</code> is not exactly zero.</li>
 
     <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\"><i>h</i></a>) will be ill-posed.
-    Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
+    Typically, the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
     </ul></p></html>"));
 

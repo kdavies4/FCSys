@@ -102,6 +102,7 @@ package Species "Dynamic models of chemical species"
 
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.16*U.W));
+
         // Note:  Mobility is small but not zero to prevent a singularity when SO3-
         // and C+ are both present (e.g., in the catalyst layers).
         annotation (
@@ -172,11 +173,11 @@ package Species "Dynamic models of chemical species"
     <p>Assumptions:<ol>
           <li>The fluidity is infinite.  All friction is by translational exchange with the
           the substrate
-          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).</li>
           
           <li>The thermal resistivity is infinite.  All of the thermal conductance is attributed to
           the substrate
-          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).<li>
+          (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>).</li>
           
           <li>The conductivity is mapped to the mobility of the electrons by assuming that
           the mobility of the substrate (<a href=\"modelica://FCSys.Species.'C+'.Graphite\">C+</a>) is zero.</li>
@@ -576,6 +577,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final T_IC,
           final consMaterial,
           redeclare parameter Q.TimeAbsolute tauprime[:]={2e12*Data.tauprime()},
+
           n_chem=1,
           final initMaterial=Init.none);
 
@@ -600,7 +602,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Ionomer;
@@ -629,6 +630,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final rho_IC,
           final p_IC,
           redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
+
           n_chem=1,
           final V_IC=epsilon_IC*product(L),
           initMaterial=Init.volume);
@@ -900,7 +902,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1753,7 +1754,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected

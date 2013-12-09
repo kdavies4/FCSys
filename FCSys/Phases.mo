@@ -170,13 +170,13 @@ package Phases "Mixtures of species"
     output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
-    Connectors.Chemical connH2[1](each final n_trans=n_trans) if inclH2
+    Connectors.Chemical chemH2[1](each final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
               {-74,40},{-54,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
-    Connectors.Chemical connH2O[3](each final n_trans=n_trans) if inclH2O
+    Connectors.Chemical chemH2O[3](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-34,40},{-14,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Chemical connO2[1](each final n_trans=n_trans) if inclO2
+    Connectors.Chemical chemO2[1](each final n_trans=n_trans) if inclO2
       "Chemical connector for O2" annotation (Placement(transformation(extent={
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
@@ -190,15 +190,15 @@ package Phases "Mixtures of species"
 
   equation
     // Chemical exchange
-    connect(O2.chemical, connO2) annotation (Line(
+    connect(O2.chemical, chemO2) annotation (Line(
         points={{56,9},{56,50}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(H2.chemical, connH2) annotation (Line(
+    connect(H2.chemical, chemH2) annotation (Line(
         points={{-64,9},{-64,50}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.chemical, chemH2O) annotation (Line(
         points={{-24,9},{-24,50}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -400,21 +400,22 @@ package Phases "Mixtures of species"
       Documentation(info="<html>
 
     <p>It is usually appropriate to assume that species
-    exist at the same temperature within a phase.  The time constants for thermal exchange (&tau;<sub><i>Q</i>E</sub>)
+    exist at the same temperature within a phase.  The time constants for thermal exchange
+ (&tau;<sub><i>Q</i>E</sub>)
     are usually much shorter than the time span of interest due to the very small coupling
-    resistances.  If this is the case, set <code>commonExch.k_Q</code> to zero as <code>final</code>.
+    resistances.  If this is the case, set <code>common.k_Q</code> to zero.
 
     This will reduce the index of the problem, so it may be
 
     necessary to eliminate some initial conditions.</p>
 
     <p>In bulk flow, it is usually appropriate to assume that species travel with the same velocity within
-    a phase.  If this is the case, set the entries of <code>commonExch.k_Phi</code>
-    to zero as <code>final</code>.  This will reduce the index of the problem, so it may be
+    a phase.  If this is the case, set the entries of <code>common.k_Phi</code>
+    to zero.  This will reduce the index of the problem, so it may be
 
     necessary to eliminate some initial conditions.</p>
 
-<p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
+<p>Please see the documentation of the <a href=\"modelica://FCSys.Phases.PartialPhase\">PartialPhase</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-60},{
               120,60}}), graphics),
@@ -557,7 +558,7 @@ package Phases "Mixtures of species"
             extent={{-80,4},{-60,24}}), iconTransformation(extent={{70,-90},{90,
               -70}})));
 
-    Connectors.Chemical 'conne-'[1](each final n_trans=n_trans) if 'incle-'
+    Connectors.Chemical 'cheme-'[1](each final n_trans=n_trans) if 'incle-'
        and 'incle-Transfer' "Chemical connector for e-" annotation (Placement(
           transformation(extent={{6,40},{26,60}}), iconTransformation(extent={{
               -10,-50},{10,-30}})));
@@ -587,7 +588,7 @@ package Phases "Mixtures of species"
         points={{16,28},{16,-11}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect('e-Transfer'.positive, 'conne-'[1]) annotation (Line(
+    connect('e-Transfer'.positive, 'cheme-'[1]) annotation (Line(
         points={{16,40},{16,50}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -710,7 +711,7 @@ package Phases "Mixtures of species"
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
-      Documentation(info="<html><p>From a physical standpoint, it is probably best
+      Documentation(info="<html><p>From a physical standpoint, the electrolytic double layer is probably best
 
     considered its own phase, but it is modeled as a part of the graphite phase in order to reduce the number of connections.  It is assumed to
 
@@ -722,7 +723,8 @@ package Phases "Mixtures of species"
 
     <p>See <a href=\"modelica://FCSys.Species.'e-'.Graphite.Fixed\">Species.'e-'.Graphite.Fixed</a> for assumptions.
     For more information, please see the
- <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
+ <a href=\"modelica://FCSys.Phases.PartialPhase\">PartialPhase</a> model.</p></html>"),
+
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-80},{80,
               60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
@@ -867,10 +869,10 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-26},{100,-6}}), iconTransformation(
             extent={{-60,60},{-40,40}})));
-    Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
+    Connectors.Chemical chemH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-14,60},{6,80}}), iconTransformation(extent={{10,-50},{30,-30}})));
-    Connectors.Chemical 'connH+'[1](each final n_trans=n_trans) if 'inclH+'
+    Connectors.Chemical 'chemH+'[1](each final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
               {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
 
@@ -925,11 +927,11 @@ package Phases "Mixtures of species"
       annotation (Placement(transformation(extent={{-59,46},{-39,66}})));
   equation
     // Chemical exchange
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.chemical, chemH2O) annotation (Line(
         points={{-4,29},{-4,70}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect('H+'.chemical, 'connH+') annotation (Line(
+    connect('H+'.chemical, 'chemH+') annotation (Line(
         points={{-44,29},{-44,70}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -1110,14 +1112,15 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
     annotation (
       Documentation(info="<html><p>Assumptions:<ol>
-    <li>The water in the ionomer does not participate in the reaction (only the water vapor does).</li>
+    <li>The water in the ionomer does not directly participate in the reaction (only the water vapor does).</li>
     </ol</p>
 
     <p>See <a href=\"modelica://FCSys.Species.'H+'.Ionomer.Fixed\">Species.'H+'.Ionomer.Fixed</a>
 
     for additional assumptions.
     For more information, please see the
- <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
+ <a href=\"modelica://FCSys.Phases.PartialPhase\">PartialPhase</a> model.</p></html>"),
+
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-80},{
               100,80}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
@@ -1189,7 +1192,7 @@ package Phases "Mixtures of species"
       "Connector for additivity of volume" annotation (Placement(transformation(
             extent={{-60,0},{-40,20}}), iconTransformation(extent={{70,-90},{90,
               -70}})));
-    Connectors.Chemical connH2O[1](each final n_trans=n_trans) if inclH2O
+    Connectors.Chemical chemH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -1255,14 +1258,15 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.chemical, chemH2O) annotation (Line(
         points={{-14,-1},{-14,20},{-30,20},{-30,30}},
         color={255,195,38},
         smooth=Smooth.None));
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation of the
- <a href=\"modelica://FCSys.Phases.Partial\">Partial</a> model.</p></html>"),
+ <a href=\"modelica://FCSys.Phases.PartialPhase\">PartialPhase</a> model.</p></html>"),
+
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},{40,

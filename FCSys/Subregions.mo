@@ -347,7 +347,6 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end AirColumn;
 
     model BinaryDiffusion
@@ -696,7 +695,6 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion
@@ -1250,22 +1248,25 @@ package Subregions
 
     // Reactions and phase change (not shown in diagram)
     // -------------------------------------------------
-    connect(gas.connH2[1], HOR.connH2);
-    connect(gas.connH2O[1], ORR.connH2O);
-    connect(gas.connO2[1], ORR.connO2);
+    connect(gas.chemH2[1], HOR.chemH2);
+    connect(gas.chemH2O[1], ORR.chemH2O);
+    connect(gas.chemO2[1], ORR.chemO2);
     if gas.inclH2O then
       if ionomer.inclH2O then
-        connect(gas.connH2O[2], ionomer.connH2O[1]);
+        connect(gas.chemH2O[2], ionomer.chemH2O[1]);
       end if;
       if liquid.inclH2O then
-        connect(gas.connH2O[3], liquid.connH2O[1]);
+        connect(gas.chemH2O[3], liquid.chemH2O[1]);
       end if;
     end if;
-    connect(graphite.'conne-'[1], HOR.'conne-');
-    connect(graphite.'conne-'[1], ORR.'conne-');
-    connect(ionomer.'connH+'[1], HOR.'connH+');
-    connect(ionomer.'connH+'[1], ORR.'connH+');
-    annotation (Documentation(info="<html>
+    connect(graphite.'cheme-'[1], HOR.'cheme-');
+    connect(graphite.'cheme-'[1], ORR.'cheme-');
+    connect(ionomer.'chemH+'[1], HOR.'chemH+');
+    connect(ionomer.'chemH+'[1], ORR.'chemH+');
+    annotation (Documentation(info="<html><p>Assumptions:<ol>
+<li>The oxygen reduction reaction generates H<sub>2</sub>O vapor, 
+although the vapor is condensed into liquid and absorbed into the ionomer.</li></ol></p>
+
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
@@ -1365,7 +1366,6 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
               60}}), graphics));
-
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1602,7 +1602,7 @@ on diagram)")}));
     // Phase change (not shown in diagram)
     // -----------------------------------
     if gas.inclH2O and liquid.inclH2O then
-      connect(gas.connH2O[3], liquid.connH2O[1]);
+      connect(gas.chemH2O[3], liquid.chemH2O[1]);
     end if;
 
     annotation (
@@ -1613,7 +1613,6 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
-
   end SubregionNoIonomer;
 
   partial model PartialSubregion

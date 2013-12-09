@@ -414,13 +414,7 @@ package Connectors "Declarative and imperative interfaces"
     flow Q.Power Qdot(nominal=U.W) "Rate of thermal conduction";
 
     annotation (
-      Documentation(info="<html><p>This connector is identical to <a href=\"modelica://FCSys.Connectors.InertNode\">InertNode</a> except for the icon.
-    It is used as a node to connect
-
-    <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> or <a href=\"modelica://FCSys.Connectors.Inter\">Inter</a>
-    connectors.  It contains outputs (<i>k</i><sub>&Phi;</sub> and <i>k<sub>Q</sub></i>) that are essentially
-    parameters to scale the translational and thermal independences of the connection.</p>
-
+      Documentation(info="<html>
     <p>Please see the documentation of the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -435,10 +429,10 @@ package Connectors "Declarative and imperative interfaces"
             extent={{-100,100},{100,-100}},
             lineColor={170,0,0},
             fillPattern=FillPattern.Solid,
-            fillColor={221,23,47})}));
-
-  end Inert;
-
+            fillColor={221,23,47})})); 
+            
+            end Inert;
+            
   expandable connector InertNode
     "<html>Internal node for <a href=\"modelica://FCSys.Connectors.Intra\">Intra</a> and <a href=\"modelica://FCSys.Connectors.Intra\">Inter</a></html>"
 
@@ -835,7 +829,7 @@ package Connectors "Declarative and imperative interfaces"
   (e.g., <a href=\"modelica://FCSys.Conditions.Adapters.ChemicalReaction\">ChemicalReaction</a>),
   which applies the stoichiometry.</p>
 
-  The <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector
+  <p>The <a href=\"modelica://FCSys.Connectors.Amagat\">Amagat</a> connector
   imposes Amagat's law of partial volumes and is used to combine material phases within a subregion.
   The
   <a href=\"modelica://FCSys.Connectors.Dalton\">Dalton</a> connector

@@ -29,7 +29,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "Mole fraction of H2O at the anode inlet";
         final parameter Q.NumberAbsolute psi_H2=1 - psi_H2O_an
           "Mole fraction of H2 at the anode inlet";
-        //
+        
         // Cathode
         Connectors.RealInputInternal I_ca(unit="N/T") = U.A
           "Equivalent current" annotation (Dialog(tab="Cathode", __Dymola_label
@@ -591,10 +591,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={8}*U.cm "Lengths in the y direction"
+      parameter Q.Length L_y[:]={8}*U.cm "Lengths of segments in the y direction"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths in the z direction"
+      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths of segments in the z direction"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
@@ -826,10 +826,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={8}*U.cm "Lengths in the y direction"
+      parameter Q.Length L_y[:]={8}*U.cm "Lengths of segments in the y direction"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths in the z direction"
+      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths of segments in the z direction"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)

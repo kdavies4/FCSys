@@ -104,15 +104,15 @@ package Chemistry "Chemical reactions and related models"
       inner Conditions.Environment environment
         annotation (Placement(transformation(extent={{20,20},{40,40}})));
     equation
-      connect(hOR.'connH+', 'H+'.chemical) annotation (Line(
+      connect(hOR.'chemH+', 'H+'.chemical) annotation (Line(
           points={{4,0},{4,-8},{30,-8},{30,-16}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(H2.chemical, hOR.connH2) annotation (Line(
+      connect(H2.chemical, hOR.chemH2) annotation (Line(
           points={{-30,-16},{-30,-8},{-4,-8},{-4,0}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect('e-'.chemical, hOR.'conne-') annotation (Line(
+      connect('e-'.chemical, hOR.'cheme-') annotation (Line(
           points={{0,-16},{0,0}},
           color={255,195,38},
           smooth=Smooth.None));
@@ -235,23 +235,19 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{-20,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+                100,100}}), graphics={Line(
+                  points={{-20,30},{-20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,30},{20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{-20,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None)}));
     end DoubleLayer;
 
     model ElectronTransfer "Electron transfer"
@@ -330,30 +326,25 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{0,-20},{0,-50}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-30,20},{32,-20}},
-              lineColor={255,195,38},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,4},{20,4},{8,12}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,-5},{20,-5},{8,3}},
-              color={255,195,38},
-              smooth=Smooth.None,
-              origin={0,-11},
-              rotation=180)}));
+                100,100}}), graphics={Line(
+                  points={{0,-20},{0,-50}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-30,20},{32,-20}},
+                  lineColor={255,195,38},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,4},{20,4},{8,12}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-20,-5},{20,-5},{8,3}},
+                  color={255,195,38},
+                  smooth=Smooth.None,
+                  origin={0,-11},
+                  rotation=180)}));
     end ElectronTransfer;
 
   end Electrochemistry;
@@ -385,29 +376,29 @@ package Chemistry "Chemical reactions and related models"
           rotation=0,
           origin={-10,0})));
 
-    Connectors.Chemical 'conne-'(redeclare final constant Integer n_trans=
+    Connectors.Chemical 'cheme-'(redeclare final constant Integer n_trans=
           n_trans) "Connector for e-" annotation (Placement(transformation(
             extent={{20,0},{40,20}}), iconTransformation(extent={{-10,-10},{10,
               10}})));
-    Connectors.Chemical 'connH+'(redeclare final constant Integer n_trans=
+    Connectors.Chemical 'chemH+'(redeclare final constant Integer n_trans=
           n_trans) "Connector for H+" annotation (Placement(transformation(
             extent={{20,-20},{40,0}}), iconTransformation(extent={{30,-10},{50,
               10}})));
-    Connectors.Chemical connH2(redeclare final constant Integer n_trans=n_trans)
+    Connectors.Chemical chemH2(redeclare final constant Integer n_trans=n_trans)
       "Connector for H2" annotation (Placement(transformation(extent={{-40,-10},
               {-20,10}}), iconTransformation(extent={{-50,-10},{-30,10}})));
     // Note:  These redeclarations are necessary due to errors in Dymola 2014.
 
   equation
-    connect(connH2, H2.chemical) annotation (Line(
+    connect(chemH2, H2.chemical) annotation (Line(
         points={{-30,0},{-14,0}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect('e-'.chemical, 'conne-') annotation (Line(
+    connect('e-'.chemical, 'cheme-') annotation (Line(
         points={{14,10},{30,10}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect('H+'.chemical, 'connH+') annotation (Line(
+    connect('H+'.chemical, 'chemH+') annotation (Line(
         points={{14,-10},{30,-10}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -426,15 +417,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -475,37 +465,37 @@ package Chemistry "Chemical reactions and related models"
           rotation=0,
           origin={10,-10})));
 
-    Connectors.Chemical 'conne-'(redeclare final constant Integer n_trans=
+    Connectors.Chemical 'cheme-'(redeclare final constant Integer n_trans=
           n_trans) "Connector for e-" annotation (Placement(transformation(
             extent={{-40,0},{-20,20}}), iconTransformation(extent={{-70,-10},{-50,
               10}})));
-    Connectors.Chemical 'connH+'(redeclare final constant Integer n_trans=
+    Connectors.Chemical 'chemH+'(redeclare final constant Integer n_trans=
           n_trans) "Connector for H+" annotation (Placement(transformation(
             extent={{-40,-20},{-20,0}}), iconTransformation(extent={{-30,-10},{
               -10,10}})));
-    Connectors.Chemical connO2(redeclare final constant Integer n_trans=n_trans)
+    Connectors.Chemical chemO2(redeclare final constant Integer n_trans=n_trans)
       "Connector for O2" annotation (Placement(transformation(extent={{-40,-40},
               {-20,-20}}), iconTransformation(extent={{10,-10},{30,10}})));
-    Connectors.Chemical connH2O(redeclare final constant Integer n_trans=
+    Connectors.Chemical chemH2O(redeclare final constant Integer n_trans=
           n_trans) "Connector for H2O" annotation (Placement(transformation(
             extent={{20,-20},{40,0}}), iconTransformation(extent={{50,-10},{70,
               10}})));
     // Note:  These redeclarations are necessary due to errors in Dymola 2014.
 
   equation
-    connect('H+'.chemical, 'connH+') annotation (Line(
+    connect('H+'.chemical, 'chemH+') annotation (Line(
         points={{-14,-10},{-30,-10}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect('e-'.chemical, 'conne-') annotation (Line(
+    connect('e-'.chemical, 'cheme-') annotation (Line(
         points={{-14,10},{-30,10}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(O2.chemical, connO2) annotation (Line(
+    connect(O2.chemical, chemO2) annotation (Line(
         points={{-14,-30},{-30,-30}},
         color={255,195,38},
         smooth=Smooth.None));
-    connect(H2O.chemical, connH2O) annotation (Line(
+    connect(H2O.chemical, chemH2O) annotation (Line(
         points={{14,-10},{30,-10}},
         color={255,195,38},
         smooth=Smooth.None));
@@ -528,15 +518,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
@@ -587,18 +576,16 @@ public
 
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Line(
-            points={{-40,0},{30,0}},
-            color={47,107,251},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Ellipse(
-            extent={{0,40},{-80,-40}},
-            lineColor={47,107,251},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Sphere),
-          Ellipse(extent={{0,40},{-80,-40}}, lineColor={0,0,0})}),
+              100}}), graphics={Line(
+              points={{-40,0},{30,0}},
+              color={47,107,251},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Ellipse(
+              extent={{0,40},{-80,-40}},
+              lineColor={47,107,251},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Sphere),Ellipse(extent={{0,40},{-80,-40}},
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end SurfaceTension;
@@ -716,40 +703,34 @@ public
     
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Polygon(
-            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
-                -60}},
-            lineColor={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
-            lineColor={191,191,191},
-            smooth=Smooth.Bezier,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-40,8},{20,-30}},
-            lineColor={85,170,255},
-            fillPattern=FillPattern.Sphere,
-            fillColor={255,255,255}),
-          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
-          Line(
-            points={{-60,20},{20,20},{20,-60}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{60,60},{20,20}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None)}),
+              100}}), graphics={Polygon(
+              points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+              -60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Polygon(
+              points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+              lineColor={191,191,191},
+              smooth=Smooth.Bezier,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{-40,8},{20,-30}},
+              lineColor={85,170,255},
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255}),Ellipse(extent={{-40,8},{20,-30}},
+            lineColor={225,225,225}),Line(
+              points={{-60,20},{20,20},{20,-60}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{60,60},{20,20}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));
