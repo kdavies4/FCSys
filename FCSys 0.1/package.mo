@@ -1293,7 +1293,7 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  version="0.1.0",
-  dateModified="2013-12-10 19:16:21Z",
-  revisionID="SHA: 77a032e");
+  version="0.1.1",
+  dateModified="2013-12-10 20:07:51Z",
+  revisionID="SHA: 89bcc5c");
 end FCSys;
