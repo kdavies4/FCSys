@@ -652,7 +652,7 @@ public
       annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
           iconTransformation(extent={{50,-30},{70,-10}})));
     SurfaceTension surfaceTension(final gamma=gamma,final overR=cos(theta)*J(
-          liquid.V/(liquid.V + gas.V))/(2*sqrt(kappa))) if inclLiquid and
+          liquid.V/(V - liquid.V))/(2*sqrt(kappa))) if inclLiquid and
       inclCapillary "Additional pressure on the liquid"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 

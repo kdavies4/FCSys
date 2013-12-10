@@ -42,8 +42,8 @@ rpls = [# Remove tabs.
         # Start single-line comments with a space.
         (r'([ \n]//)([^ ])', r'\1 \2'),
         # Remove extra spacing.
-        (r' +\n', r'\n'),
-        (r'\n\n\n+', r'\n\n'),
+        #(r' +\n', r'\n'),
+        #(r'\n\n\n+', r'\n\n'),
         (' +<br>', '<br>'),
         ('<br><br>(<br>)+', '<br><br>'),
         # Remove empty lines above annotations.

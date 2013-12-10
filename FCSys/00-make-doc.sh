@@ -6,7 +6,7 @@
 # http://kdavies4.github.io/FCSys/).
 #
 # Before running this script:
-# 1.  Make sure the documentation is up-to-date.  Use 00-find-used.sh,
+# 1.  Make sure the documentation is up-to-date.  Use 00-find-unused.sh,
 #     00-check-linewidth.py, 00-spellcheck.sh, and 00-tidy.sh as needed.
 # 2.  Add an entry to the list of revisions in package.mo.
 # 3.  Delete the help directory and recreate it using Dymola

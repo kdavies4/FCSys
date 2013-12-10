@@ -48,6 +48,6 @@ sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ "$pack
 ./00-stamp.sh
 
 # Finish.
-git commit -am "Added release information for v$version"
+git commit -am "Added release information for v$versiona.$versionb"
 echo "Now on branch v$versiona.$versionb from master."
 

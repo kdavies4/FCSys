@@ -3,7 +3,7 @@ removePlots();
 createPlot(filename = "InternalFlow.mat");
 
 FCSys.Utilities.plot6(
-   y1={"subregion.liquid.H2O.mrho"},
+   y1={"Re"},
    y2={"subregion.liquid.H2O.phi_boundaries[1, 1]", 
        "subregion.liquid.H2O.phi[1]", 
        "subregion.liquid.H2O.phi_boundaries[1, 2]"},

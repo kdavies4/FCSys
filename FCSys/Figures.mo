@@ -1638,22 +1638,6 @@ and Inert"),Line(
 
   end Connectors;
 
-  model InternalFlow
-    extends Subregions.Examples.InternalFlow(final Vdot=Vdot_SI*U.m^3/U.s);
-
-    // Conditions
-    parameter Q.VolumeRate Vdot_SI=-1.5e-6
-      "Prescribed large-signal volumetric flow rate in m3/s"
-      annotation (Dialog(__Dymola_label="<html><i>V&#775;</i></html>"));
-
-    annotation (experiment(
-        StopTime=5,
-        Tolerance=1e-008,
-        __Dymola_Algorithm="Dassl"), Commands(file=
-            "Resources/Scripts/Dymola/Subregions.Examples.InternalFlow.mos"
-          "Subregions.Examples.InternalFlow.mos"));
-
-  end InternalFlow;
 
   model TestStand
     extends Assemblies.Cells.Examples.TestStand(testConditions(final I_an=

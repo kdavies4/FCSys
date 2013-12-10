@@ -559,7 +559,7 @@ package UsersGuide "User's Guide"
       end Shah2009;
 
     class Sivertsen2005
-      "<html>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005</html>"
+      "<html>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141, pp. 65&ndash;78, 2005</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end Sivertsen2005;

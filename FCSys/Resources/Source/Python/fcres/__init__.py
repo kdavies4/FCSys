@@ -20,9 +20,6 @@ from its submodules.  These are:
 - For simulation results: :class:`fcsimres.FCSimRes`, :class:`simres.SimRes`,
   :meth:`fcsimres.gen_subtitle_conditions`
 
-- For linearization results: :class:`fclinres.FCLinRes` and
-  :class:`linres.LinRes`
-
 - To label numbers and quantities: :meth:`texunit.label_number`,
   :meth:`texunit.label_quantity`, :meth:`texunit.unit2tex`
 
@@ -45,7 +42,7 @@ if not (major == 2 and minor1 == 7):
 
 
 # All functions and classes
-#__all__ = ['simres', 'fcsimres', 'fclinres', 'modelicares']
+#__all__ = ['simres', 'fcsimres', 'modelicares']
 
 
 # Essential functions and classes
@@ -65,4 +62,3 @@ from modelicares.texunit import label_number, label_quantity, unit2tex
 # Local:
 from simres import SimRes
 from fcsimres import FCSimRes, gen_subtitle_conditions
-from fclinres import FCLinRes

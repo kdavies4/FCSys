@@ -24,6 +24,3 @@ echo
 echo UnderConstruction items:
 echo ------------------------
 find_item UnderConstruction
-
-echo
-read -p "Press [Enter] to exit."

@@ -658,11 +658,20 @@ class SimRes(SimRes):
 
         # Additional units that are useful for fuel cells
         atm = 101325*Pa
-        M = mol/L
         cc = (0.01*m)**3
         yr = 365.25*day
-        self.U.update(atm=atm, cc=cc, yr=yr)
+        M = mol/L
+        self.U.update(atm=atm, cc=cc, yr=yr, M=M)
         self.U.update({'%': 0.01})
+
+
+  final constant Q.Current mA=milli*A "milliampere";
+  final constant Q.Length um=micro*m "micrometer";
+  final constant Q.Time ms=milli*s "millisecond";
+  final constant Q.Number '%'=centi "percent (%)";
+  final constant Q.Density M=U.mol/U.L "molar";
+  final constant Q.Volume cc=U.cm^3 "cubic centimeter";
+
 
 
 class Info:

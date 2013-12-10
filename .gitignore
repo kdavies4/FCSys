@@ -34,6 +34,7 @@ FCSys*/Resources/Documentation/UsersGuide/SampleResults/CellLevel/*.svg
 *.zip
 
 # Generated files
+FCSys*/help
 FCSys*/Resources/Documentation/UsersGuide/References/*(dissertation).pdf
 FCSys*/Resources/Source/Python/doc/fcres.pdf
 FCSys*/Resources/Source/Python/examples/*.mos

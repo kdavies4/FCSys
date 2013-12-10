@@ -29,4 +29,3 @@ do
         echo Reference \"$s\" was not found.
     fi
 done
-read -p "Done.  Press [Enter] to exit."

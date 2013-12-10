@@ -80,7 +80,7 @@ package Subregions
         output Q.Current zI=subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density of the reaction, in A/cm2";
-        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.intra.Qdot
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot
           "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
@@ -151,7 +151,7 @@ package Subregions
         output Q.Current zI=-subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
-        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.intra.Qdot
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot
           "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
@@ -567,7 +567,7 @@ package Subregions
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
       // Conditions
-      parameter Q.VolumeRate Vdot=-1.5*U.cc/U.s
+      parameter Q.VolumeRate Vdot_large=-1.5*U.cc/U.s
         "Prescribed large signal volumetric flow rate";
 
       // Measurements
@@ -580,10 +580,12 @@ package Subregions
       output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.liquid.H2O.phi[
           Axis.x]/(D^2*subregion.liquid.H2O.eta)
         "Pressure difference according to Poiseuille's law";
-      output Q.Power Qdot_gen=subregion.liquid.H2O.Edot_AT
-        "Rate of heat generation";
-      output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*subregion.liquid.H2O.Vdot[
-          1] "Rate of heat generation according to Poiseuille's law";
+      Real x=Deltap_Poiseuille/Deltap;
+
+      output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*Vdot
+        "Rate of heat generation according to Poiseuille's law";
+      output Q.VolumeRate Vdot=BC1.liquid.H2O.materialSet.y if environment.analysis
+        "Total volumetric flow rate";
 
       extends Examples.Subregion(inclH2=false, subregion(
           L={U.m,U.mm,U.mm},
@@ -594,8 +596,8 @@ package Subregions
       Conditions.ByConnector.BoundaryBus.Single.Source BC1(liquid(inclH2O=true,
             H2O(
             redeclare Modelica.Blocks.Sources.Sine materialSet(
-              amplitude=0.2*Vdot,
-              offset=Vdot,
+              amplitude=0.2*Vdot_large,
+              offset=Vdot_large,
               freqHz=1),
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.volumeRate (
@@ -695,6 +697,7 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -739,7 +742,6 @@ package Subregions
         inclTransZ=false,
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclSO3-'='inclSO3-', final 'inclH+'='inclH+'),
-        liquid(H2O(epsilon_IC=0.25)),
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
