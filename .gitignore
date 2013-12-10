@@ -20,12 +20,6 @@ dymosim
 request
 status
 
-# Sample results User's Guide
-FCSys*/Resources/Documentation/UsersGuide/SampleResults/Basic/*.png
-FCSys*/Resources/Documentation/UsersGuide/SampleResults/Basic/*.svg
-FCSys*/Resources/Documentation/UsersGuide/SampleResults/CellLevel/*.png
-FCSys*/Resources/Documentation/UsersGuide/SampleResults/CellLevel/*.svg
-
 # Excel spreadsheets
 *.xls
 

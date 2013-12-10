@@ -28,6 +28,7 @@ matplotlibrc text
 *.xls binary
 
 # Keep the development files and work in progress on the development branch.
+.gitignore merge=ours
 00-* merge=ours
 *.pws merge=ours
 FCSys*/Resources/Source/Python/doc/_templates merge=ours
