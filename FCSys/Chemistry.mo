@@ -136,7 +136,7 @@ package Chemistry "Chemical reactions and related models"
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Evaluate=
-            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+            true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
       parameter Q.Area A=10*U.m^2 "Surface area"
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
       parameter Q.Length L=1e-10*U.m "Length of the gap"
@@ -154,7 +154,7 @@ package Chemistry "Chemical reactions and related models"
         __Dymola_choicesFromPackage=true);
 
       parameter Boolean setVelocity=true
-        "<html>Material exits at the velocity of the <code>direct</code> connector</html>"
+        "<html>Material exits at the velocity of the <code>inert</code> connector</html>"
         annotation (
         Evaluate=true,
         Dialog(tab="Assumptions", compact=true),
@@ -184,7 +184,7 @@ package Chemistry "Chemical reactions and related models"
         "Chemical connector on the 2nd side" annotation (Placement(
             transformation(extent={{50,-10},{70,10}}), iconTransformation(
               extent={{50,-10},{70,10}})));
-      Connectors.Intra intra(final n_trans=n_trans)
+      Connectors.Inert inert(final n_trans=n_trans)
         "Translational and thermal interface with the substrate" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -203,8 +203,8 @@ package Chemistry "Chemical reactions and related models"
 
       // Streams
       if setVelocity then
-        negative.phi = intra.phi;
-        positive.phi = intra.phi;
+        negative.phi = inert.phi;
+        positive.phi = inert.phi;
       else
         negative.phi = inStream(positive.phi);
         positive.phi = inStream(negative.phi);
@@ -215,12 +215,12 @@ package Chemistry "Chemical reactions and related models"
       // Conservation
       0 = negative.Ndot + positive.Ndot "Material (no storage)";
       zeros(n_trans) = Data.m*(actualStream(negative.phi) - actualStream(
-        positive.phi))*I + intra.mPhidot "Translational momentum (no storage)";
+        positive.phi))*I + inert.mPhidot "Translational momentum (no storage)";
       der(C*w)/U.s = Data.z*I
         "Electrical energy (reversible; simplified using material conservation and divided by potential)";
-      0 = intra.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
+      0 = inert.Qdot + (actualStream(negative.phi)*actualStream(negative.phi)
          - actualStream(positive.phi)*actualStream(positive.phi))*I*Data.m/2 +
-        intra.phi*intra.mPhidot "Mechanical and thermal energy (no storage)";
+        inert.phi*inert.mPhidot "Mechanical and thermal energy (no storage)";
 
       annotation (
         Documentation(info="<html><p>The capacitance (<i>C</i>) is calculated from the surface area (<i>A</i>), length of the gap (<i>L</i>), and the permittivity (&epsilon;) assuming that the
@@ -228,7 +228,7 @@ package Chemistry "Chemical reactions and related models"
   charges are uniformly distributed over (infinite) parallel planes.</p>
 
   <p>If <code>setVelocity</code> is <code>true</code>, then the material exits with the
-  velocity of the <code>direct</code> connector.  Typically, that connector should be connected to the stationary solid,
+  velocity of the <code>inert</code> connector.  Typically, that connector should be connected to the stationary solid,
   in which case heat will be generated if material arrives with a nonzero velocity.  That heat is rejected to the same connector.</p>
 
   </html>"),
@@ -256,7 +256,7 @@ package Chemistry "Chemical reactions and related models"
 
       parameter Integer n_trans(min=1,max=3)
         "Number of components of translational momentum" annotation (Evaluate=
-            true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+            true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
       parameter Integer z=-1 "Charge number";
       parameter Q.Potential E_A=0 "Activation energy" annotation (Dialog(group=
@@ -286,7 +286,7 @@ package Chemistry "Chemical reactions and related models"
       Q.Current I(start=0) "Reaction rate";
       Q.Potential Deltag(start=0) "Potential difference";
 
-      Connectors.Intra intra(final n_trans=n_trans)
+      Connectors.Inert inert(final n_trans=n_trans)
         "Translational and thermal interface with the substrate" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -295,7 +295,7 @@ package Chemistry "Chemical reactions and related models"
       // Aliases
       I = positive.Ndot;
       Deltag = positive.g - negative.g;
-      T = intra.T;
+      T = inert.T;
 
       // Streams
       negative.phi = inStream(positive.phi);
@@ -313,8 +313,8 @@ package Chemistry "Chemical reactions and related models"
 
       // Conservation (without storage)
       0 = negative.Ndot + positive.Ndot "Material";
-      zeros(n_trans) = intra.mPhidot "Translational momentum";
-      0 = Deltag*I + intra.Qdot "Energy";
+      zeros(n_trans) = inert.mPhidot "Translational momentum";
+      0 = Deltag*I + inert.Qdot "Energy";
       // Note:  Energy and momentum cancel among the stream terms.
 
       annotation (

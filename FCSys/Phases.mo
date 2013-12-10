@@ -606,11 +606,11 @@ package Phases "Mixtures of species"
         points={{24,-29},{24,-68},{46,-68}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('e-Transfer'.intra, 'C+'.intra[1]) annotation (Line(
+    connect('e-Transfer'.inert, 'C+'.intra[1]) annotation (Line(
         points={{12,34},{-16,34},{-16,-29}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(doubleLayer.intra, 'e-Transfer'.intra) annotation (Line(
+    connect(doubleLayer.inert, 'e-Transfer'.inert) annotation (Line(
         points={{-16,34},{12,34}},
         color={221,23,47},
         smooth=Smooth.None));

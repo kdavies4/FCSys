@@ -123,7 +123,7 @@ package Subregions
           height=200*U.A,
           duration=20,
           startTime=5)
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+          annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
             points={{10,0},{20,6.66134e-016}},
@@ -203,7 +203,7 @@ package Subregions
           duration=20,
           height=-200*U.A,
           startTime=5)
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+          annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
         // offset=-U.mA,
       equation
         connect(subregion.xPositive, caBC.boundary) annotation (Line(
@@ -731,7 +731,7 @@ package Subregions
             __Dymola_descriptionLabel=true));
 
       inner Conditions.Environment environment(RH=0)
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       FCSys.Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -800,7 +800,7 @@ package Subregions
             __Dymola_descriptionLabel=true));
 
       inner Conditions.Environment environment
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+        annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
       FCSys.Subregions.Subregion subregion1(
         L={1,1,1}*U.cm,
         inclTransY=false,
@@ -1271,11 +1271,11 @@ although the vapor is condensed into liquid and absorbed into the ionomer.</li><
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-            extent={{78,-44},{118,-50}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown
+              extent={{78,-44},{118,-50}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown
 on diagram)")}));
   end Subregion;
 

@@ -14,7 +14,7 @@
 
 # Get the version.
 # TODO: Split the version number automatically (https://gist.github.com/pete-otaqui/4188238).
-lasttag=`git describe --tags release`
+lasttag=`git describe --abbrev=0 --tags`
 versiona=${lasttag%-*}
 versiona=${versiona%.*}
 versiona=${versiona#v*}
@@ -25,6 +25,7 @@ read -p "Enter the patch and optional pre-release string (last was $versionb): "
 
 # Get the name of the package (see assumption 1).
 package="$(basename "$( pwd )" )"
+#echo $package
 
 # Create the branch.
 git checkout -b "v$versiona.$versionb" master
@@ -34,16 +35,19 @@ cd "$(git rev-parse --show-toplevel)"
 
 # Update the version number in various items.
 # Package folder
-git mv $package* "$package $versiona"
+git mv "`echo $package*.*`" "$package $versiona"
 # Load script
 sed -i "s/$package[ 0-9.]*\/package.mo/$package $versiona\/package.mo/" load.mos
-# Modelica version string
-cd $package*
-sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ package.mo
+# Link to documentation
+sed -i "s/$package[ 0-9.]*\/help/$package $versiona\/help/" Documentation.html
+# Readme file
+sed -i "s/($package[ 0-9.]*\//($package $versiona\//" README.md
 # Python module
-sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ Resources/Source/Python/setup.py
+sed -i s/version='"'[0-9A-Za-z.]*'"',/version='"'$versiona.$versionb'"',/ "$package $versiona/Resources/Source/Python/setup.py"
+# Modelica release information
+./00-stamp.sh
 
-# Commit.
-git commit -am "Bumped to $versiona.$versionb"
+# Finish.
+git commit -am "Added release information for v$version"
 echo "Now on branch v$versiona.$versionb from master."
-echo "The version info has been updated and commited."
+

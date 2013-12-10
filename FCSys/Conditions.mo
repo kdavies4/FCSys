@@ -909,30 +909,27 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,0,255},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={
-              Line(
-                points={{-30,0},{-20,0}},
-                color={127,127,127},
-                visible='incle-' or 'inclC+',
-                smooth=Smooth.None),
-              Line(
-                points={{10,0},{40,0}},
-                color={0,0,255},
-                visible='incle-',
-                smooth=Smooth.None),
-              Polygon(
-                points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                lineColor={0,0,255},
-                visible='incle-',
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-40,0},{-20,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=
-                  false, extent={{-100,-100},{100,100}}), graphics));
+        annotation (Icon(graphics={Line(
+                      points={{-30,0},{-20,0}},
+                      color={127,127,127},
+                      visible='incle-' or 'inclC+',
+                      smooth=Smooth.None),Line(
+                      points={{10,0},{40,0}},
+                      color={0,0,255},
+                      visible='incle-',
+                      smooth=Smooth.None),Polygon(
+                      points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                      lineColor={0,0,255},
+                      visible='incle-',
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Line(
+                      points={{-40,0},{-20,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5)}), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics));
       end Electronic;
 
       package Phases "Adapters for material phases"
@@ -7117,57 +7114,49 @@ connected to <code>positive1</code>, as shown by <a href=\"#Fig1b\">Figure 1b</a
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={225,225,225},
-            thickness=0.5,
-            smooth=Smooth.Bezier,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={225,225,225},
-            thickness=0.5,
-            smooth=Smooth.Bezier,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-82,40},{78,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-82,40},{78,40}},
-            color={225,225,225},
-            visible=crossOver,
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={225,225,225},
-            visible=crossOver,
-            smooth=Smooth.None,
-            thickness=0.5,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={225,225,225},
+              thickness=0.5,
+              smooth=Smooth.Bezier,
+              pattern=LinePattern.Dash),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={225,225,225},
+              thickness=0.5,
+              smooth=Smooth.Bezier,
+              pattern=LinePattern.Dash),Line(
+              points={{-82,40},{78,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-82,40},{78,40}},
+              color={225,225,225},
+              visible=crossOver,
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={225,225,225},
+              visible=crossOver,
+              smooth=Smooth.None,
+              thickness=0.5,
+              pattern=LinePattern.Dash),Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   annotation (Documentation(info="

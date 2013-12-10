@@ -2245,7 +2245,6 @@ although in reality there is inductance.</p>
 <p>Assumptions:<ol>
 <li>There are no pores in the PEM.  All H<sub>2</sub>O is absorbed into the ionomer itself.</li>
 <li>There is no cross-over of the reactant gases.</li>
-<li>There is no cross-over of the reactant gases.</li>
 </ul></p>
 
 <p>For more information, please see the

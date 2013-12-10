@@ -56,9 +56,11 @@ rm ../images/FCSys.Figures*.png
 rm ../*.html
 cp -f help/*.html ../
 mv -f ../FCSys.html ../index.html
+lasttag=`git describe --abbrev=0 --tags master`
 (
     cd ..
     ./00-process-gh-pages.py
+    rpl vx.x.x "$lasttag" *.html
 )
 
 # Be sure that all of the files are added to git.
