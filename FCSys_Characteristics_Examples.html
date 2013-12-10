@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Characteristics.Examples"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.Examples</h2>
 
 <b>Examples</b>
@@ -69,7 +68,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Model that implements the functions of the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Characteristic">Characteristic</a> package</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.SaturationPressure" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.SaturationPressure">SaturationPressure</a>
 </td><td>Evaluate the saturation pressure curve of H<sub>2</sub>O</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.Hydration" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Hydration">Hydration</a>
+<tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.HydrationLevel" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.HydrationLevel">HydrationLevel</a>
 </td><td>Evaluate the equilibrium hydration of the ionomer as a function of relative humidity</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.CellPotential" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.CellPotential">CellPotential</a>
 </td><td>Evaluate the potential of an H<sub>2</sub>/O<sub>2</sub> cell as a function of temperature</td></tr>
@@ -276,7 +275,7 @@ Extends from <a href="FCSys_Icons_Blocks.html#FCSys.Icons.Blocks.ContinuousShort
 
 <h3>Information</h3>
 
-<p>See also <a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Condensation">Subregions.Examples.PhaseChange.Condensation</a>.</p>
+<p>See also <a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Evaporation">Subregions.Examples.PhaseChange.Evaporation</a>.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 
 <h3>Modelica definition</h3>
@@ -313,10 +312,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureI.png" alt="FCSys.Characteristics.Examples.Hydration" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.Examples.Hydration"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.Hydration</h2>
+<h2><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureI.png" alt="FCSys.Characteristics.Examples.HydrationLevel" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.Examples.HydrationLevel"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.HydrationLevel</h2>
 <b>Evaluate the equilibrium hydration of the ionomer as a function of relative humidity</b>
-<img src="images/FCSys.Characteristics.Examples.HydrationD.png" alt="FCSys.Characteristics.Examples.Hydration">
+<img src="images/FCSys.Characteristics.Exa3562d5bf860ef72eLevelD.png" alt="FCSys.Characteristics.Examples.HydrationLevel">
 
 <h3>Information</h3>
 
@@ -326,7 +325,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Hydration <font color="darkgreen">
+<font color="blue">model</font> HydrationLevel <font color="darkgreen">
   &quot;Evaluate the equilibrium hydration of the ionomer as a function of relative humidity&quot;</font>
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">import </font>Absorbed = <a href="FCSys_Characteristics_H2O_Ionomer.html#FCSys.Characteristics.H2O.Ionomer">FCSys.Characteristics.H2O.Ionomer</a>;
@@ -352,7 +351,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   RH = humiditySet.y;
   <font color="red">Absorbed.g</font>(environment.T, p_abs) = <font color="red">Gas.g</font>(environment.T, RH*<font color="red">p_sat</font>(environment.T));
 
-<font color="blue">end </font>Hydration;
+<font color="blue">end </font>HydrationLevel;
 </pre>
 <hr>
 
@@ -594,6 +593,6 @@ Extends from <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:03:01 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:34 2013.
 </div>
 </span></body></html>

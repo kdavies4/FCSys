@@ -3,7 +3,7 @@
 <title>FCSys.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Chemical reactions and related models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Chemistry"></a><a href="index.html#FCSys">FCSys</a>.Chemistry</h2>
 
 <b>Chemical reactions and related models</b>
@@ -337,7 +336,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">SurfaceTension</a></td><td>gamma</td><td>0.0663*U.N/U.m</td><td>Surface tension [M/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>kappa</td><td>6.46e-5*U.mm^2</td><td>Permeability [L2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Angle</a></td><td>theta</td><td>140*U.degree</td><td>Contact angle [A]</td></tr>
-<tr><TD colspan="2">replaceable function J</td><td>FCSys.Characteristics.H2O.J_&hellip;</td><td>Leverett J function</td></tr>
+<tr><TD colspan="2">replaceable function J</td><td>FCSys.Characteristics.H2O.J_&hellip;</td><td>Leverett <i>J</i>-function</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included phases</td></tr>
 <tr><td>Boolean</td><td>inclGas</td><td>true</td><td>Gas</td></tr>
 <tr><td>Boolean</td><td>inclLiquid</td><td>true</td><td>Liquid</td></tr>
@@ -350,11 +349,11 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>gas</td><td>Interface to the gas phase</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>gas</td><td>Interface to the gas phase</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>liquid</td><td>Interface to the liquid phase</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>solid</td><td>Interface to the solid phase</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
-<tr><TD colspan="2">replaceable function J</td><td>Leverett J function</td></tr>
+<tr><TD colspan="2">replaceable function J</td><td>Leverett <i>J</i>-function</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -373,41 +372,53 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> kappa=6.46e-5*U.mm^2 <font color="darkgreen">&quot;Permeability&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> theta=140*U.degree <font color="darkgreen">&quot;Contact angle&quot;</font>;
   <font color="blue">replaceable </font><font color="blue">function</font> J = <a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.J_identity">FCSys.Characteristics.H2O.J_identity</a> <font color="darkgreen">
-    &quot;Leverett J function&quot;</font>;
+    &quot;Leverett <i>J</i>-function&quot;</font>;
 
   <font color="darkgreen">// Material properties</font>
   <font color="blue">parameter </font>Boolean inclGas=true <font color="darkgreen">&quot;Gas&quot;</font>;
   <font color="blue">parameter </font>Boolean inclLiquid=true <font color="darkgreen">&quot;Liquid&quot;</font>;
   <font color="blue">parameter </font>Boolean inclSolid=true <font color="darkgreen">&quot;Solid&quot;</font>;
 
+  <font color="darkgreen">// Alias variables (for common terms)</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V_pore <font color="darkgreen">&quot;Pore volume&quot;</font>;
+
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s(<font color="blue">final </font>stateSelect=StateSelect.never) = liquid.V/(
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(<font color="blue">final </font>stateSelect=StateSelect.never) = liquid.V/(
     gas.V + liquid.V) <font color="blue">if </font>inclLiquid<font color="blue"> and </font>inclGas<font color="blue"> and </font>environment.analysis <font color="darkgreen">
     &quot;Liquid saturation&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> gas <font color="blue">if </font>inclGas <font color="darkgreen">&quot;Interface to the gas phase&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Connectors.Dalton</a> gas <font color="blue">if </font>inclGas <font color="darkgreen">&quot;Interface to the gas phase&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> liquid <font color="blue">if </font>inclLiquid <font color="darkgreen">&quot;Interface to the liquid phase&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> solid <font color="blue">if </font>inclSolid <font color="darkgreen">&quot;Interface to the solid phase&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> solid <font color="darkgreen">&quot;Interface to the solid phase&quot;</font>;
   <a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a> surfaceTension(<font color="blue">final </font>gamma=gamma,<font color="blue">final </font>overR=<font color="red">cos</font>(theta)*<font color="red">J</font>(
-        liquid.V/(liquid.V + gas.V))/(2*<font color="red">sqrt</font>(kappa))) <font color="blue">if </font>inclLiquid<font color="blue"> and </font>
+        liquid.V/V_pore)*<font color="red">sqrt</font>(V_pore/V/kappa)/2) <font color="blue">if </font>inclLiquid<font color="blue"> and </font>
     inclCapillary <font color="darkgreen">&quot;Additional pressure on the liquid&quot;</font>;
 
   <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(<font color="blue">final </font>V=V) <font color="blue">if </font>inclGas<font color="blue"> or </font>
-    inclLiquid<font color="blue"> or </font>inclSolid <font color="darkgreen">&quot;Fixed volume&quot;</font>;
+    inclLiquid <font color="darkgreen">&quot;Fixed volume&quot;</font>;
 
 <font color="blue">protected </font>
+  <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.AmagatDalton">Conditions.Adapters.AmagatDalton</a> amagatDalton <font color="blue">if </font>inclGas<font color="blue"> or </font>(inclSolid<font color="blue"> and </font><font color="blue">
+    not </font>inclLiquid) <font color="darkgreen">
+    &quot;Adapter between additivity of volume and additivity of gas pressure&quot;</font>;
+
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">equation </font>
+  <font color="darkgreen">// Aliases</font>
+  V = V_pore + solid.V;
+
   <font color="blue">if </font><font color="blue">not </font>inclCapillary<font color="blue"> then</font>
-    <font color="red">connect</font>(gas, liquid) <font color="darkgreen">
-      &quot;Directly connect gas and liquid (not shown in diagram)&quot;</font>;
+    <font color="red">connect</font>(liquid, volume.amagat) <font color="darkgreen">
+      &quot;Directly connect liquid to the volume (not shown in diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
   <font color="red">connect</font>(surfaceTension.wetting, liquid);
-  <font color="red">connect</font>(solid, volume.amagat);
-  <font color="red">connect</font>(volume.amagat, gas);
+  <font color="red">connect</font>(solid, amagatDalton.amagat);
+  <font color="red">connect</font>(volume.amagat, amagatDalton.amagat);
+  <font color="red">connect</font>(gas, amagatDalton.dalton);
   <font color="red">connect</font>(surfaceTension.nonwetting, volume.amagat);
+
 <font color="blue">end </font>CapillaryVolume;
 </pre>
       </div>
@@ -418,6 +429,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 22:35:58 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:29 2013.
 </div>
 </span></body></html>

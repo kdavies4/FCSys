@@ -3,7 +3,7 @@
 <title>FCSys.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dynamic models of chemical species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Species"></a><a href="index.html#FCSys">FCSys</a>.Species</h2>
 
 <b>Dynamic models of chemical species</b>
@@ -160,7 +159,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>U.C</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>0</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
 </table>
 <p>
 
@@ -345,7 +344,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>U.C</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>0</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
 </table>
 <p>
 
@@ -433,7 +432,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Nu_Q=1 <font color="darkgreen">&quot;Thermal Nusselt number&quot;</font>;
 
   <font color="darkgreen">// Advanced parameters</font>
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N0=U.C <font color="darkgreen">&quot;Nominal amount of material to prevent depletion&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N0=0 <font color="darkgreen">&quot;Nominal amount of material to prevent depletion&quot;</font>;
 
   <font color="darkgreen">// Aliases (for common terms)</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I[n_trans](
@@ -747,10 +746,10 @@ Choose any condition besides none.&quot;);
     <font color="blue">for </font>side<font color="blue"> in </font>Side<font color="blue"> loop</font>
       <font color="darkgreen">// Material</font>
       (<font color="blue">if </font>consTrans[i] == ConsTrans.dynamic<font color="blue"> then </font>kL[i]*Data.m*<font color="red">der</font>(boundaries[i,
-        side].Ndot)/U.s<font color="blue"> else </font>0) = (Aprime[i]*(boundaries[i, side].p - p) +
-        phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m - minusDeltaf[i])
-        *(<font color="blue">if </font>upstream[i]<font color="blue"> then </font>1 + <font color="red">exp</font>(-zeta*<font color="red">Data.beta</font>(T, p)*boundaries[i, side].Ndot
-        /(2*Aprime[i]))<font color="blue"> else </font>2) + <font color="red">inSign</font>(side)*f[i];
+        side].Ndot)/U.s<font color="blue"> else </font>0) = (Aprime[i]*(boundaries[i, side].p - p) + <font color="red">
+        inSign</font>(side)*phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m -
+        minusDeltaf[i])*(<font color="blue">if </font>upstream[i]<font color="blue"> then </font>1 + <font color="red">exp</font>(-zeta*<font color="red">Data.beta</font>(T, p)*
+        boundaries[i, side].Ndot/(2*Aprime[i]))<font color="blue"> else </font>2) + <font color="red">inSign</font>(side)*f[i];
 
       <font color="darkgreen">// Translational momentum</font>
       kL[i]*eta*mPhidot_boundaries[i, side, Orient.after] = Aprime[i]*Nu_Phi[<font color="red">
@@ -996,6 +995,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <font color="blue">each </font>stateSelect=StateSelect.never,
     <font color="blue">each </font>start=U.s) = N*c_v*theta*kL ./ Aprime <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Time constants for thermal transport (through the whole subregion)&quot;</font>;
+
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> DeltaT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
     Delta</font>(boundaries.T) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Differences in temperatures across the boundaries&quot;</font>;
@@ -1448,6 +1448,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:02:42 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:15 2013.
 </div>
 </span></body></html>

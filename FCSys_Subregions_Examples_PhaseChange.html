@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Examples.PhaseChange</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples of phase change">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Subregions.Examples.PhaseChange"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.PhaseChange</h2>
 
 <b>Examples of phase change</b>
@@ -63,17 +62,17 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Subregions.Examples.EchoS.png" alt="FCSys.Subregions.Examples.PhaseChange.Condensation" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Condensation">Condensation</a>
-</td><td>Condensation of super-saturated H<sub>2</sub>O vapor</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Examples.EchoS.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Evaporation">Evaporation</a>
+</td><td>Evaporation of H<sub>2</sub>O vapor</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.EchoS.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Hydration">Hydration</a>
 </td><td>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.Examplesc4d8b4c4a960eb3fationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Condensation" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.Examples.PhaseChange.Condensation"></a><a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange">FCSys.Subregions.Examples.PhaseChange</a>.Condensation</h2>
-<b>Condensation of super-saturated H<sub>2</sub>O vapor</b>
-<img src="images/FCSys.Subregions.Examplesc4d8b4c4a960eb3fationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Condensation">
+<h2><img src="images/FCSys.Subregions.Examples0491e193341adc39ationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Examples.PhaseChange.Evaporation"></a><a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange">FCSys.Subregions.Examples.PhaseChange</a>.Evaporation</h2>
+<b>Evaporation of H<sub>2</sub>O vapor</b>
+<img src="images/FCSys.Subregions.Examples0491e193341adc39ationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation">
 
 <h3>Information</h3>
 
@@ -93,7 +92,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclSO3-&#39;</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
@@ -106,8 +105,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Condensation <font color="darkgreen">
-  &quot;Condensation of super-saturated H<sub>2</sub>O vapor&quot;</font>
+<font color="blue">model</font> Evaporation <font color="darkgreen">&quot;Evaporation of H<sub>2</sub>O vapor&quot;</font>
 
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p_sat=<font color="red">Characteristics.H2O.p_sat</font>(subregion.gas.H2O.T) <font color="darkgreen">
     &quot;Saturation pressure via Modelica.Media&quot;</font>;
@@ -115,17 +113,20 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(
     inclH2O=true,
     inclH2=false,
-    subregion(liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)), gas(H2O(p_IC=30*U.kPa,
-            initMaterial=FCSys.Species.Enumerations.Init.none))));
+    &#39;inclC+&#39;=true,
+    subregion(
+      volume(inclCapillary=false),
+      liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
+      gas(H2O(p_IC=U.kPa, initMaterial=FCSys.Species.Enumerations.Init.none))));
 
-<font color="blue">end </font>Condensation;
+<font color="blue">end </font>Evaporation;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.Examplesc4d8b4c4a960eb3fationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Subregions.Examples0491e193341adc39ationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.PhaseChange.Hydration"></a><a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange">FCSys.Subregions.Examples.PhaseChange</a>.Hydration</h2>
 <b>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</b>
-<img src="images/FCSys.Subregions.Examplesc4d8b4c4a960eb3fationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration">
+<img src="images/FCSys.Subregions.Examples0491e193341adc39ationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration">
 
 <h3>Information</h3>
 
@@ -133,7 +134,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
   comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.
 
-  <p>See also <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Hydration">Characteristics.Examples.Hydration</a>.</p>
+  <p>See also <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.HydrationLevel">Characteristics.Examples.HydrationLevel</a>.</p>
 
 </p>
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
@@ -181,6 +182,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:02:19 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:33:52 2013.
 </div>
 </span></body></html>

@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.H2O</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Characteristics.H2O"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.H2O</h2>
 
 <b>H<sub>2</sub>O</b>
@@ -72,7 +71,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><img src="images/FCSys.Characteristics.H2O.JS.png" alt="FCSys.Characteristics.H2O.J" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.J">J</a>
 </td><td>Leverett J function for H2O from [Wang2001]</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.H2O.JS.png" alt="FCSys.Characteristics.H2O.J_identity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.J_identity">J_identity</a>
-</td><td>Pass-through (1:1) Leverett J function</td></tr>
+</td><td>Leverett J function that outputs one</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.H2O.JS.png" alt="FCSys.Characteristics.H2O.p_sat" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.p_sat">p_sat</a>
 </td><td>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.H2O.JS.png" alt="FCSys.Characteristics.H2O.lambda_eq" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.lambda_eq">lambda_eq</a>
@@ -96,7 +95,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>s</td><td>&nbsp;</td><td>Liquid saturation [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>&nbsp;</td><td>Liquid saturation [1]</td></tr>
 </table>
 <p>
 
@@ -114,11 +113,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <font color="blue">function</font> J <font color="darkgreen">&quot;Leverett J function for H2O from [Wang2001]&quot;</font>
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s(max=1) <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(max=1) <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
   <font color="blue">output </font>Real J <font color="darkgreen">&quot;Result of Leverett correlation&quot;</font>;
 
 <font color="blue">algorithm </font>
-  J := <font color="red">FCSys.Utilities.Polynomial.f</font>(s, {0.560,-0.966,1.669,-1.263});
+  J := <font color="red">FCSys.Utilities.Polynomial.f</font>(x, {0.560,-0.966,1.669,-1.263});
 
 <font color="blue">end </font>J;
 </pre>
@@ -126,7 +125,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h2><img src="images/FCSys.Characteristics.H2O.JI.png" alt="FCSys.Characteristics.H2O.J_identity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.H2O.J_identity"></a><a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O">FCSys.Characteristics.H2O</a>.J_identity</h2>
-<b>Pass-through (1:1) Leverett J function</b>
+<b>Leverett J function that outputs one</b>
 
 <h3>Information</h3>
 
@@ -138,7 +137,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>s</td><td>&nbsp;</td><td>Liquid saturation [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>&nbsp;</td><td>Liquid saturation [1]</td></tr>
 </table>
 <p>
 
@@ -153,10 +152,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">function</font> J_identity <font color="darkgreen">&quot;Pass-through (1:1) Leverett J function&quot;</font>
+<font color="blue">function</font> J_identity <font color="darkgreen">&quot;Leverett J function that outputs one&quot;</font>
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s(max=1) <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(max=1) <font color="darkgreen">&quot;Liquid saturation&quot;</font>;
   <font color="blue">output </font>Real J <font color="darkgreen">&quot;Result of Leverett correlation&quot;</font>;
 
 <font color="blue">algorithm </font>
@@ -261,6 +260,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:03:01 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:34 2013.
 </div>
 </span></body></html>

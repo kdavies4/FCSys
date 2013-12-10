@@ -3,7 +3,7 @@
 <title>FCSys.Subregions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-10">
+<meta name="date" content="2013-12-12">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Control volumes with multi-species transport, storage, and exchange">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -21,7 +21,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -50,7 +50,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Subregions"></a><a href="index.html#FCSys">FCSys</a>.Subregions</h2>
 
 <b>Control volumes with multi-species transport, storage, and exchange</b>
@@ -148,15 +147,13 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     <font color="blue">final </font>n_trans=n_trans,
     &#39;incle-Transfer&#39;=inclHOR<font color="blue"> or </font>inclORR,
     <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
-    <font color="blue">final </font>k_inter_Q={common.k_Q},
-    <font color="blue">final </font>inclAmagat=gas.n_spec + liquid.n_spec &gt; 0) <font color="darkgreen">&quot;Graphite&quot;</font>;
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Graphite&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(
     n_inter=1,
     <font color="blue">final </font>n_trans=n_trans,
     <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
-    <font color="blue">final </font>k_inter_Q={common.k_Q},
-    <font color="blue">final </font>inclAmagat=gas.n_spec + liquid.n_spec &gt; 0) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Liquid">FCSys.Phases.Liquid</a> liquid(
     n_inter=2,
@@ -190,8 +187,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     <font color="blue">final </font>V=V,
     <font color="blue">final </font>inclGas=gas.n_spec &gt; 0,
     <font color="blue">final </font>inclLiquid=liquid.n_spec &gt; 0,
-    <font color="blue">final </font>inclSolid=graphite.n_spec + ionomer.n_spec &gt; 0) <font color="blue">if </font>gas.n_spec +
-    liquid.n_spec &gt; 0 <font color="darkgreen">&quot;Volume with capillary pressure included&quot;</font>;
+    <font color="blue">final </font>inclSolid=graphite.n_spec + ionomer.n_spec &gt; 0) <font color="darkgreen">
+    &quot;Volume with capillary pressure included&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font>Boolean inclHOR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>
@@ -237,7 +234,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
 
   <font color="darkgreen">// Mixing</font>
-  <font color="red">connect</font>(gas.amagat, volume.gas);
+  <font color="red">connect</font>(gas.dalton, volume.gas);
   <font color="red">connect</font>(liquid.amagat, volume.liquid);
   <font color="red">connect</font>(volume.solid, graphite.amagat);
   <font color="red">connect</font>(volume.solid, ionomer.amagat);
@@ -291,6 +288,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Chemistry.html#FCSys.Chemistry.CapillaryVolume">CapillaryVolume</a></td><td>volume</td><td>&nbsp;</td><td>Volume with capillary pressure included</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Lengths [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases (click to edit)</td></tr>
@@ -323,10 +321,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
 
   <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=ionomer.n_spec);
 
-  <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(
-    n_inter=0,
-    <font color="blue">final </font>n_trans=n_trans,
-    inclAmagat=false) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.Ionomer">FCSys.Phases.Ionomer</a> ionomer(n_inter=0, <font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">&quot;Ionomer&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
     &quot;Negative boundary along the x axis&quot;</font>;
@@ -341,6 +336,11 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> zPositive <font color="blue">if </font>inclTransZ <font color="darkgreen">
     &quot;Positive boundary along the z axis&quot;</font>;
 
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.CapillaryVolume">Chemistry.CapillaryVolume</a> volume(
+    <font color="blue">final </font>V=V,
+    <font color="blue">final </font>inclSolid=ionomer.n_spec &gt; 0,
+    <font color="blue">final </font>inclGas=false,
+    <font color="blue">final </font>inclLiquid=false) <font color="darkgreen">&quot;Volume with capillary pressure included&quot;</font>;
 <font color="blue">equation </font>
   <font color="darkgreen">// Boundaries</font>
   <font color="darkgreen">// ----------</font>
@@ -355,6 +355,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);
   <font color="red">connect</font>(ionomer.xPositive, xPositive.ionomer);
 
+  <font color="red">connect</font>(volume.solid, ionomer.amagat);
 <font color="blue">end </font>SubregionIonomer;
 </pre>
 <hr>
@@ -422,8 +423,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     n_inter=1,
     <font color="blue">final </font>n_trans=n_trans,
     <font color="blue">final </font>k_inter_Phi={common.k_Phi[cartTrans]},
-    <font color="blue">final </font>k_inter_Q={common.k_Q},
-    <font color="blue">final </font>inclAmagat=gas.n_spec + liquid.n_spec &gt; 0) <font color="darkgreen">&quot;Graphite&quot;</font>;
+    <font color="blue">final </font>k_inter_Q={common.k_Q}) <font color="darkgreen">&quot;Graphite&quot;</font>;
 
   <a href="FCSys_Phases.html#FCSys.Phases.Liquid">FCSys.Phases.Liquid</a> liquid(
     n_inter=2,
@@ -452,7 +452,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     <font color="blue">final </font>V=V,
     <font color="blue">final </font>inclGas=gas.n_spec &gt; 0,
     <font color="blue">final </font>inclLiquid=liquid.n_spec &gt; 0,
-    <font color="blue">final </font>inclSolid=graphite.n_spec &gt; 0) <font color="blue">if </font>gas.n_spec + liquid.n_spec &gt; 0 <font color="darkgreen">
+    <font color="blue">final </font>inclSolid=graphite.n_spec &gt; 0) <font color="darkgreen">
     &quot;Volume with capillary pressure included&quot;</font>;
 
 <font color="blue">protected </font>
@@ -489,7 +489,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
 
   <font color="darkgreen">// Mixing</font>
   <font color="red">connect</font>(liquid.amagat, volume.liquid);
-  <font color="red">connect</font>(gas.amagat, volume.gas);
+  <font color="red">connect</font>(gas.dalton, volume.gas);
   <font color="red">connect</font>(volume.solid, graphite.amagat);
 
   <font color="darkgreen">// Inert exchange</font>
@@ -590,6 +590,6 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Mon Dec 09 15:02:14 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:33:47 2013.
 </div>
 </span></body></html>
