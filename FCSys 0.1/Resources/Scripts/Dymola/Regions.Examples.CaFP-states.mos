@@ -1,0 +1,6 @@
+// Setup
+removePlots();
+createPlot(filename = "CaFP.mat");
+    
+FCSys.Utilities.plot6();
+

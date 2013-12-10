@@ -1,0 +1,21 @@
+// Setup
+removePlots();
+createPlot(filename = "ThermalConduction.mat");
+FCSys.Utilities.plot6(
+    y1=cat(1,
+             {"subregion1.graphite.'C+'.boundaries[1, 1].T", "subregion1.graphite.'C+'.T"},
+             {"subregions[" + String(i) + "].graphite.'C+'.boundaries[1, 1].T" for i in 1:n_x},
+             {"subregions[" + String(i) + "].graphite.'C+'.T" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.boundaries[1, 1].T", "subregion2.graphite.'C+'.T"}),
+    y2=cat(1,
+             {"subregion1.graphite.'C+'.M"},
+             {"subregions[" + String(i) + "].graphite.'C+'.M" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.M"}),
+    y3=cat(1,
+             {"subregion1.graphite.'C+'.tau_QT[1]"},
+             {"subregions[" + String(i) + "].graphite.'C+'.tau_QT[1]" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.tau_QT[1]"}),
+    y4=cat(1,
+             {"subregion1.graphite.'C+'.theta"},
+             {"subregions[" + String(i) + "].graphite.'C+'.theta" for i in 1:n_x},
+             {"subregion2.graphite.'C+'.theta"}));

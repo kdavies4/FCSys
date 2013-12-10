@@ -9,22 +9,26 @@
 // the defaults.
 
 // Options to increase simulation performance
-Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
-Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
-Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
-Advanced.SimplifySemiLinearCondition = true "Exploit asserts to simplify semiLinear conditions";
 Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
+Advanced.ImprovedPackageConstants = true "Improved code generation for package constants";
+Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
+//Advanced.CompileWith64 = 0 "Compile the model as 64-bit; 0 only for dll/server if executable is 64-bit, 1 never, 2 always.";
 //Evaluate = true "Evaluate parameters to reduce models (improves simulation speed).";
 //Advanced.AllowNumericDifferentiation = true "Allow numeric differentiation for computing Jacobian for non-linear solver";
 //Advanced.EvaluateParametersDuringSimulation = true "Generate code for evaluation of parameters during simulations";
 //Advanced.GuardedSqrt = false "Generate error for sqrt of negative numbers";
-//Advanced.NewStateSelection = true "Use new approach to state selection";
 //Advanced.ParameterExpressionTearing = true "Assume parameter expressions being non-zero at tearing";
 //Advanced.GenerateAnalyticJacobian = true "Generate analytic Jacobian for the ODE problem";
 //Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";
 //Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
+//Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
+//  Warning:  This makes translation very, very slow in Dymola 2014!
+//Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
+//  Warning:  Do not use this in Dymola 2014.  Modelica.Blocks.Sources.Ramp 
+//  doesn't run correctly with it!
 
 // Debugging and development options
+Advanced.EnableAnnotationCheck = true "Can set to enable annotation check for Modelica 3.1 and later";
 Advanced.CheckUnits = false "Check unit consistency of equations";
 LogStateSelection = true "List continuous time states selected";
 OutputCPUtime = true "Include a variable for elapsed CPU time during simulation";
@@ -37,6 +41,10 @@ Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
 Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
 Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
 Advanced.TranslationInCommandLog = true "Also include translation log in command log";
+Advanced.IncludeProtectedInBrowser = true "Include protected classes in package browser";
+Advanced.SmartConnect = false "Create connection automatically if connector over connector.";
+//   Note:  Smart connect sometimes crashes Dymola 2014. 
+//Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
 //Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
 //Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
 //Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";
@@ -54,7 +62,7 @@ Advanced.TranslationInCommandLog = true "Also include translation log in command
 // Startup
 // ------------
 // Load the FCSys package.
-openModel("FCSys/package.mo");
+openModel("FCSys 0.1/package.mo");
 cd("..");
 
 // Set up units.

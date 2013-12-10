@@ -1,0 +1,48 @@
+// Setup
+removePlots();
+createPlot(filename = "FPtoFP.mat");
+
+FCSys.Utilities.plot6(
+    y1={"anFP.subregions[1, 1, 1].gas.H2.rho", "anFP.subregions[1, 1, 1].gas.H2O.rho",
+        "anGDL.subregions[1, 1, 1].gas.H2.rho", "anGDL.subregions[1, 1, 1].gas.H2O.rho",
+        "anCL.subregions[1, 1, 1].gas.H2.rho", "anCL.subregions[1, 1, 1].gas.H2O.rho",
+        //"PEM.subregions[1, 1, 1].ionomer.H2O.rho",
+        "caCL.subregions[1, 1, 1].gas.H2O.rho", "caCL.subregions[1, 1, 1].gas.N2.rho", "caCL.subregions[1, 1, 1].gas.O2.rho",
+        "caGDL.subregions[1, 1, 1].gas.H2O.rho", "caGDL.subregions[1, 1, 1].gas.N2.rho", "caGDL.subregions[1, 1, 1].gas.O2.rho",
+        "caFP.subregions[1, 1, 1].gas.H2O.rho", "caFP.subregions[1, 1, 1].gas.N2.rho", "caFP.subregions[1, 1, 1].gas.O2.rho"},
+    y2={"anFP.subregions[1, 1, 1].gas.H2.phi[2]", "anFP.subregions[1, 1, 1].gas.H2O.phi[2]", "anFP.subregions[1, 1, 1].liquid.H2O.phi[2]",
+        "caFP.subregions[1, 1, 1].gas.H2O.phi[2]", "caFP.subregions[1, 1, 1].gas.N2.phi[2]", "caFP.subregions[1, 1, 1].gas.O2.phi[2]", "caFP.subregions[1, 1, 1].liquid.H2O.phi[2]"},
+    y3={"anFP.subregions[1, 1, 1].gas.H2.p", "anFP.subregions[1, 1, 1].gas.H2O.p",
+        "anGDL.subregions[1, 1, 1].gas.H2.p", "anGDL.subregions[1, 1, 1].gas.H2O.p",
+        "anCL.subregions[1, 1, 1].gas.H2.p", "anCL.subregions[1, 1, 1].gas.H2O.p",
+        //"PEM.subregions[1, 1, 1].ionomer.H2O.p",
+        "caCL.subregions[1, 1, 1].gas.H2O.p", "caCL.subregions[1, 1, 1].gas.N2.p", "caCL.subregions[1, 1, 1].gas.O2.p",
+        "caGDL.subregions[1, 1, 1].gas.H2O.p", "caGDL.subregions[1, 1, 1].gas.N2.p", "caGDL.subregions[1, 1, 1].gas.O2.p",
+        "caFP.subregions[1, 1, 1].gas.H2O.p", "caFP.subregions[1, 1, 1].gas.N2.p", "caFP.subregions[1, 1, 1].gas.O2.p"},
+    y4={"anFP.subregions[1, 1, 1].gas.H2O.T", "anFP.subregions[1, 1, 1].graphite.T",
+        "anGDL.subregions[1, 1, 1].gas.H2O.T", "anGDL.subregions[1, 1, 1].graphite.T",
+        "anCL.subregions[1, 1, 1].gas.H2O.T", "anCL.subregions[1, 1, 1].graphite.T", "anCL.subregions[1, 1, 1].ionomer.T",
+        "PEM.subregions[1, 1, 1].ionomer.T",
+        "caCL.subregions[1, 1, 1].gas.H2O.T", "caCL.subregions[1, 1, 1].graphite.T", "caCL.subregions[1, 1, 1].ionomer.T",
+        "caGDL.subregions[1, 1, 1].gas.H2O.T", "caGDL.subregions[1, 1, 1].graphite.T",
+        "caFP.subregions[1, 1, 1].gas.H2O.T", "caFP.subregions[1, 1, 1].graphite.T"},
+    y5={"anFP.subregions[1, 1, 1].gas.H2O.RH",
+        "anGDL.subregions[1, 1, 1].gas.H2O.RH",
+        "anCL.subregions[1, 1, 1].gas.H2O.RH",
+        "caCL.subregions[1, 1, 1].gas.H2O.RH",
+        "caGDL.subregions[1, 1, 1].gas.H2O.RH",
+        "caFP.subregions[1, 1, 1].gas.H2O.RH"});
+
+createPlot(id = 4,
+ position = {220, 0, 440, 325},
+ x = "J_Apercm2",
+ y = {"w"},
+ heading = "Polarization",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legend = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Potential / V",
+ bottomTitle = "Current density / (A/cm2)");

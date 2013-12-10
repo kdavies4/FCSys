@@ -1,0 +1,610 @@
+<html>
+<head>
+<title>FCSys.Units.Bases</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Sets of base constants and units">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Units.Bases"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.Bases</h2>
+
+<b>Sets of base constants and units</b>
+
+<h3>Information</h3>
+
+<p><a href="FCSys.html#FCSys">FCSys</a> requires that the Faraday and gas constants are
+  normalized to one.  The structure of the <a href="FCSys_Units.html#FCSys.Units">Units</a> package allows
+  those constants to be relaxed, but the models in <a href="FCSys.html#FCSys">FCSys</a>
+  generally do not.</p>
+
+  <p>Some natural systems of units
+  are not compatible with <a href="FCSys.html#FCSys">FCSys</a>.
+  Since the Faraday and gas constants
+  are both normalized, it follows that <i>k</i><sub>B</sub> = <i>q</i>.  This is not
+  the case for the Planck, Rydberg, and Natural systems of units
+  [<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>].</p>
+
+  <p>The quasi-SI
+  sets in this package are named by listing (in alphabetical order) the two units that are
+  <i>not</i> normalized for the sake of setting the Faraday and gas constants equal to one.
+  There are eight possible sets of this type (<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAK">SIAK</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAm">SIAm</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAs">SIAs</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIKmol">SIKmol</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIKs">SIKs</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SImmol">SImmol</a>
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIms">SIms</a>,
+  <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SImols">SImols</a>).</p>
+
+  <p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.FC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.FC">FC</a>
+</td><td>Base constants and units that are well-scaled for fuel cell simulation and analysis</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.Gaussian" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussian</a>
+</td><td>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.Hartree" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Hartree">Hartree</a>
+</td><td>Base constants and units for Hartree units</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.LH" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.LH">LH</a>
+</td><td>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.Stoney" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Stoney">Stoney</a>
+</td><td>Base constants and units for Stoney units</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIAK" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAK">SIAK</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIAm" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAm">SIAm</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and m</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIAs" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIAs">SIAs</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and s</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIKmol" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIKmol">SIKmol</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and mol</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIKs" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIKs">SIKs</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and s</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SImmol" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SImmol">SImmol</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and mol</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SIms" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SIms">SIms</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and s</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.SImols" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.SImols">SImols</a>
+</td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of mol and s</td></tr>
+<tr><td><img src="FCSys.Units.Bases.FCS.png" alt="FCSys.Units.Bases.Base" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>
+</td><td>Base constants and units</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.FC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.FC"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.FC</h2>
+<b>Base constants and units that are well-scaled for fuel cell simulation and analysis</b>
+
+<h3>Information</h3>
+
+<p>The values of this record result in the following values for the base SI units
+  (besides cd = 1, which is the default):
+       <ul>
+       <li>A &asymp; 1e-5 (&rArr; 1e3 C &asymp; 1)
+       <li>K &asymp; 8.617</li>
+       <li>kg = 1e4 (&rArr; 0.1 g = 1)</li>
+       <li>m = 10 (&rArr; 10 cm = 1)</li>
+       <li>mol &asymp; 96.485 (&rArr; 0.01036 mol &asymp;1)</li>
+       <li>s = 100 (&rArr; 10 ms = 1)</li></ul>
+   which are well-scaled for the states and efforts of a single-cell
+   PEMFC.  Also, with these settings:
+       <ul>
+       <li>10 m/s &asymp; 1</li>
+       <li>9.872e-5 atm &asymp; 1</li></ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> FC <font color="darkgreen">
+  &quot;Base constants and units that are well-scaled for fuel cell simulation and analysis&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=1e-1*10973731.568539,
+    <font color="blue">final </font>c=1e-1*299792458,
+    <font color="blue">final </font>R_K=1e10*25812.8074434,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s/1e4)/m);
+  <font color="darkgreen">// Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.</font>
+
+<font color="blue">end </font>FC;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.Gaussian" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.Gaussian"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Gaussian</h2>
+<b>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</b>
+
+<h3>Information</h3>
+
+<p>Gaussian systems of units impose:
+  <ul>
+  <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
+  <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&alpha;</li>
+  </ul>
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>
+
+<p>The Gaussian conditions are not sufficient
+to fully establish the values of the base constants and units of the
+<a href="FCSys_Units.html#FCSys.Units">Units</a> package.  Gaussian units
+encompass other systems of units.</p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> Gaussian <font color="darkgreen">
+  &quot;Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(<font color="blue">final </font>c=1,<font color="blue">final </font>R_K=25812.8074434/(299792458*1e-7));
+
+<font color="blue">end </font>Gaussian;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.Hartree" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.Hartree"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Hartree</h2>
+<b>Base constants and units for Hartree units</b>
+
+<h3>Information</h3>
+
+<p>The candela (<code>'cd'</code>)
+  is not final because luminous intensity is not included in Hartree units.</p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> Hartree <font color="darkgreen">&quot;Base constants and units for Hartree units&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=pi*(299792458*1e-7/25812.8074434)^2,
+    <font color="blue">final </font>c=25812.8074434/(2*pi*299792458*1e-7),
+    <font color="blue">final </font>k_J=1/pi,
+    <font color="blue">final </font>R_K=2*pi);
+
+<font color="blue">end </font>Hartree;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.LH" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.LH"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.LH</h2>
+<b>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</b>
+
+<h3>Information</h3>
+
+<p>Lorentz-Heaviside systems of units impose:
+  <ul>
+  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
+  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>&nbsp;<i>c</i> = 1/(2&alpha;)</li>
+  </ul>
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
+
+<p>The Lorentz-Heaviside conditions are not sufficient
+to fully establish the values of the base constants and units of the
+<a href="FCSys_Units.html#FCSys.Units">Units</a> package.  Lorentz-Heaviside units
+encompass other systems of units.</p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> LH <font color="darkgreen">
+  &quot;Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(<font color="blue">final </font>c=1,<font color="blue">final </font>R_K=25812.8074434/(4*pi*299792458*1e-7));
+
+<font color="blue">end </font>LH;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.Stoney" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.Stoney"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Stoney</h2>
+<b>Base constants and units for Stoney units</b>
+
+<h3>Information</h3>
+
+<p>The Rydberg constant (<i>R</i><sub>&infin;</sub>)
+  is not final because the <a href="FCSys_Units.html#FCSys.Units">Units</a> package does not
+  include the gravitational constant.  The candela (<code>'cd'</code>)
+  is not final because luminous intensity is not included in Stoney units.</p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussian</a> (Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> Stoney <font color="darkgreen">&quot;Base constants and units for Stoney units&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussian</a>(<font color="blue">final </font>k_J=2e-7*299792458/25812.8074434);
+
+<font color="blue">end </font>Stoney;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIAK" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIAK"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAK</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>A &asymp; 1.03643e-5</li>
+  <li>K &asymp; 8.31446</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIAK <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=10973731.568539,
+    <font color="blue">final </font>c=299792458,
+    <font color="blue">final </font>R_K=96485.3365^2*25812.8074434,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIAK;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIAm" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIAm"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAm</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and m</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>A &asymp; 1.03643e-5</li>
+  <li>m &asymp; 0.346803</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIAm <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and m&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=<font color="red">sqrt</font>(8.3144621)*10973731.568539,
+    <font color="blue">final </font>c=299792458/<font color="red">sqrt</font>(8.3144621),
+    <font color="blue">final </font>R_K=(96485.3365^2*25812.8074434)/8.3144621,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIAm;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIAs" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIAs"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAs</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and s</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>A &asymp; 3.59436e-6</li>
+  <li>s &asymp; 2.88348</li>
+  </ul></p>
+
+  <p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIAs <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and s&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=10973731.568539,
+    <font color="blue">final </font>c=299792458/<font color="red">sqrt</font>(8.3144621),
+    <font color="blue">final </font>R_K=(96485.3365^2*25812.8074434)/<font color="red">sqrt</font>(8.3144621),
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIAs;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIKmol" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIKmol"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIKmol</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and mol</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>K &asymp; 8.61733e-5</li>
+  <li>mol &asymp; 96485.3</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIKmol <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and mol&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=10973731.568539,
+    <font color="blue">final </font>c=299792458,
+    <font color="blue">final </font>R_K=25812.8074434,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIKmol;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIKs" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIKs"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIKs</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and s</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>K &asymp; 7.74028e10</li>
+  <li>s &asymp; 1.03643e-5</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIKs <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and s&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=10973731.568539,
+    <font color="blue">final </font>c=96485.3365*299792458,
+    <font color="blue">final </font>R_K=96485.3365^3*25812.8074434,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIKs;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SImmol" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SImmol"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SImmol</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and mol</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>m &asymp; 107.724</li>
+  <li>mol &asymp; 96485.3</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SImmol <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and mol&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=<font color="red">sqrt</font>(8.3144621/96485.3365)*10973731.568539,
+    <font color="blue">final </font>c=<font color="red">sqrt</font>(96485.3365/8.3144621)*299792458,
+    <font color="blue">final </font>R_K=(96485.3365*25812.8074434)/8.3144621,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SImmol;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SIms" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SIms"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIms</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and s</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>m &asymp; 3.59436e-6</li>
+  <li>s &asymp; 1.03643e-5</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SIms <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and s&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=96485.3365*<font color="red">sqrt</font>(8.3144621)*10973731.568539,
+    <font color="blue">final </font>c=299792458/<font color="red">sqrt</font>(8.3144621),
+    <font color="blue">final </font>R_K=(96485.3365*25812.8074434)/8.3144621,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SIms;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.SImols" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.SImols"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SImols</h2>
+<b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of mol and s</b>
+
+<h3>Information</h3>
+
+<p>The values of the un-normalized SI base units are (see
+  <a href="../Resources/unit-systems.cdf">Resources/unit-systems.cdf</a>):
+  <ul>
+  <li>mol &asymp; 4261.73</li>
+  <li>s &asymp; 0.0441697</li>
+  </ul></p>
+
+<p>For more information, please see the documentation for the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> SImols <font color="darkgreen">
+  &quot;Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of mol and s&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(
+    <font color="blue">final </font>R_inf=10973731.568539,
+    <font color="blue">final </font>c=(96485.3365/8.3144621)^(1/3)*299792458,
+    <font color="blue">final </font>R_K=(96485.3365*25812.8074434)/8.3144621,
+    <font color="blue">final </font>k_J=483597.870e9*<font color="red">sqrt</font>(S*s)/m,
+    <font color="blue">final </font>&#39;cd&#39;=1);
+
+<font color="blue">end </font>SImols;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Units.Bases.FCI.png" alt="FCSys.Units.Bases.Base" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Bases.Base"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Base</h2>
+<b>Base constants and units</b>
+
+<h3>Information</h3>
+
+<p>Please see the notes in the Modelica code and the documentation of the
+  <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Record">Modelica.Icons.Record</a> (Icon for records).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> Base <font color="darkgreen">&quot;Base constants and units&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Record">Modelica.Icons.Record</a>;
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=1 <font color="darkgreen">&quot;radian&quot;</font>;
+  <font color="darkgreen">// SI unit of rotation or planar angle</font>
+  <font color="darkgreen">// This condition is required by BIPM [BIPM2006, Table 3].  It can&#39;t be</font>
+  <font color="darkgreen">// relaxed because BIPM doesn&#39;t explicitly use angle in the definitions of</font>
+  <font color="darkgreen">// Hz, sr, etc. and NIST doesn&#39;t explicitly use angle in the relations for</font>
+  <font color="darkgreen">// R_inf, c_3_nu, etc. [NIST2010].</font>
+  <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> R_inf=1 <font color="darkgreen">
+    &quot;Rydberg constant (R<sub>&infin;</sub>)&quot;</font>;
+  <font color="darkgreen">// The SI unit length (meter) is inversely proportional to this value,</font>
+  <font color="darkgreen">// which should be increased for larger characteristic lengths.</font>
+  <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> c=1 <font color="darkgreen">&quot;speed of light in vacuum (c)&quot;</font>;
+  <font color="darkgreen">// The SI unit time (second) is inversely proportional to this value (and</font>
+  <font color="darkgreen">// R_inf), which should be increased for larger characteristic times.</font>
+  <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> k_J=1 <font color="darkgreen">
+    &quot;Josephson constant (k<sub>J</sub>)&quot;</font>;
+  <font color="darkgreen">// The SI unit of magnetic flux (weber) is inversely proportional to this</font>
+  <font color="darkgreen">// value, which should be increased for larger magnetic flux numbers.</font>
+  <font color="darkgreen">// Also, the SI unit of charge (coulomb) is inversely proportional to this</font>
+  <font color="darkgreen">// value.</font>
+  <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R_K=1 <font color="darkgreen">
+    &quot;von Klitzing constant (R<sub>K</sub>)&quot;</font>;
+  <font color="darkgreen">// The SI unit of electrical conductance (siemen) is inversely proportional</font>
+  <font color="darkgreen">// to this value, which should be increased for larger characteristic</font>
+  <font color="darkgreen">// conductances.  Also, the SI unit of charge (coulomb) is inversely</font>
+  <font color="darkgreen">// proportional to this value.</font>
+  <font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=1 <font color="darkgreen">&quot;candela&quot;</font>;
+  <font color="darkgreen">// SI unit of luminous intensity</font>
+  <font color="darkgreen">// From http://en.wikipedia.org/wiki/Luminous_intensity, accessed 11/5/11:</font>
+  <font color="darkgreen">// &quot;luminous intensity is a measure of the wavelength-weighted power</font>
+  <font color="darkgreen">// emitted by a light source in a particular direction per unit solid</font>
+  <font color="darkgreen">// angle, based on the luminosity function, a standardized model of the</font>
+  <font color="darkgreen">// sensitivity of the human eye.&quot;</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=1 <font color="darkgreen">&quot;Faraday constant (k<sub>F</sub>)&quot;</font>;
+  <font color="darkgreen">// The unit of substance (mole) is inversely proportional to this value.</font>
+  <font color="darkgreen">// The Faraday constant isn&#39;t adjustable because the equations of FCSys</font>
+  <font color="darkgreen">// require that it&#39;s one, which means that charge is considered to be an</font>
+  <font color="darkgreen">// amount of substance.</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=1 <font color="darkgreen">&quot;gas constant&quot;</font>;
+  <font color="darkgreen">// The unit of temperature (kelvin) is inversely proportional to this</font>
+  <font color="darkgreen">// value.  The gas constant isn&#39;t adjustable because the equations of FCSys</font>
+  <font color="darkgreen">// require that it&#39;s one, which means that temperature is considered to be</font>
+  <font color="darkgreen">// a potential.</font>
+
+<font color="blue">end </font>Base;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 09 15:03:03 2013.
+</div>
+</body>
+</html>

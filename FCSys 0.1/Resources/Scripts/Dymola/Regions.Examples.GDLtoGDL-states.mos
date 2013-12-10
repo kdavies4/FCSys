@@ -1,0 +1,52 @@
+// Setup
+removePlots();
+createPlot(filename = "GDLtoGDL.mat");
+
+FCSys.Utilities.plot6(
+y1={"caCL.subregions[1, 1, 1].gas.O2.I[1]"},
+
+y2={"anCL.subregions[1, 1, 1].gas.H2.phi[1]",
+"anCL.subregions[1, 1, 1].ionomer.H2O.phi[1]",
+"anCL.subregions[1, 1, 1].liquid.H2O.phi[1]",
+"anGDL.subregions[1, 1, 1].gas.H2.phi[1]",
+"anGDL.subregions[1, 1, 1].gas.H2O.phi[1]",
+"caCL.subregions[1, 1, 1].gas.H2O.phi[1]",
+"caCL.subregions[1, 1, 1].ionomer.H2O.phi[1]",
+"caCL.subregions[1, 1, 1].liquid.H2O.phi[1]",
+"caGDL.subregions[1, 1, 1].gas.H2O.phi[1]",
+"caGDL.subregions[1, 1, 1].gas.N2.phi[1]",
+"caGDL.subregions[1, 1, 1].gas.O2.phi[1]",
+"caGDL.subregions[1, 1, 1].liquid.H2O.phi[1]"},
+
+y3={"anCL.subregions[1, 1, 1].gas.H2.N",
+"anGDL.subregions[1, 1, 1].gas.H2.N",
+"caCL.subregions[1, 1, 1].gas.N2.N",
+"caGDL.subregions[1, 1, 1].gas.N2.N",
+"caCL.subregions[1, 1, 1].gas.O2.N",
+"caGDL.subregions[1, 1, 1].gas.O2.N",
+"anCL.subregions[1, 1, 1].gas.H2O.N",
+"anCL.subregions[1, 1, 1].ionomer.H2O.N",
+"anCL.subregions[1, 1, 1].liquid.H2O.N",
+"anGDL.subregions[1, 1, 1].gas.H2O.N",
+"anGDL.subregions[1, 1, 1].liquid.H2O.N",
+"caCL.subregions[1, 1, 1].gas.H2O.N",
+"caCL.subregions[1, 1, 1].ionomer.H2O.N",
+"caCL.subregions[1, 1, 1].liquid.H2O.N",
+"caGDL.subregions[1, 1, 1].gas.H2O.N",
+"caGDL.subregions[1, 1, 1].liquid.H2O.N",
+"PEM.subregions[1, 1, 1].ionomer.H2O.N"},
+
+y4={"anCL.subregions[1, 1, 1].ionomer.'SO3-'.T",
+"caCL.subregions[1, 1, 1].ionomer.'SO3-'.T",
+"PEM.subregions[1, 1, 1].ionomer.'SO3-'.T",
+"anCL.subregions[1, 1, 1].graphite.'C+'.T",
+"anGDL.subregions[1, 1, 1].graphite.'C+'.T",
+"caCL.subregions[1, 1, 1].graphite.'C+'.T",
+"caGDL.subregions[1, 1, 1].graphite.'C+'.T",
+"anCL.subregions[1, 1, 1].gas.H2.T",
+"anGDL.subregions[1, 1, 1].gas.H2.T",
+"anCL.subregions[1, 1, 1].liquid.H2O.T",
+"anGDL.subregions[1, 1, 1].liquid.H2O.T",
+"caCL.subregions[1, 1, 1].gas.H2O.T",
+"caGDL.subregions[1, 1, 1].gas.H2O.T"})
+

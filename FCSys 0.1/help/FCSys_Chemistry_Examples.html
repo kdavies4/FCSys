@@ -1,0 +1,160 @@
+<html>
+<head>
+<title>FCSys.Chemistry.Examples</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Examples">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Chemistry.Examples"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.Examples</h2>
+
+<b>Examples</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Chemistry.Examples.OverpotentialS.png" alt="FCSys.Chemistry.Examples.Overpotential" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Examples.html#FCSys.Chemistry.Examples.Overpotential">Overpotential</a>
+</td><td>Demonstrate the Butler-Volmer overpotential</td></tr>
+<tr><td><img src="FCSys.Chemistry.Examples.StoichiometryS.png" alt="FCSys.Chemistry.Examples.Stoichiometry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry_Examples.html#FCSys.Chemistry.Examples.Stoichiometry">Stoichiometry</a>
+</td><td>Test the stoichiometry of the <a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">HOR</a></td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Chemistry.Examples.OverpotentialI.png" alt="FCSys.Chemistry.Examples.Overpotential" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.Examples.Overpotential"></a><a href="FCSys_Chemistry_Examples.html#FCSys.Chemistry.Examples">FCSys.Chemistry.Examples</a>.Overpotential</h2>
+<b>Demonstrate the Butler-Volmer overpotential</b>
+<img src="FCSys.Chemistry.Examples.OverpotentialD.png" alt="FCSys.Chemistry.Examples.Overpotential">
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Overpotential <font color="darkgreen">&quot;Demonstrate the Butler-Volmer overpotential&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> w=-'e-Transfer'.Deltag <font color="darkgreen">&quot;Overpotential&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_A=-'e-Transfer'.I/U.A <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Reaction current in amperes&quot;</font>;
+
+  <a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.ElectronTransfer">Electrochemistry.ElectronTransfer</a> &#39;e-Transfer&#39;(
+    <font color="blue">redeclare </font><font color="blue">constant </font>Integer n_trans=1,
+    fromI=false,
+    I0=U.mA);
+  <a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Potential">Conditions.ByConnector.Chemical.Potential</a> potential(
+    inclTransY=false,
+    inclTransZ=false,
+    chemical(<font color="blue">redeclare </font><font color="blue">constant </font>Integer n_trans=1));
+  <a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Current">Conditions.ByConnector.Chemical.Current</a> current(
+    inclTransY=false,
+    inclTransZ=false,
+    chemical(<font color="blue">redeclare </font><font color="blue">constant </font>Integer n_trans=1),
+    <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Sine">Modelica.Blocks.Sources.Sine</a> set(
+      freqHz=1,
+      amplitude=100*U.A,
+      phase=1.5707963267949));
+  <a href="FCSys_Chemistry_Electrochemistry.html#FCSys.Chemistry.Electrochemistry.DoubleLayer">Electrochemistry.DoubleLayer</a> doubleLayer(
+    setVelocity=false,
+    inclVolume=false,
+    <font color="blue">redeclare </font><font color="blue">constant </font>Integer n_trans=1,
+    w(fixed=true));
+  <a href="FCSys_Conditions_ByConnector_Inter.html#FCSys.Conditions.ByConnector.Inter.Efforts">Conditions.ByConnector.Inter.Efforts</a> substrate(inclTransY=false, inclTransZ=false);
+
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(current.chemical, 'e-Transfer'.negative);
+  <font color="red">connect</font>(potential.chemical, 'e-Transfer'.positive);
+  <font color="red">connect</font>(doubleLayer.negative, 'e-Transfer'.negative);
+  <font color="red">connect</font>(doubleLayer.positive, 'e-Transfer'.positive);
+  <font color="red">connect</font>(substrate.inter, doubleLayer.intra);
+  <font color="red">connect</font>(substrate.inter, 'e-Transfer'.intra);
+<font color="blue">end </font>Overpotential;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Chemistry.Examples.StoichiometryI.png" alt="FCSys.Chemistry.Examples.Stoichiometry" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.Examples.Stoichiometry"></a><a href="FCSys_Chemistry_Examples.html#FCSys.Chemistry.Examples">FCSys.Chemistry.Examples</a>.Stoichiometry</h2>
+<b>Test the stoichiometry of the <a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">HOR</a></b>
+<img src="FCSys.Chemistry.Examples.StoichiometryD.png" alt="FCSys.Chemistry.Examples.Stoichiometry">
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Stoichiometry <font color="darkgreen">
+  &quot;Test the stoichiometry of the <a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">HOR</a>&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.HOR">HOR</a> hOR(n_trans=3);
+  <a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Potential">Conditions.ByConnector.Chemical.Potential</a> H2(sT=1000*U.K, set(y=U.A));
+  <a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Current">Conditions.ByConnector.Chemical.Current</a> &#39;e-&#39;(sT=2000*U.K, <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      set(
+      height=100*U.A,
+      duration=100,
+      startTime=10,
+      offset=U.mA));
+  <a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Potential">Conditions.ByConnector.Chemical.Potential</a> &#39;H+&#39;(sT=3000*U.K);
+
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(hOR.'chemH+', 'H+'.chemical);
+  <font color="red">connect</font>(H2.chemical, hOR.chemH2);
+  <font color="red">connect</font>('e-'.chemical, hOR.'cheme-');
+<font color="blue">end </font>Stoichiometry;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 09 22:36:00 2013.
+</div>
+</body>
+</html>

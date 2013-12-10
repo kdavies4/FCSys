@@ -1,0 +1,38 @@
+// Setup
+removePlots();
+createPlot(filename = "ORR.mat");
+
+FCSys.Utilities.plot6(
+    y1={"subregion.graphite.'e-'.rho", "subregion.ionomer.'H+'.rho", "subregion.gas.H2.rho"},
+    y2={"subregion.graphite.'e-'.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.H2.phi[1]"},
+    y3={"subregion.graphite.'e-'.p", "subregion.ionomer.'H+'.p", "subregion.gas.H2.p"},
+    y4={"subregion.graphite.'C+'.T", "subregion.ionomer.'SO3-'.T", "subregion.graphite.'e-'.T", "subregion.ionomer.'H+'.T", "subregion.gas.H2.T"});
+
+createPlot(id = 4,
+ position = {220, 0, 440, 650},
+ x = "J_Apercm2",
+ y = {"w"},
+ heading = "Overpotential",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legend = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitle = "Potential / V",
+ bottomTitle = "Current density / (A/cm2)");
+
+createPlot(id = 4,
+ position = {220, 0, 440, 325},
+ x = "J_Apercm2",
+ y = {"Qdot"},
+ legends = {"Rate of heat generation"},
+ heading = "Energy Rates",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 5,
+ legendHorizontal = false,
+ subPlot = 2,
+ leftTitle = "Power / W",
+ bottomTitle = "Current density / (A/cm2)");

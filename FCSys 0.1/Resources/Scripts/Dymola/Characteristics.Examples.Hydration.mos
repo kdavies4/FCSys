@@ -1,0 +1,17 @@
+// Setup
+removePlots();
+
+createPlot(filename = "Hydration.mat",
+ id = 1,
+ position = {0, 0, 600, 450},
+ x = "RH",
+ y = {"lambda", "lambda_Springer"},
+ heading = "Hydration vs. Humidity",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 4,
+ legendHorizontal = false,
+ legends = {"FCSys (via chemical equilibrium)", "Springer et al. (explicit function)"},
+ leftTitle = "Mole ratio of H2O to SO3-",
+ bottomTitle = "Relative humidity");

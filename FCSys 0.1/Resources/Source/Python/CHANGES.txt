@@ -1,0 +1,5 @@
+Changelog
+=========
+
+Changes and versions are tracked as a part of FCSys - the encompassing Modelica
+package.

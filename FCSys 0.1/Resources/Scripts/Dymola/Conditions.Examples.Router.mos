@@ -1,0 +1,7 @@
+// Setup
+removePlots();
+createPlot(filename = "Router.mat");
+
+FCSys.Utilities.plot6(
+    y1={"router.negative1.gas.H2.Ndot", "router.negative2.gas.H2.Ndot",
+        "router.positive1.gas.H2.Ndot", "router.positive2.gas.H2.Ndot"});

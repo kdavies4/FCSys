@@ -1,0 +1,13 @@
+// Setup
+removePlots();
+createPlot(filename = "AnFP.mat");
+    
+FCSys.Utilities.plot6(
+    y1={"anFP.subregions[1, 1, 1].gas.H2.N", 
+        "anFP.subregions[1, 1, 1].gas.H2O.N", 
+        "anFP.subregions[1, 1, 1].liquid.H2O.N"},
+    y3={"anFP.subregions[1, 1, 1].gas.H2.T", 
+        "anFP.subregions[1, 1, 1].graphite.'C+'.T"},
+    y4={"anFP.subregions[1, 1, 1].gas.H2O.phi[1]", "phi_states[1]"}, 
+    y5={"anFP.subregions[1, 1, 1].liquid.H2O.phi[2]"});
+

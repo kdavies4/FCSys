@@ -1,0 +1,32 @@
+// Setup
+removePlots();
+createPlot(filename = "AirColumn.mat");
+
+FCSys.Utilities.plot6(
+   y1=cat(1,
+            {"subregion1.gas.N2.rho_boundaries[1, 1]", "subregion1.gas.N2.rho"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.rho_boundaries[1, 1]" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.rho" for j in 1:n_y},
+            {"subregion2.gas.N2.rho_boundaries[1, 1]", "subregion2.gas.N2.rho", "subregion2.gas.N2.rho_boundaries[1, 2]"}),
+   y2=cat(1,
+            {"subregion1.gas.N2.boundaries[1, 1].phi[1]", "subregion1.gas.N2.phi[1]"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.phi_boundaries[1, 1]" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.phi[1]" for j in 1:n_y},
+            {"subregion2.gas.N2.boundaries[1, 1].phi[1]", "subregion2.gas.N2.phi[1]", "subregion2.gas.N2.boundaries[1, 2].phi[1]"}),
+   y3=cat(1,
+            {"subregion1.gas.N2.boundaries[1, 1].p", "subregion1.gas.N2.p"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.boundaries[1, 1].p" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.p" for j in 1:n_y},
+            {"subregion2.gas.N2.boundaries[1, 1].p", "subregion2.gas.N2.p",
+             "subregion2.gas.N2.boundaries[1, 2].p"}),
+   y4=cat(1,
+            {"subregion1.gas.N2.boundaries[1, 1].T", "subregion1.gas.N2.T"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.boundaries[1, 1].T" for j in 1:n_y},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.T" for j in 1:n_y},
+            {"subregion2.gas.N2.boundaries[1, 1].T", "subregion2.gas.N2.T",
+             "subregion2.gas.N2.boundaries[1, 2].T"}),
+   y5={"Deltap", "Deltap_ex"},
+   y6=cat(1,
+            {"subregion1.gas.N2.tau_QT[1]"},
+            if n_y==0 then fill("", 0) else {"subregions[" + String(j) + "].gas.N2.tau_QT[1]" for j in 1:n_y},
+            {"subregion2.gas.N2.tau_QT[1]"}));
