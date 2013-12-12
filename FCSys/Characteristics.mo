@@ -262,7 +262,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
       annotation (
         Documentation(info=
-              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Condensation\">Subregions.Examples.PhaseChange.Condensation</a>.</p></html>"),
+              "<html><p>See also <a href=\"modelica://FCSys.Subregions.Examples.PhaseChange.Evaporation\">Subregions.Examples.PhaseChange.Evaporation</a>.</p></html>"),
 
         experiment(StopTime=10),
         Commands(file(ensureTranslated=true) =
@@ -271,7 +271,7 @@ package Characteristics "Data and functions to correlate physical properties"
         __Dymola_experimentSetupOutput);
     end SaturationPressure;
 
-    model Hydration
+    model HydrationLevel
       "Evaluate the equilibrium hydration of the ionomer as a function of relative humidity"
       extends Modelica.Icons.Example;
       import Absorbed = FCSys.Characteristics.H2O.Ionomer;
@@ -307,11 +307,11 @@ package Characteristics "Data and functions to correlate physical properties"
 
         experiment(StopTime=10),
         Commands(file=
-              "Resources/Scripts/Dymola/Characteristics.Examples.Hydration.mos"
-            "Characteristics.Examples.Hydration.mos"),
+              "Resources/Scripts/Dymola/Characteristics.Examples.HydrationLevel.mos"
+            "Characteristics.Examples.HydrationLevel.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-    end Hydration;
+    end HydrationLevel;
 
     model CellPotential
       "<html>Evaluate the potential of an H<sub>2</sub>/O<sub>2</sub> cell as a function of temperature</html>"
@@ -885,23 +885,23 @@ package Characteristics "Data and functions to correlate physical properties"
     function J "Leverett J function for H2O from [Wang2001]"
       extends Modelica.Icons.Function;
 
-      input Q.NumberAbsolute s(max=1) "Liquid saturation"
-        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
+      input Q.NumberAbsolute x(max=1) "Liquid saturation"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
       output Real J "Result of Leverett correlation"
         annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
 
     algorithm
-      J := FCSys.Utilities.Polynomial.f(s, {0.560,-0.966,1.669,-1.263});
+      J := FCSys.Utilities.Polynomial.f(x, {0.560,-0.966,1.669,-1.263});
 
       annotation (Inline=true, Documentation(info="<html><p>
     The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p></html>"));
     end J;
 
-    function J_identity "Pass-through (1:1) Leverett J function"
+    function J_identity "Leverett J function that outputs one"
       extends Modelica.Icons.Function;
 
-      input Q.NumberAbsolute s(max=1) "Liquid saturation"
-        annotation (Dialog(__Dymola_label="<html><i>s</i></html>"));
+      input Q.NumberAbsolute x(max=1) "Liquid saturation"
+        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
       output Real J "Result of Leverett correlation"
         annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
 

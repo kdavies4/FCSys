@@ -6,7 +6,8 @@ package Phases "Mixtures of species"
     import Modelica.Math.BooleanVectors.countTrue;
 
     extends Icons.Phases.Gas;
-    extends PartialPhase(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}));
+    extends PartialPhase(final n_spec=countTrue({inclH2,inclH2O,inclN2,inclO2}),
+        final V=dalton.V);
 
     // Conditionally include species.
     parameter Boolean inclH2=false "Include H2" annotation (
@@ -157,17 +158,17 @@ package Phases "Mixtures of species"
       "Positive boundary along the z axis" annotation (Placement(transformation(
             extent={{-108,-22},{-88,-2}}), iconTransformation(extent={{-90,-90},
               {-70,-70}})));
-    Connectors.Amagat amagat(final V=-V) if n_spec > 0
-      "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-120,26},{-100,46}}), iconTransformation(extent={{70,-90},
-              {90,-70}})));
+    Connectors.Dalton dalton if n_spec > 0
+      "Connector for additivity of pressure" annotation (Placement(
+          transformation(extent={{-120,26},{-100,46}}), iconTransformation(
+            extent={{70,-90},{90,-70}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{100,-46},{120,-26}}),
           iconTransformation(extent={{-60,60},{-40,40}})));
 
     // Auxiliary variables (for analysis)
-    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = amagat.p if
+    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = -dalton.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
     Connectors.Chemical chemH2[1](each final n_trans=n_trans) if inclH2
@@ -181,9 +182,6 @@ package Phases "Mixtures of species"
               {46,40},{66,60}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
   protected
-    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
-      "Adapter between additivity of volume and additivity of pressure"
-      annotation (Placement(transformation(extent={{-100,26},{-80,46}})));
     Connectors.InertNode commonExch
       "Connector for exchange among species in the phase"
       annotation (Placement(transformation(extent={{76,-58},{96,-38}})));
@@ -238,24 +236,20 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     // Mixing
-    connect(H2.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-69,4},{-69,36},{-86,36}},
+    connect(H2.dalton, dalton) annotation (Line(
+        points={{-69,4},{-69,36},{-110,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(H2O.dalton, amagatDalton.dalton) annotation (Line(
-        points={{-29,4},{-29,36},{-86,36}},
+    connect(H2O.dalton, dalton) annotation (Line(
+        points={{-29,4},{-29,36},{-110,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(N2.dalton, amagatDalton.dalton) annotation (Line(
-        points={{11,4},{11,36},{-86,36}},
+    connect(N2.dalton, dalton) annotation (Line(
+        points={{11,4},{11,36},{-110,36}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(O2.dalton, amagatDalton.dalton) annotation (Line(
-        points={{51,4},{51,36},{-86,36}},
-        color={47,107,251},
-        smooth=Smooth.None));
-    connect(amagatDalton.amagat, amagat) annotation (Line(
-        points={{-94,36},{-110,36}},
+    connect(O2.dalton, dalton) annotation (Line(
+        points={{51,4},{51,36},{-110,36}},
         color={47,107,251},
         smooth=Smooth.None));
 
@@ -428,7 +422,8 @@ package Phases "Mixtures of species"
     import Modelica.Math.BooleanVectors.countTrue;
 
     extends Icons.Phases.Solid;
-    extends PartialPhase(final n_spec=countTrue({'inclC+','incle-'}));
+    extends PartialPhase(final n_spec=countTrue({'inclC+','incle-'}),final V=-
+          amagat.V);
 
     // Conditionally include species.
     parameter Boolean 'inclC+'=false "Include C+" annotation (
@@ -517,13 +512,6 @@ package Phases "Mixtures of species"
     // must be manually changed at instantiation if additional transport axes
     //  are enabled.
 
-    // Advanced parameters
-    parameter Boolean inclAmagat=true
-      "Include the connector for additivity of volume" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(tab="Advanced"));
-
     Connectors.BoundaryBus xNegative if inclTrans[Axis.x]
       "Negative boundary along the x axis" annotation (Placement(transformation(
             extent={{-80,-30},{-60,-10}}), iconTransformation(extent={{-90,-10},
@@ -553,10 +541,9 @@ package Phases "Mixtures of species"
       (Placement(transformation(extent={{60,-66},{80,-46}}), iconTransformation(
             extent={{-60,60},{-40,40}})));
 
-    Connectors.Amagat amagat if n_spec > 0 and inclAmagat
-      "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-80,4},{-60,24}}), iconTransformation(extent={{70,-90},{90,
-              -70}})));
+    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
+      annotation (Placement(transformation(extent={{-80,4},{-60,24}}),
+          iconTransformation(extent={{70,-90},{90,-70}})));
 
     Connectors.Chemical 'cheme-'[1](each final n_trans=n_trans) if 'incle-'
        and 'incle-Transfer' "Chemical connector for e-" annotation (Placement(
@@ -564,15 +551,12 @@ package Phases "Mixtures of species"
               -10,-50},{10,-30}})));
 
   protected
-    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0 and inclAmagat
+    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-60,4},{-40,24}})));
     Connectors.InertNode commonExch
       "Connector for exchange among all species in the phase"
       annotation (Placement(transformation(extent={{36,-78},{56,-58}})));
-    Connectors.DaltonNode dalton(final V=V) if n_spec > 0
-      "Internal node for additivity of volume"
-      annotation (Placement(transformation(extent={{-39,4},{-19,24}})));
 
   equation
     // Chemical exchange
@@ -620,12 +604,12 @@ package Phases "Mixtures of species"
         points={{-54,14},{-70,14}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(dalton, 'C+'.dalton) annotation (Line(
-        points={{-29,14},{-29,-16}},
+    connect(amagatDalton.dalton, 'C+'.dalton) annotation (Line(
+        points={{-46,14},{-29,14},{-29,-16}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(dalton, 'e-'.dalton) annotation (Line(
-        points={{-29,14},{11,14},{11,-16}},
+    connect(amagatDalton.dalton, 'e-'.dalton) annotation (Line(
+        points={{-46,14},{11,14},{11,-16}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(doubleLayer.amagat, amagat) annotation (Line(
@@ -706,10 +690,6 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
-    connect(dalton, amagatDalton.dalton) annotation (Line(
-        points={{-29,14},{-46,14}},
-        color={47,107,251},
-        smooth=Smooth.None));
     annotation (
       Documentation(info="<html><p>From a physical standpoint, the electrolytic double layer is probably best
 
@@ -735,8 +715,10 @@ package Phases "Mixtures of species"
     import Modelica.Math.BooleanVectors.countTrue;
 
     extends Icons.Phases.Solid;
-    extends PartialPhase(final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}),
-        n_inter=1);
+    extends PartialPhase(
+      final n_spec=countTrue({'inclSO3-','inclH+',inclH2O}),
+      final V=-amagat.V,
+      n_inter=1);
 
     // Conditionally include species.
     parameter Boolean 'inclSO3-'=false
@@ -861,10 +843,9 @@ package Phases "Mixtures of species"
       "Positive boundary along the z axis" annotation (Placement(transformation(
             extent={{-88,-2},{-68,18}}), iconTransformation(extent={{-90,-90},{
               -70,-70}})));
-    Connectors.Amagat amagat if n_spec > 0 and inclAmagat
-      "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-100,46},{-80,66}}), iconTransformation(extent={{70,-90},{
-              90,-70}})));
+    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
+      annotation (Placement(transformation(extent={{-100,46},{-80,66}}),
+          iconTransformation(extent={{70,-90},{90,-70}})));
     Connectors.Inter inter[n_inter](each final n_trans=n_trans) if n_spec > 0
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-26},{100,-6}}), iconTransformation(
@@ -875,13 +856,6 @@ package Phases "Mixtures of species"
     Connectors.Chemical 'chemH+'[1](each final n_trans=n_trans) if 'inclH+'
       "Chemical connector for H+" annotation (Placement(transformation(extent={
               {-54,60},{-34,80}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
-
-    // Advanced parameters
-    parameter Boolean inclAmagat=true
-      "Include the connector for additivity of volume" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(tab="Advanced"));
 
     // Independence factors
     ExchangeParams common(k_Q=0) if n_spec > 0 "Among all species in the phase"
@@ -901,7 +875,7 @@ package Phases "Mixtures of species"
       annotation (Dialog(group="Exchange (click to edit)"));
 
   protected
-    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0 and inclAmagat
+    Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
       "Adapter between additivity of volume and additivity of pressure"
       annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
 
@@ -922,9 +896,6 @@ package Phases "Mixtures of species"
           transformation(extent={{56,-74},{76,-54}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
 
-    Connectors.DaltonNode dalton(final V=V) if n_spec > 0
-      "Internal node for additivity of volume"
-      annotation (Placement(transformation(extent={{-59,46},{-39,66}})));
   equation
     // Chemical exchange
     connect(H2O.chemical, chemH2O) annotation (Line(
@@ -981,16 +952,16 @@ package Phases "Mixtures of species"
         smooth=Smooth.None));
 
     // Mixing
-    connect('SO3-'.dalton, dalton) annotation (Line(
-        points={{31,24},{31,56},{-49,56}},
+    connect('SO3-'.dalton, amagatDalton.dalton) annotation (Line(
+        points={{31,24},{31,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect('H+'.dalton, dalton) annotation (Line(
-        points={{-49,24},{-49,56}},
+    connect('H+'.dalton, amagatDalton.dalton) annotation (Line(
+        points={{-49,24},{-49,40},{-49,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(H2O.dalton, dalton) annotation (Line(
-        points={{-9,24},{-9,56},{-49,56}},
+    connect(H2O.dalton, amagatDalton.dalton) annotation (Line(
+        points={{-9,24},{-9,56},{-66,56}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(amagatDalton.amagat, amagat) annotation (Line(
@@ -1106,10 +1077,6 @@ package Phases "Mixtures of species"
         color={127,127,127},
         smooth=Smooth.None));
 
-    connect(dalton, amagatDalton.dalton) annotation (Line(
-        points={{-49,56},{-66,56}},
-        color={47,107,251},
-        smooth=Smooth.None));
     annotation (
       Documentation(info="<html><p>Assumptions:<ol>
     <li>The water in the ionomer does not directly participate in the reaction (only the water vapor does).</li>
@@ -1129,7 +1096,7 @@ package Phases "Mixtures of species"
 
   model Liquid "Liquid phase"
     extends Icons.Phases.Liquid;
-    extends PartialPhase(final n_spec=if inclH2O then 1 else 0);
+    extends PartialPhase(final n_spec=if inclH2O then 1 else 0,final V=-amagat.V);
 
     // Conditionally include species.
     parameter Boolean inclH2O=false "Include H2O" annotation (
@@ -1188,10 +1155,9 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{20,-40},{40,-20}}), iconTransformation(
             extent={{-60,60},{-40,40}})));
-    Connectors.Amagat amagat(final V=-V) if n_spec > 0
-      "Connector for additivity of volume" annotation (Placement(transformation(
-            extent={{-60,0},{-40,20}}), iconTransformation(extent={{70,-90},{90,
-              -70}})));
+    Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
+      annotation (Placement(transformation(extent={{-60,0},{-40,20}}),
+          iconTransformation(extent={{70,-90},{90,-70}})));
     Connectors.Chemical chemH2O[1](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -1291,8 +1257,8 @@ protected
           __Dymola_label="<html><b><i>k</i></b></html>"));
     parameter Integer n_trans=1 "Number of transport axes"
       annotation (HideResult=true);
-    // This can't be an inner/outer parameter in Dymola 2014.
-    inner Q.Volume V if n_spec > 0 "Volume of the phase";
+    // Note:  This can't be an inner/outer parameter in Dymola 2014.
+    inner Q.Volume V=0 if n_spec > 0 "Volume of the phase";
 
     // Independence factors
     inner parameter Q.NumberAbsolute k_inter_Phi[n_inter, n_trans]=ones(n_inter,

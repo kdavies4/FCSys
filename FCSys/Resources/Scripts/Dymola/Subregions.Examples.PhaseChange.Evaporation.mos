@@ -1,0 +1,11 @@
+// Setup
+removePlots();
+createPlot(filename = "Evaporation.mat");
+
+ FCSys.Utilities.plot6(
+     y1={"subregion.gas.H2O.p", "p_sat"},
+     y2={"subregion.gas.H2O.T", "subregion.liquid.H2O.T"},
+     y3={"subregion.gas.H2O.g", "subregion.liquid.H2O.g"},
+     y4={"subregion.gas.H2O.RH"},       
+     y5={"subregion.gas.H2O.chemical[3].Ndot",
+           "subregion.liquid.H2O.chemical[1].Ndot"});

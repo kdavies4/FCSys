@@ -417,14 +417,15 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -518,14 +519,15 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
@@ -576,16 +578,18 @@ public
 
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Line(
-              points={{-40,0},{30,0}},
-              color={47,107,251},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Ellipse(
-              extent={{0,40},{-80,-40}},
-              lineColor={47,107,251},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Sphere),Ellipse(extent={{0,40},{-80,-40}},
-            lineColor={0,0,0})}),
+              100}}), graphics={
+          Line(
+            points={{-40,0},{30,0}},
+            color={47,107,251},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Ellipse(
+            extent={{0,40},{-80,-40}},
+            lineColor={47,107,251},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Sphere),
+          Ellipse(extent={{0,40},{-80,-40}}, lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end SurfaceTension;
@@ -620,8 +624,9 @@ public
         __Dymola_label="<html>&theta;</html>",
         enable=inclLiquid and inclCapillary));
     replaceable function J = FCSys.Characteristics.H2O.J_identity
-      "Leverett J function" annotation (choicesAllMatching=true, Dialog(group=
-            "Material properties", enable=inclLiquid and inclCapillary));
+      "<html>Leverett <i>J</i>-function</html>" annotation (choicesAllMatching=
+          true, Dialog(group="Material properties", enable=inclLiquid and
+            inclCapillary));
 
     // Material properties
     parameter Boolean inclGas=true "Gas" annotation (
@@ -637,52 +642,67 @@ public
       choices(__Dymola_checkBox=true),
       Dialog(group="Included phases", compact=true));
 
+    // Alias variables (for common terms)
+    Q.Volume V_pore "Pore volume";
+
     // Auxiliary variables (for analysis)
-    output Q.NumberAbsolute s(final stateSelect=StateSelect.never) = liquid.V/(
+    output Q.NumberAbsolute x(final stateSelect=StateSelect.never) = liquid.V/(
       gas.V + liquid.V) if inclLiquid and inclGas and environment.analysis
       "Liquid saturation";
 
-    Connectors.Amagat gas if inclGas "Interface to the gas phase" annotation (
+    Connectors.Dalton gas if inclGas "Interface to the gas phase" annotation (
         Placement(transformation(extent={{30,-10},{50,10}}), iconTransformation(
             extent={{10,10},{30,30}})));
     Connectors.Amagat liquid if inclLiquid "Interface to the liquid phase"
-      annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}}),
           iconTransformation(extent={{-20,-20},{0,0}})));
-    Connectors.Amagat solid if inclSolid "Interface to the solid phase"
-      annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
-          iconTransformation(extent={{50,-30},{70,-10}})));
+    Connectors.Amagat solid "Interface to the solid phase" annotation (
+        Placement(transformation(extent={{6,-30},{26,-10}}), iconTransformation(
+            extent={{50,-30},{70,-10}})));
     SurfaceTension surfaceTension(final gamma=gamma,final overR=cos(theta)*J(
-          liquid.V/(V - liquid.V))/(2*sqrt(kappa))) if inclLiquid and
+          liquid.V/V_pore)*sqrt(V_pore/V/kappa)/2) if inclLiquid and
       inclCapillary "Additional pressure on the liquid"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V) if inclGas or
-      inclLiquid or inclSolid "Fixed volume"
-      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+      inclLiquid "Fixed volume"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   protected
+    Conditions.Adapters.AmagatDalton amagatDalton if inclGas or (inclSolid and
+      not inclLiquid)
+      "Adapter between additivity of volume and additivity of gas pressure"
+      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+
     outer Conditions.Environment environment "Environmental conditions";
 
   equation
+    // Aliases
+    V = V_pore + solid.V;
+
     if not inclCapillary then
-      connect(gas, liquid)
-        "Directly connect gas and liquid (not shown in diagram)";
+      connect(liquid, volume.amagat)
+        "Directly connect liquid to the volume (not shown in diagram)";
     end if;
 
     connect(surfaceTension.wetting, liquid) annotation (Line(
-        points={{-4,0},{-20,0}},
+        points={{-24,0},{-40,0}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(solid, volume.amagat) annotation (Line(
-        points={{20,-20},{20,0}},
+    connect(solid, amagatDalton.amagat) annotation (Line(
+        points={{16,-20},{16,-20},{16,0},{16,0}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(volume.amagat, gas) annotation (Line(
-        points={{20,0},{40,0}},
+    connect(volume.amagat, amagatDalton.amagat) annotation (Line(
+        points={{0,0},{16,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(gas, amagatDalton.dalton) annotation (Line(
+        points={{40,0},{24,0}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(surfaceTension.nonwetting, volume.amagat) annotation (Line(
-        points={{3,0},{20,0}},
+        points={{-17,0},{0,0}},
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
@@ -703,34 +723,40 @@ public
     
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Polygon(
-              points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
-              -60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Polygon(
-              points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
-              lineColor={191,191,191},
-              smooth=Smooth.Bezier,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-40,8},{20,-30}},
-              lineColor={85,170,255},
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}),Ellipse(extent={{-40,8},{20,-30}},
-            lineColor={225,225,225}),Line(
-              points={{-60,20},{20,20},{20,-60}},
-              color={0,0,0},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{60,60},{20,20}},
-              color={0,0,0},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None)}),
+              100}}), graphics={
+          Polygon(
+            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+                -60}},
+            lineColor={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid),
+          Polygon(
+            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+            lineColor={191,191,191},
+            smooth=Smooth.Bezier,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-40,8},{20,-30}},
+            lineColor={85,170,255},
+            fillPattern=FillPattern.Sphere,
+            fillColor={255,255,255}),
+          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
+          Line(
+            points={{-60,20},{20,20},{20,-60}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{60,60},{20,20}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));

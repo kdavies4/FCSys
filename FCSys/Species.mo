@@ -1063,7 +1063,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
 
     // Advanced parameters
-    parameter Q.Amount N0=U.C "Nominal amount of material to prevent depletion"
+    parameter Q.Amount N0=0 "Nominal amount of material to prevent depletion"
       annotation (Dialog(tab="Advanced", __Dymola_label=
             "<html><i>N</i><sup>o</sup></html>"));
 
@@ -1755,7 +1755,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
