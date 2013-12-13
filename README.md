@@ -24,7 +24,7 @@ Please see the acknowledgements on the
 ### License terms
 
 [FCSys] is published under the Modelica License 2 (see the
-[User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2)
+[User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.License)
 or
 [ModelicaLicense2.html](FCSys 0.1/Resources/Documentation/ModelicaLicense2.html)).
 Please share any modifications you make (preferably on a Github fork from

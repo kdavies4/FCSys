@@ -6,8 +6,7 @@ package Subregions
 
     package PhaseChange "Examples of phase change"
       extends Modelica.Icons.ExamplesPackage;
-      model Condensation
-        "<html>Condensation of super-saturated H<sub>2</sub>O vapor</html>"
+      model Evaporation "<html>Evaporation of H<sub>2</sub>O</html>"
 
         output Q.Pressure p_sat=Characteristics.H2O.p_sat(subregion.gas.H2O.T)
           "Saturation pressure via Modelica.Media";
@@ -15,8 +14,11 @@ package Subregions
         extends Examples.Subregion(
           inclH2O=true,
           inclH2=false,
-          subregion(liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)), gas(H2O(
-                  p_IC=30*U.kPa, initMaterial=FCSys.Species.Enumerations.Init.none))));
+          'inclC+'=true,
+          subregion(
+            volume(inclCapillary=false),
+            liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
+            gas(H2O(p_IC=U.kPa))));
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
@@ -27,16 +29,16 @@ package Subregions
   <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.SaturationPressure\">Characteristics.Examples.SaturationPressure</a>.
 
   </html>"),
-          experiment(StopTime=5),
+          experiment(StopTime=0.002),
           Commands(file=
-                "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Condensation.mos"
-              "Subregions.Examples.PhaseChange.Condensation.mos"),
+                "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Evaporation.mos"
+              "Subregions.Examples.PhaseChange.Evaporation.mos"),
           __Dymola_experimentSetupOutput);
 
-      end Condensation;
+      end Evaporation;
 
       model Hydration
-        "<html>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</html>"
+        "<html>Test absorption of H<sub>2</sub>O vapor into the ionomer</html>"
         extends Examples.Subregion(
           'inclSO3-'=true,
           inclH2O=true,
@@ -53,7 +55,7 @@ package Subregions
   Water is supplied as necessary to maintain this condition.  The ionomer begins with hydration of &lambda; = 8 and
   comes to equilibrium at approximately &lambda; &asymp; 14 in about a half an hour.
 
-  <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.Hydration\">Characteristics.Examples.Hydration</a>.</p>
+  <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.HydrationLevel\">Characteristics.Examples.HydrationLevel</a>.</p>
 
 </p></html>"),
           experiment(StopTime=2400),
@@ -80,7 +82,7 @@ package Subregions
         output Q.Current zI=subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density of the reaction, in A/cm2";
-        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.intra.Qdot
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot
           "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
@@ -151,7 +153,7 @@ package Subregions
         output Q.Current zI=-subregion.graphite.'e-Transfer'.I "Reaction rate";
         output Q.Number J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A)
           "Electrical current density, in A/cm2";
-        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.intra.Qdot
+        output Q.Power Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot
           "Rate of heat generation due to reaction";
 
         extends Examples.Subregion(
@@ -532,7 +534,7 @@ package Subregions
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=100),
+        experiment(StopTime=40),
         Commands(file(ensureTranslated=true) =
             "Resources/Scripts/Dymola/Subregions.Examples.ElectricalConduction.mos"
             "Subregions.Examples.ElectricalConduction.mos"),
@@ -567,7 +569,7 @@ package Subregions
         annotation (Dialog(__Dymola_label="<html><i>A</i></html>"));
 
       // Conditions
-      parameter Q.VolumeRate Vdot=-1.5*U.cc/U.s
+      parameter Q.VolumeRate Vdot_large=-1.5*U.cc/U.s
         "Prescribed large signal volumetric flow rate";
 
       // Measurements
@@ -580,10 +582,12 @@ package Subregions
       output Q.Pressure Deltap_Poiseuille=-32*subregion.L[Axis.x]*subregion.liquid.H2O.phi[
           Axis.x]/(D^2*subregion.liquid.H2O.eta)
         "Pressure difference according to Poiseuille's law";
-      output Q.Power Qdot_gen=subregion.liquid.H2O.Edot_AT
-        "Rate of heat generation";
-      output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*subregion.liquid.H2O.Vdot[
-          1] "Rate of heat generation according to Poiseuille's law";
+      Real x=Deltap_Poiseuille/Deltap;
+
+      output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*Vdot
+        "Rate of heat generation according to Poiseuille's law";
+      output Q.VolumeRate Vdot=BC1.liquid.H2O.materialSet.y if environment.analysis
+        "Total volumetric flow rate";
 
       extends Examples.Subregion(inclH2=false, subregion(
           L={U.m,U.mm,U.mm},
@@ -594,8 +598,8 @@ package Subregions
       Conditions.ByConnector.BoundaryBus.Single.Source BC1(liquid(inclH2O=true,
             H2O(
             redeclare Modelica.Blocks.Sources.Sine materialSet(
-              amplitude=0.2*Vdot,
-              offset=Vdot,
+              amplitude=0.2*Vdot_large,
+              offset=Vdot_large,
               freqHz=1),
             redeclare function materialSpec =
                 Conditions.ByConnector.Boundary.Single.Material.volumeRate (
@@ -739,7 +743,6 @@ package Subregions
         inclTransZ=false,
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclSO3-'='inclSO3-', final 'inclH+'='inclH+'),
-        liquid(H2O(epsilon_IC=0.25)),
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -927,9 +930,11 @@ package Subregions
               phi(stateSelect=StateSelect.always, displayUnit="mm/s"),
               phi_boundaries(each displayUnit="mm/s"))), graphite('C+'(epsilon=
                   0.5))),
-        subregions(gas(N2(each phi(each stateSelect=StateSelect.always,
-                  displayUnit="mm/s"), each phi_boundaries(each displayUnit=
-                    "mm/s"))), each graphite('C+'(epsilon=0.5))),
+        subregions(
+          common(each k_Phi={10,10,10}),
+          gas(N2(each phi(each stateSelect=StateSelect.always, displayUnit=
+                    "mm/s"), each phi_boundaries(each displayUnit="mm/s"))),
+          each graphite('C+'(epsilon=0.5))),
         subregion2(gas(N2(phi(displayUnit="mm/s"), phi_boundaries(each
                   displayUnit="mm/s"))), graphite('C+'(epsilon=0.5))),
         environment(psi_O2_dry=0, RH=0));
@@ -964,19 +969,17 @@ package Subregions
       final n_trans=n_trans,
       'incle-Transfer'=inclHOR or inclORR,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q},
-      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Graphite" annotation (
-        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
-            ={{10,-22},{30,-2}})));
+      final k_inter_Q={common.k_Q}) "Graphite" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{10,-22},
+              {30,-2}})));
 
     FCSys.Phases.Ionomer ionomer(
       n_inter=1,
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q},
-      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Ionomer" annotation (
-        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
-            ={{50,-22},{70,-2}})));
+      final k_inter_Q={common.k_Q}) "Ionomer" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{50,-22},
+              {70,-2}})));
 
     FCSys.Phases.Liquid liquid(
       n_inter=2,
@@ -1028,9 +1031,9 @@ package Subregions
       final V=V,
       final inclGas=gas.n_spec > 0,
       final inclLiquid=liquid.n_spec > 0,
-      final inclSolid=graphite.n_spec + ionomer.n_spec > 0) if gas.n_spec +
-      liquid.n_spec > 0 "Volume with capillary pressure included" annotation (
-        Dialog, Placement(transformation(extent={{-24,-80},{-4,-60}})));
+      final inclSolid=graphite.n_spec + ionomer.n_spec > 0)
+      "Volume with capillary pressure included" annotation (Dialog, Placement(
+          transformation(extent={{-24,-80},{-4,-60}})));
 
   protected
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
@@ -1200,7 +1203,7 @@ package Subregions
         smooth=Smooth.None));
 
     // Mixing
-    connect(gas.amagat, volume.gas) annotation (Line(
+    connect(gas.dalton, volume.gas) annotation (Line(
         points={{-12,-20},{-12,-68}},
         color={47,107,251},
         smooth=Smooth.None));
@@ -1283,12 +1286,9 @@ on diagram)")}));
 
     extends PartialSubregion(final n_spec=ionomer.n_spec);
 
-    FCSys.Phases.Ionomer ionomer(
-      n_inter=0,
-      final n_trans=n_trans,
-      inclAmagat=false) "Ionomer" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-20,0},
-              {0,20}})));
+    FCSys.Phases.Ionomer ionomer(n_inter=0, final n_trans=n_trans) "Ionomer"
+      annotation (Dialog(group="Phases (click to edit)"), Placement(
+          transformation(extent={{-20,0},{0,20}})));
 
     Connectors.BoundaryBus xNegative if inclTransX
       "Negative boundary along the x axis" annotation (Placement(transformation(
@@ -1314,6 +1314,12 @@ on diagram)")}));
             extent={{-40,-20},{-20,0}}), iconTransformation(extent={{-60,-60},{
               -40,-40}})));
 
+    Chemistry.CapillaryVolume volume(
+      final V=V,
+      final inclSolid=ionomer.n_spec > 0,
+      final inclGas=false,
+      final inclLiquid=false) "Volume with capillary pressure included"
+      annotation (Dialog, Placement(transformation(extent={{0,-20},{20,0}})));
   equation
     // Boundaries
     // ----------
@@ -1358,13 +1364,17 @@ on diagram)")}));
         thickness=0.5,
         smooth=Smooth.None));
 
+    connect(volume.solid, ionomer.amagat) annotation (Line(
+        points={{16,-12},{20,-12},{20,2},{-2,2}},
+        color={47,107,251},
+        smooth=Smooth.None));
     annotation (
       defaultComponentName="subregion",
       Documentation(info="<html>
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
-      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-40},{40,
+      Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-60,-40},{40,
               60}}), graphics));
   end SubregionIonomer;
 
@@ -1383,10 +1393,9 @@ on diagram)")}));
       n_inter=1,
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans]},
-      final k_inter_Q={common.k_Q},
-      final inclAmagat=gas.n_spec + liquid.n_spec > 0) "Graphite" annotation (
-        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
-            ={{30,-22},{50,-2}})));
+      final k_inter_Q={common.k_Q}) "Graphite" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{30,-22},
+              {50,-2}})));
 
     FCSys.Phases.Liquid liquid(
       n_inter=2,
@@ -1430,7 +1439,7 @@ on diagram)")}));
       final V=V,
       final inclGas=gas.n_spec > 0,
       final inclLiquid=liquid.n_spec > 0,
-      final inclSolid=graphite.n_spec > 0) if gas.n_spec + liquid.n_spec > 0
+      final inclSolid=graphite.n_spec > 0)
       "Volume with capillary pressure included"
       annotation (Placement(transformation(extent={{-4,-80},{16,-60}})));
 
@@ -1565,7 +1574,7 @@ on diagram)")}));
         points={{-32,-20},{-32,-71},{5,-71}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(gas.amagat, volume.gas) annotation (Line(
+    connect(gas.dalton, volume.gas) annotation (Line(
         points={{8,-20},{8,-68}},
         color={47,107,251},
         smooth=Smooth.None));

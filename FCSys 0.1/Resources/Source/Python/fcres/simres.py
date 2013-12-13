@@ -18,7 +18,7 @@ __license__ = "BSD-compatible (see LICENSE.txt)"
 import re
 import modelicares.base as base
 
-from modelicares import SimRes, label_number
+from modelicares import SimRes, label_number, label_quantity
 
 # Establish the default units.
 import _config
@@ -658,12 +658,11 @@ class SimRes(SimRes):
 
         # Additional units that are useful for fuel cells
         atm = 101325*Pa
-        M = mol/L
         cc = (0.01*m)**3
         yr = 365.25*day
-        self.U.update(atm=atm, cc=cc, yr=yr)
+        M = mol/L
+        self.U.update(atm=atm, cc=cc, yr=yr, M=M)
         self.U.update({'%': 0.01})
-
 
 class Info:
     """Shortcuts to the "get" methods in :class:`SimRes`

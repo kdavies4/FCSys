@@ -20,9 +20,6 @@ dymosim
 request
 status
 
-# Excel spreadsheets
-*.xls
-
 # Compressed files
 *.tar.gz
 *.zip
@@ -59,4 +56,5 @@ FCSys/Resources/Source/Python/bin/killall-fcsysres.sh
 *_broken
 WorkInProgress.mo
 Figures.mo
+FCSys/
 

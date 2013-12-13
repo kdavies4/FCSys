@@ -1063,7 +1063,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
         __Dymola_label="<html><i>Nu</i><sub><i>Q</i></sub></html>"));
 
     // Advanced parameters
-    parameter Q.Amount N0=U.C "Nominal amount of material to prevent depletion"
+    parameter Q.Amount N0=0 "Nominal amount of material to prevent depletion"
       annotation (Dialog(tab="Advanced", __Dymola_label=
             "<html><i>N</i><sup>o</sup></html>"));
 
@@ -1133,17 +1133,17 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // Time constants
     output Q.TimeAbsolute tau_NT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(zeta*beta*N, n_trans) ./ Aprime if environment.analysis
+      each start=U.s) = fill(zeta*beta*N, n_trans) ./ (2*Aprime) if environment.analysis
       "Time constants for material transport";
     output Q.TimeAbsolute tau_PhiT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = M*eta*kL ./ (Nu_Phi[cartTrans] .* Aprime) if
+      each start=U.s) = M*eta*kL ./ (2*Nu_Phi[cartTrans] .* Aprime) if
       environment.analysis
-      "Time constants for transverse translational transport (through the whole subregion)";
+      "Time constants for transverse translational transport";
     output Q.TimeAbsolute tau_QT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (N*c_v*theta/Nu_Q)*kL ./ Aprime if environment.analysis
-      "Time constants for thermal transport (through the whole subregion)";
+      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*kL ./ Aprime if environment.analysis
+      "Time constants for thermal transport";
     //
     // Peclet numbers
     output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = tau_NT
@@ -1412,9 +1412,9 @@ Choose any condition besides none.");
         // Material
         (if consTrans[i] == ConsTrans.dynamic then kL[i]*Data.m*der(boundaries[
           i, side].Ndot)/U.s else 0) = (Aprime[i]*(boundaries[i, side].p - p)
-           + phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m -
-          minusDeltaf[i])*(if upstream[i] then 1 + exp(-zeta*Data.beta(T, p)*
-          boundaries[i, side].Ndot/(2*Aprime[i])) else 2) + inSign(side)*f[i];
+           + inSign(side)*phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m
+           - minusDeltaf[i])*(if upstream[i] then 1 + exp(-zeta*Data.beta(T, p)
+          *boundaries[i, side].Ndot/(2*Aprime[i])) else 2) + inSign(side)*f[i];
 
         // Translational momentum
         kL[i]*eta*mPhidot_boundaries[i, side, Orient.after] = Aprime[i]*Nu_Phi[
@@ -1704,8 +1704,9 @@ Choose any condition besides none.");
     // Auxiliary variables (for analysis)
     output Q.TimeAbsolute tau_QT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = N*c_v*theta*kL ./ Aprime if environment.analysis
+      each start=U.s) = N*c_v*theta*kL ./ (2*Aprime) if environment.analysis
       "Time constants for thermal transport (through the whole subregion)";
+
     output Q.Temperature DeltaT[n_trans](each stateSelect=StateSelect.never) =
       Delta(boundaries.T) if environment.analysis
       "Differences in temperatures across the boundaries";
@@ -1754,6 +1755,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected
@@ -2107,7 +2109,7 @@ Check that the volumes of the other phases are set properly.");
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson1993B\">Mattsson1993B</a>] is necessary.</li>
+    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson1993\">Mattsson1993</a>] is necessary.</li>
 
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
@@ -2165,16 +2167,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

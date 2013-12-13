@@ -452,11 +452,11 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Mark1999;
 
-    class Mattsson1993B
+    class Mattsson1993
       "<html>S. E. Mattsson and G. Soderlind, \"Index Reduction in Differential-Algebraic Equations Using Dummy Derivatives,\" <i>SIAM J. Sci. Comput.</i>, vol. 14, no. 3, pp. 677&ndash;692, May 1993</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
-      end Mattsson1993B;
+      end Mattsson1993;
 
     class Mattsson2008
       "<html>S. E. Mattsson and H. Elmqvist, \"Unit Checking and Quantity Conservation,\" in <i>Modelica Conf.</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008</html>"
@@ -559,7 +559,7 @@ package UsersGuide "User's Guide"
       end Shah2009;
 
     class Sivertsen2005
-      "<html>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141 65–78, pp. 65&ndash;78, 2005</html>"
+      "<html>B. R. Sivertsen and N. Djilali, \"CFD-based Modelling of Proton Exchange Membrane Fuel Cells,\" <i>J. Power Sources</i>, vol. 141, pp. 65&ndash;78, 2005</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
       end Sivertsen2005;
@@ -1293,7 +1293,7 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  version="0.1.1",
-  dateModified="2013-12-10 20:07:51Z",
-  revisionID="SHA: 89bcc5c");
+  version="0.1.2",
+  dateModified="2013-12-13 18:23:00Z",
+  revisionID="SHA: 586b99e");
 end FCSys;

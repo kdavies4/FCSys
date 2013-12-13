@@ -1398,7 +1398,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                epsilon_IC=1e-5)),
+                epsilon_IC=1e-5,
+                N0=0.1*U.C)),
             volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
             =false));
 
@@ -2015,7 +2016,7 @@ that reference may be outdated).
               'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
               'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
                     stateSelect=StateSelect.default)),
-              H2O(initEnergy=Init.none,phi(each stateSelect=StateSelect.always,
+              H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
               k=fill(epsilon^(-0.5), 3),
@@ -2026,6 +2027,7 @@ that reference may be outdated).
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
                 mu=100*Characteristics.H2O.Liquid.mu(),
+                N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
             volume(kappa=6.46e-6*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
@@ -2483,7 +2485,7 @@ although in reality there is inductance.</p>
               'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
                     stateSelect=StateSelect.default)),
               'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
-              H2O(initEnergy=Init.none,phi(each stateSelect=StateSelect.always,
+              H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
               k=fill(epsilon^(-0.5), 3),
@@ -2494,6 +2496,7 @@ although in reality there is inductance.</p>
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
                 mu=100*Characteristics.H2O.Liquid.mu(),
+                N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
             volume(kappa=6.46e-6*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
@@ -3087,7 +3090,8 @@ that reference may be outdated).
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                epsilon_IC=1e-5)),
+                epsilon_IC=1e-5,
+                N0=0.1*U.C)),
             volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
             =false));
 

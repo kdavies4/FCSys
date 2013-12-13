@@ -620,8 +620,9 @@ public
         __Dymola_label="<html>&theta;</html>",
         enable=inclLiquid and inclCapillary));
     replaceable function J = FCSys.Characteristics.H2O.J_identity
-      "Leverett J function" annotation (choicesAllMatching=true, Dialog(group=
-            "Material properties", enable=inclLiquid and inclCapillary));
+      "<html>Leverett <i>J</i>-function</html>" annotation (choicesAllMatching=
+          true, Dialog(group="Material properties", enable=inclLiquid and
+            inclCapillary));
 
     // Material properties
     parameter Boolean inclGas=true "Gas" annotation (
@@ -637,52 +638,67 @@ public
       choices(__Dymola_checkBox=true),
       Dialog(group="Included phases", compact=true));
 
+    // Alias variables (for common terms)
+    Q.Volume V_pore "Pore volume";
+
     // Auxiliary variables (for analysis)
-    output Q.NumberAbsolute s(final stateSelect=StateSelect.never) = liquid.V/(
+    output Q.NumberAbsolute x(final stateSelect=StateSelect.never) = liquid.V/(
       gas.V + liquid.V) if inclLiquid and inclGas and environment.analysis
       "Liquid saturation";
 
-    Connectors.Amagat gas if inclGas "Interface to the gas phase" annotation (
+    Connectors.Dalton gas if inclGas "Interface to the gas phase" annotation (
         Placement(transformation(extent={{30,-10},{50,10}}), iconTransformation(
             extent={{10,10},{30,30}})));
     Connectors.Amagat liquid if inclLiquid "Interface to the liquid phase"
-      annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}}),
           iconTransformation(extent={{-20,-20},{0,0}})));
-    Connectors.Amagat solid if inclSolid "Interface to the solid phase"
-      annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
-          iconTransformation(extent={{50,-30},{70,-10}})));
+    Connectors.Amagat solid "Interface to the solid phase" annotation (
+        Placement(transformation(extent={{6,-30},{26,-10}}), iconTransformation(
+            extent={{50,-30},{70,-10}})));
     SurfaceTension surfaceTension(final gamma=gamma,final overR=cos(theta)*J(
-          liquid.V/(liquid.V + gas.V))/(2*sqrt(kappa))) if inclLiquid and
+          liquid.V/V_pore)*sqrt(V_pore/V/kappa)/2) if inclLiquid and
       inclCapillary "Additional pressure on the liquid"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V) if inclGas or
-      inclLiquid or inclSolid "Fixed volume"
-      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+      inclLiquid "Fixed volume"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   protected
+    Conditions.Adapters.AmagatDalton amagatDalton if inclGas or (inclSolid and
+      not inclLiquid)
+      "Adapter between additivity of volume and additivity of gas pressure"
+      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+
     outer Conditions.Environment environment "Environmental conditions";
 
   equation
+    // Aliases
+    V = V_pore + solid.V;
+
     if not inclCapillary then
-      connect(gas, liquid)
-        "Directly connect gas and liquid (not shown in diagram)";
+      connect(liquid, volume.amagat)
+        "Directly connect liquid to the volume (not shown in diagram)";
     end if;
 
     connect(surfaceTension.wetting, liquid) annotation (Line(
-        points={{-4,0},{-20,0}},
+        points={{-24,0},{-40,0}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(solid, volume.amagat) annotation (Line(
-        points={{20,-20},{20,0}},
+    connect(solid, amagatDalton.amagat) annotation (Line(
+        points={{16,-20},{16,-20},{16,0},{16,0}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(volume.amagat, gas) annotation (Line(
-        points={{20,0},{40,0}},
+    connect(volume.amagat, amagatDalton.amagat) annotation (Line(
+        points={{0,0},{16,0}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(gas, amagatDalton.dalton) annotation (Line(
+        points={{40,0},{24,0}},
         color={47,107,251},
         smooth=Smooth.None));
     connect(surfaceTension.nonwetting, volume.amagat) annotation (Line(
-        points={{3,0},{20,0}},
+        points={{-17,0},{0,0}},
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
