@@ -18,7 +18,7 @@ __license__ = "BSD-compatible (see LICENSE.txt)"
 import re
 import modelicares.base as base
 
-from modelicares import SimRes, label_number
+from modelicares import SimRes, label_number, label_quantity
 
 # Establish the default units.
 import _config
@@ -663,16 +663,6 @@ class SimRes(SimRes):
         M = mol/L
         self.U.update(atm=atm, cc=cc, yr=yr, M=M)
         self.U.update({'%': 0.01})
-
-
-  final constant Q.Current mA=milli*A "milliampere";
-  final constant Q.Length um=micro*m "micrometer";
-  final constant Q.Time ms=milli*s "millisecond";
-  final constant Q.Number '%'=centi "percent (%)";
-  final constant Q.Density M=U.mol/U.L "molar";
-  final constant Q.Volume cc=U.cm^3 "cubic centimeter";
-
-
 
 class Info:
     """Shortcuts to the "get" methods in :class:`SimRes`

@@ -452,11 +452,11 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Mark1999;
 
-    class Mattsson1993B
+    class Mattsson1993
       "<html>S. E. Mattsson and G. Soderlind, \"Index Reduction in Differential-Algebraic Equations Using Dummy Derivatives,\" <i>SIAM J. Sci. Comput.</i>, vol. 14, no. 3, pp. 677&ndash;692, May 1993</html>"
 
       annotation (preferredView="info", DocumentationClass=false);
-      end Mattsson1993B;
+      end Mattsson1993;
 
     class Mattsson2008
       "<html>S. E. Mattsson and H. Elmqvist, \"Unit Checking and Quantity Conservation,\" in <i>Modelica Conf.</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008</html>"

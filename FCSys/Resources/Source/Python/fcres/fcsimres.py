@@ -1030,8 +1030,8 @@ class FCSimRes(SimRes):
         self.subregions = presuffix(self.rel_subregions, prefix=cell)
 
 
-def gen_subtitle_conditions(conditions, temp=True, composition=True,
-                            pressure=True, humidity=True, flow=True):
+def annotate_conditions(conditions, temp=True, composition=True,
+                        pressure=True, humidity=True, flow=True):
     r"""Create a description of the operating conditions (e.g., to be used as a
     subtitle).
 
@@ -1040,7 +1040,7 @@ def gen_subtitle_conditions(conditions, temp=True, composition=True,
     - *conditions*: Dictionary of operating conditions
 
          The dictionary may include the keys *T*, *p_an_out*, *p_ca_out*,
-         *n_O2*, *p_an_out*, *p_ca_out*, *T_an_in*, *T_ca_out*, *anInletRH*,
+         *n_O2*, *p_an_out*, *p_ca_out*, *T_an_in*, *T_ca_in*, *anInletRH*,
          *caInletRH*, *anStoich*, and *caStoich*.  Any entry is missing, it will
          not be exclued.  Each entry is a tuple of (number, unit string) that
          describes a condition.
@@ -1060,39 +1060,63 @@ def gen_subtitle_conditions(conditions, temp=True, composition=True,
     **Example:**
 
        >>> conditions = dict(T = (60, 'degC'),
-       ...                   p_an_out = (150, 'kPa'),
-       ...                   p_ca_out = (150, 'kPa'),
+       ...                   p = (150, 'kPa'),
        ...                   n_O2 = (21, '%'),
        ...                   anInletRH = (80, '%'),
        ...                   caInletRH = (50, '%'),
        ...                   anStoich = (1.5, '1'),
        ...                   caStoich = (2.0, '1'))
-       >>> gen_subtitle_conditions(conditions)
+       >>> annotate_conditions(conditions)
        '60$\\,^{\\circ}\\!C$, 150$\\,kPa$; An|Ca: $H_2$|Air, 80|50$\\!$$\\,\\%$$\\,$RH, 1.5|2.0$\\,$stoich'
     """
     # Main description
     main_desc = []
     if temp:
         try:
-            main_desc += [label_quantity(*conditions['T'], format='%.0f')]
+            main_desc += [label_quantity(*conditions['T'])]
+            temp = False
+            if 'T_an_in' in conditions:
+                print("T_an_in will be ignored.")
+            if 'T_ca_in' in conditions:
+                print("T_ca_in will be ignored.")
         except KeyError:
             pass
-    try:
-        if pressure and conditions['p_an_out'] == conditions['p_ca_out']:
-            main_desc += [label_quantity(*conditions['p_an_out'], format='%.0f')]
+    if pressure:
+        try:
+            main_desc += [label_quantity(*conditions['p'])]
             pressure = False
-    except KeyError:
-        pass
+            if 'p_an_out' in conditions:
+                print("p_an_out will be ignored.")
+            if 'p_ca_out' in conditions:
+                print("p_ca_out will be ignored.")
+        except KeyError:
+            pass
     main_desc = ", ".join(main_desc)
 
     # Anode/cathode description
     anca_desc = []
+    if flow:
+        try:
+            anca_desc += ['%s|%sstoich' % (label_quantity(conditions['anStoich'][0],
+                                                          format='%.1f'),
+                                           label_quantity(*conditions['caStoich'],
+                                                          format='%.1f'))]
+        except KeyError:
+            pass
     if composition:
         try:
             if conditions['n_O2'][0] == 1.0:
                 anca_desc += ['$H_2$|$O_2$']
             else:
                 anca_desc += ['$H_2$|Air']
+        except KeyError:
+            pass
+    if temp:
+        try:
+            anca_desc += ['%s|%s' % (label_quantity(conditions['T_an_in'][0],
+                                                    format='%.0f'),
+                                     label_quantity(*conditions['T_ca_in'],
+                                                    format='%.0f'))]
         except KeyError:
             pass
     if pressure:
@@ -1103,29 +1127,12 @@ def gen_subtitle_conditions(conditions, temp=True, composition=True,
                                                     format='%.1f'))]
         except KeyError:
             pass
-    try:
-        if (temp and (conditions['T'] <> conditions['T_an_in']
-                      or conditions['T'] <> conditions['T_ca_in'])):
-            anca_desc += ['%s|%s' % (label_quantity(conditions['T_an_in'][0],
-                                                    format='%.0f'),
-                                     label_quantity(*conditions['T_ca_in'],
-                                                    format='%.0f'))]
-    except KeyError:
-        pass
     if humidity:
         try:
             anca_desc += ['%s|%s$\,$RH' % (label_quantity(conditions['anInletRH'][0],
                                                        format='%.0f'),
                                         label_quantity(*conditions['caInletRH'],
-                                                       format='%.0f$\!$'))]
-        except KeyError:
-            pass
-    if flow:
-        try:
-            anca_desc += ['%s|%sstoich' % (label_quantity(conditions['anStoich'][0],
-                                                          format='%.1f'),
-                                           label_quantity(*conditions['caStoich'],
-                                                          format='%.1f'))]
+                                                       format='%.0f'))]
         except KeyError:
             pass
     anca_desc = ", ".join(anca_desc)

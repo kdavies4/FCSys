@@ -2109,7 +2109,7 @@ Check that the volumes of the other phases are set properly.");
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson1993B\">Mattsson1993B</a>] is necessary.</li>
+    quantity, then index reduction [<a href=\"modelica://FCSys.UsersGuide.References.Mattsson1993\">Mattsson1993</a>] is necessary.</li>
 
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>

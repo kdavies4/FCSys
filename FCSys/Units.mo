@@ -1725,7 +1725,7 @@ precise and universally repeatable results in determining a constant rather than
 (e.g., the International Prototype of the Kilogram) which is
 carefully controlled and distributed via replicas.
 This method of defining the base units from measured physical quantities (rather than
-vice versa) is natural and reflects the way that standards organizations (e.g., <a href=\"www.nist.gov\">NIST</a>) define units.
+vice versa) is natural and reflects the way that standards organizations (e.g., <a href=\"http://www.nist.gov/\">NIST</a>) define units.
 A system of units is considered to be natural if
 all of its base units are established by universal physical constants.
 Often, those universal constants are defined to be equal to one, but the values can be chosen to scale

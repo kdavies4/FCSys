@@ -18,7 +18,7 @@ package Subregions
           subregion(
             volume(inclCapillary=false),
             liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
-            gas(H2O(p_IC=U.kPa, initMaterial=FCSys.Species.Enumerations.Init.none))));
+            gas(H2O(p_IC=U.kPa))));
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).

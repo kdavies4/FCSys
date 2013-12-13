@@ -61,4 +61,4 @@ from modelicares.texunit import label_number, label_quantity, unit2tex
 #
 # Local:
 from simres import SimRes
-from fcsimres import FCSimRes, gen_subtitle_conditions
+from fcsimres import FCSimRes, annotate_conditions
