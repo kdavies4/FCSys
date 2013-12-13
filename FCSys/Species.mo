@@ -1133,17 +1133,17 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     // Time constants
     output Q.TimeAbsolute tau_NT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = fill(zeta*beta*N, n_trans) ./ Aprime if environment.analysis
+      each start=U.s) = fill(zeta*beta*N, n_trans) ./ (2*Aprime) if environment.analysis
       "Time constants for material transport";
     output Q.TimeAbsolute tau_PhiT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = M*eta*kL ./ (Nu_Phi[cartTrans] .* Aprime) if
+      each start=U.s) = M*eta*kL ./ (2*Nu_Phi[cartTrans] .* Aprime) if
       environment.analysis
-      "Time constants for transverse translational transport (through the whole subregion)";
+      "Time constants for transverse translational transport";
     output Q.TimeAbsolute tau_QT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = (N*c_v*theta/Nu_Q)*kL ./ Aprime if environment.analysis
-      "Time constants for thermal transport (through the whole subregion)";
+      each start=U.s) = (N*c_v*theta/(2*Nu_Q))*kL ./ Aprime if environment.analysis
+      "Time constants for thermal transport";
     //
     // Peclet numbers
     output Q.Number Pe_N[n_trans](each stateSelect=StateSelect.never) = tau_NT
@@ -1704,7 +1704,7 @@ Choose any condition besides none.");
     // Auxiliary variables (for analysis)
     output Q.TimeAbsolute tau_QT[n_trans](
       each stateSelect=StateSelect.never,
-      each start=U.s) = N*c_v*theta*kL ./ Aprime if environment.analysis
+      each start=U.s) = N*c_v*theta*kL ./ (2*Aprime) if environment.analysis
       "Time constants for thermal transport (through the whole subregion)";
 
     output Q.Temperature DeltaT[n_trans](each stateSelect=StateSelect.never) =
@@ -1755,6 +1755,7 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Solid;
 
 protected

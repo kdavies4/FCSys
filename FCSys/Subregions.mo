@@ -930,9 +930,11 @@ package Subregions
               phi(stateSelect=StateSelect.always, displayUnit="mm/s"),
               phi_boundaries(each displayUnit="mm/s"))), graphite('C+'(epsilon=
                   0.5))),
-        subregions(gas(N2(each phi(each stateSelect=StateSelect.always,
-                  displayUnit="mm/s"), each phi_boundaries(each displayUnit=
-                    "mm/s"))), each graphite('C+'(epsilon=0.5))),
+        subregions(
+          common(each k_Phi={10,10,10}),
+          gas(N2(each phi(each stateSelect=StateSelect.always, displayUnit=
+                    "mm/s"), each phi_boundaries(each displayUnit="mm/s"))),
+          each graphite('C+'(epsilon=0.5))),
         subregion2(gas(N2(phi(displayUnit="mm/s"), phi_boundaries(each
                   displayUnit="mm/s"))), graphite('C+'(epsilon=0.5))),
         environment(psi_O2_dry=0, RH=0));
@@ -1272,11 +1274,11 @@ although the vapor is condensed into liquid and absorbed into the ionomer.</li><
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-            extent={{78,-44},{118,-50}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown
+              extent={{78,-44},{118,-50}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
