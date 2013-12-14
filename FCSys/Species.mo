@@ -423,7 +423,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
           final tauprime,
           final N0,
-          n_chem=3,
+          n_chem=2,
           p_IC=environment.p_H2O);
 
         // See the documentation for tables of values.
@@ -629,9 +629,9 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final g_IC,
           final rho_IC,
           final p_IC,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={1e8*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={0,1e9*Data.tauprime()},
 
-          n_chem=1,
+          n_chem=2,
           final V_IC=epsilon_IC*product(L),
           initMaterial=Init.volume);
 

@@ -1252,14 +1252,14 @@ package Subregions
     // Reactions and phase change (not shown in diagram)
     // -------------------------------------------------
     connect(gas.chemH2[1], HOR.chemH2);
-    connect(gas.chemH2O[1], ORR.chemH2O);
+    connect(liquid.chemH2O[1], ORR.chemH2O);
     connect(gas.chemO2[1], ORR.chemO2);
     if gas.inclH2O then
       if ionomer.inclH2O then
-        connect(gas.chemH2O[2], ionomer.chemH2O[1]);
+        connect(gas.chemH2O[1], ionomer.chemH2O[1]);
       end if;
       if liquid.inclH2O then
-        connect(gas.chemH2O[3], liquid.chemH2O[1]);
+        connect(gas.chemH2O[2], liquid.chemH2O[2]);
       end if;
     end if;
     connect(graphite.'cheme-'[1], HOR.'cheme-');
@@ -1274,11 +1274,11 @@ although the vapor is condensed into liquid and absorbed into the ionomer.</li><
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-              extent={{78,-44},{118,-50}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="(connections not shown
+            extent={{78,-44},{118,-50}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
@@ -1611,7 +1611,7 @@ on diagram)")}));
     // Phase change (not shown in diagram)
     // -----------------------------------
     if gas.inclH2O and liquid.inclH2O then
-      connect(gas.chemH2O[3], liquid.chemH2O[1]);
+      connect(gas.chemH2O[2], liquid.chemH2O[2]);
     end if;
 
     annotation (
@@ -1622,6 +1622,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
+
   end SubregionNoIonomer;
 
   partial model PartialSubregion

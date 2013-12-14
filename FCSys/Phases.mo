@@ -174,7 +174,7 @@ package Phases "Mixtures of species"
     Connectors.Chemical chemH2[1](each final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
               {-74,40},{-54,60}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
-    Connectors.Chemical chemH2O[3](each final n_trans=n_trans) if inclH2O
+    Connectors.Chemical chemH2O[2](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-34,40},{-14,60}}), iconTransformation(extent={{-10,-50},{10,-30}})));
     Connectors.Chemical chemO2[1](each final n_trans=n_trans) if inclO2
@@ -415,6 +415,7 @@ package Phases "Mixtures of species"
               120,60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Gas;
 
   model Graphite "Graphite phase"
@@ -1158,7 +1159,7 @@ package Phases "Mixtures of species"
     Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
       annotation (Placement(transformation(extent={{-60,0},{-40,20}}),
           iconTransformation(extent={{70,-90},{90,-70}})));
-    Connectors.Chemical chemH2O[1](each final n_trans=n_trans) if inclH2O
+    Connectors.Chemical chemH2O[2](each final n_trans=n_trans) if inclH2O
       "Chemical connector for H2O" annotation (Placement(transformation(extent=
               {{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -1237,6 +1238,7 @@ package Phases "Mixtures of species"
               100}}), graphics),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},{40,
               60}}), graphics));
+
   end Liquid;
 
 protected
