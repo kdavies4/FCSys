@@ -30,12 +30,12 @@ FCSys.Utilities.plot6(
         "cell.caCL.subregions[1, 1, 1].gas.H2O.RH",
         "cell.caGDL.subregions[1, 1, 1].gas.H2O.RH",
         "cell.caFP.subregions[1, 1, 1].gas.H2O.RH"},
-    y6={"cell.anFP.subregions[1, 1, 1].volume.s",
-        "cell.anGDL.subregions[1, 1, 1].volume.s",
-        "cell.anCL.subregions[1, 1, 1].volume.s",
-        "cell.caCL.subregions[1, 1, 1].volume.s",
-        "cell.caGDL.subregions[1, 1, 1].volume.s",
-        "cell.caFP.subregions[1, 1, 1].volume.s"});
+    y6={"cell.anFP.subregions[1, 1, 1].volume.x",
+        "cell.anGDL.subregions[1, 1, 1].volume.x",
+        "cell.anCL.subregions[1, 1, 1].volume.x",
+        "cell.caCL.subregions[1, 1, 1].volume.x",
+        "cell.caGDL.subregions[1, 1, 1].volume.x",
+        "cell.caFP.subregions[1, 1, 1].volume.x"});
 
 createPlot(id = 4,
  position = {220, 0, 440, 325},

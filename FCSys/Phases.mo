@@ -168,7 +168,7 @@ package Phases "Mixtures of species"
           iconTransformation(extent={{-60,60},{-40,40}})));
 
     // Auxiliary variables (for analysis)
-    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = -dalton.p if
+    output Q.PressureAbsolute p(stateSelect=StateSelect.never) = dalton.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
     Connectors.Chemical chemH2[1](each final n_trans=n_trans) if inclH2
