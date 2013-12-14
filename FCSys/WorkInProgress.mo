@@ -2,7 +2,6 @@ within FCSys;
 package WorkInProgress "Incomplete classes under development"
   extends Modelica.Icons.Package;
 
-
   model CellMSL
     "<html>Single-cell PEMFC with interfaces from the <a href=\"modelica://Modelica\">Modelica Standard Library</a></html>"
     extends FCSys.Icons.Cell;
@@ -87,10 +86,6 @@ package WorkInProgress "Incomplete classes under development"
     extends Modelica.Icons.UnderConstruction;
 
   end ElectroOsmoticDrag;
-
-
-
-
 
   model RegionsExamplesCLtoCLVoltage
     "Test one catalyst layer to the other, with prescribed voltage"
@@ -234,8 +229,6 @@ package WorkInProgress "Incomplete classes under development"
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end RegionsExamplesCLtoCLVoltage;
-
-
 
   annotation (Commands(
       file="../../units.mos"

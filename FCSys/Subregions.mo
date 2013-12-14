@@ -349,6 +349,7 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end AirColumn;
 
     model BinaryDiffusion
@@ -699,6 +700,7 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -961,7 +963,7 @@ package Subregions
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
+            "Phases (click to edit)"),Placement(transformation(extent={{-30,-22},
               {-10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -1274,11 +1276,11 @@ although the vapor is condensed into liquid and absorbed into the ionomer.</li><
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-            extent={{78,-44},{118,-50}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown
+              extent={{78,-44},{118,-50}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
@@ -1376,6 +1378,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-60,-40},{40,
               60}}), graphics));
+
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1386,7 +1389,7 @@ on diagram)")}));
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-22},
+            "Phases (click to edit)"),Placement(transformation(extent={{-10,-22},
               {10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -1448,7 +1451,7 @@ on diagram)")}));
 
     // Exchange
     Connectors.InertNode commonExch "Among all phases" annotation (HideResult=
-          true, Placement(transformation(extent={{56,32},{76,52}}),
+          true,Placement(transformation(extent={{56,32},{76,52}}),
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiqExch "Between gas and liquid" annotation (
         HideResult=true, Placement(transformation(extent={{56,44},{76,64}}),

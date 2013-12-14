@@ -1304,11 +1304,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1637,7 +1637,6 @@ and Inert"),Line(
               color={255,255,255})}));
 
   end Connectors;
-
 
   model TestStand
     extends Assemblies.Cells.Examples.TestStand(testConditions(final I_an=

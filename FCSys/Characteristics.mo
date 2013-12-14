@@ -269,6 +269,7 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.SaturationPressure.mos"
             "Characteristics.Examples.SaturationPressure.mos"),
         __Dymola_experimentSetupOutput);
+
     end SaturationPressure;
 
     model HydrationLevel
@@ -311,6 +312,7 @@ package Characteristics "Data and functions to correlate physical properties"
             "Characteristics.Examples.HydrationLevel.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end HydrationLevel;
 
     model CellPotential
@@ -426,6 +428,7 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.LatentHeat.mos"
             "Characteristics.Examples.LatentHeat.mos"),
         __Dymola_experimentSetupOutput);
+
     end LatentHeat;
 
     model SurfaceTension
@@ -464,6 +467,7 @@ package Characteristics "Data and functions to correlate physical properties"
         experiment(StopTime=10),
         Commands,
         __Dymola_experimentSetupOutput);
+
     end SurfaceTension;
 
   end Examples;

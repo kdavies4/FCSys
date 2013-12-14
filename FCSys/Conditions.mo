@@ -399,6 +399,7 @@ package Conditions "Models to specify and measure operating conditions"
               smooth=Smooth.None,
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid)}));
+
     end AmagatDalton;
 
     model ChemicalReaction
@@ -473,6 +474,7 @@ package Conditions "Models to specify and measure operating conditions"
                   fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end ChemicalReaction;
 
     package MSL
@@ -556,6 +558,7 @@ package Conditions "Models to specify and measure operating conditions"
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
+
         connect(liquidPort, liquid.fluidPort) annotation (Line(
             points={{60,-60},{30,-60},{30,-36},{4,-36}},
             color={0,127,255},
@@ -700,6 +703,7 @@ package Conditions "Models to specify and measure operating conditions"
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
+
         connect(liquidPort, liquid.fluidPort) annotation (Line(
             points={{60,-36},{4,-36}},
             color={0,127,255},
@@ -981,6 +985,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{-4,20},{-20,20},{-20,5.55112e-016},{-40,5.55112e-016}},
               color={127,127,127},
               smooth=Smooth.None));
+
           connect(H2.heatPort, heatPort) annotation (Line(
               points={{4,16},{40,16},{40,-40},{60,-40}},
               color={191,0,0},
@@ -1112,6 +1117,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{-4,20},{-20,20},{-20,5.55112e-016},{-40,5.55112e-016}},
               color={127,127,127},
               smooth=Smooth.None));
+
           connect(H2O.fluidPort, junction.purePort1) annotation (Line(
               points={{4,24},{12,24},{12,44},{32,44}},
               color={0,127,255},
@@ -4918,6 +4924,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       smooth=Smooth.None)}),
           Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
                   {100,100}}), graphics));
+
       end VolumeFixed;
 
       partial model Partial "Base model for a pressure/volume"

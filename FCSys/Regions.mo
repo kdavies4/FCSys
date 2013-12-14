@@ -109,7 +109,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anBC.boundary, anFP.xNegative) annotation (Line(
@@ -1062,7 +1062,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
 
@@ -1272,7 +1272,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(

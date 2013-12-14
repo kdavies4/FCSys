@@ -531,7 +531,7 @@ package Phases "Mixtures of species"
               90,10}})));
     Connectors.BoundaryBus yPositive if inclTrans[Axis.y]
       "Positive boundary along the y axis" annotation (Placement(transformation(
-            extent={{36,-6},{56,14}}),iconTransformation(extent={{-10,90},{10,
+            extent={{36,-6},{56,14}}), iconTransformation(extent={{-10,90},{10,
               110}})));
     Connectors.BoundaryBus zPositive if inclTrans[Axis.z]
       "Positive boundary along the z axis" annotation (Placement(transformation(
@@ -710,6 +710,7 @@ package Phases "Mixtures of species"
               60}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Graphite;
 
   model Ionomer "Ionomer phase"
@@ -744,9 +745,9 @@ package Phases "Mixtures of species"
       n_intra=3,
       n_inter=n_inter,
       kL=kL,
-      k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
-          waterSolid.k_Phi[cartTrans]},
-      k_intra_Q={common.k_Q,protonsSolid.k_Q,waterSolid.k_Q}) "SO3- model"
+      k_intra_Phi={common.k_Phi[cartTrans],'H+,SO3-'.k_Phi[cartTrans],
+          'H2O,SO3-'.k_Phi[cartTrans]},
+      k_intra_Q={common.k_Q,'H+,SO3-'.k_Q,'H2O,SO3-'.k_Q}) "SO3- model"
       annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
@@ -776,10 +777,10 @@ package Phases "Mixtures of species"
       n_intra=3,
       n_inter=n_inter,
       kL=kL,
-      k_intra_Phi={common.k_Phi[cartTrans],protonsSolid.k_Phi[cartTrans],
-          protonsWater.k_Phi[cartTrans]},
-      k_intra_Q={common.k_Q,protonsSolid.k_Q,protonsWater.k_Q}) "H+ model"
-      annotation (
+      k_intra_Phi={common.k_Phi[cartTrans],'H+,SO3-'.k_Phi[cartTrans],'H+,H2O'.k_Phi[
+          cartTrans]},
+      k_intra_Q={common.k_Q,'H+,SO3-'.k_Q,'H+,H2O'.k_Q}) "H+ model" annotation
+      (
       __Dymola_choicesFromPackage=true,
       Dialog(
         group="Species",
@@ -808,9 +809,9 @@ package Phases "Mixtures of species"
       n_intra=3,
       n_inter=0,
       kL=kL,
-      k_intra_Phi={common.k_Phi[cartTrans],protonsWater.k_Phi[cartTrans],
-          waterSolid.k_Phi[cartTrans]},
-      k_intra_Q={common.k_Q,protonsWater.k_Q,waterSolid.k_Q}) "H2O model"
+      k_intra_Phi={common.k_Phi[cartTrans],'H+,H2O'.k_Phi[cartTrans],'H2O,SO3-'.k_Phi[
+          cartTrans]},
+      k_intra_Q={common.k_Q,'H+,H2O'.k_Q,'H2O,SO3-'.k_Q}) "H2O model"
       annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(
@@ -861,16 +862,16 @@ package Phases "Mixtures of species"
     // Independence factors
     ExchangeParams common(k_Q=0) if n_spec > 0 "Among all species in the phase"
       annotation (Dialog(group="Exchange (click to edit)"));
-    ExchangeParams protonsSolid(final k_Phi, k_Q=Modelica.Constants.inf) if
+    ExchangeParams 'H+,SO3-'(final k_Phi, k_Q=Modelica.Constants.inf) if
       'inclSO3-' or 'inclH+'
       "<html>Between H<sup>+</sup> and SO<sub>3</sub><sup>-</sup>)</html>"
       annotation (Dialog(group="Exchange (click to edit)"));
-    ExchangeParams protonsWater(k_Phi=fill(200, 3), k_Q=Modelica.Constants.inf)
-      if 'inclH+' or inclH2O
+    ExchangeParams 'H+,H2O'(k_Phi=fill(200, 3), k_Q=Modelica.Constants.inf) if
+      'inclH+' or inclH2O
       "<html>Between H<sup>+</sup> and H<sub>2</sub>O</html>"
       annotation (Dialog(group="Exchange (click to edit)"));
 
-    ExchangeParams waterSolid(k_Q=Modelica.Constants.inf) if 'inclSO3-' or
+    ExchangeParams 'H2O,SO3-'(k_Q=Modelica.Constants.inf) if 'inclSO3-' or
       inclH2O
       "<html>Between H<sub>2</sub>O and SO<sub>3</sub><sup>-</sup></html>"
       annotation (Dialog(group="Exchange (click to edit)"));
@@ -884,15 +885,15 @@ package Phases "Mixtures of species"
       "Connector for exchange among all species in the phase" annotation (
         Placement(transformation(extent={{56,-38},{76,-18}}),
           iconTransformation(extent={{86,-50},{106,-30}})));
-    Connectors.InertNode protonsSolidExch
+    Connectors.InertNode 'H+,SO3-Exch'
       "Connector for exchange between H+ and SO3-" annotation (Placement(
           transformation(extent={{56,-50},{76,-30}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
-    Connectors.InertNode protonsWaterExch
+    Connectors.InertNode 'H+,H2OExch'
       "Connector for exchange between H+ and H2O" annotation (Placement(
           transformation(extent={{56,-62},{76,-42}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
-    Connectors.InertNode waterSolidExch
+    Connectors.InertNode 'H2O,SO3-Exch'
       "Connector for exchange between H2O and SO3-" annotation (Placement(
           transformation(extent={{56,-74},{76,-54}}), iconTransformation(extent
             ={{48,-76},{68,-56}})));
@@ -918,11 +919,11 @@ package Phases "Mixtures of species"
         points={{44,11},{44,-28},{66,-28}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('SO3-'.intra[2], protonsSolidExch.node) annotation (Line(
+    connect('SO3-'.intra[2], 'H+,SO3-Exch'.node) annotation (Line(
         points={{44,11},{44,-40},{66,-40}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('SO3-'.intra[3], waterSolidExch.node) annotation (Line(
+    connect('SO3-'.intra[3], 'H2O,SO3-Exch'.node) annotation (Line(
         points={{44,11},{44,-64},{66,-64}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -930,11 +931,11 @@ package Phases "Mixtures of species"
         points={{-36,11},{-36,-28},{66,-28}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.intra[2], protonsSolidExch.node) annotation (Line(
+    connect('H+'.intra[2], 'H+,SO3-Exch'.node) annotation (Line(
         points={{-36,11},{-36,-40},{66,-40}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect('H+'.intra[3], protonsWaterExch.node) annotation (Line(
+    connect('H+'.intra[3], 'H+,H2OExch'.node) annotation (Line(
         points={{-36,11},{-36,-52},{66,-52}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -943,11 +944,11 @@ package Phases "Mixtures of species"
         points={{4,11},{4,-28},{66,-28}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.intra[2], waterSolidExch.node) annotation (Line(
+    connect(H2O.intra[2], 'H2O,SO3-Exch'.node) annotation (Line(
         points={{4,11},{4,-64},{66,-64}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(H2O.intra[3], protonsWaterExch.node) annotation (Line(
+    connect(H2O.intra[3], 'H+,H2OExch'.node) annotation (Line(
         points={{4,11},{4,-52},{66,-52}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1093,6 +1094,7 @@ package Phases "Mixtures of species"
               100,80}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ionomer;
 
   model Liquid "Liquid phase"
