@@ -247,7 +247,9 @@ then internal inductance is included according to the relative permeability (&mu
     </ol></p>
 
 <p>The default electrical conductivity (&sigma; = <code>8.3*U.S/U.m</code>)
-  is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].</p>
+  is for DuPont<sup>TM</sup> Nafion&reg; N-112 [<a href=\"modelica://FCSys.Regions.PEMs.DuPontN112\">DuPontN112</a>].  
+  This is for the interaction between H<sup>+</sup> and the solid; it does not include the additional voltage loss
+  due to electro-osmotic drag (with H<sub>2</sub>O).</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
   (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p. 139].
@@ -414,7 +416,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1],n_v={-1,0}),
+                b_v=[1], n_v={-1,0}),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Continuity zeta=Data.zeta(),
@@ -576,8 +578,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final V_IC,
           final T_IC,
           final consMaterial,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={2e12*Data.tauprime()},
-
+          redeclare parameter Q.TimeAbsolute tauprime[:]={0},
           n_chem=1,
           final initMaterial=Init.none);
 
@@ -602,7 +603,6 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Ionomer;
@@ -630,9 +630,9 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final g_IC,
           final rho_IC,
           final p_IC,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={0,1e9*Data.tauprime()},
-
-          n_chem=2,
+          redeclare parameter Q.TimeAbsolute tauprime[:]={0,0.1e9*Data.tauprime(),
+              2e12*Data.tauprime()},
+          n_chem=3,
           final V_IC=epsilon_IC*product(L),
           initMaterial=Init.volume);
 
@@ -903,7 +903,6 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 <p>For more information, please see the <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"),
 
           Icon(graphics));
-
       end Fixed;
 
     end Gas;
@@ -1119,7 +1118,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
       Delta(boundaries.p) if environment.analysis
       "Differences in pressures across the boundaries";
     //
-    // Potentials and current
+    // Potentials
     output Q.Potential g_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
        = Data.g(boundaries.T, boundaries.p) if environment.analysis and not
       Data.isCompressible "Gibbs potentials at the boundaries";
@@ -1757,7 +1756,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected

@@ -349,7 +349,6 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end AirColumn;
 
     model BinaryDiffusion
@@ -700,7 +699,6 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion
@@ -917,7 +915,7 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.ThermalConduction.mos"
             "Subregions.Examples.ThermalConduction.mos"),
-        experiment(StopTime=500, Algorithm="Dassl"),
+        experiment(StopTime=500, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput);
 
     end ThermalConduction;
@@ -945,7 +943,7 @@ package Subregions
         Commands(file=
               "Resources/Scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"
             "Subregions.Examples.ThermalConductionConvection.mos"),
-        experiment(StopTime=500, __Dymola_Algorithm="Dassl"),
+        experiment(StopTime=400, __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput);
 
     end ThermalConductionConvection;
@@ -963,7 +961,7 @@ package Subregions
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"),Placement(transformation(extent={{-30,-22},
+            "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
               {-10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -999,9 +997,9 @@ package Subregions
       annotation (Placement(transformation(extent={{88,-46},{108,-26}})));
 
     // Independence factors
-    Phases.ExchangeParams common "Among all phases"
+    Phases.ExchangeParams common(k_Phi={1.8,1.8,1.8}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1041,10 +1039,11 @@ package Subregions
     final parameter Boolean inclHOR=graphite.'incle-' and ionomer.'inclH+' and
         gas.inclH2 "Include the hydrogen oxidation reaction";
     final parameter Boolean inclORR=graphite.'incle-' and ionomer.'inclH+' and
-        gas.inclO2 and gas.inclH2O "Include the oxygen reduction reaction";
+        gas.inclO2 and (gas.inclH2O or liquid.inclH2O)
+      "Include the oxygen reduction reaction";
 
     outer Conditions.Environment environment "Environmental conditions";
-    Connectors.InertNode commonExch "Connector for exchange among all species"
+    Connectors.InertNode exchCommon "Connector for exchange among all species"
       annotation (HideResult=true, Placement(transformation(extent={{76,32},{96,
               52}}), iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiqExch
@@ -1225,19 +1224,19 @@ package Subregions
     // Inert exchange
     // --------------
     // Common
-    connect(gas.inter[1], commonExch.node) annotation (Line(
+    connect(gas.inter[1], exchCommon.node) annotation (Line(
         points={{-25,-6.5},{-25,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(graphite.inter[1], commonExch.node) annotation (Line(
+    connect(graphite.inter[1], exchCommon.node) annotation (Line(
         points={{15,-7},{15,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(ionomer.inter[1], commonExch.node) annotation (Line(
+    connect(ionomer.inter[1], exchCommon.node) annotation (Line(
         points={{55,-7},{55,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(liquid.inter[1], commonExch.node) annotation (Line(
+    connect(liquid.inter[1], exchCommon.node) annotation (Line(
         points={{-65,-6.5},{-65,42},{86,42}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1254,33 +1253,36 @@ package Subregions
     // Reactions and phase change (not shown in diagram)
     // -------------------------------------------------
     connect(gas.chemH2[1], HOR.chemH2);
-    connect(liquid.chemH2O[1], ORR.chemH2O);
     connect(gas.chemO2[1], ORR.chemO2);
-    if gas.inclH2O then
+    connect(liquid.chemH2O[1], ORR.chemH2O);
+    if liquid.inclH2O then
+      if gas.inclH2O then
+        connect(liquid.chemH2O[2], gas.chemH2O[2]);
+      end if;
       if ionomer.inclH2O then
-        connect(gas.chemH2O[1], ionomer.chemH2O[1]);
+        connect(liquid.chemH2O[3], ionomer.chemH2O[1]);
       end if;
-      if liquid.inclH2O then
-        connect(gas.chemH2O[2], liquid.chemH2O[2]);
-      end if;
+    elseif gas.inclH2O then
+      connect(gas.chemH2O[1], ORR.chemH2O);
     end if;
     connect(graphite.'cheme-'[1], HOR.'cheme-');
     connect(graphite.'cheme-'[1], ORR.'cheme-');
     connect(ionomer.'chemH+'[1], HOR.'chemH+');
     connect(ionomer.'chemH+'[1], ORR.'chemH+');
     annotation (Documentation(info="<html><p>Assumptions:<ol>
-<li>The oxygen reduction reaction generates H<sub>2</sub>O vapor, 
-although the vapor is condensed into liquid and absorbed into the ionomer.</li></ol></p>
+<li>The oxygen reduction reaction generates liquid water if it is included; otherwise,
+it generates H<sub>2</sub>O vapor.  Since phase change is a dynamic, nonequilibrium
+process, there is a difference.</li></ol></p>
 
    <p>Please see the documentation of the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-              extent={{78,-44},{118,-50}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="(connections not shown
+            extent={{78,-44},{118,-50}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
@@ -1378,7 +1380,6 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-60,-40},{40,
               60}}), graphics));
-
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1389,7 +1390,7 @@ on diagram)")}));
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"),Placement(transformation(extent={{-10,-22},
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,-22},
               {10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -1409,9 +1410,9 @@ on diagram)")}));
               -22},{-30,-2}})));
 
     // Independence factors
-    Phases.ExchangeParams common "Among all phases"
+    Phases.ExchangeParams common(k_Phi={1.8,1.8,1.8}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1450,8 +1451,8 @@ on diagram)")}));
     outer Conditions.Environment environment "Environmental conditions";
 
     // Exchange
-    Connectors.InertNode commonExch "Among all phases" annotation (HideResult=
-          true,Placement(transformation(extent={{56,32},{76,52}}),
+    Connectors.InertNode exchCommon "Among all phases" annotation (HideResult=
+          true, Placement(transformation(extent={{56,32},{76,52}}),
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode gasLiqExch "Between gas and liquid" annotation (
         HideResult=true, Placement(transformation(extent={{56,44},{76,64}}),
@@ -1589,15 +1590,15 @@ on diagram)")}));
     // Inert exchange
     // --------------
     // Common
-    connect(gas.inter[1], commonExch.node) annotation (Line(
+    connect(gas.inter[1], exchCommon.node) annotation (Line(
         points={{-5,-6.5},{-5,42},{66,42}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(graphite.inter[1], commonExch.node) annotation (Line(
+    connect(graphite.inter[1], exchCommon.node) annotation (Line(
         points={{35,-7},{35,42},{66,42}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(liquid.inter[1], commonExch.node) annotation (Line(
+    connect(liquid.inter[1], exchCommon.node) annotation (Line(
         points={{-45,-6.5},{-45,42},{66,42}},
         color={221,23,47},
         smooth=Smooth.None));

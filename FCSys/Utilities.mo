@@ -230,6 +230,76 @@ An unrelated species may be included.");
 
   end Chemistry;
 
+  package Coordinates "Functions to handle Cartesian coordinates"
+    extends Modelica.Icons.Package;
+
+    function after
+      "Return the axis following a given axis in Cartesian coordinates"
+      extends Modelica.Icons.Function;
+
+      input Axis axis;
+      output Axis after;
+
+    algorithm
+      after := cartWrap(axis + 1);
+
+      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
+    <code>after(Axis.z)</code> or <code>after(3)</code> returns 1, which is equivalent to <code>Axis.x</code>.</p></html>"));
+    end after;
+
+    function before
+      "Return the axis preceding a given axis in Cartesian coordinates"
+      extends Modelica.Icons.Function;
+
+      input Axis axis;
+      output Axis after;
+
+    algorithm
+      after := cartWrap(axis - 1);
+
+      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
+    <code>after(Axis.x)</code> or <code>after(1)</code> returns 3, which is equivalent to <code>Axis.z</code>.</p></html>"));
+    end before;
+
+    function cartWrap = mod1 (final den=Axis.z)
+      "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
+      annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
+    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
+
+  end Coordinates;
+
+  package Means "Package of mathematical mean functions"
+    extends Modelica.Icons.Package;
+    // TODO:  Add other functions, move to (share with) Modelica standard library.
+
+    function arithmetic "Return the arithmetic mean of numbers"
+      extends Modelica.Icons.Function;
+      input Real u[:] "Vector of numbers"
+        annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
+      output Real mean "Arithmetic mean";
+
+    algorithm
+      mean := sum(u)/size(u, 1);
+      annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p></html>"));
+    end arithmetic;
+
+    function harmonic "Return the harmonic mean of numbers"
+      extends Modelica.Icons.Function;
+      input Real u[:] "Vector of numbers"
+        annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
+      output Real mean "Harmonic mean";
+
+      // TODO: Add check to FCSysTest.
+
+    algorithm
+      mean := if size(u, 1) == 1 then u[1] else (if size(u, 1) == 2 then 2*
+        product(u)/sum(u) else size(u, 1)/sum(1/u for u in u));
+      annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p></html>"));
+    end harmonic;
+  end Means;
+
   package Polynomial "Polynomial functions"
     extends Modelica.Icons.Package;
     // TODO:  Use or merge with Modelica_LinearSystems2.Math.Polynomials
@@ -466,44 +536,6 @@ An unrelated species may be included.");
 
   end Time;
 
-  package Coordinates "Functions to handle Cartesian coordinates"
-    extends Modelica.Icons.Package;
-
-    function after
-      "Return the axis following a given axis in Cartesian coordinates"
-      extends Modelica.Icons.Function;
-
-      input Axis axis;
-      output Axis after;
-
-    algorithm
-      after := cartWrap(axis + 1);
-
-      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
-    <code>after(Axis.z)</code> or <code>after(3)</code> returns 1, which is equivalent to <code>Axis.x</code>.</p></html>"));
-    end after;
-
-    function before
-      "Return the axis preceding a given axis in Cartesian coordinates"
-      extends Modelica.Icons.Function;
-
-      input Axis axis;
-      output Axis after;
-
-    algorithm
-      after := cartWrap(axis - 1);
-
-      annotation (Inline=true, Documentation(info="<html><p><b>Example:</b><br>
-    <code>after(Axis.x)</code> or <code>after(1)</code> returns 3, which is equivalent to <code>Axis.z</code>.</p></html>"));
-    end before;
-
-    function cartWrap = mod1 (final den=Axis.z)
-      "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
-      annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
-    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
-
-  end Coordinates;
-
   function arrayBooleanEqual
     "<html>Check if two <code>Boolean</code> vectors are equal</html>"
     extends Modelica.Icons.Function;
@@ -640,18 +672,6 @@ An unrelated species may be included.");
   statement to be evaluated during initialization, at
   which point the message is evaluated.</p></html>"));
   end assertEval;
-
-  function average "Return the arithmetic mean of numbers"
-    extends Modelica.Icons.Function;
-    input Real u[:] "Vector of numbers"
-      annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
-    output Real average "Arithmetic mean";
-
-  algorithm
-    average := sum(u)/size(u, 1);
-    annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p></html>"));
-  end average;
 
   function Delta
     "<html>Return the second entry of a vector minus the first (&Delta;)</html>"

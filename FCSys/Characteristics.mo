@@ -269,7 +269,6 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.SaturationPressure.mos"
             "Characteristics.Examples.SaturationPressure.mos"),
         __Dymola_experimentSetupOutput);
-
     end SaturationPressure;
 
     model HydrationLevel
@@ -312,7 +311,6 @@ package Characteristics "Data and functions to correlate physical properties"
             "Characteristics.Examples.HydrationLevel.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end HydrationLevel;
 
     model CellPotential
@@ -428,8 +426,20 @@ package Characteristics "Data and functions to correlate physical properties"
             "Resources/Scripts/Dymola/Characteristics.Examples.LatentHeat.mos"
             "Characteristics.Examples.LatentHeat.mos"),
         __Dymola_experimentSetupOutput);
-
     end LatentHeat;
+
+    model MobilityFactors "Test the mobility factors"
+      extends Modelica.Icons.Example;
+      import FCSys.Characteristics.MobilityFactors.*;
+
+      output Q.NumberAbsolute H2_H2O=k_H2_H2O() "Between H2 and H2O";
+      output Q.NumberAbsolute H2O_N2=k_H2O_N2() "Between H2O and N2";
+      output Q.NumberAbsolute H2O_O2=k_H2O_O2() "Between H2O and O2";
+      output Q.NumberAbsolute N2_O2=k_N2_O2() "Between N2 and O2";
+      annotation (Commands(file=
+              "Resources/Scripts/Dymola/Characteristics.Examples.MobilityFactors.mos"
+            "Characteristics.Examples.MobilityFactors.mos"));
+    end MobilityFactors;
 
     model SurfaceTension
       "<html>Evaluate the surface tension of H<sub>2</sub>O using the model of Garai</html>"
@@ -467,7 +477,6 @@ package Characteristics "Data and functions to correlate physical properties"
         experiment(StopTime=10),
         Commands,
         __Dymola_experimentSetupOutput);
-
     end SurfaceTension;
 
   end Examples;
@@ -1338,6 +1347,36 @@ package Characteristics "Data and functions to correlate physical properties"
   </html>"));
       end c_v;
 
+      replaceable function D
+        "Diffusivity as a function of temperature and specific volume"
+
+        extends Modelica.Icons.Function;
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
+          annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
+        output Q.Diffusivity D "Diffusivity"
+          annotation (Dialog(__Dymola_label="<html><i>D</i></html>"));
+
+      algorithm
+        D := v*omega(T)/alpha;
+        annotation (Inline=true,Documentation(info="<html>
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol></p>
+</html>"));
+      end D;
+
       function g "Gibbs potential as a function of temperature and pressure"
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
@@ -2054,6 +2093,154 @@ temperature difference.</p>
         liquid "Liquid") "Enumeration for material phases";
 
   end BaseClasses;
+
+  package MobilityFactors "Mobility factors"
+    extends Modelica.Icons.Package;
+    function k_H2_H2O
+      "<html>Binary mobility factor for H<sub>2</sub> and H<sub>2</sub>O</html>"
+      import Modelica.Media.IdealGases.Common.FluidData;
+
+      extends BaseClasses.k(
+        final T_crit=sqrt(FluidData.H2.criticalTemperature*FluidData.H2O.criticalTemperature)
+            *U.K,
+        final p_crit=sqrt(FluidData.H2.criticalPressure*FluidData.H2O.criticalPressure)
+            *U.Pa,
+        redeclare package A = H2.Gas,
+        redeclare package B = H2O.Gas,
+        redeclare function pDstar = BaseClasses.pDstar_polar);
+
+      annotation (Inline=true);
+    end k_H2_H2O;
+
+    function k_H2O_N2
+      "<html>Binary mobility factor for H<sub>2</sub>O and N<sub>2</sub></html>"
+      import Modelica.Media.IdealGases.Common.FluidData;
+
+      extends BaseClasses.k(
+        final T_crit=sqrt(FluidData.H2O.criticalTemperature*FluidData.N2.criticalTemperature)
+            *U.K,
+        final p_crit=sqrt(FluidData.H2O.criticalPressure*FluidData.N2.criticalPressure)
+            *U.Pa,
+        redeclare package A = H2O.Gas,
+        redeclare package B = N2.Gas,
+        redeclare function pDstar = BaseClasses.pDstar_polar);
+
+      annotation (Inline=true);
+    end k_H2O_N2;
+
+    function k_H2O_O2
+      "<html>Binary mobility factor for H<sub>2</sub>O and O<sub>2</sub></html>"
+      import Modelica.Media.IdealGases.Common.FluidData;
+
+      extends BaseClasses.k(
+        final T_crit=sqrt(FluidData.H2O.criticalTemperature*FluidData.O2.criticalTemperature)
+            *U.K,
+        final p_crit=sqrt(FluidData.H2O.criticalPressure*FluidData.O2.criticalPressure)
+            *U.Pa,
+        redeclare package A = H2O.Gas,
+        redeclare package B = O2.Gas,
+        redeclare function pDstar = BaseClasses.pDstar_polar);
+
+      annotation (Inline=true);
+    end k_H2O_O2;
+
+    function k_N2_O2
+      "<html>Binary mobility factor for N<sub>2</sub> and O<sub>2</sub></html>"
+      import Modelica.Media.IdealGases.Common.FluidData;
+
+      extends BaseClasses.k(
+        final T_crit=sqrt(FluidData.N2.criticalTemperature*FluidData.O2.criticalTemperature)
+            *U.K,
+        final p_crit=sqrt(FluidData.N2.criticalPressure*FluidData.O2.criticalPressure)
+            *U.Pa,
+        redeclare package A = N2.Gas,
+        redeclare package B = O2.Gas);
+
+      annotation (Inline=true);
+    end k_N2_O2;
+
+    package BaseClasses "Base classes (generally not for direct use)"
+      extends Modelica.Icons.BasesPackage;
+      function k "Binary mobility factor"
+        import harmonicMean = FCSys.Utilities.Means.harmonic;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
+          annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
+        input Q.PressureAbsolute p_A=U.atm
+          "<html>Pressure of the 1<sup>st</sup> species</html>" annotation (
+            Dialog(__Dymola_label="<html><i>p</i><sub>A</sub></html>"));
+        input Q.PressureAbsolute p_B=U.atm
+          "<html>Pressure of the 2<sup>nd</sup> species</html>" annotation (
+            Dialog(__Dymola_label="<html><i>p</i><sub>B</sub></html>"));
+        input Q.VolumeSpecific v_A=298.15*U.K/A.p0
+          "<html>Specific volume of the 1<sup>st</sup> species</html>"
+          annotation (Dialog(__Dymola_label="<html><i>v</i><sub>A</sub></html>"));
+        input Q.VolumeSpecific v_B=298.15*U.K/B.p0
+          "<html>Specific volume of the 2<sup>nd</sup> species</html>"
+          annotation (Dialog(__Dymola_label="<html><i>v</i><sub>B</sub></html>"));
+        replaceable function pDstar =
+            MobilityFactors.BaseClasses.pDstar_nonpolar
+          "Reduced pressure-diffusivity product";
+        replaceable package A =
+            FCSys.Characteristics.BaseClasses.Characteristic
+          "<html>Characteristic data of the 2<sup>nd</sup> species</html>";
+        replaceable package B =
+            FCSys.Characteristics.BaseClasses.Characteristic
+          "<html>Characteristic data of the 2<sup>nd</sup> species</html>";
+
+        input Q.TemperatureAbsolute T_crit
+          "Geometric mean of the critical temperatures" annotation (Dialog(
+              __Dymola_label="<html><i>T</i><sub>crit</sub></html>"));
+        input Q.PressureAbsolute p_crit
+          "Geometric mean of the critical pressures" annotation (Dialog(
+              __Dymola_label="<html><i>p</i><sub>crit</sub></html>"));
+        output Q.NumberAbsolute k_Phi "Binary mobility factor" annotation (
+            Dialog(__Dymola_label="<html><i>k</i><sub>&Phi;</sub></html>"));
+
+        // TODO: Add Slattery reference, cite it in the documentation.
+
+      algorithm
+        k_Phi := pDstar(T/T_crit)*p_crit^(2/3)*(T_crit*U.mol/U.K)^(5/6)*(U.atm/
+          U.q)^(1/3)*U.cm^2/U.s/sqrt(harmonicMean({A.m,B.m})*U.g)/(p_A*B.D(T,
+          v_A) + p_B*A.D(T, v_B))
+          "Based on [Slattery1958, eq. 5] and the exchange equations in FCSys.Species.Species";
+
+        annotation (Inline=true,Documentation(info="<html><p><i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> are given as inputs even though they can be calculated
+ from <i>T</i>, <i>p</i><sub>A</sub>, and <i>p</i><sub>B</sub> because it may be desirable to leave <i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> constant while
+  varying <i>p</i><sub>A</sub> and <i>p</i><sub>B</sub>.</p></html>"));
+      end k;
+
+      function pDstar_nonpolar
+        "[Slattery1958] reduced pressure-diffusivity product for nonpolar species"
+        input Q.TemperatureAbsolute Tstar=1
+          "Ratio of temperature to the geometric mean of the critical temperatures"
+          annotation (Dialog(__Dymola_label=
+                "<html><i>T</i><sub>c AB</sub></html>"));
+        output Q.NumberAbsolute pDstar "Reduced pressure-diffusivity product";
+
+        // TODO: Add Slattery reference, cite it in the documentation.
+
+      algorithm
+        pDstar := 3.882e-4*Tstar^1.823 "[Slattery1958, eq. 4]";
+        annotation (Inline=true);
+      end pDstar_nonpolar;
+
+      function pDstar_polar
+        "[Slattery1958] reduced pressure-diffusivity product for polar species"
+        input Q.TemperatureAbsolute Tstar=1
+          "Ratio of temperature to the geometric mean of the critical temperatures"
+          annotation (Dialog(__Dymola_label=
+                "<html><i>T</i><sub>c AB</sub></html>"));
+        output Q.NumberAbsolute pDstar "Reduced pressure-diffusivity product";
+
+        // TODO: Add Slattery reference, cite it in the documentation.
+
+      algorithm
+        pDstar := 5.148e-4*Tstar^2.334 "[Slattery1958, eq. 9]";
+        annotation (Inline=true);
+      end pDstar_polar;
+    end BaseClasses;
+  end MobilityFactors;
   annotation (Documentation(info="<html>
   <p>Each species has a subpackage for each material phase in which the species
   is represented.  The thermodynamic properties are generally different for each phase.</p>
@@ -2115,5 +2302,4 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
           points={{-76,-80},{-94,-16},{-94,-16}},
           color={175,175,175},
           smooth=Smooth.None)}));
-
 end Characteristics;

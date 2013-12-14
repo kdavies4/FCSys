@@ -147,49 +147,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   {100,100}}), graphics));
       end TestConditions;
 
-      model TestStandSimple
-        "Simulate the simple fuel cell model under prescribed conditions"
-
-        import DataH2 = FCSys.Characteristics.H2.Gas;
-        import DataH2O = FCSys.Characteristics.H2O.Gas;
-        import DataO2 = FCSys.Characteristics.O2.Gas;
-
-        extends TestStand(
-          redeclare SimpleCell cell,
-          Deltaw_O2=(DataO2.g(caSource[1, 1].gas.O2.boundary.T, caSource[1, 1].gas.O2.boundary.p)
-               - cell.caCGDL.subregions[1, 1, 1].gas.O2.g)/4,
-          Deltaw_H2O=(DataH2O.g(caSource[1, 1].gas.H2O.boundary.T, caSource[1,
-              1].gas.H2O.boundary.p) - cell.caCGDL.subregions[1, 1, 1].gas.H2O.g)
-              /2,
-          Deltaw_H2=(DataH2.g(anSource[1, 1].gas.H2.boundary.T, anSource[1, 1].gas.H2.boundary.p)
-               - cell.anCGDL.subregions[1, 1, 1].gas.H2.g)/2,
-          'Deltaw_e-'=cell.caFP.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
-              1, Side.p] - cell.caCGDL.subregions[1, 1, 1].graphite.'e-'.g +
-              cell.anCGDL.subregions[1, 1, 1].graphite.'e-'.g - cell.anFP.subregions[
-              1, 1, 1].graphite.'e-'.g_boundaries[1, Side.n],
-          'Deltaw_H+'=cell.anCGDL.subregions[1, 1, 1].ionomer.'H+'.g - cell.caCGDL.subregions[
-              1, 1, 1].ionomer.'H+'.g,
-          Deltaw_an=cell.anCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
-
-          Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
-
-          environment(analysis=false));
-
-        annotation (
-          Commands(file=
-                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandSimple.mos"
-              "Assemblies.Cells.Examples.TestStandSimple.mos"),
-          experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
-          __Dymola_experimentSetupOutput);
-
-      end TestStandSimple;
 
       model TestStand "Simulate the fuel cell under prescribed conditions"
         import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
         import DataH2 = FCSys.Characteristics.H2.Gas;
         import DataH2O = FCSys.Characteristics.H2O.Gas;
         import DataO2 = FCSys.Characteristics.O2.Gas;
-        import FCSys.Utilities.average;
+        import average = FCSys.Utilities.Means.arithmetic;
         extends Modelica.Icons.Example;
 
         // Aliases
@@ -471,7 +435,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         connect(caAdapt.pin, load.p) annotation (Line(
-            points={{10,-34},{10,-42},{10,-42},{10,-50}},
+            points={{10,-34},{10,-50}},
             color={0,0,255},
             smooth=Smooth.None));
         annotation (
@@ -516,15 +480,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
                       fromI=false)))), caCL(subregions(graphite(each inclDL=
                       true, 'e-Transfer'(each fromI=false))))),
           redeclare Modelica.Electrical.Analog.Sources.SineCurrent load(
-            freqHz=0.2,
-            I=10,
-            offset=5),
-          testConditions(I_an=10*U.A, I_ca=20*U.A));
+            freqHz=0.3,
+            I=7,
+            offset=4),
+          testConditions(I_an=15*U.A, I_ca=20*U.A));
 
         annotation (
           experiment(
             StopTime=7.5,
-            __Dymola_NumberOfIntervals=5000,
             Tolerance=1e-005,
             __Dymola_Algorithm="Dassl"),
           Commands(file=
@@ -533,6 +496,43 @@ package Assemblies "Combinations of regions (e.g., cells)"
           __Dymola_experimentSetupOutput);
 
       end TestStandCycle;
+
+      model TestStandSimple
+        "Simulate the simple fuel cell model under prescribed conditions"
+
+        import DataH2 = FCSys.Characteristics.H2.Gas;
+        import DataH2O = FCSys.Characteristics.H2O.Gas;
+        import DataO2 = FCSys.Characteristics.O2.Gas;
+
+        extends TestStand(
+          redeclare SimpleCell cell,
+          Deltaw_O2=(DataO2.g(caSource[1, 1].gas.O2.boundary.T, caSource[1, 1].gas.O2.boundary.p)
+               - cell.caCGDL.subregions[1, 1, 1].gas.O2.g)/4,
+          Deltaw_H2O=(DataH2O.g(caSource[1, 1].gas.H2O.boundary.T, caSource[1,
+              1].gas.H2O.boundary.p) - cell.caCGDL.subregions[1, 1, 1].gas.H2O.g)
+              /2,
+          Deltaw_H2=(DataH2.g(anSource[1, 1].gas.H2.boundary.T, anSource[1, 1].gas.H2.boundary.p)
+               - cell.anCGDL.subregions[1, 1, 1].gas.H2.g)/2,
+          'Deltaw_e-'=cell.caFP.subregions[1, 1, 1].graphite.'e-'.g_boundaries[
+              1, Side.p] - cell.caCGDL.subregions[1, 1, 1].graphite.'e-'.g +
+              cell.anCGDL.subregions[1, 1, 1].graphite.'e-'.g - cell.anFP.subregions[
+              1, 1, 1].graphite.'e-'.g_boundaries[1, Side.n],
+          'Deltaw_H+'=cell.anCGDL.subregions[1, 1, 1].ionomer.'H+'.g - cell.caCGDL.subregions[
+              1, 1, 1].ionomer.'H+'.g,
+          Deltaw_an=cell.anCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
+
+          Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
+
+          environment(analysis=true));
+
+        annotation (
+          Commands(file=
+                "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandSimple.mos"
+              "Assemblies.Cells.Examples.TestStandSimple.mos"),
+          experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
+          __Dymola_experimentSetupOutput);
+
+      end TestStandSimple;
 
       model TestStandLinearize
         "Wrapper for linear analysis of the fuel cell under prescribed conditions"
@@ -557,12 +557,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
       model TestStandSegmented
         "Simulate the fuel cell with multiple segments in the y direction"
 
-        parameter Integer n_y=6 "Number of segments in the direction"
+        parameter Integer n_y=6 "Number of segments in the y direction"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
 
         extends TestStand(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
             environment(analysis=false));
+
         annotation (experiment(
             StopTime=3660,
             Tolerance=1e-005,
@@ -574,38 +575,41 @@ package Assemblies "Combinations of regions (e.g., cells)"
         extends TestStand(testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
             load(startTime=120));
         Modelica.Blocks.Sources.Ramp anFlowSet(
-          height=125*U.A,
-          duration=60,
+          height=120*U.A,
+          duration=120,
           offset=0.1*U.mA,
           startTime=60) "Specify the equivalent current of the anode supplies"
           annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
         Modelica.Blocks.Sources.Ramp caFlowSet(
-          height=150*U.A,
-          duration=60,
+          height=160*U.A,
+          duration=120,
           offset=0.1*U.mA,
           startTime=60)
           "Specify the equivalent current of the cathode supplies"
-          annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+          annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
         annotation (experiment(StopTime=3720), __Dymola_experimentSetupOutput);
       end TestStandFixedFlow;
 
       model TestStandFixedFlowSegmented
         "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
-        parameter Integer n_y=6 "Number of segments in the direction"
+        parameter Integer n_y=6 "Number of segments in the y direction"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
 
-        extends TestStandFixedFlow(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
-            environment(analysis=false));
+        extends TestStandFixedFlow(
+          cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
+          testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
+          caFlowSet(startTime=0),
+          anFlowSet(startTime=0),
+          load(startTime=0));
 
-        annotation (experiment(StopTime=3720), __Dymola_experimentSetupOutput);
+        annotation (
+          experiment(StopTime=3720),
+          __Dymola_experimentSetupOutput,
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-80},
+                  {80,60}}), graphics));
       end TestStandFixedFlowSegmented;
 
-      model O2
-        extends Figures.TestStand(environment(psi_O2_dry=1),caStoich=9.569);
-        annotation (experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
-            __Dymola_experimentSetupOutput);
-      end O2;
     end Examples;
     extends Modelica.Icons.Package;
 
@@ -924,7 +928,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.AnCLs.AnCGDL anCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(liquid(each inclH2O=inclLiq)))
+        subregions(liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none, T(
+                  each stateSelect=StateSelect.default)))))
         "Anode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{-40,-20},{-20,0}})));
 
@@ -936,7 +941,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
       FCSys.Regions.CaCLs.CaCGDL caCGDL(
         final L_y=L_y,
         final L_z=L_z,
-        subregions(gas(each inclN2=inclN2), liquid(each inclH2O=inclLiq)))
+        subregions(liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none, T(
+                  each stateSelect=StateSelect.default)))))
         "Cathode catalyst and gas diffusion layer" annotation (Dialog(group=
               "Layers"), Placement(transformation(extent={{0,-20},{20,0}})));
 
@@ -950,7 +956,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             each inclN2=inclN2,
             H2O(each initEnergy=Init.none,T(each stateSelect=StateSelect.default))),
 
-          liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none,T(each
+          liquid(each inclH2O=inclLiq,H2O(each initEnergy=Init.none, T(each
                   stateSelect=StateSelect.default))))) "Cathode flow plate"
         annotation (
         __Dymola_choicesFromPackage=true,

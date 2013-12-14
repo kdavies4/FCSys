@@ -1373,7 +1373,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
             gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
-              k={epsilon/2,11,1/11},
+              H2_H2O(k_Phi={inf,inf,inf}),
+              k={epsilon/2,11/n_y,n_y/11},
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1393,7 +1394,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              k={epsilon/2,11,1/11},
+              k={epsilon/2,11/n_y,n_y/11},
               inclH2O=true,
               H2O(
                 upstreamX=false,
@@ -1624,7 +1625,7 @@ text layer of this model.</p>
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
             common(k_Q=0),
-            gasLiq(k_Phi={2,2,2}, k_Q=inf),
+            gasLiq(k_Q=inf),
             gas(
               common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
@@ -1656,11 +1657,12 @@ text layer of this model.</p>
                 upstreamX=false,
                 epsilon_IC=1e-5,
                 final eta=0,
-                mu=100*Characteristics.H2O.Liquid.mu(),
+                mu=200*Characteristics.H2O.Liquid.mu(),
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                T(each stateSelect=StateSelect.default))))) annotation (IconMap(
-            primitivesVisible=false));
+                T(each stateSelect=StateSelect.default))),
+            volume(kappa=1e-4*U.mm^2))) annotation (IconMap(primitivesVisible=
+              false));
 
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
@@ -1985,7 +1987,7 @@ that reference may be outdated).
         inclTransZ=false,
         redeclare replaceable model Subregion = Subregions.Subregion (
             common(k_Q=0),
-            gasLiq(k_Phi={2,2,2}, k_Q=inf),
+            gasLiq(k_Q=inf),
             gas(
               common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
@@ -2013,7 +2015,7 @@ that reference may be outdated).
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
+              'H+'(initEnergy=Init.none, sigma=100*U.S/U.m),
               'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
                     stateSelect=StateSelect.default)),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
@@ -2026,10 +2028,10 @@ that reference may be outdated).
                 epsilon_IC=1e-5,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=100*Characteristics.H2O.Liquid.mu(),
+                mu=200*Characteristics.H2O.Liquid.mu(),
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=6.46e-6*U.mm^2)),
+            volume(kappa=1e-5*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -2165,14 +2167,23 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
+      import Modelica.Constants.inf;
+
       extends AnCLs.AnCL(
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.3,0.3,0.3}),
-          gas(H2(each final eta=0),H2O(each final eta=0)),
-          ionomer('H+'(each sigma=650*U.S/U.m)),
+          common(each k_Phi={0.4,0.4,0.4}),
+          gas(H2(each final eta=0), H2O(each final eta=0)),
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=1100*U.S/U.m)),
+
           liquid(H2O(each final eta=0))));
+
+      //epsilon=0.4,
+      // H2_H2O(each k_Phi={inf,inf,inf}),
+      //common(each k_Phi={inf,inf,inf}),
+      //gasLiq(each k_Phi={inf,inf,inf}),
+      //common(each k_Phi={0.3,0.3,0.3}),
 
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of
   <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and
@@ -2209,7 +2220,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
+              'H+'(initEnergy=Init.none, sigma=100*U.S/U.m),
               H2O(initEnergy=Init.none,upstreamX=false))),
         subregions(ionomer('H+'(consTransX={{{if x > 1 or (y == 1 and z == 1)
                    then ConsTrans.steady else ConsTrans.dynamic for z in 1:n_z}
@@ -2446,7 +2457,7 @@ although in reality there is inductance.</p>
         inclTransZ=false,
         redeclare replaceable model Subregion = Subregions.Subregion (
             common(k_Q=0),
-            gasLiq(k_Phi={2,2,2}, k_Q=inf),
+            gasLiq(k_Q=inf),
             gas(
               common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
@@ -2484,7 +2495,7 @@ although in reality there is inductance.</p>
               inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
                     stateSelect=StateSelect.default)),
-              'H+'(initEnergy=Init.none, sigma=40*U.S/U.m),
+              'H+'(initEnergy=Init.none, sigma=100*U.S/U.m),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
@@ -2495,10 +2506,10 @@ although in reality there is inductance.</p>
                 epsilon_IC=1e-5,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=100*Characteristics.H2O.Liquid.mu(),
+                mu=200*Characteristics.H2O.Liquid.mu(),
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=6.46e-6*U.mm^2)),
+            volume(kappa=1e-5*U.mm^2)),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -2642,14 +2653,27 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
+      import Modelica.Constants.inf;
+
       extends CaCLs.CaCL(
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.3,0.3,0.3}),
-          gas(H2(each final eta=0),H2O(each final eta=0)),
-          ionomer('H+'(each sigma=650*U.S/U.m)),
+          common(each k_Phi={0.4,0.4,0.4}),
+          gas(
+            H2O(each final eta=0),
+            N2(each final eta=0),
+            O2(each final eta=0)),
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=1100*U.S/U.m)),
+
           liquid(H2O(each final eta=0))));
+
+      //common(each k_Phi={inf,inf,inf}),
+      //gasLiq(each k_Phi={inf,inf,inf}),
+      // H2O_N2(each k_Phi={inf,inf,inf}),
+      // H2O_O2(each k_Phi={inf,inf,inf}),
+      // N2_O2(each k_Phi={inf,inf,inf}),
+
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of
   <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and
   <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a>.</p>
@@ -2681,10 +2705,10 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
         inclTransZ=false,
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
-            common(k_Phi={200,200,200},k_Q=0),
-            gasLiq(k_Phi={2,2,2}, k_Q=inf),
+            common(k_Q=0),
+            gasLiq(k_Q=inf),
             gas(
-              common(k_Phi={0.6,0.6,0.6},k_Q=inf),
+              common(k_Q=inf),
               k=fill(epsilon^(-0.5), 3),
               inclH2O=true,
               inclN2=true,
@@ -2723,9 +2747,10 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
                 final eta=0,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=100*Characteristics.H2O.Liquid.mu(),
-                T(each stateSelect=StateSelect.default))))) annotation (IconMap(
-            primitivesVisible=false));
+                mu=200*Characteristics.H2O.Liquid.mu(),
+                T(each stateSelect=StateSelect.default))),
+            volume(kappa=1e-4*U.mm^2))) annotation (IconMap(primitivesVisible=
+              false));
 
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
@@ -3059,7 +3084,10 @@ that reference may be outdated).
             gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
-              k={epsilon/2,11,1/11},
+              H2O_N2(k_Phi={inf,inf,inf}),
+              H2O_O2(k_Phi={inf,inf,inf}),
+              N2_O2(k_Phi={inf,inf,inf}),
+              k={epsilon/2,11/n_y,n_y/11},
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -3085,7 +3113,7 @@ that reference may be outdated).
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              k={epsilon/2,11,1/11},
+              k={epsilon/2,11/n_y,n_y/11},
               inclH2O=true,
               H2O(
                 upstreamX=false,
@@ -3419,14 +3447,14 @@ text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model
               40}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Text(
-            extent={{-100,120},{100,160}},
-            textString="%name",
-            visible=inclTransY,
-            lineColor={0,0,0}), Text(
-            extent={{-100,56},{100,96}},
-            textString="%name",
-            visible=not inclTransY,
-            lineColor={0,0,0})}));
+              extent={{-100,120},{100,160}},
+              textString="%name",
+              visible=inclTransY,
+              lineColor={0,0,0}),Text(
+              extent={{-100,56},{100,96}},
+              textString="%name",
+              visible=not inclTransY,
+              lineColor={0,0,0})}));
   end Region;
   annotation (Documentation(info="
 <html>

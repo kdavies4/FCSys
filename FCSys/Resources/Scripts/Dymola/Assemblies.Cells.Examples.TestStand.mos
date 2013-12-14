@@ -50,3 +50,15 @@ createPlot(id = 4,
  legendHorizontal = false,
  leftTitle = "Potential / V",
  bottomTitle = "Current density / (A/cm2)");
+ 
+ createPlot(id = 5,
+ position = {220, 360, 440, 325},
+ y = {"cell.anCL.subregions[1, 1, 1].ionomer.H2O.lambda",
+      "cell.PEM.subregions[1, 1, 1].ionomer.H2O.lambda",
+      "cell.caCL.subregions[1, 1, 1].ionomer.H2O.lambda"},
+ heading = "Hydration",
+ grid = true,
+ online = true,
+ legend = false,
+ legendLocation = 5,
+ legendHorizontal = false);
