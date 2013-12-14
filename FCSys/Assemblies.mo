@@ -29,7 +29,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "Mole fraction of H2O at the anode inlet";
         final parameter Q.NumberAbsolute psi_H2=1 - psi_H2O_an
           "Mole fraction of H2 at the anode inlet";
-        
+
         // Cathode
         Connectors.RealInputInternal I_ca(unit="N/T") = U.A
           "Equivalent current" annotation (Dialog(tab="Cathode", __Dymola_label
@@ -135,14 +135,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
  </html>"),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics={Text(
-                extent={{-20,70},{20,60}},
-                lineColor={127,127,127},
-                textStyle={TextStyle.UnderLine},
-                textString="Anode"), Text(
-                extent={{-20,10},{20,0}},
-                lineColor={127,127,127},
-                textStyle={TextStyle.UnderLine},
-                textString="Cathode")}),
+                      extent={{-20,70},{20,60}},
+                      lineColor={127,127,127},
+                      textStyle={TextStyle.UnderLine},
+                      textString="Anode"),Text(
+                      extent={{-20,10},{20,0}},
+                      lineColor={127,127,127},
+                      textStyle={TextStyle.UnderLine},
+                      textString="Cathode")}),
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics));
       end TestConditions;
@@ -179,7 +179,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandSimple.mos"
               "Assemblies.Cells.Examples.TestStandSimple.mos"),
-          experiment(StopTime=3650, __Dymola_Algorithm="Dassl"),
+          experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
           __Dymola_experimentSetupOutput);
 
       end TestStandSimple;
@@ -196,9 +196,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Q.Current zI "Electrical current";
 
         // Auxiliary variables (for analysis)
-        output Q.Potential w=load.v*U.V "Electrical potential";
-        output Q.Number J_Apercm2=zI*U.cm^2/(cell.caFP.A[Axis.x]*U.A)
-          "Electrical current density, in A/cm2";
+        output Q.Potential w=load.v*U.V "Potential";
+        output Q.CurrentAreic J=zI/cell.caFP.A[Axis.x] "Current density";
+        output Q.Number J_Apercm2=J*U.cm^2/U.A "Current density, in A/cm2";
         output Q.PressureAbsolute p_an_in=average(average(anSource.gas.H2.boundary.p
              + anSource.gas.H2O.boundary.p)) if environment.analysis
           "Total pressure at the anode inlet";
@@ -516,15 +516,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
                       fromI=false)))), caCL(subregions(graphite(each inclDL=
                       true, 'e-Transfer'(each fromI=false))))),
           redeclare Modelica.Electrical.Analog.Sources.SineCurrent load(
-            I=10,
             freqHz=0.2,
-            offset=5,
-            startTime=60),
-          testConditions(I_an=15*U.A, I_ca=20*U.A));
+            I=10,
+            offset=5),
+          testConditions(I_an=10*U.A, I_ca=20*U.A));
 
         annotation (
           experiment(
-            StopTime=75,
+            StopTime=7.5,
             __Dymola_NumberOfIntervals=5000,
             Tolerance=1e-005,
             __Dymola_Algorithm="Dassl"),
@@ -553,8 +552,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
       equation
         der(load.i) = 0 "Current is a dummy state -- only for linear analysis.";
 
-        annotation (experiment(StopTime=20, __Dymola_Algorithm="Dassl"),
-            __Dymola_experimentSetupOutput);
       end TestStandLinearize;
 
       model TestStandSegmented
@@ -572,18 +569,43 @@ package Assemblies "Combinations of regions (e.g., cells)"
             __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput);
       end TestStandSegmented;
 
-      model TestStandSegmentedFixedFlow
+      model TestStandFixedFlow
         "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
-        extends TestStandSegmented(testConditions(I_an=flowSet.y, I_ca=flowSet.y),
+        extends TestStand(testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
             load(startTime=120));
-        Modelica.Blocks.Sources.Ramp flowSet(
-          height=100*U.A,
+        Modelica.Blocks.Sources.Ramp anFlowSet(
+          height=125*U.A,
+          duration=60,
+          offset=0.1*U.mA,
+          startTime=60) "Specify the equivalent current of the anode supplies"
+          annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+        Modelica.Blocks.Sources.Ramp caFlowSet(
+          height=150*U.A,
           duration=60,
           offset=0.1*U.mA,
           startTime=60)
-          "Specify the equivalent currents of the reactant supplies"
+          "Specify the equivalent current of the cathode supplies"
           annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
-      end TestStandSegmentedFixedFlow;
+        annotation (experiment(StopTime=3720), __Dymola_experimentSetupOutput);
+      end TestStandFixedFlow;
+
+      model TestStandFixedFlowSegmented
+        "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
+        parameter Integer n_y=6 "Number of segments in the direction"
+          annotation (Dialog(group="Geometry", __Dymola_label=
+                "<html><i>n</i><sub>y</sub></html>"));
+
+        extends TestStandFixedFlow(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
+            environment(analysis=false));
+
+        annotation (experiment(StopTime=3720), __Dymola_experimentSetupOutput);
+      end TestStandFixedFlowSegmented;
+
+      model O2
+        extends Figures.TestStand(environment(psi_O2_dry=1),caStoich=9.569);
+        annotation (experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
+            __Dymola_experimentSetupOutput);
+      end O2;
     end Examples;
     extends Modelica.Icons.Package;
 
@@ -591,12 +613,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={8}*U.cm "Lengths of segments in the y direction"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths of segments in the z direction"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
+      parameter Q.Length L_y[:]={8}*U.cm
+        "Lengths of segments in the y direction" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={6.25}*U.cm
+        "Lengths of segments in the z direction" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of subregions in the y direction";
       final parameter Integer n_z=size(L_z, 1)
@@ -826,12 +848,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
       extends FCSys.Icons.Cell;
 
       // Geometric parameters
-      parameter Q.Length L_y[:]={8}*U.cm "Lengths of segments in the y direction"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>y</sub></html>"));
-      parameter Q.Length L_z[:]={6.25}*U.cm "Lengths of segments in the z direction"
-        annotation (Dialog(group="Geometry", __Dymola_label=
-              "<html><i>L</i><sub>z</sub></html>"));
+      parameter Q.Length L_y[:]={8}*U.cm
+        "Lengths of segments in the y direction" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>y</sub></html>"));
+      parameter Q.Length L_z[:]={6.25}*U.cm
+        "Lengths of segments in the z direction" annotation (Dialog(group=
+              "Geometry", __Dymola_label="<html><i>L</i><sub>z</sub></html>"));
       final parameter Integer n_y=size(L_y, 1)
         "Number of subregions in the y direction";
       final parameter Integer n_z=size(L_z, 1)

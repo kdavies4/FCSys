@@ -27,6 +27,33 @@ Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once
 //Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
 //Evaluate = true "Evaluate parameters to reduce models (improves simulation speed).";
 
+// Debugging and development options
+Advanced.EnableAnnotationCheck = true "Can set to enable annotation check for Modelica 3.1 and later";
+LogStateSelection = true "List continuous time states selected";
+OutputCPUtime = true "Include a variable for elapsed CPU time during simulation";
+LogDefaultInitialConditions = true "Log selected default initial conditions";
+Advanced.OutputModelicaCode = true "Output dsmodel in Modelica style";
+Advanced.StoreProtectedVariables = true "Store protected variables when simulating";
+Advanced.HighlightReplaceable = false "Highlight replaceable and redeclared components in diagram";
+Advanced.Legend.Horizontal = false "Horizontal layout of plot legend by default";
+Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
+Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
+Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
+Advanced.TranslationInCommandLog = true "Also include translation log in command log";
+Advanced.IncludeProtectedInBrowser = true "Include protected classes in package browser";
+Advanced.SmartConnect = false "Create connection automatically if connector over connector.";
+//   Note:  Smart connect sometimes crashes Dymola 2014. 
+//Advanced.PedanticModelica = true "Pedantic mode for checking Modelica semantics (turn warnings into errors)";
+//Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
+//Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
+//Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";
+//Advanced.LogStartValuesForIterationVariables = true "Logs start values for iteration variables";
+//Advanced.LogStructuredEvaluation = true "Log evaluation of structural parameters";
+//Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
+//Advanced.OutputModelicaCodeWithJacobians = true "Include Jacobians for algebraic loops when outputting dsmodel in Modelica style";
+//LogDefaultInitialConditions = true "Log selected default initial conditions";
+//LogDifferentiatedEquations = true "Output information when differentiating for index reduction";
+
 // Other options
 //Advanced.DefaultSteadyStateInitialization = true "Initialize in steady state as default.";
 

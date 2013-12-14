@@ -1755,7 +1755,6 @@ Choose any condition besides none.");
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Solid;
 
 protected
