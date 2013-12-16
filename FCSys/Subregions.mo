@@ -997,7 +997,7 @@ package Subregions
       annotation (Placement(transformation(extent={{88,-46},{108,-26}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={1.8,1.8,1.8}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={2,2,2}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
     Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
@@ -1410,7 +1410,7 @@ on diagram)")}));
               -22},{-30,-2}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={1.8,1.8,1.8}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={2,2,2}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
     Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));

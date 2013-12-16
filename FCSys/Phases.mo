@@ -476,7 +476,6 @@ package Phases "Mixtures of species"
               120,80}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
-
   end Gas;
 
   model Graphite "Graphite phase"

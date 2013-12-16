@@ -147,7 +147,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
                   {100,100}}), graphics));
       end TestConditions;
 
-
       model TestStand "Simulate the fuel cell under prescribed conditions"
         import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
         import DataH2 = FCSys.Characteristics.H2.Gas;
@@ -487,7 +486,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         annotation (
           experiment(
-            StopTime=7.5,
+            StopTime=9,
             Tolerance=1e-005,
             __Dymola_Algorithm="Dassl"),
           Commands(file=
@@ -601,7 +600,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
           testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
           caFlowSet(startTime=0),
           anFlowSet(startTime=0),
-          load(startTime=0));
+          load(startTime=0),
+          environment(analysis=false));
 
         annotation (
           experiment(StopTime=3720),

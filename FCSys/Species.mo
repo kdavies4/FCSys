@@ -1117,6 +1117,10 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     output Q.Pressure Deltap[n_trans](each stateSelect=StateSelect.never) =
       Delta(boundaries.p) if environment.analysis
       "Differences in pressures across the boundaries";
+    output Q.Power Hprimedot[n_trans, Side](each stateSelect=StateSelect.never)
+       = (Data.h(boundaries.T, boundaries.p) + Data.m*phi_boundaries .^ 2/2)
+       .* boundaries.Ndot if environment.analysis
+      "Flow rates of enthalpy + kinetic energy into the boundaries";
     //
     // Potentials
     output Q.Potential g_boundaries[n_trans, Side](each stateSelect=StateSelect.never)
