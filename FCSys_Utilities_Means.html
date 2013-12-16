@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>FCSys.Utilities.Means</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-12-18">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Package of mathematical mean functions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Utilities.Means"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Means</h2>
+
+<b>Package of mathematical mean functions</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Means.arithmetic" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means.arithmetic">arithmetic</a>
+</td><td>Return the arithmetic mean of numbers</td></tr>
+<tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Means.harmonic" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means.harmonic">harmonic</a>
+</td><td>Return the harmonic mean of numbers</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.Means.arithmeticI.png" alt="FCSys.Utilities.Means.arithmetic" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Means.arithmetic"></a><a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means">FCSys.Utilities.Means</a>.arithmetic</h2>
+<b>Return the arithmetic mean of numbers</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u[:]</td><td>&nbsp;</td><td>Vector of numbers</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>mean</td><td>Arithmetic mean</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> arithmetic <font color="darkgreen">&quot;Return the arithmetic mean of numbers&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
+  <font color="blue">output </font>Real mean <font color="darkgreen">&quot;Arithmetic mean&quot;</font>;
+
+<font color="blue">algorithm </font>
+  mean := <font color="red">sum</font>(u)/<font color="red">size</font>(u, 1);
+<font color="blue">end </font>arithmetic;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Utilities.Means.arithmeticI.png" alt="FCSys.Utilities.Means.harmonic" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Means.harmonic"></a><a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means">FCSys.Utilities.Means</a>.harmonic</h2>
+<b>Return the harmonic mean of numbers</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>u[:]</td><td>&nbsp;</td><td>Vector of numbers</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>mean</td><td>Harmonic mean</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> harmonic <font color="darkgreen">&quot;Return the harmonic mean of numbers&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
+  <font color="blue">output </font>Real mean <font color="darkgreen">&quot;Harmonic mean&quot;</font>;
+
+  <font color="darkgreen">// TODO: Add check to FCSysTest.</font>
+
+<font color="blue">algorithm </font>
+  mean := <font color="blue">if </font><font color="red">size</font>(u, 1) == 1<font color="blue"> then </font>u[1]<font color="blue"> else </font>(<font color="blue">if </font><font color="red">size</font>(u, 1) == 2<font color="blue"> then </font>2*<font color="red">product</font>(
+    u)/<font color="red">sum</font>(u)<font color="blue"> else </font><font color="red">size</font>(u, 1)/<font color="red">sum</font>(1/u <font color="blue">for </font>u<font color="blue"> in </font>u));
+<font color="blue">end </font>harmonic;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:52 2013.
+</div>
+</span></body></html>

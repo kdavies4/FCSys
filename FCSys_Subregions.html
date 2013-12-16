@@ -3,7 +3,7 @@
 <title>FCSys.Subregions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Control volumes with multi-species transport, storage, and exchange">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -84,8 +84,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>Assumptions:<ol>
-<li>The oxygen reduction reaction generates H<sub>2</sub>O vapor,
-although the vapor is condensed into liquid and absorbed into the ionomer.</li></ol></p>
+<li>The oxygen reduction reaction generates liquid water if it is included; otherwise,
+it generates H<sub>2</sub>O vapor.  Since phase change is a dynamic, nonequilibrium
+process, there is a difference.</li></ol></p>
 
    <p>Please see the documentation of the
    <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p>
@@ -168,8 +169,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     &quot;Oxygen reduction reaction&quot;</font>;
 
   <font color="darkgreen">// Independence factors</font>
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common <font color="darkgreen">&quot;Among all phases&quot;</font>;
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={3,3,3}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={10,10,10}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
     &quot;Negative boundary along the x axis&quot;</font>;
@@ -195,11 +196,12 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="blue">final </font><font color="blue">parameter </font>Boolean inclHOR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>
       gas.inclH2 <font color="darkgreen">&quot;Include the hydrogen oxidation reaction&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Boolean inclORR=graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>
-      gas.inclO2<font color="blue"> and </font>gas.inclH2O <font color="darkgreen">&quot;Include the oxygen reduction reaction&quot;</font>;
+      gas.inclO2<font color="blue"> and </font>(gas.inclH2O<font color="blue"> or </font>liquid.inclH2O) <font color="darkgreen">
+    &quot;Include the oxygen reduction reaction&quot;</font>;
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">&quot;Connector for exchange among all species&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> gasLiqExch <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> exchCommon <font color="darkgreen">&quot;Connector for exchange among all species&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> exchGasLiq <font color="darkgreen">
     &quot;Connector for exchange between gas and liquid&quot;</font>;
 
 <font color="blue">equation </font>
@@ -243,26 +245,28 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="darkgreen">// Inert exchange</font>
   <font color="darkgreen">// --------------</font>
   <font color="darkgreen">// Common</font>
-  <font color="red">connect</font>(gas.inter[1], commonExch.node);
-  <font color="red">connect</font>(graphite.inter[1], commonExch.node);
-  <font color="red">connect</font>(ionomer.inter[1], commonExch.node);
-  <font color="red">connect</font>(liquid.inter[1], commonExch.node);
+  <font color="red">connect</font>(gas.inter[1], exchCommon.node);
+  <font color="red">connect</font>(graphite.inter[1], exchCommon.node);
+  <font color="red">connect</font>(ionomer.inter[1], exchCommon.node);
+  <font color="red">connect</font>(liquid.inter[1], exchCommon.node);
   <font color="darkgreen">// Gas-liquid</font>
-  <font color="red">connect</font>(gas.inter[2], gasLiqExch.node);
-  <font color="red">connect</font>(liquid.inter[2], gasLiqExch.node);
+  <font color="red">connect</font>(gas.inter[2], exchGasLiq.node);
+  <font color="red">connect</font>(liquid.inter[2], exchGasLiq.node);
 
   <font color="darkgreen">// Reactions and phase change (not shown in diagram)</font>
   <font color="darkgreen">// -------------------------------------------------</font>
   <font color="red">connect</font>(gas.chemH2[1], HOR.chemH2);
-  <font color="red">connect</font>(gas.chemH2O[1], ORR.chemH2O);
   <font color="red">connect</font>(gas.chemO2[1], ORR.chemO2);
-  <font color="blue">if </font>gas.inclH2O<font color="blue"> then</font>
+  <font color="red">connect</font>(liquid.chemH2O[1], ORR.chemH2O);
+  <font color="blue">if </font>liquid.inclH2O<font color="blue"> then</font>
+    <font color="blue">if </font>gas.inclH2O<font color="blue"> then</font>
+      <font color="red">connect</font>(liquid.chemH2O[2], gas.chemH2O[2]);
+    <font color="blue">end if</font>;
     <font color="blue">if </font>ionomer.inclH2O<font color="blue"> then</font>
-      <font color="red">connect</font>(gas.chemH2O[2], ionomer.chemH2O[1]);
+      <font color="red">connect</font>(liquid.chemH2O[3], ionomer.chemH2O[1]);
     <font color="blue">end if</font>;
-    <font color="blue">if </font>liquid.inclH2O<font color="blue"> then</font>
-      <font color="red">connect</font>(gas.chemH2O[3], liquid.chemH2O[1]);
-    <font color="blue">end if</font>;
+  <font color="blue">elseif </font>gas.inclH2O<font color="blue"> then</font>
+    <font color="red">connect</font>(gas.chemH2O[1], ORR.chemH2O);
   <font color="blue">end if</font>;
   <font color="red">connect</font>(graphite.'cheme-'[1], HOR.'cheme-');
   <font color="red">connect</font>(graphite.'cheme-'[1], ORR.'cheme-');
@@ -433,8 +437,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Liquid&quot;</font>;
 
   <font color="darkgreen">// Independence factors</font>
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common <font color="darkgreen">&quot;Among all phases&quot;</font>;
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={3,3,3}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={10,10,10}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
     &quot;Negative boundary along the x axis&quot;</font>;
@@ -460,8 +464,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
   <font color="darkgreen">// Exchange</font>
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> commonExch <font color="darkgreen">&quot;Among all phases&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> gasLiqExch <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> exchCommon <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertNode">Connectors.InertNode</a> exchGasLiq <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Boundaries</font>
@@ -496,17 +500,17 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   <font color="darkgreen">// Inert exchange</font>
   <font color="darkgreen">// --------------</font>
   <font color="darkgreen">// Common</font>
-  <font color="red">connect</font>(gas.inter[1], commonExch.node);
-  <font color="red">connect</font>(graphite.inter[1], commonExch.node);
-  <font color="red">connect</font>(liquid.inter[1], commonExch.node);
+  <font color="red">connect</font>(gas.inter[1], exchCommon.node);
+  <font color="red">connect</font>(graphite.inter[1], exchCommon.node);
+  <font color="red">connect</font>(liquid.inter[1], exchCommon.node);
   <font color="darkgreen">// Gas-liquid</font>
-  <font color="red">connect</font>(gas.inter[2], gasLiqExch.node);
-  <font color="red">connect</font>(liquid.inter[2], gasLiqExch.node);
+  <font color="red">connect</font>(gas.inter[2], exchGasLiq.node);
+  <font color="red">connect</font>(liquid.inter[2], exchGasLiq.node);
 
   <font color="darkgreen">// Phase change (not shown in diagram)</font>
   <font color="darkgreen">// -----------------------------------</font>
   <font color="blue">if </font>gas.inclH2O<font color="blue"> and </font>liquid.inclH2O<font color="blue"> then</font>
-    <font color="red">connect</font>(gas.chemH2O[3], liquid.chemH2O[1]);
+    <font color="red">connect</font>(gas.chemH2O[2], liquid.chemH2O[2]);
   <font color="blue">end if</font>;
 
 <font color="blue">end </font>SubregionNoIonomer;
@@ -591,6 +595,6 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:33:47 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:35 2013.
 </div>
 </span></body></html>

@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnGDLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Anode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -102,7 +102,7 @@ The x axis extends from the anode to the cathode.
 
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.
+<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 24 BC GDs.
 
 The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
 
@@ -131,10 +131,10 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.3}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.88</td><td>Porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Porosity [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -171,7 +171,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// used.</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x={0.3}*U.mm,
+    L_x={0.235}*U.mm,
     L_y={8}*U.cm,
     L_z={6.25}*U.cm,
     <font color="blue">final </font>inclTransX=true,
@@ -180,7 +180,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
         (
         common(k_Q=0),
-        gasLiq(k_Phi={2,2,2}, k_Q=inf),
+        gasLiq(k_Q=inf),
         gas(
           common(k_Q=inf),
           k=<font color="red">fill</font>(epsilon^(-0.5), 3),
@@ -202,7 +202,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           k=<font color="red">fill</font>((1 - epsilon)^(-0.5), 3),
           &#39;inclC+&#39;=true,
           &#39;incle-&#39;=true,
-          &#39;C+&#39;(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5,<font color="blue">final </font>epsilon=1 -
+          &#39;C+&#39;(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,<font color="blue">final </font>epsilon=1 -
                 epsilon),
           &#39;e-&#39;(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
         liquid(
@@ -212,10 +212,10 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             upstreamX=false,
             epsilon_IC=1e-5,
             <font color="blue">final </font>eta=0,
-            mu=100*<font color="red">Characteristics.H2O.Liquid.mu</font>(),
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
             <font color="blue">each </font>initEnergy=Init.none,
-            T(<font color="blue">each </font>stateSelect=StateSelect.default)))));
+            T(<font color="blue">each </font>stateSelect=StateSelect.default))),
+        volume(kappa=1e-4*U.mm^2)));
 
   <font color="darkgreen">// Note:  The fluid species have zero fluidity (eta=0) so that the transverse</font>
   <font color="darkgreen">// velocity is zero at the interface with the flow plate.  That condition</font>
@@ -224,7 +224,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
   <font color="darkgreen">// settings of k for each phase.</font>
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.88 <font color="darkgreen">&quot;Porosity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.80 <font color="darkgreen">&quot;Porosity&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
@@ -914,6 +914,6 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:32:24 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:05 2013.
 </div>
 </span></body></html>

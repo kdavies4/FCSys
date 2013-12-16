@@ -3,7 +3,7 @@
 <title>FCSys.Assemblies.Cells</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Single-cell PEMFC models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -292,7 +292,8 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">FCSys.Regions.AnCLs.AnCGDL</a> anCGDL(
     <font color="blue">final </font>L_y=L_y,
     <font color="blue">final </font>L_z=L_z,
-    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">
+              each </font>stateSelect=StateSelect.default))))) <font color="darkgreen">
     &quot;Anode catalyst and gas diffusion layer&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">Regions.PEMs.PEM</a> PEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
@@ -300,7 +301,8 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">FCSys.Regions.CaCLs.CaCGDL</a> caCGDL(
     <font color="blue">final </font>L_y=L_y,
     <font color="blue">final </font>L_z=L_z,
-    subregions(gas(<font color="blue">each </font>inclN2=inclN2), liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">
+              each </font>stateSelect=StateSelect.default))))) <font color="darkgreen">
     &quot;Cathode catalyst and gas diffusion layer&quot;</font>;
 
   <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">Regions.CaFPs.CaFP</a> caFP(
@@ -313,7 +315,7 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
         <font color="blue">each </font>inclN2=inclN2,
         H2O(<font color="blue">each </font>initEnergy=Init.none,T(<font color="blue">each </font>stateSelect=StateSelect.default))),
 
-      liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none,T(<font color="blue">each </font>
+      liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">each </font>
               stateSelect=StateSelect.default))))) <font color="darkgreen">&quot;Cathode flow plate&quot;</font>;
 
 <font color="blue">protected </font>
@@ -347,6 +349,6 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (I
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:31:07 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:25:36 2013.
 </div>
 </span></body></html>

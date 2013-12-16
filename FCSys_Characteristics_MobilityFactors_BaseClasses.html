@@ -1,0 +1,241 @@
+<html>
+<head>
+<title>FCSys.Characteristics.MobilityFactors.BaseClasses</title>
+<meta name="title" content="Modelica fuel cell library">
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
+<meta name="date" content="2013-12-18">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Base classes (generally not for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<span itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses"></a><a href="FCSys_Characteristics_MobilityFactors.html#FCSys.Characteristics.MobilityFactors">FCSys.Characteristics.MobilityFactors</a>.BaseClasses</h2>
+
+<b>Base classes (generally not for direct use)</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Characteristics.Mob1bcf4b5da1cd8170ses.kS.png" alt="FCSys.Characteristics.MobilityFactors.BaseClasses.k" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses.k">k</a>
+</td><td>Binary mobility factor</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.Mob1bcf4b5da1cd8170ses.kS.png" alt="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_nonpolar" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_nonpolar">pDstar_nonpolar</a>
+</td><td>[Slattery1958] reduced pressure-diffusivity product for nonpolar species</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.Mob1bcf4b5da1cd8170ses.kS.png" alt="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_polar" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_polar">pDstar_polar</a>
+</td><td>[Slattery1958] reduced pressure-diffusivity product for polar species</td></tr>
+</table>
+<hr>
+
+<h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses.k"></a><a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses">FCSys.Characteristics.MobilityFactors.BaseClasses</a>.k</h2>
+
+<b>Binary mobility factor</b>
+
+<h3>Information</h3>
+
+<p><i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> are given as inputs even though they can be calculated
+ from <i>T</i>, <i>p</i><sub>A</sub>, and <i>p</i><sub>B</sub> because it may be desirable to leave <i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> constant while
+  varying <i>p</i><sub>A</sub> and <i>p</i><sub>B</sub>.</p>
+
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_A</td><td>U.atm</td><td>Pressure of the 1<sup>st</sup> species [M/(L.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_B</td><td>U.atm</td><td>Pressure of the 2<sup>nd</sup> species [M/(L.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_A</td><td>298.15*U.K/A.p0</td><td>Specific volume of the 1<sup>st</sup> species [L3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_B</td><td>298.15*U.K/B.p0</td><td>Specific volume of the 2<sup>nd</sup> species [L3/N]</td></tr>
+<tr><TD colspan="2">replaceable function pDstar</td><td>MobilityFactors.BaseClasses&hellip;.</td><td>Reduced pressure-diffusivity product</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>FCSys.Characteristics.BaseCl&hellip;</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>FCSys.Characteristics.BaseCl&hellip;</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_crit</td><td>&nbsp;</td><td>Geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>&nbsp;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable function pDstar</td><td>Reduced pressure-diffusivity product</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_Phi</td><td>Binary mobility factor [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> k <font color="darkgreen">&quot;Binary mobility factor&quot;</font>
+  <font color="blue">import </font>harmonicMean = <a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means.harmonic">FCSys.Utilities.Means.harmonic</a>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_A=U.atm <font color="darkgreen">
+    &quot;Pressure of the 1<sup>st</sup> species&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_B=U.atm <font color="darkgreen">
+    &quot;Pressure of the 2<sup>nd</sup> species&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_A=298.15*U.K/A.p0 <font color="darkgreen">
+    &quot;Specific volume of the 1<sup>st</sup> species&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_B=298.15*U.K/B.p0 <font color="darkgreen">
+    &quot;Specific volume of the 2<sup>nd</sup> species&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">function</font> pDstar = <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_nonpolar">MobilityFactors.BaseClasses.pDstar_nonpolar</a> <font color="darkgreen">
+    &quot;Reduced pressure-diffusivity product&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> A = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
+    &quot;Characteristic data of the 2<sup>nd</sup> species&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">package</font> B = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="darkgreen">
+    &quot;Characteristic data of the 2<sup>nd</sup> species&quot;</font>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_crit <font color="darkgreen">
+    &quot;Geometric mean of the critical temperatures&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_crit <font color="darkgreen">&quot;Geometric mean of the critical pressures&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_Phi <font color="darkgreen">&quot;Binary mobility factor&quot;</font>;
+
+  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
+
+<font color="blue">algorithm </font>
+  k_Phi := <font color="red">pDstar</font>(T/T_crit)*p_crit^(2/3)*(T_crit*U.mol/U.K)^(5/6)*(U.atm/U.q)^(1
+    /3)*U.cm^2/U.s/<font color="red">sqrt</font>(<font color="red">harmonicMean</font>({A.m,B.m})*U.g)/(p_A*<font color="red">B.D</font>(T, v_A) + p_B*<font color="red">A.D</font>
+    (T, v_B)) <font color="darkgreen">
+    &quot;Based on [Slattery1958, eq. 5] and the exchange equations in FCSys.Species.Species&quot;</font>;
+
+<font color="blue">end </font>k;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_nonpolar"></a><a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses">FCSys.Characteristics.MobilityFactors.BaseClasses</a>.pDstar_nonpolar</h2>
+
+<b>[Slattery1958] reduced pressure-diffusivity product for nonpolar species</b>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>Tstar</td><td>1</td><td>Ratio of temperature to the geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>pDstar</td><td>Reduced pressure-diffusivity product [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> pDstar_nonpolar <font color="darkgreen">
+  &quot;[Slattery1958] reduced pressure-diffusivity product for nonpolar species&quot;</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> Tstar=1 <font color="darkgreen">
+    &quot;Ratio of temperature to the geometric mean of the critical temperatures&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> pDstar <font color="darkgreen">&quot;Reduced pressure-diffusivity product&quot;</font>;
+
+  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
+
+<font color="blue">algorithm </font>
+  pDstar := 3.882e-4*Tstar^1.823 <font color="darkgreen">&quot;[Slattery1958, eq. 4]&quot;</font>;
+<font color="blue">end </font>pDstar_nonpolar;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_polar"></a><a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses">FCSys.Characteristics.MobilityFactors.BaseClasses</a>.pDstar_polar</h2>
+
+<b>[Slattery1958] reduced pressure-diffusivity product for polar species</b>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>Tstar</td><td>1</td><td>Ratio of temperature to the geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>pDstar</td><td>Reduced pressure-diffusivity product [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> pDstar_polar <font color="darkgreen">
+  &quot;[Slattery1958] reduced pressure-diffusivity product for polar species&quot;</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> Tstar=1 <font color="darkgreen">
+    &quot;Ratio of temperature to the geometric mean of the critical temperatures&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> pDstar <font color="darkgreen">&quot;Reduced pressure-diffusivity product&quot;</font>;
+
+  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
+
+<font color="blue">algorithm </font>
+  pDstar := 5.148e-4*Tstar^2.334 <font color="darkgreen">&quot;[Slattery1958, eq. 9]&quot;</font>;
+<font color="blue">end </font>pDstar_polar;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<span itemprop="name">Kevin Davies</span></span>,
+<span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:51 2013.
+</div>
+</span></body></html>

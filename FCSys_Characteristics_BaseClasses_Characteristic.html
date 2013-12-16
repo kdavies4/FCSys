@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Package of thermodynamic and diffusive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -132,6 +132,8 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#F
 </td><td>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>
 </td><td>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.D" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.D">D</a>
+</td><td>Diffusivity as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>
@@ -404,6 +406,64 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="darkgreen">// FCSys 1 = U.R).</font>
   <font color="darkgreen">// Note 2:  [Dymond2002, p.17, eqs. 1.43 &amp; 1.44] may be incorrect.</font>
 <font color="blue">end </font>c_v;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.D" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.D"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.D</h2>
+<b>Diffusivity as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol></p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Diffusivity">Diffusivity</a></td><td>D</td><td>Diffusivity [L2/T]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> D <font color="darkgreen">
+  &quot;Diffusivity as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Diffusivity">Q.Diffusivity</a> D <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  D := v*<font color="red">omega</font>(T)/alpha;
+<font color="blue">end </font>D;
 </pre>
 <hr>
 
@@ -1242,6 +1302,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:35 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:51 2013.
 </div>
 </span></body></html>

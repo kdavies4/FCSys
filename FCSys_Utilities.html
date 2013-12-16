@@ -3,7 +3,7 @@
 <title>FCSys.Utilities</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="General supporting functions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -65,12 +65,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Chemistry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Chemistry.html#FCSys.Utilities.Chemistry">Chemistry</a>
 </td><td>Functions to support chemistry</td></tr>
+<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Coordinates" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates">Coordinates</a>
+</td><td>Functions to handle Cartesian coordinates</td></tr>
+<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Means" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Means.html#FCSys.Utilities.Means">Means</a>
+</td><td>Package of mathematical mean functions</td></tr>
 <tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Polynomial" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">Polynomial</a>
 </td><td>Polynomial functions</td></tr>
 <tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Time" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Time.html#FCSys.Utilities.Time">Time</a>
 </td><td>Functions to check translation time</td></tr>
-<tr><td><img src="images/FCSys.Utilities.ChemistryS.png" alt="FCSys.Utilities.Coordinates" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates">Coordinates</a>
-</td><td>Functions to handle Cartesian coordinates</td></tr>
 <tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.arrayBooleanEqual" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.arrayBooleanEqual">arrayBooleanEqual</a>
 </td><td>Check if two <code>Boolean</code> vectors are equal</td></tr>
 <tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.arrayIntegerEqual" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.arrayIntegerEqual">arrayIntegerEqual</a>
@@ -81,8 +83,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Check if two vectors of strings are equal</td></tr>
 <tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.assertEval" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.assertEval">assertEval</a>
 </td><td>Assert function that forces Dymola to parse the message</td></tr>
-<tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.average" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.average">average</a>
-</td><td>Return the arithmetic mean of numbers</td></tr>
 <tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Delta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.Delta">Delta</a>
 </td><td>Return the second entry of a vector minus the first (&Delta;)</td></tr>
 <tr><td><img src="images/FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities.inSign">inSign</a>
@@ -380,48 +380,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <font color="blue">algorithm </font>
   <font color="red">assert</font>(condition, &quot;\n&quot; + message + &quot;\n&quot;);
 <font color="blue">end </font>assertEval;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Utilities.arrayBooleanEqualI.png" alt="FCSys.Utilities.average" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Utilities.average"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.average</h2>
-<b>Return the arithmetic mean of numbers</b>
-
-<h3>Information</h3>
-
-<p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p>
-Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p>
-
-<h3>Inputs</h3>
-
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Real</td><td>u[:]</td><td>&nbsp;</td><td>Vector of numbers</td></tr>
-</table>
-<p>
-
-<h3>Outputs</h3>
-
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Real</td><td>average</td><td>Arithmetic mean</td></tr>
-</table>
-
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">function</font> average <font color="darkgreen">&quot;Return the arithmetic mean of numbers&quot;</font>
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
-  <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
-  <font color="blue">output </font>Real average <font color="darkgreen">&quot;Arithmetic mean&quot;</font>;
-
-<font color="blue">algorithm </font>
-  average := <font color="red">sum</font>(u)/<font color="red">size</font>(u, 1);
-<font color="blue">end </font>average;
 </pre>
 <hr>
 
@@ -876,6 +834,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:38 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:52 2013.
 </div>
 </span></body></html>

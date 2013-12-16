@@ -3,7 +3,7 @@
 <title>FCSys.Species.H2O.Gas</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;H&lt;sub&gt;2&lt;/sub&gt;O gas&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -219,7 +219,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g_IC</td><td>&nbsp;</td><td>Initial Gibbs potential [L2.M/(N.T2)]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
-<tr><td>Integer</td><td>n_chem</td><td>3</td><td>Number of reaction and phase change processes</td></tr>
+<tr><td>Integer</td><td>n_chem</td><td>2</td><td>Number of reaction and phase change processes</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of the conservation equations</td></tr>
 <tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a></td><td>consMaterial</td><td>ConsThermo.dynamic</td><td>Material</td></tr>
 <tr><td>Boolean</td><td>consRot</td><td>false</td><td>Conserve rotational momentum</td></tr>
@@ -267,7 +267,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(19.6e-3*U.W),
     <font color="blue">final </font>tauprime,
     <font color="blue">final </font>N0,
-    n_chem=3,
+    n_chem=2,
     p_IC=environment.p_H2O);
 
   <font color="darkgreen">// See the documentation for tables of values.</font>
@@ -292,6 +292,6 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:15 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:44 2013.
 </div>
 </span></body></html>

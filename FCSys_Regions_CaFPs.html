@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -75,43 +75,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h3>Information</h3>
 
-<p>This model represents the cathode flow plate of a PEMFC.
-The x axis extends from the anode to the cathode.
-Fluid is considered to travel
-in the y direction, with the associated length factor (<i>k</i><sub>y</sub>) greater than one (by default)
-to represent a serpentine channel.
-The model is
-bidirectional, meaning that either <code>yNegative</code> or <code>yPositive</code> can be
-used as the inlet.  By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
-
-<p>The solid and the fluid phases are assumed to exist in the same subregions,
-even though a
-typical flow plate is impermeable
-to the fluid (except for the channel).
-In theory, it is possible
-to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,
-this would significantly increase the mathematical size of the model.  Currently, that level of detail is best left to
-computational fluid dynamics.</p>
-
-<p>The x axis-component of the transport factor (<i>k</i><sub>x</sub>) for the gas and the liquid should
-generally be less than one because the transport distance into/out of the GDL is less that half the
-thickness of the flow plate. It is equal to the product of two ratios:<ol>
-<li>the depth of the channels to the thickness of the flow plate</li>
-<li>the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
-the total volume available for the fluid (&epsilon;) to the area of the valleys in the yz plane</li>
-</ol> The default is &epsilon;/2.</p>
-
-<p>See <a href="FCSys_Species_'C+'_Graphite.html#FCSys.Species.'C+'.Graphite.Fixed">Species.'C+'.Graphite.Fixed</a>
-regarding the default specific heat capacity.  The default thermal resistivity
-of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
-electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
-are that of Entegris/Poco Graphite AXF-5Q
-[<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Entegris2012">Entegris2012</a>].
-  There is additional data in the
-text layer of the <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> model.</p>
-
-<p>For more information, please see the
-    <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
+<p>This model represents the cathode flow plate of a PEMFC.  It is identical to
+the anode flow plate except for the included species, the default length of the
+channel, and the fraction of the volume for the fluid (&epsilon;).
+For more information, please see the
+<a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">anFP</a> model.</p>
 
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
@@ -122,12 +90,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>D</td><td>1.5*U.mm</td><td>Hydraulic diameter of the channel [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>D</td><td>0.815*U.mm</td><td>Hydraulic diameter of the channel [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{8}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{10}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.0625</td><td>Fraction of volume for the fluid [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.0423</td><td>Fraction of volume for the fluid [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -158,7 +126,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// extends FCSys.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x={8}*U.mm,
+    L_x={10}*U.mm,
     L_y={8}*U.cm,
     L_z={6.25}*U.cm,
     <font color="blue">final </font>inclTransX=true,
@@ -170,7 +138,10 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
         gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
         gas(
           common(k_Phi={inf,inf,inf}),
-          k={epsilon/2,11,1/11},
+          H2O_N2(k_Phi={inf,inf,inf}),
+          H2O_O2(k_Phi={inf,inf,inf}),
+          N2_O2(k_Phi={inf,inf,inf}),
+          k={0.17*epsilon,13.3/n_y,n_y/13.3},
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -196,7 +167,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;C+&#39;(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
           &#39;e-&#39;(sigma=U.S/(1.470e-3*U.cm))),
         liquid(
-          k={epsilon/2,11,1/11},
+          k={0.17*epsilon,13.3/n_y,n_y/13.3},
           inclH2O=true,
           H2O(
             upstreamX=false,
@@ -205,10 +176,10 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             N0=0.1*U.C)),
         volume(inclCapillary=false)));
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.0625 <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.0423 <font color="darkgreen">
     &quot;Fraction of volume for the fluid&quot;</font>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> D=1.5*U.mm <font color="darkgreen">&quot;Hydraulic diameter of the channel&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> D=0.815*U.mm <font color="darkgreen">&quot;Hydraulic diameter of the channel&quot;</font>;
 
 <font color="blue">protected </font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_states_H2O[:, :, :](
@@ -225,6 +196,8 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
+  <font color="darkgreen">// TODO: Include parameter for length of channel, add to anFP too.</font>
+
   <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
 
 <font color="blue">end </font>CaFP;
@@ -237,6 +210,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:33:32 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:30 2013.
 </div>
 </span></body></html>

@@ -3,7 +3,7 @@
 <title>FCSys.Regions.PEMs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -117,7 +117,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionIo&hellip;</td><td>Base subregion model</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{100}*U.um</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{40}*U.um</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
@@ -155,7 +155,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// used.</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
-    L_x={100}*U.um,
+    L_x={40}*U.um,
     L_y={8}*U.cm,
     L_z={6.25}*U.cm,
     <font color="blue">final </font>inclTransX=true,
@@ -167,7 +167,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;inclH+&#39;=true,
           inclH2O=true,
           &#39;SO3-&#39;(<font color="blue">final </font>mu=0,<font color="blue">final </font>epsilon=1),
-          &#39;H+&#39;(initEnergy=Init.none, sigma=40*U.S/U.m),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
           H2O(initEnergy=Init.none,upstreamX=false))),
     subregions(ionomer(&#39;H+&#39;(consTransX={{{<font color="blue">if </font>x &gt; 1<font color="blue"> or </font>(y == 1<font color="blue"> and </font>z == 1)<font color="blue"> then </font>
               ConsTrans.steady<font color="blue"> else </font>ConsTrans.dynamic <font color="blue">for </font>z<font color="blue"> in </font>1:n_z} <font color="blue">for </font>y<font color="blue"> in </font>1
@@ -603,6 +603,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:32:51 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:15 2013.
 </div>
 </span></body></html>

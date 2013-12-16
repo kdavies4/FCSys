@@ -3,7 +3,7 @@
 <title>FCSys.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dynamic models of chemical species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -484,8 +484,12 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Deltap[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">Delta</font>
     (boundaries.p) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Differences in pressures across the boundaries&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Hprimedot[n_trans, Side](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = (<font color="red">Data.h</font>(boundaries.T, boundaries.p) + Data.m*phi_boundaries .^ 2/2) .*
+    boundaries.Ndot <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Flow rates of enthalpy + kinetic energy into the boundaries&quot;</font>;
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Potentials and current</font>
+  <font color="darkgreen">// Potentials</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_boundaries[n_trans, Side](<font color="blue">each </font>stateSelect=StateSelect.never)
      = <font color="red">Data.g</font>(boundaries.T, boundaries.p) <font color="blue">if </font>environment.analysis<font color="blue"> and </font><font color="blue">not </font>Data.isCompressible
     <font color="darkgreen">&quot;Gibbs potentials at the boundaries&quot;</font>;
@@ -501,16 +505,17 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="darkgreen">// Time constants</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_NT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
-    <font color="blue">each </font>start=U.s) = <font color="red">fill</font>(zeta*beta*N, n_trans) ./ Aprime <font color="blue">if </font>environment.analysis
+    <font color="blue">each </font>start=U.s) = <font color="red">fill</font>(zeta*beta*N, n_trans) ./ (2*Aprime) <font color="blue">if </font>environment.analysis
     <font color="darkgreen">&quot;Time constants for material transport&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_PhiT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
-    <font color="blue">each </font>start=U.s) = M*eta*kL ./ (Nu_Phi[cartTrans] .* Aprime) <font color="blue">if </font>environment.analysis
-    <font color="darkgreen">&quot;Time constants for transverse translational transport (through the whole subregion)&quot;</font>;
+    <font color="blue">each </font>start=U.s) = M*eta*kL ./ (2*Nu_Phi[cartTrans] .* Aprime) <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">
+    &quot;Time constants for transverse translational transport&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_QT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
-    <font color="blue">each </font>start=U.s) = (N*c_v*theta/Nu_Q)*kL ./ Aprime <font color="blue">if </font>environment.analysis <font color="darkgreen">
-    &quot;Time constants for thermal transport (through the whole subregion)&quot;</font>;
+    <font color="blue">each </font>start=U.s) = (N*c_v*theta/(2*Nu_Q))*kL ./ Aprime <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Time constants for thermal transport&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Peclet numbers</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_N[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = tau_NT .*
@@ -994,7 +999,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_QT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
-    <font color="blue">each </font>start=U.s) = N*c_v*theta*kL ./ Aprime <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    <font color="blue">each </font>start=U.s) = N*c_v*theta*kL ./ (2*Aprime) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Time constants for thermal transport (through the whole subregion)&quot;</font>;
 
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> DeltaT[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
@@ -1142,7 +1147,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     If two configurations
     are connected through their <code>intra</code>, <code>inter</code>, or <code>boundaries</code> connectors
     and both have zero generalized resistivities for a
-    quantity, then index reduction [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Mattsson1993B">Mattsson1993B</a>] is necessary.</li>
+    quantity, then index reduction [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Mattsson1993">Mattsson1993</a>] is necessary.</li>
 
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
@@ -1449,6 +1454,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:15 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:43 2013.
 </div>
 </span></body></html>

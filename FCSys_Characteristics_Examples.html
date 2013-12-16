@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -77,6 +77,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Evaluate the Leverett J function from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Wang2001">Wang2001</a>]</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.LatentHeat" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.LatentHeat">LatentHeat</a>
 </td><td>Evaluate the latent heat of vaporization of H<sub>2</sub>O</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.MobilityFactors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.MobilityFactors">MobilityFactors</a>
+</td><td>Test the mobility factors</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureS.png" alt="FCSys.Characteristics.Examples.SurfaceTension" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.SurfaceTension">SurfaceTension</a>
 </td><td>Evaluate the surface tension of H<sub>2</sub>O using the model of Garai</td></tr>
 </table>
@@ -493,6 +495,29 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </pre>
 <hr>
 
+<h2><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureI.png" alt="FCSys.Characteristics.Examples.MobilityFactors" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.Examples.MobilityFactors"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.MobilityFactors</h2>
+<b>Test the mobility factors</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> MobilityFactors <font color="darkgreen">&quot;Test the mobility factors&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">import </font><a href="FCSys_Characteristics_MobilityFactors.html#FCSys.Characteristics.MobilityFactors">FCSys.Characteristics.MobilityFactors</a>.*;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> H2_H2O=<font color="red">k_H2_H2O</font>() <font color="darkgreen">&quot;Between H2 and H2O&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> H2O_N2=<font color="red">k_H2O_N2</font>() <font color="darkgreen">&quot;Between H2O and N2&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> H2O_O2=<font color="red">k_H2O_O2</font>() <font color="darkgreen">&quot;Between H2O and O2&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> N2_O2=<font color="red">k_N2_O2</font>() <font color="darkgreen">&quot;Between N2 and O2&quot;</font>;
+<font color="blue">end </font>MobilityFactors;
+</pre>
+<hr>
+
 <h2><img src="images/FCSys.Characteristics.Exab514ea702d40b884ssureI.png" alt="FCSys.Characteristics.Examples.SurfaceTension" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.Examples.SurfaceTension"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.SurfaceTension</h2>
 <b>Evaluate the surface tension of H<sub>2</sub>O using the model of Garai</b>
@@ -594,6 +619,6 @@ Extends from <a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:34:34 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:50 2013.
 </div>
 </span></body></html>

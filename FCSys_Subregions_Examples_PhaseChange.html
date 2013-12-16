@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Examples.PhaseChange</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-13">
+<meta name="date" content="2013-12-18">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples of phase change">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a></span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -64,15 +64,15 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.EchoS.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Evaporation">Evaporation</a>
-</td><td>Evaporation of H<sub>2</sub>O vapor</td></tr>
+</td><td>Evaporation of H<sub>2</sub>O</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Examples.EchoS.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange.Hydration">Hydration</a>
-</td><td>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</td></tr>
+</td><td>Test absorption of H<sub>2</sub>O vapor into the ionomer</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.Examples0491e193341adc39ationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.PhaseChange.Evaporation"></a><a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange">FCSys.Subregions.Examples.PhaseChange</a>.Evaporation</h2>
-<b>Evaporation of H<sub>2</sub>O vapor</b>
+<b>Evaporation of H<sub>2</sub>O</b>
 <img src="images/FCSys.Subregions.Examples0491e193341adc39ationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Evaporation">
 
 <h3>Information</h3>
@@ -106,7 +106,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> Evaporation <font color="darkgreen">&quot;Evaporation of H<sub>2</sub>O vapor&quot;</font>
+<font color="blue">model</font> Evaporation <font color="darkgreen">&quot;Evaporation of H<sub>2</sub>O&quot;</font>
 
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p_sat=<font color="red">Characteristics.H2O.p_sat</font>(subregion.gas.H2O.T) <font color="darkgreen">
     &quot;Saturation pressure via Modelica.Media&quot;</font>;
@@ -118,7 +118,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     subregion(
       volume(inclCapillary=false),
       liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
-      gas(H2O(p_IC=U.kPa, initMaterial=FCSys.Species.Enumerations.Init.none))));
+      gas(H2O(p_IC=U.kPa))));
 
 <font color="blue">end </font>Evaporation;
 </pre>
@@ -126,7 +126,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 <h2><img src="images/FCSys.Subregions.Examples0491e193341adc39ationI.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.PhaseChange.Hydration"></a><a href="FCSys_Subregions_Examples_PhaseChange.html#FCSys.Subregions.Examples.PhaseChange">FCSys.Subregions.Examples.PhaseChange</a>.Hydration</h2>
-<b>Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer</b>
+<b>Test absorption of H<sub>2</sub>O vapor into the ionomer</b>
 <img src="images/FCSys.Subregions.Examples0491e193341adc39ationD.png" alt="FCSys.Subregions.Examples.PhaseChange.Hydration">
 
 <h3>Information</h3>
@@ -161,7 +161,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 <pre>
 <font color="blue">model</font> Hydration <font color="darkgreen">
-  &quot;Test absorption and desorption of H<sub>2</sub>O between the gas and ionomer&quot;</font>
+  &quot;Test absorption of H<sub>2</sub>O vapor into the ionomer&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(
     &#39;inclSO3-&#39;=true,
     inclH2O=true,
@@ -183,6 +183,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Thu Dec 12 11:33:52 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:37 2013.
 </div>
 </span></body></html>
