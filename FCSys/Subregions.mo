@@ -997,9 +997,9 @@ package Subregions
       annotation (Placement(transformation(extent={{88,-46},{108,-26}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={2,2,2}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={3,3,3}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={10,10,10}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1046,7 +1046,7 @@ package Subregions
     Connectors.InertNode exchCommon "Connector for exchange among all species"
       annotation (HideResult=true, Placement(transformation(extent={{76,32},{96,
               52}}), iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertNode gasLiqExch
+    Connectors.InertNode exchGasLiq
       "Connector for exchange between gas and liquid" annotation (HideResult=
           true, Placement(transformation(extent={{76,44},{96,64}}),
           iconTransformation(extent={{100,18},{120,38}})));
@@ -1241,11 +1241,11 @@ package Subregions
         color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
-    connect(gas.inter[2], gasLiqExch.node) annotation (Line(
+    connect(gas.inter[2], exchGasLiq.node) annotation (Line(
         points={{-25,-7.5},{-25,54},{86,54}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(liquid.inter[2], gasLiqExch.node) annotation (Line(
+    connect(liquid.inter[2], exchGasLiq.node) annotation (Line(
         points={{-65,-7.5},{-65,54},{86,54}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1278,11 +1278,11 @@ process, there is a difference.</li></ol></p>
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-              extent={{78,-44},{118,-50}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="(connections not shown
+            extent={{78,-44},{118,-50}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="(connections not shown
 on diagram)")}));
   end Subregion;
 
@@ -1410,9 +1410,9 @@ on diagram)")}));
               -22},{-30,-2}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={2,2,2}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={3,3,3}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq(k_Phi={2,2,2}) "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={10,10,10}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1454,7 +1454,7 @@ on diagram)")}));
     Connectors.InertNode exchCommon "Among all phases" annotation (HideResult=
           true, Placement(transformation(extent={{56,32},{76,52}}),
           iconTransformation(extent={{100,18},{120,38}})));
-    Connectors.InertNode gasLiqExch "Between gas and liquid" annotation (
+    Connectors.InertNode exchGasLiq "Between gas and liquid" annotation (
         HideResult=true, Placement(transformation(extent={{56,44},{76,64}}),
           iconTransformation(extent={{100,18},{120,38}})));
 
@@ -1603,11 +1603,11 @@ on diagram)")}));
         color={221,23,47},
         smooth=Smooth.None));
     // Gas-liquid
-    connect(gas.inter[2], gasLiqExch.node) annotation (Line(
+    connect(gas.inter[2], exchGasLiq.node) annotation (Line(
         points={{-5,-7.5},{-5,54},{66,54}},
         color={221,23,47},
         smooth=Smooth.None));
-    connect(liquid.inter[2], gasLiqExch.node) annotation (Line(
+    connect(liquid.inter[2], exchGasLiq.node) annotation (Line(
         points={{-45,-7.5},{-45,54},{66,54}},
         color={221,23,47},
         smooth=Smooth.None));
@@ -1626,6 +1626,7 @@ on diagram)")}));
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));
+
   end SubregionNoIonomer;
 
   partial model PartialSubregion

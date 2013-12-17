@@ -578,7 +578,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final V_IC,
           final T_IC,
           final consMaterial,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={0},
+          final tauprime,
           n_chem=1,
           final initMaterial=Init.none);
 
@@ -630,8 +630,8 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
           final g_IC,
           final rho_IC,
           final p_IC,
-          redeclare parameter Q.TimeAbsolute tauprime[:]={0,0.1e9*Data.tauprime(),
-              2e12*Data.tauprime()},
+          redeclare parameter Q.TimeAbsolute tauprime[:]={0,1e8,2e11}*
+              Data.tauprime(),
           n_chem=3,
           final V_IC=epsilon_IC*product(L),
           initMaterial=Init.volume);
@@ -2171,16 +2171,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

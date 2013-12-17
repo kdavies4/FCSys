@@ -279,9 +279,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             H2O(materialSet(y=fill(
                           environment.p,
                           cell.caFP.n_x,
-                          cell.n_z) - p_N2_out - caSink.gas.O2.p), redeclare
-                function materialMeas =
-                  Conditions.ByConnector.Boundary.Single.Material.volumeRate),
+                          cell.n_z) - p_N2_out - caSink.gas.O2.p)),
             N2(
               redeclare function materialSpec =
                   Conditions.ByConnector.Boundary.Single.Material.current,
@@ -310,10 +308,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
           annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
         replaceable Modelica.Electrical.Analog.Sources.RampCurrent load(
-          duration=3600,
-          startTime=60,
+          offset=0.0001,
+          startTime=180,
           I=150,
-          offset=0.0001) constrainedby
+          duration=36000) constrainedby
           Modelica.Electrical.Analog.Interfaces.TwoPin "Electrical load"
           annotation (Placement(transformation(extent={{10,-60},{-10,-40}})));
         Modelica.Electrical.Analog.Basic.Ground ground
@@ -466,7 +464,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               "Assemblies.Cells.Examples.TestStand.mos", file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStand-states.mos"
               "Assemblies.Cells.Examples.TestStand-states.mos"),
-          experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
+          experiment(StopTime=36180, __Dymola_Algorithm="Dassl"),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-80},
                   {80,60}}), graphics),
           __Dymola_experimentSetupOutput);
@@ -504,7 +502,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
         import DataO2 = FCSys.Characteristics.O2.Gas;
 
         extends TestStand(
-          redeclare SimpleCell cell,
+          redeclare SimpleCell cell(inclN2=environment.psi_O2_dry < 1 -
+                Modelica.Constants.eps),
           Deltaw_O2=(DataO2.g(caSource[1, 1].gas.O2.boundary.T, caSource[1, 1].gas.O2.boundary.p)
                - cell.caCGDL.subregions[1, 1, 1].gas.O2.g)/4,
           Deltaw_H2O=(DataH2O.g(caSource[1, 1].gas.H2O.boundary.T, caSource[1,
@@ -528,7 +527,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           Commands(file=
                 "Resources/Scripts/Dymola/Assemblies.Cells.Examples.TestStandSimple.mos"
               "Assemblies.Cells.Examples.TestStandSimple.mos"),
-          experiment(StopTime=3660, __Dymola_Algorithm="Dassl"),
+          experiment(StopTime=36180, __Dymola_Algorithm="Dassl"),
           __Dymola_experimentSetupOutput);
 
       end TestStandSimple;
@@ -564,7 +563,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             environment(analysis=false));
 
         annotation (experiment(
-            StopTime=3660,
+            StopTime=36180,
             Tolerance=1e-005,
             __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput);
       end TestStandSegmented;
@@ -586,12 +585,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
           startTime=60)
           "Specify the equivalent current of the cathode supplies"
           annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
-        annotation (experiment(StopTime=3720), __Dymola_experimentSetupOutput);
+        annotation (experiment(StopTime=36120),__Dymola_experimentSetupOutput);
       end TestStandFixedFlow;
+
 
       model TestStandFixedFlowSegmented
         "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
-        parameter Integer n_y=6 "Number of segments in the y direction"
+        parameter Integer n_y=8 "Number of segments in the y direction"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
 
@@ -604,12 +604,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
           environment(analysis=false));
 
         annotation (
-          experiment(StopTime=3720),
+          experiment(StopTime=36120),
           __Dymola_experimentSetupOutput,
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-80},
                   {80,60}}), graphics));
       end TestStandFixedFlowSegmented;
-
     end Examples;
     extends Modelica.Icons.Package;
 

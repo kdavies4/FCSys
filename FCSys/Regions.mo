@@ -1374,7 +1374,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             gas(
               common(k_Phi={inf,inf,inf}),
               H2_H2O(k_Phi={inf,inf,inf}),
-              k={epsilon/2,20.3/n_y,n_y/20.3},
+              k={0.22*epsilon,20.3/n_y,n_y/20.3},
               inclH2=true,
               inclH2O=true,
               H2(
@@ -1394,7 +1394,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              k={epsilon/2,20.3/n_y,n_y/20.3},
+              k={0.22*epsilon,20.3/n_y,n_y/20.3},
               inclH2O=true,
               H2O(
                 upstreamX=false,
@@ -1477,7 +1477,7 @@ thickness of the flow plate. It is equal to the product of two ratios:<ol>
 <li>the depth of the channels to the thickness of the flow plate</li>
 <li>the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
 the total volume available for the fluid (&epsilon;) to the area of the valleys in the yz plane</li>
-</ol> The default is &epsilon;/2.</p>
+</ol></p>
 
 <p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Species.'C+'.Graphite.Fixed</a>
 regarding the default specific heat capacity.  The default thermal resistivity
@@ -1635,7 +1635,7 @@ text layer of this model.</p>
       // used.
 
       extends Region(
-        L_x={0.3}*U.mm,
+        L_x={0.235}*U.mm,
         L_y={8}*U.cm,
         L_z={6.25}*U.cm,
         final inclTransX=true,
@@ -1666,8 +1666,8 @@ text layer of this model.</p>
               k=fill((1 - epsilon)^(-0.5), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,final
-                  epsilon=1 - epsilon),
+              'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,final epsilon=1
+                     - epsilon),
               'e-'(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
             liquid(
               k=fill(epsilon^(-0.5), 3),
@@ -1676,7 +1676,6 @@ text layer of this model.</p>
                 upstreamX=false,
                 epsilon_IC=1e-5,
                 final eta=0,
-                mu=200*Characteristics.H2O.Liquid.mu(),
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
                 T(each stateSelect=StateSelect.default))),
@@ -1690,7 +1689,7 @@ text layer of this model.</p>
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.80 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -1702,7 +1701,7 @@ The x axis extends from the anode to the cathode.
 
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.
+<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 24 BC GDs.
 
 The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
 
@@ -2048,7 +2047,7 @@ that reference may be outdated).
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'H+'(initEnergy=Init.none, sigma=U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
               'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
                     stateSelect=StateSelect.default)),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
@@ -2061,7 +2060,6 @@ that reference may be outdated).
                 epsilon_IC=1e-5,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=200*Characteristics.H2O.Liquid.mu(),
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
             volume(kappa=1e-5*U.mm^2)),
@@ -2225,10 +2223,9 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.4,0.4,0.4}),
+          common(each k_Phi={0.35,0.35,0.35}),
           gas(H2(each final eta=0), H2O(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=11*U.S/U.cm)),
-
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=4*U.S/U.cm)),
 
           liquid(H2O(each final eta=0))));
 
@@ -2255,7 +2252,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       // used.
 
       extends Region(
-        L_x={100}*U.um,
+        L_x={40}*U.um,
         L_y={8}*U.cm,
         L_z={6.25}*U.cm,
         final inclTransX=true,
@@ -2267,7 +2264,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(initEnergy=Init.none, sigma=U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
               H2O(initEnergy=Init.none,upstreamX=false))),
         subregions(ionomer('H+'(consTransX={{{if x > 1 or (y == 1 and z == 1)
                    then ConsTrans.steady else ConsTrans.dynamic for z in 1:n_z}
@@ -2556,7 +2553,7 @@ although in reality there is inductance.</p>
               inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
                     stateSelect=StateSelect.default)),
-              'H+'(initEnergy=Init.none, sigma=U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
@@ -2567,7 +2564,6 @@ although in reality there is inductance.</p>
                 epsilon_IC=1e-5,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=200*Characteristics.H2O.Liquid.mu(),
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
             volume(kappa=1e-5*U.mm^2)),
@@ -2703,6 +2699,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
               textString="%name",
               visible=not inclTransY,
               lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2712,12 +2709,12 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
         L_x={(28.7*U.um + 0.3*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.4,0.4,0.4}),
+          common(each k_Phi={0.35,0.35,0.35}),
           gas(
             H2O(each final eta=0),
             N2(each final eta=0),
             O2(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=11*U.S/U.cm)),
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=4*U.S/U.cm)),
 
           liquid(H2O(each final eta=0))));
 
@@ -2744,7 +2741,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
       // used.
 
       extends Region(
-        L_x={0.3}*U.mm,
+        L_x={0.235}*U.mm,
         L_y={8}*U.cm,
         L_z={6.25}*U.cm,
         final inclTransX=true,
@@ -2794,7 +2791,6 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
                 final eta=0,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
-                mu=200*Characteristics.H2O.Liquid.mu(),
                 T(each stateSelect=StateSelect.default))),
             volume(kappa=1e-4*U.mm^2))) annotation (IconMap(primitivesVisible=
               false));
@@ -2806,7 +2802,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.88 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.80 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -3127,7 +3123,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
               H2O_N2(k_Phi={inf,inf,inf}),
               H2O_O2(k_Phi={inf,inf,inf}),
               N2_O2(k_Phi={inf,inf,inf}),
-              k={epsilon/2,13.3/n_y,n_y/13.3},
+              k={0.17*epsilon,13.3/n_y,n_y/13.3},
               inclH2O=true,
               inclN2=true,
               inclO2=true,
@@ -3153,7 +3149,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
               'C+'(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
               'e-'(sigma=U.S/(1.470e-3*U.cm))),
             liquid(
-              k={epsilon/2,13.3/n_y,n_y/13.3},
+              k={0.17*epsilon,13.3/n_y,n_y/13.3},
               inclH2O=true,
               H2O(
                 upstreamX=false,
@@ -3185,7 +3181,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
 
       outer Conditions.Environment environment "Environmental conditions";
 
-// TODO: Include parameter for length of channel, add to anFP too.
+      // TODO: Include parameter for length of channel, add to anFP too.
 
       // See AnFPs.AnFP for data on additional materials.
       annotation (Documentation(info="<html>

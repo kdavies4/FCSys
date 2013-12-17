@@ -193,13 +193,14 @@ package Phases "Mixtures of species"
     output Q.PressureAbsolute p(stateSelect=StateSelect.never) = dalton.p if
       n_spec > 0 and environment.analysis "Total thermodynamic pressure";
 
-    Connectors.Chemical chemH2[1](each final n_trans=n_trans) if inclH2
+    Connectors.Chemical chemH2[H2.n_chem](each final n_trans=n_trans) if inclH2
       "Chemical connector for H2" annotation (Placement(transformation(extent={
               {-74,60},{-54,80}}), iconTransformation(extent={{-50,-50},{-30,-30}})));
-    Connectors.Chemical chemH2O[2](each final n_trans=n_trans) if inclH2O
-      "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-34,60},{-14,80}}), iconTransformation(extent={{-10,-50},{10,-30}})));
-    Connectors.Chemical chemO2[1](each final n_trans=n_trans) if inclO2
+    Connectors.Chemical chemH2O[H2O.n_chem](each final n_trans=n_trans) if
+      inclH2O "Chemical connector for H2O" annotation (Placement(transformation(
+            extent={{-34,60},{-14,80}}), iconTransformation(extent={{-10,-50},{
+              10,-30}})));
+    Connectors.Chemical chemO2[O2.n_chem](each final n_trans=n_trans) if inclO2
       "Chemical connector for O2" annotation (Placement(transformation(extent={
               {46,60},{66,80}}), iconTransformation(extent={{30,-50},{50,-30}})));
 
@@ -912,12 +913,14 @@ package Phases "Mixtures of species"
       "Connector to exchange momentum and energy with other phases" annotation
       (Placement(transformation(extent={{80,-34},{100,-14}}),
           iconTransformation(extent={{-60,60},{-40,40}})));
-    Connectors.Chemical chemH2O[1](each final n_trans=n_trans) if inclH2O
-      "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-14,52},{6,72}}), iconTransformation(extent={{10,-50},{30,-30}})));
-    Connectors.Chemical 'chemH+'[1](each final n_trans=n_trans) if 'inclH+'
-      "Chemical connector for H+" annotation (Placement(transformation(extent={
-              {-54,52},{-34,72}}), iconTransformation(extent={{-30,-50},{-10,-30}})));
+    Connectors.Chemical chemH2O[H2O.n_chem](each final n_trans=n_trans) if
+      inclH2O "Chemical connector for H2O" annotation (Placement(transformation(
+            extent={{-14,52},{6,72}}), iconTransformation(extent={{10,-50},{30,
+              -30}})));
+    Connectors.Chemical 'chemH+'['H+'.n_chem](each final n_trans=n_trans) if
+      'inclH+' "Chemical connector for H+" annotation (Placement(transformation(
+            extent={{-54,52},{-34,72}}), iconTransformation(extent={{-30,-50},{
+              -10,-30}})));
 
     // Independence factors
     ExchangeParams common(k_Phi={inf,inf,inf},k_Q=0) if n_spec > 0
@@ -926,12 +929,11 @@ package Phases "Mixtures of species"
     ExchangeParams 'H+_SO3-'(final k_Phi, k_Q=inf) if 'inclSO3-' or 'inclH+'
       "<html>Between H<sup>+</sup> and SO<sub>3</sub><sup>-</sup>)</html>"
       annotation (Dialog(group="Exchange (click to edit)"));
-    ExchangeParams 'H+_H2O'(k_Phi={0.005,0.005,0.005}, k_Q=inf) if 'inclH+' or
+    ExchangeParams 'H+_H2O'(k_Phi={0.02,0.02,0.02}, k_Q=inf) if 'inclH+' or
       inclH2O "<html>Between H<sup>+</sup> and H<sub>2</sub>O</html>"
       annotation (Dialog(group="Exchange (click to edit)"));
 
-    ExchangeParams 'H2O_SO3-'(k_Phi={20,20,20}, k_Q=inf) if 'inclSO3-' or
-      inclH2O
+    ExchangeParams 'H2O_SO3-'(k_Phi={1,1,1}, k_Q=inf) if 'inclSO3-' or inclH2O
       "<html>Between H<sub>2</sub>O and SO<sub>3</sub><sup>-</sup></html>"
       annotation (Dialog(group="Exchange (click to edit)"));
 
@@ -1153,6 +1155,7 @@ package Phases "Mixtures of species"
               100,80}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
               100}}), graphics));
+
   end Ionomer;
 
   model Liquid "Liquid phase"
@@ -1219,9 +1222,10 @@ package Phases "Mixtures of species"
     Connectors.Amagat amagat if n_spec > 0 "Connector for additivity of volume"
       annotation (Placement(transformation(extent={{-60,0},{-40,20}}),
           iconTransformation(extent={{70,-90},{90,-70}})));
-    Connectors.Chemical chemH2O[3](each final n_trans=n_trans) if inclH2O
-      "Chemical connector for H2O" annotation (Placement(transformation(extent=
-              {{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+    Connectors.Chemical chemH2O[H2O.n_chem](each final n_trans=n_trans) if
+      inclH2O "Chemical connector for H2O" annotation (Placement(transformation(
+            extent={{-40,20},{-20,40}}), iconTransformation(extent={{-10,-50},{
+              10,-30}})));
 
   protected
     Conditions.Adapters.AmagatDalton amagatDalton if n_spec > 0
