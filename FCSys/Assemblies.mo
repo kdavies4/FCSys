@@ -306,7 +306,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           a={0,0,0},
           T=333.13*U.K,
           p=U.from_kPag(48.3),
-          RH=0.65) "Environmental conditions"
+          RH=testConditions.anRH) "Environmental conditions"
           annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
         replaceable Modelica.Electrical.Analog.Sources.RampCurrent load(

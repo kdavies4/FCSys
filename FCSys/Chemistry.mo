@@ -235,23 +235,19 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-20,30},{-20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,30},{20,-30}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{-20,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None)}));
+                100,100}}), graphics={Line(
+                  points={{-20,30},{-20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,30},{20,-30}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{-20,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{20,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None)}));
     end DoubleLayer;
 
     model ElectronTransfer "Electron transfer"
@@ -330,30 +326,25 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{0,-20},{0,-50}},
-              color={221,23,47},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,0},{50,0}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-30,20},{32,-20}},
-              lineColor={255,195,38},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-20,4},{20,4},{8,12}},
-              color={255,195,38},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,-5},{20,-5},{8,3}},
-              color={255,195,38},
-              smooth=Smooth.None,
-              origin={0,-11},
-              rotation=180)}));
+                100,100}}), graphics={Line(
+                  points={{0,-20},{0,-50}},
+                  color={221,23,47},
+                  smooth=Smooth.None),Line(
+                  points={{-50,0},{50,0}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-30,20},{32,-20}},
+                  lineColor={255,195,38},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-20,4},{20,4},{8,12}},
+                  color={255,195,38},
+                  smooth=Smooth.None),Line(
+                  points={{-20,-5},{20,-5},{8,3}},
+                  color={255,195,38},
+                  smooth=Smooth.None,
+                  origin={0,-11},
+                  rotation=180)}));
     end ElectronTransfer;
 
   end Electrochemistry;
@@ -426,15 +417,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -528,15 +518,14 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-            extent={{-100,40},{100,-50}},
-            pattern=LinePattern.Dash,
-            lineColor={127,127,127},
-            radius=15,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
-              fileName=
-                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
-
+              extent={{-100,40},{100,-50}},
+              pattern=LinePattern.Dash,
+              lineColor={127,127,127},
+              radius=15,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
+            fileName=
+            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
@@ -730,37 +719,32 @@ public
     
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Polygon(
-            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
-                -60}},
-            lineColor={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
-            lineColor={191,191,191},
-            smooth=Smooth.Bezier,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-40,8},{20,-30}},
-            lineColor={85,170,255},
-            fillPattern=FillPattern.Sphere,
-            fillColor={255,255,255}),
-          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
-          Line(
-            points={{-60,20},{20,20},{20,-60}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None),
-          Line(
-            points={{60,60},{20,20}},
-            color={0,0,0},
-            pattern=LinePattern.Dash,
-            smooth=Smooth.None)}),
+              100}}), graphics={Polygon(
+              points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+              -60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Polygon(
+              points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+              lineColor={191,191,191},
+              smooth=Smooth.Bezier,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{-40,8},{20,-30}},
+              lineColor={85,170,255},
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255}),Ellipse(extent={{-40,8},{20,-30}},
+            lineColor={225,225,225}),Line(
+              points={{-60,20},{20,20},{20,-60}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None),Line(
+              points={{60,60},{20,20}},
+              color={0,0,0},
+              pattern=LinePattern.Dash,
+              smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
   end CapillaryVolume;

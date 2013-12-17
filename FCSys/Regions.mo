@@ -1666,7 +1666,7 @@ text layer of this model.</p>
               k=fill((1 - epsilon)^(-0.5), 3),
               'inclC+'=true,
               'incle-'=true,
-              'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5,final
+              'C+'(theta=U.m*U.K/(1.18*U.W)*(1 - epsilon)^1.5,final
                   epsilon=1 - epsilon),
               'e-'(sigma=40*U.S/(12*U.cm)/(1 - epsilon)^1.5)),
             liquid(
@@ -2585,42 +2585,15 @@ although in reality there is inductance.</p>
         "Exchange current density @ 300 K"
         annotation (Dialog(__Dymola_label="<html><i>J</i><sup>o</sup></html>"));
 
-      // Auxiliary variables (for analysis)
-      output Q.Potential Deltaw[n_y, n_z]=-subregions[n_x, :, :].graphite.'e-'.g_boundaries[
-          1, Side.p] - subregions[1, :, :].ionomer.'H+'.g_boundaries[1, Side.n]
-        if environment.analysis
-        "Electrical potential differences over the yz plane";
-
     protected
       outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
 
       annotation (Documentation(info="<html>
-<p>This model represents the cathode catalyst layer of a PEMFC.
-The x axis extends from the anode to the cathode.
-
-By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
-
-<p>The default thickness (<i>L</i><sub>x</sub> = <code>{28.7*U.um}</code>) is from [<a href=\"modelica://FCSys.UsersGuide.References.Gurau1998\">Gurau1998</a>].
-The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
-   represents a compressed SGL Sigracet 10 BA gas diffusion layer
-  [<a href=\"modelica://FCSys.UsersGuide.References.Nitta2008\">Nitta2008</a>].  The default
-  electronic mobility (&sigma; = <code>40*U.S/(12*U.cm)</code>)
-  is for SGL Carbon Group Sigracet&reg; 10 BA (see <a href=\"modelica://FCSys.Regions.CaGDLs.Sigracet10BA\">CAGDLs.Sigracet10BA</a>).  The
-
-  default activation energy for the oxygen reduction reaction (<code>E_A = 73.2e3*U.J/U.mol</code>) is from
-
-  [<a href=\"modelica://FCSys.UsersGuide.References.Sivertsen2005\">Sivertsen2005</a>].</p>
-
-<p>Default assumptions (may be adjusted):
-<ol>
-<li>All of the species have the same temperature, even in different phases.</li> 
-<li>Half of the solid is graphite and half is ionomer (by volume).</li>
-</ol></p>
-
-<p>For more information, please see the
-    <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
+<p>This model represents the cathode catalyst layer of a PEMFC. It is identical to 
+the anode catalyst layer except for the included species, the exchange current density (<i>J</i><sup>o</sup>), and the activation energy ().
+For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.anCL\">anCL</a> model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -2840,30 +2813,9 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
     protected
       outer Conditions.Environment environment "Environmental conditions";
       annotation (Documentation(info="<html>
-<p>This model represents the cathode gas diffusion layer of a PEMFC.
-The x axis extends from the anode to the cathode.
-
-By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
-
-<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 10 BA and 25 BA GDLs.
-
-The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
-
-[<a href=\"modelica://FCSys.UsersGuide.References.Bernardi1992\">Bernardi1992</a>, p. 2483], although
-that reference may be outdated).
-  The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
-   represents a compressed Sigracet&reg; 10 BA gas diffusion layer
-  [<a href=\"modelica://FCSys.UsersGuide.References.Nitta2008\">Nitta2008</a>].  The default
-  electrical conductivity
-  is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].</p>
-
-<p>Default assumptions (may be adjusted):
-<ol>
-<li>All of the species have the same temperature, even in different phases.</li> 
-</ol></p>
-
-<p>For more information, please see the
-    <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
+<p> This model represents the cathode gas diffusion layer of a PEMFC.   It is identical to 
+the anode gas diffusion layer except for the included species.
+For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.anGDL\">anGDL</a> model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -3233,45 +3185,15 @@ that reference may be outdated).
 
       outer Conditions.Environment environment "Environmental conditions";
 
+// TODO: Include parameter for length of channel, add to anFP too.
+
       // See AnFPs.AnFP for data on additional materials.
       annotation (Documentation(info="<html>
-<p>This model represents the cathode flow plate of a PEMFC.
-The x axis extends from the anode to the cathode.
-Fluid is considered to travel
-in the y direction, with the associated length factor (<i>k</i><sub>y</sub>) greater than one (by default)
-to represent a serpentine channel.
-The model is
-bidirectional, meaning that either <code>yNegative</code> or <code>yPositive</code> can be
-used as the inlet.  By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
-
-<p>The solid and the fluid phases are assumed to exist in the same subregions, 
-even though a 
-typical flow plate is impermeable
-to the fluid (except for the channel).  
-In theory, it is possible
-to discretize the flow plate into smaller subregions for the bulk solid, lands, and valleys.  However,
-this would significantly increase the mathematical size of the model.  Currently, that level of detail is best left to
-computational fluid dynamics.</p>
- 
-<p>The x axis-component of the transport factor (<i>k</i><sub>x</sub>) for the gas and the liquid should
-generally be less than one because the transport distance into/out of the GDL is less that half the 
-thickness of the flow plate. It is equal to the product of two ratios:<ol>
-<li>the depth of the channels to the thickness of the flow plate</li>
-<li>the product of the total area of the flow plate in the yz plane (land + valleys) and the fraction of
-the total volume available for the fluid (&epsilon;) to the area of the valleys in the yz plane</li>
-</ol> The default is &epsilon;/2.</p>
-
-<p>See <a href=\"modelica://FCSys.Species.'C+'.Graphite.Fixed\">Species.'C+'.Graphite.Fixed</a>
-regarding the default specific heat capacity.  The default thermal resistivity
-of the carbon (&theta; = <code>U.m*U.K/(95*U.W)</code>) and the
-electrical conductivity (&sigma; = <code>U.S/(1.470e-3*U.cm)</code>)
-are that of Entegris/Poco Graphite AXF-5Q
-[<a href=\"modelica://FCSys.UsersGuide.References.Entegris2012\">Entegris2012</a>].
-  There is additional data in the
-text layer of the <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">AnFP</a> model.</p>
-
-<p>For more information, please see the
-    <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
+<p>This model represents the cathode flow plate of a PEMFC.  It is identical to 
+the anode flow plate except for the included species, the default length of the 
+channel, and the fraction of the volume for the fluid (&epsilon;).
+For more information, please see the 
+<a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">anFP</a> model.</p>
 </html>"), Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
