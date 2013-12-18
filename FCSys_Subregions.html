@@ -3,7 +3,7 @@
 <title>FCSys.Subregions</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Control volumes with multi-species transport, storage, and exchange">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -134,6 +134,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
 
 <pre>
 <font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
 
   <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec + graphite.n_spec + ionomer.n_spec
          + liquid.n_spec);
@@ -169,8 +170,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     &quot;Oxygen reduction reaction&quot;</font>;
 
   <font color="darkgreen">// Independence factors</font>
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={3,3,3}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={10,10,10}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={1.7,1.7,1.7}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={inf,inf,inf}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
     &quot;Negative boundary along the x axis&quot;</font>;
@@ -416,6 +417,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
 
 <pre>
 <font color="blue">model</font> SubregionNoIonomer <font color="darkgreen">&quot;Subregion with all phases except ionomer&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
+
   <font color="blue">extends </font><a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">PartialSubregion</a>(<font color="blue">final </font>n_spec=gas.n_spec + graphite.n_spec + liquid.n_spec);
 
   <a href="FCSys_Phases.html#FCSys.Phases.Gas">FCSys.Phases.Gas</a> gas(
@@ -437,8 +440,8 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
     <font color="blue">final </font>k_inter_Q={common.k_Q,gasLiq.k_Q}) <font color="darkgreen">&quot;Liquid&quot;</font>;
 
   <font color="darkgreen">// Independence factors</font>
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={3,3,3}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
-  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={10,10,10}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> common(k_Phi={1.7,1.7,1.7}) <font color="darkgreen">&quot;Among all phases&quot;</font>;
+  <a href="FCSys_Phases.html#FCSys.Phases.ExchangeParams">Phases.ExchangeParams</a> gasLiq(k_Phi={inf,inf,inf}) <font color="darkgreen">&quot;Between gas and liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> xNegative <font color="blue">if </font>inclTransX <font color="darkgreen">
     &quot;Negative boundary along the x axis&quot;</font>;
@@ -595,6 +598,6 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.PartialSubregion">P
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:35 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:53:00 2013.
 </div>
 </span></body></html>

@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -114,7 +114,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{0.235}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.80</td><td>Porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.8</td><td>Porosity [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
@@ -171,19 +171,19 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             initEnergy=Init.none,
             upstreamX=false,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
-            zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             <font color="blue">final </font>eta=0),
           N2(
             initEnergy=Init.none,
             upstreamX=false,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
-            zeta=100*<font color="red">Characteristics.N2.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             <font color="blue">final </font>eta=0),
           O2(
             initEnergy=Init.none,
             upstreamX=false,
             I(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
-            zeta=100*<font color="red">Characteristics.O2.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             <font color="blue">final </font>eta=0)),
         graphite(
           k=<font color="red">fill</font>((1 - epsilon)^(-0.5), 3),
@@ -202,7 +202,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
             <font color="blue">each </font>initEnergy=Init.none,
             T(<font color="blue">each </font>stateSelect=StateSelect.default))),
-        volume(kappa=1e-4*U.mm^2)));
+        volume(inclCapillary=true,capillary(R=22*U.um))));
 
   <font color="darkgreen">// Note:  The fluid species have zero fluidity (eta=0) so that the transverse</font>
   <font color="darkgreen">// velocity is zero at the interface with the flow plate.  That condition</font>
@@ -211,7 +211,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
   <font color="darkgreen">// settings of k for each phase.</font>
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.80 <font color="darkgreen">&quot;Porosity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.8 <font color="darkgreen">&quot;Porosity&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
@@ -901,6 +901,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:29 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:52:44 2013.
 </div>
 </span></body></html>

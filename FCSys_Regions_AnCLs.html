@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnCLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Anode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -160,12 +160,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           H2(
             initEnergy=Init.none,
             upstreamX=false,
-            zeta=100*<font color="red">Characteristics.H2.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true)),
           H2O(
             initEnergy=Init.none,
             upstreamX=false,
-            zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>())),
+            <font color="blue">final </font>zeta=0)),
         graphite(
           k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
           &#39;inclC+&#39;=true,
@@ -179,7 +179,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;inclSO3-&#39;=true,
           &#39;inclH+&#39;=true,
           inclH2O=true,
-          &#39;H+&#39;(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
           &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon),T(<font color="blue">each </font>fixed=false, <font color="blue">each </font>stateSelect
                 =StateSelect.default)),
           H2O(initEnergy=Init.none, phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">
@@ -194,7 +194,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             <font color="blue">each </font>initEnergy=Init.none,
             N0=0.1*U.C,
             T(<font color="blue">each </font>stateSelect=StateSelect.default))),
-        volume(kappa=1e-5*U.mm^2)),
+        volume(inclCapillary=true,capillary(R=5*U.um))),
     subregions(graphite(&#39;e-Transfer&#39;(<font color="blue">final </font>I0=J0*subregions.A[Axis.x]))));
 
   <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
@@ -236,7 +236,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.A
 <tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.Subregion (common&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>J0</td><td>U.A/U.cm^2</td><td>Exchange current density @ 300 K [N/(L2.T)]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{(28.7*U.um + 0.3*U.mm)}</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{(28.7*U.um + 0.235*U.mm)}</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.5</td><td>Porosity [1]</td></tr>
@@ -267,12 +267,13 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.A
   <font color="blue">import </font>Modelica.Constants.inf;
 
   <font color="blue">extends </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.AnCL</a>(
-    L_x={(28.7*U.um + 0.3*U.mm)},
+    L_x={(28.7*U.um + 0.235*U.mm)},
     epsilon=0.5,
     subregions(
-      common(<font color="blue">each </font>k_Phi={0.35,0.35,0.35}),
+      common(<font color="blue">each </font>k_Phi={0.22,0.22,0.22}),
       gas(H2(<font color="blue">each </font><font color="blue">final </font>eta=0), H2O(<font color="blue">each </font><font color="blue">final </font>eta=0)),
-      ionomer(&#39;H+_H2O&#39;(<font color="blue">each </font>k_Phi={0.1,0.1,0.1}),&#39;H+&#39;(<font color="blue">each </font>sigma=4*U.S/U.cm)),
+      ionomer(&#39;H+_H2O&#39;(<font color="blue">each </font>k_Phi={0.1,0.1,0.1}),&#39;H+&#39;(<font color="blue">each </font>sigma=3.5*U.S/U.cm)),
+
       liquid(H2O(<font color="blue">each </font><font color="blue">final </font>eta=0))));
 
 <font color="blue">end </font>AnCGDL;
@@ -285,6 +286,6 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.A
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:07 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:52:22 2013.
 </div>
 </span></body></html>

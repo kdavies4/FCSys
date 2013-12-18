@@ -3,7 +3,7 @@
 <title>FCSys.Regions.AnFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -167,7 +167,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
         (
         common(k_Phi={1e7,inf,1e7},k_Q=1e5),
-        gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
         gas(
           common(k_Phi={inf,inf,inf}),
           H2_H2O(k_Phi={inf,inf,inf}),
@@ -177,12 +176,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           H2(
             upstreamX=false,
             Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-            zeta=100*<font color="red">Characteristics.H2.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             T(stateSelect=StateSelect.always)),
           H2O(
             upstreamX=false,
             Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-            zeta=100*<font color="red">Characteristics.H2O.Gas.zeta</font>(),
+            <font color="blue">final </font>zeta=0,
             I(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
             initEnergy=Init.none)),
         graphite(
@@ -197,8 +196,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
             upstreamX=false,
             Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
             epsilon_IC=1e-5,
-            N0=0.1*U.C)),
-        volume(inclCapillary=false)));
+            N0=0.1*U.C))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.0588 <font color="darkgreen">
     &quot;Fraction of volume for the fluid&quot;</font>;
@@ -255,6 +253,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:25:53 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:52:09 2013.
 </div>
 </span></body></html>

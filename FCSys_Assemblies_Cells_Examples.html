@@ -3,7 +3,7 @@
 <title>FCSys.Assemblies.Cells.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -367,9 +367,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     a={0,0,0},
+    RH=testConditions.anRH,
     T=333.13*U.K,
-    p=<font color="red">U.from_kPag</font>(48.3),
-    RH=testConditions.anRH) <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+    p=<font color="red">U.from_kPag</font>(202)) <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Electrical_Analog_Sources.html#Modelica.Electrical.Analog.Sources.RampCurrent">Modelica.Electrical.Analog.Sources.RampCurrent</a> load(
     offset=0.0001,
@@ -452,9 +452,12 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 <font color="blue">model</font> TestStandCycle <font color="darkgreen">
   &quot;Simulate the fuel cell under prescribed conditions, with cyclical load&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">TestStand</a>(
-    cell(anCL(subregions(graphite(<font color="blue">each </font>inclDL=true, &#39;e-Transfer&#39;(<font color="blue">each </font>fromI=false)))),
-        caCL(subregions(graphite(<font color="blue">each </font>inclDL=true, &#39;e-Transfer&#39;(<font color="blue">each </font>fromI=false))))),
-
+    cell(
+      anCL(subregions(graphite(<font color="blue">each </font>inclDL=true, &#39;e-Transfer&#39;(<font color="blue">each </font>fromI=false)),
+            ionomer(H2O(<font color="blue">each </font>lambda_IC=13.53)))),
+      PEM(subregions(ionomer(H2O(<font color="blue">each </font>lambda_IC=13.53)))),
+      caCL(subregions(graphite(<font color="blue">each </font>inclDL=true, &#39;e-Transfer&#39;(<font color="blue">each </font>fromI=false)),
+            ionomer(H2O(<font color="blue">each </font>lambda_IC=13.53))))),
     <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Electrical_Analog_Sources.html#Modelica.Electrical.Analog.Sources.SineCurrent">Modelica.Electrical.Analog.Sources.SineCurrent</a> load(
       freqHz=0.3,
       I=7,
@@ -519,8 +522,7 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
     &#39;Deltaw_H+&#39;=cell.anCGDL.subregions[1, 1, 1].ionomer.'H+'.g - cell.caCGDL.subregions[
         1, 1, 1].ionomer.'H+'.g,
     Deltaw_an=cell.anCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
-    Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
-    environment(analysis=true));
+    Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag);
 
 <font color="blue">end </font>TestStandSimple;
 </pre>
@@ -602,8 +604,7 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 
   <font color="blue">parameter </font>Integer n_y=6 <font color="darkgreen">&quot;Number of segments in the y direction&quot;</font>;
 
-  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">TestStand</a>(cell(inclLiq=false, L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y)), environment(
-        analysis=false));
+  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">TestStand</a>(cell(inclLiq=false, L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y)));
 
 <font color="blue">end </font>TestStandSegmented;
 </pre>
@@ -683,8 +684,7 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
     testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
     caFlowSet(startTime=0),
     anFlowSet(startTime=0),
-    load(startTime=0),
-    environment(analysis=false));
+    load(startTime=0));
 
 <font color="blue">end </font>TestStandFixedFlowSegmented;
 </pre>
@@ -696,6 +696,6 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:25:46 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:51:50 2013.
 </div>
 </span></body></html>

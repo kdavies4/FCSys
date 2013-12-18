@@ -3,7 +3,7 @@
 <title>FCSys.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Chemical reactions and related models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -71,8 +71,8 @@ Extends from <a href="FCSys_Icons_ChemistryPackage.html#FCSys.Icons.ChemistryPac
 </td><td>Hydrogen oxidation reaction</td></tr>
 <tr><td><img src="images/FCSys.Chemistry.ORRS.png" alt="FCSys.Chemistry.ORR" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.ORR">ORR</a>
 </td><td>Oxygen reduction reaction</td></tr>
-<tr><td><img src="images/FCSys.Chemistry.SurfaceTensionS.png" alt="FCSys.Chemistry.SurfaceTension" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a>
-</td><td>Surface tension</td></tr>
+<tr><td><img src="images/FCSys.Chemistry.CapillaryS.png" alt="FCSys.Chemistry.Capillary" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.Capillary">Capillary</a>
+</td><td>Young-Laplace model for capillary pressure</td></tr>
 <tr><td><img src="images/FCSys.Chemistry.CapillaryVolumeS.png" alt="FCSys.Chemistry.CapillaryVolume" width=20  height=20 align=top>&nbsp;<a href="FCSys_Chemistry.html#FCSys.Chemistry.CapillaryVolume">CapillaryVolume</a>
 </td><td>Volume with capillary pressure applied to the liquid</td></tr>
 </table>
@@ -230,10 +230,10 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Chemistry.SurfaceTensionI.png" alt="FCSys.Chemistry.SurfaceTension" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Chemistry.SurfaceTension"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.SurfaceTension</h2>
-<b>Surface tension</b>
-<img src="images/FCSys.Chemistry.SurfaceTensionD.png" alt="FCSys.Chemistry.SurfaceTension">
+<h2><img src="images/FCSys.Chemistry.CapillaryI.png" alt="FCSys.Chemistry.Capillary" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Chemistry.Capillary"></a><a href="FCSys_Chemistry.html#FCSys.Chemistry">FCSys.Chemistry</a>.Capillary</h2>
+<b>Young-Laplace model for capillary pressure</b>
+<img src="images/FCSys.Chemistry.CapillaryD.png" alt="FCSys.Chemistry.Capillary">
 
 <h3>Information</h3>
 
@@ -252,9 +252,10 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthReciprocal">LengthReciprocal</a></td><td>overR</td><td>1/U.mm</td><td>Reciprocal of characteristic radius [1/L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>R</td><td>U.um</td><td>Effective radius [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">SurfaceTension</a></td><td>gamma</td><td>0.0663*U.N/U.m</td><td>Surface tension [M/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Angle</a></td><td>theta</td><td>140*U.degree</td><td>Contact angle [A]</td></tr>
 </table>
 <p>
 
@@ -270,15 +271,16 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> SurfaceTension <font color="darkgreen">&quot;Surface tension&quot;</font>
+<font color="blue">model</font> Capillary <font color="darkgreen">&quot;Young-Laplace model for capillary pressure&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
 
   <font color="darkgreen">// Geometry</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.LengthReciprocal">Q.LengthReciprocal</a> overR=1/U.mm <font color="darkgreen">&quot;Reciprocal of characteristic radius&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> R=U.um <font color="darkgreen">&quot;Effective radius&quot;</font>;
 
   <font color="darkgreen">// Material properties</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">Q.SurfaceTension</a> gamma=0.0663*U.N/U.m <font color="darkgreen">&quot;Surface tension&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> theta=140*U.degree <font color="darkgreen">&quot;Contact angle&quot;</font>;
 
   <font color="darkgreen">// Auxiliary variables (for analysis only)</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Deltap=wetting.p - nonwetting.p <font color="blue">if </font>environment.analysis <font color="darkgreen">
@@ -292,12 +294,12 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Pressure relation</font>
-  nonwetting.p = wetting.p + 2*gamma*overR <font color="darkgreen">&quot;Young-Laplace equation&quot;</font>;
+  nonwetting.p = wetting.p + 2*gamma*<font color="red">cos</font>(theta)/R <font color="darkgreen">&quot;Young-Laplace equation&quot;</font>;
 
   <font color="darkgreen">// Conservation (without storage)</font>
   0 = wetting.V + nonwetting.V <font color="darkgreen">&quot;Volume&quot;</font>;
 
-<font color="blue">end </font>SurfaceTension;
+<font color="blue">end </font>Capillary;
 </pre>
 <hr>
 
@@ -330,18 +332,15 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Chemistry.html#FCSys.Chemistry.Capillary">Capillary</a></td><td>capillary</td><td>&nbsp;</td><td>Capillary model</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [L3]</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><td>Boolean</td><td>inclCapillary</td><td>true</td><td>Include capillary pressure</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">SurfaceTension</a></td><td>gamma</td><td>0.0663*U.N/U.m</td><td>Surface tension [M/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>kappa</td><td>6.46e-5*U.mm^2</td><td>Permeability [L2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Angle</a></td><td>theta</td><td>140*U.degree</td><td>Contact angle [A]</td></tr>
-<tr><TD colspan="2">replaceable function J</td><td>FCSys.Characteristics.H2O.J_&hellip;</td><td>Leverett <i>J</i>-function</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included phases</td></tr>
 <tr><td>Boolean</td><td>inclGas</td><td>true</td><td>Gas</td></tr>
 <tr><td>Boolean</td><td>inclLiquid</td><td>true</td><td>Liquid</td></tr>
 <tr><td>Boolean</td><td>inclSolid</td><td>true</td><td>Solid</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Capillary pressure</td></tr>
+<tr><td>Boolean</td><td>inclCapillary</td><td>false</td><td>Include capillary pressure</td></tr>
 </table>
 <p>
 
@@ -353,8 +352,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>gas</td><td>Interface to the gas phase</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>liquid</td><td>Interface to the liquid phase</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Amagat</a></td><td>solid</td><td>Interface to the solid phase</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
-<tr><TD colspan="2">replaceable function J</td><td>Leverett <i>J</i>-function</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -367,18 +364,14 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <font color="darkgreen">// Material properties</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V <font color="darkgreen">&quot;Volume&quot;</font>;
 
-  <font color="darkgreen">// Capillary pressure</font>
-  <font color="blue">parameter </font>Boolean inclCapillary=true <font color="darkgreen">&quot;Include capillary pressure&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.SurfaceTension">Q.SurfaceTension</a> gamma=0.0663*U.N/U.m <font color="darkgreen">&quot;Surface tension&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> kappa=6.46e-5*U.mm^2 <font color="darkgreen">&quot;Permeability&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> theta=140*U.degree <font color="darkgreen">&quot;Contact angle&quot;</font>;
-  <font color="blue">replaceable </font><font color="blue">function</font> J = <a href="FCSys_Characteristics_H2O.html#FCSys.Characteristics.H2O.J_identity">FCSys.Characteristics.H2O.J_identity</a> <font color="darkgreen">
-    &quot;Leverett <i>J</i>-function&quot;</font>;
-
   <font color="darkgreen">// Material properties</font>
   <font color="blue">parameter </font>Boolean inclGas=true <font color="darkgreen">&quot;Gas&quot;</font>;
   <font color="blue">parameter </font>Boolean inclLiquid=true <font color="darkgreen">&quot;Liquid&quot;</font>;
   <font color="blue">parameter </font>Boolean inclSolid=true <font color="darkgreen">&quot;Solid&quot;</font>;
+
+  <font color="darkgreen">// Capillary pressure</font>
+  <font color="blue">parameter </font>Boolean inclCapillary=false <font color="darkgreen">&quot;Include capillary pressure&quot;</font>;
+  <a href="FCSys_Chemistry.html#FCSys.Chemistry.Capillary">Capillary</a> capillary <font color="blue">if </font>inclLiquid<font color="blue"> and </font>inclCapillary <font color="darkgreen">&quot;Capillary model&quot;</font>;
 
   <font color="darkgreen">// Alias variables (for common terms)</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V_pore <font color="darkgreen">&quot;Pore volume&quot;</font>;
@@ -391,9 +384,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Connectors.Dalton</a> gas <font color="blue">if </font>inclGas <font color="darkgreen">&quot;Interface to the gas phase&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> liquid <font color="blue">if </font>inclLiquid <font color="darkgreen">&quot;Interface to the liquid phase&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.Amagat">Connectors.Amagat</a> solid <font color="darkgreen">&quot;Interface to the solid phase&quot;</font>;
-  <a href="FCSys_Chemistry.html#FCSys.Chemistry.SurfaceTension">SurfaceTension</a> surfaceTension(<font color="blue">final </font>gamma=gamma,<font color="blue">final </font>overR=<font color="red">cos</font>(theta)*<font color="red">J</font>(
-        liquid.V/V_pore)*<font color="red">sqrt</font>(V_pore/V/kappa)/2) <font color="blue">if </font>inclLiquid<font color="blue"> and </font>
-    inclCapillary <font color="darkgreen">&quot;Additional pressure on the liquid&quot;</font>;
 
   <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(<font color="blue">final </font>V=V) <font color="blue">if </font>inclGas<font color="blue"> or </font>
     inclLiquid <font color="darkgreen">&quot;Fixed volume&quot;</font>;
@@ -414,11 +404,12 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
       &quot;Directly connect liquid to the volume (not shown in diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
-  <font color="red">connect</font>(surfaceTension.wetting, liquid);
+  <font color="red">connect</font>(capillary.wetting, liquid);
   <font color="red">connect</font>(solid, amagatDalton.amagat);
   <font color="red">connect</font>(volume.amagat, amagatDalton.amagat);
   <font color="red">connect</font>(gas, amagatDalton.dalton);
-  <font color="red">connect</font>(surfaceTension.nonwetting, volume.amagat);
+  <font color="red">connect</font>(capillary.nonwetting, volume.amagat);
+
 <font color="blue">end </font>CapillaryVolume;
 </pre>
       </div>
@@ -429,6 +420,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:49 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 19:10:47 2013.
 </div>
 </span></body></html>

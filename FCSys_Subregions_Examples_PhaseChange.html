@@ -3,7 +3,7 @@
 <title>FCSys.Subregions.Examples.PhaseChange</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples of phase change">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -115,10 +115,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     inclH2O=true,
     inclH2=false,
     &#39;inclC+&#39;=true,
-    subregion(
-      volume(inclCapillary=false),
-      liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
-      gas(H2O(p_IC=U.kPa))));
+    subregion(liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)), gas(H2O(p_IC=U.kPa))));
 
 <font color="blue">end </font>Evaporation;
 </pre>
@@ -152,8 +149,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
-<tr><td>Boolean</td><td>inclH2O</td><td>true</td><td>Water vapor (H<sub>2</sub>O)</td></tr>
-<tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water vapor (H<sub>2</sub>O)</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>true</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
 <tr><td>Boolean</td><td>inclO2</td><td>false</td><td>Oxygen (O<sub>2</sub>)</td></tr>
 </table>
 
@@ -164,12 +161,21 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   &quot;Test absorption of H<sub>2</sub>O vapor into the ionomer&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(
     &#39;inclSO3-&#39;=true,
-    inclH2O=true,
+    inclN2=true,
     inclH2=false,
-    subregion(gas(H2O(consMaterial=ConsThermo.IC, N(stateSelect=StateSelect.always))),
-        ionomer(
+    subregion(
+      gas(N2(
+          consMaterial=ConsThermo.IC,
+          consEnergy=ConsThermo.IC,
+          p_IC=environment.p)),
+      liquid(inclH2O=true, H2O(
+          consMaterial=ConsThermo.IC,
+          consEnergy=ConsThermo.IC,
+          N(stateSelect=StateSelect.always),
+          epsilon_IC=0.3)),
+      ionomer(
         inclH2O=true,
-        &#39;SO3-&#39;(consEnergy=ConsThermo.IC),
+        &#39;SO3-&#39;(consEnergy=ConsThermo.IC,epsilon=0.3),
         H2O(lambda_IC=8,initEnergy=Init.none))),
     environment(T=333.15*U.K, RH=1));
 
@@ -183,6 +189,6 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:37 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:53:01 2013.
 </div>
 </span></body></html>

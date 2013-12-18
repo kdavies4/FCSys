@@ -3,7 +3,7 @@
 <title>FCSys.Regions.PEMs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-18">
+<meta name="date" content="2013-12-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
     </ul>
   </div>
 </div>
@@ -167,7 +167,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;inclH+&#39;=true,
           inclH2O=true,
           &#39;SO3-&#39;(<font color="blue">final </font>mu=0,<font color="blue">final </font>epsilon=1),
-          &#39;H+&#39;(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
           H2O(initEnergy=Init.none,upstreamX=false))),
     subregions(ionomer(&#39;H+&#39;(consTransX={{{<font color="blue">if </font>x &gt; 1<font color="blue"> or </font>(y == 1<font color="blue"> and </font>z == 1)<font color="blue"> then </font>
               ConsTrans.steady<font color="blue"> else </font>ConsTrans.dynamic <font color="blue">for </font>z<font color="blue"> in </font>1:n_z} <font color="blue">for </font>y<font color="blue"> in </font>1
@@ -603,6 +603,6 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Tue Dec 17 23:26:15 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:52:30 2013.
 </div>
 </span></body></html>
