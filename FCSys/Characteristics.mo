@@ -895,34 +895,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
     end Liquid;
 
-    function J "Leverett J function for H2O from [Wang2001]"
-      extends Modelica.Icons.Function;
 
-      input Q.NumberAbsolute x(max=1) "Liquid saturation"
-        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
-      output Real J "Result of Leverett correlation"
-        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
-
-    algorithm
-      J := FCSys.Utilities.Polynomial.f(x, {0.560,-0.966,1.669,-1.263});
-
-      annotation (Inline=true, Documentation(info="<html><p>
-    The coefficients are based on [<a href=\"modelica://FCSys.UsersGuide.References.Wang2001\">Wang2001</a>].</p></html>"));
-    end J;
-
-    function J_identity "Leverett J function that outputs one"
-      extends Modelica.Icons.Function;
-
-      input Q.NumberAbsolute x(max=1) "Liquid saturation"
-        annotation (Dialog(__Dymola_label="<html><i>x</i></html>"));
-      output Real J "Result of Leverett correlation"
-        annotation (Dialog(__Dymola_label="<html><i>J</i></html>"));
-
-    algorithm
-      J := 1;
-
-      annotation (Inline=true);
-    end J_identity;
 
     function p_sat
       "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"

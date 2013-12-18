@@ -62,6 +62,7 @@ lastdate=`git log -1 --format=%ai $lasttag`
     cd ..
     ./00-process-gh-pages.py
     rpl "vx.x.x</a>" "$lasttag</a> (${lastdate::10})" *.html
+    rpl "vx.x.x" "$lasttag" *.html
 )
 
 # Be sure that all of the files are added to git.

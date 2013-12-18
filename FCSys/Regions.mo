@@ -1399,9 +1399,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
                 epsilon_IC=1e-5,
-                N0=0.1*U.C)),
-            volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
-            =false));
+                N0=0.1*U.C)))) annotation (IconMap(primitivesVisible=false));
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.0588
         "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",
@@ -1678,8 +1676,8 @@ text layer of this model.</p>
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=1e-4*U.mm^2))) annotation (IconMap(primitivesVisible=
-              false));
+            volume(inclCapillary=true,capillary(R=32*U.um)))) annotation (
+          IconMap(primitivesVisible=false));
 
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
@@ -1700,17 +1698,19 @@ The x axis extends from the anode to the cathode.
 
 By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
-<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 24 BC GDs.
+<p>The default porosity (&epsilon; = 0.88) is that of SGL Carbon Group Sigracet&reg; 24 BC GDLs.
 
 The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
 
 [<a href=\"modelica://FCSys.UsersGuide.References.Bernardi1992\">Bernardi1992</a>, p. 2483], although
 that reference may be outdated).
   The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
-   represents a compressed Sigracet&reg; 10 BA gas diffusion layer
+   represents a compressed Sigracet&reg; 10&nbsp;BA gas diffusion layer
   [<a href=\"modelica://FCSys.UsersGuide.References.Nitta2008\">Nitta2008</a>].  The default
   electrical conductivity
-  is also for Sigracet&reg; 10 BA [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].</p>
+  is also for Sigracet&reg; 10&nbsp;BA [<a href=\"modelica://FCSys.UsersGuide.References.SGL2007\">SGL2007</a>].
+<p>The default pore radius (32 &micro;m) is for SGL&nbsp;25 BC according to  
+[<a href=\"modelica://FCSys.UsersGuide.References.Parikh2012\">Parikh2012</a>].</p>.
 
 <p>Default assumptions (may be adjusted):
 <ol>
@@ -2061,7 +2061,7 @@ that reference may be outdated).
                 each initEnergy=Init.none,
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=1e-5*U.mm^2)),
+            volume(inclCapillary=true,capillary(R=5*U.um))),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -2309,89 +2309,75 @@ although in reality there is inductance.</p>
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-98,62},{98,98}},
-              fillColor={255,255,255},
-              visible=not inclTransY,
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Rectangle(
-              extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
-              lineColor={200,200,200},
-              fillColor={255,255,255},
-              rotation=-45,
-              fillPattern=FillPattern.VerticalCylinder,
-              origin={95.001,14.864}),
-            Rectangle(
-              extent={{-20,40},{0,-60}},
-              lineColor={200,200,200},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.VerticalCylinder),
-            Polygon(
-              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
-                  0,60},{20,60},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
-                  {0,-60},{20,-40},{20,0}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={200,200,200}),
-            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
-            Polygon(
-              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-20,0},{-100,0}},
-              color={240,0,0},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{10,0},{100,0}},
-              color={0,0,240},
-              visible=inclTransX,
-              thickness=0.5),
-            Line(
-              points={{0,-60},{0,-100}},
-              color={127,127,127},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,100},{0,50}},
-              color={127,127,127},
-              visible=inclTransY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-50,-50},{-10,-10}},
-              color={127,127,127},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{20,20},{50,50}},
-              color={127,127,127},
-              visible=inclTransZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Text(
-              extent={{-100,60},{100,100}},
-              textString="%name",
-              visible=not inclTransY,
-              lineColor={0,0,0})}));
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-98,62},{98,98}},
+                  fillColor={255,255,255},
+                  visible=not inclTransY,
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Rectangle(
+                  extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
+                  lineColor={200,200,200},
+                  fillColor={255,255,255},
+                  rotation=-45,
+                  fillPattern=FillPattern.VerticalCylinder,
+                  origin={95.001,14.864}),Rectangle(
+                  extent={{-20,40},{0,-60}},
+                  lineColor={200,200,200},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.VerticalCylinder),Polygon(
+                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
+                40},{0,60},{20,60},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
+                -60},{0,-60},{20,-40},{20,0}},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={200,200,200}),Rectangle(extent={{-20,40},{0,-60}},
+              lineColor={0,0,0}),Polygon(
+                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-20,0},{-100,0}},
+                  color={240,0,0},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{10,0},{100,0}},
+                  color={0,0,240},
+                  visible=inclTransX,
+                  thickness=0.5),Line(
+                  points={{0,-60},{0,-100}},
+                  color={127,127,127},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,100},{0,50}},
+                  color={127,127,127},
+                  visible=inclTransY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-50,-50},{-10,-10}},
+                  color={127,127,127},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{20,20},{50,50}},
+                  color={127,127,127},
+                  visible=inclTransZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Text(
+                  extent={{-100,60},{100,100}},
+                  textString="%name",
+                  visible=not inclTransY,
+                  lineColor={0,0,0})}));
 
     end PEM;
 
@@ -2565,7 +2551,7 @@ although in reality there is inductance.</p>
                 each initEnergy=Init.none,
                 N0=0.1*U.C,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=1e-5*U.mm^2)),
+            volume(inclCapillary=true,capillary(R=5*U.um))),
         subregions(graphite('e-Transfer'(final I0=J0*subregions.A[Axis.x]))))
         annotation (IconMap(primitivesVisible=false));
 
@@ -2791,8 +2777,8 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
                 phi(each stateSelect=StateSelect.always, each fixed=true),
                 each initEnergy=Init.none,
                 T(each stateSelect=StateSelect.default))),
-            volume(kappa=1e-4*U.mm^2))) annotation (IconMap(primitivesVisible=
-              false));
+            volume(inclCapillary=true,capillary(R=22*U.um)))) annotation (
+          IconMap(primitivesVisible=false));
 
       // Note:  The fluid species have zero fluidity (eta=0) so that the transverse
       // velocity is zero at the interface with the flow plate.  That condition
@@ -3153,9 +3139,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
                 epsilon_IC=1e-5,
-                N0=0.1*U.C)),
-            volume(inclCapillary=false))) annotation (IconMap(primitivesVisible
-            =false));
+                N0=0.1*U.C)))) annotation (IconMap(primitivesVisible=false));
 
       parameter Q.NumberAbsolute epsilon(nominal=1) = 0.0423
         "Fraction of volume for the fluid" annotation (Dialog(group="Geometry",

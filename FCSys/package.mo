@@ -505,6 +505,12 @@ package UsersGuide "User's Guide"
       annotation (preferredView="info", DocumentationClass=false);
       end Nitta2008;
 
+    class Parikh2012
+      "<html>N. Parikh, J. S. Allen, R. S. Yassar, \"<a href=\"http://onlinelibrary.wiley.com/doi/10.1002/fuce.201100014/abstract\">Microstructure of Gas Diffusion Layers for PEM Fuel Cells</a>,\" <i>Fuel Cells</i>, vol. 12, no. 3, pp. 1615&ndash;6854, 2012</html>"
+
+      annotation (preferredView="info", DocumentationClass=false);
+      end Parikh2012;
+
     class Present1958
       "<html>R. D. Present, <i>Kinetic Theory of Gases</i>, McGraw Hill, 1958</html>"
 
@@ -965,21 +971,6 @@ action. This section shall survive the termination of this License.</p>
   end UsersGuide;
 
 // TODO:  Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

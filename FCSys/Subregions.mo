@@ -15,10 +15,8 @@ package Subregions
           inclH2O=true,
           inclH2=false,
           'inclC+'=true,
-          subregion(
-            volume(inclCapillary=false),
-            liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)),
-            gas(H2O(p_IC=U.kPa))));
+          subregion(liquid(inclH2O=inclH2O, H2O(epsilon_IC=0.001)), gas(H2O(
+                  p_IC=U.kPa))));
 
         annotation (
           Documentation(info="<html><p>Initially, the water vapor is below saturation and a small amount of liquid water is present (1/1000 of the total volume).
@@ -44,7 +42,6 @@ package Subregions
           inclN2=true,
           inclH2=false,
           subregion(
-            volume(inclCapillary=false),
             gas(N2(
                 consMaterial=ConsThermo.IC,
                 consEnergy=ConsThermo.IC,
@@ -710,7 +707,6 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end InternalFlow;
 
     model Subregion

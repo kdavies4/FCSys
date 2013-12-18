@@ -417,14 +417,15 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/HOR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-20},{40,
               20}}), graphics));
   end HOR;
@@ -518,32 +519,34 @@ package Chemistry "Chemical reactions and related models"
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
-              extent={{-100,40},{100,-50}},
-              pattern=LinePattern.Dash,
-              lineColor={127,127,127},
-              radius=15,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Bitmap(extent={{-100,-20},{100,-40}},
-            fileName=
-            "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+            extent={{-100,40},{100,-50}},
+            pattern=LinePattern.Dash,
+            lineColor={127,127,127},
+            radius=15,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Bitmap(extent={{-100,-20},{100,-40}},
+              fileName=
+                "modelica://FCSys/Resources/Documentation/Reactions/ORR.png")}),
+
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
   end ORR;
 
 public
-  model SurfaceTension "Surface tension"
+  model Capillary "Young-Laplace model for capillary pressure"
 
     extends FCSys.Icons.Names.Top2;
 
     // Geometry
-    Q.LengthReciprocal overR=1/U.mm "Reciprocal of characteristic radius"
-      annotation (Dialog(group="Geometry", __Dymola_label=
-            "<html>1/<i>R</i></html>"));
+    parameter Q.Length R=U.um "Effective radius" annotation (Dialog(group=
+            "Geometry", __Dymola_label="<html><i>R</i></html>"));
 
     // Material properties
     parameter Q.SurfaceTension gamma=0.0663*U.N/U.m "Surface tension"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&gamma;</html>"));
+    parameter Q.Angle theta=140*U.degree "Contact angle" annotation (Dialog(
+          group="Material properties", __Dymola_label="<html>&theta;</html>"));
 
     // Auxiliary variables (for analysis only)
     Q.Pressure Deltap=wetting.p - nonwetting.p if environment.analysis
@@ -554,14 +557,14 @@ public
           iconTransformation(extent={{-50,-10},{-30,10}})));
     Connectors.Amagat nonwetting "Interface to the nonwetting phase"
       annotation (Placement(transformation(extent={{10,-10},{30,10}}),
-          iconTransformation(extent={{20,-10},{40,10}})));
+          iconTransformation(extent={{30,-10},{50,10}})));
 
   protected
     outer Conditions.Environment environment "Environmental conditions";
 
   equation
     // Pressure relation
-    nonwetting.p = wetting.p + 2*gamma*overR "Young-Laplace equation";
+    nonwetting.p = wetting.p + 2*gamma*cos(theta)/R "Young-Laplace equation";
 
     // Conservation (without storage)
     0 = wetting.V + nonwetting.V "Volume";
@@ -576,19 +579,33 @@ public
 
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Line(
-              points={{-40,0},{30,0}},
-              color={47,107,251},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Ellipse(
-              extent={{0,40},{-80,-40}},
-              lineColor={47,107,251},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Sphere),Ellipse(extent={{0,40},{-80,-40}},
-            lineColor={0,0,0})}),
+              100}}), graphics={
+          Rectangle(
+            extent={{-40,40},{40,-40}},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{42,40},{20,-40}},
+            pattern=LinePattern.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{0,40},{40,-40}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(
+            points={{-40,40},{40,40}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,-40},{40,-40}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
-  end SurfaceTension;
+  end Capillary;
 
   model CapillaryVolume "Volume with capillary pressure applied to the liquid"
     extends FCSys.Icons.Names.Top3;
@@ -596,33 +613,6 @@ public
     // Material properties
     parameter Q.Volume V "Volume" annotation (Dialog(group="Geometry",
           __Dymola_label="<html><i>V</i></html>"));
-
-    // Capillary pressure
-    parameter Boolean inclCapillary=true "Include capillary pressure"
-      annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        group="Material properties",
-        compact=true,
-        enable=inclLiquid));
-    parameter Q.SurfaceTension gamma=0.0663*U.N/U.m "Surface tension"
-      annotation (Dialog(
-        group="Material properties",
-        __Dymola_label="<html>&gamma;</html>",
-        enable=inclLiquid and inclCapillary));
-    parameter Q.Area kappa=6.46e-5*U.mm^2 "Permeability" annotation (Dialog(
-        group="Material properties",
-        __Dymola_label="<html>&kappa;</html>",
-        enable=inclLiquid and inclCapillary));
-    parameter Q.Angle theta=140*U.degree "Contact angle" annotation (Dialog(
-        group="Material properties",
-        __Dymola_label="<html>&theta;</html>",
-        enable=inclLiquid and inclCapillary));
-    replaceable function J = FCSys.Characteristics.H2O.J_identity
-      "<html>Leverett <i>J</i>-function</html>" annotation (choicesAllMatching=
-          true, Dialog(group="Material properties", enable=inclLiquid and
-            inclCapillary));
 
     // Material properties
     parameter Boolean inclGas=true "Gas" annotation (
@@ -637,6 +627,22 @@ public
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(group="Included phases", compact=true));
+
+    // Capillary pressure
+    parameter Boolean inclCapillary=false "Include capillary pressure"
+      annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(
+        group="Capillary pressure",
+        __Dymola_descriptionLabel=true,
+        __Dymola_label="Include",
+        compact=true,
+        __Dymola_joinNext=true,
+        enable=inclLiquid));
+    Capillary capillary if inclLiquid and inclCapillary "Capillary model"
+      annotation (Dialog(__Dymola_descriptionLabel=true, enable=inclLiquid and
+            inclCapillary), Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     // Alias variables (for common terms)
     Q.Volume V_pore "Pore volume";
@@ -655,10 +661,6 @@ public
     Connectors.Amagat solid "Interface to the solid phase" annotation (
         Placement(transformation(extent={{6,-30},{26,-10}}), iconTransformation(
             extent={{50,-30},{70,-10}})));
-    SurfaceTension surfaceTension(final gamma=gamma,final overR=cos(theta)*J(
-          liquid.V/V_pore)*sqrt(V_pore/V/kappa)/2) if inclLiquid and
-      inclCapillary "Additional pressure on the liquid"
-      annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
     Conditions.ByConnector.Amagat.VolumeFixed volume(final V=V) if inclGas or
       inclLiquid "Fixed volume"
@@ -681,7 +683,7 @@ public
         "Directly connect liquid to the volume (not shown in diagram)";
     end if;
 
-    connect(surfaceTension.wetting, liquid) annotation (Line(
+    connect(capillary.wetting, liquid) annotation (Line(
         points={{-24,0},{-40,0}},
         color={47,107,251},
         smooth=Smooth.None));
@@ -697,8 +699,8 @@ public
         points={{40,0},{24,0}},
         color={47,107,251},
         smooth=Smooth.None));
-    connect(surfaceTension.nonwetting, volume.amagat) annotation (Line(
-        points={{-17,0},{0,0}},
+    connect(capillary.nonwetting, volume.amagat) annotation (Line(
+        points={{-16,0},{0,0}},
         color={47,107,251},
         smooth=Smooth.None));
     annotation (
@@ -719,34 +721,40 @@ public
     
     </html>"),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={Polygon(
-              points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
-              -60}},
-              lineColor={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Polygon(
-              points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
-              lineColor={191,191,191},
-              smooth=Smooth.Bezier,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-40,8},{20,-30}},
-              lineColor={85,170,255},
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}),Ellipse(extent={{-40,8},{20,-30}},
-            lineColor={225,225,225}),Line(
-              points={{-60,20},{20,20},{20,-60}},
-              color={0,0,0},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None),Line(
-              points={{60,60},{20,20}},
-              color={0,0,0},
-              pattern=LinePattern.Dash,
-              smooth=Smooth.None)}),
+              100}}), graphics={
+          Polygon(
+            points={{-60,-60},{-60,20},{-20,60},{60,60},{60,-20},{20,-60},{-60,
+                -60}},
+            lineColor={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid),
+          Polygon(
+            points={{-62,10},{48,54},{30,-36},{-38,-46},{-62,10}},
+            lineColor={191,191,191},
+            smooth=Smooth.Bezier,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-40,8},{20,-30}},
+            lineColor={85,170,255},
+            fillPattern=FillPattern.Sphere,
+            fillColor={255,255,255}),
+          Ellipse(extent={{-40,8},{20,-30}}, lineColor={225,225,225}),
+          Line(
+            points={{-60,20},{20,20},{20,-60}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None),
+          Line(
+            points={{60,60},{20,20}},
+            color={0,0,0},
+            pattern=LinePattern.Dash,
+            smooth=Smooth.None)}),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics));
+
   end CapillaryVolume;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics));
