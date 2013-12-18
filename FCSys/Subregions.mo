@@ -41,12 +41,22 @@ package Subregions
         "<html>Test absorption of H<sub>2</sub>O vapor into the ionomer</html>"
         extends Examples.Subregion(
           'inclSO3-'=true,
-          inclH2O=true,
+          inclN2=true,
           inclH2=false,
-          subregion(gas(H2O(consMaterial=ConsThermo.IC, N(stateSelect=
-                      StateSelect.always))), ionomer(
+          subregion(
+            volume(inclCapillary=false),
+            gas(N2(
+                consMaterial=ConsThermo.IC,
+                consEnergy=ConsThermo.IC,
+                p_IC=environment.p)),
+            liquid(inclH2O=true, H2O(
+                consMaterial=ConsThermo.IC,
+                consEnergy=ConsThermo.IC,
+                N(stateSelect=StateSelect.always),
+                epsilon_IC=0.3)),
+            ionomer(
               inclH2O=true,
-              'SO3-'(consEnergy=ConsThermo.IC),
+              'SO3-'(consEnergy=ConsThermo.IC,epsilon=0.3),
               H2O(lambda_IC=8,initEnergy=Init.none))),
           environment(T=333.15*U.K, RH=1));
 
@@ -58,12 +68,13 @@ package Subregions
   <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.HydrationLevel\">Characteristics.Examples.HydrationLevel</a>.</p>
 
 </p></html>"),
-          experiment(StopTime=2400),
+          experiment(StopTime=120),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
               "Subregions.Examples.PhaseChange.Hydration.mos"),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
+                  {100,100}}), graphics),
+          __Dymola_experimentSetupOutput);
 
       end Hydration;
 
@@ -586,7 +597,7 @@ package Subregions
 
       output Q.Power Qdot_gen_Poiseuille=-Deltap_Poiseuille*Vdot
         "Rate of heat generation according to Poiseuille's law";
-      output Q.VolumeRate Vdot=BC1.liquid.H2O.materialSet.y if environment.analysis
+      output Q.VolumeRate Vdot=BC1.liquid.H2O.materialSet.y
         "Total volumetric flow rate";
 
       extends Examples.Subregion(inclH2=false, subregion(
@@ -699,6 +710,7 @@ package Subregions
             "Subregions.Examples.InternalFlow.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
+
     end InternalFlow;
 
     model Subregion
@@ -952,6 +964,7 @@ package Subregions
   extends Modelica.Icons.Package;
 
   model Subregion "Subregion with all phases"
+    import Modelica.Constants.inf;
 
     extends PartialSubregion(final n_spec=gas.n_spec + graphite.n_spec +
           ionomer.n_spec + liquid.n_spec);
@@ -997,9 +1010,9 @@ package Subregions
       annotation (Placement(transformation(extent={{88,-46},{108,-26}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={3,3,3}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={1.7,1.7,1.7}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq(k_Phi={10,10,10}) "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={inf,inf,inf}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX
@@ -1383,6 +1396,8 @@ on diagram)")}));
   end SubregionIonomer;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
+    import Modelica.Constants.inf;
+
     extends PartialSubregion(final n_spec=gas.n_spec + graphite.n_spec + liquid.n_spec);
 
     FCSys.Phases.Gas gas(
@@ -1410,9 +1425,9 @@ on diagram)")}));
               -22},{-30,-2}})));
 
     // Independence factors
-    Phases.ExchangeParams common(k_Phi={3,3,3}) "Among all phases"
+    Phases.ExchangeParams common(k_Phi={1.7,1.7,1.7}) "Among all phases"
       annotation (Dialog(group="Independence factors"));
-    Phases.ExchangeParams gasLiq(k_Phi={10,10,10}) "Between gas and liquid"
+    Phases.ExchangeParams gasLiq(k_Phi={inf,inf,inf}) "Between gas and liquid"
       annotation (Dialog(group="Independence factors"));
 
     Connectors.BoundaryBus xNegative if inclTransX

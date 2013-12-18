@@ -911,30 +911,27 @@ package Conditions "Models to specify and measure operating conditions"
             color={0,0,255},
             smooth=Smooth.None));
 
-        annotation (Icon(graphics={
-              Line(
-                points={{-30,0},{-20,0}},
-                color={127,127,127},
-                visible='incle-' or 'inclC+',
-                smooth=Smooth.None),
-              Line(
-                points={{10,0},{40,0}},
-                color={0,0,255},
-                visible='incle-',
-                smooth=Smooth.None),
-              Polygon(
-                points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
-                lineColor={0,0,255},
-                visible='incle-',
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-40,0},{-20,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=
-                  false, extent={{-100,-100},{100,100}}), graphics));
+        annotation (Icon(graphics={Line(
+                      points={{-30,0},{-20,0}},
+                      color={127,127,127},
+                      visible='incle-' or 'inclC+',
+                      smooth=Smooth.None),Line(
+                      points={{10,0},{40,0}},
+                      color={0,0,255},
+                      visible='incle-',
+                      smooth=Smooth.None),Polygon(
+                      points={{0,20},{-20,0},{0,-20},{20,0},{0,20}},
+                      lineColor={0,0,255},
+                      visible='incle-',
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Line(
+                      points={{-40,0},{-20,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5)}), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics));
       end Electronic;
 
       package Phases "Adapters for material phases"

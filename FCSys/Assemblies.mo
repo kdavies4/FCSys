@@ -473,9 +473,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
       model TestStandCycle
         "Simulate the fuel cell under prescribed conditions, with cyclical load"
         extends TestStand(
-          cell(anCL(subregions(graphite(each inclDL=true, 'e-Transfer'(each
-                      fromI=false)))), caCL(subregions(graphite(each inclDL=
-                      true, 'e-Transfer'(each fromI=false))))),
+          cell(
+            anCL(subregions(graphite(each inclDL=true, 'e-Transfer'(each fromI=
+                        false)), ionomer(H2O(each lambda_IC=13.53)))),
+            PEM(subregions(ionomer(H2O(each lambda_IC=13.53)))),
+            caCL(subregions(graphite(each inclDL=true, 'e-Transfer'(each fromI=
+                        false)), ionomer(H2O(each lambda_IC=13.53))))),
           redeclare Modelica.Electrical.Analog.Sources.SineCurrent load(
             freqHz=0.3,
             I=7,
@@ -519,9 +522,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               1, 1, 1].ionomer.'H+'.g,
           Deltaw_an=cell.anCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
 
-          Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag,
-
-          environment(analysis=true));
+          Deltaw_ca=-cell.caCGDL.subregions[1, 1, 1].graphite.'e-Transfer'.Deltag);
 
         annotation (
           Commands(file=
@@ -559,8 +560,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
 
-        extends TestStand(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
-            environment(analysis=false));
+        extends TestStand(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)));
 
         annotation (experiment(
             StopTime=36180,
@@ -588,10 +588,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
         annotation (experiment(StopTime=36120),__Dymola_experimentSetupOutput);
       end TestStandFixedFlow;
 
-
       model TestStandFixedFlowSegmented
         "Simulate the fuel cell with multiple segments in the y direction, with fixed flow rate"
-        parameter Integer n_y=8 "Number of segments in the y direction"
+        parameter Integer n_y=6 "Number of segments in the y direction"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
 
@@ -600,8 +599,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
           testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
           caFlowSet(startTime=0),
           anFlowSet(startTime=0),
-          load(startTime=0),
-          environment(analysis=false));
+          load(startTime=0));
 
         annotation (
           experiment(StopTime=36120),

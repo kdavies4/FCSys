@@ -1370,7 +1370,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
             common(k_Phi={1e7,inf,1e7},k_Q=1e5),
-            gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
               H2_H2O(k_Phi={inf,inf,inf}),
@@ -1380,12 +1379,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
               H2(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                zeta=100*Characteristics.H2.Gas.zeta(),
+                final zeta=0,
                 T(stateSelect=StateSelect.always)),
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                zeta=100*Characteristics.H2O.Gas.zeta(),
+                final zeta=0,
                 I(each stateSelect=StateSelect.always, each fixed=true),
                 initEnergy=Init.none)),
             graphite(
@@ -1654,13 +1653,13 @@ text layer of this model.</p>
                 initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.H2.Gas.zeta(),
+                final zeta=0,
                 final eta=0),
               H2O(
                 initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.H2O.Gas.zeta(),
+                final zeta=0,
                 final eta=0)),
             graphite(
               k=fill((1 - epsilon)^(-0.5), 3),
@@ -1689,7 +1688,7 @@ text layer of this model.</p>
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.80 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -2028,12 +2027,12 @@ that reference may be outdated).
               H2(
                 initEnergy=Init.none,
                 upstreamX=false,
-                zeta=100*Characteristics.H2.Gas.zeta(),
+                final zeta=0,
                 phi(each stateSelect=StateSelect.always, each fixed=true)),
               H2O(
                 initEnergy=Init.none,
                 upstreamX=false,
-                zeta=100*Characteristics.H2O.Gas.zeta())),
+                final zeta=0)),
             graphite(
               k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclC+'=true,
@@ -2047,7 +2046,7 @@ that reference may be outdated).
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
               'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
                     stateSelect=StateSelect.default)),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
@@ -2220,12 +2219,12 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
       import Modelica.Constants.inf;
 
       extends AnCLs.AnCL(
-        L_x={(28.7*U.um + 0.3*U.mm)},
+        L_x={(28.7*U.um + 0.235*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.35,0.35,0.35}),
+          common(each k_Phi={0.22,0.22,0.22}),
           gas(H2(each final eta=0), H2O(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=4*U.S/U.cm)),
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=3.5*U.S/U.cm)),
 
           liquid(H2O(each final eta=0))));
 
@@ -2264,7 +2263,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
               H2O(initEnergy=Init.none,upstreamX=false))),
         subregions(ionomer('H+'(consTransX={{{if x > 1 or (y == 1 and z == 1)
                    then ConsTrans.steady else ConsTrans.dynamic for z in 1:n_z}
@@ -2526,16 +2525,16 @@ although in reality there is inductance.</p>
                 initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.H2O.Gas.zeta()),
+                final zeta=0),
               N2(
                 initEnergy=Init.none,
                 upstreamX=false,
-                zeta=100*Characteristics.N2.Gas.zeta()),
+                final zeta=0),
               O2(
                 initEnergy=Init.none,
                 upstreamX=false,
                 I(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.O2.Gas.zeta(),
+                final zeta=0,
                 p_stop=12*U.Pa)),
             graphite(
               k=fill((0.5*(1 - epsilon))^(-0.5), 3),
@@ -2553,7 +2552,7 @@ although in reality there is inductance.</p>
               inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
                     stateSelect=StateSelect.default)),
-              'H+'(initEnergy=Init.none, sigma=0.18*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
@@ -2706,15 +2705,15 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
       import Modelica.Constants.inf;
 
       extends CaCLs.CaCL(
-        L_x={(28.7*U.um + 0.3*U.mm)},
+        L_x={(28.7*U.um + 0.235*U.mm)},
         epsilon=0.5,
         subregions(
-          common(each k_Phi={0.35,0.35,0.35}),
+          common(each k_Phi={0.22,0.22,0.22}),
           gas(
             H2O(each final eta=0),
             N2(each final eta=0),
             O2(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=4*U.S/U.cm)),
+          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=3.5*U.S/U.cm)),
 
           liquid(H2O(each final eta=0))));
 
@@ -2761,19 +2760,19 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
                 initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.H2O.Gas.zeta(),
+                final zeta=0,
                 final eta=0),
               N2(
                 initEnergy=Init.none,
                 upstreamX=false,
                 phi(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.N2.Gas.zeta(),
+                final zeta=0,
                 final eta=0),
               O2(
                 initEnergy=Init.none,
                 upstreamX=false,
                 I(each stateSelect=StateSelect.always, each fixed=true),
-                zeta=100*Characteristics.O2.Gas.zeta(),
+                final zeta=0,
                 final eta=0)),
             graphite(
               k=fill((1 - epsilon)^(-0.5), 3),
@@ -2802,7 +2801,7 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
       // See the documentation layer of Phases.PartialPhase regarding the
       // settings of k for each phase.
 
-      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.80 "Porosity"
+      parameter Q.NumberAbsolute epsilon(nominal=1) = 0.8 "Porosity"
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
@@ -3117,7 +3116,6 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
         redeclare replaceable model Subregion =
             FCSys.Subregions.SubregionNoIonomer (
             common(k_Phi={1e7,inf,1e7},k_Q=1e5),
-            gasLiq(k_Phi={inf,1e6,inf},k_Q=inf),
             gas(
               common(k_Phi={inf,inf,inf}),
               H2O_N2(k_Phi={inf,inf,inf}),
@@ -3130,18 +3128,18 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnGDLs.a
               H2O(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                zeta=100*Characteristics.H2O.Gas.zeta(),
+                final zeta=0,
                 T(stateSelect=StateSelect.always)),
               N2(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                zeta=100*Characteristics.N2.Gas.zeta(),
+                final zeta=0,
                 initEnergy=Init.none,
                 I(each stateSelect=StateSelect.always, each fixed=true)),
               O2(
                 upstreamX=false,
                 Nu_Phi={4,16*A[Axis.z]*epsilon/D^2,4},
-                zeta=100*Characteristics.O2.Gas.zeta(),
+                final zeta=0,
                 initEnergy=Init.none)),
             graphite(
               'inclC+'=true,
