@@ -302,9 +302,9 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         inner Conditions.Environment environment(
           a={0,0,0},
-          p=U.from_kPag(48.3),
           RH=testConditions.anRH,
-          T=333.13*U.K) "Environmental conditions"
+          T=333.13*U.K,
+          p=U.from_kPag(48.3)) "Environmental conditions"
           annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
 
         replaceable Modelica.Electrical.Analog.Sources.RampCurrent load(
@@ -559,8 +559,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
         parameter Integer n_y=6 "Number of segments in the y direction"
           annotation (Dialog(group="Geometry", __Dymola_label=
                 "<html><i>n</i><sub>y</sub></html>"));
+        import Modelica.Constants.inf;
 
-        extends TestStand(cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)));
+        extends TestStand(cell(
+            inclLiq=false,
+            L_y=fill(8*U.cm/n_y, n_y),
+            anGDL(epsilon=0.45),
+            caGDL(epsilon=0.45)));
 
         annotation (experiment(
             StopTime=36180,
@@ -595,7 +600,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "<html><i>n</i><sub>y</sub></html>"));
 
         extends TestStandFixedFlow(
-          cell(inclLiq=false, L_y=fill(8*U.cm/n_y, n_y)),
+          cell(
+            inclLiq=false,
+            L_y=fill(8*U.cm/n_y, n_y),
+            anGDL(epsilon=0.45),
+            caGDL(epsilon=0.45)),
           testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
           caFlowSet(startTime=0),
           anFlowSet(startTime=0),

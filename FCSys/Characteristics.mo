@@ -895,8 +895,6 @@ package Characteristics "Data and functions to correlate physical properties"
 
     end Liquid;
 
-
-
     function p_sat
       "<html>Saturation pressure (<i>p</i><sub>sat</sub>) as a function of temperature</html>"
       extends Modelica.Icons.Function;

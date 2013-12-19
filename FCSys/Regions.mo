@@ -2046,7 +2046,7 @@ that reference may be outdated).
               'inclSO3-'=true,
               'inclH+'=true,
               inclH2O=true,
-              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
               'SO3-'(epsilon=0.5*(1 - epsilon),T(each fixed=false, each
                     stateSelect=StateSelect.default)),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
@@ -2220,12 +2220,10 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
 
       extends AnCLs.AnCL(
         L_x={(28.7*U.um + 0.235*U.mm)},
-        epsilon=0.5,
+        epsilon=0.16,
         subregions(
-          common(each k_Phi={0.22,0.22,0.22}),
           gas(H2(each final eta=0), H2O(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=3.5*U.S/U.cm)),
-
+          ionomer('H+_H2O'(each k_Phi={1,1,1}),'H+'(each sigma=0.8*U.S/U.cm)),
           liquid(H2O(each final eta=0))));
 
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of
@@ -2263,7 +2261,7 @@ The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.
               'inclH+'=true,
               inclH2O=true,
               'SO3-'(final mu=0,final epsilon=1),
-              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
               H2O(initEnergy=Init.none,upstreamX=false))),
         subregions(ionomer('H+'(consTransX={{{if x > 1 or (y == 1 and z == 1)
                    then ConsTrans.steady else ConsTrans.dynamic for z in 1:n_z}
@@ -2309,75 +2307,89 @@ although in reality there is inductance.</p>
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-98,62},{98,98}},
-                  fillColor={255,255,255},
-                  visible=not inclTransY,
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Rectangle(
-                  extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
-                  lineColor={200,200,200},
-                  fillColor={255,255,255},
-                  rotation=-45,
-                  fillPattern=FillPattern.VerticalCylinder,
-                  origin={95.001,14.864}),Rectangle(
-                  extent={{-20,40},{0,-60}},
-                  lineColor={200,200,200},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.VerticalCylinder),Polygon(
-                  points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,
-                40},{0,60},{20,60},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,
-                -60},{0,-60},{20,-40},{20,0}},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={200,200,200}),Rectangle(extent={{-20,40},{0,-60}},
-              lineColor={0,0,0}),Polygon(
-                  points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-20,0},{-100,0}},
-                  color={240,0,0},
-                  visible=inclTransX,
-                  thickness=0.5),Line(
-                  points={{10,0},{100,0}},
-                  color={0,0,240},
-                  visible=inclTransX,
-                  thickness=0.5),Line(
-                  points={{0,-60},{0,-100}},
-                  color={127,127,127},
-                  visible=inclTransY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,100},{0,50}},
-                  color={127,127,127},
-                  visible=inclTransY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-50,-50},{-10,-10}},
-                  color={127,127,127},
-                  visible=inclTransZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{20,20},{50,50}},
-                  color={127,127,127},
-                  visible=inclTransZ,
-                  smooth=Smooth.None,
-                  thickness=0.5),Text(
-                  extent={{-100,60},{100,100}},
-                  textString="%name",
-                  visible=not inclTransY,
-                  lineColor={0,0,0})}));
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-98,62},{98,98}},
+              fillColor={255,255,255},
+              visible=not inclTransY,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              rotation=-45,
+              fillPattern=FillPattern.VerticalCylinder,
+              origin={95.001,14.864}),
+            Rectangle(
+              extent={{-20,40},{0,-60}},
+              lineColor={200,200,200},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.VerticalCylinder),
+            Polygon(
+              points={{20,0},{42,0},{42,80},{-42,80},{-42,0},{-20,0},{-20,40},{
+                  0,60},{20,60},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{20,0},{42,0},{42,-80},{-42,-80},{-42,0},{-20,0},{-20,-60},
+                  {0,-60},{20,-40},{20,0}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{0,40},{20,60},{20,-40},{0,-60},{0,40}},
+              lineColor={0,0,0},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={200,200,200}),
+            Rectangle(extent={{-20,40},{0,-60}}, lineColor={0,0,0}),
+            Polygon(
+              points={{0,60},{20,60},{0,40},{-20,40},{0,60}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{-100,0}},
+              color={240,0,0},
+              visible=inclTransX,
+              thickness=0.5),
+            Line(
+              points={{10,0},{100,0}},
+              color={0,0,240},
+              visible=inclTransX,
+              thickness=0.5),
+            Line(
+              points={{0,-60},{0,-100}},
+              color={127,127,127},
+              visible=inclTransY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,100},{0,50}},
+              color={127,127,127},
+              visible=inclTransY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-50,-50},{-10,-10}},
+              color={127,127,127},
+              visible=inclTransZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,20},{50,50}},
+              color={127,127,127},
+              visible=inclTransZ,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Text(
+              extent={{-100,60},{100,100}},
+              textString="%name",
+              visible=not inclTransY,
+              lineColor={0,0,0})}));
 
     end PEM;
 
@@ -2530,7 +2542,7 @@ although in reality there is inductance.</p>
               'C+'(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5, epsilon=
                     0.5*(1 - epsilon)),
               'e-'(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5),
-              'e-Transfer'(E_A=0.46*U.V)),
+              'e-Transfer'(E_A=0.75*U.V)),
             ionomer(
               k=fill((0.5*(1 - epsilon))^(-0.5), 3),
               'inclSO3-'=true,
@@ -2538,7 +2550,7 @@ although in reality there is inductance.</p>
               inclH2O=true,
               'SO3-'(epsilon=0.5*(1 - epsilon), T(each fixed=false, each
                     stateSelect=StateSelect.default)),
-              'H+'(initEnergy=Init.none, sigma=0.16*U.S/U.cm),
+              'H+'(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
               H2O(initEnergy=Init.none, phi(each stateSelect=StateSelect.always,
                     each fixed=true))),
             liquid(
@@ -2562,7 +2574,7 @@ although in reality there is inductance.</p>
         annotation (Dialog(group="Geometry", __Dymola_label=
               "<html>&epsilon;</html>"));
 
-      parameter Q.CurrentAreic J0(min=0) = 0.11*U.mA/U.cm^2
+      parameter Q.CurrentAreic J0(min=0) = 0.023*U.mA/U.cm^2
         "Exchange current density @ 300 K"
         annotation (Dialog(__Dymola_label="<html><i>J</i><sup>o</sup></html>"));
 
@@ -2684,7 +2696,6 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
               textString="%name",
               visible=not inclTransY,
               lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2692,15 +2703,13 @@ For more information, please see the <a href=\"modelica://FCSys.Regions.AnCLs.an
 
       extends CaCLs.CaCL(
         L_x={(28.7*U.um + 0.235*U.mm)},
-        epsilon=0.5,
+        epsilon=0.16,
         subregions(
-          common(each k_Phi={0.22,0.22,0.22}),
           gas(
             H2O(each final eta=0),
             N2(each final eta=0),
             O2(each final eta=0)),
-          ionomer('H+_H2O'(each k_Phi={0.1,0.1,0.1}),'H+'(each sigma=3.5*U.S/U.cm)),
-
+          ionomer('H+_H2O'(each k_Phi={1,1,1}),'H+'(each sigma=0.8*U.S/U.cm)),
           liquid(H2O(each final eta=0))));
 
       annotation (Documentation(info="<html><p>The default thickness is the total thickness of

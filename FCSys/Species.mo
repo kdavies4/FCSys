@@ -2171,16 +2171,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash,
-            fillColor={225,225,225},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0},
-            origin={-40,40},
-            rotation=45)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0},
+              origin={-40,40},
+              rotation=45)}));
   end Species;
 
 public
