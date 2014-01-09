@@ -1,0 +1,273 @@
+<html>
+<head>
+<title>FCSys.Regions.CaCLs</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Cathode catalyst layers">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Regions.CaCLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaCLs</h2>
+
+<b>Cathode catalyst layers</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Regions.CaCLs.CaCLS.png" alt="FCSys.Regions.CaCLs.CaCL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a>
+</td><td>Cathode catalyst layer</td></tr>
+<tr><td><img src="FCSys.Regions.CaCLs.CaCLS.png" alt="FCSys.Regions.CaCLs.CaCGDL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">CaCGDL</a>
+</td><td>Integrated cathode catalyst/gas diffusion layer</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Regions.CaCLs.CaCLI.png" alt="FCSys.Regions.CaCLs.CaCL" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Regions.CaCLs.CaCL"></a><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs">FCSys.Regions.CaCLs</a>.CaCL</h2>
+<b>Cathode catalyst layer</b>
+<img src="FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaCLs.CaCL">
+
+<h3>Information</h3>
+
+<p>This model represents the cathode catalyst layer of a PEMFC. It is identical to
+the anode catalyst layer except for the included species, the exchange current density (<i>J</i><sup>o</sup>), and the activation energy ().
+For more information, please see the <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.anCL">anCL</a> model.</p>
+
+Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.Subregion (common&hellip;</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>J0</td><td>0.023*U.mA/U.cm^2</td><td>Exchange current density @ 300 K [N/(L2.T)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{28.7}*U.um</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.4</td><td>Porosity [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive boundary along the z axis</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> CaCL <font color="darkgreen">&quot;Cathode catalyst layer&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
+  <font color="darkgreen">// extends FCSys.Icons.Names.Top4;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
+    L_x={28.7}*U.um,
+    L_y={8}*U.cm,
+    L_z={6.25}*U.cm,
+    <font color="blue">final </font>inclTransX=true,
+    inclTransY=false,
+    inclTransZ=false,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> (
+        common(k_Q=0),
+        gasLiq(k_Q=inf),
+        gas(
+          common(k_Q=inf),
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
+          inclH2O=true,
+          inclN2=true,
+          inclO2=true,
+          H2O(
+            initEnergy=Init.none,
+            upstreamX=false,
+            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">final </font>zeta=0),
+          N2(
+            initEnergy=Init.none,
+            upstreamX=false,
+            <font color="blue">final </font>zeta=0),
+          O2(
+            initEnergy=Init.none,
+            upstreamX=false,
+            I(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">final </font>zeta=0,
+            p_stop=12*U.Pa)),
+        graphite(
+          k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
+          &#39;inclC+&#39;=true,
+          &#39;incle-&#39;=true,
+          &#39;incle-Transfer&#39;=true,
+          &#39;C+&#39;(theta=U.m*U.K/(1.18*U.W)*(0.5*(1 - epsilon))^1.5, epsilon=0.5*(1 -
+                epsilon)),
+          &#39;e-&#39;(sigma=40*U.S/(12*U.cm)/(0.5*(1 - epsilon))^1.5),
+          &#39;e-Transfer&#39;(E_A=0.75*U.V)),
+        ionomer(
+          k=<font color="red">fill</font>((0.5*(1 - epsilon))^(-0.5), 3),
+          &#39;inclSO3-&#39;=true,
+          &#39;inclH+&#39;=true,
+          inclH2O=true,
+          &#39;SO3-&#39;(epsilon=0.5*(1 - epsilon), T(<font color="blue">each </font>fixed=false, <font color="blue">each </font>
+                stateSelect=StateSelect.default)),
+          &#39;H+&#39;(initEnergy=Init.none, sigma=0.1*U.S/U.cm),
+          H2O(initEnergy=Init.none, phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">
+                each </font>fixed=true))),
+        liquid(
+          k=<font color="red">fill</font>(epsilon^(-0.5), 3),
+          inclH2O=true,
+          H2O(
+            upstreamX=false,
+            epsilon_IC=1e-5,
+            phi(<font color="blue">each </font>stateSelect=StateSelect.always, <font color="blue">each </font>fixed=true),
+            <font color="blue">each </font>initEnergy=Init.none,
+            N0=0.1*U.C,
+            T(<font color="blue">each </font>stateSelect=StateSelect.default))),
+        volume(inclCapillary=true,capillary(R=5*U.um))),
+    subregions(graphite(&#39;e-Transfer&#39;(<font color="blue">final </font>I0=J0*subregions.A[Axis.x]))));
+
+  <font color="darkgreen">// See the documentation layer of Phases.PartialPhase regarding the</font>
+  <font color="darkgreen">// settings of k for each phase.</font>
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> epsilon(nominal=1) = 0.4 <font color="darkgreen">&quot;Porosity&quot;</font>;
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J0(min=0) = 0.023*U.mA/U.cm^2 <font color="darkgreen">
+    &quot;Exchange current density @ 300 K&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+
+<font color="blue">end </font>CaCL;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Regions.CaCLs.CaCLI.png" alt="FCSys.Regions.CaCLs.CaCGDL" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Regions.CaCLs.CaCGDL"></a><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs">FCSys.Regions.CaCLs</a>.CaCGDL</h2>
+<b>Integrated cathode catalyst/gas diffusion layer</b>
+<img src="FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaCLs.CaCGDL">
+
+<h3>Information</h3>
+
+<p>The default thickness is the total thickness of
+  <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a> and
+  <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a>.</p>
+
+  <p>For more information, please see the
+    <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a> model.</p>
+Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a> (Cathode catalyst layer).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Subregions.Subregion (common&hellip;</td><td>Base subregion model</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>J0</td><td>0.023*U.mA/U.cm^2</td><td>Exchange current density @ 300 K [N/(L2.T)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{(28.7*U.um + 0.235*U.mm)}</td><td>Lengths along the x axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.16</td><td>Porosity [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive boundary along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive boundary along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative boundary along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive boundary along the z axis</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> CaCGDL <font color="darkgreen">&quot;Integrated cathode catalyst/gas diffusion layer&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
+
+  <font color="blue">extends </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a>(
+    L_x={(28.7*U.um + 0.235*U.mm)},
+    epsilon=0.16,
+    subregions(
+      gas(
+        H2O(<font color="blue">each </font><font color="blue">final </font>eta=0),
+        N2(<font color="blue">each </font><font color="blue">final </font>eta=0),
+        O2(<font color="blue">each </font><font color="blue">final </font>eta=0)),
+      ionomer(&#39;H+_H2O&#39;(<font color="blue">each </font>k_Phi={1,1,1}),&#39;H+&#39;(<font color="blue">each </font>sigma=0.8*U.S/U.cm)),
+      liquid(H2O(<font color="blue">each </font><font color="blue">final </font>eta=0))));
+
+<font color="blue">end </font>CaCGDL;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 10 07:57:36 2014.
+</div>
+</body>
+</html>

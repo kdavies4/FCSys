@@ -1,0 +1,342 @@
+<html>
+<head>
+<title>FCSys.Assemblies.Cells</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Single-cell PEMFC models">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Assemblies.Cells"></a><a href="FCSys_Assemblies.html#FCSys.Assemblies">FCSys.Assemblies</a>.Cells</h2>
+
+<b>Single-cell PEMFC models</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.ExamplesS.png" alt="FCSys.Assemblies.Cells.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">Examples</a>
+</td><td>Examples</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.CellS.png" alt="FCSys.Assemblies.Cells.Cell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>
+</td><td>Single-cell PEMFC</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.CellS.png" alt="FCSys.Assemblies.Cells.SimpleCell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.SimpleCell">SimpleCell</a>
+</td><td>Simplified model of a single-cell PEMFC</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.CellI.png" alt="FCSys.Assemblies.Cells.Cell" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.Cell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.Cell</h2>
+<b>Single-cell PEMFC</b>
+<img src="FCSys.Assemblies.Cells.CellD.png" alt="FCSys.Assemblies.Cells.Cell">
+
+<h3>Information</h3>
+
+<pre>
+    </pre><p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
+    of a PEMFC is given in the <a href="FCSys.html#FCSys">top-level documentation of FCSys</a>.</p>
+
+Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (Icon for a cell).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths of segments in the y direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths of segments in the z direction [L]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare Regions.AnFPs.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a></td><td>anGDL</td><td>redeclare Regions.AnGDLs.AnG&hellip;</td><td>Anode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a></td><td>anCL</td><td>redeclare Regions.AnCLs.AnCL&hellip;</td><td>Anode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>PEM</td><td>redeclare Regions.PEMs.PEM P&hellip;</td><td>Proton exchange membrane</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a></td><td>caCL</td><td>redeclare Regions.CaCLs.CaCL&hellip;</td><td>Cathode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a></td><td>caGDL</td><td>redeclare Regions.CaGDLs.CaG&hellip;</td><td>Cathode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare Regions.CaFPs.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>inclLiq</td><td>true</td><td>Include liquid H<sub>2</sub>O</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>true</td><td>Include N<sub>2</sub></td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>an[n_y, n_z]</td><td>Interface with the anode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>ca[n_y, n_z]</td><td>Interface with the cathode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>anNegative[anFP.n_x, n_z]</td><td>Negative anode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>caNegative[caFP.n_x, n_z]</td><td>Negative cathode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>anPositive[anFP.n_x, n_z]</td><td>Positive anode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>caPositive[caFP.n_x, n_z]</td><td>Positive cathode fluid port</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Cell <font color="darkgreen">&quot;Single-cell PEMFC&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths of segments in the y direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">
+    &quot;Lengths of segments in the z direction&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of subregions in the y direction&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of subregions in the z direction&quot;</font>;
+
+  <font color="darkgreen">// Assumptions</font>
+  <font color="blue">parameter </font>Boolean inclLiq=true <font color="darkgreen">&quot;Include liquid H<sub>2</sub>O&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclN2=true <font color="darkgreen">&quot;Include N<sub>2</sub>&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> an[n_y, n_z] <font color="darkgreen">&quot;Interface with the anode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> ca[n_y, n_z] <font color="darkgreen">&quot;Interface with the cathode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> anNegative[anFP.n_x, n_z] <font color="darkgreen">&quot;Negative anode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> caNegative[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative cathode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> anPositive[anFP.n_x, n_z] <font color="darkgreen">&quot;Positive anode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> caPositive[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive cathode fluid port&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">Regions.AnFPs.AnFP</a> anFP(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">&quot;Anode flow plate&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">Regions.AnGDLs.AnGDL</a> anGDL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">&quot;Anode gas diffusion layer&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">Regions.AnCLs.AnCL</a> anCL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">&quot;Anode catalyst layer&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">Regions.PEMs.PEM</a> PEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Proton exchange membrane&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">Regions.CaCLs.CaCL</a> caCL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(gas(<font color="blue">each </font>inclN2=inclN2), liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">
+    &quot;Cathode catalyst layer&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">Regions.CaGDLs.CaGDL</a> caGDL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(gas(<font color="blue">each </font>inclN2=inclN2), liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">
+    &quot;Cathode gas diffusion layer&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">Regions.CaFPs.CaFP</a> caFP(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(gas(<font color="blue">each </font>inclN2=inclN2), liquid(<font color="blue">each </font>inclH2O=inclLiq))) <font color="darkgreen">
+    &quot;Cathode flow plate&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Internal connections (between layers)</font>
+  <font color="red">connect</font>(anFP.xPositive, anGDL.xNegative);
+  <font color="red">connect</font>(anGDL.xPositive, anCL.xNegative);
+  <font color="red">connect</font>(anCL.xPositive, PEM.xNegative);
+  <font color="red">connect</font>(PEM.xPositive, caCL.xNegative);
+  <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);
+  <font color="red">connect</font>(caGDL.xPositive, caFP.xNegative);
+
+  <font color="darkgreen">// External connections</font>
+  <font color="red">connect</font>(an, anFP.xNegative);
+  <font color="red">connect</font>(anFP.yNegative, anNegative);
+  <font color="red">connect</font>(anFP.yPositive, anPositive);
+  <font color="red">connect</font>(caFP.xPositive, ca);
+  <font color="red">connect</font>(caFP.yNegative, caNegative);
+  <font color="red">connect</font>(caFP.yPositive, caPositive);
+  <font color="darkgreen">// Note:  This model must be marked as structurally incomplete to pass the</font>
+  <font color="darkgreen">// check in Dymola 2014.</font>
+<font color="blue">end </font>Cell;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.CellI.png" alt="FCSys.Assemblies.Cells.SimpleCell" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.SimpleCell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.SimpleCell</h2>
+<b>Simplified model of a single-cell PEMFC</b>
+<img src="FCSys.Assemblies.Cells.SimpleCellD.png" alt="FCSys.Assemblies.Cells.SimpleCell">
+
+<h3>Information</h3>
+
+<p>This is a model of a single-cell proton exchange membrane fuel cell (PEMFC).  The catalyst layers and gas diffusion
+    layers are integrated on each side to reduce the complexity of the model.  All the phases are assumed to have the same temperature
+    in each layer.
+    An overview
+    of a PEMFC is given in the <a href="FCSys.html#FCSys">top-level documentation of FCSys</a>.</p>
+
+Extends from <a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a> (Icon for a cell).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths of segments in the y direction [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths of segments in the z direction [L]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare Regions.AnFPs.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a></td><td>anCGDL</td><td>&nbsp;</td><td>Anode catalyst and gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>PEM</td><td>redeclare Regions.PEMs.PEM P&hellip;</td><td>Proton exchange membrane</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">CaCGDL</a></td><td>caCGDL</td><td>&nbsp;</td><td>Cathode catalyst and gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare Regions.CaFPs.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>inclLiq</td><td>false</td><td>Include liquid H<sub>2</sub>O</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>true</td><td>Include N<sub>2</sub></td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>an[n_y, n_z]</td><td>Interface with the anode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>ca[n_y, n_z]</td><td>Interface with the cathode end plate</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>anNegative[anFP.n_x, n_z]</td><td>Negative anode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>caNegative[caFP.n_x, n_z]</td><td>Negative cathode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>anPositive[anFP.n_x, n_z]</td><td>Positive anode fluid port</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>caPositive[caFP.n_x, n_z]</td><td>Positive cathode fluid port</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> SimpleCell <font color="darkgreen">&quot;Simplified model of a single-cell PEMFC&quot;</font>
+  <font color="blue">import </font>Modelica.Constants.inf;
+  <font color="blue">extends </font><a href="FCSys_Icons.html#FCSys.Icons.Cell">FCSys.Icons.Cell</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]={8}*U.cm <font color="darkgreen">&quot;Lengths of segments in the y direction&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]={6.25}*U.cm <font color="darkgreen">
+    &quot;Lengths of segments in the z direction&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of subregions in the y direction&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of subregions in the z direction&quot;</font>;
+
+  <font color="darkgreen">// Assumptions</font>
+  <font color="blue">parameter </font>Boolean inclLiq=false <font color="darkgreen">&quot;Include liquid H<sub>2</sub>O&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclN2=true <font color="darkgreen">&quot;Include N<sub>2</sub>&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> an[n_y, n_z] <font color="darkgreen">&quot;Interface with the anode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> ca[n_y, n_z] <font color="darkgreen">&quot;Interface with the cathode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> anNegative[anFP.n_x, n_z] <font color="darkgreen">&quot;Negative anode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> caNegative[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative cathode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> anPositive[anFP.n_x, n_z] <font color="darkgreen">&quot;Positive anode fluid port&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> caPositive[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive cathode fluid port&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">Regions.AnFPs.AnFP</a> anFP(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(
+      common(<font color="blue">each </font>k_Q=0),
+      gas(common(<font color="blue">each </font>k_Q=inf), H2(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">each </font>
+              stateSelect=StateSelect.default))),
+      liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none,T(<font color="blue">each </font>
+              stateSelect=StateSelect.default))))) <font color="darkgreen">&quot;Anode flow plate&quot;</font>;
+
+  <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">FCSys.Regions.AnCLs.AnCGDL</a> anCGDL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">
+              each </font>stateSelect=StateSelect.default))))) <font color="darkgreen">
+    &quot;Anode catalyst and gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">Regions.PEMs.PEM</a> PEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Proton exchange membrane&quot;</font>;
+  <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">FCSys.Regions.CaCLs.CaCGDL</a> caCGDL(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">
+              each </font>stateSelect=StateSelect.default))))) <font color="darkgreen">
+    &quot;Cathode catalyst and gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">Regions.CaFPs.CaFP</a> caFP(
+    <font color="blue">final </font>L_y=L_y,
+    <font color="blue">final </font>L_z=L_z,
+    subregions(
+      common(<font color="blue">each </font>k_Q=0),
+      gas(
+        common(<font color="blue">each </font>k_Q=inf),
+        <font color="blue">each </font>inclN2=inclN2,
+        H2O(<font color="blue">each </font>initEnergy=Init.none,T(<font color="blue">each </font>stateSelect=StateSelect.default))),
+
+      liquid(<font color="blue">each </font>inclH2O=inclLiq,H2O(<font color="blue">each </font>initEnergy=Init.none, T(<font color="blue">each </font>
+              stateSelect=StateSelect.default))))) <font color="darkgreen">&quot;Cathode flow plate&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Internal connections (between layers)</font>
+  <font color="red">connect</font>(anFP.xPositive, anCGDL.xNegative);
+  <font color="red">connect</font>(anCGDL.xPositive, PEM.xNegative);
+  <font color="red">connect</font>(PEM.xPositive, caCGDL.xNegative);
+  <font color="red">connect</font>(caCGDL.xPositive, caFP.xNegative);
+
+  <font color="darkgreen">// External connections</font>
+  <font color="red">connect</font>(an, anFP.xNegative);
+  <font color="red">connect</font>(anFP.yNegative, anNegative);
+  <font color="red">connect</font>(anFP.yPositive, anPositive);
+
+  <font color="red">connect</font>(caFP.xPositive, ca);
+  <font color="red">connect</font>(caFP.yNegative, caNegative);
+  <font color="red">connect</font>(caFP.yPositive, caPositive);
+
+  <font color="darkgreen">// Note:  This model must be marked as structurally incomplete to pass the</font>
+  <font color="darkgreen">// check in Dymola 2014.</font>
+<font color="blue">end </font>SimpleCell;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 10 07:56:53 2014.
+</div>
+</body>
+</html>

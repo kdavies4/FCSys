@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>FCSys.Utilities.Coordinates</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Functions to handle Cartesian coordinates">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Utilities.Coordinates"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Coordinates</h2>
+
+<b>Functions to handle Cartesian coordinates</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Coordinates.after" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates.after">after</a>
+</td><td>Return the axis following a given axis in Cartesian coordinates</td></tr>
+<tr><td><img src="FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Coordinates.before" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates.before">before</a>
+</td><td>Return the axis preceding a given axis in Cartesian coordinates</td></tr>
+<tr><td><img src="FCSys.Utilities.arrayBooleanEqualS.png" alt="FCSys.Utilities.Coordinates.cartWrap" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates.cartWrap">cartWrap</a>
+</td><td>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Utilities.Coordinates.afterI.png" alt="FCSys.Utilities.Coordinates.after" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Coordinates.after"></a><a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates">FCSys.Utilities.Coordinates</a>.after</h2>
+<b>Return the axis following a given axis in Cartesian coordinates</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>after(Axis.z)</code> or <code>after(3)</code> returns 1, which is equivalent to <code>Axis.x</code>.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a></td><td>after</td><td>&nbsp;</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> after <font color="darkgreen">
+  &quot;Return the axis following a given axis in Cartesian coordinates&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a> axis;
+  <font color="blue">output </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a> after;
+
+<font color="blue">algorithm </font>
+  after := <font color="red">cartWrap</font>(axis + 1);
+
+<font color="blue">end </font>after;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Utilities.Coordinates.afterI.png" alt="FCSys.Utilities.Coordinates.before" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Coordinates.before"></a><a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates">FCSys.Utilities.Coordinates</a>.before</h2>
+<b>Return the axis preceding a given axis in Cartesian coordinates</b>
+
+<h3>Information</h3>
+
+<p><b>Example:</b><br>
+    <code>after(Axis.x)</code> or <code>after(1)</code> returns 3, which is equivalent to <code>Axis.z</code>.</p>
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a></td><td>after</td><td>&nbsp;</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> before <font color="darkgreen">
+  &quot;Return the axis preceding a given axis in Cartesian coordinates&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a> axis;
+  <font color="blue">output </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Axis">Axis</a> after;
+
+<font color="blue">algorithm </font>
+  after := <font color="red">cartWrap</font>(axis - 1);
+
+<font color="blue">end </font>before;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Utilities.Coordinates.afterI.png" alt="FCSys.Utilities.Coordinates.cartWrap" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Utilities.Coordinates.cartWrap"></a><a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates">FCSys.Utilities.Coordinates</a>.cartWrap</h2>
+<b>Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping</b>
+
+<h3>Information</h3>
+
+<p><b>Examples:</b><br>
+    <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p>
+Extends from <a href="FCSys_Utilities.html#FCSys.Utilities.mod1">mod1</a> (Modulo operator for 1-based indexing (compatible with Modelica)).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>num</td><td>&nbsp;</td><td>Dividend</td></tr>
+<tr><td>Integer</td><td>den</td><td>Axis.z</td><td>Divisor</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>index</td><td>Remainder with 1-based indexing</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> cartWrap = <a href="FCSys_Utilities.html#FCSys.Utilities.mod1">mod1</a> (<font color="blue">final </font>den=Axis.z) <font color="darkgreen">
+  &quot;Return the index to a Cartesian axis (1 to 3 or <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.x</a> to <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis.z</a>) after wrapping&quot;</font>;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 10 07:58:13 2014.
+</div>
+</body>
+</html>
