@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaCLs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -232,7 +232,7 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.C
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{(28.7*U.um + 0.235*U.mm)}</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>{6.25}*U.cm</td><td>Lengths across the z axis [L]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.5</td><td>Porosity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>epsilon</td><td>0.16</td><td>Porosity [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
 <tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
@@ -261,15 +261,13 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.C
 
   <font color="blue">extends </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a>(
     L_x={(28.7*U.um + 0.235*U.mm)},
-    epsilon=0.5,
+    epsilon=0.16,
     subregions(
-      common(<font color="blue">each </font>k_Phi={0.22,0.22,0.22}),
       gas(
         H2O(<font color="blue">each </font><font color="blue">final </font>eta=0),
         N2(<font color="blue">each </font><font color="blue">final </font>eta=0),
         O2(<font color="blue">each </font><font color="blue">final </font>eta=0)),
-      ionomer(&#39;H+_H2O&#39;(<font color="blue">each </font>k_Phi={0.1,0.1,0.1}),&#39;H+&#39;(<font color="blue">each </font>sigma=3.5*U.S/U.cm)),
-
+      ionomer(&#39;H+_H2O&#39;(<font color="blue">each </font>k_Phi={1,1,1}),&#39;H+&#39;(<font color="blue">each </font>sigma=0.8*U.S/U.cm)),
       liquid(H2O(<font color="blue">each </font><font color="blue">final </font>eta=0))));
 
 <font color="blue">end </font>CaCGDL;
@@ -282,6 +280,6 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.C
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:52:32 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:57:36 2014.
 </div>
 </span></body></html>

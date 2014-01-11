@@ -3,7 +3,7 @@
 <title>FCSys.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dynamic models of chemical species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -197,7 +197,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 
 <h3>Information</h3>
 
-<p>Fixed assumptions:<ol>
+<p>Fixed assumptions:</p><ol>
     <li>The gradient of material current is uniform in the direction of the current.</li>
     <li>The normal translational force on pairs of boundaries is split equally between the boundaries.  This includes
     the body, shear (transverse translational transport), and exchange forces due to intermolecular drag and transfer during
@@ -216,9 +216,9 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 
     The rate of advection of energy is the product of this
     specific enthalpy and the material current.
-    </ol></p>
+    </ol>
 
-    <p>Notes regarding the parameters:
+    <p>Notes regarding the parameters:</p>
     <ol>
 
     <li>If <code>approxVelocity</code> is <code>true</code>,
@@ -268,7 +268,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 
     if the heat flux is uniform [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Incropera2002">Incropera2002</a>].</li>
 
-    </ol></p>
+    </ol>
 
     <p>Translational momentum and thermal energy are advected as material is exchanged
     due to phase change and reactions.  This occurs at the velocity (&phi;) and the specific entropy-temperature
@@ -381,10 +381,10 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     &quot;Method of initializing the material state&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a> initEnergy=Init.temperature <font color="darkgreen">
     &quot;Method of initializing the thermal state&quot;</font>;
-  <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Species">Species</a>(N(stateSelect=<font color="blue">if </font>consMaterial == ConsThermo.dynamic<font color="blue"> then </font>
-          StateSelect.always<font color="blue"> else </font>StateSelect.prefer),T(<font color="blue">final </font>fixed=false));
   <font color="darkgreen">// Note:  The extension is after these parameters so that they appear first</font>
   <font color="darkgreen">// in the parameter dialog.</font>
+  <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Species">Species</a>(N(stateSelect=<font color="blue">if </font>consMaterial == ConsThermo.dynamic<font color="blue"> then </font>
+          StateSelect.always<font color="blue"> else </font>StateSelect.prefer),T(<font color="blue">final </font>fixed=false));
   <font color="darkgreen">// Note:  StateSelect.always isn&#39;t ideal, but it&#39;s necessary to avoid</font>
   <font color="darkgreen">// dynamic state selection in Dymola 2014.  In some cases it isn&#39;t</font>
   <font color="darkgreen">// appropriate (e.g., an incompressible liquid that fills the entire</font>
@@ -729,7 +729,7 @@ Choose any condition besides none.&quot;);
         i]*phi_boundaries[i, side] <font color="darkgreen">&quot;Current vs. velocity at the boundaries&quot;</font>;
     <font color="blue">end for</font>;
   <font color="blue">end for</font>;
-  minusDeltaf = I .* phi*Data.m + zeta*<font color="red">Sigma</font>(boundaries.Ndot);
+  minusDeltaf = Data.m*phi .* I + zeta*<font color="red">Sigma</font>(boundaries.Ndot);
 
   <font color="darkgreen">// Assumptions</font>
   2*I = -<font color="red">Delta</font>(boundaries.Ndot) <font color="darkgreen">&quot;Linear current profile (assumption #1)&quot;</font>;
@@ -753,7 +753,7 @@ Choose any condition besides none.&quot;);
       <font color="darkgreen">// Material</font>
       (<font color="blue">if </font>consTrans[i] == ConsTrans.dynamic<font color="blue"> then </font>kL[i]*Data.m*<font color="red">der</font>(boundaries[i,
         side].Ndot)/U.s<font color="blue"> else </font>0) = (Aprime[i]*(boundaries[i, side].p - p) + <font color="red">
-        inSign</font>(side)*phi_boundaries[i, side]*boundaries[i, side].Ndot*Data.m -
+        inSign</font>(side)*Data.m*phi_boundaries[i, side]*boundaries[i, side].Ndot -
         minusDeltaf[i])*(<font color="blue">if </font>upstream[i]<font color="blue"> then </font>1 + <font color="red">exp</font>(-zeta*<font color="red">Data.beta</font>(T, p)*
         boundaries[i, side].Ndot/(2*Aprime[i]))<font color="blue"> else </font>2) + <font color="red">inSign</font>(side)*f[i];
 
@@ -851,7 +851,7 @@ Choose any condition besides none.&quot;);
      else </font>boundaries[i, :].phi[<font color="red">cartWrap</font>(cartTrans[j] - cartTrans[i])]*
     boundaries[i, :].Ndot*Data.m + <font color="red">sum</font>(boundaries[i, :].mPhidot[<font color="red">cartWrap</font>(
     cartTrans[j] - cartTrans[i])])) <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans) <font color="blue">for </font>j<font color="blue"> in </font>1:n_trans};
-  <font color="darkgreen">// Note:  The storage is split between the boundaries via mPhidot, so a</font>
+  <font color="darkgreen">// Note:  The storage is split between the boundaries via f, so a</font>
   <font color="darkgreen">// derivative doesn&#39;t appear here (see material transport above).</font>
   <font color="darkgreen">// Note:  The explicit expansions (intra[:] and inter[:]) are necessary in</font>
   <font color="darkgreen">// Dymola 2014.</font>
@@ -914,12 +914,12 @@ Choose any condition besides none.&quot;);
 
 <h3>Information</h3>
 
-<p>Assumptions:<ol>
+<p>Assumptions:</p><ol>
   <li>There is no material transport.</li>
   <li>Velocity is zero.</li>
   <li>There are no chemical reactions or phase change.</li>
   <li>The volume is constant&mdash;determined by &epsilon; and the total volume of the subregion.</li>
-  </ol></p>
+  </ol>
 
   <p>For more information, please see the <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.</p>
 Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Base model for one chemical species in one phase).
@@ -1454,6 +1454,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 19:10:42 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:58:04 2014.
 </div>
 </span></body></html>

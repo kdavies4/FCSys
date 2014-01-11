@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Package of thermodynamic and diffusive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -61,7 +61,7 @@
     [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>] and the virial equation of state
     [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Dymond2002">Dymond2002</a>].</p>
 
-<p>Notes regarding the constants:
+<p>Notes regarding the constants:</p>
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
 
@@ -105,7 +105,7 @@
     (<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h"><i>h</i></a>) will be ill-posed.
     Typically, the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
-    </ul></p>
+    </ul>
 Extends from <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">CharacteristicEOS</a> (Base thermodynamic package with only the <i>p</i>-<i>v</i>-<i>T</i> relations).
 
 <h3>Package Content</h3>
@@ -855,7 +855,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>, p. 41].</p>
 
   <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -866,7 +866,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     diameter of a particle.</li>
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol></p>
+  </ol>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
@@ -914,7 +914,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -925,7 +925,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     diameter of a particle.</li>
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol></p>
+  </ol>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
@@ -972,7 +972,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -984,7 +984,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol>
-  Also, it is assumed that the Einstein relation applies.</p>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
 
   <p>Please see [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References">Davies2013</a>, Ch. 3] for a derivation
   of the rate of phase change from kinetic theory.</p>
@@ -1037,7 +1037,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -1049,7 +1049,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol>
-  Also, it is assumed that the Einstein relation applies.</p>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
@@ -1099,7 +1099,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 temperature difference.</p>
 
   <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     "billiard-ball"
@@ -1111,7 +1111,7 @@ temperature difference.</p>
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol>
-  Also, it is assumed that the Einstein relation applies.</p>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
@@ -1302,6 +1302,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 19:10:50 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:58:12 2014.
 </div>
 </span></body></html>

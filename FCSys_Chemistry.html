@@ -3,7 +3,7 @@
 <title>FCSys.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Chemical reactions and related models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -85,7 +85,7 @@ Extends from <a href="FCSys_Icons_ChemistryPackage.html#FCSys.Icons.ChemistryPac
 
 <h3>Information</h3>
 
-<table border=1><tr><td><font size=100 color="gray">H<sub>2</sub> &#8652; 2e<sup>-</sup> + 2H<sup>+</sup></td></tr></table></div>
+<table border=1><tr><td><font size=100 color="gray">H<sub>2</sub> &#8652; 2e<sup>-</sup> + 2H<sup>+</sup></font></td></tr></table></div>
 Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
 <p>
 
@@ -156,7 +156,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 
 <h3>Information</h3>
 
-<table border=1><tr><td><font size=100 color="gray">4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O</td></tr></table></div>
+<table border=1><tr><td><font size=100 color="gray">4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O</font></td></tr></table>
 Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
 <p>
 
@@ -193,8 +193,8 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
   <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;e-&#39;(
     <font color="blue">final </font>n_trans=n_trans,
     m=Characteristics.'e-'.Gas.m,
-    n=4,
-    reaction(Ndot(stateSelect=StateSelect.prefer)));
+    reaction(Ndot(stateSelect=StateSelect.prefer)),
+    n=4);
   <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.ChemicalReaction">Conditions.Adapters.ChemicalReaction</a> &#39;H+&#39;(
     <font color="blue">final </font>n_trans=n_trans,
     m=Characteristics.'H+'.Gas.m,
@@ -409,7 +409,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <font color="red">connect</font>(volume.amagat, amagatDalton.amagat);
   <font color="red">connect</font>(gas, amagatDalton.dalton);
   <font color="red">connect</font>(capillary.nonwetting, volume.amagat);
-
 <font color="blue">end </font>CapillaryVolume;
 </pre>
       </div>
@@ -420,6 +419,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 19:10:47 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:58:10 2014.
 </div>
 </span></body></html>

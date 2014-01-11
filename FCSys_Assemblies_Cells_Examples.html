@@ -3,7 +3,7 @@
 <title>FCSys.Assemblies.Cells.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -89,7 +89,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h3>Information</h3>
 
-<p>Some conditions are taken from the outer <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">environment</a> model.  In particular,<ol>
+<p>Some conditions are taken from the outer <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">environment</a> model.  In particular,</p>
+    <ol>
 
     <li><code>environment.T</code> is used as the initial temperature throughout the cell, the temperature at each inlet, and the exterior temperature of each end plate in the yz plane.</li>
 
@@ -99,7 +100,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
     <li><code>environment.psi_O2_dry</code> is used as the dry-gas concentration of O<sub>2</sub> at the cathode inlet.</li>
 
- </ol></p>
+ </ol>
 
 Extends from <a href="FCSys_Icons.html#FCSys.Icons.Record">FCSys.Icons.Record</a> (Icon for records).
 <p>
@@ -212,7 +213,7 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Record">FCSys.Icons.Record</a
 
     <p>To run the cell with pure O<sub>2</sub> in the cathode (no N<sub>2</sub>), set <code>environment.psi_O2_dry</code> to 100%.</p>
 
-    <p>Assumptions:
+    <p>Assumptions:</p>
     <ol>
     <li>The outer surface of each end plate has uniform temperature in the yz plane.</li>
     <li>No heat is conducted from the rest of the cell hardware.</li>
@@ -225,7 +226,7 @@ Extends from <a href="FCSys_Icons.html#FCSys.Icons.Record">FCSys.Icons.Record</a
     <li>The outlet pressure is applied to the gas mixture by Dalton's law (additivity of pressure).</li>
     <li>At the outlet, the liquid has the same pressure as the gas (Amagat's law).</li>
     <li>There is no thermal conduction across either outlet.</li>
-    </ol></p>
+    </ol>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
@@ -369,7 +370,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     a={0,0,0},
     RH=testConditions.anRH,
     T=333.13*U.K,
-    p=<font color="red">U.from_kPag</font>(202)) <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+    p=<font color="red">U.from_kPag</font>(48.3)) <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Electrical_Analog_Sources.html#Modelica.Electrical.Analog.Sources.RampCurrent">Modelica.Electrical.Analog.Sources.RampCurrent</a> load(
     offset=0.0001,
@@ -603,8 +604,13 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
   &quot;Simulate the fuel cell with multiple segments in the y direction&quot;</font>
 
   <font color="blue">parameter </font>Integer n_y=6 <font color="darkgreen">&quot;Number of segments in the y direction&quot;</font>;
+  <font color="blue">import </font>Modelica.Constants.inf;
 
-  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">TestStand</a>(cell(inclLiq=false, L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y)));
+  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">TestStand</a>(cell(
+      inclLiq=false,
+      L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y),
+      anGDL(epsilon=0.45),
+      caGDL(epsilon=0.45)));
 
 <font color="blue">end </font>TestStandSegmented;
 </pre>
@@ -680,7 +686,11 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
   <font color="blue">parameter </font>Integer n_y=6 <font color="darkgreen">&quot;Number of segments in the y direction&quot;</font>;
 
   <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandFixedFlow">TestStandFixedFlow</a>(
-    cell(inclLiq=false, L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y)),
+    cell(
+      inclLiq=false,
+      L_y=<font color="red">fill</font>(8*U.cm/n_y, n_y),
+      anGDL(epsilon=0.45),
+      caGDL(epsilon=0.45)),
     testConditions(I_an=anFlowSet.y, I_ca=caFlowSet.y),
     caFlowSet(startTime=0),
     anFlowSet(startTime=0),
@@ -696,6 +706,6 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 22:51:50 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:57:04 2014.
 </div>
 </span></body></html>

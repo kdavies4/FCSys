@@ -3,7 +3,7 @@
 <title>FCSys.UsersGuide</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2013-12-19">
+<meta name="date" content="2014-1-10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.1.2.zip">v0.1.2</a> (2013-12-13)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.0.zip">v0.2.0</a> (2014-01-08)</span></li>
     </ul>
   </div>
 </div>
@@ -79,7 +79,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <table border=1 cellspacing=0 cellpadding=4 bordercolor=#86989b >
       <tr bgcolor=#afc1c4>
         <td style="border: 1px solid #000000;">
-        <b><font color=#ffffff>Note</font></b>
+        <font color=#ffffff><b>Note</b></font>
         </td>
       </tr>
       <tr bgcolor=#f7f7f7>
@@ -93,13 +93,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
           <li>MWorks: Not supported as of version 2.6.10</li>
           <li>OpenModelica: Not supported as of version 1.8.1</li>
           <li>SystemModeler: Not supported as of version 3.0</li>
-          <!---<li>JModelica: 9/17/12: Not able to get version 1.8 running on Windows or Linux </li>--->
+          <!--<li>JModelica: 9/17/12: Not able to get version 1.8 running on Windows or Linux </li>-->
         </ul>
         </td>
       </tr>
     </table>
 
-    <p>These are the suggested steps to begin using FCSys:
+    <p>These are the suggested steps to begin using FCSys:</p>
     <ol>
         <li>Read the overview in the <a href="index.html#FCSys">top-level documentation of FCSys</a>.</li>
         <li>Browse the subpackages of FCSys.  In general, the subpackages are
@@ -159,7 +159,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         can be improved and others may benefit.  The best way is to create a fork from the
         development page at <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.
         Please also use the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Contact">contact information</a>.</li>
-    </ol></p>
+    </ol>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 <hr>
@@ -182,7 +182,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <dd><a href="http://www.gatech.edu">Georgia Institute of Technology</a></dd>
     <dd><a href="mailto:kdavies4@gmail.com">kdavies4@gmail.com</a></dd>
 
-    <p><b>Acknowledgments:</b><ul>
+    <p><b>Acknowledgments:</b></p><ul>
     <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
     <li>Technical discussions and insight from Tom Fuller, Sheldon Jeter, Tequila Harris, Mike Angelo, Guido Bender, Severine Busquet,
     Chris Ford, Sebastian Herzig, Ben Lee, George Nelson, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
@@ -198,7 +198,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <li>Grant #N00014-04-0682 from the <a href="http://www.onr.navy.mil">Office of Naval Research</a>
     to the <a href="http://www.hnei.hawaii.edu">Hawaii Natural Energy Institute</a></li>
     </ul>
-    </ul></p>
+    </ul>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Contact">Modelica.Icons.Contact</a> (Icon for contact information).
 <hr>
@@ -212,7 +212,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <a href="#ModelicaLicense2">Modelica License 2</a>
 
-with the additional condition:<ul>
+with the additional condition:</p><ul>
   <li>This software is controlled under the jurisdiction of the United States
       Department of Commerce and subject to Export Administration Regulations.
       By downloading or using the Software, you are agreeing to comply with
@@ -229,7 +229,8 @@ with the additional condition:<ul>
       available to foreign nationals for visual inspection, when technology is
       exchanged orally or when technology is made available by practice or
       application under the guidance of persons with knowledge of the
-      technology.</li></ul></p>
+      technology.</li></ul>
+
 <p><b>Copyright &copy; 2008&ndash;2013, Georgia Tech Research Corporation</b></p>
 
 <hr>
@@ -269,7 +270,7 @@ this Original Work:</p>
         Work which represents, as a whole, an original work of authorship.
         For the matter of clarity and as examples:
 
-        <ol  type="A">
+        <ol type="A">
                 <li>Derivative Work shall not include work that remains separable from
                 the Original Work, as well as merely extracting a part of the
                 Original Work without modifying it.</li>
@@ -410,7 +411,7 @@ License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
 purpose. The entire risk as to the quality of the Original Work is
-with You.</b></u> This disclaimer of warranty constitutes an
+with You.</u></b> This disclaimer of warranty constitutes an
 essential part of this License. No license to the Original Work is
 granted by this License except under this disclaimer.</p>
 
@@ -481,7 +482,6 @@ action. This section shall survive the termination of this License.</p>
         this License or by law, and Licensor promises not to interfere with
         or be responsible for such uses by You.</li>
 </ol>
-</body>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
       </div>
@@ -492,6 +492,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Dec 18 19:09:12 2013.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 10 07:56:28 2014.
 </div>
 </span></body></html>
