@@ -64,7 +64,7 @@ package Subregions
 
   <p>See also <a href=\"modelica://FCSys.Characteristics.Examples.HydrationLevel\">Characteristics.Examples.HydrationLevel</a>.</p>
 
-</p></html>"),
+</html>"),
           experiment(StopTime=120),
           Commands(file(ensureTranslated=true) =
               "Resources/Scripts/Dymola/Subregions.Examples.PhaseChange.Hydration.mos"
@@ -356,7 +356,6 @@ package Subregions
             "Subregions.Examples.AirColumn.mos"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics));
-
     end AirColumn;
 
     model BinaryDiffusion
@@ -462,10 +461,10 @@ package Subregions
             N2(upstreamX=false),
             O2(upstreamX=false))),
         subregions(gas(
-            each H2(upstreamX=false),
-            each H2O(upstreamX=false),
-            each N2(upstreamX=false),
-            each O2(upstreamX=false))),
+            H2(each upstreamX=false),
+            H2O(each upstreamX=false),
+            N2(each upstreamX=false),
+            O2(each upstreamX=false))),
         subregion2(gas(
             H2(upstreamX=false),
             H2O(upstreamX=false),
@@ -1284,7 +1283,7 @@ it generates H<sub>2</sub>O vapor.  Since phase change is a dynamic, nonequilibr
 process, there is a difference.</li></ol>
 
    <p>Please see the documentation of the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
+   <a href=\"modelica://FCSys.Subregions.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
             extent={{78,-44},{118,-50}},
@@ -1292,7 +1291,7 @@ process, there is a difference.</li></ol>
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             textString="(connections not shown
-on diagram)")}));
+in diagram)")}));
   end Subregion;
 
   model SubregionIonomer "Subregion with only the ionomer phase"
@@ -1385,7 +1384,7 @@ on diagram)")}));
       defaultComponentName="subregion",
       Documentation(info="<html>
    <p>Please see the documentation of the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
+   <a href=\"modelica://FCSys.Subregions.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-60,-40},{40,
               60}}), graphics));
@@ -1633,7 +1632,7 @@ on diagram)")}));
       defaultComponentName="subregion",
       Documentation(info="<html>
    <p>Please see the documentation of the
-   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
+   <a href=\"modelica://FCSys.Subregions.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{
               100,60}}), graphics));

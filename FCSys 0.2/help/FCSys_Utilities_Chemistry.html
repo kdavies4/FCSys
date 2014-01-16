@@ -41,6 +41,7 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
+
 <h2><a name="FCSys.Utilities.Chemistry"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Chemistry</h2>
 
 <b>Functions to support chemistry</b>
@@ -81,21 +82,17 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <p><b>Example:</b><br>
   <code>charge("Hg2+2")</code> returns 2.</p>
-
+  
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -134,18 +131,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   for details about the format of the chemical formula.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -191,21 +184,17 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <p><b>Example:</b><br>
   <code>(symbol, n, z, remainder) = readElement("Hg2+2")</code> returns
   <code>symbol="Hg"</code>, <code>n=2</code>, <code>z=2</code>, and <code>remainder=""</code>.</p>
-
+  
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -258,18 +247,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <code>symbols={"C", "H", "F", "O", "S", "e-"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -332,21 +317,17 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <p><b>Example:</b><br>
   <code>stoich({"e-","H+","O2","H2O"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
-
+  
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
-
 <h3>Inputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formulas[:]</td><td>&nbsp;</td><td>Chemical formulas of the species</td></tr>
 </table>
 <p>
-
 <h3>Outputs</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -439,7 +420,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 10 07:58:13 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:08:27 2014.
 </div>
 </body>
 </html>

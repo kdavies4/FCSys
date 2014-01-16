@@ -30,7 +30,7 @@ package UsersGuide "User's Guide"
   class GettingStarted "Getting started"
     extends Modelica.Icons.Information;
     annotation (preferredView="info", Documentation(info="<html>
-    <table border=1 cellspacing=0 cellpadding=4 bordercolor=#86989b >
+    <table border=1 cellspacing=0 cellpadding=4>
       <tr bgcolor=#afc1c4>
         <td style=\"border: 1px solid #000000;\">
         <font color=#ffffff><b>Note</b></font>
@@ -973,21 +973,6 @@ action. This section shall survive the termination of this License.</p>
 // TODO:  Summarize features of model--sim time, no nonlinear equations, included phenomena, scalability
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2.1")),
@@ -1300,7 +1285,7 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  version="0.2.0",
-  dateModified="2014-01-09 05:18:26Z",
-  revisionID="SHA: 92362f5");
+  version="0.2.1",
+  dateModified="2014-01-16 02:08:34Z",
+  revisionID="SHA: c50dda0");
 end FCSys;

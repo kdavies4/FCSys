@@ -1332,7 +1332,7 @@ package Characteristics "Data and functions to correlate physical properties"
         D := v*omega(T)/alpha;
         annotation (Inline=true,Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases under the following assumptions
-  [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>]:
+  [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>]:</p>
   <ol>
     <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
     \"billiard-ball\"
@@ -1343,7 +1343,7 @@ package Characteristics "Data and functions to correlate physical properties"
     diameter of a particle.</li>
     <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
-  </ol></p>
+  </ol>
 </html>"));
       end D;
 

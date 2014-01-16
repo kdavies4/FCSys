@@ -413,7 +413,7 @@ package Chemistry "Chemical reactions and related models"
     annotation (
       defaultComponentName="HOR",
       Documentation(info=
-            "<html><table border=1><tr><td><font size=100 color=\"gray\">H<sub>2</sub> &#8652; 2e<sup>-</sup> + 2H<sup>+</sup></font></td></tr></table></div></html>"),
+            "<html><table border=1><tr><td><font size=100 color=\"gray\">H<sub>2</sub> &#8652; 2e<sup>-</sup> + 2H<sup>+</sup></font></td></tr></table></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Rectangle(
@@ -529,7 +529,6 @@ package Chemistry "Chemical reactions and related models"
 
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},{40,
               20}}), graphics));
-
   end ORR;
 
 public

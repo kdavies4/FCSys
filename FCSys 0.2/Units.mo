@@ -1675,7 +1675,7 @@ establishing units (including the meter and the second) as mathematical entities
 Here, the variable <i>v</i> directly represents the quantity.
 Its <code>value</code> attribute is truly the value of the quantity in the context of the
 
-statement by BIPM (above).</p>
+statement by BIPM (above).
 
 One advantage is that unit conversion is handled
 naturally.  The essence of unit conversion is the phrase \"value of a quantity in a unit\" typically means

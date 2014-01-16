@@ -41,6 +41,7 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
+
 <h2><a name="FCSys.Subregions.Examples"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Examples</h2>
 
 <b>Examples</b>
@@ -114,9 +115,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       <li>The central difference scheme is used (no upstream discretization).</ol>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -207,9 +206,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Subregion</a> (Single subregion, with H<sub>2</sub> by default).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -284,9 +281,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions">Subregions</a> (Horizontal array of subregions with an initial pressure difference (H<sub>2</sub> included by default)), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -327,9 +322,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions">Subregions</a> (Horizontal array of subregions with an initial pressure difference (H<sub>2</sub> included by default)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -369,9 +362,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Echo">Echo</a> (Two regions of gas with an initial pressure difference).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -401,10 +392,10 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.E
         N2(upstreamX=false),
         O2(upstreamX=false))),
     subregions(gas(
-        <font color="blue">each </font>H2(upstreamX=false),
-        <font color="blue">each </font>H2O(upstreamX=false),
-        <font color="blue">each </font>N2(upstreamX=false),
-        <font color="blue">each </font>O2(upstreamX=false))),
+        H2(<font color="blue">each </font>upstreamX=false),
+        H2O(<font color="blue">each </font>upstreamX=false),
+        N2(<font color="blue">each </font>upstreamX=false),
+        O2(<font color="blue">each </font>upstreamX=false))),
     subregion2(gas(
         H2(upstreamX=false),
         H2O(upstreamX=false),
@@ -441,12 +432,10 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.E
     and the heat is rejected to both sides.  There is no thermal convection or
 
     radiation&mdash;only conduction to the sides.</p>
-
+    
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -523,9 +512,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     <p>Note that the temperature increases due to viscous dissipation, but the increase is limited by thermal convection.  The walls are adiabatic.</p>
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -630,12 +617,10 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   other than those implied by the open connectors (no diffusion current, no forces,
 
   no thermal conduction).  Other examples in this package extend from this one.</p>
-
+  
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -695,9 +680,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -823,9 +806,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions">Examples.Subregions</a> (Horizontal array of subregions with an initial pressure difference (H<sub>2</sub> included by default)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -867,9 +848,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.ThermalConduction">ThermalConduction</a> (Thermal conduction (through solid)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -915,7 +894,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.T
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 10 07:57:56 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:08:12 2014.
 </div>
 </body>
 </html>
