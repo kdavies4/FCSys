@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-15">
+<meta name="date" content="2014-1-17">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.1.zip">v0.2.1</a> (2014-01-15)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
     </ul>
   </div>
 </div>
@@ -65,13 +65,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionS.png" alt="FCSys.Conditions.Examples.BoundaryCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.BoundaryCondition">BoundaryCondition</a>
 </td><td>Test the conditions for the boundary of a subregion</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionS.png" alt="FCSys.Conditions.Examples.BoundaryConditionPhases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.BoundaryConditionPhases">BoundaryConditionPhases</a>
-</td><td>Test the conditions for the boundary of a subregion with phases</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.RouterS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
+<tr><td><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
 </td><td>Test the <a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a> model</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.AnodeAdapterS.png" alt="FCSys.Conditions.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.AnodeAdapter">AnodeAdapter</a>
+<tr><td><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionS.png" alt="FCSys.Conditions.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.AnodeAdapter">AnodeAdapter</a>
 </td><td>Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.AnodeAdapterS.png" alt="FCSys.Conditions.Examples.Stoichiometry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Stoichiometry">Stoichiometry</a>
+<tr><td><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionS.png" alt="FCSys.Conditions.Examples.Stoichiometry" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Stoichiometry">Stoichiometry</a>
 </td><td>Test the stoichiometry of a reaction</td></tr>
 </table>
 <hr>
@@ -83,7 +81,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h3>Information</h3>
 
-Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 
 <h3>Modelica definition</h3>
 
@@ -91,16 +89,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <font color="blue">model</font> BoundaryCondition <font color="darkgreen">
   &quot;Test the conditions for the boundary of a subregion&quot;</font>
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
   <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">ByConnector.BoundaryBus.Single.Sink</a> boundary;
   <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
     L={1,1,1}*U.cm,
     inclTransX=false,
     inclTransY=true,
     inclTransZ=false,
-    inclTransX=false,
-    inclTransY=true,
-    graphite(&#39;inclC+&#39;=true, &#39;C+&#39;(V_IC=0.5*U.cc)),
+    graphite(&#39;inclC+&#39;=true, &#39;C+&#39;(epsilon=0.5)),
     gas(inclH2O=true));
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
@@ -112,88 +108,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionI.png" alt="FCSys.Conditions.Examples.BoundaryConditionPhases" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.Examples.BoundaryConditionPhases"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.BoundaryConditionPhases</h2>
-<b>Test the conditions for the boundary of a subregion with phases</b>
-<img src="images/FCSys.Conditions.Examples6097fc98032d7531hasesD.png" alt="FCSys.Conditions.Examples.BoundaryConditionPhases">
-
-<h3>Information</h3>
-
-Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
-<p>
-
-<h3>Parameters</h3>
-
-<p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>ones(3)*U.cm</td><td>Length [L]</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
-<tr><td>Boolean</td><td>inclTransX</td><td>false</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
-</table>
-
-<h3>Modelica definition</h3>
-
-<pre>
-<font color="blue">model</font> BoundaryConditionPhases <font color="darkgreen">
-  &quot;Test the conditions for the boundary of a subregion with phases&quot;</font>
-  <font color="blue">import </font><a href="FCSys_Utilities_Coordinates.html#FCSys.Utilities.Coordinates.cartWrap">FCSys.Utilities.Coordinates.cartWrap</a>;
-  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
-  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.enumerate">Modelica.Math.BooleanVectors.enumerate</a>;
-  <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.index">Modelica.Math.BooleanVectors.index</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = <font color="red">ones</font>(3)*
-    U.cm <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
-
-  <font color="darkgreen">// Included boundaries</font>
-  <font color="blue">parameter </font>Boolean inclTransX=false <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransY=true <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
-
-  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single_Phases.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Phases.Gas">ByConnector.BoundaryBus.Single.Phases.Gas</a> boundary(inclH2O=true, H2O(<font color="blue">
-        redeclare </font>Conditions.ByConnector.Boundary.Single.ThermalDiffusive.heatRate
-        thermal, <font color="blue">redeclare </font>Conditions.ByConnector.Boundary.Single.Material.Current
-        material(set(y=U.A))));
-
-  <a href="FCSys_Conditions_ByConnector_Amagat.html#FCSys.Conditions.ByConnector.Amagat.VolumeFixed">Conditions.ByConnector.Amagat.VolumeFixed</a> volume(n_phases=1);
-  <a href="FCSys_Phases.html#FCSys.Phases.Gas">FCSys.Phases.Gas</a> gas(
-    inclH2=false,
-    inclH2O=true,
-    <font color="blue">final </font>n_trans=n_trans);
-
-  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment;
-
-<font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
-      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
-      inclTransZ} <font color="darkgreen">&quot;true, if each pairs of boundaries is included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclRot[Axis]={inclTransY<font color="blue"> and </font>inclTransZ,
-      inclTransZ<font color="blue"> and </font>inclTransX,inclTransX<font color="blue"> and </font>inclTransY} <font color="darkgreen">
-    &quot;true, if each axis of rotation has all its tangential boundaries included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
-    &quot;Number of components of translational momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartTrans[n_trans]=<font color="red">index</font>(inclTrans) <font color="darkgreen">
-    &quot;Cartesian-axis indices of the transport axes&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer transCart[Axis]=<font color="red">enumerate</font>(inclTrans) <font color="darkgreen">
-    &quot;Transport-axis indices of the Cartesian axes&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="red">connect</font>(gas.yPositive, boundary.boundary);
-
-  <font color="red">connect</font>(volume.dalton[1], gas.dalton);
-<font color="blue">end </font>BoundaryConditionPhases;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Conditions.Examples.RouterI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.Router"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.Router</h2>
 <b>Test the <a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a> model</b>
 <img src="images/FCSys.Conditions.Examples.RouterD.png" alt="FCSys.Conditions.Examples.Router">
@@ -226,14 +141,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples.AnodeAdapterI.png" alt="FCSys.Conditions.Examples.AnodeAdapter" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionI.png" alt="FCSys.Conditions.Examples.AnodeAdapter" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.AnodeAdapter"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.AnodeAdapter</h2>
 <b>Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter</b>
 <img src="images/FCSys.Conditions.Examples.AnodeAdapterD.png" alt="FCSys.Conditions.Examples.AnodeAdapter">
 
 <h3>Information</h3>
 
-Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 
 <h3>Modelica definition</h3>
 
@@ -241,14 +156,17 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <font color="blue">model</font> AnodeAdapter <font color="darkgreen">
   &quot;Test the <a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters.Anode">Anode</a> adapter&quot;</font>
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
   <font color="blue">inner </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid.html#Modelica.Fluid.System">Modelica.Fluid.System</a> system(T_ambient=293.15 + 5);
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(T=350*U.K);
   <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a> subregion(
     L={1,1,1}*U.cm,
     inclTransY=false,
     inclTransZ=false,
-    gas(inclH2=true, inclH2O=true),
+    gas(
+      inclH2=true,
+      inclH2O=true,
+      H2O(initEnergy=Init.none)),
     graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
     liquid(inclH2O=true));
   <a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL.Anode">Adapters.MSL.Anode</a> anodeAdapter(<font color="blue">redeclare </font><font color="blue">package</font> LiquidMedium = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_CompressibleLiquids_LinearColdWater.html#Modelica.Media.CompressibleLiquids.LinearColdWater">Modelica.Media.CompressibleLiquids.LinearColdWater</a>);
@@ -261,7 +179,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     use_HeatTransfer=true,
     <font color="blue">redeclare </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Vessels_BaseClasses_HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
       HeatTransfer,
-    <font color="blue">redeclare </font><font color="blue">package</font> Medium = Adapters.Media.AnodeGas,
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_MSL_Media_AnodeGas.html#FCSys.Conditions.Adapters.MSL.Media.AnodeGas">Adapters.MSL.Media.AnodeGas</a>,
     medium(p(fixed=true),X(<font color="blue">each </font>fixed=true)));
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> liquidVolume(
     nPorts=1,
@@ -287,14 +205,14 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples.AnodeAdapterI.png" alt="FCSys.Conditions.Examples.Stoichiometry" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples8ca506989b70d78aitionI.png" alt="FCSys.Conditions.Examples.Stoichiometry" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.Stoichiometry"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.Stoichiometry</h2>
 <b>Test the stoichiometry of a reaction</b>
 <img src="images/FCSys.Conditions.Examples.StoichiometryD.png" alt="FCSys.Conditions.Examples.Stoichiometry">
 
 <h3>Information</h3>
 
-Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a> (Icon for classes that are still under construction).
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p>
 
 <h3>Parameters</h3>
@@ -305,11 +223,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Current">Current</a></td><td>speciesA</td><td>redeclare ByConnector.Chemic&hellip;</td><td>&nbsp;</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Potential">Potential</a></td><td>speciesB</td><td>redeclare ByConnector.Chemic&hellip;</td><td>&nbsp;</td></tr>
 <tr><td><a href="FCSys_Conditions_ByConnector_Chemical.html#FCSys.Conditions.ByConnector.Chemical.Potential">Potential</a></td><td>speciesC</td><td>redeclare ByConnector.Chemic&hellip;</td><td>&nbsp;</td></tr>
-<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included transport axes</td></tr>
-<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -319,13 +232,13 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">import </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Math_BooleanVectors.html#Modelica.Math.BooleanVectors.countTrue">Modelica.Math.BooleanVectors.countTrue</a>;
-  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+
   <font color="darkgreen">// Assumptions</font>
   <font color="darkgreen">// -----------</font>
   <font color="darkgreen">// Included components of translational momentum</font>
-  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">constant </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">constant </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">constant </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(T=360*U.K);
 
@@ -361,10 +274,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     n=2);
 
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">constant </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
       inclTransZ} <font color="darkgreen">
     &quot;true, if each component of translational momentum is included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">constant </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
     &quot;Number of components of translational momentum&quot;</font>;
 
 <font color="blue">equation </font>
@@ -383,6 +296,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Jan 15 15:06:50 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:47:27 2014.
 </div>
 </span></body></html>

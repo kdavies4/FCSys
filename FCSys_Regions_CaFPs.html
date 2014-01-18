@@ -3,7 +3,7 @@
 <title>FCSys.Regions.CaFPs</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-15">
+<meta name="date" content="2014-1-17">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Cathode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.1.zip">v0.2.1</a> (2014-01-15)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
     </ul>
   </div>
 </div>
@@ -91,6 +91,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>D</td><td>0.815*U.mm</td><td>Hydraulic diameter of the channel [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_channel</td><td>106.4*U.cm</td><td>Length of the channel [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{10}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
@@ -140,7 +141,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           H2O_N2(k_Phi={inf,inf,inf}),
           H2O_O2(k_Phi={inf,inf,inf}),
           N2_O2(k_Phi={inf,inf,inf}),
-          k={0.17*epsilon,13.3/n_y,n_y/13.3},
+          k={0.17*epsilon,Lstar/n_y,n_y/Lstar},
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -166,7 +167,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;C+&#39;(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
           &#39;e-&#39;(sigma=U.S/(1.470e-3*U.cm))),
         liquid(
-          k={0.17*epsilon,13.3/n_y,n_y/13.3},
+          k={0.17*epsilon,Lstar/n_y,n_y/Lstar},
           inclH2O=true,
           H2O(
             upstreamX=false,
@@ -179,7 +180,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> D=0.815*U.mm <font color="darkgreen">&quot;Hydraulic diameter of the channel&quot;</font>;
 
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_channel=106.4*U.cm <font color="darkgreen">&quot;Length of the channel&quot;</font>;
+
 <font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Lstar=L_channel/L[Axis.y] <font color="darkgreen">
+    &quot;Ratio of the length of the channel to the length of the layer in the y direction&quot;</font>;
+
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_states_H2O[:, :, :](
     <font color="blue">each </font>stateSelect=StateSelect.always,
     <font color="blue">each </font>start=0,
@@ -194,8 +200,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
-  <font color="darkgreen">// TODO: Include parameter for length of channel, add to anFP too.</font>
-
   <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
 
 <font color="blue">end </font>CaFP;
@@ -208,6 +212,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Jan 15 15:08:06 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:48:43 2014.
 </div>
 </span></body></html>

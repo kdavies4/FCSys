@@ -3,7 +3,7 @@
 <title>FCSys.Utilities.Chemistry</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-15">
+<meta name="date" content="2014-1-17">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Functions to support chemistry">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.1.zip">v0.2.1</a> (2014-01-15)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
     </ul>
   </div>
 </div>
@@ -120,6 +120,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot;;
 
 <font color="blue">end </font>charge;
@@ -170,6 +171,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot;;
 
 <font color="blue">end </font>countElements;
@@ -236,6 +238,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
   <font color="blue">output </font>String remainder <font color="darkgreen">&quot;Remainder of the chemical formula&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot; <font color="red">readElement</font>(
     formula,
     symbol,
@@ -284,7 +287,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbols[countElements(formula)]</td><td>Symbols of the elements</td></tr>
-<tr><td>Integer</td><td>coeffs[size(symbols, 1)]</td><td>Coefficients of the elements</td></tr>
+<tr><td>Integer</td><td>coeffs[countElements(formula)]</td><td>Coefficients of the elements</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -295,9 +298,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>String symbols[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Symbols of the elements&quot;</font>;
-  <font color="blue">output </font>Integer coeffs[<font color="red">size</font>(symbols, 1)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
-  <font color="darkgreen">// Note:  coeffs[countElements(formula)] would require redundant</font>
-  <font color="darkgreen">// computation.</font>
+  <font color="blue">output </font>Integer coeffs[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
+  <font color="darkgreen">// Note:  coeffs[size(symbols, 1)] would save computation but fails</font>
+  <font color="darkgreen">// in Dymola 2014.</font>
 
 <font color="blue">protected </font>
   Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
@@ -316,6 +319,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       <font color="darkgreen">// Electrons are counted below.</font>
     <font color="blue">end if</font>;
   <font color="blue">end while</font>;
+
   <font color="darkgreen">// Add electrons according to the charge.</font>
   <font color="blue">if </font>z_net &lt;&gt; 0<font color="blue"> then</font>
     symbols[i] := &quot;e-&quot;;
@@ -452,6 +456,6 @@ An unrelated species may be included.&quot;);
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Jan 15 15:08:27 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:49:06 2014.
 </div>
 </span></body></html>

@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.Adapters.MSL.Phases</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-15">
+<meta name="date" content="2014-1-17">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Adapters for material phases">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.1.zip">v0.2.1</a> (2014-01-15)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
     </ul>
   </div>
 </div>
@@ -81,7 +81,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
 <p>
 
 <h3>Parameters</h3>
@@ -102,7 +102,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>boundary</td><td>FCSys boundary connector</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
-<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Orient]</td><td>Modelica translational flanges for shear force</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Medium</td><td>Medium model (Modelica)</td></tr>
 </table>
@@ -112,7 +111,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <pre>
 <font color="blue">model</font> AnodeGas <font color="darkgreen">
   &quot;Adapter for PEMFC anode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
 
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_MSL_Media_AnodeGas.html#FCSys.Conditions.Adapters.MSL.Media.AnodeGas">Media.AnodeGas</a> <font color="blue">constrainedby </font>
     Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model (Modelica)&quot;</font>;
@@ -129,9 +128,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
     &quot;Modelica heat port&quot;</font>;
 
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orient] <font color="darkgreen">
-    &quot;Modelica translational flanges for shear force&quot;</font>;
-
 <font color="blue">equation </font>
   <font color="darkgreen">// H2</font>
   <font color="red">connect</font>(H2.boundary, boundary.H2);
@@ -147,8 +143,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
   <font color="darkgreen">// Mixture</font>
   <font color="red">connect</font>(junction.mixturePort, fluidPort);
-  <font color="red">connect</font>(H2.flange, flange);
-  <font color="red">connect</font>(H2O.flange, flange);
 <font color="blue">end </font>AnodeGas;
 </pre>
 <hr>
@@ -160,7 +154,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
 <p>
 
 <h3>Parameters</h3>
@@ -179,7 +173,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Orient]</td><td>Modelica translational flanges</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>boundary</td><td>FCSys boundary connector for shear force</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
@@ -191,7 +184,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <pre>
 <font color="blue">model</font> CathodeGas <font color="darkgreen">
   &quot;Adapter for PEMFC cathode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
 
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_MSL_Media_CathodeGas.html#FCSys.Conditions.Adapters.MSL.Media.CathodeGas">Media.CathodeGas</a> <font color="blue">constrainedby </font>
     Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model (Modelica)&quot;</font>;
@@ -212,8 +205,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orient] <font color="darkgreen">
-    &quot;Modelica translational flanges&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> boundary <font color="darkgreen">&quot;FCSys boundary connector for shear force&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
     &quot;Modelica heat port&quot;</font>;
@@ -240,10 +231,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 
   <font color="darkgreen">// Mixture</font>
   <font color="red">connect</font>(junction.mixturePort, fluidPort);
-  <font color="red">connect</font>(H2O.flange, flange);
-  <font color="red">connect</font>(N2.flange, flange);
 
-  <font color="red">connect</font>(O2.flange, flange);
 <font color="blue">end </font>CathodeGas;
 </pre>
 <hr>
@@ -264,7 +252,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Include C+</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Include C+</td></tr>
 <tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>true</td><td>Include e-</td></tr>
 </table>
 <p>
@@ -286,7 +274,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
   &quot;Adapter for graphite between <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> and <a href="index.html#FCSys">FCSys</a>&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
 
-  <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Include C+&quot;</font>;
+  <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=true <font color="darkgreen">&quot;Include C+&quot;</font>;
   <a href="FCSys_Conditions_Adapters_MSL_Domains.html#FCSys.Conditions.Adapters.MSL.Domains.Thermal">Domains.Thermal</a> &#39;C+&#39; <font color="blue">if </font>'inclC+';
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=true <font color="darkgreen">&quot;Include e-&quot;</font>;
   <a href="FCSys_Conditions_Adapters_MSL_Domains.html#FCSys.Conditions.Adapters.MSL.Domains.Electrical">Domains.Electrical</a> &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>)
@@ -319,7 +307,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
 <p>
 
 <h3>Parameters</h3>
@@ -338,7 +326,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
-<tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Flange_a</a></td><td>flange[Orient]</td><td>Modelica translational flanges for shear force</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>boundary</td><td>FCSys boundary connector</td></tr>
 <tr><td><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
@@ -350,7 +337,7 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">
   &quot;Adapter for liquid between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
 
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media_Water_ConstantPropertyLiquidWater.html#Modelica.Media.Water.ConstantPropertyLiquidWater">Modelica.Media.Water.ConstantPropertyLiquidWater</a>
     <font color="blue">constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
@@ -362,8 +349,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
-  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Mechanics_Translational_Interfaces.html#Modelica.Mechanics.Translational.Interfaces.Flange_a">Modelica.Mechanics.Translational.Interfaces.Flange_a</a> flange[Orient] <font color="darkgreen">
-    &quot;Modelica translational flanges for shear force&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> boundary <font color="darkgreen">&quot;FCSys boundary connector&quot;</font>;
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b">Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b</a> heatPort <font color="darkgreen">
     &quot;Modelica heat port&quot;</font>;
@@ -375,7 +360,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   <font color="red">connect</font>(H2O.heatPort, heatPort);
 
   <font color="red">connect</font>(H2O.fluidPort, fluidPort);
-  <font color="red">connect</font>(flange, H2O.flange);
 
 <font color="blue">end </font>Liquid;
 </pre>
@@ -387,6 +371,6 @@ Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Jan 15 15:06:56 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:47:33 2014.
 </div>
 </span></body></html>

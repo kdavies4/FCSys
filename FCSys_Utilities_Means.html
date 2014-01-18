@@ -3,7 +3,7 @@
 <title>FCSys.Utilities.Means</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-15">
+<meta name="date" content="2014-1-17">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Package of mathematical mean functions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.1.zip">v0.2.1</a> (2014-01-15)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
     </ul>
   </div>
 </div>
@@ -77,7 +77,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p>
+    <code>arithmetic({1,2,3})</code> returns 2.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
 
@@ -119,7 +119,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h3>Information</h3>
 
 <p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p>
+    <code>harmonic({1,1/3})</code> returns 0.5.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
 
@@ -148,11 +148,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">input </font>Real u[:] <font color="darkgreen">&quot;Vector of numbers&quot;</font>;
   <font color="blue">output </font>Real mean <font color="darkgreen">&quot;Harmonic mean&quot;</font>;
 
-  <font color="darkgreen">// TODO: Add check to FCSysTest.</font>
-
 <font color="blue">algorithm </font>
-  mean := <font color="blue">if </font><font color="red">size</font>(u, 1) == 1<font color="blue"> then </font>u[1]<font color="blue"> else </font>(<font color="blue">if </font><font color="red">size</font>(u, 1) == 2<font color="blue"> then </font>2*<font color="red">product</font>(
-    u)/<font color="red">sum</font>(u)<font color="blue"> else </font><font color="red">size</font>(u, 1)/<font color="red">sum</font>(1/u <font color="blue">for </font>u<font color="blue"> in </font>u));
+  mean := <font color="blue">if </font><font color="red">size</font>(u, 1) == 1<font color="blue"> then </font>u[1]<font color="blue"> else </font><font color="red">size</font>(u, 1)/<font color="red">sum</font>(1/u <font color="blue">for </font>u<font color="blue"> in </font>u);
 <font color="blue">end </font>harmonic;
 </pre>
       </div>
@@ -163,6 +160,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Wed Jan 15 15:08:27 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:49:06 2014.
 </div>
 </span></body></html>
