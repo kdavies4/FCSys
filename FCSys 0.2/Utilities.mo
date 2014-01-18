@@ -9,6 +9,7 @@ package Utilities "General supporting functions"
       input String formula "Chemical formula";
       output Integer z "Charge number"
         annotation (Dialog(__Dymola_label="<html><i>z</i></html>"));
+
     external"C";
       annotation (
         IncludeDirectory="modelica://FCSys/Resources/Source/C",
@@ -32,6 +33,7 @@ package Utilities "General supporting functions"
       input String formula "Chemical formula";
       output Integer n "Number of elements"
         annotation (Dialog(__Dymola_label="<html><i>n</i></html>"));
+
     external"C";
       annotation (
         IncludeDirectory="modelica://FCSys/Resources/Source/C",
@@ -59,6 +61,7 @@ package Utilities "General supporting functions"
       output Integer z "Charge number"
         annotation (Dialog(__Dymola_label="<html><i>z</i></html>"));
       output String remainder "Remainder of the chemical formula";
+
     external"C" readElement(
             formula,
             symbol,
@@ -96,9 +99,10 @@ package Utilities "General supporting functions"
       extends Modelica.Icons.Function;
       input String formula "Chemical formula";
       output String symbols[countElements(formula)] "Symbols of the elements";
-      output Integer coeffs[size(symbols, 1)] "Coefficients of the elements";
-      // Note:  coeffs[countElements(formula)] would require redundant
-      // computation.
+      output Integer coeffs[countElements(formula)]
+        "Coefficients of the elements";
+      // Note:  coeffs[size(symbols, 1)] would save computation but fails
+      // in Dymola 2014.
 
     protected
       Integer z "Charge number";
@@ -117,6 +121,7 @@ package Utilities "General supporting functions"
           // Electrons are counted below.
         end if;
       end while;
+
       // Add electrons according to the charge.
       if z_net <> 0 then
         symbols[i] := "e-";
@@ -270,7 +275,8 @@ An unrelated species may be included.");
 
   package Means "Package of mathematical mean functions"
     extends Modelica.Icons.Package;
-    // TODO:  Add other functions, move to (share with) Modelica standard library.
+    // TODO:  Remove this package, use Modelica.Math.Vectors.Means instead if
+    // ticket #1400 is accepted (https://trac.modelica.org/Modelica/ticket/1400).
 
     function arithmetic "Return the arithmetic mean of numbers"
       extends Modelica.Icons.Function;
@@ -281,7 +287,7 @@ An unrelated species may be included.");
     algorithm
       mean := sum(u)/size(u, 1);
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p></html>"));
+    <code>arithmetic({1,2,3})</code> returns 2.</p></html>"));
     end arithmetic;
 
     function harmonic "Return the harmonic mean of numbers"
@@ -290,13 +296,10 @@ An unrelated species may be included.");
         annotation (Dialog(__Dymola_label="<html><i>u</i></html>"));
       output Real mean "Harmonic mean";
 
-      // TODO: Add check to FCSysTest.
-
     algorithm
-      mean := if size(u, 1) == 1 then u[1] else (if size(u, 1) == 2 then 2*
-        product(u)/sum(u) else size(u, 1)/sum(1/u for u in u));
+      mean := if size(u, 1) == 1 then u[1] else size(u, 1)/sum(1/u for u in u);
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
-    <code>average({1,2,3})</code> returns 2.</p></html>"));
+    <code>harmonic({1,1/3})</code> returns 0.5.</p></html>"));
     end harmonic;
   end Means;
 

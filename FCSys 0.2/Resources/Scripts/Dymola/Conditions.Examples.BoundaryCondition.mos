@@ -1,6 +1,6 @@
 // Setup
 removePlots();
-createPlot(filename = "boundaryBC.mat");
+createPlot(filename = "BoundaryCondition.mat");
 FCSys.Utilities.plot6(
     y1={"subregion.gas.H2O.T", "subregionboundaryBC.gas.H2O.entropyBC.u"},
     y2={"subregion.gas.H2O.N"},

@@ -1,0 +1,8 @@
+// Setup
+removePlots();
+createPlot(filename = "Stoichiometry.mat");
+
+FCSys.Utilities.plot6(
+    y1={"speciesA.chemical.Ndot", "speciesB.chemical.Ndot", 
+        "speciesC.chemical.Ndot"});
+    

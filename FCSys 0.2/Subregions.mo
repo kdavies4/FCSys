@@ -425,18 +425,6 @@ package Subregions
             "Subregions.Examples.BinaryDiffusion.mos"));
     end BinaryDiffusion;
 
-    model CapillaryAction "Transport of liquid due to capillary action"
-      extends Subregions(
-        Deltap_IC=0,
-        subregion1(gas(H2(consEnergy=ConsThermo.dynamic))),
-        subregion2(gas(H2(consEnergy=ConsThermo.dynamic))),
-        environment(analysis=false));
-      extends Modelica.Icons.UnderConstruction;
-      annotation (Commands(file=
-              "Resources/Scripts/Dymola/Subregions.Examples.CapillaryAction.mos"
-            "Subregions.Examples.CapillaryAction.mos"));
-
-    end CapillaryAction;
 
     model Echo "Two regions of gas with an initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
@@ -837,9 +825,6 @@ package Subregions
         each L={1,1,1}*U.cm,
         each inclTransY=false,
         each inclTransZ=false,
-        graphite(each final 'inclC+'='inclC+', each final 'incle-'='incle-'),
-        ionomer(each final 'inclSO3-'='inclSO3-', each final 'inclH+'='inclH+'),
-
         gas(
           each final inclH2=inclH2,
           each final inclH2O=inclH2O,
@@ -857,6 +842,9 @@ package Subregions
           O2(p_IC={environment.p - Deltap_IC/2 - i*Deltap_IC/(n_x + 1) for i
                  in 1:n_x}, each phi(each stateSelect=StateSelect.always, each
                 fixed=true))),
+        graphite(each final 'inclC+'='inclC+', each final 'incle-'='incle-'),
+        ionomer(each final 'inclSO3-'='inclSO3-', each final 'inclH+'='inclH+'),
+
         liquid(H2O(each epsilon_IC=0.25))) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -864,8 +852,6 @@ package Subregions
         L={1,1,1}*U.cm,
         inclTransY=false,
         inclTransZ=false,
-        graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
-        ionomer(final 'inclSO3-'=false, final 'inclH+'='inclH+'),
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -874,7 +860,10 @@ package Subregions
           H2(p_IC=environment.p + Deltap_IC/2),
           H2O(p_IC=environment.p + Deltap_IC/2),
           N2(p_IC=environment.p + Deltap_IC/2),
-          O2(p_IC=environment.p + Deltap_IC/2)))
+          O2(p_IC=environment.p + Deltap_IC/2)),
+        graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
+        ionomer(final 'inclSO3-'='inclSO3-', final 'inclH+'='inclH+'),
+        liquid(H2O(each epsilon_IC=0.25)))
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
     equation
@@ -1286,11 +1275,11 @@ process, there is a difference.</li></ol>
    <a href=\"modelica://FCSys.Subregions.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-            extent={{78,-44},{118,-50}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="(connections not shown
+              extent={{78,-44},{118,-50}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="(connections not shown
 in diagram)")}));
   end Subregion;
 

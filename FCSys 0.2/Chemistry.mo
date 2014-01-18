@@ -5,15 +5,15 @@ package Chemistry "Chemical reactions and related models"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
+
     model Overpotential "Demonstrate the Butler-Volmer overpotential"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
 
       output Q.Potential w=-'e-Transfer'.Deltag "Overpotential";
       output Q.Current I_A=-'e-Transfer'.I/U.A if environment.analysis
         "Reaction current in amperes";
 
-      Electrochemistry.ElectronTransfer 'e-Transfer'(
+      Chemistry.Electrochemistry.ElectronTransfer 'e-Transfer'(
         redeclare constant Integer n_trans=1,
         fromI=false,
         I0=U.mA)
@@ -37,14 +37,19 @@ package Chemistry "Chemical reactions and related models"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-36,0})));
-      Electrochemistry.DoubleLayer doubleLayer(
+      Chemistry.Electrochemistry.DoubleLayer doubleLayer(
         setVelocity=false,
         inclVolume=false,
         redeclare constant Integer n_trans=1,
         w(fixed=true))
         annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-      Conditions.ByConnector.Inter.Efforts substrate(inclTransY=false,
-          inclTransZ=false)
+      Conditions.ByConnector.Inter.Efforts substrate(
+        inclTransX=true,
+        inclTransY=false,
+        inclTransZ=false,
+        internalTransX=true,
+        internalTransY=true,
+        internalTransZ=true)
         annotation (Placement(transformation(extent={{50,10},{70,-10}})));
 
       inner Conditions.Environment environment
@@ -66,11 +71,11 @@ package Chemistry "Chemical reactions and related models"
           points={{6,30},{20,30},{20,0},{6,0}},
           color={255,195,38},
           smooth=Smooth.None));
-      connect(substrate.inter, doubleLayer.intra) annotation (Line(
+      connect(substrate.inter, doubleLayer.inert) annotation (Line(
           points={{60,10},{60,20},{0,20},{0,26}},
           color={221,23,47},
           smooth=Smooth.None));
-      connect(substrate.inter, 'e-Transfer'.intra) annotation (Line(
+      connect(substrate.inter, 'e-Transfer'.inert) annotation (Line(
           points={{60,10},{60,20},{0,20},{0,4}},
           color={221,23,47},
           smooth=Smooth.None));
@@ -235,19 +240,23 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{-20,30},{-20,-30}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{20,30},{20,-30}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-50,0},{-20,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{20,0},{50,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None)}));
+                100,100}}), graphics={
+            Line(
+              points={{-20,30},{-20,-30}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{20,30},{20,-30}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-50,0},{-20,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{20,0},{50,0}},
+              color={255,195,38},
+              smooth=Smooth.None)}));
     end DoubleLayer;
 
     model ElectronTransfer "Electron transfer"
@@ -326,25 +335,30 @@ package Chemistry "Chemical reactions and related models"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={Line(
-                  points={{0,-20},{0,-50}},
-                  color={221,23,47},
-                  smooth=Smooth.None),Line(
-                  points={{-50,0},{50,0}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Rectangle(
-                  extent={{-30,20},{32,-20}},
-                  lineColor={255,195,38},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-20,4},{20,4},{8,12}},
-                  color={255,195,38},
-                  smooth=Smooth.None),Line(
-                  points={{-20,-5},{20,-5},{8,3}},
-                  color={255,195,38},
-                  smooth=Smooth.None,
-                  origin={0,-11},
-                  rotation=180)}));
+                100,100}}), graphics={
+            Line(
+              points={{0,-20},{0,-50}},
+              color={221,23,47},
+              smooth=Smooth.None),
+            Line(
+              points={{-50,0},{50,0}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Rectangle(
+              extent={{-30,20},{32,-20}},
+              lineColor={255,195,38},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,4},{20,4},{8,12}},
+              color={255,195,38},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,-5},{20,-5},{8,3}},
+              color={255,195,38},
+              smooth=Smooth.None,
+              origin={0,-11},
+              rotation=180)}));
     end ElectronTransfer;
 
   end Electrochemistry;

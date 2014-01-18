@@ -7,7 +7,7 @@ from distutils.core import setup
 from glob import glob
 
 setup(name='FCRes',
-      version="0.2.1",
+      version="0.2.2",
       author='Kevin Davies',
       author_email='kdavies4@gmail.com',
       #credits=['Kevin Bandy'],

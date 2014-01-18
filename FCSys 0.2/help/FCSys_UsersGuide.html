@@ -40,8 +40,7 @@
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
-      <div class="body">
-<h2><img src="FCSys.UsersGuideI.png" alt="FCSys.UsersGuide" align=RIGHT border=1 width=80  height=80 >
+      <div class="body"><h2><img src="FCSys.UsersGuideI.png" alt="FCSys.UsersGuide" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide"></a><a href="FCSys.html#FCSys">FCSys</a>.UsersGuide</h2>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 
@@ -51,7 +50,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.GettingStarted" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted">GettingStarted</a>
 </td><td>Getting started</td></tr>
-<tr><td><img src="FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.SampleResults" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide_SampleResults.html#FCSys.UsersGuide.SampleResults">SampleResults</a>
+<tr><td><img src="FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.SampleResults" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.SampleResults">SampleResults</a>
 </td><td>Sample results</td></tr>
 <tr><td><img src="FCSys.UsersGuide.GettingStartedS.png" alt="FCSys.UsersGuide.Glossary" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide_Glossary.html#FCSys.UsersGuide.Glossary">Glossary</a>
 </td><td>Glossary</td></tr>
@@ -94,38 +93,40 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <p>These are the suggested steps to begin using FCSys:</p>
     <ol>
         <li>Read the overview in the <a href="FCSys.html#FCSys">top-level documentation of FCSys</a>.</li>
+
         <li>Browse the subpackages of FCSys.  In general, the subpackages are
-        ordered by the level of the model and the physical hierarchy (high-level at the top).
+        ordered by the level of the model and the physical hierarchy (high-level at the top).</li>
+
         <li>Call <a href="FCSys_Units.html#FCSys.Units.setup">FCSys.Units.setup</a>() to
         establish the display units.  This is automatic if FCSys
-        is loaded via the <a href="../../load.mos">load.mos</a> script.
+        is loaded via the <a href="../../load.mos">load.mos</a> script.</li>
+
         <li>Simulate the <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>
         model.
         There are scripts in <a href="../Resources/Scripts/Dymola/README.md">Resources/Scripts/Dymola/</a> to
-
         create useful plots of that model and others.
         The scripts should be accessible from the "Command" menu of the Modelica environment.
         For more detailed
         analysis, including spatial property distributions and vector plots,
         a Python module called FCRes is available in
         <a href="../Resources/Source/Python/README.md">Resources/Source/Python/</a>
-
-        (HTML and PDF documentation <a href="../Resources/Source/Python/doc/index.html">here</a> and
-
+        (HTML and PDF documentation <a href="../Resources/Source/Python/doc/index.html">here</a> an
         <a href="../Resources/Source/Python/doc/FCRes.pdf">here</a>).</li>
+
         <li>Read the documentation of the classes. In particular, these may be of interest:
         <ul>
             <li><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package:
             Information about the system of units, which is different
             than <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_SIunits.html#Modelica.SIunits">Modelica.SIunits</a></li>
+
             <li><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a> package:
             Overview of the connectors</li>
+
             <li><a href="FCSys_Species.html#FCSys.Species.Species">FCSys.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, momentum, and
             energy</li>
-            <li><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> or
 
-            <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a>:
+            <li><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
@@ -133,8 +134,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         have sufficient documentation, please look at its base model(s) and the package(s) that
         contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
-        the models it inherits from.
-        </li>
+        the models it inherits from.</li>
+
         <li>Create and simulate examples of other usage scenarios.  Many of the
         nested models (regions, subregions, species) are replaceable.
         Their parameters are often not propagated to the cell level, but may
@@ -142,17 +143,69 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         many models have auxiliary output variables for analysis and diagnostics.
         These may be included by setting <code>analysis=true</code> in the outer environment model (instance
         of <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>).</li>
+
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and
         following the existing framework.  It will be necessary to add species models
         (Li<sup>+</sup>, O<sup>2-</sup>, etc.).</li>
+
         <li>Please share your additions or modifications to the source code so that the library
         can be improved and others may benefit.  The best way is to create a fork from the
         development page at <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.
         Please also use the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Contact">contact information</a>.</li>
     </ol>
-    
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
+<hr>
+
+<h2><img src="FCSys.UsersGuideI.png" alt="FCSys.UsersGuide.SampleResults" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.UsersGuide.SampleResults"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.SampleResults</h2>
+<img src="FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.SampleResults">
+
+<p>The figures below show the results from several cell-level examples of
+    <a href="FCSys.html#FCSys">FCSys</a>.   The models were simulated using Dymola 2014.  The plots were
+    generated using <a href="http://kdavies4.github.io/ModelicaRes/">ModelicaRes</a>.  For more information, please
+    follow the links to the associated models.  For more results and complete discussions, please see
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References">Davies, 2014</a>].
+    </p>
+
+    <p align=center id="Fig1"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/PolarizationTemperature.png"></a>
+    <br>Figure&nbsp;1: Polarization curves of the cell with various inlet and flow plate temperatures
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/PolarizationPressure.png"></a>
+    <br>Figure&nbsp;2: Polarization curves of the cell with various outlet pressures
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig3"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/Losses.png"></a>
+    <br>Figure&nbsp;3: Potential losses during the baseline polarization test
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig4"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/Temperature.png"></a>
+    <br>Figure&nbsp;4: Temperature throughout the cell during the baseline polarization test
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig5"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/PressureO2.png"></a>
+    <br>Figure&nbsp;5: Oxygen pressure during the baseline polarization test
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig6"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="../Resources/Documentation/UsersGuide/SampleResults/Energy.png"></a>
+    <br>Figure&nbsp;6: Energy balance at 1.5&nbsp;A/cm<sup>2</sup> during the baseline polarization test
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
+
+    <p align=center id="Fig7"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented"><img src="../Resources/Documentation/UsersGuide/SampleResults/SegmentPolarization.png"></a>
+    <br>Figure&nbsp;7: Polarization of cell segments with fixed reactant flow rates
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented">FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented</a>).</p>
+
+    <p align=center id="Fig8"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle"><img src="../Resources/Documentation/UsersGuide/SampleResults/CyclePolarization.png"></a>
+    <br>Figure&nbsp;8: Polarization under sinuosoidal, reversing load
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle">FCSys.Assemblies.Cells.Examples.TestStandCycle</a>).</p>
+
+    <p align=center id="Fig9"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle"><img src="../Resources/Documentation/UsersGuide/SampleResults/CycleSaturation.png"></a>
+    <br>Figure&nbsp;9: Liquid pore saturation under sinuosoidal, reversing load
+    (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle">FCSys.Assemblies.Cells.Examples.TestStandCycle</a>).</p>
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 <hr>
 
@@ -481,7 +534,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:06:48 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 17 15:47:25 2014.
 </div>
 </body>
 </html>

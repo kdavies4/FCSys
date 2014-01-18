@@ -1,17 +1,7 @@
 // Setup
 removePlots();
 createPlot(filename = "Hydration.mat");
-species = cat(1,
-              if 'inclC+' then {"graphite.'C+'"} else fill("",0),
-              //if 'inclSO3-' then {"ionomer.'SO3-'"} else fill("",0),
-              if 'incle-' then {"graphite.'e-'"} else fill("",0),
-              if 'inclH+' then {"ionomer.'H+'"} else fill("",0),
-              if inclH2 then {"gas.H2"} else fill("",0),
-              if inclH2O then {"gas.H2O"} else fill("",0),
-              if inclH2O then {"liquid.H2O"} else fill("",0),
-              if inclH2O then {"ionomer.H2O"} else fill("",0),
-              if inclN2 then {"gas.N2"} else fill("",0),
-              if inclO2 then {"gas.O2"} else fill("",0));
+species = {"liquid.H2O", "ionomer.H2O", "gas.N2"};
 
 for i in 1:size(species, 1) loop
    FCSys.Utilities.plot6(

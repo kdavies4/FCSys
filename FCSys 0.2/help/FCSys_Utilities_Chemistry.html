@@ -41,7 +41,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Utilities.Chemistry"></a><a href="FCSys_Utilities.html#FCSys.Utilities">FCSys.Utilities</a>.Chemistry</h2>
 
 <b>Functions to support chemistry</b>
@@ -82,17 +81,21 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
   <p><b>Example:</b><br>
   <code>charge("Hg2+2")</code> returns 2.</p>
-  
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -107,6 +110,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot;;
 
 <font color="blue">end </font>charge;
@@ -131,14 +135,18 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   for details about the format of the chemical formula.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -153,6 +161,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot;;
 
 <font color="blue">end </font>countElements;
@@ -184,17 +193,21 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <p><b>Example:</b><br>
   <code>(symbol, n, z, remainder) = readElement("Hg2+2")</code> returns
   <code>symbol="Hg"</code>, <code>n=2</code>, <code>z=2</code>, and <code>remainder=""</code>.</p>
-  
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -215,6 +228,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
   <font color="blue">output </font>String remainder <font color="darkgreen">&quot;Remainder of the chemical formula&quot;</font>;
+
 <font color="blue">external</font>&quot;C&quot; <font color="red">readElement</font>(
     formula,
     symbol,
@@ -247,19 +261,23 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <code>symbols={"C", "H", "F", "O", "S", "e-"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p>
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbols[countElements(formula)]</td><td>Symbols of the elements</td></tr>
-<tr><td>Integer</td><td>coeffs[size(symbols, 1)]</td><td>Coefficients of the elements</td></tr>
+<tr><td>Integer</td><td>coeffs[countElements(formula)]</td><td>Coefficients of the elements</td></tr>
 </table>
 
 <h3>Modelica definition</h3>
@@ -270,9 +288,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>String symbols[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Symbols of the elements&quot;</font>;
-  <font color="blue">output </font>Integer coeffs[<font color="red">size</font>(symbols, 1)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
-  <font color="darkgreen">// Note:  coeffs[countElements(formula)] would require redundant</font>
-  <font color="darkgreen">// computation.</font>
+  <font color="blue">output </font>Integer coeffs[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
+  <font color="darkgreen">// Note:  coeffs[size(symbols, 1)] would save computation but fails</font>
+  <font color="darkgreen">// in Dymola 2014.</font>
 
 <font color="blue">protected </font>
   Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
@@ -291,6 +309,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       <font color="darkgreen">// Electrons are counted below.</font>
     <font color="blue">end if</font>;
   <font color="blue">end while</font>;
+
   <font color="darkgreen">// Add electrons according to the charge.</font>
   <font color="blue">if </font>z_net &lt;&gt; 0<font color="blue"> then</font>
     symbols[i] := &quot;e-&quot;;
@@ -317,17 +336,21 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <p><b>Example:</b><br>
   <code>stoich({"e-","H+","O2","H2O"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
-  
+
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formulas[:]</td><td>&nbsp;</td><td>Chemical formulas of the species</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -420,7 +443,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:08:27 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 17 15:49:06 2014.
 </div>
 </body>
 </html>

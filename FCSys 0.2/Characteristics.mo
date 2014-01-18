@@ -2167,8 +2167,6 @@ temperature difference.</p>
         output Q.NumberAbsolute k_Phi "Binary mobility factor" annotation (
             Dialog(__Dymola_label="<html><i>k</i><sub>&Phi;</sub></html>"));
 
-        // TODO: Add Slattery reference, cite it in the documentation.
-
       algorithm
         k_Phi := pDstar(T/T_crit)*p_crit^(2/3)*(T_crit*U.mol/U.K)^(5/6)*(U.atm/
           U.q)^(1/3)*U.cm^2/U.s/sqrt(harmonicMean({A.m,B.m})*U.g)/(p_A*B.D(T,
@@ -2177,7 +2175,9 @@ temperature difference.</p>
 
         annotation (Inline=true,Documentation(info="<html><p><i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> are given as inputs even though they can be calculated
  from <i>T</i>, <i>p</i><sub>A</sub>, and <i>p</i><sub>B</sub> because it may be desirable to leave <i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> constant while
-  varying <i>p</i><sub>A</sub> and <i>p</i><sub>B</sub>.</p></html>"));
+  varying <i>p</i><sub>A</sub> and <i>p</i><sub>B</sub>.</p>
+  
+  <p>This function is based on eq. 5 from [<a href=\"modelica://FCSys.UsersGuide.References.Slattery1958\">Slattery1958</a>].</p></html>"));
       end k;
 
       function pDstar_nonpolar
@@ -2188,11 +2188,10 @@ temperature difference.</p>
                 "<html><i>T</i><sub>c AB</sub></html>"));
         output Q.NumberAbsolute pDstar "Reduced pressure-diffusivity product";
 
-        // TODO: Add Slattery reference, cite it in the documentation.
-
       algorithm
-        pDstar := 3.882e-4*Tstar^1.823 "[Slattery1958, eq. 4]";
-        annotation (Inline=true);
+        pDstar := 3.882e-4*Tstar^1.823;
+        annotation (Inline=true,Documentation(info=
+                "<html><p>This function is based on eq. 4 from [<a href=\"modelica://FCSys.UsersGuide.References.Slattery1958\">Slattery1958</a>].</p></html>"));
       end pDstar_nonpolar;
 
       function pDstar_polar
@@ -2203,11 +2202,10 @@ temperature difference.</p>
                 "<html><i>T</i><sub>c AB</sub></html>"));
         output Q.NumberAbsolute pDstar "Reduced pressure-diffusivity product";
 
-        // TODO: Add Slattery reference, cite it in the documentation.
-
       algorithm
-        pDstar := 5.148e-4*Tstar^2.334 "[Slattery1958, eq. 9]";
-        annotation (Inline=true);
+        pDstar := 5.148e-4*Tstar^2.334;
+        annotation (Inline=true,Documentation(info=
+                "<html><p>This function is based on eq. 9 from [<a href=\"modelica://FCSys.UsersGuide.References.Slattery1958\">Slattery1958</a>].</p></html>"));
       end pDstar_polar;
     end BaseClasses;
   end MobilityFactors;

@@ -41,7 +41,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Regions.CaFPs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaFPs</h2>
 
 <b>Cathode flow plates</b>
@@ -74,12 +73,15 @@ For more information, please see the
 
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
+
 <h3>Parameters</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>D</td><td>0.815*U.mm</td><td>Hydraulic diameter of the channel [L]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_channel</td><td>106.4*U.cm</td><td>Length of the channel [L]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>{10}*U.mm</td><td>Lengths along the x axis [L]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>{8}*U.cm</td><td>Lengths along the y axis [L]</td></tr>
@@ -92,7 +94,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
+
 <h3>Connectors</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -127,7 +131,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           H2O_N2(k_Phi={inf,inf,inf}),
           H2O_O2(k_Phi={inf,inf,inf}),
           N2_O2(k_Phi={inf,inf,inf}),
-          k={0.17*epsilon,13.3/n_y,n_y/13.3},
+          k={0.17*epsilon,Lstar/n_y,n_y/Lstar},
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -153,7 +157,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
           &#39;C+&#39;(theta=U.m*U.K/(95*U.W),epsilon=1 - epsilon),
           &#39;e-&#39;(sigma=U.S/(1.470e-3*U.cm))),
         liquid(
-          k={0.17*epsilon,13.3/n_y,n_y/13.3},
+          k={0.17*epsilon,Lstar/n_y,n_y/Lstar},
           inclH2O=true,
           H2O(
             upstreamX=false,
@@ -166,7 +170,12 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> D=0.815*U.mm <font color="darkgreen">&quot;Hydraulic diameter of the channel&quot;</font>;
 
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_channel=106.4*U.cm <font color="darkgreen">&quot;Length of the channel&quot;</font>;
+
 <font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Lstar=L_channel/L[Axis.y] <font color="darkgreen">
+    &quot;Ratio of the length of the channel to the length of the layer in the y direction&quot;</font>;
+
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_states_H2O[:, :, :](
     <font color="blue">each </font>stateSelect=StateSelect.always,
     <font color="blue">each </font>start=0,
@@ -181,8 +190,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
-  <font color="darkgreen">// TODO: Include parameter for length of channel, add to anFP too.</font>
-
   <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
 
 <font color="blue">end </font>CaFP;
@@ -192,7 +199,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:08:06 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 17 15:48:43 2014.
 </div>
 </body>
 </html>

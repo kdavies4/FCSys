@@ -41,7 +41,6 @@
   <div class="documentwrapper">
     <div class="bodywrapper">
       <div class="body">
-
 <h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses"></a><a href="FCSys_Characteristics_MobilityFactors.html#FCSys.Characteristics.MobilityFactors">FCSys.Characteristics.MobilityFactors</a>.BaseClasses</h2>
 
 <b>Base classes (generally not for direct use)</b>
@@ -73,8 +72,12 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
  from <i>T</i>, <i>p</i><sub>A</sub>, and <i>p</i><sub>B</sub> because it may be desirable to leave <i>v</i><sub>A</sub> and <i>v</i><sub>B</sub> constant while
   varying <i>p</i><sub>A</sub> and <i>p</i><sub>B</sub>.</p>
 
+  <p>This function is based on eq. 5 from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Slattery1958">Slattery1958</a>].</p>
+
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -90,7 +93,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>&nbsp;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -127,8 +132,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_crit <font color="darkgreen">&quot;Geometric mean of the critical pressures&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_Phi <font color="darkgreen">&quot;Binary mobility factor&quot;</font>;
 
-  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
-
 <font color="blue">algorithm </font>
   k_Phi := <font color="red">pDstar</font>(T/T_crit)*p_crit^(2/3)*(T_crit*U.mol/U.K)^(5/6)*(U.atm/U.q)^(1
     /3)*U.cm^2/U.s/<font color="red">sqrt</font>(<font color="red">harmonicMean</font>({A.m,B.m})*U.g)/(p_A*<font color="red">B.D</font>(T, v_A) + p_B*<font color="red">A.D</font>
@@ -142,15 +145,24 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_nonpolar"></a><a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses">FCSys.Characteristics.MobilityFactors.BaseClasses</a>.pDstar_nonpolar</h2>
 
 <b>[Slattery1958] reduced pressure-diffusivity product for nonpolar species</b>
+
+<h3>Information</h3>
+
+<p>This function is based on eq. 4 from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Slattery1958">Slattery1958</a>].</p>
+
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>Tstar</td><td>1</td><td>Ratio of temperature to the geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -166,10 +178,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     &quot;Ratio of temperature to the geometric mean of the critical temperatures&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> pDstar <font color="darkgreen">&quot;Reduced pressure-diffusivity product&quot;</font>;
 
-  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
-
 <font color="blue">algorithm </font>
-  pDstar := 3.882e-4*Tstar^1.823 <font color="darkgreen">&quot;[Slattery1958, eq. 4]&quot;</font>;
+  pDstar := 3.882e-4*Tstar^1.823;
 <font color="blue">end </font>pDstar_nonpolar;
 </pre>
 <hr>
@@ -177,15 +187,24 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <h2><a name="FCSys.Characteristics.MobilityFactors.BaseClasses.pDstar_polar"></a><a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCSys.Characteristics.MobilityFactors.BaseClasses">FCSys.Characteristics.MobilityFactors.BaseClasses</a>.pDstar_polar</h2>
 
 <b>[Slattery1958] reduced pressure-diffusivity product for polar species</b>
+
+<h3>Information</h3>
+
+<p>This function is based on eq. 9 from [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Slattery1958">Slattery1958</a>].</p>
+
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>Tstar</td><td>1</td><td>Ratio of temperature to the geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -201,10 +220,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     &quot;Ratio of temperature to the geometric mean of the critical temperatures&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> pDstar <font color="darkgreen">&quot;Reduced pressure-diffusivity product&quot;</font>;
 
-  <font color="darkgreen">// TODO: Add Slattery reference, cite it in the documentation.</font>
-
 <font color="blue">algorithm </font>
-  pDstar := 5.148e-4*Tstar^2.334 <font color="darkgreen">&quot;[Slattery1958, eq. 9]&quot;</font>;
+  pDstar := 5.148e-4*Tstar^2.334;
 <font color="blue">end </font>pDstar_polar;
 </pre>
       </div>
@@ -212,7 +229,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 15 15:08:26 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 17 15:49:05 2014.
 </div>
 </body>
 </html>

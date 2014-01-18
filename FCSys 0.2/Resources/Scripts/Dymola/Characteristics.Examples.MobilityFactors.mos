@@ -1,0 +1,13 @@
+// Setup
+removePlots();
+
+createPlot(filename = "MobilityFactors.mat",
+ id = 1,
+ position = {0, 0, 600, 450},
+ y = {"H2_H2O", "H2O_N2", "H2O_O2", "N2_O2"},
+ heading = "Mobility factors",
+ range = {0, 8.0, 0.05, -0.35},
+ grid = true,
+ online = true,
+ legendLocation = 5,
+ legendHorizontal = false);

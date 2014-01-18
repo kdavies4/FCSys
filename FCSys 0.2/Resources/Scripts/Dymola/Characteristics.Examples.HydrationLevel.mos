@@ -1,7 +1,7 @@
 // Setup
 removePlots();
 
-createPlot(filename = "Hydration.mat",
+createPlot(filename = "HydrationLevel.mat",
  id = 1,
  position = {0, 0, 600, 450},
  x = "RH",
