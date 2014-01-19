@@ -3,7 +3,7 @@
 <title>FCSys - Modelica library of fuel cell models</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-17">
+<meta name="date" content="2014-1-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Modelica fuel cell library">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.3.zip">v0.2.3</a> (2014-01-19)</span></li>
     </ul>
   </div>
 </div>
@@ -72,24 +72,28 @@
     Water is included and transported independently as vapor, liquid, and absorbed in the ionomer.
     Phase change is represented as a dynamic process.</li>
 
-    <li><b>Physics-based</b>:
-    The equations are based on first principles, with explicit conservation of material, momentum, and energy
-    in every control volume and across every interface.  A unique and physically appropriate method of
-    upstream discretization is used to describe coupled advective and diffusive transfer.  All physical
-    quantities are mapped to universal constants using a novel, flexible implementation of natural units.</li>
-
-    <li><b>Up to three-dimensional (3D)</b></li>
+    <li><b>Multi-dimensional</b></li>
 
     <li><b>Highly reconfigurable</b>:
     There are options to adjust the assumptions, dimensionality (1D, 2D, or 3D), and spatial discretization
     (i.e., resolution).  Species may be independently enabled at instantiation, unlike
-    <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media.html#Modelica.Media">Modelica.Media</a>.  The framework is generic and can be extended
-    to other electrochemical devices like batteries.</li>
+    the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Media.html#Modelica.Media">Modelica media library</a>.  The framework is generic and can be extended
+    to other fluidic or electrochemical devices like batteries.</li>
 
     <li><b>Highly modular</b>:
     Each layer of the cell is a separate model which is hierarchically constructed from graphical models of
     subregions, phases, and species.  At each level, EOO (i.e., effort/flow) connectors are used to combine
     the various components.</li>
+
+    <li><b>Fully declarative</b>:
+    There are no causal connectors besides those used to apply boundary conditions.  Functions are only
+    used to simplify subexpressions of equations.</li>
+
+    <li><b>Physics-based</b>:
+    The equations are based on first principles, with explicit conservation of material, momentum, and energy
+    in every control volume and across every interface.  A unique and physically appropriate method of
+    upstream discretization is used to describe coupled advective and diffusive transfer.  All physical
+    quantities are mapped to universal physical constants using a novel, flexible implementation of natural units.</li>
 
     <li><b>Computationally efficient</b>:
     There are minimal switching events and no nonlinear systems of equations after appropriate translation.
@@ -163,9 +167,9 @@ margin-right: auto;" class=noBorder>
     <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600></a>
 <br>Figure 2: Diagram of the <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">PEMFC model</a>.</p>
 
-    <p>The fuel cell model can be exercised using the test stand shown in <a href="#Fig3">Figure 3</a> or connnected to the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid.html#Modelica.Fluid">Modelica.Fluid</a>
-    library using <a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL">available adapters</a>.
-    Please see the <a href="FCSys_UsersGuide_SampleResults.html#FCSys.UsersGuide.SampleResults.Cell">sample cell results</a> for examples and the
+    <p>The fuel cell model can be exercised using the test stand shown in <a href="#Fig3">Figure 3</a> or connected to the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Fluid.html#Modelica.Fluid">Modelica fluid library</a>
+    using <a href="FCSys_Conditions_Adapters_MSL.html#FCSys.Conditions.Adapters.MSL">available adapters</a>.
+    Please see the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.SampleResults">sample cell results</a> for examples and the
     <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.GettingStarted">getting started page</a> for information about using the library.</p>
 
     <!--<p align=center id="Fig3"><img src="images/FCSys.Assemblies.Cells.Examples.TestStandD.png" width=500>-->
@@ -200,7 +204,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
 </td><td>3D arrays of discrete, interconnected subregions</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
-</td><td>Control volumes with multi-species transport, storage, and exchange</td></tr>
+</td><td>Control volumes with multi-species transfer and storage</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Phases.html#FCSys.Phases">Phases</a>
 </td><td>Mixtures of species</td></tr>
 <tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species.html#FCSys.Species">Species</a>
@@ -214,7 +218,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Units" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units">Units</a>
 </td><td>Constants and units of physical measure</td></tr>
 <tr><td><img src="images/FCSys.QuantitiesS.png" alt="FCSys.Quantities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a>
-</td><td>Variables to represent physical properties</td></tr>
+</td><td>Types to represent physical values</td></tr>
 <tr><td><img src="images/FCSys.UtilitiesS.png" alt="FCSys.Utilities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Utilities.html#FCSys.Utilities">Utilities</a>
 </td><td>General supporting functions</td></tr>
 <tr><td><img src="images/FCSys.IconsS.png" alt="FCSys.Icons" width=20  height=20 align=top>&nbsp;<a href="FCSys_Icons.html#FCSys.Icons">Icons</a>
@@ -228,6 +232,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:47:25 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Jan 19 11:07:18 2014.
 </div>
 </span></body></html>

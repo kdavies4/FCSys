@@ -3,7 +3,7 @@
 <title>FCSys.UsersGuide</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-17">
+<meta name="date" content="2014-1-19">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -41,7 +41,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.2.zip">v0.2.2</a> (2014-01-17)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.3.zip">v0.2.3</a> (2014-01-19)</span></li>
     </ul>
   </div>
 </div>
@@ -101,10 +101,10 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
     <p>These are the suggested steps to begin using FCSys:</p>
     <ol>
-        <li>Read the overview in the <a href="index.html#FCSys">top-level documentation of FCSys</a>.</li>
+        <li>Read the overview in the <a href="index.html#FCSys">top-level documentation</a>.</li>
 
         <li>Browse the subpackages of FCSys.  In general, the subpackages are
-        ordered by the level of the model and the physical hierarchy (high-level at the top).</li>
+        ordered with high-level models at the top and basic classes at the bottom.</li>
 
         <li>Call <a href="FCSys_Units.html#FCSys.Units.setup">FCSys.Units.setup</a>() to
         establish the display units.  This is automatic if FCSys
@@ -114,12 +114,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
         model.
         There are scripts in <a href="../Resources/Scripts/Dymola/README.md">Resources/Scripts/Dymola/</a> to
         create useful plots of that model and others.
-        The scripts should be accessible from the "Command" menu of the Modelica environment.
-        For more detailed
-        analysis, including spatial property distributions and vector plots,
+        The scripts should be accessible from the "Command" menu of the Modelica development environment.
+        For more detailed analysis,
         a Python module called FCRes is available in
         <a href="../Resources/Source/Python/README.md">Resources/Source/Python/</a>
-        (HTML and PDF documentation <a href="../Resources/Source/Python/doc/index.html">here</a> an
+        (HTML and PDF documentation <a href="../Resources/Source/Python/doc/index.html">here</a> and
         <a href="../Resources/Source/Python/doc/FCRes.pdf">here</a>).</li>
 
         <li>Read the documentation of the classes. In particular, these may be of interest:
@@ -132,28 +131,28 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
             Overview of the connectors</li>
 
             <li><a href="FCSys_Species.html#FCSys.Species.Species">FCSys.Species.Species</a> model:
-            Details about the exchange, transport, and storage of material, momentum, and
+            Details about the storage and transfer of material, momentum, and
             energy</li>
 
-            <li><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a>:
+            <li><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> model:
             Information about the geometric orientation of the cell</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
-        detailed information is given at the appropriate level of inheritance.  If a model does not
-        have sufficient documentation, please look at its base model(s) and the package(s) that
+        detailed information is given at the appropriate level of inheritance.  If a class does not
+        have sufficient documentation, please look at its base class(es) and the package(s) that
         contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.</li>
 
-        <li>Create and simulate examples of other usage scenarios.  Many of the
-        nested models (regions, subregions, species) are replaceable.
+        <li>Create and simulate examples of other applications and scenarios.  Many of the
+        submodels (regions, subregions, species) are replaceable.
         Their parameters are often not propagated to the cell level, but may
-        be accessed through the parameter dialog by editing the replaceable model.  Note that
+        be edited via the parameter dialog by accessing the submodel.  Note that
         many models have auxiliary output variables for analysis and diagnostics.
         These may be included by setting <code>analysis=true</code> in the outer environment model (instance
         of <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>).</li>
 
-        <li>Develop your own classes.  It should be possible to model other electrochemical
+        <li>Develop your own classes.  It should be possible to model other fluidic or electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and
         following the existing framework.  It will be necessary to add species models
@@ -175,7 +174,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <p>The figures below show the results from several cell-level examples of
     <a href="index.html#FCSys">FCSys</a>.   The models were simulated using Dymola 2014.  The plots were
     generated using <a href="http://kdavies4.github.io/ModelicaRes/">ModelicaRes</a>.  For more information, please
-    follow the links to the associated models.  For more results and complete discussions, please see
+    follow the links to the associated models.  For discussion and more results, please see
     [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References">Davies, 2014</a>].
     </p>
 
@@ -200,7 +199,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
 
     <p align=center id="Fig6"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand"><img src="images/Energy.png"></a>
-    <br>Figure&nbsp;6: Energy balance at 1.5&nbsp;A/cm<sup>2</sup> during the baseline polarization test
+    <br>Figure&nbsp;6: Energy balance of a 50&nbsp;cm<sup>2</sup> cell at 1.5&nbsp;A/cm<sup>2</sup> during the baseline polarization test
     (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStand">FCSys.Assemblies.Cells.Examples.TestStand</a>).</p>
 
     <p align=center id="Fig7"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented"><img src="images/SegmentPolarization.png"></a>
@@ -208,11 +207,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented">FCSys.Assemblies.Cells.Examples.TestStandFixedFlowSegmented</a>).</p>
 
     <p align=center id="Fig8"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle"><img src="images/CyclePolarization.png"></a>
-    <br>Figure&nbsp;8: Polarization under sinuosoidal, reversing load
+    <br>Figure&nbsp;8: Polarization under sinusoidal, reversing load
     (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle">FCSys.Assemblies.Cells.Examples.TestStandCycle</a>).</p>
 
     <p align=center id="Fig9"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle"><img src="images/CycleSaturation.png"></a>
-    <br>Figure&nbsp;9: Liquid pore saturation under sinuosoidal, reversing load
+    <br>Figure&nbsp;9: Liquid pore saturation under sinusoidal, reversing load
     (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestStandCycle">FCSys.Assemblies.Cells.Examples.TestStandCycle</a>).</p>
 
 Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
@@ -222,7 +221,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <a name="FCSys.UsersGuide.Contact"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Contact</h2>
 <img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
-    <p>Updates to this package may be available online at the
+    <p>Updates to this library (<a href="index.html#FCSys">FCSys</a>) may be available online at the
     <a href="http://kdavies4.github.io/FCSys/">main project site</a> or the
     <a href="https://modelica.org/libraries">Modelica libraries page</a>.
     The development page is
@@ -230,17 +229,38 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     Please report any problems using the <a href="https://github.com/kdavies4/FCSys/issues">issues</a>
     link on that page.</p>
 
-    <p><b>Author:</b></p>
+    <dl><dt><b>Author:</b><br></dt>
     <dd>Kevin Davies</dd>
-    <dd><a href="http://www.me.gatech.edu">George W. Woodruff School of Mechanical Engineering</a></dd>
-    <dd><a href="http://www.gatech.edu">Georgia Institute of Technology</a></dd>
-    <dd><a href="mailto:kdavies4@gmail.com">kdavies4@gmail.com</a></dd>
+    <dd><a href="http://www.hnei.hawaii.edu">Hawaii Natural Energy Institute</a></dd>
+    <dd><a href="http://www.hawaii.edu">University of Hawaii</a></dd>
+    <dd>1680 East-West Rd., POST 109</dd>
+    <dd>Honolulu, HI  96822</dd>
+    <dd>USA</dd>
+    <dd>email: <a href="mailto:kdavies4@gmail.com">kdavies4@gmail.com</a></dd></dl>
 
     <p><b>Acknowledgments:</b></p><ul>
-    <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
-    <li>Technical discussions and insight from Tom Fuller, Sheldon Jeter, Tequila Harris, Mike Angelo, Guido Bender, Severine Busquet,
-    Chris Ford, Sebastian Herzig, Ben Lee, George Nelson, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
-    <li>Source-code contributions and bug fixes from Mohammad Ali, Kevin Bandy, Martin Sj&ouml;lund, Francois Steinmetz, and Joerg Weiss-Ungeth&uuml;m</li>
+
+    <li>Technical discussions and insight from
+    Mike Angelo,
+    Guido Bender,
+    Chris Ford,
+    Tom Fuller,
+    Comas Haynes,
+    Sebastian Herzig,
+    Sheldon Jeter,
+    Ben Lee,
+    Robert Moore,
+    George Nelson,
+    Chris Paredis,
+    Mike Tiller,
+    Hubertus Tummescheit, and
+    Mebs Virji</li>
+
+    <li>Source-code contributions and bug fixes from Kevin Bandy, Martin Sj&ouml;lund, and Joerg Weiss-Ungeth&uuml;m</li>
+
+    <li>Review and feedback from
+    Mohammad Ali, Severine Busquet, Francois Steinmetz, and Dietmar Winkler
+    </li>
 
     <li>Financial support from:
     <ul>
@@ -249,8 +269,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     of Technology</a></li>
     <li>Robert G. Shackelford Fellowship from the <a href="http://www.gtri.gatech.edu">Georgia
     Tech Research Institute</a></li>
-    <li>Grant #N00014-04-0682 from the <a href="http://www.onr.navy.mil">Office of Naval Research</a>
-    to the <a href="http://www.hnei.hawaii.edu">Hawaii Natural Energy Institute</a></li>
+    <li>Grant #N00014-04-0682 from the <a href="http://www.onr.navy.mil">Office of Naval Research</a></li>
     </ul>
     </ul>
 
@@ -546,6 +565,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   &copy; Copyright 2012&ndash;2013, <span id="_author5" itemprop="author" itemscope itemtype="http://schema.org/Person">
 <span itemprop="name">Kevin Davies</span></span>,
 <span id="_publisher7" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Fri Jan 17 15:47:25 2014.
+<span itemprop="name">Georgia Tech Research Corporation</span></span>. Last updated Sun Jan 19 11:07:18 2014.
 </div>
 </span></body></html>
