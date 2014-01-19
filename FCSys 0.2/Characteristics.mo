@@ -521,7 +521,7 @@ package Characteristics "Data and functions to correlate physical properties"
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
      <li>The default specific volume (<code>v = U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
-  at 300&nbsp;K according to [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 909].  Other forms
+  at 300&nbsp;K according to [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;909].  Other forms
   are (Ibid., also at 300&nbsp;K) are:
   <ul>
        <li>Amorphous carbon:  <code>v = U.cc*m/(1.950*U.g)</code></li>
@@ -564,7 +564,7 @@ package Characteristics "Data and functions to correlate physical properties"
      </ol>
 
     <p>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
-   [<a href=\"modelica://FCSys.UsersGuide.References.Lin2006\">Lin2006</a>, p. A1327].  Note that this is
+   [<a href=\"modelica://FCSys.UsersGuide.References.Lin2006\">Lin2006</a>, p.&nbsp;A1327].  Note that this is
 
    approximately 1.912 M, which does not match
 
@@ -581,10 +581,10 @@ package Characteristics "Data and functions to correlate physical properties"
      <li>A form of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is
      C<sub>7</sub>HF<sub>13</sub>O<sub>5</sub>S.(C<sub>2</sub>F<sub>4</sub>)<sub>6</sub>, which is a typical
    configuration of Nafion sulfonate (after hydrolysis)
-   [<a href=\"modelica://FCSys.UsersGuide.References.Mark1999\">Mark1999</a>, p. 234].</li>
+   [<a href=\"modelica://FCSys.UsersGuide.References.Mark1999\">Mark1999</a>, p.&nbsp;234].</li>
      <li>Thermodynamic data for this material is not available from
      [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].  The default specific heat capacity
-     (<i>b<sub>c</sub></i> = <code>[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href=\"modelica://FCSys.UsersGuide.References.Shah2009\">Shah2009</a>, p. B472].</li>
+     (<i>b<sub>c</sub></i> = <code>[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href=\"modelica://FCSys.UsersGuide.References.Shah2009\">Shah2009</a>, p.&nbsp;B472].</li>
      <li>According to [<a href=\"modelica://FCSys.UsersGuide.References.Avogadro\">Avogadro</a>], the furthest distance
    between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
    The radius of F is 147 pm (<a href=\"http://en.wikipedia.org/wiki/Fluorine\">http://en.wikipedia.org/wiki/Fluorine</a>).</li>
@@ -774,7 +774,7 @@ package Characteristics "Data and functions to correlate physical properties"
    bond length of H-H is 100.3 pm.  The radius of H is from
    <a href=\"http://en.wikipedia.org/wiki/Hydrogen\">http://en.wikipedia.org/wiki/Hydrogen</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p. 41].  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p.&nbsp;41].  The
   temperature range of the coefficients is [60, 500] K, but this is not enforced in the functions.</li>
      </ul>
 
@@ -823,7 +823,7 @@ package Characteristics "Data and functions to correlate physical properties"
    from <a href=\"http://en.wikipedia.org/wiki/Hydrogen\">http://en.wikipedia.org/wiki/Hydrogen</a> and the center-to-center
    distance of hydrogen atoms in H<sub>2</sub>O from [<a href=\"modelica://FCSys.UsersGuide.References.Avogadro\">Avogadro</a>],
    156.6 pm, the radius of H<sub>2</sub>O would be (120 + 156.6/2) pm = 198.3 pm.</li>
-  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 4].  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p.&nbsp;4].  The
   temperature range of the coefficients is [350, 770] K, but this is not enforced in the functions.</li>
      </ul>
 
@@ -965,7 +965,7 @@ package Characteristics "Data and functions to correlate physical properties"
    bond length of N-N is 145.2 pm.  The radius of N is from
    <a href=\"http://en.wikipedia.org/wiki/Nitrogen\">http://en.wikipedia.org/wiki/Nitrogen</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p. 69].  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p.&nbsp;69].  The
   temperature range of the coefficients is [75, 745] K, but this is not enforced in the functions.  More precise virial coefficients are available from
   <a href=\"http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm\">http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm</a>.</li>
      </ul>
@@ -1013,7 +1013,7 @@ package Characteristics "Data and functions to correlate physical properties"
    bond length of O-O is 128.2 pm.  The radius of O is from
    <a href=\"http://en.wikipedia.org/wiki/Oxygen\">http://en.wikipedia.org/wiki/Oxygen</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p. 69].  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, p.&nbsp;69].  The
   temperature range of the coefficients is [70, 495] K, but this is not enforced in the functions.</li>
      </ul>
 
@@ -1307,7 +1307,7 @@ package Characteristics "Data and functions to correlate physical properties"
                 T,
                 p,
                 dT=1,
-                dp=0) "[Moran2004, p. 546, eq. 11.66]";
+                dp=0) "[Moran2004, p.&nbsp;546, eq. 11.66]";
         // Note 1:  This reduces to c_v = c_p - 1 for an ideal gas (where in
         // FCSys 1 = U.R).
         // Note 2:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
@@ -1636,7 +1636,7 @@ package Characteristics "Data and functions to correlate physical properties"
   [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>], this independence very accurately
   matches the measured fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
-  [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>, p. 41].</p>
+  [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>, p.&nbsp;41].</p>
 
   <p>This function is based on the kinetic theory of gases under the following assumptions
   [<a href=\"modelica://FCSys.UsersGuide.References.Present1958\">Present1958</a>]:</p>
@@ -1815,7 +1815,7 @@ temperature difference.</p>
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
     25&nbsp;&deg;C is the specific enthalpy of formation at that temperature and reference pressure
-    [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>, p. 2].
+    [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>, p.&nbsp;2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
 
     <li><i>T</i><sub>lim <i>c</i></sub>: The first and last entries are the minimum and
@@ -1873,7 +1873,7 @@ temperature difference.</p>
           2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1)
           :-1:1}
         "<html>Coefficients of <i>p</i> as a polynomial in <i>v</i> and <i>T</i></html>";
-      // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
+      // Note:  This is from [Dymond2002, p.&nbsp;2].  If necessary, additional terms
       // can be computed using FCSys/Resources/virial-relations.cdf.
 
     public
@@ -2040,7 +2040,7 @@ temperature difference.</p>
     1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
     the first, second, third, and fourth coefficients in the volume-explicit
     virial equation of state
-    [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, pp. 1&ndash;2].
+    [<a href=\"modelica://FCSys.UsersGuide.References.Dymond2002\">Dymond2002</a>, pp.&nbsp;1&ndash;2].
     Currently,
     virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
     If additional terms are required, review and modify the definition of <i>b<sub>p</sub></i>.</li>

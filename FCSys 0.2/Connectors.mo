@@ -177,7 +177,7 @@ package Connectors "Declarative and imperative interfaces"
       Documentation(info="<html><p>The concept of \"additivity of volume\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Amagat's_law\">Amagat's law of partial volumes</a>, which
     states that the partial extensive volumes of the components of a mixture sum to the total
-    extensive volume of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p. 194].
+    extensive volume of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p.&nbsp;194].
     The components are assumed to each exist at the total pressure of the
     mixture.</p>
 
@@ -241,7 +241,7 @@ package Connectors "Declarative and imperative interfaces"
       Documentation(info="<html><p>The concept of \"additivity of pressure\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a>,
     which states that the partial pressures of the components of a mixture sum to the total
-    pressure of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p. 192].
+    pressure of the mixture [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>, p.&nbsp;192].
     The components are assumed to exist at the total volume of the
     mixture.</p>
 
@@ -470,7 +470,7 @@ package Connectors "Declarative and imperative interfaces"
 
     parameter Integer n_trans(min=1,max=3)
       "Number of components of translational momentum" annotation (HideResult=
-          true, Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
+          true,Dialog(__Dymola_label="<html><i>n</i><sub>trans</sub></html>"));
 
     Q.Velocity phi[n_trans](each nominal=U.cm/U.s,each start=0) "Velocity";
     flow Q.Force mPhidot[n_trans](each nominal=U.N) "Force";

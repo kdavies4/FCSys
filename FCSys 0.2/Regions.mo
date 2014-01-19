@@ -109,7 +109,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anBC.boundary, anFP.xNegative) annotation (Line(
@@ -1062,7 +1062,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
 
@@ -1272,7 +1272,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     public
       Assemblies.Cells.Examples.TestConditions testConditions(I_ca=2*zI, I_an=
-            1.5*zI) "Test conditions" annotation (Dialog, Placement(
+            1.5*zI) "Test conditions" annotation (Dialog,Placement(
             transformation(extent={{10,30},{30,50}})));
     equation
       connect(anCL.xPositive, PEM.xNegative) annotation (Line(
@@ -1475,7 +1475,7 @@ to discretize the flow plate into smaller subregions for the bulk solid, lands, 
 this would significantly increase the mathematical size of the model.  Currently, that level of detail is best left to
 computational fluid dynamics.</p>
  
-<p>The x axis-component of the transport factor (<i>k</i><sub>x</sub>) for the gas and the liquid should
+<p>The x component of the transport factor (<i>k</i><sub>x</sub>) for the gas and the liquid should
 generally be less than one because the transport distance into/out of the GDL is less that half the 
 thickness of the flow plate. It is equal to the product of two ratios:</p><ol>
 <li>the depth of the channels to the thickness of the flow plate</li>
@@ -1709,7 +1709,7 @@ By default, the cross-sectional area in the yz plane is 50 cm<sup>2</sup>.</p>
 
 The porosity of a GDL may be lower than specified due to compression (e.g., 0.4 according to
 
-[<a href=\"modelica://FCSys.UsersGuide.References.Bernardi1992\">Bernardi1992</a>, p. 2483], although
+[<a href=\"modelica://FCSys.UsersGuide.References.Bernardi1992\">Bernardi1992</a>, p.&nbsp;2483], although
 that reference may be outdated).
   The default thermal conductivity of the carbon (&theta; = <code>U.m*U.K/(1.18*U.W)</code>)
    represents a compressed Sigracet&reg; 10&nbsp;BA gas diffusion layer

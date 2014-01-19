@@ -1,5 +1,5 @@
 within FCSys;
-package Quantities "Variables to represent physical properties"
+package Quantities "Types to represent physical values"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
@@ -226,7 +226,7 @@ package Quantities "Variables to represent physical properties"
   dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The fundamental dimensions are
   angle (A), length (L), mass (M), particle number (N), and time (T).  These
   are combined according to the rules established for unit strings
-  [<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p. 210].  
+  [<a href=\"modelica://FCSys.UsersGuide.References.Modelica2010\">Modelica2010</a>, p.&nbsp;210].  
 Temperature and charge are derived dimensions
   (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p>
 

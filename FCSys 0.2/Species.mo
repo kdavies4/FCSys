@@ -38,14 +38,14 @@ package Species "Dynamic models of chemical species"
    and thermal
    resistivity (&theta; = <code>U.m*U.K/(11.1*U.W)</code>) are for graphite fiber epoxy (25% vol)
    composite (with heat flow parallel to the fibers) at 300&nbsp;K
-   [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 909].
+   [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;909].
    The integration offset for specific entropy is set such that
    the specific entropy is 154.663&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;atm).
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].
    Additional thermal data is listed in <a href=\"#Tab1\">Table 1</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 909].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;909].</caption>
     <tr>
       <th rowspan=3 valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th rowspan=1 colspan=2 width=1 valign=\"middle\">Diamond (type IIa)</th>
@@ -114,7 +114,7 @@ package Species "Dynamic models of chemical species"
     </ol>
 
     <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.16*U.W)</code>) is of dry
-  Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References.Kandlikar2009\">Kandlikar2009</a>, p. 1277].</p>
+  Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References.Kandlikar2009\">Kandlikar2009</a>, p.&nbsp;1277].</p>
 
 <p>For more information, please see the
     <a href=\"modelica://FCSys.Species.Species\">Species</a> model.</p></html>"));
@@ -252,11 +252,11 @@ then internal inductance is included according to the relative permeability (&mu
   due to electro-osmotic drag (with H<sub>2</sub>O).</p>
 
   <p>The default thermal resistivity (&theta; = <code>U.m*U.K/(0.1661*U.W)</code>) is of H gas
-  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p. 139].
+  (rather than H<sup>+</sup>) at 300&nbsp;K from [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p.&nbsp;139].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p. 139]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H gas (not H<sup>+</sup>) [<a href=\"modelica://FCSys.UsersGuide.References.Schetz1996\">Schetz1996</a>, p.&nbsp;139]</caption>
 <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1>&eta;<code><br>*U.Pa*U.s</code></th>
@@ -352,11 +352,11 @@ then internal inductance is included according to the relative permeability (&mu
 
 <p>The default resistivities (&eta; = <code>1/(89.6e-7*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 919&ndash;920].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;919&ndash;920].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 919&ndash;920].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;919&ndash;920].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -415,7 +415,7 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
         extends Fluid(
           redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas (
-                b_v=[1], n_v={-1,0}),
+                b_v=[1],n_v={-1,0}),
           redeclare parameter Q.Mobility mu=Data.mu(),
           redeclare parameter Q.TimeAbsolute nu=Data.nu(),
           redeclare parameter Q.Continuity zeta=Data.zeta(),
@@ -452,13 +452,13 @@ and &theta; = <code>U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</s
 
 <p>The default resistivities (&eta; = <code>1/(9.09e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.  <a href=\"#Tab2\">Table 2</a> lists the properties of H<sub>2</sub>O gas at 1&nbsp;atm.
   See also
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924&ndash;925].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -523,7 +523,7 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 <br>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab2\">Table 2: Properties of H<sub>2</sub>O gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].</caption>
+    <caption align=\"top\" id=\"Tab2\">Table 2: Properties of H<sub>2</sub>O gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;921].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -646,13 +646,13 @@ and &theta; = <code>U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at s
 
 <p>The default resistivities (&eta; = <code>1/(855e-6*U.Pa*U.s)</code>
 and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;921].  <a href=\"#Tab1\">Table 1</a> lists the properties at
   saturation pressure and other temperatures.
   See also
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 924&ndash;925].</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -771,14 +771,14 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
 
 <p>The default specific heat capacity (via <i>b<sub>c</sub></i> = <code>[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities
 (&eta; = <code>1/(17.82e-6*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;920].
    The integration offset for specific entropy (<i>B<sub>c</sub></i>) is set such that
    the specific entropy is 191.610&nbsp;J/(mol&middot;K) at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> (1&nbsp;bar).
    This is the value from Table B in [<a href=\"modelica://FCSys.UsersGuide.References.McBride2002\">McBride2002</a>].
    Additional data is listed in <a href=\"#Tab1\">Table 1</a>.
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p. 920]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of N<sub>2</sub> gas at 1&nbsp;atm [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, p.&nbsp;920]</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -862,12 +862,12 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     </ol>
 
   <p>The default resistivities (&eta; = <code>1/(207.2e-7*U.Pa*U.s)</code> and &theta; = <code>U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1&nbsp;atm and
-  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 920&ndash;921].
+  300&nbsp;K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;920&ndash;921].
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1&nbsp;atm
-  [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp. 920&ndash;921]</caption>
+  [<a href=\"modelica://FCSys.UsersGuide.References.Incropera2002\">Incropera2002</a>, pp.&nbsp;920&ndash;921]</caption>
   <tr>
       <th valign=\"middle\"><i>T</i><br><code>/U.K</code></th>
       <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -2026,7 +2026,7 @@ Check that the volumes of the other phases are set properly.");
        <li>The material is orthorhombic.  This implies that a gradient which induces diffusion
        along an axis does not induce diffusion along axes orthogonal to it
        [<a href=\"modelica://FCSys.UsersGuide.References.Bejan2006\">Bejan2006</a>,
-       pp. 691&ndash;692].</li>
+       pp.&nbsp;691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
        axes of transport.  For example, if the material is stratified, then the
        layers must be parallel to one of the planes in the rectilinear
@@ -2034,7 +2034,7 @@ Check that the volumes of the other phases are set properly.");
        <li>The effective transport lengths (<b><i>kL</i></b>)
           are common to material, translational, and thermal transport.</li>
        <li>There is no radiative heat transfer (or it must be linearized and added to the thermal conductance).</li>
-       <li>Rotational momentum is not exchanged, transported, or stored.</li>
+       <li>Rotational momentum is not stored or transfered.</li>
     </ol>
     Other assumptions are optional via the parameters.  Additional assumptions may be
 
@@ -2102,7 +2102,7 @@ Check that the volumes of the other phases are set properly.");
     <p>Notes regarding the parameters:
     <ol>
 
-    <li>The effect transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
+    <li>The effective transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
     transport axes due to tortouisity.  The tortouisity may be anisotropic.</li>
 
     <li>If the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
@@ -2144,15 +2144,12 @@ Check that the volumes of the other phases are set properly.");
     is related to it via the material characteristics and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-
-    <li><i>N</i><sub>min</sub> establishes an amount of material below which no exchange occurs.  It can
-    help to avoid stiffness when very little of a species exists in a subregion.</li>
 </p>
 
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
-    force due to diffusion.  Translational advection is calculated from the velocity and the current.
+    force due to diffusion.  Translational advection is calculated from the current and the velocity.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
-    thermal energy is determined from the thermodynamic state at the boundary and the current.</p>
+    thermal energy is determined from the current and the thermodynamic state at the boundary.</p>
 
     <p>For the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -2170,16 +2167,16 @@ Check that the volumes of the other phases are set properly.");
           initialScale=0.1), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0},
-              origin={-40,40},
-              rotation=45)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={225,225,225},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0},
+            origin={-40,40},
+            rotation=45)}));
   end Species;
 
 public

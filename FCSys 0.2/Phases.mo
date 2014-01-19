@@ -1369,7 +1369,7 @@ protected
     the resistance associated with the transport of material, transverse translational momentum, and energy of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
     porosity or tortousity.  These effects may be anisotropic.  Using
-    Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References.Weber2004\">Weber2004</a>, p. 4696],
+    Bruggeman correction [<a href=\"modelica://FCSys.UsersGuide.References.Weber2004\">Weber2004</a>, p.&nbsp;4696],
     the factor (<b><i>k</i></b>) within a phase should be set to &epsilon;<sup>-1/2</sup>
     along each axis, where &epsilon; is the volumetric filling ratio, or the ratio of the volume of the phase to the total volume of the subregion.
     The Bruggeman factor itself increases resistance by a &epsilon;<sup>-3/2</sup>, but a factor of &epsilon;<sup>-1</sup> is included inherently.</p>

@@ -1051,7 +1051,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
        <li>The material is orthorhombic.  This implies that a gradient which induces diffusion
        along an axis does not induce diffusion along axes orthogonal to it
        [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Bejan2006">Bejan2006</a>,
-       pp. 691&ndash;692].</li>
+       pp.&nbsp;691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
        axes of transport.  For example, if the material is stratified, then the
        layers must be parallel to one of the planes in the rectilinear
@@ -1059,7 +1059,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
        <li>The effective transport lengths (<b><i>kL</i></b>)
           are common to material, translational, and thermal transport.</li>
        <li>There is no radiative heat transfer (or it must be linearized and added to the thermal conductance).</li>
-       <li>Rotational momentum is not exchanged, transported, or stored.</li>
+       <li>Rotational momentum is not stored or transfered.</li>
     </ol>
     Other assumptions are optional via the parameters.  Additional assumptions may be
 
@@ -1127,7 +1127,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <p>Notes regarding the parameters:
     <ol>
 
-    <li>The effect transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
+    <li>The effective transport lengths (<b><i>kL</i></b>) may be different that the geometric lengths along the
     transport axes due to tortouisity.  The tortouisity may be anisotropic.</li>
 
     <li>If the interval for chemical exchange (&tau;&prime;), mobility (&mu;),
@@ -1169,15 +1169,12 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     is related to it via the material characteristics and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-
-    <li><i>N</i><sub>min</sub> establishes an amount of material below which no exchange occurs.  It can
-    help to avoid stiffness when very little of a species exists in a subregion.</li>
 </p>
 
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
-    force due to diffusion.  Translational advection is calculated from the velocity and the current.
+    force due to diffusion.  Translational advection is calculated from the current and the velocity.
     The thermal flow (<i>Q&#775;</i>) is only the rate of heat transfer due to diffusion.  The advection of
-    thermal energy is determined from the thermodynamic state at the boundary and the current.</p>
+    thermal energy is determined from the current and the thermodynamic state at the boundary.</p>
 
     <p>For the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -1441,7 +1438,7 @@ Check that the volumes of the other phases are set properly.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Jan 17 15:48:57 2014.
+  &copy; Copyright 2012&ndash;2013, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 19 11:08:48 2014.
 </div>
 </body>
 </html>

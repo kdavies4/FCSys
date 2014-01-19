@@ -18,7 +18,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         // Anode
         Connectors.RealInputInternal I_an(unit="N/T") = U.A
           "Equivalent current" annotation (Dialog(tab="Anode", __Dymola_label=
-                "<html><i>I</i><sub>an</sub></html>"), Placement(transformation(
+                "<html><i>I</i><sub>an</sub></html>"),Placement(transformation(
                 extent={{-70,30},{-50,50}}), iconTransformation(extent={{0,0},{
                   0,0}})));
         parameter Q.NumberAbsolute anRH(

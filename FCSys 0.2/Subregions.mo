@@ -1,6 +1,5 @@
 within FCSys;
-package Subregions
-  "Control volumes with multi-species transport, storage, and exchange"
+package Subregions "Control volumes with multi-species transfer and storage"
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
@@ -424,7 +423,6 @@ package Subregions
               "Resources/Scripts/Dymola/Subregions.Examples.BinaryDiffusion.mos"
             "Subregions.Examples.BinaryDiffusion.mos"));
     end BinaryDiffusion;
-
 
     model Echo "Two regions of gas with an initial pressure difference"
       parameter Q.NumberAbsolute k=1 "Damping factor";
@@ -958,7 +956,7 @@ package Subregions
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-30,-22},
+            "Phases (click to edit)"),Placement(transformation(extent={{-30,-22},
               {-10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -1275,11 +1273,11 @@ process, there is a difference.</li></ol>
    <a href=\"modelica://FCSys.Subregions.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-80},{
               120,60}}), graphics={Text(
-              extent={{78,-44},{118,-50}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="(connections not shown
+            extent={{78,-44},{118,-50}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="(connections not shown
 in diagram)")}));
   end Subregion;
 
@@ -1389,7 +1387,7 @@ in diagram)")}));
       final n_trans=n_trans,
       final k_inter_Phi={common.k_Phi[cartTrans],gasLiq.k_Phi[cartTrans]},
       final k_inter_Q={common.k_Q,gasLiq.k_Q}) "Gas" annotation (Dialog(group=
-            "Phases (click to edit)"), Placement(transformation(extent={{-10,-22},
+            "Phases (click to edit)"),Placement(transformation(extent={{-10,-22},
               {10,-2}})));
 
     FCSys.Phases.Graphite graphite(
@@ -1451,7 +1449,7 @@ in diagram)")}));
 
     // Exchange
     Connectors.InertNode exchCommon "Among all phases" annotation (HideResult=
-          true, Placement(transformation(extent={{56,32},{76,52}}),
+          true,Placement(transformation(extent={{56,32},{76,52}}),
           iconTransformation(extent={{100,18},{120,38}})));
     Connectors.InertNode exchGasLiq "Between gas and liquid" annotation (
         HideResult=true, Placement(transformation(extent={{56,44},{76,64}}),

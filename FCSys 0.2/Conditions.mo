@@ -38,7 +38,6 @@ package Conditions "Models to specify and measure operating conditions"
         __Dymola_experimentSetupOutput);
     end BoundaryCondition;
 
-
     model Router
       "<html>Test the <a href=\"modelica://FCSys.Conditions.Router\">Router</a> model</html>"
       extends Modelica.Icons.Example;
@@ -1420,8 +1419,6 @@ package Conditions "Models to specify and measure operating conditions"
         end Electrical;
         extends Modelica.Icons.Package;
 
-
-
         model Fluid
           "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
           extends FCSys.Icons.Names.Top3;
@@ -1642,7 +1639,6 @@ package Conditions "Models to specify and measure operating conditions"
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
         end Thermal;
-
 
       end Domains;
 
