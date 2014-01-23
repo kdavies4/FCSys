@@ -1,0 +1,253 @@
+<html>
+<head>
+<title>FCSys.Species.H2O.Liquid</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&lt;html&gt;H&lt;sub&gt;2&lt;/sub&gt;O liquid&lt;/html&gt;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html">
+<h2>FCSys</h2>
+</a>
+  <p align=center><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Species.H2O.Liquid"></a><a href="FCSys_Species_H2O.html#FCSys.Species.H2O">FCSys.Species.H2O</a>.Liquid</h2>
+
+<b>H<sub>2</sub>O liquid</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Species.H2O.Gas.FixedS.png" alt="FCSys.Species.H2O.Liquid.Fixed" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species_H2O_Liquid.html#FCSys.Species.H2O.Liquid.Fixed">Fixed</a>
+</td><td>Fixed properties</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Species.H2O.Liquid.FixedI.png" alt="FCSys.Species.H2O.Liquid.Fixed" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Species.H2O.Liquid.Fixed"></a><a href="FCSys_Species_H2O_Liquid.html#FCSys.Species.H2O.Liquid">FCSys.Species.H2O.Liquid</a>.Fixed</h2>
+<b>Fixed properties</b>
+<img src="FCSys.Species.'e-'.Graphite.FixedD.png" alt="FCSys.Species.H2O.Liquid.Fixed">
+
+<h3>Information</h3>
+
+<p>Assumptions:</p><ol>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
+    </ol>
+
+<p>The default resistivities (&eta; = <code>1/(855e-6*U.Pa*U.s)</code>
+and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturation pressure and
+  300&nbsp;K from Incropera and DeWitt [<a href="#Tab1">Table 1</a> lists the properties at
+  saturation pressure and other temperatures.
+  See also
+  <a href="http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
+
+  <table border="1" cellspacing=0 cellpadding=2 style="border-collapse:collapse;">
+    <caption align="top" id="Tab1">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Incropera2002">Incropera2002</a>, pp.&nbsp;924&ndash;925].</caption>
+  <tr>
+      <th valign="middle"><i>T</i><br><code>/U.K</code></th>
+      <th width=1><i>c<sub>p</sub></i><code>*U.kg*U.K<br>/(U.J*Data.m)</code></th>
+      <th width=1>&eta;<code><br>*U.Pa*U.s</code></th>
+      <th width=1>&theta;<code>*U.W<br>/(U.m*U.K)</code></th>
+    </tr>
+<tr><td>273.15</td><td>4217</td><td>1/1750e-6</td><td>1/569e-3</td></tr>
+<tr><td>275</td><td>4211</td><td>1/1652e-6</td><td>1/574e-3</td></tr>
+<tr><td>280</td><td>4198</td><td>1/1422e-6</td><td>1/582e-3</td></tr>
+<tr><td>285</td><td>4189</td><td>1/1225e-6</td><td>1/590e-3</td></tr>
+<tr><td>290</td><td>4184</td><td>1/1080e-6</td><td>1/598e-3</td></tr>
+<tr><td>295</td><td>4181</td><td>1/959e-6</td><td>1/606e-3</td></tr>
+<tr><td>300</td><td>4179</td><td>1/855e-6</td><td>1/613e-3</td></tr>
+<tr><td>305</td><td>4178</td><td>1/769e-6</td><td>1/620e-3</td></tr>
+<tr><td>310</td><td>4178</td><td>1/695e-6</td><td>1/628e-3</td></tr>
+<tr><td>315</td><td>4179</td><td>1/631e-6</td><td>1/634e-3</td></tr>
+<tr><td>320</td><td>4180</td><td>1/577e-6</td><td>1/640e-3</td></tr>
+<tr><td>325</td><td>4182</td><td>1/528e-6</td><td>1/645e-3</td></tr>
+<tr><td>330</td><td>4184</td><td>1/489e-6</td><td>1/650e-3</td></tr>
+<tr><td>335</td><td>4186</td><td>1/453e-6</td><td>1/656e-3</td></tr>
+<tr><td>340</td><td>4188</td><td>1/420e-6</td><td>1/660e-3</td></tr>
+<tr><td>345</td><td>4191</td><td>1/389e-6</td><td>1/668e-3</td></tr>
+<tr><td>350</td><td>4195</td><td>1/365e-6</td><td>1/668e-3</td></tr>
+<tr><td>355</td><td>4199</td><td>1/343e-6</td><td>1/671e-3</td></tr>
+<tr><td>360</td><td>4203</td><td>1/324e-6</td><td>1/674e-3</td></tr>
+<tr><td>365</td><td>4209</td><td>1/306e-6</td><td>1/677e-3</td></tr>
+<tr><td>370</td><td>4214</td><td>1/289e-6</td><td>1/679e-3</td></tr>
+<tr><td>373.15</td><td>4217</td><td>1/279e-6</td><td>1/680e-3</td></tr>
+<tr><td>375</td><td>4220</td><td>1/274e-6</td><td>1/681e-3</td></tr>
+<tr><td>380</td><td>4226</td><td>1/260e-6</td><td>1/683e-3</td></tr>
+<tr><td>385</td><td>4232</td><td>1/248e-6</td><td>1/685e-3</td></tr>
+<tr><td>390</td><td>4239</td><td>1/237e-6</td><td>1/686e-3</td></tr>
+<tr><td>400</td><td>4256</td><td>1/217e-6</td><td>1/688e-3</td></tr>
+<tr><td>410</td><td>4278</td><td>1/200e-6</td><td>1/688e-3</td></tr>
+<tr><td>420</td><td>4302</td><td>1/185e-6</td><td>1/688e-3</td></tr>
+<tr><td>430</td><td>4331</td><td>1/173e-6</td><td>1/685e-3</td></tr>
+<tr><td>440</td><td>4360</td><td>1/162e-6</td><td>1/682e-3</td></tr>
+<tr><td>450</td><td>4400</td><td>1/152e-6</td><td>1/678e-3</td></tr>
+<tr><td>460</td><td>4440</td><td>1/143e-6</td><td>1/673e-3</td></tr>
+<tr><td>470</td><td>4480</td><td>1/136e-6</td><td>1/667e-3</td></tr>
+<tr><td>480</td><td>4530</td><td>1/129e-6</td><td>1/660e-3</td></tr>
+<tr><td>490</td><td>4590</td><td>1/124e-6</td><td>1/651e-3</td></tr>
+<tr><td>500</td><td>4660</td><td>1/118e-6</td><td>1/642e-3</td></tr>
+<tr><td>510</td><td>4740</td><td>1/113e-6</td><td>1/631e-3</td></tr>
+<tr><td>520</td><td>4840</td><td>1/108e-6</td><td>1/621e-3</td></tr>
+<tr><td>530</td><td>4950</td><td>1/104e-6</td><td>1/608e-3</td></tr>
+<tr><td>540</td><td>5080</td><td>1/101e-6</td><td>1/594e-3</td></tr>
+<tr><td>550</td><td>5240</td><td>1/97e-6</td><td>1/580e-3</td></tr>
+<tr><td>560</td><td>5430</td><td>1/94e-6</td><td>1/563e-3</td></tr>
+<tr><td>570</td><td>5680</td><td>1/91e-6</td><td>1/548e-3</td></tr>
+<tr><td>580</td><td>6000</td><td>1/88e-6</td><td>1/528e-3</td></tr>
+<tr><td>590</td><td>6410</td><td>1/84e-6</td><td>1/513e-3</td></tr>
+<tr><td>600</td><td>7000</td><td>1/81e-6</td><td>1/497e-3</td></tr>
+<tr><td>610</td><td>7850</td><td>1/77e-6</td><td>1/467e-3</td></tr>
+<tr><td>620</td><td>9350</td><td>1/72e-6</td><td>1/444e-3</td></tr>
+<tr><td>635</td><td>10600</td><td>1/70e-6</td><td>1/430e-3</td></tr>
+<tr><td>630</td><td>12600</td><td>1/67e-6</td><td>1/412e-3</td></tr>
+<tr><td>635</td><td>16400</td><td>1/64e-6</td><td>1/392e-3</td></tr>
+<tr><td>640</td><td>26000</td><td>1/59e-6</td><td>1/367e-3</td></tr>
+  </table>
+
+<p>The specific heat capacity is not fixed because it would
+  affect the chemical potential and result in an incorrect saturation pressure.</p>
+
+  <p>For more information, please see the <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.</p>
+Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base model for a fluid species).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_inter</td><td>0</td><td>Number of exchange connections with other phases</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.H2O.Liquid</td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">DiffusivityMassSpecific</a></td><td>zeta</td><td>0</td><td>** [L2.M/(N.T)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Phi[n_intra, n_trans]</td><td>ones(n_intra, n_trans)</td><td>For translational exchange among species within the phase [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Q[n_intra]</td><td>ones(n_intra)</td><td>For thermal exchange among species within the phase [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi.start[n_trans]</td><td>0</td><td>Velocity [L/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I.start[n_trans]</td><td>0</td><td>Current [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_boundaries.start[n_trans, Side]</td><td>0</td><td>Normal velocities at the boundaries [L/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>f.start[n_trans]</td><td>0</td><td>Total normal translational force on pairs of boundaries [L.M/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>minusDeltaf.start[n_trans]</td><td>0</td><td>Dynamic and nonequilibrium compression forces [L.M/T2]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>epsilon_IC</td><td>0.01</td><td>Initial volumetric fill fraction [1]</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a></td><td>initMaterial</td><td>Init.volume</td><td>Method of initializing the material state</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a></td><td>initEnergy</td><td>Init.temperature</td><td>Method of initializing the thermal state</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_IC</td><td>epsilon_IC*product(L)</td><td>Initial volume [L3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature [L2.M/(N.T2)]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
+<tr><td>Integer</td><td>n_chem</td><td>3</td><td>Number of reaction and phase change processes</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of the conservation equations</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a></td><td>consMaterial</td><td>ConsThermo.dynamic</td><td>Material</td></tr>
+<tr><td>Boolean</td><td>consRot</td><td>false</td><td>Conserve rotational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransX</td><td>ConsTrans.dynamic</td><td>X-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransY</td><td>ConsTrans.dynamic</td><td>Y-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransZ</td><td>ConsTrans.dynamic</td><td>Z-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a></td><td>consEnergy</td><td>ConsThermo.dynamic</td><td>Energy</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
+<tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
+<tr><td>Boolean</td><td>approxVelocity</td><td>true</td><td>Calculate normal boundary velocities assuming uniform density</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>0</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra[n_intra]</td><td>Connectors to exchange translational momentum and energy within the phase</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connectors to exchange translational momentum and energy with all other species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>dalton</td><td>Connector for additivity of pressure</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a></td><td>boundaries[n_trans, Side]</td><td>Connectors for transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_chem]</td><td>Connector for reactions and phase change</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
+
+  <font color="darkgreen">// Initialization</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> epsilon_IC=0.01 <font color="darkgreen">&quot;Initial volumetric fill fraction&quot;</font>;
+
+  <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">Characteristics.H2O.Liquid</a>,
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">Data.mu</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
+    <font color="blue">final </font>zeta=0,
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> eta=1/(855e-6*U.Pa*U.s),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=U.m*U.K/(0.613*U.W),
+    initEnergy=Init.temperature,
+    <font color="blue">final </font>N_IC,
+    <font color="blue">final </font>h_IC,
+    <font color="blue">final </font>g_IC,
+    <font color="blue">final </font>rho_IC,
+    <font color="blue">final </font>p_IC,
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime[:]={0,1e8,2e11}*<font color="red">Data.tauprime</font>(),
+
+    n_chem=3,
+    <font color="blue">final </font>V_IC=epsilon_IC*<font color="red">product</font>(L),
+    initMaterial=Init.volume);
+
+  <font color="darkgreen">// See the documentation for tables of values.</font>
+
+<font color="blue">end </font>Fixed;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:06:56 2014.
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<html>
+<head>
+<title>FCSys.Subregions.Examples.Reactions</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Examples of phase change">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html">
+<h2>FCSys</h2>
+</a>
+  <p align=center><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Subregions.Examples.Reactions"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.Reactions</h2>
+
+<b>Examples of phase change</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Subregions.Examples.AirColumnS.png" alt="FCSys.Subregions.Examples.Reactions.HOR" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_Reactions.html#FCSys.Subregions.Examples.Reactions.HOR">HOR</a>
+</td><td>Test the hydrogen oxidation reaction in one subregion</td></tr>
+<tr><td><img src="FCSys.Subregions.Examples.AirColumnS.png" alt="FCSys.Subregions.Examples.Reactions.ORR" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples_Reactions.html#FCSys.Subregions.Examples.Reactions.ORR">ORR</a>
+</td><td>Test the oxygen reduction reaction in one subregion</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Subregions.Examples.Reactions.HORI.png" alt="FCSys.Subregions.Examples.Reactions.HOR" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Examples.Reactions.HOR"></a><a href="FCSys_Subregions_Examples_Reactions.html#FCSys.Subregions.Examples.Reactions">FCSys.Subregions.Examples.Reactions</a>.HOR</h2>
+<b>Test the hydrogen oxidation reaction in one subregion</b>
+<img src="FCSys.Subregions.Examples.Reactions.HORD.png" alt="FCSys.Subregions.Examples.Reactions.HOR">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclSO3-&#39;</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>true</td><td>Electrons (e<sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>true</td><td>Protons (H<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>inclH2</td><td>true</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water vapor (H<sub>2</sub>O)</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
+<tr><td>Boolean</td><td>inclO2</td><td>false</td><td>Oxygen (O<sub>2</sub>)</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> HOR <font color="darkgreen">&quot;Test the hydrogen oxidation reaction in one subregion&quot;</font>
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h0=0.5*Characteristics.H2.Gas.Deltah0_f + 0.25*
+      Characteristics.O2.Gas.Deltah0_f - 0.5*Characteristics.H2O.Gas.Deltah0_f;
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> w=subregion.graphite.'e-Transfer'.Deltag <font color="darkgreen">&quot;Overpotential&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> zI=subregion.graphite.'e-Transfer'.I <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A) <font color="darkgreen">
+    &quot;Electrical current density of the reaction, in A/cm2&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot <font color="darkgreen">
+    &quot;Rate of heat generation due to reaction&quot;</font>;
+
+  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(
+    &#39;inclC+&#39;=true,
+    &#39;inclSO3-&#39;=true,
+    &#39;incle-&#39;=true,
+    &#39;inclH+&#39;=true,
+    inclH2=true,
+    subregion(L={0.287*U.mm,10*U.cm,10*U.cm}),
+    environment(T=333.15*U.K, RH=0.8));
+
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> anBC(graphite(
+      &#39;incle-&#39;=true,
+      &#39;inclC+&#39;=true,
+      <font color="blue">redeclare </font><a href="FCSys_Conditions_ByConnector_ThermalDiffusive_Single.html#FCSys.Conditions.ByConnector.ThermalDiffusive.Single.Temperature">Conditions.ByConnector.ThermalDiffusive.Single.Temperature</a> &#39;C+&#39;
+        (set(y=environment.T)),
+      &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.current">Conditions.ByConnector.Boundary.Single.Material.current</a>,
+          materialSet(y=currentSet.y))), gas(inclH2=true, H2(
+        materialSet(y=environment.p_dry),
+        <font color="blue">redeclare </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Conditions.ByConnector.Boundary.Single.Thermal.temperature</a>,
+
+        thermalSet(y=environment.T))));
+
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Sink">Conditions.ByConnector.BoundaryBus.Single.Sink</a> caBC(ionomer(&#39;inclH+&#39;=true,
+        &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">Conditions.ByConnector.Boundary.Single.Material.potential</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>),
+          materialSet(y=0))));
+
+  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> currentSet(
+    height=200*U.A,
+    duration=20,
+    startTime=5);
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>(subregion.xPositive, caBC.boundary);
+  <font color="red">connect</font>(anBC.boundary, subregion.xNegative);
+<font color="blue">end </font>HOR;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Subregions.Examples.Reactions.HORI.png" alt="FCSys.Subregions.Examples.Reactions.ORR" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Examples.Reactions.ORR"></a><a href="FCSys_Subregions_Examples_Reactions.html#FCSys.Subregions.Examples.Reactions">FCSys.Subregions.Examples.Reactions</a>.ORR</h2>
+<b>Test the oxygen reduction reaction in one subregion</b>
+<img src="FCSys.Subregions.Examples.Reactions.HORD.png" alt="FCSys.Subregions.Examples.Reactions.ORR">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a> (Single subregion, with H<sub>2</sub> by default).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclSO3-&#39;</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>, abbreviated as SO<sub>3</sub><sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>true</td><td>Electrons (e<sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>true</td><td>Protons (H<sup>+</sup>)</td></tr>
+<tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>true</td><td>Water vapor (H<sub>2</sub>O)</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
+<tr><td>Boolean</td><td>inclO2</td><td>true</td><td>Oxygen (O<sub>2</sub>)</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> ORR <font color="darkgreen">&quot;Test the oxygen reduction reaction in one subregion&quot;</font>
+
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> w=-subregion.graphite.'e-Transfer'.Deltag <font color="darkgreen">&quot;Overpotential&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> zI=-subregion.graphite.'e-Transfer'.I <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> J_Apercm2=zI*U.cm^2/(subregion.A[Axis.x]*U.A) <font color="darkgreen">
+    &quot;Electrical current density, in A/cm2&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot=-subregion.graphite.'e-Transfer'.inert.Qdot <font color="darkgreen">
+    &quot;Rate of heat generation due to reaction&quot;</font>;
+
+  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion">Examples.Subregion</a>(
+    &#39;inclC+&#39;=true,
+    &#39;inclSO3-&#39;=true,
+    &#39;incle-&#39;=true,
+    &#39;inclH+&#39;=true,
+    inclH2=false,
+    inclH2O=true,
+    inclO2=true,
+    subregion(L={0.287*U.mm,10*U.cm,10*U.cm}, gas(O2(initEnergy=Init.none))),
+    environment(T=333.15*U.K, RH=0.6));
+
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> anBC(ionomer(&#39;inclH+&#39;=true,
+        &#39;H+&#39;(
+        thermalSet(y=environment.T),
+        materialSet(y=0),
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.potential">Conditions.ByConnector.Boundary.Single.Material.potential</a>
+            (<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>))));
+
+  <a href="FCSys_Conditions_ByConnector_BoundaryBus_Single.html#FCSys.Conditions.ByConnector.BoundaryBus.Single.Source">Conditions.ByConnector.BoundaryBus.Single.Source</a> caBC(gas(
+      inclH2O=true,
+      inclO2=true,
+      H2O(
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+
+        materialSet(y=environment.p_H2O),
+        thermalSet(y=environment.T)),
+      O2(
+        <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
+
+        materialSet(y=environment.p_O2),
+        thermalSet(y=environment.T))), graphite(
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(materialSet(y=currentSet.y), thermalSet(y=environment.T)),
+      &#39;inclC+&#39;=true,
+      &#39;C+&#39;(set(y=environment.T))));
+
+  <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> currentSet(
+    duration=20,
+    height=-200*U.A,
+    startTime=5);
+  <font color="darkgreen">// offset=-U.mA,</font>
+
+<font color="blue">equation </font>
+  <font color="red">connect</font>(subregion.xPositive, caBC.boundary);
+  <font color="red">connect</font>(anBC.boundary, subregion.xNegative);
+<font color="blue">end </font>ORR;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:06:50 2014.
+</div>
+</body>
+</html>

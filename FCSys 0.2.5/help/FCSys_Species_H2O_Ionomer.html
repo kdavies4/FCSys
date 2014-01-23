@@ -1,0 +1,180 @@
+<html>
+<head>
+<title>FCSys.Species.H2O.Ionomer</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&lt;html&gt;H&lt;sub&gt;2&lt;/sub&gt;O in ionomer&lt;/html&gt;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html">
+<h2>FCSys</h2>
+</a>
+  <p align=center><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Species.H2O.Ionomer"></a><a href="FCSys_Species_H2O.html#FCSys.Species.H2O">FCSys.Species.H2O</a>.Ionomer</h2>
+
+<b>H<sub>2</sub>O in ionomer</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Species.H2O.Gas.FixedS.png" alt="FCSys.Species.H2O.Ionomer.Fixed" width=20  height=20 align=top>&nbsp;<a href="FCSys_Species_H2O_Ionomer.html#FCSys.Species.H2O.Ionomer.Fixed">Fixed</a>
+</td><td>Fixed properties</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Species.H2O.Ionomer.FixedI.png" alt="FCSys.Species.H2O.Ionomer.Fixed" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Species.H2O.Ionomer.Fixed"></a><a href="FCSys_Species_H2O_Ionomer.html#FCSys.Species.H2O.Ionomer">FCSys.Species.H2O.Ionomer</a>.Fixed</h2>
+<b>Fixed properties</b>
+<img src="FCSys.Species.'e-'.Graphite.FixedD.png" alt="FCSys.Species.H2O.Ionomer.Fixed">
+
+<h3>Information</h3>
+
+<p>Assumptions:</p><ol>
+        <li>The generalized resistivities (&eta;, &theta;) are fixed (e.g., independent of thermodynamic state).</li>
+    </ol>
+
+<p>For more information, please see the <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> model.</p>
+Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base model for a fluid species).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_inter</td><td>0</td><td>Number of exchange connections with other phases</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.H2O.Ionomer</td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">DiffusivityMassSpecific</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>** [L2.M/(N.T)]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Phi[n_intra, n_trans]</td><td>ones(n_intra, n_trans)</td><td>For translational exchange among species within the phase [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_intra_Q[n_intra]</td><td>ones(n_intra)</td><td>For thermal exchange among species within the phase [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi.start[n_trans]</td><td>0</td><td>Velocity [L/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I.start[n_trans]</td><td>0</td><td>Current [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_boundaries.start[n_trans, Side]</td><td>0</td><td>Normal velocities at the boundaries [L/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>f.start[n_trans]</td><td>0</td><td>Total normal translational force on pairs of boundaries [L.M/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>minusDeltaf.start[n_trans]</td><td>0</td><td>Dynamic and nonequilibrium compression forces [L.M/T2]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>kL[:]</td><td>L[cartTrans]</td><td>Effective transport length [L]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a></td><td>initMaterial</td><td>Init.none</td><td>Method of initializing the material state</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.Init">Init</a></td><td>initEnergy</td><td>Init.temperature</td><td>Method of initializing the thermal state</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14*environment.RH</td><td>Initial ratio of H<sub>2</sub>O molecules to SO<sub>3</sub><sup>-</sup> end-groups [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Integer</td><td>n_trans</td><td>1</td><td>Number of transport axes</td></tr>
+<tr><td>Integer</td><td>n_chem</td><td>1</td><td>Number of reaction and phase change processes</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Formulation of the conservation equations</td></tr>
+<tr><td>Boolean</td><td>consRot</td><td>false</td><td>Conserve rotational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransX</td><td>ConsTrans.dynamic</td><td>X-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransY</td><td>ConsTrans.dynamic</td><td>Y-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a></td><td>consTransZ</td><td>ConsTrans.dynamic</td><td>Z-axis translational momentum</td></tr>
+<tr><td><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a></td><td>consEnergy</td><td>ConsThermo.dynamic</td><td>Energy</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
+<tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Flow conditions</td></tr>
+<tr><td>Boolean</td><td>approxVelocity</td><td>true</td><td>Calculate normal boundary velocities assuming uniform density</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Phi[Axis]</td><td>{4,4,4}</td><td>Translational Nusselt numbers [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>Nu_Q</td><td>1</td><td>Thermal Nusselt number [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Advanced</b></td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N0</td><td>0</td><td>Nominal amount of material to prevent depletion [N]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Intra">Intra</a></td><td>intra[n_intra]</td><td>Connectors to exchange translational momentum and energy within the phase</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inter">Inter</a></td><td>inter[n_inter]</td><td>Connectors to exchange translational momentum and energy with all other species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Dalton">Dalton</a></td><td>dalton</td><td>Connector for additivity of pressure</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Boundary">Boundary</a></td><td>boundaries[n_trans, Side]</td><td>Connectors for transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_chem]</td><td>Connector for reactions and phase change</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristic data</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a>(
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Ionomer.html#FCSys.Characteristics.H2O.Ionomer">Characteristics.H2O.Ionomer</a>,
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu=<font color="red">Data.mu</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu=<font color="red">Data.nu</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> eta=<font color="red">Data.eta</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta=<font color="red">Data.theta</font>(),
+    <font color="blue">final </font>N_IC,
+    <font color="blue">final </font>h_IC,
+    <font color="blue">final </font>g_IC,
+    <font color="blue">final </font>rho_IC,
+    <font color="blue">final </font>p_IC,
+    <font color="blue">final </font>V_IC,
+    <font color="blue">final </font>T_IC,
+    <font color="blue">final </font>consMaterial,
+    <font color="blue">final </font>tauprime,
+    n_chem=1,
+    <font color="blue">final </font>initMaterial=Init.none);
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14*environment.RH <font color="darkgreen">
+    &quot;Initial ratio of H<sub>2</sub>O molecules to SO<sub>3</sub><sup>-</sup> end-groups&quot;</font>;
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda(start=lambda_IC, fixed=true) <font color="darkgreen">
+    &quot;Ratio of H2O molecules to SO3- end-groups&quot;</font>;
+
+<font color="blue">equation </font>
+  lambda*v = Characteristics.'SO3-'.Ionomer.b_v[1, 1];
+
+<font color="blue">end </font>Fixed;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:06:56 2014.
+</div>
+</body>
+</html>
