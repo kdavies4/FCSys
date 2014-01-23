@@ -1,0 +1,226 @@
+<html>
+<head>
+<title>FCSys.Conditions</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Models to specify and measure operating conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Conditions"></a><a href="FCSys.html#FCSys">FCSys</a>.Conditions</h2>
+
+<b>Models to specify and measure operating conditions</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_SourcesPackage.html#Modelica.Icons.SourcesPackage">Modelica.Icons.SourcesPackage</a> (Icon for packages containing sources).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Conditions.ExamplesS.png" alt="FCSys.Conditions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">Examples</a>
+</td><td>Examples</td></tr>
+<tr><td><img src="FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.Adapters" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">Adapters</a>
+</td><td>Interfaces to the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica Standard Library</a></td></tr>
+<tr><td><img src="FCSys.Conditions.AdaptersS.png" alt="FCSys.Conditions.ByConnector" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ByConnector.html#FCSys.Conditions.ByConnector">ByConnector</a>
+</td><td>Conditions for each type of connector</td></tr>
+<tr><td><img src="FCSys.Conditions.EnvironmentS.png" alt="FCSys.Conditions.Environment" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>
+</td><td>Environmental properties for a simulation</td></tr>
+<tr><td><img src="FCSys.Conditions.RouterS.png" alt="FCSys.Conditions.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions.Router">Router</a>
+</td><td>Connect two pairs of boundaries to pass through or cross over</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Conditions.EnvironmentI.png" alt="FCSys.Conditions.Environment" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Environment"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Environment</h2>
+<b>Environmental properties for a simulation</b>
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Thermodynamics</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [M/(L.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>0.5</td><td>Relative humidity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>psi_O2_dry</td><td>0.20946</td><td>Mole fraction of O<sub>2</sub> in the dry gas [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Fields</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[Axis]</td><td>{0,Modelica.Constants.g_n*U&hellip;.</td><td>Acceleration due to body forces [L/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">ForceSpecific</a></td><td>E[Axis]</td><td>{0,0,0}</td><td>Electric field [L.M/(N.T2)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">record</font> Environment <font color="darkgreen">&quot;Environmental properties for a simulation&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
+
+  <font color="darkgreen">// Store the values of the base constants and units.</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a> baseUnits=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
+
+  <font color="darkgreen">// Thermodynamics</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=300*U.K) = 298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(
+    displayUnit=&quot;%&quot;,
+    max=1) = 0.5 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_O2_dry(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.20946 <font color="darkgreen">
+    &quot;Mole fraction of O<sub>2</sub> in the dry gas&quot;</font>;
+  <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen, accessed 2013/10/30</font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_sat=<font color="red">Characteristics.H2O.p_sat</font>(T) <font color="darkgreen">
+    &quot;Saturation pressure of H2O vapor&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O=RH*p_sat <font color="darkgreen">&quot;Pressure of H2O vapor&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_dry=p - p_H2O <font color="darkgreen">&quot;Pressure of dry gases&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_O2=psi_O2_dry*p_dry <font color="darkgreen">&quot;Pressure of O2&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_H2O=p_H2O/p <font color="darkgreen">&quot;Mole fraction of H2O&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> psi_dry=1 - psi_H2O <font color="darkgreen">
+    &quot;Mole fraction of dry gases&quot;</font>;
+
+  <font color="darkgreen">// Fields</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0} <font color="darkgreen">
+    &quot;Acceleration due to body forces&quot;</font>;
+  <font color="darkgreen">// The gravity component is positive because it&#39;s added to the transient</font>
+  <font color="darkgreen">// term in the Species model.</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ForceSpecific">Q.ForceSpecific</a> E[Axis]={0,0,0} <font color="darkgreen">&quot;Electric field&quot;</font>;
+
+<font color="blue">end </font>Environment;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Conditions.RouterI.png" alt="FCSys.Conditions.Router" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Router"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Router</h2>
+<b>Connect two pairs of boundaries to pass through or cross over</b>
+<img src="FCSys.Conditions.RouterD.png" alt="FCSys.Conditions.Router">
+
+<h3>Information</h3>
+
+<p>This model acts as a connection switch.
+It has a single parameter, <code>crossOver</code>.</p>
+
+<p>If <code>crossOver</code> is
+set to <code>false</code>, then
+the router will be in the pass-through mode.  In that case,
+<code>negative1</code> is connected to <code>positive1</code> and <code>negative2</code>
+is connected to <code>positive2</code>, as shown by <a href="FCSys_Conditions.html#Fig1a">Figure 1a</a>.</p>
+
+<p>If <code>crossOver</code> is set to <code>true</code>, then the router will be in cross-over mode.  In that case, <code>negative1</code> is connected to <code>positive2</code>
+and <code>negative2</code> is
+connected to <code>positive1</code>, as shown by <a href="FCSys_Conditions.html#Fig1b">Figure 1b</a>.</p>
+
+    <table border="0" cellspacing="0" cellpadding="2" align=center>
+      <tr align=center>
+        <td id="Fig1a" align=center width=120>
+          <img src="../Resources/Documentation/Conditions/Router/PassThrough.png">
+<br><b>a:</b> Pass-through
+        </td>
+        <td id="Fig1b" align=center>
+          <img src="../Resources/Documentation/Conditions/Router/CrossOver.png">
+<br><b>b:</b> Cross-over
+        </td>
+      </tr>
+      <tr align=center>
+        <td colspan=2 align=center>Figure 1: Modes of connection.</td>
+      </tr>
+    </table>
+
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>.
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>crossOver</td><td>false</td><td>Cross over (otherwise, pass through)</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>negative1</td><td>Negative boundary 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>positive1</td><td>Positive boundary 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>negative2</td><td>Negative boundary 2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">BoundaryBus</a></td><td>positive2</td><td>Positive boundary 2</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Router <font color="darkgreen">
+  &quot;Connect two pairs of boundaries to pass through or cross over&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top3">FCSys.Icons.Names.Top3</a>;
+  <font color="blue">parameter </font>Boolean crossOver=false <font color="darkgreen">&quot;Cross over (otherwise, pass through)&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> negative1 <font color="darkgreen">&quot;Negative boundary 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> positive1 <font color="darkgreen">&quot;Positive boundary 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> negative2 <font color="darkgreen">&quot;Negative boundary 2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.BoundaryBus">Connectors.BoundaryBus</a> positive2 <font color="darkgreen">&quot;Positive boundary 2&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="blue">if </font>crossOver<font color="blue"> then</font>
+    <font color="red">connect</font>(negative1, positive2);
+    <font color="red">connect</font>(negative2, positive1);
+  <font color="blue">else</font>
+    <font color="darkgreen">// Pass-through</font>
+    <font color="red">connect</font>(negative1, positive1);
+    <font color="red">connect</font>(negative2, positive2);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>Router;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:49:42 2014.
+</div>
+</body>
+</html>

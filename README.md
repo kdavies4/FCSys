@@ -5,9 +5,9 @@ FCSys
 models in [Modelica](https://www.modelica.org/).  More information is available
 in the documentation, which can be accessed
 [online](http://kdavies4.github.com/FCSys) or from the documentation layer of
-the Modelica code (starting at the [top level](FCSys 0.2/package.mo)).
+the Modelica code (starting at the [top level](FCSys 0.2.4/package.mo)).
 
-![Diagram of the fuel cell model](FCSys 0.2/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png)
+![Diagram of the fuel cell model](FCSys 0.2.4/Resources/Documentation/FCSys.Assemblies.Cells.CellD.png)
 
 ### Installation
 
@@ -26,7 +26,7 @@ Please see the acknowledgements on the
 [FCSys] is published under the Modelica License 2 (see the
 [User's Guide](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.License)
 or
-[ModelicaLicense2.html](FCSys 0.2/Resources/Documentation/ModelicaLicense2.html)).
+[ModelicaLicense2.html](FCSys 0.2.4/Resources/Documentation/ModelicaLicense2.html)).
 Please share any modifications you make (preferably on a Github fork from
 https://github.com/kdavies4/FCSys) so that others may benefit from your work.
 

@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>FCSys.Characteristics.'SO3-'.Ionomer</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="C9HF17O5S- ionomer">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Characteristics.'SO3-'.Ionomer"></a><a href="FCSys_Characteristics_'SO3-'.html#FCSys.Characteristics.'SO3-'">FCSys.Characteristics.'SO3-'</a>.Ionomer</h2>
+
+<b>C9HF17O5S- ionomer</b>
+
+<h3>Information</h3>
+
+<p>Assumptions:</p>
+     <ol>
+     <li>Constant specific volume (i.e., incompressible and without
+          thermal expansion)</li>
+     </ol>
+
+    <p>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
+   [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Lin2006">Lin2006</a>, p.&nbsp;A1327].  Note that this is
+
+   approximately 1.912 M, which does not match
+
+   the default density of
+
+  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">'H+'.Ionomer</a> (0.95 M), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.</p>
+
+     <p>Additional notes:</p>
+     <ul>
+     <li>Most of the data for this species is for C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S rather than
+     C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (with the exception of specific mass).</li>
+     <li>A form of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is
+     C<sub>7</sub>HF<sub>13</sub>O<sub>5</sub>S.(C<sub>2</sub>F<sub>4</sub>)<sub>6</sub>, which is a typical
+   configuration of Nafion sulfonate (after hydrolysis)
+   [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Mark1999">Mark1999</a>, p.&nbsp;234].</li>
+     <li>Thermodynamic data for this material is not available from
+     [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>].  The default specific heat capacity
+     (<i>b<sub>c</sub></i> = <code>[4188*U.J*m/(U.kg*U.K)]</code>) is based on [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Shah2009">Shah2009</a>, p.&nbsp;B472].</li>
+     <li>According to [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Avogadro">Avogadro</a>], the furthest distance
+   between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
+   The radius of F is 147 pm (<a href="http://en.wikipedia.org/wiki/Fluorine">http://en.wikipedia.org/wiki/Fluorine</a>).</li>
+     <li>From [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Avogadro">Avogadro</a>], the molecular weight of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S
+   is 1044.214 g/mol.  However, the "11" in Nafion 11x indicates a
+   molecular weight of 1100 g/mol.  According to
+   <a href="http://en.wikipedia.org/wiki/Nafion">http://en.wikipedia.org/wiki/Nafion</a>,
+       "the molecular weight of Nafion is uncertain due to differences in
+        processing and solution morphology."</li>
+     </ul>
+
+<p>For more information, please see the
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package.</p>
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Package of thermodynamic and diffusive properties).
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:23 2014.
+</div>
+</body>
+</html>

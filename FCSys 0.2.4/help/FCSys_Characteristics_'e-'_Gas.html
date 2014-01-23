@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>FCSys.Characteristics.'e-'.Gas</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="e- gas">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Characteristics.'e-'.Gas"></a><a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'">FCSys.Characteristics.'e-'</a>.Gas</h2>
+
+<b>e- gas</b>
+
+<h3>Information</h3>
+
+<p>Notes:</p>
+     <ul>
+     <li>The specific mass (<i>m</i>) is also
+
+     2<i>k</i><sub>A</sub>/<i>d</i>, where <i>k</i><sub>A</sub> (in the <a href="FCSys_Units.html#FCSys.Units">Units</a> package) is the magnetic force constant and
+
+     <i>d</i> (in this package) is the specific classical diameter of an electron,
+
+     &alpha;<sup>3</sup>/(2&pi;&nbsp;<i>R</i><sub>&infin;</sub>&nbsp;<i>q</i>).</li>
+  <li>McBride and Gordon [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride1996">McBride1996</a>] provide correlations for the transport
+  properties of e<sup>-</sup> gas.  However, they are not entered here, since they
+  contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
+     <li>The equation for the radius is the classical radius of an electron (see
+  <a href="http://en.wikipedia.org/wiki/Classical_electron_radius">http://en.wikipedia.org/wiki/Classical_electron_radius</a>).</li>
+  <li>McBride and Gordon [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride1996">McBride1996</a>] provide correlations for the transport
+  properties of e<sup>-</sup> gas.  However, they are not entered here, since they
+  contain only one temperature range (2000 to 5000&nbsp;K) which is beyond the expected operating range of the model.</li>
+  <li>
+  The thermodynamic data [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>] splits the correlations into three
+  temperature ranges, but the coefficients are the same for each.
+   Therefore, the temperature limits are set here such that the entire
+   range is handled without switching.  The lower temperature limit
+   in the source data is 298.150&nbsp;K, but here it is expanded down to 200&nbsp;K.
+   The constants are independent of temperature anyway.
+  </li>
+</ul>
+
+<p>For more information, please see the
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package.</p>
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Package of thermodynamic and diffusive properties).
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:23 2014.
+</div>
+</body>
+</html>

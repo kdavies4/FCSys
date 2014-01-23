@@ -1,0 +1,1295 @@
+<html>
+<head>
+<title>FCSys.Characteristics.BaseClasses.Characteristic</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Package of thermodynamic and diffusive properties">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Characteristics.BaseClasses.Characteristic"></a><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses">FCSys.Characteristics.BaseClasses</a>.Characteristic</h2>
+
+<b>Package of thermodynamic and diffusive properties</b>
+
+<h3>Information</h3>
+
+<p>This package is compatible with NASA CEA thermodynamic data
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>] and the virial equation of state
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Dymond2002">Dymond2002</a>].</p>
+
+<p>Notes regarding the constants:</p>
+    <ul>
+    <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
+
+    <li><i>d</i> is the Van der Waals diameter or the diameter for the
+    rigid-sphere ("billiard-ball") approximation of the kinetic theory of gases
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>].</li>
+
+    <li><i>b<sub>c</sub></i>: The rows give the coefficients for the temperature intervals bounded
+    by the values in <i>T</i><sub>lim <i>c</i></sub>.
+    The powers of <i>T</i> increase
+    by column.
+    By default,
+    the powers of <i>T</i> for the first column are each -2, which corresponds to [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>].
+    In that case, the dimensionalities of the coefficients are {L4.M2/(N2.T4), L2.M/(N.T2), 1, &hellip;}
+    for each row, where L is length, M is mass, N is particle number, and T is time. (In <a href="FCSys.html#FCSys">FCSys</a>,
+    temperature is a potential with dimension L2.M/(N.T2); see
+    the <a href="FCSys_Units.html#FCSys.Units">Units</a> package.)</li>
+
+    <li><i>B<sub>c</sub></i>: As in <i>b<sub>c</sub></i>, the rows correspond to different
+    temperature intervals.  The first column is for specific enthalpy and has dimensionality
+    L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
+    The integration constants for enthalpy are defined such that the enthalpy at
+    25&nbsp;&deg;C is the specific enthalpy of formation at that temperature and reference pressure
+    [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>, p.&nbsp;2].
+    The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
+
+    <li><i>T</i><sub>lim <i>c</i></sub>: The first and last entries are the minimum and
+    maximum valid temperatures.  The intermediate entries are the thresholds
+    between rows of <i>b<sub>c</sub></i> (and <i>B<sub>c</sub></i>).  Therefore, if there are <i>n</i> temperature intervals
+    (and rows in <i>b<sub>c</sub></i> and <i>B<sub>c</sub></i>), then <i>T</i><sub>lim <i>c</i></sub> must
+    have <i>n</i> + 1 entries.</li>
+
+    <li>The reference pressure is <i>p</i><sup>o</sup>.   In the
+    NASA CEA data [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.McBride2002">McBride2002</a>], it is 1&nbsp;bar for gases and 1&nbsp;atm for condensed
+    species.  For gases, the reference state is the ideal gas at <i>p</i><sup>o</sup>.
+    For example, the enthalpy of a non-ideal (real) gas at 25&nbsp;&deg;C and <i>p</i><sup>o</sup> with
+    <code>ReferenceEnthalpy.zeroAt25degC</code> is not exactly zero.</li>
+
+    <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
+    must be independent of temperature.  Otherwise, the function for specific enthalpy
+    (<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h"><i>h</i></a>) will be ill-posed.
+    Typically, the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
+    this requirement.</li>
+    </ul>
+Extends from <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS">CharacteristicEOS</a> (Base thermodynamic package with only the <i>p</i>-<i>v</i>-<i>T</i> relations).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>formula</td><td>Chemical formula</td></tr>
+<tr><td>phase</td><td>Material phase</td></tr>
+<tr><td>m</td><td>Specific mass</td></tr>
+<tr><td>d</td><td>Specific diameter</td></tr>
+<tr><td>z=charge(formula)</td><td>Charge number</td></tr>
+<tr><td>referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC</td><td>Choice of enthalpy reference</td></tr>
+<tr><td>Deltah0_f</td><td>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sup>o</sup><sub>f</sub>)</td></tr>
+<tr><td>Deltah0</td><td><i>h</i><sup>o</sup>(298.15 K) - <i>h</i><sup>o</sup>(0 K) (&Delta;<i>h</i><sup>o</sup>)</td></tr>
+<tr><td>h_offset=0</td><td>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</td></tr>
+<tr><td>n_c=-2</td><td>Power of <i>T</i> for 1<sup>st</sup> column of <i>b</i><sub><i>c</i></sub> (<i>n</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>T_lim_c={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)</td></tr>
+<tr><td>b_c</td><td>Coefficients of isobaric specific heat capacity at <i>p</i><sup>o</sup> as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>alpha=1.5*U.pi^1.5*d^2*U.q</td><td>Scaled specific intercept area</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.omega" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.omega">omega</a>
+</td><td>Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style="text-decoration:overline;">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_p" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_p">c_p</a>
+</td><td>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>
+</td><td>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.D" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.D">D</a>
+</td><td>Diffusivity as a function of temperature and specific volume</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
+</td><td>Gibbs potential as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>
+</td><td>Specific enthalpy as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
+</td><td>Specific entropy as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.zeta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.zeta">zeta</a>
+</td><td>Continuity (&zeta;) as a function of temperature</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.eta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.eta">eta</a>
+</td><td>Fluidity (&eta;) as a function of temperature</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.theta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.theta">theta</a>
+</td><td>Thermal resistivity (&theta;) as a function of temperature and specific volume</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.tauprime" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.tauprime">tauprime</a>
+</td><td>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.mu">mu</a>
+</td><td>Mobility (&mu;) as a function of temperature and specific volume</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.nu" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.nu">nu</a>
+</td><td>Thermal independity (&nu;) as a function of temperature and specific volume</td></tr>
+<tr><TH COLSPAN="2">Inherited</th></tr>
+<tr><td>p0=U.bar</td><td>Reference pressure (<i>p</i><sup>o</sup>)</td></tr>
+<tr><td>n_v={-1,0}</td><td>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub> (<i>n</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>b_v=[1]</td><td>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on pressure</td></tr>
+<tr><td>hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and n_v[2] + j - n_v[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td><code>true</code>, if density depends on temperature</td></tr>
+<tr><td>n_p={n_v[1] - size(b_v, 1) + 1,n_v[2] + 1}</td><td>Powers of <i>v</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b<sub>p</sub></i></td></tr>
+<tr><td>b_p=if size(b_v, 1) == 1 then b_v .^ (-n_p[1]) else {(if n_v[1] + i == 0 or n_v[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if n_v[1] + i == 2 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if n_v[1] + i == 3 and n_v[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of <i>p</i> as a polynomial in <i>v</i> and <i>T</i></td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dp_Tv">dp_Tv</a>
+</td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv"><i>p<sub>T v</sub></i></a>()</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.dv_Tp">dv_Tp</a>
+</td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp"><i>v<sub>T p</sub></i></a>()</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.p_Tv">p_Tv</a>
+</td><td>Pressure as a function of temperature and specific volume (<i>p<sub>T v</sub></i>())</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.v_Tp">v_Tp</a>
+</td><td>Specific volume as a function of temperature and pressure (<i>v<sub>T p</sub></i>())</td></tr>
+<tr><td><img src="FCSys.Characteristics.Basaa21346b7d304a7bosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicEOS.beta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicEOS.html#FCSys.Characteristics.BaseClasses.CharacteristicEOS.beta">beta</a>
+</td><td>Isothermal compressibility as a function of temperature and pressure (&beta;)</td></tr>
+</table>
+
+<h3>Types and constants</h3>
+
+<pre><font color="blue">constant </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Phase">Phase</a> phase <font color="darkgreen">&quot;Material phase&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m <font color="darkgreen">&quot;Specific mass&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">Q.LengthSpecific</a> d <font color="darkgreen">&quot;Specific diameter&quot;</font>;</pre>
+<pre><font color="blue">constant </font>Integer z=<font color="red">charge</font>(formula) <font color="darkgreen">&quot;Charge number&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a> referenceEnthalpy=ReferenceEnthalpy.enthalpyOfFormationAt25degC
+  <font color="darkgreen">&quot;Choice of enthalpy reference&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">Q.PotentialChemical</a> Deltah0_f <font color="darkgreen">
+  &quot;Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sup>o</sup><sub>f</sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">Q.PotentialChemical</a> Deltah0 <font color="darkgreen">
+  &quot;<i>h</i><sup>o</sup>(298.15 K) - <i>h</i><sup>o</sup>(0 K) (&Delta;<i>h</i><sup>o</sup>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">Q.PotentialChemical</a> h_offset=0 <font color="darkgreen">
+  &quot;Additional enthalpy offset (<i>h</i><sub>offset</sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font>Integer n_c=-2 <font color="darkgreen">
+  &quot;Power of <i>T</i> for 1<sup>st</sup> column of <i>b</i><sub><i>c</i></sub> (<i>n</i><sub><i>c</i></sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_c[:]={0,Modelica.Constants.inf} <font color="darkgreen">
+  &quot;Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font>Real b_c[<font color="red">size</font>(T_lim_c, 1) - 1, :] <font color="darkgreen">
+  &quot;Coefficients of isobaric specific heat capacity at <i>p</i><sup>o</sup> as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font>Real B_c[<font color="red">size</font>(T_lim_c, 1) - 1, 2] <font color="darkgreen">
+  &quot;Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)&quot;</font>;</pre>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AreaSpecific">Q.AreaSpecific</a> alpha=1.5*U.pi^1.5*d^2*U.q <font color="darkgreen">
+  &quot;Scaled specific intercept area&quot;</font>;</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.omega" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.omega"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.omega</h2>
+<b>Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style="text-decoration:overline;">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)</b>
+
+<h3>Information</h3>
+
+<p>This function outputs the root mean square of the thermal
+  velocity in any one dimension, assuming the speeds of the particles follow the
+  Maxwell-Boltzmann distribution.  In combination with &alpha;, this refactorization is
+  convenient for calculating
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.tauprime">&tau;&prime;</a>,
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.mu">&mu;</a>,
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.nu">&nu;</a>,
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.zeta">&zeta;</a>,
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.eta">&eta;</a>, and
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.theta">&theta;</a>.</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>omega</td><td>Root mean square of thermal velocity in one dimension [L/T]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> omega <font color="darkgreen">
+  &quot;Root mean square of thermal velocity in one dimension as a function of temperature (&omega; = &radic;<span style="text-decoration:overline;">&nbsp;<i>T</i>/<i>m</i>&nbsp;</span>)&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> omega <font color="darkgreen">
+    &quot;Root mean square of thermal velocity in one dimension&quot;</font>;
+
+<font color="blue">algorithm </font>
+  omega := <font color="red">sqrt</font>(T/m);
+<font color="blue">end </font>omega;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_p" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.c_p"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c_p</h2>
+<b>Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure</b>
+
+<h3>Information</h3>
+
+<p>For an ideal gas, this function is independent of pressure
+  (although pressure remains as a valid input).</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>p0</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">CapacityThermalSpecific</a></td><td>c_p</td><td>Isobaric specific heat capacity [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> c_p <font color="darkgreen">
+  &quot;Isobaric specific heat capacity (<i>c</i><sub><i>p</i></sub>) as a function of temperature and pressure&quot;</font>
+  <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=p0 <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p <font color="darkgreen">&quot;Isobaric specific heat capacity&quot;</font>;
+
+<font color="blue">protected </font>
+
+    &quot;Isobaric specific heat capacity at reference pressure as a function of temperature&quot;</font>
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_p <font color="darkgreen">
+      &quot;Isobaric specific heat capacity at reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    <font color="darkgreen">/*
+  assert(T_lim_c[1] &lt;= T and T &lt;= T_lim_c[end], &quot;Temperature &quot; + String(T/U.K) + &quot; K is out of bounds for &quot;
+     + formula + &quot; ([&quot; + String(T_lim_c[1]/U.K) + &quot;, &quot; + String(T_lim_c[size(
+    T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
+  */</font>
+    <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+    c0_p := <font color="red">smooth</font>(0, <font color="red">sum</font>(<font color="blue">if </font>(T_lim_c[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_c[i + 1]<font color="blue">
+       or </font>i == <font color="red">size</font>(T_lim_c, 1) - 1)<font color="blue"> then </font><font color="red">Polynomial.f</font>(
+        T,
+        b_c[i, :],
+        n_c)<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_c, 1) - 1));
+  <font color="blue">end </font>c0_p;
+
+&quot;Residual isobaric specific heat capacity for pressure adjustment&quot;</font>
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+    <font color="blue">input </font>Integer rowLimits[2]={1,<font color="red">size</font>(b_v, 1)} <font color="darkgreen">
+      &quot;Beginning and ending indices of rows of b_v to be included&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_resid <font color="darkgreen">
+      &quot;Temperature times the partial derivative of the integral of (dels/delp)_T*dp up to p w.r.t. T&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    c_p_resid := <font color="red">Polynomial.F</font>(
+        p,
+        {<font color="red">Polynomial.f</font>(
+          T,
+          b_v[i, :] .* {(n_v[2] - n_v[1] + j - i)*(n_v[1] - n_v[2] + i - j + 1)
+          <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)},
+          n_v[2] - n_v[1] - i) <font color="blue">for </font>i<font color="blue"> in </font>rowLimits[1]:rowLimits[2]},
+        n_v[1]);
+    <font color="darkgreen">// See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.</font>
+    <font color="darkgreen">// This is temperature times the isobaric partial derivative of that</font>
+    <font color="darkgreen">// function with respect to temperature.  It is zero for an ideal gas.</font>
+
+  <font color="blue">end </font>c_p_resid;
+
+<font color="blue">algorithm </font>
+  c_p := <font color="red">c0_p</font>(T) + <font color="red">c_p_resid</font>(T, p) - (<font color="blue">if </font>phase &lt;&gt; Phase.gas<font color="blue"> then </font><font color="red">c_p_resid</font>(T,
+    p0)<font color="blue"> else </font><font color="red">c_p_resid</font>(
+    T,
+    p0,
+    {1,-n_v[1]}));
+  <font color="darkgreen">// See the notes in the algorithm of Characteristic.s.</font>
+  <font color="darkgreen">// Note:  [Dymond2002, p.17, eqs. 1.45 &amp; 1.46] may be incorrect.</font>
+<font color="blue">end </font>c_p;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.c_v"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c_v</h2>
+<b>Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure</b>
+
+<h3>Information</h3>
+
+<p>For an ideal gas, this function is independent of pressure
+  (although pressure remains as a valid input).</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>p0</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">CapacityThermalSpecific</a></td><td>c_v</td><td>Isochoric specific heat capacity [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> c_v <font color="darkgreen">
+  &quot;Isochoric specific heat capacity (<i>c</i><sub><i>v</i></sub>) as a function of temperature and pressure&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=p0 <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v <font color="darkgreen">&quot;Isochoric specific heat capacity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  c_v := <font color="red">c_p</font>(T, p) - T*<font color="red">dp_Tv</font>(
+    T,
+    <font color="red">v_Tp</font>(T, p),
+    dT=1,
+    dv=0)*<font color="red">dv_Tp</font>(
+    T,
+    p,
+    dT=1,
+    dp=0) <font color="darkgreen">&quot;[Moran2004, p.&amp;nbsp;546, eq. 11.66]&quot;</font>;
+  <font color="darkgreen">// Note 1:  This reduces to c_v = c_p - 1 for an ideal gas (where in</font>
+  <font color="darkgreen">// FCSys 1 = U.R).</font>
+  <font color="darkgreen">// Note 2:  [Dymond2002, p.17, eqs. 1.43 &amp; 1.44] may be incorrect.</font>
+<font color="blue">end </font>c_v;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.D" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.D"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.D</h2>
+<b>Diffusivity as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Diffusivity">Diffusivity</a></td><td>D</td><td>Diffusivity [L2/T]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> D <font color="darkgreen">
+  &quot;Diffusivity as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Diffusivity">Q.Diffusivity</a> D <font color="darkgreen">&quot;Diffusivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  D := v*<font color="red">omega</font>(T)/alpha;
+<font color="blue">end </font>D;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.g"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.g</h2>
+<b>Gibbs potential as a function of temperature and pressure</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>p0</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g</td><td>Gibbs potential [L2.M/(N.T2)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> g <font color="darkgreen">
+  &quot;Gibbs potential as a function of temperature and pressure&quot;</font>
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=p0 <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g <font color="darkgreen">&quot;Gibbs potential&quot;</font>;
+
+<font color="blue">algorithm </font>
+  g := <font color="red">h</font>(T, p) - T*<font color="red">s</font>(T, p);
+<font color="blue">end </font>g;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.h"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.h</h2>
+<b>Specific enthalpy as a function of temperature and pressure</b>
+
+<h3>Information</h3>
+
+<p>For an ideal gas, this function is independent of pressure
+  (although pressure remains as a valid input).</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>p0</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h</td><td>Specific enthalpy [L2.M/(N.T2)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> h <font color="darkgreen">
+  &quot;Specific enthalpy as a function of temperature and pressure&quot;</font>
+  <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=p0 <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h <font color="darkgreen">&quot;Specific enthalpy&quot;</font>;
+
+<font color="blue">protected </font>
+
+    &quot;Return h0 as a function of T using one of the temperature intervals&quot;</font>
+  annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i">dh0_i</a>);
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h0 <font color="darkgreen">
+      &quot;Specific enthalpy at given temperature relative to enthalpy of formation at 25 degC, both at reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    h0 := <font color="red">Polynomial.F</font>(
+        T,
+        b_c[i, :],
+        n_c) + B_c[i, 1];
+    <font color="darkgreen">// This is the integral of c0_p*dT up to T at p0.  The lower bound is the</font>
+    <font color="darkgreen">// enthalpy of formation (of ideal gas, if the material is gaseous) at</font>
+    <font color="darkgreen">// 25 degC [McBride2002, p. 2].</font>
+
+  <font color="blue">end </font>h0_i;
+
+  &quot;Derivative of h0_i&quot;</font>
+    <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate h().</font>
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> dh0 <font color="darkgreen">
+      &quot;Derivative of specific enthalpy at reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    dh0 := <font color="red">Polynomial.f</font>(
+        T,
+        b_c[i, :],
+        n_c)*dT;
+
+  <font color="blue">end </font>dh0_i;
+
+&quot;Residual specific enthalpy for pressure adjustment for selected rows of b_v&quot;</font>
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+    <font color="blue">input </font>Integer rowLimits[2]={1,<font color="red">size</font>(b_v, 1)} <font color="darkgreen">
+      &quot;Beginning and ending indices of rows of b_v to be included&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_resid <font color="darkgreen">
+      &quot;Integral of (delh/delp)_T*dp up to p with zero integration constant (for selected rows)&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    h_resid := <font color="red">Polynomial.F</font>(
+        p,
+        {<font color="red">Polynomial.f</font>(
+          T,
+          b_v[i, :] .* {n_v[1] - n_v[2] + i - j + 1 <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)},
+          n_v[2] - n_v[1] - i + 1) <font color="blue">for </font>i<font color="blue"> in </font>rowLimits[1]:rowLimits[2]},
+        n_v[1] + rowLimits[1] - 1);
+    <font color="darkgreen">// Note:  The partial derivative (delh/delp)_T is equal to v +</font>
+    <font color="darkgreen">// T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)</font>
+    <font color="darkgreen">// and then to v - T*(delv/delT)_p by applying the appropriate Maxwell</font>
+    <font color="darkgreen">// relation, (dels/delp)_T = -(delv/delT)_p.</font>
+    <font color="darkgreen">// Note:  This is zero for an ideal gas.</font>
+
+  <font color="blue">end </font>h_resid;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">/*
+    assert(T_lim_c[1] &lt;= T and T &lt;= T_lim_c[end], &quot;Temperature &quot; +
+    String(T/U.K) + &quot; K is out of bounds for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
+    /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
+  */</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  h := <font color="red">smooth</font>(1, <font color="red">sum</font>(<font color="blue">if </font>(T_lim_c[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_c[i + 1]<font color="blue"> or </font>
+    i == <font color="red">size</font>(b_c, 1))<font color="blue"> then </font><font color="red">h0_i</font>(T, i)<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_c, 1))) + (<font color="blue">if </font>
+    referenceEnthalpy == ReferenceEnthalpy.zeroAt0K<font color="blue"> then </font>Deltah0<font color="blue"> else </font>0) - (<font color="blue">if </font>
+    referenceEnthalpy == ReferenceEnthalpy.enthalpyOfFormationAt25degC<font color="blue"> then </font>0<font color="blue">
+     else </font>Deltah0_f) + h_offset + <font color="red">h_resid</font>(T, p) - (<font color="blue">if </font>phase &lt;&gt; Phase.gas<font color="blue"> then </font><font color="red">
+    h_resid</font>(T, p0)<font color="blue"> else </font><font color="red">h_resid</font>(
+    T,
+    p0,
+    {1,-n_v[1]}));
+  <font color="darkgreen">// The last two terms adjust for the actual pressure relative to the</font>
+  <font color="darkgreen">// reference.  In general, the lower limit of the integral of</font>
+  <font color="darkgreen">// (delh/delp)_T*dp is the reference pressure (p0).  However, if the</font>
+  <font color="darkgreen">// material is gaseous, then the reference is the corresponding ideal gas.</font>
+  <font color="darkgreen">// In that case, the lower limit of the real gas terms of the integral is</font>
+  <font color="darkgreen">// p=0, where a real gas behaves as an ideal gas.  See [Rao1997, p. 271].</font>
+<font color="blue">end </font>h;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.s"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.s</h2>
+<b>Specific entropy as a function of temperature and pressure</b>
+
+<h3>Information</h3>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>p0</td><td>Pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>s</td><td>Specific entropy [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> s <font color="darkgreen">
+  &quot;Specific entropy as a function of temperature and pressure&quot;</font>
+  <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=p0 <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s <font color="darkgreen">&quot;Specific entropy&quot;</font>;
+
+<font color="blue">protected </font>
+
+    &quot;Return s0 as a function of T using one of the temperature intervals&quot;</font>
+  annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s.ds0_i">ds0_i</a>);
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial.F">FCSys.Utilities.Polynomial.F</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s0 <font color="darkgreen">
+      &quot;Specific entropy at given temperature and reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    s0 := <font color="red">F</font>(
+        T,
+        b_c[i, :],
+        n_c - 1) + B_c[i, 2];
+    <font color="darkgreen">// This is the integral of c0_p/T*dT up to T at p0 with the absolute</font>
+    <font color="darkgreen">// entropy at the lower bound [McBride2002, p. 2].</font>
+
+  <font color="blue">end </font>s0_i;
+
+  &quot;Derivative of s0_i&quot;</font>
+    <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate s().</font>
+    <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial.f">FCSys.Utilities.Polynomial.f</a>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> ds0 <font color="darkgreen">
+      &quot;Derivative of specific entropy at given temperature and reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    ds0 := <font color="red">f</font>(
+        T,
+        b_c[i, :],
+        n_c - 1)*dT;
+  <font color="blue">end </font>ds0_i;
+
+&quot;Residual specific entropy for pressure adjustment for selected rows of b_v&quot;</font>
+  annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s.ds_resid">ds_resid</a>);
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+    <font color="blue">input </font>Integer rowLimits[2]={1,<font color="red">size</font>(b_v, 1)} <font color="darkgreen">
+      &quot;Beginning and ending indices of rows of b_v to be included&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s_resid <font color="darkgreen">
+      &quot;Integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    s_resid := <font color="red">Polynomial.F</font>(
+        p,
+        {<font color="red">Polynomial.f</font>(
+          T,
+          b_v[i, :] .* {n_v[1] - n_v[2] + i - j <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)},
+          n_v[2] - n_v[1] - i) <font color="blue">for </font>i<font color="blue"> in </font>rowLimits[1]:rowLimits[2]},
+        n_v[1] + rowLimits[1] - 1);
+    <font color="darkgreen">// Note:  According to the Maxwell relations,</font>
+    <font color="darkgreen">// (dels/delp)_T = -(delv/delT)_p.</font>
+
+  <font color="blue">end </font>s_resid;
+
+  &quot;Derivative of s_resid&quot;</font>
+    <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate s().</font>
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+    <font color="blue">input </font>Integer rowLimits[2]={1,<font color="red">size</font>(b_v, 1)} <font color="darkgreen">
+      &quot;Beginning and ending indices of rows of b_v to be included&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> dp <font color="darkgreen">&quot;Derivative of pressure&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> ds_resid <font color="darkgreen">
+      &quot;Derivative of integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    ds_resid := <font color="red">Polynomial.dF</font>(
+        p,
+        {<font color="red">Polynomial.df</font>(
+          T,
+          b_v[i, :] .* {n_v[1] - n_v[2] + i - j <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)},
+          n_v[2] - n_v[1] - i,
+          dT) <font color="blue">for </font>i<font color="blue"> in </font>rowLimits[1]:rowLimits[2]},
+        n_v[1] + rowLimits[1] - 1,
+        dp);
+  <font color="blue">end </font>ds_resid;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">/*
+  assert(T_lim_c[1] &lt;= T and T &lt;= T_lim_c[end], &quot;Temperature &quot; +
+    String(T/U.K) + &quot; K is out of bounds for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
+    /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
+  */</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  s := <font color="red">smooth</font>(1, <font color="red">sum</font>(<font color="blue">if </font>(T_lim_c[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_c[i + 1]<font color="blue"> or </font>
+    i == <font color="red">size</font>(b_c, 1))<font color="blue"> then </font><font color="red">s0_i</font>(T, i)<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_c, 1))) + <font color="red">
+    s_resid</font>(T, p) - (<font color="blue">if </font>phase &lt;&gt; Phase.gas<font color="blue"> then </font><font color="red">s_resid</font>(T, p0)<font color="blue"> else </font><font color="red">s_resid</font>(
+    T,
+    p0,
+    {1,-n_v[1]}));
+  <font color="darkgreen">// The first term gives the specific entropy at the given temperature and</font>
+  <font color="darkgreen">// reference pressure (p0).  The following terms adjust for the actual</font>
+  <font color="darkgreen">// pressure (p) by integrating (dels/delp)_T*dp.  In general, the</font>
+  <font color="darkgreen">// integration is from p0 to p.  However, for gases the reference state</font>
+  <font color="darkgreen">// is the ideal gas at the reference pressure.  Therefore, the lower</font>
+  <font color="darkgreen">// integration limit for the higher-order real gas terms (i.e., terms with</font>
+  <font color="darkgreen">// power of p greater than -1) is p=0.  This is pressure limit at which a</font>
+  <font color="darkgreen">// real gas behaves as an ideal gas, and it implies that those terms are</font>
+  <font color="darkgreen">// zero.  See [Rao1997, p. 272].  Note that the first V_m inside the curly</font>
+  <font color="darkgreen">// brackets of the related eq. 1.47 in [Dymond2002, p. 17] should be a</font>
+  <font color="darkgreen">// subscript rather than a multiplicative factor.</font>
+  <font color="darkgreen">// Note:  If the phase is gas, the virial equation of state (as defined by</font>
+  <font color="darkgreen">// b_v and n_v) must include an ideal gas term (v = &hellip; + f(T)/p +</font>
+  <font color="darkgreen">// &hellip;).  Otherwise, an indexing error will occur.</font>
+<font color="blue">end </font>s;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.zeta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.zeta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.zeta</h2>
+<b>Continuity (&zeta;) as a function of temperature</b>
+
+<h3>Information</h3>
+
+<p>Continuity is a property is defined in <a href="FCSys.html#FCSys">FCSys</a>
+  resistivity to axial compression or material storage during transport.</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Continuity</a></td><td>zeta</td><td>Continuity [L.M/(N.T)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> zeta <font color="darkgreen">
+  &quot;Continuity (&zeta;) as a function of temperature&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Q.Continuity</a> zeta <font color="darkgreen">&quot;Continuity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  zeta := m*<font color="red">omega</font>(T);
+
+<font color="blue">end </font>zeta;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.eta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.eta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.eta</h2>
+<b>Fluidity (&eta;) as a function of temperature</b>
+
+<h3>Information</h3>
+
+<p>Fluidity is defined as the reciprocal of dynamic viscosity
+  (see <a href="http://en.wikipedia.org/wiki/Viscosity#Fluidity">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
+
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.  According to Present
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>], this independence very accurately
+  matches the measured fluidity of gases.  However, the fluidity varies by species and
+  generally falls more rapidly with temperature than indicated
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>, p.&nbsp;41].</p>
+
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>eta</td><td>Fluidity [L.T/M]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> eta <font color="darkgreen">
+  &quot;Fluidity (&eta;) as a function of temperature&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="darkgreen">// Note:  Specific volume isn&#39;t used here but is included for generality.</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> eta <font color="darkgreen">&quot;Fluidity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  eta := alpha/(m*<font color="red">omega</font>(T));
+<font color="blue">end </font>eta;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.theta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.theta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.theta</h2>
+<b>Thermal resistivity (&theta;) as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Thermal resistivity [L.T/N]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> theta <font color="darkgreen">
+  &quot;Thermal resistivity (&theta;) as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta <font color="darkgreen">&quot;Thermal resistivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  theta := alpha/(<font color="red">c_v</font>(T, <font color="red">p_Tv</font>(T, v))*<font color="red">omega</font>(T));
+<font color="blue">end </font>theta;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.tauprime" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.tauprime"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.tauprime</h2>
+<b>Phase change interval (&tau;&prime;) as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
+
+  <p>Please see [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References">Davies2013</a>, Ch. 3] for a derivation
+  of the rate of phase change from kinetic theory.</p>
+
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tauprime</td><td>Phase change interval [T]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> tauprime <font color="darkgreen">
+  &quot;Phase change interval (&tau;&prime;) as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tauprime <font color="darkgreen">&quot;Phase change interval&quot;</font>;
+
+<font color="blue">algorithm </font>
+  tauprime := v/(alpha*<font color="red">omega</font>(T));
+<font color="blue">end </font>tauprime;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.mu"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.mu</h2>
+<b>Mobility (&mu;) as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Mobility [N.T/M]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> mu <font color="darkgreen">
+  &quot;Mobility (&mu;) as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu <font color="darkgreen">&quot;Mobility&quot;</font>;
+
+<font color="blue">algorithm </font>
+  mu := v/(m*alpha*<font color="red">omega</font>(T));
+<font color="blue">end </font>mu;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.Bas8ea8b9a35c2b2518omegaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.nu" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.Characteristic.nu"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.nu</h2>
+<b>Thermal independity (&nu;) as a function of temperature and specific volume</b>
+
+<h3>Information</h3>
+
+<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a
+temperature difference.</p>
+
+  <p>This function is based on the kinetic theory of gases under the following assumptions
+  [<a href="FCSys_UsersGuide_References.html#FCSys.UsersGuide.References.Present1958">Present1958</a>]:</p>
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the
+    "billiard-ball"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions, particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
+  </ol>
+  <p>Also, it is assumed that the Einstein relation applies.</p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/p0</td><td>Specific volume [L3/N]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Thermal independity [T]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">replaceable </font><font color="blue">function</font> nu <font color="darkgreen">
+  &quot;Thermal independity (&nu;) as a function of temperature and specific volume&quot;</font>
+
+  <font color="blue">extends </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/p0 <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu <font color="darkgreen">&quot;Thermal independity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  nu := v/(<font color="red">c_p</font>(T, <font color="red">p_Tv</font>(T, v))*alpha*<font color="red">omega</font>(T));
+<font color="blue">end </font>nu;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">FCSys.Characteristics.BaseClasses.Characteristic.h</a>.dh0_i</h2>
+
+<b>Derivative of h0_i</b>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td>Integer</td><td>i</td><td>&nbsp;</td><td>Index of the temperature interval</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature [L2.M/(N.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>dh0</td><td>Derivative of specific enthalpy at reference pressure [L2.M/(N.T2)]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> dh0_i <font color="darkgreen">&quot;Derivative of h0_i&quot;</font>
+  <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate h().</font>
+  <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial">FCSys.Utilities.Polynomial</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> dh0 <font color="darkgreen">
+    &quot;Derivative of specific enthalpy at reference pressure&quot;</font>;
+
+<font color="blue">algorithm </font>
+  dh0 := <font color="red">Polynomial.f</font>(
+    T,
+    b_c[i, :],
+    n_c)*dT;
+
+<font color="blue">end </font>dh0_i;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.s.ds0_i"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">FCSys.Characteristics.BaseClasses.Characteristic.s</a>.ds0_i</h2>
+
+<b>Derivative of s0_i</b>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td>Integer</td><td>i</td><td>&nbsp;</td><td>Index of the temperature interval</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature [L2.M/(N.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>ds0</td><td>Derivative of specific entropy at given temperature and reference pressure [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> ds0_i <font color="darkgreen">&quot;Derivative of s0_i&quot;</font>
+  <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate s().</font>
+  <font color="blue">import </font><a href="FCSys_Utilities_Polynomial.html#FCSys.Utilities.Polynomial.f">FCSys.Utilities.Polynomial.f</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> ds0 <font color="darkgreen">
+    &quot;Derivative of specific entropy at given temperature and reference pressure&quot;</font>;
+
+<font color="blue">algorithm </font>
+  ds0 := <font color="red">f</font>(
+    T,
+    b_c[i, :],
+    n_c - 1)*dT;
+<font color="blue">end </font>ds0_i;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.s.ds_resid"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">FCSys.Characteristics.BaseClasses.Characteristic.s</a>.ds_resid</h2>
+
+<b>Derivative of s_resid</b>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Pressure [M/(L.T2)]</td></tr>
+<tr><td>Integer</td><td>rowLimits[2]</td><td>{1,size(b_v, 1)}</td><td>Beginning and ending indices of rows of b_v to be included</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature [L2.M/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>&nbsp;</td><td>Derivative of pressure [M/(L.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>ds_resid</td><td>Derivative of integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows) [1]</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> ds_resid <font color="darkgreen">&quot;Derivative of s_resid&quot;</font>
+  <font color="darkgreen">// Note:  This function is necessary for Dymola 7.4 to differentiate s().</font>
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font>Integer rowLimits[2]={1,<font color="red">size</font>(b_v, 1)} <font color="darkgreen">
+    &quot;Beginning and ending indices of rows of b_v to be included&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> dp <font color="darkgreen">&quot;Derivative of pressure&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> ds_resid <font color="darkgreen">
+    &quot;Derivative of integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)&quot;</font>;
+
+<font color="blue">algorithm </font>
+  ds_resid := <font color="red">Polynomial.dF</font>(
+    p,
+    {<font color="red">Polynomial.df</font>(
+      T,
+      b_v[i, :] .* {n_v[1] - n_v[2] + i - j <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)},
+      n_v[2] - n_v[1] - i,
+      dT) <font color="blue">for </font>i<font color="blue"> in </font>rowLimits[1]:rowLimits[2]},
+    n_v[1] + rowLimits[1] - 1,
+    dp);
+<font color="blue">end </font>ds_resid;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:24 2014.
+</div>
+</body>
+</html>

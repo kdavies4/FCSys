@@ -35,7 +35,7 @@ Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once
 // ------------
 // Load the FCSys package.
 Advanced.CheckUnits = false "Check unit consistency of equations";
-openModel("FCSys 0.2/package.mo");
+openModel("FCSys 0.2.4/package.mo");
 cd("..");
 
 // Establish the unit system.

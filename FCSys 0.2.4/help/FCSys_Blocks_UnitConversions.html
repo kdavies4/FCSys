@@ -1,0 +1,315 @@
+<html>
+<head>
+<title>FCSys.Blocks.UnitConversions</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Blocks to convert to or from quantities expressed in units">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../Resources/Documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../Resources/Documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../Resources/Documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Phases.html">Phases</a></li>
+    <li><a href="FCSys_Species.html">Species</a></li>
+    <li><a href="FCSys_Chemistry.html">Chemistry</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_Utilities.html">Utilities</a></li>
+    <li><a href="FCSys_Icons.html">Icons</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<h2><a name="FCSys.Blocks.UnitConversions"></a><a href="FCSys_Blocks.html#FCSys.Blocks">FCSys.Blocks</a>.UnitConversions</h2>
+
+<b>Blocks to convert to or from quantities expressed in units</b>
+
+<h3>Information</h3>
+
+<p>This package contains blocks to convert quantities from the unit system in
+  <a href="FCSys.html#FCSys">FCSys</a> (see <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>)
+  to quantities expressed in units or vice versa.
+  The <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.UnitConversion">UnitConversion</a> block
+  has a parameter that configures it
+  to convert to or from any of the supported units.
+  All other blocks convert to or from a predefined unit.</p>
+
+<p>Blocks are only included for
+  units that involve offsets or other functions besides simple scaling.
+  For conversions that require just a scaling factor, it is best to use
+the <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a>
+block with the appropriate factors from <a href="FCSys_Units.html#FCSys.Units">Units</a> package
+(<code>U</code>).  For example, to convert from potential in volts use:<br>
+<code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code><br>
+To convert to current in amperes use:<br>
+<code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
+
+Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.From_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">From_degC</a>
+</td><td>Convert from temperature in degree Celsius to thermodynamic temperature</td></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.To_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.To_degC">To_degC</a>
+</td><td>Convert from thermodynamic temperature to temperature in degree Celsius</td></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.From_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">From_kPag</a>
+</td><td>Convert from gauge pressure in kilopascals to absolute pressure</td></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.To_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.To_kPag">To_kPag</a>
+</td><td>Convert absolute pressure to gauge pressure in kilopascals</td></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.UnitConversion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.UnitConversion">UnitConversion</a>
+</td><td>Generic block to convert to or from quantities expressed in units</td></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.From_degCS.png" alt="FCSys.Blocks.UnitConversions.Partial" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>
+</td><td>Base block to convert to or from quantities expressed in units</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.From_degC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.From_degC"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.From_degC</h2>
+<b>Convert from temperature in degree Celsius to thermodynamic temperature</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.From_degC">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+    <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+
+Extends from <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a> (Base block to convert to or from quantities expressed in units).
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">block</font> From_degC <font color="darkgreen">
+  &quot;Convert from temperature in degree Celsius to thermodynamic temperature&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>(y(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;U.K&quot;));
+
+<font color="blue">equation </font>
+  y = <font color="red">U.from_degC</font>(u);
+<font color="blue">end </font>From_degC;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.To_degC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.To_degC"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.To_degC</h2>
+<b>Convert from thermodynamic temperature to temperature in degree Celsius</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.To_degC">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+    <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+
+Extends from <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a> (Base block to convert to or from quantities expressed in units).
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">block</font> To_degC <font color="darkgreen">
+  &quot;Convert from thermodynamic temperature to temperature in degree Celsius&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>(u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;U.K&quot;));
+
+<font color="blue">equation </font>
+  y = <font color="red">U.to_degC</font>(u);
+<font color="blue">end </font>To_degC;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.From_kPag" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.From_kPag"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.From_kPag</h2>
+<b>Convert from gauge pressure in kilopascals to absolute pressure</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.From_kPag">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+    <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+
+Extends from <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a> (Base block to convert to or from quantities expressed in units).
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">block</font> From_kPag <font color="darkgreen">
+  &quot;Convert from gauge pressure in kilopascals to absolute pressure&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>(y(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;));
+
+<font color="blue">equation </font>
+  y = <font color="red">U.from_kPag</font>(u);
+<font color="blue">end </font>From_kPag;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.To_kPag" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.To_kPag"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.To_kPag</h2>
+<b>Convert absolute pressure to gauge pressure in kilopascals</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.To_kPag">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+    <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+
+Extends from <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a> (Base block to convert to or from quantities expressed in units).
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">block</font> To_kPag <font color="darkgreen">
+  &quot;Convert absolute pressure to gauge pressure in kilopascals&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>(u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;));
+
+<font color="blue">equation </font>
+  y = <font color="red">U.to_kPag</font>(u);
+<font color="blue">end </font>To_kPag;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.UnitConversion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.UnitConversion"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.UnitConversion</h2>
+<b>Generic block to convert to or from quantities expressed in units</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.UnitConversion">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+    <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+
+Extends from <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a> (Base block to convert to or from quantities expressed in units).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable function f</td><td>U.from_degC</td><td>Conversion function</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
+<tr><TD colspan="2">replaceable function f</td><td>Conversion function</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">block</font> UnitConversion <font color="darkgreen">
+  &quot;Generic block to convert to or from quantities expressed in units&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.Partial">Partial</a>;
+
+  <font color="blue">replaceable </font><font color="blue">function</font> f = <a href="FCSys_Units.html#FCSys.Units.from_degC">U.from_degC</a> <font color="blue">constrainedby </font>
+    Modelica.SIunits.Conversions.ConversionIcon <font color="darkgreen">&quot;Conversion function&quot;</font>;
+
+<font color="blue">equation </font>
+  y = <font color="red">f</font>(u);
+<font color="blue">end </font>UnitConversion;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.From_degCI.png" alt="FCSys.Blocks.UnitConversions.Partial" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.Partial"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.Partial</h2>
+<b>Base block to convert to or from quantities expressed in units</b>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.Partial">
+
+<h3>Information</h3>
+
+<p>Please see the documentation of the
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
+Extends from <a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>.
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
+</table>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">block</font> Partial <font color="darkgreen">
+  &quot;Base block to convert to or from quantities expressed in units&quot;</font>
+  <font color="darkgreen">// extends FCSys.Icons.Blocks.ContinuousShort;</font>
+  <font color="blue">extends </font><a href="FCSys_Icons_Names.html#FCSys.Icons.Names.Top2">FCSys.Icons.Names.Top2</a>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> u <font color="darkgreen">&quot;Real input for value in source representation&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">Connectors.RealOutput</a> y <font color="darkgreen">&quot;Real output for quantity in desired representation&quot;</font>;
+
+<font color="blue">end </font>Partial;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:49:41 2014.
+</div>
+</body>
+</html>
