@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Inter</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;Conditions for an &lt;a href=\&quot;modelica://FCSys.Connectors.Intra\&quot;&gt;Intra&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.Inter\&quot;&gt;Inter&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -170,7 +174,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
     <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
 
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Y-axis translational</font>
   <font color="blue">replaceable </font><font color="blue">function</font> transYSpec = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.force">Translational.force</a> <font color="blue">constrainedby </font>
     Translational.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -179,7 +183,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> transYSet <font color="blue">if </font>inclTransY<font color="blue"> and </font>internalTransY
     <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Z-axis translational</font>
   <font color="blue">replaceable </font><font color="blue">function</font> transZSpec = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.force">Translational.force</a> <font color="blue">constrainedby </font>
     Translational.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -188,7 +192,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> transZSet <font color="blue">if </font>inclTransZ<font color="blue"> and </font>internalTransZ
     <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Thermal</font>
   <font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Inter_ThermalDiffusive.html#FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.heatRate">ThermalDiffusive.heatRate</a> <font color="blue">constrainedby </font>
     ThermalDiffusive.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -203,15 +207,15 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.Single"
   <font color="darkgreen">// X-axis translational</font>
   <font color="blue">replaceable </font><font color="blue">function</font> transXMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;X-axis translational quantity&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Y-axis translational</font>
   <font color="blue">replaceable </font><font color="blue">function</font> transYMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;Y-axis translational quantity&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Z-axis translational</font>
   <font color="blue">replaceable </font><font color="blue">function</font> transZMeas = <a href="FCSys_Conditions_ByConnector_Inter_Translational.html#FCSys.Conditions.ByConnector.Inter.Translational.velocity">Conditions.ByConnector.Inter.Translational.velocity</a>
     <font color="blue">constrainedby </font>Translational.Partial <font color="darkgreen">&quot;Z-axis translational quantity&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Thermal</font>
   <font color="blue">replaceable </font><font color="blue">function</font> thermalMeas = <a href="FCSys_Conditions_ByConnector_Inter_ThermalDiffusive.html#FCSys.Conditions.ByConnector.Inter.ThermalDiffusive.temperature">Conditions.ByConnector.Inter.ThermalDiffusive.temperature</a>
     <font color="blue">constrainedby </font>ThermalDiffusive.Partial <font color="darkgreen">&quot;Thermal quantity&quot;</font>;
@@ -423,6 +427,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Inter.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:50:02 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:05:42 2014.
 </div>
 </span></body></html>

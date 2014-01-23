@@ -3,7 +3,7 @@
 <title>FCSys.Quantities</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Types to represent physical values">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -138,6 +142,8 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 </td><td>Rate of current</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Diffusivity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Diffusivity">Diffusivity</a>
 </td><td>&nbsp;</td></tr>
+<tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.DiffusivityMassSpecific" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">DiffusivityMassSpecific</a>
+</td><td>Product of diffusivity and specific mass</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Energy" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Energy</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Fluidity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a>
@@ -283,7 +289,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <a name="FCSys.Quantities.CurrentAreicAbsolute"></a><pre><font color="blue">type</font> CurrentAreicAbsolute = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(L2.T)&quot;, min=0) <font color="darkgreen">
   &quot;Absolute areic current&quot;</font>;</pre>
 <a name="FCSys.Quantities.CurrentRate"></a><pre><font color="blue">type</font> CurrentRate = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T2&quot;) <font color="darkgreen">&quot;Rate of current&quot;</font>;</pre>
-<a name="FCSys.Quantities.Diffusivity"></a><pre><font color="blue">type</font> Diffusivity = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L2/T&quot;, min=0);</pre>
+<a name="FCSys.Quantities.Diffusivity"></a><pre><font color="blue">type</font> Diffusivity = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L2.M/(N.T)&quot;, min=0);</pre>
+<a name="FCSys.Quantities.DiffusivityMassSpecific"></a><pre><font color="blue">type</font> DiffusivityMassSpecific = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L2.M/(N.T)&quot;, min=0) <font color="darkgreen">
+  &quot;Product of diffusivity and specific mass&quot;</font>;</pre>
 <a name="FCSys.Quantities.Energy"></a><pre><font color="blue">type</font> Energy = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L2.M/T2&quot;);</pre>
 <a name="FCSys.Quantities.Fluidity"></a><pre><font color="blue">type</font> Fluidity = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L.T/M&quot;, min=0);</pre>
 <a name="FCSys.Quantities.Force"></a><pre><font color="blue">type</font> Force = <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Icons.html#Modelica.Icons.TypeReal">TypeReal</a> (<font color="blue">final </font>unit=&quot;L.M/T2&quot;);</pre>
@@ -367,6 +375,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:25 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:07:04 2014.
 </div>
 </span></body></html>

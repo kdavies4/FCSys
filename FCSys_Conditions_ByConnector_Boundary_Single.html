@@ -3,7 +3,7 @@
 <title>FCSys.Conditions.ByConnector.Boundary.Single</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="&lt;html&gt;Conditions for a single &lt;a href=\&quot;modelica://FCSys.Connectors.Boundary\&quot;&gt;Boundary&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -157,7 +161,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> materialSet <font color="blue">if </font>internalMaterial <font color="blue">
     constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
     &quot;Source of internal specification&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// 1st transverse</font>
   <font color="blue">replaceable </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">Translational.velocity</a> <font color="blue">constrainedby </font>
     Translational.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -165,7 +169,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> afterSet <font color="blue">if </font>internalAfter <font color="blue">constrainedby </font>
     Modelica.Blocks.Interfaces.SO <font color="darkgreen">&quot;Source of internal specification&quot;</font>;
 
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// 2nd transverse</font>
   <font color="blue">replaceable </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.velocity">Translational.velocity</a> <font color="blue">constrainedby </font>
     Translational.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -174,7 +178,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
   <font color="blue">replaceable </font><a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> beforeSet <font color="blue">if </font>internalBefore <font color="blue">constrainedby </font>
     Modelica.Blocks.Interfaces.SO <font color="darkgreen">&quot;Source of internal specification&quot;</font>;
 
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Thermal</font>
   <font color="blue">replaceable </font><font color="blue">function</font> thermalSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Thermal.html#FCSys.Conditions.ByConnector.Boundary.Single.Thermal.temperature">Thermal.temperature</a> <font color="blue">constrainedby </font>
     Thermal.Partial <font color="darkgreen">&quot;Quantity&quot;</font>;
@@ -212,6 +216,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurements&quot;</font>;
 
   <font color="darkgreen">// Inputs</font>
+
 <font color="blue">protected </font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">Connectors.RealInputInternal</a> u_material <font color="blue">if </font><font color="blue">not </font>internalMaterial <font color="darkgreen">
     &quot;Material specification&quot;</font>;
@@ -244,6 +249,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
     &quot;Internal, working value of second transverse specification&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> _u_thermal <font color="darkgreen">
     &quot;Internal, working value of thermal specification&quot;</font>;
+
 <font color="blue">public </font>
   <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Library/Modelica 3.2.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression">Sources.RealExpression</a> materialOut(y=<font color="red">materialMeas</font>(
         boundary.p,
@@ -275,6 +281,7 @@ Extends from <a href="FCSys_Icons_Conditions.html#FCSys.Icons.Conditions.SingleS
         boundary.mPhidot,
         boundary.T,
         boundary.Qdot)) <font color="darkgreen">&quot;Generate the thermal output&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="darkgreen">// Aliases</font>
   p = boundary.p;
@@ -421,6 +428,6 @@ Extends from <a href="FCSys_Conditions_ByConnector_Boundary_Single.html#FCSys.Co
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:50:00 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:05:41 2014.
 </div>
 </span></body></html>

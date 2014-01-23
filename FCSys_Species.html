@@ -3,7 +3,7 @@
 <title>FCSys.Species</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dynamic models of chemical species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -114,7 +118,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Fluid">Fluid</a> (Base mo
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>sigma*v</td><td>Mobility [N.T/M]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Continuity</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>Continuity [L.M/(N.T)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">DiffusivityMassSpecific</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>** [L2.M/(N.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>eta</td><td>Data.eta(T, v)</td><td>Fluidity [L.T/M]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity [L.T/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ConductivityElectrical">ConductivityElectrical</a></td><td>sigma</td><td>Data.mu()/Data.v_Tp()</td><td>Electrical conductivity [N2.T/(L3.M)]</td></tr>
@@ -303,7 +307,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, v)</td><td>Mobility [N.T/M]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, v)</td><td>Thermal independity [T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Continuity</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>Continuity [L.M/(N.T)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">DiffusivityMassSpecific</a></td><td>zeta</td><td>Data.zeta(T, v)</td><td>** [L2.M/(N.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>eta</td><td>Data.eta(T, v)</td><td>Fluidity [L.T/M]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, v)</td><td>Thermal resistivity [L.T/N]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Independence factors</td></tr>
@@ -392,7 +396,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
 
   <font color="darkgreen">// Material properties</font>
   <font color="blue">parameter </font>Integer n_chem=0 <font color="darkgreen">&quot;Number of reaction and phase change processes&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Continuity">Q.Continuity</a> zeta(nominal=1e-3*U.N/U.A) = <font color="red">Data.zeta</font>(T, v) <font color="darkgreen">&quot;Continuity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.DiffusivityMassSpecific">Q.DiffusivityMassSpecific</a> zeta(nominal=1e-3*U.N/U.A) = <font color="red">Data.zeta</font>(T, v) <font color="darkgreen">&quot;**&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> eta(nominal=1e5/(U.Pa*U.s)) = <font color="red">Data.eta</font>(T, v) <font color="darkgreen">&quot;Fluidity&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta(nominal=10*U.m*U.K/U.W) = <font color="red">Data.theta</font>(T, v) <font color="darkgreen">
     &quot;Thermal resistivity&quot;</font>;
@@ -419,12 +423,12 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="blue">parameter </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsTrans">ConsTrans</a> consTransZ=ConsTrans.dynamic <font color="darkgreen">
     &quot;Z-axis translational momentum&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Species_Enumerations.html#FCSys.Species.Enumerations.ConsThermo">ConsThermo</a> consEnergy=ConsThermo.dynamic <font color="darkgreen">&quot;Energy&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Upstream discretization</font>
   <font color="blue">parameter </font>Boolean upstreamX=true <font color="darkgreen">&quot;X&quot;</font>;
   <font color="blue">parameter </font>Boolean upstreamY=true <font color="darkgreen">&quot;Y&quot;</font>;
   <font color="blue">parameter </font>Boolean upstreamZ=true <font color="darkgreen">&quot;Z&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Flow conditions</font>
   <font color="blue">parameter </font>Boolean approxVelocity=true <font color="darkgreen">
     &quot;Calculate normal boundary velocities assuming uniform density&quot;</font>;
@@ -488,7 +492,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
      = (<font color="red">Data.h</font>(boundaries.T, boundaries.p) + Data.m*phi_boundaries .^ 2/2) .*
     boundaries.Ndot <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Flow rates of enthalpy + kinetic energy into the boundaries&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Potentials</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_boundaries[n_trans, Side](<font color="blue">each </font>stateSelect=StateSelect.never)
      = <font color="red">Data.g</font>(boundaries.T, boundaries.p) <font color="blue">if </font>environment.analysis<font color="blue"> and </font><font color="blue">not </font>Data.isCompressible
@@ -501,7 +505,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="darkgreen">// term, then the Gibbs energy will involve a logarithm of pressure.</font>
   <font color="darkgreen">// Therefore, to prevent errors, these variables are included only for</font>
   <font color="darkgreen">// incompressible species.</font>
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Time constants</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_NT[n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
@@ -516,7 +520,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     <font color="blue">each </font>stateSelect=StateSelect.never,
     <font color="blue">each </font>start=U.s) = (N*c_v*theta/(2*Nu_Q))*kL ./ Aprime <font color="blue">if </font>environment.analysis
     <font color="darkgreen">&quot;Time constants for thermal transport&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Peclet numbers</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_N[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = tau_NT .*
     I/N <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Material Peclet numbers&quot;</font>;
@@ -527,7 +531,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   <font color="darkgreen">// Note:  These Peclet numbers are calculated at the center of the</font>
   <font color="darkgreen">// subregion (for simplicity), but the Peclet numbers used in the transport</font>
   <font color="darkgreen">// equations are at each boundary.</font>
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Bulk flow rates</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mphiI[n_trans, n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
     outerProduct</font>(I, Data.m*phi) <font color="blue">if </font>environment.analysis <font color="darkgreen">
@@ -536,7 +540,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     if </font>environment.analysis <font color="darkgreen">&quot;Bulk volumetric flow rate&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> hI[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = h*I <font color="blue">if </font>
     environment.analysis <font color="darkgreen">&quot;Bulk enthalpy flow rate&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Translational momentum balance</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> Ma[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = M*(<font color="red">der</font>(phi)/
     U.s + environment.a[cartTrans]) + N*Data.z*environment.E[cartTrans] <font color="blue">if </font>
@@ -556,7 +560,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     if </font>i == j<font color="blue"> then </font>{0,0}<font color="blue"> else </font>boundaries[j, :].mPhidot[<font color="red">cartWrap</font>(cartTrans[i] -
     cartTrans[j])]) <font color="blue">for </font>j<font color="blue"> in </font>1:n_trans) <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans} <font color="blue">if </font>environment.analysis
     <font color="darkgreen">&quot;Shear force from other subregions (diffusive transport)&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Energy balance</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Ndere(stateSelect=StateSelect.never) = (N*T*<font color="red">der</font>(<font color="red">Data.s</font>(T, p)) +
     M*phi*<font color="red">der</font>(phi))/U.s <font color="blue">if </font>environment.analysis <font color="darkgreen">
@@ -592,6 +596,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     &quot;Connector for reactions and phase change&quot;</font>;
 
   <font color="darkgreen">// Geometric parameters</font>
+
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> Aprime[n_trans] <font color="darkgreen">&quot;Effective cross-sectional area&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclRot[3] <font color="darkgreen">
@@ -729,10 +734,17 @@ Choose any condition besides none.&quot;);
         i]*phi_boundaries[i, side] <font color="darkgreen">&quot;Current vs. velocity at the boundaries&quot;</font>;
     <font color="blue">end for</font>;
   <font color="blue">end for</font>;
-  minusDeltaf = Data.m*phi .* I + zeta*<font color="red">Sigma</font>(boundaries.Ndot);
+  minusDeltaf = Data.m*phi .* I;
 
   <font color="darkgreen">// Assumptions</font>
   2*I = -<font color="red">Delta</font>(boundaries.Ndot) <font color="darkgreen">&quot;Linear current profile (assumption #1)&quot;</font>;
+
+  <font color="darkgreen">// Equation of state</font>
+  <font color="blue">if </font>Data.isCompressible<font color="blue"> then</font>
+    p = <font color="red">Data.p_Tv</font>(T, v) + zeta*<font color="red">der</font>(1/v)/U.s;
+  <font color="blue">else</font>
+    v = <font color="red">Data.v_Tp</font>(T, p - zeta*<font color="red">der</font>(1/v)/U.s);
+  <font color="blue">end if</font>;
 
   <font color="darkgreen">// Properties upon outflow due to reaction and phase change</font>
   chemical.phi = <font color="red">fill</font>(phi, n_chem);
@@ -741,7 +753,8 @@ Choose any condition besides none.&quot;);
   <font color="darkgreen">// Material exchange</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_chem<font color="blue"> loop</font>
     <font color="blue">if </font>tauprime[i] &gt; Modelica.Constants.small<font color="blue"> then</font>
-      tauprime[i]*chemical[i].Ndot = (N + N0)*<font color="red">exp</font>((chemical[i].g - g)/T) - N;
+      tauprime[i]*(chemical[i].Ndot - 0.001*<font color="red">der</font>(chemical[i].Ndot)/U.s) = (N +
+        N0)*<font color="red">exp</font>((chemical[i].g - g)/T) - N;
     <font color="blue">else</font>
       chemical[i].g = g;
     <font color="blue">end if</font>;
@@ -1016,6 +1029,13 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
   phi = <font color="red">zeros</font>(n_trans) <font color="darkgreen">&quot;Zero velocity&quot;</font>;
   V = epsilon*<font color="red">product</font>(L) <font color="darkgreen">&quot;Prescribed volume&quot;</font>;
 
+  <font color="darkgreen">// Equation of state</font>
+  <font color="blue">if </font>Data.isCompressible<font color="blue"> then</font>
+    p = <font color="red">Data.p_Tv</font>(T, v);
+  <font color="blue">else</font>
+    v = <font color="red">Data.v_Tp</font>(T, p);
+  <font color="blue">end if</font>;
+
   <font color="darkgreen">// Thermal transport (conduction)</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_trans<font color="blue"> loop</font>
     <font color="blue">for </font>side<font color="blue"> in </font>Side<font color="blue"> loop</font>
@@ -1178,8 +1198,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     subregion.  The <code>start</code> value for particle number (<i>N</i><sub>IC</sub>)
     is related to it via the material characteristics and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
-    it may be necessary to do so before translating the model.</li>
-</p>
+    it may be necessary to do so before translating the model.</li></p>
 
     <p>In the <code>boundaries</code> connector array, the transverse translational flow (<i>m</i>&Phi;dot) is only the
     force due to diffusion.  Translational advection is calculated from the current and the velocity.
@@ -1341,7 +1360,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     Data.c_v</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isochoric specific heat capacity&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> beta(stateSelect=StateSelect.never) = <font color="red">Data.beta</font>(T,
     p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isothermal compressibility&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Time constants</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> tau_PhiE_intra[n_intra, n_trans](
     <font color="blue">each </font>stateSelect=StateSelect.never,
@@ -1363,13 +1382,13 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     &quot;Time constants for thermal inter-phase exchange&quot;</font>;
   <font color="darkgreen">// Note:  The structure of the problem should not change if these auxiliary</font>
   <font color="darkgreen">// variables are included (hence, StateSelect.never).</font>
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Translational momentum balance</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_DE[n_trans](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">sum</font>(intra[
     i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_intra) + <font color="red">sum</font>(inter[i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_inter) <font color="blue">
     if </font>environment.analysis <font color="darkgreen">
     &quot;Friction from other configurations (diffusive exchange)&quot;</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// Energy balance</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Edot_DE(stateSelect=StateSelect.never) = <font color="red">sum</font>(intra[i].phi*
     intra[i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_intra) + <font color="red">sum</font>(inter[i].phi*inter[i].mPhidot <font color="blue">
@@ -1389,6 +1408,7 @@ Extends from <a href="FCSys_Species.html#FCSys.Species.Species">Species</a> (Bas
     &quot;Connector for additivity of pressure&quot;</font>;
 
   <font color="darkgreen">// Geometric parameters</font>
+
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V <font color="darkgreen">&quot;Volume of the phase (not of the subregion)&quot;</font>;
   <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Lengths of the subregion&quot;</font>;
@@ -1417,11 +1437,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   M = Data.m*N;
 
   <font color="darkgreen">// Thermodynamic correlations</font>
-  <font color="blue">if </font>Data.isCompressible<font color="blue"> then</font>
-    p = <font color="red">Data.p_Tv</font>(T, v);
-  <font color="blue">else</font>
-    v = <font color="red">Data.v_Tp</font>(T, p);
-  <font color="blue">end if</font>;
   h = <font color="red">Data.h</font>(T, p);
   s = <font color="red">Data.s</font>(T, p);
 
@@ -1433,7 +1448,7 @@ Check that the volumes of the other phases are set properly.&quot;);
       &quot;Translational&quot;</font>;
     k_intra_Q[i]*nu*intra[i].Qdot = N*(intra[i].T - T) <font color="darkgreen">&quot;Thermal&quot;</font>;
   <font color="blue">end for</font>;
-  <font color="darkgreen">//</font>
+  <font color="darkgreen">// </font>
   <font color="darkgreen">// With other phases</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_inter<font color="blue"> loop</font>
     k_inter_Phi[i, :]*mu .* inter[i].mPhidot = N*(inter[i].phi - phi) <font color="darkgreen">
@@ -1448,6 +1463,6 @@ Check that the volumes of the other phases are set properly.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:16 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:06:56 2014.
 </div>
 </span></body></html>

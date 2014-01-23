@@ -3,7 +3,7 @@
 <title>FCSys.Regions.Examples</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -190,9 +194,11 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <font color="blue">protected </font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> zI(unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Electrical current&quot;</font>;
+
 <font color="blue">public </font>
   <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestConditions">Assemblies.Cells.Examples.TestConditions</a> testConditions(I_ca=2*zI, I_an=1.5*
         zI) <font color="darkgreen">&quot;Test conditions&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(anBC.boundary, anFP.xNegative);
 
@@ -254,24 +260,24 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       &#39;e-&#39;(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
 
     <font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2O(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>),
 
       H2(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
 
 <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
@@ -351,6 +357,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     duration=20,
     height=100*U.A,
     offset=U.mA);
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(anBC.boundary, anCL.xNegative);
 
@@ -419,6 +426,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     duration=20,
     height=100*U.A,
     offset=U.mA);
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(anBC.boundary, PEM.xNegative);
 
@@ -572,21 +580,21 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       inclO2=true,
       H2O(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>),
 
       N2(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>),
 
       O2(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
 
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
@@ -595,9 +603,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
       &#39;e-&#39;(materialSet(y=-currentSet.y), thermalSet(y=environment.T))),
     <font color="blue">each </font>liquid(inclH2O=true, H2O(
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
 
 <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
@@ -822,27 +830,27 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
         materialSet(y=environment.p_H2O),
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>),
 
       N2(
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p*(1 - environment.psi_O2_dry)),
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>),
 
       O2(
         <font color="blue">redeclare </font><font color="blue">function</font> materialSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Material.html#FCSys.Conditions.ByConnector.Boundary.Single.Material.pressure">Conditions.ByConnector.Boundary.Single.Material.pressure</a>,
 
         materialSet(y=environment.p_O2),
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)),
 
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
@@ -856,9 +864,9 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
     <font color="blue">each </font>liquid(inclH2O=true,H2O(
         materialSet(y=0),
         thermalSet(y=environment.T),
-        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>,
+        <font color="blue">redeclare </font><font color="blue">function</font> afterSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>,
 
-        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">FCSys.Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
+        <font color="blue">redeclare </font><font color="blue">function</font> beforeSpec = <a href="FCSys_Conditions_ByConnector_Boundary_Single_Translational.html#FCSys.Conditions.ByConnector.Boundary.Single.Translational.force">Conditions.ByConnector.Boundary.Single.Translational.force</a>)));
 
 <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment(
     analysis=true,
@@ -1002,11 +1010,12 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 
 <font color="blue">protected </font>
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> zI(unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Electrical current&quot;</font>;
+
 <font color="blue">public </font>
   <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestConditions">Assemblies.Cells.Examples.TestConditions</a> testConditions(I_ca=2*zI, I_an=1.5*
         zI) <font color="darkgreen">&quot;Test conditions&quot;</font>;
-<font color="blue">equation </font>
 
+<font color="blue">equation </font>
   <font color="red">connect</font>(caSource.boundary, caFP.yNegative);
   <font color="red">connect</font>(caSink.boundary, caFP.yPositive);
   <font color="red">connect</font>(currentSet.y, zI);
@@ -1176,6 +1185,7 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
 <font color="blue">public </font>
   <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.TestConditions">Assemblies.Cells.Examples.TestConditions</a> testConditions(I_ca=2*zI, I_an=1.5*
         zI) <font color="darkgreen">&quot;Test conditions&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="red">connect</font>(anCL.xPositive, PEM.xNegative);
   <font color="red">connect</font>(PEM.xPositive, caCL.xNegative);
@@ -1197,6 +1207,6 @@ Extends from <a href="file:///C:/Program Files (x86)/Dymola 2014/Modelica/Librar
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:50:25 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:06:05 2014.
 </div>
 </span></body></html>

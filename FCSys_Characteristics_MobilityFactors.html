@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.MobilityFactors</title>
 <meta name="title" content="Modelica fuel cell library">
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
-<meta name="date" content="2014-1-22">
+<meta name="date" content="2014-1-23">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Mobility factors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
@@ -14,9 +14,13 @@
 <span itemscope itemtype="http://schema.org/SoftwareApplication">
 <div class="sidebar">
   <div class="sidebarwrapper">
-  <a href="index.html"><p itemprop="name" class="sidebar-title">FCSys</p></a>
-  <p class="logo"><a href="index.html">
-    <img itemprop="image" src="images/icon.gif" class="logo" alt="Logo" width=150>
+  <a href="index.html">
+
+<h2>FCSys</h2>
+
+</a>
+  <p align=center><a href="index.html">
+    <img src="images/icon.gif" alt="Logo" width=150>
   </a></p>
 
 <h3>Table of Contents</h3>
@@ -41,7 +45,7 @@
 
   <h3>Download</h3>
     <ul>
-      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.4.zip">v0.2.4</a> (2014-01-22)</span></li>
+      <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/v0.2.5.zip">v0.2.5</a> (2014-01-23)</span></li>
     </ul>
   </div>
 </div>
@@ -96,8 +100,8 @@ Extends from <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCS
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_A</td><td>298.15*U.K/A.p0</td><td>Specific volume of the 1<sup>st</sup> species [L3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_B</td><td>298.15*U.K/B.p0</td><td>Specific volume of the 2<sup>nd</sup> species [L3/N]</td></tr>
 <tr><TD colspan="2">replaceable function pDstar</td><td>BaseClasses.pDstar_polar</td><td>Reduced pressure-diffusivity product</td></tr>
-<tr><TD colspan="2">replaceable package A</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
-<tr><TD colspan="2">replaceable package B</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>H2.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>H2O.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_crit</td><td>sqrt(FluidData.H2.criticalTe&hellip;</td><td>Geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>sqrt(FluidData.H2.criticalPr&hellip;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
 </table>
@@ -154,8 +158,8 @@ Extends from <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCS
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_A</td><td>298.15*U.K/A.p0</td><td>Specific volume of the 1<sup>st</sup> species [L3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_B</td><td>298.15*U.K/B.p0</td><td>Specific volume of the 2<sup>nd</sup> species [L3/N]</td></tr>
 <tr><TD colspan="2">replaceable function pDstar</td><td>BaseClasses.pDstar_polar</td><td>Reduced pressure-diffusivity product</td></tr>
-<tr><TD colspan="2">replaceable package A</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
-<tr><TD colspan="2">replaceable package B</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>H2O.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>N2.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_crit</td><td>sqrt(FluidData.H2O.criticalT&hellip;</td><td>Geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>sqrt(FluidData.H2O.criticalP&hellip;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
 </table>
@@ -212,8 +216,8 @@ Extends from <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCS
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_A</td><td>298.15*U.K/A.p0</td><td>Specific volume of the 1<sup>st</sup> species [L3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_B</td><td>298.15*U.K/B.p0</td><td>Specific volume of the 2<sup>nd</sup> species [L3/N]</td></tr>
 <tr><TD colspan="2">replaceable function pDstar</td><td>BaseClasses.pDstar_polar</td><td>Reduced pressure-diffusivity product</td></tr>
-<tr><TD colspan="2">replaceable package A</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
-<tr><TD colspan="2">replaceable package B</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>H2O.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>O2.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_crit</td><td>sqrt(FluidData.H2O.criticalT&hellip;</td><td>Geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>sqrt(FluidData.H2O.criticalP&hellip;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
 </table>
@@ -270,8 +274,8 @@ Extends from <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCS
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_A</td><td>298.15*U.K/A.p0</td><td>Specific volume of the 1<sup>st</sup> species [L3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v_B</td><td>298.15*U.K/B.p0</td><td>Specific volume of the 2<sup>nd</sup> species [L3/N]</td></tr>
 <tr><TD colspan="2">replaceable function pDstar</td><td>MobilityFactors.BaseClasses&hellip;.</td><td>Reduced pressure-diffusivity product</td></tr>
-<tr><TD colspan="2">replaceable package A</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
-<tr><TD colspan="2">replaceable package B</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package A</td><td>N2.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
+<tr><TD colspan="2">replaceable package B</td><td>O2.Gas</td><td>Characteristic data of the 2<sup>nd</sup> species</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_crit</td><td>sqrt(FluidData.N2.criticalTe&hellip;</td><td>Geometric mean of the critical temperatures [L2.M/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_crit</td><td>sqrt(FluidData.N2.criticalPr&hellip;</td><td>Geometric mean of the critical pressures [M/(L.T2)]</td></tr>
 </table>
@@ -310,6 +314,6 @@ Extends from <a href="FCSys_Characteristics_MobilityFactors_BaseClasses.html#FCS
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Wed Jan 22 14:51:24 2014.
+  Copyright &copy; 2007&ndash;2014, Kevin Davies, Hawaii Natural Energy Institute. Last updated Thu Jan 23 09:07:03 2014.
 </div>
 </span></body></html>

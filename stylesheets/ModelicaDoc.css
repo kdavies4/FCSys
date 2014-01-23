@@ -1,28 +1,17 @@
 /* Style sheet for Modelica documentation
  *
- * Based on:
- * 1. Sphinx stylesheet -- sphinxdoc theme.  Originally created by Armin
- *    Ronacher for Werkzeug.  BSD license, 2007-2011.
- * 2. Sphinx stylesheet -- basic theme,  Sphinx team, BSD license, 2007-2011.
+ * Based on the following (with modifications):
+ * 1. Sphinx sphinxdoc theme.  Originally created by Armin Ronacher 
+ *    for Werkzeug.  BSD license, 2007-2011.
+ * 2. Sphinx basic theme,  Sphinx team, BSD license, 2007-2011.
  * 3. Modelica Buildings library, http://simulationresearch.lbl.gov/modelica,
  *    10/18/2012
  */
 
-/* -- main layout ----------------------------------------------------------- */
-
-div.clearer {
-    clear: both;
-}
-
 /* -- page layout ----------------------------------------------------------- */
 
 body {
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
-                 'Verdana', sans-serif;
-    font-size: 14px;
-    letter-spacing: -0.01em;
-    line-height: 150%;
-    text-align: center;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
     background-color: #BFD1D4;
     color: black;
     padding: 0;
@@ -63,17 +52,19 @@ div.sidebar {
     margin-left: -100%;
 }
 
-div.sidebar h3, div.sidebar h4 {
+div.sidebar h2{
+    font-weight: bold;
+	text-align: center;
+    font-size: 2em;
+    color: #000000;
+}
+
+div.sidebar h3 {
     margin: 1em 0 0.5em 0;
-    font-size: 1em;
     padding: 0.1em 0 0.1em 0.5em;
     color: white;
     border: 1px solid #86989B;
     background-color: #AFC1C4;
-}
-
-div.sidebar h3 a {
-    color: white;
 }
 
 div.sidebar ul {
@@ -84,29 +75,10 @@ div.sidebar ul {
     list-style: none;
 }
 
-div.sidebar ul ul {
-    margin-left: 20px;
-}
-
-p.logo {
-    text-align: center;
-}
-
-p.sidebar-title {
-    font-weight: bold;
-	text-align: center;
-//    margin: 0;
-//    padding: 0.7em 0 0.3em 0;
-    font-size: 2em;
-    color: #000000;
-//    color: #11557C;
-    text-decoration: none;
-}
-
 /* -- body styles ----------------------------------------------------------- */
 
 div.body {
-    min-height:555px; // Be sure there's room for the sidebar.
+    min-height:555px; /* Be sure there's room for the sidebar. */
 }
 
 div.body p.caption {
@@ -167,30 +139,10 @@ img.align-center, .figure.align-center {
   margin-right: auto;
 }
 
-h1 {
-    margin: 0;
-    padding: 0.7em 0 0.3em 0;
-    font-size: 1.5em;
-    color: #11557C;
-}
-
 h2 {
     margin: 1.3em 0 0.2em 0;
     font-size: 1.35em;
     padding: 0;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-center {
-    clear: both;
-    text-align: center;
-}
-
-.align-right {
-    text-align: right;
 }
 
 h3 {
@@ -244,9 +196,7 @@ a tt:hover {
 }
 
 a, img {
-    /* Restrict image size to width of text.
-     Otherwise, very large image overlap the screen
-    */
+    /* Restrict image size to width of text. */
     max-width: 620px;
 }
 
@@ -271,10 +221,9 @@ h1 tt, h2 tt, h3 tt, h4 tt, h5 tt, h6 tt {
 }
 
 cite, code, tt {
-    font-family: 'Consolas', 'Deja Vu Sans Mono',
-                 'Bitstream Vera Sans Mono', monospace;
+    font-family: Consolas, "Deja Vu Sans Mono",
+                 "Bitstream Vera Sans Mono", monospace;
     font-size: 0.95em;
-    letter-spacing: 0.01em;
 }
 
 tt {
@@ -284,12 +233,9 @@ tt {
 }
 
 pre {
-    font-family: 'Consolas', 'Deja Vu Sans Mono',
-                 'Bitstream Vera Sans Mono', monospace;
+    font-family: Consolas, "Deja Vu Sans Mono",
+                 "Bitstream Vera Sans Mono", monospace;
     font-size: 0.95em;
-    letter-spacing: 0.015em;
-    line-height: 120%;
-    padding: 0.5em;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     white-space: pre;
@@ -337,7 +283,6 @@ pre.comment {
 /* -- tables --------------------------------------------------------- */
 
 table {
-    font-size: 14px;
     margin: 0.5em 0 0 0.5em;
     border-collapse: collapse;
     border: 1px solid #022e4d;
