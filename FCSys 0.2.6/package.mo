@@ -68,7 +68,7 @@ annotation (
     the <a href=\"modelica://Modelica.Media\">Modelica media library</a>.  The framework is generic and can be extended
     to other fluidic or electrochemical devices like batteries.</li>
 
-    <li><b>Highly modular</b>:
+    <li><b>Highly modular and reusable</b>:
     Each layer of the cell is a separate model which is hierarchically constructed from graphical models of
     subregions, phases, and species.  At each level, EOO (i.e., effort/flow) connectors are used to combine
     the various components.</li>
@@ -81,7 +81,8 @@ annotation (
     The equations are based on first principles, with explicit conservation of material, momentum, and energy
     in every control volume and across every interface.  A unique and physically appropriate method of
     upstream discretization is used to describe coupled advective and diffusive transfer.  All physical
-    quantities are mapped to universal physical constants using a novel, flexible implementation of natural units.</li>
+    quantities are mapped to universal physical constants using a 
+    <a href=\"modelica://FCSys.Units\">novel, flexible implementation of natural units</a>.</li>
 
     <li><b>Computationally efficient</b>:
     There are minimal switching events and no nonlinear systems of equations after appropriate translation.
@@ -349,7 +350,7 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  version="0.2.5",
-  dateModified="2014-01-23 19:55:22Z",
-  revisionID="SHA: 247c652");
+  version="0.2.6",
+  dateModified="2014-01-25 16:41:20Z",
+  revisionID="SHA: 80c2494");
 end FCSys;

@@ -958,7 +958,7 @@ and &theta; = <code>U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at
     parameter Integer n_chem=0 "Number of reaction and phase change processes"
       annotation (HideResult=true, Dialog(tab="Assumptions", __Dymola_label=
             "<html><i>n</i><sub>chem</sub></html>"));
-    Q.DiffusivityMassSpecific zeta(nominal=1e-3*U.N/U.A) = Data.zeta(T, v) "**"
+    Q.Continuity zeta(nominal=1e-3*U.N/U.A) = Data.zeta(T, v) "Continuity"
       annotation (Dialog(group="Material properties", __Dymola_label=
             "<html>&zeta;</html>"));
     Q.Fluidity eta(nominal=1e5/(U.Pa*U.s)) = Data.eta(T, v) "Fluidity"
@@ -1389,17 +1389,10 @@ Choose any condition besides none.");
           "Current vs. velocity at the boundaries";
       end for;
     end for;
-    minusDeltaf = Data.m*phi .* I;
+    minusDeltaf = Data.m*phi .* I + zeta*Sigma(boundaries.Ndot);
 
     // Assumptions
     2*I = -Delta(boundaries.Ndot) "Linear current profile (assumption #1)";
-
-    // Equation of state
-    if Data.isCompressible then
-      p = Data.p_Tv(T, v) + zeta*der(1/v)/U.s;
-    else
-      v = Data.v_Tp(T, p - zeta*der(1/v)/U.s);
-    end if;
 
     // Properties upon outflow due to reaction and phase change
     chemical.phi = fill(phi, n_chem);
@@ -1408,8 +1401,7 @@ Choose any condition besides none.");
     // Material exchange
     for i in 1:n_chem loop
       if tauprime[i] > Modelica.Constants.small then
-        tauprime[i]*(chemical[i].Ndot - 0.001*der(chemical[i].Ndot)/U.s) = (N
-           + N0)*exp((chemical[i].g - g)/T) - N;
+        tauprime[i]*chemical[i].Ndot = (N + N0)*exp((chemical[i].g - g)/T) - N;
       else
         chemical[i].g = g;
       end if;
@@ -1732,13 +1724,6 @@ Choose any condition besides none.");
     phi = zeros(n_trans) "Zero velocity";
     V = epsilon*product(L) "Prescribed volume";
 
-    // Equation of state
-    if Data.isCompressible then
-      p = Data.p_Tv(T, v);
-    else
-      v = Data.v_Tp(T, p);
-    end if;
-
     // Thermal transport (conduction)
     for i in 1:n_trans loop
       for side in Side loop
@@ -1997,6 +1982,11 @@ Check that the volumes of the other phases are set properly.");
     M = Data.m*N;
 
     // Thermodynamic correlations
+    if Data.isCompressible then
+      p = Data.p_Tv(T, v);
+    else
+      v = Data.v_Tp(T, p);
+    end if;
     h = Data.h(T, p);
     s = Data.s(T, p);
 

@@ -38,8 +38,7 @@ package Quantities "Types to represent physical values"
         "Absolute areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Density Density=1*U.C/U.m^3 "Density";
-      parameter Q.DiffusivityMassSpecific DiffusivityMassSpecific=1*U.g*U.m^2/(
-          (U.mol*U.s)) "Product of diffusivity and specific mass";
+      parameter Q.Diffusivity Diffusivity=1*U.m^2/U.s "Diffusivity";
       parameter Q.Energy Energy=1*U.J "Energy";
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
@@ -138,9 +137,7 @@ package Quantities "Types to represent physical values"
   type CurrentAreicAbsolute = TypeReal (final unit="N/(L2.T)", min=0)
     "Absolute areic current";
   type CurrentRate = TypeReal (final unit="N/T2") "Rate of current";
-  type Diffusivity = TypeReal (final unit="L2.M/(N.T)", min=0);
-  type DiffusivityMassSpecific = TypeReal (final unit="L2.M/(N.T)", min=0)
-    "Product of diffusivity and specific mass";
+  type Diffusivity = TypeReal (final unit="L2/T", min=0);
   type Energy = TypeReal (final unit="L2.M/T2");
   type Fluidity = TypeReal (final unit="L.T/M", min=0);
   type Force = TypeReal (final unit="L.M/T2");

@@ -1590,21 +1590,21 @@ package Characteristics "Data and functions to correlate physical properties"
       end s;
 
       replaceable function zeta
-        "<html>** (&zeta;) as a function of temperature</html>"
+        "<html>Continuity (&zeta;) as a function of temperature</html>"
 
         extends Modelica.Icons.Function;
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature"
           annotation (Dialog(__Dymola_label="<html><i>T</i></html>"));
         input Q.VolumeSpecific v=298.15*U.K/p0 "Specific volume"
           annotation (Dialog(__Dymola_label="<html><i>v</i></html>"));
-        output Q.DiffusivityMassSpecific zeta "**"
+        output Q.Continuity zeta "Continuity"
           annotation (Dialog(__Dymola_label="<html>&zeta;</html>"));
 
       algorithm
-        zeta := m*D(T, v);
+        zeta := m*omega(T);
 
         annotation (Inline=true,Documentation(info="<html>
-  <p>**Continuity is a property is defined in <a href=\"modelica://FCSys\">FCSys</a>
+  <p>Continuity is a property is defined in <a href=\"modelica://FCSys\">FCSys</a>
   resistivity to axial compression or material storage during transport.</p>
   </html>"));
       end zeta;
