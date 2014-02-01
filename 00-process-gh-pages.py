@@ -27,7 +27,7 @@ rpls = [
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrane, PEMFC, Modelica, Dymola, open-source, electrochemistry">
 <meta name="date" content="%d-%d-%d">""" % (now.year, now.month, now.day)),
     # Change the meta description of the main page.
-    ('<meta name="description" content="Modelica fuel cell library">', '<meta name="description" content="Open-source library of declarative, dynamic, and flexible models of proton exchange membrane fuel cells in the Modelica language">'),
+    ('<meta name="description" content="Modelica fuel cell library">', '<meta name="description" content="Free, open-source library of equation-based, object-oriented fuel cell models in Modelica">'),
     # Add the download link.
     ("""(Icons</a></li> *
  *</ul> *
