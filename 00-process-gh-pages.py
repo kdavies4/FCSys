@@ -28,10 +28,25 @@ rpls = [
 <meta name="date" content="%d-%d-%d">""" % (now.year, now.month, now.day)),
     # Change the meta description of the main page.
     ('<meta name="description" content="Modelica fuel cell library">', '<meta name="description" content="Free, open-source library of equation-based, object-oriented fuel cell models in Modelica">'),
-    # Add the download link.
+    # Add Google custom search and the download link.
     ("""(Icons</a></li> *
  *</ul> *
 )( *</div>)""", r"""\1
+  <h3>Search</h3>    
+    <script>
+      (function() {
+      var cx = '001356158537703621276:db7jag_aoya';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.com/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+    <gcse:search></gcse:search>
+
   <h3>Download</h3>
     <ul>
       <li><span itemprop="downloadUrl">Latest: <a href="https://github.com/kdavies4/FCSys/archive/vx.x.x.zip">vx.x.x</a></span></li>
@@ -53,24 +68,6 @@ rpls = [
     # Add the Google Analytics script.
     ('(<link rel="shortcut icon" href=".*\.ico">\n)(</head>)', r"""\1<script type="text/javascript" src="javascripts/analytics.js"></script>
 \2"""),
-    # Add the Google custom search.
-    # Currently too big for sidebar
-#    ("( *<h3>Download</h3>)", r"""
-#<h3>Search</h3>
-#<script>
-#  (function() {
-#    var cx = '001356158537703621276:r9xyqvfc-94';
-#    var gcse = document.createElement('script');
-#    gcse.type = 'text/javascript';
-#    gcse.async = true;
-#    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-#        '//www.google.com/cse/cse.js?cx=' + cx;
-#    var s = document.getElementsByTagName('script')[0];
-#    s.parentNode.insertBefore(gcse, s);
-#  })();
-#</script>
-#<gcse:search></gcse:search>
-#\1"""),
     # Move the icon.
     ('"\.\./Resources/Documentation/favicon\.ico"', '"images/favicon.ico"'),
     # Remove the self-reference.
